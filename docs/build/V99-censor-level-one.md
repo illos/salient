@@ -63,3 +63,9 @@ uses a Compendium-derived independent ledger rather than extending the existing 
 - ENGINE R1 corrects Self targets for Hands of the Maker/Faithful Friend; Grave Speech uses a
   zero-Stamina target. R2 independently records six embedded Wrath costs in the source ledger,
   asserting sheet metadata and actual spend instead of deriving expected payment from the sheet.
+- TESTER `47e3aa9` resumed gates passed in 54s (382 engine; all four previously failing API files,
+  13 cases; remaining content/report/build checks). The live cohort failed after 28.6s at damage
+  actual 3 / expected 2. Source recheck of `chapter/kits.md` Damage Bonuses shows Melee + Weapon
+  is sufficient, without Strike: Back Blasphemer! with Cloak and Dagger deals 3/5/7, not 2/4/6.
+  Corrected the independent ledger and allowed the controlled Censor scenario filename in failure
+  locations. Runtime is unchanged; accepted gates are retained for the bounded live retry.

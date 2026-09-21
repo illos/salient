@@ -136,8 +136,9 @@
         {
           "name": "Back Blasphemer!",
           "cost": 0,
-          "damageByTier": [2, 4, 6],
-          "source": "feature/ability/censor/level-1/back-blasphemer.md"
+          "damageByTier": [3, 5, 7],
+          "source": "feature/ability/censor/level-1/back-blasphemer.md",
+          "derivation": "Source2/4/6 + Cloak and Dagger melee bonus1/1/1. chapter/kits.md Damage Bonuses applies to Melee+Weapon; Strike is not required."
         },
         {
           "name": "Behold a Shield of Faith!",
@@ -752,8 +753,9 @@
         {
           "name": "Back Blasphemer!",
           "cost": 0,
-          "damageByTier": [2, 4, 6],
-          "source": "feature/ability/censor/level-1/back-blasphemer.md"
+          "damageByTier": [3, 5, 7],
+          "source": "feature/ability/censor/level-1/back-blasphemer.md",
+          "derivation": "Source2/4/6 + Cloak and Dagger melee bonus1/1/1. chapter/kits.md Damage Bonuses applies to Melee+Weapon; Strike is not required."
         },
         {
           "name": "Behold a Shield of Faith!",
@@ -1374,8 +1376,9 @@
         {
           "name": "Back Blasphemer!",
           "cost": 0,
-          "damageByTier": [2, 4, 6],
-          "source": "feature/ability/censor/level-1/back-blasphemer.md"
+          "damageByTier": [3, 5, 7],
+          "source": "feature/ability/censor/level-1/back-blasphemer.md",
+          "derivation": "Source2/4/6 + Cloak and Dagger melee bonus1/1/1. chapter/kits.md Damage Bonuses applies to Melee+Weapon; Strike is not required."
         },
         {
           "name": "Behold a Shield of Faith!",

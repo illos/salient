@@ -53,7 +53,9 @@ export function failureDetails(error: unknown) {
       operator?: string;
     };
     // Only a repository-controlled scenario filename and line, never the raw stack/payload.
-    result.location = assertion.stack?.match(/character-(?:lifecycle|scenarios)\.ts:\d+:\d+/)?.[0];
+    result.location = assertion.stack?.match(
+      /(?:character-(?:lifecycle|scenarios)|censor)\.ts:\d+:\d+/,
+    )?.[0];
     result.operator = assertion.operator;
     if (assertion.actual instanceof Error)
       result.rejection = {
