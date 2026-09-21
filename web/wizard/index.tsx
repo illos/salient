@@ -290,6 +290,14 @@ export function DecisionEditor({
         <Diagnostics list={diagnostics} />
       </ChoiceSection>
     );
+  // A base-statistics step reads its values back as tiles, so its own `statistic` grant — the
+  // same "size 1M, speed 5, stability 0" sentence — would print them a second time. Drop it and
+  // let the source quote stand under the tiles, as it does for an ancestry that grants no text.
+  const showsStatTiles =
+    decision.kind === 'automatic' && decision.id.endsWith('.base-statistics') && !!baseline;
+  const shownGrants = (decision.grants ?? []).filter(
+    grant => !(showsStatTiles && grant.kind === 'statistic'),
+  );
   let control: React.ReactNode = null;
   if (decision.kind === 'none') control = null;
   else if (decision.id === 'culture.preset')
@@ -304,7 +312,7 @@ export function DecisionEditor({
       <div className="flex flex-col gap-3">
         {/* The base-statistics step reads its three values back as tiles (V96 mockup). They come
             from the shared evaluation, exactly as the hero column's do; nothing is derived here. */}
-        {decision.id.endsWith('.base-statistics') && baseline && (
+        {showsStatTiles && baseline && (
           <div className="grid grid-cols-3 gap-2">
             {(
               [
@@ -314,17 +322,25 @@ export function DecisionEditor({
               ] as const
             ).map(([label, entry]) => (
               <span key={label} className="flex flex-col gap-0.5 rounded-md bg-muted px-4 py-3">
-                <span className="text-2xl font-medium tabular-nums">
-                  {entry === undefined ? '—' : String(entry.value)}
+                <span
+                  className={cn(
+                    'text-2xl font-medium tabular-nums',
+                    entry === undefined && 'text-base font-normal text-muted-foreground',
+                  )}
+                >
+                  {/* The hero column's word for a value the evaluator has not produced yet.
+                      Stability waits for the kit, which can add to it; the source sentence under
+                      these tiles still states the ancestry's own 0. */}
+                  {entry === undefined ? 'Pending' : String(entry.value)}
                 </span>
                 <span className="text-sm text-muted-foreground">{label}</span>
               </span>
             ))}
           </div>
         )}
-        {(decision.grants ?? []).length > 0 && (
+        {shownGrants.length > 0 && (
           <ul className="m-0 list-none p-0">
-            {(decision.grants ?? []).map((grant, i) => (
+            {shownGrants.map((grant, i) => (
               <li key={i} className="flex items-center gap-2 py-0.5 text-lg font-medium">
                 {readableRuleText(grant.value)
                   .replace(/ \(derived in R02\)/g, '')
@@ -334,7 +350,7 @@ export function DecisionEditor({
             ))}
           </ul>
         )}
-        {!decision.grants?.length && decision.quote && (
+        {!shownGrants.length && decision.quote && (
           <p className="m-0 border-t border-border pt-3 text-sm text-muted-foreground">
             {readableRuleText(decision.quote)}
           </p>
@@ -638,9 +654,7 @@ export function DecisionEditor({
       : [];
   return (
     <ChoiceSection
-      label={
-        decision.kind === 'automatic' && decision.grants?.length ? `${label} — granted` : label
-      }
+      label={decision.kind === 'automatic' && shownGrants.length ? `${label} — granted` : label}
       reference={reference}
     >
       {decision.decisionActor && decision.decisionActor !== 'owner' && (
@@ -1095,6 +1109,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
   const next = stepIndex < PRESENTED.length - 1 ? PRESENTED[stepIndex + 1] : undefined;
   // A point-budget decision is its own panel beside the step card (V96 mockup); everything else
   // reads inside it. Both lists come from the same step in the same source order.
+  const stepDecisionIndex = indexDecisions(definitions);
   const isPanel = (decision: Decision) =>
     decision !== primary && decision.shape.type === 'points' && !lockedByPreset(decision.id);
   const dependent = primary
@@ -1115,8 +1130,11 @@ function Wizard({ character }: { character: WizardCharacter }) {
       : next
         ? 'This step is complete.'
         : 'Name your hero in this step, then save.';
+  // Only the branch the hero is actually on: every ancestry's trait budget lives in this step,
+  // and the unreachable ones are neither rendered nor owed.
   const pointsOwed = dependent.flatMap(decision => {
     if (decision.shape.type !== 'points') return [];
+    if (!isAvailable(decision, selections, stepDecisionIndex)) return [];
     const chosen = selections[decision.id];
     const spent = (Array.isArray(chosen) ? chosen : [])
       .filter((name): name is string => typeof name === 'string')

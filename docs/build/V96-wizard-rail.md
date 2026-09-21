@@ -129,3 +129,25 @@ unchanged.
     appear as their own chip inset.
   The points left are counted from recorded selections and content costs, the same sum the panel
   heading already made; no new rules resolution entered the UI.
+- 2026-09-21 fixes on the mockup pass:
+  - A base-statistics step's own `statistic` grant repeated the tiles word for word ("size 1M,
+    speed 5, stability 0"); it is suppressed where the tiles render, and the source sentence
+    stands under them as it does for an ancestry that grants no such text.
+  - The step hint summed every ancestry's trait budget, because all twelve live in the ancestry
+    step. It now counts only decisions `isAvailable` reports for the current selections.
+  - Cards in a grid row stretch to a common height.
+  - The rules ingest caps an excerpt at 230 characters, so long traits arrived cut mid-word (2025
+    of 2614 entries sit exactly at the cap). `ruleExcerpt` now falls back to the last complete
+    sentence, or the last whole word plus an ellipsis.
+  - A statistic the evaluator has not produced reads "Pending", the hero column's word, rather
+    than an em dash.
+
+## Follow-up: stability before the kit
+
+Not a wizard defect, so not fixed here. The ancestry modules set `size` and `speed` as soon as the
+ancestry is chosen, but set `stability` only once a kit is chosen or declined
+(`shared/evaluate/ancestries/*.ts`), because a kit can add to it. Speed takes the same kind of kit
+bonus and does not wait, so the ancestry step shows size and speed but not stability, even though
+the step's own source sentence states stability 0. Making them consistent means changing the
+shared evaluator for all twelve ancestries, which can flip a build's completeness before a kit is
+chosen; it needs its own slice and headless proof.

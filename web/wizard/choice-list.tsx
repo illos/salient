@@ -113,7 +113,7 @@ export function ChoiceRow({
     <li>
       <label
         className={cn(
-          'flex cursor-pointer flex-col gap-1.5 rounded-md bg-muted px-4 py-3.5 transition-colors duration-(--motion-fast)',
+          'flex h-full cursor-pointer flex-col gap-1.5 rounded-md bg-muted px-4 py-3.5 transition-colors duration-(--motion-fast)',
           checked ? 'ring-1 ring-primary ring-inset' : supported && 'hover:bg-accent',
           !supported && 'cursor-default text-muted-foreground',
           'has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring',
@@ -160,9 +160,7 @@ export function ChoiceList({ children, grid }: { children: React.ReactNode; grid
     <ul
       className={cn(
         'm-0 list-none p-0',
-        grid
-          ? 'grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] items-start gap-2'
-          : 'flex flex-col gap-2',
+        grid ? 'grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] gap-2' : 'flex flex-col gap-2',
       )}
     >
       {children}

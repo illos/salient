@@ -73,5 +73,18 @@ export function ruleExcerpt(
 ): string | undefined {
   if (!catalog) return undefined;
   const excerpt = resolveRule(catalog, reference)?.entry.excerpt;
-  return excerpt ? readableRuleText(excerpt) : undefined;
+  return excerpt ? endOnASentence(readableRuleText(excerpt)) : undefined;
+}
+
+/**
+ * The ingest caps an entry's excerpt at a fixed length (scripts/ingest-rules.ts), so a long entry
+ * arrives cut mid-word. Fall back to the last complete sentence, or the last whole word, and mark
+ * the cut: the reference beside it still opens the entry in full.
+ */
+function endOnASentence(text: string): string {
+  if (/[.!?]["')\]]?$/.test(text.trim())) return text.trim();
+  const sentence = text.search(/[.!?]["')\]]?(?=[^.!?]*$)/);
+  if (sentence > 0) return text.slice(0, sentence + 1).trim();
+  const word = text.lastIndexOf(' ');
+  return `${(word > 0 ? text.slice(0, word) : text).trim()}…`;
 }
