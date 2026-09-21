@@ -35,3 +35,11 @@ full check and isolated cohort; DEPLOY2 publication reuses acceptance.
 - Isolated `SALIENT_HEADLESS_COHORT=talent node scripts/verify-character-headless.ts` exit 0 /80.4s: five source builds and all 58 action entries, negative Clarity payment/readback and floor refusal, signed manual adjustment, zero crossing and free signature while strained; manual strain records leave state unchanged. Backend stopped, ports free, data retained, checkout clean/released. Artifacts `/srv/presidium/projects/salient/test-artifacts/V105-fd7a17d`.
 - Rebased only over V104 publication documentation at main `65df23c`; `git diff fd7a17d..2eef728 -- . ':(exclude)docs' ':(exclude)deploy.md'` is empty. Accepted runtime/generated content/tests unchanged; no rerun required.
 - Ready for DEPLOY2 main/cloud/GitHub promotion with accepted tests reused; no smoke requested.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `465814b` into main and published the backend, 1483-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded.
+Worker: `ef7da151-f04d-4bc8-8532-12aedb937290`. Accepted 998-test gate and isolated
+five-build/58-action results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V105-release-465814b`.

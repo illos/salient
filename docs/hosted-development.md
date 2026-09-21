@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V104 Elementalist level one
+## Current release — V105 Talent level one
+
+Backend/frontend source `465814b17640852055d40b7a47614f658779b95a` published on 2026-09-21 as
+Worker `ef7da151-f04d-4bc8-8532-12aedb937290`. Backend/schema validation, content reseed
+(1483 entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test
+or rerun. See [V105](build/V105-talent-level-one.md) and the [ledger](../deploy.md).
+
+## Previous release — V104 Elementalist level one
 
 Backend/frontend source `e064050936c73c75da87b82f3830b127948f70c7` published on 2026-09-21 as
 Worker `68918c7b-7875-45a3-bb7f-aefb97163a6f`. Backend/schema validation, updated content reseed
