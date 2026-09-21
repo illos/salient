@@ -26,6 +26,7 @@ import type { Id } from '../../convex/_generated/dataModel';
 import { definitions as levelOneDefinitions } from '../../shared/content/level-one-decisions';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { emptyAuthored, type CharacterAuthored } from '../../shared/characterDraft';
+import { findCulturePreset } from '../../shared/content/culture-presets';
 import type {
   Diagnostic,
   EvaluationResult,
@@ -94,6 +95,15 @@ type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
  * records `connections.notes`.
  */
 const HIDDEN_STEPS = new Set(['step.think', 'step.free-strikes', 'step.connections']);
+/**
+ * Culture aspects a preset fixes (V96). Choosing a premade culture takes its aspects as a set;
+ * the three skills stay the player's choice, and Build your own still reaches every combination.
+ */
+const PRESET_FIXED_ASPECTS = new Set([
+  'culture.environment',
+  'culture.organization',
+  'culture.upbringing',
+]);
 /** The rail heading's reference: the whole Making a Hero chapter. */
 const BUILDER_REFERENCE = { id: 'mcdm.heroes.v1/chapter/making-a-hero', label: 'Making a Hero' };
 
@@ -210,6 +220,7 @@ export function DecisionEditor({
   authored,
   onAuthored,
   diagnostics,
+  lockedBy,
 }: {
   definitions?: DecisionDefinitions;
   decision: Decision;
@@ -219,6 +230,8 @@ export function DecisionEditor({
   authored: CharacterAuthored;
   onAuthored: (value: CharacterAuthored) => void;
   diagnostics: Diagnostic[] | undefined;
+  /** Name of the preset that fixed this value: show it read-only and say what to do instead. */
+  lockedBy?: string;
 }) {
   const decisions = useMemo(() => indexDecisions(definitions), [definitions]);
   const available = isAvailable(decision, selections, decisions);
@@ -243,6 +256,19 @@ export function DecisionEditor({
           {readableGuidance(
             unavailableReason(decision, decisions) ?? 'Complete the earlier choices first.',
           )}
+        </p>
+        <Diagnostics list={diagnostics} />
+      </ChoiceSection>
+    );
+  // A chosen preset fixes the aspects it names. The source lets a player "use or modify" a table
+  // culture (background.md, before the Typical Ancestry Cultures Table), and Build your own still
+  // reaches every combination, so this restricts the path rather than the legal character.
+  if (lockedBy)
+    return (
+      <ChoiceSection label={label} reference={reference}>
+        <p className="m-0 text-base">{typeof value === 'string' ? value : 'Pending'}</p>
+        <p className="m-0 text-sm text-muted-foreground">
+          Set by the {lockedBy} culture. Choose Build your own to set this yourself.
         </p>
         <Diagnostics list={diagnostics} />
       </ChoiceSection>
@@ -918,6 +944,19 @@ function Wizard({ character }: { character: WizardCharacter }) {
     ? (primary?.options?.find(option => option.value === selectedName)?.source ??
       primary?.optionSources?.[selectedName])
     : undefined;
+  // Aspects a chosen starting culture fixes: shown read-only until the hero goes bespoke. A
+  // preset's language counts only when that preset actually names one, so a professional culture
+  // still picks its own (background.md: "then add a language that fits the culture's concept").
+  const culturePreset = findCulturePreset(
+    typeof selections['culture.preset'] === 'string'
+      ? (selections['culture.preset'] as string)
+      : undefined,
+  );
+  const lockedByPreset = (id: string): string | undefined => {
+    if (!culturePreset) return undefined;
+    if (id === 'culture.language') return culturePreset.language ? culturePreset.name : undefined;
+    return PRESET_FIXED_ASPECTS.has(id) ? culturePreset.name : undefined;
+  };
   const renderDecision = (decision: Decision, onSelect = select) => (
     <DecisionEditor
       key={decision.id}
@@ -929,6 +968,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
       authored={authored}
       onAuthored={author}
       diagnostics={evaluation?.diagnostics[decision.id]}
+      lockedBy={lockedByPreset(decision.id)}
     />
   );
   const previous = stepIndex > 0 ? PRESENTED[stepIndex - 1] : undefined;

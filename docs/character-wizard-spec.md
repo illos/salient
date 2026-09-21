@@ -326,10 +326,18 @@ values and controls retain their behavior.
 - Confirmed 2026-09-20: culture offers the book's 11 ancestral and 16 professional presets,
   independently of the hero's ancestry, plus Bespoke. A preset fills environment, organization,
   upbringing and any printed language default; players still choose the associated skills.
-  All defaults remain editable through the shared wizard/API transition. Modifying a printed
+  All defaults remain editable through the shared API transition. Modifying a printed
   default marks the culture Bespoke without clearing its other choices. Professional cultures
   leave language freely selectable. Existing saved cultures need no preset or migration. See
   [V84](build/V84-culture-presets.md) for source tables and naming discrepancies.
+- **Amended 2026-09-21 (V96):** in the wizard, choosing a preset takes its aspects as a set. The
+  environment, organization and upbringing it names, and its language where it prints one, read
+  back read-only; Build your own sets them individually. The associated skills stay the player's
+  choice, and a professional preset still picks its own language. The source permits using *or
+  modifying* a table culture (`background.md`, the paragraph before the Typical Ancestry Cultures
+  Table), and Bespoke reaches every combination, so this constrains the wizard path rather than
+  the legal character. The shared transition and headless routes still accept a modified preset,
+  and still mark it Bespoke.
 - Starting rewards persist once from the complete, first-admitted build: Wealth, Renown,
   project points and sourced initial possessions. Subsequent career/complication changes and
   restoration retain that award without regranting it. The sheet and authenticated API share

@@ -21,6 +21,9 @@ unchanged.
 - `web/wizard/culture-preset.tsx`: replace the starting-culture dropdown with a card grid,
   grouped ancestral, professional, then bespoke, each card showing the choices that preset makes
   as chips.
+- `web/wizard/index.tsx`: a chosen preset renders its fixed aspects read-only in the wizard, with
+  Build your own as the way to set them individually.
+- docs/character-wizard-spec.md#confirmed-behavior (the 2026-09-21 amendment)
 - Out of scope: the decision definitions (`presentedInV001` stays content data), the
   `connections.notes` headless route and its sheet field, the centre and hero-so-far columns.
 - docs/character-wizard-spec.md#main-creation-and-editing
@@ -52,3 +55,10 @@ unchanged.
   per-card category badge (the group heading already says it), and the aspects shown as chips of
   the actual choices rather than a prose description, on the user's follow-up. Cards are native
   radios in one group, so the value still moves through the shared choice transition.
+- 2026-09-21: the user asked that choosing a premade culture lock its choices in. Implemented in
+  the wizard only, over the V84 out-of-scope line "locking a preset's defaults": the source says a
+  player may "use or modify" a table culture, but Bespoke reaches every combination, so no legal
+  character becomes unbuildable. Locked are environment, organization, upbringing and a preset's
+  printed language; the three skills and a professional preset's language stay choices. The shared
+  transition still accepts a modified preset and still marks it Bespoke, so the headless route is
+  unchanged.
