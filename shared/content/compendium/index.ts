@@ -18,7 +18,7 @@ import cultureJson from './culture.json';
 import featureJson from './feature.json' with { type: 'json' };
 import featureblockJson from './featureblock.json';
 import godJson from './god.json';
-import kitJson from './kit.json';
+import kitJson from './kit.json' with { type: 'json' };
 import monsterJson from './monster.json';
 import perkJson from './perk.json';
 import ruleJson from './rule.json';
