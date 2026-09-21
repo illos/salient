@@ -76,3 +76,11 @@ Rules:
 | 2026-09-21 | V96 | Wizard inside the site chrome: the top nav appears above it and scrolls away, the side panes stick below the viewport top, and the single Save hero button under the rail saves and returns to the character | `v21-wizard.spec.ts`, `v40-unsaved-wizard.spec.ts` (obsolete: expect the wizard header with Save draft and Exit) | spot | none needed: presentation and routing only (V96 work log) | |
 | 2026-09-21 | V96 | Delay first create; keep editing and navigate immediately. Editor does not remount, navigation waits; failed save retains edits with Retry. Reload/close warns while unsaved. | new | spot | `wizard-save-queue.test.ts`, wizard-draft headless cohort | |
 | 2026-09-21 | V96 | Reopen a primary chooser and reselect the checked radio with mouse or Space; chooser closes without pruning. Culture Clear removes all three skills. Finalize step count matches visible top-level pages for kit and kitless classes. | new | spot | shared choice transitions; browser interaction deferred | |
+
+## V97: full-builder target level
+
+- Select level 2 before the first autosave; choose each Shadow college and its level-two choices.
+- Switch 2 → 1 → 2 during an in-flight save, then reload: the final level persists, higher-level
+  choices clear when lowered, and the route/editor stays mounted.
+- Keyboard operation of the level selector; unavailable 3–10 options; visible unsupported-class
+  diagnostics; explicit Save and Close and navigation draining include the latest level.

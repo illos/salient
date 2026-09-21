@@ -357,7 +357,10 @@ than only recording appearance and backstory.
   absent and privately selected items keep their source restrictions. See
   [starting awards](inventory-spec.md#starting-awards--v86).
 - The main wizard provides access to all levels and their applicable options; it is not limited to level 1 or
-  the currently unlocked level-up prompts.
+  the currently unlocked level-up prompts. **Confirmed 2026-09-21:** a visible level selector sets the
+  target build level and displays all applicable choices through that level. The individual progression
+  flow is a later, narrower subset of these same wizard options. Unsupported levels remain visibly
+  unavailable until their content is implemented; changing target level is a full-build edit.
 - Available options and resulting grants depend on previous choices and progression. The model must handle
   nested choices and cross-dependencies.
 - Changes to a parent choice update the dependent choices and the resulting sheet. Invalidated selections

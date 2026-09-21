@@ -12,6 +12,7 @@ import { getDefinitions } from '../shared/content/character-decisions';
 import { isSupportedDefinitionLevel } from '../shared/content/character-support';
 import { draftSelectionsFrom } from '../shared/evaluate/draft';
 import { evaluateCharacter, selectionsFrom } from '../shared/evaluate/character';
+import { changeLevel } from '../shared/evaluate/levelTransition';
 import { changeChoice } from '../shared/evaluate/choiceTransition';
 import { indexDecisions, isAvailable, isSupported, poolOf } from '../shared/evaluate/structure';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation';
@@ -172,6 +173,42 @@ export const transition = query({
     validateSelections(selections);
     return portable({
       selections,
+      removed: changed.removed,
+      evaluation: evaluation(changed.selections, definitions, state.targetLevel),
+    });
+  },
+});
+
+/** Full-build level editing only; campaign advancement and activation keep their own gates. */
+export const transitionLevel = query({
+  args: {
+    characterId: v.optional(v.id('characters')),
+    fromLevel: v.number(),
+    targetLevel: v.number(),
+    selections: v.array(selectionValidator),
+  },
+  returns: v.object({
+    targetLevel: v.number(),
+    selections: v.array(selectionValidator),
+    removed: v.array(v.string()),
+    evaluation: v.any(),
+  }),
+  handler: async (ctx, args) => {
+    if (!isSupportedDefinitionLevel(args.fromLevel))
+      throw new ConvexError('Unsupported character definition level.');
+    const state = await context(ctx, args);
+    const changed = changeLevel(state.map, getDefinitions(args.fromLevel), state.definitions);
+    const definitions = getDefinitions(
+      state.targetLevel,
+      canonicalChoiceOrigins(
+        draftSelectionsFrom(changed.selections, state.definitions),
+        state.targetLevel,
+        state.draft,
+      ),
+    );
+    return portable({
+      targetLevel: state.targetLevel,
+      selections: draftSelectionsFrom(changed.selections, definitions),
       removed: changed.removed,
       evaluation: evaluation(changed.selections, definitions, state.targetLevel),
     });

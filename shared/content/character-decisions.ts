@@ -9,6 +9,7 @@ import { definitions as legacyLevelOne } from './level-one-decisions.ts';
 import type { DecisionDefinitions } from '../evaluate/definitions.ts';
 
 import { levelTwoDecisions } from './classes/fury/level-two.ts';
+import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
 export { FURY_LEVEL_TWO_PERK_GROUPS } from './classes/fury/level-two.ts';
 
 const levelOne: DecisionDefinitions = structuredClone(legacyLevelOne);
@@ -19,7 +20,7 @@ const levelDecision = classStep.decisions.find(decision => decision.id === 'clas
 levelDecision.quote =
   "Each time you gain a new level in your class, your Stamina increases, and you gain new features or abilities according to your class's advancement, as detailed in Chapter 5: Classes.";
 levelDecision.grants = [{ kind: 'level', value: '2' }];
-classStep.decisions.push(...structuredClone(levelTwoDecisions));
+classStep.decisions.push(...structuredClone([...levelTwoDecisions, ...shadowLevelTwo]));
 
 for (const definitions of [levelOne, levelTwo]) {
   definitions.supportingChoicesVersion = 'v37';

@@ -26,6 +26,8 @@ import { useConvex, useMutation, useQuery } from 'convex/react';
 import type { FunctionReturnType } from 'convex/server';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
+import { changeLevel } from '../../shared/evaluate/levelTransition';
+import { isSupportedDefinitionLevel } from '../../shared/content/character-support';
 import { definitions as levelOneDefinitions } from '../../shared/content/level-one-decisions';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { emptyAuthored, type CharacterAuthored } from '../../shared/characterDraft';
@@ -110,8 +112,8 @@ type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
  */
 const HIDDEN_STEPS = new Set(['step.think', 'step.free-strikes', 'step.connections']);
 /**
- * Decisions the wizard does not show (V96). Creation is level one for every class, so reading the
- * starting level back says nothing. The decision still grants the level and still carries its
+ * The level is controlled by the full builder selector. Its automatic decision still grants the
+ * selected level and carries its
  * provenance; only this view skips it, and the progression editor is unaffected.
  */
 const HIDDEN_DECISIONS = new Set(['class.level']);
@@ -1093,9 +1095,10 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
   const liveCharacter = useQuery(api.characters.get, liveId ? { characterId: liveId } : 'skip');
   // Never replace the editor with a loading screen while its first create is acknowledged.
   const character = liveCharacter ?? initialCharacter;
+  const [targetLevel, setTargetLevel] = useState(initialCharacter.level);
   const definitions = useMemo(
-    () => getDefinitions(character.level, character.choiceOrigins),
-    [character.level, character.choiceOrigins],
+    () => getDefinitions(targetLevel, character.choiceOrigins),
+    [targetLevel, character.choiceOrigins],
   );
   const SHOWN = definitions.steps.filter(
     step => step.presentedInV001 && !HIDDEN_STEPS.has(step.id),
@@ -1143,7 +1146,7 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
   const evaluation = useQuery(api.characters.evaluate, {
     ...(character.id ? { characterId: character.id } : {}),
     selections: draft,
-    targetLevel: character.level,
+    targetLevel,
   }) as EvaluationResult | undefined;
   const step = PRESENTED[stepIndex]!;
   const { catalog } = useRulesCatalog();
@@ -1189,6 +1192,18 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
     snapshot.current.draft = draftSelectionsFrom(working, definitions);
     setCleared([...new Set(removed)]);
   }
+  function selectLevel(level: number) {
+    if (explicitSave.current || !canSave || !isSupportedDefinitionLevel(level)) return;
+    const next = getDefinitions(level, character.choiceOrigins);
+    const changed = changeLevel(selections, definitions, next);
+    snapshot.current.level = level;
+    snapshot.current.draft = draftSelectionsFrom(changed.selections, next);
+    setTargetLevel(level);
+    setSelections(changed.selections);
+    setCleared(changed.removed);
+    setSaved(false);
+    recordEdit();
+  }
   function author(value: CharacterAuthored) {
     if (explicitSave.current) return;
     setSaved(false);
@@ -1209,13 +1224,12 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
   const snapshot = useRef({
     authored,
     draft,
-    level: character.level,
+    level: targetLevel,
     campaignId: character.campaignId,
   });
   useEffect(() => {
-    snapshot.current.level = character.level;
     snapshot.current.campaignId = character.campaignId;
-  }, [character.level, character.campaignId]);
+  }, [character.campaignId]);
   const idRef = useRef(character.id);
   const revisionRef = useRef(character.revision);
   const effectiveRef = useRef(character.effectiveRevisionId);
@@ -1246,6 +1260,7 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
         authored: fields,
         selections,
         wizardDraft: true,
+        targetLevel: level,
       });
       idRef.current = id;
       setLiveId(id);
@@ -1297,7 +1312,12 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
           throw new Error('The working draft could not be saved. Retry before leaving.');
         const { authored: fields, draft: selections, level } = snapshot.current;
         if (!idRef.current) {
-          idRef.current = await create({ commandId, authored: fields, selections });
+          idRef.current = await create({
+            commandId,
+            authored: fields,
+            selections,
+            targetLevel: level,
+          });
           setLiveId(idRef.current);
           revisionRef.current = 1;
           setExpectedRevision(1);
@@ -1630,6 +1650,28 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
     <div className="-mt-6" data-wizard-shell>
       <div className="grid grid-cols-[224px_minmax(0,1fr)_330px] items-start gap-(--page-gap)">
         <div className={STICKY_PANE}>
+          <label className="mb-4 flex items-center justify-between gap-3 text-sm">
+            Level
+            <select
+              aria-label="Character level"
+              className="rounded-md border bg-background px-3 py-2"
+              value={targetLevel}
+              disabled={!canSave}
+              onChange={event => selectLevel(Number(event.target.value))}
+            >
+              {Array.from({ length: 10 }, (_, i) => i + 1).map(level => (
+                <option key={level} value={level} disabled={!isSupportedDefinitionLevel(level)}>
+                  {level}
+                  {!isSupportedDefinitionLevel(level) ? ' — coming later' : ''}
+                </option>
+              ))}
+            </select>
+          </label>
+          {targetLevel === 2 && (
+            <p className="mb-4 text-sm text-muted-foreground">
+              Level 2 supports Shadow and Berserker Fury.
+            </p>
+          )}
           <StepRail
             title="Character Builder"
             reference={BUILDER_REFERENCE}

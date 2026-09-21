@@ -179,6 +179,12 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V92-shadow-level-one.md#scope: complete level-one Shadow.',
   },
   {
+    id: 'shadow-level-two',
+    description: 'Shadow level-two college features, perk and six college ability alternatives.',
+    paths: ['feature/shadow/level-2', 'feature/ability/shadow/level-2'],
+    basis: 'docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices.',
+  },
+  {
     id: 'tactician-level-one',
     description:
       'Tactician class, level-one features and abilities (all three doctrines). Readable alternatives do not imply wizard or execution support.',

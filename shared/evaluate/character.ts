@@ -1,6 +1,7 @@
 import { startingRewardItems } from '../content/starting-reward-items.ts';
 import { tacticianAbilities } from './tacticianAbilities.ts';
 import { complicationAbilities } from './complicationAbilities.ts';
+import { shadowAbilities } from './shadowAbilities.ts';
 import { perkAbilities } from './perkAbilities.ts';
 import { applyRevenantBaseline, applyRevenantDisengage } from './ancestries/revenant.ts';
 import { applyTimeRaiderBaseline } from './ancestries/time-raider.ts';
@@ -920,7 +921,7 @@ class Evaluation {
       out.features,
       perkAbilities(out.perks, ancestryAbilities(out.traits, this.abilities())),
     );
-    out.abilities = tacticianAbilities(out.features, out.abilities);
+    out.abilities = shadowAbilities(out.features, tacticianAbilities(out.features, out.abilities));
     this.deriveSupportingChoices(out);
     const items = startingRewardItems(out.features ?? [], out.initialItems);
     if (items.length) out.initialItems = items;
@@ -1739,6 +1740,13 @@ class Evaluation {
         out.push({
           name,
           kind: option.abilityKind,
+          ...(name === 'Sticky Bomb' &&
+          decision.id === 'class.shadow.level-2.trained-assassin-ability'
+            ? {
+                activationCondition:
+                  'Attach now; if not disarmed, detonate at the end of your next turn. Roll and apply the printed damage manually at detonation.',
+              }
+            : {}),
           sourcePath: option.source ?? decision.source,
           ...(cost ? { cost } : {}),
           kitBonusesIncluded: false,

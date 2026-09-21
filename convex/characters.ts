@@ -1,3 +1,4 @@
+import { shadowAbilitySource } from '../shared/evaluate/shadowAbilities';
 import { tacticianAbilities, tacticianAbilitySource } from '../shared/evaluate/tacticianAbilities';
 import {
   startingItemAbilities,
@@ -364,6 +365,7 @@ export const create = mutation({
     selections: v.optional(v.array(selectionValidator)),
     /** Start the wizard's working draft: unlisted, and nameable later. */
     wizardDraft: v.optional(v.boolean()),
+    targetLevel: v.optional(v.number()),
   },
   returns: v.id('characters'),
   handler: async (ctx, args) => {
@@ -386,9 +388,12 @@ export const create = mutation({
         );
     }
     if (existing.length >= 100) throw new ConvexError('Prototype limit of 100 characters reached.');
-    const selections = validatedSelections(args.selections ?? [], 1);
-    const choiceOrigins = canonicalChoiceOrigins(selections, 1);
-    const evaluation = evaluateSelections(selections, 1, choiceOrigins);
+    const level = args.targetLevel ?? 1;
+    if (!isSupportedDefinitionLevel(level))
+      throw new ConvexError('Unsupported character definition level.');
+    const selections = validatedSelections(args.selections ?? [], level);
+    const choiceOrigins = canonicalChoiceOrigins(selections, level);
+    const evaluation = evaluateSelections(selections, level, choiceOrigins);
     const id = await ctx.db.insert('characters', {
       ownerId: user._id,
       authored: fields,
@@ -406,7 +411,7 @@ export const create = mutation({
       revision: 1,
       parentRevisionId: null,
       selections,
-      level: 1,
+      level,
       kind: 'full-edit',
       choiceOrigins,
       baseEffectiveRevisionId: null,
@@ -708,7 +713,10 @@ async function abilityView(
   const complicationSource = complicationAbilitySource(ability);
   const tacticianSource = tacticianAbilitySource(ability);
   const traitAbility =
-    ancestryAbilitySource(ability) ?? itemSource ?? (perkSource?.embedded ? undefined : perkSource);
+    shadowAbilitySource(ability) ??
+    ancestryAbilitySource(ability) ??
+    itemSource ??
+    (perkSource?.embedded ? undefined : perkSource);
   const embedded =
     row && (ability.kind === 'kit-signature' || perkSource?.embedded)
       ? extractEmbeddedAbility(row.text, ability.name)

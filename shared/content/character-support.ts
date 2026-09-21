@@ -15,7 +15,7 @@ export const CHARACTER_LEVEL_SUPPORT: Readonly<Record<number, readonly SupportRe
     {
       decisionId: 'class.choice',
       value: 'Fury',
-      message: 'Level two currently supports Fury only.',
+      message: 'Level two currently supports Shadow and Berserker Fury.',
     },
     {
       decisionId: 'class.fury.aspect',
@@ -37,9 +37,10 @@ export function characterSupportDiagnostics(
     return [
       {
         decisionId: 'class.level',
-        message: `Level ${level} has no supported character definitions; this slice supports level one and Berserker Fury level two.`,
+        message: `Level ${level} has no supported character definitions; supported level-two builds are Shadow and Berserker Fury.`,
       },
     ];
+  if (level === 2 && selections['class.choice'] === 'Shadow') return [];
   return CHARACTER_LEVEL_SUPPORT[level]!.filter(
     requirement => selections[requirement.decisionId] !== requirement.value,
   ).map(({ decisionId, message }) => ({ decisionId, message }));

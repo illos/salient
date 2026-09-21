@@ -1,3 +1,4 @@
+import { shadowAbilitySource } from '../../shared/evaluate/shadowAbilities';
 import {
   tacticianAbilities,
   tacticianAbilitySource,
@@ -277,6 +278,9 @@ export function abilityFromEntry(
 ): AbilityDefinition {
   const s = entry.structured as Structured;
   const parsed = effectsOf(s.effects);
+  // Sticky Bomb rolls only at detonation (end of the next turn, unless disarmed).
+  // Recording attachment must never apply its printed damage immediately.
+  const delayed = entry.sourcePath.endsWith('/feature/ability/shadow/level-2/sticky-bomb.md');
   return build({
     compilation: compileLiveEntry(entry, entry.kind),
     abilityId: entry.contentId,
@@ -289,7 +293,7 @@ export function abilityFromEntry(
     target: stringOf(s.target),
     keywords: stringsOf(s.keywords),
     ...(typeof s.cost === 'string' ? { cost: s.cost } : {}),
-    ...(parsed.roll ? { roll: parsed.roll, tiers: parsed.tiers } : {}),
+    ...(parsed.roll && !delayed ? { roll: parsed.roll, tiers: parsed.tiers } : {}),
     ...(parsed.effects.length ? { effects: parsed.effects } : {}),
     kitBonusesIncluded: options.kitBonusesIncluded ?? false,
   });
@@ -668,7 +672,7 @@ export async function abilitiesFor(
         );
         continue;
       }
-      const traitAbility = ancestryAbilitySource(grant) ?? perkSource;
+      const traitAbility = shadowAbilitySource(grant) ?? ancestryAbilitySource(grant) ?? perkSource;
       if (traitAbility) {
         granted.push(
           build({
