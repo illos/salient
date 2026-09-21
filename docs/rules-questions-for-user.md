@@ -828,3 +828,11 @@ No user approval is implied by this classification.
 - **Boundary:** Explicitly includes required supplemental editor choices, grants and derived builds;
   does not enable unrelated supplements/homebrew or claim implemented table support. Forge Steel
   remains a structural and import/export reference; Compendium remains rules authority.
+
+## V100: Conduit domain Piety wording discrepancy — deferred automation
+
+Pinned `en/unified/md/feature/conduit/level-1/domain-piety-and-effects.md` introduces Sun as a
+nearby creature taking fire/holy damage and War as damage of 10 + level or higher. The named
+paragraphs require an enemy for Sun, and greater than 10 + level in a single turn for War.
+V100 retains the complete source and manual trigger resolution. A later automation slice must
+resolve which clauses govern; this does not block the level-one editor or manual action routes.

@@ -58,7 +58,7 @@ export function isCodePath(path: string): boolean {
 }
 
 export function sliceIdsFrom(statusMarkdown: string): Set<string> {
-  return new Set([...statusMarkdown.matchAll(/^\| ([A-Z]\d{2}) \| \[/gm)].map(match => match[1]));
+  return new Set([...statusMarkdown.matchAll(/^\| ([A-Z]\d{2,}) \| \[/gm)].map(match => match[1]));
 }
 
 /** Strips git comment lines and everything after a scissors line, as git does before committing. */

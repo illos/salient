@@ -94,3 +94,8 @@ After V66: select level 3, inspect cumulative Shadow choices and 7-Insight alter
 Visually check deity/domain portfolio filtering, custom deity name and four-domain selection,
 order/domain skill changes, and source-timed Censor actions on the sheet. Programmatic coverage
 uses the `censor` cohort; browser execution remains deferred under V66.
+
+## V100 Conduit level one
+
+Spot-check two-domain selection and one feature-domain, prayer/ward controls, Piety costs and
+source-timed manual actions. Shared API coverage is in the `conduit` cohort; browser runs await V66.

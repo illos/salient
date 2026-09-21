@@ -194,7 +194,7 @@ export interface GrantedAbility {
 }
 
 /** The heroic resources of the supported classes (each class feature names its own). */
-export type HeroicResourceName = 'ferocity' | 'essence' | 'insight' | 'focus' | 'wrath';
+export type HeroicResourceName = 'ferocity' | 'essence' | 'insight' | 'focus' | 'wrath' | 'piety';
 
 /** A bonus column of the Kits table (chapter/kits.md); Field Arsenal resolves each one once. */
 export type KitBenefit =

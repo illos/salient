@@ -1,3 +1,5 @@
+import { conduitAbilities } from './conduitAbilities.ts';
+import { applyConduitModifiers } from './classes/conduit.ts';
 import { startingRewardItems } from '../content/starting-reward-items.ts';
 import { tacticianAbilities } from './tacticianAbilities.ts';
 import { complicationAbilities } from './complicationAbilities.ts';
@@ -135,7 +137,8 @@ function parseCost(costQuote: string | undefined): GrantedAbility['cost'] | unde
     resource !== 'essence' &&
     resource !== 'insight' &&
     resource !== 'focus' &&
-    resource !== 'wrath'
+    resource !== 'wrath' &&
+    resource !== 'piety'
   )
     return undefined;
   return { resource, amount: Number(match[1]) };
@@ -923,9 +926,12 @@ class Evaluation {
       out.features,
       perkAbilities(out.perks, ancestryAbilities(out.traits, this.abilities())),
     );
-    out.abilities = censorAbilities(
+    out.abilities = conduitAbilities(
       out.features,
-      shadowAbilities(out.features, tacticianAbilities(out.features, out.abilities)),
+      censorAbilities(
+        out.features,
+        shadowAbilities(out.features, tacticianAbilities(out.features, out.abilities)),
+      ),
     );
     this.deriveSupportingChoices(out);
     const items = startingRewardItems(out.features ?? [], out.initialItems);
@@ -1331,6 +1337,7 @@ class Evaluation {
       ]);
     }
     applyElementalistModifiers(this, out);
+    applyConduitModifiers(this, out);
   }
 
   private skillGroup(name: string): string {

@@ -1,3 +1,7 @@
+import {
+  classProfile as conduitProfile,
+  getLevelOneDecisions as conduitDecisions,
+} from './classes/conduit/level-one.ts';
 import { createRevenantDecisions } from './ancestries/revenant/level-one.ts';
 import { levelOneDecisions as timeRaiderDecisions } from './ancestries/time-raider/level-one.ts';
 import { levelOneDecisions as wodeElfDecisions } from './ancestries/wode-elf/level-one.ts';
@@ -78,7 +82,7 @@ allow('ancestry.choice', [
   'Revenant',
 ]);
 allow('career.choice', ["Mage's Apprentice"]);
-allow('class.choice', ['Elementalist', 'Shadow', 'Tactician', 'Censor']);
+allow('class.choice', ['Elementalist', 'Shadow', 'Tactician', 'Censor', 'Conduit']);
 allow('culture.environment', ['Urban']);
 allow('culture.environment.skill', ['Alertness']);
 allow('culture.organization.skill', ['Gymnastics']);
@@ -91,6 +95,7 @@ definitions.classProfiles = structuredClone({
   Shadow: shadowProfile,
   Tactician: tacticianProfile,
   Censor: censorProfile,
+  Conduit: conduitProfile,
 });
 
 /**
@@ -207,5 +212,6 @@ append('step.career', [
 append('step.class', elementalistDecisions(definitions.pools));
 append('step.class', shadowDecisions(definitions.pools));
 append('step.class', censorDecisions(definitions.pools));
+append('step.class', conduitDecisions(definitions.pools));
 append('step.class', tacticianDecisions(definitions.pools));
 export default definitions;

@@ -1,3 +1,4 @@
+import { conduitAbilitySource } from '../../shared/evaluate/conduitAbilities';
 import { censorAbilitySource } from '../../shared/evaluate/censorAbilities';
 import { shadowAbilitySource } from '../../shared/evaluate/shadowAbilities';
 import {
@@ -555,10 +556,11 @@ export async function abilitiesFor(
         ),
       ),
     ]) {
+      const conduitSource = conduitAbilitySource(grant);
       const censorSource = censorAbilitySource(grant);
-      const tacticianSource = censorSource ?? tacticianAbilitySource(grant);
+      const tacticianSource = conduitSource ?? censorSource ?? tacticianAbilitySource(grant);
       if (tacticianSource) {
-        const id = `${censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
+        const id = `${conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
         granted.push(
           build({
             abilityId: id,

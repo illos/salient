@@ -128,7 +128,11 @@ describe('check-commit', () => {
     expect(validateMessage(good, context())).toEqual([]);
   });
   test('reads slice ids from STATUS.md rows only', () => {
-    expect([...sliceIdsFrom(specs['docs/build/STATUS.md'])]).toEqual(['S00', 'A05']);
+    expect([
+      ...sliceIdsFrom(
+        specs['docs/build/STATUS.md'] + '| V100 | [Conduit](V100.md) |\nNot a row: V101',
+      ),
+    ]).toEqual(['S00', 'A05', 'V100']);
   });
   test('rejects a feat commit without Spec and names the reason', () => {
     const failures = validateMessage(without('Spec:'), context());

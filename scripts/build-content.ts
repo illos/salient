@@ -185,6 +185,12 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices.',
   },
   {
+    id: 'conduit-level-one',
+    description: 'Conduit level-one domains, prayers, wards and abilities.',
+    paths: ['class/conduit.md', 'feature/conduit/level-1', 'feature/ability/conduit/level-1'],
+    basis: 'docs/build/V100-conduit-level-one.md#scope: complete Conduit level-one options.',
+  },
+  {
     id: 'censor-level-one',
     description:
       'Censor class, all level-one orders, domains, abilities and pinned deity/saint portfolios.',
