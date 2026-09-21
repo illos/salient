@@ -62,3 +62,16 @@ export function readableRuleText(text: string): string {
     .replace(/[📏🎯]/gu, '')
     .trim();
 }
+
+/**
+ * One readable sentence or two of an entry's own text, for a card or row that offers the option
+ * (V96). The catalog carries every entry's excerpt inline, so this needs no extra fetch.
+ */
+export function ruleExcerpt(
+  catalog: RulesCatalog | undefined,
+  reference: RuleReference,
+): string | undefined {
+  if (!catalog) return undefined;
+  const excerpt = resolveRule(catalog, reference)?.entry.excerpt;
+  return excerpt ? readableRuleText(excerpt) : undefined;
+}

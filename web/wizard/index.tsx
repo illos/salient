@@ -53,7 +53,8 @@ import { Textarea } from '../components/ui/textarea';
 import { StatBox } from '../components/stat-box';
 import { ErrorNotice, Field, Loading, Notice, useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
-import { readableRuleText } from '../rules/reference';
+import { readableRuleText, ruleExcerpt } from '../rules/reference';
+import { useRulesCatalog } from '../rules/content';
 import {
   decisionLabel,
   decisionReference,
@@ -234,6 +235,8 @@ export function DecisionEditor({
   lockedBy?: string;
 }) {
   const decisions = useMemo(() => indexDecisions(definitions), [definitions]);
+  // Shared cached catalog: the reference links on these same rows already hold it.
+  const { catalog } = useRulesCatalog();
   const available = isAvailable(decision, selections, decisions);
   const value = selections[decision.id];
   const shape = decision.shape;
@@ -486,6 +489,11 @@ export function DecisionEditor({
                   onSelect(decision.id, next.length ? next : undefined);
                 }}
                 meta={`${option.cost} point${option.cost === 1 ? '' : 's'}`}
+                body={
+                  option.source
+                    ? ruleExcerpt(catalog, { sourcePath: option.source, label: option.value })
+                    : undefined
+                }
                 reference={
                   option.source ? (
                     <RuleLink sourcePath={option.source} label={option.value} />

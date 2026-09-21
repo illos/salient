@@ -3,7 +3,8 @@
  * The wizard's centre column pieces (V21 item 10; Quiet, docs/design-mockups/quiet/README.md):
  * the step title block, the muted section label over a decision, the ChoiceRow (a `sub` tile
  * inside the step panel with a radio or checkbox, the option name, muted metadata, description
- * and right-aligned facts; the selected tile takes an inset accent ring; the "Not offered in
+ * and right-aligned facts, plus an optional wrapped `body` line under the name for the option's
+ * own rules text; the selected tile takes an inset accent ring; the "Not offered in
  * v0.01" state stays visible and muted) and the pinned step navigation. Presentation only: every
  * row forwards the same change the plain radio or checkbox made before; the option data supplies
  * what the row shows.
@@ -78,6 +79,11 @@ export interface ChoiceRowProps {
   facts?: string;
   /** The rulebook icon for the option. */
   reference?: React.ReactNode;
+  /**
+   * Full option text under the name, wrapped rather than truncated (V96): what an ancestry trait
+   * actually does, so the choice is made from the row instead of the reference dialog.
+   */
+  body?: React.ReactNode;
 }
 
 export function ChoiceRow({
@@ -92,6 +98,7 @@ export function ChoiceRow({
   description,
   facts,
   reference,
+  body,
 }: ChoiceRowProps) {
   return (
     <li>
@@ -124,6 +131,11 @@ export function ChoiceRow({
         <span className="justify-self-end text-right text-sm text-muted-foreground">
           {supported ? (facts ?? '') : (unavailableReason ?? 'Not offered yet')}
         </span>
+        {body && (
+          <span className="col-span-4 col-start-2 text-sm text-balance text-muted-foreground">
+            {body}
+          </span>
+        )}
       </label>
     </li>
   );

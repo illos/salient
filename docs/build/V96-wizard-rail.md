@@ -23,6 +23,8 @@ unchanged.
   as chips.
 - `web/wizard/index.tsx`: a chosen preset renders its fixed aspects read-only in the wizard, with
   Build your own as the way to set them individually.
+- `web/wizard/choice-list.tsx`, `web/rules/reference.ts`: a point-budget option row carries its
+  own rules text, read from the already-loaded rules catalog.
 - docs/character-wizard-spec.md#confirmed-behavior (the 2026-09-21 amendment)
 - Out of scope: the decision definitions (`presentedInV001` stays content data), the
   `connections.notes` headless route and its sheet field, the centre and hero-so-far columns.
@@ -62,3 +64,9 @@ unchanged.
   printed language; the three skills and a professional preset's language stay choices. The shared
   transition still accepts a modified preset and still marks it Bespoke, so the headless route is
   unchanged.
+- 2026-09-21: ancestry trait rows now show the trait's text. The option records carry a source
+  path but no prose, and the rules catalog already holds an inline excerpt for every entry, so
+  `ruleExcerpt` resolves it through the existing `resolveRule` path mapping with no extra fetch.
+  Checked against the built catalog: all 161 point-budget options across every ancestry resolve to
+  text, none missing. The text wraps under the name rather than filling the truncated description
+  column, so a two-sentence trait stays readable.
