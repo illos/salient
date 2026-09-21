@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V96 | `1e20eec` | Merged; backend/frontend published; accepted gates reused | complete |
 | V95 | `1115380` | Merged; backend/frontend published; accepted gates reused | complete |
 | V94 | `fcf13f1` | Merged and published; 1209 entries; accepted gates reused | complete; no deployment test gate |
 | V92 | `81b7931` | Merged and published; 1182 entries; hosted Shadow smoke passed | documentation closeout SHA and verified GitHub push recorded in completion handoff |
@@ -168,3 +169,13 @@ succeeded. Worker `72e2c950-8477-4c4a-895c-ed6b2c3026f1` serves the account scre
 Content remains the V94 snapshot (1209 entries); no reseed required. Temporary credentials
 removed and private hosted helpers stopped. No smoke/live test or automatic GitHub suite.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V95-release-1115380`.
+
+### V96 character builder publication — 2026-09-21
+
+Reviewed owner tip `1e20eece741fc763eea4c359d3853d018e4513de` fast-forwarded into main.
+Accepted runtime `f5189d4` evidence reused: full 968 checks (176 s), isolated push/codegen
+(2.25 s), wizard-draft 3/3 (14.3 s). No tests repeated during deployment.
+Backend publication/schema validation, hosted build and frontend publication succeeded.
+Worker: `b1effe2a-181b-4fa5-8355-df49f69cc3f0`. Content remains V94's 1209-entry snapshot;
+no reseed needed. Temporary credentials removed; private hosted helpers stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V96-release-1e20eec`.

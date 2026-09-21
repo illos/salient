@@ -360,3 +360,11 @@ Two things an auditor should read first: **Flagged for audit** above, on the Tac
 grid, which is the one change that touches how a character option is chosen; and **Working
 drafts**, which changed the save model and the `characters` table (an additive `wizardDraft` field,
 `create.wizardDraft`, `save.list`, and a `characters.wizardDraft` query).
+
+### 2026-09-21 — publication
+
+DEPLOY2 fast-forwarded reviewed `1e20eec` into main and published the backend and frontend.
+Backend schema validation, hosted build and upload succeeded; Worker
+`b1effe2a-181b-4fa5-8355-df49f69cc3f0`. Accepted `f5189d4` results were reused (968 checks,
+isolated push/codegen, wizard-draft 3/3). No smoke test or test rerun. Content was unchanged;
+no reseed needed. Release logs: `/srv/presidium/projects/salient/test-artifacts/V96-release-1e20eec`.

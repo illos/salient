@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V95 Account screen
+## Current release — V96 Character builder
+
+Backend/frontend source `1e20eece741fc763eea4c359d3853d018e4513de` published on 2026-09-21 as
+Worker `b1effe2a-181b-4fa5-8355-df49f69cc3f0`. Backend publication/schema validation and hosted
+build/upload succeeded. Accepted TESTER results reused, with no smoke test or rerun. Content
+remains the V94 1209-entry snapshot. See [V96](build/V96-wizard-rail.md) and the [ledger](../deploy.md).
+
+## Previous release — V95 Account screen
 
 Backend/frontend source `1115380d0411acae916a3c7a8936e46cad95f9da` published on 2026-09-21 as
 Worker `72e2c950-8477-4c4a-895c-ed6b2c3026f1`. Backend publication and hosted build/upload succeeded.

@@ -106,4 +106,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V93 | [CI reuse and failure events](V93-ci-failure-events.md) | Merged (`a5a23ec`); targeted gate and real event delivery pass |
 | V94 | [Tactician level one](V94-tactician-level-one.md) | Merged (`fcf13f1`); cloud dev published; accepted TESTER gates reused |
 | V95 | [Account screen](V95-account-screen.md) | Merged (`1115380`); cloud dev published; accepted TESTER results reused |
-| V96 | [Character builder rail](V96-wizard-rail.md) | Ready for DEPLOY2; review PASS, TESTER `f5189d4` full 968 + isolated wizard-draft 3/3 PASS |
+| V96 | [Character builder](V96-wizard-rail.md) | Merged (`1e20eec`); cloud dev published; accepted TESTER results reused |
