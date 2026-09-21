@@ -87,3 +87,13 @@ entries. The clean Heroes text supplies ability group membership. No Forge outpu
   through `abilities:results`, tie it to the use and target, and compare printed distance with
   source tiers 1/2/4. Other manual-remainder assertions remain. No runtime change.
   Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-39f12c1`.
+
+- Final TESTER `0adef76`: touched lint/format exit 0; isolated `SALIENT_HEADLESS_COHORT=fury
+  node scripts/verify-character-headless.ts` exit 0, 45.4s. All six builds and forty distinct actions
+  passed persisted readback. Backend stopped and ports released. Accepted unique coverage is
+  387 engine + 600 app/scripts = 987 tests across the retained/resumed runs above, not one
+  uninterrupted full run. Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-0adef76`.
+- ENGINE static PASS on implementation/proofs at `ddc7edf`, bounded historical-oracle updates
+  at `c5334df` and `aca62e3`, packaging regression at `fa601c2`, and compiled-push proof at `0adef76`.
+  Review persisted in [the rules audit](audits/V101-fury-rules-review.md). Ready for DEPLOY2;
+  reuse accepted results during publication. No new runtime changes after the accepted journey.

@@ -47,3 +47,19 @@ No blocking findings remain. The earlier suspected kit-parent provenance defect 
 provenance. No repair was required for that finding.
 
 Reviewed-By: ENGINE (pass, 2026-09-21)
+
+## Bounded follow-up reviews and execution
+
+ENGINE additionally returned static PASS for `c5334df` (exact two embedded additions before whole
+legacy-output equality), `aca62e3` (source/cost/manual assertions and nonmutating legacy comparison),
+`fa601c2` (matching kit JSON import attributes and regression), and `0adef76` (Brutal Slam's saved
+compiled push linked to the original use and target, with source printed tiers 1/2/4). The generated
+index correction at `39f12c1` contains exactly the kit import attribute change. These were static
+reviews; ENGINE ran no tests. The authentic follow-up trailer remains the one above.
+
+TESTER separately confirmed `0adef76`: lint/format exit 0; isolated Fury journey exit 0 in 45.4s,
+six builds and forty distinct actions with persisted readback. Accepted retained/resumed gates
+cover 987 unique tests (387 engine + 600 app/scripts). This is not a claim of one uninterrupted
+987-test run. Evidence: `/srv/presidium/projects/salient/test-artifacts/V101-0adef76`; earlier
+failures and repaired stages remain documented in the slice work log. Manual form/threshold/spatial
+boundaries above are unchanged.
