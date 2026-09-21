@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V99 Censor level one
+## Current release — V100 Conduit level one
+
+Backend/frontend source `507919299a83b079167c43f7da40c0a0c8bfa92e` published on 2026-09-21 as
+Worker `28baa4c0-dbb9-4b75-ad0a-7a596b8d54a2`. Backend/schema validation, content reseed (1361
+entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test or
+rerun. See [V100](build/V100-conduit-level-one.md) and the [ledger](../deploy.md).
+
+## Previous release — V99 Censor level one
 
 Backend/frontend source `517ea19de44ea758bc76812d3235b617077defd1` published on 2026-09-21 as
 Worker `4cfd22de-2da4-42fe-b10b-65c373ae1cf1`. Backend/schema validation, content reseed (1306

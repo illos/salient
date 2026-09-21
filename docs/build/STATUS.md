@@ -110,4 +110,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V96 | [Character builder](V96-wizard-rail.md) | Merged (`1e20eec`); cloud dev published; accepted TESTER results reused |
 | V98 | [Shadow level three](V98-shadow-level-three.md) | Merged (`66a0f3d`); cloud dev published; accepted TESTER results reused |
 | V99 | [Censor level one](V99-censor-level-one.md) | Merged (`517ea19`); cloud dev published; accepted TESTER results reused |
-| V100 | [Conduit level one](V100-conduit-level-one.md) | Ready for DEPLOY2; ENGINE pass; TESTER 984 + 12-build/64-action cohort pass |
+| V100 | [Conduit level one](V100-conduit-level-one.md) | Merged (`5079192`); cloud dev published; accepted TESTER results reused |

@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V100 | `5079192` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V99 | `517ea19` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V98 | `66a0f3d` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V97 | `c3423f4` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -214,3 +215,14 @@ upload succeeded. Worker `4cfd22de-2da4-42fe-b10b-65c373ae1cf1`.
 No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V99-release-517ea19`.
 Committed content snapshot hash: `sha256:08fd8c7f9ee5f55ebe5b96a777ea6363dd828862ac1f6d894fa62bb688dd0362`.
+
+### V100 Conduit level one publication — 2026-09-21
+
+Reviewed owner `507919299a83b079167c43f7da40c0a0c8bfa92e` fast-forwarded into main.
+Accepted evidence reused: full 984-test gate from `ec9108a` and isolated twelve-build/64-action
+cohort from `a91faef` (72.2 s). Prior fixture correction remains recorded in the slice.
+Backend publication/schema validation, content reseed (1361 entries), hosted build and frontend
+upload succeeded. Worker `28baa4c0-dbb9-4b75-ad0a-7a596b8d54a2`.
+No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V100-release-5079192`.
+Committed content snapshot hash: `sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b`.

@@ -78,3 +78,11 @@ Compendium rather than evaluator output. Guided progression is separate from thi
   This is one successful selected cohort, not a repeat of the aggregate headless suite.
   Artifacts: `/srv/presidium/projects/salient/test-artifacts/V100-a91faef`.
   Backend stopped, ports free, data retained. Ready for DEPLOY2 promotion with accepted evidence.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `5079192` into main and published the backend, 1361-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded. Worker:
+`28baa4c0-dbb9-4b75-ad0a-7a596b8d54a2`. Accepted 984-test gate and isolated twelve-build/64-action
+results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V100-release-5079192`.
