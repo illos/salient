@@ -52,3 +52,11 @@ Independent ENGINE review then DEPLOY2 publication reusing acceptance.
   Artifacts: `/srv/presidium/projects/salient/test-artifacts/V103-17c0776`.
 - Accepted runtime remains `17c0776`; closeout adds review/evidence only. Ready for DEPLOY2 to
   integrate and publish, reusing accepted results. No repeat suite, smoke or live checks requested.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `983bcfa` into main and published the backend, 1436-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded. Worker:
+`7d57b840-f22b-4dd3-bb6b-859147f92f71`. Accepted 993-test gate and isolated four-build/39-action
+results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V103-release-983bcfa`.
