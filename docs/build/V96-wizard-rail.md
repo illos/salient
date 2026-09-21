@@ -1,8 +1,12 @@
-# V96: Character builder rail
+# V96: Character builder
 
 Rules review: not required. Depends on: V75 (Quiet theme).
 
 ## Goal
+
+Rework the character wizard from the user's direction and mockups across 2026-09-21. It began as a
+compaction of the left rail and grew into the whole builder: the rail, the step header, every
+chooser, the hero column, the save model and the page chrome. The original goal follows.
 
 Compact the character wizard's left rail so the centre column gains room, and drop the two
 presented steps that record nothing the builder needs: the step rail is headed "Character
@@ -292,3 +296,15 @@ chosen; it needs its own slice and headless proof.
   nav leaves the page, and the draft is saved as you work either way. Saving then moved again, to
   the head of the hero column, replacing the status word: the outstanding list under it already
   says whether the build is finished.
+
+## Checkpoint, 2026-09-21
+
+Committed on `slice/V96` in `.worktrees/wizard-ui`, cut from main `1115380`. Not merged, not yet
+tested. Authoring checks on the branch tip: eslint and prettier over the tree, `tsc` for both
+projects, 418 Markdown links, vendor pins, and the four focused character suites (13 tests) pass.
+Handed to UI3 for audit, which routes to TESTER and DEPLOY2.
+
+Two things an auditor should read first: **Flagged for audit** above, on the Tactician's two-kit
+grid, which is the one change that touches how a character option is chosen; and **Working
+drafts**, which changed the save model and the `characters` table (an additive `wizardDraft` field,
+`create.wizardDraft`, `save.list`, and a `characters.wizardDraft` query).
