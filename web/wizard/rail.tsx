@@ -3,11 +3,11 @@
  * The wizard step rail (V21 item 10; Quiet, docs/design-mockups/quiet/README.md; V96 compaction):
  * a `card` panel headed "Character Builder" with the Making a Hero reference, a muted "Step n
  * of m" line, one compact row per presented step — the tonal round badge carries the number and
- * takes the accent on the current step (a check mark once the step is done), the step name, the
- * chosen value in muted at the right — and a rounded progress bar at the bottom. The rows are the
- * same step buttons the wizard always had: the accessible name stays `n. Step name` so the
- * keyboard flow keeps working. The steps come from the caller in presented order; nothing here
- * knows how many there are.
+ * takes the accent on the current step (a check mark once the step is done), then the step's
+ * chosen value, falling back to the step name until it has one — and a rounded progress bar at
+ * the bottom. The rows are the same step buttons the wizard always had, and the accessible name
+ * keeps the step it belongs to (`n. Step name: Chosen`) so the keyboard flow keeps working. The
+ * steps come from the caller in presented order; nothing here knows how many there are.
  */
 import { cn } from 'cn';
 import { Badge } from '../components/ui/badge';
@@ -20,7 +20,7 @@ export interface RailStep {
   name: string;
   /** The step's position in the presented sequence, starting at one. */
   number: number;
-  /** Label of the step's primary decision when one is recorded. */
+  /** Value of the step's primary decision when one is recorded; it replaces the name in the row. */
   chosen?: string;
   /** Outstanding (non-warning) diagnostics for the step's decisions. */
   problems: number;
@@ -92,7 +92,13 @@ export function StepRail({
               <button
                 type="button"
                 aria-current={current ? 'step' : undefined}
-                aria-label={`${step.number}. ${step.name}`}
+                // The visible text is the chosen value once there is one, so the accessible name
+                // keeps the step it belongs to and still contains what the row reads.
+                aria-label={
+                  step.chosen
+                    ? `${step.number}. ${step.name}: ${step.chosen}`
+                    : `${step.number}. ${step.name}`
+                }
                 title={step.chosen ? `${step.name}: ${step.chosen}` : step.name}
                 className={cn(
                   'flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-left text-sm transition-colors duration-(--motion-fast) hover:bg-muted',
@@ -105,14 +111,10 @@ export function StepRail({
                 onClick={() => onSelect(index)}
               >
                 <StepMarker number={step.number} done={step.done} current={current} />
-                <span className="min-w-0 flex-1 truncate">{step.name}</span>
-                {/* The chosen value and the outstanding count are both shown: a step can be
-                    decided and still owe sub-choices. */}
-                {step.chosen && (
-                  <span className="max-w-[45%] truncate text-xs font-normal text-muted-foreground">
-                    {step.chosen}
-                  </span>
-                )}
+                {/* Once a step is decided its value stands in for the step name (V96): the rail
+                    reads back the hero rather than repeating the book's step list. The outstanding
+                    count still shows, since a step can be decided and still owe sub-choices. */}
+                <span className="min-w-0 flex-1 truncate">{step.chosen ?? step.name}</span>
                 {step.problems > 0 && (
                   <Badge variant="outline" aria-label={`${step.problems} to resolve`}>
                     {step.problems}

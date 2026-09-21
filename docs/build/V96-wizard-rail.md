@@ -14,7 +14,8 @@ unchanged.
 ## Scope
 
 - `web/wizard/rail.tsx`: heading with the chapter reference, muted "Step n of m", compact rows,
-  accent badge on the current step, no pip.
+  accent badge on the current step, no pip; a decided step reads its chosen value in place of the
+  step name.
 - `web/wizard/index.tsx`: hide `step.think`, `step.free-strikes` and `step.connections`, number
   the presented steps from one, narrow the rail column.
 - `web/wizard/presentation.ts`: remove the unused source-number helper.
@@ -77,3 +78,7 @@ unchanged.
   selection is unchanged. Applied to every `ChoiceRow`, not only ancestry traits, so the wizard
   selects consistently with the new culture cards. Dropped the `description` and `facts` props at
   the same time: no call site passed either, and the truncated middle column they fed is gone.
+- 2026-09-21: a decided step now shows its value instead of the step name, rather than both. The
+  accessible name keeps the step (`2. Ancestry: Devil`) so the row still says which step it is and
+  still contains its visible text; the title attribute is unchanged and the outstanding-count
+  badge still appears, since a step can be decided and still owe sub-choices.
