@@ -162,8 +162,9 @@ From the user's culture mockup (attachment, 2026-09-21):
   beside the step card as the point-budget panel is.
 - A granted automatic step reads as a card rather than a bare line.
 
-Not from the mockup, and worth a later pass: its skill rows put the select beside a two-line
-label with the aspect and its option count, where these keep the ordinary decision layout.
+The skill rows follow the mockup too: the label and a note naming the aspect they follow and how
+many options it offers on the left, the control on the right. `DecisionEditor` takes a `row` note
+for this, so the pool and availability logic stays in one place.
 
 ## Working drafts
 

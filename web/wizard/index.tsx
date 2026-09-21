@@ -237,6 +237,7 @@ export function DecisionEditor({
   diagnostics,
   lockedBy,
   baseline,
+  row,
 }: {
   definitions?: DecisionDefinitions;
   decision: Decision;
@@ -250,6 +251,11 @@ export function DecisionEditor({
   lockedBy?: string;
   /** Evaluated values, for the automatic steps that read them back (base statistics). */
   baseline?: PartialBaseline;
+  /**
+   * Render as one row of a panel (V96 mockup): the label and this note on the left, the control
+   * on the right, instead of the label-above-control section.
+   */
+  row?: string;
 }) {
   const decisions = useMemo(() => indexDecisions(definitions), [definitions]);
   // Shared cached catalog: the reference links on these same rows already hold it.
@@ -676,6 +682,25 @@ export function DecisionEditor({
           return sourcePath && !parentSource ? [{ name, sourcePath }] : [];
         })
       : [];
+  if (row)
+    return (
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-md bg-muted px-4 py-3.5">
+          <span className="min-w-0">
+            <span className="flex items-center gap-2">
+              <span className="text-base font-medium">{label}</span>
+              {reference}
+            </span>
+            <span className="block text-sm text-muted-foreground">{row}</span>
+          </span>
+          <span className="shrink-0">{control}</span>
+        </div>
+        <Diagnostics list={diagnostics} />
+        {selectedSkills.map(name => (
+          <SelectedSkillSource key={name} name={name} />
+        ))}
+      </div>
+    );
   return (
     <ChoiceSection
       label={decision.kind === 'automatic' && shownGrants.length ? `${label} — granted` : label}
@@ -1170,7 +1195,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
     target?.focus({ preventScroll: true });
     target?.scrollIntoView({ block: 'nearest' });
   }, [primaryExpanded, focusAfterChange]);
-  const renderDecision = (decision: Decision, onSelect = select) => (
+  const renderDecision = (decision: Decision, onSelect = select, row?: string) => (
     <DecisionEditor
       key={decision.id}
       decision={decision}
@@ -1183,6 +1208,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
       diagnostics={evaluation?.diagnostics[decision.id]}
       lockedBy={lockedByPreset(decision.id)}
       baseline={evaluation?.baseline ?? evaluation?.partial}
+      row={row}
     />
   );
   const previous = stepIndex > 0 ? PRESENTED[stepIndex - 1] : undefined;
@@ -1525,7 +1551,19 @@ function Wizard({ character }: { character: WizardCharacter }) {
                     </Button>
                   </div>
                 </div>
-                {cultureSkills.map(decision => renderDecision(decision))}
+                <div className="mt-4 flex flex-col gap-2">
+                  {cultureSkills.map(decision => {
+                    const parent = selections[decision.id.replace(/\.skill$/, '')];
+                    const count = poolOf(decision, selections, definitions).values.length;
+                    return renderDecision(
+                      decision,
+                      select,
+                      [typeof parent === 'string' ? parent : null, `${count} options`]
+                        .filter(Boolean)
+                        .join(' · '),
+                    );
+                  })}
+                </div>
               </section>
             )}
             {panelDecisions.map(decision => renderDecision(decision))}
