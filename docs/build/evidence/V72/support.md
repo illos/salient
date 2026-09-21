@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8`.
 
-Currently reachable compiled: 19; unchanged reachable compatibility: 1339; structurally supported but unavailable: 2.
+Currently reachable compiled: 19; unchanged reachable compatibility: 1355; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -154,23 +154,24 @@ Currently reachable compiled: 19; unchanged reachable compatibility: 1339; struc
 | The Green Within, the Green Without | hero-standalone | manual | not-reachable | manual-section |
 | Unquiet Ground | hero-standalone | manual | not-reachable | manual-section, target-boundary |
 | Viscous Fire | hero-standalone | supported | compiled |  |
-| Back! | hero-standalone | manual | not-reachable | target-boundary |
-| Blood for Blood! | hero-standalone | manual | not-reachable | unsafe-tier-remainder, manual-section |
+| Back! | hero-standalone | manual | legacy-compatibility | target-boundary |
+| Blood for Blood! | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Brutal Slam | hero-standalone | supported | compiled |  |
-| Furious Change | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary, action-type |
-| Hit and Run | hero-standalone | manual | not-reachable | manual-section |
-| Impaled! | hero-standalone | manual | not-reachable | unsafe-tier-remainder, target-boundary |
+| Furious Change | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Hit and Run | hero-standalone | manual | legacy-compatibility | manual-section |
+| Impaled! | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | Lines of Force | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Make Peace With Your God! | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
+| Make Peace With Your God! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Out of the Way! | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Thunder Roar | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
-| Tide of Death | hero-standalone | manual | not-reachable | manual-section, target-boundary |
-| To the Death! | hero-standalone | manual | not-reachable | manual-section |
-| To the Uttermost End | hero-standalone | manual | not-reachable | manual-section |
-| Unearthly Reflexes | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary, action-type |
-| Your Entrails Are Your Extrails! | hero-standalone | manual | not-reachable | manual-section |
+| Tide of Death | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| To the Death! | hero-standalone | manual | legacy-compatibility | manual-section |
+| To the Uttermost End | hero-standalone | manual | legacy-compatibility | manual-section |
+| Unearthly Reflexes | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Your Entrails Are Your Extrails! | hero-standalone | manual | legacy-compatibility | manual-section |
 | Special Delivery | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Wrecking Ball | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Aspect of the Wild | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Shadowmeld | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Detonate Sigil | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Black Ash Teleport | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
@@ -222,16 +223,16 @@ Currently reachable compiled: 19; unchanged reachable compatibility: 1339; struc
 | The Wode Defends | hero-standalone | supported | compiled |  |
 | Exploding Arrow | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Unmooring | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
-| Bear Claws | kit-signature | manual | not-reachable | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Bear Claws | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Fade | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
-| Wing Buffet | kit-signature | manual | not-reachable | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Wing Buffet | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
 | Double Strike | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
 | Forward Thrust, Backward Smash | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
 | Battle Grace | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Pain for Pain | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
 | Devastating Rush | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
 | Let's Dance | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
-| Driving Pounce | kit-signature | manual | not-reachable | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Driving Pounce | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
 | Raider's Awe | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
 | Hamstring Shot | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
 | Two Shot | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
@@ -242,7 +243,7 @@ Currently reachable compiled: 19; unchanged reachable compatibility: 1339; struc
 | Where I Want You | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Fancy Footwork | kit-signature | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
 | Shield Bash | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
-| Unbalancing Attack | kit-signature | manual | not-reachable | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Unbalancing Attack | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Weakening Brand | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Extension of My Arm | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Arcane Trick | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |

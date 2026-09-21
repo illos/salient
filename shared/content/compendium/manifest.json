@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b",
-  "entryCount": 1361,
+  "contentHash": "sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8",
+  "entryCount": 1362,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -62,6 +62,7 @@
         "class/fury.md",
         "feature/fury/level-1",
         "feature/ability/fury/level-1",
+        "feature/ability/fury/stormwight-kits",
         "feature/fury/stormwight-kits",
         "feature/fury/boren",
         "feature/fury/corven",
@@ -1033,6 +1034,14 @@
       "name": "Wrecking Ball",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/wrecking-ball.md",
       "selection": "fury-level-two",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild",
+      "kind": "ability",
+      "name": "Aspect of the Wild",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+      "selection": "fury-level-one",
       "file": "ability.json"
     },
     {

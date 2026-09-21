@@ -1,3 +1,4 @@
+import { stormwightKitDecisions } from './classes/fury/stormwight.ts';
 import {
   classProfile as conduitProfile,
   getLevelOneDecisions as conduitDecisions,
@@ -125,6 +126,7 @@ kitChoice.optionsByParent = {
   },
 };
 append('step.kit', tacticianKitDecisions(kitChoice.optionSources));
+append('step.kit', stormwightKitDecisions);
 
 append('step.ancestry', structuredClone(polderDecisions));
 append('step.ancestry', structuredClone(dwarfDecisions));

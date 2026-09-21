@@ -1,0 +1,880 @@
+{
+  "schemaVersion": "v101-source-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium/en/unified/md",
+  "method": "Handwritten printed-source inventory and arithmetic, never evaluator output. Human Soldier background reused from approved V100. Permanent kit bonuses only; true form, no threshold benefit or optional bonus. M=A2; kit signatures include bonuses once. Ordinary Fury Melee+Weapon damage including area receives the selected kit bonus. Tide of Death remains entirely manual to avoid damaging Self. Each selected ability citation is its name slug under feature/ability/fury/level-1/. ENGINE independent inventory in docs/build/audits/V101-fury-source-audit.md.",
+  "embeddedFerocityCosts": {
+    "Lines of Force: Enhance": 1,
+    "Unearthly Reflexes: Reduce Potency": 1,
+    "Furious Change: Recovery": 1,
+    "Aspect of the Wild: Second Shapeshift": 1,
+    "To the Uttermost End: Extra Ferocity": 1
+  },
+  "paidSourceCosts": {
+    "Out of the Way!": 3,
+    "Back!": 3,
+    "Tide of Death": 3,
+    "Your Entrails Are Your Extrails!": 3,
+    "Thunder Roar": 5,
+    "Blood for Blood!": 5,
+    "Make Peace With Your God!": 5,
+    "To the Uttermost End": 5
+  },
+  "selfTargets": [
+    "Unearthly Reflexes",
+    "Furious Change",
+    "Aspect of the Wild",
+    "Make Peace With Your God!",
+    "Tide of Death"
+  ],
+  "witnesses": [
+    {
+      "id": "v101-mountain",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Berserker Mountain",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, −1, −1",
+        "class.fury.array-assignment": {
+          "Reason": -1,
+          "Intuition": 2,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Mountain"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Berserker",
+        "kit": "Mountain",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Jump",
+          "Climb",
+          "Lift"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Kit",
+          "Primordial Strength"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Lines of Force",
+          "Pain for Pain",
+          "Lines of Force: Enhance",
+          "Out of the Way!: Follow"
+        ]
+      },
+      "classActions": [
+        "Brutal Slam",
+        "Out of the Way!",
+        "Thunder Roar",
+        "Lines of Force",
+        "Pain for Pain",
+        "Lines of Force: Enhance",
+        "Out of the Way!: Follow"
+      ],
+      "rolledActions": [
+        {
+          "name": "Brutal Slam",
+          "damageByTier": [5, 8, 15],
+          "manualRemainder": "push"
+        },
+        {
+          "name": "Out of the Way!",
+          "damageByTier": [5, 7, 14],
+          "manualRemainder": "slide"
+        },
+        {
+          "name": "Thunder Roar",
+          "damageByTier": [6, 9, 17],
+          "manualRemainder": "push"
+        },
+        {
+          "name": "Pain for Pain",
+          "damageByTier": [5, 7, 15],
+          "manualRemainder": "additional damage"
+        }
+      ],
+      "citations": [
+        "class/fury.md#Basics",
+        "feature/fury/level-1/primordial-aspect.md",
+        "feature/fury/level-1/1st-level-aspect-features.md",
+        "feature/fury/level-1/aspect-triggered-action.md",
+        "feature/fury/level-1/fury-abilities.md",
+        "kit/mountain.md"
+      ]
+    },
+    {
+      "id": "v101-panther",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Reaver Panther",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 1, −1",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": -1,
+          "Presence": 1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Reaver",
+        "class.fury.signature-ability": "Hit and Run",
+        "class.fury.ability-3": "Back!",
+        "class.fury.ability-5": "Blood for Blood!",
+        "kit.choice": "Panther"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Reaver",
+        "kit": "Panther",
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Jump",
+          "Climb",
+          "Hide"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Kit",
+          "Primordial Cunning"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Hit and Run",
+          "Back!",
+          "Blood for Blood!",
+          "Unearthly Reflexes",
+          "Devastating Rush",
+          "Unearthly Reflexes: Reduce Potency",
+          "Primordial Cunning: Slide Instead",
+          "Blood for Blood!: Extra Damage"
+        ]
+      },
+      "classActions": [
+        "Hit and Run",
+        "Back!",
+        "Blood for Blood!",
+        "Unearthly Reflexes",
+        "Devastating Rush",
+        "Unearthly Reflexes: Reduce Potency",
+        "Primordial Cunning: Slide Instead",
+        "Blood for Blood!: Extra Damage"
+      ],
+      "rolledActions": [
+        {
+          "name": "Hit and Run",
+          "damageByTier": [4, 7, 13],
+          "manualRemainder": "shift"
+        },
+        {
+          "name": "Back!",
+          "damageByTier": [5, 8, 15],
+          "manualRemainder": "push"
+        },
+        {
+          "name": "Blood for Blood!",
+          "damageByTier": [6, 8, 16],
+          "manualRemainder": "bleeding"
+        },
+        {
+          "name": "Devastating Rush",
+          "damageByTier": [5, 8, 15],
+          "manualRemainder": "move"
+        }
+      ],
+      "citations": [
+        "class/fury.md#Basics",
+        "feature/fury/level-1/primordial-aspect.md",
+        "feature/fury/level-1/1st-level-aspect-features.md",
+        "feature/fury/level-1/aspect-triggered-action.md",
+        "feature/fury/level-1/fury-abilities.md",
+        "kit/panther.md"
+      ]
+    },
+    {
+      "id": "v101-boren",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Stormwight Boren",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Reason": 0,
+          "Intuition": 0,
+          "Presence": 1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Stormwight",
+        "class.fury.signature-ability": "Impaled!",
+        "class.fury.ability-3": "Tide of Death",
+        "class.fury.ability-5": "Make Peace With Your God!",
+        "kit.choice": "Boren"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Stormwight",
+        "kit": "Boren",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Jump",
+          "Climb",
+          "Track"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Beast Shape",
+          "Relentless Hunter",
+          "Boren: Aspect Benefits",
+          "Boren: Growing Ferocity",
+          "Animal Form: Bear",
+          "Hybrid Form: Bear",
+          "Primordial Storm: Blizzard"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Impaled!",
+          "Tide of Death",
+          "Make Peace With Your God!",
+          "Furious Change",
+          "Bear Claws",
+          "Furious Change: Recovery",
+          "Aspect of the Wild: Second Shapeshift",
+          "Boren: Pull Instead",
+          "Boren: Grab Pulled Creature",
+          "Aspect of the Wild"
+        ]
+      },
+      "classActions": [
+        "Impaled!",
+        "Tide of Death",
+        "Make Peace With Your God!",
+        "Furious Change",
+        "Bear Claws",
+        "Furious Change: Recovery",
+        "Aspect of the Wild: Second Shapeshift",
+        "Boren: Pull Instead",
+        "Boren: Grab Pulled Creature",
+        "Aspect of the Wild"
+      ],
+      "rolledActions": [
+        {
+          "name": "Impaled!",
+          "damageByTier": [4, 7, 13],
+          "manualRemainder": "grabbed"
+        },
+        {
+          "name": "Bear Claws",
+          "damageByTier": [4, 7, 13],
+          "manualRemainder": "grabbed"
+        }
+      ],
+      "citations": [
+        "class/fury.md#Basics",
+        "feature/fury/level-1/primordial-aspect.md",
+        "feature/fury/level-1/1st-level-aspect-features.md",
+        "feature/fury/level-1/aspect-triggered-action.md",
+        "feature/fury/level-1/fury-abilities.md",
+        "kit/boren.md",
+        "feature/fury/boren/kit-bonuses.md",
+        "feature/fury/boren/aspect-benefits.md",
+        "feature/fury/boren/growing-ferocity.md",
+        "feature/ability/fury/stormwight-kits/aspect-of-the-wild.md"
+      ]
+    },
+    {
+      "id": "v101-corven",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Stormwight Corven",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, −1, −1",
+        "class.fury.array-assignment": {
+          "Reason": -1,
+          "Intuition": 2,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Stormwight",
+        "class.fury.signature-ability": "To the Death!",
+        "class.fury.ability-3": "Your Entrails Are Your Extrails!",
+        "class.fury.ability-5": "To the Uttermost End",
+        "kit.choice": "Corven"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Stormwight",
+        "kit": "Corven",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Jump",
+          "Climb",
+          "Track"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Beast Shape",
+          "Relentless Hunter",
+          "Corven: Aspect Benefits",
+          "Corven: Growing Ferocity",
+          "Animal Form: Crow",
+          "Hybrid Form: Crow",
+          "Primordial Storm: Anabatic Wind"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "To the Death!",
+          "Your Entrails Are Your Extrails!",
+          "To the Uttermost End",
+          "Furious Change",
+          "Wing Buffet",
+          "Furious Change: Recovery",
+          "Aspect of the Wild: Second Shapeshift",
+          "Corven: Falling Shapeshift",
+          "Corven: Animal Hide",
+          "Wing Buffet: Shift",
+          "Aspect of the Wild",
+          "To the Death!: Target Opportunity Attack",
+          "Your Entrails Are Your Extrails!: Ongoing Damage",
+          "To the Uttermost End: Extra Ferocity"
+        ]
+      },
+      "classActions": [
+        "To the Death!",
+        "Your Entrails Are Your Extrails!",
+        "To the Uttermost End",
+        "Furious Change",
+        "Wing Buffet",
+        "Furious Change: Recovery",
+        "Aspect of the Wild: Second Shapeshift",
+        "Corven: Falling Shapeshift",
+        "Corven: Animal Hide",
+        "Wing Buffet: Shift",
+        "Aspect of the Wild",
+        "To the Death!: Target Opportunity Attack",
+        "Your Entrails Are Your Extrails!: Ongoing Damage",
+        "To the Uttermost End: Extra Ferocity"
+      ],
+      "rolledActions": [
+        {
+          "name": "To the Death!",
+          "damageByTier": [7, 10, 13],
+          "manualRemainder": "surge"
+        },
+        {
+          "name": "Your Entrails Are Your Extrails!",
+          "damageByTier": [7, 9, 12],
+          "manualRemainder": "bleeding"
+        },
+        {
+          "name": "To the Uttermost End",
+          "damageByTier": [11, 15, 20],
+          "manualRemainder": "winded"
+        },
+        {
+          "name": "Wing Buffet",
+          "damageByTier": [3, 6, 8],
+          "manualRemainder": "shift"
+        }
+      ],
+      "citations": [
+        "class/fury.md#Basics",
+        "feature/fury/level-1/primordial-aspect.md",
+        "feature/fury/level-1/1st-level-aspect-features.md",
+        "feature/fury/level-1/aspect-triggered-action.md",
+        "feature/fury/level-1/fury-abilities.md",
+        "kit/corven.md",
+        "feature/fury/corven/kit-bonuses.md",
+        "feature/fury/corven/aspect-benefits.md",
+        "feature/fury/corven/growing-ferocity.md",
+        "feature/ability/fury/stormwight-kits/aspect-of-the-wild.md"
+      ]
+    },
+    {
+      "id": "v101-raden",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Stormwight Raden",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 1, −1",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": -1,
+          "Presence": 1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Stormwight",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Raden"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Stormwight",
+        "kit": "Raden",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Jump",
+          "Climb",
+          "Track"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Beast Shape",
+          "Relentless Hunter",
+          "Raden: Aspect Benefits",
+          "Raden: Growing Ferocity",
+          "Animal Form: Rat",
+          "Hybrid Form: Rat",
+          "Primordial Storm: Rat Flood"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Furious Change",
+          "Driving Pounce",
+          "Furious Change: Recovery",
+          "Aspect of the Wild: Second Shapeshift",
+          "Raden: Animal Hide",
+          "Driving Pounce: Follow",
+          "Aspect of the Wild",
+          "Out of the Way!: Follow"
+        ]
+      },
+      "classActions": [
+        "Brutal Slam",
+        "Out of the Way!",
+        "Thunder Roar",
+        "Furious Change",
+        "Driving Pounce",
+        "Furious Change: Recovery",
+        "Aspect of the Wild: Second Shapeshift",
+        "Raden: Animal Hide",
+        "Driving Pounce: Follow",
+        "Aspect of the Wild",
+        "Out of the Way!: Follow"
+      ],
+      "rolledActions": [
+        {
+          "name": "Brutal Slam",
+          "damageByTier": [7, 10, 13],
+          "manualRemainder": "push"
+        },
+        {
+          "name": "Out of the Way!",
+          "damageByTier": [7, 9, 12],
+          "manualRemainder": "slide"
+        },
+        {
+          "name": "Thunder Roar",
+          "damageByTier": [8, 11, 15],
+          "manualRemainder": "push"
+        },
+        {
+          "name": "Driving Pounce",
+          "damageByTier": [6, 9, 11],
+          "manualRemainder": "shift"
+        }
+      ],
+      "citations": [
+        "class/fury.md#Basics",
+        "feature/fury/level-1/primordial-aspect.md",
+        "feature/fury/level-1/1st-level-aspect-features.md",
+        "feature/fury/level-1/aspect-triggered-action.md",
+        "feature/fury/level-1/fury-abilities.md",
+        "kit/raden.md",
+        "feature/fury/raden/kit-bonuses.md",
+        "feature/fury/raden/aspect-benefits.md",
+        "feature/fury/raden/growing-ferocity.md",
+        "feature/ability/fury/stormwight-kits/aspect-of-the-wild.md"
+      ]
+    },
+    {
+      "id": "v101-vuken",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Stormwight Vuken",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Reason": 0,
+          "Intuition": 0,
+          "Presence": 1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Stormwight",
+        "class.fury.signature-ability": "Hit and Run",
+        "class.fury.ability-3": "Back!",
+        "class.fury.ability-5": "Blood for Blood!",
+        "kit.choice": "Vuken"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Stormwight",
+        "kit": "Vuken",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Jump",
+          "Climb",
+          "Track"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Beast Shape",
+          "Relentless Hunter",
+          "Vuken: Aspect Benefits",
+          "Vuken: Growing Ferocity",
+          "Animal Form: Wolf",
+          "Hybrid Form: Wolf",
+          "Primordial Storm: Lightning Storm"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Hit and Run",
+          "Back!",
+          "Blood for Blood!",
+          "Furious Change",
+          "Unbalancing Attack",
+          "Furious Change: Recovery",
+          "Aspect of the Wild: Second Shapeshift",
+          "Vuken: Aid After Knockback",
+          "Aspect of the Wild",
+          "Blood for Blood!: Extra Damage"
+        ]
+      },
+      "classActions": [
+        "Hit and Run",
+        "Back!",
+        "Blood for Blood!",
+        "Furious Change",
+        "Unbalancing Attack",
+        "Furious Change: Recovery",
+        "Aspect of the Wild: Second Shapeshift",
+        "Vuken: Aid After Knockback",
+        "Aspect of the Wild",
+        "Blood for Blood!: Extra Damage"
+      ],
+      "rolledActions": [
+        {
+          "name": "Hit and Run",
+          "damageByTier": [6, 9, 11],
+          "manualRemainder": "shift"
+        },
+        {
+          "name": "Back!",
+          "damageByTier": [7, 10, 13],
+          "manualRemainder": "push"
+        },
+        {
+          "name": "Blood for Blood!",
+          "damageByTier": [8, 10, 14],
+          "manualRemainder": "bleeding"
+        },
+        {
+          "name": "Unbalancing Attack",
+          "damageByTier": [6, 9, 11],
+          "manualRemainder": "prone"
+        }
+      ],
+      "citations": [
+        "class/fury.md#Basics",
+        "feature/fury/level-1/primordial-aspect.md",
+        "feature/fury/level-1/1st-level-aspect-features.md",
+        "feature/fury/level-1/aspect-triggered-action.md",
+        "feature/fury/level-1/fury-abilities.md",
+        "kit/vuken.md",
+        "feature/fury/vuken/kit-bonuses.md",
+        "feature/fury/vuken/aspect-benefits.md",
+        "feature/fury/vuken/growing-ferocity.md",
+        "feature/ability/fury/stormwight-kits/aspect-of-the-wild.md"
+      ]
+    }
+  ]
+}

@@ -102,7 +102,9 @@
       "Lines of Force",
       "Pain for Pain",
       "Melee Weapon Free Strike",
-      "Ranged Weapon Free Strike"
+      "Ranged Weapon Free Strike",
+      "Lines of Force: Enhance",
+      "Out of the Way!: Follow"
     ],
     "abilityDamageTiers": {
       "Brutal Slam": [5, 8, 15],

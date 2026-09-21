@@ -25,6 +25,10 @@ export const stormwightDecisions: Decision[] = [
       ),
     ],
   ),
+];
+
+// The evaluator validates choices in step order: kit-dependent grants follow kit.choice.
+export const stormwightKitDecisions: Decision[] = [
   ...[
     ['Boren', 'Bear', 'Blizzard'],
     ['Corven', 'Crow', 'Anabatic Wind'],

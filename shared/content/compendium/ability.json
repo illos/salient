@@ -3206,6 +3206,35 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild",
+    "kind": "ability",
+    "name": "Aspect of the Wild",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/stormwight-kits/aspect-of-the-wild.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ndistance: Self\neffects:\n    - effect: You can shapeshift into the animal defined by your stormwight kit, into a hybrid form, or back into your true form. While in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) or hybrid form, you can speak as you usually do, and you can also speak to animals who share your form. If you are in a negotiation with an animal while in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), you treat your [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) as 2 higher than usual.\n      name: Effect\n    - cost: Spend 1 Ferocity\n      effect: As a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver), you can shapeshift a second time, either into another [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), into your hybrid form, or back into your true form.\nflavor: You assume the form of the animal who channels your ferocity.\nkeywords:\n    - Magic\nname: Aspect of the Wild\nscc: mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild\ntarget: Self\ntype: ability\n---\n\n\n*You assume the form of the animal who channels your ferocity.*\n\n| **Magic**   | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** You can shapeshift into the animal defined by your stormwight kit, into a hybrid form, or back into your true form. While in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) or hybrid form, you can speak as you usually do, and you can also speak to animals who share your form. If you are in a negotiation with an animal while in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), you treat your [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) as 2 higher than usual.\n\n**Spend 1 Ferocity:** As a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver), you can shapeshift a second time, either into another [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), into your hybrid form, or back into your true form.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You can shapeshift into the animal defined by your stormwight kit, into a hybrid form, or back into your true form. While in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) or hybrid form, you can speak as you usually do, and you can also speak to animals who share your form. If you are in a negotiation with an animal while in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), you treat your [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) as 2 higher than usual.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Ferocity",
+          "effect": "As a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver), you can shapeshift a second time, either into another [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), into your hybrid form, or back into your true form."
+        }
+      ],
+      "flavor": "You assume the form of the animal who channels your ferocity.",
+      "keywords": [
+        "Magic"
+      ],
+      "target": "Self"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.polder/shadowmeld",
     "kind": "ability",
     "name": "Shadowmeld",

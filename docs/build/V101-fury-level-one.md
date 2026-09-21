@@ -44,3 +44,19 @@ entries. The clean Heroes text supplies ability group membership. No Forge outpu
 
 - 2026-09-21: registered from main `53b7853`, branch `slice/V101`, worktree `.worktrees/class-fury`.
   User requests full level-one Fury subclass choices. ENGINE owns independent source/final review.
+
+- Source review at `fdf9c87`: ENGINE found no blocking rules defects. Eighteen embedded uses
+  complement twenty Fury/Stormwight source abilities. Two ordinary-kit signatures are also exercised.
+  Forms and Growing Ferocity remain source-visible manual effects (thresholds 2/4/6 at level one;
+  benefits last through own turn even after spending). Optional costs debit Ferocity; the source's
+  repeat-use lock and variable-spend Victories total outside combat remain manual.
+- Both authoring typechecks passed. TESTER generated content/audit/support reports at `fdf9c87`,
+  exits 0 (1.00/0.68/0.89s), 1362 content entries; artifacts
+  `/srv/presidium/projects/salient/test-artifacts/V101-fdf9c87-generation`.
+- Independent six-witness ledger checks exposed kit-dependent features evaluated before kit.choice.
+  Moved those automatic grants after the kit choice. Focused `character-v101-fury.test.ts` passes 2/2.
+  Existing V25/V32 expected action lists explicitly gain Lines of Force: Enhance and Out of the Way!: Follow;
+  their numerical expectations stay sourced and unchanged.
+- `scripts/headless/fury.ts` is cohort `fury`: six builds, forty distinct action uses, ordinary↔Stormwight
+  draft pruning, admitted-build separation, source-derived damage/cost/readback and Tide self-safety.
+  The ledger is written directly from the pinned source and independently audited; no Forge run requested.

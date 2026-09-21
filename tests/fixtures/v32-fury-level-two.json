@@ -108,7 +108,9 @@
       "Pain for Pain",
       "Melee Weapon Free Strike",
       "Ranged Weapon Free Strike",
-      "Wrecking Ball"
+      "Wrecking Ball",
+      "Lines of Force: Enhance",
+      "Out of the Way!: Follow"
     ],
     "abilityDamageTiers": {
       "Brutal Slam": [5, 8, 15],
@@ -614,7 +616,7 @@
       "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
       "sourceSha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01",
       "classification": "source-and-build",
-      "expectedEffect": "Berserker section lines9284\u20139314: Special Delivery/Wrecking Ball. Exploration Perks contains Danger Sense. Unified perks chapter is not Heroes."
+      "expectedEffect": "Berserker section lines9284–9314: Special Delivery/Wrecking Ball. Exploration Perks contains Danger Sense. Unified perks chapter is not Heroes."
     }
   ],
   "transition": {

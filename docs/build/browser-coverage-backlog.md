@@ -99,3 +99,9 @@ uses the `censor` cohort; browser execution remains deferred under V66.
 
 Spot-check two-domain selection and one feature-domain, prayer/ward controls, Piety costs and
 source-timed manual actions. Shared API coverage is in the `conduit` cohort; browser runs await V66.
+
+## V101: Full Fury level one
+
+After V66: choose each aspect; confirm ordinary versus four Stormwight kit cards, derived bonuses,
+animal/form rule cards and conditional actions. Edit Stormwight to Reaver and confirm stale kit/action
+cards disappear. Headless cohort `fury` owns saved-choice, cost and action-state proof.

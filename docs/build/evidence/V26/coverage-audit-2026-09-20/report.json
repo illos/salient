@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b",
+  "contentHash": "sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 10,
       "COMPILES_WITH_REMAINDER": 67,
-      "NO_MATCH": 63,
-      "total": 140,
+      "NO_MATCH": 64,
+      "total": 141,
       "withinV26Bounded": 8
     },
     "kit-signature": {
@@ -41,9 +41,9 @@
     }
   },
   "grants": {
-    "total": 804,
-    "resolvedToStandalone": 393,
-    "resolvedToKit": 63,
+    "total": 819,
+    "resolvedToStandalone": 396,
+    "resolvedToKit": 75,
     "ownText": 348,
     "unresolved": []
   },
@@ -5347,8 +5347,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Back! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Back! supportedInV001=true; chain selectable"
         },
         {
           "name": "Back!",
@@ -5356,8 +5356,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Back! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Back! supportedInV001=true; chain selectable"
         },
         {
           "name": "Back!",
@@ -5365,11 +5365,11 @@
           "decisionId": "class.fury.ability-3",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Back! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Back! supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5448,8 +5448,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Blood for Blood! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Blood for Blood! supportedInV001=true; chain selectable"
         },
         {
           "name": "Blood for Blood!",
@@ -5457,8 +5457,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Blood for Blood! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Blood for Blood! supportedInV001=true; chain selectable"
         },
         {
           "name": "Blood for Blood!",
@@ -5466,11 +5466,11 @@
           "decisionId": "class.fury.ability-5",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Blood for Blood! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Blood for Blood! supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5598,8 +5598,8 @@
           "decisionId": "class.fury.aspect",
           "level": 1,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Stormwight supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Stormwight supportedInV001=true; chain selectable"
         },
         {
           "name": "Furious Change",
@@ -5607,8 +5607,8 @@
           "decisionId": "class.fury.aspect",
           "level": 2,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Stormwight supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Stormwight supportedInV001=true; chain selectable"
         },
         {
           "name": "Furious Change",
@@ -5616,11 +5616,11 @@
           "decisionId": "class.fury.aspect",
           "level": 3,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Stormwight supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Stormwight supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5684,8 +5684,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 1,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Hit and Run supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Hit and Run supportedInV001=true; chain selectable"
         },
         {
           "name": "Hit and Run",
@@ -5693,8 +5693,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 2,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Hit and Run supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Hit and Run supportedInV001=true; chain selectable"
         },
         {
           "name": "Hit and Run",
@@ -5702,11 +5702,11 @@
           "decisionId": "class.fury.signature-ability",
           "level": 3,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Hit and Run supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Hit and Run supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5778,8 +5778,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 1,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Impaled! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Impaled! supportedInV001=true; chain selectable"
         },
         {
           "name": "Impaled!",
@@ -5787,8 +5787,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 2,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Impaled! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Impaled! supportedInV001=true; chain selectable"
         },
         {
           "name": "Impaled!",
@@ -5796,11 +5796,11 @@
           "decisionId": "class.fury.signature-ability",
           "level": 3,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Impaled! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Impaled! supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5912,8 +5912,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Make Peace With Your God! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Make Peace With Your God! supportedInV001=true; chain selectable"
         },
         {
           "name": "Make Peace With Your God!",
@@ -5921,8 +5921,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Make Peace With Your God! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Make Peace With Your God! supportedInV001=true; chain selectable"
         },
         {
           "name": "Make Peace With Your God!",
@@ -5930,11 +5930,11 @@
           "decisionId": "class.fury.ability-5",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Make Peace With Your God! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Make Peace With Your God! supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -6183,8 +6183,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Tide of Death supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Tide of Death supportedInV001=true; chain selectable"
         },
         {
           "name": "Tide of Death",
@@ -6192,8 +6192,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Tide of Death supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Tide of Death supportedInV001=true; chain selectable"
         },
         {
           "name": "Tide of Death",
@@ -6201,11 +6201,11 @@
           "decisionId": "class.fury.ability-3",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Tide of Death supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Tide of Death supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -6262,8 +6262,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 1,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option To the Death! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Death! supportedInV001=true; chain selectable"
         },
         {
           "name": "To the Death!",
@@ -6271,8 +6271,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 2,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option To the Death! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Death! supportedInV001=true; chain selectable"
         },
         {
           "name": "To the Death!",
@@ -6280,11 +6280,11 @@
           "decisionId": "class.fury.signature-ability",
           "level": 3,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option To the Death! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Death! supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -6342,8 +6342,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option To the Uttermost End supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Uttermost End supportedInV001=true; chain selectable"
         },
         {
           "name": "To the Uttermost End",
@@ -6351,8 +6351,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option To the Uttermost End supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Uttermost End supportedInV001=true; chain selectable"
         },
         {
           "name": "To the Uttermost End",
@@ -6360,11 +6360,11 @@
           "decisionId": "class.fury.ability-5",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option To the Uttermost End supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Uttermost End supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -6412,8 +6412,8 @@
           "decisionId": "class.fury.aspect",
           "level": 1,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Reaver supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Reaver supportedInV001=true; chain selectable"
         },
         {
           "name": "Unearthly Reflexes",
@@ -6421,8 +6421,8 @@
           "decisionId": "class.fury.aspect",
           "level": 2,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Reaver supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Reaver supportedInV001=true; chain selectable"
         },
         {
           "name": "Unearthly Reflexes",
@@ -6430,11 +6430,11 @@
           "decisionId": "class.fury.aspect",
           "level": 3,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Reaver supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Reaver supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -6513,8 +6513,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Your Entrails Are Your Extrails! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Your Entrails Are Your Extrails! supportedInV001=true; chain selectable"
         },
         {
           "name": "Your Entrails Are Your Extrails!",
@@ -6522,8 +6522,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Your Entrails Are Your Extrails! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Your Entrails Are Your Extrails! supportedInV001=true; chain selectable"
         },
         {
           "name": "Your Entrails Are Your Extrails!",
@@ -6531,11 +6531,11 @@
           "decisionId": "class.fury.ability-3",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Your Entrails Are Your Extrails! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Your Entrails Are Your Extrails! supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "not-selectable"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -6650,6 +6650,70 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Wrecking Ball supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild",
+      "name": "Aspect of the Wild",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can shapeshift into the animal defined by your stormwight kit, into a hybrid form, or back into your true form. While in animal form or hybrid form, you can speak as you usually do, and you can also speak to animals who share your form. If you are in a negotiation with an animal while in animal form, you treat your Renown as 2 higher than usual.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "As a free maneuver, you can shapeshift a second time, either into another animal form, into your hybrid form, or back into your true form.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Aspect of the Wild",
+          "sourcePath": "en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+          "decisionId": "class.fury.stormwight.aspect-of-the-wild",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Aspect of the Wild",
+          "sourcePath": "en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+          "decisionId": "class.fury.stormwight.aspect-of-the-wild",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Aspect of the Wild",
+          "sourcePath": "en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+          "decisionId": "class.fury.stormwight.aspect-of-the-wild",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10845,7 +10909,36 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Bear Claws",
+          "sourcePath": "en/unified/md/kit/boren.md#bear-claws",
+          "decisionId": "kit.boren.contributions",
+          "level": 1,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Bear Claws",
+          "sourcePath": "en/unified/md/kit/boren.md#bear-claws",
+          "decisionId": "kit.boren.contributions",
+          "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Bear Claws",
+          "sourcePath": "en/unified/md/kit/boren.md#bear-claws",
+          "decisionId": "kit.boren.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "kit-signature",
@@ -10995,7 +11088,36 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Wing Buffet",
+          "sourcePath": "en/unified/md/kit/corven.md#wing-buffet",
+          "decisionId": "kit.corven.contributions",
+          "level": 1,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Wing Buffet",
+          "sourcePath": "en/unified/md/kit/corven.md#wing-buffet",
+          "decisionId": "kit.corven.contributions",
+          "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Wing Buffet",
+          "sourcePath": "en/unified/md/kit/corven.md#wing-buffet",
+          "decisionId": "kit.corven.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "kit-signature",
@@ -11586,7 +11708,36 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Driving Pounce",
+          "sourcePath": "en/unified/md/kit/raden.md#driving-pounce",
+          "decisionId": "kit.raden.contributions",
+          "level": 1,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Driving Pounce",
+          "sourcePath": "en/unified/md/kit/raden.md#driving-pounce",
+          "decisionId": "kit.raden.contributions",
+          "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Driving Pounce",
+          "sourcePath": "en/unified/md/kit/raden.md#driving-pounce",
+          "decisionId": "kit.raden.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "kit-signature",
@@ -12562,7 +12713,36 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Unbalancing Attack",
+          "sourcePath": "en/unified/md/kit/vuken.md#unbalancing-attack",
+          "decisionId": "kit.vuken.contributions",
+          "level": 1,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Unbalancing Attack",
+          "sourcePath": "en/unified/md/kit/vuken.md#unbalancing-attack",
+          "decisionId": "kit.vuken.contributions",
+          "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Unbalancing Attack",
+          "sourcePath": "en/unified/md/kit/vuken.md#unbalancing-attack",
+          "decisionId": "kit.vuken.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "kit-signature",
@@ -76514,8 +76694,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1085,
-      "abilities": 1071,
+      "count": 1086,
+      "abilities": 1072,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -76525,8 +76705,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 607,
-      "abilities": 607,
+      "count": 608,
+      "abilities": 608,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -77310,6 +77490,17 @@
       ]
     },
     {
+      "shape": "resource-spend:spend N ferocity",
+      "type": "resource-spend",
+      "count": 4,
+      "abilities": 4,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.fury.level-1/furious-change",
+        "mcdm.heroes.v1/feature.ability.fury.level-1/lines-of-force",
+        "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes"
+      ]
+    },
+    {
       "shape": "resource-spend:spend N focus",
       "type": "resource-spend",
       "count": 4,
@@ -77431,17 +77622,6 @@
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance",
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls",
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/subtle-relocation"
-      ]
-    },
-    {
-      "shape": "resource-spend:spend N ferocity",
-      "type": "resource-spend",
-      "count": 3,
-      "abilities": 3,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.fury.level-1/furious-change",
-        "mcdm.heroes.v1/feature.ability.fury.level-1/lines-of-force",
-        "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes"
       ]
     },
     {
@@ -80531,11 +80711,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 237,
+      "total": 238,
       "compiles": 13,
       "withRemainder": 88,
       "withinV26Bounded": 9,
-      "noMatch": 136
+      "noMatch": 137
     }
   }
 }

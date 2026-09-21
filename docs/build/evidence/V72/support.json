@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b",
+  "contentHash": "sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1150
     },
     "hero-standalone": {
-      "total": 140,
+      "total": 141,
       "supported": 13,
-      "manual": 127
+      "manual": 128
     },
     "kit-signature": {
       "total": 25,
@@ -18806,8 +18806,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Back!",
@@ -18815,8 +18815,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Back! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Back! supportedInV001=true; chain selectable"
         },
         {
           "name": "Back!",
@@ -18824,8 +18824,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Back! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Back! supportedInV001=true; chain selectable"
         },
         {
           "name": "Back!",
@@ -18833,8 +18833,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Back! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Back! supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
@@ -18960,8 +18960,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Blood for Blood!",
@@ -18969,8 +18969,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Blood for Blood! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Blood for Blood! supportedInV001=true; chain selectable"
         },
         {
           "name": "Blood for Blood!",
@@ -18978,8 +18978,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Blood for Blood! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Blood for Blood! supportedInV001=true; chain selectable"
         },
         {
           "name": "Blood for Blood!",
@@ -18987,8 +18987,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Blood for Blood! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Blood for Blood! supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -19194,8 +19194,8 @@
           "message": "Unrecognized action type."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Furious Change",
@@ -19203,8 +19203,8 @@
           "decisionId": "class.fury.aspect",
           "level": 1,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Stormwight supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Stormwight supportedInV001=true; chain selectable"
         },
         {
           "name": "Furious Change",
@@ -19212,8 +19212,8 @@
           "decisionId": "class.fury.aspect",
           "level": 2,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Stormwight supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Stormwight supportedInV001=true; chain selectable"
         },
         {
           "name": "Furious Change",
@@ -19221,8 +19221,8 @@
           "decisionId": "class.fury.aspect",
           "level": 3,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Stormwight supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Stormwight supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -19317,8 +19317,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Hit and Run",
@@ -19326,8 +19326,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 1,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Hit and Run supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Hit and Run supportedInV001=true; chain selectable"
         },
         {
           "name": "Hit and Run",
@@ -19335,8 +19335,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 2,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Hit and Run supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Hit and Run supportedInV001=true; chain selectable"
         },
         {
           "name": "Hit and Run",
@@ -19344,8 +19344,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 3,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Hit and Run supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Hit and Run supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -19461,8 +19461,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Impaled!",
@@ -19470,8 +19470,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 1,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Impaled! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Impaled! supportedInV001=true; chain selectable"
         },
         {
           "name": "Impaled!",
@@ -19479,8 +19479,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 2,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Impaled! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Impaled! supportedInV001=true; chain selectable"
         },
         {
           "name": "Impaled!",
@@ -19488,8 +19488,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 3,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option Impaled! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Impaled! supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -19661,8 +19661,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Make Peace With Your God!",
@@ -19670,8 +19670,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Make Peace With Your God! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Make Peace With Your God! supportedInV001=true; chain selectable"
         },
         {
           "name": "Make Peace With Your God!",
@@ -19679,8 +19679,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Make Peace With Your God! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Make Peace With Your God! supportedInV001=true; chain selectable"
         },
         {
           "name": "Make Peace With Your God!",
@@ -19688,8 +19688,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Make Peace With Your God! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Make Peace With Your God! supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -20078,8 +20078,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Tide of Death",
@@ -20087,8 +20087,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Tide of Death supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Tide of Death supportedInV001=true; chain selectable"
         },
         {
           "name": "Tide of Death",
@@ -20096,8 +20096,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Tide of Death supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Tide of Death supportedInV001=true; chain selectable"
         },
         {
           "name": "Tide of Death",
@@ -20105,8 +20105,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Tide of Death supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Tide of Death supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -20187,8 +20187,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "To the Death!",
@@ -20196,8 +20196,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 1,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option To the Death! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Death! supportedInV001=true; chain selectable"
         },
         {
           "name": "To the Death!",
@@ -20205,8 +20205,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 2,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option To the Death! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Death! supportedInV001=true; chain selectable"
         },
         {
           "name": "To the Death!",
@@ -20214,8 +20214,8 @@
           "decisionId": "class.fury.signature-ability",
           "level": 3,
           "grantKind": "signature",
-          "selectable": "not-selectable",
-          "detail": "option To the Death! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Death! supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -20296,8 +20296,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "To the Uttermost End",
@@ -20305,8 +20305,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option To the Uttermost End supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Uttermost End supportedInV001=true; chain selectable"
         },
         {
           "name": "To the Uttermost End",
@@ -20314,8 +20314,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option To the Uttermost End supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Uttermost End supportedInV001=true; chain selectable"
         },
         {
           "name": "To the Uttermost End",
@@ -20323,8 +20323,8 @@
           "decisionId": "class.fury.ability-5",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option To the Uttermost End supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option To the Uttermost End supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -20414,8 +20414,8 @@
           "message": "Unrecognized action type."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Unearthly Reflexes",
@@ -20423,8 +20423,8 @@
           "decisionId": "class.fury.aspect",
           "level": 1,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Reaver supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Reaver supportedInV001=true; chain selectable"
         },
         {
           "name": "Unearthly Reflexes",
@@ -20432,8 +20432,8 @@
           "decisionId": "class.fury.aspect",
           "level": 2,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Reaver supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Reaver supportedInV001=true; chain selectable"
         },
         {
           "name": "Unearthly Reflexes",
@@ -20441,8 +20441,8 @@
           "decisionId": "class.fury.aspect",
           "level": 3,
           "grantKind": "aspect-triggered",
-          "selectable": "not-selectable",
-          "detail": "aspect Reaver supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "aspect Reaver supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -20565,8 +20565,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Your Entrails Are Your Extrails!",
@@ -20574,8 +20574,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 1,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Your Entrails Are Your Extrails! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Your Entrails Are Your Extrails! supportedInV001=true; chain selectable"
         },
         {
           "name": "Your Entrails Are Your Extrails!",
@@ -20583,8 +20583,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Your Entrails Are Your Extrails! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Your Entrails Are Your Extrails! supportedInV001=true; chain selectable"
         },
         {
           "name": "Your Entrails Are Your Extrails!",
@@ -20592,8 +20592,8 @@
           "decisionId": "class.fury.ability-3",
           "level": 3,
           "grantKind": "heroic",
-          "selectable": "not-selectable",
-          "detail": "option Your Entrails Are Your Extrails! supportedInV001=false; chain selectable"
+          "selectable": "selectable",
+          "detail": "option Your Entrails Are Your Extrails! supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -20830,6 +20830,103 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Wrecking Ball supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild",
+      "name": "Aspect of the Wild",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild#block:0:0:3c592b860b349892",
+          "locator": "block:0:0",
+          "clause": "You can shapeshift into the animal defined by your stormwight kit, into a hybrid form, or back into your true form. While in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) or hybrid form, you can speak as you usually do, and you can also speak to animals who share your form. If you are in a negotiation with an animal while in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), you treat your [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) as 2 higher than usual.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild#block:1:0:74985d045507f2b2",
+          "locator": "block:1:0",
+          "clause": "As a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver), you can shapeshift a second time, either into another [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), into your hybrid form, or back into your true form.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N ferocity",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You can shapeshift into the animal defined by your stormwight kit, into a hybrid form, or back into your true form. While in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) or hybrid form, you can speak as you usually do, and you can also speak to animals who share your form. If you are in a negotiation with an animal while in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), you treat your [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) as 2 higher than usual.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "As a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver), you can shapeshift a second time, either into another [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), into your hybrid form, or back into your true form.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Aspect of the Wild",
+          "sourcePath": "en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+          "decisionId": "class.fury.stormwight.aspect-of-the-wild",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Aspect of the Wild",
+          "sourcePath": "en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+          "decisionId": "class.fury.stormwight.aspect-of-the-wild",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Aspect of the Wild",
+          "sourcePath": "en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md",
+          "decisionId": "class.fury.stormwight.aspect-of-the-wild",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -27369,9 +27466,37 @@
           "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
-      "live": "not-reachable",
+      "live": "legacy-compatibility",
       "boundary": "Unchanged kit signatures retain A05 compatibility.",
-      "grants": [],
+      "grants": [
+        {
+          "name": "Bear Claws",
+          "sourcePath": "en/unified/md/kit/boren.md#bear-claws",
+          "decisionId": "kit.boren.contributions",
+          "level": 1,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Bear Claws",
+          "sourcePath": "en/unified/md/kit/boren.md#bear-claws",
+          "decisionId": "kit.boren.contributions",
+          "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Bear Claws",
+          "sourcePath": "en/unified/md/kit/boren.md#bear-claws",
+          "decisionId": "kit.boren.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -27657,9 +27782,37 @@
           "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
-      "live": "not-reachable",
+      "live": "legacy-compatibility",
       "boundary": "Unchanged kit signatures retain A05 compatibility.",
-      "grants": [],
+      "grants": [
+        {
+          "name": "Wing Buffet",
+          "sourcePath": "en/unified/md/kit/corven.md#wing-buffet",
+          "decisionId": "kit.corven.contributions",
+          "level": 1,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Wing Buffet",
+          "sourcePath": "en/unified/md/kit/corven.md#wing-buffet",
+          "decisionId": "kit.corven.contributions",
+          "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Wing Buffet",
+          "sourcePath": "en/unified/md/kit/corven.md#wing-buffet",
+          "decisionId": "kit.corven.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -28691,9 +28844,37 @@
           "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
-      "live": "not-reachable",
+      "live": "legacy-compatibility",
       "boundary": "Unchanged kit signatures retain A05 compatibility.",
-      "grants": [],
+      "grants": [
+        {
+          "name": "Driving Pounce",
+          "sourcePath": "en/unified/md/kit/raden.md#driving-pounce",
+          "decisionId": "kit.raden.contributions",
+          "level": 1,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Driving Pounce",
+          "sourcePath": "en/unified/md/kit/raden.md#driving-pounce",
+          "decisionId": "kit.raden.contributions",
+          "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Driving Pounce",
+          "sourcePath": "en/unified/md/kit/raden.md#driving-pounce",
+          "decisionId": "kit.raden.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        }
+      ],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
@@ -30387,9 +30568,37 @@
           "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
-      "live": "not-reachable",
+      "live": "legacy-compatibility",
       "boundary": "Unchanged kit signatures retain A05 compatibility.",
-      "grants": [],
+      "grants": [
+        {
+          "name": "Unbalancing Attack",
+          "sourcePath": "en/unified/md/kit/vuken.md#unbalancing-attack",
+          "decisionId": "kit.vuken.contributions",
+          "level": 1,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Unbalancing Attack",
+          "sourcePath": "en/unified/md/kit/vuken.md#unbalancing-attack",
+          "decisionId": "kit.vuken.contributions",
+          "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Unbalancing Attack",
+          "sourcePath": "en/unified/md/kit/vuken.md#unbalancing-attack",
+          "decisionId": "kit.vuken.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -177299,7 +177508,7 @@
   ],
   "liveCounts": {
     "compiled": 19,
-    "compatibility": 1339,
+    "compatibility": 1355,
     "compiledButUnavailable": 2
   }
 }
