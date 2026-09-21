@@ -1,4 +1,8 @@
 import {
+  classProfile as summonerProfile,
+  getLevelOneDecisions as summonerDecisions,
+} from './classes/summoner/level-one.ts';
+import {
   classProfile as beastheartProfile,
   getLevelOneDecisions as beastheartDecisions,
 } from './classes/beastheart/level-one.ts';
@@ -99,7 +103,10 @@ allow('ancestry.choice', [
   'Revenant',
 ]);
 allow('career.choice', ["Mage's Apprentice"]);
-decision('class.choice').options!.push(option('Beastheart', path('class/beastheart')));
+decision('class.choice').options!.push(
+  option('Beastheart', path('class/beastheart')),
+  option('Summoner', path('class/summoner')),
+);
 allow('class.choice', [
   'Elementalist',
   'Shadow',
@@ -127,6 +134,7 @@ definitions.classProfiles = structuredClone({
   Null: nullProfile,
   Talent: talentProfile,
   Beastheart: beastheartProfile,
+  Summoner: summonerProfile,
 });
 
 /**
@@ -262,3 +270,4 @@ export default definitions;
 
 append('step.class', talentDecisions(definitions.pools));
 append('step.class', beastheartDecisions(definitions.pools));
+append('step.class', summonerDecisions(definitions.pools));

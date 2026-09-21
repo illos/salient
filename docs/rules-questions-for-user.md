@@ -852,3 +852,19 @@ effects. Lightbender Avoidance replaces saves with expiry; basilisk Stoned requi
 damage and contextual cut-away action. V106 exposes source-labelled manual records rather than
 reusing ordinary creature conditions or save timers. These are future automation questions, not
 blocking character creation or source visibility.
+
+
+## Q-SUMMONER-1 — level-one portfolio interpretation and manual source gaps
+
+V107 uses the pinned `en/unified/md/class/summoner.md#Summoner Advancement` row `1, 1, 3, 3`
+and `feature/summoner/level-1/portfolio.md` circle mapping as two distinct signature species and
+two distinct three-Essence species. This is a labelled interpretation: the text does not explicitly
+spell out distinctness. Repeated species or individual summoned creatures are alternatives; the latter
+conflicts with portfolios being learned options and three-Essence entries summoning two creatures.
+Recommendation: retain distinct known options; actual summoning and squad counts remain separate.
+
+`feature/summoner/level-1/essence.md` says sacrifice one or more minions to reduce cost by one,
+without unambiguously specifying one reduction per minion. Discount adjudication stays manual;
+no one-for-one discount or unwilling-death gain is inferred. `monster/minion/summoner/elemental/statblock/brisk-gale.md`
+Whirlwind does not specify shift distance. `monster/minion/summoner/demon/statblock/twisted-bengrul.md`
+Soulsight names ensnarer. Both source passages stay verbatim/manual, without invented correction.

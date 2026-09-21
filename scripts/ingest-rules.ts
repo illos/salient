@@ -54,6 +54,11 @@ export const BOOKS = [
       'Supported character sources and their readable rule dependencies. Reference coverage does not imply automation.',
   },
 ];
+BOOKS.push({
+  id: 'summoner',
+  name: 'Summoner (supplemental)',
+  description: 'Supported portfolios and readable dependencies; summon combat remains manual.',
+});
 const CATEGORIES: Record<string, string> = {
   chapter: 'Books & chapters',
   rule: 'Rules',
@@ -165,13 +170,14 @@ function readSources(revision: string): Map<string, string> {
       'en/books/monsters/md',
       'en/books/monsters/md-linked',
       'en/books/beastheart/md',
+      'en/books/summoner/md',
     ],
     { cwd, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 },
   )
     .trim()
     .split('\n');
   const paths = all.filter(p =>
-    /^en\/books\/(heroes|monsters|beastheart)\/(md|md-linked)\/.*\.md$/.test(p),
+    /^en\/books\/(heroes|monsters|beastheart|summoner)\/(md|md-linked)\/.*\.md$/.test(p),
   );
   const output = execFileSync('git', ['cat-file', '--batch'], {
     cwd,
@@ -338,7 +344,7 @@ export function buildRules() {
   const blobs = readSources(revision);
   const sources: Source[] = [];
   for (const [path, text] of blobs) {
-    const match = /^en\/books\/(heroes|monsters|beastheart)\/md\/(.*)\.md$/.exec(path);
+    const match = /^en\/books\/(heroes|monsters|beastheart|summoner)\/md\/(.*)\.md$/.exec(path);
     if (!match) continue;
     const { frontmatter, body } = splitFrontmatter(text);
     const meta = parse(frontmatter) as Record<string, unknown>;
@@ -350,7 +356,8 @@ export function buildRules() {
       throw new Error(`Missing identity: ${path}`);
     if (!meta.scc.startsWith(`mcdm.${match[1]}.v1/`)) throw new Error(`Unexpected book: ${path}`);
     const expanded = blobs.get(path.replace('/md/', '/md-linked/'));
-    if (!expanded && match[1] !== 'beastheart') throw new Error(`Missing expanded source: ${path}`);
+    if (!expanded && !['beastheart', 'summoner'].includes(match[1]))
+      throw new Error(`Missing expanded source: ${path}`);
     sources.push({
       path,
       book: match[1],
@@ -360,20 +367,24 @@ export function buildRules() {
       kind: meta.type,
       order: typeof meta.order === 'number' ? meta.order : undefined,
       raw: body,
-      expanded: match[1] === 'beastheart' ? body : splitFrontmatter(expanded!).body,
+      expanded: ['beastheart', 'summoner'].includes(match[1])
+        ? body
+        : splitFrontmatter(expanded!).body,
       details: metadataDetails(meta),
     });
   }
-  // Q-CHAR-14: seed only the implemented Beastheart corpus, then retain its exact SCC link
+  // Q-CHAR-14: seed only the implemented supplemental corpus, then retain its exact SCC link
   // dependencies as readable references. This does not import unrelated supplement material or
   // enable any choice/automation. Core per-book sources and collision behavior are unchanged.
   const candidateSources = new Map(sources.map(s => [s.id, s]));
   const snapshot = JSON.parse(
     readFileSync(join(ROOT, 'shared/content/compendium/manifest.json'), 'utf8'),
   ) as { entries: { id: string }[] };
-  const included = new Set(sources.filter(s => s.book !== 'beastheart').map(s => s.id));
+  const included = new Set(
+    sources.filter(s => !['beastheart', 'summoner'].includes(s.book)).map(s => s.id),
+  );
   const pending = snapshot.entries
-    .filter(e => e.id.startsWith('mcdm.beastheart.v1/'))
+    .filter(e => /^mcdm\.(beastheart|summoner)\.v1\//.test(e.id))
     .map(e => e.id);
   while (pending.length) {
     const id = pending.pop()!;
@@ -382,7 +393,7 @@ export function buildRules() {
     if (!source) throw new Error(`Missing supplemental reference: ${id}`);
     included.add(id);
     for (const match of source.raw.matchAll(/scc\.v1:([^\s)"#]+)/g))
-      if (match[1]!.startsWith('mcdm.beastheart.v1/')) pending.push(match[1]!);
+      if (/^mcdm\.(beastheart|summoner)\.v1\//.test(match[1]!)) pending.push(match[1]!);
   }
   for (let i = sources.length - 1; i >= 0; i--)
     if (!included.has(sources[i]!.id)) sources.splice(i, 1);
@@ -431,7 +442,7 @@ export function buildRules() {
       book: source.book,
       category,
       kind: source.kind,
-      classification: source.book === 'beastheart' ? 'supplemental' : 'core',
+      classification: ['beastheart', 'summoner'].includes(source.book) ? 'supplemental' : 'core',
       order: source.order,
       excerpt,
       file,

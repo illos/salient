@@ -1,3 +1,5 @@
+import { applySummonerModifiers, deriveSummonerPortfolio } from './classes/summoner.ts';
+import { summonerAbilities } from './summonerAbilities.ts';
 import { elementalistAbilities } from './elementalistAbilities.ts';
 import { deriveBeastheartCompanion, applyBeastheartModifiers } from './classes/beastheart.ts';
 import { beastheartAbilities } from './beastheartAbilities.ts';
@@ -953,6 +955,8 @@ class Evaluation {
       out.abilities = furyAbilities(out.features, out.abilities);
     out.abilities = beastheartAbilities(out.features, out.abilities);
     deriveBeastheartCompanion(this, out);
+    out.abilities = summonerAbilities(out.features, out.abilities);
+    deriveSummonerPortfolio(this, out);
     this.deriveSupportingChoices(out);
     const items = startingRewardItems(out.features ?? [], out.initialItems);
     if (items.length) out.initialItems = items;
@@ -1360,6 +1364,7 @@ class Evaluation {
     applyConduitModifiers(this, out);
     applyTalentModifiers(this, out);
     applyBeastheartModifiers(this, out);
+    applySummonerModifiers(this, out);
     applyNullModifiers(this, out);
   }
 

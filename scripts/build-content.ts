@@ -48,6 +48,12 @@ export const INCLUDED_SOURCEBOOKS = new Set(['mcdm.heroes.v1', 'mcdm.monsters.v1
  */
 export const SELECTIONS: ManifestSelection[] = [
   {
+    id: 'summoner-level-one',
+    description: 'Explicit Summoner level-one character choices; only 1/3-Essence minions.',
+    paths: ['class/summoner.md', 'feature/summoner/level-1', 'feature/ability/summoner/level-1'],
+    basis: 'docs/build/V107-summoner-level-one.md#scope: Q-CHAR-14 supplemental editor inclusion.',
+  },
+  {
     id: 'beastheart-level-one',
     description:
       'Explicitly supported supplemental Beastheart level-one choices and companion sources.',
@@ -409,7 +415,16 @@ function loadFile(root: string, relativePath: string, selection: string): Loaded
       /^(?:feature\/(?:ability\/)?beastheart\/level-1|feature\/(?:ability\/)?companion\/beastheart\/[^/]+\/level-1)\/[^/]+\.md$/.test(
         relativePath,
       ));
-  if (!INCLUDED_SOURCEBOOKS.has(sourcebook) && !beastheartLevelOne)
+  const summonerLevelOne =
+    sourcebook === 'mcdm.summoner.v1' &&
+    (relativePath === 'class/summoner.md' ||
+      /^feature\/(?:ability\/)?summoner\/level-1\/[^/]+\.md$/.test(relativePath) ||
+      (/^monster\/minion\/summoner\/(demon|undead|fey|elemental)\/statblock\/[^/]+\.md$/.test(
+        relativePath,
+      ) &&
+        typeof structured.cost === 'string' &&
+        /^[13] essence/.test(structured.cost)));
+  if (!INCLUDED_SOURCEBOOKS.has(sourcebook) && !beastheartLevelOne && !summonerLevelOne)
     return {
       exclusion: {
         path: relativePath,
@@ -578,7 +593,7 @@ function renderIndex(kinds: string[]): string {
     // identical: esbuild/Convex 1.45 cannot stat mixed-attribute metafile input names.
     ...kinds.map(
       kind =>
-        `import ${identifier(kind)}Json from './${kind}.json'${['ability', 'feature', 'complication', 'kit'].includes(kind) ? " with { type: 'json' }" : ''};`,
+        `import ${identifier(kind)}Json from './${kind}.json'${['ability', 'feature', 'complication', 'kit', 'statblock'].includes(kind) ? " with { type: 'json' }" : ''};`,
     ),
     '',
     'export const manifest: ContentManifest = manifestJson;',

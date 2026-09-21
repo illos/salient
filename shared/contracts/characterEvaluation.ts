@@ -301,6 +301,36 @@ export interface CompanionBaseline {
 }
 export interface DerivedBaseline {
   companion?: CompanionBaseline;
+  summoner?: {
+    circle: string;
+    formation: string;
+    range: number;
+    minionMaximum: number;
+    squadMaximum: number;
+    squadSizeMaximum: number;
+    startOfCombatMinions: number;
+    startOfTurnMinions: number;
+    outsideCombatMaximum: number;
+    provenance: Provenance[];
+    portfolio: {
+      name: string;
+      sourcePath: string;
+      cost: number;
+      summonCount: number;
+      stamina: number;
+      stability: number;
+      size: string;
+      speed: number;
+      movement: string;
+      freeStrike: number;
+      characteristics: Record<Characteristic, number>;
+      immunities: string[];
+      weaknesses: string[];
+      traits: string[];
+      text: string;
+      provenance: Provenance[];
+    }[];
+  };
   level: DerivedValue<number>;
   ancestry: DerivedValue<string>;
   class: DerivedValue<string>;

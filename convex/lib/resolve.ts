@@ -1,3 +1,4 @@
+import { summonerAbilitySource } from '../../shared/evaluate/summonerAbilities';
 import { beastheartAbilitySource } from '../../shared/evaluate/beastheartAbilities';
 import { elementalistAbilitySource } from '../../shared/evaluate/elementalistAbilities';
 import { talentAbilitySource } from '../../shared/evaluate/talentAbilities';
@@ -580,6 +581,7 @@ export async function abilitiesFor(
     ]) {
       const elementalistSource = elementalistAbilitySource(grant);
       const beastheartSource = beastheartAbilitySource(grant);
+      const summonerSource = summonerAbilitySource(grant);
       const talentSource = talentAbilitySource(grant);
       const nullSource = nullAbilitySource(grant);
       const troubadourSource = troubadourAbilitySource(grant);
@@ -587,6 +589,7 @@ export async function abilitiesFor(
       const conduitSource = conduitAbilitySource(grant);
       const censorSource = censorAbilitySource(grant);
       const tacticianSource =
+        summonerSource ??
         beastheartSource ??
         elementalistSource ??
         talentSource ??
@@ -628,7 +631,7 @@ export async function abilitiesFor(
         continue;
       }
       if (tacticianSource) {
-        const id = `${beastheartSource ? 'beastheart' : talentSource ? 'talent' : elementalistSource ? 'elementalist' : nullSource ? 'null' : troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
+        const id = `${summonerSource ? 'summoner' : beastheartSource ? 'beastheart' : talentSource ? 'talent' : elementalistSource ? 'elementalist' : nullSource ? 'null' : troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
         granted.push(
           build({
             abilityId: id,
@@ -785,7 +788,12 @@ export async function abilitiesFor(
         }),
       );
   }
-  const common = await commonActions(ctx, actor, records.foe);
+  let common = await commonActions(ctx, actor, records.foe);
+  // Summoner Strike replaces both ordinary hero free strikes (Summoner level-one feature).
+  if (granted.some(a => a.name === 'Summoner: Summoner Strike'))
+    common = common.filter(
+      a => ![MELEE_FREE_STRIKE_ID, RANGED_FREE_STRIKE_ID].includes(a.abilityId),
+    );
   return [...granted, ...common.filter(a => !granted.some(g => g.abilityId === a.abilityId))];
 }
 

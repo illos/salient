@@ -118,3 +118,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V105 | [Talent level one](V105-talent-level-one.md) | Merged (`465814b`); cloud dev published; accepted TESTER results reused |
 
 | V106 | [Beastheart level one and companion builds](V106-beastheart-level-one.md) | Merged (`34a8b48`); cloud dev published; accepted TESTER results reused |
+| V107 | [Summoner level one](V107-summoner-level-one.md) | Building |

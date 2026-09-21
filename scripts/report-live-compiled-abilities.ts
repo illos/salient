@@ -32,9 +32,9 @@ export function liveCompiledSupportReport(inputs: AuditInputs = readInputs()) {
       (['hero-standalone', 'kit-signature', 'granted'].includes(entry.context.corpus) &&
         (commonActions.has(entry.id) || grants.some(g => g.selectable === 'selectable'))) ||
       (entry.context.corpus === 'foe-ability' && loadableFoes.has(entry.context.parent ?? ''));
-    const manualBeastheart = entry.id.startsWith('mcdm.beastheart.v1/');
+    const manualBeastheart = /^mcdm\.(beastheart|summoner)\.v1\//.test(entry.id);
     const boundary = manualBeastheart
-      ? 'Explicit Beastheart/companion manual record; shared Ferocity payment only. Companion combat and turn integration deferred.'
+      ? 'Explicit supplemental class/minion/companion manual record; shared resource payment only. Creature combat and turn integration deferred.'
       : entry.context.corpus === 'kit-signature'
         ? 'Unchanged kit signatures retain A05 compatibility.'
         : !reachable

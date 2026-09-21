@@ -1,3 +1,4 @@
+import { summonerAbilitySource } from '../shared/evaluate/summonerAbilities';
 import { beastheartAbilitySource } from '../shared/evaluate/beastheartAbilities';
 import { elementalistAbilitySource } from '../shared/evaluate/elementalistAbilities';
 import { talentAbilitySource } from '../shared/evaluate/talentAbilities';
@@ -721,6 +722,7 @@ async function abilityView(
   const complicationSource = complicationAbilitySource(ability);
   const elementalistSource = elementalistAbilitySource(ability);
   const tacticianSource =
+    summonerAbilitySource(ability) ??
     beastheartAbilitySource(ability) ??
     elementalistSource ??
     talentAbilitySource(ability) ??

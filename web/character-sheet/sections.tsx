@@ -398,6 +398,50 @@ export function DetailsRows({
             />
           </li>
         )}
+      {partial?.summoner && (
+        <li className="space-y-2 py-3" aria-label="Summoner portfolio">
+          <h3 className="text-lg font-medium">
+            Circle of {partial.summoner.circle} · {partial.summoner.formation} formation
+          </h3>
+          <p>
+            Summoner’s Range {partial.summoner.range} · Maximum {partial.summoner.minionMaximum}{' '}
+            minions in {partial.summoner.squadMaximum} squads · Up to{' '}
+            {partial.summoner.squadSizeMaximum} per squad
+          </p>
+          <p>
+            Free signature summons: {partial.summoner.startOfCombatMinions} at combat start;{' '}
+            {partial.summoner.startOfTurnMinions} at turn start. Outside combat maximum:{' '}
+            {partial.summoner.outsideCombatMaximum}.
+          </p>
+          {partial.summoner.portfolio.map(m => (
+            <details key={m.name}>
+              <summary>
+                {m.name} · {m.cost} Essence for {m.summonCount}
+              </summary>
+              <p>
+                Size {m.size} · Speed {m.speed} · Stamina per minion {m.stamina} · Stability{' '}
+                {m.stability} · Free strike {m.freeStrike}
+              </p>
+              <p>
+                {Object.entries(m.characteristics)
+                  .map(([k, v]) => `${k} ${v}`)
+                  .join(' · ')}{' '}
+                · Movement: {m.movement}
+              </p>
+              <p>
+                Immunity: {m.immunities.join(', ') || 'None'} · Weakness:{' '}
+                {m.weaknesses.join(', ') || 'None'}
+              </p>
+              <p>{m.traits.join(' · ')}</p>
+            </details>
+          ))}
+          <p className="text-sm text-muted-foreground">
+            Track summoned squads, Stamina and conditions manually. Actions in the list record their
+            sourced effects; Essence costs are paid automatically. Sacrifice reductions, free
+            summons and shared turns remain manual.
+          </p>
+        </li>
+      )}
       {partial?.companion && (
         <li className="space-y-2 py-3" aria-label="Beastheart companion">
           <h3 className="text-lg font-medium">Companion · {partial.companion.name}</h3>
