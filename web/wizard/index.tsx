@@ -1244,12 +1244,6 @@ function Wizard({ character }: { character: WizardCharacter }) {
         <div className="flex min-w-0 flex-col gap-(--page-gap)">
           <section className="rounded-lg bg-card" aria-label="Current step">
             <div className="p-6" data-wizard-pane="centre">
-              {(character.wizardDraft || !character.id) && (
-                <Notice className="mb-4">
-                  This hero is a working draft. Your choices are kept as you make them, and it joins
-                  your characters when you save it.
-                </Notice>
-              )}
               {nameRequired && (
                 <p role="alert" className="mb-4 text-base text-destructive">
                   Enter a name in Details before saving your character.
