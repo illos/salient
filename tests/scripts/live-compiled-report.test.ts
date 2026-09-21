@@ -32,6 +32,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
     'Melee Weapon Free Strike',
     'Pinning Shot',
     'Power Chord',
+    'Pressure Points',
     'Ranged Weapon Free Strike',
     'Razor Claws',
     'Repent!',
@@ -161,6 +162,8 @@ test.each([
   ['Curse of Terror', 'I', 'frightened', [8, 11, 15], 5, 'piety'],
   // Troubadour/level-1/cutting-sarcasm: P-derived bleeding, printed 2/5/7 + P psychic.
   ['Cutting Sarcasm', 'P', 'bleeding', [4, 7, 9], 0, 'drama'],
+  // Null Pressure Points: A roll2, I-derived potency; target Agility, strict thresholds.
+  ['Pressure Points', 'A', 'weakened', [6, 9, 11], 0, 'discipline'],
 ] as const)(
   '%s retains each strict source threshold and resource cost',
   (name, characteristic, condition, damages, cost, resource) => {
@@ -179,7 +182,13 @@ test.each([
         const outcome = resolveCompiledAbility(definition, {
           actor: {
             actorId: 'censor',
-            characteristics: { M: 2, A: 1, R: 1, I: resource === 'piety' ? 2 : -1, P: 2 },
+            characteristics: {
+              M: 2,
+              A: resource === 'discipline' ? 2 : 1,
+              R: 1,
+              I: ['piety', 'discipline'].includes(resource) ? 2 : -1,
+              P: 2,
+            },
           },
           targets: [{ targetId: 'target', edges: 0, banes: 0 }],
           dice: { d10a, d10b },
@@ -198,7 +207,7 @@ test.each([
           ],
           conditionFacts: {
             potency: {
-              characteristic: resource === 'piety' ? 'I' : 'P',
+              characteristic: ['piety', 'discipline'].includes(resource) ? 'I' : 'P',
               weak: 0,
               average: 1,
               strong: 2,

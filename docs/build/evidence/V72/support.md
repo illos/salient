@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:71c51714ee7ea4132cd14fdf6585bb945d656be91e20727320ef462cf4ab2095`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:81a631bfa49ba52e9f52ed5fbbd1ba3a571a1417339b22f0e74ef570ede97887`.
 
-Currently reachable compiled: 20; unchanged reachable compatibility: 1378; structurally supported but unavailable: 2.
+Currently reachable compiled: 21; unchanged reachable compatibility: 1395; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -172,6 +172,24 @@ Currently reachable compiled: 20; unchanged reachable compatibility: 1378; struc
 | Special Delivery | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Wrecking Ball | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Aspect of the Wild | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| A Squad Unto Myself | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Arcane Disruptor | hero-standalone | manual | legacy-compatibility | manual-section |
+| Chronal Spike | hero-standalone | manual | legacy-compatibility | manual-section |
+| Dance of Blows | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Faster Than the Eye | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Impart Force | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
+| Inertial Shield | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Inertial Step | hero-standalone | manual | legacy-compatibility | manual-section |
+| Joint Lock | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Kinetic Strike | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Magnetic Strike | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Null Field | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Phase Inversion Strike | hero-standalone | manual | legacy-compatibility | manual-section |
+| Phase Strike | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Pressure Points | hero-standalone | supported | compiled |  |
+| Psychic Pulse | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Relentless Nemesis | hero-standalone | manual | legacy-compatibility | manual-section |
+| Stunning Blow | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Shadowmeld | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Detonate Sigil | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Black Ash Teleport | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |

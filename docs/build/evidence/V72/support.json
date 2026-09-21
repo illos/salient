@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:71c51714ee7ea4132cd14fdf6585bb945d656be91e20727320ef462cf4ab2095",
+  "contentHash": "sha256:81a631bfa49ba52e9f52ed5fbbd1ba3a571a1417339b22f0e74ef570ede97887",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1150
     },
     "hero-standalone": {
-      "total": 165,
-      "supported": 14,
-      "manual": 151
+      "total": 183,
+      "supported": 15,
+      "manual": 168
     },
     "kit-signature": {
       "total": 25,
@@ -20927,6 +20927,2334 @@
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself",
+      "name": "A Squad Unto Myself",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/a-squad-unto-myself.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself#block:0:tier1:0:65723ebe74a7200a",
+            "locator": "block:0:tier1:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself#block:0:tier2:0:abbf0071bed5821d",
+            "locator": "block:0:tier2:0",
+            "clause": "9 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself#block:0:tier3:0:2ea56bbac3101626",
+            "locator": "block:0:tier3:0",
+            "clause": "13 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 13
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself#block:1:0:ee6dee5865431cab",
+          "locator": "block:1:0",
+          "clause": "You can take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) before or after you use this ability.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) before or after you use this ability.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "A Squad Unto Myself",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/a-squad-unto-myself.md",
+          "decisionId": "class.null.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option A Squad Unto Myself supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "A Squad Unto Myself",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/a-squad-unto-myself.md",
+          "decisionId": "class.null.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option A Squad Unto Myself supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "A Squad Unto Myself",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/a-squad-unto-myself.md",
+          "decisionId": "class.null.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option A Squad Unto Myself supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor",
+      "name": "Arcane Disruptor",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/arcane-disruptor.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier1:0:a9f98c63167d223b",
+            "locator": "block:0:tier1:0",
+            "clause": "8 + **A** psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier1:1:ba967b1c1a98424c",
+            "locator": "block:0:tier1:1",
+            "clause": "M < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier1:0:a9f98c63167d223b"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier2:0:15139880a2658180",
+            "locator": "block:0:tier2:0",
+            "clause": "12 + **A** psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier2:1:0f71dba3c626c67b",
+            "locator": "block:0:tier2:1",
+            "clause": "M < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier2:0:15139880a2658180"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier3:0:3f92dab31be84e7c",
+            "locator": "block:0:tier3:0",
+            "clause": "16 + **A** psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier3:1:e8021f32ef9f5213",
+            "locator": "block:0:tier3:1",
+            "clause": "M < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:0:tier3:0:3f92dab31be84e7c"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor#block:1:0:b95de6a057db23c3",
+          "locator": "block:1:0",
+          "clause": "While [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, the target takes damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score whenever they use a [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) ability that costs Malice.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "While [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, the target takes damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score whenever they use a [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) ability that costs Malice.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Arcane Disruptor",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/arcane-disruptor.md",
+          "decisionId": "class.null.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arcane Disruptor supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Arcane Disruptor",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/arcane-disruptor.md",
+          "decisionId": "class.null.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arcane Disruptor supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Arcane Disruptor",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/arcane-disruptor.md",
+          "decisionId": "class.null.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arcane Disruptor supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike",
+      "name": "Chronal Spike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/chronal-spike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike#block:0:tier1:0:fc822cc1b0d91921",
+            "locator": "block:0:tier1:0",
+            "clause": "7 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike#block:0:tier2:0:4d2cc6daeb82879b",
+            "locator": "block:0:tier2:0",
+            "clause": "10 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike#block:0:tier3:0:e667b4ddb44f1970",
+            "locator": "block:0:tier3:0",
+            "clause": "13 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike#block:1:0:7e4d270756878554",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike). Additionally, whenever an effect lets you make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability), you can use this ability instead, paying its discipline cost as usual.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike). Additionally, whenever an effect lets you make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability), you can use this ability instead, paying its discipline cost as usual.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Chronal Spike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/chronal-spike.md",
+          "decisionId": "class.null.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Chronal Spike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Chronal Spike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/chronal-spike.md",
+          "decisionId": "class.null.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Chronal Spike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Chronal Spike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/chronal-spike.md",
+          "decisionId": "class.null.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Chronal Spike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows",
+      "name": "Dance of Blows",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/dance-of-blows.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows#block:0:tier1:0:c31afe8fa82fb263",
+            "locator": "block:0:tier1:0",
+            "clause": "3 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows#block:0:tier2:0:2a44e212de1f4bf4",
+            "locator": "block:0:tier2:0",
+            "clause": "4 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows#block:0:tier3:0:4148a008d7858141",
+            "locator": "block:0:tier3:0",
+            "clause": "5 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows#block:1:0:3634d62a5a87d45a",
+          "locator": "block:1:0",
+          "clause": "You can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) enemy up to a number of squares equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) enemy up to a number of squares equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Dance of Blows",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/dance-of-blows.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Dance of Blows supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dance of Blows",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/dance-of-blows.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Dance of Blows supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dance of Blows",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/dance-of-blows.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Dance of Blows supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye",
+      "name": "Faster Than the Eye",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/faster-than-the-eye.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye#block:0:tier1:0:2a44e212de1f4bf4",
+            "locator": "block:0:tier1:0",
+            "clause": "4 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye#block:0:tier2:0:4148a008d7858141",
+            "locator": "block:0:tier2:0",
+            "clause": "5 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye#block:0:tier3:0:8882180d6b03536f",
+            "locator": "block:0:tier3:0",
+            "clause": "7 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye#block:1:0:88a16ac3eed5c28a",
+          "locator": "block:1:0",
+          "clause": "You can deal damage equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score to one creature or object [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can deal damage equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score to one creature or object [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Two creatures or objects",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Faster Than the Eye",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/faster-than-the-eye.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Faster Than the Eye supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Faster Than the Eye",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/faster-than-the-eye.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Faster Than the Eye supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Faster Than the Eye",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/faster-than-the-eye.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Faster Than the Eye supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force",
+      "name": "Impart Force",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/impart-force.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force#block:0:tier1:0:81fdc15d679c084f",
+            "locator": "block:0:tier1:0",
+            "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "unsupported",
+            "shape": "push N (not directly after damage)",
+            "reason": "push-with-extra",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force#block:0:tier2:0:81fdbf5d679c04e9",
+            "locator": "block:0:tier2:0",
+            "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+            "kind": "unsupported",
+            "shape": "push N (not directly after damage)",
+            "reason": "push-with-extra",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force#block:0:tier3:0:81fdbd5d679c0183",
+            "locator": "block:0:tier3:0",
+            "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
+            "kind": "unsupported",
+            "shape": "push N (not directly after damage)",
+            "reason": "push-with-extra",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force#block:1:0:62e7036ddecd3336",
+          "locator": "block:1:0",
+          "clause": "An object you target must be your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on this ability. Additionally, for each square you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target, they take 1 psychic damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "An object you target must be your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on this ability. Additionally, for each square you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target, they take 1 psychic damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Impart Force",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/impart-force.md",
+          "decisionId": "class.null.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Impart Force supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Impart Force",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/impart-force.md",
+          "decisionId": "class.null.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Impart Force supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Impart Force",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/impart-force.md",
+          "decisionId": "class.null.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Impart Force supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield",
+      "name": "Inertial Shield",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/inertial-shield.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield#block:0:0:be3818a860174e7a",
+          "locator": "block:0:0",
+          "clause": "You take damage.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield#block:1:0:697516afa9dcb352",
+          "locator": "block:1:0",
+          "clause": "You take half the damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield#block:2:0:6e4d46d2de610ff6",
+          "locator": "block:2:0",
+          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of one effect associated with the damage is reduced by 1 for you.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N discipline",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You take damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You take half the damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of one effect associated with the damage is reduced by 1 for you.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Inertial Shield",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/inertial-shield.md",
+          "decisionId": "class.null.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Inertial Shield",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/inertial-shield.md",
+          "decisionId": "class.null.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Inertial Shield",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/inertial-shield.md",
+          "decisionId": "class.null.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step",
+      "name": "Inertial Step",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/inertial-step.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step#block:0:tier1:0:7238ed4d4beac54f",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step#block:0:tier2:0:fc822cc1b0d91921",
+            "locator": "block:0:tier2:0",
+            "clause": "7 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step#block:0:tier3:0:4d2cc6daeb82879b",
+            "locator": "block:0:tier3:0",
+            "clause": "10 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step#block:1:0:ed0a8b0944ebbed6",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Inertial Step",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/inertial-step.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Inertial Step supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Inertial Step",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/inertial-step.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Inertial Step supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Inertial Step",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/inertial-step.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Inertial Step supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock",
+      "name": "Joint Lock",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/joint-lock.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier1:0:ff347188e73e615a",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier1:1:5fe7f10a698313b6",
+            "locator": "block:0:tier1:1",
+            "clause": "A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM grabbed",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier2:0:fc822cc1b0d91921",
+            "locator": "block:0:tier2:0",
+            "clause": "7 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier2:1:9f54fce0cb01fa29",
+            "locator": "block:0:tier2:1",
+            "clause": "A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM grabbed",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier3:0:59d6701840f609eb",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier3:1:0cbf3e09768f5b89",
+            "locator": "block:0:tier3:1",
+            "clause": "A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM grabbed",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Joint Lock",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/joint-lock.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Joint Lock supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Joint Lock",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/joint-lock.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Joint Lock supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Joint Lock",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/joint-lock.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Joint Lock supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike",
+      "name": "Kinetic Strike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/kinetic-strike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier1:0:ff347188e73e615a",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier1:1:5bb41b8dd8dce27c",
+            "locator": "block:0:tier1:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "unsupported",
+            "shape": "taunted (eot)",
+            "reason": "condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier2:0:7238ed4d4beac54f",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier2:1:03c1bc7f533d523d",
+            "locator": "block:0:tier2:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "taunted (eot), slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier3:0:c242b54eeae60b04",
+            "locator": "block:0:tier3:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier3:1:03c1b97f533d4d24",
+            "locator": "block:0:tier3:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "taunted (eot), slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Kinetic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/kinetic-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/kinetic-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/kinetic-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike",
+      "name": "Magnetic Strike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/magnetic-strike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike#block:0:tier1:0:c16684c7dd9486b2",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + A psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike#block:0:tier1:1:9e25da2e10fede64",
+            "locator": "block:0:tier1:1",
+            "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "vertical pull N",
+            "reason": "pull",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike#block:0:tier2:0:e2194c107f3e8647",
+            "locator": "block:0:tier2:0",
+            "clause": "8 + A psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike#block:0:tier2:1:9e25dd2e10fee37d",
+            "locator": "block:0:tier2:1",
+            "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "vertical pull N",
+            "reason": "pull",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike#block:0:tier3:0:8b0d723a72f7ee57",
+            "locator": "block:0:tier3:0",
+            "clause": "11 + A psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike#block:0:tier3:1:9e25dc2e10fee1ca",
+            "locator": "block:0:tier3:1",
+            "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "unsupported",
+            "shape": "vertical pull N",
+            "reason": "pull",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Magnetic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/magnetic-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Magnetic Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Magnetic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/magnetic-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Magnetic Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Magnetic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/magnetic-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Magnetic Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field",
+      "name": "Null Field",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/null-field.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field#block:0:0:e08a9f2ce8169e5e",
+          "locator": "block:0:0",
+          "clause": "Each target reduces their [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field#markdown:block:0:0:49293265bb7c210f",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target reduces their potencies by 1.\nOnce as a free maneuver on each of your turns, you can spend 1 discipline and give your Null Field one of the following additional effects until the start of your next turn:\n- Gravitic Disruption: The first time on a turn that a target takes damage, you can slide them up to 2 squares.\n- Inertial Anchor: Any target who starts their turn in the area can't shift.\n- Synaptic Break: Whenever you or any ally uses an ability against a target that has a potency effect, the potency is increased by 1.\nThis ability remains active even after an encounter ends. It ends only if you are dying or if you willingly end it (no action required).",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field#markdown:item:4:0:ec92d0cb336f3681",
+          "locator": "markdown:item:4:0",
+          "clause": "Once as a free maneuver on each of your turns, you can spend 1 discipline and give your Null Field one of the following additional effects until the start of your next turn:",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field#markdown:item:5:0:2d8f1b19f3b13f79",
+          "locator": "markdown:item:5:0",
+          "clause": "- Gravitic Disruption: The first time on a turn that a target takes damage, you can slide them up to 2 squares.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field#markdown:item:6:0:197878bb6a74cbc0",
+          "locator": "markdown:item:6:0",
+          "clause": "- Inertial Anchor: Any target who starts their turn in the area can't shift.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field#markdown:item:7:0:7b92e7f50166917c",
+          "locator": "markdown:item:7:0",
+          "clause": "- Synaptic Break: Whenever you or any ally uses an ability against a target that has a potency effect, the potency is increased by 1.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field#markdown:item:8:0:4429026a2ae59a91",
+          "locator": "markdown:item:8:0",
+          "clause": "This ability remains active even after an encounter ends. It ends only if you are dying or if you willingly end it (no action required).",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: Each target reduces their potencies by 1.\nOnce as a free maneuver on each of your turns, you can spend 1 discipline and give your Null Field one of the following additional effects until the start of your next turn:\n- Gravitic Disruption: The first time on a turn that a target takes damage, you can slide them up to 2 squares.\n- Inertial Anchor: Any target who starts their turn in the area can't shift.\n- Synaptic Break: Whenever you or any ally uses an ability against a target that has a potency effect, the potency is increased by 1.\nThis ability remains active even after an encounter ends. It ends only if you are dying or if you willingly end it (no action required).",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "Once as a free maneuver on each of your turns, you can spend 1 discipline and give your Null Field one of the following additional effects until the start of your next turn:",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:5",
+          "clause": "- Gravitic Disruption: The first time on a turn that a target takes damage, you can slide them up to 2 squares.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:6",
+          "clause": "- Inertial Anchor: Any target who starts their turn in the area can't shift.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:7",
+          "clause": "- Synaptic Break: Whenever you or any ally uses an ability against a target that has a potency effect, the potency is increased by 1.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "This ability remains active even after an encounter ends. It ends only if you are dying or if you willingly end it (no action required).",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target reduces their [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target reduces their potencies by 1.\nOnce as a free maneuver on each of your turns, you can spend 1 discipline and give your Null Field one of the following additional effects until the start of your next turn:\n- Gravitic Disruption: The first time on a turn that a target takes damage, you can slide them up to 2 squares.\n- Inertial Anchor: Any target who starts their turn in the area can't shift.\n- Synaptic Break: Whenever you or any ally uses an ability against a target that has a potency effect, the potency is increased by 1.\nThis ability remains active even after an encounter ends. It ends only if you are dying or if you willingly end it (no action required).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "Once as a free maneuver on each of your turns, you can spend 1 discipline and give your Null Field one of the following additional effects until the start of your next turn:",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:5:0",
+          "clause": "- Gravitic Disruption: The first time on a turn that a target takes damage, you can slide them up to 2 squares.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:6:0",
+          "clause": "- Inertial Anchor: Any target who starts their turn in the area can't shift.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:7:0",
+          "clause": "- Synaptic Break: Whenever you or any ally uses an ability against a target that has a potency effect, the potency is increased by 1.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "This ability remains active even after an encounter ends. It ends only if you are dying or if you willingly end it (no action required).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Null Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/null-field.md",
+          "decisionId": "class.null.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Null Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/null-field.md",
+          "decisionId": "class.null.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Null Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/null-field.md",
+          "decisionId": "class.null.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike",
+      "name": "Phase Inversion Strike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/phase-inversion-strike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier1:0:ff347188e73e615a",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier1:1:4e9226361948973c",
+            "locator": "block:0:tier1:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier1:0:ff347188e73e615a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier2:0:c242b54eeae60b04",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier2:1:4e922436194893d6",
+            "locator": "block:0:tier2:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+            "kind": "push",
+            "distance": 4,
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier2:0:c242b54eeae60b04"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier3:0:b3d3653192b48556",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier3:1:4e92223619489070",
+            "locator": "block:0:tier3:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6",
+            "kind": "push",
+            "distance": 6,
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:0:tier3:0:b3d3653192b48556"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:1:0:937361f5ae2f1334",
+          "locator": "block:1:0",
+          "clause": "Before the [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) is resolved, you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target to a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and opposite the one they started in. If the target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed this way, you can't [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Before the [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) is resolved, you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target to a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and opposite the one they started in. If the target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed this way, you can't [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Phase Inversion Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/phase-inversion-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Phase Inversion Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phase Inversion Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/phase-inversion-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Phase Inversion Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phase Inversion Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/phase-inversion-strike.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Phase Inversion Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike",
+      "name": "Phase Strike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/phase-strike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike#block:0:tier1:0:d6c8049005faed04",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + A psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike#block:0:tier1:1:ca2c3ac8dc19be08",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, the target goes out of phase (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM the target goes out of phase (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike#block:0:tier2:0:b899919d13002bbb",
+            "locator": "block:0:tier2:0",
+            "clause": "4 + A psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike#block:0:tier2:1:0ea67aa2b227031b",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, the target goes out of phase (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM the target goes out of phase (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike#block:0:tier3:0:24c56927e7c3c101",
+            "locator": "block:0:tier3:0",
+            "clause": "6 + A psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike#block:0:tier3:1:92dc5540318105cb",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, the target goes out of phase (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM the target goes out of phase (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike#block:1:0:47fb432928d1b85a",
+          "locator": "block:1:0",
+          "clause": "A target who goes out of phase is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), has their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) reduced by 2, and can't obtain a tier 3 outcome on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "I < WEAK, the target goes out of phase (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "I < AVERAGE, the target goes out of phase (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "I < STRONG, the target goes out of phase (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "A target who goes out of phase is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), has their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) reduced by 2, and can't obtain a tier 3 outcome on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Phase Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/phase-strike.md",
+          "decisionId": "class.null.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phase Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phase Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/phase-strike.md",
+          "decisionId": "class.null.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phase Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phase Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/phase-strike.md",
+          "decisionId": "class.null.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phase Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points",
+      "name": "Pressure Points",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/pressure-points.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier1:0:ff347188e73e615a",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier1:1:a105d66082e66c40",
+            "locator": "block:0:tier1:1",
+            "clause": "A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier1:0:ff347188e73e615a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier2:0:fc822cc1b0d91921",
+            "locator": "block:0:tier2:0",
+            "clause": "7 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier2:1:e2b87c9fa771a5e7",
+            "locator": "block:0:tier2:1",
+            "clause": "A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier2:0:fc822cc1b0d91921"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier3:0:59d6701840f609eb",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier3:1:a7729133121407c7",
+            "locator": "block:0:tier3:1",
+            "clause": "A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points#block:0:tier3:0:59d6701840f609eb"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Pressure Points",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/pressure-points.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Pressure Points supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Pressure Points",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/pressure-points.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Pressure Points supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Pressure Points",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/pressure-points.md",
+          "decisionId": "class.null.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Pressure Points supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/psychic-pulse",
+      "name": "Psychic Pulse",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/psychic-pulse",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/psychic-pulse.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/psychic-pulse#block:0:0:b9397c231cdecf46",
+          "locator": "block:0:0",
+          "clause": "Each target takes psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. At the end of your current [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability takes psychic damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target takes psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. At the end of your current [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability takes psychic damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Psychic Pulse",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/psychic-pulse.md",
+          "decisionId": "class.null.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Psychic Pulse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Psychic Pulse",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/psychic-pulse.md",
+          "decisionId": "class.null.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Psychic Pulse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Psychic Pulse",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/psychic-pulse.md",
+          "decisionId": "class.null.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Psychic Pulse supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis",
+      "name": "Relentless Nemesis",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/relentless-nemesis.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis#block:0:tier1:0:c242b54eeae60b04",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis#block:0:tier2:0:b3d3653192b48556",
+            "locator": "block:0:tier2:0",
+            "clause": "8 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis#block:0:tier3:0:99add391d67bdc5d",
+            "locator": "block:0:tier3:0",
+            "clause": "12 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis#block:1:0:46dd4d34cc2d3c86",
+          "locator": "block:1:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), whenever the target finishes moving or being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You must end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), whenever the target finishes moving or being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You must end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Relentless Nemesis",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/relentless-nemesis.md",
+          "decisionId": "class.null.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Relentless Nemesis supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Relentless Nemesis",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/relentless-nemesis.md",
+          "decisionId": "class.null.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Relentless Nemesis supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Relentless Nemesis",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/relentless-nemesis.md",
+          "decisionId": "class.null.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Relentless Nemesis supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow",
+      "name": "Stunning Blow",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/stunning-blow.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:0:ff347188e73e615a",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:1:b30721af67d18dab",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM dazed and slowed (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:0:7238ed4d4beac54f",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:1:0f9232813c5fec9a",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM dazed and slowed (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:0:fc822cc1b0d91921",
+            "locator": "block:0:tier3:0",
+            "clause": "7 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:1:dfe43f199e50d18a",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM dazed and slowed (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Stunning Blow",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/stunning-blow.md",
+          "decisionId": "class.null.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stunning Blow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stunning Blow",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/stunning-blow.md",
+          "decisionId": "class.null.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stunning Blow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stunning Blow",
+          "sourcePath": "en/unified/md/feature/ability/null/level-1/stunning-blow.md",
+          "decisionId": "class.null.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stunning Blow supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -180341,8 +182669,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 20,
-    "compatibility": 1378,
+    "compiled": 21,
+    "compatibility": 1395,
     "compiledButUnavailable": 2
   }
 }

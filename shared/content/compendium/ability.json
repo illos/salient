@@ -3235,6 +3235,671 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself",
+    "kind": "ability",
+    "name": "A Squad Unto Myself",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/a-squad-unto-myself.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/a-squad-unto-myself.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: 2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 6 damage\n      tier2: 9 damage\n      tier3: 13 damage\n    - effect: You can take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) before or after you use this ability.\n      name: Effect\nflavor: You move so quickly, it seems as though an army assaulted your foes.\nkeywords:\n    - Area\n    - Psionic\n    - Weapon\nlevel: \"1\"\nname: A Squad Unto Myself\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself\ntarget: Each enemy in the area\ntier1: 6 damage\ntier2: 9 damage\ntier3: 13 damage\ntype: ability\n---\n\n\n*You move so quickly, it seems as though an army assaulted your foes.*\n\n| **Area, Psionic, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**            | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 6 damage\n- **12-16:** 9 damage\n- **17+:** 13 damage\n\n**Effect:** You can take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) before or after you use this ability.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "6 damage",
+          "tier2": "9 damage",
+          "tier3": "13 damage"
+        },
+        {
+          "effect": "You can take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) before or after you use this ability.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You move so quickly, it seems as though an army assaulted your foes.",
+      "keywords": [
+        "Area",
+        "Psionic",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "Each enemy in the area",
+      "tier1": "6 damage",
+      "tier2": "9 damage",
+      "tier3": "13 damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor",
+    "kind": "ability",
+    "name": "Arcane Disruptor",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/arcane-disruptor.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/arcane-disruptor.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 8 + **A** psychic damage; M < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier2: 12 + **A** psychic damage; M < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier3: 16 + **A** psychic damage; M < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n    - effect: While [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, the target takes damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score whenever they use a [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) ability that costs Malice.\n      name: Effect\nflavor: Your blow reorders a foe's body, causing pain if they attempt to channel sorcery.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Arcane Disruptor\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor\ntarget: One creature\ntier1: 8 + **A** psychic damage; M < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier2: 12 + **A** psychic damage; M < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier3: 16 + **A** psychic damage; M < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntype: ability\n---\n\n\n*Your blow reorders a foe's body, causing pain if they attempt to channel sorcery.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 8 + **A** psychic damage; M < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **12-16:** 12 + **A** psychic damage; M < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 16 + **A** psychic damage; M < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n\n**Effect:** While [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, the target takes damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score whenever they use a [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) ability that costs Malice.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "8 + **A** psychic damage; M < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier2": "12 + **A** psychic damage; M < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier3": "16 + **A** psychic damage; M < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+        },
+        {
+          "effect": "While [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, the target takes damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score whenever they use a [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) ability that costs Malice.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your blow reorders a foe's body, causing pain if they attempt to channel sorcery.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature",
+      "tier1": "8 + **A** psychic damage; M < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier2": "12 + **A** psychic damage; M < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier3": "16 + **A** psychic damage; M < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike",
+    "kind": "ability",
+    "name": "Chronal Spike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/chronal-spike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/chronal-spike.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 3 Discipline\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 7 + A damage\n      tier2: 10 + A damage\n      tier3: 13 + A damage\n    - effect: You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike). Additionally, whenever an effect lets you make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability), you can use this ability instead, paying its discipline cost as usual.\n      name: Effect\nflavor: You foresee the best moment to strike, then exploit it.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Chronal Spike\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike\ntarget: One creature or object\ntier1: 7 + A damage\ntier2: 10 + A damage\ntier3: 13 + A damage\ntype: ability\n---\n\n\n*You foresee the best moment to strike, then exploit it.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 7 + A damage\n- **12-16:** 10 + A damage\n- **17+:** 13 + A damage\n\n**Effect:** You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike). Additionally, whenever an effect lets you make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability), you can use this ability instead, paying its discipline cost as usual.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "3 Discipline",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "7 + A damage",
+          "tier2": "10 + A damage",
+          "tier3": "13 + A damage"
+        },
+        {
+          "effect": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike). Additionally, whenever an effect lets you make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability), you can use this ability instead, paying its discipline cost as usual.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You foresee the best moment to strike, then exploit it.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature or object",
+      "tier1": "7 + A damage",
+      "tier2": "10 + A damage",
+      "tier3": "13 + A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows",
+    "kind": "ability",
+    "name": "Dance of Blows",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/dance-of-blows.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/dance-of-blows.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 3 damage\n      tier2: 4 damage\n      tier3: 5 damage\n    - effect: You can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) enemy up to a number of squares equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n      name: Effect\nflavor: You strike everywhere at once, tricking an enemy into moving out of position.\nkeywords:\n    - Area\n    - Psionic\n    - Weapon\nlevel: \"1\"\nname: Dance of Blows\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows\nsubtype: signature\ntarget: Each enemy in the area\ntier1: 3 damage\ntier2: 4 damage\ntier3: 5 damage\ntype: ability\n---\n\n\n*You strike everywhere at once, tricking an enemy into moving out of position.*\n\n| **Area, Psionic, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**            | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 3 damage\n- **12-16:** 4 damage\n- **17+:** 5 damage\n\n**Effect:** You can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) enemy up to a number of squares equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "3 damage",
+          "tier2": "4 damage",
+          "tier3": "5 damage"
+        },
+        {
+          "effect": "You can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) enemy up to a number of squares equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You strike everywhere at once, tricking an enemy into moving out of position.",
+      "keywords": [
+        "Area",
+        "Psionic",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "Each enemy in the area",
+      "tier1": "3 damage",
+      "tier2": "4 damage",
+      "tier3": "5 damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye",
+    "kind": "ability",
+    "name": "Faster Than the Eye",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/faster-than-the-eye.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/faster-than-the-eye.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 damage\n      tier2: 5 damage\n      tier3: 7 damage\n    - effect: You can deal damage equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score to one creature or object [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.\n      name: Effect\nflavor: You strike so quickly that your hands become a blur.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Faster Than the Eye\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye\nsubtype: signature\ntarget: Two creatures or objects\ntier1: 4 damage\ntier2: 5 damage\ntier3: 7 damage\ntype: ability\n---\n\n\n*You strike so quickly that your hands become a blur.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |                 **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|--------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 Two creatures or objects** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 damage\n- **12-16:** 5 damage\n- **17+:** 7 damage\n\n**Effect:** You can deal damage equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score to one creature or object [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 damage",
+          "tier2": "5 damage",
+          "tier3": "7 damage"
+        },
+        {
+          "effect": "You can deal damage equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score to one creature or object [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You strike so quickly that your hands become a blur.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "Two creatures or objects",
+      "tier1": "4 damage",
+      "tier2": "5 damage",
+      "tier3": "7 damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force",
+    "kind": "ability",
+    "name": "Impart Force",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/impart-force.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/impart-force.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3'\n      tier2: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5'\n      tier3: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7'\n    - effect: An object you target must be your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on this ability. Additionally, for each square you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target, they take 1 psychic damage.\n      name: Effect\nflavor: A single touch from you, and your enemy flies backward.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Impart Force\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/impart-force\ntarget: One creature or object\ntier1: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3'\ntier2: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5'\ntier3: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7'\ntype: ability\n---\n\n\n*A single touch from you, and your enemy flies backward.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n- **12-16:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n- **17+:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7\n\n**Effect:** An object you target must be your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on this ability. Additionally, for each square you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target, they take 1 psychic damage.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "tier2": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+          "tier3": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7"
+        },
+        {
+          "effect": "An object you target must be your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on this ability. Additionally, for each square you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target, they take 1 psychic damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A single touch from you, and your enemy flies backward.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "target": "One creature or object",
+      "tier1": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+      "tier2": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+      "tier3": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield",
+    "kind": "ability",
+    "name": "Inertial Shield",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/inertial-shield.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/inertial-shield.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: \"null\"\ndistance: Self\neffects:\n    - effect: You take half the damage.\n      name: Effect\n    - cost: Spend 1 Discipline\n      effect: The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of one effect associated with the damage is reduced by 1 for you.\nflavor: You intuit the course of an incoming attack, reducing its effects.\nkeywords:\n    - Psionic\nlevel: \"1\"\nname: Inertial Shield\nscc: mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield\nsubtype: triggered\ntarget: Self\ntrigger: You take damage.\ntype: ability\n---\n\n\n*You intuit the course of an incoming attack, reducing its effects.*\n\n| **Psionic** | **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------|--------------:|\n| **📏 Self** |   **🎯 Self** |\n\n**Trigger:** You take damage.\n\n**Effect:** You take half the damage.\n\n**Spend 1 Discipline:** The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of one effect associated with the damage is reduced by 1 for you.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "null",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You take half the damage.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Discipline",
+          "effect": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of one effect associated with the damage is reduced by 1 for you."
+        }
+      ],
+      "flavor": "You intuit the course of an incoming attack, reducing its effects.",
+      "keywords": [
+        "Psionic"
+      ],
+      "level": "1",
+      "subtype": "triggered",
+      "target": "Self",
+      "trigger": "You take damage."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step",
+    "kind": "ability",
+    "name": "Inertial Step",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/inertial-step.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/inertial-step.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 5 + A damage\n      tier2: 7 + A damage\n      tier3: 10 + A damage\n    - effect: You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n      name: Effect\nflavor: You flit about the battlefield and take an opportunistic strike.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Inertial Step\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/inertial-step\nsubtype: signature\ntarget: One creature or object\ntier1: 5 + A damage\ntier2: 7 + A damage\ntier3: 10 + A damage\ntype: ability\n---\n\n\n*You flit about the battlefield and take an opportunistic strike.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 5 + A damage\n- **12-16:** 7 + A damage\n- **17+:** 10 + A damage\n\n**Effect:** You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "5 + A damage",
+          "tier2": "7 + A damage",
+          "tier3": "10 + A damage"
+        },
+        {
+          "effect": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You flit about the battlefield and take an opportunistic strike.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "5 + A damage",
+      "tier2": "7 + A damage",
+      "tier3": "10 + A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock",
+    "kind": "ability",
+    "name": "Joint Lock",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/joint-lock.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/joint-lock.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 + A damage; A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n      tier2: 7 + A damage; A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n      tier3: 9 + A damage; A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\nflavor: You contort your enemy's body into a stance they struggle to escape from.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Joint Lock\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/joint-lock\nsubtype: signature\ntarget: One creature or object\ntier1: 4 + A damage; A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntier2: 7 + A damage; A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntier3: 9 + A damage; A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntype: ability\n---\n\n\n*You contort your enemy's body into a stance they struggle to escape from.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 + A damage; A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n- **12-16:** 7 + A damage; A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n- **17+:** 9 + A damage; A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 + A damage; A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "tier2": "7 + A damage; A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "tier3": "9 + A damage; A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)"
+        }
+      ],
+      "flavor": "You contort your enemy's body into a stance they struggle to escape from.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "4 + A damage; A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+      "tier2": "7 + A damage; A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+      "tier3": "9 + A damage; A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike",
+    "kind": "ability",
+    "name": "Kinetic Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/kinetic-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/kinetic-strike.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n      tier2: 5 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier3: 6 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\nflavor: Your opponent staggers. They cannot ignore you.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Kinetic Strike\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike\nsubtype: signature\ntarget: One creature or object\ntier1: 4 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\ntier2: 5 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier3: 6 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntype: ability\n---\n\n\n*Your opponent staggers. They cannot ignore you.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n- **12-16:** 5 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **17+:** 6 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "tier2": "5 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier3": "6 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2"
+        }
+      ],
+      "flavor": "Your opponent staggers. They cannot ignore you.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "4 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+      "tier2": "5 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier3": "6 + A damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike",
+    "kind": "ability",
+    "name": "Magnetic Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/magnetic-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/magnetic-strike.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 5 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier3: 11 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\nflavor: The force of your blow extends past the limits of your body, pulling your enemy closer.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Magnetic Strike\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike\nsubtype: signature\ntarget: One creature\ntier1: 5 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier3: 11 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntype: ability\n---\n\n\n*The force of your blow extends past the limits of your body, pulling your enemy closer.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2**                     | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 5 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** 11 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "5 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "11 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        }
+      ],
+      "flavor": "The force of your blow extends past the limits of your body, pulling your enemy closer.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "5 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "11 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field",
+    "kind": "ability",
+    "name": "Null Field",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/null-field.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/null-field.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: 1 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - effect: Each target reduces their [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.\n      name: Effect\nflavor: You project an [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) that dampens the power of your foes.\nkeywords:\n    - Area\n    - Psionic\nlevel: \"1\"\nname: Null Field\nscc: mcdm.heroes.v1/feature.ability.null.level-1/null-field\ntarget: Each enemy in the area\ntype: ability\n---\n\n\n*You project an [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) that dampens the power of your foes.*\n\n| **Area, Psionic** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|------------------------------:|\n| **📏 1 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**     | **🎯 Each enemy in the area** |\n\n**Effect:** Each target reduces their [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.\n\nOnce as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) on each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can spend 1 discipline and give your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) one of the following additional effects until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn):\n\n- Gravitic Disruption: The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that a target takes damage, you can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them up to 2 squares.\n- Inertial Anchor: Any target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area can't [shift](scc.v1:mcdm.heroes.v1/movement/shifting).\n- Synaptic Break: Whenever you or any ally uses an ability against a target that has a [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effect, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is increased by 1.\n\nThis ability remains active even after an encounter ends. It ends only if you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) or if you willingly end it (no action required).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "1 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "effect": "Each target reduces their [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You project an [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) that dampens the power of your foes.",
+      "keywords": [
+        "Area",
+        "Psionic"
+      ],
+      "level": "1",
+      "target": "Each enemy in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike",
+    "kind": "ability",
+    "name": "Phase Inversion Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/phase-inversion-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/phase-inversion-strike.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier2: 6 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n      tier3: 8 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n    - effect: Before the [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) is resolved, you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target to a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and opposite the one they started in. If the target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed this way, you can't [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n      name: Effect\nflavor: You step momentarily out of phase as you pull an enemy through you.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Phase Inversion Strike\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike\nsubtype: signature\ntarget: One creature or object\ntier1: 4 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier2: 6 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\ntier3: 8 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\ntype: ability\n---\n\n\n*You step momentarily out of phase as you pull an enemy through you.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **12-16:** 6 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n- **17+:** 8 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n\n**Effect:** Before the [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) is resolved, you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target to a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and opposite the one they started in. If the target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed this way, you can't [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier2": "6 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+          "tier3": "8 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6"
+        },
+        {
+          "effect": "Before the [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) is resolved, you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target to a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and opposite the one they started in. If the target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed this way, you can't [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You step momentarily out of phase as you pull an enemy through you.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "4 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier2": "6 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+      "tier3": "8 + A damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike",
+    "kind": "ability",
+    "name": "Phase Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/phase-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/phase-strike.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 3 + A psychic damage; I < WEAK, the target goes out of phase (save ends)\n      tier2: 4 + A psychic damage; I < AVERAGE, the target goes out of phase (save ends)\n      tier3: 6 + A psychic damage; I < STRONG, the target goes out of phase (save ends)\n    - effect: A target who goes out of phase is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), has their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) reduced by 2, and can't obtain a tier 3 outcome on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).\n      name: Effect\nflavor: For a moment, your foe slips out of phase with this manifold.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Phase Strike\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/phase-strike\ntarget: One creature\ntier1: 3 + A psychic damage; I < WEAK, the target goes out of phase (save ends)\ntier2: 4 + A psychic damage; I < AVERAGE, the target goes out of phase (save ends)\ntier3: 6 + A psychic damage; I < STRONG, the target goes out of phase (save ends)\ntype: ability\n---\n\n\n*For a moment, your foe slips out of phase with this manifold.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |                           **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     |                       **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 3 + A psychic damage; I < WEAK, the target goes out of phase (save ends)\n- **12-16:** 4 + A psychic damage; I < AVERAGE, the target goes out of phase (save ends)\n- **17+:** 6 + A psychic damage; I < STRONG, the target goes out of phase (save ends)\n\n**Effect:** A target who goes out of phase is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), has their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) reduced by 2, and can't obtain a tier 3 outcome on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "3 + A psychic damage; I < WEAK, the target goes out of phase (save ends)",
+          "tier2": "4 + A psychic damage; I < AVERAGE, the target goes out of phase (save ends)",
+          "tier3": "6 + A psychic damage; I < STRONG, the target goes out of phase (save ends)"
+        },
+        {
+          "effect": "A target who goes out of phase is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), has their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) reduced by 2, and can't obtain a tier 3 outcome on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "For a moment, your foe slips out of phase with this manifold.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature",
+      "tier1": "3 + A psychic damage; I < WEAK, the target goes out of phase (save ends)",
+      "tier2": "4 + A psychic damage; I < AVERAGE, the target goes out of phase (save ends)",
+      "tier3": "6 + A psychic damage; I < STRONG, the target goes out of phase (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points",
+    "kind": "ability",
+    "name": "Pressure Points",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/pressure-points.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/pressure-points.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 + A damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier2: 7 + A damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier3: 9 + A damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\nflavor: You strike at key nerve clusters to leave your foe staggered.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Pressure Points\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/pressure-points\nsubtype: signature\ntarget: One creature or object\ntier1: 4 + A damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier2: 7 + A damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier3: 9 + A damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntype: ability\n---\n\n\n*You strike at key nerve clusters to leave your foe staggered.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 + A damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **12-16:** 7 + A damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 9 + A damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 + A damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier2": "7 + A damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier3": "9 + A damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+        }
+      ],
+      "flavor": "You strike at key nerve clusters to leave your foe staggered.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "4 + A damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier2": "7 + A damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier3": "9 + A damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/psychic-pulse",
+    "kind": "ability",
+    "name": "Psychic Pulse",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/psychic-pulse.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/psychic-pulse.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 3 Discipline\ndistance: 2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - effect: Each target takes psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. At the end of your current [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability takes psychic damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n      name: Effect\nflavor: A burst of psionic energy interferes with your enemy's synapses.\nkeywords:\n    - Area\n    - Psionic\nlevel: \"1\"\nname: Psychic Pulse\nscc: mcdm.heroes.v1/feature.ability.null.level-1/psychic-pulse\ntarget: Each enemy in the area\ntype: ability\n---\n\n\n*A burst of psionic energy interferes with your enemy's synapses.*\n\n| **Area, Psionic** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|------------------------------:|\n| **📏 2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**    | **🎯 Each enemy in the area** |\n\n**Effect:** Each target takes psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. At the end of your current [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability takes psychic damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "3 Discipline",
+      "distance": "2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "effect": "Each target takes psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. At the end of your current [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability takes psychic damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A burst of psionic energy interferes with your enemy's synapses.",
+      "keywords": [
+        "Area",
+        "Psionic"
+      ],
+      "level": "1",
+      "target": "Each enemy in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis",
+    "kind": "ability",
+    "name": "Relentless Nemesis",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/relentless-nemesis.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/relentless-nemesis.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 3 Discipline\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 6 + A damage\n      tier2: 8 + A damage\n      tier3: 12 + A damage\n    - effect: Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), whenever the target finishes moving or being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You must end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target.\n      name: Effect\nflavor: You strike, and for the next few moments, your enemy can't escape you.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Relentless Nemesis\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis\ntarget: One creature or object\ntier1: 6 + A damage\ntier2: 8 + A damage\ntier3: 12 + A damage\ntype: ability\n---\n\n\n*You strike, and for the next few moments, your enemy can't escape you.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 6 + A damage\n- **12-16:** 8 + A damage\n- **17+:** 12 + A damage\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), whenever the target finishes moving or being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You must end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "3 Discipline",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "6 + A damage",
+          "tier2": "8 + A damage",
+          "tier3": "12 + A damage"
+        },
+        {
+          "effect": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), whenever the target finishes moving or being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You must end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You strike, and for the next few moments, your enemy can't escape you.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature or object",
+      "tier1": "6 + A damage",
+      "tier2": "8 + A damage",
+      "tier3": "12 + A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow",
+    "kind": "ability",
+    "name": "Stunning Blow",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/stunning-blow.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-1/stunning-blow.json",
+    "selection": "null-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 3 Discipline\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 + A damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier2: 5 + A damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier3: 7 + A damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\nflavor: You focus your psionic technique into a concussive punch.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Stunning Blow\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow\ntarget: One creature or object\ntier1: 4 + A damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier2: 5 + A damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier3: 7 + A damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntype: ability\n---\n\n\n*You focus your psionic technique into a concussive punch.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 + A damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 5 + A damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **17+:** 7 + A damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "3 Discipline",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 + A damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier2": "5 + A damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier3": "7 + A damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+        }
+      ],
+      "flavor": "You focus your psionic technique into a concussive punch.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature or object",
+      "tier1": "4 + A damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier2": "5 + A damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier3": "7 + A damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.polder/shadowmeld",
     "kind": "ability",
     "name": "Shadowmeld",

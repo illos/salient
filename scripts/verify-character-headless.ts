@@ -1,3 +1,4 @@
+import { runNull } from './headless/null.ts';
 import { runTroubadour } from './headless/troubadour.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** Live character acceptance against an explicitly selected development target and cohort. */
@@ -27,6 +28,7 @@ import { runWizardDraft } from './headless/wizard-draft.ts';
 const cohorts = {
   fury: runFury,
   troubadour: runTroubadour,
+  null: runNull,
   censor: runCensor,
   conduit: runConduit,
   all: runScenarios,

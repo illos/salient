@@ -24,3 +24,20 @@ Independent ENGINE review then DEPLOY2 publication reusing acceptance.
 ## Work log
 
 - Started from main `0919e70`. ENGINE assigned pinned source audit. No tests run yet.
+- Independent source audit persisted in [audit](audits/V103-null-source-audit.md). ENGINE found no
+  authoring blockers at `aa498a1`; final proof review pending.
+- TESTER generated 1436 content entries and reports (all three commands exit 0) at `aa498a1`;
+  artifacts `/srv/presidium/projects/salient/test-artifacts/V103-aa498a1-generation`.
+- Source oracle: `tests/fixtures/v103-null-expected.json`, four Human Soldier builds covering all
+  eight signatures, all eight heroic choices, three traditions/augmentations/arrays. No evaluator
+  output used. Every rolled action names its source path and independent tier damage; embedded
+  action costs are the four printed 1-Discipline options. The ordinary free-strike oracle protects
+  Force's Psionic-only restriction. Manual fixed damage is not automatically modified.
+- `scripts/headless/null.ts` invokes every one of 18 source envelopes and 21 embedded actions.
+  It reads saved builds, edits/pruning without changing admitted builds, resource debit/block/waiver,
+  damage and manual state back. Pressure Points has both resisted A2 and applied A−1 paths with
+  condition source/save registration; its pure check covers below/equal each strict threshold.
+  Phase Inversion's prerequisite prevents compiled admission; its teleport/push stays manual.
+- Authoring: both TypeScript projects and touched ESLint passed. Focused evaluator/report files:
+  11 passing tests. Found and repaired empty skill options shadowing their source pools.
+  Full/live acceptance has not yet run.

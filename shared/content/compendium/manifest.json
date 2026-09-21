@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:71c51714ee7ea4132cd14fdf6585bb945d656be91e20727320ef462cf4ab2095",
-  "entryCount": 1402,
+  "contentHash": "sha256:81a631bfa49ba52e9f52ed5fbbd1ba3a571a1417339b22f0e74ef570ede97887",
+  "entryCount": 1436,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -190,6 +190,16 @@
         "feature/ability/shadow/level-2"
       ],
       "basis": "docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices."
+    },
+    {
+      "id": "null-level-one",
+      "description": "Null level-one traditions, augmentations and abilities.",
+      "paths": [
+        "class/null.md",
+        "feature/null/level-1",
+        "feature/ability/null/level-1"
+      ],
+      "basis": "docs/build/V103-null-level-one.md#scope: complete Null level-one options."
     },
     {
       "id": "troubadour-level-one",
@@ -1055,6 +1065,150 @@
       "file": "ability.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself",
+      "kind": "ability",
+      "name": "A Squad Unto Myself",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/a-squad-unto-myself.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/arcane-disruptor",
+      "kind": "ability",
+      "name": "Arcane Disruptor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/arcane-disruptor.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike",
+      "kind": "ability",
+      "name": "Chronal Spike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/chronal-spike.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows",
+      "kind": "ability",
+      "name": "Dance of Blows",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/dance-of-blows.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye",
+      "kind": "ability",
+      "name": "Faster Than the Eye",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/faster-than-the-eye.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force",
+      "kind": "ability",
+      "name": "Impart Force",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/impart-force.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield",
+      "kind": "ability",
+      "name": "Inertial Shield",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/inertial-shield.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step",
+      "kind": "ability",
+      "name": "Inertial Step",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/inertial-step.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock",
+      "kind": "ability",
+      "name": "Joint Lock",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/joint-lock.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike",
+      "kind": "ability",
+      "name": "Kinetic Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/kinetic-strike.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike",
+      "kind": "ability",
+      "name": "Magnetic Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/magnetic-strike.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/null-field",
+      "kind": "ability",
+      "name": "Null Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/null-field.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike",
+      "kind": "ability",
+      "name": "Phase Inversion Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/phase-inversion-strike.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike",
+      "kind": "ability",
+      "name": "Phase Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/phase-strike.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points",
+      "kind": "ability",
+      "name": "Pressure Points",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/pressure-points.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/psychic-pulse",
+      "kind": "ability",
+      "name": "Psychic Pulse",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/psychic-pulse.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis",
+      "kind": "ability",
+      "name": "Relentless Nemesis",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/relentless-nemesis.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow",
+      "kind": "ability",
+      "name": "Stunning Blow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/stunning-blow.md",
+      "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.polder/shadowmeld",
       "kind": "ability",
       "name": "Shadowmeld",
@@ -1916,6 +2070,14 @@
       "name": "Fury",
       "sourcePath": "vendor/steel-compendium/en/unified/md/class/fury.md",
       "selection": "fury-level-one",
+      "file": "class.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/class/null",
+      "kind": "class",
+      "name": "Null",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/class/null.md",
+      "selection": "null-level-one",
       "file": "class.json"
     },
     {
@@ -4060,6 +4222,126 @@
       "name": "Primordial Storm: Lightning Storm",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/primordial-storm-lightning-storm.md",
       "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/chronokinetic-mastery",
+      "kind": "feature",
+      "name": "Chronokinetic Mastery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/chronokinetic-mastery.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/cryokinetic-mastery",
+      "kind": "feature",
+      "name": "Cryokinetic Mastery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/cryokinetic-mastery.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/density-augmentation",
+      "kind": "feature",
+      "name": "Density Augmentation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/density-augmentation.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/discipline-mastery",
+      "kind": "feature",
+      "name": "Discipline Mastery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/discipline-mastery.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/discipline",
+      "kind": "feature",
+      "name": "Discipline",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/discipline.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/force-augmentation",
+      "kind": "feature",
+      "name": "Force Augmentation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/force-augmentation.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/inertial-shield",
+      "kind": "feature",
+      "name": "Inertial Shield",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/inertial-shield.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/metakinetic-mastery",
+      "kind": "feature",
+      "name": "Metakinetic Mastery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/metakinetic-mastery.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/null-abilities",
+      "kind": "feature",
+      "name": "Null Abilities",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/null-abilities.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/null-field",
+      "kind": "feature",
+      "name": "Null Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/null-field.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/null-speed",
+      "kind": "feature",
+      "name": "Null Speed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/null-speed.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/null-tradition",
+      "kind": "feature",
+      "name": "Null Tradition",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/null-tradition.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/psionic-augmentation",
+      "kind": "feature",
+      "name": "Psionic Augmentation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/psionic-augmentation.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/psionic-martial-arts",
+      "kind": "feature",
+      "name": "Psionic Martial Arts",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/psionic-martial-arts.md",
+      "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-1/speed-augmentation",
+      "kind": "feature",
+      "name": "Speed Augmentation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/speed-augmentation.md",
+      "selection": "null-level-one",
       "file": "feature.json"
     },
     {

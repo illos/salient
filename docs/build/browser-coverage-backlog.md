@@ -112,3 +112,5 @@ After the browser moratorium: select each class act, inspect both Virtuoso perfo
 ordinary-kit choices and skill exclusions, and reopen a saved build. Check Drama costs and optional
 action labels on the sheet, manual performance timing and Upstage Self text. Public-API proof is
 the Troubadour cohort; no browser test was run for V102.
+
+- V103: Null tradition/augmentation cards, two-signature selection, no kit section, sourced sheet actions and draft pruning. Browser runs deferred under moratorium; shared routes covered by Null cohort.

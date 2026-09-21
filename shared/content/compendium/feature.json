@@ -1838,6 +1838,201 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.null.level-1/chronokinetic-mastery",
+    "kind": "feature",
+    "name": "Chronokinetic Mastery",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/chronokinetic-mastery.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/chronokinetic-mastery.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Chronokinetic Mastery\nscc: mcdm.heroes.v1/feature.null.level-1/chronokinetic-mastery\ntype: feature\n---\n\nWhenever you use the [Inertial Shield](scc.v1:mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield) ability, you can use the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n\nAdditionally, as your discipline grows, your psionic mastery of your body intensifies, granting benefits from the [Chronokinetic Mastery](scc.v1:mcdm.heroes.v1/feature.null.level-1/chronokinetic-mastery) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n\n###### Chronokinetic Mastery Table\n\n| Discipline      | Benefit                                                                                                                                                                                     |\n|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | Whenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver, you can use the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) either before or after the maneuver.                                              |\n| 4               | The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you willingly move 1 or more squares as part of an ability, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                 |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) and [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers.                                                                                                                                       |\n| 8 (4th level)   | The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you willingly move 1 or more squares as part of an ability, you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) and [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers.                                                                                                                                 |\n| 12 (10th level) | Whenever you force move a target, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Additionally, whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). |\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/cryokinetic-mastery",
+    "kind": "feature",
+    "name": "Cryokinetic Mastery",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/cryokinetic-mastery.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/cryokinetic-mastery.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Cryokinetic Mastery\nscc: mcdm.heroes.v1/feature.null.level-1/cryokinetic-mastery\ntype: feature\n---\n\nWhenever you use your [Inertial Shield](scc.v1:mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield) ability, you can then use the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) maneuver as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n\nAdditionally, as your discipline grows, you strengthen the psionic power suffusing you, granting benefits from the [Cryokinetic Mastery](scc.v1:mcdm.heroes.v1/feature.null.level-1/cryokinetic-mastery) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n\n###### Cryokinetic Mastery Table\n\n| Discipline      | Benefit                                                                                                                                                                                           |\n|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | Whenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver, you can target one additional creature. Additionally, whenever you deal untyped damage with a psionic ability, you can change it to cold damage instead. |\n| 4               | The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you grab a creature or an enemy moves 1 or more squares in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                   |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) and [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers.                                                                                                                                             |\n| 8 (4th level)   | The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you grab a creature or an enemy moves 1 or more squares in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability, you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                  |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) and [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers.                                                                                                                                       |\n| 12 (10th level) | Whenever you force move a target, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Additionally, whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).       |\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/density-augmentation",
+    "kind": "feature",
+    "name": "Density Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/density-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/density-augmentation.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Density Augmentation\nscc: mcdm.heroes.v1/feature.null.level-1/density-augmentation\ntype: feature\n---\n\nYou gain a +6 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), and this [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) increases by 6 at 4th, 7th, and 10th levels. Additionally, you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/discipline-mastery",
+    "kind": "feature",
+    "name": "Discipline Mastery",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/discipline-mastery.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/discipline-mastery.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Discipline Mastery\nscc: mcdm.heroes.v1/feature.null.level-1/discipline-mastery\ntype: feature\n---\n\nAs you advance in your chosen [null tradition](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-tradition), you gain certain benefits in combat, including benefits based on the amount of discipline you have. Benefits based on how much discipline you have last until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), even if a benefit would become unavailable to you because of the amount of discipline you spend during your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\nSome [Discipline Mastery](scc.v1:mcdm.heroes.v1/feature.null.level-1/discipline-mastery) benefits can be applied only if you are a specific level or higher, with the level of those benefits noted in the tables below.\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/discipline",
+    "kind": "feature",
+    "name": "Discipline",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/discipline.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/discipline.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Discipline\nscc: mcdm.heroes.v1/feature.null.level-1/discipline\ntype: feature\n---\n\nAs your mastery of your body and tradition grows, it imbues you with a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) called discipline.\n\n##### Discipline in Combat\n\nAt the start of a combat encounter or some other stressful situation tracked in [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) (as determined by the Director), you gain discipline equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories). At the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) during combat, you gain 2 discipline.\n\nAdditionally, the first time each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that an enemy in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability (see below) uses a main action, you gain 1 discipline. The first time each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that the Director uses an ability that costs Malice (see *Draw Steel: Monsters*), you gain 1 discipline.\n\nYou lose any remaining discipline at the end of the encounter.\n\n##### Discipline Outside of Combat\n\nThough you can't gain discipline outside of combat, you can use your [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) and effects that cost discipline without spending it. Whenever you use an ability or effect outside of combat that costs discipline, you can't use that same ability or effect outside of combat again until you earn 1 or more [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories) or finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n\nWhen you use an ability outside of combat that lets you spend unlimited discipline on its effect, you can use it as if you had spent an amount of discipline equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories). (Such abilities aren't part of the core rules for the [null](scc.v1:mcdm.heroes.v1/class/null), but they might appear in future products.)\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/force-augmentation",
+    "kind": "feature",
+    "name": "Force Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/force-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/force-augmentation.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Force Augmentation\nscc: mcdm.heroes.v1/feature.null.level-1/force-augmentation\ntype: feature\n---\n\nYour damage-dealing psionic abilities gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage).\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/inertial-shield",
+    "kind": "feature",
+    "name": "Inertial Shield",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/inertial-shield.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/inertial-shield.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Inertial Shield\nscc: mcdm.heroes.v1/feature.null.level-1/inertial-shield\ntype: feature\n---\n\nYour instincts for danger let you predict attacks before they happen.\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/metakinetic-mastery",
+    "kind": "feature",
+    "name": "Metakinetic Mastery",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/metakinetic-mastery.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/metakinetic-mastery.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Metakinetic Mastery\nscc: mcdm.heroes.v1/feature.null.level-1/metakinetic-mastery\ntype: feature\n---\n\nWhenever you use your [Inertial Shield](scc.v1:mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield) ability, you can then use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n\nAdditionally, as your discipline grows, your psionic potential is amplified, granting benefits from the [Metakinetic Mastery](scc.v1:mcdm.heroes.v1/feature.null.level-1/metakinetic-mastery) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n\n###### Metakinetic Mastery Table\n\n| Discipline      | Benefit                                                                                                                                                                                     |\n|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | Whenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.                                                                          |\n| 4               | The first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that you take damage or are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge), even if you resist the effect.                                                                  |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) and [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers.                                                                                                                                       |\n| 8 (4th level)   | The first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that you take damage or are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), even if you resist the effect.                                                                 |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) and [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers.                                                                                                                                 |\n| 12 (10th level) | Whenever you force move a target, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Additionally, whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). |\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/null-abilities",
+    "kind": "feature",
+    "name": "Null Abilities",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/null-abilities.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/null-abilities.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Null Abilities\nscc: mcdm.heroes.v1/feature.null.level-1/null-abilities\ntype: feature\n---\n\nYou rely on a unique blend of martial techniques and psionic prowess to take down your foes and defend your allies.\n\n##### Signature Abilities\n\nChoose two [signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) from the following options. [Signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can be used at will. (*Quick Build:* [Faster Than the Eye](scc.v1:mcdm.heroes.v1/feature.ability.null.level-1/faster-than-the-eye), [Inertial Step](scc.v1:mcdm.heroes.v1/feature.ability.null.level-1/inertial-step).)\n\n##### Heroic Abilities\n\nYou have mastered a range of [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), all of them channeled through your discipline.\n\n###### 3-Discipline Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 3 discipline to use. (*Quick Build:* [Chronal Spike](scc.v1:mcdm.heroes.v1/feature.ability.null.level-1/chronal-spike).)\n\n###### 5-Discipline Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 5 discipline to use. (*Quick Build:* [A Squad Unto Myself](scc.v1:mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself).)\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/null-field",
+    "kind": "feature",
+    "name": "Null Field",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/null-field.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/null-field.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Null Field\nscc: mcdm.heroes.v1/feature.null.level-1/null-field\ntype: feature\n---\n\nYou project a psionic field of order around your body, dampening the effects of [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) abilities harmful to you and your allies.\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/null-speed",
+    "kind": "feature",
+    "name": "Null Speed",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/null-speed.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/null-speed.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Null Speed\nscc: mcdm.heroes.v1/feature.null.level-1/null-speed\ntype: feature\n---\n\nThe flow of psionic power through you allows you to achieve high velocity. You gain a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and to the number of squares you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/null-tradition",
+    "kind": "feature",
+    "name": "Null Tradition",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/null-tradition.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/null-tradition.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Null Tradition\nscc: mcdm.heroes.v1/feature.null.level-1/null-tradition\ntype: feature\n---\n\nThrough extensive physical and psionic training, you have learned to unlock the full potential of your body. As you shape the growth of your power, you choose a [null tradition](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-tradition) from the following options, each of which grants you a skill. (*Quick Build:* Chronokinetic and the [Monsters](scc.v1:mcdm.heroes.v1/skill.lore/monsters) skill.)\n\n- **Chronokinetic:** Your training unmoors you from temporal reality, allowing you to use the flow of time as another dimension that all things move through. You gain one skill from the [lore group](scc.v1:mcdm.heroes.v1/skill.group/lore).\n- **Cryokinetic:** You can tap into absolute cold, the most essential energy of myriad manifolds, and manifest its effects in your body. You gain one skill from the [crafting group](scc.v1:mcdm.heroes.v1/skill.group/crafting).\n- **Metakinetic:** You learn to see through the illusions of the universe to more fully understand your body and its psionic potential. You gain one skill from the [exploration group](scc.v1:mcdm.heroes.v1/skill.group/exploration).\n\nYour [null tradition](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-tradition) is your [subclass](scc.v1:mcdm.heroes.v1/rule.general/subclass), and your choice of tradition determines many of the features you'll gain as you gain new levels.\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/psionic-augmentation",
+    "kind": "feature",
+    "name": "Psionic Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/psionic-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/psionic-augmentation.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Psionic Augmentation\nscc: mcdm.heroes.v1/feature.null.level-1/psionic-augmentation\ntype: feature\n---\n\nYour training has turned your body into the perfect psionic weapon, shaping pathways in your mind that enhance your physical form. Choose one of the following augmentations. You can change your augmentation by undergoing a psionic meditation as a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity. (*Quick Build:* [Speed Augmentation](scc.v1:mcdm.heroes.v1/feature.null.level-1/speed-augmentation).)\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/psionic-martial-arts",
+    "kind": "feature",
+    "name": "Psionic Martial Arts",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/psionic-martial-arts.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/psionic-martial-arts.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Psionic Martial Arts\nscc: mcdm.heroes.v1/feature.null.level-1/psionic-martial-arts\ntype: feature\n---\n\nWhenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) or [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) maneuver, you use [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) instead of [Might](scc.v1:mcdm.heroes.v1/rule.character/might) for the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and for determining if you can target creatures larger than you. Additionally, whenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver, you can choose to [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.null.level-1/speed-augmentation",
+    "kind": "feature",
+    "name": "Speed Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/speed-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/null/level-1/speed-augmentation.json",
+    "selection": "null-level-one",
+    "text": "---\nclass: \"null\"\nlevel: \"1\"\nname: Speed Augmentation\nscc: mcdm.heroes.v1/feature.null.level-1/speed-augmentation\ntype: feature\n---\n\nYou gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action.\n",
+    "structured": {
+      "class": "null",
+      "level": "1"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.shadow.level-1/1st-level-college-features",
     "kind": "feature",
     "name": "1st-Level College Features",

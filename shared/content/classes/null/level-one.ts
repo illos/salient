@@ -91,6 +91,7 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
       [],
       {
         shape: { type: 'multi', count: 2 },
+        options: undefined,
         selectionRole: 'skill',
         optionsFrom: ['pool.skills.interpersonal', 'pool.skills.lore'],
         supportedInV001: [
@@ -141,6 +142,7 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
         [],
         {
           shape: { type: 'multi', count: 1 },
+          options: undefined,
           selectionRole: 'skill',
           optionsFrom: `pool.skills.${group}`,
           supportedInV001: pools[`pool.skills.${group}`]!.values,
