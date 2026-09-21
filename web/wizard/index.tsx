@@ -103,6 +103,12 @@ type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
  */
 const HIDDEN_STEPS = new Set(['step.think', 'step.free-strikes', 'step.connections']);
 /**
+ * Decisions the wizard does not show (V96). Creation is level one for every class, so reading the
+ * starting level back says nothing. The decision still grants the level and still carries its
+ * provenance; only this view skips it, and the progression editor is unaffected.
+ */
+const HIDDEN_DECISIONS = new Set(['class.level']);
+/**
  * Culture aspects a preset fixes (V96). Choosing a premade culture takes its name and aspects as
  * a set; the three skills stay the player's choice, and Build your own still reaches every
  * combination, including naming the culture.
@@ -1494,7 +1500,11 @@ function Wizard({ character }: { character: WizardCharacter }) {
     </section>
   ) : null;
   const inlineDecisions = dependent.filter(
-    decision => !isPanel(decision) && !lockedIds.has(decision.id) && !isCultureSkill(decision),
+    decision =>
+      !isPanel(decision) &&
+      !lockedIds.has(decision.id) &&
+      !isCultureSkill(decision) &&
+      !HIDDEN_DECISIONS.has(decision.id),
   );
   const panelDecisions = primaryExpanded ? [] : dependent.filter(isPanel);
   // What this step still owes, for the rail hint and the step footer. The budget and the costs
@@ -1731,7 +1741,9 @@ function Wizard({ character }: { character: WizardCharacter }) {
                         abilities.
                       </p>
                     )}
-                    {child.decisions.map(decision => renderDecision(decision))}
+                    {child.decisions
+                      .filter(decision => !HIDDEN_DECISIONS.has(decision.id))
+                      .map(decision => renderDecision(decision))}
                   </section>
                 ))}
                 {step.id === 'step.details' && (
