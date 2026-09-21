@@ -1103,10 +1103,11 @@ function Wizard({ character }: { character: WizardCharacter }) {
     ? (primary?.options?.find(option => option.value === selectedName)?.source ??
       primary?.optionSources?.[selectedName])
     : undefined;
-  const primaryNoneLabel = !primary
-    ? undefined
-    : primary.id === 'culture.preset'
-      ? 'Bespoke culture'
+  // Culture has no "none": Build your own is a card in the chooser's own bespoke group, so a
+  // second confirm button above the list would offer the same thing twice.
+  const primaryNoneLabel =
+    !primary || primary.id === 'culture.preset'
+      ? undefined
       : primary.optional || (primary.shape.type === 'single' && primary.shape.noneAllowed)
         ? `No ${stepName(step).toLowerCase()}`
         : undefined;
@@ -1224,10 +1225,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
       className="flex flex-col gap-3 py-5"
       aria-label={`Set by the ${culturePreset!.name} culture`}
     >
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-sm text-muted-foreground">
-        <span>Set by the {culturePreset!.name} culture</span>
-        <span>Choose Build your own to set these yourself</span>
-      </div>
+      <p className="m-0 text-sm text-muted-foreground">Set by the {culturePreset!.name} culture</p>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-2">
         {lockedAspects.map(aspect => (
           <div key={aspect.id} className="flex flex-col gap-1 rounded-md bg-muted px-4 py-3">

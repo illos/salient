@@ -147,8 +147,8 @@ unchanged.
 
 From the user's culture mockup (attachment, 2026-09-21):
 
-- The aspects a preset fixes read back as one block of tiles, headed "Set by the <name> culture"
-  with "Choose Build your own to set these yourself" opposite, instead of one read-only section
+- The aspects a preset fixes read back as one block of tiles, headed "Set by the <name> culture",
+  instead of one read-only section
   per decision each repeating that sentence. A culture has no entry of its own, being a table row
   that combines aspects, but each of the thirteen aspects does, so a tile carries that aspect's
   own text and opens it. Checked against the built catalog: all 81 aspect tiles across the 27
@@ -194,3 +194,7 @@ chosen; it needs its own slice and headless proof.
   entry. Every culture preset cites the Background chapter, which is also the decision's own
   source, so the header was showing that chapter's opening paragraph under every culture. When the
   option's source is the decision's, the header keeps the step's name, text and reference.
+- 2026-09-21: dropped the culture name tile (the step title already carries it), the "Choose Build
+  your own to set these yourself" caption, and culture's optional-none confirm button. Build your
+  own is a card in the chooser's bespoke group, so the button above the list offered the same
+  thing twice; culture now has no "none" label, and picking a culture means picking a card.
