@@ -70,3 +70,11 @@ Compendium rather than evaluator output. Guided progression is separate from thi
   Retain full gates; retry only touched authoring checks and the Conduit cohort. Artifacts:
   `/srv/presidium/projects/salient/test-artifacts/V100-ec9108a`.
 - Corrected source comment: Curse of Terror damage is holy. Numeric expectations and runtime unchanged.
+
+- Final ENGINE review PASS `a91faef` (Chords 1437); fixture and holy-damage comment corrections
+  verified independently. TESTER `a91faef`: touched lint/format exit 0; isolated
+  `SALIENT_HEADLESS_COHORT=conduit` run through `scripts/verify-character-headless.ts` exit 0,
+  72.2s wall time, twelve builds and 64 distinct actions. Retained full 984-test gate from `ec9108a`.
+  This is one successful selected cohort, not a repeat of the aggregate headless suite.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V100-a91faef`.
+  Backend stopped, ports free, data retained. Ready for DEPLOY2 promotion with accepted evidence.

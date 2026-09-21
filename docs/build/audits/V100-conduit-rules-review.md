@@ -42,3 +42,12 @@ No blocking findings remain. One nonblocking source-comment correction was sent 
 Curse of Terror deals **holy**, not psychic, damage; its numeric expectations are correct.
 
 Reviewed-By: ENGINE (pass, 2026-09-21)
+
+## Bounded closure
+
+ENGINE confirmed the corrected fixture and final report at `a91faef` (Chords 1437).
+Protection uses the Exploration skill Navigate; Curse of Terror's source comment now says holy.
+The six report corrections comprise three Conduit domain grants and three existing Time Raider
+Psionic Gift abilities: copying the visited set per dependency path prevents a shared ancestor
+from being mistaken for a cycle. Report totals are 19 compiled, 1339 compatibility, 2 unavailable.
+Runtime evidence is recorded in the slice work log; this review remains independent of test execution.
