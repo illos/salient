@@ -265,3 +265,9 @@ chosen; it needs its own slice and headless proof.
   user's instruction. The cards become checkboxes bounded at two, with a line counting the picks;
   each pick still writes its own decision. Flagged for audit above, since this changes how a
   character option is chosen.
+- 2026-09-21: complications are chosen from a filtered card grid rather than a search-and-select,
+  after the user's Forge Steel reference. Each card carries the complication's own text from the
+  rules catalog and a reference that opens its entry; the filter narrows by name and the count
+  under the grid says how many match. No complication is a card; a hundred are, so the grid is
+  behind an explicit `CARD_CATALOGS` list rather than an option-count threshold. Checked against
+  the composed definitions and the built catalog: all 100 resolve to text and a reference.

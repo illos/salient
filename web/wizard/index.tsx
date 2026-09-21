@@ -127,6 +127,11 @@ const STICKY_PANE =
  * The flow is unchanged: the kit is still its own step, in source order, with its own page.
  */
 const NESTED_STEPS: Record<string, string> = { 'step.kit': 'step.class' };
+/**
+ * Catalogs the wizard shows as cards rather than a select (V96): a hundred complications are read
+ * before they are chosen, so each needs its own text and reference on the page.
+ */
+const CARD_CATALOGS = new Set(['complication.choice']);
 /** Anchor for a decision, so the rail can jump to the choice it names (V96). */
 const anchorId = (decisionId: string) => `choice-${decisionId.replace(/\./g, '-')}`;
 /** The rail heading's reference: the whole Making a Hero chapter. */
@@ -276,6 +281,7 @@ export function DecisionEditor({
   const decisions = useMemo(() => indexDecisions(definitions), [definitions]);
   // Shared cached catalog: the reference links on these same rows already hold it.
   const { catalog } = useRulesCatalog();
+  const [search, setSearch] = useState('');
   const available = isAvailable(decision, selections, decisions);
   const value = selections[decision.id];
   const shape = decision.shape;
@@ -479,9 +485,66 @@ export function DecisionEditor({
     const options = decision.options.filter(
       option => pool.values.includes(option.value) || option.requiresFeature,
     );
+    // A big catalog the hero reads before choosing — the hundred complications — is a filtered
+    // card grid, each card carrying its own text and reference (V96). Others keep the select.
+    const cards = CARD_CATALOGS.has(decision.id);
+    const matching = cards
+      ? options.filter(option =>
+          option.value.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase()),
+        )
+      : options;
     control = (
       <>
-        {options.length > 30 ? (
+        {cards ? (
+          <div className="flex flex-col gap-3">
+            <Input
+              aria-label={`Search ${label.toLowerCase()} options`}
+              placeholder="Filter options by name…"
+              className="max-w-md"
+              value={search}
+              onChange={event => setSearch(event.target.value)}
+            />
+            <ChoiceList grid>
+              {(decision.optional || shape.noneAllowed) && !search.trim() && (
+                <ChoiceRow
+                  type="radio"
+                  group={decision.id}
+                  name={decision.id === 'complication.choice' ? 'No complication' : 'None'}
+                  checked={value === undefined}
+                  supported
+                  onChange={() => onSelect(decision.id, undefined)}
+                />
+              )}
+              {matching.map(option => (
+                <ChoiceRow
+                  key={option.id}
+                  type="radio"
+                  group={decision.id}
+                  name={option.value}
+                  checked={value === option.value}
+                  supported={option.supportedInV001 && pool.values.includes(option.value)}
+                  unavailableReason={
+                    !pool.values.includes(option.value) ? option.unavailableReason : undefined
+                  }
+                  onChange={() => onSelect(decision.id, option.value)}
+                  body={
+                    option.source
+                      ? ruleExcerpt(catalog, { sourcePath: option.source, label: option.value })
+                      : undefined
+                  }
+                  reference={
+                    option.source ? (
+                      <RuleLink sourcePath={option.source} label={option.value} />
+                    ) : null
+                  }
+                />
+              ))}
+            </ChoiceList>
+            <span className="text-sm text-muted-foreground">
+              {matching.length} of {options.length} options match
+            </span>
+          </div>
+        ) : options.length > 30 ? (
           <CatalogSelect
             decision={decision}
             label={label}
