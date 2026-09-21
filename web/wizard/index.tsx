@@ -27,6 +27,7 @@ import { definitions as levelOneDefinitions } from '../../shared/content/level-o
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { emptyAuthored, type CharacterAuthored } from '../../shared/characterDraft';
 import { findCulturePreset } from '../../shared/content/culture-presets';
+import { SUPPORTING_LANGUAGES } from '../../shared/content/supporting-languages';
 import type {
   Diagnostic,
   EvaluationResult,
@@ -348,17 +349,29 @@ export function DecisionEditor({
         )}
         {shownGrants.length > 0 && (
           <ul className="m-0 flex list-none flex-col gap-2 p-0">
-            {shownGrants.map((grant, i) => (
-              <li
-                key={i}
-                className="flex items-center gap-2 rounded-md bg-muted px-4 py-3.5 text-lg font-medium"
-              >
-                {readableRuleText(grant.value)
-                  .replace(/ \(derived in R02\)/g, '')
-                  .replace(/manual in v0.01/g, 'resolved at the table')}
-                {grant.source && <RuleLink sourcePath={grant.source} label={grant.value} />}
-              </li>
-            ))}
+            {shownGrants.map((grant, i) => {
+              // A granted language names its kind and links its table row, so the card says
+              // everything the separate language card below used to.
+              const language =
+                grant.kind === 'language' ? SUPPORTING_LANGUAGES[grant.value] : undefined;
+              return (
+                <li
+                  key={i}
+                  className="flex items-center gap-2 rounded-md bg-muted px-4 py-3.5 text-lg font-medium"
+                >
+                  {language
+                    ? `${grant.value} · ${language.type} language`
+                    : readableRuleText(grant.value)
+                        .replace(/ \(derived in R02\)/g, '')
+                        .replace(/manual in v0.01/g, 'resolved at the table')}
+                  {language ? (
+                    <RuleLink id={language.source.scc} label={`${grant.value} language`} />
+                  ) : (
+                    grant.source && <RuleLink sourcePath={grant.source} label={grant.value} />
+                  )}
+                </li>
+              );
+            })}
           </ul>
         )}
         {!shownGrants.length && decision.quote && (
@@ -702,9 +715,8 @@ export function DecisionEditor({
       {selectedSkills.map(name => (
         <SelectedSkillSource key={name} name={name} />
       ))}
-      {selectedLanguages.map(name => (
-        <SelectedLanguageSource key={name} name={name} />
-      ))}
+      {decision.kind !== 'automatic' &&
+        selectedLanguages.map(name => <SelectedLanguageSource key={name} name={name} />)}
       {selectedSources.map(source => (
         <SelectedRuleSource key={`${source.name}:${source.sourcePath}`} {...source} />
       ))}
