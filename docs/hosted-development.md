@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V98 Shadow level three
+## Current release — V99 Censor level one
+
+Backend/frontend source `517ea19de44ea758bc76812d3235b617077defd1` published on 2026-09-21 as
+Worker `4cfd22de-2da4-42fe-b10b-65c373ae1cf1`. Backend/schema validation, content reseed (1306
+entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test or
+rerun. See [V99](build/V99-censor-level-one.md) and the [ledger](../deploy.md).
+
+## Previous release — V98 Shadow level three
 
 Backend/frontend source `66a0f3d12ea8bb450cfda7c8375ba363fa718861` published on 2026-09-21 as
 Worker `185d6c0a-3965-4ea1-87da-f399259360f2`. Backend/schema validation, content reseed (1228

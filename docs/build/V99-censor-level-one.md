@@ -81,3 +81,11 @@ uses a Compendium-derived independent ledger rather than extending the existing 
   successful full-command run. Initial failures and reports remain retained. Runtime is unchanged
   since `47e3aa9`; no repeated suite is required for publication.
 - Ready for DEPLOY2 to integrate and publish the complete slice with 1306 content entries.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `517ea19` into main and published the backend, 1306-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded. Worker:
+`4cfd22de-2da4-42fe-b10b-65c373ae1cf1`. Accepted resumed 979-test gate and isolated twelve-build/
+42-action results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V99-release-517ea19`.
