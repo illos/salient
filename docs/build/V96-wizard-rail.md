@@ -27,7 +27,10 @@ unchanged.
 - `web/wizard/choice-list.tsx`, `web/rules/reference.ts`: an option row is a card with the name at
   the left of a header, its metadata at the right and its own rules text below, read from the
   already-loaded rules catalog; the control is screen-reader only.
+- `web/wizard/primary-choice.tsx`, `choice-list.tsx`: a settled main choice is reported by the
+  step header, so the chooser component renders only the chooser or the dependent choices.
 - docs/character-wizard-spec.md#confirmed-behavior (the 2026-09-21 amendment)
+- docs/character-wizard-spec.md#main-creation-and-editing (the 2026-09-21 header amendment)
 - `web/wizard/index.tsx`, `header.tsx`, `rail.tsx`, `hero-so-far.tsx`: the wizard is one
   scrolling document. The page scrolls, the header scrolls with it, and the two side panes stick
   to the viewport, scrolling inside themselves only when taller than it.
@@ -97,3 +100,9 @@ unchanged.
   sticky box while a short rail shows no scrollbar. The centre column no longer scrolls
   independently; `[data-wizard-pane="centre"]` remains on the same element, but the obsolete
   browser assertion reads its scrollTop and will need rewriting against the document.
+- 2026-09-21: choosing a step's main option now replaces the step title, description and
+  reference with that option's own, with Edit beside the title, instead of leaving a summary line
+  under the step header. The open state and the post-choice focus move lifted from PrimaryChoice
+  into the wizard, since the header they act on belongs to the wizard; PrimaryChoice is now just
+  the chooser-or-children switch. The primary decision's diagnostics render under the header while
+  the chooser is closed, so a settled choice with an outstanding problem still says so.

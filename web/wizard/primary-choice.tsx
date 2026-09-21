@@ -1,78 +1,47 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { useEffect, useRef, useState } from 'react';
+/**
+ * The step's one main catalog choice (Ancestry, Career, Class, Kit, Complication).
+ *
+ * V96: a made choice is reported by the step header itself, which takes the option's name, its
+ * own rules text and its reference, with Edit beside it. So this renders only the chooser while
+ * it is open, and only the dependent choices once it is closed. The caller owns the open state
+ * and the focus move, because the header it belongs to is the caller's.
+ *
+ * Presentation only: opening the chooser never clears the existing draft.
+ */
 import type { SelectionValue } from '../../shared/contracts/characterEvaluation';
 import { Button } from '../components/ui/button';
 
-/** Presentation only: opening the chooser never clears the existing draft. */
 export function PrimaryChoice({
   label,
   selected,
   noneLabel,
-  noneConfirmed,
-  reference,
-  diagnostics,
-  onSelect,
+  expanded,
+  chooserRef,
+  onKeep,
   renderChooser,
   children,
 }: {
   label: string;
   selected?: string;
   noneLabel?: string;
-  noneConfirmed: boolean;
-  reference?: React.ReactNode;
-  diagnostics?: React.ReactNode;
-  onSelect: (value: SelectionValue | undefined) => void;
+  /** The chooser is open: either nothing is settled yet, or the caller pressed Edit. */
+  expanded: boolean;
+  chooserRef: React.RefObject<HTMLDivElement | null>;
+  /** Confirm the current option (or the optional none) without changing the draft. */
+  onKeep: (value: SelectionValue | undefined) => void;
   renderChooser: (select: (value: SelectionValue | undefined) => void) => React.ReactNode;
   children: React.ReactNode;
 }) {
-  const [editing, setEditing] = useState(false);
-  const expanded = editing || (!selected && !(noneLabel && noneConfirmed));
-  const [focusAfterChange, setFocusAfterChange] = useState(false);
-  const chooser = useRef<HTMLDivElement>(null);
-  const edit = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    if (!focusAfterChange) return;
-    const target = expanded ? chooser.current : edit.current;
-    target?.focus({ preventScroll: true });
-    target?.scrollIntoView({ block: 'nearest' });
-  }, [expanded, focusAfterChange]);
-  function finish(value: SelectionValue | undefined) {
-    onSelect(value);
-    setFocusAfterChange(true);
-    setEditing(false);
-  }
-  return expanded ? (
-    <div ref={chooser} tabIndex={-1} role="group" aria-label={`Choose ${label.toLowerCase()}`}>
+  if (!expanded) return <>{children}</>;
+  return (
+    <div ref={chooserRef} tabIndex={-1} role="group" aria-label={`Choose ${label.toLowerCase()}`}>
       {(selected || noneLabel) && (
-        <Button type="button" variant="outline" className="mt-4" onClick={() => finish(selected)}>
+        <Button type="button" variant="outline" className="mt-4" onClick={() => onKeep(selected)}>
           {selected ? `Keep ${selected}` : `Use ${noneLabel!.toLowerCase()}`}
         </Button>
       )}
-      {renderChooser(finish)}
+      {renderChooser(onKeep)}
     </div>
-  ) : (
-    <>
-      <section className="py-5" aria-label={`Selected ${label.toLowerCase()}`}>
-        <div className="flex flex-wrap items-center gap-3">
-          <h3 className="m-0 text-xl font-medium">{selected ?? noneLabel}</h3>
-          {reference}
-          <Button
-            ref={edit}
-            type="button"
-            variant="outline"
-            size="sm"
-            aria-label={`Edit ${label.toLowerCase()}`}
-            onClick={() => {
-              setFocusAfterChange(true);
-              setEditing(true);
-            }}
-          >
-            Edit
-          </Button>
-        </div>
-        {diagnostics}
-      </section>
-      {children}
-    </>
   );
 }

@@ -17,7 +17,7 @@ import { CulturePresetSelect } from './culture-preset';
  * docs/build/V37-supporting-character-choices.md (full supporting-choice text and conditional
  * controls). Availability, pools and permanent mechanics are owned by the shared evaluator.
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useConvex, useMutation, useQuery } from 'convex/react';
 import type { FunctionReturnType } from 'convex/server';
@@ -54,6 +54,7 @@ import { StatBox } from '../components/stat-box';
 import { ErrorNotice, Field, Loading, Notice, useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
 import { readableRuleText, ruleExcerpt } from '../rules/reference';
+import { Button } from '../components/ui/button';
 import { useRulesCatalog } from '../rules/content';
 import {
   decisionLabel,
@@ -817,6 +818,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
   const [dirty, setDirty] = useState(false);
   const [cleared, setCleared] = useState<string[]>([]);
   const [confirmedEmptyChoices, setConfirmedEmptyChoices] = useState<Set<string>>(() => new Set());
+  // The step whose main chooser is deliberately reopened, and where to put focus after the
+  // header and the chooser swap places. Lifted out of PrimaryChoice with V96, because the
+  // chosen option now lives in the step header that this component owns.
+  const [editingStep, setEditingStep] = useState<string | null>(null);
+  const [focusAfterChange, setFocusAfterChange] = useState(false);
+  const chooserRef = useRef<HTMLDivElement>(null);
+  const editRef = useRef<HTMLButtonElement>(null);
   const stale =
     character.revision !== expectedRevision ||
     character.effectiveRevisionId !== expectedEffectiveRevisionId;
@@ -830,6 +838,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
     targetLevel: character.level,
   }) as EvaluationResult | undefined;
   const step = PRESENTED[stepIndex]!;
+  const { catalog } = useRulesCatalog();
   const canSave =
     !command.pending &&
     !stale &&
@@ -960,6 +969,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
     ? (primary?.options?.find(option => option.value === selectedName)?.source ??
       primary?.optionSources?.[selectedName])
     : undefined;
+  const primaryNoneLabel = !primary
+    ? undefined
+    : primary.id === 'culture.preset'
+      ? 'Bespoke culture'
+      : primary.optional || (primary.shape.type === 'single' && primary.shape.noneAllowed)
+        ? `No ${stepName(step).toLowerCase()}`
+        : undefined;
   // Aspects a chosen starting culture fixes: shown read-only until the hero goes bespoke. A
   // preset's language counts only when that preset actually names one, so a professional culture
   // still picks its own (background.md: "then add a language that fits the culture's concept").
@@ -973,6 +989,21 @@ function Wizard({ character }: { character: WizardCharacter }) {
     if (id === 'culture.language') return culturePreset.language ? culturePreset.name : undefined;
     return PRESET_FIXED_ASPECTS.has(id) ? culturePreset.name : undefined;
   };
+  const primaryExpanded =
+    primary !== undefined &&
+    (editingStep === step.id ||
+      (!selectedName &&
+        !(
+          primaryNoneLabel &&
+          primaryValue === undefined &&
+          (Boolean(character.id) || confirmedEmptyChoices.has(primary.id))
+        )));
+  useEffect(() => {
+    if (!focusAfterChange) return;
+    const target = primaryExpanded ? chooserRef.current : editRef.current;
+    target?.focus({ preventScroll: true });
+    target?.scrollIntoView({ block: 'nearest' });
+  }, [primaryExpanded, focusAfterChange]);
   const renderDecision = (decision: Decision, onSelect = select) => (
     <DecisionEditor
       key={decision.id}
@@ -1066,12 +1097,52 @@ function Wizard({ character }: { character: WizardCharacter }) {
                 Cleared because a parent choice changed: {cleared.map(decisionLabel).join(', ')}.
               </Notice>
             )}
-            <StepTitle
-              title={stepName(step)}
-              description={stepExcerpt(step)}
-              reference={<RuleLink {...stepReference(step)} />}
-              optional={step.optional}
-            />
+            {/* A settled main choice speaks for its step: the option's name, its own rules text
+                and its reference stand in for the step's, with Edit to reopen the chooser. */}
+            {primary && !primaryExpanded ? (
+              <StepTitle
+                title={selectedName ?? primaryNoneLabel ?? stepName(step)}
+                description={
+                  (selectedSource &&
+                    ruleExcerpt(catalog, { sourcePath: selectedSource, label: selectedName })) ||
+                  stepExcerpt(step)
+                }
+                reference={
+                  selectedSource ? (
+                    <RuleLink sourcePath={selectedSource} label={selectedName} />
+                  ) : (
+                    <RuleLink {...stepReference(step)} />
+                  )
+                }
+                optional={step.optional}
+                action={
+                  <Button
+                    ref={editRef}
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    disabled={command.pending}
+                    aria-label={`Edit ${stepName(step).toLowerCase()}`}
+                    onClick={() => {
+                      setFocusAfterChange(true);
+                      setEditingStep(step.id);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                }
+              />
+            ) : (
+              <StepTitle
+                title={stepName(step)}
+                description={stepExcerpt(step)}
+                reference={<RuleLink {...stepReference(step)} />}
+                optional={step.optional}
+              />
+            )}
+            {primary && !primaryExpanded && (
+              <Diagnostics list={evaluation?.diagnostics[primary.id]} />
+            )}
             {step.id === 'step.kit' && evaluation?.partial?.kit === null && (
               <p className="text-base text-muted-foreground">
                 This build has no kit. Its class features supply its starting statistics and
@@ -1084,25 +1155,10 @@ function Wizard({ character }: { character: WizardCharacter }) {
                   key={step.id}
                   label={stepName(step)}
                   selected={selectedName}
-                  noneConfirmed={
-                    primaryValue === undefined &&
-                    (Boolean(character.id) || confirmedEmptyChoices.has(primary.id))
-                  }
-                  noneLabel={
-                    primary.id === 'culture.preset'
-                      ? 'Bespoke culture'
-                      : primary.optional ||
-                          (primary.shape.type === 'single' && primary.shape.noneAllowed)
-                        ? `No ${stepName(step).toLowerCase()}`
-                        : undefined
-                  }
-                  reference={
-                    selectedSource ? (
-                      <RuleLink sourcePath={selectedSource} label={selectedName} />
-                    ) : undefined
-                  }
-                  diagnostics={<Diagnostics list={evaluation?.diagnostics[primary.id]} />}
-                  onSelect={value => {
+                  noneLabel={primaryNoneLabel}
+                  expanded={primaryExpanded}
+                  chooserRef={chooserRef}
+                  onKeep={value => {
                     if (command.pending) return;
                     if (value !== selections[primary.id]) select(primary.id, value);
                     setConfirmedEmptyChoices(previous => {
@@ -1111,6 +1167,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
                       else next.delete(primary.id);
                       return next;
                     });
+                    setFocusAfterChange(true);
+                    setEditingStep(null);
                   }}
                   renderChooser={choose => renderDecision(primary, (_id, value) => choose(value))}
                 >

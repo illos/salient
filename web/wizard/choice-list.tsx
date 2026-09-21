@@ -17,11 +17,14 @@ export function StepTitle({
   description,
   reference,
   optional,
+  action,
 }: {
   title: string;
   description?: string;
   reference: React.ReactNode;
   optional?: boolean;
+  /** Edit, once the step's main choice is made and the header carries it (V96). */
+  action?: React.ReactNode;
 }) {
   return (
     <div className="mb-4">
@@ -29,6 +32,7 @@ export function StepTitle({
         <h2 className="m-0 text-3xl font-medium">{title}</h2>
         {reference}
         {optional && <span className="text-sm text-muted-foreground">Optional</span>}
+        {action}
       </div>
       {description && <p className="mt-2 mb-0 text-base text-muted-foreground">{description}</p>}
     </div>

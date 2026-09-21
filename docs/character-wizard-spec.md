@@ -450,9 +450,11 @@ or leaving an unsaved draft discards it; the wizard explains this. A name of 1â€
 is required at save time; incomplete build choices may still be saved. Later saves retain the same
 character identity and existing revision, review and combat-lock protections.
 
-**Confirmed primary-choice presentation, 2026-09-19:** sections with one main catalog choice
-(Ancestry, Career, Class, Kit, and Complication) initially show that chooser. After selection,
-replace it with a compact chosen-name summary, a source reference, and Edit. Show the dependent
+**Confirmed primary-choice presentation, 2026-09-19, amended 2026-09-21 (V96):** sections with one
+main catalog choice (Ancestry, Career, Class, Kit, and Complication) initially show that chooser.
+After selection, the step header itself carries the choice: the option's name replaces the step
+name, its own rules text replaces the step description, its reference replaces the step's, and
+Edit sits beside it. There is no separate summary line. Show the dependent
 choices beneath the summary. Edit reopens the main chooser and hides dependent controls; opening
 Edit alone does not alter the draft. The user can keep the current option or select a replacement.
 Only replacement uses the existing dependency pruning. Revisited and saved selections start
