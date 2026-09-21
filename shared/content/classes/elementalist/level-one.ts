@@ -1,8 +1,32 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Existing V25 level-one Elementalist content. */
+/** Complete level-one Elementalist choices from the pinned Compendium. */
 import type { ClassProfile, Decision, DecisionDefinitions } from '../../../evaluate/definitions.ts';
 import { auto, choice, grant, option, path } from '../../decision-builders.ts';
 
+const slug = (s: string) =>
+  s
+    .toLowerCase()
+    .replaceAll("'", '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+export const ELEMENTALIST_CHOICES = [
+  ['Afflict a Bountiful Decay', 0],
+  ['Bifurcated Incineration', 0],
+  ['Grasp of Beyond', 0],
+  ['Meteoric Introduction', 0],
+  ['Ray of Agonizing Self-Reflection', 0],
+  ['The Green Within, the Green Without', 0],
+  ['Unquiet Ground', 0],
+  ['Viscous Fire', 0],
+  ['Behold the Mystery', 3],
+  ['Invigorating Growth', 3],
+  ['Ripples in the Earth', 3],
+  ['The Flesh, a Crucible', 3],
+  ['Conflagration', 5],
+  ['Instantaneous Excavation', 5],
+  ['No More Than a Breeze', 5],
+  ['Test of Rain', 5],
+] as const;
 const elementalist = path('class/elementalist');
 const feature = (slug: string) => path(`feature/elementalist/level-1/${slug}`);
 const ability = (slug: string) => path(`feature/ability/elementalist/level-1/${slug}`);
@@ -84,7 +108,9 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
         options: undefined,
         shape: { type: 'multi', count: 3 },
         optionsFrom: ['pool.skills.crafting', 'pool.skills.lore'],
-        supportedInV001: ['Alchemy', 'Blacksmithing', 'History'],
+        supportedInV001: [
+          ...new Set(['crafting', 'lore'].flatMap(g => pools[`pool.skills.${g}`]!.values)),
+        ],
       },
     ),
     choice(
@@ -99,7 +125,13 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
         dependsOn: ['class.elementalist.skill.magic'],
         replacesDuplicateSkill: 'Magic',
         optionsFrom: Object.keys(pools).filter(id => id.startsWith('pool.skills.')),
-        supportedInV001: ['Empathize'],
+        supportedInV001: [
+          ...new Set(
+            Object.entries(pools)
+              .filter(([id]) => id.startsWith('pool.skills.'))
+              .flatMap(([, p]) => p.values),
+          ),
+        ],
       },
     ),
     auto(
@@ -132,24 +164,29 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
       feature('elemental-specialization'),
       'You choose an elemental specialization from the following options: earth, fire, green, or void.',
       [
-        option('Fire', feature('elemental-specialization'), {
+        ['Earth', 'Earth: Acolyte of Earth', 'Motivate Earth', 'Skin Like Castle Walls'],
+        ['Fire', 'Fire: Acolyte of Fire', 'Return to Formlessness', 'Explosive Assistance'],
+        [
+          'Green',
+          'Green: Acolyte of the Green',
+          'It Is the Soul Which Hears',
+          'Breath of Dawn Remembered',
+        ],
+        ['Void', 'Void: Acolyte of the Mystery', 'A Beyonding of Vision', 'Subtle Relocation'],
+      ].map(([name, acolyte, extra, triggered]) =>
+        option(name!, feature('elemental-specialization'), {
           grants: [
-            grant('class-feature', 'Fire: Acolyte of Fire', feature('fire-acolyte-of-fire')),
-            grant(
-              'class-ability',
-              'Return to Formlessness',
-              ability('return-to-formlessness'),
-              'You have the following ability.',
-            ),
-            grant(
-              'aspect-ability',
-              'Explosive Assistance',
-              ability('explosive-assistance'),
-              'Your elemental specialization grants you a triggered action',
-            ),
+            grant('class-feature', acolyte!, feature(slug(acolyte!))),
+            ...(name === 'Earth' || name === 'Fire'
+              ? [grant('class-ability', extra!, ability(slug(extra!)))]
+              : [grant('class-feature', extra!, feature(slug(extra!)))]),
+            ...(name === 'Void'
+              ? [grant('class-ability', 'Shared Void Sense', ability('shared-void-sense'))]
+              : []),
+            grant('aspect-ability', triggered!, ability(slug(triggered!))),
           ],
         }),
-      ],
+      ),
     ),
     choice(
       'class.elementalist.enchantment',
@@ -157,17 +194,12 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
       'Elementalist',
       feature('enchantment'),
       'Choose one of the following enchantments.',
-      [
-        option('Enchantment of Destruction', feature('enchantment-of-destruction'), {
-          grants: [
-            grant(
-              'class-feature',
-              'Enchantment of Destruction',
-              feature('enchantment-of-destruction'),
-            ),
-          ],
-        }),
-      ],
+      ['Battle', 'Celerity', 'Destruction', 'Distance', 'Permanence'].map(n => {
+        const name = `Enchantment of ${n}`;
+        return option(name, feature(slug(name)), {
+          grants: [grant('class-feature', name, feature(slug(name)))],
+        });
+      }),
     ),
     choice(
       'class.elementalist.ward',
@@ -176,56 +208,34 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
       feature('elementalist-ward'),
       'Choose one of the following wards.',
       [
-        option('Ward of Delightful Consequences', feature('ward-of-delightful-consequences'), {
-          grants: [
-            grant(
-              'class-feature',
-              'Ward of Delightful Consequences',
-              feature('ward-of-delightful-consequences'),
-            ),
-          ],
-        }),
-      ],
+        'Delightful Consequences',
+        'Excellent Protection',
+        "Nature's Affection",
+        'Surprising Reactivity',
+      ].map(n => {
+        const name = `Ward of ${n}`;
+        return option(name, feature(slug(name)), {
+          grants: [grant('class-feature', name, feature(slug(name)))],
+        });
+      }),
     ),
-    choice(
-      'class.elementalist.signature-abilities',
-      'class.choice',
-      'Elementalist',
-      feature('elementalist-abilities'),
-      'Choose two signature abilities from the following options.',
-      [
-        option('Bifurcated Incineration', ability('bifurcated-incineration'), {
-          abilityKind: 'signature',
-        }),
-        option('Viscous Fire', ability('viscous-fire'), { abilityKind: 'signature' }),
-      ],
-      { shape: { type: 'multi', count: 2 } },
-    ),
-    choice(
-      'class.elementalist.ability-3',
-      'class.choice',
-      'Elementalist',
-      feature('elementalist-abilities'),
-      'Choose one heroic ability from the following options, each of which costs 3 essence to use.',
-      [
-        option('The Flesh, a Crucible', ability('the-flesh-a-crucible'), {
-          abilityKind: 'heroic',
-          costQuote: 'cost: 3 Essence',
-        }),
-      ],
-    ),
-    choice(
-      'class.elementalist.ability-5',
-      'class.choice',
-      'Elementalist',
-      feature('elementalist-abilities'),
-      'Choose one heroic ability from the following options, each of which costs 5 essence to use.',
-      [
-        option('Conflagration', ability('conflagration'), {
-          abilityKind: 'heroic',
-          costQuote: 'cost: 5 Essence',
-        }),
-      ],
+    ...[0, 3, 5].map(cost =>
+      choice(
+        `class.elementalist.${cost ? `ability-${cost}` : 'signature-abilities'}`,
+        'class.choice',
+        'Elementalist',
+        feature('elementalist-abilities'),
+        cost
+          ? `each of which costs ${cost} essence to use.`
+          : 'Choose two signature abilities from the following options.',
+        ELEMENTALIST_CHOICES.filter(([, c]) => c === cost).map(([name]) =>
+          option(name, ability(slug(name)), {
+            abilityKind: cost ? 'heroic' : 'signature',
+            ...(cost ? { costQuote: `cost: ${cost} Essence` } : {}),
+          }),
+        ),
+        cost ? {} : { shape: { type: 'multi', count: 2 } },
+      ),
     ),
   ];
 }

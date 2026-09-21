@@ -1,3 +1,4 @@
+import { elementalistAbilities } from './elementalistAbilities.ts';
 import { applyNullModifiers } from './classes/null.ts';
 import { nullAbilities } from './nullAbilities.ts';
 import { troubadourAbilities } from './troubadourAbilities.ts';
@@ -940,6 +941,7 @@ class Evaluation {
       ),
     );
     out.abilities = troubadourAbilities(out.features, out.abilities);
+    out.abilities = elementalistAbilities(out.features, out.abilities);
     out.abilities = nullAbilities(out.features, out.abilities);
     if (this.available.has('class.fury.action-options'))
       out.abilities = furyAbilities(out.features, out.abilities);

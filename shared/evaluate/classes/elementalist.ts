@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** V45 extraction: preserve existing source contributions and their phase/order. */
+import { SENTENCES } from '../sources.ts';
 import type { DerivationContext } from '../derivation.ts';
 import type {
   DerivedBaseline,
@@ -7,12 +8,84 @@ import type {
   PartialBaseline,
 } from '../../contracts/characterEvaluation.ts';
 export function applyElementalistModifiers(ctx: DerivationContext, out: PartialBaseline) {
+  if (ctx.single('class.choice') !== 'Elementalist') return;
   const sourced = (
     decisionId: string,
     source: string,
     quote: string,
     extra: Partial<Provenance> = {},
   ): Provenance => ({ decisionId, source: ctx.sentence({ path: source, quote }), ...extra });
+  const enchantment = ctx.single('class.elementalist.enchantment');
+  const source = (id: string, slug: string, quote: string, amount?: number): Provenance =>
+    sourced(
+      `class.elementalist.${id}`,
+      `en/unified/md/feature/elementalist/level-1/${slug}.md`,
+      quote,
+      amount === undefined ? {} : { operation: 'add', amount },
+    );
+  const add = (
+    field: 'staminaMaximum' | 'stability' | 'speed' | 'disengage' | 'savingThrowThreshold',
+    amount: number,
+    p: Provenance,
+  ) => {
+    const v = out[field];
+    if (v) out[field] = { value: v.value + amount, provenance: [...v.provenance, p] };
+  };
+  if (enchantment === 'Enchantment of Permanence') {
+    add(
+      'staminaMaximum',
+      6,
+      source('enchantment', 'enchantment-of-permanence', 'You gain a +6 bonus to Stamina', 6),
+    );
+    add(
+      'stability',
+      1,
+      source(
+        'enchantment',
+        'enchantment-of-permanence',
+        'Additionally, you gain a +1 bonus to stability.',
+        1,
+      ),
+    );
+    if (out.staminaMaximum) {
+      out.recoveryValue = {
+        value: Math.floor(out.staminaMaximum.value / 3),
+        provenance: [
+          ...out.staminaMaximum.provenance,
+          {
+            decisionId: 'class.elementalist.prayer',
+            source: ctx.sentence(SENTENCES.recoveryValue),
+            operation: 'floor-divide',
+            amount: 3,
+          },
+        ],
+      };
+      out.windedValue = {
+        value: Math.floor(out.staminaMaximum.value / 2),
+        provenance: [
+          ...out.staminaMaximum.provenance,
+          {
+            decisionId: 'class.elementalist.prayer',
+            source: ctx.sentence(SENTENCES.winded),
+            operation: 'floor-divide',
+            amount: 2,
+          },
+        ],
+      };
+    }
+  }
+  if (enchantment === 'Enchantment of Celerity')
+    for (const field of ['speed', 'disengage'] as const)
+      add(
+        field,
+        1,
+        source(
+          'enchantment',
+          'enchantment-of-celerity',
+          'You gain a +1 bonus to speed and to the distance you can shift when you take the Disengage move action.',
+          1,
+        ),
+      );
   const modifiers: NonNullable<DerivedBaseline['abilityModifiers']> = [];
   if (ctx.single('class.elementalist.enchantment') === 'Enchantment of Destruction')
     modifiers.push({

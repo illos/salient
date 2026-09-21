@@ -1,3 +1,4 @@
+import { elementalistAbilitySource } from '../shared/evaluate/elementalistAbilities';
 import { nullAbilitySource } from '../shared/evaluate/nullAbilities';
 import { troubadourAbilitySource } from '../shared/evaluate/troubadourAbilities';
 import { furyAbilitySource } from '../shared/evaluate/furyAbilities';
@@ -717,6 +718,7 @@ async function abilityView(
   const itemSource = startingItemAbilitySource(ability);
   const complicationSource = complicationAbilitySource(ability);
   const tacticianSource =
+    elementalistAbilitySource(ability) ??
     nullAbilitySource(ability) ??
     troubadourAbilitySource(ability) ??
     furyAbilitySource(ability) ??

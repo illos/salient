@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: GPL-3.0-only
+import {
+  ELEMENTALIST_ACTIONS,
+  elementalistActionText,
+} from '../content/classes/elementalist/abilities.ts';
+import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
+const managed = (ability: Pick<GrantedAbility, 'name' | 'sourcePath' | 'kind'>) =>
+  ability.kind === 'class'
+    ? ELEMENTALIST_ACTIONS.find(a => a.name === ability.name && a.sourcePath === ability.sourcePath)
+    : undefined;
+export function elementalistAbilitySource(
+  ability: Pick<GrantedAbility, 'name' | 'sourcePath' | 'kind'>,
+) {
+  const action = managed(ability);
+  return action
+    ? {
+        ...action,
+        text: elementalistActionText(action),
+        ...(action.cost ? { cost: `${action.cost} Essence` } : { cost: undefined }),
+      }
+    : undefined;
+}
+export function elementalistAbilities(
+  features: GrantedFeature[],
+  existing: GrantedAbility[],
+): GrantedAbility[] {
+  const result = existing.filter(a => !managed(a));
+  for (const action of ELEMENTALIST_ACTIONS) {
+    const parent = [...features, ...result].find(
+      p => p.name === action.parent && p.provenance.decisionId.startsWith('class.elementalist.'),
+    );
+    if (!parent) continue;
+    result.push({
+      name: action.name,
+      kind: 'class',
+      sourcePath: action.sourcePath,
+      kitBonusesIncluded: false,
+      activationCondition: action.activationCondition,
+      ...(action.cost ? { cost: { resource: 'essence', amount: action.cost } } : {}),
+      provenance: {
+        ...parent.provenance,
+        source: {
+          ...parent.provenance.source,
+          path: action.sourcePath,
+          quote: elementalistActionText(action),
+        },
+      },
+    });
+  }
+  return result;
+}
