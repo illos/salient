@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V106 | `34a8b48` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V105 | `465814b` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V104 | `e064050` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V103 | `983bcfa` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -286,3 +287,15 @@ upload succeeded. Worker `ef7da151-f04d-4bc8-8532-12aedb937290`.
 No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V105-release-465814b`.
 Committed content snapshot hash: `sha256:7ffe0438ccb96263a43c2d3c8728737d387521af8d846b3cf9fbfd6bd4347d0a`.
+
+### V106 Beastheart level one publication — 2026-09-21
+
+Reviewed owner `34a8b483ec71065e48aaa132c77acc796879c8e9` fast-forwarded into main.
+Accepted evidence reused: 1000 unique tests across retained/resumed stages (not one uninterrupted
+full run), and isolated fourteen-build/111-manual-record cohort at `aaef3bd` (147.8 s).
+Companion combat automation remains deferred.
+Backend publication/schema validation, content reseed (1561 entries), hosted build and frontend
+upload succeeded. Worker `e0c83bf3-190c-466b-a623-5b2cc46bcc4d`.
+No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V106-release-34a8b48`.
+Committed content snapshot hash: `sha256:69db8c6944325ab4762699e0203dabf65680208099453c75e5ec30d73e455ace`.

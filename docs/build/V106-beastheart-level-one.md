@@ -42,3 +42,12 @@ Spec: docs/table-spec.md#2-participation-and-presence
 - Isolated `SALIENT_HEADLESS_COHORT=beastheart node scripts/verify-character-headless.ts` passed (exit 0 /147.8s): fourteen persisted builds and all111 distinct manual records, source costs, payment/refusal/waiver, owner refusal, draft/admitted separation and unchanged actor/target state except Ferocity debit. Backend stopped, ports free, data retained, checkout released.
 - Evidence: `/srv/presidium/projects/salient/test-artifacts/V106-bff7deb-generation`, `V106-05c4920`, `V106-cb4a085`, and `V106-aaef3bd` under the same artifact root. Runtime acceptance source: `aaef3bd5813344178259c5af9bd6a9f1727519e7`. Final documentation does not change accepted runtime or generated sources.
 - Ready for DEPLOY2 main/cloud-dev/GitHub publication. Reuse accepted checks and isolated cohort; no deployment smoke or rerun. Companion combat automation remains deferred as described above.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `34a8b48` into main and published the backend, 1561-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded.
+Worker: `e0c83bf3-190c-466b-a623-5b2cc46bcc4d`. Accepted resumed 1000-test gate and isolated
+fourteen-build/111-manual-record results were reused; no smoke test or test rerun.
+Companion combat remains manual. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V106-release-34a8b48`.

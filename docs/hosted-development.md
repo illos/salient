@@ -113,7 +113,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V105 Talent level one
+## Current release — V106 Beastheart level one
+
+Backend/frontend source `34a8b483ec71065e48aaa132c77acc796879c8e9` published on 2026-09-21 as
+Worker `e0c83bf3-190c-466b-a623-5b2cc46bcc4d`. Backend/schema validation, content reseed
+(1561 entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test
+or rerun. Companion combat remains manual. See [V106](build/V106-beastheart-level-one.md)
+and the [ledger](../deploy.md).
+
+## Previous release — V105 Talent level one
 
 Backend/frontend source `465814b17640852055d40b7a47614f658779b95a` published on 2026-09-21 as
 Worker `ef7da151-f04d-4bc8-8532-12aedb937290`. Backend/schema validation, content reseed
