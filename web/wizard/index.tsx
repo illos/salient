@@ -284,10 +284,9 @@ export function DecisionEditor({
   // reaches every combination, so this restricts the path rather than the legal character.
   if (lockedBy)
     return (
-      <ChoiceSection label={label} reference={reference}>
-        <p className="m-0 text-base">{typeof value === 'string' ? value : 'Pending'}</p>
-        <p className="m-0 text-sm text-muted-foreground">
-          Set by the {lockedBy} culture. Choose Build your own to set this yourself.
+      <ChoiceSection label={`${label} — set by the ${lockedBy} culture`} reference={reference}>
+        <p className="m-0 rounded-md bg-muted px-4 py-3.5 text-lg font-medium">
+          {typeof value === 'string' ? value : 'Pending'}
         </p>
         <Diagnostics list={diagnostics} />
       </ChoiceSection>
@@ -1128,12 +1127,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
   );
   // Tiles, in reading order. The culture name is fixed too, but it is already the step's title,
   // so it gets no tile of its own.
-  const lockedAspectOrder = [
-    'culture.language',
-    'culture.environment',
-    'culture.organization',
-    'culture.upbringing',
-  ];
+  const lockedAspectOrder = ['culture.environment', 'culture.organization', 'culture.upbringing'];
   const lockedByPreset = (id: string): string | undefined => {
     if (!culturePreset) return undefined;
     if (id === 'culture.language') return culturePreset.language ? culturePreset.name : undefined;
@@ -1208,9 +1202,9 @@ function Wizard({ character }: { character: WizardCharacter }) {
       })
     : [];
   // Everything the preset fixed is taken out of the ordinary decision list, tile or not.
-  const lockedIds = new Set(
-    [...PRESET_FIXED_ASPECTS, 'culture.language'].filter(id => lockedByPreset(id)),
-  );
+  // The preset's language is not a tile: it reads with the common language it joins, further
+  // down the step, so the two languages the hero speaks sit together.
+  const lockedIds = new Set([...PRESET_FIXED_ASPECTS].filter(id => lockedByPreset(id)));
   // The three culture skills are one decision to the player: one per aspect, chosen together.
   const isCultureSkill = (decision: Decision) =>
     /^culture\..+\.skill$/.test(decision.id) &&
