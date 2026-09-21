@@ -34,6 +34,8 @@ export interface RailStep {
   index: number;
   /** Steps that depend on this one, such as the kit a class grants. */
   children: RailStep[];
+  /** A nested step's section within its parent's page, for the rail's jump. */
+  anchor?: string;
   /** No outstanding problems and at least one recorded decision (or nothing to decide, once visited). */
   done: boolean;
   /** The hero moved past this step: an outstanding choice here is something they left behind. */
@@ -84,6 +86,9 @@ function StepRow({
   nested?: boolean;
 }) {
   const current = step.index === currentIndex;
+  const visibleChildren = step.children.filter(
+    child => child.choices > 0 || child.index === currentIndex,
+  );
   return (
     <li>
       <button
@@ -102,7 +107,10 @@ function StepRow({
               ? 'text-foreground'
               : 'text-muted-foreground',
         )}
-        onClick={() => onSelect(step.index)}
+        onClick={() => {
+          onSelect(step.index);
+          if (step.anchor) onSelectItem?.(step.anchor);
+        }}
       >
         {nested ? (
           // The bullet sits in a badge-sized box, so it centres on the numbers above it.
@@ -162,10 +170,12 @@ function StepRow({
           ))}
         </ol>
       )}
-      {/* A dependent step sits under the one it depends on, whichever is current. */}
-      {step.children.length > 0 && (
+      {/* A dependent step sits under the one it depends on, and appears only once it applies: a
+          kit shows when the chosen class grants one. It stays visible while it is the open step,
+          so the rail never highlights nothing. */}
+      {visibleChildren.length > 0 && (
         <ol className="m-0 flex list-none flex-col p-0">
-          {step.children.map(child => (
+          {visibleChildren.map(child => (
             <StepRow
               key={child.id}
               step={child}

@@ -941,9 +941,12 @@ function Wizard({ character }: { character: WizardCharacter }) {
     () => getDefinitions(character.level, character.choiceOrigins),
     [character.level, character.choiceOrigins],
   );
-  const PRESENTED = definitions.steps.filter(
+  const SHOWN = definitions.steps.filter(
     step => step.presentedInV001 && !HIDDEN_STEPS.has(step.id),
   );
+  const PRESENTED = SHOWN.filter(step => !NESTED_STEPS[step.id]);
+  /** The steps that read as sections of this one, in source order. */
+  const nestedUnder = (parent: Step) => SHOWN.filter(step => NESTED_STEPS[step.id] === parent.id);
   const navigate = useNavigate();
   const client = useConvex();
   const save = useMutation(api.characters.save);
@@ -1146,6 +1149,31 @@ function Wizard({ character }: { character: WizardCharacter }) {
         isAvailable(d, selections, railIndex) &&
         !belongsToOtherBranch(d, selections, railIndex),
     );
+  /**
+   * A nested step reads as a section of its parent's page, so its rail row opens the parent and
+   * scrolls to the section. It has no number, no position of its own, and is not "passed".
+   */
+  const nestedRow = (child: Step, parent: RailStep): RailStep => {
+    const choices = stepChoices(child);
+    const decided = choices.filter(d =>
+      AUTHORED_FIELDS[d.id] ? Boolean(authored[AUTHORED_FIELDS[d.id]!]) : d.id in selections,
+    ).length;
+    return {
+      id: child.id,
+      name: stepName(child),
+      index: parent.index,
+      anchor: primaryDecisionId(child) ?? choices[0]?.id,
+      number: 0,
+      children: [],
+      chosen: recordedValue(primaryDecisionId(child)),
+      problems: problemsByStep(child),
+      decided,
+      choices: choices.length,
+      items: [],
+      done: choices.length > 0 ? decided === choices.length : parent.done,
+      passed: parent.passed,
+    };
+  };
   const flatSteps = PRESENTED.map((s, index) => {
     const problems = problemsByStep(s);
     const choices = stepChoices(s);
@@ -1155,15 +1183,16 @@ function Wizard({ character }: { character: WizardCharacter }) {
     const recorded = s.decisions.some(d =>
       AUTHORED_FIELDS[d.id] ? Boolean(authored[AUTHORED_FIELDS[d.id]!]) : d.id in selections,
     );
+    // A step that asks nothing of this hero — a class that grants no kit, say — is done once
+    // they have been past it, the same as a step with nothing to decide at all.
     const done =
       evaluation !== undefined &&
       problems === 0 &&
-      (hasInteractiveDecision(s) ? recorded : index < reached);
+      (hasInteractiveDecision(s) && choices.length > 0 ? recorded : index < reached);
     return {
       id: s.id,
       name: stepName(s),
       index,
-      parentId: NESTED_STEPS[s.id],
       children: [] as RailStep[],
       number: 0,
       chosen: recordedValue(primaryDecisionId(s)),
@@ -1185,14 +1214,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
   const railSteps: RailStep[] = [];
   let number = 0;
   for (const entry of flatSteps) {
-    const parent = entry.parentId
-      ? flatSteps.find(candidate => candidate.id === entry.parentId)
-      : undefined;
-    if (parent) parent.children.push(entry);
-    else {
-      entry.number = ++number;
-      railSteps.push(entry);
-    }
+    entry.number = ++number;
+    railSteps.push(entry);
+  }
+  for (const parent of SHOWN) {
+    const row = railSteps.find(entry => entry.id === parent.id);
+    if (!row) continue;
+    row.children = nestedUnder(parent).map(child => nestedRow(child, row));
   }
   const primary = step.decisions.find(
     decision =>
@@ -1386,9 +1414,12 @@ function Wizard({ character }: { character: WizardCharacter }) {
             currentIndex={stepIndex}
             onSelect={goTo}
             onSelectItem={id =>
-              document
-                .getElementById(anchorId(id))
-                ?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+              // A nested row opens its parent first, so wait for that page before scrolling.
+              requestAnimationFrame(() =>
+                document
+                  .getElementById(anchorId(id))
+                  ?.scrollIntoView({ block: 'center', behavior: 'smooth' }),
+              )
             }
             hint={
               pointsOwed.length
@@ -1525,12 +1556,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
                   <Diagnostics list={evaluation?.diagnostics[primary.id]} />
                 )}
               </div>
-              {step.id === 'step.kit' && evaluation?.partial?.kit === null && (
-                <p className="text-base text-muted-foreground">
-                  This build has no kit. Its class features supply its starting statistics and
-                  abilities.
-                </p>
-              )}
+
               <fieldset disabled={command.pending} className="contents">
                 {primary ? (
                   <PrimaryChoice
@@ -1561,6 +1587,24 @@ function Wizard({ character }: { character: WizardCharacter }) {
                     {inlineDecisions.map(decision => renderDecision(decision))}
                   </>
                 )}
+                {nestedUnder(step).map(child => (
+                  <section
+                    key={child.id}
+                    className="mt-2 flex flex-col gap-3 border-t border-border pt-6"
+                  >
+                    <div className="flex items-center gap-3">
+                      <h3 className="m-0 text-xl font-medium">{stepName(child)}</h3>
+                      <RuleLink {...stepReference(child)} />
+                    </div>
+                    {child.id === 'step.kit' && evaluation?.partial?.kit === null && (
+                      <p className="m-0 text-base text-muted-foreground">
+                        This build has no kit. Its class features supply its starting statistics and
+                        abilities.
+                      </p>
+                    )}
+                    {child.decisions.map(decision => renderDecision(decision))}
+                  </section>
+                ))}
                 {step.id === 'step.details' && (
                   <Field
                     label="Private notes"

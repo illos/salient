@@ -224,3 +224,11 @@ chosen; it needs its own slice and headless proof.
   page; only the rail nests it, and it leaves the top-level numbering to the rest. The completed
   percentage and "Step n of m" count the whole tree, so a nested step still counts as a step.
   Sub-menu bullets sit in a badge-sized box so they centre on the numbers above them.
+- 2026-09-21: the kit is a section of the class page rather than a step of its own. It leaves the
+  presented sequence, so Continue runs Class then Complication, and the class page renders the kit
+  step's decisions under their own heading after the class's. Its rail row opens the class and
+  scrolls to that section, and appears only where the class actually grants a kit. Checked against
+  the shared availability: no class chosen offers nothing, Elementalist offers nothing at all,
+  Shadow and Tactician offer the kit from the class choice, and Fury offers it once the aspect
+  that grants the Kit feature is chosen. A step that asks this hero nothing now counts as done
+  once passed, so a kitless class can still reach 100%.
