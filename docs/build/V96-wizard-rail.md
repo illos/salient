@@ -218,3 +218,9 @@ chosen; it needs its own slice and headless proof.
   anchor id, and while a step's main choice is collapsed into the header the header answers to
   that choice's anchor, since that is where the choice lives. Checked across every presented step
   with a mid-build selection: no item names a decision without a rendered anchor.
+- 2026-09-21: the rail is a tree. A step can hang off the step it depends on, and the kit does:
+  the class grants it and decides which kits are offered, so it reads under the class rather than
+  beside it. The flow is unchanged, with the kit still its own step in source order and its own
+  page; only the rail nests it, and it leaves the top-level numbering to the rest. The completed
+  percentage and "Step n of m" count the whole tree, so a nested step still counts as a step.
+  Sub-menu bullets sit in a badge-sized box so they centre on the numbers above them.

@@ -119,6 +119,12 @@ const PRESET_FIXED_ASPECTS = new Set([
  */
 const STICKY_PANE =
   'sticky top-(--page-gap) max-h-[calc(100dvh_-_var(--page-gap)_*_2)] overflow-y-auto';
+/**
+ * Steps the rail nests under the step they depend on (V96). A kit is granted by the class, and
+ * which kits are offered follows from it, so it reads as part of the class rather than beside it.
+ * The flow is unchanged: the kit is still its own step, in source order, with its own page.
+ */
+const NESTED_STEPS: Record<string, string> = { 'step.kit': 'step.class' };
 /** Anchor for a decision, so the rail can jump to the choice it names (V96). */
 const anchorId = (decisionId: string) => `choice-${decisionId.replace(/\./g, '-')}`;
 /** The rail heading's reference: the whole Making a Hero chapter. */
@@ -1140,7 +1146,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
         isAvailable(d, selections, railIndex) &&
         !belongsToOtherBranch(d, selections, railIndex),
     );
-  const railSteps: RailStep[] = PRESENTED.map((s, index) => {
+  const flatSteps = PRESENTED.map((s, index) => {
     const problems = problemsByStep(s);
     const choices = stepChoices(s);
     const decided = choices.filter(d =>
@@ -1156,7 +1162,10 @@ function Wizard({ character }: { character: WizardCharacter }) {
     return {
       id: s.id,
       name: stepName(s),
-      number: index + 1,
+      index,
+      parentId: NESTED_STEPS[s.id],
+      children: [] as RailStep[],
+      number: 0,
       chosen: recordedValue(primaryDecisionId(s)),
       problems,
       decided,
@@ -1172,6 +1181,19 @@ function Wizard({ character }: { character: WizardCharacter }) {
       passed: index < reached,
     };
   });
+  // Nested steps hang off their parent and leave the top-level numbering to the rest.
+  const railSteps: RailStep[] = [];
+  let number = 0;
+  for (const entry of flatSteps) {
+    const parent = entry.parentId
+      ? flatSteps.find(candidate => candidate.id === entry.parentId)
+      : undefined;
+    if (parent) parent.children.push(entry);
+    else {
+      entry.number = ++number;
+      railSteps.push(entry);
+    }
+  }
   const primary = step.decisions.find(
     decision =>
       decision.id === primaryDecisionId(step) &&

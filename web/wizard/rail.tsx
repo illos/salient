@@ -30,6 +30,10 @@ export interface RailStep {
   decided: number;
   /** The step's own choices, listed under it while the hero is inside the step. */
   items: { id: string; label: string; done: boolean }[];
+  /** Position in the presented sequence, for navigation. */
+  index: number;
+  /** Steps that depend on this one, such as the kit a class grants. */
+  children: RailStep[];
   /** No outstanding problems and at least one recorded decision (or nothing to decide, once visited). */
   done: boolean;
   /** The hero moved past this step: an outstanding choice here is something they left behind. */
@@ -65,6 +69,118 @@ function StepMarker({
   );
 }
 
+function StepRow({
+  step,
+  currentIndex,
+  onSelect,
+  onSelectItem,
+  nested,
+}: {
+  step: RailStep;
+  currentIndex: number;
+  onSelect: (index: number) => void;
+  onSelectItem?: (decisionId: string) => void;
+  /** A step that depends on its parent, such as the kit a class grants. */
+  nested?: boolean;
+}) {
+  const current = step.index === currentIndex;
+  return (
+    <li>
+      <button
+        type="button"
+        aria-current={current ? 'step' : undefined}
+        // The visible text is the chosen value once there is one, so the accessible name keeps
+        // the step it belongs to and still contains what the row reads.
+        aria-label={step.chosen ? `${step.name}: ${step.chosen}` : step.name}
+        title={step.chosen ? `${step.name}: ${step.chosen}` : step.name}
+        className={cn(
+          'flex w-full items-center gap-2.5 rounded-md py-1.5 pr-2 text-left text-sm transition-colors duration-(--motion-fast) hover:bg-muted',
+          'pl-2',
+          current
+            ? 'bg-muted font-medium text-foreground'
+            : step.done
+              ? 'text-foreground'
+              : 'text-muted-foreground',
+        )}
+        onClick={() => onSelect(step.index)}
+      >
+        {nested ? (
+          // The bullet sits in a badge-sized box, so it centres on the numbers above it.
+          <span aria-hidden className="flex size-6 shrink-0 items-center justify-center">
+            <span
+              className={cn(
+                'size-1.5 rounded-full',
+                current ? 'bg-primary' : step.done ? 'bg-foreground' : 'bg-placeholder',
+              )}
+            />
+          </span>
+        ) : (
+          <StepMarker
+            number={step.number}
+            done={step.done}
+            current={current}
+            unresolved={!current && step.passed && step.problems > 0}
+          />
+        )}
+        {/* Once a step is decided its value stands in for the step name (V96): the rail reads
+            back the hero rather than repeating the book's step list. The count still shows, since
+            a step can be decided and still owe sub-choices. */}
+        <span className="min-w-0 flex-1 truncate">{step.chosen ?? step.name}</span>
+        {step.choices > 0 && (
+          <span
+            className="shrink-0 text-sm tabular-nums text-muted-foreground"
+            aria-label={`${step.decided} of ${step.choices} chosen`}
+          >
+            {step.decided}/{step.choices}
+          </span>
+        )}
+      </button>
+      {/* Inside a step, its own choices list under it, and picking one jumps to it. */}
+      {current && step.items.length > 0 && (
+        <ol className="m-0 mb-1 flex list-none flex-col p-0">
+          {step.items.map(item => (
+            <li key={item.id}>
+              <button
+                type="button"
+                className={cn(
+                  'flex w-full items-center gap-2.5 rounded-md py-1 pr-2 text-left text-sm text-muted-foreground transition-colors duration-(--motion-fast) hover:bg-muted hover:text-foreground',
+                  'pl-2',
+                )}
+                onClick={() => onSelectItem?.(item.id)}
+              >
+                <span aria-hidden className="flex size-6 shrink-0 items-center justify-center">
+                  <span
+                    className={cn(
+                      'size-1.5 rounded-full',
+                      item.done ? 'bg-foreground' : 'bg-placeholder',
+                    )}
+                  />
+                </span>
+                <span className="min-w-0 flex-1 truncate">{item.label}</span>
+              </button>
+            </li>
+          ))}
+        </ol>
+      )}
+      {/* A dependent step sits under the one it depends on, whichever is current. */}
+      {step.children.length > 0 && (
+        <ol className="m-0 flex list-none flex-col p-0">
+          {step.children.map(child => (
+            <StepRow
+              key={child.id}
+              step={child}
+              currentIndex={currentIndex}
+              onSelect={onSelect}
+              onSelectItem={onSelectItem}
+              nested
+            />
+          ))}
+        </ol>
+      )}
+    </li>
+  );
+}
+
 export function StepRail({
   title,
   reference,
@@ -89,8 +205,11 @@ export function StepRail({
   /** One line under the navigation: what this step still owes and what comes next. */
   hint?: React.ReactNode;
 }) {
-  const completed = steps.filter(step => step.done).length;
-  const percent = steps.length ? Math.round((completed / steps.length) * 100) : 0;
+  // Count the whole tree: a nested step is still a step of the build, and `currentIndex` is a
+  // position in the presented sequence rather than in this list.
+  const all = steps.flatMap(step => [step, ...step.children]);
+  const completed = all.filter(step => step.done).length;
+  const percent = all.length ? Math.round((completed / all.length) * 100) : 0;
   return (
     <nav
       aria-label="Steps"
@@ -103,7 +222,7 @@ export function StepRail({
       </div>
       <div className="mt-1 mb-2 flex items-baseline justify-between gap-2 text-sm text-muted-foreground">
         <span>
-          Step {currentIndex + 1} of {steps.length}
+          Step {currentIndex + 1} of {all.length}
         </span>
         <span className="tabular-nums">{percent}%</span>
       </div>
@@ -111,9 +230,9 @@ export function StepRail({
         role="progressbar"
         aria-label="Steps completed"
         aria-valuemin={0}
-        aria-valuemax={steps.length}
+        aria-valuemax={all.length}
         aria-valuenow={completed}
-        aria-valuetext={`${completed} of ${steps.length} steps completed`}
+        aria-valuetext={`${completed} of ${all.length} steps completed`}
         className="mb-3 h-1 w-full overflow-hidden rounded-full bg-placeholder"
       >
         <div
@@ -122,76 +241,15 @@ export function StepRail({
         />
       </div>
       <ol className="-mx-2 m-0 flex list-none flex-col p-0">
-        {steps.map((step, index) => {
-          const current = index === currentIndex;
-          return (
-            <li key={step.id}>
-              <button
-                type="button"
-                aria-current={current ? 'step' : undefined}
-                // The visible text is the chosen value once there is one, so the accessible name
-                // keeps the step it belongs to and still contains what the row reads.
-                aria-label={
-                  step.chosen
-                    ? `${step.number}. ${step.name}: ${step.chosen}`
-                    : `${step.number}. ${step.name}`
-                }
-                title={step.chosen ? `${step.name}: ${step.chosen}` : step.name}
-                className={cn(
-                  'flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-left text-sm transition-colors duration-(--motion-fast) hover:bg-muted',
-                  current
-                    ? 'bg-muted font-medium text-foreground'
-                    : step.done
-                      ? 'text-foreground'
-                      : 'text-muted-foreground',
-                )}
-                onClick={() => onSelect(index)}
-              >
-                <StepMarker
-                  number={step.number}
-                  done={step.done}
-                  current={current}
-                  unresolved={!current && step.passed && step.problems > 0}
-                />
-                {/* Once a step is decided its value stands in for the step name (V96): the rail
-                    reads back the hero rather than repeating the book's step list. The outstanding
-                    count still shows, since a step can be decided and still owe sub-choices. */}
-                <span className="min-w-0 flex-1 truncate">{step.chosen ?? step.name}</span>
-                {step.choices > 0 && (
-                  <span
-                    className="shrink-0 text-sm tabular-nums text-muted-foreground"
-                    aria-label={`${step.decided} of ${step.choices} chosen`}
-                  >
-                    {step.decided}/{step.choices}
-                  </span>
-                )}
-              </button>
-              {/* Inside a step, its own choices list under it, and picking one jumps to it. */}
-              {current && step.items.length > 0 && (
-                <ol className="m-0 mb-1 flex list-none flex-col p-0">
-                  {step.items.map(item => (
-                    <li key={item.id}>
-                      <button
-                        type="button"
-                        className="flex w-full items-center gap-2.5 rounded-md py-1 pr-2 pl-[calc(0.5rem_+_1.5rem_+_0.625rem)] text-left text-sm text-muted-foreground transition-colors duration-(--motion-fast) hover:bg-muted hover:text-foreground"
-                        onClick={() => onSelectItem?.(item.id)}
-                      >
-                        <span
-                          aria-hidden
-                          className={cn(
-                            'size-1.5 shrink-0 rounded-full',
-                            item.done ? 'bg-foreground' : 'bg-placeholder',
-                          )}
-                        />
-                        <span className="min-w-0 flex-1 truncate">{item.label}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </li>
-          );
-        })}
+        {steps.map(step => (
+          <StepRow
+            key={step.id}
+            step={step}
+            currentIndex={currentIndex}
+            onSelect={onSelect}
+            onSelectItem={onSelectItem}
+          />
+        ))}
       </ol>
       <div className="flex flex-col gap-2 pt-3">
         {footer}
