@@ -1764,26 +1764,30 @@ function Wizard({ character }: { character: WizardCharacter }) {
                     {inlineDecisions.map(decision => renderDecision(decision))}
                   </>
                 )}
-                {nestedUnder(step).map(child => (
-                  <section
-                    key={child.id}
-                    className="mt-2 flex flex-col gap-3 border-t border-border pt-6"
-                  >
-                    <div className="flex items-center gap-3">
-                      <h3 className="m-0 text-xl font-medium">{stepName(child)}</h3>
-                      <RuleLink {...stepReference(child)} />
-                    </div>
-                    {child.id === 'step.kit' && evaluation?.partial?.kit === null && (
-                      <p className="m-0 text-base text-muted-foreground">
-                        This build has no kit. Its class features supply its starting statistics and
-                        abilities.
-                      </p>
-                    )}
-                    {child.decisions
-                      .filter(decision => !HIDDEN_DECISIONS.has(decision.id))
-                      .map(decision => renderDecision(decision))}
-                  </section>
-                ))}
+                {/* A section appears exactly when the rail's row for it does: only once the
+                    class path grants it something to choose. */}
+                {nestedUnder(step)
+                  .filter(child => stepChoices(child).length > 0)
+                  .map(child => (
+                    <section
+                      key={child.id}
+                      className="mt-2 flex flex-col gap-3 border-t border-border pt-6"
+                    >
+                      <div className="flex items-center gap-3">
+                        <h3 className="m-0 text-xl font-medium">{stepName(child)}</h3>
+                        <RuleLink {...stepReference(child)} />
+                      </div>
+                      {child.id === 'step.kit' && evaluation?.partial?.kit === null && (
+                        <p className="m-0 text-base text-muted-foreground">
+                          This build has no kit. Its class features supply its starting statistics
+                          and abilities.
+                        </p>
+                      )}
+                      {child.decisions
+                        .filter(decision => !HIDDEN_DECISIONS.has(decision.id))
+                        .map(decision => renderDecision(decision))}
+                    </section>
+                  ))}
                 {step.id === 'step.details' && (
                   <Field
                     label="Private notes"
