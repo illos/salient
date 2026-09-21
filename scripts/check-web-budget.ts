@@ -3,6 +3,7 @@
 import { readFileSync, statSync, readdirSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import assert from 'node:assert/strict';
+import type { RulesCatalog } from '../shared/contracts/rules.ts';
 type Chunk = { file: string; isEntry?: boolean; imports?: string[] };
 const manifest = JSON.parse(readFileSync('dist/.vite/manifest.json', 'utf8')) as Record<
   string,
@@ -25,10 +26,16 @@ const initial = assets
   .map(sizes)
   .reduce((a, b) => ({ raw: a.raw + b.raw, gzip: a.gzip + b.gzip }), { raw: 0, gzip: 0 });
 assert(initial.gzip < 200_000, `Initial static JS exceeds the 200 KB gzip budget: ${initial.gzip}`);
-const rules = JSON.parse(readFileSync('dist/rules-data/catalog.json', 'utf8'));
+const rules = JSON.parse(readFileSync('dist/rules-data/catalog.json', 'utf8')) as RulesCatalog;
 const foes = JSON.parse(readFileSync('dist/foes-data/catalog.json', 'utf8'));
+const core = rules.entries.filter(entry => entry.classification === 'core');
+const supplemental = rules.entries.filter(entry => entry.classification === 'supplemental');
 assert(
-  rules.entries.length === 2614 && foes.entries.length === 2507,
+  core.length === 2614 &&
+    supplemental.length === 122 &&
+    supplemental.every(entry => entry.id.startsWith('mcdm.beastheart.v1/')) &&
+    rules.entries.length === core.length + supplemental.length &&
+    foes.entries.length === 2507,
   'Pinned reference coverage changed',
 );
 console.log(
