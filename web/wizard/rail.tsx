@@ -86,9 +86,9 @@ function StepRow({
   nested?: boolean;
 }) {
   const current = step.index === currentIndex;
-  const visibleChildren = step.children.filter(
-    child => child.choices > 0 || child.index === currentIndex,
-  );
+  // A nested row is a section of this page, not a step of its own, so it shows exactly when its
+  // section has something to offer. It shares its parent's index, so "is it current" says nothing.
+  const visibleChildren = step.children.filter(child => child.choices > 0);
   return (
     <li>
       <button
@@ -171,8 +171,7 @@ function StepRow({
         </ol>
       )}
       {/* A dependent step sits under the one it depends on, and appears only once it applies: a
-          kit shows when the chosen class grants one. It stays visible while it is the open step,
-          so the rail never highlights nothing. */}
+          kit shows when the chosen class grants one. */}
       {visibleChildren.length > 0 && (
         <ol className="m-0 flex list-none flex-col p-0">
           {visibleChildren.map(child => (
