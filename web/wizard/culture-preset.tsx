@@ -76,10 +76,22 @@ function CultureCard({
   );
 }
 
-function CultureGroup({ label, children }: { label: string; children: React.ReactNode }) {
+function CultureGroup({
+  label,
+  note,
+  children,
+}: {
+  label: string;
+  /** A clarification that belongs to this group rather than to the whole chooser. */
+  note?: string;
+  children: React.ReactNode;
+}) {
   return (
     <section className="flex flex-col gap-3">
-      <h4 className="m-0 text-sm font-normal text-muted-foreground">{label}</h4>
+      <h4 className="m-0 text-sm font-normal text-muted-foreground">
+        {label}
+        {note && <span className="ml-2 text-muted-foreground">{note}</span>}
+      </h4>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-2">{children}</div>
     </section>
   );
@@ -106,11 +118,9 @@ export function CulturePresetSelect({
     ));
   return (
     <div className="flex flex-col gap-5" role="radiogroup" aria-label="Starting culture">
-      <p className="m-0 text-sm text-muted-foreground">
-        Choose a starting culture or build your own. Every choice below can be adjusted. Ancestral
-        cultures are available to heroes of any ancestry.
-      </p>
-      <CultureGroup label="Ancestral cultures">{group('ancestral')}</CultureGroup>
+      <CultureGroup label="Ancestral cultures" note="Available to heroes of any ancestry.">
+        {group('ancestral')}
+      </CultureGroup>
       <CultureGroup label="Professional cultures">{group('professional')}</CultureGroup>
       <CultureGroup label="Bespoke culture">
         <CultureCard
@@ -121,9 +131,6 @@ export function CulturePresetSelect({
           onChange={() => onChange(BESPOKE_CULTURE)}
         />
       </CultureGroup>
-      <p className="m-0 text-sm text-muted-foreground">
-        Choose one skill for each aspect below. Changing an aspect keeps skills that still fit.
-      </p>
     </div>
   );
 }

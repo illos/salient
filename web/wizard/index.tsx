@@ -300,6 +300,13 @@ export function DecisionEditor({
   const shownGrants = (decision.grants ?? []).filter(
     grant => !(showsStatTiles && grant.kind === 'statistic'),
   );
+  if (decision.id === 'culture.preset')
+    return (
+      <CulturePresetSelect
+        value={typeof value === 'string' ? value : undefined}
+        onChange={value => onSelect(decision.id, value)}
+      />
+    );
   let control: React.ReactNode = null;
   if (decision.kind === 'none') control = null;
   else if (decision.id === 'culture.preset')
@@ -1404,7 +1411,14 @@ function Wizard({ character }: { character: WizardCharacter }) {
                 <StepTitle
                   title={stepName(step)}
                   description={stepExcerpt(step)}
-                  reference={<RuleLink {...stepReference(step)} />}
+                  reference={
+                    <>
+                      <RuleLink {...stepReference(step)} />
+                      {primary?.id === 'culture.preset' && (
+                        <RuleLink {...decisionReference(primary, step)} />
+                      )}
+                    </>
+                  }
                   optional={step.optional}
                 />
               )}

@@ -198,3 +198,8 @@ chosen; it needs its own slice and headless proof.
   your own to set these yourself" caption, and culture's optional-none confirm button. Build your
   own is a card in the chooser's bespoke group, so the button above the list offered the same
   thing twice; culture now has no "none" label, and picking a culture means picking a card.
+- 2026-09-21: cut the culture step's stacked preamble. The chooser no longer sits in a "Starting
+  culture" section with its source quote and two more lines of instruction above the cards; its
+  rule reference moved beside the step title, and the one sentence worth keeping, that ancestral
+  cultures are open to any ancestry, became a note on that group's heading where it applies. The
+  skills line went with it: the Culture skills panel already says the same thing.
