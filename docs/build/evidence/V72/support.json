@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:b4e0d992e181c9bac991ca9487600fabeb1ce20a130781dc38128cdba0fa5035",
+  "contentHash": "sha256:9778bbbd413dfe01afd0c76e26fc41542f6ce46957aa261af9bf541d5ba342ca",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1150
     },
     "hero-standalone": {
-      "total": 89,
+      "total": 95,
       "supported": 9,
-      "manual": 80
+      "manual": 86
     },
     "kit-signature": {
       "total": 25,
@@ -17557,6 +17557,599 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option You Were Watching the Wrong One supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash",
+      "name": "In a Puff of Ash",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/in-a-puff-of-ash.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier1:0:c242b54eeae60b04",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier1:1:1da5c3c30aca2ef4",
+            "locator": "block:0:tier1:1",
+            "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target 1 square",
+            "kind": "unsupported",
+            "shape": "you can teleport the target N square",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier2:0:4d2cc6daeb82879b",
+            "locator": "block:0:tier2:0",
+            "clause": "10 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier2:1:72225060c1a22bc1",
+            "locator": "block:0:tier2:1",
+            "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target up to 3 squares",
+            "kind": "unsupported",
+            "shape": "you can teleport the target up to N squares",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier3:0:4f757a98684bb787",
+            "locator": "block:0:tier3:0",
+            "clause": "14 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier3:1:2a48eebcbb23852b",
+            "locator": "block:0:tier3:1",
+            "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target up to 5 squares",
+            "kind": "unsupported",
+            "shape": "you can teleport the target up to N squares",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target 1 square",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target up to 3 squares",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target up to 5 squares",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "In a Puff of Ash",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/in-a-puff-of-ash.md",
+          "decisionId": "class.shadow.level-2.burning-ash-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option In a Puff of Ash supportedInV001=true; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound",
+      "name": "Machinations of Sound",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/machinations-of-sound.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound#block:0:tier1:0:6f1145636660cfa5",
+            "locator": "block:0:tier1:0",
+            "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound#block:0:tier2:0:6f1144636660cdf2",
+            "locator": "block:0:tier2:0",
+            "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound#block:0:tier3:0:6f1142636660ca8c",
+            "locator": "block:0:tier3:0",
+            "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound#block:1:0:d842f208021f97d9",
+          "locator": "block:1:0",
+          "clause": "This [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). Instead, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced by a number equal to the target's [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "This [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). Instead, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced by a number equal to the target's [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each creature in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Machinations of Sound",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/machinations-of-sound.md",
+          "decisionId": "class.shadow.level-2.friend-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option Machinations of Sound supportedInV001=true; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/so-gullible",
+      "name": "So Gullible",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/so-gullible",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/so-gullible.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/so-gullible#block:0:0:bea9a9ecd1cd8fe6",
+          "locator": "block:0:0",
+          "clause": "Another creature targets you with a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/so-gullible#block:1:0:5e7cc88cc46d5d8a",
+          "locator": "block:1:0",
+          "clause": "You use your [Clever Trick](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick) ability with no insight cost against the triggering creature and strike. You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) to an unoccupied space within 3 squares of that creature and can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them. You can then spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Another creature targets you with a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You use your [Clever Trick](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick) ability with no insight cost against the triggering creature and strike. You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) to an unoccupied space within 3 squares of that creature and can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them. You can then spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Free triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "So Gullible",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/so-gullible.md",
+          "decisionId": "class.shadow.level-2.friend-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option So Gullible supportedInV001=true; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/sticky-bomb",
+      "name": "Sticky Bomb",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/sticky-bomb",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/sticky-bomb.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/sticky-bomb#block:1:tier1:0:3d6e6a82b7f751b0",
+            "locator": "block:1:tier1:0",
+            "clause": "4 + A fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/sticky-bomb#block:1:tier2:0:4cd12e3ca175461d",
+            "locator": "block:1:tier2:0",
+            "clause": "7 + A fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/sticky-bomb#block:1:tier3:0:31fa78d9fe0ef214",
+            "locator": "block:1:tier3:0",
+            "clause": "11 + A fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "A"
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/sticky-bomb#block:0:0:c7bdc897cbfb5d46",
+          "locator": "block:0:0",
+          "clause": "You attach a small bomb to a creature. If you are hidden from the creature, they don't notice the bomb and you remain hidden. The creature otherwise notices the bomb and can disarm and remove it as a main action. If they don't, at the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the bomb detonates. When the bomb detonates, you make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) targeting each enemy within 2 squares of it.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You attach a small bomb to a creature. If you are hidden from the creature, they don't notice the bomb and you remain hidden. The creature otherwise notices the bomb and can disarm and remove it as a main action. If they don't, at the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the bomb detonates. When the bomb detonates, you make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) targeting each enemy within 2 squares of it.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Sticky Bomb",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/sticky-bomb.md",
+          "decisionId": "class.shadow.level-2.trained-assassin-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option Sticky Bomb supportedInV001=true; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/stink-bomb",
+      "name": "Stink Bomb",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/stink-bomb",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/stink-bomb.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/stink-bomb#block:0:tier1:0:a43323814dd5a4b4",
+            "locator": "block:0:tier1:0",
+            "clause": "2 poison damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "poison",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/stink-bomb#block:0:tier2:0:f6a58fd278ea6939",
+            "locator": "block:0:tier2:0",
+            "clause": "5 poison damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "poison",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/stink-bomb#block:0:tier3:0:ed072e98e38f937b",
+            "locator": "block:0:tier3:0",
+            "clause": "7 poison damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "damageType": "poison",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/stink-bomb#block:1:0:4b538b841353c879",
+          "locator": "block:1:0",
+          "clause": "The gas remains in the area until the end of the encounter. Any creature who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area and has M < AVERAGE is [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The gas remains in the area until the end of the encounter. Any creature who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area and has M < AVERAGE is [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each creature in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Stink Bomb",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/stink-bomb.md",
+          "decisionId": "class.shadow.level-2.trained-assassin-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option Stink Bomb supportedInV001=true; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/too-slow",
+      "name": "Too Slow",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/too-slow",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/too-slow.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/too-slow#block:0:0:aba1028b67cc1f5e",
+          "locator": "block:0:0",
+          "clause": "You use your [In All This Confusion](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion) ability.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/too-slow#block:1:0:f6d26fce628ca4f1",
+          "locator": "block:1:0",
+          "clause": "You ignore any effects associated with the damage that triggered your [In All This Confusion](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion) ability. Before you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport), you can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature who damaged you to trigger [In All This Confusion](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion). After you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport), you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You use your [In All This Confusion](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion) ability.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You ignore any effects associated with the damage that triggered your [In All This Confusion](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion) ability. Before you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport), you can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature who damaged you to trigger [In All This Confusion](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion). After you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport), you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Free triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Too Slow",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/too-slow.md",
+          "decisionId": "class.shadow.level-2.burning-ash-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option Too Slow supportedInV001=true; chain unknown"
         }
       ],
       "movementFacts": "No compiled push."

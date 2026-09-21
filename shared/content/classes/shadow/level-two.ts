@@ -57,6 +57,6 @@ export const levelTwoDecisions: Decision[] = [
     ])
     .map(decision => ({
       ...decision,
-      conditions: [{ decision: 'class.choice', value: 'Shadow' }],
+      dependsOn: ['class.shadow.college'],
     })),
 ];

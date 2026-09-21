@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:b4e0d992e181c9bac991ca9487600fabeb1ce20a130781dc38128cdba0fa5035",
+  "contentHash": "sha256:9778bbbd413dfe01afd0c76e26fc41542f6ce46957aa261af9bf541d5ba342ca",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 9,
-      "COMPILES_WITH_REMAINDER": 36,
-      "NO_MATCH": 44,
-      "total": 89,
+      "COMPILES_WITH_REMAINDER": 39,
+      "NO_MATCH": 47,
+      "total": 95,
       "withinV26Bounded": 4
     },
     "kit-signature": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 435,
-    "resolvedToStandalone": 164,
+    "total": 441,
+    "resolvedToStandalone": 170,
     "resolvedToKit": 42,
     "ownText": 229,
     "unresolved": []
@@ -4688,6 +4688,359 @@
         }
       ],
       "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash",
+      "name": "In a Puff of Ash",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/in-a-puff-of-ash.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Insight",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "A"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "you can teleport the target N square",
+            "text": "you can teleport the target 1 square",
+            "locator": "tier1"
+          },
+          {
+            "type": "unknown",
+            "shape": "you can teleport the target up to N squares",
+            "text": "you can teleport the target up to 3 squares",
+            "locator": "tier2"
+          },
+          {
+            "type": "unknown",
+            "shape": "you can teleport the target up to N squares",
+            "text": "you can teleport the target up to 5 squares",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "In a Puff of Ash",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/in-a-puff-of-ash.md",
+          "decisionId": "class.shadow.level-2.burning-ash-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option In a Puff of Ash supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound",
+      "name": "Machinations of Sound",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/machinations-of-sound.md",
+      "usage": "Maneuver",
+      "target": "Each creature in the area",
+      "cost": "5 Insight",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "This forced movement ignores stability. Instead, the forced movement is reduced by a number equal to the target's Intuition score.",
+            "locator": "section:1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 4",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 5",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 7",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Machinations of Sound",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/machinations-of-sound.md",
+          "decisionId": "class.shadow.level-2.friend-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option Machinations of Sound supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/so-gullible",
+      "name": "So Gullible",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/so-gullible.md",
+      "usage": "Free triggered",
+      "target": "Self",
+      "cost": "5 Insight",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "Another creature targets you with a strike.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You use your Clever Trick ability with no insight cost against the triggering creature and strike. You can teleport to an unoccupied space within 3 squares of that creature and can make a free strike against them. You can then spend a Recovery.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "So Gullible",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/so-gullible.md",
+          "decisionId": "class.shadow.level-2.friend-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option So Gullible supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/sticky-bomb",
+      "name": "Sticky Bomb",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/sticky-bomb.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Insight",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "damageType": "fire"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            },
+            "damageType": "fire"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "A"
+            },
+            "damageType": "fire"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You attach a small bomb to a creature. If you are hidden from the creature, they don't notice the bomb and you remain hidden. The creature otherwise notices the bomb and can disarm and remove it as a main action. If they don't, at the end of your next turn, the bomb detonates. When the bomb detonates, you make a power roll targeting each enemy within 2 squares of it.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Sticky Bomb",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/sticky-bomb.md",
+          "decisionId": "class.shadow.level-2.trained-assassin-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option Sticky Bomb supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/stink-bomb",
+      "name": "Stink Bomb",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/stink-bomb.md",
+      "usage": "Main action",
+      "target": "Each creature in the area",
+      "cost": "5 Insight",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "poison"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "poison"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "damageType": "poison"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The gas remains in the area until the end of the encounter. Any creature who starts their turn in the area and has M < AVERAGE is weakened (save ends).",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Stink Bomb",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/stink-bomb.md",
+          "decisionId": "class.shadow.level-2.trained-assassin-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option Stink Bomb supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/too-slow",
+      "name": "Too Slow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/too-slow.md",
+      "usage": "Free triggered",
+      "target": "Self",
+      "cost": "5 Insight",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "You use your In All This Confusion ability.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You ignore any effects associated with the damage that triggered your In All This Confusion ability. Before you teleport, you can make a free strike against a creature who damaged you to trigger In All This Confusion. After you teleport, you can spend a Recovery.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Too Slow",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/too-slow.md",
+          "decisionId": "class.shadow.level-2.burning-ash-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "unknown",
+          "detail": "option Too Slow supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
     },
     {
       "corpus": "hero-standalone",
@@ -70563,8 +70916,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1046,
-      "abilities": 1032,
+      "count": 1051,
+      "abilities": 1037,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -70574,8 +70927,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 590,
-      "abilities": 590,
+      "count": 592,
+      "abilities": 592,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -70585,8 +70938,8 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 186,
-      "abilities": 186,
+      "count": 188,
+      "abilities": 188,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered",
@@ -70891,6 +71244,17 @@
       ]
     },
     {
+      "shape": "tier:slide N",
+      "type": "tier-damage",
+      "count": 14,
+      "abilities": 5,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound",
+        "salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8",
+        "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb"
+      ]
+    },
+    {
       "shape": "potency:P < N weakened (save ends)",
       "type": "potency-condition",
       "count": 13,
@@ -70976,17 +71340,6 @@
         "salient:foe-feature:20e69c78-4894-473d-b84c-3ccf17f2ef2d",
         "salient:foe-feature:33263d55-4161-4fa6-811e-f5bbd1d3381b",
         "salient:foe-feature:35c64f30-f0c2-4d20-a3ba-0c77b1521254"
-      ]
-    },
-    {
-      "shape": "tier:slide N",
-      "type": "tier-damage",
-      "count": 11,
-      "abilities": 4,
-      "examples": [
-        "salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8",
-        "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb",
-        "salient:foe-feature:590ca0d9-bf77-4fac-9e07-79e4f803045e"
       ]
     },
     {
@@ -72812,6 +73165,15 @@
       ]
     },
     {
+      "shape": "you can teleport the target up to N squares",
+      "type": "unknown",
+      "count": 2,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash"
+      ]
+    },
+    {
       "shape": "you or one ally within N squares of you can spend a recovery",
       "type": "unknown",
       "count": 2,
@@ -74313,6 +74675,15 @@
       "examples": [
         "mcdm.heroes.v1/kit/cloak-and-dagger/fade"
       ]
+    },
+    {
+      "shape": "you can teleport the target N square",
+      "type": "unknown",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash"
+      ]
     }
   ],
   "v26": [
@@ -74440,11 +74811,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 186,
+      "total": 192,
       "compiles": 12,
-      "withRemainder": 57,
+      "withRemainder": 60,
       "withinV26Bounded": 5,
-      "noMatch": 117
+      "noMatch": 120
     }
   }
 }

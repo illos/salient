@@ -58,3 +58,10 @@ accept targetLevel. This is full editing, not an XP-gated advancement operation.
 - 2026-09-21: user requested the smallest next-level experiment, Shadow level two, plus target-level
   selection in the full wizard. Registered on `slice/V97` in `.worktrees/shadow-level-two` from
   main `02ce529`. Existing design already specifies full-level editing and scoped advancement.
+
+- Author checks on the initial implementation: both TypeScript projects exit 0, touched ESLint exit 0,
+  focused engine file 3/3 passed. TESTER generated 1221 content entries and V26/V72 reports (all exit 0;
+  artifacts `/srv/presidium/projects/salient/test-artifacts/V97-1f580a0-generation`). Inspection found
+  the audit's shared-ancestor traversal classified redundant college/class conditions as unknown;
+  use the college dependency itself, which already requires Shadow, to describe reachability once.
+  Added the six source-identified abilities to the existing audit allowance; prior hashes retained.

@@ -1285,6 +1285,87 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.shadow.level-2/2nd-level-college-ability",
+    "kind": "feature",
+    "name": "2nd-Level College Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-2/2nd-level-college-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-2/2nd-level-college-ability.json",
+    "selection": "shadow-level-two",
+    "text": "---\nclass: shadow\nlevel: \"2\"\nname: 2nd-Level College Ability\nscc: mcdm.heroes.v1/feature.shadow.level-2/2nd-level-college-ability\ntype: feature\n---\n\nYour [shadow college](scc.v1:mcdm.heroes.v1/feature.shadow.level-1/shadow-college) grants your choice of one of two [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability).\n\n##### 2nd-Level Black Ash Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Caustic Alchemy Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Harlequin Mask Ability\n\nChoose one of the following abilities.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-2/2nd-level-college-feature",
+    "kind": "feature",
+    "name": "2nd-Level College Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-2/2nd-level-college-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-2/2nd-level-college-feature.json",
+    "selection": "shadow-level-two",
+    "text": "---\nclass: shadow\nlevel: \"2\"\nname: 2nd-Level College Feature\nscc: mcdm.heroes.v1/feature.shadow.level-2/2nd-level-college-feature\ntype: feature\n---\n\nYour [shadow college](scc.v1:mcdm.heroes.v1/feature.shadow.level-1/shadow-college) grants you a feature, as shown on the 2nd-Level College Features table.\n\n###### 2nd-Level College Features Table\n\n| College                    | Feature          |\n|----------------------------|------------------|\n| Black Ash                  | [Burning Ash](scc.v1:mcdm.heroes.v1/feature.shadow.level-2/burning-ash)      |\n| Caustic Alchemy            | [Trained Assassin](scc.v1:mcdm.heroes.v1/feature.shadow.level-2/trained-assassin) |\n| Harlequin Mask             | Friend!          |\n",
+    "structured": {
+      "class": "shadow",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-2/burning-ash",
+    "kind": "feature",
+    "name": "Burning Ash",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-2/burning-ash.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-2/burning-ash.json",
+    "selection": "shadow-level-two",
+    "text": "---\nclass: shadow\nlevel: \"2\"\nname: Burning Ash\nscc: mcdm.heroes.v1/feature.shadow.level-2/burning-ash\nsubclass: black-ash\ntype: feature\n---\n\nThe ash you leave behind burns your foes. The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you use a shadow ability to [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) away from or into a space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to an enemy, that enemy takes fire damage equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "2",
+      "subclass": "black-ash"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-2/friend",
+    "kind": "feature",
+    "name": "Friend!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-2/friend.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-2/friend.json",
+    "selection": "shadow-level-two",
+    "text": "---\nclass: shadow\nlevel: \"2\"\nname: Friend!\nscc: mcdm.heroes.v1/feature.shadow.level-2/friend\nsubclass: harlequin-mask\ntype: feature\n---\n\nYour illusions make your enemies believe you are their friend in critical moments. Whenever an enemy uses an ability or trait that targets multiple allies and you are within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the effect, you can choose to be a target of the effect as well.\n\nAdditionally, when you use your [I'm No Threat](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat) ability, you can take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as part of that ability.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "2",
+      "subclass": "harlequin-mask"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-2/perk.json",
+    "selection": "shadow-level-two",
+    "text": "---\nclass: shadow\nlevel: \"2\"\nname: Perk\nscc: mcdm.heroes.v1/feature.shadow.level-2/perk\ntype: feature\n---\n\nYou gain one exploration, interpersonal, or intrigue perk of your choice. See Chapter 7: [Perks](scc.v1:mcdm.heroes.v1/chapter/perks).\n",
+    "structured": {
+      "class": "shadow",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-2/trained-assassin",
+    "kind": "feature",
+    "name": "Trained Assassin",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-2/trained-assassin.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-2/trained-assassin.json",
+    "selection": "shadow-level-two",
+    "text": "---\nclass: shadow\nlevel: \"2\"\nname: Trained Assassin\nscc: mcdm.heroes.v1/feature.shadow.level-2/trained-assassin\nsubclass: caustic-alchemy\ntype: feature\n---\n\nYou know just where to cut your enemies. Whenever you make a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) that has no [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) or double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane), and that incorporates 1 or more [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), you gain 1 additional [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use only on that [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+    "structured": {
+      "class": "shadow",
+      "level": "2",
+      "subclass": "caustic-alchemy"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.tactician.level-1/1st-level-doctrine-feature",
     "kind": "feature",
     "name": "1st-Level Doctrine Feature",
