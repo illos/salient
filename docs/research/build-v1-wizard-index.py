@@ -35,7 +35,13 @@ def field(md, name):
 def source(slug):
     path = COMP / "en/unified/md" / (slug + ".md")
     md = path.read_text()
-    if not (field(md, "scc") or "").startswith("mcdm.heroes.v1/"):
+    supplemental_class = {
+        "class/beastheart": "mcdm.beastheart.v1/class/beastheart",
+        "class/summoner": "mcdm.summoner.v1/class/summoner",
+    }.get(slug)
+    if supplemental_class and field(md, "scc") != supplemental_class:
+        raise ValueError("Unexpected supplemental class SCC: " + slug)
+    if not supplemental_class and not (field(md, "scc") or "").startswith("mcdm.heroes.v1/"):
         md = git(COMP, "show", "HEAD:en/books/heroes/md/" + slug + ".md")
         location = "vendor/steel-compendium@" + git(COMP, "rev-parse", "HEAD") + ":en/books/heroes/md/" + slug + ".md"
     else:
