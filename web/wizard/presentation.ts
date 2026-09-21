@@ -146,9 +146,17 @@ export function readableGuidance(text: string): string {
   return text;
 }
 
+/**
+ * Wizard names for steps the app calls something other than the book does (V96). The source step
+ * name stays on the step's reference, so the rulebook link still reaches "9. Determine Details".
+ */
+const STEP_NAMES: Record<string, string> = {
+  'step.details': 'Finalize',
+};
+
 /** The step name without its source number: "5. Class" → "Class". */
 export function stepName(step: Step): string {
-  return step.sourceStep.replace(/^\d+\.\s*/, '');
+  return STEP_NAMES[step.id] ?? step.sourceStep.replace(/^\d+\.\s*/, '');
 }
 
 /**

@@ -330,7 +330,12 @@ values and controls retain their behavior.
   default marks the culture Bespoke without clearing its other choices. Professional cultures
   leave language freely selectable. Existing saved cultures need no preset or migration. See
   [V84](build/V84-culture-presets.md) for source tables and naming discrepancies.
-- **Amended 2026-09-21 (V96):** in the wizard, choosing a preset takes its aspects as a set. The
+- **Amended 2026-09-21 (V96):** the wizard calls the "9. Determine Details" step **Finalize**. The
+step's reference still names and links the source step, and its description is still the source
+sentence; only the wizard's own label differs, because the step now closes out the build rather
+than only recording appearance and backstory.
+
+**Amended 2026-09-21 (V96):** in the wizard, choosing a preset takes its aspects as a set. The
   environment, organization and upbringing it names, and its language where it prints one, read
   back read-only; Build your own sets them individually. The associated skills stay the player's
   choice, and a professional preset still picks its own language. The source permits using *or

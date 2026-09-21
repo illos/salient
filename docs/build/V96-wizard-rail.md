@@ -18,7 +18,8 @@ unchanged.
   step name, and carries the step navigation at its foot.
 - `web/wizard/index.tsx`: hide `step.think`, `step.free-strikes` and `step.connections`, number
   the presented steps from one, narrow the rail column.
-- `web/wizard/presentation.ts`: remove the unused source-number helper.
+- `web/wizard/presentation.ts`: remove the unused source-number helper; name the details step
+  Finalize in the wizard while its reference keeps the source step name.
 - `web/wizard/culture-preset.tsx`: replace the starting-culture dropdown with a card grid,
   grouped ancestral, professional, then bespoke, each card showing the choices that preset makes
   as chips.
@@ -106,3 +107,7 @@ unchanged.
   into the wizard, since the header they act on belongs to the wizard; PrimaryChoice is now just
   the chooser-or-children switch. The primary decision's diagnostics render under the header while
   the chooser is closed, so a settled choice with an outstanding problem still says so.
+- 2026-09-21: "Determine Details" is named Finalize in the wizard, on the user's instruction. The
+  v0.01 scope line asks for the book's step names, so this is an explicit amendment rather than a
+  drift: the override is one entry in a wizard-only map, the step's rulebook reference still
+  resolves to "9. Determine Details", and the step description is still the source sentence.
