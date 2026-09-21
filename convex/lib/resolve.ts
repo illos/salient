@@ -1,4 +1,5 @@
 import { elementalistAbilitySource } from '../../shared/evaluate/elementalistAbilities';
+import { talentAbilitySource } from '../../shared/evaluate/talentAbilities';
 import { nullAbilitySource } from '../../shared/evaluate/nullAbilities';
 import { troubadourAbilitySource } from '../../shared/evaluate/troubadourAbilities';
 import { furyAbilitySource } from '../../shared/evaluate/furyAbilities';
@@ -299,6 +300,9 @@ export function abilityFromEntry(
     '/feature/ability/elementalist/level-1/instantaneous-excavation.md',
     // A damage type is mandatory; source-typed grants below own its actual roll.
     '/feature/ability/elementalist/level-1/hurl-element.md',
+    // Ally/enemy branching and mandatory damage type require explicit manual resolution.
+    '/feature/ability/talent/level-1/awe.md',
+    '/feature/ability/talent/level-1/smolder.md',
   ].some(path => entry.sourcePath.endsWith(path));
   return build({
     compilation: compileLiveEntry(entry, entry.kind),
@@ -574,6 +578,7 @@ export async function abilitiesFor(
       ),
     ]) {
       const elementalistSource = elementalistAbilitySource(grant);
+      const talentSource = talentAbilitySource(grant);
       const nullSource = nullAbilitySource(grant);
       const troubadourSource = troubadourAbilitySource(grant);
       const furySource = furyAbilitySource(grant);
@@ -581,6 +586,7 @@ export async function abilitiesFor(
       const censorSource = censorAbilitySource(grant);
       const tacticianSource =
         elementalistSource ??
+        talentSource ??
         nullSource ??
         troubadourSource ??
         furySource ??
@@ -619,7 +625,7 @@ export async function abilitiesFor(
         continue;
       }
       if (tacticianSource) {
-        const id = `${elementalistSource ? 'elementalist' : nullSource ? 'null' : troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
+        const id = `${talentSource ? 'talent' : elementalistSource ? 'elementalist' : nullSource ? 'null' : troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
         granted.push(
           build({
             abilityId: id,

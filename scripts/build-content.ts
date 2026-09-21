@@ -187,6 +187,12 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices.',
   },
   {
+    id: 'talent-level-one',
+    description: 'Talent level-one traditions, augmentations, wards and abilities.',
+    paths: ['class/talent.md', 'feature/talent/level-1', 'feature/ability/talent/level-1'],
+    basis: 'docs/build/V105-talent-level-one.md#scope: complete Talent level-one choices.',
+  },
+  {
     id: 'null-level-one',
     description: 'Null level-one traditions, augmentations and abilities.',
     paths: ['class/null.md', 'feature/null/level-1', 'feature/ability/null/level-1'],

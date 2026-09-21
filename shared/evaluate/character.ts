@@ -1,4 +1,6 @@
 import { elementalistAbilities } from './elementalistAbilities.ts';
+import { applyTalentModifiers } from './classes/talent.ts';
+import { talentAbilities } from './talentAbilities.ts';
 import { applyNullModifiers } from './classes/null.ts';
 import { nullAbilities } from './nullAbilities.ts';
 import { troubadourAbilities } from './troubadourAbilities.ts';
@@ -145,7 +147,8 @@ function parseCost(costQuote: string | undefined): GrantedAbility['cost'] | unde
     resource !== 'wrath' &&
     resource !== 'piety' &&
     resource !== 'drama' &&
-    resource !== 'discipline'
+    resource !== 'discipline' &&
+    resource !== 'clarity'
   )
     return undefined;
   return { resource, amount: Number(match[1]) };
@@ -942,6 +945,7 @@ class Evaluation {
     );
     out.abilities = troubadourAbilities(out.features, out.abilities);
     out.abilities = elementalistAbilities(out.features, out.abilities);
+    out.abilities = talentAbilities(out.features, out.abilities);
     out.abilities = nullAbilities(out.features, out.abilities);
     if (this.available.has('class.fury.action-options'))
       out.abilities = furyAbilities(out.features, out.abilities);
@@ -1350,6 +1354,7 @@ class Evaluation {
     }
     applyElementalistModifiers(this, out);
     applyConduitModifiers(this, out);
+    applyTalentModifiers(this, out);
     applyNullModifiers(this, out);
   }
 

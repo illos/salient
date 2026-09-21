@@ -400,6 +400,7 @@ const OUTSIDE_COMBAT_WAIVER_SOURCES: Record<string, string> = {
   piety: 'conduit/level-1/piety',
   drama: 'troubadour/level-1/drama',
   discipline: 'null/level-1/discipline',
+  clarity: 'talent/level-1/clarity-and-strain',
 };
 
 /**

@@ -1,4 +1,8 @@
 import {
+  classProfile as talentProfile,
+  getLevelOneDecisions as talentDecisions,
+} from './classes/talent/level-one.ts';
+import {
   classProfile as nullProfile,
   getLevelOneDecisions as nullDecisions,
 } from './classes/null/level-one.ts';
@@ -99,6 +103,7 @@ allow('class.choice', [
   'Conduit',
   'Troubadour',
   'Null',
+  'Talent',
 ]);
 allow('culture.environment', ['Urban']);
 allow('culture.environment.skill', ['Alertness']);
@@ -115,6 +120,7 @@ definitions.classProfiles = structuredClone({
   Conduit: conduitProfile,
   Troubadour: troubadourProfile,
   Null: nullProfile,
+  Talent: talentProfile,
 });
 
 /**
@@ -242,3 +248,5 @@ append('step.class', troubadourDecisions(definitions.pools));
 append('step.class', nullDecisions(definitions.pools));
 append('step.class', tacticianDecisions(definitions.pools));
 export default definitions;
+
+append('step.class', talentDecisions(definitions.pools));

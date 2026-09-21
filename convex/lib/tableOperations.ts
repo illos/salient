@@ -1,3 +1,4 @@
+import { heroicResourceFloor } from '../../shared/resolve/resourceFloor';
 import { setManualCondition } from './conditionInstances';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
@@ -489,7 +490,11 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
     session: RUNNING_SESSION,
     actor: field.scope === 'campaign' ? 'none' : 'required',
     execute: async (ctx, { context, actor, args }) => {
-      const value = integer(args.value, 'value', field.min);
+      const value = integer(
+        args.value,
+        'value',
+        field.verb === 'heroic-resource' ? undefined : field.min,
+      );
       if (field.scope === 'campaign') {
         const before = context.campaign.malice ?? 0;
         const outcome = manual('shared', before, value, null);
@@ -554,6 +559,12 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
       }
       const character = await loadCharacter(ctx, context, actor!);
       const live = requireHeroLive(character);
+      if (field.verb === 'heroic-resource')
+        integer(
+          value,
+          'value',
+          heroicResourceFloor(baselineOf(character.derivedBaseline), live.heroicResource.name),
+        );
       const before = heroField(live, field.verb);
       const outcome = manual(character.authored.name, before, value, {
         kind: 'character',

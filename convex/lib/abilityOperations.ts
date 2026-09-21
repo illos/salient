@@ -1,3 +1,4 @@
+import { heroicResourceFloor } from '../../shared/resolve/resourceFloor';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * A05 ability operations, registered in convex/lib/registry.ts and reachable from the sheet, the
@@ -739,7 +740,14 @@ function poolFor(records: ActorRecords, context: TableContext, resource: string)
   const pool = records.character?.liveState?.heroicResource;
   if (!pool || pool.name === null || pool.current === null) return undefined;
   if (pool.name.toLowerCase() !== resource) return undefined;
-  return { resource, current: pool.current, legalFloor: 0 };
+  return {
+    resource,
+    current: pool.current,
+    legalFloor: heroicResourceFloor(
+      records.character ? baselineOf(records.character.derivedBaseline) : null,
+      resource,
+    ),
+  };
 }
 
 async function debit(
