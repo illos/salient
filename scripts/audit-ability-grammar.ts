@@ -13,6 +13,7 @@
  * their public APIs are re-exported here for existing audit callers. Corpus loading, wizard-grant
  * discovery and report output stay in this script.
  */
+import { selectedPoolWitness } from './selected-pool-witness.ts';
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -69,24 +70,47 @@ function isSupported(decision: Decision, value: string): boolean {
 function reachability(
   decision: Decision,
   index: Map<string, Decision>,
+  definitions: DecisionDefinitions,
+  witnesses: string[],
+  required?: string,
   seen = new Set<string>(),
 ): 'selectable' | 'not-selectable' | 'unknown' {
   if (seen.has(decision.id)) return 'unknown';
   seen.add(decision.id);
-  if (decision.selectedPool || decision.abilityPool) return 'unknown';
+  if (decision.abilityPool) return 'unknown';
+  if (decision.selectedPool) {
+    const witness = selectedPoolWitness(decision, required, definitions, index);
+    if (!witness) return 'unknown';
+    witnesses.push(JSON.stringify(witness));
+    return 'selectable';
+  }
   for (const condition of decision.conditions ?? []) {
     if (condition.not) continue;
     const parent = index.get(condition.decision);
     if (!parent) return 'unknown';
     if (!isSupported(parent, condition.value)) return 'not-selectable';
-    const upstream = reachability(parent, index, seen);
+    const upstream = reachability(
+      parent,
+      index,
+      definitions,
+      witnesses,
+      condition.value,
+      new Set(seen),
+    );
     if (upstream !== 'selectable') return upstream;
   }
   if (decision.availableWhen) {
     const parent = index.get(decision.availableWhen.decision);
     if (!parent) return 'unknown';
     if (!isSupported(parent, decision.availableWhen.value)) return 'not-selectable';
-    return reachability(parent, index, seen);
+    return reachability(
+      parent,
+      index,
+      definitions,
+      witnesses,
+      decision.availableWhen.value,
+      new Set(seen),
+    );
   }
   return 'selectable';
 }
@@ -116,7 +140,9 @@ export function wizardGrants(definitions: DecisionDefinitions, level: number): G
         ? 'unknown'
         : 'selectable';
   for (const decision of index.values()) {
-    const chain = reachability(decision, index);
+    const witnesses: string[] = [];
+    const chain = reachability(decision, index, definitions, witnesses);
+    const witnessDetail = witnesses.length ? `; witness ${witnesses.join('; ')}` : '';
     for (const option of decision.options ?? []) {
       const isAbilityOption =
         option.abilityKind !== undefined || FURY_ABILITY_DECISIONS.includes(decision.id);
@@ -167,7 +193,7 @@ export function wizardGrants(definitions: DecisionDefinitions, level: number): G
             level,
             grantKind: grant.kind,
             selectable: chain,
-            detail: `automatic grant; chain ${chain}`,
+            detail: `automatic grant; chain ${chain}${witnessDetail}`,
           });
         else if (grant.kind === 'ability' && grant.source && decision.id === 'free-strikes.grant')
           out.push({
@@ -177,7 +203,7 @@ export function wizardGrants(definitions: DecisionDefinitions, level: number): G
             level,
             grantKind: 'free-strike',
             selectable: chain,
-            detail: `automatic grant; chain ${chain}`,
+            detail: `automatic grant; chain ${chain}${witnessDetail}`,
           });
         else if (grant.kind === 'ability' && kit && decision.availableWhen)
           // The evaluator resolves a kit signature through SUPPORTING_KITS by the selected kit name.
@@ -196,7 +222,7 @@ export function wizardGrants(definitions: DecisionDefinitions, level: number): G
   for (const source of COMPLICATION_ABILITIES) {
     const decision = index.get(source.availability.decision) ?? complicationChoice;
     const supported = decision ? isSupported(decision, source.availability.value) : false;
-    const chain = decision ? reachability(decision, index) : 'unknown';
+    const chain = decision ? reachability(decision, index, definitions, []) : 'unknown';
     const trait = source.selectedTrait ? index.get(source.selectedTrait.decision) : undefined;
     const traitSupported = source.selectedTrait
       ? trait

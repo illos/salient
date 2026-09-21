@@ -826,6 +826,798 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light",
+    "kind": "ability",
+    "name": "Blessed Light",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/blessed-light.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 3 + I holy damage\n      tier2: 5 + I holy damage\n      tier3: 8 + I holy damage\n    - effect: One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a number of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) equal to the [tier outcome](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) of your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n      name: Effect\nflavor: Burning radiance falls upon your foe, transferring some of their energy to a nearby ally.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Blessed Light\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + I holy damage\ntier2: 5 + I holy damage\ntier3: 8 + I holy damage\ntype: ability\n---\n\n\n*Burning radiance falls upon your foe, transferring some of their energy to a nearby ally.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**          | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 3 + I holy damage\n- **12-16:** 5 + I holy damage\n- **17+:** 8 + I holy damage\n\n**Effect:** One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a number of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) equal to the [tier outcome](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) of your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "3 + I holy damage",
+          "tier2": "5 + I holy damage",
+          "tier3": "8 + I holy damage"
+        },
+        {
+          "effect": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a number of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) equal to the [tier outcome](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) of your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Burning radiance falls upon your foe, transferring some of their energy to a nearby ally.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + I holy damage",
+      "tier2": "5 + I holy damage",
+      "tier3": "8 + I holy damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down",
+    "kind": "ability",
+    "name": "Call the Thunder Down",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/call-the-thunder-down.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ncost: 3 Piety\ndistance: 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 2 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 3 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier3: 5 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n    - effect: You can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) each willing ally in the area the same [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).\n      name: Effect\nflavor: You ask your [saint](scc.v1:mcdm.heroes.v1/rule.world/saint) for thunder and your prayer is answered.\nkeywords:\n    - Area\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Call the Thunder Down\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down\ntarget: Each enemy in the area\ntier1: 2 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 3 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier3: 5 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntype: ability\n---\n\n\n*You ask your [saint](scc.v1:mcdm.heroes.v1/rule.world/saint) for thunder and your prayer is answered.*\n\n| **Area, Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------|------------------------------:|\n| **📏 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10** | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 2 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 3 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** 5 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n\n**Effect:** You can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) each willing ally in the area the same [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "cost": "3 Piety",
+      "distance": "3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "2 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "3 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "5 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        },
+        {
+          "effect": "You can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) each willing ally in the area the same [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You ask your [saint](scc.v1:mcdm.heroes.v1/rule.world/saint) for thunder and your prayer is answered.",
+      "keywords": [
+        "Area",
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "target": "Each enemy in the area",
+      "tier1": "2 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "3 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "5 sonic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse",
+    "kind": "ability",
+    "name": "Corruption's Curse",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/corruptions-curse.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ncost: 5 Piety\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 3 + I corruption damage; M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n      tier2: 6 + I corruption damage; M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n      tier3: 9 + I corruption damage; M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\nflavor: Cursed by you, your enemy takes more damage from your allies.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Corruption's Curse\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse\ntarget: One creature or object\ntier1: 3 + I corruption damage; M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\ntier2: 6 + I corruption damage; M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\ntier3: 9 + I corruption damage; M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\ntype: ability\n---\n\n\n*Cursed by you, your enemy takes more damage from your allies.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 3 + I corruption damage; M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n- **12-16:** 6 + I corruption damage; M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n- **17+:** 9 + I corruption damage; M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "cost": "5 Piety",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "3 + I corruption damage; M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "tier2": "6 + I corruption damage; M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "tier3": "9 + I corruption damage; M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)"
+        }
+      ],
+      "flavor": "Cursed by you, your enemy takes more damage from your allies.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "target": "One creature or object",
+      "tier1": "3 + I corruption damage; M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+      "tier2": "6 + I corruption damage; M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+      "tier3": "9 + I corruption damage; M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror",
+    "kind": "ability",
+    "name": "Curse of Terror",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/curse-of-terror.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ncost: 5 Piety\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 6 + I holy damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier2: 9 + I holy damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier3: 13 + I holy damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\nflavor: Fear of divine judgment overwhelms your foe.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Curse of Terror\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror\ntarget: One creature\ntier1: 6 + I holy damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier2: 9 + I holy damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier3: 13 + I holy damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntype: ability\n---\n\n\n*Fear of divine judgment overwhelms your foe.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |                      **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|-------------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           |                  **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 6 + I holy damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **12-16:** 9 + I holy damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **17+:** 13 + I holy damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "cost": "5 Piety",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "6 + I holy damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier2": "9 + I holy damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier3": "13 + I holy damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+        }
+      ],
+      "flavor": "Fear of divine judgment overwhelms your foe.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "target": "One creature",
+      "tier1": "6 + I holy damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier2": "9 + I holy damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier3": "13 + I holy damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain",
+    "kind": "ability",
+    "name": "Drain",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/drain.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/drain.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 2 + I corruption damage\n      tier2: 5 + I corruption damage\n      tier3: 7 + I corruption damage\n    - effect: You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n      name: Effect\nflavor: You drain the energy from your target to revitalize yourself or an ally.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Drain\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/drain\nsubtype: signature\ntarget: One creature\ntier1: 2 + I corruption damage\ntier2: 5 + I corruption damage\ntier3: 7 + I corruption damage\ntype: ability\n---\n\n\n*You drain the energy from your target to revitalize yourself or an ally.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**           | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 2 + I corruption damage\n- **12-16:** 5 + I corruption damage\n- **17+:** 7 + I corruption damage\n\n**Effect:** You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "2 + I corruption damage",
+          "tier2": "5 + I corruption damage",
+          "tier3": "7 + I corruption damage"
+        },
+        {
+          "effect": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You drain the energy from your target to revitalize yourself or an ally.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "2 + I corruption damage",
+      "tier2": "5 + I corruption damage",
+      "tier3": "7 + I corruption damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor",
+    "kind": "ability",
+    "name": "Faith Is Our Armor",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/faith-is-our-armor.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ncost: 5 Piety\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: You can target yourself instead of one ally with this ability.\n      name: Effect\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: The target gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n      tier2: The target gains 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n      tier3: The target gains 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\nflavor: The heroes' armor glows with golden light, granting divine protection.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Faith Is Our Armor\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor\ntarget: Four allies\ntier1: The target gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\ntier2: The target gains 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\ntier3: The target gains 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\ntype: ability\n---\n\n\n*The heroes' armor glows with golden light, granting divine protection.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**        |       **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------|-------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**         | **🎯 Four allies** |\n\n**Effect:** You can target yourself instead of one ally with this ability.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** The target gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n- **12-16:** The target gains 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n- **17+:** The target gains 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "cost": "5 Piety",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "You can target yourself instead of one ally with this ability.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "The target gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "tier2": "The target gains 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "tier3": "The target gains 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina)."
+        }
+      ],
+      "flavor": "The heroes' armor glows with golden light, granting divine protection.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "target": "Four allies",
+      "tier1": "The target gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+      "tier2": "The target gains 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+      "tier3": "The target gains 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faithful-friend",
+    "kind": "ability",
+    "name": "Faithful Friend",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/faithful-friend.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: Self\neffects:\n    - effect: You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.\n      name: Effect\nflavor: An animal spirit is drawn to you, sharing their senses with you and serving you faithfully.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Faithful Friend\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/faithful-friend\nsubclass: nature\ntarget: Self\ntype: ability\n---\n\n\n*An animal spirit is drawn to you, sharing their senses with you and serving you faithfully.*\n\n| **Magic**   |  **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-----------------:|\n| **📏 Self** |      **🎯 Self** |\n\n**Effect:** You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "An animal spirit is drawn to you, sharing their senses with you and serving you faithfully.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "nature",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/font-of-wrath",
+    "kind": "ability",
+    "name": "Font of Wrath",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/font-of-wrath.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ncost: 3 Piety\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: You summon a spirit of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 who can't be harmed, and who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). The spirit lasts until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You and your allies can move through the spirit's space, but enemies can't. Any enemy who moves within 2 squares of the spirit for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes holy damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n      name: Effect\nflavor: A brilliant column of holy light appears on the battlefield, striking out at nearby enemies.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Font of Wrath\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/font-of-wrath\ntarget: Special\ntype: ability\n---\n\n\n*A brilliant column of holy light appears on the battlefield, striking out at nearby enemies.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**  | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------|----------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**   |  **🎯 Special** |\n\n**Effect:** You summon a spirit of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 who can't be harmed, and who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). The spirit lasts until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You and your allies can move through the spirit's space, but enemies can't. Any enemy who moves within 2 squares of the spirit for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes holy damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "cost": "3 Piety",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "You summon a spirit of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 who can't be harmed, and who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). The spirit lasts until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You and your allies can move through the spirit's space, but enemies can't. Any enemy who moves within 2 squares of the spirit for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes holy damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A brilliant column of holy light appears on the battlefield, striking out at nearby enemies.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "target": "Special"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/grave-speech",
+    "kind": "ability",
+    "name": "Grave Speech",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/grave-speech.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - effect: You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.\n      name: Effect\nflavor: You commune with the lingering soul of the recently dead.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Grave Speech\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/grave-speech\nsubclass: death\ntarget: One dead creature\ntype: ability\n---\n\n\n*You commune with the lingering soul of the recently dead.*\n\n| **Magic**      |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)**  |\n|----------------|-------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1** | **🎯 One dead creature** |\n\n**Effect:** You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "effect": "You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You commune with the lingering soul of the recently dead.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "death",
+      "target": "One dead creature"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/hands-of-the-maker",
+    "kind": "ability",
+    "name": "Hands of the Maker",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/hands-of-the-maker.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: Self\neffects:\n    - effect: You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).\n      name: Effect\nflavor: You craft objects with the power of your mind.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Hands of the Maker\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/hands-of-the-maker\nsubclass: creation\ntarget: Self\ntype: ability\n---\n\n\n*You craft objects with the power of your mind.*\n\n| **Magic**                |  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------|--------------:|\n| **📏 Self**              |   **🎯 Self** |\n\n**Effect:** You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You craft objects with the power of your mind.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "creation",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace",
+    "kind": "ability",
+    "name": "Healing Grace",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/healing-grace.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n      name: Effect\n    - cost: Spend 1+ Piety\n      effect: 'For each piety spent, choose one of the following [enhancements](scc.v1:mcdm.heroes.v1/rule.treasure/enhancement):'\nflavor: Your divine energy restores the righteous.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Healing Grace\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace\ntarget: Self or one ally\ntype: ability\n---\n\n\n*Your divine energy restores the righteous.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**          |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 Self or one ally** |\n\n**Effect:** The target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n\n**Spend 1+ Piety:** For each piety spent, choose one of the following [enhancements](scc.v1:mcdm.heroes.v1/rule.treasure/enhancement):\n\n- You can target one additional ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).\n- You can end one effect on a target that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n- A [prone target](scc.v1:mcdm.heroes.v1/condition/prone) can stand up.\n- A target can spend 1 additional [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1+ Piety",
+          "effect": "For each piety spent, choose one of the following [enhancements](scc.v1:mcdm.heroes.v1/rule.treasure/enhancement):"
+        }
+      ],
+      "flavor": "Your divine energy restores the righteous.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "target": "Self or one ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash",
+    "kind": "ability",
+    "name": "Holy Lash",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/holy-lash.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 3 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier2: 5 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n      tier3: 8 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\nflavor: A tendril of divine energy shoots forth to draw in your foe.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Holy Lash\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier2: 5 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntier3: 8 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\ntype: ability\n---\n\n\n*A tendril of divine energy shoots forth to draw in your foe.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 3 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **12-16:** 5 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n- **17+:** 8 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "3 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier2": "5 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "tier3": "8 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4"
+        }
+      ],
+      "flavor": "A tendril of divine energy shoots forth to draw in your foe.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier2": "5 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+      "tier3": "8 + I holy damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer",
+    "kind": "ability",
+    "name": "Judgment's Hammer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/judgments-hammer.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ncost: 3 Piety\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 3 + I holy damage; A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n      tier2: 6 + I holy damage; A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n      tier3: 9 + I holy damage; A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)\nflavor: Your divine [fury](scc.v1:mcdm.heroes.v1/class/fury) is a hammer that crashes down upon the unrighteous.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Judgment's Hammer\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer\ntarget: One creature or object\ntier1: 3 + I holy damage; A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntier2: 6 + I holy damage; A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntier3: 9 + I holy damage; A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)\ntype: ability\n---\n\n\n*Your divine [fury](scc.v1:mcdm.heroes.v1/class/fury) is a hammer that crashes down upon the unrighteous.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 3 + I holy damage; A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **12-16:** 6 + I holy damage; A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **17+:** 9 + I holy damage; A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "cost": "3 Piety",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "3 + I holy damage; A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "tier2": "6 + I holy damage; A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "tier3": "9 + I holy damage; A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)"
+        }
+      ],
+      "flavor": "Your divine [fury](scc.v1:mcdm.heroes.v1/class/fury) is a hammer that crashes down upon the unrighteous.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "target": "One creature or object",
+      "tier1": "3 + I holy damage; A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+      "tier2": "6 + I holy damage; A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+      "tier3": "9 + I holy damage; A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall",
+    "kind": "ability",
+    "name": "Lightfall",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/lightfall.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: 2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 2 holy damage\n      tier2: 3 holy damage\n      tier3: 5 holy damage\n    - effect: You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) yourself and each ally in the area to unoccupied spaces in the area.\n      name: Effect\nflavor: A rain of holy light scours your enemies and repositions your allies.\nkeywords:\n    - Area\n    - Magic\nlevel: \"1\"\nname: Lightfall\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall\nsubtype: signature\ntarget: Each enemy in the area\ntier1: 2 holy damage\ntier2: 3 holy damage\ntier3: 5 holy damage\ntype: ability\n---\n\n\n*A rain of holy light scours your enemies and repositions your allies.*\n\n| **Area, Magic**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------|------------------------------:|\n| **📏 2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**   | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 2 holy damage\n- **12-16:** 3 holy damage\n- **17+:** 5 holy damage\n\n**Effect:** You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) yourself and each ally in the area to unoccupied spaces in the area.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "2 holy damage",
+          "tier2": "3 holy damage",
+          "tier3": "5 holy damage"
+        },
+        {
+          "effect": "You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) yourself and each ally in the area to unoccupied spaces in the area.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A rain of holy light scours your enemies and repositions your allies.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subtype": "signature",
+      "target": "Each enemy in the area",
+      "tier1": "2 holy damage",
+      "tier2": "3 holy damage",
+      "tier3": "5 holy damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath",
+    "kind": "ability",
+    "name": "Ray of Wrath",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/ray-of-wrath.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 2 + I damage\n      tier2: 4 + I damage\n      tier3: 6 + I damage\n    - effect: You can have this ability deal holy damage.\n      name: Effect\nflavor: You unleash a blast of holy light upon your foe.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Ray of Wrath\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath\ntarget: One creature or object\ntier1: 2 + I damage\ntier2: 4 + I damage\ntier3: 6 + I damage\ntype: ability\n---\n\n\n*You unleash a blast of holy light upon your foe.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 2 + I damage\n- **12-16:** 4 + I damage\n- **17+:** 6 + I damage\n\n**Effect:** You can have this ability deal holy damage.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "2 + I damage",
+          "tier2": "4 + I damage",
+          "tier3": "6 + I damage"
+        },
+        {
+          "effect": "You can have this ability deal holy damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You unleash a blast of holy light upon your foe.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "target": "One creature or object",
+      "tier1": "2 + I damage",
+      "tier2": "4 + I damage",
+      "tier3": "6 + I damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer",
+    "kind": "ability",
+    "name": "Sacrificial Offer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/sacrificial-offer.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 2 + I corruption damage\n      tier2: 4 + I corruption damage\n      tier3: 6 + I corruption damage\n    - effect: Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can impose a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against them before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Effect\nflavor: Divine magic tears at your foe and defends a nearby friend.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Sacrificial Offer\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer\nsubtype: signature\ntarget: One creature\ntier1: 2 + I corruption damage\ntier2: 4 + I corruption damage\ntier3: 6 + I corruption damage\ntype: ability\n---\n\n\n*Divine magic tears at your foe and defends a nearby friend.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 2 + I corruption damage\n- **12-16:** 4 + I corruption damage\n- **17+:** 6 + I corruption damage\n\n**Effect:** Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can impose a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against them before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "2 + I corruption damage",
+          "tier2": "4 + I corruption damage",
+          "tier3": "6 + I corruption damage"
+        },
+        {
+          "effect": "Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can impose a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against them before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Divine magic tears at your foe and defends a nearby friend.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "2 + I corruption damage",
+      "tier2": "4 + I corruption damage",
+      "tier3": "6 + I corruption damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace",
+    "kind": "ability",
+    "name": "Sermon of Grace",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/sermon-of-grace.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ncost: 5 Piety\ndistance: 4 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - effect: Each target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries). Additionally, each target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or to stand up if [prone](scc.v1:mcdm.heroes.v1/condition/prone).\n      name: Effect\nflavor: You inspire your allies with tales of your [saint](scc.v1:mcdm.heroes.v1/rule.world/saint)'s great deeds.\nkeywords:\n    - Area\n    - Magic\nlevel: \"1\"\nname: Sermon of Grace\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace\ntarget: Each ally in the area\ntype: ability\n---\n\n\n*You inspire your allies with tales of your [saint](scc.v1:mcdm.heroes.v1/rule.world/saint)'s great deeds.*\n\n| **Area, Magic** |              **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|-----------------------------:|\n| **📏 4 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**  | **🎯 Each ally in the area** |\n\n**Effect:** Each target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries). Additionally, each target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or to stand up if [prone](scc.v1:mcdm.heroes.v1/condition/prone).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "cost": "5 Piety",
+      "distance": "4 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "effect": "Each target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries). Additionally, each target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or to stand up if [prone](scc.v1:mcdm.heroes.v1/condition/prone).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You inspire your allies with tales of your [saint](scc.v1:mcdm.heroes.v1/rule.world/saint)'s great deeds.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "1",
+      "target": "Each ally in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse",
+    "kind": "ability",
+    "name": "Staggering Curse",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/staggering-curse.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 3 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 5 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier3: 8 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\nflavor: A blast of judgment disorients your foe.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Staggering Curse\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 5 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier3: 8 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntype: ability\n---\n\n\n*A blast of judgment disorients your foe.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 3 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 5 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** 8 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "3 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "5 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "8 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        }
+      ],
+      "flavor": "A blast of judgment disorients your foe.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "5 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "8 + I holy damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee",
+    "kind": "ability",
+    "name": "Violence Will Not Aid Thee",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/violence-will-not-aid-thee.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ncost: 3 Piety\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 3 + I lightning damage\n      tier2: 6 + I lightning damage\n      tier3: 9 + I lightning damage\n    - effect: The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends).\n      name: Effect\nflavor: After some holy lightning, your enemy will think twice about their next attack.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Violence Will Not Aid Thee\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee\ntarget: One creature\ntier1: 3 + I lightning damage\ntier2: 6 + I lightning damage\ntier3: 9 + I lightning damage\ntype: ability\n---\n\n\n*After some holy lightning, your enemy will think twice about their next attack.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 3 + I lightning damage\n- **12-16:** 6 + I lightning damage\n- **17+:** 9 + I lightning damage\n\n**Effect:** The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "cost": "3 Piety",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "3 + I lightning damage",
+          "tier2": "6 + I lightning damage",
+          "tier3": "9 + I lightning damage"
+        },
+        {
+          "effect": "The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "After some holy lightning, your enemy will think twice about their next attack.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "target": "One creature",
+      "tier1": "3 + I lightning damage",
+      "tier2": "6 + I lightning damage",
+      "tier3": "9 + I lightning damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer",
+    "kind": "ability",
+    "name": "Warrior's Prayer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/warriors-prayer.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 3 + I holy damage\n      tier2: 6 + I holy damage\n      tier3: 9 + I holy damage\n    - effect: You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n      name: Effect\nflavor: Your quickly uttered prayer lends aggressive divine energy to a friend engaged in [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee).\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Warrior's Prayer\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer\nsubtype: signature\ntarget: One creature\ntier1: 3 + I holy damage\ntier2: 6 + I holy damage\ntier3: 9 + I holy damage\ntype: ability\n---\n\n\n*Your quickly uttered prayer lends aggressive divine energy to a friend engaged in [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee).*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 3 + I holy damage\n- **12-16:** 6 + I holy damage\n- **17+:** 9 + I holy damage\n\n**Effect:** You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "3 + I holy damage",
+          "tier2": "6 + I holy damage",
+          "tier3": "9 + I holy damage"
+        },
+        {
+          "effect": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your quickly uttered prayer lends aggressive divine energy to a friend engaged in [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee).",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "3 + I holy damage",
+      "tier2": "6 + I holy damage",
+      "tier3": "9 + I holy damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither",
+    "kind": "ability",
+    "name": "Wither",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/wither.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/wither.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: 3 + I corruption damage; P < WEAK, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\n      tier2: 5 + I corruption damage; P < AVERAGE, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\n      tier3: 8 + I corruption damage; P < STRONG, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\nflavor: A bolt of holy energy saps the life from a foe.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Wither\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/wither\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + I corruption damage; P < WEAK, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\ntier2: 5 + I corruption damage; P < AVERAGE, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\ntier3: 8 + I corruption damage; P < STRONG, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\ntype: ability\n---\n\n\n*A bolt of holy energy saps the life from a foe.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** 3 + I corruption damage; P < WEAK, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\n- **12-16:** 5 + I corruption damage; P < AVERAGE, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\n- **17+:** 8 + I corruption damage; P < STRONG, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "3 + I corruption damage; P < WEAK, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+          "tier2": "5 + I corruption damage; P < AVERAGE, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+          "tier3": "8 + I corruption damage; P < STRONG, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)"
+        }
+      ],
+      "flavor": "A bolt of holy energy saps the life from a foe.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + I corruption damage; P < WEAK, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+      "tier2": "5 + I corruption damage; P < AVERAGE, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+      "tier3": "8 + I corruption damage; P < STRONG, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance",
+    "kind": "ability",
+    "name": "Word of Guidance",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/word-of-guidance.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\n      name: Effect\n    - cost: Spend 1 Piety\n      effect: The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\nflavor: You invigorate an attacking ally with divine energy.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Word of Guidance\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance\nsubtype: triggered\ntarget: One ally\ntrigger: The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) for a damage-dealing ability.\ntype: ability\n---\n\n\n*You invigorate an attacking ally with divine energy.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**      |        **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|------------------------|---------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**       |      **🎯 One ally** |\n\n**Trigger:** The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) for a damage-dealing ability.\n\n**Effect:** The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\n\n**Spend 1 Piety:** The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Piety",
+          "effect": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge)."
+        }
+      ],
+      "flavor": "You invigorate an attacking ally with divine energy.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subtype": "triggered",
+      "target": "One ally",
+      "trigger": "The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) for a damage-dealing ability."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment",
+    "kind": "ability",
+    "name": "Word of Judgment",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/conduit/level-1/word-of-judgment.json",
+    "selection": "conduit-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: conduit\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.\n      name: Effect\n    - cost: Spend 1 Piety\n      effect: The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.\nflavor: Your holy word saps an attacking enemy's strength.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Word of Judgment\nscc: mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment\nsubtype: triggered\ntarget: One ally\ntrigger: The target would take damage from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\ntype: ability\n---\n\n\n*Your holy word saps an attacking enemy's strength.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**  |     **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|--------------------|------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**   |   **🎯 One ally** |\n\n**Trigger:** The target would take damage from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n\n**Effect:** The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.\n\n**Spend 1 Piety:** The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "conduit",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Piety",
+          "effect": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target."
+        }
+      ],
+      "flavor": "Your holy word saps an attacking enemy's strength.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subtype": "triggered",
+      "target": "One ally",
+      "trigger": "The target would take damage from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)."
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.dragon-knight/draconian-pride",
     "kind": "ability",
     "name": "Draconian Pride",

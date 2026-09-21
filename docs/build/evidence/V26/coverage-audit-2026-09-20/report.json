@@ -1,15 +1,15 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:08fd8c7f9ee5f55ebe5b96a777ea6363dd828862ac1f6d894fa62bb688dd0362",
+  "contentHash": "sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 10,
-      "COMPILES_WITH_REMAINDER": 53,
-      "NO_MATCH": 54,
-      "total": 117,
-      "withinV26Bounded": 7
+      "COMPILES_WITH_REMAINDER": 67,
+      "NO_MATCH": 63,
+      "total": 140,
+      "withinV26Bounded": 8
     },
     "kit-signature": {
       "COMPILES": 2,
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 735,
-    "resolvedToStandalone": 324,
+    "total": 804,
+    "resolvedToStandalone": 393,
     "resolvedToKit": 63,
     "ownText": 348,
     "unresolved": []
@@ -1901,6 +1901,1809 @@
         "expected": "COMPILES",
         "agrees": true
       }
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light",
+      "name": "Blessed Light",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "One ally within distance gains a number of surges equal to the tier outcome of your power roll.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Blessed Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Blessed Light supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessed Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Blessed Light supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessed Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Blessed Light supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down",
+      "name": "Call the Thunder Down",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "3 Piety",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "sonic",
+            "push": 1
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "damageType": "sonic",
+            "push": 2
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "sonic",
+            "push": 3
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can push each willing ally in the area the same distance, ignoring stability.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Call the Thunder Down",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Call the Thunder Down supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Call the Thunder Down",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Call the Thunder Down supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Call the Thunder Down",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Call the Thunder Down supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse",
+      "name": "Corruption's Curse",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "5 Piety",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM damage weakness N (save ends)",
+            "text": "M < WEAK, damage weakness 5 (save ends)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM damage weakness N (save ends)",
+            "text": "M < AVERAGE, damage weakness 5 (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM damage weakness N (save ends)",
+            "text": "M < STRONG, damage weakness 5 (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Corruption's Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Corruption's Curse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Corruption's Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Corruption's Curse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Corruption's Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Corruption's Curse supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror",
+      "name": "Curse of Terror",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Piety",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM frightened (save ends)",
+            "text": "I < WEAK, frightened (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM frightened (save ends)",
+            "text": "I < AVERAGE, frightened (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM frightened (save ends)",
+            "text": "I < STRONG, frightened (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": true,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Curse of Terror",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Curse of Terror supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Curse of Terror",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Curse of Terror supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Curse of Terror",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Curse of Terror supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain",
+      "name": "Drain",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/drain.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You or one ally within distance can spend a Recovery.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Drain",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/drain.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Drain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Drain",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/drain.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Drain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Drain",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/drain.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Drain supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor",
+      "name": "Faith Is Our Armor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+      "usage": "Maneuver",
+      "target": "Four allies",
+      "cost": "5 Piety",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can target yourself instead of one ally with this ability.",
+            "locator": "section:0"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target gains N temporary stamina",
+            "text": "The target gains 5 temporary Stamina",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target gains N temporary stamina",
+            "text": "The target gains 10 temporary Stamina",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target gains N temporary stamina",
+            "text": "The target gains 15 temporary Stamina",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "multi"
+      },
+      "grants": [
+        {
+          "name": "Faith Is Our Armor",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Faith Is Our Armor supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Faith Is Our Armor",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Faith Is Our Armor supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Faith Is Our Armor",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Faith Is Our Armor supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faithful-friend",
+      "name": "Faithful Friend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+      "usage": "Main action",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has speed 5 and can fly, but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.domain-feature.nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.domain-feature.nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.domain-feature.nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/font-of-wrath",
+      "name": "Font of Wrath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+      "usage": "Main action",
+      "target": "Special",
+      "cost": "3 Piety",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You summon a spirit of size 2 who can't be harmed, and who appears in an unoccupied space within distance. The spirit lasts until the end of your next turn. You and your allies can move through the spirit's space, but enemies can't. Any enemy who moves within 2 squares of the spirit for the first time in a combat round or starts their turn there takes holy damage equal to your Intuition score.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Font of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Font of Wrath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Font of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Font of Wrath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Font of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Font of Wrath supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/grave-speech",
+      "name": "Grave Speech",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+      "usage": "Maneuver",
+      "target": "One dead creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make tests to influence them and convince them to speak with you. The trauma of dying can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.domain-feature.death",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.domain-feature.death",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.domain-feature.death",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/hands-of-the-maker",
+      "name": "Hands of the Maker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You create a mundane object of size 1S or smaller. You can maintain a number of objects created this way equal to your Intuition score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.domain-feature.creation",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.domain-feature.creation",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.domain-feature.creation",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace",
+      "name": "Healing Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+      "usage": "Maneuver",
+      "target": "Self or one ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target can spend a Recovery.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N+ piety",
+            "text": "For each piety spent, choose one of the following enhancements:",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Healing Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+          "decisionId": "class.conduit.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Healing Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+          "decisionId": "class.conduit.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Healing Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+          "decisionId": "class.conduit.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash",
+      "name": "Holy Lash",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "pull",
+            "shape": "vertical pull N",
+            "text": "vertical pull 2",
+            "locator": "tier1"
+          },
+          {
+            "type": "pull",
+            "shape": "vertical pull N",
+            "text": "vertical pull 3",
+            "locator": "tier2"
+          },
+          {
+            "type": "pull",
+            "shape": "vertical pull N",
+            "text": "vertical pull 4",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Holy Lash",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Holy Lash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Holy Lash",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Holy Lash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Holy Lash",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Holy Lash supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer",
+      "name": "Judgment's Hammer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "3 Piety",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM prone",
+            "text": "A < WEAK, prone",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM prone",
+            "text": "A < AVERAGE, prone",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM prone and can't stand (save ends)",
+            "text": "A < STRONG, prone and can't stand (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Judgment's Hammer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Judgment's Hammer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Judgment's Hammer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Judgment's Hammer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Judgment's Hammer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Judgment's Hammer supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall",
+      "name": "Lightfall",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can teleport yourself and each ally in the area to unoccupied spaces in the area.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Lightfall",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Lightfall supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lightfall",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Lightfall supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lightfall",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Lightfall supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath",
+      "name": "Ray of Wrath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "I"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "I"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can have this ability deal holy damage.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Ray of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+          "decisionId": "class.conduit.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Ray of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+          "decisionId": "class.conduit.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Ray of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+          "decisionId": "class.conduit.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer",
+      "name": "Sacrificial Offer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Choose yourself or one ally within distance. That character can impose a bane on one power roll made against them before the end of their next turn.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Sacrificial Offer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Sacrificial Offer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sacrificial Offer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Sacrificial Offer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sacrificial Offer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Sacrificial Offer supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace",
+      "name": "Sermon of Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+      "usage": "Main action",
+      "target": "Each ally in the area",
+      "cost": "5 Piety",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each target can spend a Recovery. Additionally, each target can use a free triggered action to end one effect on them that is ended by a saving throw or that ends at the end of their turn, or to stand up if prone.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Sermon of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sermon of Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sermon of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sermon of Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sermon of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sermon of Grace supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse",
+      "name": "Staggering Curse",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 1",
+            "locator": "tier1"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 2",
+            "locator": "tier2"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 3",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Staggering Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Staggering Curse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Staggering Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Staggering Curse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Staggering Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Staggering Curse supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee",
+      "name": "Violence Will Not Aid Thee",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "3 Piety",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "lightning"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "lightning"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "lightning"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The first time on a turn that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends).",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Violence Will Not Aid Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Violence Will Not Aid Thee supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Violence Will Not Aid Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Violence Will Not Aid Thee supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Violence Will Not Aid Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Violence Will Not Aid Thee supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer",
+      "name": "Warrior's Prayer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You or one ally within distance gains temporary Stamina equal to your Intuition score.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Warrior's Prayer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Warrior's Prayer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Warrior's Prayer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Warrior's Prayer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Warrior's Prayer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Warrior's Prayer supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither",
+      "name": "Wither",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/wither.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "I"
+            },
+            "damageType": "corruption"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM the target takes a bane on their next power roll",
+            "text": "P < WEAK, the target takes a bane on their next power roll",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM the target takes a bane on their next power roll",
+            "text": "P < AVERAGE, the target takes a bane on their next power roll",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM the target takes a bane on their next power roll",
+            "text": "P < STRONG, the target takes a bane on their next power roll",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Wither",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/wither.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Wither supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Wither",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/wither.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Wither supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Wither",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/wither.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Wither supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance",
+      "name": "Word of Guidance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+      "usage": "Triggered",
+      "target": "One ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target makes an ability roll for a damage-dealing ability.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The power roll gains an edge.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N piety",
+            "text": "The power roll has a double edge.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Word of Guidance",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Guidance supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Word of Guidance",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Guidance supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Word of Guidance",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Guidance supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment",
+      "name": "Word of Judgment",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+      "usage": "Triggered",
+      "target": "One ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target would take damage from an ability that uses a power roll.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The power roll takes a bane against the target.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N piety",
+            "text": "The power roll has a double bane against the target.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Word of Judgment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Judgment supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Word of Judgment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Judgment supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Word of Judgment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Judgment supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -74711,8 +76514,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1068,
-      "abilities": 1054,
+      "count": 1085,
+      "abilities": 1071,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -74722,8 +76525,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 599,
-      "abilities": 599,
+      "count": 607,
+      "abilities": 607,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -74733,12 +76536,12 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 189,
-      "abilities": 189,
+      "count": 191,
+      "abilities": 191,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
         "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered"
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance"
       ]
     },
     {
@@ -74766,12 +76569,12 @@
     {
       "shape": "slide N",
       "type": "slide",
-      "count": 83,
-      "abilities": 32,
+      "count": 86,
+      "abilities": 33,
       "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse",
         "mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way",
-        "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
-        "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike"
+        "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil"
       ]
     },
     {
@@ -75404,6 +77207,16 @@
       ]
     },
     {
+      "shape": "vertical pull N",
+      "type": "pull",
+      "count": 6,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash",
+        "mcdm.heroes.v1/kit/whirlwind/extension-of-my-arm"
+      ]
+    },
+    {
       "shape": "effect-paragraph:persistent N",
       "type": "effect-paragraph",
       "count": 5,
@@ -75443,6 +77256,16 @@
       "examples": [
         "salient:foe-feature:4ff7792e-27fe-4c2f-8bf2-7daec6645f31",
         "salient:foe-feature:ea2bd50d-f43d-4005-86ef-4b0eedb66a51"
+      ]
+    },
+    {
+      "shape": "potency:A < SYM prone",
+      "type": "potency-condition",
+      "count": 5,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer",
+        "mcdm.heroes.v1/kit/vuken/unbalancing-attack"
       ]
     },
     {
@@ -75868,15 +77691,6 @@
       ]
     },
     {
-      "shape": "potency:A < SYM prone",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/kit/vuken/unbalancing-attack"
-      ]
-    },
-    {
       "shape": "potency:I < N prone",
       "type": "potency-condition",
       "count": 3,
@@ -75919,6 +77733,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.censor.level-1/repent"
+      ]
+    },
+    {
+      "shape": "potency:I < SYM frightened (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror"
       ]
     },
     {
@@ -76012,6 +77835,15 @@
       ]
     },
     {
+      "shape": "potency:M < SYM damage weakness N (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse"
+      ]
+    },
+    {
       "shape": "potency:M < SYM dazed (save ends)",
       "type": "potency-condition",
       "count": 3,
@@ -76099,6 +77931,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM the target takes a bane on their next power roll",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/wither"
       ]
     },
     {
@@ -76345,21 +78186,21 @@
       ]
     },
     {
+      "shape": "tier:the target gains N temporary stamina",
+      "type": "tier-damage",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor"
+      ]
+    },
+    {
       "shape": "tier:the target makes a free strike (tier N result) against themself",
       "type": "tier-damage",
       "count": 3,
       "abilities": 1,
       "examples": [
         "salient:foe-feature:67903115-71ac-44a5-82bb-c0cf353ea844"
-      ]
-    },
-    {
-      "shape": "vertical pull N",
-      "type": "pull",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/kit/whirlwind/extension-of-my-arm"
       ]
     },
     {
@@ -76440,6 +78281,16 @@
       "examples": [
         "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll",
         "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat"
+      ]
+    },
+    {
+      "shape": "resource-spend:spend N piety",
+      "type": "resource-spend",
+      "count": 2,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance",
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment"
       ]
     },
     {
@@ -77340,6 +79191,15 @@
       ]
     },
     {
+      "shape": "potency:A < SYM prone and can't stand (save ends)",
+      "type": "potency-condition",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer"
+      ]
+    },
+    {
       "shape": "potency:A < SYM restrained (eot)",
       "type": "potency-condition",
       "count": 1,
@@ -77823,6 +79683,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.fury.level-1/to-the-uttermost-end"
+      ]
+    },
+    {
+      "shape": "resource-spend:spend N+ piety",
+      "type": "resource-spend",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace"
       ]
     },
     {
@@ -78662,11 +80531,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 214,
+      "total": 237,
       "compiles": 13,
-      "withRemainder": 74,
-      "withinV26Bounded": 8,
-      "noMatch": 127
+      "withRemainder": 88,
+      "withinV26Bounded": 9,
+      "noMatch": 136
     }
   }
 }

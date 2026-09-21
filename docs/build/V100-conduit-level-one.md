@@ -45,3 +45,17 @@ Compendium rather than evaluator output. Guided progression is separate from thi
   introduction conflicts with Sun/War's named paragraphs; trigger resolution remains manual,
   retaining the full source and naming the discrepancy rather than automating an interpretation.
   Grave Speech's death/time/language facts remain manual; zero Stamina is not proof of death.
+
+- Source ledger: `tests/fixtures/v100-conduit-expected.json`; twelve builds, all four arrays,
+  five prayers/four wards and all 23 source abilities plus 41 embedded activities. Live cohort
+  `scripts/headless/conduit.ts` checks independent Piety costs (including optional enhancements),
+  outside-combat waiver, failed affordability, manual target readback and Curse of Terror applied/
+  resisted save registrations. Pure all-tier thresholds complement the live random-tier witness.
+- ENGINE found one resource-label defect (Wrath instead of Piety) in the embedded source adapter;
+  repaired and covered by source-ledger cost checks. Manual healing and domain conditions remain
+  labelled, including the out-of-combat Healing Grace Victories budget.
+- Audit reachability gains a conservative finite selected-pool witness: one of two printed portfolio
+  domains, with supported ancestor selection, exact cardinality and shared availability/pool checks.
+  Unknown/excluded/dynamic forms remain unknown. This repairs three reachable domain ability rows;
+  it changes reporting only. Regression retains all original V88 rows/hashes and adds 23 explicit IDs.
+- Authoring: engine fixture 3/3; audit-focused 23/23. Full check/live evidence pending TESTER.

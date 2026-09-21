@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:08fd8c7f9ee5f55ebe5b96a777ea6363dd828862ac1f6d894fa62bb688dd0362",
+  "contentHash": "sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1150
     },
     "hero-standalone": {
-      "total": 117,
-      "supported": 12,
-      "manual": 105
+      "total": 140,
+      "supported": 13,
+      "manual": 127
     },
     "kit-signature": {
       "total": 25,
@@ -13301,6 +13301,2737 @@
           "grantKind": "free-strike",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light",
+      "name": "Blessed Light",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light#block:0:tier1:0:6aa43620a16bbff3",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light#block:0:tier2:0:36f620db508bf7bd",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light#block:0:tier3:0:bd13047b3c7a6e86",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light#block:1:0:d741d1037652b63a",
+          "locator": "block:1:0",
+          "clause": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a number of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) equal to the [tier outcome](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) of your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a number of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) equal to the [tier outcome](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) of your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Blessed Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Blessed Light supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessed Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Blessed Light supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessed Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Blessed Light supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down",
+      "name": "Call the Thunder Down",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier1:0:6a84c5aa59de7bb6",
+            "locator": "block:0:tier1:0",
+            "clause": "2 sonic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "sonic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier1:1:4e92293619489c55",
+            "locator": "block:0:tier1:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "push",
+            "distance": 1,
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier1:0:6a84c5aa59de7bb6"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier2:0:3aad72d4fff5f1e7",
+            "locator": "block:0:tier2:0",
+            "clause": "3 sonic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "damageType": "sonic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier2:1:4e9226361948973c",
+            "locator": "block:0:tier2:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier2:0:3aad72d4fff5f1e7"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier3:0:6a970863fefdf425",
+            "locator": "block:0:tier3:0",
+            "clause": "5 sonic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "sonic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier3:1:4e922736194898ef",
+            "locator": "block:0:tier3:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "push",
+            "distance": 3,
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:0:tier3:0:6a970863fefdf425"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:1:0:1a7c21a6902ba9ce",
+          "locator": "block:1:0",
+          "clause": "You can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) each willing ally in the area the same [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) each willing ally in the area the same [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Call the Thunder Down",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Call the Thunder Down supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Call the Thunder Down",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Call the Thunder Down supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Call the Thunder Down",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Call the Thunder Down supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse",
+      "name": "Corruption's Curse",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier1:0:36f59bdde83ca50a",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier1:1:d891b5bc1c2b2786",
+            "locator": "block:0:tier1:1",
+            "clause": "M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:M < SYM damage weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier2:0:ca473fb1364cdfa1",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier2:1:5c8fabf48a139285",
+            "locator": "block:0:tier2:1",
+            "clause": "M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:M < SYM damage weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier3:0:406df3a99cfc1c2c",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier3:1:1177b6671e05769d",
+            "locator": "block:0:tier3:1",
+            "clause": "M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:M < SYM damage weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Corruption's Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Corruption's Curse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Corruption's Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Corruption's Curse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Corruption's Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Corruption's Curse supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror",
+      "name": "Curse of Terror",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier1:0:0dd4ce1c97353d5c",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier1:1:ffe5a7c0b786a3c4",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier1:0:0dd4ce1c97353d5c"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier2:0:9c03fc9b6cf41c51",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier2:1:71fa25629efd631b",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier2:0:9c03fc9b6cf41c51"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier3:0:252d0e6821689050",
+            "locator": "block:0:tier3:0",
+            "clause": "13 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier3:1:22233f5a1e90790b",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror#block:0:tier3:0:252d0e6821689050"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Curse of Terror",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Curse of Terror supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Curse of Terror",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Curse of Terror supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Curse of Terror",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Curse of Terror supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain",
+      "name": "Drain",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/drain.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain#block:0:tier1:0:e4222a2230742e85",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain#block:0:tier2:0:8d7ec1b6c2644490",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain#block:0:tier3:0:5ad936e072db5c46",
+            "locator": "block:0:tier3:0",
+            "clause": "7 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain#block:1:0:e8aac6ed0a8539cb",
+          "locator": "block:1:0",
+          "clause": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Drain",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/drain.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Drain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Drain",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/drain.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Drain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Drain",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/drain.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Drain supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor",
+      "name": "Faith Is Our Armor",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor#block:1:tier1:0:eae4cc4d5f07e782",
+            "locator": "block:1:tier1:0",
+            "clause": "The target gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+            "kind": "unsupported",
+            "shape": "the target gains N temporary stamina",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor#block:1:tier2:0:9fb5ae1339083e82",
+            "locator": "block:1:tier2:0",
+            "clause": "The target gains 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+            "kind": "unsupported",
+            "shape": "the target gains N temporary stamina",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor#block:1:tier3:0:d1a4591c938f5af1",
+            "locator": "block:1:tier3:0",
+            "clause": "The target gains 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+            "kind": "unsupported",
+            "shape": "the target gains N temporary stamina",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor#block:0:0:e77fac5b87e44dd1",
+          "locator": "block:0:0",
+          "clause": "You can target yourself instead of one ally with this ability.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier1:0",
+          "clause": "The target gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier2:0",
+          "clause": "The target gains 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier3:0",
+          "clause": "The target gains 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You can target yourself instead of one ally with this ability.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Four allies",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Faith Is Our Armor",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Faith Is Our Armor supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Faith Is Our Armor",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Faith Is Our Armor supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Faith Is Our Armor",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Faith Is Our Armor supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faithful-friend",
+      "name": "Faithful Friend",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faithful-friend",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faithful-friend#block:0:0:8bb9540169178a88",
+          "locator": "block:0:0",
+          "clause": "You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.domain-feature.nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.domain-feature.nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.domain-feature.nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/font-of-wrath",
+      "name": "Font of Wrath",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/font-of-wrath",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/font-of-wrath#block:0:0:1401d3fc0e7a8f84",
+          "locator": "block:0:0",
+          "clause": "You summon a spirit of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 who can't be harmed, and who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). The spirit lasts until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You and your allies can move through the spirit's space, but enemies can't. Any enemy who moves within 2 squares of the spirit for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes holy damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You summon a spirit of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 who can't be harmed, and who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). The spirit lasts until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You and your allies can move through the spirit's space, but enemies can't. Any enemy who moves within 2 squares of the spirit for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes holy damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Font of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Font of Wrath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Font of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Font of Wrath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Font of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Font of Wrath supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/grave-speech",
+      "name": "Grave Speech",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/grave-speech",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/grave-speech#block:0:0:56b89849596de3e3",
+          "locator": "block:0:0",
+          "clause": "You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "One dead creature",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.domain-feature.death",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.domain-feature.death",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.domain-feature.death",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/hands-of-the-maker",
+      "name": "Hands of the Maker",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/hands-of-the-maker",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/hands-of-the-maker#block:0:0:5b669ce12d4c45ec",
+          "locator": "block:0:0",
+          "clause": "You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.domain-feature.creation",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.domain-feature.creation",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.domain-feature.creation",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace",
+      "name": "Healing Grace",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace#block:0:0:e141dd44bb812383",
+          "locator": "block:0:0",
+          "clause": "The target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace#block:1:0:8acd7ae1a7d8dd75",
+          "locator": "block:1:0",
+          "clause": "For each piety spent, choose one of the following [enhancements](scc.v1:mcdm.heroes.v1/rule.treasure/enhancement):",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N+ piety",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace#markdown:block:1:0:89965cc399a17cb9",
+          "locator": "markdown:block:1:0",
+          "clause": "Spend 1+ Piety: For each piety spent, choose one of the following enhancements:\n- You can target one additional ally within distance.\n- You can end one effect on a target that is ended by a saving throw or that ends at the end of their turn.\n- A prone target can stand up.\n- A target can spend 1 additional Recovery.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace#markdown:item:5:0:7bed6b9c65595325",
+          "locator": "markdown:item:5:0",
+          "clause": "- You can target one additional ally within distance.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace#markdown:item:6:0:dc778fdd297f90ec",
+          "locator": "markdown:item:6:0",
+          "clause": "- You can end one effect on a target that is ended by a saving throw or that ends at the end of their turn.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace#markdown:item:7:0:615da7e92f7d02c1",
+          "locator": "markdown:item:7:0",
+          "clause": "- A prone target can stand up.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace#markdown:item:8:0:f1abcb918f0101e5",
+          "locator": "markdown:item:8:0",
+          "clause": "- A target can spend 1 additional Recovery.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Spend 1+ Piety: For each piety spent, choose one of the following enhancements:\n- You can target one additional ally within distance.\n- You can end one effect on a target that is ended by a saving throw or that ends at the end of their turn.\n- A prone target can stand up.\n- A target can spend 1 additional Recovery.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:5",
+          "clause": "- You can target one additional ally within distance.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:6",
+          "clause": "- You can end one effect on a target that is ended by a saving throw or that ends at the end of their turn.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:7",
+          "clause": "- A prone target can stand up.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "- A target can spend 1 additional Recovery.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "For each piety spent, choose one of the following [enhancements](scc.v1:mcdm.heroes.v1/rule.treasure/enhancement):",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:1:0",
+          "clause": "Spend 1+ Piety: For each piety spent, choose one of the following enhancements:\n- You can target one additional ally within distance.\n- You can end one effect on a target that is ended by a saving throw or that ends at the end of their turn.\n- A prone target can stand up.\n- A target can spend 1 additional Recovery.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:5:0",
+          "clause": "- You can target one additional ally within distance.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:6:0",
+          "clause": "- You can end one effect on a target that is ended by a saving throw or that ends at the end of their turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:7:0",
+          "clause": "- A prone target can stand up.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "- A target can spend 1 additional Recovery.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self or one ally",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Healing Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+          "decisionId": "class.conduit.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Healing Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+          "decisionId": "class.conduit.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Healing Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+          "decisionId": "class.conduit.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash",
+      "name": "Holy Lash",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash#block:0:tier1:0:6aa43620a16bbff3",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash#block:0:tier1:1:9e25dd2e10fee37d",
+            "locator": "block:0:tier1:1",
+            "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "vertical pull N",
+            "reason": "pull",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash#block:0:tier2:0:36f620db508bf7bd",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash#block:0:tier2:1:9e25dc2e10fee1ca",
+            "locator": "block:0:tier2:1",
+            "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "unsupported",
+            "shape": "vertical pull N",
+            "reason": "pull",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash#block:0:tier3:0:bd13047b3c7a6e86",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash#block:0:tier3:1:9e25d72e10fed94b",
+            "locator": "block:0:tier3:1",
+            "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+            "kind": "unsupported",
+            "shape": "vertical pull N",
+            "reason": "pull",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Holy Lash",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Holy Lash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Holy Lash",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Holy Lash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Holy Lash",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Holy Lash supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer",
+      "name": "Judgment's Hammer",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier1:0:6aa43620a16bbff3",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier1:1:6716cc47122267b4",
+            "locator": "block:0:tier1:1",
+            "clause": "A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM prone",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier2:0:0dd4ce1c97353d5c",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier2:1:0002d72827ab5aaf",
+            "locator": "block:0:tier2:1",
+            "clause": "A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM prone",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier3:0:9c03fc9b6cf41c51",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier3:1:0b3af19d7d73f5db",
+            "locator": "block:0:tier3:1",
+            "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM prone and can't stand (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Judgment's Hammer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Judgment's Hammer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Judgment's Hammer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Judgment's Hammer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Judgment's Hammer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Judgment's Hammer supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall",
+      "name": "Lightfall",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall#block:0:tier1:0:a8da508e0106de26",
+            "locator": "block:0:tier1:0",
+            "clause": "2 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall#block:0:tier2:0:81732d92f5a3b241",
+            "locator": "block:0:tier2:0",
+            "clause": "3 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall#block:0:tier3:0:c448d28effb4ddef",
+            "locator": "block:0:tier3:0",
+            "clause": "5 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall#block:1:0:5df06627d5d376b2",
+          "locator": "block:1:0",
+          "clause": "You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) yourself and each ally in the area to unoccupied spaces in the area.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) yourself and each ally in the area to unoccupied spaces in the area.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Lightfall",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Lightfall supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lightfall",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Lightfall supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lightfall",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Lightfall supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath",
+      "name": "Ray of Wrath",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath#block:0:tier1:0:f76157f206497e30",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + I damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "I"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath#block:0:tier2:0:26c94dee0a0bb652",
+            "locator": "block:0:tier2:0",
+            "clause": "4 + I damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "I"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath#block:0:tier3:0:38633fde14c3423c",
+            "locator": "block:0:tier3:0",
+            "clause": "6 + I damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath#block:1:0:d39701b4b1c33363",
+          "locator": "block:1:0",
+          "clause": "You can have this ability deal holy damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can have this ability deal holy damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Ray of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+          "decisionId": "class.conduit.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Ray of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+          "decisionId": "class.conduit.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Ray of Wrath",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+          "decisionId": "class.conduit.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer",
+      "name": "Sacrificial Offer",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer#block:0:tier1:0:e4222a2230742e85",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer#block:0:tier2:0:95ca86195dfa6c13",
+            "locator": "block:0:tier2:0",
+            "clause": "4 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer#block:0:tier3:0:ca473fb1364cdfa1",
+            "locator": "block:0:tier3:0",
+            "clause": "6 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer#block:1:0:3e7a8ac00542e99a",
+          "locator": "block:1:0",
+          "clause": "Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can impose a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against them before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can impose a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against them before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Sacrificial Offer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Sacrificial Offer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sacrificial Offer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Sacrificial Offer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sacrificial Offer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Sacrificial Offer supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace",
+      "name": "Sermon of Grace",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace#block:0:0:f7be5f66cfabe729",
+          "locator": "block:0:0",
+          "clause": "Each target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries). Additionally, each target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or to stand up if [prone](scc.v1:mcdm.heroes.v1/condition/prone).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries). Additionally, each target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or to stand up if [prone](scc.v1:mcdm.heroes.v1/condition/prone).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each ally in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Sermon of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sermon of Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sermon of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sermon of Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sermon of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+          "decisionId": "class.conduit.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sermon of Grace supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse",
+      "name": "Staggering Curse",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse#block:0:tier1:0:6aa43620a16bbff3",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse#block:0:tier1:1:e2f998b3a230cbc6",
+            "locator": "block:0:tier1:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse#block:0:tier2:0:36f620db508bf7bd",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse#block:0:tier2:1:e2f997b3a230ca13",
+            "locator": "block:0:tier2:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse#block:0:tier3:0:bd13047b3c7a6e86",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse#block:0:tier3:1:e2f996b3a230c860",
+            "locator": "block:0:tier3:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Staggering Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Staggering Curse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Staggering Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Staggering Curse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Staggering Curse",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Staggering Curse supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee",
+      "name": "Violence Will Not Aid Thee",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee#block:0:tier1:0:6cafd37248eed6ef",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + I lightning damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "lightning",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee#block:0:tier2:0:5b98e2d79c2ddd4a",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + I lightning damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "lightning",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee#block:0:tier3:0:abb804ff7c8ed805",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + I lightning damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "lightning",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee#block:1:0:dce299669a3241ca",
+          "locator": "block:1:0",
+          "clause": "The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Violence Will Not Aid Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Violence Will Not Aid Thee supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Violence Will Not Aid Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Violence Will Not Aid Thee supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Violence Will Not Aid Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+          "decisionId": "class.conduit.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Violence Will Not Aid Thee supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer",
+      "name": "Warrior's Prayer",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer#block:0:tier1:0:6aa43620a16bbff3",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer#block:0:tier2:0:0dd4ce1c97353d5c",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer#block:0:tier3:0:9c03fc9b6cf41c51",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer#block:1:0:f953fcdc1d9ab527",
+          "locator": "block:1:0",
+          "clause": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Warrior's Prayer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Warrior's Prayer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Warrior's Prayer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Warrior's Prayer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Warrior's Prayer",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Warrior's Prayer supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither",
+      "name": "Wither",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/wither.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither#block:0:tier1:0:36f59bdde83ca50a",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither#block:0:tier1:1:ad79e413ccd12e59",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM the target takes a bane on their next power roll",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither#block:0:tier2:0:8d7ec1b6c2644490",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither#block:0:tier2:1:f9fd14c64465dadc",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM the target takes a bane on their next power roll",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither#block:0:tier3:0:8c15a534c3482a1f",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither#block:0:tier3:1:006e85e831a883f6",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM the target takes a bane on their next power roll",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "P < WEAK, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "P < AVERAGE, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "P < STRONG, the target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Wither",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/wither.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Wither supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Wither",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/wither.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Wither supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Wither",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/wither.md",
+          "decisionId": "class.conduit.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Wither supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance",
+      "name": "Word of Guidance",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance#block:0:0:9015b892b4b749b6",
+          "locator": "block:0:0",
+          "clause": "The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) for a damage-dealing ability.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance#block:1:0:f8002cb29794e2c2",
+          "locator": "block:1:0",
+          "clause": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance#block:2:0:9a835b1abc219ca5",
+          "locator": "block:2:0",
+          "clause": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N piety",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) for a damage-dealing ability.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Word of Guidance",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Guidance supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Word of Guidance",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Guidance supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Word of Guidance",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Guidance supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment",
+      "name": "Word of Judgment",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment#block:0:0:c44755bb2ef98cfa",
+          "locator": "block:0:0",
+          "clause": "The target would take damage from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment#block:1:0:d71628b47e5f0d53",
+          "locator": "block:1:0",
+          "clause": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment#block:2:0:6f1965d598baa7e8",
+          "locator": "block:2:0",
+          "clause": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N piety",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target would take damage from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "The [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) has a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) against the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Word of Judgment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Judgment supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Word of Judgment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Judgment supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Word of Judgment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+          "decisionId": "class.conduit.triggered-action",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Word of Judgment supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -174567,8 +177298,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 18,
-    "compatibility": 1314,
+    "compiled": 19,
+    "compatibility": 1333,
     "compiledButUnavailable": 2
   }
 }

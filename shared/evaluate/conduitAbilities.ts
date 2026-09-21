@@ -13,7 +13,7 @@ export function conduitAbilitySource(
     ? {
         ...action,
         text: conduitActionText(action),
-        ...(action.cost ? { cost: `${action.cost} Wrath` } : { cost: undefined }),
+        ...(action.cost ? { cost: `${action.cost} Piety` } : { cost: undefined }),
       }
     : undefined;
 }

@@ -22,6 +22,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
     'Bury the Point',
     // V94: the Tactician's 3-Focus Concussive Strike is reachable through the class ability choice.
     'Concussive Strike',
+    'Curse of Terror',
     // V92: the Shadow's 3-Insight Eviscerate is reachable through the class ability choice.
     'Eviscerate',
     'Eye Flash',
@@ -153,11 +154,13 @@ test('Pinning Shot evaluates each source potency threshold strictly after tier d
 
 // Censor/level-1: Halt Miscreant! tests P, Repent! tests I; both strict P-derived 0/1/2 potency.
 test.each([
-  ['Halt Miscreant!', 'P', 'slowed', [4, 7, 9], 0],
-  ['Repent!', 'I', 'dazed', [7, 10, 13], 3],
+  ['Halt Miscreant!', 'P', 'slowed', [4, 7, 9], 0, 'wrath'],
+  ['Repent!', 'I', 'dazed', [7, 10, 13], 3, 'wrath'],
+  // Conduit/level-1/curse-of-terror: I-derived potency, 6/9/13 + I psychic, 5 Piety.
+  ['Curse of Terror', 'I', 'frightened', [8, 11, 15], 5, 'piety'],
 ] as const)(
-  '%s retains each strict source threshold and Wrath cost',
-  (name, characteristic, condition, damages, cost) => {
+  '%s retains each strict source threshold and resource cost',
+  (name, characteristic, condition, damages, cost, resource) => {
     const inputs = readInputs();
     const source = buildCorpus(inputs).envelopes.find(e => e.name === name)!;
     const definition = compileAbility(compilerEnvelope(source, inputs));
@@ -171,11 +174,14 @@ test.each([
         [threshold, 'resisted'],
       ] as const) {
         const outcome = resolveCompiledAbility(definition, {
-          actor: { actorId: 'censor', characteristics: { M: 2, A: 1, R: 1, I: -1, P: 2 } },
+          actor: {
+            actorId: 'censor',
+            characteristics: { M: 2, A: 1, R: 1, I: resource === 'piety' ? 2 : -1, P: 2 },
+          },
           targets: [{ targetId: 'target', edges: 0, banes: 0 }],
           dice: { d10a, d10b },
           inCombat: true,
-          resourcePool: { resource: 'wrath', current: cost, legalFloor: 0 },
+          resourcePool: { resource, current: cost, legalFloor: 0 },
           targetFacts: [
             {
               targetId: 'target',
@@ -188,7 +194,12 @@ test.each([
             },
           ],
           conditionFacts: {
-            potency: { characteristic: 'P', weak: 0, average: 1, strong: 2 },
+            potency: {
+              characteristic: resource === 'piety' ? 'I' : 'P',
+              weak: 0,
+              average: 1,
+              strong: 2,
+            },
             targets: [
               { targetId: 'target', kind: 'hero', characteristics: { [characteristic]: score } },
             ],

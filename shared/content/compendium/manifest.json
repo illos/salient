@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:08fd8c7f9ee5f55ebe5b96a777ea6363dd828862ac1f6d894fa62bb688dd0362",
-  "entryCount": 1306,
+  "contentHash": "sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b",
+  "entryCount": 1361,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -189,6 +189,16 @@
         "feature/ability/shadow/level-2"
       ],
       "basis": "docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices."
+    },
+    {
+      "id": "conduit-level-one",
+      "description": "Conduit level-one domains, prayers, wards and abilities.",
+      "paths": [
+        "class/conduit.md",
+        "feature/conduit/level-1",
+        "feature/ability/conduit/level-1"
+      ],
+      "basis": "docs/build/V100-conduit-level-one.md#scope: complete Conduit level-one options."
     },
     {
       "id": "censor-level-one",
@@ -487,6 +497,190 @@
       "name": "Ranged Weapon Free Strike",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
       "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light",
+      "kind": "ability",
+      "name": "Blessed Light",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down",
+      "kind": "ability",
+      "name": "Call the Thunder Down",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse",
+      "kind": "ability",
+      "name": "Corruption's Curse",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror",
+      "kind": "ability",
+      "name": "Curse of Terror",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/curse-of-terror.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain",
+      "kind": "ability",
+      "name": "Drain",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/drain.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faith-is-our-armor",
+      "kind": "ability",
+      "name": "Faith Is Our Armor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/faith-is-our-armor.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/faithful-friend",
+      "kind": "ability",
+      "name": "Faithful Friend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/font-of-wrath",
+      "kind": "ability",
+      "name": "Font of Wrath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/font-of-wrath.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/grave-speech",
+      "kind": "ability",
+      "name": "Grave Speech",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/hands-of-the-maker",
+      "kind": "ability",
+      "name": "Hands of the Maker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/healing-grace",
+      "kind": "ability",
+      "name": "Healing Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/healing-grace.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash",
+      "kind": "ability",
+      "name": "Holy Lash",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/holy-lash.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer",
+      "kind": "ability",
+      "name": "Judgment's Hammer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall",
+      "kind": "ability",
+      "name": "Lightfall",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/lightfall.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath",
+      "kind": "ability",
+      "name": "Ray of Wrath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer",
+      "kind": "ability",
+      "name": "Sacrificial Offer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace",
+      "kind": "ability",
+      "name": "Sermon of Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse",
+      "kind": "ability",
+      "name": "Staggering Curse",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/staggering-curse.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee",
+      "kind": "ability",
+      "name": "Violence Will Not Aid Thee",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer",
+      "kind": "ability",
+      "name": "Warrior's Prayer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/wither",
+      "kind": "ability",
+      "name": "Wither",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/wither.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance",
+      "kind": "ability",
+      "name": "Word of Guidance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-guidance.md",
+      "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-judgment",
+      "kind": "ability",
+      "name": "Word of Judgment",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
+      "selection": "conduit-level-one",
       "file": "ability.json"
     },
     {
@@ -1487,6 +1681,14 @@
       "name": "Censor",
       "sourcePath": "vendor/steel-compendium/en/unified/md/class/censor.md",
       "selection": "censor-level-one",
+      "file": "class.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/class/conduit",
+      "kind": "class",
+      "name": "Conduit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/class/conduit.md",
+      "selection": "conduit-level-one",
       "file": "class.json"
     },
     {
@@ -2799,6 +3001,254 @@
       "name": "Ride",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/move-actions/ride.md",
       "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/1st-level-domain-feature",
+      "kind": "feature",
+      "name": "1st-Level Domain Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/1st-level-domain-feature.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/bastion-ward",
+      "kind": "feature",
+      "name": "Bastion Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/bastion-ward.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/blessing-of-compassion",
+      "kind": "feature",
+      "name": "Blessing of Compassion",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/blessing-of-compassion.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/blessing-of-comprehension",
+      "kind": "feature",
+      "name": "Blessing of Comprehension",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/blessing-of-comprehension.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/blessing-of-fortunate-weather",
+      "kind": "feature",
+      "name": "Blessing of Fortunate Weather",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/blessing-of-fortunate-weather.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/conduit-abilities",
+      "kind": "feature",
+      "name": "Conduit Abilities",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/conduit-abilities.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/conduit-ward",
+      "kind": "feature",
+      "name": "Conduit Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/conduit-ward.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/deity-and-domains",
+      "kind": "feature",
+      "name": "Deity and Domains",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/deity-and-domains.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/domain-piety-and-effects",
+      "kind": "feature",
+      "name": "Domain Piety and Effects",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/domain-piety-and-effects.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/faithful-friend",
+      "kind": "feature",
+      "name": "Faithful Friend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/faithful-friend.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/grave-speech",
+      "kind": "feature",
+      "name": "Grave Speech",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/grave-speech.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/hands-of-the-maker",
+      "kind": "feature",
+      "name": "Hands of the Maker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/hands-of-the-maker.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/healing-grace",
+      "kind": "feature",
+      "name": "Healing Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/healing-grace.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/inner-light",
+      "kind": "feature",
+      "name": "Inner Light",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/inner-light.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/inspired-deception",
+      "kind": "feature",
+      "name": "Inspired Deception",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/inspired-deception.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/oracular-visions",
+      "kind": "feature",
+      "name": "Oracular Visions",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/oracular-visions.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/piety",
+      "kind": "feature",
+      "name": "Piety",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/piety.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/prayer-of-destruction",
+      "kind": "feature",
+      "name": "Prayer of Destruction",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/prayer-of-destruction.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/prayer-of-distance",
+      "kind": "feature",
+      "name": "Prayer of Distance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/prayer-of-distance.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/prayer-of-soldiers-skill",
+      "kind": "feature",
+      "name": "Prayer of Soldier's Skill",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/prayer-of-soldiers-skill.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/prayer-of-speed",
+      "kind": "feature",
+      "name": "Prayer of Speed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/prayer-of-speed.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/prayer-of-steel",
+      "kind": "feature",
+      "name": "Prayer of Steel",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/prayer-of-steel.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/prayer",
+      "kind": "feature",
+      "name": "Prayer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/prayer.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/protective-circle",
+      "kind": "feature",
+      "name": "Protective Circle",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/protective-circle.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/quickness-ward",
+      "kind": "feature",
+      "name": "Quickness Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/quickness-ward.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/ray-of-wrath",
+      "kind": "feature",
+      "name": "Ray of Wrath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/ray-of-wrath.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/revitalizing-ritual",
+      "kind": "feature",
+      "name": "Revitalizing Ritual",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/revitalizing-ritual.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/sanctified-weapon",
+      "kind": "feature",
+      "name": "Sanctified Weapon",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/sanctified-weapon.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/sanctuary-ward",
+      "kind": "feature",
+      "name": "Sanctuary Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/sanctuary-ward.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/spirit-ward",
+      "kind": "feature",
+      "name": "Spirit Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/spirit-ward.md",
+      "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-1/triggered-action",
+      "kind": "feature",
+      "name": "Triggered Action",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/triggered-action.md",
+      "selection": "conduit-level-one",
       "file": "feature.json"
     },
     {

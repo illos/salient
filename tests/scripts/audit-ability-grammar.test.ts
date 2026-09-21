@@ -9,6 +9,7 @@ import { readFileSync } from 'node:fs';
 import { conditionExpression } from '../../shared/resolve/abilityGrammar.ts';
 import { describe, expect, it } from 'vitest';
 import {
+  wizardGrants,
   audit,
   buildCorpus,
   classify,
@@ -16,6 +17,8 @@ import {
   type Corpus,
   type Envelope,
 } from '../../scripts/audit-ability-grammar.ts';
+
+import { getDefinitions } from '../../shared/content/character-decisions.ts';
 
 const corpus = buildCorpus();
 const envelope = (kind: Corpus, name: string, parent?: RegExp): Envelope => {
@@ -317,4 +320,36 @@ it.each([
     threshold: { kind: 'printed', value: -1 },
     condition,
   });
+});
+
+// Conduit Deity and Domains / 1st-Level Domain Feature: feature must be one of two portfolio domains.
+it('finite selected-pool witnesses prove actual domain grants without accepting unsupported pools', () => {
+  const definitions = structuredClone(getDefinitions(1));
+  const all = () => definitions.steps.flatMap(s => s.decisions);
+  const find = (id: string) => all().find(d => d.id === id)!;
+  const grant = () =>
+    wizardGrants(definitions, 1).find(
+      g => g.decisionId === 'class.conduit.domain-feature.creation',
+    )!;
+  for (const name of ['Hands of the Maker', 'Grave Speech', 'Faithful Friend']) {
+    const g = wizardGrants(definitions, 1).find(
+      g => g.name === name && g.decisionId.startsWith('class.conduit.'),
+    )!;
+    expect(g.selectable).toBe('selectable');
+    expect(g.detail).toContain('witness');
+  }
+  const domains = find('class.conduit.domains');
+  const portfolios = structuredClone(domains.optionsByParent!);
+  for (const entry of Object.values(domains.optionsByParent!))
+    entry.values = entry.values!.filter(v => v !== 'Creation');
+  expect(grant().selectable).not.toBe('selectable');
+  for (const entry of Object.values(domains.optionsByParent!)) entry.values = ['Creation'];
+  expect(grant().selectable).not.toBe('selectable');
+  domains.optionsByParent = portfolios;
+  const feature = find('class.conduit.domain-feature');
+  feature.selectedPool!.exclude = true;
+  expect(grant().selectable).toBe('unknown');
+  delete feature.selectedPool;
+  feature.abilityPool = { knownOnly: true };
+  expect(grant().selectable).toBe('unknown');
 });

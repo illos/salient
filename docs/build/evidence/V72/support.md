@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:08fd8c7f9ee5f55ebe5b96a777ea6363dd828862ac1f6d894fa62bb688dd0362`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b`.
 
-Currently reachable compiled: 18; unchanged reachable compatibility: 1314; structurally supported but unavailable: 2.
+Currently reachable compiled: 19; unchanged reachable compatibility: 1333; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -104,6 +104,29 @@ Currently reachable compiled: 18; unchanged reachable compatibility: 1314; struc
 | Knockback | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section |
 | Melee Weapon Free Strike | hero-standalone | supported | compiled |  |
 | Ranged Weapon Free Strike | hero-standalone | supported | compiled |  |
+| Blessed Light | hero-standalone | manual | legacy-compatibility | manual-section |
+| Call the Thunder Down | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Corruption's Curse | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Curse of Terror | hero-standalone | supported | compiled |  |
+| Drain | hero-standalone | manual | legacy-compatibility | manual-section |
+| Faith Is Our Armor | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Faithful Friend | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
+| Font of Wrath | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Grave Speech | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
+| Hands of the Maker | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
+| Healing Grace | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Holy Lash | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Judgment's Hammer | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Lightfall | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Ray of Wrath | hero-standalone | manual | legacy-compatibility | manual-section |
+| Sacrificial Offer | hero-standalone | manual | legacy-compatibility | manual-section |
+| Sermon of Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Staggering Curse | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Violence Will Not Aid Thee | hero-standalone | manual | legacy-compatibility | manual-section |
+| Warrior's Prayer | hero-standalone | manual | legacy-compatibility | manual-section |
+| Wither | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Word of Guidance | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
+| Word of Judgment | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Draconian Pride | hero-standalone | manual | legacy-compatibility | target-boundary |
 | Dragon Breath | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Afflict a Bountiful Decay | hero-standalone | manual | not-reachable | manual-section |
