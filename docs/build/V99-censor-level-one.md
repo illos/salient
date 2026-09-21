@@ -69,3 +69,15 @@ uses a Compendium-derived independent ledger rather than extending the existing 
   is sufficient, without Strike: Back Blasphemer! with Cloak and Dagger deals 3/5/7, not 2/4/6.
   Corrected the independent ledger and allowed the controlled Censor scenario filename in failure
   locations. Runtime is unchanged; accepted gates are retained for the bounded live retry.
+- ENGINE independently passed the final bounded correction at `56ddceb` (Chords 1403); see
+  [the rules review](audits/V99-censor-rules-review.md). No open findings.
+- TESTER final live acceptance at `56ddceb` (Chords 1404): isolated `censor` cohort exited 0 in
+  53.7s, covering twelve domain builds and 42 distinct granted action uses, custom-deity pruning,
+  saved/effective separation, fixed-cost blocking, target damage and applied/resisted conditions.
+  Touched lint/format passed. Backend stopped, ports free; retained development data is unused.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V99-56ddceb`.
+- Combined accepted verification covers 979 distinct tests (382 engine + 597 app/scripts), using
+  retained `74b8f74` passes and repaired `47e3aa9` gates. This was a resumed gate, not a single
+  successful full-command run. Initial failures and reports remain retained. Runtime is unchanged
+  since `47e3aa9`; no repeated suite is required for publication.
+- Ready for DEPLOY2 to integrate and publish the complete slice with 1306 content entries.
