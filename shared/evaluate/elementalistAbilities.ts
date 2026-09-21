@@ -2,6 +2,7 @@
 import {
   ELEMENTALIST_ACTIONS,
   elementalistActionText,
+  elementalistSourceText,
 } from '../content/classes/elementalist/abilities.ts';
 import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
 const managed = (ability: Pick<GrantedAbility, 'name' | 'sourcePath' | 'kind'>) =>
@@ -42,7 +43,7 @@ export function elementalistAbilities(
         source: {
           ...parent.provenance.source,
           path: action.sourcePath,
-          quote: elementalistActionText(action),
+          quote: elementalistSourceText(action),
         },
       },
     });

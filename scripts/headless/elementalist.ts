@@ -115,6 +115,15 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
           const a = sheet.abilities.find(x => x.name === name);
           assert.ok(a?.content?.text, `${w.id} ${name} source`);
           if (name.includes(':')) assert.ok(a.activationCondition);
+          if (name.startsWith('Hurl Element:')) {
+            const expected = w.rolledActions.find(r => r.name === name)!;
+            assert.equal(
+              a.buildModifiers?.reduce((n, m) => n + m.amount, 0) ?? 0,
+              expected.damageByTier[0]! - 4,
+              name,
+            );
+            assert.ok(!a.buildModifiers?.some(m => m.condition), name);
+          }
         }
       }
       // Editing the draft must prune old tradition grants without replacing its admitted build.
@@ -174,7 +183,7 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
         campaignId,
         characterId: targetId,
       });
-      // Source-derived Elementalist target has Agility -1; below every I2 potency threshold.
+      // Source-derived Null target has Reason -1; below every R2 potency threshold.
       const lowId = await create(
         ledger.lowReasonTarget as unknown as EvaluationInput['selections'],
         `Low Reason ${runId}`,

@@ -243,10 +243,14 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
       'While maintaining Persistent 1, effect lasts until start of next turn. This records the maintenance effect; any repeat rolls and damage are resolved manually. Resolve the stated effects manually.',
   },
 ];
-export function elementalistActionText(action: ElementalistAction): string {
+export function elementalistSourceText(action: ElementalistAction): string {
   const entry = [...abilitySources, ...featureSources].find(
     e => e.sourcePath === `vendor/steel-compendium/${action.sourcePath}`,
   );
   if (!entry) throw new Error(`Missing Elementalist source ${action.sourcePath}`);
-  return `${action.activationCondition}\n\n${entry.text}`;
+  return entry.text;
+}
+
+export function elementalistActionText(action: ElementalistAction): string {
+  return `${action.activationCondition}\n\n${elementalistSourceText(action)}`;
 }

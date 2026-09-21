@@ -761,11 +761,15 @@ async function abilityView(
               ? metadataOf(row)
               : { keywords: [] };
   const { provenance, ...rest } = ability;
-  const facts = { name: ability.name, keywords: metadata.keywords };
+  const facts = {
+    name: elementalistSource?.damageType ? 'Hurl Element' : ability.name,
+    keywords: metadata.keywords,
+  };
   const buildModifiers = metadata.roll
     ? modifiers.flatMap(modifier => {
-        const condition = abilityModifierCondition(modifier, facts);
-        if (!condition && !matchesAbilityModifier(modifier, facts)) return [];
+        const fixedType = elementalistSource?.damageType;
+        const condition = fixedType ? null : abilityModifierCondition(modifier, facts);
+        if (!condition && !matchesAbilityModifier(modifier, facts, fixedType)) return [];
         return [
           {
             label: modifier.label ?? modifier.provenance.selection ?? modifier.id,

@@ -107,6 +107,8 @@ test('V25 complete corrected Bethell matches every independent baseline and gran
     [
       ['The Flesh, a Crucible', { resource: 'essence', amount: 3 }],
       ['Conflagration', { resource: 'essence', amount: 5 }],
+      ['Practical Magic: Additional Square', { resource: 'essence', amount: 1 }],
+      ['Explosive Assistance: Enhance', { resource: 'essence', amount: 1 }],
     ],
   );
   assert.deepEqual(
