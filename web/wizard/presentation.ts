@@ -140,7 +140,7 @@ export function decisionReference(decision: Decision, step: Step): RuleReference
 }
 /** Replace technical decision references inside evaluator guidance, preserving its meaning. */
 export function readableGuidance(text: string): string {
-  if (text.startsWith('Required choice missing:')) return 'Make a selection to continue.';
+  if (text.startsWith('Required choice missing:')) return 'Needs a selection';
   for (const id of Object.keys(DECISION_LABELS).sort((a, b) => b.length - a.length))
     text = text.replaceAll(id, decisionLabel(id));
   return text;

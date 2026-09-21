@@ -178,6 +178,17 @@ in its header, and Exit keeps the draft. Proof: `tests/app/wizard-draft.test.ts`
 Known consequence: an abandoned draft stays as an unlisted row. It is capped at one per owner by
 the resume, and it counts against the hundred-character creation limit.
 
+## Hero column
+
+From the user's two-part mockup of the right pane (2026-09-21): the derived values are grouped and
+named rather than listed flat. Vitals carries Stamina, Recoveries, Winded, the heroic resource and
+the kit; Movement and defense carries Speed, Stability, Size, Disengage, Potency and the saving
+throw; Standing carries Renown, Wealth and Languages. Each group is a `sub` inset of hairline-split
+rows under its own label. What the build grants follows in its own counted insets — Traits,
+Features, Perks, Abilities — then the skills, then the outstanding list, each row a dot, the
+decision's name and what it needs, with the count in the accent and one line saying they all need
+answering before the hero is finished. A missing value still reads "Pending".
+
 ## Flagged for audit: the Tactician's two kits
 
 **This slice changed how a character option is chosen, not only how it looks.** A Tactician takes
@@ -271,3 +282,6 @@ chosen; it needs its own slice and headless proof.
   under the grid says how many match. No complication is a card; a hundred are, so the grid is
   behind an explicit `CARD_CATALOGS` list rather than an option-count threshold. Checked against
   the composed definitions and the built catalog: all 100 resolve to text and a reference.
+- 2026-09-21: right pane regrouped from the user's mockup, see "Hero column" above. `Required
+  choice missing:` now reads "Needs a selection" rather than "Make a selection to continue.", which
+  also shortens the same guidance where it appears beside a decision in the centre column.

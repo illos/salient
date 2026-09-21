@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The "Your hero so far" column (V21 item 10; Quiet, docs/design-mockups/quiet/README.md): a
- * `card` panel with the disc and identity line, five compact characteristic tiles, derived-value
- * rows split by hairlines, skill pills, the traits taken, the outstanding list and the Source
- * text inset for the current step. The status reads as a dot and a word rather than a pill
- * (V96 mockup), so the accent marks completeness rather than decorating a label. Every value is read from the shared `characters.evaluate` result; nothing here
- * derives one. A value the evaluator has not produced yet reads "Pending" (the model does not say
- * which later step supplies it).
+ * The "Your hero so far" column (V21 item 10; Quiet, docs/design-mockups/quiet/README.md; V96
+ * grouping): a `card` panel with the disc and identity line, five compact characteristic tiles,
+ * then the derived values in named groups — Vitals, Movement and defense, Standing — each a `sub`
+ * inset of hairline-split rows. What the build grants follows in its own insets, counted; then the
+ * skills, then what the hero still owes, then the Source text inset for the current step.
+ *
+ * The status reads as a dot and a word rather than a pill, so the accent marks completeness
+ * rather than decorating a label. Every value is read from the shared `characters.evaluate`
+ * result; nothing here derives one. A value the evaluator has not produced yet reads "Pending"
+ * (the model does not say which later step supplies it).
  */
 import { cn } from 'cn';
 import { Chip } from '../components/chip';
@@ -30,10 +33,37 @@ const CHARACTERISTICS = [
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   const pending = value === undefined || value === null || value === '';
   return (
-    <div className="flex items-baseline justify-between gap-4 py-2 text-base">
+    <div className="flex items-baseline justify-between gap-4 py-2.5 text-base">
       <span className="text-sm text-muted-foreground">{label}</span>
-      <span className={pending ? 'text-muted-foreground' : 'text-right font-medium tabular-nums'}>
+      <span className={pending ? 'text-sm text-muted-foreground' : 'text-right font-medium'}>
         {pending ? 'Pending' : value}
+      </span>
+    </div>
+  );
+}
+
+/** A named group of rows: the label outside, the rows in a `sub` inset. */
+function Group({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <section className="flex flex-col gap-1.5" aria-label={label}>
+      <h3 className="m-0 text-sm font-normal text-muted-foreground">{label}</h3>
+      <div className="divide-y divide-border rounded-md bg-muted px-4 py-1">{children}</div>
+    </section>
+  );
+}
+
+/** One kind of thing the build grants: what it is, how many, and their names. */
+function Granted({ label, list }: { label: string; list: { name: string }[] | undefined }) {
+  return (
+    <div className="flex flex-col gap-1 rounded-md bg-muted px-4 py-3">
+      <span className="flex items-baseline justify-between gap-3">
+        <span className="text-sm text-muted-foreground">{label}</span>
+        {list?.length ? (
+          <span className="text-sm tabular-nums text-muted-foreground">{list.length}</span>
+        ) : null}
+      </span>
+      <span className={cn('text-base', !list?.length && 'text-sm text-muted-foreground')}>
+        {list?.length ? list.map(item => item.name).join(', ') : 'Pending'}
       </span>
     </div>
   );
@@ -114,7 +144,7 @@ export function HeroSoFar({
           />
         ))}
       </div>
-      <div className="divide-y divide-border">
+      <Group label="Vitals">
         <Row label="Stamina" value={show(b.staminaMaximum)} />
         <Row
           label="Recoveries"
@@ -134,6 +164,8 @@ export function HeroSoFar({
           }
         />
         <Row label="Kit" value={b.kit === null ? 'None' : b.kit?.name.value} />
+      </Group>
+      <Group label="Movement and defense">
         <Row label="Speed" value={show(b.speed)} />
         <Row label="Stability" value={show(b.stability)} />
         <Row label="Size" value={show(b.size)} />
@@ -150,31 +182,24 @@ export function HeroSoFar({
           label="Saves on"
           value={b.savingThrowThreshold ? `${b.savingThrowThreshold.value}+` : undefined}
         />
+      </Group>
+      <Group label="Standing">
         <Row label="Renown" value={show(b.renown)} />
         <Row label="Wealth" value={show(b.wealth)} />
         <Row label="Languages" value={names(b.languages)} />
-        <Row label="Traits" value={names(b.traits)} />
-        <Row label="Features" value={names(b.features)} />
-        <Row label="Perks" value={names(b.perks)} />
-        <Row label="Abilities" value={names(b.abilities)} />
-      </div>
-      {b.traits?.length ? (
-        <div className="rounded-md bg-muted p-4">
-          <p className="mb-2 text-sm text-muted-foreground">Traits chosen</p>
-          <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0" aria-label="Traits chosen">
-            {b.traits.map(trait => (
-              <li key={trait.name}>
-                <Chip>{trait.name}</Chip>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+      </Group>
+      <section className="flex flex-col gap-1.5" aria-label="Granted by your build">
+        <h3 className="m-0 text-sm font-normal text-muted-foreground">Granted by your build</h3>
+        <Granted label="Traits" list={b.traits} />
+        <Granted label="Features" list={b.features} />
+        <Granted label="Perks" list={b.perks} />
+        <Granted label="Abilities" list={b.abilities} />
+      </section>
       <SupportingBuildFacts baseline={b} />
-      <div>
-        <p className="mb-2 text-sm text-muted-foreground">Skills</p>
+      <section className="flex flex-col gap-1.5" aria-label="Skills">
+        <h3 className="m-0 text-sm font-normal text-muted-foreground">Skills</h3>
         {b.skills?.length ? (
-          <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0" aria-label="Skills">
+          <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
             {b.skills.map(skill => (
               <li key={skill.name}>
                 <Chip>{skill.name}</Chip>
@@ -184,19 +209,36 @@ export function HeroSoFar({
         ) : (
           <p className="m-0 text-sm text-muted-foreground">None yet</p>
         )}
-      </div>
+      </section>
       {problems.length > 0 && (
-        <div>
-          <p className="mb-1 text-sm text-muted-foreground">Outstanding</p>
-          <ul className="m-0 list-none p-0 text-sm">
+        <section className="flex flex-col gap-1.5" aria-label="Outstanding">
+          <div className="flex items-baseline justify-between gap-3">
+            <h3 className="m-0 text-sm font-normal text-muted-foreground">Outstanding</h3>
+            <span className="text-sm text-primary tabular-nums">
+              {problems.length} of {problems.length} left
+            </span>
+          </div>
+          <ul className="m-0 flex list-none flex-col gap-1 p-0">
             {problems.map((d, i) => (
-              <li key={i} className="py-0.5">
-                <span className="font-medium">{decisionLabel(d.decisionId)}</span>:{' '}
-                {readableGuidance(d.message)}
+              <li
+                key={i}
+                className="flex items-baseline gap-2 rounded-md bg-muted px-3 py-2 text-sm"
+              >
+                <span
+                  aria-hidden
+                  className="size-1.5 shrink-0 translate-y-1.5 rounded-full bg-primary"
+                />
+                <span className="min-w-0 flex-1 font-medium">{decisionLabel(d.decisionId)}</span>
+                <span className="shrink-0 text-muted-foreground">
+                  {readableGuidance(d.message)}
+                </span>
               </li>
             ))}
           </ul>
-        </div>
+          <p className="m-0 text-sm text-muted-foreground">
+            Each needs a selection before the hero can be finished.
+          </p>
+        </section>
       )}
       {b.uncertainties?.length ? (
         <p className="m-0 text-sm text-muted-foreground">
