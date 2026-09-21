@@ -1118,8 +1118,9 @@ function Wizard({ character }: { character: WizardCharacter }) {
       ? (selections['culture.preset'] as string)
       : undefined,
   );
+  // Tiles, in reading order. The culture name is fixed too, but it is already the step's title,
+  // so it gets no tile of its own.
   const lockedAspectOrder = [
-    'culture.name',
     'culture.language',
     'culture.environment',
     'culture.organization',
@@ -1198,7 +1199,10 @@ function Wizard({ character }: { character: WizardCharacter }) {
         ];
       })
     : [];
-  const lockedIds = new Set(lockedAspects.map(aspect => aspect.id));
+  // Everything the preset fixed is taken out of the ordinary decision list, tile or not.
+  const lockedIds = new Set(
+    [...PRESET_FIXED_ASPECTS, 'culture.language'].filter(id => lockedByPreset(id)),
+  );
   // The three culture skills are one decision to the player: one per aspect, chosen together.
   const isCultureSkill = (decision: Decision) =>
     /^culture\..+\.skill$/.test(decision.id) &&
