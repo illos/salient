@@ -1366,6 +1366,32 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.shadow.level-3/7-insight-ability",
+    "kind": "feature",
+    "name": "7-Insight Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-3/7-insight-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-3/7-insight-ability.json",
+    "selection": "shadow-level-three",
+    "text": "---\nclass: shadow\nlevel: \"3\"\nname: 7-Insight Ability\nscc: mcdm.heroes.v1/feature.shadow.level-3/7-insight-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 insight to use.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-3/careful-observation",
+    "kind": "feature",
+    "name": "Careful Observation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-3/careful-observation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-3/careful-observation.json",
+    "selection": "shadow-level-three",
+    "text": "---\nclass: shadow\nlevel: \"3\"\nname: Careful Observation\nscc: mcdm.heroes.v1/feature.shadow.level-3/careful-observation\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.tactician.level-1/1st-level-doctrine-feature",
     "kind": "feature",
     "name": "1st-Level Doctrine Feature",

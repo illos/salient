@@ -8,24 +8,24 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:9778bbbd413dfe01afd0c76e26fc41542f6ce46957aa261af9bf541d5ba342ca`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:242bc3e1b0f8fead8bf2a47236797e1212e1bbb6cf1ed3221411a4ea62e64d72`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 95 | 9 | 39 | 4 | 47 |
+| Hero standalone (`ability.json`) | 100 | 9 | 42 | 5 | 49 |
 | Kit signature (`kit.json`) | 25 | 2 | 19 | 1 | 4 |
 | Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 20 | 566 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 441 (170 resolve to a standalone entry, 42 to a kit signature, 229 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 675 (264 resolve to a standalone entry, 63 to a kit signature, 348 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 20 fully (1.73%), 566 with a typed remainder (48.88%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 72 of 192 (37.50%) compile: 12 fully (6.25%), 60 with a typed remainder (31.25%), of which 5 (2.60%) are within the bounded potency remainder. 120 (62.50%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 75 of 197 (38.07%) compile: 12 fully (6.09%), 63 with a typed remainder (31.98%), of which 6 (3.05%) are within the bounded potency remainder. 122 (61.93%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -34,7 +34,7 @@ compiled entries:
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Hero standalone (`ability.json`) | COMPILES | 5 | 2 | 2 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 28 | 0 | 8 | 2 | 1 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 31 | 0 | 8 | 2 | 1 |
 | Kit signature (`kit.json`) | COMPILES | 0 | 2 | 0 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 17 | 1 | 1 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -65,82 +65,85 @@ Expected categories are read from the V26 designs; a disagreement is a finding, 
 
 ## Hero abilities that compile (fully or with remainder)
 
-Availability is derived from the composed wizard definitions (`getDefinitions(1)` and `(2)`): `selectable` when at least one granting decision chain is offered by the current wizard, `not-selectable` when every grant path is unsupported, `not-granted` when no wizard decision references the entry, `unknown` when a pool-restricted decision could not be evaluated statically.
+Availability is derived from the composed wizard definitions (`getDefinitions(1)`, `(2)` and `(3)`): `selectable` when at least one granting decision chain is offered by the current wizard, `not-selectable` when every grant path is unsupported, `not-granted` when no wizard decision references the entry, `unknown` when a pool-restricted decision could not be evaluated statically.
 
 | Corpus | Ability | Category | Bounded | Target | Availability | Grant decisions | Remainder shapes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| hero-standalone | Melee Weapon Free Strike [V26: Melee Free Strike] | COMPILES | — | single | selectable | free-strikes.grant@1:selectable, free-strikes.grant@2:selectable | — |
-| hero-standalone | Ranged Weapon Free Strike [V26: Ranged Free Strike] | COMPILES | — | single | selectable | free-strikes.grant@1:selectable, free-strikes.grant@2:selectable | — |
-| hero-standalone | Draconian Pride | COMPILES | — | area | selectable | ancestry.dragon-knight.purchased-traits@1:selectable, ancestry.revenant.dragon-knight.purchased-traits@1:selectable, ancestry.dragon-knight.purchased-traits@2:selectable, ancestry.revenant.dragon-knight.purchased-traits@2:selectable | — |
-| hero-standalone | Dragon Breath | COMPILES_WITH_REMAINDER | — | area | selectable | ancestry.dragon-knight.purchased-traits@1:selectable, ancestry.revenant.dragon-knight.purchased-traits@1:selectable, ancestry.dragon-knight.purchased-traits@2:selectable, ancestry.revenant.dragon-knight.purchased-traits@2:selectable | effect-paragraph:effect |
+| hero-standalone | Melee Weapon Free Strike [V26: Melee Free Strike] | COMPILES | — | single | selectable | free-strikes.grant@1:selectable, free-strikes.grant@2:selectable, free-strikes.grant@3:selectable | — |
+| hero-standalone | Ranged Weapon Free Strike [V26: Ranged Free Strike] | COMPILES | — | single | selectable | free-strikes.grant@1:selectable, free-strikes.grant@2:selectable, free-strikes.grant@3:selectable | — |
+| hero-standalone | Draconian Pride | COMPILES | — | area | selectable | ancestry.dragon-knight.purchased-traits@1:selectable, ancestry.revenant.dragon-knight.purchased-traits@1:selectable, ancestry.dragon-knight.purchased-traits@2:selectable, ancestry.revenant.dragon-knight.purchased-traits@2:selectable, ancestry.dragon-knight.purchased-traits@3:selectable, ancestry.revenant.dragon-knight.purchased-traits@3:selectable | — |
+| hero-standalone | Dragon Breath | COMPILES_WITH_REMAINDER | — | area | selectable | ancestry.dragon-knight.purchased-traits@1:selectable, ancestry.revenant.dragon-knight.purchased-traits@1:selectable, ancestry.dragon-knight.purchased-traits@2:selectable, ancestry.revenant.dragon-knight.purchased-traits@2:selectable, ancestry.dragon-knight.purchased-traits@3:selectable, ancestry.revenant.dragon-knight.purchased-traits@3:selectable | effect-paragraph:effect |
 | hero-standalone | Afflict a Bountiful Decay | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
 | hero-standalone | Behold the Mystery | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:persistent N |
-| hero-standalone | Bifurcated Incineration | COMPILES | — | multi | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable | — |
-| hero-standalone | Conflagration | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-5@1:selectable, class.elementalist.ability-5@2:selectable | effect-paragraph:persistent N |
+| hero-standalone | Bifurcated Incineration | COMPILES | — | multi | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | — |
+| hero-standalone | Conflagration | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-5@1:selectable, class.elementalist.ability-5@2:selectable, class.elementalist.ability-5@3:selectable | effect-paragraph:persistent N |
 | hero-standalone | Grasp of Beyond | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
-| hero-standalone | Hurl Element | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.features@1:selectable, class.elementalist.features@2:selectable | effect-paragraph:effect |
+| hero-standalone | Hurl Element | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.features@1:selectable, class.elementalist.features@2:selectable, class.elementalist.features@3:selectable | effect-paragraph:effect |
 | hero-standalone | Invigorating Growth | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
 | hero-standalone | Meteoric Introduction [V26: Meteoric Introduction (compile-only)] | COMPILES | — | single | not-granted | — | — |
 | hero-standalone | Ray of Agonizing Self-Reflection [V26: Ray of Agonizing Self-Reflection (compile-only)] | COMPILES_WITH_REMAINDER | yes | single | not-granted | — | potency:R < SYM slowed (save ends) |
 | hero-standalone | Ripples in the Earth | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:effect; potency:M < SYM prone |
 | hero-standalone | Test of Rain | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:effect |
-| hero-standalone | The Flesh, a Crucible | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable | effect-paragraph:persistent N |
+| hero-standalone | The Flesh, a Crucible | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable | effect-paragraph:persistent N |
 | hero-standalone | The Green Within, the Green Without | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
 | hero-standalone | Unquiet Ground | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:effect |
-| hero-standalone | Viscous Fire [V26: Viscous Fire] | COMPILES | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable | — |
-| hero-standalone | Back! | COMPILES | — | area | not-selectable | class.fury.ability-3@1:not-selectable, class.fury.ability-3@2:not-selectable | — |
-| hero-standalone | Blood for Blood! | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.ability-5@1:not-selectable, class.fury.ability-5@2:not-selectable | effect-paragraph:effect; potency:M < SYM bleeding and weakened (save ends) |
-| hero-standalone | Brutal Slam [V26: Brutal Slam] | COMPILES | — | single | selectable | class.fury.signature-ability@1:selectable, class.fury.signature-ability@2:selectable | — |
-| hero-standalone | Hit and Run | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.signature-ability@1:not-selectable, class.fury.signature-ability@2:not-selectable | effect-paragraph:effect; potency:A < SYM slowed (save ends) |
-| hero-standalone | Impaled! | COMPILES_WITH_REMAINDER | — | unknown | not-selectable | class.fury.signature-ability@1:not-selectable, class.fury.signature-ability@2:not-selectable | potency:M < SYM grabbed |
-| hero-standalone | Out of the Way! [V26: Out of the Way!] | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.ability-3@1:selectable, class.fury.ability-3@2:selectable | effect-paragraph:effect; slide N |
-| hero-standalone | Thunder Roar [V26: Thunder Roar] | COMPILES_WITH_REMAINDER | — | area | selectable | class.fury.ability-5@1:selectable, class.fury.ability-5@2:selectable | effect-paragraph:effect |
-| hero-standalone | Tide of Death | COMPILES_WITH_REMAINDER | — | self | not-selectable | class.fury.ability-3@1:not-selectable, class.fury.ability-3@2:not-selectable | effect-paragraph:effect |
-| hero-standalone | To the Death! | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.signature-ability@1:not-selectable, class.fury.signature-ability@2:not-selectable | effect-paragraph:effect |
-| hero-standalone | To the Uttermost End | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.ability-5@1:not-selectable, class.fury.ability-5@2:not-selectable | resource-spend:spend N+ ferocity |
-| hero-standalone | Your Entrails Are Your Extrails! | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.ability-3@1:not-selectable, class.fury.ability-3@2:not-selectable | effect-paragraph:effect; potency:M < SYM bleeding (save ends) |
-| hero-standalone | Disorienting Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | effect-paragraph:effect; slide N |
-| hero-standalone | Eviscerate | COMPILES_WITH_REMAINDER | yes | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | potency:A < SYM bleeding (save ends) |
-| hero-standalone | Gasping in Pain | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect; potency:I < SYM prone |
-| hero-standalone | Get In Get Out | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | effect-paragraph:effect |
-| hero-standalone | I Work Better Alone | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect |
-| hero-standalone | One Hundred Throats | COMPILES_WITH_REMAINDER | — | self | selectable | class.shadow.ability-5@1:selectable, class.shadow.ability-5@2:selectable | effect-paragraph:effect |
-| hero-standalone | Setup | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-5@1:selectable, class.shadow.ability-5@2:selectable | potency:R < SYM the target has damage weakness N (save ends) |
-| hero-standalone | Teamwork Has Its Place | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect |
-| hero-standalone | Two Throats at Once | COMPILES | — | multi | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | — |
-| hero-standalone | You Were Watching the Wrong One | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect |
-| hero-standalone | In a Puff of Ash | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.level-2.burning-ash-ability@2:selectable | you can teleport the target N square; you can teleport the target up to N squares |
-| hero-standalone | Sticky Bomb | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.level-2.trained-assassin-ability@2:selectable | effect-paragraph:effect |
-| hero-standalone | Stink Bomb | COMPILES_WITH_REMAINDER | — | area | selectable | class.shadow.level-2.trained-assassin-ability@2:selectable | effect-paragraph:effect |
-| hero-standalone | Concussive Strike | COMPILES_WITH_REMAINDER | yes | single | selectable | class.tactician.ability-3@1:selectable, class.tactician.ability-3@2:selectable | potency:M < SYM dazed (save ends) |
-| hero-standalone | Hammer and Anvil | COMPILES_WITH_REMAINDER | — | single | selectable | class.tactician.ability-5@1:selectable, class.tactician.ability-5@2:selectable | effect-paragraph:effect; one ally within N squares of you can use a strike signature ability against the target as a free triggered action; one ally within N squares of you can use a strike signature ability that gains an edge against the target as a free triggered action; two allies within N squares of you can each use a strike signature ability that gains an edge against the target as a free triggered action |
-| hero-standalone | Inspiring Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.tactician.ability-3@1:selectable, class.tactician.ability-3@2:selectable | you or one ally within N squares of you can spend a recovery; you and one ally within N squares of you can spend a recovery, and each of you gains an edge on the next ability roll you make during the encounter |
-| hero-standalone | Mind Game | COMPILES_WITH_REMAINDER | — | single | selectable | class.tactician.ability-5@1:selectable, class.tactician.ability-5@2:selectable | effect-paragraph:effect; potency:R < SYM weakened (save ends) |
-| hero-standalone | The Wode Defends | COMPILES_WITH_REMAINDER | yes | single | selectable | ancestry.revenant.wode-elf.purchased-traits@1:selectable, ancestry.wode-elf.purchased-traits@1:selectable, ancestry.revenant.wode-elf.purchased-traits@2:selectable, ancestry.wode-elf.purchased-traits@2:selectable | potency:A < SYM slowed (save ends); potency:A < SYM restrained (save ends) |
+| hero-standalone | Viscous Fire [V26: Viscous Fire] | COMPILES | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | — |
+| hero-standalone | Back! | COMPILES | — | area | not-selectable | class.fury.ability-3@1:not-selectable, class.fury.ability-3@2:not-selectable, class.fury.ability-3@3:not-selectable | — |
+| hero-standalone | Blood for Blood! | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.ability-5@1:not-selectable, class.fury.ability-5@2:not-selectable, class.fury.ability-5@3:not-selectable | effect-paragraph:effect; potency:M < SYM bleeding and weakened (save ends) |
+| hero-standalone | Brutal Slam [V26: Brutal Slam] | COMPILES | — | single | selectable | class.fury.signature-ability@1:selectable, class.fury.signature-ability@2:selectable, class.fury.signature-ability@3:selectable | — |
+| hero-standalone | Hit and Run | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.signature-ability@1:not-selectable, class.fury.signature-ability@2:not-selectable, class.fury.signature-ability@3:not-selectable | effect-paragraph:effect; potency:A < SYM slowed (save ends) |
+| hero-standalone | Impaled! | COMPILES_WITH_REMAINDER | — | unknown | not-selectable | class.fury.signature-ability@1:not-selectable, class.fury.signature-ability@2:not-selectable, class.fury.signature-ability@3:not-selectable | potency:M < SYM grabbed |
+| hero-standalone | Out of the Way! [V26: Out of the Way!] | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.ability-3@1:selectable, class.fury.ability-3@2:selectable, class.fury.ability-3@3:selectable | effect-paragraph:effect; slide N |
+| hero-standalone | Thunder Roar [V26: Thunder Roar] | COMPILES_WITH_REMAINDER | — | area | selectable | class.fury.ability-5@1:selectable, class.fury.ability-5@2:selectable, class.fury.ability-5@3:selectable | effect-paragraph:effect |
+| hero-standalone | Tide of Death | COMPILES_WITH_REMAINDER | — | self | not-selectable | class.fury.ability-3@1:not-selectable, class.fury.ability-3@2:not-selectable, class.fury.ability-3@3:not-selectable | effect-paragraph:effect |
+| hero-standalone | To the Death! | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.signature-ability@1:not-selectable, class.fury.signature-ability@2:not-selectable, class.fury.signature-ability@3:not-selectable | effect-paragraph:effect |
+| hero-standalone | To the Uttermost End | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.ability-5@1:not-selectable, class.fury.ability-5@2:not-selectable, class.fury.ability-5@3:not-selectable | resource-spend:spend N+ ferocity |
+| hero-standalone | Your Entrails Are Your Extrails! | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.ability-3@1:not-selectable, class.fury.ability-3@2:not-selectable, class.fury.ability-3@3:not-selectable | effect-paragraph:effect; potency:M < SYM bleeding (save ends) |
+| hero-standalone | Disorienting Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable, class.shadow.ability-3@3:selectable | effect-paragraph:effect; slide N |
+| hero-standalone | Eviscerate | COMPILES_WITH_REMAINDER | yes | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable, class.shadow.ability-3@3:selectable | potency:A < SYM bleeding (save ends) |
+| hero-standalone | Gasping in Pain | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable, class.shadow.signature-ability@3:selectable | effect-paragraph:effect; potency:I < SYM prone |
+| hero-standalone | Get In Get Out | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable, class.shadow.ability-3@3:selectable | effect-paragraph:effect |
+| hero-standalone | I Work Better Alone | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable, class.shadow.signature-ability@3:selectable | effect-paragraph:effect |
+| hero-standalone | One Hundred Throats | COMPILES_WITH_REMAINDER | — | self | selectable | class.shadow.ability-5@1:selectable, class.shadow.ability-5@2:selectable, class.shadow.ability-5@3:selectable | effect-paragraph:effect |
+| hero-standalone | Setup | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-5@1:selectable, class.shadow.ability-5@2:selectable, class.shadow.ability-5@3:selectable | potency:R < SYM the target has damage weakness N (save ends) |
+| hero-standalone | Teamwork Has Its Place | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable, class.shadow.signature-ability@3:selectable | effect-paragraph:effect |
+| hero-standalone | Two Throats at Once | COMPILES | — | multi | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable, class.shadow.ability-3@3:selectable | — |
+| hero-standalone | You Were Watching the Wrong One | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable, class.shadow.signature-ability@3:selectable | effect-paragraph:effect |
+| hero-standalone | In a Puff of Ash | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.level-2.burning-ash-ability@2:selectable, class.shadow.level-2.burning-ash-ability@3:selectable | you can teleport the target N square; you can teleport the target up to N squares |
+| hero-standalone | Sticky Bomb | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.level-2.trained-assassin-ability@2:selectable, class.shadow.level-2.trained-assassin-ability@3:selectable | effect-paragraph:effect |
+| hero-standalone | Stink Bomb | COMPILES_WITH_REMAINDER | — | area | selectable | class.shadow.level-2.trained-assassin-ability@2:selectable, class.shadow.level-2.trained-assassin-ability@3:selectable | effect-paragraph:effect |
+| hero-standalone | Misdirecting Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.level-3.ability-7@3:selectable | effect-paragraph:effect |
+| hero-standalone | Pinning Shot | COMPILES_WITH_REMAINDER | yes | single | selectable | class.shadow.level-3.ability-7@3:selectable | potency:A < SYM restrained (save ends) |
+| hero-standalone | Staggering Blow | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.level-3.ability-7@3:selectable | potency:M < SYM slowed (save ends); potency:M < SYM prone and can't stand (save ends) |
+| hero-standalone | Concussive Strike | COMPILES_WITH_REMAINDER | yes | single | selectable | class.tactician.ability-3@1:selectable, class.tactician.ability-3@2:selectable, class.tactician.ability-3@3:selectable | potency:M < SYM dazed (save ends) |
+| hero-standalone | Hammer and Anvil | COMPILES_WITH_REMAINDER | — | single | selectable | class.tactician.ability-5@1:selectable, class.tactician.ability-5@2:selectable, class.tactician.ability-5@3:selectable | effect-paragraph:effect; one ally within N squares of you can use a strike signature ability against the target as a free triggered action; one ally within N squares of you can use a strike signature ability that gains an edge against the target as a free triggered action; two allies within N squares of you can each use a strike signature ability that gains an edge against the target as a free triggered action |
+| hero-standalone | Inspiring Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.tactician.ability-3@1:selectable, class.tactician.ability-3@2:selectable, class.tactician.ability-3@3:selectable | you or one ally within N squares of you can spend a recovery; you and one ally within N squares of you can spend a recovery, and each of you gains an edge on the next ability roll you make during the encounter |
+| hero-standalone | Mind Game | COMPILES_WITH_REMAINDER | — | single | selectable | class.tactician.ability-5@1:selectable, class.tactician.ability-5@2:selectable, class.tactician.ability-5@3:selectable | effect-paragraph:effect; potency:R < SYM weakened (save ends) |
+| hero-standalone | The Wode Defends | COMPILES_WITH_REMAINDER | yes | single | selectable | ancestry.revenant.wode-elf.purchased-traits@1:selectable, ancestry.wode-elf.purchased-traits@1:selectable, ancestry.revenant.wode-elf.purchased-traits@2:selectable, ancestry.wode-elf.purchased-traits@2:selectable, ancestry.revenant.wode-elf.purchased-traits@3:selectable, ancestry.wode-elf.purchased-traits@3:selectable | potency:A < SYM slowed (save ends); potency:A < SYM restrained (save ends) |
 | kit-signature | Bear Claws | COMPILES_WITH_REMAINDER | — | single | not-granted | — | potency:M < SYM grabbed |
-| kit-signature | Fade | COMPILES_WITH_REMAINDER | — | single | selectable | kit.cloak and dagger.contributions@1:selectable, kit.cloak and dagger.contributions@2:selectable | you can shift N square; you can shift up to N squares |
+| kit-signature | Fade | COMPILES_WITH_REMAINDER | — | single | selectable | kit.cloak and dagger.contributions@1:selectable, kit.cloak and dagger.contributions@2:selectable, kit.cloak and dagger.contributions@3:selectable | you can shift N square; you can shift up to N squares |
 | kit-signature | Wing Buffet | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:effect |
-| kit-signature | Double Strike | COMPILES_WITH_REMAINDER | — | multi | selectable | kit.dual wielder.contributions@1:selectable, kit.dual wielder.contributions@2:selectable | effect-paragraph:effect |
-| kit-signature | Forward Thrust, Backward Smash | COMPILES | — | multi | selectable | kit.guisarmier.contributions@1:selectable, kit.guisarmier.contributions@2:selectable | — |
-| kit-signature | Battle Grace | COMPILES_WITH_REMAINDER | — | single | selectable | kit.martial artist.contributions@1:selectable, kit.martial artist.contributions@2:selectable | effect-paragraph:effect; you can swap places with the target |
-| kit-signature | Pain for Pain [V26: Pain for Pain] | COMPILES_WITH_REMAINDER | — | single | selectable | kit.mountain.contributions@1:selectable, kit.mountain.contributions@2:selectable | effect-paragraph:effect |
-| kit-signature | Devastating Rush | COMPILES_WITH_REMAINDER | — | single | selectable | kit.panther.contributions@1:selectable, kit.panther.contributions@2:selectable | effect-paragraph:effect |
-| kit-signature | Let's Dance | COMPILES_WITH_REMAINDER | — | single | selectable | kit.pugilist.contributions@1:selectable, kit.pugilist.contributions@2:selectable | effect-paragraph:effect; slide N |
+| kit-signature | Double Strike | COMPILES_WITH_REMAINDER | — | multi | selectable | kit.dual wielder.contributions@1:selectable, kit.dual wielder.contributions@2:selectable, kit.dual wielder.contributions@3:selectable | effect-paragraph:effect |
+| kit-signature | Forward Thrust, Backward Smash | COMPILES | — | multi | selectable | kit.guisarmier.contributions@1:selectable, kit.guisarmier.contributions@2:selectable, kit.guisarmier.contributions@3:selectable | — |
+| kit-signature | Battle Grace | COMPILES_WITH_REMAINDER | — | single | selectable | kit.martial artist.contributions@1:selectable, kit.martial artist.contributions@2:selectable, kit.martial artist.contributions@3:selectable | effect-paragraph:effect; you can swap places with the target |
+| kit-signature | Pain for Pain [V26: Pain for Pain] | COMPILES_WITH_REMAINDER | — | single | selectable | kit.mountain.contributions@1:selectable, kit.mountain.contributions@2:selectable, kit.mountain.contributions@3:selectable | effect-paragraph:effect |
+| kit-signature | Devastating Rush | COMPILES_WITH_REMAINDER | — | single | selectable | kit.panther.contributions@1:selectable, kit.panther.contributions@2:selectable, kit.panther.contributions@3:selectable | effect-paragraph:effect |
+| kit-signature | Let's Dance | COMPILES_WITH_REMAINDER | — | single | selectable | kit.pugilist.contributions@1:selectable, kit.pugilist.contributions@2:selectable, kit.pugilist.contributions@3:selectable | effect-paragraph:effect; slide N |
 | kit-signature | Driving Pounce | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
-| kit-signature | Raider's Awe | COMPILES_WITH_REMAINDER | — | single | selectable | kit.raider.contributions@1:selectable, kit.raider.contributions@2:selectable | effect-paragraph:effect |
-| kit-signature | Hamstring Shot | COMPILES_WITH_REMAINDER | yes | single | selectable | kit.ranger.contributions@1:selectable, kit.ranger.contributions@2:selectable | potency:A < SYM slowed (save ends) |
-| kit-signature | Two Shot | COMPILES | — | multi | selectable | kit.rapid-fire.contributions@1:selectable, kit.rapid-fire.contributions@2:selectable | — |
-| kit-signature | Net and Stab | COMPILES_WITH_REMAINDER | — | single | selectable | kit.retiarius.contributions@1:selectable, kit.retiarius.contributions@2:selectable | potency:A < SYM slowed (eot); potency:A < SYM restrained (eot) |
-| kit-signature | Protective Attack | COMPILES_WITH_REMAINDER | — | single | selectable | kit.shining armor.contributions@1:selectable, kit.shining armor.contributions@2:selectable | effect-paragraph:effect |
-| kit-signature | Patient Shot | COMPILES_WITH_REMAINDER | — | single | selectable | kit.sniper.contributions@1:selectable, kit.sniper.contributions@2:selectable | effect-paragraph:effect |
-| kit-signature | Where I Want You | COMPILES_WITH_REMAINDER | — | single | selectable | kit.stick and robe.contributions@1:selectable, kit.stick and robe.contributions@2:selectable | slide N |
-| kit-signature | Fancy Footwork | COMPILES_WITH_REMAINDER | — | single | selectable | kit.swashbuckler.contributions@1:selectable, kit.swashbuckler.contributions@2:selectable | effect-paragraph:effect |
-| kit-signature | Shield Bash | COMPILES_WITH_REMAINDER | — | single | selectable | kit.sword and board.contributions@1:selectable, kit.sword and board.contributions@2:selectable | potency:M < SYM prone |
+| kit-signature | Raider's Awe | COMPILES_WITH_REMAINDER | — | single | selectable | kit.raider.contributions@1:selectable, kit.raider.contributions@2:selectable, kit.raider.contributions@3:selectable | effect-paragraph:effect |
+| kit-signature | Hamstring Shot | COMPILES_WITH_REMAINDER | yes | single | selectable | kit.ranger.contributions@1:selectable, kit.ranger.contributions@2:selectable, kit.ranger.contributions@3:selectable | potency:A < SYM slowed (save ends) |
+| kit-signature | Two Shot | COMPILES | — | multi | selectable | kit.rapid-fire.contributions@1:selectable, kit.rapid-fire.contributions@2:selectable, kit.rapid-fire.contributions@3:selectable | — |
+| kit-signature | Net and Stab | COMPILES_WITH_REMAINDER | — | single | selectable | kit.retiarius.contributions@1:selectable, kit.retiarius.contributions@2:selectable, kit.retiarius.contributions@3:selectable | potency:A < SYM slowed (eot); potency:A < SYM restrained (eot) |
+| kit-signature | Protective Attack | COMPILES_WITH_REMAINDER | — | single | selectable | kit.shining armor.contributions@1:selectable, kit.shining armor.contributions@2:selectable, kit.shining armor.contributions@3:selectable | effect-paragraph:effect |
+| kit-signature | Patient Shot | COMPILES_WITH_REMAINDER | — | single | selectable | kit.sniper.contributions@1:selectable, kit.sniper.contributions@2:selectable, kit.sniper.contributions@3:selectable | effect-paragraph:effect |
+| kit-signature | Where I Want You | COMPILES_WITH_REMAINDER | — | single | selectable | kit.stick and robe.contributions@1:selectable, kit.stick and robe.contributions@2:selectable, kit.stick and robe.contributions@3:selectable | slide N |
+| kit-signature | Fancy Footwork | COMPILES_WITH_REMAINDER | — | single | selectable | kit.swashbuckler.contributions@1:selectable, kit.swashbuckler.contributions@2:selectable, kit.swashbuckler.contributions@3:selectable | effect-paragraph:effect |
+| kit-signature | Shield Bash | COMPILES_WITH_REMAINDER | — | single | selectable | kit.sword and board.contributions@1:selectable, kit.sword and board.contributions@2:selectable, kit.sword and board.contributions@3:selectable | potency:M < SYM prone |
 | kit-signature | Unbalancing Attack | COMPILES_WITH_REMAINDER | — | single | not-granted | — | potency:A < SYM prone |
-| kit-signature | Extension of My Arm | COMPILES_WITH_REMAINDER | — | single | selectable | kit.whirlwind.contributions@1:selectable, kit.whirlwind.contributions@2:selectable | vertical pull N |
-| granted | Draconian Pride | COMPILES | — | area | selectable | complication.dragon-dreams.traits@1:selectable, complication.dragon-dreams.traits@2:selectable | — |
-| granted | Dragon Breath | COMPILES_WITH_REMAINDER | — | area | selectable | complication.dragon-dreams.traits@1:selectable, complication.dragon-dreams.traits@2:selectable | effect-paragraph:effect |
-| granted | Stone Eyes | COMPILES_WITH_REMAINDER | — | single | selectable | complication.choice@1:selectable, complication.choice@2:selectable | effect-paragraph:effect; potency:M < SYM slowed (save ends) |
+| kit-signature | Extension of My Arm | COMPILES_WITH_REMAINDER | — | single | selectable | kit.whirlwind.contributions@1:selectable, kit.whirlwind.contributions@2:selectable, kit.whirlwind.contributions@3:selectable | vertical pull N |
+| granted | Draconian Pride | COMPILES | — | area | selectable | complication.dragon-dreams.traits@1:selectable, complication.dragon-dreams.traits@2:selectable, complication.dragon-dreams.traits@3:selectable | — |
+| granted | Dragon Breath | COMPILES_WITH_REMAINDER | — | area | selectable | complication.dragon-dreams.traits@1:selectable, complication.dragon-dreams.traits@2:selectable, complication.dragon-dreams.traits@3:selectable | effect-paragraph:effect |
+| granted | Stone Eyes | COMPILES_WITH_REMAINDER | — | single | selectable | complication.choice@1:selectable, complication.choice@2:selectable, complication.choice@3:selectable | effect-paragraph:effect; potency:M < SYM slowed (save ends) |
 
 ## Hero abilities that do not match
 
@@ -181,6 +184,8 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Machinations of Sound | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:slide N |
 | hero-standalone | So Gullible | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
 | hero-standalone | Too Slow | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
+| hero-standalone | Careful Observation | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Dancer | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Advanced Tactics | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N focus |
 | hero-standalone | Battle Cry | tier1-damage-outside-grammar | selectable | tier:each target gains N surge; tier:each target gains N surges |
 | hero-standalone | Mark | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
@@ -271,8 +276,8 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1051 | 1037 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
-| 2 | no-power-roll | no-power-roll | 592 | 592 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1054 | 1040 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 2 | no-power-roll | no-power-roll | 594 | 594 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
 | 3 | trigger | trigger | 188 | 188 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered`, `mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
 | 5 | unknown | unattached-paragraph | 130 | 59 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
@@ -316,9 +321,9 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1099 | 6 |
-| potency-condition | 943 | 182 |
-| no-power-roll | 592 | 1 |
+| effect-paragraph | 1102 | 6 |
+| potency-condition | 949 | 183 |
+| no-power-roll | 594 | 1 |
 | tier-damage | 230 | 80 |
 | unknown | 217 | 50 |
 | trigger | 188 | 1 |
@@ -491,7 +496,7 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 | granted | roll-expression-outside-grammar | 5 |
 | granted | tier1-damage-outside-grammar | 1 |
 | granted | tiers-without-power-roll | 1 |
-| hero-standalone | no-power-roll | 34 |
+| hero-standalone | no-power-roll | 36 |
 | hero-standalone | roll-expression-outside-grammar | 4 |
 | hero-standalone | tier1-damage-outside-grammar | 9 |
 | kit-signature | roll-expression-outside-grammar | 4 |

@@ -44,3 +44,13 @@ Guided progression remains deferred.
 - Started from main `1d08b96` on `slice/V98`, `.worktrees/shadow-level-three`.
 - Source inventory: two advancement features, one automatic maneuver, four cost-7 choices,
   one embedded conditional action; no new perk, skill, college feature or characteristic increase.
+
+- Author checks: both TypeScript projects pass; focused Shadow3 engine test 2/2 passes.
+- TESTER generation at `3aea652` passed all three generators (1.00/0.67/0.92s), 1228 content entries;
+  artifacts `/srv/presidium/projects/salient/test-artifacts/V98-3aea652-generation`.
+  Support inventory adds only five source abilities: 16 compiled / 1299 compatibility / 2 unavailable.
+- Review R1 corrected the headless ledger filename before execution. R2 adds a second Pinning Shot
+  use against an Elementalist with A−1, a legal reassignment of the existing independent Bethell
+  fixture under `en/unified/md/class/elementalist.md` Basics. This guarantees applied restraint at
+  every tier; readback covers the condition, source instance and save registration. The A2 target
+  separately proves resistance; pure source-derived cases cover all three strict thresholds.

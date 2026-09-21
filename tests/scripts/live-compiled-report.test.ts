@@ -27,6 +27,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
     'Eye Flash',
     'Eye of Surlach',
     'Melee Weapon Free Strike',
+    'Pinning Shot',
     'Power Chord',
     'Ranged Weapon Free Strike',
     'Razor Claws',
@@ -88,5 +89,62 @@ test.each([
     const manual = outcome.effects.filter(e => e.kind === 'condition');
     expect(manual).toHaveLength(name === 'Razor Claws' && tier === 3 ? 1 : 0);
     if (manual.length) expect(manual[0]!.clause).toMatch(/M < 2 .*bleeding.*save ends/);
+  }
+});
+
+// Shadow/level-3/pinning-shot: A < weak/average/strong, restrained (save ends).
+// Sniper: +0/+0/+4 ranged damage; no other combat modifiers.
+test('Pinning Shot evaluates each source potency threshold strictly after tier damage', () => {
+  const inputs = readInputs();
+  const source = buildCorpus(inputs).envelopes.find(e => e.name === 'Pinning Shot')!;
+  const definition = compileAbility(compilerEnvelope(source, inputs));
+  expect(definition.execution).toBe('supported');
+  for (const [d10a, d10b, tier, threshold, damage] of [
+    [4, 5, 1, 0, 10],
+    [7, 7, 2, 1, 14],
+    [8, 7, 3, 2, 22],
+  ] as const) {
+    for (const [agility, status] of [
+      [threshold - 1, 'applied'],
+      [threshold, 'resisted'],
+    ] as const) {
+      const outcome = resolveCompiledAbility(definition, {
+        actor: {
+          actorId: 'shadow',
+          characteristics: { M: 2, A: 2, R: 1, I: 1, P: -1 },
+          kitRangedDamageBonus: [0, 0, 4],
+        },
+        targets: [{ targetId: 'target', edges: 0, banes: 0 }],
+        dice: { d10a, d10b },
+        inCombat: true,
+        resourcePool: { resource: 'insight', current: 7, legalFloor: 0 },
+        targetFacts: [
+          {
+            targetId: 'target',
+            kind: 'hero',
+            stamina: 30,
+            maxStamina: 30,
+            temporaryStamina: 0,
+            immunities: [],
+            weaknesses: [],
+          },
+        ],
+        conditionFacts: {
+          potency: { characteristic: 'A', weak: 0, average: 1, strong: 2 },
+          targets: [{ targetId: 'target', kind: 'hero', characteristics: { A: agility } }],
+        },
+      });
+      expect(outcome.kind).toBe('resolved');
+      if (outcome.kind !== 'resolved') throw new Error('Pinning Shot did not resolve');
+      expect(outcome.roll.targets[0]).toMatchObject({ tier, damage: { rolledDamage: damage } });
+      expect(outcome.roll.cost).toMatchObject({ amount: 7, after: 0 });
+      expect(outcome.effects.find(e => e.kind === 'condition')).toMatchObject({
+        status,
+        condition: 'restrained',
+        duration: 'save-ends',
+        threshold,
+        targetScore: agility,
+      });
+    }
   }
 });

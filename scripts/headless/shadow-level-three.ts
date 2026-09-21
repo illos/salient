@@ -13,7 +13,7 @@ import type { HeroSheet } from '../../shared/contracts/characterSheet.ts';
 import type { DraftSelection } from '../../shared/characterDraft.ts';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft.ts';
 const ledger = JSON.parse(
-  readFileSync('tests/fixtures/v97-shadow-three-expected.json', 'utf8'),
+  readFileSync('tests/fixtures/v98-shadow-three-expected.json', 'utf8'),
 ) as {
   witnesses: {
     id: string;
@@ -31,13 +31,28 @@ const ledger = JSON.parse(
     };
   }[];
 };
+const targetFixture = JSON.parse(readFileSync('tests/fixtures/v25-bethell.json', 'utf8')) as {
+  selections: EvaluationInput['selections'];
+};
 type Saved = {
   level: number;
   revision: number;
   authored: { name: string; appearance: string; biography: string; notes: string };
   selections: DraftSelection[];
   evaluation: EvaluationResult;
-  liveState: { heroicResource: { current: number }; stamina: number } | null;
+  liveState: {
+    heroicResource: { current: number };
+    stamina: number;
+    conditions?: { restrained: boolean };
+    conditionInstances?: {
+      status: string;
+      condition: string;
+      sourceUseEventId: string;
+      abilityName: string;
+      duration: string;
+      registrationId?: string;
+    }[];
+  } | null;
 };
 type Transition = { selections: DraftSelection[]; removed: string[]; evaluation: EvaluationResult };
 const commandId = () => crypto.randomUUID();
@@ -185,6 +200,42 @@ export async function runShadowLevelThree({
       assert.equal(effective.build?.baseline?.level.value, 3);
       assert.ok(effective.abilities.some(a => a.name === 'Dancer'));
 
+      // Source: Elementalist Basics permits 2,1,1,-1 in non-Reason scores. Swap fixture M/A.
+      // A-1 is below Shadow's weak0/average1/strong2 in every possible random tier.
+      const { definitions: targetDefinitions } = await director.query<{
+        definitions: DecisionDefinitions;
+      }>('characterWizard:discover', { targetLevel: 1 });
+      const conditionTarget = await director.mutation<string>('characters:create', {
+        commandId: commandId(),
+        targetLevel: 1,
+        authored: {
+          name: `V98 condition target ${runId}`,
+          appearance: '',
+          biography: '',
+          notes: '',
+        },
+        selections: draftSelectionsFrom(
+          {
+            ...targetFixture.selections,
+            'class.elementalist.array-assignment': {
+              Might: 1,
+              Agility: -1,
+              Intuition: 2,
+              Presence: 1,
+            },
+          },
+          targetDefinitions,
+        ),
+      });
+      await director.mutation('characters:submit', {
+        commandId: commandId(),
+        campaignId,
+        characterId: conditionTarget,
+      });
+      const targetSheet = await director.query<HeroSheet>('characters:sheet', {
+        characterId: conditionTarget,
+      });
+      assert.equal(targetSheet.build?.baseline?.characteristics.A.value, -1);
       const sessionId = await director.mutation<string>('sessions:start', {
         commandId: commandId(),
         campaignId,
@@ -280,6 +331,39 @@ export async function runShadowLevelThree({
           });
           assert.equal((await event(blocked.eventId))?.kind, 'ability.blocked');
         }
+        // R2: prove Pinning Shot's applied writes, not only the resisted outcome above.
+        const pinner = ids[1]!;
+        await invoke(pinner, 'adjust.heroic-resource', { value: 7 });
+        const beforePinned = await director.query<Saved>('characters:get', {
+          characterId: conditionTarget,
+        });
+        const pinned = await invoke(pinner, 'ability.use', {
+          ability: 'Pinning Shot',
+          targets: [{ refKind: 'character', id: conditionTarget }],
+        });
+        const pinnedEvent = await event(pinned.eventId);
+        assert.equal(pinnedEvent?.kind, 'ability.use');
+        const pinRoll = pinnedEvent?.payload?.data?.result;
+        assert.ok(pinRoll);
+        const pinDamage = [10, 14, 22][pinRoll.targets[0]!.tier - 1]!;
+        const pinnedState = await director.query<Saved>('characters:get', {
+          characterId: conditionTarget,
+        });
+        assert.equal(pinnedState.liveState?.stamina, beforePinned.liveState!.stamina - pinDamage);
+        assert.equal(pinnedState.liveState?.conditions?.restrained, true);
+        const instance = pinnedState.liveState?.conditionInstances?.find(
+          i => i.sourceUseEventId === pinned.eventId && i.status === 'active',
+        );
+        assert.ok(instance);
+        assert.equal(instance.abilityName, 'Pinning Shot');
+        assert.equal(instance.condition, 'restrained');
+        assert.equal(instance.duration, 'save-ends');
+        assert.ok(instance.registrationId, 'Committed combat must register the automatic save');
+        assert.equal(
+          (await director.query<Saved>('characters:get', { characterId: pinner })).liveState
+            ?.heroicResource.current,
+          0,
+        );
         // Free maneuvers/embedded actions keep their source timing and do not spend the restricted surge.
         for (const name of ['Careful Observation', 'Dancer: Disengage']) {
           const id = ids[0]!;

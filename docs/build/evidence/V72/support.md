@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:9778bbbd413dfe01afd0c76e26fc41542f6ce46957aa261af9bf541d5ba342ca`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:242bc3e1b0f8fead8bf2a47236797e1212e1bbb6cf1ed3221411a4ea62e64d72`.
 
-Currently reachable compiled: 15; unchanged reachable compatibility: 1295; structurally supported but unavailable: 2.
+Currently reachable compiled: 16; unchanged reachable compatibility: 1299; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -158,6 +158,11 @@ Currently reachable compiled: 15; unchanged reachable compatibility: 1295; struc
 | Sticky Bomb | hero-standalone | manual | legacy-compatibility | manual-section |
 | Stink Bomb | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Too Slow | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Careful Observation | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Dancer | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Misdirecting Strike | hero-standalone | manual | legacy-compatibility | manual-section |
+| Pinning Shot | hero-standalone | supported | compiled |  |
+| Staggering Blow | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Advanced Tactics | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Battle Cry | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, target-boundary |
 | Concussive Strike | hero-standalone | supported | compiled |  |

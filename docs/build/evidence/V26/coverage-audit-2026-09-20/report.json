@@ -1,15 +1,15 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:9778bbbd413dfe01afd0c76e26fc41542f6ce46957aa261af9bf541d5ba342ca",
+  "contentHash": "sha256:242bc3e1b0f8fead8bf2a47236797e1212e1bbb6cf1ed3221411a4ea62e64d72",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 9,
-      "COMPILES_WITH_REMAINDER": 39,
-      "NO_MATCH": 47,
-      "total": 95,
-      "withinV26Bounded": 4
+      "COMPILES_WITH_REMAINDER": 42,
+      "NO_MATCH": 49,
+      "total": 100,
+      "withinV26Bounded": 5
     },
     "kit-signature": {
       "COMPILES": 2,
@@ -41,10 +41,10 @@
     }
   },
   "grants": {
-    "total": 441,
-    "resolvedToStandalone": 170,
-    "resolvedToKit": 42,
-    "ownText": 229,
+    "total": 675,
+    "resolvedToStandalone": 264,
+    "resolvedToKit": 63,
+    "ownText": 348,
     "unresolved": []
   },
   "entries": [
@@ -342,6 +342,15 @@
           "grantKind": "free-strike",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Melee Weapon Free Strike",
+          "sourcePath": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+          "decisionId": "free-strikes.grant",
+          "level": 3,
+          "grantKind": "free-strike",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         }
       ],
       "availability": "selectable",
@@ -417,6 +426,15 @@
           "sourcePath": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
           "decisionId": "free-strikes.grant",
           "level": 2,
+          "grantKind": "free-strike",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Ranged Weapon Free Strike",
+          "sourcePath": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+          "decisionId": "free-strikes.grant",
+          "level": 3,
           "grantKind": "free-strike",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
@@ -506,6 +524,24 @@
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -589,6 +625,24 @@
           "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
           "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
           "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 3,
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
@@ -759,6 +813,15 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Bifurcated Incineration supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Bifurcated Incineration",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/bifurcated-incineration.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Bifurcated Incineration supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -871,6 +934,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Conflagration supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Conflagration",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Conflagration supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -929,6 +1001,15 @@
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/explosive-assistance.md",
           "decisionId": "class.elementalist.specialization",
           "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Explosive Assistance",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/explosive-assistance.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
           "grantKind": "aspect-ability",
           "selectable": "selectable",
           "detail": "grant of option Fire supportedInV001=true; chain selectable"
@@ -1052,6 +1133,15 @@
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/hurl-element.md",
           "decisionId": "class.elementalist.features",
           "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hurl Element",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/hurl-element.md",
+          "decisionId": "class.elementalist.features",
+          "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
@@ -1327,6 +1417,15 @@
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Practical Magic",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/practical-magic.md",
+          "decisionId": "class.elementalist.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -1446,6 +1545,15 @@
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/return-to-formlessness.md",
           "decisionId": "class.elementalist.specialization",
           "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Return to Formlessness",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/return-to-formlessness.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "grant of option Fire supportedInV001=true; chain selectable"
@@ -1740,6 +1848,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option The Flesh, a Crucible supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Flesh, a Crucible",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-flesh-a-crucible.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option The Flesh, a Crucible supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -1906,6 +2023,15 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Viscous Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Viscous Fire",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/viscous-fire.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Viscous Fire supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable",
@@ -1971,6 +2097,15 @@
           "sourcePath": "en/unified/md/feature/ability/fury/level-1/back.md",
           "decisionId": "class.fury.ability-3",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "not-selectable",
+          "detail": "option Back! supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Back!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/back.md",
+          "decisionId": "class.fury.ability-3",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "not-selectable",
           "detail": "option Back! supportedInV001=false; chain selectable"
@@ -2066,6 +2201,15 @@
           "grantKind": "heroic",
           "selectable": "not-selectable",
           "detail": "option Blood for Blood! supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Blood for Blood!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/blood-for-blood.md",
+          "decisionId": "class.fury.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "not-selectable",
+          "detail": "option Blood for Blood! supportedInV001=false; chain selectable"
         }
       ],
       "availability": "not-selectable"
@@ -2132,6 +2276,15 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Brutal Slam supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Brutal Slam",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+          "decisionId": "class.fury.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Brutal Slam supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable",
@@ -2195,6 +2348,15 @@
           "sourcePath": "en/unified/md/feature/ability/fury/level-1/furious-change.md",
           "decisionId": "class.fury.aspect",
           "level": 2,
+          "grantKind": "aspect-triggered",
+          "selectable": "not-selectable",
+          "detail": "aspect Stormwight supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Furious Change",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/furious-change.md",
+          "decisionId": "class.fury.aspect",
+          "level": 3,
           "grantKind": "aspect-triggered",
           "selectable": "not-selectable",
           "detail": "aspect Stormwight supportedInV001=false; chain selectable"
@@ -2272,6 +2434,15 @@
           "sourcePath": "en/unified/md/feature/ability/fury/level-1/hit-and-run.md",
           "decisionId": "class.fury.signature-ability",
           "level": 2,
+          "grantKind": "signature",
+          "selectable": "not-selectable",
+          "detail": "option Hit and Run supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Hit and Run",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/hit-and-run.md",
+          "decisionId": "class.fury.signature-ability",
+          "level": 3,
           "grantKind": "signature",
           "selectable": "not-selectable",
           "detail": "option Hit and Run supportedInV001=false; chain selectable"
@@ -2360,6 +2531,15 @@
           "grantKind": "signature",
           "selectable": "not-selectable",
           "detail": "option Impaled! supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Impaled!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/impaled.md",
+          "decisionId": "class.fury.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "not-selectable",
+          "detail": "option Impaled! supportedInV001=false; chain selectable"
         }
       ],
       "availability": "not-selectable"
@@ -2421,6 +2601,15 @@
           "grantKind": "aspect-triggered",
           "selectable": "selectable",
           "detail": "aspect Berserker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lines of Force",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/lines-of-force.md",
+          "decisionId": "class.fury.aspect",
+          "level": 3,
+          "grantKind": "aspect-triggered",
+          "selectable": "selectable",
+          "detail": "aspect Berserker supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable",
@@ -2473,6 +2662,15 @@
           "sourcePath": "en/unified/md/feature/ability/fury/level-1/make-peace-with-your-god.md",
           "decisionId": "class.fury.ability-5",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "not-selectable",
+          "detail": "option Make Peace With Your God! supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Make Peace With Your God!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/make-peace-with-your-god.md",
+          "decisionId": "class.fury.ability-5",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "not-selectable",
           "detail": "option Make Peace With Your God! supportedInV001=false; chain selectable"
@@ -2565,6 +2763,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Out of the Way! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Out of the Way!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+          "decisionId": "class.fury.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Out of the Way! supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable",
@@ -2638,6 +2845,15 @@
           "sourcePath": "en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
           "decisionId": "class.fury.ability-5",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Thunder Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thunder Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+          "decisionId": "class.fury.ability-5",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Thunder Roar supportedInV001=true; chain selectable"
@@ -2720,6 +2936,15 @@
           "grantKind": "heroic",
           "selectable": "not-selectable",
           "detail": "option Tide of Death supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Tide of Death",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/tide-of-death.md",
+          "decisionId": "class.fury.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "not-selectable",
+          "detail": "option Tide of Death supportedInV001=false; chain selectable"
         }
       ],
       "availability": "not-selectable"
@@ -2787,6 +3012,15 @@
           "sourcePath": "en/unified/md/feature/ability/fury/level-1/to-the-death.md",
           "decisionId": "class.fury.signature-ability",
           "level": 2,
+          "grantKind": "signature",
+          "selectable": "not-selectable",
+          "detail": "option To the Death! supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "To the Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/to-the-death.md",
+          "decisionId": "class.fury.signature-ability",
+          "level": 3,
           "grantKind": "signature",
           "selectable": "not-selectable",
           "detail": "option To the Death! supportedInV001=false; chain selectable"
@@ -2861,6 +3095,15 @@
           "grantKind": "heroic",
           "selectable": "not-selectable",
           "detail": "option To the Uttermost End supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "To the Uttermost End",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/to-the-uttermost-end.md",
+          "decisionId": "class.fury.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "not-selectable",
+          "detail": "option To the Uttermost End supportedInV001=false; chain selectable"
         }
       ],
       "availability": "not-selectable"
@@ -2919,6 +3162,15 @@
           "sourcePath": "en/unified/md/feature/ability/fury/level-1/unearthly-reflexes.md",
           "decisionId": "class.fury.aspect",
           "level": 2,
+          "grantKind": "aspect-triggered",
+          "selectable": "not-selectable",
+          "detail": "aspect Reaver supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Unearthly Reflexes",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/unearthly-reflexes.md",
+          "decisionId": "class.fury.aspect",
+          "level": 3,
           "grantKind": "aspect-triggered",
           "selectable": "not-selectable",
           "detail": "aspect Reaver supportedInV001=false; chain selectable"
@@ -3014,6 +3266,15 @@
           "grantKind": "heroic",
           "selectable": "not-selectable",
           "detail": "option Your Entrails Are Your Extrails! supportedInV001=false; chain selectable"
+        },
+        {
+          "name": "Your Entrails Are Your Extrails!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-1/your-entrails-are-your-extrails.md",
+          "decisionId": "class.fury.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "not-selectable",
+          "detail": "option Your Entrails Are Your Extrails! supportedInV001=false; chain selectable"
         }
       ],
       "availability": "not-selectable"
@@ -3052,6 +3313,15 @@
           "sourcePath": "en/unified/md/feature/ability/fury/level-2/special-delivery.md",
           "decisionId": "class.fury.level-2.aspect-ability",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Special Delivery supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Special Delivery",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/special-delivery.md",
+          "decisionId": "class.fury.level-2.aspect-ability",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Special Delivery supportedInV001=true; chain selectable"
@@ -3113,6 +3383,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Wrecking Ball supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Wrecking Ball",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/wrecking-ball.md",
+          "decisionId": "class.fury.level-2.aspect-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Wrecking Ball supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -3159,6 +3438,15 @@
           "sourcePath": "en/unified/md/feature/ability/polder/shadowmeld.md",
           "decisionId": "ancestry.polder.signature-trait",
           "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Shadowmeld",
+          "sourcePath": "en/unified/md/feature/ability/polder/shadowmeld.md",
+          "decisionId": "ancestry.polder.signature-trait",
+          "level": 3,
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
@@ -3427,6 +3715,105 @@
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.devil.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dwarf.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.hakaan.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.high-elf.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.human.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.memonek.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.orc.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.polder.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.time-raider.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -3479,6 +3866,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/black-ash-teleport.md",
           "decisionId": "class.shadow.college",
           "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Black Ash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Black Ash Teleport",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/black-ash-teleport.md",
+          "decisionId": "class.shadow.college",
+          "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "grant of option Black Ash supportedInV001=true; chain selectable"
@@ -3538,6 +3934,15 @@
           "grantKind": "aspect-ability",
           "selectable": "selectable",
           "detail": "grant of option Harlequin Mask supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Clever Trick",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/clever-trick.md",
+          "decisionId": "class.shadow.college",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Harlequin Mask supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -3590,6 +3995,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coat-the-blade.md",
           "decisionId": "class.shadow.college",
           "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Caustic Alchemy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Coat the Blade",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coat-the-blade.md",
+          "decisionId": "class.shadow.college",
+          "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "grant of option Caustic Alchemy supportedInV001=true; chain selectable"
@@ -3654,6 +4068,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Coup de Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Coup de Grace",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coup-de-grace.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Coup de Grace supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -3712,6 +4135,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
           "decisionId": "class.shadow.college",
           "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Caustic Alchemy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Defensive Roll",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
+          "decisionId": "class.shadow.college",
+          "level": 3,
           "grantKind": "aspect-ability",
           "selectable": "selectable",
           "detail": "grant of option Caustic Alchemy supportedInV001=true; chain selectable"
@@ -3804,6 +4236,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Disorienting Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Disorienting Strike",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/disorienting-strike.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Disorienting Strike supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -3890,6 +4331,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Eviscerate supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eviscerate",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/eviscerate.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Eviscerate supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -3967,6 +4417,15 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Gasping in Pain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gasping in Pain",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/gasping-in-pain.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Gasping in Pain supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -4038,6 +4497,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Get In Get Out supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Get In Get Out",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/get-in-get-out.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Get In Get Out supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -4091,6 +4559,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
           "decisionId": "class.shadow.features",
           "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hesitation Is Weakness",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
+          "decisionId": "class.shadow.features",
+          "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
@@ -4164,6 +4641,15 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option I Work Better Alone supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I Work Better Alone",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/i-work-better-alone.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option I Work Better Alone supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -4216,6 +4702,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/im-no-threat.md",
           "decisionId": "class.shadow.college",
           "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Harlequin Mask supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I'm No Threat",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/im-no-threat.md",
+          "decisionId": "class.shadow.college",
+          "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "grant of option Harlequin Mask supportedInV001=true; chain selectable"
@@ -4277,6 +4772,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
           "decisionId": "class.shadow.college",
           "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Black Ash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "In All This Confusion",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
+          "decisionId": "class.shadow.college",
+          "level": 3,
           "grantKind": "aspect-ability",
           "selectable": "selectable",
           "detail": "grant of option Black Ash supportedInV001=true; chain selectable"
@@ -4345,6 +4849,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/one-hundred-throats.md",
           "decisionId": "class.shadow.ability-5",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option One Hundred Throats supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "One Hundred Throats",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/one-hundred-throats.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option One Hundred Throats supportedInV001=true; chain selectable"
@@ -4434,6 +4947,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Setup supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Setup",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/setup.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Setup supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -4481,6 +5003,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
           "decisionId": "class.shadow.ability-5",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Shadowstrike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shadowstrike",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Shadowstrike supportedInV001=true; chain selectable"
@@ -4554,6 +5085,15 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Teamwork Has Its Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Teamwork Has Its Place",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/teamwork-has-its-place.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Teamwork Has Its Place supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -4612,6 +5152,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/two-throats-at-once.md",
           "decisionId": "class.shadow.ability-3",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Two Throats at Once supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Two Throats at Once",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/two-throats-at-once.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Two Throats at Once supportedInV001=true; chain selectable"
@@ -4682,6 +5231,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.md",
           "decisionId": "class.shadow.signature-ability",
           "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option You Were Watching the Wrong One supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Were Watching the Wrong One",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 3,
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option You Were Watching the Wrong One supportedInV001=true; chain selectable"
@@ -4759,6 +5317,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option In a Puff of Ash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "In a Puff of Ash",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/in-a-puff-of-ash.md",
+          "decisionId": "class.shadow.level-2.burning-ash-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option In a Puff of Ash supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -4817,6 +5384,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Machinations of Sound supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Machinations of Sound",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/machinations-of-sound.md",
+          "decisionId": "class.shadow.level-2.friend-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Machinations of Sound supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -4861,6 +5437,15 @@
           "sourcePath": "en/unified/md/feature/ability/shadow/level-2/so-gullible.md",
           "decisionId": "class.shadow.level-2.friend-ability",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option So Gullible supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Gullible",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/so-gullible.md",
+          "decisionId": "class.shadow.level-2.friend-ability",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option So Gullible supportedInV001=true; chain selectable"
@@ -4929,6 +5514,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Sticky Bomb supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sticky Bomb",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/sticky-bomb.md",
+          "decisionId": "class.shadow.level-2.trained-assassin-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sticky Bomb supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -4991,6 +5585,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Stink Bomb supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stink Bomb",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/stink-bomb.md",
+          "decisionId": "class.shadow.level-2.trained-assassin-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stink Bomb supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5038,6 +5641,312 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Too Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Too Slow",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-2/too-slow.md",
+          "decisionId": "class.shadow.level-2.burning-ash-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Too Slow supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/careful-observation",
+      "name": "Careful Observation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/careful-observation.md",
+      "usage": "Maneuver",
+      "target": "One creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "As long as you remain within distance of the target, maintain line of effect to them, and strike no other creature first, you gain an edge on the next strike you make against the assessed creature, and gain 1 surge you can use only on that strike.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Careful Observation",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-3/careful-observation.md",
+          "decisionId": "class.shadow.level-3.careful-observation",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/dancer",
+      "name": "Dancer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/dancer.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Insight",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter, whenever an enemy moves or is force moved adjacent to you or damages you, you can take the Disengage move action as a free triggered action.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Dancer",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-3/dancer.md",
+          "decisionId": "class.shadow.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Dancer supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/misdirecting-strike",
+      "name": "Misdirecting Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/misdirecting-strike.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "7 Insight",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 18,
+              "characteristic": "A"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target is taunted by a willing ally within 5 squares of you until the end of the target's next turn.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Misdirecting Strike",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-3/misdirecting-strike.md",
+          "decisionId": "class.shadow.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Misdirecting Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/pinning-shot",
+      "name": "Pinning Shot",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/pinning-shot.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "7 Insight",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "A"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM restrained (save ends)",
+            "text": "A < WEAK, restrained (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM restrained (save ends)",
+            "text": "A < AVERAGE, restrained (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM restrained (save ends)",
+            "text": "A < STRONG, restrained (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": true,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Pinning Shot",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-3/pinning-shot.md",
+          "decisionId": "class.shadow.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Pinning Shot supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow",
+      "name": "Staggering Blow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/staggering-blow.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "7 Insight",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "A"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM slowed (save ends)",
+            "text": "M < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone and can't stand (save ends)",
+            "text": "M < AVERAGE, prone and can't stand (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone and can't stand (save ends)",
+            "text": "M < STRONG, prone and can't stand (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Staggering Blow",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-3/staggering-blow.md",
+          "decisionId": "class.shadow.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Staggering Blow supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5099,6 +6008,15 @@
           "grantKind": "aspect-ability",
           "selectable": "selectable",
           "detail": "grant of option Insurgent supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Advanced Tactics",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/advanced-tactics.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Insurgent supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5157,6 +6075,15 @@
           "sourcePath": "en/unified/md/feature/ability/tactician/level-1/battle-cry.md",
           "decisionId": "class.tactician.ability-3",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Battle Cry supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Battle Cry",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/battle-cry.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Battle Cry supportedInV001=true; chain selectable"
@@ -5243,6 +6170,15 @@
           "sourcePath": "en/unified/md/feature/ability/tactician/level-1/concussive-strike.md",
           "decisionId": "class.tactician.ability-3",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Concussive Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Concussive Strike",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/concussive-strike.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Concussive Strike supportedInV001=true; chain selectable"
@@ -5335,6 +6271,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Hammer and Anvil supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hammer and Anvil",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/hammer-and-anvil.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hammer and Anvil supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5418,6 +6363,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Inspiring Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Inspiring Strike",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/inspiring-strike.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Inspiring Strike supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5464,6 +6418,15 @@
           "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md",
           "decisionId": "class.tactician.features",
           "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Mark",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md",
+          "decisionId": "class.tactician.features",
+          "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
@@ -5565,6 +6528,15 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Mind Game supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Mind Game",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mind-game.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Mind Game supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5612,6 +6584,15 @@
           "sourcePath": "en/unified/md/feature/ability/tactician/level-1/now.md",
           "decisionId": "class.tactician.ability-5",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Now! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Now!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/now.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Now! supportedInV001=true; chain selectable"
@@ -5676,6 +6657,15 @@
           "grantKind": "aspect-ability",
           "selectable": "selectable",
           "detail": "grant of option Mastermind supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwatch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/overwatch.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Mastermind supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5737,6 +6727,15 @@
           "grantKind": "aspect-ability",
           "selectable": "selectable",
           "detail": "grant of option Vanguard supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Parry",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/parry.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vanguard supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5784,6 +6783,15 @@
           "sourcePath": "en/unified/md/feature/ability/tactician/level-1/squad-forward.md",
           "decisionId": "class.tactician.ability-3",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! Forward! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! Forward!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/squad-forward.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Squad! Forward! supportedInV001=true; chain selectable"
@@ -5842,6 +6850,15 @@
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "\"Strike Now!\"",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/strike-now.md",
+          "decisionId": "class.tactician.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5889,6 +6906,15 @@
           "sourcePath": "en/unified/md/feature/ability/tactician/level-1/this-is-what-we-planned-for.md",
           "decisionId": "class.tactician.ability-5",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option This Is What We Planned For supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "This Is What We Planned For",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/this-is-what-we-planned-for.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option This Is What We Planned For supportedInV001=true; chain selectable"
@@ -5990,6 +7016,24 @@
           "grantKind": "ancestry-ability",
           "selectable": "unknown",
           "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
         }
       ],
       "availability": "unknown"
@@ -6054,6 +7098,24 @@
           "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 3,
           "grantKind": "ancestry-ability",
           "selectable": "unknown",
           "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
@@ -6151,6 +7213,24 @@
           "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 3,
           "grantKind": "ancestry-ability",
           "selectable": "unknown",
           "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
@@ -6267,6 +7347,24 @@
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.wode-elf.purchased-traits",
+          "level": 3,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -6335,6 +7433,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Exploding Arrow",
+          "sourcePath": "en/unified/md/kit/arcane-archer.md#exploding-arrow",
+          "decisionId": "kit.arcane archer.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -6400,6 +7507,15 @@
           "sourcePath": "en/unified/md/kit/battlemind.md#unmooring",
           "decisionId": "kit.battlemind.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Unmooring",
+          "sourcePath": "en/unified/md/kit/battlemind.md#unmooring",
+          "decisionId": "kit.battlemind.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -6562,6 +7678,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Fade",
+          "sourcePath": "en/unified/md/kit/cloak-and-dagger.md#fade",
+          "decisionId": "kit.cloak and dagger.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -6679,6 +7804,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Double Strike",
+          "sourcePath": "en/unified/md/kit/dual-wielder.md#double-strike",
+          "decisionId": "kit.dual wielder.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -6738,6 +7872,15 @@
           "sourcePath": "en/unified/md/kit/guisarmier.md#forward-thrust-backward-smash",
           "decisionId": "kit.guisarmier.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Forward Thrust, Backward Smash",
+          "sourcePath": "en/unified/md/kit/guisarmier.md#forward-thrust-backward-smash",
+          "decisionId": "kit.guisarmier.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -6834,6 +7977,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Battle Grace",
+          "sourcePath": "en/unified/md/kit/martial-artist.md#battle-grace",
+          "decisionId": "kit.martial artist.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -6912,6 +8064,15 @@
           "sourcePath": "en/unified/md/kit/mountain.md#pain-for-pain",
           "decisionId": "kit.mountain.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Pain for Pain",
+          "sourcePath": "en/unified/md/kit/mountain.md#pain-for-pain",
+          "decisionId": "kit.mountain.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -6998,6 +8159,15 @@
           "sourcePath": "en/unified/md/kit/panther.md#devastating-rush",
           "decisionId": "kit.panther.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Devastating Rush",
+          "sourcePath": "en/unified/md/kit/panther.md#devastating-rush",
+          "decisionId": "kit.panther.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -7091,6 +8261,15 @@
           "sourcePath": "en/unified/md/kit/pugilist.md#let-s-dance",
           "decisionId": "kit.pugilist.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Let's Dance",
+          "sourcePath": "en/unified/md/kit/pugilist.md#let-s-dance",
+          "decisionId": "kit.pugilist.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -7228,6 +8407,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Raider's Awe",
+          "sourcePath": "en/unified/md/kit/raider.md#raider-s-awe",
+          "decisionId": "kit.raider.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -7324,6 +8512,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Hamstring Shot",
+          "sourcePath": "en/unified/md/kit/ranger.md#hamstring-shot",
+          "decisionId": "kit.ranger.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -7383,6 +8580,15 @@
           "sourcePath": "en/unified/md/kit/rapid-fire.md#two-shot",
           "decisionId": "kit.rapid-fire.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Two Shot",
+          "sourcePath": "en/unified/md/kit/rapid-fire.md#two-shot",
+          "decisionId": "kit.rapid-fire.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -7482,6 +8688,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Net and Stab",
+          "sourcePath": "en/unified/md/kit/retiarius.md#net-and-stab",
+          "decisionId": "kit.retiarius.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -7560,6 +8775,15 @@
           "sourcePath": "en/unified/md/kit/shining-armor.md#protective-attack",
           "decisionId": "kit.shining armor.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Protective Attack",
+          "sourcePath": "en/unified/md/kit/shining-armor.md#protective-attack",
+          "decisionId": "kit.shining armor.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -7644,6 +8868,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Patient Shot",
+          "sourcePath": "en/unified/md/kit/sniper.md#patient-shot",
+          "decisionId": "kit.sniper.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -7709,6 +8942,15 @@
           "sourcePath": "en/unified/md/kit/spellsword.md#leaping-lightning",
           "decisionId": "kit.spellsword.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Leaping Lightning",
+          "sourcePath": "en/unified/md/kit/spellsword.md#leaping-lightning",
+          "decisionId": "kit.spellsword.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -7799,6 +9041,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Where I Want You",
+          "sourcePath": "en/unified/md/kit/stick-and-robe.md#where-i-want-you",
+          "decisionId": "kit.stick and robe.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -7879,6 +9130,15 @@
           "sourcePath": "en/unified/md/kit/swashbuckler.md#fancy-footwork",
           "decisionId": "kit.swashbuckler.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Fancy Footwork",
+          "sourcePath": "en/unified/md/kit/swashbuckler.md#fancy-footwork",
+          "decisionId": "kit.swashbuckler.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -7964,6 +9224,15 @@
           "sourcePath": "en/unified/md/kit/sword-and-board.md#shield-bash",
           "decisionId": "kit.sword and board.contributions",
           "level": 2,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Shield Bash",
+          "sourcePath": "en/unified/md/kit/sword-and-board.md#shield-bash",
+          "decisionId": "kit.sword and board.contributions",
+          "level": 3,
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
@@ -8101,6 +9370,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Weakening Brand",
+          "sourcePath": "en/unified/md/kit/warrior-priest.md#weakening-brand",
+          "decisionId": "kit.warrior priest.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -8194,6 +9472,15 @@
           "grantKind": "kit-signature",
           "selectable": "selectable",
           "detail": "kit contributions; chain selectable"
+        },
+        {
+          "name": "Extension of My Arm",
+          "sourcePath": "en/unified/md/kit/whirlwind.md#extension-of-my-arm",
+          "decisionId": "kit.whirlwind.contributions",
+          "level": 3,
+          "grantKind": "kit-signature",
+          "selectable": "selectable",
+          "detail": "kit contributions; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -8253,6 +9540,15 @@
           "sourcePath": "complication:Advanced Studies/advanced-studies-study-notebook",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Advanced Studies supported=true; chain selectable"
+        },
+        {
+          "name": "Advanced Studies: Study Notebook",
+          "sourcePath": "complication:Advanced Studies/advanced-studies-study-notebook",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Advanced Studies supported=true; chain selectable"
@@ -8324,6 +9620,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Animal Form supported=true; chain selectable"
+        },
+        {
+          "name": "Animal Form",
+          "sourcePath": "complication:Animal Form/animal-form",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Animal Form supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -8383,6 +9688,15 @@
           "sourcePath": "complication:Bereaved/bereaved-ask-the-spirit",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Bereaved supported=true; chain selectable"
+        },
+        {
+          "name": "Bereaved: Ask the Spirit",
+          "sourcePath": "complication:Bereaved/bereaved-ask-the-spirit",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Bereaved supported=true; chain selectable"
@@ -8478,6 +9792,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Consuming Interest supported=true; chain selectable"
+        },
+        {
+          "name": "Consuming Interest: Study Lore",
+          "sourcePath": "complication:Consuming Interest/consuming-interest-study-lore",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Consuming Interest supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -8525,6 +9848,15 @@
           "sourcePath": "complication:Corrupted Mentor/corrupt-spirit",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Corrupted Mentor supported=true; chain selectable"
+        },
+        {
+          "name": "Corrupt Spirit",
+          "sourcePath": "complication:Corrupted Mentor/corrupt-spirit",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Corrupted Mentor supported=true; chain selectable"
@@ -8590,6 +9922,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Crash Landed supported=true; chain selectable"
+        },
+        {
+          "name": "Crash Landed: Activate Power Pack",
+          "sourcePath": "complication:Crash Landed/crash-landed-activate-power-pack",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Crash Landed supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -8649,6 +9990,15 @@
           "sourcePath": "complication:Crash Landed/crash-landed-deactivate-power-pack",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Crash Landed supported=true; chain selectable"
+        },
+        {
+          "name": "Crash Landed: Deactivate Power Pack",
+          "sourcePath": "complication:Crash Landed/crash-landed-deactivate-power-pack",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Crash Landed supported=true; chain selectable"
@@ -8714,6 +10064,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Cult Victim supported=true; chain selectable"
+        },
+        {
+          "name": "Cult Victim: Pass Through Matter",
+          "sourcePath": "complication:Cult Victim/cult-victim-pass-through-matter",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Cult Victim supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -8776,6 +10135,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Curse of Stone supported=true; chain selectable"
+        },
+        {
+          "name": "Curse of Stone: Stone Appearance",
+          "sourcePath": "complication:Curse of Stone/curse-of-stone-stone-appearance",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Curse of Stone supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -8823,6 +10191,15 @@
           "sourcePath": "complication:Dragon Dreams/draconian-guard",
           "decisionId": "complication.dragon-dreams.traits",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Dragon Dreams supported=true; trait Draconian Guard supported=true; chain selectable"
+        },
+        {
+          "name": "Draconian Guard",
+          "sourcePath": "complication:Dragon Dreams/draconian-guard",
+          "decisionId": "complication.dragon-dreams.traits",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Dragon Dreams supported=true; trait Draconian Guard supported=true; chain selectable"
@@ -8887,6 +10264,15 @@
           "sourcePath": "complication:Dragon Dreams/draconian-pride",
           "decisionId": "complication.dragon-dreams.traits",
           "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "complication Dragon Dreams supported=true; trait Draconian Pride supported=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "complication:Dragon Dreams/draconian-pride",
+          "decisionId": "complication.dragon-dreams.traits",
+          "level": 3,
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "complication Dragon Dreams supported=true; trait Draconian Pride supported=true; chain selectable"
@@ -8959,6 +10345,15 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "complication Dragon Dreams supported=true; trait Dragon Breath supported=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "complication:Dragon Dreams/dragon-breath",
+          "decisionId": "complication.dragon-dreams.traits",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "complication Dragon Dreams supported=true; trait Dragon Breath supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9006,6 +10401,15 @@
           "sourcePath": "complication:Dragon Dreams/remember-your-oath",
           "decisionId": "complication.dragon-dreams.traits",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Dragon Dreams supported=true; trait Remember Your Oath supported=true; chain selectable"
+        },
+        {
+          "name": "Remember Your Oath",
+          "sourcePath": "complication:Dragon Dreams/remember-your-oath",
+          "decisionId": "complication.dragon-dreams.traits",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Dragon Dreams supported=true; trait Remember Your Oath supported=true; chain selectable"
@@ -9071,6 +10475,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Evanesceria supported=true; chain selectable"
+        },
+        {
+          "name": "Evanesceria: Absent from Reality",
+          "sourcePath": "complication:Evanesceria/evanesceria-absent-from-reality",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Evanesceria supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9133,6 +10546,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Famous Relative supported=true; chain selectable"
+        },
+        {
+          "name": "Famous Relative: Summon Relative",
+          "sourcePath": "complication:Famous Relative/famous-relative-summon-relative",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Famous Relative supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9186,6 +10608,15 @@
           "sourcePath": "complication:Feytouched/feytouched-accept-fey-power",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Feytouched supported=true; chain selectable"
+        },
+        {
+          "name": "Feytouched: Accept Fey Power",
+          "sourcePath": "complication:Feytouched/feytouched-accept-fey-power",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Feytouched supported=true; chain selectable"
@@ -9251,6 +10682,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Forbidden Romance supported=true; chain selectable"
+        },
+        {
+          "name": "Forbidden Romance: Request Favor",
+          "sourcePath": "complication:Forbidden Romance/forbidden-romance-request-favor",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Forbidden Romance supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9310,6 +10750,15 @@
           "sourcePath": "complication:Getting Too Old for This/getting-too-old-for-this-use-advanced-ability",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Getting Too Old for This supported=true; chain selectable"
+        },
+        {
+          "name": "Getting Too Old for This: Use Advanced Ability",
+          "sourcePath": "complication:Getting Too Old for This/getting-too-old-for-this-use-advanced-ability",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Getting Too Old for This supported=true; chain selectable"
@@ -9381,6 +10830,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Gnoll-Mauled supported=true; chain selectable"
+        },
+        {
+          "name": "Gnoll-Mauled: Retaliate",
+          "sourcePath": "complication:Gnoll-Mauled/gnoll-mauled-retaliate",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Gnoll-Mauled supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9428,6 +10886,15 @@
           "sourcePath": "complication:Grounded/motivate-earth",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Grounded supported=true; chain selectable"
+        },
+        {
+          "name": "Motivate Earth",
+          "sourcePath": "complication:Grounded/motivate-earth",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Grounded supported=true; chain selectable"
@@ -9493,6 +10960,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Guilty Conscience supported=true; chain selectable"
+        },
+        {
+          "name": "Guilty Conscience: Stay Alive",
+          "sourcePath": "complication:Guilty Conscience/guilty-conscience-stay-alive",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Guilty Conscience supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9552,6 +11028,15 @@
           "sourcePath": "complication:Hawk Rider/hawk-rider-dismiss-hawk",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Hawk Rider supported=true; chain selectable"
+        },
+        {
+          "name": "Hawk Rider: Dismiss Hawk",
+          "sourcePath": "complication:Hawk Rider/hawk-rider-dismiss-hawk",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Hawk Rider supported=true; chain selectable"
@@ -9617,6 +11102,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Hawk Rider supported=true; chain selectable"
+        },
+        {
+          "name": "Hawk Rider: Restore Hawk",
+          "sourcePath": "complication:Hawk Rider/hawk-rider-restore-hawk",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Hawk Rider supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9676,6 +11170,15 @@
           "sourcePath": "complication:Hawk Rider/hawk-rider-summon-hawk",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Hawk Rider supported=true; chain selectable"
+        },
+        {
+          "name": "Hawk Rider: Summon Hawk",
+          "sourcePath": "complication:Hawk Rider/hawk-rider-summon-hawk",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Hawk Rider supported=true; chain selectable"
@@ -9741,6 +11244,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Host Body supported=true; chain selectable"
+        },
+        {
+          "name": "Host Body: Transfer Host",
+          "sourcePath": "complication:Host Body/host-body-transfer-host",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Host Body supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9800,6 +11312,15 @@
           "sourcePath": "complication:Hunted/hunted-lay-low",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Hunted supported=true; chain selectable"
+        },
+        {
+          "name": "Hunted: Lay Low",
+          "sourcePath": "complication:Hunted/hunted-lay-low",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Hunted supported=true; chain selectable"
@@ -9865,6 +11386,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Loner supported=true; chain selectable"
+        },
+        {
+          "name": "Loner: Choose Respite Skill",
+          "sourcePath": "complication:Loner/loner-choose-respite-skill",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Loner supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -9912,6 +11442,15 @@
           "sourcePath": "complication:Lost Your Head/share-head",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Lost Your Head supported=true; chain selectable"
+        },
+        {
+          "name": "Share Head",
+          "sourcePath": "complication:Lost Your Head/share-head",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Lost Your Head supported=true; chain selectable"
@@ -9974,6 +11513,15 @@
           "sourcePath": "complication:Master Chef/master-chef-prepare-meal",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Master Chef supported=true; chain selectable"
+        },
+        {
+          "name": "Master Chef: Prepare Meal",
+          "sourcePath": "complication:Master Chef/master-chef-prepare-meal",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Master Chef supported=true; chain selectable"
@@ -10042,6 +11590,15 @@
           "sourcePath": "complication:Medium/contact-spirits",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Medium supported=true; chain selectable"
+        },
+        {
+          "name": "Contact Spirits",
+          "sourcePath": "complication:Medium/contact-spirits",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Medium supported=true; chain selectable"
@@ -10135,6 +11692,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Medusa Blood supported=true; chain selectable"
+        },
+        {
+          "name": "Stone Eyes",
+          "sourcePath": "complication:Medusa Blood/stone-eyes",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Medusa Blood supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10197,6 +11763,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Preacher supported=true; chain selectable"
+        },
+        {
+          "name": "Preacher: Convert Follower",
+          "sourcePath": "complication:Preacher/preacher-convert-follower",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Preacher supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10256,6 +11831,15 @@
           "sourcePath": "complication:Prisoner of the Synlirii/prisoner-of-the-synlirii-telepathy",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Prisoner of the Synlirii supported=true; chain selectable"
+        },
+        {
+          "name": "Prisoner of the Synlirii: Telepathy",
+          "sourcePath": "complication:Prisoner of the Synlirii/prisoner-of-the-synlirii-telepathy",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Prisoner of the Synlirii supported=true; chain selectable"
@@ -10324,6 +11908,15 @@
           "sourcePath": "complication:Psychic Eruption/psychic-blast",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "complication Psychic Eruption supported=true; chain selectable"
+        },
+        {
+          "name": "Psychic Blast",
+          "sourcePath": "complication:Psychic Eruption/psychic-blast",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "complication Psychic Eruption supported=true; chain selectable"
@@ -10413,6 +12006,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Psychic Eruption supported=true; chain selectable"
+        },
+        {
+          "name": "Psychic Blast: Forced Eruption",
+          "sourcePath": "complication:Psychic Eruption/psychic-blast-forced-eruption",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Psychic Eruption supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10472,6 +12074,15 @@
           "sourcePath": "complication:Rogue Talent/telekinetic-grasp",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Rogue Talent supported=true; chain selectable"
+        },
+        {
+          "name": "Telekinetic Grasp",
+          "sourcePath": "complication:Rogue Talent/telekinetic-grasp",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Rogue Talent supported=true; chain selectable"
@@ -10555,6 +12166,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Rogue Talent supported=true; chain selectable"
+        },
+        {
+          "name": "Telekinetic Grasp: Ranged Free Strike",
+          "sourcePath": "complication:Rogue Talent/telekinetic-grasp-ranged-free-strike",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Rogue Talent supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10614,6 +12234,15 @@
           "sourcePath": "complication:Secret Identity/secret-identity-resume-secret-identity",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Secret Identity supported=true; chain selectable"
+        },
+        {
+          "name": "Secret Identity: Resume Secret Identity",
+          "sourcePath": "complication:Secret Identity/secret-identity-resume-secret-identity",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Secret Identity supported=true; chain selectable"
@@ -10679,6 +12308,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Secret Identity supported=true; chain selectable"
+        },
+        {
+          "name": "Secret Identity: Resume True Identity",
+          "sourcePath": "complication:Secret Identity/secret-identity-resume-true-identity",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Secret Identity supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10735,6 +12373,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Self-Taught supported=true; chain selectable"
+        },
+        {
+          "name": "Self-Taught: Forgo Heroic Resource",
+          "sourcePath": "complication:Self-Taught/self-taught-forgo-heroic-resource",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Self-Taught supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10788,6 +12435,15 @@
           "sourcePath": "complication:Shared Spirit/shared-spirit-determine-controller",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Shared Spirit supported=true; chain selectable"
+        },
+        {
+          "name": "Shared Spirit: Determine Controller",
+          "sourcePath": "complication:Shared Spirit/shared-spirit-determine-controller",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Shared Spirit supported=true; chain selectable"
@@ -10853,6 +12509,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Silent Sentinel supported=true; chain selectable"
+        },
+        {
+          "name": "Silent Sentinel: Telepathy",
+          "sourcePath": "complication:Silent Sentinel/silent-sentinel-telepathy",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Silent Sentinel supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10915,6 +12580,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Stolen Face supported=true; chain selectable"
+        },
+        {
+          "name": "Stolen Face: Change Face",
+          "sourcePath": "complication:Stolen Face/stolen-face-change-face",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Stolen Face supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -10968,6 +12642,15 @@
           "sourcePath": "complication:Stripped of Rank/issue-order",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Stripped of Rank supported=true; chain selectable"
+        },
+        {
+          "name": "Issue Order",
+          "sourcePath": "complication:Stripped of Rank/issue-order",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Stripped of Rank supported=true; chain selectable"
@@ -11033,6 +12716,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Waking Dreams supported=true; chain selectable"
+        },
+        {
+          "name": "Waking Dreams: Receive Vision",
+          "sourcePath": "complication:Waking Dreams/waking-dreams-receive-vision",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Waking Dreams supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -11080,6 +12772,15 @@
           "sourcePath": "complication:War Dog Collar/posthumous-retirement",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication War Dog Collar supported=true; chain selectable"
+        },
+        {
+          "name": "Posthumous Retirement",
+          "sourcePath": "complication:War Dog Collar/posthumous-retirement",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication War Dog Collar supported=true; chain selectable"
@@ -11145,6 +12846,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication War Dog Collar supported=true; chain selectable"
+        },
+        {
+          "name": "War Dog Collar: Reset Collar",
+          "sourcePath": "complication:War Dog Collar/war-dog-collar-reset-collar",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication War Dog Collar supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -11204,6 +12914,15 @@
           "sourcePath": "complication:War of Assassins/war-of-assassins-call-in-favor",
           "decisionId": "complication.choice",
           "level": 2,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication War of Assassins supported=true; chain selectable"
+        },
+        {
+          "name": "War of Assassins: Call in Favor",
+          "sourcePath": "complication:War of Assassins/war-of-assassins-call-in-favor",
+          "decisionId": "complication.choice",
+          "level": 3,
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication War of Assassins supported=true; chain selectable"
@@ -11295,6 +13014,15 @@
           "grantKind": "complication",
           "selectable": "selectable",
           "detail": "complication Waterborn supported=true; chain selectable"
+        },
+        {
+          "name": "Rogue Wave",
+          "sourcePath": "complication:Waterborn/rogue-wave",
+          "decisionId": "complication.choice",
+          "level": 3,
+          "grantKind": "complication",
+          "selectable": "selectable",
+          "detail": "complication Waterborn supported=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -11363,6 +13091,24 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Arcane Trick supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Arcane Trick",
+          "sourcePath": "en/unified/md/perk/arcane-trick.md",
+          "decisionId": "career.disciple.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Arcane Trick supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Arcane Trick",
+          "sourcePath": "en/unified/md/perk/arcane-trick.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Arcane Trick supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -11413,6 +13159,24 @@
           "sourcePath": "en/unified/md/perk/area-of-expertise.md",
           "decisionId": "class.fury.level-2.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Area of Expertise: Inspect Object",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md",
+          "decisionId": "career.artisan.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Area of Expertise: Inspect Object",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
@@ -11475,6 +13239,24 @@
           "sourcePath": "en/unified/md/perk/creature-sense.md",
           "decisionId": "career.mages-apprentice.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.disciple.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
@@ -11549,6 +13331,33 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.agent.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.criminal.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -11608,6 +13417,24 @@
           "sourcePath": "en/unified/md/perk/eidetic-memory.md",
           "decisionId": "career.sage.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.sage.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
@@ -11691,6 +13518,33 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.beggar.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.performer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.politician.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -11750,6 +13604,24 @@
           "sourcePath": "en/unified/md/perk/familiar.md",
           "decisionId": "career.mages-apprentice.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.disciple.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Familiar supportedInV001=true; chain selectable"
@@ -11821,6 +13693,33 @@
           "sourcePath": "en/unified/md/perk/forgettable-face.md",
           "decisionId": "class.fury.level-2.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.agent.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.criminal.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
@@ -12003,6 +13902,87 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.explorer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.farmer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.laborer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.sailor.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.soldier.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.warden.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -12074,6 +14054,33 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.agent.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.criminal.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -12124,6 +14131,24 @@
           "sourcePath": "en/unified/md/perk/improvisation-creation.md",
           "decisionId": "class.fury.level-2.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md",
+          "decisionId": "career.artisan.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
@@ -12192,6 +14217,24 @@
           "sourcePath": "en/unified/md/perk/invisible-force.md",
           "decisionId": "career.mages-apprentice.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Invisible Force supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Invisible Force",
+          "sourcePath": "en/unified/md/perk/invisible-force.md",
+          "decisionId": "career.disciple.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Invisible Force supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Invisible Force",
+          "sourcePath": "en/unified/md/perk/invisible-force.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Invisible Force supportedInV001=true; chain selectable"
@@ -12374,6 +14417,87 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.explorer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.farmer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.laborer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.sailor.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.soldier.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.warden.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -12433,6 +14557,24 @@
           "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
           "decisionId": "career.sage.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.sage.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
@@ -12516,6 +14658,33 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.beggar.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.performer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.politician.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -12596,6 +14765,33 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.beggar.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.performer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.politician.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -12664,6 +14860,24 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Psychic Whisper supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Psychic Whisper",
+          "sourcePath": "en/unified/md/perk/psychic-whisper.md",
+          "decisionId": "career.disciple.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Psychic Whisper supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Psychic Whisper",
+          "sourcePath": "en/unified/md/perk/psychic-whisper.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Psychic Whisper supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -12723,6 +14937,24 @@
           "sourcePath": "en/unified/md/perk/ritualist.md",
           "decisionId": "career.mages-apprentice.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.disciple.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
@@ -12794,6 +15026,33 @@
           "sourcePath": "en/unified/md/perk/slipped-lead.md",
           "decisionId": "class.fury.level-2.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.agent.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.criminal.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
@@ -12877,6 +15136,33 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.beggar.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.performer.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.politician.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -12939,6 +15225,24 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.disciple.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -12989,6 +15293,24 @@
           "sourcePath": "en/unified/md/perk/traveling-artisan.md",
           "decisionId": "class.fury.level-2.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md",
+          "decisionId": "career.artisan.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
@@ -13051,6 +15373,24 @@
           "sourcePath": "en/unified/md/perk/traveling-sage.md",
           "decisionId": "career.sage.perk",
           "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 3,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.sage.perk",
+          "level": 3,
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
@@ -70916,8 +73256,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1051,
-      "abilities": 1037,
+      "count": 1054,
+      "abilities": 1040,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -70927,8 +73267,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 592,
-      "abilities": 592,
+      "count": 594,
+      "abilities": 594,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -71725,6 +74065,16 @@
       ]
     },
     {
+      "shape": "potency:A < SYM restrained (save ends)",
+      "type": "potency-condition",
+      "count": 4,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-3/pinning-shot",
+        "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends"
+      ]
+    },
+    {
       "shape": "potency:M < N bleeding (eot)",
       "type": "potency-condition",
       "count": 4,
@@ -71752,6 +74102,16 @@
       "examples": [
         "mcdm.heroes.v1/feature.ability.fury.level-1/your-entrails-are-your-extrails",
         "salient:foe-feature:d8696aab-0daf-46a8-82a0-c29ceb504fd4"
+      ]
+    },
+    {
+      "shape": "potency:M < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 4,
+      "abilities": 2,
+      "examples": [
+        "complication:Medusa Blood/stone-eyes",
+        "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow"
       ]
     },
     {
@@ -72185,15 +74545,6 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike"
-      ]
-    },
-    {
-      "shape": "potency:M < SYM slowed (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "complication:Medusa Blood/stone-eyes"
       ]
     },
     {
@@ -72850,6 +75201,15 @@
       ]
     },
     {
+      "shape": "potency:M < SYM prone and can't stand (save ends)",
+      "type": "potency-condition",
+      "count": 2,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow"
+      ]
+    },
+    {
       "shape": "potency:P < N the target is shapechanged (save ends)",
       "type": "potency-condition",
       "count": 2,
@@ -73495,15 +75855,6 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/kit/retiarius/net-and-stab"
-      ]
-    },
-    {
-      "shape": "potency:A < SYM restrained (save ends)",
-      "type": "potency-condition",
-      "count": 1,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends"
       ]
     },
     {
@@ -74811,11 +77162,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 192,
+      "total": 197,
       "compiles": 12,
-      "withRemainder": 60,
-      "withinV26Bounded": 5,
-      "noMatch": 120
+      "withRemainder": 63,
+      "withinV26Bounded": 6,
+      "noMatch": 122
     }
   }
 }

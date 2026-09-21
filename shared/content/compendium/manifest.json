@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:9778bbbd413dfe01afd0c76e26fc41542f6ce46957aa261af9bf541d5ba342ca",
-  "entryCount": 1221,
+  "contentHash": "sha256:242bc3e1b0f8fead8bf2a47236797e1212e1bbb6cf1ed3221411a4ea62e64d72",
+  "entryCount": 1228,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -189,6 +189,15 @@
         "feature/ability/shadow/level-2"
       ],
       "basis": "docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices."
+    },
+    {
+      "id": "shadow-level-three",
+      "description": "Shadow level-three Careful Observation and four 7-Insight alternatives.",
+      "paths": [
+        "feature/shadow/level-3",
+        "feature/ability/shadow/level-3"
+      ],
+      "basis": "docs/build/V98-shadow-level-three.md#scope: Shadow level-three build choices."
     },
     {
       "id": "tactician-level-one",
@@ -898,6 +907,46 @@
       "name": "Too Slow",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/too-slow.md",
       "selection": "shadow-level-two",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/careful-observation",
+      "kind": "ability",
+      "name": "Careful Observation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/careful-observation.md",
+      "selection": "shadow-level-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/dancer",
+      "kind": "ability",
+      "name": "Dancer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/dancer.md",
+      "selection": "shadow-level-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/misdirecting-strike",
+      "kind": "ability",
+      "name": "Misdirecting Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/misdirecting-strike.md",
+      "selection": "shadow-level-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/pinning-shot",
+      "kind": "ability",
+      "name": "Pinning Shot",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/pinning-shot.md",
+      "selection": "shadow-level-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow",
+      "kind": "ability",
+      "name": "Staggering Blow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/staggering-blow.md",
+      "selection": "shadow-level-three",
       "file": "ability.json"
     },
     {
@@ -3154,6 +3203,22 @@
       "name": "Trained Assassin",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-2/trained-assassin.md",
       "selection": "shadow-level-two",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-3/7-insight-ability",
+      "kind": "feature",
+      "name": "7-Insight Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-3/7-insight-ability.md",
+      "selection": "shadow-level-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-3/careful-observation",
+      "kind": "feature",
+      "name": "Careful Observation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-3/careful-observation.md",
+      "selection": "shadow-level-three",
       "file": "feature.json"
     },
     {
