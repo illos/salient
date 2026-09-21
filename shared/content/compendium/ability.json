@@ -6288,6 +6288,483 @@
     }
   },
   {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/call-forth",
+    "kind": "ability",
+    "name": "Call Forth (1+ Essence)",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/call-forth.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/call-forth.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Main action\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - effect: 'You summon one or more minions from your [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) into unoccupied spaces within distance. Choose one of the following options:'\n      name: Effect\n    - effect: You summon one [signature minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) for each essence you spend on this ability.\n      name: Signature Minions\n    - effect: You summon the set number of minions listed on the stat block for their essence cost.\n      name: All Other Minions\nfeature_source: summoner\nflavor: My power is yours, and yours, mine. I summon thee.\nkeywords:\n    - Magic\n    - Ranged\nlevel: \"1\"\nname: Call Forth (1+ Essence)\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/call-forth\ntarget: Self\ntype: ability\n---\n\n*My power is yours, and yours, mine. I summon thee.*\n\n| **Magic, Ranged**       | **Main action** |\n|-------------------------|----------------:|\n| **📏 Summoner's Range** |     **🎯 Self** |\n\n**Effect:** You summon one or more minions from your [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) into unoccupied spaces within distance. Choose one of the following options:\n\n**Signature Minions:** You summon one [signature minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) for each essence you spend on this ability.\n\n**All Other Minions:** You summon the set number of minions listed on the stat block for their essence cost.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "effect": "You summon one or more minions from your [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) into unoccupied spaces within distance. Choose one of the following options:",
+          "name": "Effect"
+        },
+        {
+          "effect": "You summon one [signature minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) for each essence you spend on this ability.",
+          "name": "Signature Minions"
+        },
+        {
+          "effect": "You summon the set number of minions listed on the stat block for their essence cost.",
+          "name": "All Other Minions"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "My power is yours, and yours, mine. I summon thee.",
+      "keywords": [
+        "Magic",
+        "Ranged"
+      ],
+      "level": "1",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/distraction-tactics",
+    "kind": "ability",
+    "name": "Distraction Tactics",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/distraction-tactics.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/distraction-tactics.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Free maneuver\nclass: summoner\ndistance: Self\neffects:\n    - effect: 'Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) under your control during the encounter is the target of the following effect:'\n      name: Effect\nfeature_source: summoner\nflavor: Your minions do the work to draw the heat away from your allies.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Distraction Tactics\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/distraction-tactics\ntarget: Special\ntype: ability\n---\n\n*Your minions do the work to draw the heat away from your allies.*\n\n| **Magic** | **Free maneuver** |\n|-----------|------------------:|\n| **📏 Self** | **🎯 Special** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) under your control during the encounter is the target of the following effect:\n\nThe target's [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) can inflict I < WEAK [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) to enemies. The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) that joined the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+    "structured": {
+      "action_type": "Free maneuver",
+      "class": "summoner",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) under your control during the encounter is the target of the following effect:",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "Your minions do the work to draw the heat away from your allies.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "target": "Special"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/essence-transfer",
+    "kind": "ability",
+    "name": "Essence Transfer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/essence-transfer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/essence-transfer.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Main action\nclass: summoner\ndistance: Melee 1\neffects:\n    - roll: Power Roll + Reason\n      tier1: 5 + R corruption damage; 2 charges (see below)\n      tier2: 8 + R corruption damage; 3 charges\n      tier3: 11 + R corruption damage; 4 charges\n    - effect: You can spend charges to activate one of the following effects. You can activate an effect multiple times. All charges disappear after using this ability.\n      name: Effect\nfeature_source: summoner\nflavor: You pierce your foe and repurpose some of that 'fiber of their being' they weren't using.\nkeywords:\n    - Magic\n    - Melee\n    - Strike\nlevel: \"1\"\nname: Essence Transfer\npower_roll_characteristic: Reason\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/essence-transfer\ntarget: One creature\ntier1: 5 + R corruption damage; 2 charges (see below)\ntier2: 8 + R corruption damage; 3 charges\ntier3: 11 + R corruption damage; 4 charges\ntype: ability\n---\n\n*You pierce your foe and repurpose some of that 'fiber of their being' they weren't using.*\n\n| **Magic, Melee, Strike** | **Main action** |\n|--------------------------|----------------:|\n| **📏 Melee 1** | **🎯 One creature** |\n\n**Power Roll + Reason:**\n\n- **≤11:** 5 + R corruption damage; 2 charges (see below)\n- **12-16:** 8 + R corruption damage; 3 charges\n- **17+:** 11 + R corruption damage; 4 charges\n\n**Effect:** You can spend charges to activate one of the following effects. You can activate an effect multiple times. All charges disappear after using this ability.\n\n- 1 charge: You or an ally within your Summoner's Range can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n- 1 charge: You or an ally within your Summoner's Range gain a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n- 2 charges: You call forth a signature [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) into an unoccupied space within your Summoner's Range.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "summoner",
+      "distance": "Melee 1",
+      "effects": [
+        {
+          "roll": "Power Roll + Reason",
+          "tier1": "5 + R corruption damage; 2 charges (see below)",
+          "tier2": "8 + R corruption damage; 3 charges",
+          "tier3": "11 + R corruption damage; 4 charges"
+        },
+        {
+          "effect": "You can spend charges to activate one of the following effects. You can activate an effect multiple times. All charges disappear after using this ability.",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "You pierce your foe and repurpose some of that 'fiber of their being' they weren't using.",
+      "keywords": [
+        "Magic",
+        "Melee",
+        "Strike"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "Reason",
+      "target": "One creature",
+      "tier1": "5 + R corruption damage; 2 charges (see below)",
+      "tier2": "8 + R corruption damage; 3 charges",
+      "tier3": "11 + R corruption damage; 4 charges"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade",
+    "kind": "ability",
+    "name": "Explosive Parade",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/explosive-parade.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/explosive-parade.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Main action\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - roll: Power Roll + Reason\n      tier1: You summon four [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n      tier2: You summon five [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n      tier3: You summon six [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n    - effect: The [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) are summoned within distance regardless of your minion maximum and without organizing them into squads. Each newly summoned [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) immediately moves up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward a creature or object.\n      name: Effect\n    - effect: In addition to the [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) summoned as a part of this ability, you can choose to command any number of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within distance, provided they haven't used a main action or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Special\nfeature_source: summoner\nflavor: Your minions swell with energy until they can no longer exist in this realm.\nkeywords:\n    - Magic\n    - Ranged\nlevel: \"1\"\nname: Explosive Parade\npower_roll_characteristic: Reason\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade\ntarget: Special\ntier1: You summon four [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\ntier2: You summon five [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\ntier3: You summon six [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\ntype: ability\n---\n\n*Your minions swell with energy until they can no longer exist in this realm.*\n\n| **Magic, Ranged** | **Main action** |\n|-------------------|----------------:|\n| **📏 Summoner's Range** | **🎯 Special** |\n\n**Power Roll + Reason:**\n\n- **≤11:** You summon four [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n- **12-16:** You summon five [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n- **17+:** You summon six [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n\n**Effect:** The [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) are summoned within distance regardless of your minion maximum and without organizing them into squads. Each newly summoned [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) immediately moves up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward a creature or object.\n\nIf they move adjacent to their target, become targeted by an [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack), or stop moving, they explode, dealing 2 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to one adjacent creature or object and pushing them 1 square. If a target is affected by two or more minions' explosions, the effects stack. These [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) activate no effects upon death, and you gain no [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) from their deaths.\n\n**Special:** In addition to the [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) summoned as a part of this ability, you can choose to command any number of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within distance, provided they haven't used a main action or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "roll": "Power Roll + Reason",
+          "tier1": "You summon four [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).",
+          "tier2": "You summon five [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).",
+          "tier3": "You summon six [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions)."
+        },
+        {
+          "effect": "The [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) are summoned within distance regardless of your minion maximum and without organizing them into squads. Each newly summoned [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) immediately moves up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward a creature or object.",
+          "name": "Effect"
+        },
+        {
+          "effect": "In addition to the [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) summoned as a part of this ability, you can choose to command any number of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within distance, provided they haven't used a main action or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Special"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "Your minions swell with energy until they can no longer exist in this realm.",
+      "keywords": [
+        "Magic",
+        "Ranged"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "Reason",
+      "target": "Special",
+      "tier1": "You summon four [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).",
+      "tier2": "You summon five [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).",
+      "tier3": "You summon six [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions)."
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/focus-fire",
+    "kind": "ability",
+    "name": "Focus Fire!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/focus-fire.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/focus-fire.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Triggered\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - effect: The target gains a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) for each of your minions [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them (up to a maximum of 3 surges), which they can use on the triggering damage.\n      name: Effect\n    - cost: Spend 1 Essence\n      effect: If the triggering damage is from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\nfeature_source: summoner\nflavor: You ensure the enemy can't escape the incoming attack.\nkeywords: []\nlevel: \"1\"\nname: Focus Fire!\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/focus-fire\ntarget: Self or one ally\ntrigger: The target deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to another creature.\ntype: ability\n---\n\n*You ensure the enemy can't escape the incoming attack.*\n\n| **—** | **Triggered** |\n|-------|-------------:|\n| **📏 Summoner's Range** | **🎯 Self or one ally** |\n\n**Trigger:** The target deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to another creature.\n\n**Effect:** The target gains a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) for each of your minions [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them (up to a maximum of 3 surges), which they can use on the triggering damage.\n\n**Spend 1 Essence:** If the triggering damage is from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\n",
+    "structured": {
+      "action_type": "Triggered",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "effect": "The target gains a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) for each of your minions [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them (up to a maximum of 3 surges), which they can use on the triggering damage.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Essence",
+          "effect": "If the triggering damage is from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge)."
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "You ensure the enemy can't escape the incoming attack.",
+      "keywords": [],
+      "level": "1",
+      "target": "Self or one ally",
+      "trigger": "The target deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to another creature."
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/halt",
+    "kind": "ability",
+    "name": "Halt!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/halt.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/halt.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Triggered\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - effect: You summon a signature minion in an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target. If the target is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) into the minion, you can choose to make the target take no [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) from the collision.\n      name: Effect\n    - effect: Instead of summoning a new minion, you can command one of your minions within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target before any additional effects occur.\n      name: Special\nfeature_source: summoner\nflavor: You order a minion to get in the way.\nkeywords: []\nlevel: \"1\"\nname: Halt!\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/halt\ntarget: One creature\ntrigger: The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), moves, or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).\ntype: ability\n---\n\n*You order a minion to get in the way.*\n\n| **—** | **Triggered** |\n|-------|-------------:|\n| **📏 Summoner's Range** | **🎯 One creature** |\n\n**Trigger:** The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), moves, or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).\n\n**Effect:** You summon a signature minion in an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target. If the target is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) into the minion, you can choose to make the target take no [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) from the collision.\n\n**Special:** Instead of summoning a new minion, you can command one of your minions within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target before any additional effects occur.\n",
+    "structured": {
+      "action_type": "Triggered",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "effect": "You summon a signature minion in an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target. If the target is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) into the minion, you can choose to make the target take no [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) from the collision.",
+          "name": "Effect"
+        },
+        {
+          "effect": "Instead of summoning a new minion, you can command one of your minions within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target before any additional effects occur.",
+          "name": "Special"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "You order a minion to get in the way.",
+      "keywords": [],
+      "level": "1",
+      "target": "One creature",
+      "trigger": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), moves, or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement)."
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/minion-bridge",
+    "kind": "ability",
+    "name": "Minion Bridge",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/minion-bridge.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/minion-bridge.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Maneuver\nclass: summoner\ndistance: Melee 1\neffects:\n    - effect: You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into a square adjacent to the target, including vertically.\n      name: Effect\n    - effect: An adjacent ally can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) alongside you during this movement. They must end their movement in an unoccupied square adjacent to the last minion you moved through.\n      name: 1 Essence\nfeature_source: summoner\nflavor: Your minions do everything in their power to form a safe path for you to cross.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Minion Bridge\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/minion-bridge\ntarget: One of your minions\ntype: ability\n---\n\n*Your minions do everything in their power to form a safe path for you to cross.*\n\n| **Magic**   | **Maneuver** |\n|-------------|-------------:|\n| **📏 Melee 1** | **🎯 One of your minions** |\n\n**Effect:** You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into a square adjacent to the target, including vertically.\n\nYou can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into squares that contain one of your minions, even if they occupy [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain). Each time you [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into a square that contains one of your minions while using this maneuver, you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) an additional square.\n\n**1 Essence:** An adjacent ally can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) alongside you during this movement. They must end their movement in an unoccupied square adjacent to the last minion you moved through.\n",
+    "structured": {
+      "action_type": "Maneuver",
+      "class": "summoner",
+      "distance": "Melee 1",
+      "effects": [
+        {
+          "effect": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into a square adjacent to the target, including vertically.",
+          "name": "Effect"
+        },
+        {
+          "effect": "An adjacent ally can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) alongside you during this movement. They must end their movement in an unoccupied square adjacent to the last minion you moved through.",
+          "name": "1 Essence"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "Your minions do everything in their power to form a safe path for you to cross.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "target": "One of your minions"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/not-yet",
+    "kind": "ability",
+    "name": "Not Yet!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/not-yet.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/not-yet.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Triggered\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - effect: If the target is a minion, they must be the only minion remaining in their squad.\n      name: Special\n    - effect: The [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) the target receives is reduced by an amount that leaves the target alive with 1 point of [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).\n      name: Effect\nfeature_source: summoner\nflavor: I command you to not die.\nkeywords: []\nlevel: \"1\"\nname: Not Yet!\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/not-yet\ntarget: One ally\ntrigger: The target receives enough damage to die or be destroyed.\ntype: ability\n---\n\n*I command you to not die.*\n\n| **—** | **Triggered** |\n|-------|-------------:|\n| **📏 Summoner's Range** | **🎯 One ally** |\n\n**Trigger:** The target receives enough damage to die or be destroyed.\n\n**Special:** If the target is a minion, they must be the only minion remaining in their squad.\n\n**Effect:** The [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) the target receives is reduced by an amount that leaves the target alive with 1 point of [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).\n",
+    "structured": {
+      "action_type": "Triggered",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "effect": "If the target is a minion, they must be the only minion remaining in their squad.",
+          "name": "Special"
+        },
+        {
+          "effect": "The [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) the target receives is reduced by an amount that leaves the target alive with 1 point of [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "I command you to not die.",
+      "keywords": [],
+      "level": "1",
+      "target": "One ally",
+      "trigger": "The target receives enough damage to die or be destroyed."
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/rallying-cry",
+    "kind": "ability",
+    "name": "Rallying Cry",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/rallying-cry.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/rallying-cry.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Maneuver\nclass: summoner\ndistance: 3 burst\neffects:\n    - effect: Each target chooses between gaining 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) or dealing additional [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) on their next [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n      name: Effect\nfeature_source: summoner\nflavor: '\"Show them what you''re made of!\"'\nkeywords:\n    - Magic\n    - Ranged\nlevel: \"1\"\nname: Rallying Cry\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/rallying-cry\ntarget: All Allies\ntype: ability\n---\n\n*\"Show them what you're made of!\"*\n\n| **Magic, Ranged** | **Maneuver** |\n|-------------------|-------------:|\n| **📏 3 burst** | **🎯 All Allies** |\n\n**Effect:** Each target chooses between gaining 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) or dealing additional [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) on their next [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+    "structured": {
+      "action_type": "Maneuver",
+      "class": "summoner",
+      "distance": "3 burst",
+      "effects": [
+        {
+          "effect": "Each target chooses between gaining 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) or dealing additional [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) on their next [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "\"Show them what you're made of!\"",
+      "keywords": [
+        "Magic",
+        "Ranged"
+      ],
+      "level": "1",
+      "target": "All Allies"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/shield",
+    "kind": "ability",
+    "name": "Shield!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/shield.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/shield.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Triggered\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - effect: If one of your minions is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target and is within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the strike, they become the new target of the strike.\n      name: Effect\n    - cost: Spend 1 Essence\n      effect: Instead of commanding an existing minion, you summon a signature minion into an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target to take the strike.\nfeature_source: summoner\nflavor: You call upon a minion to use their body to dampen the blow.\nkeywords: []\nlevel: \"1\"\nname: Shield!\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/shield\ntarget: Self or one ally\ntrigger: The target is targeted by a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\ntype: ability\n---\n\n*You call upon a minion to use their body to dampen the blow.*\n\n| **—** | **Triggered** |\n|-------|-------------:|\n| **📏 Summoner's Range** | **🎯 Self or one ally** |\n\n**Trigger:** The target is targeted by a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n\n**Effect:** If one of your minions is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target and is within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the strike, they become the new target of the strike.\n\n**Spend 1 Essence:** Instead of commanding an existing minion, you summon a signature minion into an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target to take the strike.\n",
+    "structured": {
+      "action_type": "Triggered",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "effect": "If one of your minions is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target and is within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the strike, they become the new target of the strike.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Essence",
+          "effect": "Instead of commanding an existing minion, you summon a signature minion into an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target to take the strike."
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "You call upon a minion to use their body to dampen the blow.",
+      "keywords": [],
+      "level": "1",
+      "target": "Self or one ally",
+      "trigger": "The target is targeted by a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)."
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/shields-of-essence",
+    "kind": "ability",
+    "name": "Shields of Essence",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/shields-of-essence.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/shields-of-essence.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Maneuver\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - roll: Power Roll + Reason\n      tier1: Three creatures\n      tier2: Four creatures\n      tier3: Five creatures\n    - effect: Until the end of the encounter, each target can use a [free triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) whenever they take [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to reduce the incoming [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) by half and then lose this effect.\n      name: Effect\nfeature_source: summoner\nflavor: You call forth protective forces to keep you all from harm.\nkeywords:\n    - Magic\n    - Ranged\nlevel: \"1\"\nname: Shields of Essence\npower_roll_characteristic: Reason\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/shields-of-essence\ntarget: Special\ntier1: Three creatures\ntier2: Four creatures\ntier3: Five creatures\ntype: ability\n---\n\n*You call forth protective forces to keep you all from harm.*\n\n| **Magic, Ranged** | **Maneuver** |\n|-------------------|-------------:|\n| **📏 Summoner's Range** | **🎯 Special** |\n\n**Power Roll + Reason:**\n\n- **≤11:** Three creatures\n- **12-16:** Four creatures\n- **17+:** Five creatures\n\n**Effect:** Until the end of the encounter, each target can use a [free triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) whenever they take [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to reduce the incoming [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) by half and then lose this effect.\n",
+    "structured": {
+      "action_type": "Maneuver",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "roll": "Power Roll + Reason",
+          "tier1": "Three creatures",
+          "tier2": "Four creatures",
+          "tier3": "Five creatures"
+        },
+        {
+          "effect": "Until the end of the encounter, each target can use a [free triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) whenever they take [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to reduce the incoming [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) by half and then lose this effect.",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "You call forth protective forces to keep you all from harm.",
+      "keywords": [
+        "Magic",
+        "Ranged"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "Reason",
+      "target": "Special",
+      "tier1": "Three creatures",
+      "tier2": "Four creatures",
+      "tier3": "Five creatures"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me",
+    "kind": "ability",
+    "name": "Strike for Me",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/strike-for-me.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/strike-for-me.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Free triggered\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: Up to three targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\n      tier2: Up to five targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\n      tier3: Up to seven targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\n    - effect: On a [natural 19 or 20](scc.v1:mcdm.heroes.v1/rule.dice/natural-19-20), each target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n      name: Special\n    - effect: Your minions act in place of you making a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or using a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability). If you were granted the [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) against a specific target, your minions must strike the same target. If the [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) granted you a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability), you have an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n      name: Effect\nfeature_source: summoner\nflavor: Your minions fight in your stead.\nkeywords:\n    - Magic\n    - Ranged\nlevel: \"1\"\nname: Strike for Me\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me\ntarget: Each of your minions\ntier1: Up to three targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\ntier2: Up to five targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\ntier3: Up to seven targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\ntrigger: You use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability).\ntype: ability\n---\n\n*Your minions fight in your stead.*\n\n| **Magic, Ranged**       |  **Free triggered** |\n|-------------------------|--------------------:|\n| **📏 Summoner's Range** | **🎯 Each of your minions** |\n\n**Trigger:** You use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability).\n\n**Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** Up to three targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\n- **12-16:** Up to five targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\n- **17+:** Up to seven targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\n\n**Special:** On a [natural 19 or 20](scc.v1:mcdm.heroes.v1/rule.dice/natural-19-20), each target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n\n**Effect:** Your minions act in place of you making a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or using a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability). If you were granted the [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) against a specific target, your minions must strike the same target. If the [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) granted you a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability), you have an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n\n**Your Minions Deal the Damage**\n\nBy normal Draw Steel rules, everyone gets access to [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). As a [summoner](scc.v1:mcdm.summoner.v1/class/summoner), you have a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) equivalent in addition to minions who have their own free strikes. Changing how you attack allows your minions to shine in battle while keeping your damage output in line with your fellow heroes. The static damage you and most of your minions deal also keeps your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) fast and flowing.\n",
+    "structured": {
+      "action_type": "Free triggered",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "Up to three targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)",
+          "tier2": "Up to five targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)",
+          "tier3": "Up to seven targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)"
+        },
+        {
+          "effect": "On a [natural 19 or 20](scc.v1:mcdm.heroes.v1/rule.dice/natural-19-20), each target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "name": "Special"
+        },
+        {
+          "effect": "Your minions act in place of you making a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or using a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability). If you were granted the [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) against a specific target, your minions must strike the same target. If the [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) granted you a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability), you have an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "Your minions fight in your stead.",
+      "keywords": [
+        "Magic",
+        "Ranged"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "Each of your minions",
+      "tier1": "Up to three targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)",
+      "tier2": "Up to five targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)",
+      "tier3": "Up to seven targets each make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)",
+      "trigger": "You use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability)."
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/summoner-strike",
+    "kind": "ability",
+    "name": "Summoner Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/summoner-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/summoner-strike.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Main action\nclass: summoner\ndistance: Melee 1 or Ranged 5\neffects:\n    - effect: R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage). If the target has R < WEAK, they are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).\n      name: Effect\n    - effect: This ability has the Charge keyword when it's used as a melee [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n      name: Special\nfeature_source: summoner\nflavor: A sudden burst of energy erupts from your implement and shocks your foes' nerves.\nkeywords:\n    - Magic\n    - Melee\n    - Ranged\n    - Strike\nlevel: \"1\"\nname: Summoner Strike\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/summoner-strike\ntarget: One creature or object\ntype: ability\n---\n\n*A sudden burst of energy erupts from your implement and shocks your foes' nerves.*\n\n| **Magic, Melee, Ranged, Strike** |          **Main action** |\n|----------------------------------|--------------------------:|\n| **📏 Melee 1 or Ranged 5**      | **🎯 One creature or object** |\n\n**Effect:** R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage). If the target has R < WEAK, they are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).\n\n**Special:** This ability has the Charge keyword when it's used as a melee [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "summoner",
+      "distance": "Melee 1 or Ranged 5",
+      "effects": [
+        {
+          "effect": "R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage). If the target has R < WEAK, they are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).",
+          "name": "Effect"
+        },
+        {
+          "effect": "This ability has the Charge keyword when it's used as a melee [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "name": "Special"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "A sudden burst of energy erupts from your implement and shocks your foes' nerves.",
+      "keywords": [
+        "Magic",
+        "Melee",
+        "Ranged",
+        "Strike"
+      ],
+      "level": "1",
+      "target": "One creature or object"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/summoners-sword",
+    "kind": "ability",
+    "name": "Summoner's Sword",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/summoners-sword.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-1/summoners-sword.json",
+    "selection": "summoner-level-one",
+    "text": "---\naction_type: Main action\nclass: summoner\ndistance: Melee 3\neffects:\n    - roll: Power Roll + Reason\n      tier1: R damage\n      tier2: 2 + R damage\n      tier3: 4 + R damage\n    - effect: This [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) deals an additional 2 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) for each ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.\n      name: Effect\nfeature_source: summoner\nflavor: You draw your strength from the army you surround yourself with and summon a hot blade of energy and fervor.\nkeywords:\n    - Magic\n    - Melee\n    - Strike\nlevel: \"1\"\nname: Summoner's Sword\npower_roll_characteristic: Reason\nscc: mcdm.summoner.v1/feature.ability.summoner.level-1/summoners-sword\ntarget: One creature or object\ntier1: R damage\ntier2: 2 + R damage\ntier3: 4 + R damage\ntype: ability\n---\n\n*You draw your strength from the army you surround yourself with and summon a hot blade of energy and fervor.*\n\n| **Magic, Melee, Strike** | **Main action** |\n|--------------------------|----------------:|\n| **📏 Melee 3** | **🎯 One creature or object** |\n\n**Power Roll + Reason:**\n\n- **≤11:** R damage\n- **12-16:** 2 + R damage\n- **17+:** 4 + R damage\n\n**Effect:** This [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) deals an additional 2 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) for each ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "summoner",
+      "distance": "Melee 3",
+      "effects": [
+        {
+          "roll": "Power Roll + Reason",
+          "tier1": "R damage",
+          "tier2": "2 + R damage",
+          "tier3": "4 + R damage"
+        },
+        {
+          "effect": "This [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) deals an additional 2 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) for each ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "You draw your strength from the army you surround yourself with and summon a hot blade of energy and fervor.",
+      "keywords": [
+        "Magic",
+        "Melee",
+        "Strike"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "Reason",
+      "target": "One creature or object",
+      "tier1": "R damage",
+      "tier2": "2 + R damage",
+      "tier3": "4 + R damage"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics",
     "kind": "ability",
     "name": "Advanced Tactics",

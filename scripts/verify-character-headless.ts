@@ -1,3 +1,4 @@
+import { runSummoner } from './headless/summoner.ts';
 import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
 import { runTalent } from './headless/talent.ts';
@@ -35,6 +36,7 @@ const cohorts = {
   elementalist: runElementalist,
   talent: runTalent,
   beastheart: runBeastheart,
+  summoner: runSummoner,
   censor: runCensor,
   conduit: runConduit,
   all: runScenarios,

@@ -88,6 +88,7 @@ export function deriveSummonerPortfolio(ctx: DerivationContext, out: PartialBase
       ],
     })),
     provenance: [
+      ...(formation === 'Horde' ? [provenance] : []),
       {
         decisionId: 'class.summoner.features',
         source: ctx.sentence({

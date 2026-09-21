@@ -2653,6 +2653,406 @@
     }
   },
   {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/1st-level-circle-features",
+    "kind": "feature",
+    "name": "1st-Level Circle Features",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/1st-level-circle-features.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/1st-level-circle-features.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: 1st-Level Circle Features\nscc: mcdm.summoner.v1/feature.summoner.level-1/1st-level-circle-features\ntype: feature\n---\n\nYour circle grants you features as shown on the 1st-Level Summoner Circle Features table.\n\n###### 1st-Level Summoner Circle Features\n\n| Circle | Feature |\n|--------|---------|\n| Blight | [Death Snap](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/death-snap), [Soulsense](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/soulsense) |\n| Graves | [Dead Men Tell All Tales](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/dead-men-tell-all-tales), [Rise!](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/rise) |\n| Spring | [Fairy Whispers](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/fairy-whispers), [Pixie Dust](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/pixie-dust) |\n| Storms | [Elemental Affinity](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/elemental-affinity), [Heart of Nature](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/heart-of-nature) |\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/call-forth",
+    "kind": "feature",
+    "name": "Call Forth",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/call-forth.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/call-forth.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Call Forth\nscc: mcdm.summoner.v1/feature.summoner.level-1/call-forth\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/dead-men-tell-all-tales",
+    "kind": "feature",
+    "name": "Dead Men Tell All Tales",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/dead-men-tell-all-tales.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/dead-men-tell-all-tales.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Dead Men Tell All Tales\nscc: mcdm.summoner.v1/feature.summoner.level-1/dead-men-tell-all-tales\nsubclass: graves\ntype: feature\n---\n\nYou can touch the corpse of a creature who died within the past week and ask them a question. The corpse can choose to answer the question to the best of their ability. Each additional question you ask the corpse requires a medium [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) [test](scc.v1:mcdm.heroes.v1/rule.test/test), where failure or consequence breaks your connection with the corpse permanently.\n\nThe corpse can also choose to refuse to answer or lie, especially if you were the one to kill them in the first place.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1",
+      "subclass": "graves"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/death-snap",
+    "kind": "feature",
+    "name": "Death Snap",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/death-snap.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/death-snap.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Death Snap\nscc: mcdm.summoner.v1/feature.summoner.level-1/death-snap\nsubclass: blight\ntype: feature\n---\n\nWhenever one of your demon minions would die unwillingly, they can deal [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature equal to their [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) value before dying.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1",
+      "subclass": "blight"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/elemental-affinity",
+    "kind": "feature",
+    "name": "Elemental Affinity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/elemental-affinity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/elemental-affinity.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Elemental Affinity\nscc: mcdm.summoner.v1/feature.summoner.level-1/elemental-affinity\nsubclass: storms\ntype: feature\n---\n\nWhenever you use [Call Forth](scc.v1:mcdm.summoner.v1/feature.ability.summoner.level-1/call-forth) to summon one or more non-signature elemental minions, you can summon one bonus signature minion at no cost. You can choose between a signature minion that shares an Element keyword with the minions you summoned (such as Fire, Earth, or Air) or an elemental mote.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1",
+      "subclass": "storms"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/elite-formation",
+    "kind": "feature",
+    "name": "Elite Formation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/elite-formation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/elite-formation.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Elite Formation\nscc: mcdm.summoner.v1/feature.summoner.level-1/elite-formation\ntype: feature\n---\n\nEach of your minions have their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) increased by 3 and their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increased by 1.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/essence",
+    "kind": "feature",
+    "name": "Essence",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/essence.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/essence.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Essence\nscc: mcdm.summoner.v1/feature.summoner.level-1/essence\ntype: feature\n---\n\nYou and your minions have a unique reserve of essence as your [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource). You use this magic to sculpt your forces and maintain control over the battlefield.\n\n#### Essence in Combat\n\nAt the start of a combat encounter or some other stressful situation tracked in [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) (as determined by the Director), you gain essence equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories).\n\nAt the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) during combat, you gain 2 essence.\n\nThe first time each [round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that any minion (either yours or an enemy) dies unwillingly within your Summoner's Range, you gain 1 essence.\n\nWhenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) or call forth a minion that costs essence, you can willingly sacrifice one or more of your minions within your Summoner's Range to reduce the cost by 1. You can't kill minions this way if they used a [main action](scc.v1:mcdm.heroes.v1/rule.combat/turn) or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You can sacrifice more minions than you would reduce the cost by.\n\nYou lose any remaining essence at the end of the encounter.\n\n#### Essence Outside of Combat\n\nThough you can't gain essence outside of combat, you can use your [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) and effects that cost essence without spending it. Whenever you use an ability or effect outside of combat that costs essence, you can't use that same ability or effect outside of combat again until you gain at least 1 [Victory](scc.v1:mcdm.heroes.v1/rule.resource/victories) or finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n\n<!-- @type: callout | @owner: loose -->\n> **More Wielders of Quintessence**\n>\n> Essence is the \"stuff of creation.\" Just as the elementalist uses essence to conjure fire, lightning, or warp space and time, the summoner uses essence to manifest skeletons, conjure pixies, and call forth demons from the Abyssal Waste.\n>\n> There may be more magicians in the future that also rely on essence for their magic.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/fairy-whispers",
+    "kind": "feature",
+    "name": "Fairy Whispers",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/fairy-whispers.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/fairy-whispers.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Fairy Whispers\nscc: mcdm.summoner.v1/feature.summoner.level-1/fairy-whispers\nsubclass: spring\ntype: feature\n---\n\nWhenever you send a minion to perform a task for you outside of combat, they can bring back a rumor from the destination to which you sent them. When the minion returns, make a [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) [test](scc.v1:mcdm.heroes.v1/rule.test/test):\n\n- **≤11:** You learn an undoubtedly false common rumor.\n- **12-16:** You learn a common rumor that is most likely true.\n- **17+:** You learn an obscure rumor that could either be true or false.\n\nYou gain a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on the test for each subsequent rumor you collect either on the same day or in the same location.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1",
+      "subclass": "spring"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/focus-fire",
+    "kind": "feature",
+    "name": "Focus Fire!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/focus-fire.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/focus-fire.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Focus Fire!\nscc: mcdm.summoner.v1/feature.summoner.level-1/focus-fire\ntype: feature\n---\n\nYou have the following triggered action.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/formation",
+    "kind": "feature",
+    "name": "Formation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/formation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/formation.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Formation\nscc: mcdm.summoner.v1/feature.summoner.level-1/formation\ntype: feature\n---\n\nYou've practiced a specific formation for your minions. Choose one of the following formations: horde, platoon, elite, or leader. You can change your formation along with your quick command (see [Quick Command](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/quick-command)) by performing intense study as a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity. (*Quick Build:* [Platoon Formation](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/platoon-formation).)\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/halt",
+    "kind": "feature",
+    "name": "Halt!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/halt.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/halt.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Halt!\nscc: mcdm.summoner.v1/feature.summoner.level-1/halt\ntype: feature\n---\n\nYou have the following triggered action.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/heart-of-nature",
+    "kind": "feature",
+    "name": "Heart of Nature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/heart-of-nature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/heart-of-nature.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Heart of Nature\nscc: mcdm.summoner.v1/feature.summoner.level-1/heart-of-nature\nsubclass: storms\ntype: feature\n---\n\nYou can sense the presence of creatures with the Elemental or Dragon keywords within 1 mile of you. You can innately feel their emotions or pain, and you can't obtain lower than a tier 2 outcome on any [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) [test](scc.v1:mcdm.heroes.v1/rule.test/test) made to socially interact with them.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1",
+      "subclass": "storms"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/horde-formation",
+    "kind": "feature",
+    "name": "Horde Formation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/horde-formation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/horde-formation.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Horde Formation\nscc: mcdm.summoner.v1/feature.summoner.level-1/horde-formation\ntype: feature\n---\n\nYour maximum number of minions increases by 4 and you summon up to four of your [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) at the start of each of your turns instead of three.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/leader-formation",
+    "kind": "feature",
+    "name": "Leader Formation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/leader-formation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/leader-formation.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Leader Formation\nscc: mcdm.summoner.v1/feature.summoner.level-1/leader-formation\ntype: feature\n---\n\nYou aren't affected by excess [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) after all minions in a squad are dead. If your minion is within your Summoner's Range when they take [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage), you can choose to take damage in place of the minion.\n\nAdditionally, you can use light armor [treasures](scc.v1:mcdm.heroes.v1/rule.treasure/leveled-treasure) and light weapon [treasures](scc.v1:mcdm.heroes.v1/rule.treasure/leveled-treasure) while you don't have a kit.\n\n<!-- @type: callout | @owner: loose -->\n> **Minions and Treasures**\n>\n> [Treasures](scc.v1:mcdm.heroes.v1/rule.treasure/leveled-treasure) in Draw Steel are typically worded for you to use, which might create ambiguity for a [summoner](scc.v1:mcdm.summoner.v1/class/summoner) managing an army. You can use the following guidelines to ensure the treasures you come across in your adventures do what they were intended to do.\n>\n> - Treasures that give you a [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) bonus to [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) only apply to [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made from a non-minion's space. However, when you use [Strike for Me](scc.v1:mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me), any bonus damage is applied to each enemy and object that took damage.\n> - Once you reach level 4 as a [summoner](scc.v1:mcdm.summoner.v1/class/summoner), you regain access to your normal [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) abilities while wielding a weapon treasure, an [implement](scc.v1:mcdm.heroes.v1/rule.treasure/implement) treasure, or any treasure that enables you to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) as a part of its effect.\n> - Treasures that increase the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of ranged magic abilities also increase the distance of your Summoner's Range.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/minion-bridge",
+    "kind": "feature",
+    "name": "Minion Bridge",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/minion-bridge.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/minion-bridge.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Minion Bridge\nscc: mcdm.summoner.v1/feature.summoner.level-1/minion-bridge\ntype: feature\n---\n\nYou have the following maneuver.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/minions",
+    "kind": "feature",
+    "name": "Minions",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/minions.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/minions.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Minions\nscc: mcdm.summoner.v1/feature.summoner.level-1/minions\ntype: feature\n---\n\nThe creatures you control are called minions. You can summon and maintain up to a maximum of 8 minions. Your minions are considered allies at your level.\n\nYou can manage up to two squads of minions. Newly summoned minions can either be organized into a new squad or be distributed into other squads under your control. A squad can't contain more than eight minions, and all minions in the squad must have the same name.\n\nThe maximum [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) that you can summon minions and use specific conjuring abilities is called your Summoner's Range. Your Summoner's Range is equal to 5 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. You must have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to summon and give commands to minions within your Summoner's Range. Commanding a minion to take a [main action](scc.v1:mcdm.heroes.v1/rule.combat/turn) or a [maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn) while hidden reveals you.\n\nYou also have special minions at your disposal called signature minions, low-cost creatures that you've become accustomed to summoning often. See [Portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) for more details about the types of minions you can summon.\n\n#### Minions in Combat\n\n**Start of Combat:** At the start of a combat encounter or some other stressful situation tracked in [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) (as determined by the Director), you can summon up to two of your signature minions at no cost into unoccupied spaces within your Summoner's Range (no action required).\n\n**Start of [Turn](scc.v1:mcdm.heroes.v1/rule.combat/turn):** At the start of each of your turns during combat, you can summon up to three of your signature minions at no cost into unoccupied spaces within your Summoner's Range (no action required).\n\n**Summoning:** Each minion is summoned on the ground unless they can [fly](scc.v1:mcdm.heroes.v1/movement/fly) or [hover](scc.v1:mcdm.heroes.v1/movement/hover). Unless an ability specifies, you can't summon any new minions beyond your minion maximum until the same number of existing minions are dismissed or destroyed.\n\n**[Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina):** Minions in a squad pool their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) together. Whenever a minion in a squad takes [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage), the squad's [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) pool is reduced by a number equal to the damage taken. Each time the pool is reduced by an amount equal to a single squad member's [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), one minion dies (starting with the minion that took damage, followed by the next nearest minion). If there is any excess damage after all minions in the squad are dead, you take damage equal to 2 + your level. Minions can't be [winded](scc.v1:mcdm.heroes.v1/rule.health/winded), can't regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), and can't gain [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n\n**Area Effects:** The [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) from an area effect dealt to a squad's [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) pool can only kill up to the minions in its area. Any excess damage is ignored.\n\n**Strikes with Multiple Targets:** A squad's [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) pool only takes the largest single instance of [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) from a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) that targets two or more minions in that squad. Any additional effects still affect the minions targeted by the strike.\n\n**[Conditions](scc.v1:mcdm.heroes.v1/rule.combat/condition):** You resolve any [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) on [conditions](scc.v1:mcdm.heroes.v1/rule.combat/condition) affecting one or more of your minions. Treat [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) as if you had one instance of each condition.\n\n**[Damage Immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) and [Weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness):** If any minion in a squad has [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) or [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) to a particular [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type), apply that effect to the entire squad only once, regardless of how many minions share the same trait.\n\n**Actions:** Minions in a squad act together on your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in any order, before, in-between, and/or after any of your actions. They can either take a move action and a [main action](scc.v1:mcdm.heroes.v1/rule.combat/turn) (excluding [Heal](scc.v1:mcdm.heroes.v1/feature.common.main-actions/heal) and [Defend](scc.v1:mcdm.heroes.v1/feature.common.main-actions/defend)), a move action and a [maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn), or two move actions. Individual minions can also make [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack).\n\n**[Free Strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike):** Unless otherwise specified, a minion's [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) has a distance of Melee 1 or Ranged 5 and deals the damage value listed on the stat block. The minion can choose to deal untyped damage or the [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) next to the damage value.\n\n**[Damage](scc.v1:mcdm.heroes.v1/rule.damage/damage):** Whenever multiple minions [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) the same target simultaneously, the damage is added together and treated as a single strike. Minions in a squad targeting the same target with a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) only apply one instance of the signature ability while each additional minion increases the damage by a number equal to their [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) value.\n\n**[Surges](scc.v1:mcdm.heroes.v1/rule.resource/surge):** Your minions share your pool of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) and can apply them to their strikes. Whenever one or more of your minions would gain a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) during a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain that surge instead.\n\n**Maneuvers:** Unless otherwise specified on the minions' stat block, a squad uses their maneuver together as a unit. If a maneuver targets a single creature, all minions in the squad target the same creature. If a maneuver requires a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), the result is equal to 8 + the minions' characteristic + the number of squad members within distance of the maneuver.\n\n**Individual Maneuvers:** An individual minion can use a maneuver to alleviate their own circumstances, such as getting up from [prone](scc.v1:mcdm.heroes.v1/condition/prone) or escaping a [grab](scc.v1:mcdm.heroes.v1/condition/grabbed). If they do, they can't take part in their squad's main action or maneuver.\n\n**[Characteristics](scc.v1:mcdm.heroes.v1/rule.character/characteristic):** Your minions have their own [characteristics](scc.v1:mcdm.heroes.v1/rule.character/characteristic) for the purposes of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency), maneuvers, and making tests. You use your own [characteristics](scc.v1:mcdm.heroes.v1/rule.character/characteristic) where a minion's stat block refers to an R or uses a [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) (such as M < WEAK).\n\n**Unconscious:** If you are unconscious or unable to act on your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can't summon new minions. Additionally, your remaining minions can't deal damage; they can only act to bring you to safety.\n\n**End of Combat:** At the end of combat, your minions finish their tasks (such as carrying someone to safety) and are then dismissed.\n\n#### Minions Outside of Combat\n\nWhile outside of combat, you can have up to 4 minions summoned without spending [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence). You can freely summon your signature minions this way. For other minions, while you have a number of [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories) equal to the minion's essence cost or more, you can summon up to the set number of minions listed on their stat block.\n\nEach of your minions can be given a simple task and a destination you've previously visited and they'll fulfill it to the best of their ability. Example tasks include sending messages, scouting, and carrying supplies. Your minions aren't [followers](scc.v1:mcdm.heroes.v1/rule.general/follower) and can't make [project rolls](scc.v1:mcdm.heroes.v1/rule.downtime/project-roll) until you can summon specialists (see [Minion Machinations](scc.v1:mcdm.summoner.v1/feature.summoner.level-6/minion-machinations)).\n\nWhen combat begins, any of your minions who were summoned outside of combat finish their tasks and are then dismissed.\n\n> **Soul-y Moley!**\n>\n> Your minions are manifestations of the magic you weave and don't harbor any souls of their own. They are expressions of your own soul and are more akin to dreams than sapient creatures.\n>\n> Treat your minions as if they had your soul whenever they are targeted by abilities that affect souls. Ignore any effects that trigger when a creature with a soul dies unless you're the one being targeted.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/not-yet",
+    "kind": "feature",
+    "name": "Not Yet!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/not-yet.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/not-yet.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Not Yet!\nscc: mcdm.summoner.v1/feature.summoner.level-1/not-yet\ntype: feature\n---\n\nYou have the following triggered action.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/pixie-dust",
+    "kind": "feature",
+    "name": "Pixie Dust",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/pixie-dust.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/pixie-dust.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Pixie Dust\nscc: mcdm.summoner.v1/feature.summoner.level-1/pixie-dust\nsubclass: spring\ntype: feature\n---\n\nIncrease your number of [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) by 2.\n\nWhenever one of your fey minions dies within your Summoner's Range, you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to give [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to twice your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score to each non-minion ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the minion when they died.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1",
+      "subclass": "spring"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/platoon-formation",
+    "kind": "feature",
+    "name": "Platoon Formation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/platoon-formation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/platoon-formation.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Platoon Formation\nscc: mcdm.summoner.v1/feature.summoner.level-1/platoon-formation\ntype: feature\n---\n\nWhenever one of your squads uses a damaging ability, choose one target of that ability to take additional [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/portfolio",
+    "kind": "feature",
+    "name": "Portfolio",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/portfolio.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/portfolio.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Portfolio\nscc: mcdm.summoner.v1/feature.summoner.level-1/portfolio\ntype: feature\n---\n\nYour portfolio comprises the minions you've learned to summon. Each summoner circle specializes in a portfolio of creatures with which the summoner can build their armies, as shown on the Summoner Circle Portfolio table. Your circle allows you to select minions to add to your own portfolio.\n\n###### Summoner Circle Portfolio\n\n| Circle | Portfolio |\n|--------|-----------|\n| Blight | Demon Portfolio |\n| Graves | Undead Portfolio |\n| Spring | Fey Portfolio |\n| Storms | Elemental Portfolio |\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/quick-command",
+    "kind": "feature",
+    "name": "Quick Command",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/quick-command.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/quick-command.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Quick Command\nscc: mcdm.summoner.v1/feature.summoner.level-1/quick-command\ntype: feature\n---\n\nYou have a special command you can issue to your minions. Choose one of the following quick commands. You can change your quick command along with your formation (see [Formation](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/formation)) by performing intense study as a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity. (*Quick Build:* [Shield!](scc.v1:mcdm.summoner.v1/feature.ability.summoner.level-1/shield))\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/rise",
+    "kind": "feature",
+    "name": "Rise!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/rise.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/rise.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Rise!\nscc: mcdm.summoner.v1/feature.summoner.level-1/rise\nsubclass: graves\ntype: feature\n---\n\nOnce per [round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round), when a creature dies unwillingly within your Summoner's Range, you can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to summon a signature undead minion in their space at no cost, even if you're at your minion maximum, but only if they can be organized into one of your squads. The new minion can't act until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\nThis ability becomes a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) if the target was a minion (either yours or an enemy).\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1",
+      "subclass": "graves"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/shield",
+    "kind": "feature",
+    "name": "Shield!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/shield.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/shield.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Shield!\nscc: mcdm.summoner.v1/feature.summoner.level-1/shield\ntype: feature\n---\n\nYou have the following triggered action.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/soulsense",
+    "kind": "feature",
+    "name": "Soulsense",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/soulsense.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/soulsense.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Soulsense\nscc: mcdm.summoner.v1/feature.summoner.level-1/soulsense\nsubclass: blight\ntype: feature\n---\n\nWhile you have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to a creature with a soul, you can perceive a trail of where the creature has been in the last number of minutes equal to 5 × your level.\n\nWhen you finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite), you can always perceive the soul trails of each creature that took the [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) with you until your next [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1",
+      "subclass": "blight"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/strike-for-me",
+    "kind": "feature",
+    "name": "Strike For Me",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/strike-for-me.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/strike-for-me.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Strike For Me\nscc: mcdm.summoner.v1/feature.summoner.level-1/strike-for-me\ntype: feature\n---\n\nYou have the following free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/summoner-abilities",
+    "kind": "feature",
+    "name": "Summoner Abilities",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/summoner-abilities.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/summoner-abilities.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Summoner Abilities\nscc: mcdm.summoner.v1/feature.summoner.level-1/summoner-abilities\ntype: feature\n---\n\nYour own abilities focus on support and enable you to position and outfit your allies for success.\n\n#### Heroic Abilities\n\nBreaking down your [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) into pure power can lead to devastating effects. Your [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) enable you to punctuate your army's efforts.\n\n##### 5-Essence Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 5 [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) to use. (Quick Build: [Rallying Cry](scc.v1:mcdm.summoner.v1/feature.ability.summoner.level-1/rallying-cry).)\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/summoner-circle",
+    "kind": "feature",
+    "name": "Summoner Circle",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/summoner-circle.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/summoner-circle.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"1\"\nname: Summoner Circle\nscc: mcdm.summoner.v1/feature.summoner.level-1/summoner-circle\ntype: feature\n---\n\nYou've learned the art of summoning from a member of a loose network of summoners called a circle. Each circle specializes in a distinct [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) of creatures you can call into existence. Choose a summoner circle from the following options, each of which grants you a communication feature (*Quick Build:* Circle of Graves.)\n\n**Circle of Blight:** You are a demonologist who calls forth demons from the Abyssal Waste. Your [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) includes shapechanging demons that grow in hunger and power over time. You can communicate with creatures that have the Abyssal keyword even if you don't share a language.\n\n**Circle of Graves:** You are a necromancer who raises undead creatures from the Necropolitan Ruin. The corporeal and incorporeal creatures under your command are hardy and many. You can communicate with creatures that have the Undead keyword even if you don't share a language.\n\n**Circle of Spring:** You are a feybright who beckons pixies, nixies, and sprites from Arcadia. Your [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) features ephemeral fey spirits surrounded by weird and powerful magic. You can communicate with creatures that have the Fey keyword even if you don't share a language.\n\n**Circle of Storms:** You are a storm caster who summons elementals from Quintessence. This [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) contains forces of nature that leave a big impact on the environment. You can communicate with creatures that have the Elemental keyword even if you don't share a language.\n\nYour choice of circle decides the [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) from which you summon minions, as well as many of the features you'll gain from this class. Your circle is your [subclass](scc.v1:mcdm.heroes.v1/rule.general/subclass).\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-1/summoner-strike",
+    "kind": "feature",
+    "name": "Summoner Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-1/summoner-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-1/summoner-strike.json",
+    "selection": "summoner-level-one",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"1\"\nname: Summoner Strike\nscc: mcdm.summoner.v1/feature.summoner.level-1/summoner-strike\ntype: feature\n---\n\nYou have the following ability, which replaces both your melee and ranged [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "1"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.tactician.level-1/1st-level-doctrine-feature",
     "kind": "feature",
     "name": "1st-Level Doctrine Feature",

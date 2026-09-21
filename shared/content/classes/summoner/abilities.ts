@@ -18,7 +18,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/distraction-tactics.md',
     actionType: 'Free maneuver',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     cost: 5,
   },
   {
@@ -27,7 +27,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/essence-transfer.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     cost: 5,
   },
   {
@@ -36,7 +36,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/explosive-parade.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     cost: 5,
   },
   {
@@ -45,7 +45,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/focus-fire.md',
     actionType: 'Triggered',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     trigger:
       'The target deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to another creature.',
   },
@@ -55,7 +55,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/focus-fire.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use only with the parent ability. If the triggering damage is from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use only with the parent ability. If the triggering damage is from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).',
     cost: 1,
   },
   {
@@ -64,7 +64,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/halt.md',
     actionType: 'Triggered',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     trigger:
       'The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), moves, or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).',
   },
@@ -74,7 +74,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/minion-bridge.md',
     actionType: 'Maneuver',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
   },
   {
     name: 'Summoner: Minion Bridge: 1 Essence option',
@@ -82,7 +82,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/minion-bridge.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use only with the parent ability. An adjacent ally can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) alongside you during this movement. They must end their movement in an unoccupied square adjacent to the last minion you moved through.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use only with the parent ability. An adjacent ally can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) alongside you during this movement. They must end their movement in an unoccupied square adjacent to the last minion you moved through.',
     cost: 1,
   },
   {
@@ -91,7 +91,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/not-yet.md',
     actionType: 'Triggered',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     trigger: 'The target receives enough damage to die or be destroyed.',
   },
   {
@@ -100,7 +100,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/rallying-cry.md',
     actionType: 'Maneuver',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     cost: 5,
   },
   {
@@ -109,7 +109,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/shield.md',
     actionType: 'Triggered',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     trigger: 'The target is targeted by a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).',
   },
   {
@@ -118,7 +118,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/shield.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use only with the parent ability. Instead of commanding an existing minion, you summon a signature minion into an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target to take the strike.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use only with the parent ability. Instead of commanding an existing minion, you summon a signature minion into an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target to take the strike.',
     cost: 1,
   },
   {
@@ -127,7 +127,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/shields-of-essence.md',
     actionType: 'Maneuver',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     cost: 5,
   },
   {
@@ -136,7 +136,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/strike-for-me.md',
     actionType: 'Free triggered',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     trigger:
       'You use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) or use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability).',
   },
@@ -146,7 +146,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/summoner-strike.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
   },
   {
     name: "Summoner: Summoner's Sword",
@@ -154,7 +154,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/summoners-sword.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. ',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ',
     cost: 5,
   },
   {
@@ -163,7 +163,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/halt.md',
     actionType: 'Triggered',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use the alternative shift instead of summoning.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use the alternative shift instead of summoning.',
   },
   {
     name: 'Summoner: Essence Transfer: Recovery',
@@ -171,7 +171,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/essence-transfer.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Spend 1 rolled charge; target spends a Recovery manually.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Spend 1 rolled charge; target spends a Recovery manually.',
   },
   {
     name: 'Summoner: Essence Transfer: Surge',
@@ -179,7 +179,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/essence-transfer.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Spend 1 rolled charge; grant a surge manually.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Spend 1 rolled charge; grant a surge manually.',
   },
   {
     name: 'Summoner: Essence Transfer: Signature minion',
@@ -187,7 +187,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/essence-transfer.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Spend 2 rolled charges.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Spend 2 rolled charges.',
   },
   {
     name: 'Summoner: Shields of Essence: Reduce damage',
@@ -195,7 +195,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/shields-of-essence.md',
     actionType: 'Free triggered action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Protected creature acts when damaged, then loses this effect.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Protected creature acts when damaged, then loses this effect.',
   },
   {
     name: 'Summoner: Rallying Cry: Surges',
@@ -203,7 +203,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/rallying-cry.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Target chooses 2 surges.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Target chooses 2 surges.',
   },
   {
     name: 'Summoner: Rallying Cry: Damage bonus',
@@ -211,7 +211,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/rallying-cry.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Target chooses Reason damage on their next strike.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Target chooses Reason damage on their next strike.',
   },
   {
     name: 'Summoner: Death Snap',
@@ -219,7 +219,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/death-snap.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Demon dies unwillingly; damage before death.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Demon dies unwillingly; damage before death.',
   },
   {
     name: 'Summoner: Soulsense',
@@ -227,7 +227,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/soulsense.md',
     actionType: 'Source activity',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Line of effect; trail for 5 minutes at level one; respite exception.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Line of effect; trail for 5 minutes at level one; respite exception.',
   },
   {
     name: 'Summoner: Dead Men Tell All Tales',
@@ -235,7 +235,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/dead-men-tell-all-tales.md',
     actionType: 'Source activity',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Corpse died within one week; additional questions need medium Reason test.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Corpse died within one week; additional questions need medium Reason test.',
   },
   {
     name: 'Summoner: Rise!',
@@ -243,7 +243,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/rise.md',
     actionType: 'Triggered action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Once per round; unwilling death in range; squad required; cannot act until next turn; free if minion.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Once per round; unwilling death in range; squad required; cannot act until next turn; free if minion.',
   },
   {
     name: 'Summoner: Fairy Whispers',
@@ -251,7 +251,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/fairy-whispers.md',
     actionType: 'Source activity',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Returned minion rumor; Reason test and cumulative banes.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Returned minion rumor; Reason test and cumulative banes.',
   },
   {
     name: 'Summoner: Pixie Dust',
@@ -259,7 +259,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/pixie-dust.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Fey dies in range; spend a Recovery manually; adjacent non-minion allies gain twice Reason temporary Stamina.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Fey dies in range; spend a Recovery manually; adjacent non-minion allies gain twice Reason temporary Stamina.',
   },
   {
     name: 'Summoner: Elemental Affinity',
@@ -267,7 +267,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/elemental-affinity.md',
     actionType: 'Part of Call Forth',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Non-signature elemental Call Forth: bonus signature of matching element or mote; manually track cap and squads.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Non-signature elemental Call Forth: bonus signature of matching element or mote; manually track cap and squads.',
   },
   {
     name: 'Summoner: Heart of Nature',
@@ -275,7 +275,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/heart-of-nature.md',
     actionType: 'Source activity',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Elemental or Dragon within one mile; Intuition social tests minimum tier 2.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Elemental or Dragon within one mile; Intuition social tests minimum tier 2.',
   },
   {
     name: 'Summoner: Leader Formation',
@@ -283,7 +283,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/leader-formation.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Choose to take damage for minion within range.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Choose to take damage for minion within range.',
   },
   {
     name: 'Summoner: Platoon Formation',
@@ -291,7 +291,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/platoon-formation.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. One target takes Reason additional damage after damaging squad ability.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. One target takes Reason additional damage after damaging squad ability.',
   },
   {
     name: 'Summoner: Essence',
@@ -299,7 +299,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/essence.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Victories at combat start; +2 start of turn; first unwilling minion death in range each round +1; clear at end. Track outside-combat reuse until Victory/respite.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Victories at combat start; +2 start of turn; first unwilling minion death in range each round +1; clear at end. Track outside-combat reuse until Victory/respite.',
   },
   {
     name: 'Summoner: Minions',
@@ -307,7 +307,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/minions.md',
     actionType: 'Source activity',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Commands, squad allocation and summon limits tracked manually.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Commands, squad allocation and summon limits tracked manually.',
   },
   {
     name: 'Summoner: Formation',
@@ -315,7 +315,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/formation.md',
     actionType: 'Respite activity',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Change formation and quick command together through editor after intense study.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Change formation and quick command together through editor after intense study.',
   },
   {
     name: 'Summoner: Sacrifice minions',
@@ -323,7 +323,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/essence.md',
     actionType: 'Part of paid effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Eligible minions in range cannot have used main action or maneuver this turn; record sacrifice and adjust Essence manually for the printed reduction before paying the normal action cost.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Eligible minions in range cannot have used main action or maneuver this turn; record sacrifice and adjust Essence manually for the printed reduction before paying the normal action cost.',
   },
   {
     name: 'Summoner: Start of combat summons',
@@ -331,7 +331,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/minions.md',
     actionType: 'No action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon up to two signature minions at no cost.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon up to two signature minions at no cost.',
   },
   {
     name: 'Summoner: Start of turn summons',
@@ -339,7 +339,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/minions.md',
     actionType: 'No action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon up to three signature minions, or four with Horde, at no cost.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon up to three signature minions, or four with Horde, at no cost.',
   },
   {
     name: 'Summoner: Outside combat summons',
@@ -347,7 +347,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/minions.md',
     actionType: 'Source activity',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Maximum four minions; non-signature requires Victories at least cost and printed batch.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Maximum four minions; non-signature requires Victories at least cost and printed batch.',
   },
   {
     name: 'Summoner: Dismiss minions',
@@ -355,7 +355,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/minions.md',
     actionType: 'Source activity',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Finish tasks then dismiss at encounter end or combat start for outside-combat minions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Finish tasks then dismiss at encounter end or combat start for outside-combat minions.',
   },
   {
     name: 'Call Forth: Archer Spittlich',
@@ -363,7 +363,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Archer Spittlich; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Archer Spittlich; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -372,7 +372,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/archer-spittlich.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Archer Spittlich: Splash Strike',
@@ -380,7 +380,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/archer-spittlich.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Archer Spittlich: Soulsight',
@@ -388,7 +388,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/archer-spittlich.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Ensnarer',
@@ -396,7 +396,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Ensnarer; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Ensnarer; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -405,7 +405,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/ensnarer.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Ensnarer: Extended Barbed Strike',
@@ -413,7 +413,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/ensnarer.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Ensnarer: Soulsight',
@@ -421,7 +421,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/ensnarer.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Fanged Musilex',
@@ -429,7 +429,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Fanged Musilex; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Fanged Musilex; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -438,7 +438,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/fanged-musilex.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Fanged Musilex: Mawful Strike',
@@ -446,7 +446,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/fanged-musilex.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Fanged Musilex: Soulsight',
@@ -454,7 +454,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/fanged-musilex.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Rasquine',
@@ -462,7 +462,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Rasquine; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Rasquine; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -471,7 +471,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/rasquine.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Rasquine: Skulker',
@@ -479,7 +479,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/rasquine.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Rasquine: Soulsight',
@@ -487,7 +487,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/rasquine.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Razor',
@@ -495,7 +495,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Razor; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Razor; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -504,7 +504,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/razor.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Razor: Teeth!',
@@ -512,7 +512,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/razor.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Razor: Soulsight',
@@ -520,7 +520,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/razor.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Twisted Bengrul',
@@ -528,7 +528,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Twisted Bengrul; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Twisted Bengrul; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -537,7 +537,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/twisted-bengrul.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Twisted Bengrul: Mind Twist',
@@ -545,7 +545,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/twisted-bengrul.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Twisted Bengrul: Soulsight',
@@ -553,7 +553,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/demon/statblock/twisted-bengrul.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Grave Knight',
@@ -561,7 +561,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Grave Knight; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Grave Knight; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -570,7 +570,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/grave-knight.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Grave Knight: Knight Strike',
@@ -578,7 +578,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/grave-knight.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Grave Knight: To the Grave',
@@ -586,7 +586,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/grave-knight.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Husk',
@@ -594,7 +594,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Husk; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Husk; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -603,7 +603,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/husk.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Husk: Rotting Strike',
@@ -611,7 +611,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/husk.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Shrieker',
@@ -619,7 +619,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Shrieker; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Shrieker; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -628,7 +628,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/shrieker.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Shrieker: Howling Strike',
@@ -636,7 +636,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/shrieker.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Shrieker: Shrill Alarm',
@@ -644,7 +644,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/shrieker.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Skeleton',
@@ -652,7 +652,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Skeleton; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Skeleton; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -661,7 +661,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/skeleton.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Skeleton: Bonetrops',
@@ -669,7 +669,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/skeleton.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Stalker Shade',
@@ -677,7 +677,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Stalker Shade; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Stalker Shade; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -686,7 +686,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/stalker-shade.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Stalker Shade: Shadow Strike',
@@ -694,7 +694,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/stalker-shade.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Stalker Shade: Shadow Phasing',
@@ -702,7 +702,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/stalker-shade.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Zombie Lumberer',
@@ -710,7 +710,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Zombie Lumberer; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Zombie Lumberer; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -719,7 +719,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/zombie-lumberer.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Zombie Lumberer: Zombie Clutch',
@@ -727,7 +727,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/zombie-lumberer.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Zombie Lumberer: Death Grasp',
@@ -735,7 +735,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/undead/statblock/zombie-lumberer.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Nixie Soakreed',
@@ -743,7 +743,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Nixie Soakreed; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Nixie Soakreed; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -752,7 +752,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/nixie-soakreed.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Nixie Soakreed: Water Weird',
@@ -760,7 +760,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/nixie-soakreed.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Nixie Soakreed: Soaking Bog',
@@ -768,7 +768,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/nixie-soakreed.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Nixie Soakreed: Minuscule',
@@ -776,7 +776,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/nixie-soakreed.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Pixie Bellringer',
@@ -784,7 +784,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Pixie Bellringer; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Pixie Bellringer; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -793,7 +793,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-bellringer.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Pixie Bellringer: Ringing Strike',
@@ -801,7 +801,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-bellringer.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Pixie Bellringer: Fairy Chime',
@@ -809,7 +809,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-bellringer.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Pixie Bellringer: Minuscule',
@@ -817,7 +817,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-bellringer.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Pixie Hydrain',
@@ -825,7 +825,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Pixie Hydrain; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Pixie Hydrain; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -834,7 +834,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-hydrain.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Pixie Hydrain: Burning/Healing Rain',
@@ -842,7 +842,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-hydrain.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Pixie Hydrain: Minuscule',
@@ -850,7 +850,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-hydrain.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Pixie Loftlilly',
@@ -858,7 +858,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Pixie Loftlilly; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Pixie Loftlilly; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -867,7 +867,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-loftlilly.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Pixie Loftlilly: Floating Toxins',
@@ -875,7 +875,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-loftlilly.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Pixie Loftlilly: Minuscule',
@@ -883,7 +883,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/pixie-loftlilly.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Sprite Dandeknight',
@@ -891,7 +891,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Sprite Dandeknight; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Sprite Dandeknight; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -900,7 +900,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/sprite-dandeknight.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Sprite Dandeknight: Magic Strike',
@@ -908,7 +908,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/sprite-dandeknight.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Sprite Dandeknight: Staccato Swings',
@@ -916,7 +916,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/sprite-dandeknight.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Sprite Dandeknight: Minuscule',
@@ -924,7 +924,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/sprite-dandeknight.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Sprite Orchiguard',
@@ -932,7 +932,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Sprite Orchiguard; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Sprite Orchiguard; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -941,7 +941,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/sprite-orchiguard.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Sprite Orchiguard: Fairy Guard',
@@ -949,7 +949,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/sprite-orchiguard.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Sprite Orchiguard: Minuscule',
@@ -957,7 +957,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/fey/statblock/sprite-orchiguard.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Brisk Gale',
@@ -965,7 +965,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Brisk Gale; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Brisk Gale; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -974,7 +974,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/brisk-gale.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Brisk Gale: Cutting the Air',
@@ -982,7 +982,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/brisk-gale.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Brisk Gale: Whirlwind',
@@ -990,7 +990,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/brisk-gale.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Crux of Ash',
@@ -998,7 +998,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Crux of Ash; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Crux of Ash; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -1007,7 +1007,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/crux-of-ash.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Crux of Ash: Soot Strike',
@@ -1015,7 +1015,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/crux-of-ash.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Crux of Ash: Ashen Cloud',
@@ -1023,7 +1023,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/crux-of-ash.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
     cost: 1,
   },
   {
@@ -1032,7 +1032,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Desolation of Sand; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Desolation of Sand; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -1041,7 +1041,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/desolation-of-sand.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Desolation of Sand: Burying Strike',
@@ -1049,7 +1049,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/desolation-of-sand.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Desolation of Sand: Sand Through Your Fingers',
@@ -1057,7 +1057,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/desolation-of-sand.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Desolation of Sand: Shifting Sand Pit',
@@ -1065,7 +1065,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/desolation-of-sand.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
     cost: 1,
   },
   {
@@ -1074,7 +1074,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Elemental Mote; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Elemental Mote; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -1083,7 +1083,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/elemental-mote.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Elemental Mote: Dweomer Burst',
@@ -1091,7 +1091,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/elemental-mote.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Elemental Mote: Catalyst',
@@ -1099,7 +1099,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/elemental-mote.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Elemental Mote: Catalyst outside portfolio',
@@ -1107,7 +1107,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/elemental-mote.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Once per turn; transform into an elemental signature minion not in portfolio; preserve current Stamina and reassign squad. Resolve new minion traits manually from its source.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Once per turn; transform into an elemental signature minion not in portfolio; treat the replacement as newly summoned and reassign squad. Resolve new minion traits manually from its source.',
     cost: 1,
   },
   {
@@ -1116,7 +1116,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Fire Plume; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Fire Plume; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -1125,7 +1125,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/fire-plume.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Fire Plume: Spitfire Strike',
@@ -1133,7 +1133,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/fire-plume.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Fire Plume: Pyre',
@@ -1141,7 +1141,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/fire-plume.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Call Forth: Flow of Magma',
@@ -1149,7 +1149,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 2 Flow of Magma; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 2 Flow of Magma; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 3; no summoned actors are created.',
     cost: 3,
   },
   {
@@ -1158,7 +1158,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/flow-of-magma.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Flow of Magma: Molten Strike',
@@ -1166,7 +1166,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/flow-of-magma.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Flow of Magma: Eruption',
@@ -1174,7 +1174,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/flow-of-magma.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
     cost: 1,
   },
   {
@@ -1183,7 +1183,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Summon 1 Walking Boulder; requires portfolio, range, unoccupied spaces, minion and squad capacity. For more signature minions, repeat this one-minion payment. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Summon 1 Walking Boulder; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ 1; no summoned actors are created.',
     cost: 1,
   },
   {
@@ -1192,7 +1192,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/walking-boulder.md',
     actionType: 'Main action',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
   },
   {
     name: 'Minion Walking Boulder: Obstruct',
@@ -1200,7 +1200,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/walking-boulder.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
   },
   {
     name: 'Minion Walking Boulder: Pile Up',
@@ -1208,7 +1208,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/monster/minion/summoner/elemental/statblock/walking-boulder.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat. Requires this summoned minion and its printed trigger/conditions.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Requires this summoned minion and its printed trigger/conditions.',
     cost: 1,
   },
 ];

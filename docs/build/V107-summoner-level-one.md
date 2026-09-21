@@ -40,3 +40,38 @@ TESTER owns generators, full check and isolated cohort. ENGINE independently rev
 ## Work log
 
 - Started from main `a0792cd`. ENGINE source audit requested. Runtime work in progress.
+
+- Authoring `38cb8e9`: both TypeScript projects and touched ESLint passed. TESTER generated
+  content/audit/support/reference outputs (exit 0 each): 1,629 content entries, 2,840 readable
+  references (2,614 core + 122 Beastheart + 104 Summoner), support 23/1,483/0. Artifacts:
+  `/srv/presidium/projects/salient/test-artifacts/V107-38cb8e9-generation`.
+- ENGINE found paid Catalyst wording and missing Horde provenance; repaired both. Three-Essence
+  Call Forth correctly pays for two minions. Exact core 438 statblocks/1,158 embedded abilities
+  remain checked separately from 25 supplemental minions. V88 preserves all prior rows/hashes,
+  explicitly adding only the 14 source hero envelopes. Generator gives statblock imports consistent
+  JSON attributes in shared and backend modules; existing regression now covers both kit/statblock.
+- Twelve independent source witnesses cover all 25 minions, four arrays/circles/formations/commands
+  and six heroic choices. All 144 distinct records carry source-derived expected costs. Focused
+  two-test authoring run passed. Initial fixture mistakenly retained Alertness from another witness:
+  Soldier grants only the two chosen skills, and Creative gives Tailoring, so source review removed
+  the unsupported extra skill before acceptance. See `tests/fixtures/v107-summoner-expected.json`.
+- Summoner statblocks are readable editor references, excluded from both `foes:definitions` and
+  the shared foe/squad loading guard. Live proof checks refusal. These minions do not use the ordinary
+  foe squad rules. Headless also checks ordinary free strikes cannot be invoked by the Summoner.
+- Forge pin `5a846aadb623a9855a023e9403bb887a956c341f` has `src/data/classes/summoner/`
+  (`class-summoner`, four circle modules, feature bonuses, resource/portfolio followers). Inspected
+  for model mapping only; `scripts/forge/project.ts` currently supports Fury/Elementalist/Shadow/
+  Tactician. No executed Summoner parity or import/export claim. Compendium remains sole rules source.
+- Browser scenario backlog: four circles and both portfolio pickers; formation-derived minion
+  statistics; free-strike substitution; readable manual actions. No browser run under moratorium.
+
+### TESTER job
+
+Frozen candidate only; default local isolated target. Run `CI=true pnpm check`, then the standard
+isolated setup/seed with `SALIENT_HEADLESS_COHORT=summoner node scripts/verify-character-headless.ts`.
+Expected one scenario: twelve saved/admitted builds and 144 manual action records with persisted
+readback, actual payments, blocked repeat with empty resource, outside-combat waiver, circle edit
+pruning/admission isolation, owner refusal, no ordinary free strikes or generic minion loading.
+Keep existing 15s request/240s run/295s hard stop. Backend must be stopped when finished. No shared
+cloud action or browser needed. Logs under test-artifacts/V107-<commit>. Reuse unchanged passed stages
+if a concrete repair is needed. Generator outputs are committed; freshness gates perform comparison.

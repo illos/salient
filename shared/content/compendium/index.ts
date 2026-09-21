@@ -26,7 +26,7 @@ import ruleJson from './rule.json';
 import saintJson from './saint.json';
 import skillJson from './skill.json';
 import skillGroupJson from './skill-group.json';
-import statblockJson from './statblock.json';
+import statblockJson from './statblock.json' with { type: 'json' };
 import traitJson from './trait.json';
 
 export const manifest: ContentManifest = manifestJson;

@@ -247,7 +247,21 @@
     "hero-standalone|mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play",
     "hero-standalone|mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage",
     "hero-standalone|mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter",
-    "hero-standalone|mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends"
+    "hero-standalone|mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/call-forth",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/distraction-tactics",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/essence-transfer",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/focus-fire",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/halt",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/minion-bridge",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/not-yet",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/rallying-cry",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/shield",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/shields-of-essence",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/summoner-strike",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/summoners-sword"
   ],
   "rows": {
     "hero-standalone|mcdm.heroes.v1/feature.ability.common/claw-dirt": {

@@ -119,3 +119,10 @@ the Troubadour cohort; no browser test was run for V102.
 - V105: Talent traditions/augmentation/ward choices, signature pairs, Mindspeech, negative Clarity display and explicit manual strain actions; headless API proof owns behavior.
 
 - V106: Beastheart wizard shows all fourteen companion choices, conditional drake attunement and kit melee-bonus choice; sheet displays companion stats separately and manual actor-labelled actions. Verify small-screen readability when browser moratorium ends.
+
+## V107 — Summoner level one
+
+Four circle cards; two signature and two three-Essence portfolio selections; formation statistics
+including Elite/Horde; quick command/heroic choices; source-labelled manual minion actions and Essence
+costs; no ordinary hero free strikes or Summoner minions in foe picker. Verify visually when the
+browser moratorium is lifted. Logic and persisted results use the Summoner CLI/API cohort.

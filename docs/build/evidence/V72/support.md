@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:69db8c6944325ab4762699e0203dabf65680208099453c75e5ec30d73e455ace`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:9bcde574efb5facb4741f329a92879f31d5e49feedd0f31baa61e507522f3ec2`.
 
-Currently reachable compiled: 23; unchanged reachable compatibility: 1469; structurally supported but unavailable: 0.
+Currently reachable compiled: 23; unchanged reachable compatibility: 1483; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -370,6 +370,20 @@ Currently reachable compiled: 23; unchanged reachable compatibility: 1469; struc
 | Thingspeaker | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
 | Traveling Artisan | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
 | Traveling Sage | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Call Forth (1+ Essence) | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Distraction Tactics | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Essence Transfer | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Explosive Parade | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Focus Fire! | hero-standalone | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type |
+| Halt! | hero-standalone | manual | legacy-compatibility | grammar, source-header, manual-section, action-type |
+| Minion Bridge | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Not Yet! | hero-standalone | manual | legacy-compatibility | grammar, source-header, manual-section, action-type |
+| Rallying Cry | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Shield! | hero-standalone | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type |
+| Shields of Essence | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Strike for Me | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary, action-type |
+| Summoner Strike | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Summoner's Sword | hero-standalone | manual | legacy-compatibility | manual-section |
 | Shadow Chains | foe-ability | manual | legacy-compatibility | target-boundary |
 | Portal to the Void | foe-ability | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Drill Press | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |

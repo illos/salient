@@ -10,6 +10,10 @@ export const GOBLIN_WARRIOR_ID = 'mcdm.monsters.v1/monster.goblin.statblock/gobl
 /** A seeded stat block by content id; other kinds of content are not loadable creatures. */
 export async function requireStatBlock(ctx: ReadCtx, contentId: string): Promise<Doc<'content'>> {
   const entry = await requireContent(ctx, contentId);
+  if (entry.contentId.startsWith('mcdm.summoner.v1/'))
+    throw new ConvexError(
+      'Summoner portfolio entries are manual character references, not supported foe actors.',
+    );
   if (entry.kind !== 'statblock')
     throw new ConvexError(`${entry.name} is ${entry.kind} content, not a stat block.`);
   return entry;

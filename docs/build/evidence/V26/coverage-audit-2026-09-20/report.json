@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:69db8c6944325ab4762699e0203dabf65680208099453c75e5ec30d73e455ace",
+  "contentHash": "sha256:9bcde574efb5facb4741f329a92879f31d5e49feedd0f31baa61e507522f3ec2",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 10,
-      "COMPILES_WITH_REMAINDER": 110,
-      "NO_MATCH": 122,
-      "total": 242,
+      "COMPILES_WITH_REMAINDER": 112,
+      "NO_MATCH": 134,
+      "total": 256,
       "withinV26Bounded": 10
     },
     "kit-signature": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 1173,
-    "resolvedToStandalone": 750,
+    "total": 1215,
+    "resolvedToStandalone": 792,
     "resolvedToKit": 75,
     "ownText": 348,
     "unresolved": []
@@ -13906,6 +13906,1034 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Staggering Blow supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/call-forth",
+      "name": "Call Forth (1+ Essence)",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/call-forth.md",
+      "usage": "Main action",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 3",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You summon one or more minions from your portfolio into unoccupied spaces within distance. Choose one of the following options:",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:signature minions",
+            "text": "You summon one signature minion for each essence you spend on this ability.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:all other minions",
+            "text": "You summon the set number of minions listed on the stat block for their essence cost.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Call Forth (1+ Essence)",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/call-forth.md",
+          "decisionId": "class.summoner.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Call Forth (1+ Essence)",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/call-forth.md",
+          "decisionId": "class.summoner.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Call Forth (1+ Essence)",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/call-forth.md",
+          "decisionId": "class.summoner.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/distraction-tactics",
+      "name": "Distraction Tactics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/distraction-tactics.md",
+      "usage": "Free maneuver",
+      "target": "Special",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, each minion under your control during the encounter is the target of the following effect:",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Distraction Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/distraction-tactics.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Distraction Tactics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Distraction Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/distraction-tactics.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Distraction Tactics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Distraction Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/distraction-tactics.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Distraction Tactics supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/essence-transfer",
+      "name": "Essence Transfer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/essence-transfer.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "R"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "R"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "R"
+            },
+            "damageType": "corruption"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can spend charges to activate one of the following effects. You can activate an effect multiple times. All charges disappear after using this ability.",
+            "locator": "section:1"
+          },
+          {
+            "type": "unknown",
+            "shape": "N charges (see below)",
+            "text": "2 charges (see below)",
+            "locator": "tier1"
+          },
+          {
+            "type": "unknown",
+            "shape": "N charges",
+            "text": "3 charges",
+            "locator": "tier2"
+          },
+          {
+            "type": "unknown",
+            "shape": "N charges",
+            "text": "4 charges",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Essence Transfer",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/essence-transfer.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Transfer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Essence Transfer",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/essence-transfer.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Transfer supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Essence Transfer",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/essence-transfer.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Transfer supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade",
+      "name": "Explosive Parade",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/explosive-parade.md",
+      "usage": "Main action",
+      "target": "Special",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The minions are summoned within distance regardless of your minion maximum and without organizing them into squads. Each newly summoned minion immediately moves up to their speed toward a creature or object.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:special",
+            "text": "In addition to the minions summoned as a part of this ability, you can choose to command any number of your minions within distance, provided they haven't used a main action or maneuver during the turn.",
+            "locator": "section:2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you summon four signature minions",
+            "text": "You summon four signature minions",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you summon five signature minions",
+            "text": "You summon five signature minions",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you summon six signature minions",
+            "text": "You summon six signature minions",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Explosive Parade",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/explosive-parade.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Explosive Parade supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Explosive Parade",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/explosive-parade.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Explosive Parade supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Explosive Parade",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/explosive-parade.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Explosive Parade supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/focus-fire",
+      "name": "Focus Fire!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/focus-fire.md",
+      "usage": "Triggered",
+      "target": "Self or one ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target deals damage to another creature.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target gains a surge for each of your minions adjacent to them (up to a maximum of 3 surges), which they can use on the triggering damage.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N essence",
+            "text": "If the triggering damage is from an ability that uses a power roll, the power roll gains an edge.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Focus Fire!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/focus-fire.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Focus Fire! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Focus Fire!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/focus-fire.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Focus Fire! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Focus Fire!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/focus-fire.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Focus Fire! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/halt",
+      "name": "Halt!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/halt.md",
+      "usage": "Triggered",
+      "target": "One creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target starts their turn, moves, or is force moved.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You summon a signature minion in an unoccupied space adjacent to the target. If the target is force moved into the minion, you can choose to make the target take no damage from the collision.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:special",
+            "text": "Instead of summoning a new minion, you can command one of your minions within distance to shift up to their speed toward a square adjacent to the target before any additional effects occur.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Halt!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/halt.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Halt! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Halt!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/halt.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Halt! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Halt!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/halt.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Halt! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/minion-bridge",
+      "name": "Minion Bridge",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/minion-bridge.md",
+      "usage": "Maneuver",
+      "target": "One of your minions",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You shift into a square adjacent to the target, including vertically.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:N essence",
+            "text": "An adjacent ally can shift alongside you during this movement. They must end their movement in an unoccupied square adjacent to the last minion you moved through.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Minion Bridge",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/minion-bridge.md",
+          "decisionId": "class.summoner.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Minion Bridge",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/minion-bridge.md",
+          "decisionId": "class.summoner.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Minion Bridge",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/minion-bridge.md",
+          "decisionId": "class.summoner.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/not-yet",
+      "name": "Not Yet!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/not-yet.md",
+      "usage": "Triggered",
+      "target": "One ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target receives enough damage to die or be destroyed.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:special",
+            "text": "If the target is a minion, they must be the only minion remaining in their squad.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The damage the target receives is reduced by an amount that leaves the target alive with 1 point of Stamina.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Not Yet!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/not-yet.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Not Yet! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Not Yet!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/not-yet.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Not Yet! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Not Yet!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/not-yet.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Not Yet! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/rallying-cry",
+      "name": "Rallying Cry",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/rallying-cry.md",
+      "usage": "Maneuver",
+      "target": "All Allies",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each target chooses between gaining 2 surges or dealing additional damage equal to your Reason on their next strike.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Rallying Cry",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/rallying-cry.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rallying Cry supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rallying Cry",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/rallying-cry.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rallying Cry supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rallying Cry",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/rallying-cry.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rallying Cry supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/shield",
+      "name": "Shield!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/shield.md",
+      "usage": "Triggered",
+      "target": "Self or one ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target is targeted by a strike.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If one of your minions is adjacent to the target and is within distance of the strike, they become the new target of the strike.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N essence",
+            "text": "Instead of commanding an existing minion, you summon a signature minion into an unoccupied space adjacent to the target to take the strike.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Shield!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/shield.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Shield! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shield!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/shield.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Shield! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shield!",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/shield.md",
+          "decisionId": "class.summoner.quick-command",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Shield! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/shields-of-essence",
+      "name": "Shields of Essence",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/shields-of-essence.md",
+      "usage": "Maneuver",
+      "target": "Special",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter, each target can use a free triggered action whenever they take damage to reduce the incoming damage by half and then lose this effect.",
+            "locator": "section:1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:three creatures",
+            "text": "Three creatures",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:four creatures",
+            "text": "Four creatures",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:five creatures",
+            "text": "Five creatures",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Shields of Essence",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/shields-of-essence.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Shields of Essence supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shields of Essence",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/shields-of-essence.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Shields of Essence supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shields of Essence",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/shields-of-essence.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Shields of Essence supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me",
+      "name": "Strike for Me",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/strike-for-me.md",
+      "usage": "Free triggered",
+      "target": "Each of your minions",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "You use a triggered action to make a free strike or use a signature ability.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:special",
+            "text": "On a natural 19 or 20, each target makes a free strike.",
+            "locator": "section:2"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Your minions act in place of you making a free strike or using a signature ability. If you were granted the triggered action against a specific target, your minions must strike the same target. If the triggered action granted you a signature ability, you have an edge on the power roll.",
+            "locator": "section:3"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:up to three targets each make a free strike",
+            "text": "Up to three targets each make a free strike",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:up to five targets each make a free strike",
+            "text": "Up to five targets each make a free strike",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:up to seven targets each make a free strike",
+            "text": "Up to seven targets each make a free strike",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Strike for Me",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/strike-for-me.md",
+          "decisionId": "class.summoner.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Strike for Me",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/strike-for-me.md",
+          "decisionId": "class.summoner.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Strike for Me",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/strike-for-me.md",
+          "decisionId": "class.summoner.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/summoner-strike",
+      "name": "Summoner Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/summoner-strike.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "R damage. If the target has R < WEAK, they are slowed (save ends).",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:special",
+            "text": "This ability has the Charge keyword when it's used as a melee strike.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Summoner Strike",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/summoner-strike.md",
+          "decisionId": "class.summoner.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Summoner Strike",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/summoner-strike.md",
+          "decisionId": "class.summoner.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Summoner Strike",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/summoner-strike.md",
+          "decisionId": "class.summoner.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-1/summoners-sword",
+      "name": "Summoner's Sword",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/summoners-sword.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 0,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "This strike deals an additional 2 damage for each ally adjacent to you.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Summoner's Sword",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/summoners-sword.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Summoner's Sword supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Summoner's Sword",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/summoners-sword.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Summoner's Sword supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Summoner's Sword",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-1/summoners-sword.md",
+          "decisionId": "class.summoner.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Summoner's Sword supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -85020,8 +86048,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1172,
-      "abilities": 1158,
+      "count": 1186,
+      "abilities": 1172,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -85031,8 +86059,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 658,
-      "abilities": 658,
+      "count": 667,
+      "abilities": 667,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -85042,8 +86070,8 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 202,
-      "abilities": 202,
+      "count": 207,
+      "abilities": 207,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
         "mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre",
@@ -85128,6 +86156,17 @@
       ]
     },
     {
+      "shape": "effect-paragraph:special",
+      "type": "effect-paragraph",
+      "count": 45,
+      "abilities": 45,
+      "examples": [
+        "complication:Gnoll-Mauled/gnoll-mauled-retaliate",
+        "complication:Stripped of Rank/issue-order",
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade"
+      ]
+    },
+    {
       "shape": "potency:A < N bleeding (save ends)",
       "type": "potency-condition",
       "count": 44,
@@ -85158,17 +86197,6 @@
         "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip",
         "salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce",
         "salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29"
-      ]
-    },
-    {
-      "shape": "effect-paragraph:special",
-      "type": "effect-paragraph",
-      "count": 40,
-      "abilities": 40,
-      "examples": [
-        "complication:Gnoll-Mauled/gnoll-mauled-retaliate",
-        "complication:Stripped of Rank/issue-order",
-        "salient:foe-feature:0f9e2dcf-c949-4a62-b76a-98cc9eef23bc"
       ]
     },
     {
@@ -85260,6 +86288,17 @@
       ]
     },
     {
+      "shape": "envelope:structured-markdown-mismatch",
+      "type": "unknown",
+      "count": 24,
+      "abilities": 24,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
+        "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath"
+      ]
+    },
+    {
       "shape": "grabbed",
       "type": "condition",
       "count": 23,
@@ -85290,17 +86329,6 @@
         "salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc",
         "salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22",
         "salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa"
-      ]
-    },
-    {
-      "shape": "envelope:structured-markdown-mismatch",
-      "type": "unknown",
-      "count": 22,
-      "abilities": 22,
-      "examples": [
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
-        "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath"
       ]
     },
     {
@@ -85822,6 +86850,17 @@
       ]
     },
     {
+      "shape": "resource-spend:spend N essence",
+      "type": "resource-spend",
+      "count": 5,
+      "abilities": 5,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance",
+        "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls",
+        "mcdm.heroes.v1/feature.ability.elementalist.level-1/subtle-relocation"
+      ]
+    },
+    {
       "shape": "potency:M < SYM bleeding (save ends)",
       "type": "potency-condition",
       "count": 5,
@@ -86006,17 +87045,6 @@
         "mcdm.heroes.v1/feature.ability.talent.level-1/accelerate",
         "mcdm.heroes.v1/feature.ability.talent.level-1/minor-telekinesis",
         "mcdm.heroes.v1/feature.ability.talent.level-1/remote-assistance"
-      ]
-    },
-    {
-      "shape": "resource-spend:spend N essence",
-      "type": "resource-spend",
-      "count": 3,
-      "abilities": 3,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance",
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls",
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/subtle-relocation"
       ]
     },
     {
@@ -87048,6 +88076,15 @@
       ]
     },
     {
+      "shape": "N charges",
+      "type": "unknown",
+      "count": 2,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/essence-transfer"
+      ]
+    },
+    {
       "shape": "or if the target has a < N they are beheaded",
       "type": "unknown",
       "count": 2,
@@ -87606,6 +88643,15 @@
       ]
     },
     {
+      "shape": "effect-paragraph:all other minions",
+      "type": "effect-paragraph",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/call-forth"
+      ]
+    },
+    {
       "shape": "effect-paragraph:head",
       "type": "effect-paragraph",
       "count": 1,
@@ -87621,6 +88667,24 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:4b8bb5fc-0ff3-4dbc-92fc-f69ac08bd49b"
+      ]
+    },
+    {
+      "shape": "effect-paragraph:N essence",
+      "type": "effect-paragraph",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/minion-bridge"
+      ]
+    },
+    {
+      "shape": "effect-paragraph:signature minions",
+      "type": "effect-paragraph",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/call-forth"
       ]
     },
     {
@@ -87675,6 +88739,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:ed53a706-5794-4c1d-9262-c5c17ead44ec"
+      ]
+    },
+    {
+      "shape": "N charges (see below)",
+      "type": "unknown",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/essence-transfer"
       ]
     },
     {
@@ -88830,6 +89903,24 @@
       ]
     },
     {
+      "shape": "tier:five creatures",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/shields-of-essence"
+      ]
+    },
+    {
+      "shape": "tier:four creatures",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/shields-of-essence"
+      ]
+    },
+    {
       "shape": "tier:i < N prone",
       "type": "tier-damage",
       "count": 1,
@@ -89100,6 +90191,42 @@
       ]
     },
     {
+      "shape": "tier:three creatures",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/shields-of-essence"
+      ]
+    },
+    {
+      "shape": "tier:up to five targets each make a free strike",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me"
+      ]
+    },
+    {
+      "shape": "tier:up to seven targets each make a free strike",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me"
+      ]
+    },
+    {
+      "shape": "tier:up to three targets each make a free strike",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me"
+      ]
+    },
+    {
       "shape": "tier:vertical slide N",
       "type": "tier-damage",
       "count": 1,
@@ -89160,6 +90287,33 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.common/claw-dirt"
+      ]
+    },
+    {
+      "shape": "tier:you summon five signature minions",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade"
+      ]
+    },
+    {
+      "shape": "tier:you summon four signature minions",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade"
+      ]
+    },
+    {
+      "shape": "tier:you summon six signature minions",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade"
       ]
     },
     {
@@ -89387,11 +90541,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 339,
+      "total": 353,
       "compiles": 13,
-      "withRemainder": 131,
+      "withRemainder": 133,
       "withinV26Bounded": 11,
-      "noMatch": 195
+      "noMatch": 207
     }
   }
 }

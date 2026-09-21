@@ -10,7 +10,9 @@ import type { ContentEntry } from '../../shared/contracts/content';
 // build-content.test independently verifies every snapshot body/feature against the pinned source.
 test('every embedded core ability has a nonempty, byte-exact source section', () => {
   let count = 0;
-  for (const entry of statblocks as unknown as ContentEntry[]) {
+  for (const entry of (statblocks as unknown as ContentEntry[]).filter(
+    e => !e.id.startsWith('mcdm.summoner.v1/'),
+  )) {
     const expected = (entry.features ?? []).filter(
       (feature): feature is { feature_type: string; name: string } =>
         feature !== null &&

@@ -102,6 +102,7 @@ export const definitions = query({
       .take(1000);
     const text = (value: unknown) => (typeof value === 'string' && value ? value : null);
     return rows
+      .filter(row => !row.contentId.startsWith('mcdm.summoner.v1/'))
       .map(row => {
         const s = (row.structured ?? {}) as Record<string, unknown>;
         const level = s.level;

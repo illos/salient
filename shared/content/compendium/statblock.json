@@ -27617,6 +27617,1533 @@
     ]
   },
   {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/archer-spittlich",
+    "kind": "statblock",
+    "name": "Archer Spittlich",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/archer-spittlich.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/demon/statblock/archer-spittlich.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 2\ncost: 3 essence for two minions\nflavor: These minor demons resemble larger pitlings. They can spit a nerve-numbing phlegm at long distance that makes it easy to catch their next meal.\nfree_strike: 5\nfree_strike_damage_type: Poison\nimmunities: []\nintuition: -1\nkeywords:\n    - Abyssal\n    - Demon\nmight: 0\nmovement: —\nname: Archer Spittlich\norganization: Minion\npresence: 0\nreason: -1\nrole: Artillery\nscc: mcdm.summoner.v1/monster.minion.summoner.demon.statblock/archer-spittlich\nsize: 1S\nspeed: 5\nstability: 2\nstamina: 5 | 5\ntype: statblock\nweaknesses:\n    - Holy 1\n---\n\nThese minor demons resemble larger pitlings. They can spit a nerve-numbing phlegm at long distance that makes it easy to catch their next meal.\n\n| Abyssal, Demon | - | - | Minion Artillery | 3 essence for two minions |\n|:----------------:|:--------------:|:----------------:|:-:|:-------------------------:|\n| **1S**<br>Size | **5**<br>Speed | **5 \\| 5**<br>Stamina | **2**<br>Stability | **5**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | - | **Holy 1**<br>Weakness | **Poison**<br>Free Strike Damage Type |\n| **0**<br>Might | **+2**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **0**<br>Presence |\n\n> ⭐️ **Splash Strike**\n>\n> The spittlich's ranged [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 10 and deal 2 poison damage to an enemy adjacent to the target. Creatures that take poison damage from this spittlich can't [shift](scc.v1:mcdm.heroes.v1/movement/shifting) until the start of the spittlich's next turn.\n\n> ⭐️ **Soulsight**\n>\n> Each creature adjacent to the spittlich can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them.\n",
+    "structured": {
+      "agility": 2,
+      "cost": "3 essence for two minions",
+      "flavor": "These minor demons resemble larger pitlings. They can spit a nerve-numbing phlegm at long distance that makes it easy to catch their next meal.",
+      "free_strike": 5,
+      "free_strike_damage_type": "Poison",
+      "immunities": [],
+      "intuition": -1,
+      "keywords": [
+        "Abyssal",
+        "Demon"
+      ],
+      "might": 0,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": 0,
+      "reason": -1,
+      "role": "Artillery",
+      "size": "1S",
+      "speed": 5,
+      "stability": 2,
+      "stamina": "5 | 5",
+      "weaknesses": [
+        "Holy 1"
+      ]
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The spittlich's ranged [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 10 and deal 2 poison damage to an enemy adjacent to the target. Creatures that take poison damage from this spittlich can't [shift](scc.v1:mcdm.heroes.v1/movement/shifting) until the start of the spittlich's next turn."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Splash Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Each creature adjacent to the spittlich can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Soulsight",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/ensnarer",
+    "kind": "statblock",
+    "name": "Ensnarer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/ensnarer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/demon/statblock/ensnarer.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 0\ncost: 1 essence per minion summoned\nflavor: This vaguely humanoid form is warped and distorted by a demon nestled inside them. They extend long tongues from multiple orifices to drag victims in close.\nfree_strike: 2\nimmunities: []\nintuition: -1\nkeywords:\n    - Abyssal\n    - Demon\nmight: 2\nmovement: —\nname: Ensnarer\norganization: Minion\npresence: -1\nreason: -1\nrole: Brute\nscc: mcdm.summoner.v1/monster.minion.summoner.demon.statblock/ensnarer\nsize: 1M\nspeed: 5\nstability: 0\nstamina: \"2\"\ntype: statblock\nweaknesses:\n    - Holy 1\n---\n\nThis vaguely humanoid form is warped and distorted by a demon nestled inside them. They extend long tongues from multiple orifices to drag victims in close.\n\n| Abyssal, Demon | - | - | Signature Minion Brute | 1 essence per minion summoned |\n|:--------:|:--------------:|:----------------------:|:-:|:-----------------------------:|\n| **1M**<br>Size | **5**<br>Speed | **2**<br>Stamina | **0**<br>Stability | **2**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | - | **Holy 1**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+2**<br>Might | **0**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **-1**<br>Presence |\n\n> ⭐️ **Extended Barbed Strike**\n>\n> The ensnarer's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 3 and inflict [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1. The [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) distance increases by 1 for each additional ensnarer striking the same target. Choose the ensnarer that the target is being pulled to before applying [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement).\n\n> ⭐️ **Soulsight**\n>\n> Each creature adjacent to the ensnarer can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them.\n",
+    "structured": {
+      "agility": 0,
+      "cost": "1 essence per minion summoned",
+      "flavor": "This vaguely humanoid form is warped and distorted by a demon nestled inside them. They extend long tongues from multiple orifices to drag victims in close.",
+      "free_strike": 2,
+      "immunities": [],
+      "intuition": -1,
+      "keywords": [
+        "Abyssal",
+        "Demon"
+      ],
+      "might": 2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": -1,
+      "role": "Brute",
+      "size": "1M",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "2",
+      "weaknesses": [
+        "Holy 1"
+      ]
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The ensnarer's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 3 and inflict [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1. The [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) distance increases by 1 for each additional ensnarer striking the same target. Choose the ensnarer that the target is being pulled to before applying [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Extended Barbed Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Each creature adjacent to the ensnarer can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Soulsight",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/fanged-musilex",
+    "kind": "statblock",
+    "name": "Fanged Musilex",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/fanged-musilex.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/demon/statblock/fanged-musilex.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 1\ncost: 3 essence for two minions\nflavor: Ensnarers knot and twist their bodies together to form heaving, heavy musilexes. They're compelled to drag everything in toward their body.\nfree_strike: 5\nimmunities: []\nintuition: -1\nkeywords:\n    - Abyssal\n    - Demon\nmight: 2\nmovement: —\nname: Fanged Musilex\norganization: Minion\npresence: 0\nreason: -1\nrole: Brute\nscc: mcdm.summoner.v1/monster.minion.summoner.demon.statblock/fanged-musilex\nsize: 1L\nspeed: 6\nstability: 1\nstamina: 6 | 6\ntype: statblock\nweaknesses:\n    - Holy 1\n---\n\nEnsnarers knot and twist their bodies together to form heaving, heavy musilexes. They're compelled to drag everything in toward their body.\n\n| Abyssal, Demon | - | - | Minion Brute | 3 essence for two minions |\n|:--------------:|:--------------:|:------------:|:-:|:-------------------------:|\n| **1L**<br>Size | **6**<br>Speed | **6 \\| 6**<br>Stamina | **1**<br>Stability | **5**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | - | **Holy 1**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+2**<br>Might | **+1**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **0**<br>Presence |\n\n> ⭐️ **Mawful Strike**\n>\n> The musilex's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 2 + R and inflict [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2. The [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) distance increases by 2 for each additional musilex striking the same target. Choose the musilex that the target is being pulled to before applying [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement). If the target is pulled adjacent to the musilex, the musilex either deals an additional 2 damage or [grabs](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) them.\n\n> ⭐️ **Soulsight**\n>\n> Each creature adjacent to the musilex can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them.\n",
+    "structured": {
+      "agility": 1,
+      "cost": "3 essence for two minions",
+      "flavor": "Ensnarers knot and twist their bodies together to form heaving, heavy musilexes. They're compelled to drag everything in toward their body.",
+      "free_strike": 5,
+      "immunities": [],
+      "intuition": -1,
+      "keywords": [
+        "Abyssal",
+        "Demon"
+      ],
+      "might": 2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": 0,
+      "reason": -1,
+      "role": "Brute",
+      "size": "1L",
+      "speed": 6,
+      "stability": 1,
+      "stamina": "6 | 6",
+      "weaknesses": [
+        "Holy 1"
+      ]
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The musilex's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 2 + R and inflict [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2. The [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) distance increases by 2 for each additional musilex striking the same target. Choose the musilex that the target is being pulled to before applying [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement). If the target is pulled adjacent to the musilex, the musilex either deals an additional 2 damage or [grabs](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Mawful Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Each creature adjacent to the musilex can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Soulsight",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/rasquine",
+    "kind": "statblock",
+    "name": "Rasquine",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/rasquine.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/demon/statblock/rasquine.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 0\ncost: 1 essence per minion summoned\nflavor: The rasquine are skulking demons that shimmer in the light. They teleport into position before biting the necks of their prey.\nfree_strike: 2\nimmunities: []\nintuition: -1\nkeywords:\n    - Abyssal\n    - Demon\nmight: -1\nmovement: Teleport\nname: Rasquine\norganization: Minion\npresence: 2\nreason: -1\nrole: Ambusher\nscc: mcdm.summoner.v1/monster.minion.summoner.demon.statblock/rasquine\nsize: 1S\nspeed: 4\nstability: 0\nstamina: \"2\"\ntype: statblock\nweaknesses:\n    - Holy 1\n---\n\nThe rasquine are skulking demons that shimmer in the light. They teleport into position before biting the necks of their prey.\n\n| Abyssal, Demon | - | - | Signature Minion Ambusher | 1 essence per minion summoned |\n|:--------:|:--------------:|:-------------------------:|:-:|:-----------------------------:|\n| **1S**<br>Size | **4**<br>Speed | **2**<br>Stamina | **0**<br>Stability | **2**<br>Free Strike |\n| **—**<br>Immunity | **Teleport**<br>Movement | - | **Holy 1**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **-1**<br>Might | **0**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **+2**<br>Presence |\n\n> ⭐️ **Skulker**\n>\n> Once per turn, the rasquine can [hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) after [teleporting](scc.v1:mcdm.heroes.v1/movement/teleport).\n\n> ⭐️ **Soulsight**\n>\n> Each creature adjacent to the rasquine can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them.\n",
+    "structured": {
+      "agility": 0,
+      "cost": "1 essence per minion summoned",
+      "flavor": "The rasquine are skulking demons that shimmer in the light. They teleport into position before biting the necks of their prey.",
+      "free_strike": 2,
+      "immunities": [],
+      "intuition": -1,
+      "keywords": [
+        "Abyssal",
+        "Demon"
+      ],
+      "might": -1,
+      "movement": "Teleport",
+      "organization": "Minion",
+      "presence": 2,
+      "reason": -1,
+      "role": "Ambusher",
+      "size": "1S",
+      "speed": 4,
+      "stability": 0,
+      "stamina": "2",
+      "weaknesses": [
+        "Holy 1"
+      ]
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "Once per turn, the rasquine can [hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) after [teleporting](scc.v1:mcdm.heroes.v1/movement/teleport)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Skulker",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Each creature adjacent to the rasquine can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Soulsight",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/razor",
+    "kind": "statblock",
+    "name": "Razor",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/razor.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/demon/statblock/razor.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 2\ncost: 1 essence per minion summoned\nflavor: Razors appear to be a diminutive variant of the ruinant demon. Their bodies are swift, tumbling mounds of scarred flesh and deadly claws.\nfree_strike: 1\nimmunities: []\nintuition: -1\nkeywords:\n    - Abyssal\n    - Demon\nmight: 0\nmovement: —\nname: Razor\norganization: Minion\npresence: -1\nreason: -1\nrole: Harrier\nscc: mcdm.summoner.v1/monster.minion.summoner.demon.statblock/razor\nsize: 1M\nspeed: 6\nstability: 0\nstamina: \"2\"\ntype: statblock\nweaknesses:\n    - Holy 1\n---\n\nRazors appear to be a diminutive variant of the ruinant demon. Their bodies are swift, tumbling mounds of scarred flesh and deadly claws.\n\n| Abyssal, Demon | - | - | Signature Minion Harrier | 1 essence per minion summoned |\n|:-----:|:--------------:|:------------------------:|:-:|:-----------------------------:|\n| **1M**<br>Size | **6**<br>Speed | **2**<br>Stamina | **0**<br>Stability | **1**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | - | **Holy 1**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **0**<br>Might | **+2**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **-1**<br>Presence |\n\n> ⭐️ **Teeth!**\n>\n> Once per turn, whenever an adjacent enemy [grabs](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) the razor or uses a melee ability against them, that enemy takes 1 damage for each razor adjacent to them.\n\n> ⭐️ **Soulsight**\n>\n> Each creature adjacent to the razor can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them.\n",
+    "structured": {
+      "agility": 2,
+      "cost": "1 essence per minion summoned",
+      "flavor": "Razors appear to be a diminutive variant of the ruinant demon. Their bodies are swift, tumbling mounds of scarred flesh and deadly claws.",
+      "free_strike": 1,
+      "immunities": [],
+      "intuition": -1,
+      "keywords": [
+        "Abyssal",
+        "Demon"
+      ],
+      "might": 0,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": -1,
+      "role": "Harrier",
+      "size": "1M",
+      "speed": 6,
+      "stability": 0,
+      "stamina": "2",
+      "weaknesses": [
+        "Holy 1"
+      ]
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "Once per turn, whenever an adjacent enemy [grabs](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) the razor or uses a melee ability against them, that enemy takes 1 damage for each razor adjacent to them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Teeth!",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Each creature adjacent to the razor can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Soulsight",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/twisted-bengrul",
+    "kind": "statblock",
+    "name": "Twisted Bengrul",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/twisted-bengrul.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/demon/statblock/twisted-bengrul.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 1\ncost: 3 essence for two minions\nflavor: The bengrul is an undulating heap of glass and flesh. They shatter pieces of themselves to disrupt senses and inflict grisly wounds on their prey.\nfree_strike: 4\nfree_strike_damage_type: Psychic\nimmunities: []\nintuition: -1\nkeywords:\n    - Abyssal\n    - Demon\nmight: 2\nmovement: —\nname: Twisted Bengrul\norganization: Minion\npresence: 0\nreason: -1\nrole: Hexer\nscc: mcdm.summoner.v1/monster.minion.summoner.demon.statblock/twisted-bengrul\nsize: 1L\nspeed: 5\nstability: 1\nstamina: 5 | 5\ntype: statblock\nweaknesses:\n    - Holy 1\n---\n\nThe bengrul is an undulating heap of glass and flesh. They shatter pieces of themselves to disrupt senses and inflict grisly wounds on their prey.\n\n| Abyssal, Demon | - | - | Minion Hexer | 3 essence for two minions |\n|:---------------:|:--------------:|:------------:|:-:|:-------------------------:|\n| **1L**<br>Size | **5**<br>Speed | **5 \\| 5**<br>Stamina | **1**<br>Stability | **4**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | - | **Holy 1**<br>Weakness | **Psychic**<br>Free Strike Damage Type |\n| **+2**<br>Might | **+1**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **0**<br>Presence |\n\n> 🏹 **Mind Twist 2d10 + R (Signature Ability)**\n>\n> | **Magic, Ranged, Strike** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|----------------:|\n> | **📏 Ranged 5** | **🎯 One creature or object per minion** |\n>\n> 4 damage; P < WEAK twisted (save ends)\n>\n> 6 damage; P < AVERAGE twisted (save ends)\n>\n> 8 damage; P < STRONG twisted (save ends)\n>\n> **Effect:** A twisted target can't take advantage of [edges](scc.v1:mcdm.heroes.v1/rule.dice/edge) or [search for hidden creatures](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/search-for-hidden-creatures) until the condition ends.\n\n> ⭐️ **Soulsight**\n>\n> Each creature adjacent to the ensnarer can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them.\n",
+    "structured": {
+      "agility": 1,
+      "cost": "3 essence for two minions",
+      "flavor": "The bengrul is an undulating heap of glass and flesh. They shatter pieces of themselves to disrupt senses and inflict grisly wounds on their prey.",
+      "free_strike": 4,
+      "free_strike_damage_type": "Psychic",
+      "immunities": [],
+      "intuition": -1,
+      "keywords": [
+        "Abyssal",
+        "Demon"
+      ],
+      "might": 2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": 0,
+      "reason": -1,
+      "role": "Hexer",
+      "size": "1L",
+      "speed": 5,
+      "stability": 1,
+      "stamina": "5 | 5",
+      "weaknesses": [
+        "Holy 1"
+      ]
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Ranged 5",
+        "effects": [
+          {
+            "roll": "2d10 + R",
+            "tier1": "4 damage; P < WEAK twisted (save ends)",
+            "tier2": "6 damage; P < AVERAGE twisted (save ends)",
+            "tier3": "8 damage; P < STRONG twisted (save ends)"
+          },
+          {
+            "effect": "A twisted target can't take advantage of [edges](scc.v1:mcdm.heroes.v1/rule.dice/edge) or [search for hidden creatures](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/search-for-hidden-creatures) until the condition ends.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Magic",
+          "Ranged",
+          "Strike"
+        ],
+        "name": "Mind Twist",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Each creature adjacent to the ensnarer can't be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) from them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Soulsight",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/brisk-gale",
+    "kind": "statblock",
+    "name": "Brisk Gale",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/brisk-gale.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/elemental/statblock/brisk-gale.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 2\ncost: 1 essence per minion summoned\nflavor: The gales are twisting ribbons of cloud and debris endlessly dancing in place. They disrupt the air and allow their allies to move freely.\nfree_strike: 1\nfree_strike_damage_type: Sonic\nimmunities:\n    - Sonic R\nintuition: 0\nkeywords:\n    - Elemental (Air)\nmight: -2\nmovement: Fly\nname: Brisk Gale\norganization: Minion\npresence: 1\nreason: 0\nrole: Harrier\nscc: mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/brisk-gale\nsize: 1S\nspeed: 5\nstability: 0\nstamina: \"2\"\ntype: statblock\nweaknesses: []\n---\n\nThe gales are twisting ribbons of cloud and debris endlessly dancing in place. They disrupt the air and allow their allies to move freely.\n\n| Elemental (Air) | - | - | Signature Minion Harrier | 1 essence per minion summoned |\n|:----------:|:---------------:|:------------------------:|:-:|:-----------------------------:|\n| **1S**<br>Size | **5**<br>Speed | **2**<br>Stamina | **0**<br>Stability | **1**<br>Free Strike |\n| **Sonic R**<br>Immunity | **Fly**<br>Movement | - | **—**<br>Weakness | **Sonic**<br>Free Strike Damage Type |\n| **-2**<br>Might | **+2**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+1**<br>Presence |\n\n> ⭐️ **Cutting the Air**\n>\n> The gale doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n\n> ⭐️ **Whirlwind**\n>\n> When the gale is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), winds whip in their space until the end of the encounter. You or an ally that enters this space or starts their turn there can immediately [shift](scc.v1:mcdm.heroes.v1/movement/shifting) (including vertically).\n",
+    "structured": {
+      "agility": 2,
+      "cost": "1 essence per minion summoned",
+      "flavor": "The gales are twisting ribbons of cloud and debris endlessly dancing in place. They disrupt the air and allow their allies to move freely.",
+      "free_strike": 1,
+      "free_strike_damage_type": "Sonic",
+      "immunities": [
+        "Sonic R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Elemental (Air)"
+      ],
+      "might": -2,
+      "movement": "Fly",
+      "organization": "Minion",
+      "presence": 1,
+      "reason": 0,
+      "role": "Harrier",
+      "size": "1S",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "2",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The gale doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Cutting the Air",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "When the gale is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), winds whip in their space until the end of the encounter. You or an ally that enters this space or starts their turn there can immediately [shift](scc.v1:mcdm.heroes.v1/movement/shifting) (including vertically)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Whirlwind",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/crux-of-ash",
+    "kind": "statblock",
+    "name": "Crux of Ash",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/crux-of-ash.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/elemental/statblock/crux-of-ash.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: -2\ncost: 3 essence for two minions\nflavor: The crux is a curtain of billowing hot ash with an avian head. They cover their victims in a burning cloak of charcoal and soot.\nfree_strike: 5\nimmunities:\n    - Fire R\n    - Sonic R\nintuition: 0\nkeywords:\n    - Elemental (Fire)\n    - Elemental (Air)\nmight: -2\nmovement: Fly\nname: Crux of Ash\norganization: Minion\npresence: 1\nreason: 0\nrole: Ambusher\nscc: mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/crux-of-ash\nsize: 1M\nspeed: 5\nstability: 0\nstamina: 6 | 6\ntype: statblock\nweaknesses: []\n---\n\nThe crux is a curtain of billowing hot ash with an avian head. They cover their victims in a burning cloak of charcoal and soot.\n\n| Elemental (Fire, Air) | - | - | Minion Ambusher | 3 essence for two minions |\n|:-----------:|:---------------------:|:---------------:|:-:|:-------------------------:|\n| **1M**<br>Size | **5**<br>Speed | **6 \\| 6**<br>Stamina | **0**<br>Stability | **5**<br>Free Strike |\n| **Fire R, Sonic R**<br>Immunity | **Fly**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **-2**<br>Might | **-2**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+1**<br>Presence |\n\n> ⭐️ **Soot Strike**\n>\n> The crux's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) M < AVERAGE automatically [hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) each ally from the target until the start of the crux's next turn, until the target uses a [maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn) to clear the soot, until the crux takes damage, or until the crux is destroyed.\n\n> ⭐️ **Ashen Cloud (1 Essence)**\n>\n> When the crux is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), the area within 1 square of the crux is clouded by ash until it is dispersed by wind. You or any ally are [concealed](scc.v1:mcdm.heroes.v1/rule.combat/concealment) while occupying an affected square. An enemy can't establish [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) beyond the ash while occupying an affected square.\n",
+    "structured": {
+      "agility": -2,
+      "cost": "3 essence for two minions",
+      "flavor": "The crux is a curtain of billowing hot ash with an avian head. They cover their victims in a burning cloak of charcoal and soot.",
+      "free_strike": 5,
+      "immunities": [
+        "Fire R",
+        "Sonic R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Elemental (Fire)",
+        "Elemental (Air)"
+      ],
+      "might": -2,
+      "movement": "Fly",
+      "organization": "Minion",
+      "presence": 1,
+      "reason": 0,
+      "role": "Ambusher",
+      "size": "1M",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "6 | 6",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The crux's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) M < AVERAGE automatically [hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) each ally from the target until the start of the crux's next turn, until the target uses a [maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn) to clear the soot, until the crux takes damage, or until the crux is destroyed."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Soot Strike",
+        "type": "feature"
+      },
+      {
+        "cost": "1 Essence",
+        "effects": [
+          {
+            "effect": "When the crux is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), the area within 1 square of the crux is clouded by ash until it is dispersed by wind. You or any ally are [concealed](scc.v1:mcdm.heroes.v1/rule.combat/concealment) while occupying an affected square. An enemy can't establish [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) beyond the ash while occupying an affected square."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Ashen Cloud",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/desolation-of-sand",
+    "kind": "statblock",
+    "name": "Desolation of Sand",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/desolation-of-sand.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/elemental/statblock/desolation-of-sand.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 2\ncost: 3 essence for two minions\nflavor: The desolations have vaguely humanoid sand forms with no legs. Their glass hose “arms” shift and bristle before firing high pressure streams of sand at their foes.\nfree_strike: 4\nimmunities:\n    - Sonic R\nintuition: 0\nkeywords:\n    - Elemental (Air)\n    - Elemental (Earth)\nmight: 1\nmovement: Burrow\nname: Desolation of Sand\norganization: Minion\npresence: -2\nreason: 0\nrole: Hexer\nscc: mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/desolation-of-sand\nsize: 1M\nspeed: 5\nstability: 1\nstamina: 5 | 5\ntype: statblock\nweaknesses: []\n---\n\nThe desolations have vaguely humanoid sand forms with no legs. Their glass hose “arms” shift and bristle before firing high pressure streams of sand at their foes.\n\n| Elemental (Air, Earth) | - | - | Minion Hexer | 3 essence for two minions |\n|:------------------:|:----------------------:|:------------:|:-:|:-------------------------:|\n| **1M**<br>Size | **5**<br>Speed | **5 \\| 5**<br>Stamina | **1**<br>Stability | **4**<br>Free Strike |\n| **Sonic R**<br>Immunity | **Burrow**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+1**<br>Might | **+2**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **-2**<br>Presence |\n\n> ⭐️ **Burying Strike**\n>\n> The desolation's [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) inflict M < AVERAGE [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends). If the target is already [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), then they are M < STRONG [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).\n\n> ⭐️ **Sand Through Your Fingers**\n>\n> The desolation doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n\n> ⭐️ **Shifting Sand Pit (1 Essence)**\n>\n> When the desolation is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), the area within 1 square of the desolation becomes [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. You or an ally that enters the affected area can immediately [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 3.\n",
+    "structured": {
+      "agility": 2,
+      "cost": "3 essence for two minions",
+      "flavor": "The desolations have vaguely humanoid sand forms with no legs. Their glass hose “arms” shift and bristle before firing high pressure streams of sand at their foes.",
+      "free_strike": 4,
+      "immunities": [
+        "Sonic R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Elemental (Air)",
+        "Elemental (Earth)"
+      ],
+      "might": 1,
+      "movement": "Burrow",
+      "organization": "Minion",
+      "presence": -2,
+      "reason": 0,
+      "role": "Hexer",
+      "size": "1M",
+      "speed": 5,
+      "stability": 1,
+      "stamina": "5 | 5",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The desolation's [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) inflict M < AVERAGE [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends). If the target is already [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), then they are M < STRONG [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Burying Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The desolation doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Sand Through Your Fingers",
+        "type": "feature"
+      },
+      {
+        "cost": "1 Essence",
+        "effects": [
+          {
+            "effect": "When the desolation is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), the area within 1 square of the desolation becomes [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. You or an ally that enters the affected area can immediately [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 3."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Shifting Sand Pit",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/elemental-mote",
+    "kind": "statblock",
+    "name": "Elemental Mote",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/elemental-mote.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/elemental/statblock/elemental-mote.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 0\ncost: 1 essence per minion summoned\nflavor: This near-pure form of autonomous essence just barely maintains their form. They can shift their nature to match their surroundings.\nfree_strike: 1\nimmunities: []\nintuition: 0\nkeywords:\n    - Elemental\nmight: 0\nmovement: Fly\nname: Elemental Mote\norganization: Minion\npresence: 2\nreason: 0\nrole: Hexer\nscc: mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/elemental-mote\nsize: 1T\nspeed: 5\nstability: 0\nstamina: \"1\"\ntype: statblock\nweaknesses: []\n---\n\nThis near-pure form of autonomous essence just barely maintains their form. They can shift their nature to match their surroundings.\n\n| Elemental | - | - | Signature Minion Hexer | 1 essence per minion summoned |\n|:--------------:|:---------:|:----------------------:|:-:|:-----------------------------:|\n| **1T**<br>Size | **5**<br>Speed | **1**<br>Stamina | **0**<br>Stability | **1**<br>Free Strike |\n| **—**<br>Immunity | **Fly**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **0**<br>Might | **0**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+2**<br>Presence |\n\n> ⭐️ **Dweomer Burst**\n>\n> When the mote is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), each enemy adjacent to the mote has a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n\n> ⭐️ **Catalyst**\n>\n> Once per turn, the mote can transform into an adjacent allied [signature minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions), maintaining their current Stamina. The minion must be reassigned to a new squad if their new name differs from the other squad members.\n>\n> Alternatively, you can spend 1 essence to transform the mote into any [signature minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) in the elemental portfolio you don't have, as if you summoned the new minion into the mote's space.\n",
+    "structured": {
+      "agility": 0,
+      "cost": "1 essence per minion summoned",
+      "flavor": "This near-pure form of autonomous essence just barely maintains their form. They can shift their nature to match their surroundings.",
+      "free_strike": 1,
+      "immunities": [],
+      "intuition": 0,
+      "keywords": [
+        "Elemental"
+      ],
+      "might": 0,
+      "movement": "Fly",
+      "organization": "Minion",
+      "presence": 2,
+      "reason": 0,
+      "role": "Hexer",
+      "size": "1T",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "1",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "When the mote is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), each enemy adjacent to the mote has a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on their next [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Dweomer Burst",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Once per turn, the mote can transform into an adjacent allied [signature minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions), maintaining their current Stamina. The minion must be reassigned to a new squad if their new name differs from the other squad members."
+          },
+          {
+            "effect": "Alternatively, you can spend 1 essence to transform the mote into any [signature minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) in the elemental portfolio you don't have, as if you summoned the new minion into the mote's space."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Catalyst",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/fire-plume",
+    "kind": "statblock",
+    "name": "Fire Plume",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/fire-plume.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/elemental/statblock/fire-plume.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 1\ncost: 1 essence per minion summoned\nflavor: A fire plume burns so bright that their true shape is hard to discern from the flames. They sputter and spit motes of fire in high arcs.\nfree_strike: 2\nfree_strike_damage_type: Fire\nimmunities:\n    - Fire R\nintuition: 0\nkeywords:\n    - Elemental (Fire)\nmight: -2\nmovement: —\nname: Fire Plume\norganization: Minion\npresence: 2\nreason: 0\nrole: Artillery\nscc: mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/fire-plume\nsize: 1T\nspeed: 5\nstability: 0\nstamina: \"1\"\ntype: statblock\nweaknesses: []\n---\n\nA fire plume burns so bright that their true shape is hard to discern from the flames. They sputter and spit motes of fire in high arcs.\n\n| Elemental (Fire) | - | - | Signature Minion Artillery | 1 essence per minion summoned |\n|:----------:|:----------------:|:--------------------------:|:-:|:-----------------------------:|\n| **1T**<br>Size | **5**<br>Speed | **1**<br>Stamina | **0**<br>Stability | **2**<br>Free Strike |\n| **Fire R**<br>Immunity | **—**<br>Movement | - | **—**<br>Weakness | **Fire**<br>Free Strike Damage Type |\n| **-2**<br>Might | **+1**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+2**<br>Presence |\n\n> ⭐️ **Spitfire Strike**\n>\n> The plume's ranged [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 10.\n\n> ⭐️ **Pyre**\n>\n> When the plume is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), their space becomes wreathed in flames until the end of the encounter. An enemy that enters this space or starts their turn there takes 2 fire damage.\n",
+    "structured": {
+      "agility": 1,
+      "cost": "1 essence per minion summoned",
+      "flavor": "A fire plume burns so bright that their true shape is hard to discern from the flames. They sputter and spit motes of fire in high arcs.",
+      "free_strike": 2,
+      "free_strike_damage_type": "Fire",
+      "immunities": [
+        "Fire R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Elemental (Fire)"
+      ],
+      "might": -2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": 2,
+      "reason": 0,
+      "role": "Artillery",
+      "size": "1T",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "1",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The plume's ranged [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 10."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Spitfire Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "When the plume is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), their space becomes wreathed in flames until the end of the encounter. An enemy that enters this space or starts their turn there takes 2 fire damage."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Pyre",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/flow-of-magma",
+    "kind": "statblock",
+    "name": "Flow of Magma",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/flow-of-magma.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/elemental/statblock/flow-of-magma.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: -2\ncost: 3 essence for two minions\nflavor: This elemental is a long, serpentine creature of heated rock. Flows of magma drool trails of lava from their fangs after biting their prey.\nfree_strike: 4\nfree_strike_damage_type: Fire\nimmunities:\n    - Fire R\nintuition: 0\nkeywords:\n    - Elemental (Fire)\n    - Elemental (Earth)\nmight: 2\nmovement: Climb\nname: Flow of Magma\norganization: Minion\npresence: 1\nreason: 0\nrole: Harrier\nscc: mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/flow-of-magma\nsize: 1L\nspeed: 5\nstability: 2\nstamina: 6 | 6\ntype: statblock\nweaknesses: []\n---\n\nThis elemental is a long, serpentine creature of heated rock. Flows of magma drool trails of lava from their fangs after biting their prey.\n\n| Elemental (Fire, Earth) | - | - | Minion Harrier | 3 essence for two minions |\n|:-------------:|:-----------------------:|:--------------:|:-:|:-------------------------:|\n| **1L**<br>Size | **5**<br>Speed | **6 \\| 6**<br>Stamina | **2**<br>Stability | **4**<br>Free Strike |\n| **Fire R**<br>Immunity | **Climb**<br>Movement | - | **—**<br>Weakness | **Fire**<br>Free Strike Damage Type |\n| **+2**<br>Might | **-2**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+1**<br>Presence |\n\n> 🏹 **Molten Strike 2d10 + R (Signature Ability)**\n>\n> | **Magic, Melee, Strike** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |--------------------------|----------------:|\n> | **📏 Melee 2** | **🎯 One creature or object per minion** |\n>\n> 4 fire damage; [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 3\n>\n> 6 fire damage; [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 4\n>\n> 8 fire damage; [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 5\n>\n> **Effect:** Each square that the flow [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) into becomes wreathed in flames until the start of the flow's next turn. An enemy that enters an affected square takes 2 damage.\n\n> ⭐️ **Eruption (1 Essence)**\n>\n> When the flow is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they launch lava into an area equal to 1 + their size within 5 squares. The affected area becomes [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. An enemy that enters an affected square or starts their turn there takes A < AVERAGE 4 fire damage.\n",
+    "structured": {
+      "agility": -2,
+      "cost": "3 essence for two minions",
+      "flavor": "This elemental is a long, serpentine creature of heated rock. Flows of magma drool trails of lava from their fangs after biting their prey.",
+      "free_strike": 4,
+      "free_strike_damage_type": "Fire",
+      "immunities": [
+        "Fire R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Elemental (Fire)",
+        "Elemental (Earth)"
+      ],
+      "might": 2,
+      "movement": "Climb",
+      "organization": "Minion",
+      "presence": 1,
+      "reason": 0,
+      "role": "Harrier",
+      "size": "1L",
+      "speed": 5,
+      "stability": 2,
+      "stamina": "6 | 6",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 2",
+        "effects": [
+          {
+            "roll": "2d10 + R",
+            "tier1": "4 fire damage; [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 3",
+            "tier2": "6 fire damage; [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 4",
+            "tier3": "8 fire damage; [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 5"
+          },
+          {
+            "effect": "Each square that the flow [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) into becomes wreathed in flames until the start of the flow's next turn. An enemy that enters an affected square takes 2 damage.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Magic",
+          "Melee",
+          "Strike"
+        ],
+        "name": "Molten Strike",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "1 Essence",
+        "effects": [
+          {
+            "effect": "When the flow is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they launch lava into an area equal to 1 + their size within 5 squares. The affected area becomes [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. An enemy that enters an affected square or starts their turn there takes A < AVERAGE 4 fire damage."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Eruption",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/walking-boulder",
+    "kind": "statblock",
+    "name": "Walking Boulder",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/walking-boulder.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/elemental/statblock/walking-boulder.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: -2\ncost: 1 essence per minion summoned\nflavor: These massive clods of animated stone roll upon smaller piles of rocks that could be perceived as limbs. Walking boulders are useful for taking up space and forming barricades.\nfree_strike: 1\nimmunities: []\nintuition: 0\nkeywords:\n    - Elemental (Earth)\nmight: 2\nmovement: Climb\nname: Walking Boulder\norganization: Minion\npresence: 1\nreason: 0\nrole: Defender\nscc: mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/walking-boulder\nsize: \"2\"\nspeed: 4\nstamina: \"3\"\ntype: statblock\nweaknesses: []\n---\n\nThese massive clods of animated stone roll upon smaller piles of rocks that could be perceived as limbs. Walking boulders are useful for taking up space and forming barricades.\n\n| Elemental (Earth) | - | - | Signature Minion Defender | 1 essence per minion summoned |\n|:---------------:|:-----------------:|:-------------------------:|:-:|:-----------------------------:|\n| **2**<br>Size | **4**<br>Speed | **3**<br>Stamina | **R**<br>Stability | **1**<br>Free Strike |\n| **—**<br>Immunity | **Climb**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+2**<br>Might | **-2**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+1**<br>Presence |\n\n> ⭐️ **Obstruct**\n>\n> The boulder obstructs [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) for enemies.\n\n> ⭐️ **Pile Up (1 Essence)**\n>\n> When one or more boulders is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they each leave behind a stone [wall](scc.v1:mcdm.heroes.v1/rule.combat/wall) equal to their size in their space until the end of the encounter.\n\n> **Traits with an Essence Cost**\n>\n> Some minion stat blocks have traits that can only be activated if you spend the [heroic resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) listed in the top corner of the trait. For example, when a crux of ash is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can spend 1 essence to use their Ashen Cloud trait.\n",
+    "structured": {
+      "agility": -2,
+      "cost": "1 essence per minion summoned",
+      "flavor": "These massive clods of animated stone roll upon smaller piles of rocks that could be perceived as limbs. Walking boulders are useful for taking up space and forming barricades.",
+      "free_strike": 1,
+      "immunities": [],
+      "intuition": 0,
+      "keywords": [
+        "Elemental (Earth)"
+      ],
+      "might": 2,
+      "movement": "Climb",
+      "organization": "Minion",
+      "presence": 1,
+      "reason": 0,
+      "role": "Defender",
+      "size": "2",
+      "speed": 4,
+      "stamina": "3",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The boulder obstructs [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) for enemies."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Obstruct",
+        "type": "feature"
+      },
+      {
+        "cost": "1 Essence",
+        "effects": [
+          {
+            "effect": "When one or more boulders is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they each leave behind a stone [wall](scc.v1:mcdm.heroes.v1/rule.combat/wall) equal to their size in their space until the end of the encounter."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Pile Up",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/nixie-soakreed",
+    "kind": "statblock",
+    "name": "Nixie Soakreed",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/nixie-soakreed.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/fey/statblock/nixie-soakreed.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: -1\ncost: 1 essence per minion summoned\nflavor: These nixies are especially tiny. Their hair grows longer than their bodies and curls into reeds. The water soakreeds swim in tends to turn thick and cling to surfaces.\nfree_strike: 1\nimmunities: []\nintuition: 2\nkeywords:\n    - Fey\nmight: -2\nmovement: Swim\nname: Nixie Soakreed\norganization: Minion\npresence: 1\nreason: 0\nrole: Controller\nscc: mcdm.summoner.v1/monster.minion.summoner.fey.statblock/nixie-soakreed\nsize: 1T\nspeed: 5\nstability: 0\nstamina: \"1\"\ntype: statblock\nweaknesses: []\n---\n\nThese nixies are especially tiny. Their hair grows longer than their bodies and curls into reeds. The water soakreeds swim in tends to turn thick and cling to surfaces.\n\n| Fey | - | - | Signature Minion Controller | 1 essence per minion summoned |\n|:--------------:|:---:|:---------------------------:|:-:|:-----------------------------:|\n| **1T**<br>Size | **5**<br>Speed | **1**<br>Stamina | **0**<br>Stability | **1**<br>Free Strike |\n| **—**<br>Immunity | **Swim**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **-2**<br>Might | **-1**<br>Agility | **0**<br>Reason | **+2**<br>Intuition | **+1**<br>Presence |\n\n> ⭐️ **Water Weird**\n>\n> Once per turn during their move action, each nixie under your control can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) to a body of water within 5. The soakreed can't [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) into water created by their own soaking bog.\n\n> ⭐️ **Soaking Bog**\n>\n> The area within 1 square of the soakreed is filled with swampy water. An enemy that starts their turn in the area is A < WEAK [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each additional soaking bog the target occupies (maximum +2).\n\n> ⭐️ **Minuscule**\n>\n> The soakreed has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space.\n",
+    "structured": {
+      "agility": -1,
+      "cost": "1 essence per minion summoned",
+      "flavor": "These nixies are especially tiny. Their hair grows longer than their bodies and curls into reeds. The water soakreeds swim in tends to turn thick and cling to surfaces.",
+      "free_strike": 1,
+      "immunities": [],
+      "intuition": 2,
+      "keywords": [
+        "Fey"
+      ],
+      "might": -2,
+      "movement": "Swim",
+      "organization": "Minion",
+      "presence": 1,
+      "reason": 0,
+      "role": "Controller",
+      "size": "1T",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "1",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "Once per turn during their move action, each nixie under your control can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) to a body of water within 5. The soakreed can't [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) into water created by their own soaking bog."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Water Weird",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The area within 1 square of the soakreed is filled with swampy water. An enemy that starts their turn in the area is A < WEAK [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each additional soaking bog the target occupies (maximum +2)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Soaking Bog",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The soakreed has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Minuscule",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/pixie-bellringer",
+    "kind": "statblock",
+    "name": "Pixie Bellringer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/pixie-bellringer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/fey/statblock/pixie-bellringer.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 1\ncost: 1 essence per minion summoned\nflavor: The bellringers are glowing pixies that jingle as they fly. Historically, these pixies worked alongside bowman to ensure their arrows struck true.\nfree_strike: 1\nimmunities: []\nintuition: 0\nkeywords:\n    - Fey\nmight: -3\nmovement: Fly, hover\nname: Pixie Bellringer\norganization: Minion\npresence: 2\nreason: 0\nrole: Support\nscc: mcdm.summoner.v1/monster.minion.summoner.fey.statblock/pixie-bellringer\nsize: 1T\nspeed: 5\nstability: 0\nstamina: \"2\"\ntype: statblock\nweaknesses: []\n---\n\nThe bellringers are glowing pixies that jingle as they fly. Historically, these pixies worked alongside bowman to ensure their arrows struck true.\n\n| Fey | - | - | Signature Minion Support | 1 essence per minion summoned |\n|:----------------:|:---:|:------------------------:|:-:|:-----------------------------:|\n| **1T**<br>Size | **5**<br>Speed | **2**<br>Stamina | **0**<br>Stability | **1**<br>Free Strike |\n| **—**<br>Immunity | **Fly, hover**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **-3**<br>Might | **+1**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+2**<br>Presence |\n\n> ⭐️ **Ringing Strike**\n>\n> The bellringer's [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) grant an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) to the next [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) made against the target, or a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) if two or more bellringers strike the same target.\n\n> ⭐️ **Fairy Chime**\n>\n> Each ally within 1 square of a bellringer has a +1 to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw). Each enemy within 1 square of a bellringer has a -1 to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw).\n\n> ⭐️ **Minuscule**\n>\n> The bellringer has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space.\n",
+    "structured": {
+      "agility": 1,
+      "cost": "1 essence per minion summoned",
+      "flavor": "The bellringers are glowing pixies that jingle as they fly. Historically, these pixies worked alongside bowman to ensure their arrows struck true.",
+      "free_strike": 1,
+      "immunities": [],
+      "intuition": 0,
+      "keywords": [
+        "Fey"
+      ],
+      "might": -3,
+      "movement": "Fly, hover",
+      "organization": "Minion",
+      "presence": 2,
+      "reason": 0,
+      "role": "Support",
+      "size": "1T",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "2",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The bellringer's [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) grant an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) to the next [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) made against the target, or a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) if two or more bellringers strike the same target."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Ringing Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Each ally within 1 square of a bellringer has a +1 to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw). Each enemy within 1 square of a bellringer has a -1 to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Fairy Chime",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The bellringer has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Minuscule",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/pixie-hydrain",
+    "kind": "statblock",
+    "name": "Pixie Hydrain",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/pixie-hydrain.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/fey/statblock/pixie-hydrain.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 0\ncost: 3 essence for two minions\nflavor: This pixie flies on a delicate array of vibrant flower petals for wings. The color drains from their wings as they call forth acid rain showers.\nfree_strike: 5\nfree_strike_damage_type: Acid\nimmunities:\n    - Acid R\nintuition: 0\nkeywords:\n    - Fey\nmight: -3\nmovement: Fly, hover\nname: Pixie Hydrain\norganization: Minion\npresence: 2\nreason: 1\nrole: Artillery\nscc: mcdm.summoner.v1/monster.minion.summoner.fey.statblock/pixie-hydrain\nsize: 1T\nspeed: 5\nstability: 0\nstamina: 5 | 5\ntype: statblock\nweaknesses: []\n---\n\nThis pixie flies on a delicate array of vibrant flower petals for wings. The color drains from their wings as they call forth acid rain showers.\n\n| Fey | - | - | Minion Artillery | 3 essence for two minions |\n|:-------------:|:---:|:----------------:|:-:|:-------------------------:|\n| **1T**<br>Size | **5**<br>Speed | **5 \\| 5**<br>Stamina | **0**<br>Stability | **5**<br>Free Strike |\n| **Acid R**<br>Immunity | **Fly, hover**<br>Movement | - | **—**<br>Weakness | **Acid**<br>Free Strike Damage Type |\n| **-3**<br>Might | **0**<br>Agility | **+1**<br>Reason | **0**<br>Intuition | **+2**<br>Presence |\n\n> 🏹 **Burning/Healing Rain 2d10 + R (Signature Ability)**\n>\n> | **Magic, Ranged, Strike** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|----------------:|\n> | **📏 Ranged 5** | **🎯 One creature or object per minion** |\n>\n> 5 acid damage; M < WEAK [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n>\n> 7 acid damage; M < AVERAGE [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n>\n> 9 acid damage; M < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n>\n> **Effect:** After the hydrain's squad uses this ability, you or one ally within distance can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) or end a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition).\n\n> ⭐️ **Minuscule**\n>\n> The hydrain has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space.\n",
+    "structured": {
+      "agility": 0,
+      "cost": "3 essence for two minions",
+      "flavor": "This pixie flies on a delicate array of vibrant flower petals for wings. The color drains from their wings as they call forth acid rain showers.",
+      "free_strike": 5,
+      "free_strike_damage_type": "Acid",
+      "immunities": [
+        "Acid R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Fey"
+      ],
+      "might": -3,
+      "movement": "Fly, hover",
+      "organization": "Minion",
+      "presence": 2,
+      "reason": 1,
+      "role": "Artillery",
+      "size": "1T",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "5 | 5",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Ranged 5",
+        "effects": [
+          {
+            "roll": "2d10 + R",
+            "tier1": "5 acid damage; M < WEAK [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "tier2": "7 acid damage; M < AVERAGE [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "tier3": "9 acid damage; M < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+          },
+          {
+            "effect": "After the hydrain's squad uses this ability, you or one ally within distance can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) or end a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition).",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Magic",
+          "Ranged",
+          "Strike"
+        ],
+        "name": "Burning/Healing Rain",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The hydrain has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Minuscule",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/pixie-loftlilly",
+    "kind": "statblock",
+    "name": "Pixie Loftlilly",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/pixie-loftlilly.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/fey/statblock/pixie-loftlilly.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 1\ncost: 3 essence for two minions\nflavor: Loftlillies lazily drift through the air in flower cups. They sip on toxic nectar to emit a powerful haze from their skin.\nfree_strike: 4\nfree_strike_damage_type: Poison\nimmunities:\n    - Poison R\nintuition: 0\nkeywords:\n    - Fey\nmight: -2\nmovement: Fly, hover\nname: Pixie Loftlilly\norganization: Minion\npresence: 2\nreason: 0\nrole: Controller\nscc: mcdm.summoner.v1/monster.minion.summoner.fey.statblock/pixie-loftlilly\nsize: 1T\nspeed: 5\nstability: 0\nstamina: 5 | 5\ntype: statblock\nweaknesses: []\n---\n\nLoftlillies lazily drift through the air in flower cups. They sip on toxic nectar to emit a powerful haze from their skin.\n\n| Fey | - | - | Minion Controller | 3 essence for two minions |\n|:---------------:|:---:|:-----------------:|:-:|:-------------------------:|\n| **1T**<br>Size | **5**<br>Speed | **5 \\| 5**<br>Stamina | **0**<br>Stability | **4**<br>Free Strike |\n| **Poison R**<br>Immunity | **Fly, hover**<br>Movement | - | **—**<br>Weakness | **Poison**<br>Free Strike Damage Type |\n| **-2**<br>Might | **+1**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+2**<br>Presence |\n\n> ⭐️ **Floating Toxins**\n>\n> The area within 1 square of the loftlilly causes each enemy and object with a size equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) or smaller to float 1 square off the ground until they leave the area. A floating enemy that can't [fly](scc.v1:mcdm.heroes.v1/movement/fly) is unable to [shift](scc.v1:mcdm.heroes.v1/movement/shifting), moves 2 additional squares from [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement), and has a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n\n> ⭐️ **Minuscule**\n>\n> The loftlilly has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space.\n",
+    "structured": {
+      "agility": 1,
+      "cost": "3 essence for two minions",
+      "flavor": "Loftlillies lazily drift through the air in flower cups. They sip on toxic nectar to emit a powerful haze from their skin.",
+      "free_strike": 4,
+      "free_strike_damage_type": "Poison",
+      "immunities": [
+        "Poison R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Fey"
+      ],
+      "might": -2,
+      "movement": "Fly, hover",
+      "organization": "Minion",
+      "presence": 2,
+      "reason": 0,
+      "role": "Controller",
+      "size": "1T",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "5 | 5",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The area within 1 square of the loftlilly causes each enemy and object with a size equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) or smaller to float 1 square off the ground until they leave the area. A floating enemy that can't [fly](scc.v1:mcdm.heroes.v1/movement/fly) is unable to [shift](scc.v1:mcdm.heroes.v1/movement/shifting), moves 2 additional squares from [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement), and has a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Floating Toxins",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The loftlilly has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Minuscule",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-dandeknight",
+    "kind": "statblock",
+    "name": "Sprite Dandeknight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/sprite-dandeknight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/fey/statblock/sprite-dandeknight.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 0\ncost: 1 essence per minion summoned\nflavor: Dandeknights are sprite warriors whose dragonfly wingbeats emit a tonal drone. They're usually clad in tassels that shift color as they swing their weapons.\nfree_strike: 1\nimmunities: []\nintuition: -1\nkeywords:\n    - Fey\nmight: 2\nmovement: Fly\nname: Sprite Dandeknight\norganization: Minion\npresence: -1\nreason: -1\nrole: Harrier\nscc: mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-dandeknight\nsize: 1T\nspeed: 6\nstability: 0\nstamina: \"2\"\ntype: statblock\nweaknesses: []\n---\n\nDandeknights are sprite warriors whose dragonfly wingbeats emit a tonal drone. They're usually clad in tassels that shift color as they swing their weapons.\n\n| Fey | - | - | Signature Minion Harrier | 1 essence per minion summoned |\n|:-----------------:|:---:|:------------------------:|:-:|:-----------------------------:|\n| **1T**<br>Size | **6**<br>Speed | **2**<br>Stamina | **0**<br>Stability | **1**<br>Free Strike |\n| **—**<br>Immunity | **Fly**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+2**<br>Might | **0**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **-1**<br>Presence |\n\n> ⭐️ **Magic Strike**\n>\n> When the dandeknight strikes, you can choose one of the following damage types: acid, cold, corruption, fire, lightning, poison, or sonic. The strike deals that damage.\n\n> ⭐️ **Staccato Swings**\n>\n> When the dandeknight makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike), they can make two [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) instead. The damage is added together and treated as a single [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) if both strikes hit the same target.\n\n> ⭐️ **Minuscule**\n>\n> The dandeknight has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space.\n",
+    "structured": {
+      "agility": 0,
+      "cost": "1 essence per minion summoned",
+      "flavor": "Dandeknights are sprite warriors whose dragonfly wingbeats emit a tonal drone. They're usually clad in tassels that shift color as they swing their weapons.",
+      "free_strike": 1,
+      "immunities": [],
+      "intuition": -1,
+      "keywords": [
+        "Fey"
+      ],
+      "might": 2,
+      "movement": "Fly",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": -1,
+      "role": "Harrier",
+      "size": "1T",
+      "speed": 6,
+      "stability": 0,
+      "stamina": "2",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "When the dandeknight strikes, you can choose one of the following damage types: acid, cold, corruption, fire, lightning, poison, or sonic. The strike deals that damage."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Magic Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "When the dandeknight makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike), they can make two [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) instead. The damage is added together and treated as a single [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) if both strikes hit the same target."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Staccato Swings",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The dandeknight has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Minuscule",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-orchiguard",
+    "kind": "statblock",
+    "name": "Sprite Orchiguard",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/sprite-orchiguard.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/fey/statblock/sprite-orchiguard.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 0\ncost: 3 essence for two minions\nflavor: The orchiguard is a sprite surrounded by a wheel of shields. They are usually crushed by the pressures of their own impenetrable defenses before ever being felled by enemy hands.\nfree_strike: 4\nimmunities: []\nintuition: -1\nkeywords:\n    - Fey\nmight: 2\nmovement: Fly\nname: Sprite Orchiguard\norganization: Minion\npresence: -1\nreason: -1\nrole: Defender\nscc: mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-orchiguard\nsize: 1S\nspeed: 6\nstability: 2\nstamina: 8 | 8\ntype: statblock\nweaknesses: []\n---\n\nThe orchiguard is a sprite surrounded by a wheel of shields. They are usually crushed by the pressures of their own impenetrable defenses before ever being felled by enemy hands.\n\n| Fey | - | - | Minion Defender | 3 essence for two minions |\n|:-----------------:|:---:|:---------------:|:-:|:-------------------------:|\n| **1S**<br>Size | **6**<br>Speed | **8 \\| 8**<br>Stamina | **2**<br>Stability | **4**<br>Free Strike |\n| **—**<br>Immunity | **Fly**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+2**<br>Might | **0**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **-1**<br>Presence |\n\n> ⭐️ **Fairy Guard**\n>\n> Each non-orchiguard ally takes half damage from abilities while within 1 square of the orchiguard. Whenever the orchiguard reduces damage this way, they take damage equal to half their maximum [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and their [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) damage increases by 1.\n\n> ⭐️ **Minuscule**\n>\n> The orchiguard has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space.\n",
+    "structured": {
+      "agility": 0,
+      "cost": "3 essence for two minions",
+      "flavor": "The orchiguard is a sprite surrounded by a wheel of shields. They are usually crushed by the pressures of their own impenetrable defenses before ever being felled by enemy hands.",
+      "free_strike": 4,
+      "immunities": [],
+      "intuition": -1,
+      "keywords": [
+        "Fey"
+      ],
+      "might": 2,
+      "movement": "Fly",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": -1,
+      "role": "Defender",
+      "size": "1S",
+      "speed": 6,
+      "stability": 2,
+      "stamina": "8 | 8",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "Each non-orchiguard ally takes half damage from abilities while within 1 square of the orchiguard. Whenever the orchiguard reduces damage this way, they take damage equal to half their maximum [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and their [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) damage increases by 1."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Fairy Guard",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The orchiguard has [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) while occupying a larger creature's space."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Minuscule",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/grave-knight",
+    "kind": "statblock",
+    "name": "Grave Knight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/grave-knight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/undead/statblock/grave-knight.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 1\ncost: 3 essence for two minions\nflavor: The grave knights are zombie warriors that continue to fight after death. Any blood spilled at a grave knight's hand runs pitch black.\nfree_strike: 5\nimmunities:\n    - Corruption R\n    - Poison R\nintuition: 0\nkeywords:\n    - Undead\nmight: 2\nmovement: —\nname: Grave Knight\norganization: Minion\npresence: 1\nreason: 0\nrole: Brute\nscc: mcdm.summoner.v1/monster.minion.summoner.undead.statblock/grave-knight\nsize: 1M\nspeed: 6\nstability: 1\nstamina: 6 | 6\ntype: statblock\nweaknesses: []\n---\n\nThe grave knights are zombie warriors that continue to fight after death. Any blood spilled at a grave knight's hand runs pitch black.\n\n| Undead | - | - | Minion Brute | 3 essence for two minions |\n|:------------:|:------:|:------------:|:-:|:-------------------------:|\n| **1M**<br>Size | **6**<br>Speed | **6 \\| 6**<br>Stamina | **1**<br>Stability | **5**<br>Free Strike |\n| **Corruption R, Poison R**<br>Immunity | **—**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+2**<br>Might | **+1**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+1**<br>Presence |\n\n> 🏹 **Knight Strike 2d10 + R (Signature Ability)**\n>\n> | **Melee, Strike, Weapon** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|----------------:|\n> | **📏 Melee 1** | **🎯 One creature or object per minion** |\n>\n> 5 corruption damage; M < WEAK [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n>\n> 7 corruption damage; M < AVERAGE [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n>\n> 9 corruption damage; M < STRONG [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n\n> ⭐️ **To the Grave**\n>\n> When the grave knight is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they can make a melee [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) before being destroyed.\n",
+    "structured": {
+      "agility": 1,
+      "cost": "3 essence for two minions",
+      "flavor": "The grave knights are zombie warriors that continue to fight after death. Any blood spilled at a grave knight's hand runs pitch black.",
+      "free_strike": 5,
+      "immunities": [
+        "Corruption R",
+        "Poison R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Undead"
+      ],
+      "might": 2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": 1,
+      "reason": 0,
+      "role": "Brute",
+      "size": "1M",
+      "speed": 6,
+      "stability": 1,
+      "stamina": "6 | 6",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "2d10 + R",
+            "tier1": "5 corruption damage; M < WEAK [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "tier2": "7 corruption damage; M < AVERAGE [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "tier3": "9 corruption damage; M < STRONG [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Knight Strike",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "When the grave knight is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they can make a melee [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) before being destroyed."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "To the Grave",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/husk",
+    "kind": "statblock",
+    "name": "Husk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/husk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/undead/statblock/husk.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 0\ncost: 1 essence per minion summoned\nflavor: Husks have stiff corpses that snap and crackle with each sudden movement. Corrosive breath endlessly billows from their slackjawed faces.\nfree_strike: 1\nfree_strike_damage_type: Corruption\nimmunities:\n    - Damage 2\n    - Corruption R\n    - Poison R\nintuition: -1\nkeywords:\n    - Undead\nmight: 2\nmovement: —\nname: Husk\norganization: Minion\npresence: -1\nreason: -1\nrole: Defender\nscc: mcdm.summoner.v1/monster.minion.summoner.undead.statblock/husk\nsize: 1M\nspeed: 5\nstability: 1\nstamina: \"3\"\ntype: statblock\nweaknesses: []\n---\n\nHusks have stiff corpses that snap and crackle with each sudden movement. Corrosive breath endlessly billows from their slackjawed faces.\n\n| Undead | - | - | Signature Minion Defender | 1 essence per minion summoned |\n|:----:|:------:|:-------------------------:|:-:|:-----------------------------:|\n| **1M**<br>Size | **5**<br>Speed | **3**<br>Stamina | **1**<br>Stability | **1**<br>Free Strike |\n| **Damage 2, Corruption R, Poison R**<br>Immunity | **—**<br>Movement | - | **—**<br>Weakness | **Corruption**<br>Free Strike Damage Type |\n| **+2**<br>Might | **0**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **-1**<br>Presence |\n\n> ⭐️ **Rotting Strike**\n>\n> The husk's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) inflict M < WEAK [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each additional husk adjacent to the target (maximum +2).\n",
+    "structured": {
+      "agility": 0,
+      "cost": "1 essence per minion summoned",
+      "flavor": "Husks have stiff corpses that snap and crackle with each sudden movement. Corrosive breath endlessly billows from their slackjawed faces.",
+      "free_strike": 1,
+      "free_strike_damage_type": "Corruption",
+      "immunities": [
+        "Damage 2",
+        "Corruption R",
+        "Poison R"
+      ],
+      "intuition": -1,
+      "keywords": [
+        "Undead"
+      ],
+      "might": 2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": -1,
+      "role": "Defender",
+      "size": "1M",
+      "speed": 5,
+      "stability": 1,
+      "stamina": "3",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The husk's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) inflict M < WEAK [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each additional husk adjacent to the target (maximum +2)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Rotting Strike",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/shrieker",
+    "kind": "statblock",
+    "name": "Shrieker",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/shrieker.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/undead/statblock/shrieker.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: -2\ncost: 1 essence per minion summoned\nflavor: The shrieker expresses their unending pain in a way that can be heard and felt for miles. A white-hot fire smolders within each of their sunken eye sockets.\nfree_strike: 2\nfree_strike_damage_type: Sonic\nimmunities:\n    - Corruption R\n    - Poison R\nintuition: 0\nkeywords:\n    - Undead\nmight: -2\nmovement: —\nname: Shrieker\norganization: Minion\npresence: 2\nreason: 0\nrole: Artillery\nscc: mcdm.summoner.v1/monster.minion.summoner.undead.statblock/shrieker\nsize: 1M\nspeed: 4\nstability: 0\nstamina: \"1\"\ntype: statblock\nweaknesses: []\n---\n\nThe shrieker expresses their unending pain in a way that can be heard and felt for miles. A white-hot fire smolders within each of their sunken eye sockets.\n\n| Undead | - | - | Signature Minion Artillery | 1 essence per minion summoned |\n|:--------:|:------:|:---------------------------:|:-:|:-----------------------------:|\n| **1M**<br>Size | **4**<br>Speed | **1**<br>Stamina | **0**<br>Stability | **2**<br>Free Strike |\n| **Corruption R, Poison R**<br>Immunity | **—**<br>Movement | - | **—**<br>Weakness | **Sonic**<br>Free Strike Damage Type |\n| **-2**<br>Might | **-2**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+2**<br>Presence |\n\n> ⭐️ **Howling Strike**\n>\n> The shrieker's ranged [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 12.\n\n> ⭐️ **Shrill Alarm**\n>\n> Each enemy within 2 squares of the shrieker can't [hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) or be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide).\n",
+    "structured": {
+      "agility": -2,
+      "cost": "1 essence per minion summoned",
+      "flavor": "The shrieker expresses their unending pain in a way that can be heard and felt for miles. A white-hot fire smolders within each of their sunken eye sockets.",
+      "free_strike": 2,
+      "free_strike_damage_type": "Sonic",
+      "immunities": [
+        "Corruption R",
+        "Poison R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Undead"
+      ],
+      "might": -2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": 2,
+      "reason": 0,
+      "role": "Artillery",
+      "size": "1M",
+      "speed": 4,
+      "stability": 0,
+      "stamina": "1",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The shrieker's ranged [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) have a distance of 12."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Howling Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Each enemy within 2 squares of the shrieker can't [hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) or be [hidden](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Shrill Alarm",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/skeleton",
+    "kind": "statblock",
+    "name": "Skeleton",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/skeleton.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/undead/statblock/skeleton.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 0\ncost: 1 essence per minion summoned\nflavor: These autonomous bone networks fall just short of replicating the structure they had in life. Skeleton bones are especially brittle and can splinter into huge shards when met with enough force.\nfree_strike: 1\nimmunities:\n    - Corruption R\n    - Poison R\nintuition: -1\nkeywords:\n    - Undead\nmight: 2\nmovement: —\nname: Skeleton\norganization: Minion\npresence: -1\nreason: -1\nrole: Harrier\nscc: mcdm.summoner.v1/monster.minion.summoner.undead.statblock/skeleton\nsize: 1M\nspeed: 6\nstability: 0\nstamina: \"2\"\ntype: statblock\nweaknesses: []\n---\n\nThese autonomous bone networks fall just short of replicating the structure they had in life. Skeleton bones are especially brittle and can splinter into huge shards when met with enough force.\n\n| Undead | - | - | Signature Minion Harrier | 1 essence per minion summoned |\n|:--------:|:------:|:-------------------------:|:-:|:-----------------------------:|\n| **1M**<br>Size | **6**<br>Speed | **2**<br>Stamina | **0**<br>Stability | **1**<br>Free Strike |\n| **Corruption R, Poison R**<br>Immunity | **—**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+2**<br>Might | **0**<br>Agility | **-1**<br>Reason | **-1**<br>Intuition | **-1**<br>Presence |\n\n> ⭐️ **Bonetrops**\n>\n> When the skeleton is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), their square becomes [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies. The first time any enemy enters this space, they take 2 damage and end this effect.\n",
+    "structured": {
+      "agility": 0,
+      "cost": "1 essence per minion summoned",
+      "flavor": "These autonomous bone networks fall just short of replicating the structure they had in life. Skeleton bones are especially brittle and can splinter into huge shards when met with enough force.",
+      "free_strike": 1,
+      "immunities": [
+        "Corruption R",
+        "Poison R"
+      ],
+      "intuition": -1,
+      "keywords": [
+        "Undead"
+      ],
+      "might": 2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": -1,
+      "role": "Harrier",
+      "size": "1M",
+      "speed": 6,
+      "stability": 0,
+      "stamina": "2",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "When the skeleton is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), their square becomes [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies. The first time any enemy enters this space, they take 2 damage and end this effect."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Bonetrops",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/stalker-shade",
+    "kind": "statblock",
+    "name": "Stalker Shade",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/stalker-shade.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/undead/statblock/stalker-shade.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: 1\ncost: 3 essence for two minions\nflavor: Shades are a form of umbral stalker that float free from any floor or surface. They can bend their appearance to completely vanish in the light.\nfree_strike: 5\nfree_strike_damage_type: Corruption\nimmunities:\n    - Corruption R\n    - Poison R\nintuition: 0\nkeywords:\n    - Undead\nmight: -2\nmovement: Fly, hover\nname: Stalker Shade\norganization: Minion\npresence: 2\nreason: 0\nrole: Ambusher\nscc: mcdm.summoner.v1/monster.minion.summoner.undead.statblock/stalker-shade\nsize: 1M\nspeed: 5\nstability: 1\nstamina: 6 | 6\ntype: statblock\nweaknesses: []\n---\n\nShades are a form of umbral stalker that float free from any floor or surface. They can bend their appearance to completely vanish in the light.\n\n| Undead | - | - | Minion Ambusher | 3 essence for two minions |\n|:-------------:|:------:|:---------------:|:-:|:-------------------------:|\n| **1M**<br>Size | **5**<br>Speed | **6 \\| 6**<br>Stamina | **1**<br>Stability | **5**<br>Free Strike |\n| **Corruption R, Poison R**<br>Immunity | **Fly, hover**<br>Movement | - | **—**<br>Weakness | **Corruption**<br>Free Strike Damage Type |\n| **-2**<br>Might | **+1**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+2**<br>Presence |\n\n> ⭐️ **Shadow Strike**\n>\n> The stalker shade turns invisible, [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) 3 squares, and reappears after making a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n\n> ⭐️ **Shadow Phasing**\n>\n> The stalker shade can move through other creatures and objects at normal speed. The first time in a round that the stalker shade passes through a creature, that creature takes 2 corruption damage. The stalker shade doesn't take damage from being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) into objects.\n",
+    "structured": {
+      "agility": 1,
+      "cost": "3 essence for two minions",
+      "flavor": "Shades are a form of umbral stalker that float free from any floor or surface. They can bend their appearance to completely vanish in the light.",
+      "free_strike": 5,
+      "free_strike_damage_type": "Corruption",
+      "immunities": [
+        "Corruption R",
+        "Poison R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Undead"
+      ],
+      "might": -2,
+      "movement": "Fly, hover",
+      "organization": "Minion",
+      "presence": 2,
+      "reason": 0,
+      "role": "Ambusher",
+      "size": "1M",
+      "speed": 5,
+      "stability": 1,
+      "stamina": "6 | 6",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The stalker shade turns invisible, [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) 3 squares, and reappears after making a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Shadow Strike",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The stalker shade can move through other creatures and objects at normal speed. The first time in a round that the stalker shade passes through a creature, that creature takes 2 corruption damage. The stalker shade doesn't take damage from being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) into objects."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Shadow Phasing",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/zombie-lumberer",
+    "kind": "statblock",
+    "name": "Zombie Lumberer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/zombie-lumberer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/minion/summoner/undead/statblock/zombie-lumberer.json",
+    "selection": "core-monsters",
+    "text": "---\nagility: -2\ncost: 3 essence for two minions\nflavor: These massive, animated ogre corpses still maintain their incredible grip strength. When a lumberer falls, they'll take anything within reach down with them.\nfree_strike: 1\nimmunities:\n    - Corruption R\n    - Poison R\nintuition: 0\nkeywords:\n    - Undead\nmight: 2\nmovement: —\nname: Zombie Lumberer\norganization: Minion\npresence: 1\nreason: 0\nrole: Defender\nscc: mcdm.summoner.v1/monster.minion.summoner.undead.statblock/zombie-lumberer\nsize: \"2\"\nspeed: 5\nstamina: 8 | 8\ntype: statblock\nweaknesses: []\n---\n\nThese massive, animated ogre corpses still maintain their incredible grip strength. When a lumberer falls, they'll take anything within reach down with them.\n\n| Undead | - | - | Minion Defender | 3 essence for two minions |\n|:---------------:|:------:|:---------------:|:-:|:-------------------------:|\n| **2**<br>Size | **5**<br>Speed | **8 \\| 8**<br>Stamina | **R**<br>Stability | **1**<br>Free Strike |\n| **Corruption R, Poison R**<br>Immunity | **—**<br>Movement | - | **—**<br>Weakness | **—**<br>Free Strike Damage Type |\n| **+2**<br>Might | **-2**<br>Agility | **0**<br>Reason | **0**<br>Intuition | **+1**<br>Presence |\n\n> ⭐️ **Zombie Clutch**\n>\n> The lumberer's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) inflict A < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed). A creature or object that starts their turn [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by the lumberer takes corruption damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason).\n\n> ⭐️ **Death Grasp**\n>\n> When the lumberer is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they can latch onto an adjacent enemy before being destroyed. The enemy is M < STRONG [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).\n",
+    "structured": {
+      "agility": -2,
+      "cost": "3 essence for two minions",
+      "flavor": "These massive, animated ogre corpses still maintain their incredible grip strength. When a lumberer falls, they'll take anything within reach down with them.",
+      "free_strike": 1,
+      "immunities": [
+        "Corruption R",
+        "Poison R"
+      ],
+      "intuition": 0,
+      "keywords": [
+        "Undead"
+      ],
+      "might": 2,
+      "movement": "—",
+      "organization": "Minion",
+      "presence": 1,
+      "reason": 0,
+      "role": "Defender",
+      "size": "2",
+      "speed": 5,
+      "stamina": "8 | 8",
+      "weaknesses": []
+    },
+    "features": [
+      {
+        "effects": [
+          {
+            "effect": "The lumberer's melee [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) inflict A < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed). A creature or object that starts their turn [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by the lumberer takes corruption damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Zombie Clutch",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "When the lumberer is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they can latch onto an adjacent enemy before being destroyed. The enemy is M < STRONG [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Death Grasp",
+        "type": "feature"
+      }
+    ]
+  },
+  {
     "id": "mcdm.monsters.v1/monster.minotaur.statblock/minotaur-bully",
     "kind": "statblock",
     "name": "Minotaur Bully",

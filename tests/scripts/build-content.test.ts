@@ -320,7 +320,17 @@ describe('verbatim text and traceable fields', () => {
 
 // Full-core ingestion must not silently lose a monster body, embedded feature or source boundary.
 test('all 438 core monster stat blocks retain exact Markdown and JSON features', () => {
-  const statblocks = entriesIn('statblock.json');
+  const statblocks = entriesIn('statblock.json').filter(
+    row => !row.id.startsWith('mcdm.summoner.v1/'),
+  );
+  const minions = entriesIn('statblock.json').filter(row => row.id.startsWith('mcdm.summoner.v1/'));
+  expect(minions).toHaveLength(25);
+  for (const row of minions) {
+    expect(row.structured.cost).toMatch(/^[13] essence/);
+    expect(row.text).toBe(readPinnedSource(root, join(root, row.sourcePath)));
+    const twin = JSON.parse(readPinnedSource(root, join(root, row.jsonPath!)));
+    expect(row.features ?? []).toEqual(twin.features ?? []);
+  }
   expect(statblocks).toHaveLength(438); // docs/research/foe-catalog-audit-2026-09-15.json
   for (const row of statblocks) {
     expect(['mcdm.monsters.v1', 'mcdm.heroes.v1']).toContain(row.id.split('/')[0]);
