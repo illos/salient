@@ -188,6 +188,13 @@ export const characterTables = {
     entryLevelXpOffset: v.optional(v.number()),
     /** Invalidates a preserved legacy full-edit draft without rewriting its historical snapshot. */
     staleFullEditRevisionId: v.optional(v.union(v.id('characterRevisions'), v.null())),
+    /**
+     * The wizard's own working draft (V96): created as soon as the hero is worked on and saved
+     * continuously, but kept out of the owner's character list, and allowed to have no name yet,
+     * until they save it. Absent on every character created before this field existed and on
+     * every character that has been saved, both of which are listed.
+     */
+    wizardDraft: v.optional(v.boolean()),
     /** Scoped advancement is independent of the ordinary full-edit draft. */
     advancementDraft: v.optional(
       v.union(

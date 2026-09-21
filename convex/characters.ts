@@ -104,9 +104,14 @@ async function owned(ctx: ReadCtx, id: Id<'characters'>, userId: Id<'users'>) {
   if (!character || character.ownerId !== userId) throw new ConvexError('Character unavailable.');
   return character;
 }
-function authored(input: CharacterAuthored): CharacterAuthored {
+/**
+ * `nameOptional` is the wizard's working draft (V96): it is saved continuously from the first
+ * choice, before the hero is named, and stays out of the owner's list until they save it. Every
+ * other path, including saving that draft into the list, still requires the name.
+ */
+function authored(input: CharacterAuthored, nameOptional = false): CharacterAuthored {
   const name = input.name.trim();
-  if (!name || name.length > 100)
+  if (nameOptional ? name.length > 100 : !name || name.length > 100)
     throw new ConvexError('Enter a character name of 1–100 characters.');
   for (const value of [input.appearance, input.biography, input.notes]) {
     if (value.length > 10000)
@@ -148,6 +153,8 @@ const detail = v.object({
   id: v.id('characters'),
   authored: authoredValidator,
   revision: v.number(),
+  /** The wizard's working draft, kept out of the owner's list until they save it (V96). */
+  wizardDraft: v.boolean(),
   selections: v.array(selectionValidator),
   status: revisionStatusValidator,
   /** The R02 EvaluationResult of the draft revision (shared/contracts/characterEvaluation.ts). */
@@ -201,9 +208,13 @@ export const evaluate = query({
     );
   },
 });
-export const listMine = query({
+/**
+ * The owner's working wizard draft, if they have one (V96). Opening the wizard for a new hero
+ * resumes it instead of leaving another unlisted row behind; it is never more than one.
+ */
+export const wizardDraft = query({
   args: {},
-  returns: v.array(summary),
+  returns: v.union(v.id('characters'), v.null()),
   handler: async ctx => {
     const user = await requireUser(ctx);
     const characters = await ctx.db
@@ -211,6 +222,24 @@ export const listMine = query({
       .withIndex('by_owner', q => q.eq('ownerId', user._id))
       .order('desc')
       .take(100);
+    return characters.find(character => character.wizardDraft === true)?._id ?? null;
+  },
+});
+
+export const listMine = query({
+  args: {},
+  returns: v.array(summary),
+  handler: async ctx => {
+    const user = await requireUser(ctx);
+    const characters = (
+      await ctx.db
+        .query('characters')
+        .withIndex('by_owner', q => q.eq('ownerId', user._id))
+        .order('desc')
+        .take(100)
+    )
+      // The wizard's working draft is shown only inside the wizard, until it is saved (V96).
+      .filter(character => character.wizardDraft !== true);
     return Promise.all(
       characters.map(async character => {
         const draft = character.draftRevisionId
@@ -257,6 +286,8 @@ export const get = query({
       id: character._id,
       authored: character.authored,
       revision: character.revision,
+      /** The wizard's working draft, kept out of the owner's list until they save it (V96). */
+      wizardDraft: character.wizardDraft === true,
       selections: draft?.selections ?? [],
       status: draft?.status ?? ('awaiting-rules-evaluation' as const),
       evaluation: draft?.evaluation ?? null,
@@ -331,13 +362,15 @@ export const create = mutation({
     commandId: v.string(),
     authored: authoredValidator,
     selections: v.optional(v.array(selectionValidator)),
+    /** Start the wizard's working draft: unlisted, and nameable later. */
+    wizardDraft: v.optional(v.boolean()),
   },
   returns: v.id('characters'),
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
     const receipt = await command(ctx, user._id, args.commandId, 'characters.create', args);
     if (receipt.previous) return receipt.previous.result as Id<'characters'>;
-    const fields = authored(args.authored);
+    const fields = authored(args.authored, args.wizardDraft === true);
     const existing = await ctx.db
       .query('characters')
       .withIndex('by_owner', q => q.eq('ownerId', user._id))
@@ -356,6 +389,7 @@ export const create = mutation({
       liveState: null,
       campaignId: null,
       combatLocked: false,
+      ...(args.wizardDraft === true ? { wizardDraft: true } : {}),
     });
     const revisionId = await ctx.db.insert('characterRevisions', {
       characterId: id,
@@ -384,6 +418,8 @@ export const save = mutation({
     selections: v.optional(v.array(selectionValidator)),
     targetLevel: v.optional(v.number()),
     expectedEffectiveRevisionId: v.optional(v.union(v.id('characterRevisions'), v.null())),
+    /** Put the wizard's working draft into the owner's character list (V96). Requires a name. */
+    list: v.optional(v.boolean()),
     /** Named equivalent of wizard drag/drop; saved through this same revision operation. */
     assignment: v.optional(
       v.object({
@@ -408,7 +444,7 @@ export const save = mutation({
       throw new ConvexError(
         'This character changed since you opened it. Reload the saved version before saving.',
       );
-    const fields = authored(args.authored);
+    const fields = authored(args.authored, character.wizardDraft === true && !args.list);
     const old = character.draftRevisionId ? await ctx.db.get(character.draftRevisionId) : null;
     const level = args.targetLevel ?? old?.level ?? 1;
     if (!isSupportedDefinitionLevel(level))
@@ -453,6 +489,8 @@ export const save = mutation({
       authored: fields,
       revision,
       draftRevisionId: revisionId,
+      // The save the owner asks for is the one that puts the wizard's draft in their list.
+      ...(args.list && character.wizardDraft ? { wizardDraft: false } : {}),
       ...(!character.campaignId &&
       character.activeRune?.kind &&
       !(evaluation.baseline ?? evaluation.partial)?.traits?.some(

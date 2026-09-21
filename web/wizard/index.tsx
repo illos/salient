@@ -855,6 +855,7 @@ function hasInteractiveDecision(step: Step): boolean {
 type WizardCharacter = Omit<LoadedCharacter, 'id'> & { id: Id<'characters'> | null };
 const unsavedCharacter: WizardCharacter = {
   id: null,
+  wizardDraft: true,
   authored: emptyAuthored,
   revision: 0,
   selections: [],
@@ -907,6 +908,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
   // The step whose main chooser is deliberately reopened, and where to put focus after the
   // header and the chooser swap places. Lifted out of PrimaryChoice with V96, because the
   // chosen option now lives in the step header that this component owns.
+  const autosaving = useRef(false);
   const [editingStep, setEditingStep] = useState<string | null>(null);
   const [focusAfterChange, setFocusAfterChange] = useState(false);
   const chooserRef = useRef<HTMLDivElement>(null);
@@ -948,6 +950,46 @@ function Wizard({ character }: { character: WizardCharacter }) {
     setDirty(true);
     setAuthored(value);
   }
+  /**
+   * Keep the working draft on the server (V96). Runs quietly after every change, creating the
+   * character on the first one, and never lists it or demands a name. `characters.save` is the
+   * same revision operation the explicit save uses.
+   */
+  async function autosave() {
+    if (autosaving.current || command.pending || stale || character.combatLocked) return;
+    autosaving.current = true;
+    try {
+      if (!character.id) {
+        const id = await create({
+          commandId: crypto.randomUUID(),
+          authored,
+          selections: draft,
+          wizardDraft: true,
+        });
+        await navigate({
+          to: '/characters/$characterId/wizard',
+          params: { characterId: id },
+          replace: true,
+        });
+        return;
+      }
+      const revision = await save({
+        commandId: crypto.randomUUID(),
+        characterId: character.id,
+        expectedRevision,
+        expectedEffectiveRevisionId,
+        authored,
+        selections: draft,
+        targetLevel: character.level,
+      });
+      setExpectedRevision(revision);
+      setDirty(false);
+    } catch {
+      // A failed autosave leaves the editor dirty; the explicit save reports the reason.
+    } finally {
+      autosaving.current = false;
+    }
+  }
   async function persist(close: boolean) {
     setSaved(false);
     if (!authored.name.trim()) {
@@ -971,6 +1013,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
           authored,
           selections: draft,
           targetLevel: character.level,
+          list: true,
         });
         setExpectedRevision(revision);
         // An already-effective standalone build follows its own complete saves. Accept only
@@ -996,13 +1039,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
         await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
     }
   }
-  /** EXIT: the old "Save and close" when there is something to save; otherwise just leave. */
+  /** EXIT: the working draft is already saved, so leaving keeps it; a listed hero opens its page. */
   async function exit() {
-    if (!character.id) {
+    if (dirty && !character.wizardDraft && character.id && canSave) return persist(true);
+    if (!character.id || character.wizardDraft) {
       await navigate({ to: '/characters' });
       return;
     }
-    if (dirty && canSave) return persist(true);
     await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
   }
   const problemsByStep = (s: Step) =>
@@ -1084,6 +1127,16 @@ function Wizard({ character }: { character: WizardCharacter }) {
           primaryValue === undefined &&
           (Boolean(character.id) || confirmedEmptyChoices.has(primary.id))
         )));
+  // One quiet write a short while after the last change, not one per keystroke or click.
+  const latestAutosave = useRef(autosave);
+  useEffect(() => {
+    latestAutosave.current = autosave;
+  });
+  useEffect(() => {
+    if (!dirty) return;
+    const timer = setTimeout(() => void latestAutosave.current(), 800);
+    return () => clearTimeout(timer);
+  }, [dirty, selections, authored]);
   useEffect(() => {
     if (!focusAfterChange) return;
     const target = primaryExpanded ? chooserRef.current : editRef.current;
@@ -1149,6 +1202,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
         editing={Boolean(character.effectiveRevisionId)}
         saving={command.pending}
         canSave={canSave}
+        draft={character.wizardDraft || !character.id}
+        savingDraft={dirty}
         onSaveDraft={() => void persist(false)}
         onExit={() => void exit()}
       />
@@ -1173,7 +1228,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
                 next={next ? stepName(next) : undefined}
                 onPrevious={() => goTo(stepIndex - 1)}
                 onNext={() => goTo(stepIndex + 1)}
-                finishLabel={command.pending ? 'Saving…' : 'Save and close'}
+                finishLabel={
+                  command.pending
+                    ? 'Saving…'
+                    : character.wizardDraft || !character.id
+                      ? 'Save hero'
+                      : 'Save and close'
+                }
                 finishDisabled={!canSave}
                 onFinish={() => void persist(true)}
               />
@@ -1183,10 +1244,10 @@ function Wizard({ character }: { character: WizardCharacter }) {
         <div className="flex min-w-0 flex-col gap-(--page-gap)">
           <section className="rounded-lg bg-card" aria-label="Current step">
             <div className="p-6" data-wizard-pane="centre">
-              {!character.id && (
+              {(character.wizardDraft || !character.id) && (
                 <Notice className="mb-4">
-                  Unsaved character. Save draft to keep your choices. Exiting or reloading before
-                  saving discards them.
+                  This hero is a working draft. Your choices are kept as you make them, and it joins
+                  your characters when you save it.
                 </Notice>
               )}
               {nameRequired && (
@@ -1345,7 +1406,11 @@ function Wizard({ character }: { character: WizardCharacter }) {
                 disabled={!canSave}
                 onClick={() => void persist(true)}
               >
-                {command.pending ? 'Saving…' : 'Save and close'}
+                {command.pending
+                  ? 'Saving…'
+                  : character.wizardDraft || !character.id
+                    ? 'Save hero'
+                    : 'Save and close'}
               </Button>
             )}
           </div>
@@ -1364,8 +1429,18 @@ function Wizard({ character }: { character: WizardCharacter }) {
 }
 
 export function WizardPage({ characterId }: { characterId?: Id<'characters'> }) {
-  const character = useQuery(api.characters.get, characterId ? { characterId } : 'skip');
-  if (!characterId) return <Wizard key="new" character={unsavedCharacter} />;
+  // A new hero resumes this owner's working draft when they have one, so leaving and returning
+  // continues the same build instead of starting another unlisted row (V96).
+  const existingDraft = useQuery(api.characters.wizardDraft, characterId ? 'skip' : {});
+  const resolved = characterId ?? existingDraft ?? undefined;
+  const character = useQuery(api.characters.get, resolved ? { characterId: resolved } : 'skip');
+  if (!characterId && existingDraft === undefined)
+    return (
+      <div className="p-10">
+        <Loading>Opening the character builder…</Loading>
+      </div>
+    );
+  if (!resolved) return <Wizard key="new" character={unsavedCharacter} />;
   if (character === undefined)
     return (
       <div className="p-10">

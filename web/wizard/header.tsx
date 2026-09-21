@@ -2,8 +2,8 @@
 /**
  * The wizard header (V21 item 10; Quiet, docs/design-mockups/quiet/README.md): the 64px session
  * header without a rule or divider — wordmark, the sentence-case New hero / Edit hero context in
- * ink, the hero name in muted, Save draft (tonal) and Exit (bare) at the right, then the user
- * menu. It replaces the site nav on the wizard route (web/router.tsx, `isWizardRoute`).
+ * ink, the hero name in muted, the working draft's save state, Save (tonal) and Exit (bare) at
+ * the right, then the user menu. It replaces the site nav on the wizard route (web/router.tsx, `isWizardRoute`).
  * The buttons call back into the wizard; nothing here saves or navigates on its own.
  */
 import { Link } from '@tanstack/react-router';
@@ -17,6 +17,8 @@ export function WizardHeader({
   editing,
   saving,
   canSave,
+  draft,
+  savingDraft,
   onSaveDraft,
   onExit,
 }: {
@@ -25,6 +27,10 @@ export function WizardHeader({
   editing: boolean;
   saving: boolean;
   canSave: boolean;
+  /** The wizard's working draft: kept as you go and not yet in the owner's characters (V96). */
+  draft: boolean;
+  /** A change is still on its way to the server. */
+  savingDraft: boolean;
   onSaveDraft: () => void;
   onExit: () => void;
 }) {
@@ -39,8 +45,13 @@ export function WizardHeader({
         {heroName || 'Unnamed hero'}
       </h1>
       <div className="ml-auto flex items-center gap-3">
+        {draft && (
+          <span className="text-sm text-muted-foreground" role="status">
+            {savingDraft ? 'Saving…' : 'Draft saved'}
+          </span>
+        )}
         <Button type="button" variant="outline" disabled={!canSave} onClick={onSaveDraft}>
-          {saving ? 'Saving…' : 'Save draft'}
+          {saving ? 'Saving…' : draft ? 'Save hero' : 'Save draft'}
         </Button>
         <Button type="button" variant="ghost" disabled={saving} onClick={onExit}>
           Exit

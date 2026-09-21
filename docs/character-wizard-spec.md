@@ -446,7 +446,16 @@ path. See [the respite mode](table-spec.md#respite-mode) and
 
 ### Main creation and editing
 
-**Confirmed entry and first-save behavior, 2026-09-19:** opening the creation wizard requires
+**Amended 2026-09-21 (V96):** the wizard keeps a working draft on the server instead of in the
+browser. The first choice creates the character, every later change is saved to it automatically,
+and it may have no name yet. That draft is shown only inside the wizard: it is absent from the
+owner's character list until they save the hero, which is the action that requires the name and
+lists it. Opening the wizard for a new hero resumes the owner's existing working draft, so there
+is never more than one. Leaving or reloading keeps the draft rather than discarding it. Every
+other creation route still requires a name at creation and is listed immediately. The paragraph
+below records the behavior this replaces.
+
+**Superseded 2026-09-19 entry and first-save behavior:** opening the creation wizard requires
 neither a name nor an existing character. Naming belongs to the wizard's Details step. Choices
 and authored details remain an unsaved browser draft until the user explicitly selects Save draft
 or Save and close. The first successful save creates the character and its first selection revision

@@ -142,6 +142,18 @@ unchanged.
   - A statistic the evaluator has not produced reads "Pending", the hero column's word, rather
     than an em dash.
 
+## Working drafts
+
+The wizard no longer holds an unsaved character in the browser. `characters.create` takes
+`wizardDraft`, which allows a nameless character and marks it as the wizard's own; `characters.save`
+takes `list`, which is the save that requires the name and puts it in the owner's list;
+`characters.listMine` omits working drafts; `characters.wizardDraft` returns the owner's one draft
+so the wizard resumes it. The wizard autosaves 800 ms after the last change, shows the save state
+in its header, and Exit keeps the draft. Proof: `tests/app/wizard-draft.test.ts`, two cases.
+
+Known consequence: an abandoned draft stays as an unlisted row. It is capped at one per owner by
+the resume, and it counts against the hundred-character creation limit.
+
 ## Follow-up: stability before the kit
 
 Not a wizard defect, so not fixed here. The ancestry modules set `size` and `speed` as soon as the
@@ -151,3 +163,7 @@ bonus and does not wait, so the ancestry step shows size and speed but not stabi
 the step's own source sentence states stability 0. Making them consistent means changing the
 shared evaluator for all twelve ancestries, which can flip a build's completeness before a kit is
 chosen; it needs its own slice and headless proof.
+- 2026-09-21: the user asked for the wizard to persist a draft character and for the character to
+  leave draft only when finalized, and confirmed the draft is shown only inside the wizard,
+  appearing in the list once saved. This reverses the V40 first-save behavior, which is recorded
+  as an amendment in the spec rather than left as drift.
