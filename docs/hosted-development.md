@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V94 Tactician level one
+## Current release — V95 Account screen
+
+Backend/frontend source `1115380d0411acae916a3c7a8936e46cad95f9da` published on 2026-09-21 as
+Worker `72e2c950-8477-4c4a-895c-ed6b2c3026f1`. Backend publication and hosted build/upload succeeded.
+Accepted TESTER results reused; no deployment smoke test or rerun. Content remains the V94
+1209-entry snapshot below. See [V95](build/V95-account-screen.md) and the [ledger](../deploy.md).
+
+## Previous release / current content — V94 Tactician level one
 
 Backend/frontend source `fcf13f11e91646579e9a5a05e1650255bc2ae21b` published on 2026-09-21.
 Worker `c4b6b8f4-dd09-4706-934a-be5d4fac73a3`; content reseed returned 1209 entries, with committed

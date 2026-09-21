@@ -105,4 +105,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V92 | [Shadow level one](V92-shadow-level-one.md) | Merged (`81b7931`), cloud published; TESTER full pass on `2b46094`, hosted Shadow smoke pass |
 | V93 | [CI reuse and failure events](V93-ci-failure-events.md) | Merged (`a5a23ec`); targeted gate and real event delivery pass |
 | V94 | [Tactician level one](V94-tactician-level-one.md) | Merged (`fcf13f1`); cloud dev published; accepted TESTER gates reused |
-| V95 | [Account screen](V95-account-screen.md) | In progress |
+| V95 | [Account screen](V95-account-screen.md) | Merged (`1115380`); cloud dev published; accepted TESTER results reused |
