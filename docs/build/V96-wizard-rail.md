@@ -200,6 +200,6 @@ chosen; it needs its own slice and headless proof.
   thing twice; culture now has no "none" label, and picking a culture means picking a card.
 - 2026-09-21: cut the culture step's stacked preamble. The chooser no longer sits in a "Starting
   culture" section with its source quote and two more lines of instruction above the cards; its
-  rule reference moved beside the step title, and the one sentence worth keeping, that ancestral
-  cultures are open to any ancestry, became a note on that group's heading where it applies. The
-  skills line went with it: the Culture skills panel already says the same thing.
+  rule reference moved beside the step title. What remains above the cards is the chooser's own
+  sentence, that a starting culture can be built on or replaced and that ancestral cultures are
+  open to any ancestry. The skills line went: the Culture skills panel already says the same.
