@@ -1,3 +1,4 @@
+import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
 import { runTalent } from './headless/talent.ts';
 import { runNull } from './headless/null.ts';
@@ -33,6 +34,7 @@ const cohorts = {
   null: runNull,
   elementalist: runElementalist,
   talent: runTalent,
+  beastheart: runBeastheart,
   censor: runCensor,
   conduit: runConduit,
   all: runScenarios,

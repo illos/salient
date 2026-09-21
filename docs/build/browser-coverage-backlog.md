@@ -117,3 +117,5 @@ the Troubadour cohort; no browser test was run for V102.
 
 - V104: Elementalist four specializations, five enchantments/four wards and two-of-eight signatures; edit pruning, source manual actions and persistent timing text. Headless proof owns behavior.
 - V105: Talent traditions/augmentation/ward choices, signature pairs, Mindspeech, negative Clarity display and explicit manual strain actions; headless API proof owns behavior.
+
+- V106: Beastheart wizard shows all fourteen companion choices, conditional drake attunement and kit melee-bonus choice; sheet displays companion stats separately and manual actor-labelled actions. Verify small-screen readability when browser moratorium ends.

@@ -8,24 +8,24 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:7ffe0438ccb96263a43c2d3c8728737d387521af8d846b3cf9fbfd6bd4347d0a`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:69db8c6944325ab4762699e0203dabf65680208099453c75e5ec30d73e455ace`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 206 | 10 | 99 | 10 | 97 |
+| Hero standalone (`ability.json`) | 242 | 10 | 110 | 10 | 122 |
 | Kit signature (`kit.json`) | 25 | 2 | 19 | 1 | 4 |
 | Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 20 | 566 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 1065 (642 resolve to a standalone entry, 75 to a kit signature, 348 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 1173 (750 resolve to a standalone entry, 75 to a kit signature, 348 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 20 fully (1.73%), 566 with a typed remainder (48.88%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 133 of 303 (43.89%) compile: 13 fully (4.29%), 120 with a typed remainder (39.60%), of which 11 (3.63%) are within the bounded potency remainder. 170 (56.11%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 144 of 339 (42.48%) compile: 13 fully (3.83%), 131 with a typed remainder (38.64%), of which 11 (3.24%) are within the bounded potency remainder. 195 (57.52%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -34,7 +34,7 @@ compiled entries:
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Hero standalone (`ability.json`) | COMPILES | 5 | 2 | 3 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 79 | 2 | 15 | 2 | 1 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 87 | 2 | 18 | 2 | 1 |
 | Kit signature (`kit.json`) | COMPILES | 0 | 2 | 0 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 17 | 1 | 1 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -69,6 +69,17 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Corpus | Ability | Category | Bounded | Target | Availability | Grant decisions | Remainder shapes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| hero-standalone | Bodyswap | COMPILES_WITH_REMAINDER | — | single | selectable | class.beastheart.signature-ability@1:selectable, class.beastheart.signature-ability@2:selectable, class.beastheart.signature-ability@3:selectable | effect-paragraph:effect |
+| hero-standalone | Bring the Thunder | COMPILES_WITH_REMAINDER | — | area | selectable | class.beastheart.ability-3@1:selectable, class.beastheart.ability-3@2:selectable, class.beastheart.ability-3@3:selectable | resource-spend:spend N ferocity; potency:P < SYM taunted (save ends); potency:P < SYM frightened (save ends) |
+| hero-standalone | Come On! | COMPILES_WITH_REMAINDER | — | single | selectable | class.beastheart.signature-ability@1:selectable, class.beastheart.signature-ability@2:selectable, class.beastheart.signature-ability@3:selectable | effect-paragraph:effect |
+| hero-standalone | Covering Fire | COMPILES_WITH_REMAINDER | — | single | selectable | class.beastheart.signature-ability@1:selectable, class.beastheart.signature-ability@2:selectable, class.beastheart.signature-ability@3:selectable | effect-paragraph:effect |
+| hero-standalone | Feral Strike | COMPILES_WITH_REMAINDER | — | area | selectable | class.beastheart.features@1:selectable, class.beastheart.features@2:selectable, class.beastheart.features@3:selectable | envelope:structured-markdown-mismatch; effect-paragraph:effect |
+| hero-standalone | Herd the Sheep | COMPILES_WITH_REMAINDER | — | single | selectable | class.beastheart.ability-3@1:selectable, class.beastheart.ability-3@2:selectable, class.beastheart.ability-3@3:selectable | effect-paragraph:effect; potency:I < SYM weakened (save ends); slide N |
+| hero-standalone | Hungry Like the Wolf | COMPILES_WITH_REMAINDER | — | single | selectable | class.beastheart.ability-3@1:selectable, class.beastheart.ability-3@2:selectable, class.beastheart.ability-3@3:selectable | your companion can spend a recovery; you and your companion can each spend a recovery; potency:A < SYM bleeding (eot); you and your companion can each spend a recovery and shift up to N squares |
+| hero-standalone | I Feed On Your Pain! | COMPILES_WITH_REMAINDER | — | single | selectable | class.beastheart.ability-5@1:selectable, class.beastheart.ability-5@2:selectable, class.beastheart.ability-5@3:selectable | effect-paragraph:effect; potency:M < SYM bleeding (save ends) |
+| hero-standalone | Pushover | COMPILES_WITH_REMAINDER | — | single | selectable | class.beastheart.ability-3@1:selectable, class.beastheart.ability-3@2:selectable, class.beastheart.ability-3@3:selectable | effect-paragraph:effect |
+| hero-standalone | Rain of Fire | COMPILES_WITH_REMAINDER | — | area | selectable | class.beastheart.ability-5@1:selectable, class.beastheart.ability-5@2:selectable, class.beastheart.ability-5@3:selectable | effect-paragraph:effect |
+| hero-standalone | You Let Me Get Too Close | COMPILES_WITH_REMAINDER | — | single | selectable | class.beastheart.ability-5@1:selectable, class.beastheart.ability-5@2:selectable, class.beastheart.ability-5@3:selectable | effect-paragraph:effect; potency:M < SYM grabbed |
 | hero-standalone | Arrest | COMPILES_WITH_REMAINDER | — | single | selectable | class.censor.ability-5@1:selectable, class.censor.ability-5@2:selectable, class.censor.ability-5@3:selectable | effect-paragraph:effect; grabbed |
 | hero-standalone | Back Blasphemer! | COMPILES | — | area | selectable | class.censor.signature-ability@1:selectable, class.censor.signature-ability@2:selectable, class.censor.signature-ability@3:selectable | — |
 | hero-standalone | Behold a Shield of Faith! | COMPILES_WITH_REMAINDER | — | single | selectable | class.censor.ability-3@1:selectable, class.censor.ability-3@2:selectable, class.censor.ability-3@3:selectable | effect-paragraph:effect |
@@ -207,6 +218,17 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Corpus | Ability | Reason | Availability | Shapes |
 | --- | --- | --- | --- | --- |
+| hero-standalone | All of You Versus All of Me | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Avalanche Rush | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Heart of the Beast | no-power-roll | selectable | no-power-roll; envelope:structured-markdown-mismatch; effect-paragraph:effect; resource-spend:spend N ferocity; effect-paragraph:spend NN ferocity |
+| hero-standalone | Jaws of the Storm | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Lightning Leap | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Living Arrow | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Pyre | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Shadow in the Mist | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Stormrage | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:N + m cold, fire, lightning, or sonic damage |
+| hero-standalone | The Pack Defends | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Thunderclap | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
 | hero-standalone | Faithful Friend | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Grave Speech | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Hands of the Maker | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
@@ -217,6 +239,20 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Escape Grab | tier1-damage-outside-grammar | not-granted | effect-paragraph:effect; tier:no effect; tier:you can escape the grab, but if you do, a creature who has you grabbed can make a melee free strike against you before you are no longer grabbed; tier:you are no longer grabbed |
 | hero-standalone | Grab | tier1-damage-outside-grammar | not-granted | effect-paragraph:effect; tier:no effect; tier:you can grab the target, but if you do, the target can make a melee free strike against you before they are grabbed; tier:the target is grabbed by you |
 | hero-standalone | Knockback | tier1-damage-outside-grammar | not-granted | effect-paragraph:effect; tier:push N |
+| hero-standalone | Petrify | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Backhand | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Gore | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Flurry of Wings | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Terrible Claws | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Drake Breath | no-power-roll | selectable | no-power-roll; envelope:structured-markdown-mismatch; effect-paragraph:effect; effect-paragraph:spend N or N ferocity |
+| hero-standalone | Static Shock | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Absorb | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Fire Breath | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Sparking Tail Whip | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Pounce | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Web Shot | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Spore Puff | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
+| hero-standalone | Clamping Jaws | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
 | hero-standalone | Faith Is Our Armor | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:the target gains N temporary stamina |
 | hero-standalone | Faithful Friend | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Font of Wrath | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
@@ -382,12 +418,12 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1138 | 1124 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
-| 2 | no-power-roll | no-power-roll | 634 | 634 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
-| 3 | trigger | trigger | 198 | 198 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours`, `mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1172 | 1158 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 2 | no-power-roll | no-power-roll | 658 | 658 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 3 | trigger | trigger | 202 | 202 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
 | 5 | unknown | unattached-paragraph | 130 | 59 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
-| 6 | slide | slide N | 86 | 33 | `mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse`, `mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way`, `mcdm.heroes.v1/feature.ability.revenant/detonate-sigil` |
+| 6 | slide | slide N | 89 | 34 | `mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep`, `mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse`, `mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way` |
 | 7 | potency-condition | potency:M < N bleeding (save ends) | 64 | 30 | `foe-feature:77cbca92-0a9e-40e8-b402-97d0b11eca24`, `foe-feature:a0cf5ff7-f923-4ce3-8e1a-07adc576dd2c`, `salient:foe-feature:1c921045-6bd1-4a1b-a794-c6f8dc63fb52` |
 | 8 | pull | pull N | 64 | 24 | `salient:foe-feature:065066fe-d557-4f82-94c4-01a38505d9b7`, `salient:foe-feature:17912a2b-0ae3-447f-9e8a-d1aed6e34054`, `salient:foe-feature:1df6ce7d-a081-43af-892d-7120279ea7e7` |
 | 9 | extra-table | extra-table:tiers without a power roll | 55 | 55 | `complication:Advanced Studies/advanced-studies-study-notebook`, `salient:foe-feature:08b75627-ded0-4e55-a034-6a2f6c7d35ea`, `salient:foe-feature:0ee6dd1c-8d53-4033-a8c3-879ac28b430e` |
@@ -399,47 +435,47 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | 15 | potency-condition | potency:M < N prone | 40 | 18 | `salient:foe-feature:03e3e1d4-0ab0-4b6c-97e5-a496536f9c2e`, `salient:foe-feature:0f17ac0c-bc4f-46a8-81b8-e8b49c96dbfc`, `salient:foe-feature:25f4d46c-02c5-4178-aabc-45b4778757a4` |
 | 16 | potency-condition | potency:A < N slowed (save ends) | 31 | 14 | `salient:foe-feature:1e16e43e-5f2b-48a9-9e2d-d2d307f8392e`, `salient:foe-feature:384202f9-ba09-4c42-bdf5-93ea4d0eaaeb`, `salient:foe-feature:3ae18f0b-3369-4e2b-9966-a0576e1df4d9` |
 | 17 | potency-condition | potency:I < N frightened (save ends) | 31 | 13 | `salient:foe-feature:00be6939-a8f4-429b-8329-90cbe37a5859`, `salient:foe-feature:049e1060-2d30-4f06-bccf-b48b72f90ab1`, `salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5` |
-| 18 | potency-condition | potency:I < N dazed (save ends) | 28 | 11 | `salient:foe-feature:28379230-7a51-4f89-b8b2-53b07dbc1154`, `salient:foe-feature:3964ef10-10fe-4d2b-8d01-7ef4fc05b962`, `salient:foe-feature:42ff9936-7937-464a-be42-979499736395` |
-| 19 | tier-damage | tier:push N | 28 | 10 | `mcdm.heroes.v1/feature.ability.common/knockback`, `mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball`, `mcdm.heroes.v1/feature.ability.null.level-1/impart-force` |
-| 20 | potency-condition | potency:A < N grabbed | 25 | 12 | `salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880`, `salient:foe-feature:36454ca2-1178-487b-94bb-e5010d1ccf59`, `salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9` |
-| 21 | potency-condition | potency:A < N restrained (save ends) | 25 | 12 | `salient:foe-feature:003d77fe-6a8e-4074-8c91-96a50c77c5fb`, `salient:foe-feature:38b42d43-df0b-4a76-b424-ebb8dcda3e9d`, `salient:foe-feature:47396d85-c934-4cf0-805b-1330420e73b5` |
-| 22 | condition | grabbed | 23 | 17 | `foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac`, `mcdm.heroes.v1/feature.ability.censor.level-1/arrest`, `salient:foe-feature:0111b484-e533-47e2-859b-2c8041af5214` |
-| 23 | potency-condition | potency:M < N dazed (save ends) | 23 | 10 | `foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b`, `salient:foe-feature:01bf9520-d963-4137-87da-6b525b0b1c4c`, `salient:foe-feature:19cf3949-d026-43a6-9787-afe7890f0fc4` |
-| 24 | potency-condition | potency:M < N grabbed | 23 | 9 | `salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc`, `salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22`, `salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa` |
-| 25 | roll-expression | roll:power roll + highest characteristic | 20 | 20 | `salient:foe-feature:047c7929-7d37-4083-8817-40f7363da23f`, `salient:foe-feature:08262f07-e929-4223-9787-a05ea050db62`, `salient:foe-feature:08dd35a2-505e-4ab3-9eef-e0e9477f767d` |
-| 26 | slide | vertical slide N | 20 | 8 | `salient:foe-feature:3bed2cb6-3172-4f0e-a293-1656b2283263`, `salient:foe-feature:555cf154-f5a4-4a9a-9116-86e2606ab3f3`, `salient:foe-feature:582d9548-66ad-4a68-8ecb-67d22a4d2089` |
-| 27 | unknown | envelope:structured-markdown-mismatch | 19 | 19 | `mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt`, `mcdm.heroes.v1/feature.ability.talent.level-1/flashback`, `mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost` |
-| 28 | potency-condition | potency:M < N restrained (save ends) | 19 | 11 | `salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce`, `salient:foe-feature:1e131435-884e-47c2-b6a2-dfcf2c15c398`, `salient:foe-feature:3976a9f6-8129-4ccc-8842-059de220d89e` |
-| 29 | potency-condition | potency:R < N dazed (save ends) | 18 | 9 | `salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c`, `salient:foe-feature:0b7cf3c6-6c5b-41e3-970a-03f1187d68aa`, `salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee` |
-| 30 | potency-condition | potency:A < N N damage | 18 | 7 | `salient:foe-feature:218787cf-84fa-476f-9f2e-ad038c7bcda3`, `salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb`, `salient:foe-feature:6fd3cfb0-af4e-4a2e-9269-9d07c8f43b7c` |
-| 31 | tier-damage | tier:slide N | 17 | 6 | `mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound`, `mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones`, `salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8` |
-| 32 | potency-condition | potency:A < N weakened (save ends) | 16 | 6 | `salient:foe-feature:2d425f83-e132-4fe4-8732-5d4a414c914c`, `salient:foe-feature:69149685-5481-4f4d-9f9f-47422ffa8a73`, `salient:foe-feature:86f8a31b-28f4-45a7-94e6-3b131231a609` |
-| 33 | effect-paragraph | effect-paragraph:strained | 13 | 13 | `mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt`, `mcdm.heroes.v1/feature.ability.talent.level-1/flashback`, `mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost` |
-| 34 | potency-condition | potency:P < N weakened (save ends) | 13 | 6 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `salient:foe-feature:60c6b21f-a947-4c0d-b1b2-714c2c99d7bc`, `salient:foe-feature:85414376-9c50-4589-aa4d-67458d7a1d8f` |
-| 35 | condition | taunted (eot) | 12 | 7 | `mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike`, `salient:foe-feature:20e69c78-4894-473d-b84c-3ccf17f2ef2d`, `salient:foe-feature:33263d55-4161-4fa6-811e-f5bbd1d3381b` |
-| 36 | potency-condition | potency:R < N weakened (save ends) | 12 | 5 | `salient:foe-feature:333d419e-8d66-4fd2-94dd-30dc9a9eaaa5`, `salient:foe-feature:4781b369-5ee2-4bc3-b0e5-b6a9df42125f`, `salient:foe-feature:85612eea-5eef-4b52-9330-6405ab50fb01` |
-| 37 | shift | the null shifts up to N squares | 12 | 4 | `salient:foe-feature:218787cf-84fa-476f-9f2e-ad038c7bcda3`, `salient:foe-feature:875e9228-b904-4316-b389-6ee0c5076521`, `salient:foe-feature:a0cbaae6-f598-4386-a048-4933d75cbac4` |
-| 38 | tier-damage | tier:pull N | 12 | 4 | `salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5`, `salient:foe-feature:97349340-a701-4732-8b1c-251b89513be8`, `salient:foe-feature:c2df5038-0c4e-4fe7-983c-bf0f4a4f8ac6` |
-| 39 | tier-damage | tier:vertical push N | 12 | 4 | `salient:foe-feature:8af25658-9e6b-49bb-ae8a-67ea9f173b31`, `salient:foe-feature:a22c9f6a-043a-435a-b8ae-404dc8cc4249`, `salient:foe-feature:b278f3cd-1035-48f5-8fea-d10cbc4325a0` |
-| 40 | malice-spend | malice-spend:N+ malice | 11 | 11 | `salient:foe-feature:2fcc9511-d669-4730-b475-2c5704366490`, `salient:foe-feature:6b247dbf-3a2b-40d2-a11b-7a214f00e8f3`, `salient:foe-feature:8aaefb8f-5df1-4489-83d5-3c2cb874a3ef` |
+| 18 | resource-spend | resource-spend:spend N ferocity | 29 | 28 | `mcdm.beastheart.v1/feature.ability.beastheart.level-1/all-of-you-versus-all-of-me`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/avalanche-rush`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/bring-the-thunder` |
+| 19 | potency-condition | potency:I < N dazed (save ends) | 28 | 11 | `salient:foe-feature:28379230-7a51-4f89-b8b2-53b07dbc1154`, `salient:foe-feature:3964ef10-10fe-4d2b-8d01-7ef4fc05b962`, `salient:foe-feature:42ff9936-7937-464a-be42-979499736395` |
+| 20 | tier-damage | tier:push N | 28 | 10 | `mcdm.heroes.v1/feature.ability.common/knockback`, `mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball`, `mcdm.heroes.v1/feature.ability.null.level-1/impart-force` |
+| 21 | potency-condition | potency:A < N grabbed | 25 | 12 | `salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880`, `salient:foe-feature:36454ca2-1178-487b-94bb-e5010d1ccf59`, `salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9` |
+| 22 | potency-condition | potency:A < N restrained (save ends) | 25 | 12 | `salient:foe-feature:003d77fe-6a8e-4074-8c91-96a50c77c5fb`, `salient:foe-feature:38b42d43-df0b-4a76-b424-ebb8dcda3e9d`, `salient:foe-feature:47396d85-c934-4cf0-805b-1330420e73b5` |
+| 23 | condition | grabbed | 23 | 17 | `foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac`, `mcdm.heroes.v1/feature.ability.censor.level-1/arrest`, `salient:foe-feature:0111b484-e533-47e2-859b-2c8041af5214` |
+| 24 | potency-condition | potency:M < N dazed (save ends) | 23 | 10 | `foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b`, `salient:foe-feature:01bf9520-d963-4137-87da-6b525b0b1c4c`, `salient:foe-feature:19cf3949-d026-43a6-9787-afe7890f0fc4` |
+| 25 | potency-condition | potency:M < N grabbed | 23 | 9 | `salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc`, `salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22`, `salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa` |
+| 26 | unknown | envelope:structured-markdown-mismatch | 22 | 22 | `mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast`, `mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath` |
+| 27 | roll-expression | roll:power roll + highest characteristic | 20 | 20 | `salient:foe-feature:047c7929-7d37-4083-8817-40f7363da23f`, `salient:foe-feature:08262f07-e929-4223-9787-a05ea050db62`, `salient:foe-feature:08dd35a2-505e-4ab3-9eef-e0e9477f767d` |
+| 28 | slide | vertical slide N | 20 | 8 | `salient:foe-feature:3bed2cb6-3172-4f0e-a293-1656b2283263`, `salient:foe-feature:555cf154-f5a4-4a9a-9116-86e2606ab3f3`, `salient:foe-feature:582d9548-66ad-4a68-8ecb-67d22a4d2089` |
+| 29 | potency-condition | potency:M < N restrained (save ends) | 19 | 11 | `salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce`, `salient:foe-feature:1e131435-884e-47c2-b6a2-dfcf2c15c398`, `salient:foe-feature:3976a9f6-8129-4ccc-8842-059de220d89e` |
+| 30 | potency-condition | potency:R < N dazed (save ends) | 18 | 9 | `salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c`, `salient:foe-feature:0b7cf3c6-6c5b-41e3-970a-03f1187d68aa`, `salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee` |
+| 31 | potency-condition | potency:A < N N damage | 18 | 7 | `salient:foe-feature:218787cf-84fa-476f-9f2e-ad038c7bcda3`, `salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb`, `salient:foe-feature:6fd3cfb0-af4e-4a2e-9269-9d07c8f43b7c` |
+| 32 | tier-damage | tier:slide N | 17 | 6 | `mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound`, `mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones`, `salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8` |
+| 33 | potency-condition | potency:A < N weakened (save ends) | 16 | 6 | `salient:foe-feature:2d425f83-e132-4fe4-8732-5d4a414c914c`, `salient:foe-feature:69149685-5481-4f4d-9f9f-47422ffa8a73`, `salient:foe-feature:86f8a31b-28f4-45a7-94e6-3b131231a609` |
+| 34 | effect-paragraph | effect-paragraph:strained | 13 | 13 | `mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt`, `mcdm.heroes.v1/feature.ability.talent.level-1/flashback`, `mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost` |
+| 35 | potency-condition | potency:P < N weakened (save ends) | 13 | 6 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `salient:foe-feature:60c6b21f-a947-4c0d-b1b2-714c2c99d7bc`, `salient:foe-feature:85414376-9c50-4589-aa4d-67458d7a1d8f` |
+| 36 | condition | taunted (eot) | 12 | 7 | `mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike`, `salient:foe-feature:20e69c78-4894-473d-b84c-3ccf17f2ef2d`, `salient:foe-feature:33263d55-4161-4fa6-811e-f5bbd1d3381b` |
+| 37 | potency-condition | potency:R < N weakened (save ends) | 12 | 5 | `salient:foe-feature:333d419e-8d66-4fd2-94dd-30dc9a9eaaa5`, `salient:foe-feature:4781b369-5ee2-4bc3-b0e5-b6a9df42125f`, `salient:foe-feature:85612eea-5eef-4b52-9330-6405ab50fb01` |
+| 38 | shift | the null shifts up to N squares | 12 | 4 | `salient:foe-feature:218787cf-84fa-476f-9f2e-ad038c7bcda3`, `salient:foe-feature:875e9228-b904-4316-b389-6ee0c5076521`, `salient:foe-feature:a0cbaae6-f598-4386-a048-4933d75cbac4` |
+| 39 | tier-damage | tier:pull N | 12 | 4 | `salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5`, `salient:foe-feature:97349340-a701-4732-8b1c-251b89513be8`, `salient:foe-feature:c2df5038-0c4e-4fe7-983c-bf0f4a4f8ac6` |
+| 40 | tier-damage | tier:vertical push N | 12 | 4 | `salient:foe-feature:8af25658-9e6b-49bb-ae8a-67ea9f173b31`, `salient:foe-feature:a22c9f6a-043a-435a-b8ae-404dc8cc4249`, `salient:foe-feature:b278f3cd-1035-48f5-8fea-d10cbc4325a0` |
 
 ### Remainder clauses by type
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1199 | 7 |
-| potency-condition | 1018 | 203 |
-| no-power-roll | 634 | 1 |
-| tier-damage | 254 | 88 |
-| unknown | 233 | 51 |
-| trigger | 198 | 1 |
+| effect-paragraph | 1235 | 9 |
+| potency-condition | 1029 | 207 |
+| no-power-roll | 658 | 1 |
+| tier-damage | 257 | 89 |
+| unknown | 238 | 53 |
+| trigger | 202 | 1 |
 | malice-spend | 151 | 2 |
-| slide | 117 | 9 |
+| slide | 120 | 9 |
 | condition | 102 | 14 |
 | pull | 76 | 3 |
+| resource-spend | 59 | 15 |
 | extra-table | 56 | 2 |
-| shift | 40 | 24 |
-| resource-spend | 34 | 15 |
+| shift | 41 | 25 |
 | roll-expression | 33 | 6 |
 | push-with-extra | 28 | 11 |
 | extra-damage | 3 | 1 |
@@ -451,6 +487,9 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 
 | Corpus | Ability | Parent | Detail |
 | --- | --- | --- | --- |
+| hero-standalone | Feral Strike | — | markdown has 6 unattached paragraphs, structured has 0 |
+| hero-standalone | Heart of the Beast | — | markdown has 3 sections, structured has 4 |
+| hero-standalone | Drake Breath | — | markdown has 1 sections, structured has 2 |
 | hero-standalone | Entropic Bolt | — | markdown has 1 sections, structured has 2 |
 | hero-standalone | Flashback | — | markdown has 1 sections, structured has 2 |
 | hero-standalone | Hoarfrost | — | markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1 |
@@ -615,9 +654,9 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 | granted | roll-expression-outside-grammar | 5 |
 | granted | tier1-damage-outside-grammar | 1 |
 | granted | tiers-without-power-roll | 1 |
-| hero-standalone | no-power-roll | 76 |
+| hero-standalone | no-power-roll | 100 |
 | hero-standalone | roll-expression-outside-grammar | 4 |
-| hero-standalone | tier1-damage-outside-grammar | 17 |
+| hero-standalone | tier1-damage-outside-grammar | 18 |
 | kit-signature | roll-expression-outside-grammar | 4 |
 | malice | tier1-damage-outside-grammar | 1 |
 

@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:7ffe0438ccb96263a43c2d3c8728737d387521af8d846b3cf9fbfd6bd4347d0a`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:69db8c6944325ab4762699e0203dabf65680208099453c75e5ec30d73e455ace`.
 
-Currently reachable compiled: 23; unchanged reachable compatibility: 1433; structurally supported but unavailable: 0.
+Currently reachable compiled: 23; unchanged reachable compatibility: 1469; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -80,6 +80,42 @@ Currently reachable compiled: 23; unchanged reachable compatibility: 1433; struc
 | Haunt | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Shadow Jump | foe-ability | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary |
 | Bone Shards | foe-ability | manual | legacy-compatibility | manual-section |
+| All of You Versus All of Me | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Avalanche Rush | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Bodyswap | hero-standalone | manual | legacy-compatibility | manual-section |
+| Bring the Thunder | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
+| Come On! | hero-standalone | manual | legacy-compatibility | manual-section |
+| Covering Fire | hero-standalone | manual | legacy-compatibility | manual-section |
+| Feral Strike | hero-standalone | manual | legacy-compatibility | source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Heart of the Beast | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Herd the Sheep | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Hungry Like the Wolf | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| I Feed On Your Pain! | hero-standalone | manual | legacy-compatibility | manual-section |
+| Jaws of the Storm | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Lightning Leap | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Living Arrow | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Pushover | hero-standalone | manual | legacy-compatibility | manual-section |
+| Pyre | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Rain of Fire | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Shadow in the Mist | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Stormrage | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
+| The Pack Defends | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Thunderclap | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| You Let Me Get Too Close | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Petrify | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Backhand | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Gore | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Flurry of Wings | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Terrible Claws | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Drake Breath | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Static Shock | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Absorb | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Fire Breath | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Sparking Tail Whip | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Pounce | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Web Shot | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Spore Puff | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Clamping Jaws | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Arrest | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Back Blasphemer! | hero-standalone | manual | legacy-compatibility | target-boundary |
 | Behold a Shield of Faith! | hero-standalone | manual | legacy-compatibility | manual-section |

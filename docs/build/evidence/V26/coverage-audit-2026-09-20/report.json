@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:7ffe0438ccb96263a43c2d3c8728737d387521af8d846b3cf9fbfd6bd4347d0a",
+  "contentHash": "sha256:69db8c6944325ab4762699e0203dabf65680208099453c75e5ec30d73e455ace",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 10,
-      "COMPILES_WITH_REMAINDER": 99,
-      "NO_MATCH": 97,
-      "total": 206,
+      "COMPILES_WITH_REMAINDER": 110,
+      "NO_MATCH": 122,
+      "total": 242,
       "withinV26Bounded": 10
     },
     "kit-signature": {
@@ -41,13 +41,1766 @@
     }
   },
   "grants": {
-    "total": 1065,
-    "resolvedToStandalone": 642,
+    "total": 1173,
+    "resolvedToStandalone": 750,
     "resolvedToKit": 75,
     "ownText": 348,
     "unresolved": []
   },
   "entries": [
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/all-of-you-versus-all-of-me",
+      "name": "All of You Versus All of Me",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/all-of-you-versus-all-of-me.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "cost": "5 Ferocity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can spend a Recovery and gain 3 temporary Stamina for each target. Each target is taunted by you until the end of their next turn.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "This ability also affects a 3 burst originating from your companion. Targets in this second area are taunted by your companion. An enemy in both areas is taunted only by you.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "All of You Versus All of Me",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/all-of-you-versus-all-of-me.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option All of You Versus All of Me supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "All of You Versus All of Me",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/all-of-you-versus-all-of-me.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option All of You Versus All of Me supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "All of You Versus All of Me",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/all-of-you-versus-all-of-me.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option All of You Versus All of Me supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/avalanche-rush",
+      "name": "Avalanche Rush",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/avalanche-rush.md",
+      "usage": "Maneuver",
+      "target": "One creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage equal to 3 + your Might score, and if they have M < AVERAGE, they are knocked prone.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "If the target has M < STRONG, they are knocked prone.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Avalanche Rush",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/avalanche-rush.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Punisher supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Avalanche Rush",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/avalanche-rush.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Punisher supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Avalanche Rush",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/avalanche-rush.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Punisher supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/bodyswap",
+      "name": "Bodyswap",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/bodyswap.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "I"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "I"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "I"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If you and a willing ally are standing on the ground within 10 squares of each other, you can teleport to swap places. If you do, you gain an edge on this ability.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Bodyswap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/bodyswap.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Bodyswap supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Bodyswap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/bodyswap.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Bodyswap supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Bodyswap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/bodyswap.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Bodyswap supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/bring-the-thunder",
+      "name": "Bring the Thunder",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/bring-the-thunder.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "3 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "damageType": "sonic",
+            "push": 1
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "sonic",
+            "push": 2
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "damageType": "sonic",
+            "push": 3
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "This ability also affects a 2 burst originating from you. An enemy in both areas is only affected once.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM taunted (save ends)",
+            "text": "P < WEAK taunted (save ends)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM taunted (save ends)",
+            "text": "P < AVERAGE taunted (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM frightened (save ends)",
+            "text": "P < STRONG frightened (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Bring the Thunder",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/bring-the-thunder.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Bring the Thunder supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Bring the Thunder",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/bring-the-thunder.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Bring the Thunder supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Bring the Thunder",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/bring-the-thunder.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Bring the Thunder supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/come-on",
+      "name": "Come On!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/come-on.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "M"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Your companion can make a melee free strike. You both shift up to a number of squares equal to your Intuition score.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Come On!",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/come-on.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Come On! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Come On!",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/come-on.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Come On! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Come On!",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/come-on.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Come On! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/covering-fire",
+      "name": "Covering Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/covering-fire.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "I"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "I"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "I"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If the target is not prone, they must use a free triggered action to fall prone or take extra damage equal to twice your Intuition score. Your companion can shift up to a number of squares equal to their Intuition score.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Covering Fire",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/covering-fire.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Covering Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Covering Fire",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/covering-fire.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Covering Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Covering Fire",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/covering-fire.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Covering Fire supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
+      "name": "Feral Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/feral-strike.md",
+      "usage": "Main action",
+      "target": "Each creature in the area",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 1,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "M"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 6 unattached paragraphs, structured has 0",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Your companion moves up to a number of squares equal to their Intuition score straight toward the closest enemy they are aware of, avoiding damaging terrain and ending the movement when they are adjacent to that enemy.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Feral Strike",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/feral-strike.md",
+          "decisionId": "class.beastheart.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Feral Strike",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/feral-strike.md",
+          "decisionId": "class.beastheart.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Feral Strike",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/feral-strike.md",
+          "decisionId": "class.beastheart.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
+      "name": "Heart of the Beast",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/heart-of-the-beast.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 3 sections, structured has 4",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You must spend a Recovery without regaining Stamina. Your partner gains temporary Stamina equal to your recovery value as they leap out of your chest. Your partner teleports to your space from any distance, even if they don't have line of effect to you.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "Your partner can shift up to their speed.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:spend NN ferocity",
+            "text": "Your partner gains additional temporary Stamina equal to their Might score for each ferocity spent this way.",
+            "locator": "section:2"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "You restore your dead partner to life with 1 Stamina, even if their body was destroyed. They gain no temporary Stamina if you use this ability this way.",
+            "locator": "section:3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Heart of the Beast",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/heart-of-the-beast.md",
+          "decisionId": "class.beastheart.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Heart of the Beast",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/heart-of-the-beast.md",
+          "decisionId": "class.beastheart.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Heart of the Beast",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/heart-of-the-beast.md",
+          "decisionId": "class.beastheart.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep",
+      "name": "Herd the Sheep",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/herd-the-sheep.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "3 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "M"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You and your companion can shift up to a number of squares equal to the number of squares the target was force moved.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM weakened (save ends)",
+            "text": "I < WEAK weakened (save ends)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 1",
+            "locator": "tier1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM weakened (save ends)",
+            "text": "I < AVERAGE weakened (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 2",
+            "locator": "tier2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM weakened (save ends)",
+            "text": "I < STRONG weakened (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 4",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Herd the Sheep",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/herd-the-sheep.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Herd the Sheep supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Herd the Sheep",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/herd-the-sheep.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Herd the Sheep supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Herd the Sheep",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/herd-the-sheep.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Herd the Sheep supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/hungry-like-the-wolf",
+      "name": "Hungry Like the Wolf",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/hungry-like-the-wolf.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "3 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "M"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "your companion can spend a recovery",
+            "text": "your companion can spend a Recovery",
+            "locator": "tier1"
+          },
+          {
+            "type": "unknown",
+            "shape": "you and your companion can each spend a recovery",
+            "text": "you and your companion can each spend a Recovery",
+            "locator": "tier2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM bleeding (eot)",
+            "text": "A < STRONG bleeding (EoT)",
+            "locator": "tier3",
+            "bounded": false
+          },
+          {
+            "type": "shift",
+            "shape": "you and your companion can each spend a recovery and shift up to N squares",
+            "text": "you and your companion can each spend a Recovery and shift up to 2 squares",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Hungry Like the Wolf",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/hungry-like-the-wolf.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hungry Like the Wolf supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hungry Like the Wolf",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/hungry-like-the-wolf.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hungry Like the Wolf supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hungry Like the Wolf",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/hungry-like-the-wolf.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hungry Like the Wolf supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/i-feed-on-your-pain",
+      "name": "I Feed On Your Pain!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/i-feed-on-your-pain.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "M"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If the target is killed by this damage, or is winded or bleeding after taking this damage, you gain 2 surges.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM bleeding (save ends)",
+            "text": "M < STRONG bleeding (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "I Feed On Your Pain!",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/i-feed-on-your-pain.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I Feed On Your Pain! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I Feed On Your Pain!",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/i-feed-on-your-pain.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I Feed On Your Pain! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I Feed On Your Pain!",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/i-feed-on-your-pain.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I Feed On Your Pain! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/jaws-of-the-storm",
+      "name": "Jaws of the Storm",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/jaws-of-the-storm.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each target takes cold, fire, lightning, or sonic damage (your choice) equal to your Might score.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "The size of the cube increases by 1.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Jaws of the Storm",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/jaws-of-the-storm.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Jaws of the Storm",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/jaws-of-the-storm.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Jaws of the Storm",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/jaws-of-the-storm.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spark supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/lightning-leap",
+      "name": "Lightning Leap",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/lightning-leap.md",
+      "usage": "Maneuver",
+      "target": "One creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage equal to 3 + your Might score. Before you use this ability, you can jump up to a number of squares equal to your Intuition score in a straight line. During this jump, enemies' spaces don't count as difficult terrain for you. The target takes extra lightning damage equal to the number of squares you jumped this way.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "Your jump doesn't provoke opportunity attacks.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Lightning Leap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/lightning-leap.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Prowler supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lightning Leap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/lightning-leap.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Prowler supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lightning Leap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/lightning-leap.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Prowler supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/living-arrow",
+      "name": "Living Arrow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/living-arrow.md",
+      "usage": "Maneuver",
+      "target": "One unoccupied space",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If your companion is within range and can fit into the target space, they teleport to the space. They can then make a melee free strike.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "The distance increases to ranged 15.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Living Arrow",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/living-arrow.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Guardian supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Living Arrow",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/living-arrow.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Guardian supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Living Arrow",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/living-arrow.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Guardian supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/pushover",
+      "name": "Pushover",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/pushover.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "3 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "push": 2
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "push": 4
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "M"
+            },
+            "push": 6
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "This forced movement can pass through your space but not end there. If the target passes through your space, they fall prone and take extra damage equal to your Intuition score.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Pushover",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/pushover.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Pushover supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Pushover",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/pushover.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Pushover supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Pushover",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/pushover.md",
+          "decisionId": "class.beastheart.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Pushover supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre",
+      "name": "Pyre",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/pyre.md",
+      "usage": "Triggered Action",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "You take damage.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You take half the damage and teleport up to 5 squares.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "When you teleport this way, each enemy adjacent to your original space takes lightning or fire damage (your choice) equal to your Intuition score.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Pyre",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/pyre.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Pyre",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/pyre.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Pyre",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/pyre.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spark supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/rain-of-fire",
+      "name": "Rain of Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/rain-of-fire.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "5 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "damageType": "fire"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "fire"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 8
+            },
+            "damageType": "fire"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If your companion is in the area, they deal fire damage equal to their Intuition score to each target.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Rain of Fire",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/rain-of-fire.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rain of Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rain of Fire",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/rain-of-fire.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rain of Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rain of Fire",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/rain-of-fire.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rain of Fire supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist",
+      "name": "Shadow in the Mist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/shadow-in-the-mist.md",
+      "usage": "Triggered Action",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "An enemy within 10 squares deals damage to a creature other than you.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You become invisible until the end of your next turn or you deal damage. You can then use the Hide maneuver even if you are observed and can move up to a number of squares equal to your Intuition score before or after using that maneuver.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "You can move up to a number of squares equal to twice your Intuition score and ignore difficult terrain during this movement.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Shadow in the Mist",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/shadow-in-the-mist.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Prowler supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shadow in the Mist",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/shadow-in-the-mist.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Prowler supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shadow in the Mist",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/shadow-in-the-mist.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Prowler supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/stormrage",
+      "name": "Stormrage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/stormrage.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can spend 1 surge without gaining its benefits. If you do, your companion can use this ability as a free triggered action, targeting a different creature or object with the same power roll, but they don't trigger this effect.",
+            "locator": "section:1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + m cold, fire, lightning, or sonic damage",
+            "text": "2 + M cold, fire, lightning, or sonic damage",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + m cold, fire, lightning, or sonic damage",
+            "text": "4 + M cold, fire, lightning, or sonic damage",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + m cold, fire, lightning, or sonic damage",
+            "text": "6 + M cold, fire, lightning, or sonic damage",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Stormrage",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/stormrage.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Stormrage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stormrage",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/stormrage.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Stormrage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stormrage",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/stormrage.md",
+          "decisionId": "class.beastheart.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Stormrage supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/the-pack-defends",
+      "name": "The Pack Defends",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/the-pack-defends.md",
+      "usage": "Triggered Action",
+      "target": "One ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target takes damage.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes half the damage.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "You spend a Recovery without regaining Stamina, and the target regains Stamina equal to your recovery value.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "The Pack Defends",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/the-pack-defends.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Guardian supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Pack Defends",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/the-pack-defends.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Guardian supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Pack Defends",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/the-pack-defends.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Guardian supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/thunderclap",
+      "name": "Thunderclap",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/thunderclap.md",
+      "usage": "Triggered Action",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target deals damage to a creature.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You deal sonic damage equal to your Might score to the target and push them up to a number of squares equal to 1 + your Might score. If this forced movement pushes the target away from the creature they damaged, the creature takes half the triggering damage.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "The forced movement distance is doubled.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Thunderclap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/thunderclap.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Punisher supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thunderclap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/thunderclap.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Punisher supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thunderclap",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/thunderclap.md",
+          "decisionId": "class.beastheart.wild-nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Punisher supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close",
+      "name": "You Let Me Get Too Close",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/you-let-me-get-too-close.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "M"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If you grab the target while your companion is adjacent to them, your companion can make a melee free strike against the target.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM grabbed",
+            "text": "M < WEAK grabbed",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM grabbed",
+            "text": "M < AVERAGE grabbed",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM grabbed",
+            "text": "M < STRONG grabbed",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "You Let Me Get Too Close",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/you-let-me-get-too-close.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Let Me Get Too Close supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Let Me Get Too Close",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/you-let-me-get-too-close.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Let Me Get Too Close supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Let Me Get Too Close",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-1/you-let-me-get-too-close.md",
+          "decisionId": "class.beastheart.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Let Me Get Too Close supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
     {
       "corpus": "hero-standalone",
       "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest",
@@ -1901,6 +3654,908 @@
         "expected": "COMPILES",
         "agrees": true
       }
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.basilisk.level-1/petrify",
+      "name": "Petrify",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/basilisk/level-1/petrify.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes corruption damage equal to 3 + the basilisk's Might score and is stoned (save ends) (see Stoned).",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "While stoned this way, the target is also slowed.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Petrify",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/basilisk/level-1/petrify.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Basilisk supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Petrify",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/basilisk/level-1/petrify.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Basilisk supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Petrify",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/basilisk/level-1/petrify.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Basilisk supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.bear.level-1/backhand",
+      "name": "Backhand",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/bear/level-1/backhand.md",
+      "usage": "Maneuver",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage equal to 4 + the bear's Might score and is pushed up to 2 squares.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "The target is force moved up to a number of additional squares equal to the bear's Might score.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Backhand",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/bear/level-1/backhand.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Bear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Backhand",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/bear/level-1/backhand.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Bear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Backhand",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/bear/level-1/backhand.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Bear supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.boar.level-1/gore",
+      "name": "Gore",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/boar/level-1/gore.md",
+      "usage": "Maneuver",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The boar moves up to their speed in a straight line. When this movement ends, they can deal damage equal to 3 + their Might score to an adjacent target. If the boar moved closer to the target as part of this movement, the boar deals extra damage equal to their Might score.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "The target is bleeding until the end of their next turn.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Gore",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/boar/level-1/gore.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Boar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gore",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/boar/level-1/gore.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Boar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gore",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/boar/level-1/gore.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Boar supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.condor.level-1/flurry-of-wings",
+      "name": "Flurry of Wings",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/condor/level-1/flurry-of-wings.md",
+      "usage": "Maneuver",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage equal to 3 + the condor's Might score. Additionally, enemies are weakened while adjacent to the condor until the end of your next turn.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "An enemy who would be weakened by this ability is taunted instead.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Flurry of Wings",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/condor/level-1/flurry-of-wings.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Condor supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Flurry of Wings",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/condor/level-1/flurry-of-wings.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Condor supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Flurry of Wings",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/condor/level-1/flurry-of-wings.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Condor supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.deinonychus.level-1/terrible-claws",
+      "name": "Terrible Claws",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/deinonychus/level-1/terrible-claws.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage equal to 3 + the deinonychus's Might score, and if they have M < AVERAGE, they are bleeding until the end of their next turn.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "A target who has M < STRONG is bleeding (save ends).",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Terrible Claws",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/deinonychus/level-1/terrible-claws.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Deinonychus supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Terrible Claws",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/deinonychus/level-1/terrible-claws.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Deinonychus supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Terrible Claws",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/deinonychus/level-1/terrible-claws.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Deinonychus supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath",
+      "name": "Drake Breath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/drake/level-1/drake-breath.md",
+      "usage": "Maneuver",
+      "target": "Each creature in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage of the drake's attuned damage type (see Elementally Attuned) equal to the drake's Might score.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:spend N or N ferocity",
+            "text": "This ability affects a 3 cube (if you spend 1 ferocity) or a 4 cube (if you spend 2 ferocity) within 1.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Drake Breath",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/drake/level-1/drake-breath.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Drake supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Drake Breath",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/drake/level-1/drake-breath.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Drake supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Drake Breath",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/drake/level-1/drake-breath.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Drake supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.elemental-spark.level-1/static-shock",
+      "name": "Static Shock",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/elemental-spark/level-1/static-shock.md",
+      "usage": "Maneuver",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes lightning damage equal to 2 + the spark's Might score.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "The distance increases to melee 5.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Static Shock",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/elemental-spark/level-1/static-shock.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Elemental Spark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Static Shock",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/elemental-spark/level-1/static-shock.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Elemental Spark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Static Shock",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/elemental-spark/level-1/static-shock.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Elemental Spark supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.gummy-ball.level-1/absorb",
+      "name": "Absorb",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/gummy-ball/level-1/absorb.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes acid damage equal to 3 + the ball's Might score, and if they have A < AVERAGE, the ball moves into the target's space. If the target completely fits within the ball's space, the target is grabbed by the ball.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "A target grabbed this way takes acid damage equal to the ball's Might score at the end of each of the ball's turns.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Absorb",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/gummy-ball/level-1/absorb.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gummy Ball supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Absorb",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/gummy-ball/level-1/absorb.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gummy Ball supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Absorb",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/gummy-ball/level-1/absorb.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gummy Ball supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.hellhound.level-1/fire-breath",
+      "name": "Fire Breath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/hellhound/level-1/fire-breath.md",
+      "usage": "Maneuver",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes fire damage equal to 3 + the hellhound's Might score.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "This ability gains a bonus to either its damage or distance equal to the hellhound's Intuition score.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Fire Breath",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/hellhound/level-1/fire-breath.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Hellhound supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fire Breath",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/hellhound/level-1/fire-breath.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Hellhound supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fire Breath",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/hellhound/level-1/fire-breath.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Hellhound supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.lightbender.level-1/sparking-tail-whip",
+      "name": "Sparking Tail Whip",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/lightbender/level-1/sparking-tail-whip.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage equal to 3 + the lightbender's Might score, and if they have M < AVERAGE, they are dazzled until the end of their next turn. A dazzled creature has line of effect only within 1 square.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "A dazzled creature also takes a bane on strikes.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Sparking Tail Whip",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/lightbender/level-1/sparking-tail-whip.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lightbender supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sparking Tail Whip",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/lightbender/level-1/sparking-tail-whip.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lightbender supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sparking Tail Whip",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/lightbender/level-1/sparking-tail-whip.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lightbender supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.panther.level-1/pounce",
+      "name": "Pounce",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/panther/level-1/pounce.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage equal to 3 + the panther's Might score, and if they have M < AVERAGE, they are knocked prone.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "The panther can jump up to a number of squares equal to their speed before using this ability. If they jump at least 1 square in this way, a target who has M < STRONG is knocked prone.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Pounce",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/panther/level-1/pounce.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Panther supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Pounce",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/panther/level-1/pounce.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Panther supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Pounce",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/panther/level-1/pounce.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Panther supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.spider.level-1/web-shot",
+      "name": "Web Shot",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/spider/level-1/web-shot.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If the target has M < AVERAGE, they are restrained until the end of their next turn.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "If the target has M < STRONG, they are restrained (save ends).",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Web Shot",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/spider/level-1/web-shot.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spider supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Web Shot",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/spider/level-1/web-shot.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spider supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Web Shot",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/spider/level-1/web-shot.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Spider supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.sporeling.level-1/spore-puff",
+      "name": "Spore Puff",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/sporeling/level-1/spore-puff.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes poison damage equal to 3 + the sporeling's Might score, and the sporeling is invisible to the target until the end of the sporeling's next turn or they deal damage to the target.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "If the target has M < STRONG, they are dazed until the end of their next turn.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Spore Puff",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/sporeling/level-1/spore-puff.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Sporeling supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Spore Puff",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/sporeling/level-1/spore-puff.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Sporeling supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Spore Puff",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/sporeling/level-1/spore-puff.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Sporeling supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.beastheart.v1/feature.ability.companion.beastheart.wolf.level-1/clamping-jaws",
+      "name": "Clamping Jaws",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/companion/beastheart/wolf/level-1/clamping-jaws.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes damage equal to 3 + the wolf's Might score, and if they have M < AVERAGE, they are grabbed by the wolf.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N ferocity",
+            "text": "If the target has M < STRONG, they are grabbed by the wolf.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Clamping Jaws",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/wolf/level-1/clamping-jaws.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Wolf supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Clamping Jaws",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/wolf/level-1/clamping-jaws.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Wolf supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Clamping Jaws",
+          "sourcePath": "en/unified/md/feature/ability/companion/beastheart/wolf/level-1/clamping-jaws.md",
+          "decisionId": "class.beastheart.companion",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Wolf supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -82365,8 +85020,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1138,
-      "abilities": 1124,
+      "count": 1172,
+      "abilities": 1158,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -82376,8 +85031,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 634,
-      "abilities": 634,
+      "count": 658,
+      "abilities": 658,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -82387,12 +85042,12 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 198,
-      "abilities": 198,
+      "count": 202,
+      "abilities": 202,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
-        "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
-        "mcdm.heroes.v1/feature.ability.conduit.level-1/word-of-guidance"
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist"
       ]
     },
     {
@@ -82420,12 +85075,12 @@
     {
       "shape": "slide N",
       "type": "slide",
-      "count": 86,
-      "abilities": 33,
+      "count": 89,
+      "abilities": 34,
       "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep",
         "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse",
-        "mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way",
-        "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil"
+        "mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way"
       ]
     },
     {
@@ -82550,6 +85205,17 @@
       ]
     },
     {
+      "shape": "resource-spend:spend N ferocity",
+      "type": "resource-spend",
+      "count": 29,
+      "abilities": 28,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/all-of-you-versus-all-of-me",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/avalanche-rush",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/bring-the-thunder"
+      ]
+    },
+    {
       "shape": "potency:I < N dazed (save ends)",
       "type": "potency-condition",
       "count": 28,
@@ -82627,6 +85293,17 @@
       ]
     },
     {
+      "shape": "envelope:structured-markdown-mismatch",
+      "type": "unknown",
+      "count": 22,
+      "abilities": 22,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
+        "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath"
+      ]
+    },
+    {
       "shape": "roll:power roll + highest characteristic",
       "type": "roll-expression",
       "count": 20,
@@ -82646,17 +85323,6 @@
         "salient:foe-feature:3bed2cb6-3172-4f0e-a293-1656b2283263",
         "salient:foe-feature:555cf154-f5a4-4a9a-9116-86e2606ab3f3",
         "salient:foe-feature:582d9548-66ad-4a68-8ecb-67d22a4d2089"
-      ]
-    },
-    {
-      "shape": "envelope:structured-markdown-mismatch",
-      "type": "unknown",
-      "count": 19,
-      "abilities": 19,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
-        "mcdm.heroes.v1/feature.ability.talent.level-1/flashback",
-        "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost"
       ]
     },
     {
@@ -82891,6 +85557,17 @@
       ]
     },
     {
+      "shape": "potency:M < SYM grabbed",
+      "type": "potency-condition",
+      "count": 9,
+      "abilities": 3,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close",
+        "mcdm.heroes.v1/feature.ability.fury.level-1/impaled",
+        "mcdm.heroes.v1/kit/boren/bear-claws"
+      ]
+    },
+    {
       "shape": "vertical pull N",
       "type": "pull",
       "count": 9,
@@ -83074,16 +85751,6 @@
       ]
     },
     {
-      "shape": "potency:M < SYM grabbed",
-      "type": "potency-condition",
-      "count": 6,
-      "abilities": 2,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.fury.level-1/impaled",
-        "mcdm.heroes.v1/kit/boren/bear-claws"
-      ]
-    },
-    {
       "shape": "tier:i < N dazed (save ends)",
       "type": "tier-damage",
       "count": 6,
@@ -83152,6 +85819,17 @@
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/behold-the-mystery",
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/conflagration",
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/instantaneous-excavation"
+      ]
+    },
+    {
+      "shape": "potency:M < SYM bleeding (save ends)",
+      "type": "potency-condition",
+      "count": 5,
+      "abilities": 3,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/i-feed-on-your-pain",
+        "mcdm.heroes.v1/feature.ability.fury.level-1/your-entrails-are-your-extrails",
+        "salient:foe-feature:d8696aab-0daf-46a8-82a0-c29ceb504fd4"
       ]
     },
     {
@@ -83227,17 +85905,6 @@
       ]
     },
     {
-      "shape": "resource-spend:spend N ferocity",
-      "type": "resource-spend",
-      "count": 4,
-      "abilities": 4,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.fury.level-1/furious-change",
-        "mcdm.heroes.v1/feature.ability.fury.level-1/lines-of-force",
-        "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes"
-      ]
-    },
-    {
       "shape": "resource-spend:spend N focus",
       "type": "resource-spend",
       "count": 4,
@@ -83298,16 +85965,6 @@
       "examples": [
         "salient:foe-feature:78979227-a99b-408a-8504-e674554f4b8b",
         "salient:foe-feature:db58b6e9-a184-455c-9ab6-8611166318cc"
-      ]
-    },
-    {
-      "shape": "potency:M < SYM bleeding (save ends)",
-      "type": "potency-condition",
-      "count": 4,
-      "abilities": 2,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.fury.level-1/your-entrails-are-your-extrails",
-        "salient:foe-feature:d8696aab-0daf-46a8-82a0-c29ceb504fd4"
       ]
     },
     {
@@ -83692,6 +86349,15 @@
       ]
     },
     {
+      "shape": "potency:I < SYM weakened (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep"
+      ]
+    },
+    {
       "shape": "potency:M < N N damage",
       "type": "potency-condition",
       "count": 3,
@@ -84058,6 +86724,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/kit/arcane-archer/exploding-arrow"
+      ]
+    },
+    {
+      "shape": "tier:N + m cold, fire, lightning, or sonic damage",
+      "type": "tier-damage",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/stormrage"
       ]
     },
     {
@@ -84562,6 +87237,15 @@
       ]
     },
     {
+      "shape": "potency:P < SYM taunted (save ends)",
+      "type": "potency-condition",
+      "count": 2,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/bring-the-thunder"
+      ]
+    },
+    {
       "shape": "potency:R < N damage weakness N (save ends)",
       "type": "potency-condition",
       "count": 2,
@@ -84940,6 +87624,24 @@
       ]
     },
     {
+      "shape": "effect-paragraph:spend N or N ferocity",
+      "type": "effect-paragraph",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath"
+      ]
+    },
+    {
+      "shape": "effect-paragraph:spend NN ferocity",
+      "type": "effect-paragraph",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast"
+      ]
+    },
+    {
       "shape": "effect-paragraph:torso",
       "type": "effect-paragraph",
       "count": 1,
@@ -85207,6 +87909,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:e7ef353f-fbbf-44b5-aeb5-46804cfb1194"
+      ]
+    },
+    {
+      "shape": "potency:A < SYM bleeding (eot)",
+      "type": "potency-condition",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/hungry-like-the-wolf"
       ]
     },
     {
@@ -85513,6 +88224,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:20d846b2-64de-4380-a924-ee2368a68175"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM frightened (save ends)",
+      "type": "potency-condition",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/bring-the-thunder"
       ]
     },
     {
@@ -86497,6 +89217,24 @@
       ]
     },
     {
+      "shape": "you and your companion can each spend a recovery",
+      "type": "unknown",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/hungry-like-the-wolf"
+      ]
+    },
+    {
+      "shape": "you and your companion can each spend a recovery and shift up to N squares",
+      "type": "shift",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/hungry-like-the-wolf"
+      ]
+    },
+    {
       "shape": "you can shift N square",
       "type": "shift",
       "count": 1,
@@ -86512,6 +89250,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash"
+      ]
+    },
+    {
+      "shape": "your companion can spend a recovery",
+      "type": "unknown",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/hungry-like-the-wolf"
       ]
     }
   ],
@@ -86640,11 +89387,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 303,
+      "total": 339,
       "compiles": 13,
-      "withRemainder": 120,
+      "withRemainder": 131,
       "withinV26Bounded": 11,
-      "noMatch": 170
+      "noMatch": 195
     }
   }
 }

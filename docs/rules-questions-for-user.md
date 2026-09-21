@@ -836,3 +836,19 @@ nearby creature taking fire/holy damage and War as damage of 10 + level or highe
 paragraphs require an enemy for Sun, and greater than 10 + level in a single turn for War.
 V100 retains the complete source and manual trigger resolution. A later automation slice must
 resolve which clauses govern; this does not block the level-one editor or manual action routes.
+
+## V106: Companion free strikes and special effects — deferred automation
+
+The printed Beastheart companion stat blocks give Free Strike `1 + M`, while
+`vendor/steel-compendium/en/unified/md/rule/monster/creature-free-strike.md` scopes its
+no-roll rule to Director-controlled creatures. Alternatives are applying the printed fixed value
+or a hero-style roll; recommendation is to retain the printed value visibly and resolve manually
+until companion combat integration settles the player-controlled route. V106 does so and does
+not create a companion ranged free strike.
+
+Companion-only prose sometimes retains “you and your companion” despite actor-relative pronouns
+in `feature/beastheart/level-1/companion-rules.md`; paired areas/recipients remain explicit manual
+effects. Lightbender Avoidance replaces saves with expiry; basilisk Stoned requires its own save
+damage and contextual cut-away action. V106 exposes source-labelled manual records rather than
+reusing ordinary creature conditions or save timers. These are future automation questions, not
+blocking character creation or source visibility.

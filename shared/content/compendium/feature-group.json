@@ -1,0 +1,184 @@
+[
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/basilisk",
+    "kind": "feature-group",
+    "name": "Basilisk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/basilisk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/basilisk.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: basilisk\nlevel: \"1\"\nname: Basilisk\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/basilisk\ntype: feature-group\n---\n\n|     Beast, Companion     |         -         |                            Level 1                            |          -          |            -             |\n|:------------------------:|:-----------------:|:-------------------------------------------------------------:|:-------------------:|:------------------------:|\n|      **1L**<br>Size      |  **5**<br>Speed   |                    **= yours**<br>Stamina                     | **2**<br>Stability  | **1 + M**<br>Free Strike |\n| **Poison 3**<br>Immunity | **—**<br>Movement | **[Alertness](scc.v1:mcdm.heroes.v1/skill.intrigue/alertness)**<br>Skills |                     |                          |\n|     **+2**<br>Might      | **+1**<br>Agility |                       **-1**<br>Reason                        | **+2**<br>Intuition |    **+2**<br>Presence    |\n",
+    "structured": {
+      "companion": "basilisk",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/bear",
+    "kind": "feature-group",
+    "name": "Bear",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/bear.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/bear.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: bear\nlevel: \"1\"\nname: Bear\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/bear\ntype: feature-group\n---\n\n| Animal, Companion |           -           |                             Level 1                             |          -          |            -             |\n|:-----------------:|:---------------------:|:---------------------------------------------------------------:|:-------------------:|:------------------------:|\n|  **1L**<br>Size   |    **5**<br>Speed     |                     **= yours**<br>Stamina                      | **2**<br>Stability  | **1 + M**<br>Free Strike |\n| **—**<br>Immunity | **Climb**<br>Movement | **[Intimidate](scc.v1:mcdm.heroes.v1/skill.interpersonal/intimidate)**<br>Skills |                     |                          |\n|  **+2**<br>Might  |   **+1**<br>Agility   |                        **-1**<br>Reason                         | **+2**<br>Intuition |    **+2**<br>Presence    |\n",
+    "structured": {
+      "companion": "bear",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/boar",
+    "kind": "feature-group",
+    "name": "Boar",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/boar.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/boar.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: boar\nlevel: \"1\"\nname: Boar\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/boar\ntype: feature-group\n---\n\n| Animal, Companion |         -         |                         Level 1                         |          -          |            -             |\n|:-----------------:|:-----------------:|:-------------------------------------------------------:|:-------------------:|:------------------------:|\n|  **1M**<br>Size   |  **5**<br>Speed   |                 **= yours**<br>Stamina                  | **2**<br>Stability  | **1 + M**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | **[Search](scc.v1:mcdm.heroes.v1/skill.intrigue/search)**<br>Skills |                     |                          |\n|  **+2**<br>Might  | **+1**<br>Agility |                    **-1**<br>Reason                     | **+2**<br>Intuition |    **+2**<br>Presence    |\n",
+    "structured": {
+      "companion": "boar",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/condor",
+    "kind": "feature-group",
+    "name": "Condor",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/condor.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/condor.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: condor\nlevel: \"1\"\nname: Condor\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/condor\ntype: feature-group\n---\n\n| Animal, Companion |          -          |                            Level 1                            |          -          |            -             |\n|:-----------------:|:-------------------:|:-------------------------------------------------------------:|:-------------------:|:------------------------:|\n|  **1M**<br>Size   |   **7**<br>Speed    |                    **= yours**<br>Stamina                     | **0**<br>Stability  | **1 + M**<br>Free Strike |\n| **—**<br>Immunity | **Fly**<br>Movement | **[Alertness](scc.v1:mcdm.heroes.v1/skill.intrigue/alertness)**<br>Skills |                     |                          |\n|  **+2**<br>Might  |  **+1**<br>Agility  |                       **-1**<br>Reason                        | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "condor",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/deinonychus",
+    "kind": "feature-group",
+    "name": "Deinonychus",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/deinonychus.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/deinonychus.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: deinonychus\nlevel: \"1\"\nname: Deinonychus\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/deinonychus\ntype: feature-group\n---\n\n| Animal, Companion |         -         |                        Level 1                        |          -          |            -             |\n|:-----------------:|:-----------------:|:-----------------------------------------------------:|:-------------------:|:------------------------:|\n|  **1M**<br>Size   |  **7**<br>Speed   |                **= yours**<br>Stamina                 | **1**<br>Stability  | **1 + M**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | **[Track](scc.v1:mcdm.heroes.v1/skill.intrigue/track)**<br>Skills |                     |                          |\n|  **+2**<br>Might  | **+2**<br>Agility |                   **-1**<br>Reason                    | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "deinonychus",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/drake",
+    "kind": "feature-group",
+    "name": "Drake",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/drake.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/drake.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: drake\nlevel: \"1\"\nname: Drake\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/drake\ntype: feature-group\n---\n\n|                                                                  Companion, Dragon                                                                  |          -          |                             Level 1                             |          -          |            -             |\n|:---------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------:|:---------------------------------------------------------------:|:-------------------:|:------------------------:|\n|                                                                   **1M**<br>Size                                                                    |   **5**<br>Speed    |                     **= yours**<br>Stamina                      | **1**<br>Stability  | **1 + M**<br>Free Strike |\n| **Attuned damage type 3 (see [Elementally Attuned](scc.v1:mcdm.beastheart.v1/feature.companion.beastheart.drake.level-1/elementally-attuned))**<br>Immunity | **Fly**<br>Movement | **[Intimidate](scc.v1:mcdm.heroes.v1/skill.interpersonal/intimidate)**<br>Skills |                     |                          |\n|                                                                   **+2**<br>Might                                                                   |  **+1**<br>Agility  |                        **-1**<br>Reason                         | **+2**<br>Intuition |    **+2**<br>Presence    |\n",
+    "structured": {
+      "companion": "drake",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/elemental-spark",
+    "kind": "feature-group",
+    "name": "Elemental Spark",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/elemental-spark.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/elemental-spark.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: elemental-spark\nlevel: \"1\"\nname: Elemental Spark\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/elemental-spark\ntype: feature-group\n---\n\n|    Companion, Elemental     |         -         |                        Level 1                        |          -          |            -             |\n|:---------------------------:|:-----------------:|:-----------------------------------------------------:|:-------------------:|:------------------------:|\n|       **1M**<br>Size        |  **7**<br>Speed   |                **= yours**<br>Stamina                 | **1**<br>Stability  | **1 + M**<br>Free Strike |\n| **Lightning 3**<br>Immunity | **—**<br>Movement | **[Magic](scc.v1:mcdm.heroes.v1/skill.lore/magic)**<br>Skills |                     |                          |\n|       **+2**<br>Might       | **+2**<br>Agility |                   **-1**<br>Reason                    | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "elemental-spark",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/gummy-ball",
+    "kind": "feature-group",
+    "name": "Gummy Ball",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/gummy-ball.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/gummy-ball.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: gummy-ball\nlevel: \"1\"\nname: Gummy Ball\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/gummy-ball\ntype: feature-group\n---\n\n|    Companion, Ooze     |         -         |                        Level 1                        |          -          |            -             |\n|:----------------------:|:-----------------:|:-----------------------------------------------------:|:-------------------:|:------------------------:|\n|     **1L**<br>Size     |  **5**<br>Speed   |                **= yours**<br>Stamina                 | **2**<br>Stability  | **1 + M**<br>Free Strike |\n| **Acid 3**<br>Immunity | **—**<br>Movement | **[Sneak](scc.v1:mcdm.heroes.v1/skill.intrigue/sneak)**<br>Skills |                     |                          |\n|    **+2**<br>Might     | **+2**<br>Agility |                   **-1**<br>Reason                    | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "gummy-ball",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/hellhound",
+    "kind": "feature-group",
+    "name": "Hellhound",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/hellhound.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/hellhound.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: hellhound\nlevel: \"1\"\nname: Hellhound\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/hellhound\ntype: feature-group\n---\n\n|  Companion, Infernal   |         -         |                             Level 1                             |          -          |            -             |\n|:----------------------:|:-----------------:|:---------------------------------------------------------------:|:-------------------:|:------------------------:|\n|     **1M**<br>Size     |  **7**<br>Speed   |                     **= yours**<br>Stamina                      | **1**<br>Stability  | **1 + M**<br>Free Strike |\n| **Fire 3**<br>Immunity | **—**<br>Movement | **[Intimidate](scc.v1:mcdm.heroes.v1/skill.interpersonal/intimidate)**<br>Skills |                     |                          |\n|    **+2**<br>Might     | **+2**<br>Agility |                        **-1**<br>Reason                         | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "hellhound",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/lightbender",
+    "kind": "feature-group",
+    "name": "Lightbender",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/lightbender.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/lightbender.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: lightbender\nlevel: \"1\"\nname: Lightbender\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/lightbender\ntype: feature-group\n---\n\n| Beast, Companion  |         -         |                       Level 1                       |          -          |            -             |\n|:-----------------:|:-----------------:|:---------------------------------------------------:|:-------------------:|:------------------------:|\n|  **1L**<br>Size   |  **7**<br>Speed   |               **= yours**<br>Stamina                | **2**<br>Stability  | **1 + M**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | **[Hide](scc.v1:mcdm.heroes.v1/skill.intrigue/hide)**<br>Skills |                     |                          |\n|  **+2**<br>Might  | **+1**<br>Agility |                  **-1**<br>Reason                   | **+2**<br>Intuition |    **+2**<br>Presence    |\n",
+    "structured": {
+      "companion": "lightbender",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/panther",
+    "kind": "feature-group",
+    "name": "Panther",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/panther.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/panther.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: panther\nlevel: \"1\"\nname: Panther\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/panther\ntype: feature-group\n---\n\n| Animal, Companion |           -           |                        Level 1                        |          -          |            -             |\n|:-----------------:|:---------------------:|:-----------------------------------------------------:|:-------------------:|:------------------------:|\n|  **1M**<br>Size   |    **7**<br>Speed     |                **= yours**<br>Stamina                 | **1**<br>Stability  | **1 + M**<br>Free Strike |\n| **—**<br>Immunity | **Climb**<br>Movement | **[Sneak](scc.v1:mcdm.heroes.v1/skill.intrigue/sneak)**<br>Skills |                     |                          |\n|  **+2**<br>Might  |   **+2**<br>Agility   |                   **-1**<br>Reason                    | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "panther",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/spider",
+    "kind": "feature-group",
+    "name": "Spider",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/spider.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/spider.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: spider\nlevel: \"1\"\nname: Spider\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/spider\ntype: feature-group\n---\n\n| Animal, Companion |           -           |                        Level 1                        |          -          |            -             |\n|:-----------------:|:---------------------:|:-----------------------------------------------------:|:-------------------:|:------------------------:|\n|  **1M**<br>Size   |    **5**<br>Speed     |                **= yours**<br>Stamina                 | **1**<br>Stability  | **1 + M**<br>Free Strike |\n| **—**<br>Immunity | **Climb**<br>Movement | **[Sneak](scc.v1:mcdm.heroes.v1/skill.intrigue/sneak)**<br>Skills |                     |                          |\n|  **+2**<br>Might  |   **+2**<br>Agility   |                   **-1**<br>Reason                    | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "spider",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/sporeling",
+    "kind": "feature-group",
+    "name": "Sporeling",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/sporeling.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/sporeling.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: sporeling\nlevel: \"1\"\nname: Sporeling\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/sporeling\ntype: feature-group\n---\n\n|     Beast, Companion     |         -         |                        Level 1                        |          -          |            -             |\n|:------------------------:|:-----------------:|:-----------------------------------------------------:|:-------------------:|:------------------------:|\n|      **1S**<br>Size      |  **5**<br>Speed   |                **= yours**<br>Stamina                 | **0**<br>Stability  | **1 + M**<br>Free Strike |\n| **Poison 3**<br>Immunity | **—**<br>Movement | **[Track](scc.v1:mcdm.heroes.v1/skill.intrigue/track)**<br>Skills |                     |                          |\n|     **+2**<br>Might      | **+2**<br>Agility |                   **-1**<br>Reason                    | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "sporeling",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/monster.companion.beastheart.statblock/wolf",
+    "kind": "feature-group",
+    "name": "Wolf",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/companion/beastheart/statblock/wolf.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/companion/beastheart/statblock/wolf.json",
+    "selection": "core-monsters",
+    "text": "---\ncompanion: wolf\nlevel: \"1\"\nname: Wolf\nscc: mcdm.beastheart.v1/monster.companion.beastheart.statblock/wolf\ntype: feature-group\n---\n\n| Animal, Companion |         -         |                        Level 1                        |          -          |            -             |\n|:-----------------:|:-----------------:|:-----------------------------------------------------:|:-------------------:|:------------------------:|\n|  **1M**<br>Size   |  **7**<br>Speed   |                **= yours**<br>Stamina                 | **1**<br>Stability  | **1 + M**<br>Free Strike |\n| **—**<br>Immunity | **—**<br>Movement | **[Track](scc.v1:mcdm.heroes.v1/skill.intrigue/track)**<br>Skills |                     |                          |\n|  **+2**<br>Might  | **+2**<br>Agility |                   **-1**<br>Reason                    | **+2**<br>Intuition |    **+1**<br>Presence    |\n",
+    "structured": {
+      "companion": "wolf",
+      "level": "1"
+    }
+  }
+]

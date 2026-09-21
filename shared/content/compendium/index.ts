@@ -16,6 +16,7 @@ import complicationJson from './complication.json' with { type: 'json' };
 import conditionJson from './condition.json';
 import cultureJson from './culture.json';
 import featureJson from './feature.json' with { type: 'json' };
+import featureGroupJson from './feature-group.json';
 import featureblockJson from './featureblock.json';
 import godJson from './god.json';
 import kitJson from './kit.json' with { type: 'json' };
@@ -40,6 +41,7 @@ export const byKind: Record<string, ContentEntry[]> = {
   'condition': typed(conditionJson),
   'culture': typed(cultureJson),
   'feature': typed(featureJson),
+  'feature-group': typed(featureGroupJson),
   'featureblock': typed(featureblockJson),
   'god': typed(godJson),
   'kit': typed(kitJson),
