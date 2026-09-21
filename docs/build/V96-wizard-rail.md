@@ -23,8 +23,9 @@ unchanged.
   as chips.
 - `web/wizard/index.tsx`: a chosen preset renders its fixed aspects read-only in the wizard, with
   Build your own as the way to set them individually.
-- `web/wizard/choice-list.tsx`, `web/rules/reference.ts`: a point-budget option row carries its
-  own rules text, read from the already-loaded rules catalog.
+- `web/wizard/choice-list.tsx`, `web/rules/reference.ts`: an option row is a card with the name at
+  the left of a header, its metadata at the right and its own rules text below, read from the
+  already-loaded rules catalog; the control is screen-reader only.
 - docs/character-wizard-spec.md#confirmed-behavior (the 2026-09-21 amendment)
 - Out of scope: the decision definitions (`presentedInV001` stays content data), the
   `connections.notes` headless route and its sheet field, the centre and hero-so-far columns.
@@ -70,3 +71,9 @@ unchanged.
   Checked against the built catalog: all 161 point-budget options across every ancestry resolve to
   text, none missing. The text wraps under the name rather than filling the truncated description
   column, so a two-sentence trait stays readable.
+- 2026-09-21: option rows restyled to cards on the user's instruction: no visible checkbox or
+  radio, since the accent ring already marks selection, and the name and point cost read as a
+  header line. The control stays in the markup as `sr-only`, so keyboard and assistive-technology
+  selection is unchanged. Applied to every `ChoiceRow`, not only ancestry traits, so the wizard
+  selects consistently with the new culture cards. Dropped the `description` and `facts` props at
+  the same time: no call site passed either, and the truncated middle column they fed is gone.

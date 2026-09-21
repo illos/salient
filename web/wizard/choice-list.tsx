@@ -2,10 +2,10 @@
 /**
  * The wizard's centre column pieces (V21 item 10; Quiet, docs/design-mockups/quiet/README.md):
  * the step title block, the muted section label over a decision, the ChoiceRow (a `sub` tile
- * inside the step panel with a radio or checkbox, the option name, muted metadata, description
- * and right-aligned facts, plus an optional wrapped `body` line under the name for the option's
- * own rules text; the selected tile takes an inset accent ring; the "Not offered in
- * v0.01" state stays visible and muted) and the pinned step navigation. Presentation only: every
+ * inside the step panel: a header with the option name at the left and its muted metadata at the
+ * right, then an optional wrapped `body` line carrying the option's own rules text. The radio or
+ * checkbox is screen-reader only (V96) because the inset accent ring already marks the selection;
+ * the "Not offered in v0.01" state stays visible and muted) and the pinned step navigation. Presentation only: every
  * row forwards the same change the plain radio or checkbox made before; the option data supplies
  * what the row shows.
  */
@@ -71,17 +71,13 @@ export interface ChoiceRowProps {
   /** Source prerequisite prevents selection, while the reference remains readable. */
   unavailableReason?: string;
   onChange: () => void;
-  /** Muted metadata after the name (heroic resource, kit type, point cost). */
+  /** Muted metadata at the right of the header (heroic resource, kit type, point cost). */
   meta?: string;
-  /** Short grey description. */
-  description?: string;
-  /** Right-aligned facts (primary characteristics). */
-  facts?: string;
   /** The rulebook icon for the option. */
   reference?: React.ReactNode;
   /**
-   * Full option text under the name, wrapped rather than truncated (V96): what an ancestry trait
-   * actually does, so the choice is made from the row instead of the reference dialog.
+   * The option's own rules text under the header, wrapped rather than truncated (V96): what an
+   * ancestry trait actually does, so the choice is made from the card, not the reference dialog.
    */
   body?: React.ReactNode;
 }
@@ -95,8 +91,6 @@ export function ChoiceRow({
   unavailableReason,
   onChange,
   meta,
-  description,
-  facts,
   reference,
   body,
 }: ChoiceRowProps) {
@@ -104,11 +98,14 @@ export function ChoiceRow({
     <li>
       <label
         className={cn(
-          'grid cursor-pointer grid-cols-[auto_minmax(0,1.3fr)_auto_minmax(0,1.6fr)_auto] items-center gap-x-5 rounded-md bg-muted px-4 py-3.5 text-base transition-colors duration-(--motion-fast)',
+          'flex cursor-pointer flex-col gap-1.5 rounded-md bg-muted px-4 py-3.5 transition-colors duration-(--motion-fast)',
           checked ? 'ring-1 ring-primary ring-inset' : supported && 'hover:bg-accent',
           !supported && 'cursor-default text-muted-foreground',
+          'has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring',
         )}
       >
+        {/* The control stays for the keyboard and assistive technology; the ring carries the
+            selection visually, so no box or dot competes with the option's own name. */}
         <input
           type={type}
           name={group}
@@ -116,26 +113,17 @@ export function ChoiceRow({
           checked={checked}
           disabled={!supported}
           onChange={onChange}
-          className={cn(
-            'size-[18px] shrink-0 cursor-pointer appearance-none bg-placeholder transition-colors duration-(--motion-fast) outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-default disabled:opacity-40',
-            type === 'radio' ? 'rounded-full' : 'rounded-[5px]',
-            'checked:bg-primary',
-          )}
+          className="sr-only"
         />
-        <span className="flex min-w-0 items-center gap-2">
+        <span className="flex items-baseline gap-2">
           <span className="truncate text-lg font-medium">{name}</span>
           {reference}
-        </span>
-        <span className="text-sm whitespace-nowrap text-muted-foreground">{meta ?? ''}</span>
-        <span className="truncate text-base text-muted-foreground">{description ?? ''}</span>
-        <span className="justify-self-end text-right text-sm text-muted-foreground">
-          {supported ? (facts ?? '') : (unavailableReason ?? 'Not offered yet')}
-        </span>
-        {body && (
-          <span className="col-span-4 col-start-2 text-sm text-balance text-muted-foreground">
-            {body}
+          <span className="ml-auto flex items-baseline gap-2 pl-3 text-sm whitespace-nowrap text-muted-foreground">
+            {meta && <span>{meta}</span>}
+            {!supported && <span>{unavailableReason ?? 'Not offered yet'}</span>}
           </span>
-        )}
+        </span>
+        {body && <span className="text-sm text-balance text-muted-foreground">{body}</span>}
       </label>
     </li>
   );
