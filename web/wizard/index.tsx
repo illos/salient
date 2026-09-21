@@ -1578,13 +1578,6 @@ function Wizard({ character }: { character: WizardCharacter }) {
                   ?.scrollIntoView({ block: 'center', behavior: 'smooth' }),
               )
             }
-            hint={
-              pointsOwed.length
-                ? `${pointsOwed.join(' · ')}. ${next ? `${stepName(next)} comes next.` : ''}`
-                : next
-                  ? `${stepName(next)} comes next.`
-                  : undefined
-            }
             save={
               <Button
                 type="button"
