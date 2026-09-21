@@ -346,7 +346,15 @@ competing-create refusal, ownership isolation, explicit listing, Tactician prima
 grid transitions with overlap pruning and exclusions, and Fury/Shadow single-kit edits. Each save
 is followed by public-query readback. Full `CI=true pnpm check`, isolated schema/codegen push and
 `SALIENT_HEADLESS_COHORT=wizard-draft node scripts/verify-character-headless.ts` await TESTER.
-Browser scenarios remain in the backlog under the moratorium. Not yet merged or published.
+Browser scenarios remain in the backlog under the moratorium.
+
+TESTER accepted `f5189d4` on 2026-09-21: full check exit 0, 968 tests in 176 s; isolated schema/codegen
+ready in 2.25 s with no tracked diff; wizard-draft cohort exit 0, all three persisted-readback scenarios
+passed in 14.3 s. Artifacts: `/srv/presidium/projects/salient/test-artifacts/V96-f5189d4/`.
+WIZARD.2 also passed the headless proof at `939a0a9` plus its runner wiring. Backend stopped and
+ports released. Active-standalone UI reconciliation and browser navigation are not claimed as live
+browser proof: they have static review and queued post-moratorium scenarios. Ready for DEPLOY2;
+reuse these accepted results for publication, without smoke tests or another suite run.
 
 Two things an auditor should read first: **Flagged for audit** above, on the Tactician's two-kit
 grid, which is the one change that touches how a character option is chosen; and **Working
