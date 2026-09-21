@@ -1415,12 +1415,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
                   // column's Source inset.
                   description={primary?.id === 'culture.preset' ? undefined : stepExcerpt(step)}
                   reference={
-                    <>
+                    // Culture cites the Background chapter, which is the reference that matters
+                    // here; the Making a Hero step reference is already on the rail's heading.
+                    primary?.id === 'culture.preset' ? (
+                      <RuleLink {...decisionReference(primary, step)} />
+                    ) : (
                       <RuleLink {...stepReference(step)} />
-                      {primary?.id === 'culture.preset' && (
-                        <RuleLink {...decisionReference(primary, step)} />
-                      )}
-                    </>
+                    )
                   }
                   optional={step.optional}
                 />
