@@ -1116,6 +1116,19 @@ function Wizard({ character }: { character: WizardCharacter }) {
   // What a step asks of the hero right now: the choices it actually presents, and how many of
   // them are recorded. Only the active branch counts, since every ancestry's and class's
   // decisions live in their step, and a value a preset fixed is not a choice to make.
+  const culturePreset = findCulturePreset(
+    typeof selections['culture.preset'] === 'string'
+      ? (selections['culture.preset'] as string)
+      : undefined,
+  );
+  // Tiles, in reading order. The culture name is fixed too, but it is already the step's title,
+  // so it gets no tile of its own.
+  const lockedAspectOrder = ['culture.environment', 'culture.organization', 'culture.upbringing'];
+  const lockedByPreset = (id: string): string | undefined => {
+    if (!culturePreset) return undefined;
+    if (id === 'culture.language') return culturePreset.language ? culturePreset.name : undefined;
+    return PRESET_FIXED_ASPECTS.has(id) ? culturePreset.name : undefined;
+  };
   const railIndex = indexDecisions(definitions);
   const stepChoices = (s: Step) =>
     s.decisions.filter(
@@ -1180,19 +1193,6 @@ function Wizard({ character }: { character: WizardCharacter }) {
   // Aspects a chosen starting culture fixes: shown read-only until the hero goes bespoke. A
   // preset's language counts only when that preset actually names one, so a professional culture
   // still picks its own (background.md: "then add a language that fits the culture's concept").
-  const culturePreset = findCulturePreset(
-    typeof selections['culture.preset'] === 'string'
-      ? (selections['culture.preset'] as string)
-      : undefined,
-  );
-  // Tiles, in reading order. The culture name is fixed too, but it is already the step's title,
-  // so it gets no tile of its own.
-  const lockedAspectOrder = ['culture.environment', 'culture.organization', 'culture.upbringing'];
-  const lockedByPreset = (id: string): string | undefined => {
-    if (!culturePreset) return undefined;
-    if (id === 'culture.language') return culturePreset.language ? culturePreset.name : undefined;
-    return PRESET_FIXED_ASPECTS.has(id) ? culturePreset.name : undefined;
-  };
   const primaryExpanded =
     primary !== undefined &&
     (editingStep === step.id ||
