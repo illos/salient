@@ -70,7 +70,7 @@ try {
   let viewer = await first.query(api.auth.viewer, {});
   expect(viewer?.displayName === 'Account headless renamed', 'display name did not persist');
 
-  const uploadUrl = await first.mutation(api.account.portraitUploadUrl, {});
+  const { url: uploadUrl, ticketId } = await first.mutation(api.account.portraitUploadUrl, {});
   const upload = await fetch(uploadUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'image/png' },
@@ -78,7 +78,10 @@ try {
   });
   expect(upload.ok, `portrait upload failed (${upload.status})`);
   const { storageId } = (await upload.json()) as { storageId: string };
-  const portrait = await first.action(api.account.setPortrait, { storageId: storageId as never });
+  const portrait = await first.action(api.account.setPortrait, {
+    ticketId,
+    storageId: storageId as never,
+  });
   expect(portrait.ok, portrait.ok ? '' : portrait.error);
   viewer = await first.query(api.auth.viewer, {});
   expect(viewer?.portraitUrl, 'portrait URL did not persist');
@@ -90,11 +93,15 @@ try {
   const secondLogin = await secondAuth.signIn.email({ email, password: initialPassword });
   if (secondLogin.error) throw new Error(secondLogin.error.message || 'Second sign-in failed.');
   const second = await appClient(secondAuth);
-  const devices = await first.query(api.account.devices, {});
+  const deviceResult = await firstAuth.listSessions();
+  if (deviceResult.error) throw new Error(deviceResult.error.message || 'Device listing failed.');
+  const devices = deviceResult.data;
   expect(devices.length === 2, `expected two devices, found ${devices.length}`);
-  const other = devices.find(device => !device.current);
+  const firstSession = await firstAuth.getSession({ query: { disableCookieCache: true } });
+  const other = devices.find(device => device.token !== firstSession.data?.session.token);
   expect(other, 'the second device was not distinguishable from the current device');
-  await first.mutation(api.account.revokeDevice, { sessionId: other.id });
+  const revocation = await firstAuth.revokeSession({ token: other.token });
+  if (revocation.error) throw new Error(revocation.error.message || 'Device revocation failed.');
   expect((await second.query(api.auth.viewer, {})) === null, 'revoked device stayed authorized');
 
   const thirdAuth = sessionClient();
@@ -122,10 +129,17 @@ try {
     commandId: `${run}-campaign`,
   });
   expect(campaignId, 'campaign creation failed');
+  const campaign = await first.query(api.campaigns.get, { campaignId });
+  expect(campaign.shareCode, 'the owner could not read the campaign share code');
   const deletion = await firstAuth.deleteUser({ password: changedPassword });
   if (deletion.error) throw new Error(deletion.error.message || 'Account deletion failed.');
   deleted = true;
   expect((await first.query(api.auth.viewer, {})) === null, 'deleted account profile remained');
+  const anonymous = new ConvexHttpClient(convexUrl);
+  expect(
+    (await anonymous.query(api.campaigns.preview, { shareCode: campaign.shareCode })) === null,
+    'the deleted account campaign remained reachable',
+  );
 
   console.log(
     JSON.stringify({
@@ -134,7 +148,7 @@ try {
       portrait: 'set-and-cleared',
       devices: 'revoked-and-password-revoked',
       email: renamedEmail,
-      deletion: 'auth-and-profile-removed',
+      deletion: 'auth-profile-and-owned-campaign-removed',
     }),
   );
 } finally {

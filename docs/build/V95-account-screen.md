@@ -18,11 +18,11 @@ storage.
   session header does the same. The login page keeps its switch.
 - `/account` (Profile), `/account/security`, `/account/preferences`, `/account/delete`: a sidebar
   of sections beside one `card` panel, after `docs/design-mockups/quiet/account-light.png`.
-- Profile: portrait upload and removal (Convex file storage, image under 2 MB, shown in the
-  header, the sidebar and the campaign members cards); display name (the app profile other
-  players see); email change through Better Auth's change-email route (addresses are unverified
-  in this app, so the change is direct; an address another account uses is refused without
-  saying whose).
+- Profile: portrait upload and removal (Convex file storage, an account-bound short-lived upload
+  ticket, orphan cleanup, image under 2 MB, shown in the header, the sidebar and campaign member
+  cards); display name (the app profile other players see); email change through Better Auth's
+  change-email route (addresses are unverified in this app, so the change is direct; an address
+  another account uses is refused without saying whose).
 - Security: signed-in devices from Better Auth's session table with the current one marked; sign
   out one device or every other device; change password (current password required, other
   sessions revoked); sign out this device.
@@ -55,24 +55,28 @@ reminders); the header shows the disc alone, as pictured, and the name sits on t
 1. `CI=true pnpm exec vitest run tests/app/account.test.ts`: a display name change persists on the
    `users` row and is what `campaigns.get` returns for the member; empty and over-long names are
    refused.
-2. Portrait: a stored image sets `users.portraitId` and `auth.viewer.portraitUrl`; replacing it
-   removes the earlier file (its `_storage` row is gone); a non-image is refused and its upload
-   deleted; clearing removes the file and the field.
-3. Devices: two sessions for one user list with the current one first and marked; revoking the
-   current one is refused; revoking the other leaves one and that identity's `auth.viewer` is
-   null; `revokeOtherDevices` leaves only the current session.
+2. Portrait: an account-bound ticket accepts its new stored image, sets `users.portraitId` and
+   `auth.viewer.portraitUrl`, and cannot claim or delete another profile's exposed storage ID;
+   replacing removes the earlier file; non-image and over-2-MB uploads are deleted; an unclaimed
+   upload is cleaned after expiry; clearing removes the file and field.
+3. Devices: Better Auth's active-session route lists two sessions with the current one first in the
+   UI; its revoke-session route removes the chosen other device, and revoke-other-sessions leaves
+   only the current session. There is no wall-clock-dependent Convex query or fixed session cap.
 4. Deletion cascade (`internal.account.continuePurge` on a fixture table): the owned campaign and
    its memberships, sessions, events and chat are gone; another player's attached hero is detached
    (`campaignId` null, `liveState` null, `combatLocked` false) with its revisions intact; the
    deleted user's own characters are gone; the membership in another user's campaign is gone while
    that user's chat line keeps `authorName`; the `users` row is gone.
-5. Real route: `POST /api/auth/delete-user` with the password removes the Better Auth user and,
-   through the trigger, the app profile and its owned campaign.
-6. Quiet greps on `web/account/**`, `web/router.tsx`, `web/components/session-user.tsx` and
+5. A fixture with `PURGE_BUDGET + 1` command receipts spends the first transaction's budget,
+   schedules a continuation, then removes the last receipt and profile when scheduled work drains.
+6. Real route and headless journey: `POST /api/auth/delete-user` with the password removes the
+   Better Auth user and, through the trigger, the app profile and owned campaign; an unauthenticated
+   `campaigns.preview` persisted readback confirms the deleted campaign is no longer reachable.
+7. Quiet greps on `web/account/**`, `web/router.tsx`, `web/components/session-user.tsx` and
    `web/components/disc.tsx`: no raw hex, `uppercase`, `tracking-caps`, `shadow-hard`,
    `rule-strong`, text under 13px or weights over 500. Browser scenarios logged in the
    [browser coverage backlog](browser-coverage-backlog.md).
-7. TESTER: `CI=true pnpm check` passes on the candidate commit.
+8. TESTER: `CI=true pnpm check` passes on the candidate commit.
 
 ## Work log
 
@@ -88,5 +92,22 @@ finished the backend, deletion cascade, shared CLI action support, authenticated
 tests and slice records. Authoring checks on the recovered candidate: `tsc -p tsconfig.web.json`
 passed; targeted ESLint and Prettier passed; the four focused app/script files passed (21 tests,
 6.86 s); the quiet-theme grep and `git diff --check` passed. The isolated headless journey and the
-required full gate remain assigned to TESTER after the candidate commit. Browser scenarios are in
-the backlog under the standing V66 moratorium.
+required full gate were assigned to TESTER after the candidate commit. Browser scenarios are in the
+backlog under the standing V66 moratorium.
+
+2026-09-21: TESTER passed candidate `7b481ef`: `CI=true pnpm check` completed 949 checks in
+181 seconds, then an isolated Convex push/codegen and `pnpm test:headless:account` passed in 5.28
+seconds. Artifacts: `/srv/presidium/projects/salient/test-artifacts/V95-7b481ef`. Codegen also
+restored the omitted generated declaration for the already-present `lib/conditionInstances`
+module; that generated-only repair is included in the closeout commit and does not change tested
+runtime inputs.
+
+2026-09-21: independent review rejected `7b481ef` because a caller could submit another account's
+exposed storage ID, abandoned uploads had no cleanup, the custom device query depended on
+`Date.now()` and a 200-row cap, the headless deletion stopped at auth loss, and the bounded purge
+had no continuation-scale proof. The repair binds each upload to a short-lived profile ticket,
+refuses already-owned storage IDs, schedules orphan cleanup, and proves server-side type/size
+enforcement. Devices now use Better Auth's active-session/revocation routes directly. The headless
+journey reads the owned campaign back as absent after deletion, and a `PURGE_BUDGET + 1` fixture
+proves the scheduled continuation. The revised focused file passes all six tests in 4.47 seconds;
+the revised candidate still requires independent re-review and a new TESTER gate.

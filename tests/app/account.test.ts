@@ -7,6 +7,8 @@ import betterAuthTest from '@convex-dev/better-auth/test';
 import schema from '../../convex/schema';
 import { api, components, internal } from '../../convex/_generated/api';
 import { account, admit, admitHero, backend, table } from './fixtures/table';
+import { PORTRAIT_UPLOAD_TTL_MS } from '../../convex/account';
+import { PURGE_BUDGET } from '../../convex/lib/accountDeletion';
 
 const modules = import.meta.glob('../../convex/**/*.ts');
 const site = 'https://salient.example.test';
@@ -18,15 +20,29 @@ function authBackend() {
   return t;
 }
 
-function post(t: ReturnType<typeof authBackend>, path: string, body: unknown, cookie?: string) {
+function post(
+  t: ReturnType<typeof authBackend>,
+  path: string,
+  body: unknown,
+  cookie?: string,
+  userAgent?: string,
+) {
   return t.fetch(`/api/auth/${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Origin: site,
       ...(cookie ? { Cookie: cookie } : {}),
+      ...(userAgent ? { 'User-Agent': userAgent } : {}),
     },
     body: JSON.stringify(body),
+  });
+}
+
+function get(t: ReturnType<typeof authBackend>, path: string, cookie: string) {
+  return t.fetch(`/api/auth/${path}`, {
+    method: 'GET',
+    headers: { Origin: site, Cookie: cookie },
   });
 }
 
@@ -37,6 +53,7 @@ beforeEach(() => {
   vi.stubEnv('BETTER_AUTH_SECRET', 'only-a-test-secret-at-least-thirty-two-characters');
 });
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllGlobals();
   vi.unstubAllEnvs();
 });
@@ -65,6 +82,7 @@ describe('V95 account operations', () => {
   test('portrait replacement and clearing remove old files; rejected uploads do not linger', async () => {
     const t = backend();
     const viewer = await account(t, 'Portrait');
+    const otherViewer = await account(t, 'Other portrait');
     // convex-test's storage metadata omits contentType. setPortrait deliberately falls back to a
     // HEAD request for that legacy shape; vary this trusted storage response across uploads.
     let contentType = 'image/png';
@@ -72,90 +90,133 @@ describe('V95 account operations', () => {
       'fetch',
       vi.fn(async () => new Response(null, { headers: { 'Content-Type': contentType } })),
     );
+    const firstTicket = await viewer.client.mutation(api.account.portraitUploadUrl, {});
     const first = await t.run(ctx => ctx.storage.store(new Blob(['first'])));
-    expect(await viewer.client.action(api.account.setPortrait, { storageId: first })).toEqual({
-      ok: true,
-    });
+    expect(
+      await viewer.client.action(api.account.setPortrait, {
+        ticketId: firstTicket.ticketId,
+        storageId: first,
+      }),
+    ).toEqual({ ok: true });
+    expect((await viewer.client.query(api.auth.viewer, {}))?.portraitUrl).toEqual(
+      expect.any(String),
+    );
+
+    const foreignTicket = await otherViewer.client.mutation(api.account.portraitUploadUrl, {});
+    expect(
+      await otherViewer.client.action(api.account.setPortrait, {
+        ticketId: foreignTicket.ticketId,
+        storageId: first,
+      }),
+    ).toEqual({ ok: false, error: 'That upload expired; choose the file again.' });
+    expect(await t.run(ctx => ctx.db.system.get(first))).not.toBeNull();
     expect((await viewer.client.query(api.auth.viewer, {}))?.portraitUrl).toEqual(
       expect.any(String),
     );
 
     contentType = 'image/webp';
+    const secondTicket = await viewer.client.mutation(api.account.portraitUploadUrl, {});
     const second = await t.run(ctx => ctx.storage.store(new Blob(['second'])));
-    expect(await viewer.client.action(api.account.setPortrait, { storageId: second })).toEqual({
-      ok: true,
-    });
+    expect(
+      await viewer.client.action(api.account.setPortrait, {
+        ticketId: secondTicket.ticketId,
+        storageId: second,
+      }),
+    ).toEqual({ ok: true });
     expect(await t.run(ctx => ctx.db.system.get(first))).toBeNull();
 
     contentType = 'text/plain';
+    const rejectedTicket = await viewer.client.mutation(api.account.portraitUploadUrl, {});
     const rejected = await t.run(ctx => ctx.storage.store(new Blob(['not an image'])));
-    expect(await viewer.client.action(api.account.setPortrait, { storageId: rejected })).toEqual({
-      ok: false,
-      error: 'Choose an image under 2 MB.',
-    });
+    expect(
+      await viewer.client.action(api.account.setPortrait, {
+        ticketId: rejectedTicket.ticketId,
+        storageId: rejected,
+      }),
+    ).toEqual({ ok: false, error: 'Choose an image under 2 MB.' });
     expect(await t.run(ctx => ctx.db.system.get(rejected))).toBeNull();
+
+    contentType = 'image/png';
+    const oversizedTicket = await viewer.client.mutation(api.account.portraitUploadUrl, {});
+    const oversized = await t.run(ctx =>
+      ctx.storage.store(new Blob([new Uint8Array(2 * 1024 * 1024 + 1)])),
+    );
+    expect(
+      await viewer.client.action(api.account.setPortrait, {
+        ticketId: oversizedTicket.ticketId,
+        storageId: oversized,
+      }),
+    ).toEqual({ ok: false, error: 'Choose an image under 2 MB.' });
+    expect(await t.run(ctx => ctx.db.system.get(oversized))).toBeNull();
+
+    await viewer.client.mutation(api.account.portraitUploadUrl, {});
+    const orphan = await t.run(ctx => ctx.storage.store(new Blob(['never claimed'])));
+    await t.mutation(internal.account.cleanupPortraitUploads, {
+      before: Date.now() + PORTRAIT_UPLOAD_TTL_MS * 2,
+      cursor: null,
+    });
+    expect(await t.run(ctx => ctx.db.system.get(orphan))).toBeNull();
+    expect(await t.run(ctx => ctx.db.system.get(second))).not.toBeNull();
     await viewer.client.mutation(api.account.clearPortrait, {});
     expect(await t.run(ctx => ctx.db.system.get(second))).toBeNull();
     expect((await t.run(ctx => ctx.db.get(viewer.profile.userId)))?.portraitId).toBeUndefined();
   });
 
-  test('device controls identify the current session and revoke only the viewer’s sessions', async () => {
-    const t = backend();
-    const viewer = await account(t, 'Devices');
-    const profile = (await t.run(ctx => ctx.db.get(viewer.profile.userId)))!;
-    const sessions = await t.query(components.betterAuth.adapter.findMany, {
-      model: 'session',
-      where: [{ field: 'userId', value: profile.authId }],
-      paginationOpts: { cursor: null, numItems: 10 },
+  test('Better Auth lists every active device and revokes one or every other session', async () => {
+    const t = authBackend();
+    const signup = await post(t, 'sign-up/email', {
+      email: 'devices@example.test',
+      password,
+      name: 'Devices',
     });
-    const current = sessions.page[0]!;
-    const other = await t.mutation(components.betterAuth.adapter.create, {
-      input: {
-        model: 'session',
-        data: {
-          userId: profile.authId,
-          token: 'other-device-token',
-          userAgent: 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/140 Safari/537.36',
-          expiresAt: Date.now() + 3_600_000,
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        },
-      },
-    });
-    const listed = await viewer.client.query(api.account.devices, {});
-    expect(listed.map(device => [device.id, device.current])).toEqual([
-      [current._id, true],
-      [other._id, false],
-    ]);
-    await expect(
-      viewer.client.mutation(api.account.revokeDevice, { sessionId: current._id }),
-    ).rejects.toThrow('this device');
-    await viewer.client.mutation(api.account.revokeDevice, { sessionId: other._id });
-    expect(
-      await t
-        .withIdentity({ subject: profile.authId, sessionId: other._id })
-        .query(api.auth.viewer, {}),
-    ).toBeNull();
+    const cookie = signup.headers.getSetCookie()[0]!.split(';', 1)[0]!;
+    const second = await post(
+      t,
+      'sign-in/email',
+      { email: 'devices@example.test', password },
+      undefined,
+      'Second device',
+    );
+    const secondCookie = second.headers.getSetCookie()[0]!.split(';', 1)[0]!;
+    const listed = await get(t, 'list-sessions', cookie);
+    expect(listed.status).toBe(200);
+    const sessions = (await listed.json()) as Array<{ token: string; userAgent?: string }>;
+    expect(sessions).toHaveLength(2);
+    const other = sessions.find(session => session.userAgent === 'Second device')!;
+    expect((await post(t, 'revoke-session', { token: other.token }, cookie)).status).toBe(200);
+    expect((await get(t, 'get-session', secondCookie)).status).toBe(200);
+    expect(await (await get(t, 'get-session', secondCookie)).json()).toBeNull();
 
-    const third = await t.mutation(components.betterAuth.adapter.create, {
-      input: {
-        model: 'session',
-        data: {
-          userId: profile.authId,
-          token: 'third-device-token',
-          expiresAt: Date.now() + 3_600_000,
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        },
-      },
+    await post(
+      t,
+      'sign-in/email',
+      { email: 'devices@example.test', password },
+      undefined,
+      'Third device',
+    );
+    expect((await post(t, 'revoke-other-sessions', {}, cookie)).status).toBe(200);
+    expect(await (await get(t, 'list-sessions', cookie)).json()).toHaveLength(1);
+  });
+
+  test('a purge beyond one transaction budget resumes until the profile is gone', async () => {
+    vi.useFakeTimers();
+    const t = backend();
+    const viewer = await account(t, 'Large account');
+    await t.run(async ctx => {
+      for (let index = 0; index <= PURGE_BUDGET; index++)
+        await ctx.db.insert('commands', {
+          userId: viewer.profile.userId,
+          commandId: `purge-${index}`,
+          fingerprint: `purge-${index}`,
+          result: null,
+        });
     });
-    expect(await viewer.client.mutation(api.account.revokeOtherDevices, {})).toBe(1);
-    expect(
-      await t
-        .withIdentity({ subject: profile.authId, sessionId: third._id })
-        .query(api.auth.viewer, {}),
-    ).toBeNull();
-    expect(await viewer.client.query(api.account.devices, {})).toHaveLength(1);
+    await t.mutation(internal.account.continuePurge, { userId: viewer.profile.userId });
+    expect(await t.run(ctx => ctx.db.get(viewer.profile.userId))).not.toBeNull();
+    expect(await t.run(ctx => ctx.db.query('commands').take(2))).toHaveLength(1);
+    await t.finishAllScheduledFunctions(vi.runAllTimers);
+    expect(await t.run(ctx => ctx.db.get(viewer.profile.userId))).toBeNull();
+    expect(await t.run(ctx => ctx.db.query('commands').take(1))).toHaveLength(0);
   });
 
   test('the app-data purge deletes owned data, detaches other heroes, and preserves snapshots elsewhere', async () => {

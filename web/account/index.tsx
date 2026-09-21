@@ -15,6 +15,7 @@ import { ProfilePanel } from './profile';
 import { SecurityPanel } from './security';
 import { PreferencesPanel } from './preferences';
 import { DeletePanel } from './delete';
+import { useDevices } from './device';
 
 export const SECTIONS = ['profile', 'security', 'preferences', 'delete'] as const;
 export type Section = (typeof SECTIONS)[number];
@@ -35,8 +36,9 @@ const INTROS: Record<Section, string> = {
 export function AccountPage({ section }: { section?: string }) {
   const current: Section = SECTIONS.includes(section as Section) ? (section as Section) : 'profile';
   const viewer = useQuery(api.auth.viewer);
-  const devices = useQuery(api.account.devices);
   const session = authClient.useSession();
+  const deviceState = useDevices(session.data?.session.token);
+  const { devices } = deviceState;
   const email = session.data?.user.email ?? '';
   if (!viewer) return <Loading>Opening your account…</Loading>;
   const item =
@@ -85,7 +87,7 @@ export function AccountPage({ section }: { section?: string }) {
           {current === 'profile' && (
             <ProfilePanel viewer={viewer} email={email} refreshSession={session.refetch} />
           )}
-          {current === 'security' && <SecurityPanel devices={devices} />}
+          {current === 'security' && <SecurityPanel {...deviceState} />}
           {current === 'preferences' && <PreferencesPanel />}
           {current === 'delete' && <DeletePanel />}
         </div>

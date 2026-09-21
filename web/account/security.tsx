@@ -1,48 +1,51 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * Security section (V95): the signed-in devices (Better Auth sessions read through
- * convex/account.ts, the current one first) with sign-out per device or for every other device,
- * and the password change (Better Auth change-password; the current password is required and
- * every other session is revoked, per the spec's recent-authentication and revocation rules).
+ * Security section (V95): Better Auth's active-session route, with the current device first and
+ * sign-out per device or for every other device, plus password change with current-password
+ * confirmation and other-session revocation.
  */
 import { useState } from 'react';
-import { useMutation } from 'convex/react';
-import { api } from '../../convex/_generated/api';
 import { authClient } from '../auth-client';
 import { SignOut } from '../components/session-user';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { useToast } from '../toast';
 import { Field, Loading, Notice, errorMessage } from '../ui';
-import { describeDevice, sinceLabel } from './device';
+import { describeDevice, sinceLabel, type Device } from './device';
 
-export type Device = {
-  id: string;
-  current: boolean;
-  userAgent: string | null;
-  createdAt: number;
-  updatedAt: number;
-  expiresAt: number;
-};
-
-export function SecurityPanel({ devices }: { devices: Device[] | undefined }) {
+export function SecurityPanel({
+  devices,
+  error,
+  refresh,
+}: {
+  devices: Device[] | undefined;
+  error: string | null;
+  refresh: () => Promise<void>;
+}) {
   return (
     <>
-      <DevicesList devices={devices} />
+      <DevicesList devices={devices} error={error} refresh={refresh} />
       <PasswordForm />
     </>
   );
 }
 
-function DevicesList({ devices }: { devices: Device[] | undefined }) {
-  const revoke = useMutation(api.account.revokeDevice);
-  const revokeOthers = useMutation(api.account.revokeOtherDevices);
+function DevicesList({
+  devices,
+  error,
+  refresh,
+}: {
+  devices: Device[] | undefined;
+  error: string | null;
+  refresh: () => Promise<void>;
+}) {
   const showError = useToast();
   const [pending, setPending] = useState(false);
   async function run(action: () => Promise<unknown>) {
     setPending(true);
     try {
       await action();
+      await refresh();
     } catch (e) {
       showError(errorMessage(e));
     } finally {
@@ -58,13 +61,21 @@ function DevicesList({ devices }: { devices: Device[] | undefined }) {
             variant="ghost"
             size="sm"
             disabled={pending}
-            onClick={() => run(() => revokeOthers({}))}
+            onClick={() =>
+              run(async () => {
+                const result = await authClient.revokeOtherSessions();
+                if (result.error)
+                  throw new Error(result.error.message || 'Unable to sign out other devices.');
+              })
+            }
           >
             Sign out of other devices
           </Button>
         )}
       </div>
-      {devices === undefined ? (
+      {error ? (
+        <Notice role="alert">{error}</Notice>
+      ) : devices === undefined ? (
         <Loading>Finding your devices…</Loading>
       ) : (
         <ul className="m-0 flex list-none flex-col gap-2 p-0">
@@ -87,7 +98,13 @@ function DevicesList({ devices }: { devices: Device[] | undefined }) {
                   variant="outline"
                   size="sm"
                   disabled={pending}
-                  onClick={() => run(() => revoke({ sessionId: d.id }))}
+                  onClick={() =>
+                    run(async () => {
+                      const result = await authClient.revokeSession({ token: d.token });
+                      if (result.error)
+                        throw new Error(result.error.message || 'Unable to sign out that device.');
+                    })
+                  }
                 >
                   Sign out
                 </Button>

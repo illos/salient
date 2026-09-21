@@ -21,7 +21,16 @@ export default defineSchema({
     displayName: v.string(),
     /** V95 optional so existing profiles remain valid until a portrait is uploaded. */
     portraitId: v.optional(v.id('_storage')),
-  }).index('by_authId', ['authId']),
+  })
+    .index('by_authId', ['authId'])
+    .index('by_portrait', ['portraitId']),
+  /** V95 short-lived capability binding one generated portrait upload URL to one profile. */
+  portraitUploads: defineTable({
+    userId: v.id('users'),
+    expiresAt: v.number(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_expiry', ['expiresAt']),
   campaigns: defineTable({
     name: v.string(),
     ownerId: v.id('users'),

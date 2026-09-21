@@ -49,7 +49,7 @@ function PortraitRow({ name, src }: { name: string; src: string | null }) {
     }
     setPending(true);
     try {
-      const url = await uploadUrl({});
+      const { url, ticketId } = await uploadUrl({});
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': file.type },
@@ -57,7 +57,10 @@ function PortraitRow({ name, src }: { name: string; src: string | null }) {
       });
       if (!response.ok) throw new Error('The upload did not finish; try again.');
       const { storageId } = (await response.json()) as { storageId: string };
-      const result = await setPortrait({ storageId: storageId as Id<'_storage'> });
+      const result = await setPortrait({
+        ticketId,
+        storageId: storageId as Id<'_storage'>,
+      });
       if (!result.ok) throw new Error(result.error);
     } catch (e) {
       showError(errorMessage(e));

@@ -53,6 +53,7 @@ import type * as lib_combatOperations from "../lib/combatOperations.js";
 import type * as lib_commands from "../lib/commands.js";
 import type * as lib_compiledResults from "../lib/compiledResults.js";
 import type * as lib_compiledSource from "../lib/compiledSource.js";
+import type * as lib_conditionInstances from "../lib/conditionInstances.js";
 import type * as lib_dice from "../lib/dice.js";
 import type * as lib_encounters from "../lib/encounters.js";
 import type * as lib_engine from "../lib/engine.js";
@@ -133,6 +134,7 @@ declare const fullApi: ApiFromModules<{
   "lib/commands": typeof lib_commands;
   "lib/compiledResults": typeof lib_compiledResults;
   "lib/compiledSource": typeof lib_compiledSource;
+  "lib/conditionInstances": typeof lib_conditionInstances;
   "lib/dice": typeof lib_dice;
   "lib/encounters": typeof lib_encounters;
   "lib/engine": typeof lib_engine;

@@ -371,6 +371,11 @@ async function purgeSteps(ctx: MutationCtx, budget: Budget, user: Doc<'users'>):
   const rest: Page[] = [
     () =>
       ctx.db
+        .query('portraitUploads')
+        .withIndex('by_user', q => q.eq('userId', userId))
+        .take(PAGE),
+    () =>
+      ctx.db
         .query('joinRequests')
         .withIndex('by_user', q => q.eq('userId', userId))
         .take(PAGE),
