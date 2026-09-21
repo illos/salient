@@ -198,6 +198,54 @@ describe('V95 account operations', () => {
     expect(await (await get(t, 'list-sessions', cookie)).json()).toHaveLength(1);
   });
 
+  test('device pagination and bounded revoke cover more than Better Auth’s 100-row default', async () => {
+    const t = backend();
+    const viewer = await account(t, 'Many devices');
+    const profile = (await t.run(ctx => ctx.db.get(viewer.profile.userId)))!;
+    for (let index = 0; index < 101; index++)
+      await t.mutation(components.betterAuth.adapter.create, {
+        input: {
+          model: 'session',
+          data: {
+            userId: profile.authId,
+            token: `extra-device-${index}`,
+            userAgent: `Extra device ${index}`,
+            expiresAt: Date.now() + 3_600_000,
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+          },
+        },
+      });
+
+    let cursor: string | null = null;
+    let done = false;
+    const listed: Array<{ current: boolean }> = [];
+    while (!done) {
+      const page: {
+        page: Array<{ current: boolean }>;
+        continueCursor: string;
+        isDone: boolean;
+      } = await viewer.client.query(api.account.devicesPage, { cursor });
+      listed.push(...page.page);
+      cursor = page.continueCursor;
+      done = page.isDone;
+    }
+    expect(listed).toHaveLength(102);
+    expect(listed.filter(device => device.current)).toHaveLength(1);
+
+    let removed = 0;
+    done = false;
+    while (!done) {
+      const page = await viewer.client.mutation(api.account.revokeOtherDevices, {});
+      removed += page.removed;
+      done = page.done;
+    }
+    expect(removed).toBe(101);
+    expect(
+      (await viewer.client.query(api.account.devicesPage, { cursor: null })).page,
+    ).toHaveLength(1);
+  });
+
   test('a purge beyond one transaction budget resumes until the profile is gone', async () => {
     vi.useFakeTimers();
     const t = backend();

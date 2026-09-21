@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** Better Auth's active-session API and plain-language labels for the Security panel (V95). */
 import { useCallback, useEffect, useState } from 'react';
-import { authClient } from '../auth-client';
+import { useConvex } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 
 export type Device = {
   id: string;
@@ -13,36 +14,36 @@ export type Device = {
   expiresAt: number;
 };
 
-function millis(value: Date | string): number {
-  return value instanceof Date ? value.getTime() : new Date(value).getTime();
-}
-
-/** Uses Better Auth's unbounded active-session route; its server owns expiry filtering. */
-export function useDevices(currentToken: string | undefined) {
+/** Follows every explicit Convex cursor, then filters expiry against the browser clock. */
+export function useDevices() {
+  const convex = useConvex();
   const [devices, setDevices] = useState<Device[] | undefined>();
   const [error, setError] = useState<string | null>(null);
   const refresh = useCallback(async () => {
-    if (!currentToken) return;
-    const result = await authClient.listSessions();
-    if (result.error) {
-      setError(result.error.message || 'Unable to list signed-in devices.');
-      return;
+    try {
+      const all: Device[] = [];
+      let cursor: string | null = null;
+      let done = false;
+      while (!done) {
+        const result: { page: Device[]; continueCursor: string; isDone: boolean } =
+          await convex.query(api.account.devicesPage, { cursor });
+        all.push(...result.page);
+        cursor = result.continueCursor;
+        done = result.isDone;
+      }
+      const now = Date.now();
+      setError(null);
+      setDevices(
+        all
+          .filter(session => session.expiresAt > now)
+          .sort((a, b) =>
+            a.current === b.current ? b.updatedAt - a.updatedAt : a.current ? -1 : 1,
+          ),
+      );
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : 'Unable to list signed-in devices.');
     }
-    setError(null);
-    setDevices(
-      result.data
-        .map(session => ({
-          id: session.id,
-          token: session.token,
-          current: session.token === currentToken,
-          userAgent: session.userAgent ?? null,
-          createdAt: millis(session.createdAt),
-          updatedAt: millis(session.updatedAt),
-          expiresAt: millis(session.expiresAt),
-        }))
-        .sort((a, b) => (a.current === b.current ? b.updatedAt - a.updatedAt : a.current ? -1 : 1)),
-    );
-  }, [currentToken]);
+  }, [convex]);
   useEffect(() => {
     const pending = window.setTimeout(() => void refresh(), 0);
     return () => window.clearTimeout(pending);

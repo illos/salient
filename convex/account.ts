@@ -2,13 +2,21 @@
 /**
  * V95 account screen (docs/accounts-and-access-spec.md#accounts-and-administration): the profile
  * other players see (display name, portrait), account-bound upload lifecycle, and the scheduled
- * continuation of an account purge. Devices and credentials go through Better Auth's own routes
- * from web/account; the deletion trigger that purges app data lives in convex/auth.ts and
- * convex/lib/accountDeletion.ts.
+ * continuation of an account purge. Device reads and bulk revocation use Better Auth's component
+ * store with explicit pagination; credentials and single-session revocation use its own routes.
+ * The deletion trigger that purges app data lives in convex/auth.ts and accountDeletion.ts.
  */
 import { v, ConvexError } from 'convex/values';
-import { internal } from './_generated/api';
-import { action, internalMutation, internalQuery, mutation } from './_generated/server';
+import { components, internal } from './_generated/api';
+import {
+  action,
+  internalMutation,
+  internalQuery,
+  mutation,
+  query,
+  type MutationCtx,
+  type QueryCtx,
+} from './_generated/server';
 import { authComponent } from './auth';
 import { requireUser } from './lib/access';
 import { purgeUser } from './lib/accountDeletion';
@@ -17,6 +25,7 @@ export const MAX_DISPLAY_NAME = 80;
 export const MAX_PORTRAIT_BYTES = 2 * 1024 * 1024;
 export const PORTRAIT_UPLOAD_TTL_MS = 15 * 60 * 1000;
 const STORAGE_CLEANUP_PAGE = 100;
+const DEVICE_PAGE = 100;
 
 export const updateProfile = mutation({
   args: { displayName: v.string() },
@@ -216,6 +225,88 @@ export const clearPortrait = mutation({
     await ctx.storage.delete(user.portraitId);
     await ctx.db.patch(user._id, { portraitId: undefined });
     return null;
+  },
+});
+
+const device = v.object({
+  id: v.string(),
+  token: v.string(),
+  current: v.boolean(),
+  userAgent: v.union(v.string(), v.null()),
+  createdAt: v.number(),
+  updatedAt: v.number(),
+  expiresAt: v.number(),
+});
+
+type SessionRow = {
+  _id: string;
+  token: string;
+  expiresAt: number;
+  createdAt: number;
+  updatedAt: number;
+  userAgent?: string | null;
+};
+
+async function currentSessionId(ctx: QueryCtx | MutationCtx): Promise<string | null> {
+  const identity = (await ctx.auth.getUserIdentity()) as { sessionId?: unknown } | null;
+  return typeof identity?.sessionId === 'string' ? identity.sessionId : null;
+}
+
+/** One explicit page of sessions; the client follows the cursor and filters expiry on its clock. */
+export const devicesPage = query({
+  args: { cursor: v.union(v.string(), v.null()) },
+  returns: v.object({
+    page: v.array(device),
+    continueCursor: v.string(),
+    isDone: v.boolean(),
+  }),
+  handler: async (ctx, { cursor }) => {
+    const user = await requireUser(ctx);
+    const current = await currentSessionId(ctx);
+    const result = await ctx.runQuery(components.betterAuth.adapter.findMany, {
+      model: 'session',
+      where: [{ field: 'userId', value: user.authId }],
+      paginationOpts: { cursor, numItems: DEVICE_PAGE },
+    });
+    return {
+      page: (result.page as unknown as SessionRow[]).map(session => ({
+        id: session._id,
+        token: session.token,
+        current: session._id === current,
+        userAgent: session.userAgent ?? null,
+        createdAt: session.createdAt,
+        updatedAt: session.updatedAt,
+        expiresAt: session.expiresAt,
+      })),
+      continueCursor: result.continueCursor,
+      isDone: result.isDone,
+    };
+  },
+});
+
+/**
+ * Removes one bounded page of other sessions. The caller repeats until `done`, so the operation
+ * neither inherits Better Auth's default 100-row findMany limit nor risks one oversized mutation.
+ */
+export const revokeOtherDevices = mutation({
+  args: {},
+  returns: v.object({ removed: v.number(), done: v.boolean() }),
+  handler: async ctx => {
+    const user = await requireUser(ctx);
+    const current = await currentSessionId(ctx);
+    const result = await ctx.runQuery(components.betterAuth.adapter.findMany, {
+      model: 'session',
+      where: [{ field: 'userId', value: user.authId }],
+      paginationOpts: { cursor: null, numItems: DEVICE_PAGE },
+    });
+    const others = (result.page as unknown as SessionRow[]).filter(
+      session => session._id !== current,
+    );
+    for (const session of others)
+      await ctx.runMutation(components.betterAuth.adapter.deleteOne, {
+        input: { model: 'session', where: [{ field: '_id', value: session._id }] },
+      });
+    return { removed: others.length, done: result.isDone };
   },
 });
 

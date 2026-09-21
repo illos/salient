@@ -37,7 +37,7 @@ export function AccountPage({ section }: { section?: string }) {
   const current: Section = SECTIONS.includes(section as Section) ? (section as Section) : 'profile';
   const viewer = useQuery(api.auth.viewer);
   const session = authClient.useSession();
-  const deviceState = useDevices(session.data?.session.token);
+  const deviceState = useDevices();
   const { devices } = deviceState;
   const email = session.data?.user.email ?? '';
   if (!viewer) return <Loading>Opening your account…</Loading>;

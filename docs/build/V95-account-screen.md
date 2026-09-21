@@ -59,9 +59,10 @@ reminders); the header shows the disc alone, as pictured, and the name sits on t
    `auth.viewer.portraitUrl`, and cannot claim or delete another profile's exposed storage ID;
    replacing removes the earlier file; non-image and over-2-MB uploads are deleted; an unclaimed
    upload is cleaned after expiry; clearing removes the file and field.
-3. Devices: Better Auth's active-session route lists two sessions with the current one first in the
-   UI; its revoke-session route removes the chosen other device, and revoke-other-sessions leaves
-   only the current session. There is no wall-clock-dependent Convex query or fixed session cap.
+3. Devices: explicit Convex cursors list all Better Auth session pages, with the current one first
+   after client-side expiry filtering; Better Auth's revoke-session route removes one chosen
+   device, and a repeated bounded mutation removes every other device. A 102-session fixture proves
+   listing and revocation beyond Better Auth's pinned 100-row default.
 4. Deletion cascade (`internal.account.continuePurge` on a fixture table): the owned campaign and
    its memberships, sessions, events and chat are gone; another player's attached hero is detached
    (`campaignId` null, `liveState` null, `combatLocked` false) with its revisions intact; the
@@ -107,7 +108,11 @@ exposed storage ID, abandoned uploads had no cleanup, the custom device query de
 `Date.now()` and a 200-row cap, the headless deletion stopped at auth loss, and the bounded purge
 had no continuation-scale proof. The repair binds each upload to a short-lived profile ticket,
 refuses already-owned storage IDs, schedules orphan cleanup, and proves server-side type/size
-enforcement. Devices now use Better Auth's active-session/revocation routes directly. The headless
+enforcement. Device listing/revocation first moved to Better Auth's routes directly. The headless
 journey reads the owned campaign back as absent after deletion, and a `PURGE_BUDGET + 1` fixture
-proves the scheduled continuation. The revised focused file passes all six tests in 4.47 seconds;
-the revised candidate still requires independent re-review and a new TESTER gate.
+proves the scheduled continuation. The revised focused file passed all six tests in 4.47 seconds.
+
+2026-09-21: re-review found that pinned Better Auth itself applies a 100-row default to its
+unbounded list/revoke-other routes. The final repair follows explicit component cursors for reads
+and repeats a bounded mutation for revocation; a 102-session fixture proves neither path truncates.
+The candidate still requires final independent approval and a new TESTER gate.

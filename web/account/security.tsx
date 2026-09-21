@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * Security section (V95): Better Auth's active-session route, with the current device first and
- * sign-out per device or for every other device, plus password change with current-password
- * confirmation and other-session revocation.
+ * Security section (V95): explicitly paginated Better Auth session storage, with the current
+ * device first and sign-out per device or for every other device, plus password change with
+ * current-password confirmation and other-session revocation.
  */
 import { useState } from 'react';
+import { useMutation } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 import { authClient } from '../auth-client';
 import { SignOut } from '../components/session-user';
 import { Button } from '../components/ui/button';
@@ -39,6 +41,7 @@ function DevicesList({
   error: string | null;
   refresh: () => Promise<void>;
 }) {
+  const revokeOthers = useMutation(api.account.revokeOtherDevices);
   const showError = useToast();
   const [pending, setPending] = useState(false);
   async function run(action: () => Promise<unknown>) {
@@ -63,9 +66,8 @@ function DevicesList({
             disabled={pending}
             onClick={() =>
               run(async () => {
-                const result = await authClient.revokeOtherSessions();
-                if (result.error)
-                  throw new Error(result.error.message || 'Unable to sign out other devices.');
+                let done = false;
+                while (!done) ({ done } = await revokeOthers({}));
               })
             }
           >
