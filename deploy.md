@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V94 | `fcf13f1` | Merged and published; 1209 entries; accepted gates reused | complete; no deployment test gate |
 | V92 | `81b7931` | Merged and published; 1182 entries; hosted Shadow smoke passed | documentation closeout SHA and verified GitHub push recorded in completion handoff |
 | Stable-cloud reconciliation | `main` release source `a0a700a` | Published; targeted live checks passed | documentation closeout and verified GitHub push; exact closeout SHA in DEPLOY2 completion message |
 | V85/V86 | owner `64972e6`, integrated `4f3fe13` | Merged and published; targeted live checks passed | release closeout |
@@ -142,3 +143,16 @@ Logs: `/srv/presidium/projects/salient/test-artifacts/V75-release-c4ed53e`.
 TESTER1179 hosted smoke passed in 1.27 s: public HTML, CSS and all three referenced fonts
 returned HTTP200 with exact hosted-build hashes; Quiet background/accent/Schibsted tokens were
 present. No browser run. Evidence: `/srv/presidium/projects/salient/test-artifacts/V75-hosted-c4ed53e`.
+
+### V94 publication — 2026-09-21
+
+Reviewed owner `7ec2d1f` integrated with current main UI polish at
+`fcf13f11e91646579e9a5a05e1650255bc2ae21b`. V95 is not included.
+Accepted feature evidence reused: 954 tests and Forge4/4 on `2f3f938`, targeted import-repair
+checks and isolated Tactician cohort on `71530ba` (8.54 s). No tests repeated during promotion.
+Backend publication passed schema validation; content reseed returned 1209 entries. The committed
+snapshot hash is `sha256:b4e0d992e181c9bac991ca9487600fabeb1ce20a130781dc38128cdba0fa5035`.
+Hosted build and frontend publication succeeded; Worker `c4b6b8f4-dd09-4706-934a-be5d4fac73a3`.
+The user removed the deployment smoke-test requirement in policy commit `c465eb6`; no post-deploy
+smoke, cohort, manifest readback or suite was run. Temporary credentials removed; private hosted
+helpers stopped. Logs: `/srv/presidium/projects/salient/test-artifacts/V94-release-fcf13f1`.

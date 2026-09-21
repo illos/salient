@@ -113,14 +113,22 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current frontend release — V75 Quiet theme
+## Current release — V94 Tactician level one
+
+Backend/frontend source `fcf13f11e91646579e9a5a05e1650255bc2ae21b` published on 2026-09-21.
+Worker `c4b6b8f4-dd09-4706-934a-be5d4fac73a3`; content reseed returned 1209 entries, with committed
+snapshot hash `sha256:b4e0d992e181c9bac991ca9487600fabeb1ce20a130781dc38128cdba0fa5035`.
+Accepted TESTER evidence was reused. Publication commands succeeded; no deployment smoke tests
+or repeated test gates. See [V94](build/V94-tactician-level-one.md) and the [ledger](../deploy.md).
+
+## Previous frontend release — V75 Quiet theme
 
 Frontend source `c4ed53e48c74f5783b876cd6a7c09fafe2f0795c` published on 2026-09-20 as
 Worker `31c58f6d-cfe2-4848-945e-908aa4104003`. User-approved presentation changes only;
 backend and content remain at the V92 identities below. Hosted build passed; the full TESTER
 check was reused. See [V75](build/V75-quiet-theme.md) and the [deployment ledger](../deploy.md).
 
-## Current backend/content — V92 Shadow level one
+## Previous backend/content — V92 Shadow level one
 
 Backend/frontend source `81b79316dbf11e18d44f3feab6e7f1d3b49f5d22` published on 2026-09-20.
 Worker `f6951468-0bfe-49bd-b0ab-1ec9628334fc`; content reseeded to 1182 entries with hash

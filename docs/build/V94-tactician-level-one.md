@@ -198,3 +198,9 @@ and above, any other class. Spec sections: `docs/character-wizard-spec.md#3-deci
   gameplay gate954 and Forge4/4 from2f3f938. Independent rules/implementation review passes.
   V94 acceptance is complete on the branch; DEPLOY2 integration and shared cloud promotion remain
   pending. This closeout changes documentation only.
+
+- 2026-09-21: DEPLOY2 integrated the reviewed branch with current main UI polish at `fcf13f1`.
+  Backend, 1209-entry content reseed, hosted build and frontend publication succeeded. Worker:
+  `c4b6b8f4-dd09-4706-934a-be5d4fac73a3`. V95 excluded. Accepted feature gates above were reused;
+  no deployment test ran. User explicitly removed routine smoke/live gates in `c465eb6`.
+  Publication logs: `/srv/presidium/projects/salient/test-artifacts/V94-release-fcf13f1`.
