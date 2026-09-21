@@ -220,14 +220,8 @@ export function HeroSoFar({
           </div>
           <ul className="m-0 flex list-none flex-col gap-1 p-0">
             {problems.map((d, i) => (
-              <li
-                key={i}
-                className="flex items-baseline gap-2 rounded-md bg-muted px-3 py-2 text-sm"
-              >
-                <span
-                  aria-hidden
-                  className="size-1.5 shrink-0 translate-y-1.5 rounded-full bg-primary"
-                />
+              <li key={i} className="flex items-center gap-2 rounded-md bg-muted px-3 py-2 text-sm">
+                <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-primary" />
                 <span className="min-w-0 flex-1 font-medium">{decisionLabel(d.decisionId)}</span>
                 <span className="shrink-0 text-muted-foreground">
                   {readableGuidance(d.message)}
