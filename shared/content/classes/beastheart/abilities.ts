@@ -1077,9 +1077,13 @@ export const BEASTHEART_ACTIONS: BeastheartAction[] = [
       'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
   },
 ];
-export function beastheartActionText(a: BeastheartAction): string {
+export function beastheartSourceText(a: BeastheartAction): string {
   const source = [...abilitySources, ...featureSources].find(
     s => s.sourcePath === `vendor/steel-compendium/${a.sourcePath}`,
   );
-  return `${a.activationCondition}\n\n${source?.text ?? ''}`;
+  if (!source) throw new Error(`Missing Beastheart source: ${a.sourcePath}`);
+  return source.text;
+}
+export function beastheartActionText(a: BeastheartAction): string {
+  return `${a.activationCondition}\n\n${beastheartSourceText(a)}`;
 }

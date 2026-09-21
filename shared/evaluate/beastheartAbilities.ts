@@ -2,6 +2,7 @@
 import {
   BEASTHEART_ACTIONS,
   beastheartActionText,
+  beastheartSourceText,
 } from '../content/classes/beastheart/abilities.ts';
 import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
 const managed = (ability: Pick<GrantedAbility, 'name' | 'sourcePath' | 'kind'>) =>
@@ -40,7 +41,7 @@ export function beastheartAbilities(
       ...(a.cost ? { cost: { resource: 'ferocity', amount: a.cost } } : {}),
       provenance: {
         ...parent.provenance,
-        source: { ...parent.provenance.source, path: a.sourcePath, quote: beastheartActionText(a) },
+        source: { ...parent.provenance.source, path: a.sourcePath, quote: beastheartSourceText(a) },
       },
     });
   }

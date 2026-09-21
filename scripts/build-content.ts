@@ -57,7 +57,6 @@ export const SELECTIONS: ManifestSelection[] = [
       'feature/ability/beastheart/level-1',
       'feature/companion/beastheart',
       'feature/ability/companion/beastheart',
-      'monster/companion/beastheart/statblock',
     ],
     basis:
       'docs/build/V106-beastheart-level-one.md#scope: Q-CHAR-14 supplemental editor inclusion; only level-one entries admitted.',
