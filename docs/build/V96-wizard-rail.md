@@ -18,6 +18,9 @@ unchanged.
 - `web/wizard/index.tsx`: hide `step.think`, `step.free-strikes` and `step.connections`, number
   the presented steps from one, narrow the rail column.
 - `web/wizard/presentation.ts`: remove the unused source-number helper.
+- `web/wizard/culture-preset.tsx`: replace the starting-culture dropdown with a card grid,
+  grouped ancestral, professional, then bespoke, each card showing the choices that preset makes
+  as chips.
 - Out of scope: the decision definitions (`presentedInV001` stays content data), the
   `connections.notes` headless route and its sheet field, the centre and hero-so-far columns.
 - docs/character-wizard-spec.md#main-creation-and-editing
@@ -44,3 +47,8 @@ unchanged.
   both already shown in the hero column and on the sheet, and the one decision the source names
   there ("it's up to you to decide what exactly your free strikes are") is authored flavor that
   belongs to Details. Hidden on the user's instruction; presented steps are now 1-7.
+- 2026-09-21: culture step relaid out from the user's Forge Steel reference screenshot, in Quiet
+  rather than Forge's chrome: sentence-case group labels instead of tracked uppercase, no
+  per-card category badge (the group heading already says it), and the aspects shown as chips of
+  the actual choices rather than a prose description, on the user's follow-up. Cards are native
+  radios in one group, so the value still moves through the shared choice transition.
