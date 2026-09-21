@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V101 Fury level one
+## Current release — V102 Troubadour level one
+
+Backend/frontend source `0bb1ead31771b6b148102fefba9f0f22706ae2dd` published on 2026-09-21 as
+Worker `e2663b2f-4575-43a2-9bae-b9fb906f1997`. Backend/schema validation, content reseed (1402
+entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test or
+rerun. See [V102](build/V102-troubadour-level-one.md) and the [ledger](../deploy.md).
+
+## Previous release — V101 Fury level one
 
 Backend/frontend source `e31335d0fa35ebcb2cc9e50af60d2d56f6c96c7f` published on 2026-09-21 as
 Worker `179f7087-1c06-4e07-a626-2ebc6473d69a`. Backend/schema validation, content reseed (1362

@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V102 | `0bb1ead` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V101 | `e31335d` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V100 | `5079192` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V99 | `517ea19` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -238,3 +239,14 @@ upload succeeded. Worker `179f7087-1c06-4e07-a626-2ebc6473d69a`.
 No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V101-release-e31335d`.
 Committed content snapshot hash: `sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8`.
+
+### V102 Troubadour level one publication — 2026-09-21
+
+Reviewed owner `0bb1ead31771b6b148102fefba9f0f22706ae2dd` fast-forwarded into main.
+Accepted evidence reused from `189cec8`: full 990-test gate (195 s), and isolated four-build/
+44-action cohort (69.7 s).
+Backend publication/schema validation, content reseed (1402 entries), hosted build and frontend
+upload succeeded. Worker `e2663b2f-4575-43a2-9bae-b9fb906f1997`.
+No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V102-release-0bb1ead`.
+Committed content snapshot hash: `sha256:71c51714ee7ea4132cd14fdf6585bb945d656be91e20727320ef462cf4ab2095`.

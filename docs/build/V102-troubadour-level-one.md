@@ -61,3 +61,11 @@ Rules authority: pinned Compendium `fb83a789da8f0327a389c277a0c790b1648d5810`, u
   Artifacts: `/srv/presidium/projects/salient/test-artifacts/V102-189cec8`.
 - Ready for DEPLOY2. Source/runtime frozen at `189cec8`; this closeout adds evidence only.
   Reuse accepted TESTER results for publication, with no smoke or repeated live gate.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `0bb1ead` into main and published the backend, 1402-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded. Worker:
+`e2663b2f-4575-43a2-9bae-b9fb906f1997`. Accepted 990-test gate and isolated four-build/44-action
+results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V102-release-0bb1ead`.

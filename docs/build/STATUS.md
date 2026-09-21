@@ -112,4 +112,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V99 | [Censor level one](V99-censor-level-one.md) | Merged (`517ea19`); cloud dev published; accepted TESTER results reused |
 | V100 | [Conduit level one](V100-conduit-level-one.md) | Merged (`5079192`); cloud dev published; accepted TESTER results reused |
 | V101 | [Fury level one](V101-fury-level-one.md) | Merged (`e31335d`); cloud dev published; accepted TESTER results reused |
-| V102 | [Troubadour level one](V102-troubadour-level-one.md) | Ready for DEPLOY2; 990 tests + four-build/44-action journey passed |
+| V102 | [Troubadour level one](V102-troubadour-level-one.md) | Merged (`0bb1ead`); cloud dev published; accepted TESTER results reused |
