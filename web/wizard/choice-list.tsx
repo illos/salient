@@ -229,3 +229,50 @@ export function StepNav({
     </div>
   );
 }
+
+/**
+ * A short list of values chosen inline (V96): the characteristic arrays, where each option is a
+ * handful of numbers and a full card per option, each with its own reference, buried the choice.
+ * The section keeps the one reference they all share.
+ */
+export function CompactChoices({
+  label,
+  options,
+  value,
+  onSelect,
+}: {
+  label: string;
+  options: { id: string; value: string; supported: boolean }[];
+  value?: string;
+  onSelect: (value: string) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={label}>
+      {options.map(option => {
+        const checked = value === option.value;
+        return (
+          <label
+            key={option.id}
+            className={cn(
+              'inline-flex h-9 items-center rounded-full bg-muted px-4 text-base tabular-nums transition-colors duration-(--motion-fast)',
+              checked ? 'ring-1 ring-primary ring-inset' : option.supported && 'hover:bg-accent',
+              option.supported ? 'cursor-pointer' : 'cursor-default text-muted-foreground',
+              'has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring',
+            )}
+          >
+            <input
+              type="radio"
+              name={label}
+              aria-label={option.value}
+              checked={checked}
+              disabled={!option.supported}
+              onChange={() => onSelect(option.value)}
+              className="sr-only"
+            />
+            {option.value}
+          </label>
+        );
+      })}
+    </div>
+  );
+}

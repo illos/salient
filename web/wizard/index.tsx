@@ -71,7 +71,14 @@ import {
 } from './presentation';
 import { WizardHeader } from './header';
 import { StepRail, type RailStep } from './rail';
-import { ChoiceList, ChoiceRow, ChoiceSection, StepNav, StepTitle } from './choice-list';
+import {
+  ChoiceList,
+  ChoiceRow,
+  ChoiceSection,
+  CompactChoices,
+  StepNav,
+  StepTitle,
+} from './choice-list';
 import { cn } from 'cn';
 import { HeroSoFar } from './hero-so-far';
 import { PrimaryChoice } from './primary-choice';
@@ -138,6 +145,8 @@ const NESTED_STEPS: Record<string, string> = { 'step.kit': 'step.class' };
  * before they are chosen, so each needs its own text and reference on the page.
  */
 const CARD_CATALOGS = new Set(['complication.choice']);
+/** Decisions whose options are short enough to read inline: the class characteristic arrays. */
+const COMPACT_CHOICES = /\.characteristic-array$/;
 /** Anchor for a decision, so the rail can jump to the choice it names (V96). */
 const anchorId = (decisionId: string) => `choice-${decisionId.replace(/\./g, '-')}`;
 /** The rail heading's reference: the whole Making a Hero chapter. */
@@ -491,6 +500,27 @@ export function DecisionEditor({
     const options = decision.options.filter(
       option => pool.values.includes(option.value) || option.requiresFeature,
     );
+    // A handful of short values reads inline, without a card or a reference each (V96).
+    if (COMPACT_CHOICES.test(decision.id)) {
+      control = (
+        <CompactChoices
+          label={label}
+          value={typeof value === 'string' ? value : undefined}
+          options={options.map(option => ({
+            id: option.id,
+            value: option.value,
+            supported: option.supportedInV001 && pool.values.includes(option.value),
+          }))}
+          onSelect={next => onSelect(decision.id, next)}
+        />
+      );
+      return (
+        <ChoiceSection label={label} reference={reference}>
+          {control}
+          <Diagnostics list={diagnostics} />
+        </ChoiceSection>
+      );
+    }
     // A big catalog the hero reads before choosing — the hundred complications — is a filtered
     // card grid, each card carrying its own text and reference (V96). Others keep the select.
     const cards = CARD_CATALOGS.has(decision.id);
