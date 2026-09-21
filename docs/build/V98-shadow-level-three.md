@@ -59,3 +59,7 @@ Guided progression remains deferred.
 - TESTER initial full run at `3482943` was cancelled at 24.3s after reproducing the stale V32
   globally-unsupported-level-3 expectation. Changed its sentinel to level 4; Shadow3 and unsupported
   Fury3 are separately covered in V98. No backend/headless had started.
+- TESTER `b0c1ed5` full run exited 1 in 11.1s: 378 engine tests passed, one V45 foundation
+  assertion also treated level 3 as globally unsupported. Updated that sentinel to 4; a repository
+  search found no further unsupported-level-3 assertions. Artifacts:
+  `/srv/presidium/projects/salient/test-artifacts/V98-b0c1ed5`. No backend had started.

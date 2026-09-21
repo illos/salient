@@ -61,7 +61,7 @@ test('V45 incomplete kit and invalid levels retain absent values and explicit di
   assert.equal(incomplete.partial?.staminaMaximum, undefined);
   assert.equal(incomplete.partial?.recoveryValue, undefined);
   assert.equal(incomplete.partial?.stability, undefined);
-  for (const level of [-1, 0, 1.5, 3, 10, Number.NaN, Infinity]) {
+  for (const level of [-1, 0, 1.5, 4, 10, Number.NaN, Infinity]) {
     assert.equal(isSupportedDefinitionLevel(level), false);
     assert.equal(characterSupportDiagnostics(level, fury.selections)[0].decisionId, 'class.level');
     assert.equal(evaluate(fury.selections, level).baseline, null);
