@@ -174,9 +174,14 @@ describe('committed snapshot', () => {
     expect(manifest.entryCount).toBe(manifest.entries.length);
     expect(manifest.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
-  test('only core sourcebooks are included; the supplemental paths are recorded as excluded', () => {
-    for (const row of manifest.entries)
-      expect(INCLUDED_SOURCEBOOKS.has(row.id.split('/')[0]), row.id).toBe(true);
+  test('core content and explicit Beastheart level one are included; other supplements remain excluded', () => {
+    for (const row of manifest.entries) {
+      if (row.id.startsWith('mcdm.beastheart.v1/')) {
+        expect(row.sourcePath).toMatch(
+          /(?:class\/beastheart\.md|monster\/companion\/beastheart\/statblock\/[^/]+\.md|feature\/(?:ability\/)?(?:beastheart\/level-1|companion\/beastheart\/[^/]+\/level-1)\/[^/]+\.md)$/,
+        );
+      } else expect(INCLUDED_SOURCEBOOKS.has(row.id.split('/')[0]), row.id).toBe(true);
+    }
     const excludedPaths = manifest.excluded.map(row => row.path);
     // docs/compendium-navigation.md: chapter/perks.md is Beastheart, chapter/rewards.md is Summoner.
     expect(excludedPaths).toContain('chapter/perks.md');

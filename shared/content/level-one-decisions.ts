@@ -1,4 +1,8 @@
 import {
+  classProfile as beastheartProfile,
+  getLevelOneDecisions as beastheartDecisions,
+} from './classes/beastheart/level-one.ts';
+import {
   classProfile as talentProfile,
   getLevelOneDecisions as talentDecisions,
 } from './classes/talent/level-one.ts';
@@ -95,6 +99,7 @@ allow('ancestry.choice', [
   'Revenant',
 ]);
 allow('career.choice', ["Mage's Apprentice"]);
+decision('class.choice').options!.push(option('Beastheart', path('class/beastheart')));
 allow('class.choice', [
   'Elementalist',
   'Shadow',
@@ -121,6 +126,7 @@ definitions.classProfiles = structuredClone({
   Troubadour: troubadourProfile,
   Null: nullProfile,
   Talent: talentProfile,
+  Beastheart: beastheartProfile,
 });
 
 /**
@@ -132,6 +138,11 @@ delete kitChoice.dependsOn;
 kitChoice.dependsOnAny = ['class.fury.aspect', 'class.choice'];
 kitChoice.optionsByParent = {
   ...kitChoice.optionsByParent,
+  Beastheart: {
+    source: path('feature/beastheart/level-1/kit'),
+    quote: 'You can use and gain the benefits of a kit.',
+    optionsFrom: ['pool.kits.standard'],
+  },
   Shadow: {
     source: path('feature/shadow/level-1/kit'),
     quote: 'You can use and gain the benefits of a kit.',
@@ -250,3 +261,4 @@ append('step.class', tacticianDecisions(definitions.pools));
 export default definitions;
 
 append('step.class', talentDecisions(definitions.pools));
+append('step.class', beastheartDecisions(definitions.pools));

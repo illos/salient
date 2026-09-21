@@ -273,7 +273,34 @@ export interface SupportingChoice {
   actor?: 'owner' | 'Director' | 'owner+Director';
 }
 
+/** Beastheart build-time companion; separate creature, no live/initiative integration implied. */
+export interface CompanionBaseline {
+  name: string;
+  sourcePath: string;
+  characteristics: Record<Characteristic, number>;
+  size: string;
+  speed: number;
+  stability: number;
+  disengage: number;
+  movement: string;
+  staminaMaximum: number;
+  recoveriesMaximum: 0;
+  recoveryValue: number;
+  windedValue: number;
+  freeStrike: number;
+  meleeDamageBonus: [number, number, number];
+  rangedDamageBonus: [number, number, number];
+  meleeDistanceBonus: number;
+  rangedDistanceBonus: number;
+  potency: { weak: number; average: number; strong: number };
+  immunity: string;
+  skills: string[];
+  features: string[];
+  abilities: string[];
+  provenance: Provenance[];
+}
 export interface DerivedBaseline {
+  companion?: CompanionBaseline;
   level: DerivedValue<number>;
   ancestry: DerivedValue<string>;
   class: DerivedValue<string>;

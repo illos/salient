@@ -48,6 +48,21 @@ export const INCLUDED_SOURCEBOOKS = new Set(['mcdm.heroes.v1', 'mcdm.monsters.v1
  */
 export const SELECTIONS: ManifestSelection[] = [
   {
+    id: 'beastheart-level-one',
+    description:
+      'Explicitly supported supplemental Beastheart level-one choices and companion sources.',
+    paths: [
+      'class/beastheart.md',
+      'feature/beastheart/level-1',
+      'feature/ability/beastheart/level-1',
+      'feature/companion/beastheart',
+      'feature/ability/companion/beastheart',
+      'monster/companion/beastheart/statblock',
+    ],
+    basis:
+      'docs/build/V106-beastheart-level-one.md#scope: Q-CHAR-14 supplemental editor inclusion; only level-one entries admitted.',
+  },
+  {
     id: 'supporting-character-choices',
     description:
       'V37 borrowed Dragon Knight traits and abilities; Grounded sources are already in the Elementalist selection.',
@@ -388,7 +403,14 @@ function loadFile(root: string, relativePath: string, selection: string): Loaded
   if (typeof name !== 'string' || typeof scc !== 'string' || typeof type !== 'string')
     throw new Error(`${relativePath}: frontmatter must state string name, scc and type.`);
   const sourcebook = scc.split('/')[0];
-  if (!INCLUDED_SOURCEBOOKS.has(sourcebook))
+  const beastheartLevelOne =
+    sourcebook === 'mcdm.beastheart.v1' &&
+    (relativePath === 'class/beastheart.md' ||
+      /^monster\/companion\/beastheart\/statblock\/[^/]+\.md$/.test(relativePath) ||
+      /^(?:feature\/(?:ability\/)?beastheart\/level-1|feature\/(?:ability\/)?companion\/beastheart\/[^/]+\/level-1)\/[^/]+\.md$/.test(
+        relativePath,
+      ));
+  if (!INCLUDED_SOURCEBOOKS.has(sourcebook) && !beastheartLevelOne)
     return {
       exclusion: {
         path: relativePath,

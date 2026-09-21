@@ -398,6 +398,46 @@ export function DetailsRows({
             />
           </li>
         )}
+      {partial?.companion && (
+        <li className="space-y-2 py-3" aria-label="Beastheart companion">
+          <h3 className="text-lg font-medium">Companion · {partial.companion.name}</h3>
+          <p>
+            Size {partial.companion.size} · Speed {partial.companion.speed} · Stability{' '}
+            {partial.companion.stability} · Disengage {partial.companion.disengage}
+          </p>
+          <p>
+            {Object.entries(partial.companion.characteristics)
+              .map(([key, value]) => `${key} ${value}`)
+              .join(' · ')}
+          </p>
+          <p>
+            Stamina maximum {partial.companion.staminaMaximum} · Winded{' '}
+            {partial.companion.windedValue} · Recovery value {partial.companion.recoveryValue}. Uses
+            the hero’s Recoveries.
+          </p>
+          <p>
+            Movement: {partial.companion.movement} · Immunity: {partial.companion.immunity}
+          </p>
+          <p>
+            Melee damage bonus: {partial.companion.meleeDamageBonus.join(' / ')} · Printed free
+            strike: {partial.companion.freeStrike}. No ranged free strike.
+          </p>
+          <p>
+            Ranged damage bonus: {partial.companion.rangedDamageBonus.join(' / ')} · Distance
+            bonuses: melee {partial.companion.meleeDistanceBonus}, ranged{' '}
+            {partial.companion.rangedDistanceBonus} · Potency: {partial.companion.potency.weak} /{' '}
+            {partial.companion.potency.average} / {partial.companion.potency.strong}
+          </p>
+          <p>Shared skills: {partial.companion.skills.join(', ')}</p>
+          <p>Species features: {partial.companion.features.join(', ')}</p>
+          <p>Species actions: {partial.companion.abilities.join(', ')}</p>
+          <p className="text-sm text-muted-foreground">
+            Track the companion’s current Stamina, conditions and Rampage separately. Companion
+            actions are manual records in the action list; shared turns and companion targeting are
+            not yet automated. Kit signature abilities belong to the Beastheart only.
+          </p>
+        </li>
+      )}
       <DetailRow label="Appearance" value={sheet.authored.appearance || '—'} />
       <DetailRow label="Biography" value={sheet.authored.biography || '—'} />
     </ul>

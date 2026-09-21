@@ -1,3 +1,4 @@
+import { beastheartAbilitySource } from '../../shared/evaluate/beastheartAbilities';
 import { elementalistAbilitySource } from '../../shared/evaluate/elementalistAbilities';
 import { talentAbilitySource } from '../../shared/evaluate/talentAbilities';
 import { nullAbilitySource } from '../../shared/evaluate/nullAbilities';
@@ -578,6 +579,7 @@ export async function abilitiesFor(
       ),
     ]) {
       const elementalistSource = elementalistAbilitySource(grant);
+      const beastheartSource = beastheartAbilitySource(grant);
       const talentSource = talentAbilitySource(grant);
       const nullSource = nullAbilitySource(grant);
       const troubadourSource = troubadourAbilitySource(grant);
@@ -585,6 +587,7 @@ export async function abilitiesFor(
       const conduitSource = conduitAbilitySource(grant);
       const censorSource = censorAbilitySource(grant);
       const tacticianSource =
+        beastheartSource ??
         elementalistSource ??
         talentSource ??
         nullSource ??
@@ -625,7 +628,7 @@ export async function abilitiesFor(
         continue;
       }
       if (tacticianSource) {
-        const id = `${talentSource ? 'talent' : elementalistSource ? 'elementalist' : nullSource ? 'null' : troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
+        const id = `${beastheartSource ? 'beastheart' : talentSource ? 'talent' : elementalistSource ? 'elementalist' : nullSource ? 'null' : troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
         granted.push(
           build({
             abilityId: id,

@@ -1,4 +1,6 @@
 import { elementalistAbilities } from './elementalistAbilities.ts';
+import { deriveBeastheartCompanion, applyBeastheartModifiers } from './classes/beastheart.ts';
+import { beastheartAbilities } from './beastheartAbilities.ts';
 import { applyTalentModifiers } from './classes/talent.ts';
 import { talentAbilities } from './talentAbilities.ts';
 import { applyNullModifiers } from './classes/null.ts';
@@ -949,6 +951,8 @@ class Evaluation {
     out.abilities = nullAbilities(out.features, out.abilities);
     if (this.available.has('class.fury.action-options'))
       out.abilities = furyAbilities(out.features, out.abilities);
+    out.abilities = beastheartAbilities(out.features, out.abilities);
+    deriveBeastheartCompanion(this, out);
     this.deriveSupportingChoices(out);
     const items = startingRewardItems(out.features ?? [], out.initialItems);
     if (items.length) out.initialItems = items;
@@ -1355,6 +1359,7 @@ class Evaluation {
     applyElementalistModifiers(this, out);
     applyConduitModifiers(this, out);
     applyTalentModifiers(this, out);
+    applyBeastheartModifiers(this, out);
     applyNullModifiers(this, out);
   }
 

@@ -32,8 +32,10 @@ export function liveCompiledSupportReport(inputs: AuditInputs = readInputs()) {
       (['hero-standalone', 'kit-signature', 'granted'].includes(entry.context.corpus) &&
         (commonActions.has(entry.id) || grants.some(g => g.selectable === 'selectable'))) ||
       (entry.context.corpus === 'foe-ability' && loadableFoes.has(entry.context.parent ?? ''));
-    const boundary =
-      entry.context.corpus === 'kit-signature'
+    const manualBeastheart = entry.id.startsWith('mcdm.beastheart.v1/');
+    const boundary = manualBeastheart
+      ? 'Explicit Beastheart/companion manual record; shared Ferocity payment only. Companion combat and turn integration deferred.'
+      : entry.context.corpus === 'kit-signature'
         ? 'Unchanged kit signatures retain A05 compatibility.'
         : !reachable
           ? 'No current standalone grant or public ordinary-foe loading path.'
@@ -43,7 +45,7 @@ export function liveCompiledSupportReport(inputs: AuditInputs = readInputs()) {
     return {
       ...entry,
       live: reachable
-        ? entry.execution === 'supported'
+        ? entry.execution === 'supported' && !manualBeastheart
           ? 'compiled'
           : 'legacy-compatibility'
         : 'not-reachable',
