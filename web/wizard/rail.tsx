@@ -28,6 +28,8 @@ export interface RailStep {
   /** Choices this step presents right now, and how many are recorded. */
   choices: number;
   decided: number;
+  /** The step's own choices, listed under it while the hero is inside the step. */
+  items: { id: string; label: string; done: boolean }[];
   /** No outstanding problems and at least one recorded decision (or nothing to decide, once visited). */
   done: boolean;
   /** The hero moved past this step: an outstanding choice here is something they left behind. */
@@ -69,6 +71,7 @@ export function StepRail({
   steps,
   currentIndex,
   onSelect,
+  onSelectItem,
   footer,
   hint,
 }: {
@@ -79,6 +82,8 @@ export function StepRail({
   steps: RailStep[];
   currentIndex: number;
   onSelect: (index: number) => void;
+  /** Jump to one of the current step's choices. */
+  onSelectItem?: (decisionId: string) => void;
   /** Step navigation, at the foot of the rail (V96). */
   footer?: React.ReactNode;
   /** One line under the navigation: what this step still owes and what comes next. */
@@ -161,6 +166,29 @@ export function StepRail({
                   </span>
                 )}
               </button>
+              {/* Inside a step, its own choices list under it, and picking one jumps to it. */}
+              {current && step.items.length > 0 && (
+                <ol className="m-0 mb-1 flex list-none flex-col p-0">
+                  {step.items.map(item => (
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        className="flex w-full items-center gap-2.5 rounded-md py-1 pr-2 pl-[calc(0.5rem_+_1.5rem_+_0.625rem)] text-left text-sm text-muted-foreground transition-colors duration-(--motion-fast) hover:bg-muted hover:text-foreground"
+                        onClick={() => onSelectItem?.(item.id)}
+                      >
+                        <span
+                          aria-hidden
+                          className={cn(
+                            'size-1.5 shrink-0 rounded-full',
+                            item.done ? 'bg-foreground' : 'bg-placeholder',
+                          )}
+                        />
+                        <span className="min-w-0 flex-1 truncate">{item.label}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+              )}
             </li>
           );
         })}

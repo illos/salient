@@ -211,3 +211,8 @@ chosen; it needs its own slice and headless proof.
   which reports the same availability the rail uses: with a Devil culture preset the culture step
   offers nine decisions, five of them fixed by the preset, so the rail reads 0/4; before a preset
   it reads 0/6; Devil ancestry reads 1/3.
+- 2026-09-21: the rail is two levels. The step the hero is inside lists its own choices beneath
+  it, each with a dot showing whether it is recorded, and picking one scrolls to that choice in
+  the centre column. The items are the same derived list the step's decided-over-presented count
+  uses, so the sub-menu and the count can never disagree, and every rendered decision now carries
+  an anchor id for the jump.

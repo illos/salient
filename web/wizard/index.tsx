@@ -119,6 +119,8 @@ const PRESET_FIXED_ASPECTS = new Set([
  */
 const STICKY_PANE =
   'sticky top-(--page-gap) max-h-[calc(100dvh_-_var(--page-gap)_*_2)] overflow-y-auto';
+/** Anchor for a decision, so the rail can jump to the choice it names (V96). */
+const anchorId = (decisionId: string) => `choice-${decisionId.replace(/\./g, '-')}`;
 /** The rail heading's reference: the whole Making a Hero chapter. */
 const BUILDER_REFERENCE = { id: 'mcdm.heroes.v1/chapter/making-a-hero', label: 'Making a Hero' };
 
@@ -1159,6 +1161,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
       problems,
       decided,
       choices: choices.length,
+      items: choices.map(d => ({
+        id: d.id,
+        label: d.label ?? decisionLabel(d.id),
+        done: AUTHORED_FIELDS[d.id]
+          ? Boolean(authored[AUTHORED_FIELDS[d.id]!])
+          : d.id in selections,
+      })),
       done,
       passed: index < reached,
     };
@@ -1219,20 +1228,21 @@ function Wizard({ character }: { character: WizardCharacter }) {
     target?.scrollIntoView({ block: 'nearest' });
   }, [primaryExpanded, focusAfterChange]);
   const renderDecision = (decision: Decision, onSelect = select, row?: string) => (
-    <DecisionEditor
-      key={decision.id}
-      decision={decision}
-      definitions={definitions}
-      step={step}
-      selections={selections}
-      onSelect={onSelect}
-      authored={authored}
-      onAuthored={author}
-      diagnostics={evaluation?.diagnostics[decision.id]}
-      lockedBy={lockedByPreset(decision.id)}
-      baseline={evaluation?.baseline ?? evaluation?.partial}
-      row={row}
-    />
+    <div key={decision.id} id={anchorId(decision.id)}>
+      <DecisionEditor
+        decision={decision}
+        definitions={definitions}
+        step={step}
+        selections={selections}
+        onSelect={onSelect}
+        authored={authored}
+        onAuthored={author}
+        diagnostics={evaluation?.diagnostics[decision.id]}
+        lockedBy={lockedByPreset(decision.id)}
+        baseline={evaluation?.baseline ?? evaluation?.partial}
+        row={row}
+      />
+    </div>
   );
   const previous = stepIndex > 0 ? PRESENTED[stepIndex - 1] : undefined;
   const next = stepIndex < PRESENTED.length - 1 ? PRESENTED[stepIndex + 1] : undefined;
@@ -1353,6 +1363,11 @@ function Wizard({ character }: { character: WizardCharacter }) {
             steps={railSteps}
             currentIndex={stepIndex}
             onSelect={goTo}
+            onSelectItem={id =>
+              document
+                .getElementById(anchorId(id))
+                ?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+            }
             hint={
               pointsOwed.length
                 ? `${pointsOwed.join(' · ')}. ${next ? `${stepName(next)} comes next.` : ''}`
