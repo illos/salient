@@ -17,10 +17,12 @@ import conditionJson from './condition.json';
 import cultureJson from './culture.json';
 import featureJson from './feature.json' with { type: 'json' };
 import featureblockJson from './featureblock.json';
+import godJson from './god.json';
 import kitJson from './kit.json';
 import monsterJson from './monster.json';
 import perkJson from './perk.json';
 import ruleJson from './rule.json';
+import saintJson from './saint.json';
 import skillJson from './skill.json';
 import skillGroupJson from './skill-group.json';
 import statblockJson from './statblock.json';
@@ -39,10 +41,12 @@ export const byKind: Record<string, ContentEntry[]> = {
   'culture': typed(cultureJson),
   'feature': typed(featureJson),
   'featureblock': typed(featureblockJson),
+  'god': typed(godJson),
   'kit': typed(kitJson),
   'monster': typed(monsterJson),
   'perk': typed(perkJson),
   'rule': typed(ruleJson),
+  'saint': typed(saintJson),
   'skill': typed(skillJson),
   'skill-group': typed(skillGroupJson),
   'statblock': typed(statblockJson),

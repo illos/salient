@@ -47,3 +47,12 @@ uses a Compendium-derived independent ledger rather than extending the existing 
 - Source inventory contains four signature, four 3-Wrath and four 5-Wrath choices, Judgment,
   My Life for Yours, and three domain source abilities. Twenty-five embedded actions retain
   conditional timing and manual effects. Source names use their exact pinned punctuation.
+- Author checks: both TypeScript projects pass; focused Censor evaluator 3/3 and touched lint pass.
+  Initial source review found no blockers (ENGINE, Chords 1380); final proof review pending.
+- TESTER generation at `595f3b9` passed all three generators in 1.00/0.68/0.88s, yielding 1306
+  content entries. Artifacts: `/srv/presidium/projects/salient/test-artifacts/V99-595f3b9-generation`.
+  Added seventeen explicit source ability IDs to the audit allowance; original V88 rows remain.
+- Live proof includes twelve admitted domain builds, custom-portfolio transition/save readback,
+  all 42 new action names, fixed-cost exhaustion, rolled damage/manual clauses, and both strict
+  potency paths for Halt Miscreant! (P/slowed) and Repent! (I/dazed). Two legal Elementalist
+  targets use the source 2/2/−1/−1 array to give I/P −1 or 2; applied paths read save registration.

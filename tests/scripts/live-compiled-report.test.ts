@@ -26,11 +26,13 @@ test('V72 availability follows current grants and loading, not catalog presence'
     'Eviscerate',
     'Eye Flash',
     'Eye of Surlach',
+    'Halt Miscreant!',
     'Melee Weapon Free Strike',
     'Pinning Shot',
     'Power Chord',
     'Ranged Weapon Free Strike',
     'Razor Claws',
+    'Repent!',
     'Spear Charge',
     'The Wode Defends',
     'Viscous Fire',
@@ -148,3 +150,65 @@ test('Pinning Shot evaluates each source potency threshold strictly after tier d
     }
   }
 });
+
+// Censor/level-1: Halt Miscreant! tests P, Repent! tests I; both strict P-derived 0/1/2 potency.
+test.each([
+  ['Halt Miscreant!', 'P', 'slowed', [4, 7, 9], 0],
+  ['Repent!', 'I', 'dazed', [7, 10, 13], 3],
+] as const)(
+  '%s retains each strict source threshold and Wrath cost',
+  (name, characteristic, condition, damages, cost) => {
+    const inputs = readInputs();
+    const source = buildCorpus(inputs).envelopes.find(e => e.name === name)!;
+    const definition = compileAbility(compilerEnvelope(source, inputs));
+    for (const [d10a, d10b, tier, threshold] of [
+      [4, 5, 1, 0],
+      [7, 7, 2, 1],
+      [8, 7, 3, 2],
+    ] as const) {
+      for (const [score, status] of [
+        [threshold - 1, 'applied'],
+        [threshold, 'resisted'],
+      ] as const) {
+        const outcome = resolveCompiledAbility(definition, {
+          actor: { actorId: 'censor', characteristics: { M: 2, A: 1, R: 1, I: -1, P: 2 } },
+          targets: [{ targetId: 'target', edges: 0, banes: 0 }],
+          dice: { d10a, d10b },
+          inCombat: true,
+          resourcePool: { resource: 'wrath', current: cost, legalFloor: 0 },
+          targetFacts: [
+            {
+              targetId: 'target',
+              kind: 'hero',
+              stamina: 30,
+              maxStamina: 30,
+              temporaryStamina: 0,
+              immunities: [],
+              weaknesses: [],
+            },
+          ],
+          conditionFacts: {
+            potency: { characteristic: 'P', weak: 0, average: 1, strong: 2 },
+            targets: [
+              { targetId: 'target', kind: 'hero', characteristics: { [characteristic]: score } },
+            ],
+          },
+        });
+        expect(outcome.kind).toBe('resolved');
+        if (outcome.kind !== 'resolved') throw new Error(name);
+        expect(outcome.roll.targets[0]).toMatchObject({
+          tier,
+          damage: { rolledDamage: damages[tier - 1] },
+        });
+        if (cost) expect(outcome.roll.cost).toMatchObject({ amount: cost, after: 0 });
+        expect(outcome.effects.find(e => e.kind === 'condition')).toMatchObject({
+          status,
+          condition,
+          duration: 'save-ends',
+          threshold,
+          targetScore: score,
+        });
+      }
+    }
+  },
+);

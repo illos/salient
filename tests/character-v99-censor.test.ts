@@ -50,7 +50,7 @@ test('Censor level one: twelve domains retain independent stats, skills, actions
         sorted(w.expected[key]),
         `${w.id} ${key}`,
       );
-    assert.equal(hero.heroicResource.name, 'wrath');
+    assert.equal(hero.heroicResource.name.value, 'wrath');
     for (const a of w.rolledActions)
       assert.deepEqual(
         hero.abilities.find(x => x.name === a.name)?.cost,
@@ -105,4 +105,28 @@ test('Censor deity, portfolio, order and class changes revoke incompatible choic
   assert.ok(!removed['class.censor.domain-skill']);
   const changed = changeChoice(first, definitions, 'class.choice', 'Shadow').selections;
   assert.ok(!Object.keys(changed).some(k => k.startsWith('class.censor.')));
+});
+
+test('Wrath costs outside combat retain the sourced waiver and repeated-use warning', async () => {
+  const { checkAffordability } = await import('../shared/resolve/index.ts');
+  const result = checkAffordability(
+    { resource: 'wrath', amount: 5 },
+    {
+      resource: 'wrath',
+      current: 0,
+      legalFloor: 0,
+      usedOutsideCombatSinceLastVictoryOrRespite: true,
+    },
+    false,
+  );
+  assert.equal(result.kind, 'waived');
+  if (result.kind === 'waived') assert.match(result.warnings.join(' '), /censor\/level-1\/wrath/);
+  assert.equal(
+    checkAffordability(
+      { resource: 'wrath', amount: 5 },
+      { resource: 'wrath', current: 0, legalFloor: 0 },
+      true,
+    ).kind,
+    'blocked',
+  );
 });

@@ -9,6 +9,7 @@ import {
   type ActorSession,
   type ScenarioContext,
 } from './headless/character-client.ts';
+import { runCensor } from './headless/censor.ts';
 import { runShadowLevelThree } from './headless/shadow-level-three.ts';
 import { runShadowLevelTwo } from './headless/shadow-level-two.ts';
 import { runTactician } from './headless/tactician.ts';
@@ -21,6 +22,7 @@ import { runWizardDraft } from './headless/wizard-draft.ts';
 
 // Each selected cohort invokes the original scenario, including all assertions and setup.
 const cohorts = {
+  censor: runCensor,
   all: runScenarios,
   tactician: runTactician,
   'shadow-level-two': runShadowLevelTwo,

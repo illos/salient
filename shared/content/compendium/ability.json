@@ -1,5 +1,609 @@
 [
   {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest",
+    "kind": "ability",
+    "name": "Arrest",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/arrest.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/arrest.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 6 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n      tier2: 9 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n      tier3: 13 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n    - effect: If the target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature while [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) this way, you can spend 3 wrath to deal holy damage to them equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score, then change the target of the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) to another target within the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'s [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).\n      name: Effect\nflavor: '\"I got you, you son of a bitch.\"'\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Arrest\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/arrest\ntarget: One creature\ntier1: 6 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntier2: 9 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntier3: 13 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntype: ability\n---\n\n\n*\"I got you, you son of a bitch.\"*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                   |           **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 6 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n- **12-16:** 9 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n- **17+:** 13 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n\n**Effect:** If the target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature while [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) this way, you can spend 3 wrath to deal holy damage to them equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score, then change the target of the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) to another target within the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'s [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "6 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "tier2": "9 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "tier3": "13 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)"
+        },
+        {
+          "effect": "If the target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature while [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) this way, you can spend 3 wrath to deal holy damage to them equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score, then change the target of the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) to another target within the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'s [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "\"I got you, you son of a bitch.\"",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "6 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+      "tier2": "9 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+      "tier3": "13 + M holy damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer",
+    "kind": "ability",
+    "name": "Back Blasphemer!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/back-blasphemer.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ndistance: 2 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 2 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 4 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier3: 6 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\nflavor: You channel power through your weapon to repel foes.\nkeywords:\n    - Area\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"1\"\nname: Back Blasphemer!\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer\nsubtype: signature\ntarget: Each enemy in the area\ntier1: 2 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 4 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier3: 6 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntype: ability\n---\n\n\n*You channel power through your weapon to repel foes.*\n\n| **Area, Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|------------------------------:|\n| **📏 2 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1**         | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 2 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 4 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** 6 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "distance": "2 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "2 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "4 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "6 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        }
+      ],
+      "flavor": "You channel power through your weapon to repel foes.",
+      "keywords": [
+        "Area",
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "Each enemy in the area",
+      "tier1": "2 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "4 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "6 holy damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith",
+    "kind": "ability",
+    "name": "Behold a Shield of Faith!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/behold-a-shield-of-faith.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 3 Wrath\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M holy damage\n      tier2: 6 + M holy damage\n      tier3: 9 + M holy damage\n    - effect: Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), enemies take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against you or any ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.\n      name: Effect\nflavor: A mighty blow [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) your foe's vitality into a holy light that envelops you and an ally, discouraging enemies who might attack you.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Behold a Shield of Faith!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith\ntarget: One creature or object\ntier1: 3 + M holy damage\ntier2: 6 + M holy damage\ntier3: 9 + M holy damage\ntype: ability\n---\n\n\n*A mighty blow [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) your foe's vitality into a holy light that envelops you and an ally, discouraging enemies who might attack you.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M holy damage\n- **12-16:** 6 + M holy damage\n- **17+:** 9 + M holy damage\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), enemies take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against you or any ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "3 Wrath",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M holy damage",
+          "tier2": "6 + M holy damage",
+          "tier3": "9 + M holy damage"
+        },
+        {
+          "effect": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), enemies take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against you or any ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A mighty blow [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) your foe's vitality into a holy light that envelops you and an ally, discouraging enemies who might attack you.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature or object",
+      "tier1": "3 + M holy damage",
+      "tier2": "6 + M holy damage",
+      "tier3": "9 + M holy damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice",
+    "kind": "ability",
+    "name": "Behold the Face of Justice!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/behold-the-face-of-justice.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M holy damage; if the target has P < WEAK, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\n      tier2: 5 + M holy damage; if the target has P < AVERAGE, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\n      tier3: 8 + M holy damage; if the target has P < STRONG, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\n    - effect: Each enemy [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) this way is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 2 squares away from the target and takes psychic damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.\n      name: Effect\nflavor: You attack a foe and your enemies behold a vision of the true nature of your resolve.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Behold the Face of Justice!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice\ntarget: One creature\ntier1: 3 + M holy damage; if the target has P < WEAK, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\ntier2: 5 + M holy damage; if the target has P < AVERAGE, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\ntier3: 8 + M holy damage; if the target has P < STRONG, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\ntype: ability\n---\n\n\n*You attack a foe and your enemies behold a vision of the true nature of your resolve.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**                |           **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M holy damage; if the target has P < WEAK, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\n- **12-16:** 5 + M holy damage; if the target has P < AVERAGE, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\n- **17+:** 8 + M holy damage; if the target has P < STRONG, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)\n\n**Effect:** Each enemy [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) this way is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 2 squares away from the target and takes psychic damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M holy damage; if the target has P < WEAK, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+          "tier2": "5 + M holy damage; if the target has P < AVERAGE, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+          "tier3": "8 + M holy damage; if the target has P < STRONG, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)"
+        },
+        {
+          "effect": "Each enemy [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) this way is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 2 squares away from the target and takes psychic damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You attack a foe and your enemies behold a vision of the true nature of your resolve.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "3 + M holy damage; if the target has P < WEAK, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+      "tier2": "5 + M holy damage; if the target has P < AVERAGE, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+      "tier3": "8 + M holy damage; if the target has P < STRONG, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/censored",
+    "kind": "ability",
+    "name": "Censored",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/censored.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/censored.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 2 + M holy damage\n      tier2: 3 + M holy damage\n      tier3: 5 + M holy damage\n    - effect: When a target who is not a leader or solo creature is made [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) by this ability, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).\n      name: Effect\nflavor: Judged and [sentenced](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-2/sentenced).\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Censored\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/censored\ntarget: One creature\ntier1: 2 + M holy damage\ntier2: 3 + M holy damage\ntier3: 5 + M holy damage\ntype: ability\n---\n\n\n*Judged and [sentenced](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-2/sentenced).*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**             |           **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 2 + M holy damage\n- **12-16:** 3 + M holy damage\n- **17+:** 5 + M holy damage\n\n**Effect:** When a target who is not a leader or solo creature is made [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) by this ability, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "2 + M holy damage",
+          "tier2": "3 + M holy damage",
+          "tier3": "5 + M holy damage"
+        },
+        {
+          "effect": "When a target who is not a leader or solo creature is made [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) by this ability, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Judged and [sentenced](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-2/sentenced).",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "2 + M holy damage",
+      "tier2": "3 + M holy damage",
+      "tier3": "5 + M holy damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault",
+    "kind": "ability",
+    "name": "Driving Assault",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/driving-assault.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 3 Wrath\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n      tier3: 9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n    - effect: You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line toward the target after [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n      name: Effect\nflavor: As you force your enemy back with your weapon, you use your faith to stay close.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Driving Assault\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault\ntarget: One creature or object\ntier1: 3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntier3: 9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\ntype: ability\n---\n\n\n*As you force your enemy back with your weapon, you use your faith to stay close.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n- **17+:** 9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n\n**Effect:** You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line toward the target after [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "3 Wrath",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "tier3": "9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+        },
+        {
+          "effect": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line toward the target after [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "As you force your enemy back with your weapon, you use your faith to stay close.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature or object",
+      "tier1": "3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+      "tier3": "9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death",
+    "kind": "ability",
+    "name": "Every Step... Death!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/every-step-death.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 5 + P psychic damage\n      tier2: 7 + P psychic damage\n      tier3: 10 + P psychic damage\n    - effect: Each time the target willingly moves before the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they take 1 psychic damage for each square they move.\n      name: Effect\nflavor: You show your foe a glimpse of their fate after death.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Every Step... Death!\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death\nsubtype: signature\ntarget: One creature\ntier1: 5 + P psychic damage\ntier2: 7 + P psychic damage\ntier3: 10 + P psychic damage\ntype: ability\n---\n\n\n*You show your foe a glimpse of their fate after death.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**          |           **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 5 + P psychic damage\n- **12-16:** 7 + P psychic damage\n- **17+:** 10 + P psychic damage\n\n**Effect:** Each time the target willingly moves before the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they take 1 psychic damage for each square they move.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "5 + P psychic damage",
+          "tier2": "7 + P psychic damage",
+          "tier3": "10 + P psychic damage"
+        },
+        {
+          "effect": "Each time the target willingly moves before the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they take 1 psychic damage for each square they move.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You show your foe a glimpse of their fate after death.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "5 + P psychic damage",
+      "tier2": "7 + P psychic damage",
+      "tier3": "10 + P psychic damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/faithful-friend",
+    "kind": "ability",
+    "name": "Faithful Friend",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/faithful-friend.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ndistance: Self\neffects:\n    - effect: You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.\n      name: Effect\nflavor: An animal spirit is drawn to you, sharing their senses with you and serving you faithfully.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Faithful Friend\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/faithful-friend\nsubclass: nature\ntarget: Self\ntype: ability\n---\n\n\n*An animal spirit is drawn to you, sharing their senses with you and serving you faithfully.*\n\n| **Magic**   | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|----------------:|\n| **📏 Self** |     **🎯 Self** |\n\n**Effect:** You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "An animal spirit is drawn to you, sharing their senses with you and serving you faithfully.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "nature",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/grave-speech",
+    "kind": "ability",
+    "name": "Grave Speech",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/grave-speech.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - effect: You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.\n      name: Effect\nflavor: You commune with the lingering soul of the recently dead.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Grave Speech\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/grave-speech\nsubclass: death\ntarget: One dead creature\ntype: ability\n---\n\n\n*You commune with the lingering soul of the recently dead.*\n\n| **Magic**      |             **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------|-------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1** | **🎯 One dead creature** |\n\n**Effect:** You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "effect": "You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You commune with the lingering soul of the recently dead.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "death",
+      "target": "One dead creature"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant",
+    "kind": "ability",
+    "name": "Halt Miscreant!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/halt-miscreant.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 2 + M holy damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier2: 5 + M holy damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier3: 7 + M holy damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\nflavor: You infuse your weapon with holy magic that makes it difficult for your foe to get away.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Halt Miscreant!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant\nsubtype: signature\ntarget: One creature or object\ntier1: 2 + M holy damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier2: 5 + M holy damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier3: 7 + M holy damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntype: ability\n---\n\n\n*You infuse your weapon with holy magic that makes it difficult for your foe to get away.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 2 + M holy damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 5 + M holy damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **17+:** 7 + M holy damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "2 + M holy damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier2": "5 + M holy damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier3": "7 + M holy damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+        }
+      ],
+      "flavor": "You infuse your weapon with holy magic that makes it difficult for your foe to get away.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "2 + M holy damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier2": "5 + M holy damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier3": "7 + M holy damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/hands-of-the-maker",
+    "kind": "ability",
+    "name": "Hands of the Maker",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/hands-of-the-maker.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ndistance: Self\neffects:\n    - effect: You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).\n      name: Effect\nflavor: You craft objects with the power of your mind.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Hands of the Maker\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/hands-of-the-maker\nsubclass: creation\ntarget: Self\ntype: ability\n---\n\n\n*You craft objects with the power of your mind.*\n\n| **Magic**   | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|------------:|\n| **📏 Self** | **🎯 Self** |\n\n**Effect:** You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You craft objects with the power of your mind.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "creation",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment",
+    "kind": "ability",
+    "name": "Judgment",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/judgment.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/judgment.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another [censor](scc.v1:mcdm.heroes.v1/class/censor) judges the target.\n      name: Effect\nflavor: You utter a prayer that outlines your foe in holy energy.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Judgment\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/judgment\ntarget: One enemy\ntype: ability\n---\n\n\n*You utter a prayer that outlines your foe in holy energy.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |     **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|-----------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**  | **🎯 One enemy** |\n\n**Effect:** The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another [censor](scc.v1:mcdm.heroes.v1/class/censor) judges the target.\n\nWhenever a creature judged by you uses a main action and is within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to deal holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score to them.\n\nWhen a creature judged by you is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to use this ability against a new target.\n\nAdditionally, you can spend 1 wrath to take one of the following free [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action):\n\n- When an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature judged by you starts to [shift](scc.v1:mcdm.heroes.v1/movement/shifting), you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them and their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) becomes 0 until the end of the current [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), preventing them from [shifting](scc.v1:mcdm.heroes.v1/movement/shifting).\n- When a creature judged by you within 10 squares makes a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you cause them to take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on the roll.\n- When a creature judged by you within 10 squares uses an ability with a [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) that targets only one creature, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is reduced by 1 for that creature.\n- If you damage a creature judged by you with a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) ability, the creature is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n  \nYou can choose only one free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) option at a time, even if multiple options are triggered by the same effect.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another [censor](scc.v1:mcdm.heroes.v1/class/censor) judges the target.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You utter a prayer that outlines your foe in holy energy.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "target": "One enemy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
+    "kind": "ability",
+    "name": "My Life for Yours",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/my-life-for-yours.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: censor\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: You spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and the target regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n      name: Effect\n    - cost: Spend 1 Wrath\n      effect: You can end one effect on the target that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or a [prone](scc.v1:mcdm.heroes.v1/condition/prone) target can stand up.\nflavor: You channel some of your vitality into more resilience for you or an ally.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: My Life for Yours\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours\nsubtype: triggered\ntarget: Self or one ally\ntrigger: The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.\ntype: ability\n---\n\n\n*You channel some of your vitality into more resilience for you or an ally.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |           **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**  | **🎯 Self or one ally** |\n\n**Trigger:** The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.\n\n**Effect:** You spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and the target regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n\n**Spend 1 Wrath:** You can end one effect on the target that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or a [prone](scc.v1:mcdm.heroes.v1/condition/prone) target can stand up.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "censor",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "You spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and the target regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Wrath",
+          "effect": "You can end one effect on the target that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or a [prone](scc.v1:mcdm.heroes.v1/condition/prone) target can stand up."
+        }
+      ],
+      "flavor": "You channel some of your vitality into more resilience for you or an ally.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subtype": "triggered",
+      "target": "Self or one ally",
+      "trigger": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire",
+    "kind": "ability",
+    "name": "Purifying Fire",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/purifying-fire.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 5 + M holy damage; M < WEAK, the target has fire weakness 3 (save ends)\n      tier2: 9 + M holy damage; M < AVERAGE, the target has fire weakness 5 (save ends)\n      tier3: 12 + M holy damage; M < STRONG, the target has fire weakness 7 (save ends)\n    - effect: While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage.\n      name: Effect\nflavor: The gods judge, fire cleanses.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Purifying Fire\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire\ntarget: One creature\ntier1: 5 + M holy damage; M < WEAK, the target has fire weakness 3 (save ends)\ntier2: 9 + M holy damage; M < AVERAGE, the target has fire weakness 5 (save ends)\ntier3: 12 + M holy damage; M < STRONG, the target has fire weakness 7 (save ends)\ntype: ability\n---\n\n\n*The gods judge, fire cleanses.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**                |           **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 5 + M holy damage; M < WEAK, the target has fire weakness 3 (save ends)\n- **12-16:** 9 + M holy damage; M < AVERAGE, the target has fire weakness 5 (save ends)\n- **17+:** 12 + M holy damage; M < STRONG, the target has fire weakness 7 (save ends)\n\n**Effect:** While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "5 + M holy damage; M < WEAK, the target has fire weakness 3 (save ends)",
+          "tier2": "9 + M holy damage; M < AVERAGE, the target has fire weakness 5 (save ends)",
+          "tier3": "12 + M holy damage; M < STRONG, the target has fire weakness 7 (save ends)"
+        },
+        {
+          "effect": "While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "The gods judge, fire cleanses.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "5 + M holy damage; M < WEAK, the target has fire weakness 3 (save ends)",
+      "tier2": "9 + M holy damage; M < AVERAGE, the target has fire weakness 5 (save ends)",
+      "tier3": "12 + M holy damage; M < STRONG, the target has fire weakness 7 (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent",
+    "kind": "ability",
+    "name": "Repent!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/repent.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/repent.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 3 Wrath\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 5 + P holy damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier2: 8 + P holy damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier3: 11 + P holy damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\nflavor: You conjure memories of their sins to harry your foes.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Repent!\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/repent\ntarget: One creature\ntier1: 5 + P holy damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier2: 8 + P holy damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier3: 11 + P holy damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntype: ability\n---\n\n\n*You conjure memories of their sins to harry your foes.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  |    **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)**  |\n|----------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**           | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 5 + P holy damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **12-16:** 8 + P holy damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **17+:** 11 + P holy damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "3 Wrath",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "5 + P holy damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier2": "8 + P holy damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier3": "11 + P holy damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+        }
+      ],
+      "flavor": "You conjure memories of their sins to harry your foes.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "target": "One creature",
+      "tier1": "5 + P holy damage; I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier2": "8 + P holy damage; I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier3": "11 + P holy damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend",
+    "kind": "ability",
+    "name": "The Gods Punish and Defend",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/the-gods-punish-and-defend.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 3 Wrath\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 5 + M holy damage\n      tier2: 8 + M holy damage\n      tier3: 11 + M holy damage\n    - effect: You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow yourself or one ally within 10 squares to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n      name: Effect\nflavor: You channel holy energy to smite a foe and heal an ally.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: The Gods Punish and Defend\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend\ntarget: One creature or object\ntier1: 5 + M holy damage\ntier2: 8 + M holy damage\ntier3: 11 + M holy damage\ntype: ability\n---\n\n\n*You channel holy energy to smite a foe and heal an ally.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                   | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 5 + M holy damage\n- **12-16:** 8 + M holy damage\n- **17+:** 11 + M holy damage\n\n**Effect:** You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow yourself or one ally within 10 squares to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "3 Wrath",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "5 + M holy damage",
+          "tier2": "8 + M holy damage",
+          "tier3": "11 + M holy damage"
+        },
+        {
+          "effect": "You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow yourself or one ally within 10 squares to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You channel holy energy to smite a foe and heal an ally.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature or object",
+      "tier1": "5 + M holy damage",
+      "tier2": "8 + M holy damage",
+      "tier3": "11 + M holy damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you",
+    "kind": "ability",
+    "name": "Your Allies Cannot Save You!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-1/your-allies-cannot-save-you.json",
+    "selection": "censor-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M holy damage\n      tier2: 5 + M holy damage\n      tier3: 8 + M holy damage\n    - effect: Each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) away from the target up to a number of squares equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.\n      name: Effect\nflavor: Your magic [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) your foe's guilt into a burst of holy power.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Your Allies Cannot Save You!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + M holy damage\ntier2: 5 + M holy damage\ntier3: 8 + M holy damage\ntype: ability\n---\n\n\n*Your magic [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) your foe's guilt into a burst of holy power.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M holy damage\n- **12-16:** 5 + M holy damage\n- **17+:** 8 + M holy damage\n\n**Effect:** Each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) away from the target up to a number of squares equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M holy damage",
+          "tier2": "5 + M holy damage",
+          "tier3": "8 + M holy damage"
+        },
+        {
+          "effect": "Each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) away from the target up to a number of squares equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your magic [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) your foe's guilt into a burst of holy power.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + M holy damage",
+      "tier2": "5 + M holy damage",
+      "tier3": "8 + M holy damage"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.common/claw-dirt",
     "kind": "ability",
     "name": "Claw Dirt",

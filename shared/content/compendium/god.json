@@ -1,0 +1,219 @@
+[
+  {
+    "id": "mcdm.heroes.v1/religion.god/adun",
+    "kind": "god",
+    "name": "Adûn",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/adun.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/adun.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: good\ndomains:\n    - Creation\n    - Life\n    - Love\n    - Protection\ngod_class: younger\nname: Adûn\npantheon: vasloria\nscc: mcdm.heroes.v1/religion.god/adun\ntype: god\n---\n\n**Domains:** Creation, Life, Love, Protection\n\nAdûn believes that truth and hard work are virtues. He embodies the Vaslorian belief that hard work is honesty. Someone who works hard—real physical labor—is an honest person. Anyone who does no obvious work for a living is someone not to be trusted. Adûn is more worshiped in the field than in the city. Farmers distrust city folk because many of them make a living writing, or counting money, and never break a sweat.\n\nVaslorians in remote villages still use the ancient test of strength to determine truth. Two individuals in a legal dispute may find the reeve asking them to fell a tree or build a wall. Whoever finishes first is in the right, because they worked harder and are therefore more honest. Many walls and fields owe their existence to this ancient legal tradition.\n\nA priest following Adûn expresses their faith through labor. They build things. Many priests are also masons or carpenters. Joining the church for them did not mean abandoning their former trade. It intensified it.\n\nA knight following Adûn spends their time aiding others through hard work, inspiring people to honest speech and hard labor, as opposed to Adûn's brother [Cavall](scc.v1:mcdm.heroes.v1/religion.god/cavall) who seeks to right wrongs.\n\nAdûn and [Cavall](scc.v1:mcdm.heroes.v1/religion.god/cavall) are brothers and the line between them is not a sharply defined one. Truth and justice are close companions.\n",
+    "structured": {
+      "alignment": "good",
+      "domains": [
+        "Creation",
+        "Life",
+        "Love",
+        "Protection"
+      ],
+      "god_class": "younger",
+      "pantheon": "vasloria"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/cavall",
+    "kind": "god",
+    "name": "Cavall",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/cavall.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/cavall.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: good\ndomains:\n    - Life\n    - Love\n    - Protection\n    - War\ngod_class: younger\nname: Cavall\npantheon: vasloria\nscc: mcdm.heroes.v1/religion.god/cavall\ntype: god\n---\n\n**Domains:** Life, Love, Protection, War\n\nCavall believes that mortals cannot live where injustice thrives. To [followers](scc.v1:mcdm.heroes.v1/rule.general/follower) of Cavall, the unjust society is the Wasted Land, where people live false lives. The concepts of civil law and just punishment are his.\n\nA watchhouse chaplain is almost certainly a priest of Cavall. A rector serving a small town may be welcome on the town council, but would consider passing judgment on a fellow citizen a breach of duty. The maxim of the church of Saint Gwiddon the Vigilant translates as: \"To watch, report, but not to judge.\" The law, Cavall says, belongs to mortals.\n\n[Censors](scc.v1:mcdm.heroes.v1/class/censor) of Cavall, on the other hand, have no such motto. The nobility often sponsor knights of Cavall to roam the countryside and dispense justice in remote wilderness areas where the noble's influence cannot reach.\n\nBrother to [Adûn](scc.v1:mcdm.heroes.v1/religion.god/adun) and patron of the country of Corwell, Cavall also believes that people, no matter how vile, can be bettered. \"Let the law judge,\" said Saint Llewellyn, \"Let us forgive.\"\n",
+    "structured": {
+      "alignment": "good",
+      "domains": [
+        "Life",
+        "Love",
+        "Protection",
+        "War"
+      ],
+      "god_class": "younger",
+      "pantheon": "vasloria"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/cyrvis",
+    "kind": "god",
+    "name": "Cyrvis",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/cyrvis.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/cyrvis.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: evil\ndomains:\n    - Death\n    - Fate\n    - Knowledge\n    - Trickery\ngod_class: younger\nname: Cyrvis\npantheon: vasloria\nscc: mcdm.heroes.v1/religion.god/cyrvis\ntype: god\n---\n\n**Domains:** Death, Fate, Knowledge, Trickery\n\nCyrvis is the enemy of fate. He is the god of those who believe they have been wronged by life, and seek revenge. Cyrvis is a god of magic, because through magic one can gain power to exert their will over others. He is brother to Nikros but because he is frail and Nikros values only strength, Nikros hates Cyrvis, and Cyrvis is happy to return the sentiment.\n\nA person bullied, a criminal arrested, a servant dismissed—all who harbor secret hate whisper Cyrvis' name, and that whisper is a prayer. A suitor rejected by a consort who loves another finds themself walking in Cyrvis' shadow. He is the god of assassins, conspirators, and the bitterly frail.\n\nIt is dangerous to worship Cyrvis in public, but those who gain power through his worship often parade this fact gladly and teach Cyrvis' hatred as virtue. Many is the knight who rides with Cyrvis's screaming-skull talisman on their shield, teaching folk to take what they want, the law be damned. The law is a coward! The law is a system designed by cowards to keep us from seeking real power!\n\nHis churches are often underground—in dungeons, cellars. His priests worship in secret, plotting against those with power, or those who are merely popular. To be liked and loved is reason enough for a [follower](scc.v1:mcdm.heroes.v1/rule.general/follower) of Cyrvis to hate you.\n",
+    "structured": {
+      "alignment": "evil",
+      "domains": [
+        "Death",
+        "Fate",
+        "Knowledge",
+        "Trickery"
+      ],
+      "god_class": "younger",
+      "pantheon": "vasloria"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/kul",
+    "kind": "god",
+    "name": "Kul",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/kul.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/kul.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: good\ndomains:\n    - Knowledge\n    - Life\n    - Sun\n    - Trickery\n    - War\ngod_class: elder\nname: Kul\npantheon: orc\nscc: mcdm.heroes.v1/religion.god/kul\ntype: god\n---\n\n**Domains:** Knowledge, Life, Sun, Trickery, War\n\nKul, Father of Flames, Lord of the Forge, the Cleansing Fire who put fire and magma within the world at its creation.\n\nHe saw his sibling gods creating their own children and placing them within the world, and so followed suit, creating the [orcs](scc.v1:mcdm.heroes.v1/ancestry/orc), the last of the original five speaking peoples.\n\nKul's fire is the fire that destroys, but it is also the fire that creates, the fire of the forge, the fire that makes meat safe to eat, the fire that cauterizes wounds. Kul teaches that action is the defining [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) of being. Kul's heroes are not philosophers or poets, but warriors and hunters.\n\nUniquely among the Elder Creator Gods, Kul does not desire worship finds it distasteful. [Orcs](scc.v1:mcdm.heroes.v1/ancestry/orc) still call out to Kul in desperate times as \"Kul Who Once Spoke.\" But in those moments, they do not call out for aid—only that Kul witness them, and that they might prove worthy of his attention.\n\n#### Heroes of the Orcs\n\nThe following heroes are venerated by many [orcs](scc.v1:mcdm.heroes.v1/ancestry/orc) and others who follow Kul.\n\n#### Heroes of the Hakaan\n\nMost [hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) in [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden) are animists. They know and respect the four Elder Gods who created the world and believe these gods watch the world and see what happens within it. But the [Hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) do not create churches or formal belief systems around this attitude.\n\nInstead they believe the world is filled with innumerable nature spirits. Each river, tree, stone, has their own spirit, which the [hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) revere. They have no organized religion in the way the other ancestries in this chapter do, though a [hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) brought up in a city, or among another people, would naturally venerate in whatever gods and [saints](scc.v1:mcdm.heroes.v1/rule.world/saint) are worshiped by the folk who raised them.\n\nThe [hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) know they are descended from stone giants, but they do not think of themselves as stone giants. They know their ancestors were tricked by Holkatya, one of the gods of Vanigar, into trading some of their great strength for the doomsight. But while they respect Holkatya, they do not worship her. Nor do they resent her. She's merely a detail of their history.\n\n[Hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) [conduits](scc.v1:mcdm.heroes.v1/class/conduit) and [censors](scc.v1:mcdm.heroes.v1/class/censor) venerate [hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) heroes who, after doing great deeds in life, were chosen by the gods to take their place among the stars, becoming constellations. They see the stars at night as a complex map of legendary [hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) heroes, and their own ancestors who watch from above.\n",
+    "structured": {
+      "alignment": "good",
+      "domains": [
+        "Knowledge",
+        "Life",
+        "Sun",
+        "Trickery",
+        "War"
+      ],
+      "god_class": "elder",
+      "pantheon": "orc"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/lords-of-hell",
+    "kind": "god",
+    "name": "Lords of Hell",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/lords-of-hell.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/lords-of-hell.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: devil\ngod_class: devil\nname: Lords of Hell\npantheon: hell\nscc: mcdm.heroes.v1/religion.god/lords-of-hell\ntype: god\n---\n\n[Devil](scc.v1:mcdm.heroes.v1/ancestry/devil) heroes in [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden) usually serve the gods and [saints](scc.v1:mcdm.heroes.v1/rule.world/saint) of the culture in which they were raised. Few [devils](scc.v1:mcdm.heroes.v1/ancestry/devil) in [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden) are from the Seven Cities, most are descended from [devils](scc.v1:mcdm.heroes.v1/ancestry/devil) who were stranded on [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden) hundreds or thousands of years ago. [Devils](scc.v1:mcdm.heroes.v1/ancestry/devil) who are from the Seven Cities have their own unique pantheon.\n\nThe Seven Cities have [saints](scc.v1:mcdm.heroes.v1/rule.world/saint) just like [humans](scc.v1:mcdm.heroes.v1/ancestry/human) in [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden) do but in place of gods, these [saints](scc.v1:mcdm.heroes.v1/rule.world/saint) serve the seven Archdukes of Hell, also known as Archdevils or the Lords of Hell. Unlike the gods of [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden), the Lords of Hell are corporeal. Giant figures, 30 feet tall, who each sit upon the throne of their city, projecting their consciousness out into the world, dealing with politics, sorcery, and treachery, manifesting avatars when necessary. They are, effectively, the Gods of Hell.\n\nLike the other gods of the timescape, the Lords of Hell are too busy to attend to every petition and request and so employ [saints](scc.v1:mcdm.heroes.v1/rule.world/saint) just like other gods. Religion in Hell is superficially similar to religion among the peoples of [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden). There are churches and rites and rituals, but [devils](scc.v1:mcdm.heroes.v1/ancestry/devil) tend to view attending church and performing the expected rituals at the appropriate times as akin to paying taxes. Annoying but necessary.\n\n#### Saints of Hell\n\nLike [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden), there are dozens of [saints](scc.v1:mcdm.heroes.v1/rule.world/saint) in Hell, some obscure. These three are some of the most popular and the most likely [saints](scc.v1:mcdm.heroes.v1/rule.world/saint) for a [conduit](scc.v1:mcdm.heroes.v1/class/conduit) or [censor](scc.v1:mcdm.heroes.v1/class/censor) to follow.\n",
+    "structured": {
+      "alignment": "devil",
+      "god_class": "devil",
+      "pantheon": "hell"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/nebular",
+    "kind": "god",
+    "name": "Nebular the Star Mother",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/nebular.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/nebular.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: good\ndomains:\n    - Creation\n    - Life\n    - Love\n    - Sun\ngod_class: space\nname: Nebular the Star Mother\npantheon: timescape\nscc: mcdm.heroes.v1/religion.god/nebular\ntype: god\n---\n\n**Domains:** Creation, Life, Love, Sun\n\nThe Queen of Suns. A living nebula. Desperate ships in need sometimes find themselves enveloped within Nebular, their systems repairing, their injuries healing.\n\nShe is a stellar nursery leaving a trail of infant stars in her wake. Hers is the Engine of Law transforming darkness into light, chaos into order. She is the most popular god among the [memonek](scc.v1:mcdm.heroes.v1/ancestry/memonek) and the senior god among the Lords of Law insofar as their hierarchy can be discerned by mortal minds.\n\nShe is the goddess of creation and for some of her [followers](scc.v1:mcdm.heroes.v1/rule.general/follower), life itself, as her children's energies feed all life on all worlds. Her priests teach that life is the opposite of entropy, and the natural byproduct of her solar incubator.\n",
+    "structured": {
+      "alignment": "good",
+      "domains": [
+        "Creation",
+        "Life",
+        "Love",
+        "Sun"
+      ],
+      "god_class": "space",
+      "pantheon": "timescape"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/nikros",
+    "kind": "god",
+    "name": "Nikros the Tyrant",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/nikros.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/nikros.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: evil\ndomains:\n    - Death\n    - Fate\n    - Storm\n    - War\ngod_class: younger\nname: Nikros the Tyrant\npantheon: vasloria\nscc: mcdm.heroes.v1/religion.god/nikros\ntype: god\n---\n\n**Domains:** Death, Fate, Storm, War\n\nNikros is strength. He is dominance. His is the right of the strong to rule over the weak. He is the Tyrant.\n\nNikros believes that strength is the only virtue, and those who are born strong were born to rule. Because of this, [followers](scc.v1:mcdm.heroes.v1/rule.general/follower) of Nikros are often mistaken for [followers](scc.v1:mcdm.heroes.v1/rule.general/follower) of [Adûn](scc.v1:mcdm.heroes.v1/religion.god/adun)—a mask they are happy to wear. Both teach that strength is good. But for [Adûn](scc.v1:mcdm.heroes.v1/religion.god/adun) strength is a tool for helping others. For Nikros, strength is power to enact your will heedless of the consequences. [Might](scc.v1:mcdm.heroes.v1/rule.character/might) is right.\n\nMany is the baron or duke who attained power through sheer strength and ruthlessness, seeing their people as mere resources to be spent. Many of these rulers only come to Nikros after achieving power, their ears poisoned by a priest of the Tyrant.\n\nThough he and Cyrvis are brothers, Nikros hates Cyrvis because Cyrvis is feeble and weak. Both teach that strength is the only virtue. But Cyrvis teaches that the weak can exploit treachery and sorcery to become strong. Nikros spits upon these feeble wastes and preaches to the strong to take what is theirs by right.\n\nLike Cyrvis, his priests worship in secret. Like Cyrvis, folk hate [followers](scc.v1:mcdm.heroes.v1/rule.general/follower) of Nikros, while sometimes secretly admiring them. Bullies always have their sycophants.\n\nNikros's [censors](scc.v1:mcdm.heroes.v1/class/censor) take what they want, ignore the law heedless of consequence, and teach that all folk should live thus. To subjugate one's will to the law, or the community, or the family, is to be weak! Weakness is a disease and it must be eradicated!\n",
+    "structured": {
+      "alignment": "evil",
+      "domains": [
+        "Death",
+        "Fate",
+        "Storm",
+        "War"
+      ],
+      "god_class": "younger",
+      "pantheon": "vasloria"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/ord",
+    "kind": "god",
+    "name": "Ord",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/ord.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/ord.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: good\ndomains:\n    - Creation\n    - Knowledge\n    - Protection\n    - Sun\n    - War\ngod_class: elder\nname: Ord\npantheon: dwarf\nscc: mcdm.heroes.v1/religion.god/ord\ntype: god\n---\n\n**Domains:** Creation, Knowledge, Protection, Sun, War\n\nOrd, the Maker, the Engineer, is the patron of the [dwarves](scc.v1:mcdm.heroes.v1/ancestry/dwarf). Ord, along with his siblings Aan, Eth, and Kul, created [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden). These four saw the world as a dynamic expression of their philosophies.\n\nOrd values integrity, honor, faithfulness to an ideal. Courage in battle and fair play. Treating your opponent honorably, Ord teaches, is an expression of your own worthiness. Ord is associated with permanence, which some elder [dwarves](scc.v1:mcdm.heroes.v1/ancestry/dwarf) take to mean a kind of slavish devotion to tradition. But Ord teaches permanence is the quality of reliability, of steadfastness. Young [dwarves](scc.v1:mcdm.heroes.v1/ancestry/dwarf) who chafe at the stale and stifling traditions of their elders remind the greybeards that Ord is the Maker. He expects his children to create marvels, to bring forth new discoveries, new insights. To remake the world anew each generation.\n\n#### Heroes of the Dwarves\n\nThe following heroes are venerated by many [dwarves](scc.v1:mcdm.heroes.v1/ancestry/dwarf) and others who follow Ord.\n",
+    "structured": {
+      "alignment": "good",
+      "domains": [
+        "Creation",
+        "Knowledge",
+        "Protection",
+        "Sun",
+        "War"
+      ],
+      "god_class": "elder",
+      "pantheon": "dwarf"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/ov",
+    "kind": "god",
+    "name": "OV the Wave Pilot",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/ov.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/ov.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: good\ndomains:\n    - Fate\n    - Knowledge\n    - Storm\n    - Sun\ngod_class: space\nname: OV the Wave Pilot\npantheon: timescape\nscc: mcdm.heroes.v1/religion.god/ov\ntype: god\n---\n\n**Domains:** Fate, Knowledge, Storm, Sun\n\nOV the Wave Pilot, the Navigator, an enigmatic humanoid figure described as masculine, appears to live inside the pilot-wave. In those rare instances where a mortal is directly exposed to the energies that propel ships across the sea of stars, they occasionally report seeing a figure that matches the description of OV.\n\nLost ships sometimes find their navigation systems lighting up, a clear path home suddenly visible where no such path was possible before. OV aids those who are lost regardless of their affiliation with law or chaos, and is one of the Lords of Balance. His herald works to stop conflicts by guiding ships around and past routes that might cause them to intercept hostile entities.\n\nOV is the god of navigators and those who seek safe passage through treacherous scenarios. Because he cares little for the politics of the timescape, he is respected by the [time raiders](scc.v1:mcdm.heroes.v1/ancestry/time-raider), though none would call him or any other being their \"god.\"\n\nWhen a [time raider](scc.v1:mcdm.heroes.v1/ancestry/time-raider) swears, \"OV guide me,\" the meaning is not, \"Show me the right thing to do.\" But: \"Show me a way out of this mess.\"\n",
+    "structured": {
+      "alignment": "good",
+      "domains": [
+        "Fate",
+        "Knowledge",
+        "Storm",
+        "Sun"
+      ],
+      "god_class": "space",
+      "pantheon": "timescape"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/salorna",
+    "kind": "god",
+    "name": "Salorna",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/salorna.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/salorna.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: good\ndomains:\n    - Life\n    - Nature\n    - Storm\n    - Sun\ngod_class: younger\nname: Salorna\npantheon: vasloria\nscc: mcdm.heroes.v1/religion.god/salorna\ntype: god\n---\n\n**Domains:** Life, Nature, Storm, Sun\n\nSalorna believes that nature is a moral good. That to behave in a manner not in accord with the natural balance (she would never use the word \"order\") is to commit offense against the gods.\n\nSalorna teaches that [humans](scc.v1:mcdm.heroes.v1/ancestry/human) are a product of nature, so then a tilled farm is as much a natural phenomenon as a forest. Indeed, tilling the land is a form of caring for it. But she also teaches balance in all things. A land of farms and no trees would be just as unnatural to her as a land of all trees and no people.\n\nFelling a tree for lumber is natural. People need lumber to make homes for shelter. This is proper and good. Felling a tree because it's in the way of a road is mere convenience and therefore a moral wrong. Salorna curses a straight road.\n\nKilling for food is likewise natural. People need to eat and the pig knows this as well as the person. Killing for sport is a moral wrong, however. It is unnatural, Salorna says.\n\nA wheel that harnesses the power of the river is a beautiful thing. [Humans](scc.v1:mcdm.heroes.v1/ancestry/human) and river physically connected. A dam that blocks the river is a desecration.\n\nSome of Salorna's priests are [conduits](scc.v1:mcdm.heroes.v1/class/conduit); some are mages of the green. Both seek to preserve the balance and respect for nature. Because much of [Vasloria](scc.v1:mcdm.heroes.v1/rule.world/vasloria) is covered in elven forest, Salorna's druids are also often diplomats to the elves.\n\nSalorna has few [censors](scc.v1:mcdm.heroes.v1/class/censor), but not none! Favoring light armor and [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) weapons, her [censors](scc.v1:mcdm.heroes.v1/class/censor) are often mistaken for rangers. They seek to punish those who hunt for sport, or those who would defile the natural order.\n",
+    "structured": {
+      "alignment": "good",
+      "domains": [
+        "Life",
+        "Nature",
+        "Storm",
+        "Sun"
+      ],
+      "god_class": "younger",
+      "pantheon": "vasloria"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/religion.god/val",
+    "kind": "god",
+    "name": "Val",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/religion/god/val.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/religion/god/val.json",
+    "selection": "censor-level-one",
+    "text": "---\nalignment: good\ndomains:\n    - Creation\n    - Knowledge\n    - Life\n    - Nature\n    - Protection\ngod_class: elder\nname: Val\npantheon: arcadia\nscc: mcdm.heroes.v1/religion.god/val\ntype: god\n---\n\n**Domains:** Creation, Knowledge, Life, Nature, Protection\n\nVal, the Noble Lord, First Among Equals, is the patron of the elves. He created the celestials—the true elves, second of the five speaking peoples—who then created the younger elves: the high, wode, and shadow elves. His name is the root of the Caelian word \"valiant,\" and the [dwarves](scc.v1:mcdm.heroes.v1/ancestry/dwarf) named the most precious ore in [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden)—Valiar, the truemetal—after him.\n\nVal holds that the greatest purpose a thinking being can commit themselves to is the creation of art and the appreciation of beauty. He keeps the magical, elf-haunted forests called wodes close to his heart because they represent his vision for [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden). What the world could have been. His growing disgust with the concept of war led him to leave [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden) and take up residence in his private manifold, *Arcadia* where all elves hope to someday join their patron.\n\n#### Heroes of the Elves\n\nThe legendary heroes of the elves are once-mortal heroes who now dwell in Arcadia and make up Val's court there. They answer prayers and dispense blessings and boons, even manifest in the world during times of great need. (Though, like all the speaking people's [saints](scc.v1:mcdm.heroes.v1/rule.world/saint) and heroes, what these legendary figures consider \"great need\" is very personal and has little to do with politics or great kingdoms.)\n\nThe [high elf](scc.v1:mcdm.heroes.v1/ancestry/high-elf) heroes detailed in this book are A Sea of Suns, the Taste of Morning, and Ripples of Honey on a Shore of Gold. The [wode elf](scc.v1:mcdm.heroes.v1/ancestry/wode-elf) heroes are Yllin Dyrvis, Thyll Hylacae, and Illwyv li Orchiax.\n",
+    "structured": {
+      "alignment": "good",
+      "domains": [
+        "Creation",
+        "Knowledge",
+        "Life",
+        "Nature",
+        "Protection"
+      ],
+      "god_class": "elder",
+      "pantheon": "arcadia"
+    }
+  }
+]

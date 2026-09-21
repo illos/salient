@@ -1,15 +1,15 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:242bc3e1b0f8fead8bf2a47236797e1212e1bbb6cf1ed3221411a4ea62e64d72",
+  "contentHash": "sha256:08fd8c7f9ee5f55ebe5b96a777ea6363dd828862ac1f6d894fa62bb688dd0362",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
-      "COMPILES": 9,
-      "COMPILES_WITH_REMAINDER": 42,
-      "NO_MATCH": 49,
-      "total": 100,
-      "withinV26Bounded": 5
+      "COMPILES": 10,
+      "COMPILES_WITH_REMAINDER": 53,
+      "NO_MATCH": 54,
+      "total": 117,
+      "withinV26Bounded": 7
     },
     "kit-signature": {
       "COMPILES": 2,
@@ -41,13 +41,1468 @@
     }
   },
   "grants": {
-    "total": 675,
-    "resolvedToStandalone": 264,
+    "total": 735,
+    "resolvedToStandalone": 324,
     "resolvedToKit": 63,
     "ownText": 348,
     "unresolved": []
   },
   "entries": [
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest",
+      "name": "Arrest",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/arrest.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If the target makes a strike against a creature while grabbed this way, you can spend 3 wrath to deal holy damage to them equal to your Presence score, then change the target of the strike to another target within the strike's distance.",
+            "locator": "section:1"
+          },
+          {
+            "type": "condition",
+            "shape": "grabbed",
+            "text": "grabbed",
+            "locator": "tier1"
+          },
+          {
+            "type": "condition",
+            "shape": "grabbed",
+            "text": "grabbed",
+            "locator": "tier2"
+          },
+          {
+            "type": "condition",
+            "shape": "grabbed",
+            "text": "grabbed",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Arrest",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/arrest.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arrest supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Arrest",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/arrest.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arrest supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Arrest",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/arrest.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arrest supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer",
+      "name": "Back Blasphemer!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "classification": {
+        "category": "COMPILES",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "holy",
+            "push": 1
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "damageType": "holy",
+            "push": 2
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "damageType": "holy",
+            "push": 3
+          }
+        ],
+        "diagnostics": [],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Back Blasphemer!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Back Blasphemer! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Back Blasphemer!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Back Blasphemer! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Back Blasphemer!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Back Blasphemer! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith",
+      "name": "Behold a Shield of Faith!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "3 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the start of your next turn, enemies take a bane on ability rolls made against you or any ally adjacent to you.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Behold a Shield of Faith!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold a Shield of Faith! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold a Shield of Faith!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold a Shield of Faith! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold a Shield of Faith!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold a Shield of Faith! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice",
+      "name": "Behold the Face of Justice!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each enemy frightened this way is pushed up to 2 squares away from the target and takes psychic damage equal to your Presence score.",
+            "locator": "section:1"
+          },
+          {
+            "type": "unknown",
+            "shape": "if the target has p < SYM, each enemy within N squares of them is frightened of you (save ends)",
+            "text": "if the target has P < WEAK, each enemy within 2 squares of them is frightened of you (save ends)",
+            "locator": "tier1"
+          },
+          {
+            "type": "unknown",
+            "shape": "if the target has p < SYM, each enemy within N squares of them is frightened of you (save ends)",
+            "text": "if the target has P < AVERAGE, each enemy within 2 squares of them is frightened of you (save ends)",
+            "locator": "tier2"
+          },
+          {
+            "type": "unknown",
+            "shape": "if the target has p < SYM, each enemy within N squares of them is frightened of you (save ends)",
+            "text": "if the target has P < STRONG, each enemy within 2 squares of them is frightened of you (save ends)",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Behold the Face of Justice!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Face of Justice! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold the Face of Justice!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Face of Justice! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold the Face of Justice!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Face of Justice! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/censored",
+      "name": "Censored",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/censored.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "When a target who is not a leader or solo creature is made winded by this ability, they are reduced to 0 Stamina.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Censored",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/censored.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Censored supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Censored",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/censored.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Censored supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Censored",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/censored.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Censored supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault",
+      "name": "Driving Assault",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "3 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "push": 1
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "M"
+            },
+            "push": 3
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "push": 5
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can shift up to your speed in a straight line toward the target after pushing them.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Driving Assault",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Driving Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Driving Assault",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Driving Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Driving Assault",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Driving Assault supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death",
+      "name": "Every Step... Death!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each time the target willingly moves before the end of your next turn, they take 1 psychic damage for each square they move.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Every Step... Death!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Every Step... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Every Step... Death!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Every Step... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Every Step... Death!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Every Step... Death! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/faithful-friend",
+      "name": "Faithful Friend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+      "usage": "Main action",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has speed 5 and can fly, but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.custom-domain.nature-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.domain.nature-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.custom-domain.nature-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.domain.nature-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.custom-domain.nature-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.domain.nature-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/grave-speech",
+      "name": "Grave Speech",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+      "usage": "Maneuver",
+      "target": "One dead creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make tests to influence them and convince them to speak with you. The trauma of dying can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.custom-domain.death-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.domain.death-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.custom-domain.death-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.domain.death-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.custom-domain.death-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.domain.death-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant",
+      "name": "Halt Miscreant!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM slowed (save ends)",
+            "text": "P < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM slowed (save ends)",
+            "text": "P < AVERAGE, slowed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM slowed (save ends)",
+            "text": "P < STRONG, slowed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": true,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Halt Miscreant!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Halt Miscreant! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Halt Miscreant!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Halt Miscreant! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Halt Miscreant!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Halt Miscreant! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/hands-of-the-maker",
+      "name": "Hands of the Maker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You create a mundane object of size 1S or smaller. You can maintain a number of objects created this way equal to your Presence score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.custom-domain.creation-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.domain.creation-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.custom-domain.creation-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.domain.creation-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.custom-domain.creation-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.domain.creation-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment",
+      "name": "Judgment",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/judgment.md",
+      "usage": "Maneuver",
+      "target": "One enemy",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another censor judges the target.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Judgment",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/judgment.md",
+          "decisionId": "class.censor.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Judgment",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/judgment.md",
+          "decisionId": "class.censor.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Judgment",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/judgment.md",
+          "decisionId": "class.censor.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
+      "name": "My Life for Yours",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+      "usage": "Triggered",
+      "target": "Self or one ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target starts their turn or takes damage.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You spend a Recovery and the target regains Stamina equal to your recovery value.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N wrath",
+            "text": "You can end one effect on the target that is ended by a saving throw or that ends at the end of their turn, or a prone target can stand up.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "My Life for Yours",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+          "decisionId": "class.censor.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "My Life for Yours",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+          "decisionId": "class.censor.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "My Life for Yours",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+          "decisionId": "class.censor.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire",
+      "name": "Purifying Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
+            "text": "M < WEAK, the target has fire weakness 3 (save ends)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
+            "text": "M < AVERAGE, the target has fire weakness 5 (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
+            "text": "M < STRONG, the target has fire weakness 7 (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Purifying Fire",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Purifying Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Purifying Fire",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Purifying Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Purifying Fire",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Purifying Fire supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent",
+      "name": "Repent!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/repent.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "3 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "P"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "P"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "text": "I < WEAK, dazed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "text": "I < AVERAGE, dazed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "text": "I < STRONG, dazed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": true,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Repent!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/repent.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Repent! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Repent!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/repent.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Repent! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Repent!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/repent.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Repent! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend",
+      "name": "The Gods Punish and Defend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "3 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can spend a Recovery to allow yourself or one ally within 10 squares to regain Stamina equal to your recovery value.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "The Gods Punish and Defend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option The Gods Punish and Defend supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Gods Punish and Defend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option The Gods Punish and Defend supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Gods Punish and Defend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option The Gods Punish and Defend supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you",
+      "name": "Your Allies Cannot Save You!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each enemy adjacent to the target is pushed away from the target up to a number of squares equal to your Presence score.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Your Allies Cannot Save You!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Your Allies Cannot Save You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Your Allies Cannot Save You!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Your Allies Cannot Save You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Your Allies Cannot Save You!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Your Allies Cannot Save You! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
     {
       "corpus": "hero-standalone",
       "id": "mcdm.heroes.v1/feature.ability.common/claw-dirt",
@@ -73256,8 +74711,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1054,
-      "abilities": 1040,
+      "count": 1068,
+      "abilities": 1054,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -73267,8 +74722,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 594,
-      "abilities": 594,
+      "count": 599,
+      "abilities": 599,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -73278,12 +74733,12 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 188,
-      "abilities": 188,
+      "count": 189,
+      "abilities": 189,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered",
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance"
+        "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
+        "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered"
       ]
     },
     {
@@ -73474,6 +74929,17 @@
       ]
     },
     {
+      "shape": "grabbed",
+      "type": "condition",
+      "count": 23,
+      "abilities": 17,
+      "examples": [
+        "foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac",
+        "mcdm.heroes.v1/feature.ability.censor.level-1/arrest",
+        "salient:foe-feature:0111b484-e533-47e2-859b-2c8041af5214"
+      ]
+    },
+    {
       "shape": "potency:M < N dazed (save ends)",
       "type": "potency-condition",
       "count": 23,
@@ -73515,17 +74981,6 @@
         "salient:foe-feature:047c7929-7d37-4083-8817-40f7363da23f",
         "salient:foe-feature:08262f07-e929-4223-9787-a05ea050db62",
         "salient:foe-feature:08dd35a2-505e-4ab3-9eef-e0e9477f767d"
-      ]
-    },
-    {
-      "shape": "grabbed",
-      "type": "condition",
-      "count": 20,
-      "abilities": 16,
-      "examples": [
-        "foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac",
-        "salient:foe-feature:0111b484-e533-47e2-859b-2c8041af5214",
-        "salient:foe-feature:33ca2918-cd88-454c-9eaa-abda315cffa6"
       ]
     },
     {
@@ -74314,6 +75769,15 @@
       ]
     },
     {
+      "shape": "if the target has p < SYM, each enemy within N squares of them is frightened of you (save ends)",
+      "type": "unknown",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice"
+      ]
+    },
+    {
       "shape": "N fire damage",
       "type": "extra-damage",
       "count": 3,
@@ -74449,6 +75913,15 @@
       ]
     },
     {
+      "shape": "potency:I < SYM dazed (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/repent"
+      ]
+    },
+    {
       "shape": "potency:M < N N damage",
       "type": "potency-condition",
       "count": 3,
@@ -74548,6 +76021,15 @@
       ]
     },
     {
+      "shape": "potency:M < SYM the target has fire weakness N (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire"
+      ]
+    },
+    {
       "shape": "potency:P < N dazed (save ends)",
       "type": "potency-condition",
       "count": 3,
@@ -74608,6 +76090,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:2e8f2f42-dabe-4139-94fd-af963d0c7b65"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant"
       ]
     },
     {
@@ -76308,6 +77799,15 @@
       ]
     },
     {
+      "shape": "resource-spend:spend N wrath",
+      "type": "resource-spend",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours"
+      ]
+    },
+    {
       "shape": "resource-spend:spend N+ essence",
       "type": "resource-spend",
       "count": 1,
@@ -77162,11 +78662,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 197,
-      "compiles": 12,
-      "withRemainder": 63,
-      "withinV26Bounded": 6,
-      "noMatch": 122
+      "total": 214,
+      "compiles": 13,
+      "withRemainder": 74,
+      "withinV26Bounded": 8,
+      "noMatch": 127
     }
   }
 }

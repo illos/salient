@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:242bc3e1b0f8fead8bf2a47236797e1212e1bbb6cf1ed3221411a4ea62e64d72`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:08fd8c7f9ee5f55ebe5b96a777ea6363dd828862ac1f6d894fa62bb688dd0362`.
 
-Currently reachable compiled: 16; unchanged reachable compatibility: 1299; structurally supported but unavailable: 2.
+Currently reachable compiled: 18; unchanged reachable compatibility: 1314; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -80,6 +80,23 @@ Currently reachable compiled: 16; unchanged reachable compatibility: 1299; struc
 | Haunt | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Shadow Jump | foe-ability | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary |
 | Bone Shards | foe-ability | manual | legacy-compatibility | manual-section |
+| Arrest | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Back Blasphemer! | hero-standalone | manual | legacy-compatibility | target-boundary |
+| Behold a Shield of Faith! | hero-standalone | manual | legacy-compatibility | manual-section |
+| Behold the Face of Justice! | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Censored | hero-standalone | manual | legacy-compatibility | manual-section |
+| Driving Assault | hero-standalone | manual | legacy-compatibility | manual-section |
+| Every Step... Death! | hero-standalone | manual | legacy-compatibility | manual-section |
+| Faithful Friend | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Grave Speech | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Halt Miscreant! | hero-standalone | supported | compiled |  |
+| Hands of the Maker | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Judgment | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
+| My Life for Yours | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Purifying Fire | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Repent! | hero-standalone | supported | compiled |  |
+| The Gods Punish and Defend | hero-standalone | manual | legacy-compatibility | manual-section |
+| Your Allies Cannot Save You! | hero-standalone | manual | legacy-compatibility | manual-section |
 | Claw Dirt | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, target-boundary |
 | Dragon's Fire | hero-standalone | manual | not-reachable | grammar, target-boundary |
 | Escape Grab | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |

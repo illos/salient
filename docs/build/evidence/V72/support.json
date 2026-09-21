@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:242bc3e1b0f8fead8bf2a47236797e1212e1bbb6cf1ed3221411a4ea62e64d72",
+  "contentHash": "sha256:08fd8c7f9ee5f55ebe5b96a777ea6363dd828862ac1f6d894fa62bb688dd0362",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1150
     },
     "hero-standalone": {
-      "total": 100,
-      "supported": 10,
-      "manual": 90
+      "total": 117,
+      "supported": 12,
+      "manual": 105
     },
     "kit-signature": {
       "total": 25,
@@ -10268,6 +10268,2277 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest",
+      "name": "Arrest",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/arrest.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier1:0:5d7d94631cf7c758",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier1:1:bb9281cdde189617",
+            "locator": "block:0:tier1:1",
+            "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+            "kind": "unsupported",
+            "shape": "grabbed",
+            "reason": "condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier2:0:afc871927433a505",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier2:1:bb9281cdde189617",
+            "locator": "block:0:tier2:1",
+            "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+            "kind": "unsupported",
+            "shape": "grabbed",
+            "reason": "condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier3:0:fb806da3d5ae4d34",
+            "locator": "block:0:tier3:0",
+            "clause": "13 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier3:1:bb9281cdde189617",
+            "locator": "block:0:tier3:1",
+            "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+            "kind": "unsupported",
+            "shape": "grabbed",
+            "reason": "condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:1:0:179fdc1e012328b2",
+          "locator": "block:1:0",
+          "clause": "If the target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature while [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) this way, you can spend 3 wrath to deal holy damage to them equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score, then change the target of the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) to another target within the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'s [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "If the target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature while [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) this way, you can spend 3 wrath to deal holy damage to them equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score, then change the target of the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) to another target within the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'s [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Arrest",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/arrest.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arrest supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Arrest",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/arrest.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arrest supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Arrest",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/arrest.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Arrest supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer",
+      "name": "Back Blasphemer!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier1:0:a8da508e0106de26",
+            "locator": "block:0:tier1:0",
+            "clause": "2 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier1:1:4e92293619489c55",
+            "locator": "block:0:tier1:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "push",
+            "distance": 1,
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier1:0:a8da508e0106de26"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier2:0:7d0811d435842164",
+            "locator": "block:0:tier2:0",
+            "clause": "4 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier2:1:4e9226361948973c",
+            "locator": "block:0:tier2:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier2:0:7d0811d435842164"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier3:0:c2aa0521a387650a",
+            "locator": "block:0:tier3:0",
+            "clause": "6 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier3:1:4e922736194898ef",
+            "locator": "block:0:tier3:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "push",
+            "distance": 3,
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/back-blasphemer#block:0:tier3:0:c2aa0521a387650a"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Back Blasphemer!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Back Blasphemer! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Back Blasphemer!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Back Blasphemer! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Back Blasphemer!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/back-blasphemer.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Back Blasphemer! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith",
+      "name": "Behold a Shield of Faith!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith#block:0:tier1:0:096fe4e92a95f297",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith#block:0:tier2:0:5d7d94631cf7c758",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith#block:0:tier3:0:afc871927433a505",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith#block:1:0:cab6e13916a4772e",
+          "locator": "block:1:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), enemies take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against you or any ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), enemies take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against you or any ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Behold a Shield of Faith!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold a Shield of Faith! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold a Shield of Faith!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold a Shield of Faith! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold a Shield of Faith!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold a Shield of Faith! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice",
+      "name": "Behold the Face of Justice!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice#block:0:tier1:0:096fe4e92a95f297",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice#block:0:tier1:1:ff0197d77b4dbb45",
+            "locator": "block:0:tier1:1",
+            "clause": "if the target has P < WEAK, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+            "kind": "unsupported",
+            "shape": "if the target has p < SYM, each enemy within N squares of them is frightened of you (save ends)",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice#block:0:tier2:0:34a47434afce1c29",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice#block:0:tier2:1:3b18452588645a52",
+            "locator": "block:0:tier2:1",
+            "clause": "if the target has P < AVERAGE, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+            "kind": "unsupported",
+            "shape": "if the target has p < SYM, each enemy within N squares of them is frightened of you (save ends)",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice#block:0:tier3:0:42dfe3ac019856ea",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice#block:0:tier3:1:f3cddff918d3c35e",
+            "locator": "block:0:tier3:1",
+            "clause": "if the target has P < STRONG, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+            "kind": "unsupported",
+            "shape": "if the target has p < SYM, each enemy within N squares of them is frightened of you (save ends)",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-the-face-of-justice#block:1:0:f760e628eb9ec5dc",
+          "locator": "block:1:0",
+          "clause": "Each enemy [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) this way is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 2 squares away from the target and takes psychic damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "if the target has P < WEAK, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "if the target has P < AVERAGE, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "if the target has P < STRONG, each enemy within 2 squares of them is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Each enemy [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) this way is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 2 squares away from the target and takes psychic damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Behold the Face of Justice!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Face of Justice! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold the Face of Justice!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Face of Justice! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold the Face of Justice!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/behold-the-face-of-justice.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Face of Justice! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/censored",
+      "name": "Censored",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/censored",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/censored.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/censored#block:0:tier1:0:cd2fadf5d76b7a1c",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/censored#block:0:tier2:0:096fe4e92a95f297",
+            "locator": "block:0:tier2:0",
+            "clause": "3 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/censored#block:0:tier3:0:34a47434afce1c29",
+            "locator": "block:0:tier3:0",
+            "clause": "5 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/censored#block:1:0:c74d1c137b9dc87a",
+          "locator": "block:1:0",
+          "clause": "When a target who is not a leader or solo creature is made [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) by this ability, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "When a target who is not a leader or solo creature is made [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) by this ability, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Censored",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/censored.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Censored supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Censored",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/censored.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Censored supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Censored",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/censored.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Censored supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault",
+      "name": "Driving Assault",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier1:0:4eba022a22560d99",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier1:1:4e92293619489c55",
+            "locator": "block:0:tier1:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "push",
+            "distance": 1,
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier1:0:4eba022a22560d99"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier2:0:19deb37cda1175f0",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier2:1:4e922736194898ef",
+            "locator": "block:0:tier2:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "push",
+            "distance": 3,
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier2:0:19deb37cda1175f0"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier3:0:c61408dee770503f",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier3:1:4e92253619489589",
+            "locator": "block:0:tier3:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+            "kind": "push",
+            "distance": 5,
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:0:tier3:0:c61408dee770503f"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:1:0:a322260d41c5d167",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line toward the target after [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line toward the target after [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Driving Assault",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Driving Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Driving Assault",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Driving Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Driving Assault",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/driving-assault.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Driving Assault supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death",
+      "name": "Every Step... Death!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death#block:0:tier1:0:37bde185ea521dbb",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death#block:0:tier2:0:b31e13c1c6b9b7c1",
+            "locator": "block:0:tier2:0",
+            "clause": "7 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death#block:0:tier3:0:9ec6428a8a8e3af7",
+            "locator": "block:0:tier3:0",
+            "clause": "10 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/every-step-death#block:1:0:fdbd6050673dfa47",
+          "locator": "block:1:0",
+          "clause": "Each time the target willingly moves before the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they take 1 psychic damage for each square they move.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Each time the target willingly moves before the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they take 1 psychic damage for each square they move.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Every Step... Death!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Every Step... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Every Step... Death!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Every Step... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Every Step... Death!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/every-step-death.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Every Step... Death! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/faithful-friend",
+      "name": "Faithful Friend",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/faithful-friend",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/faithful-friend#block:0:0:8bb9540169178a88",
+          "locator": "block:0:0",
+          "clause": "You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You conjure a spirit that takes the form of any animal you have seen. The incorporeal animal has [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 5 and can [fly](scc.v1:mcdm.heroes.v1/movement/fly), but can't physically interact with the world. While you are within 10 squares of the spirit, you automatically sense everything that type of animal would sense, in addition to sensing your own surroundings. You can dismiss the spirit at any time (no action required). If the spirit takes any damage, they are dismissed and you take 1d10 psychic damage that can't be reduced in any way.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.custom-domain.nature-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.domain.nature-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.custom-domain.nature-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.domain.nature-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.custom-domain.nature-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/faithful-friend.md",
+          "decisionId": "class.censor.domain.nature-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/grave-speech",
+      "name": "Grave Speech",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/grave-speech",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/grave-speech#block:0:0:56b89849596de3e3",
+          "locator": "block:0:0",
+          "clause": "You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You can speak to the target if they are a creature who has died within the last 24 hours and who can speak a language you know, even if they are just a head. The target regards you as they would have in life, and you might need to make [tests](scc.v1:mcdm.heroes.v1/rule.test/test) to influence them and convince them to speak with you. The trauma of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) can make a creature's memory of that event hazy, but the target otherwise knows all they knew in life. After 1 minute, the effect ends. You can't use this ability on the same creature twice.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "One dead creature",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.custom-domain.death-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.domain.death-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.custom-domain.death-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.domain.death-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.custom-domain.death-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/grave-speech.md",
+          "decisionId": "class.censor.domain.death-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant",
+      "name": "Halt Miscreant!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier1:0:cd2fadf5d76b7a1c",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier1:1:e8db1fe3ed211821",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier1:0:cd2fadf5d76b7a1c"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier2:0:34a47434afce1c29",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier2:1:3861e3e33a2c784c",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier2:0:34a47434afce1c29"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier3:0:4b805982a71781f3",
+            "locator": "block:0:tier3:0",
+            "clause": "7 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier3:1:4f641b95c99cff02",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant#block:0:tier3:0:4b805982a71781f3"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Halt Miscreant!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Halt Miscreant! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Halt Miscreant!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Halt Miscreant! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Halt Miscreant!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/halt-miscreant.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Halt Miscreant! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/hands-of-the-maker",
+      "name": "Hands of the Maker",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/hands-of-the-maker",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/hands-of-the-maker#block:0:0:af1761492bce3cea",
+          "locator": "block:0:0",
+          "clause": "You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You create a mundane object of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S or smaller. You can maintain a number of objects created this way equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. You can destroy an object created this way with a thought, no matter how far you are from it (no action required).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.custom-domain.creation-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.domain.creation-feature",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.custom-domain.creation-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.domain.creation-feature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.custom-domain.creation-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "unknown",
+          "detail": "automatic grant; chain unknown"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/hands-of-the-maker.md",
+          "decisionId": "class.censor.domain.creation-feature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment",
+      "name": "Judgment",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/judgment.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#block:0:0:505941afba3b69a9",
+          "locator": "block:0:0",
+          "clause": "The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another [censor](scc.v1:mcdm.heroes.v1/class/censor) judges the target.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:block:0:0:cd310fbb36b40647",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another censor judges the target.\nWhenever a creature judged by you uses a main action and is within your line of effect, you can use a free triggered action to deal holy damage equal to twice your Presence score to them.\nWhen a creature judged by you is reduced to 0 Stamina, you can use a free triggered action to use this ability against a new target.\nAdditionally, you can spend 1 wrath to take one of the following free triggered actions:\n- When an adjacent creature judged by you starts to shift, you make a melee free strike against them and their speed becomes 0 until the end of the current turn, preventing them from shifting.\n- When a creature judged by you within 10 squares makes a power roll, you cause them to take a bane on the roll.\n- When a creature judged by you within 10 squares uses an ability with a potency that targets only one creature, the potency is reduced by 1 for that creature.\n- If you damage a creature judged by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can choose only one free triggered action option at a time, even if multiple options are triggered by the same effect.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:item:4:0:626235d694399add",
+          "locator": "markdown:item:4:0",
+          "clause": "Whenever a creature judged by you uses a main action and is within your line of effect, you can use a free triggered action to deal holy damage equal to twice your Presence score to them.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:item:5:0:56105d161c074845",
+          "locator": "markdown:item:5:0",
+          "clause": "When a creature judged by you is reduced to 0 Stamina, you can use a free triggered action to use this ability against a new target.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:item:6:0:f9ef3b454774548a",
+          "locator": "markdown:item:6:0",
+          "clause": "Additionally, you can spend 1 wrath to take one of the following free triggered actions:",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:item:7:0:47f50247f582e004",
+          "locator": "markdown:item:7:0",
+          "clause": "- When an adjacent creature judged by you starts to shift, you make a melee free strike against them and their speed becomes 0 until the end of the current turn, preventing them from shifting.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:item:8:0:817e6ef2b9b2778f",
+          "locator": "markdown:item:8:0",
+          "clause": "- When a creature judged by you within 10 squares makes a power roll, you cause them to take a bane on the roll.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:item:9:0:6c1353bbe0da3ab9",
+          "locator": "markdown:item:9:0",
+          "clause": "- When a creature judged by you within 10 squares uses an ability with a potency that targets only one creature, the potency is reduced by 1 for that creature.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:item:10:0:38baaf3ffeff9c55",
+          "locator": "markdown:item:10:0",
+          "clause": "- If you damage a creature judged by you with a melee ability, the creature is taunted by you until the end of their next turn.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/judgment#markdown:item:11:0:5510e22cc501c7eb",
+          "locator": "markdown:item:11:0",
+          "clause": "You can choose only one free triggered action option at a time, even if multiple options are triggered by the same effect.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another censor judges the target.\nWhenever a creature judged by you uses a main action and is within your line of effect, you can use a free triggered action to deal holy damage equal to twice your Presence score to them.\nWhen a creature judged by you is reduced to 0 Stamina, you can use a free triggered action to use this ability against a new target.\nAdditionally, you can spend 1 wrath to take one of the following free triggered actions:\n- When an adjacent creature judged by you starts to shift, you make a melee free strike against them and their speed becomes 0 until the end of the current turn, preventing them from shifting.\n- When a creature judged by you within 10 squares makes a power roll, you cause them to take a bane on the roll.\n- When a creature judged by you within 10 squares uses an ability with a potency that targets only one creature, the potency is reduced by 1 for that creature.\n- If you damage a creature judged by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can choose only one free triggered action option at a time, even if multiple options are triggered by the same effect.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "Whenever a creature judged by you uses a main action and is within your line of effect, you can use a free triggered action to deal holy damage equal to twice your Presence score to them.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:5",
+          "clause": "When a creature judged by you is reduced to 0 Stamina, you can use a free triggered action to use this ability against a new target.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:6",
+          "clause": "Additionally, you can spend 1 wrath to take one of the following free triggered actions:",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:7",
+          "clause": "- When an adjacent creature judged by you starts to shift, you make a melee free strike against them and their speed becomes 0 until the end of the current turn, preventing them from shifting.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "- When a creature judged by you within 10 squares makes a power roll, you cause them to take a bane on the roll.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:9",
+          "clause": "- When a creature judged by you within 10 squares uses an ability with a potency that targets only one creature, the potency is reduced by 1 for that creature.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:10",
+          "clause": "- If you damage a creature judged by you with a melee ability, the creature is taunted by you until the end of their next turn.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:11",
+          "clause": "You can choose only one free triggered action option at a time, even if multiple options are triggered by the same effect.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another [censor](scc.v1:mcdm.heroes.v1/class/censor) judges the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: The target is judged by you until the end of the encounter, you use this ability again, you willingly end this effect (no action required), or another censor judges the target.\nWhenever a creature judged by you uses a main action and is within your line of effect, you can use a free triggered action to deal holy damage equal to twice your Presence score to them.\nWhen a creature judged by you is reduced to 0 Stamina, you can use a free triggered action to use this ability against a new target.\nAdditionally, you can spend 1 wrath to take one of the following free triggered actions:\n- When an adjacent creature judged by you starts to shift, you make a melee free strike against them and their speed becomes 0 until the end of the current turn, preventing them from shifting.\n- When a creature judged by you within 10 squares makes a power roll, you cause them to take a bane on the roll.\n- When a creature judged by you within 10 squares uses an ability with a potency that targets only one creature, the potency is reduced by 1 for that creature.\n- If you damage a creature judged by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can choose only one free triggered action option at a time, even if multiple options are triggered by the same effect.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "Whenever a creature judged by you uses a main action and is within your line of effect, you can use a free triggered action to deal holy damage equal to twice your Presence score to them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:5:0",
+          "clause": "When a creature judged by you is reduced to 0 Stamina, you can use a free triggered action to use this ability against a new target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:6:0",
+          "clause": "Additionally, you can spend 1 wrath to take one of the following free triggered actions:",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:7:0",
+          "clause": "- When an adjacent creature judged by you starts to shift, you make a melee free strike against them and their speed becomes 0 until the end of the current turn, preventing them from shifting.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "- When a creature judged by you within 10 squares makes a power roll, you cause them to take a bane on the roll.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:9:0",
+          "clause": "- When a creature judged by you within 10 squares uses an ability with a potency that targets only one creature, the potency is reduced by 1 for that creature.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:10:0",
+          "clause": "- If you damage a creature judged by you with a melee ability, the creature is taunted by you until the end of their next turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:11:0",
+          "clause": "You can choose only one free triggered action option at a time, even if multiple options are triggered by the same effect.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Judgment",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/judgment.md",
+          "decisionId": "class.censor.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Judgment",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/judgment.md",
+          "decisionId": "class.censor.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Judgment",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/judgment.md",
+          "decisionId": "class.censor.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
+      "name": "My Life for Yours",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours#block:0:0:40d9f6a8d629aced",
+          "locator": "block:0:0",
+          "clause": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours#block:1:0:b3f1e67ab9d22753",
+          "locator": "block:1:0",
+          "clause": "You spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and the target regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours#block:2:0:46cc1384be5aac0b",
+          "locator": "block:2:0",
+          "clause": "You can end one effect on the target that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or a [prone](scc.v1:mcdm.heroes.v1/condition/prone) target can stand up.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N wrath",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and the target regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "You can end one effect on the target that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or a [prone](scc.v1:mcdm.heroes.v1/condition/prone) target can stand up.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self or one ally",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "My Life for Yours",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+          "decisionId": "class.censor.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "My Life for Yours",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+          "decisionId": "class.censor.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "My Life for Yours",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+          "decisionId": "class.censor.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire",
+      "name": "Purifying Fire",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier1:0:34a47434afce1c29",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier1:1:acca4174cc87fdc2",
+            "locator": "block:0:tier1:1",
+            "clause": "M < WEAK, the target has fire weakness 3 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier2:0:afc871927433a505",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier2:1:bbde7338685d7a47",
+            "locator": "block:0:tier2:1",
+            "clause": "M < AVERAGE, the target has fire weakness 5 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier3:0:bae9458eba2f07af",
+            "locator": "block:0:tier3:0",
+            "clause": "12 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier3:1:8a0419a3b14f2bd5",
+            "locator": "block:0:tier3:1",
+            "clause": "M < STRONG, the target has fire weakness 7 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:1:0:3c770134179f71cd",
+          "locator": "block:1:0",
+          "clause": "While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "M < WEAK, the target has fire weakness 3 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "M < AVERAGE, the target has fire weakness 5 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "M < STRONG, the target has fire weakness 7 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Purifying Fire",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Purifying Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Purifying Fire",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Purifying Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Purifying Fire",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/purifying-fire.md",
+          "decisionId": "class.censor.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Purifying Fire supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent",
+      "name": "Repent!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/repent.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier1:0:4603dbc09a6d3b5a",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + P holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier1:1:71c0828acfcc9d00",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier1:0:4603dbc09a6d3b5a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier2:0:d2d215057721ecd9",
+            "locator": "block:0:tier2:0",
+            "clause": "8 + P holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "P"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier2:1:2415280207e88ef3",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier2:0:d2d215057721ecd9"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier3:0:d839638951d783a9",
+            "locator": "block:0:tier3:0",
+            "clause": "11 + P holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "P"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier3:1:20c8f05ce821f263",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/repent#block:0:tier3:0:d839638951d783a9"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Repent!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/repent.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Repent! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Repent!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/repent.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Repent! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Repent!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/repent.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Repent! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend",
+      "name": "The Gods Punish and Defend",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend#block:0:tier1:0:34a47434afce1c29",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend#block:0:tier2:0:42dfe3ac019856ea",
+            "locator": "block:0:tier2:0",
+            "clause": "8 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend#block:0:tier3:0:e998cb153c76a2da",
+            "locator": "block:0:tier3:0",
+            "clause": "11 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend#block:1:0:00496f9e1c797ed2",
+          "locator": "block:1:0",
+          "clause": "You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow yourself or one ally within 10 squares to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow yourself or one ally within 10 squares to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "The Gods Punish and Defend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option The Gods Punish and Defend supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Gods Punish and Defend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option The Gods Punish and Defend supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Gods Punish and Defend",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+          "decisionId": "class.censor.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option The Gods Punish and Defend supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you",
+      "name": "Your Allies Cannot Save You!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you#block:0:tier1:0:096fe4e92a95f297",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you#block:0:tier2:0:34a47434afce1c29",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you#block:0:tier3:0:42dfe3ac019856ea",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you#block:1:0:9993ab2de1fb87ab",
+          "locator": "block:1:0",
+          "clause": "Each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) away from the target up to a number of squares equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) away from the target up to a number of squares equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Your Allies Cannot Save You!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Your Allies Cannot Save You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Your Allies Cannot Save You!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Your Allies Cannot Save You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Your Allies Cannot Save You!",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+          "decisionId": "class.censor.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Your Allies Cannot Save You! supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -172296,8 +174567,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 16,
-    "compatibility": 1299,
+    "compiled": 18,
+    "compatibility": 1314,
     "compiledButUnavailable": 2
   }
 }
