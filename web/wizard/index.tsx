@@ -100,10 +100,12 @@ type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
  */
 const HIDDEN_STEPS = new Set(['step.think', 'step.free-strikes', 'step.connections']);
 /**
- * Culture aspects a preset fixes (V96). Choosing a premade culture takes its aspects as a set;
- * the three skills stay the player's choice, and Build your own still reaches every combination.
+ * Culture aspects a preset fixes (V96). Choosing a premade culture takes its name and aspects as
+ * a set; the three skills stay the player's choice, and Build your own still reaches every
+ * combination, including naming the culture.
  */
 const PRESET_FIXED_ASPECTS = new Set([
+  'culture.name',
   'culture.environment',
   'culture.organization',
   'culture.upbringing',

@@ -335,9 +335,9 @@ step's reference still names and links the source step, and its description is s
 sentence; only the wizard's own label differs, because the step now closes out the build rather
 than only recording appearance and backstory.
 
-**Amended 2026-09-21 (V96):** in the wizard, choosing a preset takes its aspects as a set. The
-  environment, organization and upbringing it names, and its language where it prints one, read
-  back read-only; Build your own sets them individually. The associated skills stay the player's
+**Amended 2026-09-21 (V96):** in the wizard, choosing a preset takes its name and aspects as a
+  set. The culture name, the environment, organization and upbringing it names, and its language
+  where it prints one, read back read-only; Build your own sets them individually. The associated skills stay the player's
   choice, and a professional preset still picks its own language. The source permits using *or
   modifying* a table culture (`background.md`, the paragraph before the Typical Ancestry Cultures
   Table), and Bespoke reaches every combination, so this constrains the wizard path rather than

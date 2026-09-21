@@ -70,8 +70,9 @@ unchanged.
 - 2026-09-21: the user asked that choosing a premade culture lock its choices in. Implemented in
   the wizard only, over the V84 out-of-scope line "locking a preset's defaults": the source says a
   player may "use or modify" a table culture, but Bespoke reaches every combination, so no legal
-  character becomes unbuildable. Locked are environment, organization, upbringing and a preset's
-  printed language; the three skills and a professional preset's language stay choices. The shared
+  character becomes unbuildable. Locked are the culture name, environment, organization,
+  upbringing and a preset's printed language; the three skills and a professional preset's
+  language stay choices. The shared
   transition still accepts a modified preset and still marks it Bespoke, so the headless route is
   unchanged.
 - 2026-09-21: ancestry trait rows now show the trait's text. The option records carry a source
