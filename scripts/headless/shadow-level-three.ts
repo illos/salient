@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** V97 full-build level editing and source-timed actions, through authenticated public operations. */
+/** V98 full-build level editing and source-timed actions, through authenticated public operations. */
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import type { ScenarioContext } from './character-client.ts';
@@ -12,11 +12,14 @@ import type { AbilityRollResult } from '../../shared/contracts/rollResolution.ts
 import type { HeroSheet } from '../../shared/contracts/characterSheet.ts';
 import type { DraftSelection } from '../../shared/characterDraft.ts';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft.ts';
-const ledger = JSON.parse(readFileSync('tests/fixtures/v97-shadow-two-expected.json', 'utf8')) as {
+const ledger = JSON.parse(
+  readFileSync('tests/fixtures/v97-shadow-three-expected.json', 'utf8'),
+) as {
   witnesses: {
     id: string;
     abilityDecision: string;
     newAbility: string;
+    damageByTier?: number[];
     selections: EvaluationInput['selections'];
     expected: {
       staminaMaximum: number;
@@ -38,27 +41,27 @@ type Saved = {
 };
 type Transition = { selections: DraftSelection[]; removed: string[]; evaluation: EvaluationResult };
 const commandId = () => crypto.randomUUID();
-export async function runShadowLevelTwo({
+export async function runShadowLevelThree({
   actors: { director, peer },
   run,
   runId,
 }: ScenarioContext) {
   await run(
-    'Shadow level two: six builds, target-level edits and conditional manual actions persist',
+    'Shadow level three: four builds, level edits and six action uses persist',
     async () => {
       const { definitions } = await director.query<{ definitions: DecisionDefinitions }>(
         'characterWizard:discover',
-        { targetLevel: 2 },
+        { targetLevel: 3 },
       );
       const campaignId = await director.mutation<string>('campaigns:create', {
         commandId: commandId(),
-        name: `Shadow 2 ${runId}`,
+        name: `Shadow 3 ${runId}`,
       });
       const ids: string[] = [];
       for (const [index, witness] of ledger.witnesses.entries()) {
         const characterId = await director.mutation<string>('characters:create', {
           commandId: commandId(),
-          targetLevel: 2,
+          targetLevel: 3,
           wizardDraft: index === 0,
           authored: {
             name: index === 0 ? '' : `${witness.id} ${runId}`,
@@ -70,7 +73,7 @@ export async function runShadowLevelTwo({
         });
         ids.push(characterId);
         let saved = await director.query<Saved>('characters:get', { characterId });
-        assert.equal(saved.level, 2);
+        assert.equal(saved.level, 3);
         assert.equal(saved.evaluation.status, 'complete');
         if (index === 0) {
           assert.equal(await director.query('characters:wizardDraft', {}), characterId);
@@ -78,19 +81,19 @@ export async function runShadowLevelTwo({
             'characterWizard:discover',
             { characterId },
           );
-          assert.equal(resumed.targetLevel, 2);
+          assert.equal(resumed.targetLevel, 3);
           await director.mutation('characters:save', {
             commandId: commandId(),
             characterId,
             expectedRevision: saved.revision,
-            targetLevel: 2,
+            targetLevel: 3,
             authored: { ...saved.authored, name: `${witness.id} ${runId}` },
             selections: saved.selections,
             list: true,
           });
           saved = await director.query<Saved>('characters:get', { characterId });
           assert.equal(await director.query('characters:wizardDraft', {}), null);
-          assert.equal(saved.level, 2);
+          assert.equal(saved.level, 3);
         }
         await director.mutation('characters:submit', {
           commandId: commandId(),
@@ -103,7 +106,7 @@ export async function runShadowLevelTwo({
         for (const key of ['staminaMaximum', 'recoveryValue', 'windedValue'] as const)
           assert.equal(baseline[key].value, witness.expected[key]);
         assert.equal(baseline.recoveriesMaximum.value, 8);
-        assert.equal(baseline.level.value, 2);
+        assert.equal(baseline.level.value, 3);
         for (const name of witness.expected.abilities)
           assert.ok(
             sheet.abilities.some(a => a.name === name),
@@ -116,7 +119,7 @@ export async function runShadowLevelTwo({
           );
         assert.deepEqual(sheet.abilities.find(a => a.name === witness.newAbility)?.cost, {
           resource: 'insight',
-          amount: 5,
+          amount: 7,
         });
         assert.ok(sheet.abilities.find(a => a.name === witness.newAbility)?.content?.text);
       }
@@ -126,8 +129,8 @@ export async function runShadowLevelTwo({
       await assert.rejects(
         peer.query('characterWizard:transitionLevel', {
           characterId,
-          fromLevel: 2,
-          targetLevel: 1,
+          fromLevel: 3,
+          targetLevel: 2,
           selections: saved.selections,
         }),
         /owner/i,
@@ -135,7 +138,7 @@ export async function runShadowLevelTwo({
       await assert.rejects(
         director.query('characterWizard:transitionLevel', {
           characterId,
-          fromLevel: 2,
+          fromLevel: 3,
           targetLevel: 4,
           selections: saved.selections,
         }),
@@ -143,8 +146,8 @@ export async function runShadowLevelTwo({
       );
       const down = await director.query<Transition>('characterWizard:transitionLevel', {
         characterId,
-        fromLevel: 2,
-        targetLevel: 1,
+        fromLevel: 3,
+        targetLevel: 2,
         selections: saved.selections,
       });
       assert.ok(down.removed.includes(ledger.witnesses[0]!.abilityDecision));
@@ -160,40 +163,27 @@ export async function runShadowLevelTwo({
         });
         return director.query<Saved>('characters:get', { characterId });
       };
-      saved = await persist(1, down.selections);
-      assert.equal(saved.level, 1);
-      assert.equal(saved.evaluation.baseline?.staminaMaximum.value, 21);
-      assert.ok(!saved.selections.some(s => s.decisionId.startsWith('class.shadow.level-2.')));
+      saved = await persist(2, down.selections);
+      assert.equal(saved.level, 2);
+      assert.equal(saved.evaluation.baseline?.staminaMaximum.value, 27);
+      assert.ok(!saved.selections.some(s => s.decisionId.startsWith('class.shadow.level-3.')));
       const up = await director.query<Transition>('characterWizard:transitionLevel', {
         characterId,
-        fromLevel: 1,
-        targetLevel: 2,
+        fromLevel: 2,
+        targetLevel: 3,
         selections: saved.selections,
       });
-      saved = await persist(2, up.selections);
+      saved = await persist(3, up.selections);
       assert.equal(saved.evaluation.status, 'incomplete');
-      const college = await director.query<Transition>('characterWizard:transition', {
+      const draftSheet = await director.query<HeroSheet>('characters:sheet', {
         characterId,
-        targetLevel: 2,
-        selections: draftSelectionsFrom(ledger.witnesses[0]!.selections, definitions),
-        decisionId: 'class.shadow.college',
-        value: 'Caustic Alchemy',
+        view: 'draft',
       });
-      assert.ok(college.removed.includes(ledger.witnesses[0]!.abilityDecision));
-      const replacement = await director.query<Transition>('characterWizard:transition', {
-        characterId,
-        targetLevel: 2,
-        selections: college.selections,
-        decisionId: 'class.shadow.level-2.trained-assassin-ability',
-        value: 'Sticky Bomb',
-      });
-      saved = await persist(2, replacement.selections);
-      assert.equal(saved.evaluation.status, 'complete');
-      assert.ok(saved.evaluation.baseline?.features.some(f => f.name === 'Trained Assassin'));
-      assert.ok(!saved.evaluation.baseline?.features.some(f => f.name === 'Burning Ash'));
-      // Attached editing remains a draft; level selection does not activate it or bypass review.
+      assert.ok(!draftSheet.abilities.some(a => a.name === 'Dancer'));
+      // Draft level edits never replace the admitted effective build without submission.
       const effective = await director.query<HeroSheet>('characters:sheet', { characterId });
-      assert.ok(effective.build?.baseline?.features.some(f => f.name === 'Burning Ash'));
+      assert.equal(effective.build?.baseline?.level.value, 3);
+      assert.ok(effective.abilities.some(a => a.name === 'Dancer'));
 
       const sessionId = await director.mutation<string>('sessions:start', {
         commandId: commandId(),
@@ -232,98 +222,85 @@ export async function runShadowLevelTwo({
             operation,
             arguments: {},
           });
-        // Sticky Bomb pays at attachment and records full source for delayed/manual detonation.
-        const bomber = ids[2]!;
-        const target = { refKind: 'character', id: ids[1]! };
-        const before = await director.query<Saved>('characters:get', { characterId: ids[1]! });
-        await invoke(bomber, 'adjust.heroic-resource', { value: 5 });
-        const used = await invoke(bomber, 'ability.use', {
-          ability: 'Sticky Bomb',
-          targets: [target],
-        });
-        assert.equal((await event(used.eventId))?.kind, 'ability.recorded');
-        assert.equal((await event(used.eventId))?.payload?.data?.manual, true);
-        assert.equal(
-          (await director.query<Saved>('characters:get', { characterId: bomber })).liveState
-            ?.heroicResource.current,
-          0,
-        );
-        assert.deepEqual(
-          (await director.query<Saved>('characters:get', { characterId: ids[1]! })).liveState
-            ?.stamina,
-          before.liveState?.stamina,
-        );
-        const blocked = await invoke(bomber, 'ability.use', {
-          ability: 'Sticky Bomb',
-          targets: [target],
-        });
-        assert.equal((await event(blocked.eventId))?.kind, 'ability.blocked');
-        // Source rows: In a Puff of Ash 6/10/14 + A2 + Cloak and Dagger 1;
-        // Stink Bomb 2/5/7 poison (no characteristic or kit bonus); Machinations only moves.
-        for (const [index, name, damageByTier, manual] of [
-          [0, 'In a Puff of Ash', [9, 13, 17], /teleport/i],
-          [3, 'Stink Bomb', [2, 5, 7], /gas remains/i],
-          [4, 'Machinations of Sound', [0, 0, 0], /slide/i],
-        ] as const) {
+        const target = { refKind: 'character', id: ids[0]! };
+        for (const [index, witness] of ledger.witnesses.entries()) {
           const id = ids[index]!;
-          await invoke(id, 'adjust.heroic-resource', { value: 5 });
+          await invoke(id, 'adjust.heroic-resource', { value: 7 });
           const beforeTarget = await director.query<Saved>('characters:get', {
             characterId: target.id,
           });
-          const result = await invoke(id, 'ability.use', { ability: name, targets: [target] });
-          const persisted = await event(result.eventId);
-          assert.equal(persisted?.kind, 'ability.use');
-          const roll = persisted?.payload?.data?.result;
-          assert.ok(roll);
-          const outcome = roll.targets[0]!;
-          const expectedDamage = damageByTier[outcome.tier - 1]!;
-          assert.equal(outcome.damage?.rolledDamage ?? 0, expectedDamage);
-          assert.match(JSON.stringify([outcome.unresolvedClauses, roll.manualResolutions]), manual);
-          if (name === 'Machinations of Sound')
-            assert.match(JSON.stringify(roll.manualResolutions), /Intuition/);
-          assert.equal(
-            (await director.query<Saved>('characters:get', { characterId: id })).liveState
-              ?.heroicResource.current,
-            0,
-          );
+          const used = await invoke(id, 'ability.use', {
+            ability: witness.newAbility,
+            targets: [target],
+          });
+          const persisted = await event(used.eventId);
           const afterTarget = await director.query<Saved>('characters:get', {
             characterId: target.id,
           });
           assert.equal(
-            afterTarget.liveState?.stamina,
-            beforeTarget.liveState!.stamina - expectedDamage,
-          );
-        }
-        for (const id of [ids[1]!, ids[5]!]) {
-          const name = id === ids[1] ? 'Too Slow' : 'So Gullible';
-          await invoke(id, 'adjust.heroic-resource', { value: 5 });
-          const result = await invoke(id, 'ability.use', {
-            ability: name,
-            targets: [{ refKind: 'character', id }],
-          });
-          assert.equal((await event(result.eventId))?.kind, 'ability.recorded');
-          assert.equal(
             (await director.query<Saved>('characters:get', { characterId: id })).liveState
               ?.heroicResource.current,
             0,
           );
-        }
-        for (const name of ['Friend!: Join an Effect', 'Friend!: Disengage']) {
-          const id = ids[4]!;
-          const available = await director.query<{ abilities: { name: string }[] }>(
-            'abilities:sheet',
-            { campaignId, actor: { kind: 'character', id, name: 'Shadow' } },
-          );
-          assert.ok(available.abilities.some(a => a.name === name));
-          const result = await invoke(id, 'ability.use', {
-            ability: name,
-            targets: [{ refKind: 'character', id }],
+          if (witness.damageByTier) {
+            assert.equal(persisted?.kind, 'ability.use');
+            const roll = persisted?.payload?.data?.result;
+            assert.ok(roll);
+            const outcome = roll.targets[0]!;
+            const damage = witness.damageByTier[outcome.tier - 1]!;
+            assert.equal(outcome.damage?.rolledDamage, damage);
+            assert.equal(afterTarget.liveState?.stamina, beforeTarget.liveState!.stamina - damage);
+            if (witness.newAbility === 'Pinning Shot') {
+              // Target A2 is never < weak0/average1/strong2. The persisted condition event must resist.
+              const log = await director.query<{
+                events: {
+                  kind: string;
+                  payload?: { sourceUseEventId?: string; status?: string; condition?: string };
+                }[];
+              }>('events:list', { campaignId });
+              const condition = log.events.find(
+                e => e.kind === 'condition.potency' && e.payload?.sourceUseEventId === used.eventId,
+              );
+              assert.equal(condition?.payload?.condition, 'restrained');
+              assert.equal(condition?.payload?.status, 'resisted');
+            } else {
+              assert.match(
+                JSON.stringify([outcome.unresolvedClauses, roll.manualResolutions]),
+                witness.newAbility === 'Misdirecting Strike' ? /taunted/ : /slowed|can't stand/,
+              );
+            }
+          } else {
+            assert.equal(persisted?.kind, 'ability.recorded');
+            assert.equal(persisted?.payload?.data?.manual, true);
+            assert.equal(afterTarget.liveState?.stamina, beforeTarget.liveState?.stamina);
+          }
+          const blocked = await invoke(id, 'ability.use', {
+            ability: witness.newAbility,
+            targets: [target],
           });
-          const persisted = await event(result.eventId);
+          assert.equal((await event(blocked.eventId))?.kind, 'ability.blocked');
+        }
+        // Free maneuvers/embedded actions keep their source timing and do not spend the restricted surge.
+        for (const name of ['Careful Observation', 'Dancer: Disengage']) {
+          const id = ids[0]!;
+          const sheet = await director.query<HeroSheet>('characters:sheet', { characterId: id });
+          const action = sheet.abilities.find(a => a.name === name);
+          assert.ok(action);
+          if (name === 'Dancer: Disengage')
+            assert.match(action.activationCondition ?? '', /after using Dancer.*encounter ends/);
+          const before = await director.query<Saved>('characters:get', { characterId: id });
+          const used = await invoke(id, 'ability.use', { ability: name, targets: [target] });
+          const persisted = await event(used.eventId);
           assert.equal(persisted?.kind, 'ability.recorded');
           assert.equal(persisted?.payload?.data?.manual, true);
           assert.equal(persisted?.payload?.data?.ability?.name, name);
+          const after = await director.query<Saved>('characters:get', { characterId: id });
+          assert.deepEqual(after.liveState, before.liveState);
         }
+        const nonDancer = await director.query<HeroSheet>('characters:sheet', {
+          characterId: ids[1]!,
+        });
+        assert.ok(!nonDancer.abilities.some(a => a.name === 'Dancer: Disengage'));
       } finally {
         const session = await director.query<{ revision: number }>('sessions:get', { sessionId });
         await director.mutation('sessions:transition', {

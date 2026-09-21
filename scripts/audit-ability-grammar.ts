@@ -437,7 +437,7 @@ export function buildCorpus(inputs: AuditInputs = readInputs()): Corpus_ {
   }
 
   // Wizard grants: resolve to the standalone/kit entry where possible; otherwise classify own text.
-  const grants = [...wizardGrants(getDefinitions(1), 1), ...wizardGrants(getDefinitions(2), 2)];
+  const grants = [1, 2, 3].flatMap(level => wizardGrants(getDefinitions(level), level));
   const perkByPath = new Map(inputs.perks.map(p => [strip(p.sourcePath), p]));
   let resolvedToStandalone = 0;
   let resolvedToKit = 0;
@@ -771,7 +771,7 @@ export function renderMarkdown(report: Report): string {
 
   lines.push('## Hero abilities that compile (fully or with remainder)', '');
   lines.push(
-    'Availability is derived from the composed wizard definitions (`getDefinitions(1)` and `(2)`): `selectable` when at least one granting decision chain is offered by the current wizard, `not-selectable` when every grant path is unsupported, `not-granted` when no wizard decision references the entry, `unknown` when a pool-restricted decision could not be evaluated statically.',
+    'Availability is derived from the composed wizard definitions (`getDefinitions(1)`, `(2)` and `(3)`): `selectable` when at least one granting decision chain is offered by the current wizard, `not-selectable` when every grant path is unsupported, `not-granted` when no wizard decision references the entry, `unknown` when a pool-restricted decision could not be evaluated statically.',
     '',
   );
   lines.push(

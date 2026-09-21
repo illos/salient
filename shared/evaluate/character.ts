@@ -770,7 +770,7 @@ class Evaluation {
       p({
         decisionId: 'class.level',
         source:
-          this.level === 2
+          this.level >= 2
             ? this.own(this.decisions.get('class.level')!)
             : this.sentence(SENTENCES.level),
         operation: 'set',

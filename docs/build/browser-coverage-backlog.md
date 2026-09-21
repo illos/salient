@@ -84,3 +84,7 @@ Rules:
   choices clear when lowered, and the route/editor stays mounted.
 - Keyboard operation of the level selector; unavailable 3–10 options; visible unsupported-class
   diagnostics; explicit Save and Close and navigation draining include the latest level.
+
+## V98: Shadow level three
+
+After V66: select level 3, inspect cumulative Shadow choices and 7-Insight alternatives; lower to 2 and confirm later choices disappear; resume the saved level-3 draft. API proof lives in the V98 cohort.

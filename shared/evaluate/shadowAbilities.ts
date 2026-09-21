@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
 
+const dancerPath = 'en/unified/md/feature/ability/shadow/level-3/dancer.md';
 const sourcePath = 'en/unified/md/feature/shadow/level-2/friend.md';
 /** Source-timed uses of Friend!; neither effect is automatically adjudicated. */
 export const SHADOW_ACTIONS: {
@@ -11,6 +12,16 @@ export const SHADOW_ACTIONS: {
   activationCondition: string;
   trigger?: string;
 }[] = [
+  {
+    name: 'Dancer: Disengage',
+    sourcePath: dancerPath,
+    actionType: 'Free triggered action',
+    quote:
+      'Until the end of the encounter, whenever an enemy moves or is force moved adjacent to you or damages you, you can take the Disengage move action as a free triggered action.',
+    trigger: 'An enemy moves or is force moved adjacent to you or damages you.',
+    activationCondition:
+      'Only after using Dancer and before the encounter ends, when an enemy moves or is force moved adjacent to you or damages you. Track activation and resolve movement manually.',
+  },
   {
     name: 'Friend!: Join an Effect',
     sourcePath,
@@ -42,21 +53,23 @@ export function shadowAbilities(
   existing: GrantedAbility[],
 ): GrantedAbility[] {
   const result = existing.filter(ability => !shadowAbilitySource(ability));
-  const parent = features.find(
-    feature => feature.name === 'Friend!' && feature.sourcePath === sourcePath,
-  );
-  if (parent)
-    for (const action of SHADOW_ACTIONS)
+  for (const action of SHADOW_ACTIONS) {
+    const parent =
+      action.sourcePath === dancerPath
+        ? result.find(ability => ability.name === 'Dancer' && ability.sourcePath === dancerPath)
+        : features.find(feature => feature.name === 'Friend!' && feature.sourcePath === sourcePath);
+    if (parent)
       result.push({
         name: action.name,
         kind: 'class',
-        sourcePath,
+        sourcePath: action.sourcePath,
         kitBonusesIncluded: false,
         activationCondition: action.activationCondition,
         provenance: {
           ...parent.provenance,
-          source: { ...parent.provenance.source, path: sourcePath, quote: action.quote },
+          source: { ...parent.provenance.source, path: action.sourcePath, quote: action.quote },
         },
       });
+  }
   return result;
 }

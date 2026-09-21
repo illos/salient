@@ -10,6 +10,7 @@ import type { DecisionDefinitions } from '../evaluate/definitions.ts';
 
 import { levelTwoDecisions } from './classes/fury/level-two.ts';
 import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
+import { levelThreeDecisions as shadowLevelThree } from './classes/shadow/level-three.ts';
 export { FURY_LEVEL_TWO_PERK_GROUPS } from './classes/fury/level-two.ts';
 
 const levelOne: DecisionDefinitions = structuredClone(legacyLevelOne);
@@ -22,7 +23,15 @@ levelDecision.quote =
 levelDecision.grants = [{ kind: 'level', value: '2' }];
 classStep.decisions.push(...structuredClone([...levelTwoDecisions, ...shadowLevelTwo]));
 
-for (const definitions of [levelOne, levelTwo]) {
+const levelThree: DecisionDefinitions = structuredClone(levelTwo);
+levelThree.level = 3;
+const thirdClassStep = levelThree.steps.find(step => step.id === 'step.class')!;
+thirdClassStep.decisions.find(decision => decision.id === 'class.level')!.grants = [
+  { kind: 'level', value: '3' },
+];
+thirdClassStep.decisions.push(...structuredClone(shadowLevelThree));
+
+for (const definitions of [levelOne, levelTwo, levelThree]) {
   definitions.supportingChoicesVersion = 'v37';
   extendBackgroundDefinitions(definitions);
   extendCultureDefinitions(definitions);
@@ -43,7 +52,14 @@ export function getDefinitions(
   level: number,
   choiceOrigins?: CharacterChoiceOrigins,
 ): DecisionDefinitions {
-  const definitions = level === 1 ? levelOne : level === 2 ? levelTwo : { ...levelOne, level };
+  const definitions =
+    level === 1
+      ? levelOne
+      : level === 2
+        ? levelTwo
+        : level === 3
+          ? levelThree
+          : { ...levelOne, level };
   return choiceOrigins
     ? { ...definitions, choiceOrigins: structuredClone(choiceOrigins) }
     : definitions;

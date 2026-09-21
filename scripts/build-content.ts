@@ -185,6 +185,12 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices.',
   },
   {
+    id: 'shadow-level-three',
+    description: 'Shadow level-three Careful Observation and four 7-Insight alternatives.',
+    paths: ['feature/shadow/level-3', 'feature/ability/shadow/level-3'],
+    basis: 'docs/build/V98-shadow-level-three.md#scope: Shadow level-three build choices.',
+  },
+  {
     id: 'tactician-level-one',
     description:
       'Tactician class, level-one features and abilities (all three doctrines). Readable alternatives do not imply wizard or execution support.',

@@ -95,15 +95,17 @@ export function applyClassProfile(ctx: DerivationContext, out: PartialBaseline) 
         })),
       ]);
     }
-    const growth = ctx.decisions.get('class.shadow.level-2.stamina');
-    if (out.staminaMaximum && growth && ctx.available.has(growth.id)) {
-      out.staminaMaximum.value += 6;
-      out.staminaMaximum.provenance.push(
-        sourced(growth.id, growth.source, growth.quote, {
-          operation: 'add',
-          amount: 6,
-        }),
-      );
+    for (const level of [2, 3]) {
+      const growth = ctx.decisions.get(`class.shadow.level-${level}.stamina`);
+      if (out.staminaMaximum && growth && ctx.available.has(growth.id)) {
+        out.staminaMaximum.value += 6;
+        out.staminaMaximum.provenance.push(
+          sourced(growth.id, growth.source, growth.quote, {
+            operation: 'add',
+            amount: 6,
+          }),
+        );
+      }
     }
     out.recoveriesMaximum = dv(profile.recoveries, [
       entry(`Recoveries: ${profile.recoveries}`, {

@@ -9,6 +9,7 @@ import {
   type ActorSession,
   type ScenarioContext,
 } from './headless/character-client.ts';
+import { runShadowLevelThree } from './headless/shadow-level-three.ts';
 import { runShadowLevelTwo } from './headless/shadow-level-two.ts';
 import { runTactician } from './headless/tactician.ts';
 import { runScenarios } from './headless/character-scenarios.ts';
@@ -23,6 +24,7 @@ const cohorts = {
   all: runScenarios,
   tactician: runTactician,
   'shadow-level-two': runShadowLevelTwo,
+  'shadow-level-three': runShadowLevelThree,
   culture: runCulturePresets,
   'complication-choices': runComplicationChoices,
   'complication-table': runComplicationTable,
