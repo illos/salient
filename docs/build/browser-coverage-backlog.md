@@ -132,3 +132,9 @@ browser moratorium is lifted. Logic and persisted results use the Summoner CLI/A
 Target levels 4–6 show cumulative choices, separate characteristic/perk/skill controls and college
 ability pairs. Verify second-echelon sheet totals, manual timing/Umbral liabilities and lower-level
 pruning visually when the moratorium ends. Shared API cohort owns behavioral proof.
+
+## V109 — Compiled Effect riders and kit signatures
+
+After the moratorium, inspect the Ability effect label, full manual rider text, explicit movement
+prerequisites and Director disposition button on a narrow screen. Verify corrected and restored
+occurrences display current dispositions. Public API cohort and persisted tests own behavior.

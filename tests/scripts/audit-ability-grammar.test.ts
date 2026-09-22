@@ -392,3 +392,16 @@ it('finite selected-pool witnesses prove actual domain grants without accepting 
   feature.abilityPool = { knownOnly: true };
   expect(grant().selectable).toBe('unknown');
 });
+
+// V109: the checked-in descriptive audit must represent the same current source/grammar.
+it('keeps the committed V64 audit fresh after rider grammar changes', () => {
+  const report = audit();
+  const directory = new URL(
+    '../../docs/build/evidence/V26/coverage-audit-2026-09-20/',
+    import.meta.url,
+  );
+  expect(readFileSync(new URL('report.json', directory), 'utf8')).toBe(
+    JSON.stringify(report, null, 2) + '\n',
+  );
+  expect(readFileSync(new URL('report.md', directory), 'utf8')).toBe(renderMarkdown(report));
+});

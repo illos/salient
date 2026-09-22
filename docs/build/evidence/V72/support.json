@@ -12,18 +12,18 @@
     },
     "foe-ability": {
       "total": 1158,
-      "supported": 8,
-      "manual": 1150
+      "supported": 9,
+      "manual": 1149
     },
     "hero-standalone": {
       "total": 267,
-      "supported": 15,
-      "manual": 252
+      "supported": 28,
+      "manual": 239
     },
     "kit-signature": {
       "total": 25,
-      "supported": 0,
-      "manual": 25
+      "supported": 5,
+      "manual": 20
     },
     "malice": {
       "total": 14,
@@ -12236,7 +12236,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/come-on.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -12286,20 +12286,12 @@
           "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/come-on#block:1:0:536560b14f83a399",
           "locator": "block:1:0",
           "clause": "Your companion can make a melee free strike. You both [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your Intuition score.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "free-strike",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Your companion can make a melee free strike. You both [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your Intuition score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
+      "diagnostics": [],
       "live": "legacy-compatibility",
       "boundary": "Explicit supplemental class/minion/companion manual record; shared resource payment only. Creature combat and turn integration deferred.",
       "grants": [
@@ -13453,7 +13445,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/i-feed-on-your-pain.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -13517,20 +13509,12 @@
           "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/i-feed-on-your-pain#block:1:0:38fd015883021440",
           "locator": "block:1:0",
           "clause": "If the target is killed by this damage, or is winded or [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) after taking this damage, you gain 2 surges.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "surges",
+          "dependency": "after-damage"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "If the target is killed by this damage, or is winded or [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) after taking this damage, you gain 2 surges.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
+      "diagnostics": [],
       "live": "legacy-compatibility",
       "boundary": "Explicit supplemental class/minion/companion manual record; shared resource payment only. Creature combat and turn integration deferred.",
       "grants": [
@@ -17193,7 +17177,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/behold-a-shield-of-faith.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -17246,22 +17230,14 @@
           "id": "mcdm.heroes.v1/feature.ability.censor.level-1/behold-a-shield-of-faith#block:1:0:cab6e13916a4772e",
           "locator": "block:1:0",
           "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), enemies take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against you or any ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "bane",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), enemies take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against you or any ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Behold a Shield of Faith!",
@@ -17655,7 +17631,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/driving-assault.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -17729,22 +17705,14 @@
           "id": "mcdm.heroes.v1/feature.ability.censor.level-1/driving-assault#block:1:0:a322260d41c5d167",
           "locator": "block:1:0",
           "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line toward the target after [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "push-followup",
+          "dependency": "after-movement"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line toward the target after [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Driving Assault",
@@ -19392,7 +19360,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/the-gods-punish-and-defend.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -19445,22 +19413,14 @@
           "id": "mcdm.heroes.v1/feature.ability.censor.level-1/the-gods-punish-and-defend#block:1:0:00496f9e1c797ed2",
           "locator": "block:1:0",
           "clause": "You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow yourself or one ally within 10 squares to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "recovery",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow yourself or one ally within 10 squares to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "The Gods Punish and Defend",
@@ -20488,7 +20448,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/blessed-light.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -20541,22 +20501,14 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/blessed-light#block:1:0:d741d1037652b63a",
           "locator": "block:1:0",
           "clause": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a number of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) equal to the [tier outcome](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) of your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "surges",
+          "dependency": "after-damage"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a number of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) equal to the [tier outcome](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) of your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Blessed Light",
@@ -21125,7 +21077,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/drain.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -21178,22 +21130,14 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/drain#block:1:0:e8aac6ed0a8539cb",
           "locator": "block:1:0",
           "clause": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "recovery",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Drain",
@@ -23255,7 +23199,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/warriors-prayer.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -23308,22 +23252,14 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/warriors-prayer#block:1:0:f953fcdc1d9ab527",
           "locator": "block:1:0",
           "clause": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "temporary-stamina",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Warrior's Prayer",
@@ -25065,7 +25001,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -25118,22 +25054,14 @@
           "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/grasp-of-beyond#block:1:0:6040dbb4bc0a80f3",
           "locator": "block:1:0",
           "clause": "You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "teleport",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Grasp of Beyond",
@@ -27552,19 +27480,12 @@
           "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/unquiet-ground#block:1:0:c82324ff7249b220",
           "locator": "block:1:0",
           "clause": "The ground beneath the area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "terrain",
+          "dependency": "independent"
         }
       ],
       "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The ground beneath the area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
@@ -28398,7 +28319,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/hit-and-run.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -28462,22 +28383,14 @@
           "id": "mcdm.heroes.v1/feature.ability.fury.level-1/hit-and-run#block:1:0:6be3f7e2c891ca36",
           "locator": "block:1:0",
           "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "shift",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Hit and Run",
@@ -31510,7 +31423,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/inertial-step.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -31560,22 +31473,14 @@
           "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-step#block:1:0:ed0a8b0944ebbed6",
           "locator": "block:1:0",
           "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "shift",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) before or after you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Inertial Step",
@@ -35246,10 +35151,9 @@
           "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain#block:1:0:38bc455ef6ca216e",
           "locator": "block:1:0",
           "clause": "One ally within 5 squares of the target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "surges",
+          "dependency": "independent"
         }
       ],
       "diagnostics": [
@@ -35258,12 +35162,6 @@
           "locator": "block:0:tier3:1",
           "clause": "I < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "One ally within 5 squares of the target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
       "live": "legacy-compatibility",
@@ -35338,7 +35236,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/get-in-get-out.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -35388,22 +35286,14 @@
           "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out#block:1:0:1f4f8e4bc2bb6539",
           "locator": "block:1:0",
           "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), dividing that movement before or after your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) as desired.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "shift",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), dividing that movement before or after your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) as desired.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Get In Get Out",
@@ -45283,10 +45173,9 @@
           "id": "mcdm.heroes.v1/feature.ability.talent.level-1/spirit-sword#block:1:0:2a9250212e2578ff",
           "locator": "block:1:0",
           "clause": "You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "surges",
+          "dependency": "independent"
         },
         {
           "id": "mcdm.heroes.v1/feature.ability.talent.level-1/spirit-sword#block:2:0:5adf21379a785a8c",
@@ -45340,12 +45229,6 @@
           "locator": "markdown:item:8",
           "clause": "Strained: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
           "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
           "code": "manual-section",
@@ -46237,10 +46120,9 @@
           "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish#block:1:0:8f54460bef188ca5",
           "locator": "block:1:0",
           "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 3 squares.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "shift",
+          "dependency": "independent"
         },
         {
           "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish#block:2:0:157fed464f7b24de",
@@ -46253,12 +46135,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 3 squares.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
         {
           "code": "manual-section",
           "locator": "block:2:0",
@@ -47900,7 +47776,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/instigator.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -47950,22 +47826,14 @@
           "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator#block:1:0:73f9c6763afe989f",
           "locator": "block:1:0",
           "clause": "The target is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you or a willing ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "taunt",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The target is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you or a willing ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Instigator",
@@ -48444,19 +48312,12 @@
           "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:1:0:5f06feb84f57cf21",
           "locator": "block:1:0",
           "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "terrain",
+          "dependency": "independent"
         }
       ],
       "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
@@ -49827,15 +49688,6 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/arcane-archer/exploding-arrow#markdown:item:1:0:d22e55d416f5524f",
-          "locator": "markdown:item:1:0",
-          "clause": "*Your ammunition explodes with magical energy.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -49864,32 +49716,14 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Your ammunition explodes with magical energy.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "One creature or object of your choice within 2 squares of the target takes fire damage equal to the characteristic score used for this ability's power roll.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Your ammunition explodes with magical energy.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Exploding Arrow",
@@ -50006,15 +49840,6 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/battlemind/unmooring#markdown:item:1:0:fa4489c4fc763f71",
-          "locator": "markdown:item:1:0",
-          "clause": "*Your weapon unleashes psionic energy that reduces your target's weight.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -50043,32 +49868,14 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Your weapon unleashes psionic energy that reduces your target's weight.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "Until the end of the target's next turn, any forced movement that affects the target has its distance increased by 2.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Your weapon unleashes psionic energy that reduces your target's weight.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Unmooring",
@@ -50212,17 +50019,7 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/boren/bear-claws#markdown:item:1:0:3533db6b72a8e04a",
-          "locator": "markdown:item:1:0",
-          "clause": "*Attacks with your sharp and deadly claws grab the weak.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
         {
           "code": "unsafe-tier-remainder",
@@ -50241,28 +50038,10 @@
           "locator": "block:0:tier3:1",
           "clause": "M < STRONG, grabbed",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Attacks with your sharp and deadly claws grab the weak.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Attacks with your sharp and deadly claws grab the weak.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Bear Claws",
@@ -50415,17 +50194,7 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/cloak-and-dagger/fade#markdown:item:1:0:4785c0dcfa4e30d5",
-          "locator": "markdown:item:1:0",
-          "clause": "*A stab, and a few quick, careful steps back.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
         {
           "code": "unsafe-tier-remainder",
@@ -50444,28 +50213,10 @@
           "locator": "block:0:tier3:1",
           "clause": "you can shift up to 3 squares",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*A stab, and a few quick, careful steps back.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*A stab, and a few quick, careful steps back.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Fade",
@@ -50588,24 +50339,9 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/corven/wing-buffet#markdown:item:1:0:780452f305ed1955",
-          "locator": "markdown:item:1:0",
-          "clause": "*Foes who try to close in around you do so at their peril.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Foes who try to close in around you do so at their peril.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -50613,26 +50349,14 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Foes who try to close in around you do so at their peril.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Each enemy in the area",
           "message": "Only the designed single-target envelope is eligible."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Wing Buffet",
@@ -50755,24 +50479,9 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/dual-wielder/double-strike#markdown:item:1:0:7087ecd65314a847",
-          "locator": "markdown:item:1:0",
-          "clause": "*Why strike once when you could do it twice?*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Why strike once when you could do it twice?*",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -50780,26 +50489,14 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Why strike once when you could do it twice?*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Two creatures or objects",
           "message": "Only the designed single-target envelope is eligible."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Double Strike",
@@ -50913,45 +50610,17 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/guisarmier/forward-thrust-backward-smash#markdown:item:1:0:2607f18b90e53f2f",
-          "locator": "markdown:item:1:0",
-          "clause": "*In your hands, the haft is as good as the head.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*In your hands, the haft is as good as the head.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*In your hands, the haft is as good as the head.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Two creatures or objects",
           "message": "Only the designed single-target envelope is eligible."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Forward Thrust, Backward Smash",
@@ -51104,15 +50773,6 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/martial-artist/battle-grace#markdown:item:1:0:083933b8690021bd",
-          "locator": "markdown:item:1:0",
-          "clause": "*You feint to move your enemies into perfect position.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -51129,32 +50789,14 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*You feint to move your enemies into perfect position.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "If you obtain a tier 2 or tier 3 outcome and can't swap places with the target because one or both of you is too big to fit into the swapped space, you both remain in your original spaces and the target takes 1 extra damage.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*You feint to move your enemies into perfect position.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Battle Grace",
@@ -51289,45 +50931,18 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/mountain/pain-for-pain#markdown:item:1:0:1cfe1ea158ff6c13",
-          "locator": "markdown:item:1:0",
-          "clause": "*An enemy who tagged you will pay for that.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*An enemy who tagged you will pay for that.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "If the target dealt damage to you since the end of your last turn, this strike deals additional damage equal to your Might or Agility score (your choice).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*An enemy who tagged you will pay for that.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Pain for Pain",
@@ -51462,45 +51077,18 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/panther/devastating-rush#markdown:item:1:0:e51998215d39139e",
-          "locator": "markdown:item:1:0",
-          "clause": "*The faster you move, the harder you hit.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*The faster you move, the harder you hit.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You can move up to 3 squares straight toward the target before this strike, which deals extra damage equal to the number of squares you move this way.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*The faster you move, the harder you hit.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Devastating Rush",
@@ -51653,15 +51241,6 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/pugilist/let-s-dance#markdown:item:1:0:e95ad30e984bda6d",
-          "locator": "markdown:item:1:0",
-          "clause": "*Keeping your enemies stumbling around the battlefield is second nature to you.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -51678,32 +51257,14 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Keeping your enemies stumbling around the battlefield is second nature to you.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You can shift into any square the target leaves after you slide them.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Keeping your enemies stumbling around the battlefield is second nature to you.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Let's Dance",
@@ -51775,7 +51336,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/raden.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -51841,49 +51402,14 @@
           "id": "mcdm.heroes.v1/kit/raden/driving-pounce#block:1:0:16750e95690d6ae4",
           "locator": "block:1:0",
           "clause": "You can shift up to the same number of squares that you pushed the target.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/raden/driving-pounce#markdown:item:1:0:df5f80831827f6a9",
-          "locator": "markdown:item:1:0",
-          "clause": "*Your enemies try in vain to fall back from your pouncing attack.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "push-followup",
+          "dependency": "after-movement"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Your enemies try in vain to fall back from your pouncing attack.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can shift up to the same number of squares that you pushed the target.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Your enemies try in vain to fall back from your pouncing attack.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Driving Pounce",
@@ -51955,7 +51481,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/raider.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -52014,49 +51540,14 @@
           "id": "mcdm.heroes.v1/kit/raider/raider-s-awe#block:1:0:57adf390f77f445b",
           "locator": "block:1:0",
           "clause": "The target takes a bane on their next power roll made before the end of their next turn.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/raider/raider-s-awe#markdown:item:1:0:f3020e17a13de5a4",
-          "locator": "markdown:item:1:0",
-          "clause": "*You execute a brutal strike that leaves your foe reeling. (Previously known as \"Shock and Awe\")*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "bane",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*You execute a brutal strike that leaves your foe reeling. (Previously known as \"Shock and Awe\")*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The target takes a bane on their next power roll made before the end of their next turn.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*You execute a brutal strike that leaves your foe reeling. (Previously known as \"Shock and Awe\")*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Raider's Awe",
@@ -52128,7 +51619,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/ranger.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -52224,39 +51715,10 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/ranger/hamstring-shot#markdown:item:1:0:45cb029bfd2cfdb5",
-          "locator": "markdown:item:1:0",
-          "clause": "*A well-placed shot leaves your enemy struggling to move.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
-      "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*A well-placed shot leaves your enemy struggling to move.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*A well-placed shot leaves your enemy struggling to move.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Hamstring Shot",
@@ -52370,45 +51832,17 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/rapid-fire/two-shot#markdown:item:1:0:8ca5bc2f9c5ceaf6",
-          "locator": "markdown:item:1:0",
-          "clause": "*When you fire two arrows back-to-back, both hit their mark.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*When you fire two arrows back-to-back, both hit their mark.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*When you fire two arrows back-to-back, both hit their mark.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Two creatures or objects",
           "message": "Only the designed single-target envelope is eligible."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Two Shot",
@@ -52561,17 +51995,7 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/retiarius/net-and-stab#markdown:item:1:0:8df0f279871bfb81",
-          "locator": "markdown:item:1:0",
-          "clause": "*The well-thrown net that follows your main attack leaves your foes right where you want them.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
         {
           "code": "unsafe-tier-remainder",
@@ -52590,28 +52014,10 @@
           "locator": "block:0:tier3:1",
           "clause": "A < STRONG, restrained (EoT)",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*The well-thrown net that follows your main attack leaves your foes right where you want them.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*The well-thrown net that follows your main attack leaves your foes right where you want them.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Net and Stab",
@@ -52683,7 +52089,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/shining-armor.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -52742,49 +52148,14 @@
           "id": "mcdm.heroes.v1/kit/shining-armor/protective-attack#block:1:0:739f3f3721fe3621",
           "locator": "block:1:0",
           "clause": "The target is taunted until the end of their next turn.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/shining-armor/protective-attack#markdown:item:1:0:e0c9635cb2302e07",
-          "locator": "markdown:item:1:0",
-          "clause": "*The strength of your assault makes it impossible for your foe to ignore you.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "taunt",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*The strength of your assault makes it impossible for your foe to ignore you.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The target is taunted until the end of their next turn.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*The strength of your assault makes it impossible for your foe to ignore you.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Protective Attack",
@@ -52919,45 +52290,18 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/sniper/patient-shot#markdown:item:1:0:a5ba51dc951a7730",
-          "locator": "markdown:item:1:0",
-          "clause": "*Breathe... aim... wait... then strike!*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Breathe... aim... wait... then strike!*",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "If you don't take a move action this turn, this strike deals extra damage equal to your Might or Agility score (your choice).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Breathe... aim... wait... then strike!*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Patient Shot",
@@ -53074,15 +52418,6 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/spellsword/leaping-lightning#markdown:item:1:0:c4001deed3f43dc5",
-          "locator": "markdown:item:1:0",
-          "clause": "*Lightning jumps from your weapon as you strike to harm a nearby foe.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -53111,32 +52446,14 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*Lightning jumps from your weapon as you strike to harm a nearby foe.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "A creature or object of your choice within 2 squares of the target takes lightning damage equal to the characteristic score used for this ability's power roll.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*Lightning jumps from your weapon as you strike to harm a nearby foe.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Leaping Lightning",
@@ -53280,17 +52597,7 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/stick-and-robe/where-i-want-you#markdown:item:1:0:a1fd4545561982b6",
-          "locator": "markdown:item:1:0",
-          "clause": "*When your stick speaks, your enemy moves.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
         {
           "code": "unsafe-tier-remainder",
@@ -53303,28 +52610,10 @@
           "locator": "block:0:tier3:1",
           "clause": "slide 3",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*When your stick speaks, your enemy moves.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*When your stick speaks, your enemy moves.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Where I Want You",
@@ -53396,7 +52685,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/swashbuckler.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -53471,49 +52760,14 @@
           "id": "mcdm.heroes.v1/kit/swashbuckler/fancy-footwork#block:1:0:76514aef42816350",
           "locator": "block:1:0",
           "clause": "You can shift into any square the target leaves after you push them.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/swashbuckler/fancy-footwork#markdown:item:1:0:154502a4b2b6c0d1",
-          "locator": "markdown:item:1:0",
-          "clause": "*All combat is a dance—and you'll be the one leading.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "push-followup",
+          "dependency": "after-movement"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*All combat is a dance—and you'll be the one leading.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can shift into any square the target leaves after you push them.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*All combat is a dance—and you'll be the one leading.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Fancy Footwork",
@@ -53672,45 +52926,17 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/sword-and-board/shield-bash#markdown:item:1:0:6242f381f486927e",
-          "locator": "markdown:item:1:0",
-          "clause": "*In your hands, a shield isn't just for protection.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier3:2",
           "clause": "M < STRONG, prone",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*In your hands, a shield isn't just for protection.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*In your hands, a shield isn't just for protection.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Shield Bash",
@@ -53854,17 +53080,7 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/vuken/unbalancing-attack#markdown:item:1:0:4ef5be90ea7aef69",
-          "locator": "markdown:item:1:0",
-          "clause": "*A wild assault forces your foe onto their back.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
         {
           "code": "unsafe-tier-remainder",
@@ -53883,28 +53099,10 @@
           "locator": "block:0:tier3:1",
           "clause": "A < STRONG, prone",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*A wild assault forces your foe onto their back.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*A wild assault forces your foe onto their back.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Unbalancing Attack",
@@ -54021,15 +53219,6 @@
           "shape": "effect-paragraph:effect",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/kit/warrior-priest/weakening-brand#markdown:item:1:0:f2741891f6a802eb",
-          "locator": "markdown:item:1:0",
-          "clause": "*The impact of your weapon brands your target for destruction.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -54058,32 +53247,14 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*The impact of your weapon brands your target for destruction.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "Until the end of the target's next turn, they have damage weakness equal to the characteristic score used for this ability's power roll.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*The impact of your weapon brands your target for destruction.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Weakening Brand",
@@ -54236,17 +53407,7 @@
           }
         ]
       ],
-      "sections": [
-        {
-          "id": "mcdm.heroes.v1/kit/whirlwind/extension-of-my-arm#markdown:item:1:0:b35b2a45fe7610dc",
-          "locator": "markdown:item:1:0",
-          "clause": "*When you draw your whip back after an attack, your enemy is drawn ever closer.*",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        }
-      ],
+      "sections": [],
       "diagnostics": [
         {
           "code": "unsafe-tier-remainder",
@@ -54265,28 +53426,10 @@
           "locator": "block:0:tier3:1",
           "clause": "vertical pull 3",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:1",
-          "clause": "*When you draw your whip back after an attack, your enemy is drawn ever closer.*",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:1:0",
-          "clause": "*When you draw your whip back after an attack, your enemy is drawn ever closer.*",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "compatibility-boundary",
-          "locator": "envelope",
-          "clause": "kit-signature",
-          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
         }
       ],
       "live": "legacy-compatibility",
-      "boundary": "Unchanged kit signatures retain A05 compatibility.",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Extension of My Arm",
@@ -83480,7 +82623,7 @@
         "path": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-subcommander.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -83527,22 +82670,14 @@
           "id": "salient:foe-feature:248520e8-f793-47e3-8c4b-4f7117105484#block:1:0:3cb62bd46f574eff",
           "locator": "block:1:0",
           "clause": "One ally within 5 squares of the subcommander can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "free-strike",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "One ally within 5 squares of the subcommander can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -149617,10 +148752,9 @@
           "id": "salient:foe-feature:9e9b0433-58c7-4442-abb4-7cd6d6e6c961#block:1:0:5f06feb84f57cf21",
           "locator": "block:1:0",
           "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "terrain",
+          "dependency": "independent"
         }
       ],
       "diagnostics": [
@@ -149647,12 +148781,6 @@
           "locator": "block:0:tier3:0",
           "clause": "A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
           "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
           "code": "target-boundary",
@@ -205179,8 +204307,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 23,
-    "compatibility": 1494,
+    "compiled": 40,
+    "compatibility": 1477,
     "compiledButUnavailable": 0
   }
 }

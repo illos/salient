@@ -5,15 +5,15 @@
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
-      "COMPILES": 10,
-      "COMPILES_WITH_REMAINDER": 117,
+      "COMPILES": 22,
+      "COMPILES_WITH_REMAINDER": 105,
       "NO_MATCH": 140,
       "total": 267,
-      "withinV26Bounded": 10
+      "withinV26Bounded": 13
     },
     "kit-signature": {
-      "COMPILES": 2,
-      "COMPILES_WITH_REMAINDER": 19,
+      "COMPILES": 6,
+      "COMPILES_WITH_REMAINDER": 15,
       "NO_MATCH": 4,
       "total": 25,
       "withinV26Bounded": 1
@@ -26,8 +26,8 @@
       "withinV26Bounded": 0
     },
     "foe-ability": {
-      "COMPILES": 20,
-      "COMPILES_WITH_REMAINDER": 566,
+      "COMPILES": 21,
+      "COMPILES_WITH_REMAINDER": 565,
       "NO_MATCH": 572,
       "total": 1158,
       "withinV26Bounded": 29
@@ -476,7 +476,7 @@
       "usage": "Main action",
       "target": "One creature or object",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M"
@@ -505,14 +505,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "Your companion can make a melee free strike. You both shift up to a number of squares equal to your Intuition score.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -1213,12 +1206,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "If the target is killed by this damage, or is winded or bleeding after taking this damage, you gain 2 surges.",
-            "locator": "section:1"
-          },
-          {
             "type": "potency-condition",
             "shape": "potency:M < SYM bleeding (save ends)",
             "text": "M < STRONG bleeding (save ends)",
@@ -1226,7 +1213,7 @@
             "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "single"
       },
       "grants": [
@@ -2634,7 +2621,7 @@
       "target": "One creature or object",
       "cost": "3 Wrath",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M"
@@ -2666,14 +2653,7 @@
             "damageType": "holy"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "Until the start of your next turn, enemies take a bane on ability rolls made against you or any ally adjacent to you.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -2982,7 +2962,7 @@
       "target": "One creature or object",
       "cost": "3 Wrath",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M"
@@ -3014,14 +2994,7 @@
             "push": 5
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift up to your speed in a straight line toward the target after pushing them.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -4180,7 +4153,7 @@
       "target": "One creature or object",
       "cost": "3 Wrath",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M"
@@ -4212,14 +4185,7 @@
             "damageType": "holy"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can spend a Recovery to allow yourself or one ally within 10 squares to regain Stamina equal to your recovery value.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -6131,7 +6097,7 @@
       "usage": "Main action",
       "target": "One creature or object",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "I"
@@ -6163,14 +6129,7 @@
             "damageType": "holy"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "One ally within distance gains a number of surges equal to the tier outcome of your power roll.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -6600,7 +6559,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "I"
@@ -6632,14 +6591,7 @@
             "damageType": "corruption"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You or one ally within distance can spend a Recovery.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -8128,7 +8080,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "I"
@@ -8160,14 +8112,7 @@
             "damageType": "holy"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You or one ally within distance gains temporary Stamina equal to your Intuition score.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -9482,7 +9427,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "R"
@@ -9514,14 +9459,7 @@
             "damageType": "corruption"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can teleport up to a number of squares equal to your Reason score.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -11212,7 +11150,7 @@
       "usage": "Main action",
       "target": "Each enemy in the area",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "R"
@@ -11238,14 +11176,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The ground beneath the area is difficult terrain for enemies.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -11887,12 +11818,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift 1 square.",
-            "locator": "section:1"
-          },
-          {
             "type": "potency-condition",
             "shape": "potency:A < SYM slowed (save ends)",
             "text": "A < STRONG, slowed (save ends)",
@@ -11900,7 +11825,7 @@
             "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "single"
       },
       "grants": [
@@ -14078,7 +14003,7 @@
       "usage": "Main action",
       "target": "One creature or object",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -14107,14 +14032,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift up to half your speed before or after you make this strike.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -16797,12 +16715,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "One ally within 5 squares of the target gains 1 surge.",
-            "locator": "section:1"
-          },
-          {
             "type": "potency-condition",
             "shape": "potency:I < SYM prone",
             "text": "I < STRONG, prone",
@@ -16880,7 +16792,7 @@
       "target": "One creature",
       "cost": "3 Insight",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -16909,14 +16821,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift up to your speed, dividing that movement before or after your strike as desired.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -24859,12 +24764,6 @@
           },
           {
             "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You gain 1 surge.",
-            "locator": "section:1"
-          },
-          {
-            "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
             "text": "The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
             "locator": "section:2"
@@ -25529,12 +25428,6 @@
           }
         ],
         "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift up to 3 squares.",
-            "locator": "section:1"
-          },
           {
             "type": "resource-spend",
             "shape": "resource-spend:spend N+ drama",
@@ -26682,7 +26575,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "P"
@@ -26711,14 +26604,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The target is taunted by you or a willing ally adjacent to you until the end of the target's next turn.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -27041,12 +26927,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The area is difficult terrain for enemies.",
-            "locator": "section:1"
-          },
-          {
             "type": "potency-condition",
             "shape": "potency:P < SYM slowed (save ends)",
             "text": "P < WEAK, slowed (save ends)",
@@ -27068,7 +26948,7 @@
             "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       },
       "grants": [
@@ -29293,7 +29173,7 @@
       "usage": "Main action",
       "target": "One creature or object",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -29324,14 +29204,7 @@
             "push": 2
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift up to the same number of squares that you pushed the target.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -29402,7 +29275,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M",
@@ -29441,14 +29314,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The target takes a bane on their next power roll made before the end of their next turn.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -29881,7 +29747,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M",
@@ -29920,14 +29786,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The target is taunted until the end of their next turn.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -30342,7 +30201,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M",
@@ -30383,14 +30242,7 @@
             "push": 2
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift into any square the target leaves after you push them.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -64251,12 +64103,6 @@
         },
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The area is difficult terrain for enemies.",
-            "locator": "section:1"
-          },
-          {
             "type": "tier-damage",
             "shape": "tier:a < N restrained (save ends)",
             "text": "A < 0 restrained (save ends)",
@@ -91284,7 +91130,7 @@
       "usage": "Main action",
       "target": "One creature or object",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [],
           "fixedRollBonus": 2
@@ -91309,14 +91155,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "One ally within 5 squares of the subcommander can make a free strike against the target.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       }
@@ -97858,8 +97697,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1197,
-      "abilities": 1183,
+      "count": 1173,
+      "abilities": 1159,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -102409,16 +102248,16 @@
   "buys": {
     "foe": {
       "total": 1158,
-      "compiles": 20,
-      "withRemainder": 566,
+      "compiles": 21,
+      "withRemainder": 565,
       "withinV26Bounded": 29,
       "noMatch": 572
     },
     "hero": {
       "total": 364,
-      "compiles": 13,
-      "withRemainder": 138,
-      "withinV26Bounded": 11,
+      "compiles": 29,
+      "withRemainder": 122,
+      "withinV26Bounded": 14,
       "noMatch": 213
     }
   }

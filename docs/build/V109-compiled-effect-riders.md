@@ -35,7 +35,7 @@ results follow damage to all targets; multiple effects resolve in printed order.
 here do not affect that roll or damage; optional before/after movement is preserved verbatim as
 manual table work, not automatically sequenced movement. V72 establishes occurrence identity,
 manual dispositions and history; V88 establishes after-damage dependencies and condition privacy.
-Per-shape sources and the resulting per-ability inventory will accompany the implementation.
+Per-shape sources and the resulting per-ability inventory follow below.
 
 Baseline survey (ENGINE2, `cff8b25`, V72 support.json): all eleven classes’ level-one abilities plus
 25 kit signatures total 239; 11 compile. Blockers overlap: Effect paragraph 187 (41 alone),
@@ -127,3 +127,12 @@ and tier-effect records, using the sole target identity for addressing but label
 - Historical V88 hash test projects only newly recognized whole Effect sections back into its old
   descriptive classification, retaining every original hash and all 235 promotions/5 demotions.
   V72 inventory gains the explicit 17 reviewed live abilities; older entries remain asserted.
+- TESTER job `test-V109-f1be170-1` PASS: V64/V67/V72 generators exited 0; four focused
+  files 67/67 passed (scripts 3.92 s, app 4.37 s). Artifacts:
+  `/srv/presidium/projects/salient/test-artifacts/V109-f1be170`. No full/live run yet.
+- Reviewed generated inventory: V72 moves exactly the seventeen designed live abilities to
+  compiled: 40 compiled / 1477 compatibility / 0 supported-but-unavailable. Two Beastheart
+  definitions compile purely but retain manual live records. V64 changes 24 descriptive entries;
+  no source content drift. V67's older historical report additionally refreshes its stale corpus
+  from 1264 to 1536 entries, matching V64/V72; these 272 pre-existing content additions are not
+  V109 grants. Added V64 byte-freshness check; existing V72 freshness gate retained.
