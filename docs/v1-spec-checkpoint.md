@@ -15,6 +15,14 @@ isolation. The [accepted prototype record](build/evidence/v001-acceptance.md) cl
 below; historical statements about its remaining work are not instructions to restart it. Fuller V1
 behavior still requires its own implementation and verification.
 
+## Current release scope
+
+The [user-confirmed 2026-09-22 target](v1-roadmap.md#current-v1-release-target--confirmed-2026-09-22)
+now governs V1 release breadth: all classes close to fully automated through level two or three,
+useful low-level foes rather than complete bands, and most app features working and tested.
+The fuller scope below remains a source of feature contracts and future expansion, not a requirement
+to complete every listed feature or all levels 1–10 before V1. See the target for unsettled boundaries.
+
 ## Immediate milestone: v0.01
 
 Scope review concluded 2026-09-14: the user is satisfied with the shared-basics prototype scope.

@@ -4,6 +4,14 @@ Salient is a Draw Steel companion web app: Convex backend, React frontend, TypeS
 This file is the whole standing instruction set. Product decisions live in the specs under `docs/`,
 the build process in `docs/build/README.md`, test execution in `testing-process.md`.
 
+## Current V1 target
+
+Build toward the [confirmed 2026-09-22 release target](docs/v1-roadmap.md#current-v1-release-target--confirmed-2026-09-22):
+all eleven classes playable and close to fully engine automated through level two or three, a useful
+low-level foe roster (complete bands are unnecessary), and most app features working and tested.
+The exact level ceiling, foe roster and release checklist remain open. Broader levels 1–10 designs
+are not all V1 release gates. Prioritize and report work against this target.
+
 ## Rules and mechanics
 
 - The pinned Steel Compendium at `vendor/steel-compendium` is the only source of Draw Steel rules.

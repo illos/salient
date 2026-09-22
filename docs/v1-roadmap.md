@@ -7,6 +7,37 @@ intermediate version numbers.
 Session handoff: [2026-09-16 checkpoint and next-session kickoff](checkpoint-2026-09-16-development-tracks.md).
 Recheck its repository snapshot before resuming; it is not a second progress tracker.
 
+## Current V1 release target — confirmed 2026-09-22
+
+This is the user-confirmed target we are now building toward. Use it to prioritize slices and
+assess V1 readiness. It supersedes broader earlier release-completeness expectations where they
+conflict; the owning specifications still define how included features behave.
+
+- **Characters and engine:** all eleven classes playable, with close to full engine automation
+  through level two or three. The exact release ceiling (two versus three) remains open; level
+  three is the proposed planning target, not a separately confirmed requirement. Valid builds,
+  readable actions and paid manual records alone do not meet the automation target.
+- **Foes:** a useful, varied roster for low-level play, with the selected foes' combat behavior
+  implemented and tested. Complete monster bands/families and full-catalog automation are not V1
+  requirements. Select the actual roster from the pinned Compendium for the intended party levels;
+  the roster and count remain to be chosen.
+- **App:** most app features working and tested, supporting practical play. The exact release
+  checklist and any feature deferrals remain to be settled; this does not silently require every
+  item in the older, broader V1 specifications.
+
+Measure progress by usable play and verified persisted effects through the shared UI/CLI/API
+operations. Report remaining manual mechanics explicitly. Source ingestion, character build support,
+compiler recognition and passing action-record tests are separate from automated gameplay. The
+precise acceptable manual exceptions to “close to full” remain open.
+
+Continue the active engine coverage work toward this target. Prefer shared mechanics that improve
+several classes and useful low-level foes, then prove connected encounters and the surrounding app
+workflows. This direction does not assign new work to another thread or declare current slices
+complete. Keep implementation status in [the build tracker](build/STATUS.md).
+
+Higher-level character coverage (including the broader levels 1–10 design) and additional foe
+families remain expansion scope; existing support beyond the release ceiling may remain available.
+
 ## Confirmed development tracks — 2026-09-15
 
 Following the [v0.01 acceptance](build/evidence/v001-acceptance.md), organize further development into
@@ -40,7 +71,8 @@ the character track and table authority with the engine/shared operations. These
 not a sequential build order; individual changes retain their concrete dependencies.
 
 This is a workstream decision, not approval of every proposed implementation or unresolved rule. The
-[V1 checkpoint](v1-spec-checkpoint.md) retains the release scope and exclusions. Existing
+[current release target](#current-v1-release-target--confirmed-2026-09-22) sets release breadth; the
+[V1 checkpoint](v1-spec-checkpoint.md) retains detailed behavior and exclusions where compatible. Existing
 [build slices](build/STATUS.md) remain the implementation tracker; split or refine their outlines when
 claiming concrete work, preserving actual dependencies. Respite, inventory and integration remain
 release work spanning the relevant tracks, with their owning contracts unchanged.
