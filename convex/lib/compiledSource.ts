@@ -129,7 +129,7 @@ export function compileLiveKit(entry: LiveSource, name: string): LiveCompilation
       ...kitEnvelope(readerEntry(entry, 'kit'), name),
       sourceRevision: entry.revision,
     },
-    false,
+    true,
   );
 }
 

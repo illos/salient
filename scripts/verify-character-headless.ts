@@ -1,3 +1,4 @@
+import { runEffectRiders } from './headless/effect-riders.ts';
 import { runSummoner } from './headless/summoner.ts';
 import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
@@ -31,6 +32,7 @@ import { runWizardDraft } from './headless/wizard-draft.ts';
 
 // Each selected cohort invokes the original scenario, including all assertions and setup.
 const cohorts = {
+  'effect-riders': runEffectRiders,
   fury: runFury,
   troubadour: runTroubadour,
   null: runNull,

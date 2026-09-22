@@ -8,7 +8,8 @@ import type {
   TierDamageText,
 } from '../contracts/rollResolution.ts';
 import type { CompiledAbility, CompiledNode, PushNode, ConditionNode } from './compileAbility.ts';
-import type { Characteristic } from './abilityGrammar.ts';
+import { effectRider, plain, type Characteristic } from './abilityGrammar.ts';
+import type { RiderNode } from './compileAbility.ts';
 import { plainText, resolveAbilityRoll, type AbilityRollInput } from './index.ts';
 
 /** Absence is unknown. `none` asserts coverage of this category for forced movement. */
@@ -142,8 +143,24 @@ export interface CompiledManualOutcome extends EffectIdentity {
   dependency: 'after-damage' | 'unknown';
 }
 
+/** One whole Effect section, attached to the use's sole target for occurrence addressing.
+ * Its printed subject may be the actor or an ally. No inferred beneficiary or state writes.
+ */
+export interface CompiledRiderOutcome extends EffectIdentity {
+  kind: 'rider';
+  status: 'manual' | 'fact-needed';
+  shape: RiderNode['shape'];
+  dependency: RiderNode['dependency'];
+  after: string[];
+  requirements: string[];
+}
+
 export type CompiledEffectOutcome =
-  CompiledDamageOutcome | CompiledPushOutcome | CompiledConditionOutcome | CompiledManualOutcome;
+  | CompiledDamageOutcome
+  | CompiledPushOutcome
+  | CompiledConditionOutcome
+  | CompiledManualOutcome
+  | CompiledRiderOutcome;
 
 export type CompiledAbilityOutcome =
   | { kind: 'manual'; definition: CompiledAbility; reason: string; effects: [] }
@@ -283,9 +300,14 @@ export function resolveCompiledAbility(
     definition.format !== 'salient.compiled-ability' ||
     definition.version !== 1 ||
     definition.tiers.length !== 3 ||
-    definition.sections.length ||
+    definition.sections.some(node => {
+      if (node.kind !== 'rider') return true;
+      const parsed = effectRider(plain(node.clause));
+      return !parsed || parsed.shape !== node.shape || parsed.dependency !== node.dependency;
+    }) ||
     definition.tiers.some(
       nodes =>
+        nodes.some(node => node.kind === 'rider') ||
         nodes.filter(node => node.kind === 'damage').length !== 1 ||
         nodes.some(
           (node, index) =>
@@ -367,7 +389,7 @@ export function resolveCompiledAbility(
         remainder.push(conditionOutcome(node, target.targetId, input, !!application));
       } else if (node.kind === 'push') {
         remainder.push(pushOutcome(node, target.targetId, definition, input, !!application));
-      } else {
+      } else if (node.kind === 'unsupported') {
         remainder.push({
           ...identity,
           kind: 'unsupported',
@@ -377,6 +399,34 @@ export function resolveCompiledAbility(
         });
       }
     }
+  }
+  // Sections occur once per use, after tier effects in printed order. Current admission is
+  // single-target; never turn an actor/ally rider into one award for each future target.
+  for (const node of definition.sections) {
+    if (node.kind !== 'rider') continue;
+    const after = node.dependency === 'after-damage' ? effects.map(effect => effect.nodeId) : [];
+    const requirements =
+      node.dependency === 'after-movement'
+        ? [
+            'Actual table-resolved push and the printed movement prerequisite; a calculated allowance or disposition is not movement',
+          ]
+        : node.dependency === 'after-damage'
+          ? effects
+              .filter(effect => effect.kind === 'damage' && !effect.application)
+              .map(effect => `damage:${effect.nodeId}.completion`)
+          : [];
+    remainder.push({
+      kind: 'rider',
+      nodeId: node.id,
+      targetId: roll.targets[0]!.targetId,
+      locator: node.locator,
+      clause: node.clause,
+      shape: node.shape,
+      dependency: node.dependency,
+      after,
+      requirements,
+      status: requirements.length ? 'fact-needed' : 'manual',
+    });
   }
   return { kind: 'resolved', definition, roll, effects: [...effects, ...remainder] };
 }

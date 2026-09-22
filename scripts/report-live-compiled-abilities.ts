@@ -35,13 +35,11 @@ export function liveCompiledSupportReport(inputs: AuditInputs = readInputs()) {
     const manualBeastheart = /^mcdm\.(beastheart|summoner)\.v1\//.test(entry.id);
     const boundary = manualBeastheart
       ? 'Explicit supplemental class/minion/companion manual record; shared resource payment only. Creature combat and turn integration deferred.'
-      : entry.context.corpus === 'kit-signature'
-        ? 'Unchanged kit signatures retain A05 compatibility.'
-        : !reachable
-          ? 'No current standalone grant or public ordinary-foe loading path.'
-          : entry.execution === 'supported'
-            ? 'Compiled damage and ordered manual instructions through registered ability operations.'
-            : 'Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.';
+      : !reachable
+        ? 'No current standalone grant or public ordinary-foe loading path.'
+        : entry.execution === 'supported'
+          ? 'Compiled damage and ordered manual instructions through registered ability operations.'
+          : 'Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.';
     return {
       ...entry,
       live: reachable

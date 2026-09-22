@@ -6,7 +6,12 @@
  */
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { conditionExpression } from '../../shared/resolve/abilityGrammar.ts';
+import {
+  conditionExpression,
+  effectRider,
+  plain,
+  typeSection,
+} from '../../shared/resolve/abilityGrammar.ts';
 import { describe, expect, it } from 'vitest';
 import {
   wizardGrants,
@@ -288,6 +293,32 @@ it('V88 changes only the exact bounded flags, preserving every other prior class
     const entry = report.entries.find(row => `${row.corpus}|${row.id}` === key);
     expect(entry, key).toBeDefined();
     const classification = structuredClone(entry!.classification);
+    // V109 admits only whole Effect riders. Restore those exact source sections in this
+    // historical V88 view, preserving the original hash and all 235/5 potency checks below.
+    const source = corpus.envelopes.find(e => e.corpus === entry!.corpus && e.id === entry!.id)!;
+    source.blocks.forEach((block, index) => {
+      if (
+        block.kind === 'section' &&
+        block.label === 'Effect' &&
+        !block.cost &&
+        source.blocks.slice(0, index).some(b => b.kind === 'roll') &&
+        effectRider(plain(block.text))
+      ) {
+        expect(classification.diagnostics.some(d => d.locator === `section:${index}`)).toBe(false);
+        classification.diagnostics.push(typeSection(block, index));
+      }
+    });
+    classification.diagnostics.sort(
+      (a, b) => a.locator.localeCompare(b.locator, 'en') || a.shape.localeCompare(b.shape, 'en'),
+    );
+    classification.category = classification.reason
+      ? 'NO_MATCH'
+      : classification.diagnostics.length
+        ? 'COMPILES_WITH_REMAINDER'
+        : 'COMPILES';
+    classification.withinV26Bounded =
+      classification.category === 'COMPILES_WITH_REMAINDER' &&
+      classification.diagnostics.every(d => d.type === 'potency-condition' && d.bounded === true);
     for (const change of baseline.changes ?? []) {
       const diagnostic = classification.diagnostics[change.index]!;
       expect(diagnostic, key).toMatchObject({

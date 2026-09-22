@@ -379,8 +379,8 @@ export function CompiledEffects({
           >
             <span className="flex flex-wrap items-center gap-2">
               <strong>
-                {target?.name ?? 'Original target'} ·{' '}
-                {effect.kind === 'unsupported'
+                {effect.kind === 'rider' ? 'Ability effect' : (target?.name ?? 'Original target')} ·{' '}
+                {effect.kind === 'unsupported' || effect.kind === 'rider'
                   ? 'Manual effect'
                   : effect.kind === 'push'
                     ? 'Push'
@@ -486,6 +486,13 @@ export function CompiledEffects({
                   Rules: {effect.rulePaths.join('; ')}.
                 </span>
               </>
+            )}
+            {effect.kind === 'rider' && (
+              <span>
+                Resolve the printed effect at the table; this entry applies no additional state
+                changes.
+                {effect.requirements.length > 0 && ` Needed: ${effect.requirements.join('; ')}.`}
+              </span>
             )}
             {effect.kind === 'unsupported' && (
               <span>

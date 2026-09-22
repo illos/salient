@@ -7,6 +7,8 @@
  * Extracted from the V64 audit without changing its recognition or reconciliation semantics.
  * Readers retain every roll block, unlike the legacy resolver's first-roll adapter.
  */
+import { effectRider } from './effectRiders.ts';
+export { effectRider } from './effectRiders.ts';
 import type { ConditionId } from '../contracts/liveState.ts';
 
 // ---------------------------------------------------------------------------------------------
@@ -33,6 +35,8 @@ export type Block =
 
 export interface Envelope {
   corpus: Corpus;
+  /** Reader-declared presentation text; never arbitrary italic mechanics. */
+  declaredFlavor?: string[];
   id: string;
   name: string;
   parent?: string;
@@ -555,8 +559,15 @@ export function classify(envelope: Envelope): Classification {
   let tiers: Classification['tiers'];
 
   envelope.blocks.forEach((block, index) => {
-    if (block.kind === 'section') diagnostics.push(typeSection(block, index));
-    else if (block.kind === 'tiers')
+    if (block.kind === 'section') {
+      if (
+        block.label !== 'Effect' ||
+        block.cost ||
+        !envelope.blocks.slice(0, index).some(prior => prior.kind === 'roll') ||
+        !effectRider(plain(block.text))
+      )
+        diagnostics.push(typeSection(block, index));
+    } else if (block.kind === 'tiers')
       diagnostics.push({
         type: 'extra-table',
         shape: 'extra-table:tiers without a power roll',
@@ -755,7 +766,20 @@ export const slug = (value: string) =>
 
 /** A kit's own printed signature section (copy of convex/lib/resolve.ts abilityFromKit extraction). */
 export function kitEnvelope(entry: ContentEntry, name: string): Envelope {
-  return headedEnvelope('kit-signature', entry, name, `${entry.id}/${slug(name)}`);
+  const envelope = headedEnvelope('kit-signature', entry, name, `${entry.id}/${slug(name)}`);
+  // The kit format declares exactly the standalone italic line immediately after its heading.
+  // Subsequent italics (including inside/after mechanics) remain unaccounted source text.
+  const lines = envelope.markdown
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(Boolean);
+  const flavor = lines[1];
+  return {
+    ...envelope,
+    ...(flavor && /^\*[^*]+\*$/.test(flavor)
+      ? { declaredFlavor: [plain(flavor.slice(1, -1))] }
+      : {}),
+  };
 }
 
 /** The `###### <name>` section of an entry that embeds an ability (kits and perks). */

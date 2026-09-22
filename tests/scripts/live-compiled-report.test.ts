@@ -14,34 +14,53 @@ test('V72 availability follows current grants and loading, not catalog presence'
       .filter(e => e.live === 'compiled')
       .map(e => e.name)
       .sort(),
-  ).toEqual([
-    // V87 seeds the full core corpus: both Worg Bite and Ghoul Razor Claws are reachable.
-    'Bite',
-    'Bola Knock',
-    'Brutal Slam',
-    'Bury the Point',
-    // V94: the Tactician's 3-Focus Concussive Strike is reachable through the class ability choice.
-    'Concussive Strike',
-    'Curse of Terror',
-    'Cutting Sarcasm',
-    // V92: the Shadow's 3-Insight Eviscerate is reachable through the class ability choice.
-    'Eviscerate',
-    'Eye Flash',
-    'Eye of Surlach',
-    'Halt Miscreant!',
-    'Melee Weapon Free Strike',
-    'Meteoric Introduction',
-    'Pinning Shot',
-    'Power Chord',
-    'Pressure Points',
-    'Ranged Weapon Free Strike',
-    'Ray of Agonizing Self-Reflection',
-    'Razor Claws',
-    'Repent!',
-    'Spear Charge',
-    'The Wode Defends',
-    'Viscous Fire',
-  ]);
+  ).toEqual(
+    [
+      'Behold a Shield of Faith!',
+      'Blessed Light',
+      'Command Saber',
+      'Drain',
+      'Driving Assault',
+      'Driving Pounce',
+      'Fancy Footwork',
+      'Get In Get Out',
+      'Grasp of Beyond',
+      'Hamstring Shot',
+      'Hit and Run',
+      'Inertial Step',
+      'Instigator',
+      "Raider's Awe",
+      'Protective Attack',
+      'The Gods Punish and Defend',
+      "Warrior's Prayer",
+      // V87 seeds the full core corpus: both Worg Bite and Ghoul Razor Claws are reachable.
+      'Bite',
+      'Bola Knock',
+      'Brutal Slam',
+      'Bury the Point',
+      // V94: the Tactician's 3-Focus Concussive Strike is reachable through the class ability choice.
+      'Concussive Strike',
+      'Curse of Terror',
+      'Cutting Sarcasm',
+      // V92: the Shadow's 3-Insight Eviscerate is reachable through the class ability choice.
+      'Eviscerate',
+      'Eye Flash',
+      'Eye of Surlach',
+      'Halt Miscreant!',
+      'Melee Weapon Free Strike',
+      'Meteoric Introduction',
+      'Pinning Shot',
+      'Power Chord',
+      'Pressure Points',
+      'Ranged Weapon Free Strike',
+      'Ray of Agonizing Self-Reflection',
+      'Razor Claws',
+      'Repent!',
+      'Spear Charge',
+      'The Wode Defends',
+      'Viscous Fire',
+    ].sort(),
+  );
   expect(
     report.entries
       .filter(e => e.execution === 'supported' && e.live === 'not-reachable')

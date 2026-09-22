@@ -13,6 +13,7 @@ import {
   type Characteristic,
   type ConditionThreshold,
   damageExpression,
+  effectRider,
   plain,
   readMarkdownItems,
   shapeOf,
@@ -60,7 +61,12 @@ export interface UnsupportedNode extends NodeSource {
   reason: string;
   dependency: 'after-damage' | 'unknown';
 }
-export type CompiledNode = DamageNode | PushNode | ConditionNode | UnsupportedNode;
+export interface RiderNode extends NodeSource {
+  kind: 'rider';
+  shape: import('./effectRiders.ts').EffectRider['shape'];
+  dependency: 'independent' | 'after-damage' | 'after-movement';
+}
+export type CompiledNode = DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -77,7 +83,7 @@ export interface CompiledAbility {
   envelope: CompileEnvelope;
   metadata?: AbilityRollMetadata;
   tiers: CompiledNode[][];
-  sections: UnsupportedNode[];
+  sections: (UnsupportedNode | RiderNode)[];
   diagnostics: CompileDiagnostic[];
   execution: 'supported' | 'manual';
   context: {
@@ -142,7 +148,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
   const envelope = structuredClone(input);
   const grammar = classify(envelope);
   const diagnostics: CompileDiagnostic[] = [];
-  const sections: UnsupportedNode[] = [];
+  const sections: (UnsupportedNode | RiderNode)[] = [];
   const tiers: CompiledNode[][] = [[], [], []];
   const diagnose = (code: string, locator: string, clause: string, message: string) => {
     diagnostics.push({ code, locator, clause, message });
@@ -176,6 +182,14 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
   envelope.blocks.forEach((block, index) => {
     const locator = `block:${index}`;
     if (block.kind === 'section') {
+      const rider =
+        block.label === 'Effect' && !block.cost && rollIndex >= 0
+          ? effectRider(plain(block.text))
+          : undefined;
+      if (rider) {
+        sections.push({ ...sourceNode(envelope, locator, 0, block.text), kind: 'rider', ...rider });
+        return;
+      }
       const diagnostic = typeSection(block, index);
       // Paragraph ordinals retain repeated identical work as separate source occurrences.
       block.text
@@ -398,12 +412,13 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       'Declared flavor is absent from the source body.',
     );
   for (const section of sections)
-    diagnose(
-      'manual-section',
-      section.locator,
-      section.clause,
-      'Section preserved as manual work; its effect on automation is not assumed independent.',
-    );
+    if (section.kind === 'unsupported')
+      diagnose(
+        'manual-section',
+        section.locator,
+        section.clause,
+        'Section preserved as manual work; its effect on automation is not assumed independent.',
+      );
   if (
     grammar.targetShape !== 'single' ||
     envelope.keywords.some(k => plain(k).toLowerCase() === 'area')
@@ -414,11 +429,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       envelope.target,
       'Only the designed single-target envelope is eligible.',
     );
-  if (
-    envelope.corpus === 'kit-signature' ||
-    envelope.corpus === 'granted' ||
-    envelope.corpus === 'malice'
-  )
+  if (envelope.corpus === 'granted' || envelope.corpus === 'malice')
     diagnose(
       'compatibility-boundary',
       'envelope',

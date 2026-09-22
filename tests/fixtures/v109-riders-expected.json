@@ -1,0 +1,784 @@
+{
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "method": "Reuse independently source-derived V92/V99\u2013104 selection witnesses and damage tables; new kit arrays are printed tiers + M/A2, without kit bonus a second time. Shadow Get In Get Out =5/8/11+A2+Swashbuckler2/2/2. Source expected values are never obtained from evaluator/compiler.",
+  "witnesses": [
+    {
+      "id": "v99-creation",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "kit.choice": "Cloak and Dagger",
+        "details.name": "V99 Censor Creation",
+        "class.choice": "Censor",
+        "class.censor.characteristic-array": "2, \u22121, \u22121",
+        "class.censor.array-assignment": {
+          "Agility": 2,
+          "Reason": -1,
+          "Intuition": -1
+        },
+        "class.censor.skills": ["History", "Persuade"],
+        "class.censor.order": "Exorcist",
+        "class.censor.deity": "Val",
+        "class.censor.domain": "Creation",
+        "class.censor.domain-skill": "Tailoring",
+        "class.censor.signature-ability": "Back Blasphemer!",
+        "class.censor.ability-3": "Behold a Shield of Faith!",
+        "class.censor.ability-5": "Arrest"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": -1,
+        "P": 2
+      },
+      "actions": [
+        {
+          "name": "Behold a Shield of Faith!",
+          "cost": 3,
+          "damageByTier": [6, 9, 12],
+          "source": "feature/ability/censor/level-1/behold-a-shield-of-faith.md",
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "v99-death",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "kit.choice": "Sniper",
+        "details.name": "V99 Censor Death",
+        "class.choice": "Censor",
+        "class.censor.characteristic-array": "1, 1, \u22121",
+        "class.censor.array-assignment": {
+          "Agility": 1,
+          "Reason": 1,
+          "Intuition": -1
+        },
+        "class.censor.skills": ["History", "Persuade"],
+        "class.censor.order": "Oracle",
+        "class.censor.deity": "Nikros the Tyrant",
+        "class.censor.domain": "Death",
+        "class.censor.domain-skill": "Religion",
+        "class.censor.signature-ability": "Every Step... Death!",
+        "class.censor.ability-3": "Driving Assault",
+        "class.censor.ability-5": "Behold the Face of Justice!"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 1,
+        "R": 1,
+        "I": -1,
+        "P": 2
+      },
+      "actions": [
+        {
+          "name": "Driving Assault",
+          "cost": 3,
+          "damageByTier": [5, 8, 11],
+          "source": "feature/ability/censor/level-1/driving-assault.md",
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "v99-knowledge",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "kit.choice": "Mountain",
+        "details.name": "V99 Censor Knowledge",
+        "class.choice": "Censor",
+        "class.censor.characteristic-array": "2, \u22121, \u22121",
+        "class.censor.array-assignment": {
+          "Agility": 2,
+          "Reason": -1,
+          "Intuition": -1
+        },
+        "class.censor.skills": ["History", "Persuade"],
+        "class.censor.order": "Exorcist",
+        "class.censor.deity": "Val",
+        "class.censor.domain": "Knowledge",
+        "class.censor.domain-skill": "Religion",
+        "class.censor.signature-ability": "Your Allies Cannot Save You!",
+        "class.censor.ability-3": "The Gods Punish and Defend",
+        "class.censor.ability-5": "Purifying Fire"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": -1,
+        "P": 2
+      },
+      "actions": [
+        {
+          "name": "The Gods Punish and Defend",
+          "cost": 3,
+          "damageByTier": [7, 10, 17],
+          "source": "feature/ability/censor/level-1/the-gods-punish-and-defend.md",
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "v100-creation",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V100 Conduit Creation",
+        "class.choice": "Conduit",
+        "class.conduit.characteristic-array": "2, 2, \u22121, \u22121",
+        "class.conduit.array-assignment": {
+          "Might": 2,
+          "Agility": 2,
+          "Reason": -1,
+          "Presence": -1
+        },
+        "class.conduit.skills": ["History", "Persuade"],
+        "class.conduit.deity": "Ad\u00fbn",
+        "class.conduit.domains": ["Creation", "Life"],
+        "class.conduit.domain-feature": "Creation",
+        "class.conduit.domain-skill": "Tailoring",
+        "class.conduit.prayer": "Prayer of Destruction",
+        "class.conduit.ward": "Bastion Ward",
+        "class.conduit.triggered-action": "Word of Guidance",
+        "class.conduit.signature-abilities": ["Blessed Light", "Drain"],
+        "class.conduit.ability-3": "Call the Thunder Down",
+        "class.conduit.ability-5": "Corruption's Curse"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Blessed Light",
+          "cost": 0,
+          "source": "feature/ability/conduit/level-1/blessed-light.md",
+          "damageByTier": [6, 8, 11],
+          "manualRemainder": "surge",
+          "rider": true
+        },
+        {
+          "name": "Drain",
+          "cost": 0,
+          "source": "feature/ability/conduit/level-1/drain.md",
+          "damageByTier": [5, 8, 10],
+          "manualRemainder": "Recovery",
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "v100-knowledge",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V100 Conduit Knowledge",
+        "class.choice": "Conduit",
+        "class.conduit.characteristic-array": "1, 1, 1, 0",
+        "class.conduit.array-assignment": {
+          "Might": 1,
+          "Agility": 1,
+          "Reason": 1,
+          "Presence": 0
+        },
+        "class.conduit.skills": ["History", "Persuade"],
+        "class.conduit.deity": "Cyrvis",
+        "class.conduit.domains": ["Knowledge", "Death"],
+        "class.conduit.domain-feature": "Knowledge",
+        "class.conduit.domain-skill": "Religion",
+        "class.conduit.prayer": "Prayer of Speed",
+        "class.conduit.ward": "Spirit Ward",
+        "class.conduit.triggered-action": "Word of Judgment",
+        "class.conduit.signature-abilities": ["Warrior's Prayer", "Wither"],
+        "class.conduit.ability-3": "Violence Will Not Aid Thee",
+        "class.conduit.ability-5": "Sermon of Grace"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 1,
+        "R": 1,
+        "I": 2,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Warrior's Prayer",
+          "cost": 0,
+          "source": "feature/ability/conduit/level-1/warriors-prayer.md",
+          "damageByTier": [5, 8, 11],
+          "manualRemainder": "temporary",
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "v104-4",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V104 Void Distance",
+        "class.choice": "Elementalist",
+        "class.elementalist.specialization": "Void",
+        "class.elementalist.enchantment": "Enchantment of Distance",
+        "class.elementalist.ward": "Ward of Surprising Reactivity",
+        "class.elementalist.skills": ["Alchemy", "History", "Timescape"],
+        "class.elementalist.characteristic-array": "1, 1, 1, 0",
+        "class.elementalist.array-assignment": {
+          "Might": 1,
+          "Agility": 1,
+          "Intuition": 1,
+          "Presence": 0
+        },
+        "class.elementalist.signature-abilities": [
+          "Grasp of Beyond",
+          "Ray of Agonizing Self-Reflection"
+        ],
+        "class.elementalist.ability-3": "Behold the Mystery",
+        "class.elementalist.ability-5": "No More Than a Breeze"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 1,
+        "R": 2,
+        "I": 1,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Grasp of Beyond",
+          "damageByTier": [5, 8, 11],
+          "manualRemainder": "teleport",
+          "source": "feature/ability/elementalist/level-1/grasp-of-beyond.md",
+          "cost": 0,
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "v101-panther",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Reaver Panther",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 1, \u22121",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": -1,
+          "Presence": 1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Reaver",
+        "class.fury.signature-ability": "Hit and Run",
+        "class.fury.ability-3": "Back!",
+        "class.fury.ability-5": "Blood for Blood!",
+        "kit.choice": "Panther"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 1,
+        "I": -1,
+        "P": 1
+      },
+      "actions": [
+        {
+          "name": "Hit and Run",
+          "damageByTier": [4, 7, 13],
+          "manualRemainder": "shift",
+          "cost": 0,
+          "rider": true,
+          "source": "feature/ability/fury/level-1/hit-and-run.md"
+        }
+      ]
+    },
+    {
+      "id": "v103-2",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V103 Cryokinetic Density",
+        "class.choice": "Null",
+        "class.null.tradition": "Cryokinetic",
+        "class.null.augmentation": "Density Augmentation",
+        "class.null.characteristic-array": "1, 1, \u22121",
+        "class.null.array-assignment": {
+          "Might": 1,
+          "Reason": 1,
+          "Presence": -1
+        },
+        "class.null.skills": ["Read Person", "Timescape"],
+        "class.null.tradition-skill.cryokinetic": ["Cooking"],
+        "class.null.signature-abilities": ["Inertial Step", "Joint Lock"],
+        "class.null.ability-3": "Psychic Pulse",
+        "class.null.ability-5": "Arcane Disruptor"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 2,
+        "R": 1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Inertial Step",
+          "damageByTier": [7, 9, 12],
+          "manualRemainder": "shift",
+          "compiledCondition": false,
+          "source": "feature/ability/null/level-1/inertial-step.md",
+          "cost": 0,
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "v102-3",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V102 Virtuoso Sniper",
+        "class.choice": "Troubadour",
+        "class.troubadour.class-act": "Virtuoso",
+        "class.troubadour.characteristic-array": "1, 0, 0",
+        "class.troubadour.array-assignment": {
+          "Might": 1,
+          "Reason": 0,
+          "Intuition": 0
+        },
+        "class.troubadour.skills.interpersonal": ["Flirt", "Lead"],
+        "class.troubadour.skills.intrigue-lore": ["Rumors"],
+        "class.troubadour.signature-ability": "Instigator",
+        "class.troubadour.ability-3": "Quick Rewrite",
+        "class.troubadour.ability-5": "Flip the Script",
+        "kit.choice": "Sniper"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 2,
+        "R": 0,
+        "I": 0,
+        "P": 2
+      },
+      "actions": [
+        {
+          "name": "Instigator",
+          "damageByTier": [5, 8, 11],
+          "manualRemainder": "taunted",
+          "compiledCondition": false,
+          "cost": 0,
+          "rider": true,
+          "source": "feature/ability/troubadour/level-1/instigator.md"
+        }
+      ]
+    },
+    {
+      "id": "shadow-swash",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "2, 1, 0, 0",
+        "class.shadow.array-assignment": {
+          "Might": 2,
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Harlequin Mask",
+        "class.shadow.signature-ability": "Teamwork Has Its Place",
+        "class.shadow.ability-3": "Get In Get Out",
+        "class.shadow.ability-5": "Setup",
+        "kit.choice": "Swashbuckler",
+        "details.name": "V92 Shadow 3"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 1,
+        "I": 0,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Get In Get Out",
+          "cost": 3,
+          "damageByTier": [9, 12, 15],
+          "source": "feature/ability/shadow/level-1/get-in-get-out.md",
+          "rider": true
+        },
+        {
+          "name": "Fancy Footwork",
+          "cost": 0,
+          "damageByTier": [7, 9, 12],
+          "source": "kit/swashbuckler.md",
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "kit-raden",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Stormwight Raden",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 1, \u22121",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": -1,
+          "Presence": 1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Stormwight",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Raden"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 1,
+        "I": -1,
+        "P": 1
+      },
+      "actions": [
+        {
+          "name": "Driving Pounce",
+          "cost": 0,
+          "damageByTier": [6, 9, 11],
+          "source": "kit/raden.md",
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "kit-ranger",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Berserker Mountain",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, \u22121, \u22121",
+        "class.fury.array-assignment": {
+          "Reason": -1,
+          "Intuition": 2,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Ranger"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Hamstring Shot",
+          "cost": 0,
+          "damageByTier": [5, 7, 9],
+          "source": "kit/ranger.md",
+          "rider": false
+        }
+      ]
+    },
+    {
+      "id": "kit-raider",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Berserker Mountain",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, \u22121, \u22121",
+        "class.fury.array-assignment": {
+          "Reason": -1,
+          "Intuition": 2,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Raider"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Raider's Awe",
+          "cost": 0,
+          "damageByTier": [5, 8, 10],
+          "source": "kit/raider.md",
+          "rider": true
+        }
+      ]
+    },
+    {
+      "id": "kit-shining-armor",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Berserker Mountain",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, \u22121, \u22121",
+        "class.fury.array-assignment": {
+          "Reason": -1,
+          "Intuition": 2,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Shining Armor"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Protective Attack",
+          "cost": 0,
+          "damageByTier": [7, 10, 13],
+          "source": "kit/shining-armor.md",
+          "rider": true
+        }
+      ]
+    }
+  ],
+  "foe": {
+    "definition": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-subcommander",
+    "name": "Command Saber",
+    "damageByTier": [4, 5, 7],
+    "source": "monster/war-dog/1st-echelon/statblock/war-dog-subcommander.md"
+  }
+}
