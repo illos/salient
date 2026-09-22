@@ -30,8 +30,9 @@ Record the source revision, runner host, application URL/environment, command, e
 result. A local runner may test the hosted app through its API; its location does not change the
 application target. A local test pass does not prove a different deployed build. Keep the shared
 playable app and existing data in place; do not restart abandoned pilot stacks or repurpose
-protected rollback copies. Browser testing remains prohibited everywhere under the
-[existing moratorium](build/README.md#browser-testing-moratorium--2026-09-20).
+protected rollback copies. The user clarified on 2026-09-22 that the
+[existing moratorium](build/README.md#browser-testing-moratorium--2026-09-20) prohibits table
+browser testing; focused non-table browser investigations may proceed through TESTER.
 
 ## Workflow
 
