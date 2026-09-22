@@ -136,3 +136,11 @@ and tier-effect records, using the sole target identity for addressing but label
   no source content drift. V67's older historical report additionally refreshes its stale corpus
   from 1264 to 1536 entries, matching V64/V72; these 272 pre-existing content additions are not
   V109 grants. Added V64 byte-freshness check; existing V72 freshness gate retained.
+- TESTER `test-V109-9557080-2` full PASS: 402 engine + 638 app/scripts tests, all lint,
+  typecheck, reports, links, vendor/content and production build gates; exit 0 in 216.8 s.
+  Artifacts `/srv/presidium/projects/salient/test-artifacts/V109-9557080`. Live held before setup
+  for independent review R1: Hamstring Shot needed an applied witness as well as resistance.
+- R1 repair changes only headless proof: legal Elementalist array assigns Agility −1 (fixed Reason
+  2; Might/Intuition 2, Presence −1), so every M2 Hamstring tier applies. Read persisted slowed,
+  the exact source occurrence instance and save registration; manual-off cleanup is read back.
+  Existing A2 resisted case remains. Retain the accepted full gate for unchanged application code.

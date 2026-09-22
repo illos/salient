@@ -17,7 +17,21 @@ const ledger = JSON.parse(
   readFileSync('tests/fixtures/v109-riders-expected.json', 'utf8'),
 ) as typeof SourceLedger;
 const cid = () => crypto.randomUUID();
-type Live = { stamina: number; heroicResource: { current: number }; [key: string]: unknown };
+type Live = {
+  conditions?: Record<string, boolean>;
+  conditionInstances?: {
+    id: string;
+    status: string;
+    condition: string;
+    sourceUseEventId: string;
+    abilityName: string;
+    duration: string;
+    registrationId?: string;
+  }[];
+  stamina: number;
+  heroicResource: { current: number };
+  [key: string]: unknown;
+};
 type Saved = { evaluation: EvaluationResult; liveState: Live };
 type Result = {
   dice: { d10a: number; d10b: number };
@@ -89,6 +103,31 @@ export async function runEffectRiders({ actors: { director }, run, runId }: Scen
         campaignId,
         characterId: targetId,
       });
+      // Elementalist's printed 2/2/-1/-1 array assigns A-1, M2, I2, P-1 with fixed R2.
+      // Below all Fury M2 potency thresholds (0/1/2), regardless of accepted campaign dice.
+      const lowSelections = structuredClone(
+        ledger.witnesses.find(w => w.id === 'v104-4')!.selections,
+      ) as unknown as EvaluationInput['selections'];
+      lowSelections['class.elementalist.characteristic-array'] = '2, 2, −1, −1';
+      lowSelections['class.elementalist.array-assignment'] = {
+        Might: 2,
+        Agility: -1,
+        Intuition: 2,
+        Presence: -1,
+      };
+      const lowId = await director.mutation<string>('characters:create', {
+        commandId: cid(),
+        targetLevel: 1,
+        authored: { name: `Low Agility ${runId}`, appearance: '', biography: '', notes: '' },
+        selections: draftSelectionsFrom(lowSelections, definitions),
+      });
+      assert.equal((await get(lowId)).evaluation.status, 'complete');
+      await director.mutation('characters:submit', {
+        commandId: cid(),
+        campaignId,
+        characterId: lowId,
+      });
+      assert.equal((await get(lowId)).evaluation.baseline!.characteristics.A.value, -1);
       const foeId = await director.mutation<string>('foes:add', {
         commandId: cid(),
         campaignId,
@@ -209,6 +248,44 @@ export async function runEffectRiders({ actors: { director }, run, runId }: Scen
             }
           }
         }
+        const rangerId = ids[ledger.witnesses.findIndex(w => w.id === 'kit-ranger')]!;
+        const lowBefore = (await get(lowId)).liveState;
+        const slowed = await invoke(
+          'ability.use',
+          { ability: 'Hamstring Shot', targets: [{ refKind: 'character', id: lowId }] },
+          rangerId,
+        );
+        const slowedResult = await read(slowed.eventId);
+        const condition = slowedResult.compiled.effects.find(o => o.effect.kind === 'condition')!;
+        assert.equal(condition.effect.kind, 'condition');
+        if (condition.effect.kind !== 'condition') throw new Error('Missing Hamstring condition');
+        assert.equal(condition.effect.status, 'applied');
+        assert.equal(condition.effect.targetScore, -1);
+        assert.equal(
+          condition.effect.threshold,
+          [0, 1, 2][slowedResult.targets[0]!.outcome.tier - 1],
+        );
+        const lowAfter = (await get(lowId)).liveState;
+        assert.equal(
+          lowAfter.stamina,
+          lowBefore.stamina - [5, 7, 9][slowedResult.targets[0]!.outcome.tier - 1]!,
+        );
+        assert.equal(lowAfter.conditions?.slowed, true);
+        const instance = lowAfter.conditionInstances?.find(i => i.id === condition.id);
+        assert.ok(instance);
+        assert.equal(instance.sourceUseEventId, slowed.eventId);
+        assert.equal(instance.abilityName, 'Hamstring Shot');
+        assert.equal(instance.condition, 'slowed');
+        assert.equal(instance.duration, 'save-ends');
+        assert.equal(instance.status, 'active');
+        assert.ok(
+          instance.registrationId,
+          'Hamstring saves registered at committed target turn ends',
+        );
+        await invoke('condition.off', { name: 'slowed' }, lowId);
+        const ended = (await get(lowId)).liveState;
+        assert.equal(ended.conditions?.slowed, false);
+        assert.equal(ended.conditionInstances?.find(i => i.id === condition.id)?.status, 'ended');
         await invoke('adjust.stamina', { value: 24 }, targetId);
         const before = (await get(targetId)).liveState;
         const used = await invoke(
