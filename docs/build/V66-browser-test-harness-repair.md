@@ -105,6 +105,10 @@ None recorded. Capacity (CPU or environment cap) is the user's separate decision
 
 ## Work log
 
+- 2026-09-22 clarification: the user states the browser-testing pause was specifically for table
+  testing. Focused non-table browser investigations may proceed through TESTER; V112's live
+  Firefox authentication probes use that authorization. V66's table harness work remains pending.
+
 - 2026-09-20: registered by the browser-failure investigation thread at the user's direction after
   the audit; not started. The user simultaneously placed all browser testing under a moratorium
   until this slice is implemented.

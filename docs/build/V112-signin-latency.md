@@ -113,3 +113,20 @@ using fresh test accounts and measured public authentication/API requests.
   sign in and measure both. Native HTTP cache remains enabled; response metadata
   is restricted to timing and cache headers. This tests a different condition from
   the fresh-browser baseline, not a general rerun.
+- Returning-tab Firefox result: root-to-login 407 ms; second-tab root-to-login
+  346 ms; active-tab sign-in-to-home 1842 ms. The background tab did not fetch a
+  new session or reach home within the 60-second wait, so the aggregate probe
+  timed out; this does not reproduce the foreground 20-second stall. Final explicit
+  sign-out passed and the browser stopped. See
+  [returning-tab summary](evidence/V112/firefox-returning-tab-summary.json), derived
+  from `/srv/presidium/projects/salient/test-artifacts/V112-firefox-cache-d86f9cd/events.json`.
+  Auth GET response headers had `Vary: Origin` and `CF-Cache-Status: DYNAMIC`, with
+  no Cache-Control header observed. DYNAMIC refers to the CDN and does not rule
+  out browser caching; no cache-related cause is proven by these measurements.
+- Investigation result: a matching server timeline and user-confirmed UI state
+  locate the long wait in session establishment outside recorded backend execution.
+  Three headless accounts and three further browser-probe accounts exercised the
+  live system; active Firefox sign-in reached home in 1.84–2.35 seconds. Exact cause
+  on the user's Firefox remains unresolved. Asked for a Private Window comparison
+  to distinguish browser-profile state/extensions from the network path before
+  proposing an application repair. No authentication behavior was changed or deployed.

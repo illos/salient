@@ -147,3 +147,8 @@ profile readiness and home rendering. A 13:48 UTC server sequence on 2026-09-22 
 20-second gap after a 299-ms auth POST and before the next auth GET. Fresh public-API sign-ins
 take 432–490 ms. Browser timing is needed to distinguish response delivery from delayed client
 session notification; retain no credentials, cookies, tokens or response bodies.
+
+2026-09-22: user clarified pause is table-only. TESTER exercised live Firefox with fresh and
+returning tabs: foreground sign-in-to-home 1.84–2.35 s; no 20 s stall reproduced. A background-tab
+auto-navigation expectation timed out. See [V112](V112-signin-latency.md) for evidence and limits.
+The outstanding scenario is the affected user's Firefox profile/network path.

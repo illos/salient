@@ -1,0 +1,55 @@
+{
+  "target": "https://salient-dev.rdxx.workers.dev",
+  "source": "d86f9cd",
+  "browser": "Playwright Firefox 155 / CT114",
+  "returnRootToLoginMs": 407,
+  "secondTabRootToLoginMs": 346,
+  "activeTabSigninToHomeMs": 1842,
+  "secondTabHome": "Timed out after 60000ms while background; no session GET after other-tab sign-in. Not evidence for foreground 20-second delay.",
+  "finalExplicitSignout": "passed",
+  "authGetCacheHeaders": {
+    "vary": "Origin",
+    "cf-cache-status": "DYNAMIC"
+  },
+  "limits": "No 20-second stall reproduced. Missing Cache-Control is observed; cf-cache-status DYNAMIC describes CDN behavior, not browser cache behavior.",
+  "milestones": [
+    {
+      "ms": 8225,
+      "type": "signout-complete"
+    },
+    {
+      "ms": 8225,
+      "type": "return-root-start"
+    },
+    {
+      "ms": 8632,
+      "type": "return-root-login"
+    },
+    {
+      "ms": 8749,
+      "type": "second-root-start"
+    },
+    {
+      "ms": 9095,
+      "type": "second-root-login"
+    },
+    {
+      "ms": 9112,
+      "type": "signin-start"
+    },
+    {
+      "ms": 10954,
+      "type": "first-home"
+    },
+    {
+      "ms": 70955,
+      "type": "error",
+      "name": "TimeoutError",
+      "timeout": true
+    },
+    {
+      "ms": 74327,
+      "type": "signout-complete"
+    }
+  ]
+}
