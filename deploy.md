@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V109 | `7d82b59` | Merged; backend/frontend published; accepted gates reused | complete |
 | V108 | `8744738` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V107 | `ca190a9` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V106 | `34a8b48` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -323,3 +324,14 @@ upload succeeded. Worker `bcdeafc0-9b86-4fde-b3b4-c163b7a98a66`.
 No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V108-release-8744738`.
 Committed content snapshot hash: `sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf`.
+
+### V109 Effect riders and kit signatures publication — 2026-09-22
+
+Reviewed owner `7d82b594181e22dfcd1ba108cc41a930d83ebf5e` fast-forwarded into main.
+Accepted evidence reused: full 1040-test gate at `9557080` (216.8 s), and repaired isolated
+seventeen-ability journey at `254d5d2` (49.0 s), including Hamstring applied/resisted readback.
+Backend publication/schema validation, hosted build and frontend upload succeeded.
+Worker `afc19386-cef9-48b7-9979-748a9456ddca`. Content remains V108's 1654-entry snapshot;
+no reseed needed. Effect riders remain manual table work as documented in the slice.
+No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V109-release-7d82b59`.

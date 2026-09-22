@@ -120,4 +120,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V106 | [Beastheart level one and companion builds](V106-beastheart-level-one.md) | Merged (`34a8b48`); cloud dev published; accepted TESTER results reused |
 | V107 | [Summoner level one](V107-summoner-level-one.md) | Merged (`ca190a9`); cloud dev published; accepted TESTER results reused |
 | V108 | [Shadow through level six](V108-shadow-level-six.md) | Merged (`8744738`); cloud dev published; accepted TESTER results reused |
-| V109 | [Compiled Effect riders and kit signatures](V109-compiled-effect-riders.md) | Ready for DEPLOY2; full 1040, isolated headless and independent review PASS |
+| V109 | [Compiled Effect riders and kit signatures](V109-compiled-effect-riders.md) | Merged (`7d82b59`); cloud dev published; accepted TESTER results reused |

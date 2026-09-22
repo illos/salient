@@ -151,3 +151,13 @@ and tier-effect records, using the sole target identity for addressing but label
 - Independent WIZARD.2 [rules/implementation review](audits/V109-rules-review.md) PASS at
   `254d5d2`, 2026-09-22; R1 closed. Final documentation-only closeout carries that authentic
   review trailer. Explicit handoff to DEPLOY2; no merge or publication by ENGINE.
+
+## Publication — 2026-09-22
+
+DEPLOY2 fast-forwarded reviewed `7d82b59` into main and published the backend and frontend.
+Backend/schema validation, hosted build and upload succeeded. Worker:
+`afc19386-cef9-48b7-9979-748a9456ddca`. Accepted full 1040-test gate and isolated seventeen-ability
+journey with Hamstring application/resistance were reused; no smoke test or test rerun.
+Content remains V108's 1654-entry snapshot; no reseed was needed. Effect rider dispositions
+record manual table work without applying rider state. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V109-release-7d82b59`.

@@ -113,7 +113,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V108 Shadow through level six
+## Current release — V109 Effect riders and kit signatures
+
+Backend/frontend source `7d82b594181e22dfcd1ba108cc41a930d83ebf5e` published on 2026-09-22 as
+Worker `afc19386-cef9-48b7-9979-748a9456ddca`. Backend/schema validation, hosted build and upload
+succeeded. Content remains V108's 1654 entries; no reseed needed. Accepted TESTER results reused;
+no smoke test or rerun. See [V109](build/V109-compiled-effect-riders.md) for manual rider boundaries
+and the [ledger](../deploy.md).
+
+## Previous release — V108 Shadow through level six
 
 Backend/frontend source `8744738c24003d2794f24cb5ef1637472665c26d` published on 2026-09-21 as
 Worker `bcdeafc0-9b86-4fde-b3b4-c163b7a98a66`. Backend/schema validation, content reseed
