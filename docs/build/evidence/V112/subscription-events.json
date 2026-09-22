@@ -1,0 +1,62 @@
+[
+  {
+    "event": "session pending",
+    "ms": 0
+  },
+  {
+    "event": "session pending",
+    "ms": 4
+  },
+  {
+    "event": "session empty",
+    "ms": 470
+  },
+  {
+    "event": "session pending",
+    "ms": 1057
+  },
+  {
+    "event": "session authenticated",
+    "ms": 1345
+  },
+  {
+    "event": "session empty",
+    "ms": 1349
+  },
+  {
+    "event": "session pending",
+    "ms": 1616
+  },
+  {
+    "event": "session empty",
+    "ms": 2100
+  },
+  {
+    "event": "signin start",
+    "ms": 2110
+  },
+  {
+    "event": "session pending",
+    "ms": 2668
+  },
+  {
+    "event": "signin resolved",
+    "ms": 2669
+  },
+  {
+    "event": "session authenticated",
+    "ms": 2915
+  },
+  {
+    "event": "session ready",
+    "ms": 2921
+  },
+  {
+    "event": "session empty",
+    "ms": 2921
+  },
+  {
+    "event": "session pending",
+    "ms": 3323
+  }
+]

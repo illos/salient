@@ -122,4 +122,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V108 | [Shadow through level six](V108-shadow-level-six.md) | Merged (`8744738`); cloud dev published; accepted TESTER results reused |
 | V109 | [Compiled Effect riders and kit signatures](V109-compiled-effect-riders.md) | Merged (`7d82b59`); cloud dev published; accepted TESTER results reused |
 | V111 | [Current V1 release target](V111-v1-release-target.md) | Merged (`105f7d5`); independent documentation review passed |
-| V112 | [Live sign-in latency investigation](V112-signin-latency.md) | Investigating; TESTER measuring hosted authentication with fresh accounts |
+| V112 | [Live sign-in latency investigation](V112-signin-latency.md) | API investigation complete; matching 22s timeline isolated to gap between auth requests; exact browser cause unresolved |

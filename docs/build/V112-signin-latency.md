@@ -39,3 +39,46 @@ using fresh test accounts and measured public authentication/API requests.
 - Convex MCP status resolves the stopped local backend at port 3212, so it cannot
   directly provide the hosted logs. DEPLOY2 has been asked for bounded read-only
   hosted authentication execution logs.
+- TESTER completed public-API probes against hosted development using two fresh
+  accounts and 60-second request timeouts. Sign-up: 864/909 ms; repeated successful
+  sign-in: 490/432/444 ms; wrong-password rejection: 471 ms. Session reads: 247–416 ms;
+  JWT: 220–244 ms; profile readback: 234–438 ms; campaign reads: 314–355 ms.
+  Profile creation and authenticated persisted readback passed; test sessions were
+  signed out. No secrets were retained. Commands were `node probe.mjs` and
+  `node wrong-password.mjs` from
+  `/srv/presidium/projects/salient/test-artifacts/signin-d86f9cd/`.
+  The sequential sign-in/session/token/viewer/campaign/character probes took
+  1.94–2.15 seconds; that includes a character query absent from the home screen,
+  and is **not** a browser click-to-home measurement. See
+  [timings](evidence/V112/timings.json) and
+  [negative authentication timings](evidence/V112/wrong-password-timings.json).
+- DEPLOY2 supplied sanitized metadata from the last 1000 hosted execution records,
+  ending 13:49:53 UTC. Nine auth POSTs: median 307.5 ms, maximum 531.7 ms;
+  54 auth GETs: maximum 600.9 ms. This contradicts the initial slow-password-hash
+  hypothesis for the observed window.
+- A [request sequence](evidence/V112/hosted-request-sequence.json) closely matches
+  the reported 22 seconds: auth POST completed at 13:48:06.377 UTC in 299 ms;
+  next auth GET completed at 13:48:26.826 in 297 ms; profile read completed at
+  13:48:27.504; campaign queries completed at 13:48:27.873 and 13:48:28.049.
+  The interval from estimated POST start to final home query completion is
+  approximately 21.97 seconds. Roughly 20.15 seconds passed between POST completion
+  and estimated next GET execution start. The logs expose wildcard auth paths
+  and lack browser/session correlation, so this is a matching candidate sequence,
+  not proof of the exact user's request or exact GET endpoint.
+- Current finding: the excess delay lies outside the recorded backend execution,
+  before the subsequent session/auth requests. The exact cause (response delivery,
+  browser scheduling, or session-state notification) is unconfirmed. The installed
+  client signals session refresh immediately when its stored session cookie changes
+  and also schedules a signal after 10 ms; no intentional 20-second wait was found.
+  Do not lower password security or change backend hashing based on these results.
+- Next diagnostic: capture the actual browser's request start/headers/body-finish,
+  session notification, JWT/WebSocket authentication, and profile/route timestamps.
+  Retain timing metadata only, excluding passwords, cookies, tokens and bodies.
+  Browser execution remains deferred under the standing V66 moratorium. TESTER is
+  checking whether the real session subscription can reproduce the gap headlessly.
+- TESTER's additional `node subscription.mjs` probe used a third fresh account,
+  the real Better Auth client and a minimal window shim. Sign-in took 558 ms;
+  the automatic session became ready 252 ms later (811 ms from recorded start).
+  Sign-out passed. See [subscription timings](evidence/V112/subscription-timings.json)
+  and [events](evidence/V112/subscription-events.json). This excludes actual browser
+  transport, React and WebSocket behavior and does not explain the observed 20-second gap.

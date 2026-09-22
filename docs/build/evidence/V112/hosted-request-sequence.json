@@ -1,0 +1,322 @@
+[
+  {
+    "completedAt": "2026-09-22T13:48:01.263+00:00",
+    "timestamp": 1790084881.2637143,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 0.080482584,
+    "requestId": "f6cdb2351b7115b8"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:01.272+00:00",
+    "timestamp": 1790084881.272651,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 3.0457e-05,
+    "requestId": "f6cdb2351b7115b8"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:01.325+00:00",
+    "timestamp": 1790084881.3253286,
+    "udfType": "Mutation",
+    "identifier": "adapter:updateMany",
+    "executionTime": 0.034837151,
+    "requestId": "f6cdb2351b7115b8"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:01.327+00:00",
+    "timestamp": 1790084881.3276699,
+    "udfType": "HttpAction",
+    "identifier": "GET /api/auth/*",
+    "executionTime": 0.22266224,
+    "requestId": "f6cdb2351b7115b8"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:01.739+00:00",
+    "timestamp": 1790084881.739561,
+    "udfType": "Query",
+    "identifier": "auth:recoveryAvailable",
+    "executionTime": 3.0457e-05,
+    "requestId": "c1494995db891c29"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:06.122+00:00",
+    "timestamp": 1790084886.1226637,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 0.023042373,
+    "requestId": "19b51e4dc7cbfee3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:06.129+00:00",
+    "timestamp": 1790084886.1295753,
+    "udfType": "Query",
+    "identifier": "adapter:findOne",
+    "executionTime": 5.5596e-05,
+    "requestId": "19b51e4dc7cbfee3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:06.131+00:00",
+    "timestamp": 1790084886.1312883,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 3.4345e-05,
+    "requestId": "19b51e4dc7cbfee3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:06.332+00:00",
+    "timestamp": 1790084886.3326483,
+    "udfType": "Mutation",
+    "identifier": "adapter:create",
+    "executionTime": 0.028802827,
+    "requestId": "19b51e4dc7cbfee3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:06.336+00:00",
+    "timestamp": 1790084886.336308,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 3.1819e-05,
+    "requestId": "19b51e4dc7cbfee3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:06.343+00:00",
+    "timestamp": 1790084886.3436759,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 3.4535e-05,
+    "requestId": "19b51e4dc7cbfee3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:06.375+00:00",
+    "timestamp": 1790084886.3757803,
+    "udfType": "Mutation",
+    "identifier": "adapter:updateMany",
+    "executionTime": 0.023166611,
+    "requestId": "19b51e4dc7cbfee3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:06.377+00:00",
+    "timestamp": 1790084886.377493,
+    "udfType": "HttpAction",
+    "identifier": "POST /api/auth/*",
+    "executionTime": 0.299094996,
+    "requestId": "19b51e4dc7cbfee3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:26.678+00:00",
+    "timestamp": 1790084906.6786375,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 0.073208692,
+    "requestId": "d229ede0b7e8cbf3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:26.718+00:00",
+    "timestamp": 1790084906.718266,
+    "udfType": "Query",
+    "identifier": "adapter:findOne",
+    "executionTime": 0.031965772,
+    "requestId": "d229ede0b7e8cbf3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:26.742+00:00",
+    "timestamp": 1790084906.742339,
+    "udfType": "Query",
+    "identifier": "adapter:findOne",
+    "executionTime": 0.022385356,
+    "requestId": "d229ede0b7e8cbf3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:26.778+00:00",
+    "timestamp": 1790084906.778734,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 0.032376263,
+    "requestId": "d229ede0b7e8cbf3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:26.787+00:00",
+    "timestamp": 1790084906.7870858,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 2.9308e-05,
+    "requestId": "d229ede0b7e8cbf3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:26.824+00:00",
+    "timestamp": 1790084906.824185,
+    "udfType": "Mutation",
+    "identifier": "adapter:updateMany",
+    "executionTime": 0.02524538,
+    "requestId": "d229ede0b7e8cbf3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:26.826+00:00",
+    "timestamp": 1790084906.8263607,
+    "udfType": "HttpAction",
+    "identifier": "GET /api/auth/*",
+    "executionTime": 0.297324496,
+    "requestId": "d229ede0b7e8cbf3"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.044+00:00",
+    "timestamp": 1790084907.0447714,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 0.030253201,
+    "requestId": "278fee1f2cad973f"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.047+00:00",
+    "timestamp": 1790084907.0476787,
+    "udfType": "Query",
+    "identifier": "adapter:findOne",
+    "executionTime": 2.8389e-05,
+    "requestId": "278fee1f2cad973f"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.048+00:00",
+    "timestamp": 1790084907.0489783,
+    "udfType": "Query",
+    "identifier": "adapter:findOne",
+    "executionTime": 2.6469e-05,
+    "requestId": "278fee1f2cad973f"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.050+00:00",
+    "timestamp": 1790084907.0509944,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 2.4516e-05,
+    "requestId": "278fee1f2cad973f"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.055+00:00",
+    "timestamp": 1790084907.0556982,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 2.1972e-05,
+    "requestId": "278fee1f2cad973f"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.099+00:00",
+    "timestamp": 1790084907.0999906,
+    "udfType": "Mutation",
+    "identifier": "adapter:updateMany",
+    "executionTime": 0.030563995,
+    "requestId": "278fee1f2cad973f"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.101+00:00",
+    "timestamp": 1790084907.101587,
+    "udfType": "HttpAction",
+    "identifier": "GET /api/auth/*",
+    "executionTime": 0.11027049,
+    "requestId": "278fee1f2cad973f"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.236+00:00",
+    "timestamp": 1790084907.2363052,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 4.2994e-05,
+    "requestId": "4e9f68c5e17a34d5"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.249+00:00",
+    "timestamp": 1790084907.2490053,
+    "udfType": "HttpAction",
+    "identifier": "GET /api/auth/*",
+    "executionTime": 0.041282837,
+    "requestId": "4e9f68c5e17a34d5"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.279+00:00",
+    "timestamp": 1790084907.2798212,
+    "udfType": "Query",
+    "identifier": "auth:recoveryAvailable",
+    "executionTime": 0.022175558,
+    "requestId": "e3725f2e2625f501"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.504+00:00",
+    "timestamp": 1790084907.5047197,
+    "udfType": "Query",
+    "identifier": "auth:viewer",
+    "executionTime": 0.116947159,
+    "requestId": "5675ad6042dcc712"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.527+00:00",
+    "timestamp": 1790084907.5279007,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 0.029188209,
+    "requestId": "5550daed10109312"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.536+00:00",
+    "timestamp": 1790084907.5361845,
+    "udfType": "Query",
+    "identifier": "adapter:findOne",
+    "executionTime": 3.6389e-05,
+    "requestId": "5550daed10109312"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.537+00:00",
+    "timestamp": 1790084907.5379019,
+    "udfType": "Query",
+    "identifier": "adapter:findOne",
+    "executionTime": 2.8159e-05,
+    "requestId": "5550daed10109312"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.541+00:00",
+    "timestamp": 1790084907.541099,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 3.1105e-05,
+    "requestId": "5550daed10109312"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.550+00:00",
+    "timestamp": 1790084907.5500417,
+    "udfType": "Query",
+    "identifier": "adapter:findMany",
+    "executionTime": 3.0481e-05,
+    "requestId": "5550daed10109312"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.599+00:00",
+    "timestamp": 1790084907.5999577,
+    "udfType": "Mutation",
+    "identifier": "adapter:updateMany",
+    "executionTime": 0.026709055,
+    "requestId": "5550daed10109312"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.602+00:00",
+    "timestamp": 1790084907.6023858,
+    "udfType": "HttpAction",
+    "identifier": "GET /api/auth/*",
+    "executionTime": 0.179778004,
+    "requestId": "5550daed10109312"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:27.873+00:00",
+    "timestamp": 1790084907.873666,
+    "udfType": "Query",
+    "identifier": "campaigns:list",
+    "executionTime": 0.254633325,
+    "requestId": "6af46b16d9098315"
+  },
+  {
+    "completedAt": "2026-09-22T13:48:28.049+00:00",
+    "timestamp": 1790084908.049769,
+    "udfType": "Query",
+    "identifier": "campaigns:myRequests",
+    "executionTime": 0.173937108,
+    "requestId": "a2580f59cd580843"
+  }
+]

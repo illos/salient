@@ -138,3 +138,12 @@ pruning visually when the moratorium ends. Shared API cohort owns behavioral pro
 After the moratorium, inspect the Ability effect label, full manual rider text, explicit movement
 prerequisites and Director disposition button on a narrow screen. Verify corrected and restored
 occurrences display current dispositions. Public API cohort and persisted tests own behavior.
+
+## V112 — Live sign-in latency
+
+Capture click-to-home timing on hosted development with a disposable account. Record auth POST
+request/headers/body timing, automatic session refresh, JWT retrieval, WebSocket authentication,
+profile readiness and home rendering. A 13:48 UTC server sequence on 2026-09-22 has a roughly
+20-second gap after a 299-ms auth POST and before the next auth GET. Fresh public-API sign-ins
+take 432–490 ms. Browser timing is needed to distinguish response delivery from delayed client
+session notification; retain no credentials, cookies, tokens or response bodies.
