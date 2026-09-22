@@ -1,0 +1,16 @@
+{
+  "runId": "66582be8-27bf-41a6-ba96-cd5b1630b4fa",
+  "target": "http://127.0.0.1:3210",
+  "cohort": "effect-riders",
+  "coverage": "selected-cohort",
+  "runnerSource": "254d5d236e9388a0511b70f60e391f2a83fe9e88",
+  "source": "254d5d236e9388a0511b70f60e391f2a83fe9e88",
+  "elapsedMs": 48801,
+  "results": [
+    {
+      "name": "V109 seven classes, five kits and one foe persist manual riders with real dice",
+      "status": "pass",
+      "elapsedMs": 46742
+    }
+  ]
+}

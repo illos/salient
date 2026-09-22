@@ -54,23 +54,23 @@ modifiers (including Conduit prayer and selected kits) are the existing evaluate
 
 | Ability | Source section | Expected fixture damage / cost | Headless case | Built | Playtested |
 | --- | --- | --- | --- | --- | --- |
-| Behold a Shield of Faith! | `feature/ability/censor/level-1/behold-a-shield-of-faith.md` | 6/9/12; cost 3 | `v99-creation` | Yes | Authored; TESTER pending |
-| Driving Assault | `feature/ability/censor/level-1/driving-assault.md` | 5/8/11; cost 3 | `v99-death` | Yes | Authored; TESTER pending |
-| The Gods Punish and Defend | `feature/ability/censor/level-1/the-gods-punish-and-defend.md` | 7/10/17; cost 3 | `v99-knowledge` | Yes | Authored; TESTER pending |
-| Blessed Light | `feature/ability/conduit/level-1/blessed-light.md` | 6/8/11; cost 0 | `v100-creation` | Yes | Authored; TESTER pending |
-| Drain | `feature/ability/conduit/level-1/drain.md` | 5/8/10; cost 0 | `v100-creation` | Yes | Authored; TESTER pending |
-| Warrior's Prayer | `feature/ability/conduit/level-1/warriors-prayer.md` | 5/8/11; cost 0 | `v100-knowledge` | Yes | Authored; TESTER pending |
-| Grasp of Beyond | `feature/ability/elementalist/level-1/grasp-of-beyond.md` | 5/8/11; cost 0 | `v104-4` | Yes | Authored; TESTER pending |
-| Hit and Run | `feature/ability/fury/level-1/hit-and-run.md` | 4/7/13; cost 0 | `v101-panther` | Yes | Authored; TESTER pending |
-| Inertial Step | `feature/ability/null/level-1/inertial-step.md` | 7/9/12; cost 0 | `v103-2` | Yes | Authored; TESTER pending |
-| Instigator | `feature/ability/troubadour/level-1/instigator.md` | 5/8/11; cost 0 | `v102-3` | Yes | Authored; TESTER pending |
-| Get In Get Out | `feature/ability/shadow/level-1/get-in-get-out.md` | 9/12/15; cost 3 | `shadow-swash` | Yes | Authored; TESTER pending |
-| Fancy Footwork | `kit/swashbuckler.md` | 7/9/12; cost 0 | `shadow-swash` | Yes | Authored; TESTER pending |
-| Driving Pounce | `kit/raden.md` | 6/9/11; cost 0 | `kit-raden` | Yes | Authored; TESTER pending |
-| Hamstring Shot | `kit/ranger.md` | 5/7/9; cost 0 | `kit-ranger` | Yes | Authored; TESTER pending |
-| Raider's Awe | `kit/raider.md` | 5/8/10; cost 0 | `kit-raider` | Yes | Authored; TESTER pending |
-| Protective Attack | `kit/shining-armor.md` | 7/10/13; cost 0 | `kit-shining-armor` | Yes | Authored; TESTER pending |
-| Command Saber | `monster/war-dog/1st-echelon/statblock/war-dog-subcommander.md` | 4/5/7, fixed roll +2; ally free strike manual | `foe` | Yes | Authored; TESTER pending |
+| Behold a Shield of Faith! | `feature/ability/censor/level-1/behold-a-shield-of-faith.md` | 6/9/12; cost 3 | `v99-creation` | Yes | [PASS](evidence/V109/README.md) |
+| Driving Assault | `feature/ability/censor/level-1/driving-assault.md` | 5/8/11; cost 3 | `v99-death` | Yes | [PASS](evidence/V109/README.md) |
+| The Gods Punish and Defend | `feature/ability/censor/level-1/the-gods-punish-and-defend.md` | 7/10/17; cost 3 | `v99-knowledge` | Yes | [PASS](evidence/V109/README.md) |
+| Blessed Light | `feature/ability/conduit/level-1/blessed-light.md` | 6/8/11; cost 0 | `v100-creation` | Yes | [PASS](evidence/V109/README.md) |
+| Drain | `feature/ability/conduit/level-1/drain.md` | 5/8/10; cost 0 | `v100-creation` | Yes | [PASS](evidence/V109/README.md) |
+| Warrior's Prayer | `feature/ability/conduit/level-1/warriors-prayer.md` | 5/8/11; cost 0 | `v100-knowledge` | Yes | [PASS](evidence/V109/README.md) |
+| Grasp of Beyond | `feature/ability/elementalist/level-1/grasp-of-beyond.md` | 5/8/11; cost 0 | `v104-4` | Yes | [PASS](evidence/V109/README.md) |
+| Hit and Run | `feature/ability/fury/level-1/hit-and-run.md` | 4/7/13; cost 0 | `v101-panther` | Yes | [PASS](evidence/V109/README.md) |
+| Inertial Step | `feature/ability/null/level-1/inertial-step.md` | 7/9/12; cost 0 | `v103-2` | Yes | [PASS](evidence/V109/README.md) |
+| Instigator | `feature/ability/troubadour/level-1/instigator.md` | 5/8/11; cost 0 | `v102-3` | Yes | [PASS](evidence/V109/README.md) |
+| Get In Get Out | `feature/ability/shadow/level-1/get-in-get-out.md` | 9/12/15; cost 3 | `shadow-swash` | Yes | [PASS](evidence/V109/README.md) |
+| Fancy Footwork | `kit/swashbuckler.md` | 7/9/12; cost 0 | `shadow-swash` | Yes | [PASS](evidence/V109/README.md) |
+| Driving Pounce | `kit/raden.md` | 6/9/11; cost 0 | `kit-raden` | Yes | [PASS](evidence/V109/README.md) |
+| Hamstring Shot | `kit/ranger.md` | 5/7/9; cost 0 | `kit-ranger` | Yes | [PASS](evidence/V109/README.md) |
+| Raider's Awe | `kit/raider.md` | 5/8/10; cost 0 | `kit-raider` | Yes | [PASS](evidence/V109/README.md) |
+| Protective Attack | `kit/shining-armor.md` | 7/10/13; cost 0 | `kit-shining-armor` | Yes | [PASS](evidence/V109/README.md) |
+| Command Saber | `monster/war-dog/1st-echelon/statblock/war-dog-subcommander.md` | 4/5/7, fixed roll +2; ally free strike manual | `foe` | Yes | [PASS](evidence/V109/README.md) |
 
 Additional pure-only admissions: `feature/ability/beastheart/level-1/come-on.md` (companion melee
 free strike and both shift by Intuition, all manual), and `.../i-feed-on-your-pain.md` (printed
@@ -144,3 +144,10 @@ and tier-effect records, using the sole target identity for addressing but label
   2; Might/Intuition 2, Presence −1), so every M2 Hamstring tier applies. Read persisted slowed,
   the exact source occurrence instance and save registration; manual-off cleanup is read back.
   Existing A2 resisted case remains. Retain the accepted full gate for unchanged application code.
+- TESTER `test-V109-254d5d2-3-live` PASS, exit 0 in 49.0 s: seven classes, five kits, one
+  foe, plus applied Hamstring source condition/save registration and manual cleanup. Backend
+  stopped, ports free, data retained. Retain full 1040 gate at `9557080` (runtime unchanged).
+  [Accepted evidence](evidence/V109/README.md) and exact headless report retained.
+- Independent WIZARD.2 [rules/implementation review](audits/V109-rules-review.md) PASS at
+  `254d5d2`, 2026-09-22; R1 closed. Final documentation-only closeout carries that authentic
+  review trailer. Explicit handoff to DEPLOY2; no merge or publication by ENGINE.
