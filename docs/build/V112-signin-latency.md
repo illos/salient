@@ -134,3 +134,10 @@ using fresh test accounts and measured public authentication/API requests.
   `de72960`: **pass**, 2026-09-22. Raw milestones and limitations verified; no additional
   test runs. Documentation-only handoff to DEPLOY2; future application repair still
   requires evidence from the affected browser/network condition.
+
+## Integration — 2026-09-22
+
+DEPLOY2 fast-forwarded reviewed `8b166cc` into main. Merge metadata and documentation whitespace
+checks passed. The merged policy limits the V66 browser pause to table testing; focused non-table
+investigations continue through TESTER. This records the investigation, not a fix or resolution
+of the reported delay. No runtime changes, deployment or repeated tests were required.
