@@ -25,3 +25,14 @@ level two versus three, the selected foe roster, manual exceptions and the app r
   user's still-open level-two/three choice. No rules or runtime behavior changed.
 - Documentation readback, local link-target/heading checks and `git diff --check` passed.
   Documentation only; no tests run. Sent to DEPLOY2 for independent scope review and integration.
+
+## Review and integration — 2026-09-22
+
+DEPLOY2 independently reviewed `105f7d5` against the user-confirmed scope relayed in the owner
+handoff. PASS: all eleven classes and near-full low-level automation, selected useful low-level
+foes rather than complete bands, and most app features working/tested are preserved. Level three
+is explicitly proposed; the ceiling, roster, manual exceptions and checklist remain open.
+The roadmap, checkpoint and AGENTS.md consistently distinguish release breadth from feature
+behavior and expansion scope. Local links and heading references were inspected; merge metadata
+and `git diff --check` passed. Fast-forwarded into main. Documentation only: no application tests
+or cloud publication required.

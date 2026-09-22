@@ -121,4 +121,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V107 | [Summoner level one](V107-summoner-level-one.md) | Merged (`ca190a9`); cloud dev published; accepted TESTER results reused |
 | V108 | [Shadow through level six](V108-shadow-level-six.md) | Merged (`8744738`); cloud dev published; accepted TESTER results reused |
 | V109 | [Compiled Effect riders and kit signatures](V109-compiled-effect-riders.md) | Merged (`7d82b59`); cloud dev published; accepted TESTER results reused |
-| V111 | [Current V1 release target](V111-v1-release-target.md) | Committed on branch |
+| V111 | [Current V1 release target](V111-v1-release-target.md) | Merged (`105f7d5`); independent documentation review passed |
