@@ -51,8 +51,10 @@ are not all V1 release gates. Prioritize and report work against this target.
   work log), one row in `docs/build/STATUS.md`, one branch `slice/<id>` in its own worktree cut from
   main. The build README has the commit trailers, review and merge steps.
 - Write only tests that catch a concrete failure; delete redundant or implementation-mirroring ones.
-  Headless CLI/API journeys with persisted readback prove features. Browser tests are under
-  moratorium until V66 lands; log would-be scenarios in `docs/build/browser-coverage-backlog.md`.
+  Headless CLI/API journeys with persisted readback prove features. Table browser tests are under
+  moratorium until V66 lands; log would-be table scenarios in `docs/build/browser-coverage-backlog.md`.
+  The user clarified on 2026-09-22 that the pause is specifically for table testing; focused
+  non-table browser tests and investigations may proceed through TESTER.
 - All test runs go through the TESTER thread under `testing-process.md`. Implementers run only
   authoring checks locally: lint, typecheck, the focused test file. DEPLOY2 integrates finished
   slices into main and promotes to the cloud dev deployment.

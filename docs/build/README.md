@@ -52,10 +52,13 @@ state. Effect text the engine cannot resolve stays verbatim and visibly manual i
 
 ## Browser testing moratorium — 2026-09-20
 
-No browser or Playwright test runs anywhere until [V66](V66-browser-test-harness-repair.md) is
-implemented. Verify headlessly; a missing browser run is not a blocker. Log would-be scenarios in the
-[browser coverage backlog](browser-coverage-backlog.md). Browser tests are a visual spot check, not
-proof of logic; the [failure audit](audits/2026-09-20-browser-testing-failures.md) records why.
+The user clarified on 2026-09-22 that this pause applies specifically to **table testing**.
+No table browser or Playwright test runs until [V66](V66-browser-test-harness-repair.md) is
+implemented. Verify table behavior headlessly and log would-be table scenarios in the
+[browser coverage backlog](browser-coverage-backlog.md). Focused non-table browser tests and
+investigations, including live sign-in timing, may proceed through TESTER. Browser checks do not
+replace persisted CLI/API proof; the [failure audit](audits/2026-09-20-browser-testing-failures.md)
+records the original harness failures.
 
 ## Verification baseline
 

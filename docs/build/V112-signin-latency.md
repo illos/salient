@@ -93,3 +93,6 @@ using fresh test accounts and measured public authentication/API requests.
   the screenshots alone cannot distinguish those stages. The observed POST-to-GET
   gap is consistent with a stalled session-check handoff. No user credentials or
   screenshots containing the user's email were copied into the repository.
+- User confirmed Firefox and clarified that the browser-testing pause was specifically
+  for table testing. Resumed focused live Firefox investigation through TESTER job
+  `test-V112-d86f9cd-browser-1`; updated the standing guidance to reflect that scope.

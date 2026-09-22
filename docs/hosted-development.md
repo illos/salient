@@ -68,7 +68,8 @@ failure warrants a targeted test; it is not a routine release step.
 
 The hosted demo is a test environment alongside local and CT114, not production. Use a free
 suitable runner on either host; record the runner separately from the application target.
-The browser moratorium applies here too. Programmatic API tests set `VITE_SITE_URL` to the
+The table browser-testing moratorium applies here too; the user's 2026-09-22 clarification
+allows focused non-table browser investigations through TESTER. Programmatic API tests set `VITE_SITE_URL` to the
 Worker URL and `VITE_CONVEX_URL` / `VITE_CONVEX_SITE_URL` to the matching cloud URLs.
 The headless helper sends `VITE_SITE_URL` as its authentication Origin; inheriting the CT114 preview
 value causes an expected “Invalid origin” rejection from hosted auth. Use fresh
