@@ -130,3 +130,7 @@ using fresh test accounts and measured public authentication/API requests.
   on the user's Firefox remains unresolved. Asked for a Private Window comparison
   to distinguish browser-profile state/extensions from the network path before
   proposing an application repair. No authentication behavior was changed or deployed.
+- ENGINE independently reviewed the browser evidence and table-only guidance at
+  `de72960`: **pass**, 2026-09-22. Raw milestones and limitations verified; no additional
+  test runs. Documentation-only handoff to DEPLOY2; future application repair still
+  requires evidence from the affected browser/network condition.
