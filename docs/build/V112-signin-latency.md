@@ -96,3 +96,20 @@ using fresh test accounts and measured public authentication/API requests.
 - User confirmed Firefox and clarified that the browser-testing pause was specifically
   for table testing. Resumed focused live Firefox investigation through TESTER job
   `test-V112-d86f9cd-browser-1`; updated the standing guidance to reflect that scope.
+- TESTER ran Playwright Firefox 155 on CT114 against the unchanged live site. See
+  [Firefox summary](evidence/V112/firefox-summary.json). Successful attempt measured
+  sign-up click-to-home 2856 ms, sign-in click-to-home 2346 ms, session GET starting
+  4 ms after the sign-in response finished, disabled Sign in observed for 699 ms,
+  and unsigned “Checking your session” observed for 590 ms. No WebSocket errors.
+  The first attempt passed sign-up but timed out on a stale sign-out selector; the
+  second used `/account/security`. Second sign-in overlapped the tail of sign-out,
+  so a follow-up separates those transitions. Final explicit sign-out was not
+  confirmed; disposable sessions were retained and browser/container stopped.
+  These observations do not reproduce the user's browser/network conditions or
+  explain the 20-second gap. Original sanitized request/UI/WS timings are at
+  `/srv/presidium/projects/salient/test-artifacts/V112-firefox-d86f9cd/`.
+- Follow-up TESTER job `test-V112-d86f9cd-browser-cache-2` targets returning-tab and
+  shared-session state: await completed sign-out, reload root, open another tab,
+  sign in and measure both. Native HTTP cache remains enabled; response metadata
+  is restricted to timing and cache headers. This tests a different condition from
+  the fresh-browser baseline, not a general rerun.

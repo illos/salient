@@ -1,0 +1,18 @@
+{
+  "target": "https://salient-dev.rdxx.workers.dev",
+  "localSource": "d86f9cd",
+  "runtimeRecorded": "7d82b59 / Worker afc19386",
+  "browser": "Playwright Firefox 155, CT114 image v1.63.0-noble",
+  "signupClickToHomeMs": 2856,
+  "signinClickToHomeMs": 2346,
+  "signinResponseToSessionRequestMs": 4,
+  "disabledSigninObservedMs": 699,
+  "unsignedCheckingObservedMs": 590,
+  "websocketErrors": 0,
+  "attempts": [
+    "First: signup passed, harness timed out locating signout on home.",
+    "Second: signup, account/security signout, signin, home passed."
+  ],
+  "cleanup": "Containers/browser contexts closed; no final explicit signout confirmed (cleanup checked button before account page finished loading). Disposable accounts/sessions retained; no credentials recorded.",
+  "limits": "Fresh CT114 browser; user browser/network conditions not reproduced. Second signin began while preceding signout request was still finishing. No HAR, headers, payloads, cookies or WS payloads recorded."
+}
