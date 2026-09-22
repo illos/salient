@@ -82,3 +82,14 @@ using fresh test accounts and measured public authentication/API requests.
   Sign-out passed. See [subscription timings](evidence/V112/subscription-timings.json)
   and [events](evidence/V112/subscription-events.json). This excludes actual browser
   transport, React and WebSocket behavior and does not explain the observed 20-second gap.
+- ENGINE independently reviewed `c70d729`: **pass**, 2026-09-22. Verified 21.971-second
+  sequence, 20.152-second execution gap, 811-ms subscribed session, and 9 POST/54 GET
+  aggregates against retained evidence; agrees that exact browser attribution is unproven.
+- User clarified with screenshots: signed-out startup waits a long time at “Checking
+  your session…”. On submitting credentials, “Please wait…” lasts about one second,
+  then the button returns to disabled “Sign in” for 20+ seconds. In `web/router.tsx`,
+  this means submit `pending` has cleared while `useConvexAuth().isLoading` remains
+  true. That state covers session discovery, JWT retrieval and Convex confirmation;
+  the screenshots alone cannot distinguish those stages. The observed POST-to-GET
+  gap is consistent with a stalled session-check handoff. No user credentials or
+  screenshots containing the user's email were copied into the repository.
