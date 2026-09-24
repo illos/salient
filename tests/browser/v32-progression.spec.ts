@@ -68,7 +68,7 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await expect(levelUp).toBeVisible();
     await player.screenshot({ path: `${directory}/v164-sheet-level-up.png`, fullPage: true });
     await levelUp.click();
-    await expect(player.getByRole('heading', { name: 'Level 2 perk' })).toBeVisible();
+    await expect(player.getByRole('heading', { level: 2, name: 'Level 2 perk' })).toBeVisible();
     // V37: switching a level-up perk removes its hidden modifier target before saving.
     await player.getByLabel('Area of Expertise', { exact: true }).check();
     const target = player.getByLabel('Area of Expertise: choose an owned crafting skill', {
@@ -80,7 +80,9 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await player.screenshot({ path: `${directory}/v164-step-perk.png`, fullPage: true });
     // Moving on saves the level-up's choices (the shared saveAdvancement operation).
     await player.getByRole('button', { name: /Continue to Level 2 Berserker ability/ }).click();
-    await expect(player.getByRole('heading', { name: 'Level 2 Berserker ability' })).toBeVisible();
+    await expect(
+      player.getByRole('heading', { level: 2, name: 'Level 2 Berserker ability' }),
+    ).toBeVisible();
     await expect
       .poll(async () => (await query('characters:progression', { characterId })).draft?.version)
       .toBe(1);
