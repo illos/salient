@@ -525,6 +525,14 @@ eligibility and the level-up steps. Awarding XP does not choose build options or
 a new build. The owner completes the scoped level-up through the character sheet and equivalent
 shared headless operation, under existing timing, encounter locks and validation.
 
+**Confirmed 2026-09-24 (user, level-up scope):**
+- **Level-up happens only inside a campaign.** A character outside a campaign has no XP and no
+  level-up flow; changing its level uses the existing full-edit flow (choose a target level).
+- **Each level-up is one event granting one level of choices.** A hero with enough banked XP for two
+  levels runs the level-up flow twice, one level at a time; the two are never combined into one flow.
+- Level-up timing (during a respite), completing choices before or after the respite ends, and
+  replacing earlier choices are settled with the respite design (V161).
+
 A transferred higher-level hero starts with zero destination-campaign XP and earns toward the next
 level from the admitted effective level. Keep an eligibility offset equal to that entry level's
 minimum standard XP threshold, separate from campaign XP. Compare `offset + campaignXP` against
