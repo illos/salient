@@ -66,3 +66,7 @@ shared API. Guided advancement remains deferred.
   target, and the cohort aimed it at another creature. The cohort now derives self-only uses from the
   printed target on the sheet, and requires activation text only for embedded uses (as V101). An
   evaluator and route dry run over all twelve builds found no further mismatch.
+- Test-support gate PASS at `a538f9d`: `CI=true pnpm check` rc0 in 276 s, engine 419/419, app+scripts
+  667/667, content 1773 entries at the pin, links, vendor, foes and build pass. Artifacts
+  `/srv/presidium/projects/salient/test-artifacts/V134-a538f9d`. The Test-Deploy headless run there hit
+  a `sessions:get` request timeout under host load (not a code failure); it reruns at the rebased tip.
