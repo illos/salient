@@ -64,3 +64,9 @@ App test `tests/app/heroic-resource-forgo.test.ts`, on a Self-Taught Shadow:
 - TESTER at `50f066d5` PASS: gate rc 0 in 281 s (engine 416, app 668); `heroic-resource` and
   `shadow-level-two` pass. QC1 static PASS at `50f066d5` (R1 and R1b closed).
 - QC1 final PASS at `50f066d5`. It merges first; V140 and V145 follow.
+
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `fad564f` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `e6b75c20-07d3-4d41-bc8c-d75576303b1d`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V150-release-fad564f`.

@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V150 | `fad564f` | Merged; backend/frontend published; accepted gates reused | complete |
 | V133 | `b99b951` | Merged; backend/content/frontend published; combined gates at tip | complete |
 | V120 | `f3acd97` | Merged; backend/frontend published; accepted gates reused | complete |
 | V132 | `c3f9e35` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -507,3 +508,15 @@ was tested before merge:
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V133-release-b99b951`.
+
+### V150 Self-Taught forgo publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed tip `fad564fc6cd877031b501ef08b9771af2456f878` into main.
+- Accepted evidence reused: full gate at `50f066d` (281 s, Test-support) and `heroic-resource` and `shadow-level-two` journeys at `50f066d`; the tip adds a docs-only record.
+- Independent review and QC1 final review passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `e6b75c20-07d3-4d41-bc8c-d75576303b1d`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V150-release-fad564f`.

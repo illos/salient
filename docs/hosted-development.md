@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V133 Null levels two and three
+## Current release — V150 Self-Taught forgo
+
+Backend/frontend source `fad564fc6cd877031b501ef08b9771af2456f878` published on 2026-09-24 as
+Worker `e6b75c20-07d3-4d41-bc8c-d75576303b1d`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V150](build/V150-self-taught-forgo.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V133 Null levels two and three
 
 Backend/content/frontend source `b99b951784bd235b16174f507a8144929e89d262` published on 2026-09-24 as
 Worker `99cbb3c1-fad8-4f35-8715-1c94905601b6`. Backend and schema validation, the content reseed (1751 entries at
