@@ -95,3 +95,22 @@ test('the Tactician profile matches its source amounts', () => {
     1,
   ]);
 });
+
+// feature/censor/level-1/wrath.md, level-4/wrath-beyond-wrath.md ("2 wrath instead of 1") and
+// level-7/focused-wrath.md (turn-start gain 3), so levels 1–6 are checked.
+test('the Censor profile matches its source amounts', () => {
+  const censor = GENERATION_PROFILES.find(p => p.className === 'Censor')!;
+  expect(censor).toMatchObject({
+    resource: 'wrath',
+    verifiedThroughLevel: 6,
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'fixed', amount: 2 },
+    encounterEnd: { kind: 'lose' },
+    triggers: [
+      { id: 'censor-judged-damaged-you', amount: 1, limit: 'round' },
+      { id: 'censor-damaged-judged', amount: 1, limit: 'round' },
+    ],
+  });
+  expect(triggerAmount(censor.triggers[0]!, 6).amount).toBe(1);
+  expect(triggerAmount(censor.triggers[1]!, 4).amount).toBe(2);
+});

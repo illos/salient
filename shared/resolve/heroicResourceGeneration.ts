@@ -60,7 +60,9 @@ const SHADOW_INSIGHT = 'vendor/steel-compendium/en/unified/md/feature/shadow/lev
 
 const TACTICIAN_FOCUS = 'vendor/steel-compendium/en/unified/md/feature/tactician/level-1/focus.md';
 
-/** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician; V141–V149 the rest). */
+const CENSOR_WRATH = 'vendor/steel-compendium/en/unified/md/feature/censor/level-1/wrath.md';
+
+/** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
   {
     className: 'Shadow',
@@ -161,6 +163,63 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
           'The first time in a combat round that any ally within 10 squares of you uses a heroic ability, you gain 1 focus.',
         confirmation:
           'Distance is not tracked; the table confirms an ally (not you) within 10 squares used a heroic ability: one that cannot be used at all without spending its Heroic Resource, not an optional spend.',
+      },
+    ],
+  },
+  {
+    className: 'Censor',
+    // feature/censor/level-7/focused-wrath.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'wrath',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: CENSOR_WRATH,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain wrath equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'fixed',
+      amount: 2,
+      sourcePath: CENSOR_WRATH,
+      quote: 'At the start of each of your turns during combat, you gain 2 wrath.',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: CENSOR_WRATH,
+      quote: 'You lose any remaining wrath at the end of the encounter.',
+    },
+    triggers: [
+      {
+        id: 'censor-judged-damaged-you',
+        label: 'A creature you judged damaged you',
+        amount: 1,
+        limit: 'round',
+        sourcePath: CENSOR_WRATH,
+        quote:
+          'Additionally, the first time each combat round that a creature judged by you (see Judgment below) deals damage to you, you gain 1 wrath.',
+        confirmation:
+          'Judgment is not tracked; the table confirms the creature that damaged you is judged by you.',
+      },
+      {
+        id: 'censor-damaged-judged',
+        label: 'You damaged a creature you judged',
+        amount: 1,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 2,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/censor/level-4/wrath-beyond-wrath.md',
+            quote:
+              'The first time each combat round that you deal damage to a creature judged by you, you gain 2 wrath instead of 1.',
+          },
+        ],
+        limit: 'round',
+        sourcePath: CENSOR_WRATH,
+        quote:
+          'The first time each combat round that you deal damage to a creature judged by you, you gain 1 wrath.',
+        confirmation:
+          'Judgment is not tracked; the table confirms the creature you damaged is judged by you.',
       },
     ],
   },
