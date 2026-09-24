@@ -188,36 +188,23 @@ the first slice where lasting effects change numbers
     printed sentence gives a lasting edge yet. Raider's Awe (consumable) and Squad! On Me!
     (stability) run through compiled uses.
   - Squad actions (`/squad act`) don't read modifiers, so no modifier is stored on a squad minion.
-    Tests have no operation, so no admitted scope needs them yet. Both are noted for later.
-  - ENGINE2's V158 lifecycle fix (on `slice/V158`, not yet in this branch) changes how
-    same-ability instances are stored on one subject:
-    - A new instance with an identical payload supersedes the older one.
-    - A new instance with a different payload is not stored (`untracked`), and the table applies
-      the stacking rule.
-    - V159 relies on `effectiveAggregate` only where different abilities combine. Its same-ability
-      grouping only ever sees one live instance per ability and subject.
-    - `commitModifiers` logs `effect.untracked` for a declined instance. For example, a second
-      Squad! On Me! from a Tactician with a different Might stays table work.
-- Authoring runs (not the TESTER gate):
-  - `pnpm exec tsc --noEmit` and `pnpm exec tsc -p tsconfig.web.json --noEmit` are clean. eslint
-    and prettier are clean on the changed files.
-  - `vitest run --maxWorkers=2` on 12 script files passed 203 tests: `modifiers`, `effect-riders`,
-    `effect-instances`, `effect-only`, `compiled-ability`, `compiled-effects-presentation`,
-    `tier-effects`, `tier-instructions`, `insight-edge`, `compiled-condition-privacy`,
-    `live-compiled-report` and `audit-ability-grammar`.
-  - On 14 app files it passed 98 tests: `modifiers`, `effect-riders`, `effect-instances`,
-    `effect-only`, `compiled-effects`, `party-read-limit`, `condition-instances`, `abilities`,
-    `combat`, `history`, `closeout`, `table`, `tactician-character` and `squads`. The pipeline reads
-    only the actor and target records it already loads, and `party-read-limit` passes.
-  - The `modifiers`, `effect-riders`, `tactician-level-three`, `effect-instances`, `effect-only`,
-    `rider-grammar`, `multi-target`, `tier-instructions`, `insight-edge` and `tactician` journeys
-    passed under a throwaway convex-test harness, which was not committed.
+    Noted for later.
+  - Review fix 2: "A test is a power roll" (rule/dice/power-roll.md), so `test.roll` reads the
+    tester's own `rolls-by` power-roll modifiers, takes an `exclude` override, adds their edges,
+    banes and bonuses, records the contributions and uses up consumables in its own journal (undo
+    restores them). A test has no target, so `rolls-against` modifiers don't arise.
+  - V158's lifecycle (R1/R1b) stores a same-owner identical repeat as a supersede; any other
+    same-ability overlap on one subject becomes a manual group (`manualStacking`), unscheduled.
+    - `rollModifiersOf` and the stat filter skip manual-group instances.
+    - Review fix 1: `commitModifiers` logs `effect.untracked` for a use that joined a manual group,
+      and the saved occurrence is `manual` with a stacking requirement, not "applied
+      automatically". For example, a second hero's Raider's Awe on the same goblin stays table work.
   - `kit-bonus` failed in 2 of 4 runs, depending on the dice. V148's Persistent Magic correction
     refusal ("a correction can't recompute it") hit an Elementalist target. No modifier is
     involved, and the path is unchanged without contributions. TESTER should confirm whether it
     also flakes on `slice/V158`.
 - Open questions:
-  - Squad actions and a future test operation should read modifiers before any `rolls-against`
-    modifier is admitted. Otherwise a squad's roll against a subject would miss it.
+  - Squad actions should read modifiers before any `rolls-against` modifier is admitted.
+    Otherwise a squad's roll against a subject would miss it.
   - Wither needs a potency-gated tier modifier node. A correction that changes its tier must end,
     or refuse to replace, an instance a later roll already used up.

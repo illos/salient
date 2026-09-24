@@ -35,6 +35,14 @@ import type {
 import { recoveryValueOf, resolveEdgeBane, testOutcome, tierOf } from '../../shared/resolve/index';
 import type { ConditionId } from '../../shared/contracts/liveState';
 import { rollDice } from './dice';
+import {
+  consumedBy,
+  contributionIds,
+  describeContribution,
+  rollContributions,
+  withContributions,
+} from '../../shared/resolve/modifiers';
+import { consumeRollEffects } from './effectInstances';
 import { requireContent } from '../content';
 import { journalPatch } from './journal';
 import { run, type OperationDefinition, type Outcome, type TableContext } from './registry';
@@ -114,6 +122,7 @@ const testRoll: OperationDefinition = {
     edges: v.optional(v.number()),
     banes: v.optional(v.number()),
     difficulty: v.optional(v.string()),
+    exclude: v.optional(v.union(v.string(), v.array(v.string()))),
   },
   argDescriptions: {
     characteristic: 'M, A, R, I or P.',
@@ -123,6 +132,8 @@ const testRoll: OperationDefinition = {
     edges: 'Number of edges (default 0).',
     banes: 'Number of banes (default 0).',
     difficulty: 'easy, medium or hard; omit it to leave interpretation to the Director.',
+    exclude:
+      'Effect instance ids whose automatic edge, bane or bonus does not apply to this test (the table’s override). Edges and banes given here are circumstance, added to the automatic ones.',
   },
   roles: ['director', 'player'],
   session: RUNNING_SESSION,
@@ -166,6 +177,26 @@ const testRoll: OperationDefinition = {
       characteristicValue = integer(args.value, 'value');
       characteristicValueSource = 'supplied';
     }
+    // V159 (docs/lasting-effects-design.md#2-modifier-pipeline): "A test is a power roll"
+    // (rule/dice/power-roll.md), so the tester's active power-roll modifiers apply to it. A test has
+    // no target, so only the tester's own `rolls-by` modifiers count; a test is never a strike.
+    const exclude =
+      args.exclude === undefined
+        ? []
+        : (Array.isArray(args.exclude) ? args.exclude : [args.exclude]).map(String);
+    const contributions = rollContributions({
+      actor: { id: actor!.id, instances: character.liveState?.effectInstances ?? [] },
+      targets: [{ id: actor!.id, instances: [] }],
+      roll: { strike: false },
+      exclude,
+    })[0]!.contributions;
+    const unknown = exclude.filter(id => !contributionIds(contributions).has(id));
+    if (unknown.length)
+      throw new ConvexError(
+        `Not an automatic contribution to this test: ${unknown.join(', ')}. effect.list names the active effects.`,
+      );
+    const inputs = withContributions({ targetId: actor!.id, edges, banes }, contributions);
+    const consumed = consumedBy([{ contributions }]);
     const accepted = await rollDice(
       ctx,
       context.campaign._id,
@@ -182,9 +213,11 @@ const testRoll: OperationDefinition = {
     const naturalRoll = a!.value + b!.value;
     // Section 5: +2 when the Director agreed a skill applies.
     const skillBonus: 0 | 2 = skill ? 2 : 0;
-    const edgeBane = resolveEdgeBane(edges, banes);
+    const edgeBane = resolveEdgeBane(inputs.edges, inputs.banes);
+    const otherBonuses = inputs.bonuses ?? [];
+    const bonusTotal = skillBonus + otherBonuses.reduce((sum, b) => sum + b.amount, 0);
     // Section 5 / 1.5: total = natural + characteristic + skill + other bonuses + edge/bane modifier.
-    const total = naturalRoll + characteristicValue + skillBonus + edgeBane.modifier;
+    const total = naturalRoll + characteristicValue + bonusTotal + edgeBane.modifier;
     // Section 1.6: a natural 19 or 20 is tier 3 regardless of modifiers (Q-R-1 resolved).
     const criticalSuccess = naturalRoll >= 19;
     const tier: Tier = criticalSuccess ? 3 : tierOf(total, edgeBane.tierShift);
@@ -195,7 +228,7 @@ const testRoll: OperationDefinition = {
       characteristic,
       characteristicValue,
       skillBonus,
-      bonusTotal: skillBonus,
+      bonusTotal,
       edgeBane,
       total,
       tier,
@@ -208,6 +241,7 @@ const testRoll: OperationDefinition = {
       `${a!.value} + ${b!.value}`,
       `${characteristicValue >= 0 ? '+' : '−'} ${Math.abs(characteristicValue)} (${characteristic})`,
       skill ? `+ 2 (${skill})` : null,
+      ...otherBonuses.map(b => `${b.amount >= 0 ? '+' : '−'} ${Math.abs(b.amount)} (${b.label})`),
       edgeBane.modifier
         ? `${edgeBane.modifier > 0 ? '+' : '−'} 2 (${edgeBane.modifier > 0 ? 'edge' : 'bane'})`
         : null,
@@ -218,7 +252,7 @@ const testRoll: OperationDefinition = {
         : edgeBane.tierShift === -1
           ? ', double bane: tier −1'
           : '';
-    const description = `${actor!.name} tested ${characteristic}: ${parts.join(' ')} = ${total} → tier ${tier}${shift}${criticalSuccess ? ' (natural 19+)' : ''}${result.outcome ? `; ${difficulty}: ${result.outcome}` : '; the Director interprets the total'}.`;
+    const description = `${actor!.name} tested ${characteristic}: ${parts.join(' ')} = ${total} → tier ${tier}${shift}${criticalSuccess ? ' (natural 19+)' : ''}${result.outcome ? `; ${difficulty}: ${result.outcome}` : '; the Director interprets the total'}.${contributions.length ? ` Automatic: ${contributions.map(describeContribution).join('; ')}.` : ''}`;
     return {
       kind: 'test.roll',
       description,
@@ -228,7 +262,26 @@ const testRoll: OperationDefinition = {
         rollId: accepted.rollId,
         characteristicValueSource,
         ...(skill ? { skill } : {}),
+        ...(contributions.length ? { contributions } : {}),
+        ...(consumed.length ? { consumed: consumed.map(c => c.instanceId) } : {}),
       },
+      // V159 (design 5a): a consumable the test qualified for is used up by it, in this operation's
+      // journal, so undo of the test restores it.
+      ...(consumed.length
+        ? {
+            commit: async (mctx: MutationCtx, scope: Parameters<typeof consumeRollEffects>[1]) => {
+              await consumeRollEffects(
+                mctx,
+                scope,
+                consumed.map(c => ({
+                  holder: { kind: 'character', id: character._id },
+                  instanceId: c.instanceId,
+                })),
+                `${actor!.name}'s ${characteristic} test`,
+              );
+            },
+          }
+        : {}),
     };
   },
 };

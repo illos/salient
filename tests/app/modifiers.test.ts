@@ -16,6 +16,10 @@
  * - tests/fixtures/v116-tactician-three-expected.json, v94-tactician-3-alt: a level-2 Vanguard with
  *   Might 2, stability 2 and Squad! On Me!.
  * - rule/character/stability.md: a force-moved creature can reduce the movement by its stability.
+ * - rule/dice/power-roll.md: "A test is a power roll", so a power-roll bane applies to a test.
+ *   Thorn tests Might (2) on 5 + 5 with one bane: 10 + 2 − 2 = 10 → tier 1.
+ * - Heroes book "Stacking Unique Effects" with the V158 R1b boundary: a second hero's Raider's Awe
+ *   on the same goblin is table work, so neither bane is applied automatically.
  * The lasting edge has no admitted printed source yet, so it is stored through the library with a
  * synthetic source occurrence, as the V158 lifecycle test does; everything else is registered
  * operations with persisted readback.
@@ -346,4 +350,132 @@ test('V159: Squad! On Me! raises each target’s stability by the Tactician’s 
   await command('/history rewind');
   expect((await live(vex)).effectInstances ?? []).toEqual([]);
   expect((await live(f.thornId)).surges).toBe(surgesBefore);
+});
+
+test('V159: a test is a power roll, so it takes and uses up a consumable power-roll bane; undo restores it', async () => {
+  const { t, f, command } = await setup();
+  const bane: ModifierPayload = { kind: 'roll', target: 'rolls-by', scope: 'power-roll', banes: 1 };
+  const stored = await t.run(async ctx => {
+    const eventId = await appendEvent(ctx, {
+      campaignId: f.campaignId,
+      sessionId: f.sessionId!,
+      encounterId: null,
+      origin: 'user',
+      actor: (await ctx.db.get(f.director.profile.userId))!,
+      commandId: `modifiers-source-${++sequence}`,
+      kind: 'test.effect',
+      description: 'Synthetic source occurrence for a consumable bane.',
+    });
+    const thorn = { kind: 'character' as const, id: f.thornId, name: 'Thorn' };
+    const stored = await applyEffectInstance(
+      ctx,
+      { campaignId: f.campaignId, eventId },
+      {
+        id: `fixture-${eventId}`,
+        kind: 'modifier',
+        sourceUseEventId: eventId,
+        sourceActorId: f.thornId,
+        abilityId: 'fixture-bane',
+        abilityName: 'Fixture Bane',
+        actorLabel: 'Thorn',
+        sourcePath: 'rule/dice/bane.md',
+        clause: 'Fixture: a bane on the next power roll.',
+        owner: thorn,
+        subject: thorn,
+        payload: {
+          kind: 'modifier',
+          text: 'Fixture: a bane on the next power roll.',
+          modifier: bane,
+        },
+        consumeOn: { event: 'power-roll' },
+        printedDuration: { kind: 'encounter' },
+        endsWhen: [],
+        appliedSequence: (await ctx.db.get(eventId))!.sequence,
+      },
+    );
+    if (!stored || !('instance' in stored)) throw new Error('Expected a tracked instance.');
+    return stored.instance;
+  });
+  const thornEffect = async () =>
+    (await t.run(ctx => ctx.db.get(f.thornId)))!.liveState!.effectInstances![0]!;
+
+  await expect(
+    command('@Thorn /test roll characteristic=M exclude=["nope"]', true),
+  ).rejects.toThrow(/Not an automatic contribution/);
+  await atDice(t, f.campaignId, [5, 5]);
+  const tested = await command('@Thorn /test roll characteristic=M', true);
+  const event = (await t.run(ctx => ctx.db.get(tested.eventId)))!;
+  const data = (event.payload as { data: Record<string, unknown> }).data;
+  expect(data.result).toMatchObject({
+    naturalRoll: 10,
+    characteristicValue: 2,
+    edgeBane: { edges: 0, banes: 1 },
+    total: 10,
+    tier: 1,
+  });
+  expect(data.contributions).toEqual([
+    expect.objectContaining({ instanceId: stored.id, banes: 1, consumes: [stored.id] }),
+  ]);
+  expect(data.consumed).toEqual([stored.id]);
+  expect(event.description).toContain('Fixture Bane');
+  expect(await thornEffect()).toMatchObject({ status: 'consumed', endedEventId: tested.eventId });
+
+  // Used up once: the next test has no bane (10 + 2 = 12 → tier 2).
+  await atDice(t, f.campaignId, [5, 5]);
+  const again = await command('@Thorn /test roll characteristic=M', true);
+  const next = (await t.run(ctx => ctx.db.get(again.eventId)))!.payload as {
+    data: Record<string, unknown>;
+  };
+  expect(next.data.result).toMatchObject({ total: 12, tier: 2 });
+  expect(next.data.contributions).toBeUndefined();
+
+  await command('/history rewind');
+  await command('/history rewind');
+  expect(await thornEffect()).toMatchObject({ status: 'active' });
+  expect((await thornEffect()).endedEventId).toBeUndefined();
+});
+
+test("V159: a second hero's Raider's Awe on the same goblin is a manual group, never applied automatically", async () => {
+  const { t, f, command, results, goblin } = await setup();
+  for (const name of ['Korva', 'Brakka'])
+    await admitHero(
+      t,
+      f.player,
+      f.director,
+      f.campaignId,
+      name,
+      heroFixtureSelections({ 'kit.choice': 'Raider', 'details.name': name }),
+    );
+  const goblinRef = `@{foe:${goblin}}`;
+  await command(`@Korva /ability use ability="Raider's Awe" targets=[${goblinRef}]`, true);
+  const second = await command(
+    `@Brakka /ability use ability="Raider's Awe" targets=[${goblinRef}]`,
+    true,
+  );
+  const occurrence = (await results(second.eventId)).compiled!.effects.find(
+    o => o.effect.kind === 'modifier',
+  )!;
+  expect(occurrence.effect.status).toBe('manual');
+  const logged = await t.run(ctx =>
+    ctx.db
+      .query('events')
+      .withIndex('by_campaign_sequence', q => q.eq('campaignId', f.campaignId))
+      .collect(),
+  );
+  expect(logged.some(e => e.kind === 'effect.untracked' && /stacking/i.test(e.description))).toBe(
+    true,
+  );
+  const instances = (await t.run(ctx => ctx.db.get(goblin)))!.live.effectInstances!;
+  expect(instances).toHaveLength(2);
+  expect(instances.every(i => i.manualStacking && i.status === 'active')).toBe(true);
+
+  // The goblin's next power roll gets no automatic bane and uses none up.
+  await atDice(t, f.campaignId, [5, 5]);
+  const roll = await command(`${goblinRef} /ability use ability="Spear Charge" targets=[@Thorn]`);
+  expect((await results(roll.eventId)).targets[0]!.contributions).toBeUndefined();
+  expect(
+    (await t.run(ctx => ctx.db.get(goblin)))!.live.effectInstances!.every(
+      i => i.status === 'active',
+    ),
+  ).toBe(true);
 });

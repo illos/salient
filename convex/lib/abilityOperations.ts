@@ -1072,6 +1072,28 @@ async function commitLasting(
  * (docs/lasting-effects-design.md#2-modifier-pipeline), with its duration bound and registered on
  * the clock. The engine then applies it to later rolls and derived values automatically.
  */
+/** V159: occurrences that joined a manual stacking group are recorded as manual on the result. */
+function markManual<T extends import('../../shared/contracts/compiledResult').EffectOccurrence>(
+  occurrences: T[],
+  manualIds: ReadonlySet<string>,
+): T[] {
+  return occurrences.map(occurrence =>
+    manualIds.has(occurrence.id) && occurrence.effect.kind === 'modifier'
+      ? {
+          ...occurrence,
+          effect: {
+            ...occurrence.effect,
+            status: 'manual' as const,
+            requirements: [
+              ...occurrence.effect.requirements,
+              'manual stacking: an unresolved use of the same ability is already active; apply the stacking rule at the table',
+            ],
+          },
+        }
+      : occurrence,
+  );
+}
+
 async function commitModifiers(
   ctx: MutationCtx,
   scope: JournalScope,
@@ -1085,7 +1107,9 @@ async function commitModifiers(
     sourcePath: string;
   },
   encounterId: Id<'encounters'> | null,
-) {
+): Promise<Set<string>> {
+  /** Occurrences that joined a V158 manual stacking group: the table applies them, not the engine. */
+  const manualIds = new Set<string>();
   const cause = (await ctx.db.get(scope.eventId))!;
   const use = (await ctx.db.get(source.eventId))!;
   for (const occurrence of occurrences) {
@@ -1129,7 +1153,10 @@ async function commitModifiers(
     // The ENGINE2 V158 lifecycle boundary may decline to store a same-ability instance whose
     // payload differs from an active one on the subject (Stacking Unique Effects is then applied at
     // the table); such a result carries no instance.
-    const stored = result && 'instance' in result ? result : undefined;
+    const tracked = result && 'instance' in result ? result : undefined;
+    const manualGroup = tracked?.manualGroup === true;
+    if (manualGroup) manualIds.add(occurrence.id);
+    const stored = manualGroup ? undefined : tracked;
     const untracked = result !== undefined && stored === undefined;
     await appendEvent(ctx, {
       campaignId: scope.campaignId,
@@ -1141,9 +1168,11 @@ async function commitModifiers(
       kind: untracked ? 'effect.untracked' : 'effect.applied',
       description: stored
         ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}${consumable}. The engine applies it automatically; exclude it on a roll it doesn't fit${stored.instance.registrationIds.length ? '' : effect.spec.duration.kind === 'none' || effect.spec.duration.kind === 'maintained' ? '' : '. Its end is unscheduled outside a committed encounter, so end it with /effect end'}.`
-        : untracked
-          ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. Another use of ${source.abilityName} with a different effect is already active on ${subject!.name}, so this one is not tracked: the same ability doesn't stack, and the table applies the most impactful effect and the most recent duration (Stacking Unique Effects).`
-          : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); apply it at the table.`,
+        : manualGroup
+          ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. ${subject!.name} is already under ${source.abilityName} in a way the engine can't resolve, so this use and the earlier ones form a manual stacking group. The engine applies none of them: apply the most impactful effect with the most recent use's duration at the table (Stacking Unique Effects), then end them with /effect end.`
+          : untracked
+            ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. This effect can't be tracked on a squad or object; apply it at the table.`
+            : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); apply it at the table.`,
       payload: {
         sourceUseEventId: source.eventId,
         occurrence: occurrence.id,
@@ -1155,6 +1184,7 @@ async function commitModifiers(
       },
     });
   }
+  return manualIds;
 }
 
 /** V159: a hero's or foe's stored effect instances; squads and objects hold none. */
@@ -1788,7 +1818,7 @@ const abilityUse: OperationDefinition = {
             });
           }
           // V159: modifiers become modifier effect instances on each subject.
-          await commitModifiers(
+          const manualIds = await commitModifiers(
             mctx,
             scope,
             effects(scope.eventId),
@@ -1816,7 +1846,7 @@ const abilityUse: OperationDefinition = {
               definition,
               inputs: effectInput,
               revision: scope.eventId,
-              effects: effects(scope.eventId),
+              effects: markManual(effects(scope.eventId), manualIds),
             } satisfies CompiledResult,
             abilityName: ability.name,
             selectedCharacteristic: null,
@@ -2218,21 +2248,23 @@ const abilityUse: OperationDefinition = {
             allowance.encounterId,
           );
         // V159: applied modifiers become modifier effect instances on their subjects.
-        if (compiledOutcome?.kind === 'resolved')
-          await commitModifiers(
-            mctx,
-            scope,
-            effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
-            targets,
-            {
-              eventId: scope.eventId,
-              abilityId: ability.abilityId,
-              abilityName: ability.name,
-              actor: actor!,
-              sourcePath: ability.source.path,
-            },
-            allowance.encounterId,
-          );
+        const manualIds =
+          compiledOutcome?.kind === 'resolved'
+            ? await commitModifiers(
+                mctx,
+                scope,
+                effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+                targets,
+                {
+                  eventId: scope.eventId,
+                  abilityId: ability.abilityId,
+                  abilityName: ability.name,
+                  actor: actor!,
+                  sourcePath: ability.source.path,
+                },
+                allowance.encounterId,
+              )
+            : new Set<string>();
         // V158: lasting instructions become tracked effect instances after the conditions.
         if (compiledOutcome?.kind === 'resolved')
           await commitLasting(
@@ -2264,7 +2296,10 @@ const abilityUse: OperationDefinition = {
                   definition: compiledOutcome.definition,
                   inputs: resolutionInput,
                   revision: scope.eventId,
-                  effects: effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+                  effects: markManual(
+                    effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+                    manualIds,
+                  ),
                 } satisfies CompiledResult,
               }
             : {}),
