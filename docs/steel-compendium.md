@@ -19,10 +19,11 @@ files plus 27 MB of Git data each, pin `fb83a789`) and Forge Steel (pin `5a846aa
 deletion, every copy was verified to be at its pin with no local edits.
 
 Scripts and tests find the one copy through `scripts/lib/vendor.ts` (V118): a checkout's own
-populated `vendor/<name>`, else `$SALIENT_VENDOR_ROOT/<name>` (set this for a copy without Git
-metadata, such as a headless `/tmp` tree), else the main working tree's copy. New code that reads a
-source file calls `vendorPath`/`vendorDir`, or reads Git blobs at the pin
-(`readPinnedTree`, `tests/helpers/pinned-source.ts`) for paths outside main's sparse set.
+populated `vendor/<name>`, else `$SALIENT_VENDOR_ROOT/<name>`, else the main working tree's copy.
+Set `SALIENT_VENDOR_ROOT` for a copy without Git metadata, such as a headless `/tmp` tree; it serves
+file reads, not Git-blob reads or pin checks. New code that reads a source file calls
+`vendorPath`/`vendorDir`, or reads Git blobs at the pin (`readPinnedTree`,
+`tests/helpers/pinned-source.ts`) for paths outside main's sparse set.
 
 ## Pinning
 

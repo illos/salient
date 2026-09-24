@@ -13,7 +13,8 @@ again. No rules, content or generated output change.
 
 - `scripts/lib/vendor.ts` resolves the readable copy of each source. It uses this checkout's
   `vendor/<name>` when populated (main, GitHub CI, CT114); otherwise `$SALIENT_VENDOR_ROOT/<name>`
-  when set (for copies without Git metadata, such as headless `/tmp` trees); otherwise the main
+  when set (for copies without Git metadata, such as headless `/tmp` trees; that serves file reads
+  only, since `readPinnedTree` and the pin checks need the copy's Git data); otherwise the main
   working tree found through `git rev-parse --git-common-dir`. Citations keep repo-relative
   `vendor/<name>/…` paths; only file-system and `git -C` access go through `vendorDir`/`vendorPath`.
 - `readPinnedTree` reads a subtree at the pin from Git objects. The foe ingest needs
@@ -23,7 +24,7 @@ again. No rules, content or generated output change.
   links into `vendor/*` against the resolved copy.
 - Every script and test that touched `vendor/*` on disk uses the resolver: the content, rules and
   foe ingests, supporting inventory, character-source inspection, glyph/presentation audits, the
-  Forge build (CT114), headless helpers and 20 test files.
+  Forge build (CT114), headless helpers, `tests/helpers/pinned-source.ts` and 18 test files.
 
 ## Acceptance checks
 
@@ -44,3 +45,8 @@ again. No rules, content or generated output change.
 - After the fix: `pnpm check` exit 0 in the worktree; engine 407/407 tests, app+scripts 652/652,
   464 Markdown files with no broken links, vendor at pins (2 submodules), foes 438 stat blocks
   verified, web build passes. Log: `/tmp/v118/pnpm-check.log`.
+- Independent review (subagent, 2026-09-24): changes required. The foe ingest had lost its
+  source-selection completeness check in the rewrite; restored and confirmed against the Git-blob
+  source (501 discovered = 501 selected). `src/content.ts` now resolves its default corpus lazily.
+- After the fixes: `pnpm check` exit 0 again in the worktree (engine 407/407, app+scripts 652/652,
+  foes verified, links and vendor pass; log `/tmp/v118/pnpm-check-2.log`). Re-review: pass.

@@ -42,6 +42,11 @@ export function readInputs(): Input[] {
     if (record.type === 'statblock' || (record.type === 'featureblock' && record.kind === 'malice'))
       discovered.push(`${match[1]}/${match[2]}`);
   }
+  if (
+    JSON.stringify(discovered.sort()) !==
+    JSON.stringify(SELECTION.map(e => `${e.book}/${e.path}`).sort())
+  )
+    throw new Error('Source selection is incomplete or duplicated');
   return SELECTION.map(({ book, path }) => ({
     book,
     path,

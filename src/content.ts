@@ -7,7 +7,7 @@ import { plain } from './parser.ts';
 import { vendorDir } from '../scripts/lib/vendor.ts';
 
 export const SOURCE_REVISION = 'fb83a789da8f0327a389c277a0c790b1648d5810';
-const defaultRoot = `${vendorDir('steel-compendium')}/`;
+const defaultRoot = () => `${vendorDir('steel-compendium')}/`;
 const git = promisify(execFile);
 async function verifyRevision(root: string): Promise<void> {
   const { stdout } = await git('git', ['-C', root, 'rev-parse', 'HEAD']);
@@ -59,7 +59,7 @@ async function record(path: string, root: string): Promise<{ data: RecordData; t
 export async function loadHeroAbility(
   path: string,
   id: string,
-  corpusRoot = defaultRoot,
+  corpusRoot = defaultRoot(),
 ): Promise<AbilitySource> {
   const { data, text } = await record(path, corpusRoot);
   const scc = data.metadata.scc;
@@ -80,7 +80,7 @@ export async function loadMonster(
   path: string,
   entityId: string,
   prefix: string,
-  corpusRoot = defaultRoot,
+  corpusRoot = defaultRoot(),
 ): Promise<{ entity: Entity; abilities: AbilitySource[] }> {
   const { data, text } = await record(path, corpusRoot);
   const starts = [...text.matchAll(/^> [^\s*|>-]+ \*\*[^*\n]+\*\*[ \t]*$/gm)];
@@ -164,7 +164,7 @@ export async function loadMonster(
 export async function loadScenario(
   options: { includeSquad?: boolean; corpusRoot?: string } = {},
 ): Promise<Scenario> {
-  const root = options.corpusRoot ?? defaultRoot;
+  const root = options.corpusRoot ?? defaultRoot();
   const abilities: Record<string, AbilitySource> = {};
   const selected = ['brutal-slam', 'out-of-the-way', 'thunder-roar', 'lines-of-force'];
   const sources = await Promise.all([
