@@ -237,10 +237,11 @@ test('V32 level and class support are explicit and never silently evaluated as l
     assert.equal(result.diagnostics['class.level'][0].code, 'unsupported-option');
     assert.notEqual(result.partial?.level?.value, 1);
   }
-  const unsupportedClass = evaluate(bethell.selections, 2);
+  // Levels two and three now support every built class; level four still supports only Shadow.
+  const unsupportedClass = evaluate(bethell.selections, 4);
   assert.equal(unsupportedClass.status, 'unsupported');
   assert.equal(unsupportedClass.baseline, null);
-  assert.equal(unsupportedClass.partial?.level?.value, 2);
+  assert.equal(unsupportedClass.partial?.level?.value, 4);
   assert.equal(unsupportedClass.diagnostics['class.choice'][0].code, 'unsupported-option');
   assert.equal(evaluate(selections, 2, getDefinitions(1)).status, 'invalid');
   assert.equal(evaluate({ ...selections, 'class.choice': 'not-a-class' }).baseline, null);

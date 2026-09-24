@@ -61,3 +61,6 @@ wizard and shared API. Guided advancement remains deferred.
   damage. Fixed in the shared ability-use path with a pure unit case (14 fire vs fire 10 and
   all-damage 3 lands 11, not 4). Non-blocking: the specialization swap now proves the Disciple of Earth
   Stamina leaves with the feature; the cohort names list no longer repeats chosen abilities.
+- Test-support gate at `201b255` failed one engine test: the V32 support sentinel used an Elementalist
+  at level 2 as its unsupported class. Moved the sentinel to level 4, where only Shadow is supported, so
+  later class slices do not break it. Log `/srv/presidium/projects/salient/test-artifacts/V135-201b255`.
