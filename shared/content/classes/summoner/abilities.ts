@@ -2,7 +2,6 @@
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
 import statblockSources from '../../compendium/statblock.json' with { type: 'json' };
-import featureblockSources from '../../compendium/featureblock.json' with { type: 'json' };
 import { SUMMONER_MINIONS } from './minions.ts';
 import { SUMMONER_FIXTURES } from './level-two-three.ts';
 export interface SummonerAction {
@@ -1353,12 +1352,11 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
   ...LEVEL_TWO_THREE_ACTIONS,
 ];
 export function summonerSourceText(a: SummonerAction): string {
-  const source = [
-    ...abilitySources,
-    ...featureSources,
-    ...statblockSources,
-    ...featureblockSources,
-  ].find(s => s.sourcePath === 'vendor/steel-compendium/' + a.sourcePath);
+  const fixture = SUMMONER_FIXTURES.find(f => f.sourcePath === a.sourcePath);
+  if (fixture) return fixture.text;
+  const source = [...abilitySources, ...featureSources, ...statblockSources].find(
+    s => s.sourcePath === 'vendor/steel-compendium/' + a.sourcePath,
+  );
   if (!source) throw new Error('Missing Summoner source: ' + a.sourcePath);
   return source.text;
 }

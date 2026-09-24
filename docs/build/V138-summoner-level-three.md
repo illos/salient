@@ -79,3 +79,8 @@ shared API. Guided advancement remains deferred.
   checks every printed action's type and trigger against the ledger and refuses out-of-pool perk, ward
   and 7-essence values; the perk filter matches its one decision; the strike reuses the range value.
 - Review re-verification at `e09040c`: PASS. The cohort also reads back the kit strike potency and distance.
+- Test-Deploy: a clean `convex dev` never finished "Preparing Convex functions" at `4c34a8e` (main is
+  ready in about 10 s). Reproduced here (silent exit); the cause was the Summoner records importing
+  the whole `featureblock.json` (0.87 MB) into every function bundle for four fixture texts. Those texts
+  are now embedded verbatim in `SUMMONER_FIXTURES` (as `minions.ts`), and a focused test compares them
+  with the pinned featureblocks. The same recipe on the fix is ready.

@@ -7,6 +7,8 @@ import { evaluateCharacter } from '../shared/evaluate/character.ts';
 import { changeChoice } from '../shared/evaluate/choiceTransition.ts';
 import { changeLevel } from '../shared/evaluate/levelTransition.ts';
 import { SUMMONER_ACTIONS } from '../shared/content/classes/summoner/abilities.ts';
+import { SUMMONER_FIXTURES } from '../shared/content/classes/summoner/level-two-three.ts';
+import featureblocks from '../shared/content/compendium/featureblock.json' with { type: 'json' };
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
 type Selections = Record<string, SelectionValue>;
 const evaluate = (selections: Selections, level: number) =>
@@ -200,5 +202,15 @@ test('the level-2 perk, ward and 7-essence choices refuse values outside their s
       result.diagnostics[id]!.some(d => d.code === 'value-not-in-pool'),
       id,
     );
+  }
+});
+
+test('each fixture carries the verbatim text of its pinned featureblock', () => {
+  // Embedded (as minions.ts) so Convex functions need not bundle featureblock.json.
+  for (const fixture of SUMMONER_FIXTURES) {
+    const entry = featureblocks.find(
+      e => e.sourcePath === `vendor/steel-compendium/${fixture.sourcePath}`,
+    );
+    assert.equal(fixture.text, entry?.text, fixture.name);
   }
 });
