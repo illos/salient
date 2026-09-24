@@ -4187,6 +4187,132 @@
     }
   },
   {
+    "id": "mcdm.summoner.v1/feature.summoner.level-2/new-portfolio-minion",
+    "kind": "feature",
+    "name": "New Portfolio Minion",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-2/new-portfolio-minion.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-2/new-portfolio-minion.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"2\"\nname: New Portfolio Minion\nscc: mcdm.summoner.v1/feature.summoner.level-2/new-portfolio-minion\ntype: feature\n---\n\nYour circle allows you to select new [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) to add to your [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio).\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-2/perk.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"2\"\nname: Perk\nscc: mcdm.summoner.v1/feature.summoner.level-2/perk\ntype: feature\n---\n\nYou gain an [intrigue](scc.v1:mcdm.heroes.v1/skill.group/intrigue), [lore](scc.v1:mcdm.heroes.v1/skill.group/lore), or supernatural [perk](scc.v1:mcdm.summoner.v1/feature.summoner.level-2/perk) of your choice. See Perks in Draw Steel: Heroes for more information.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-2/summoners-dominion",
+    "kind": "feature",
+    "name": "Summoner's Dominion",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-2/summoners-dominion.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-2/summoners-dominion.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: circle\nlevel: \"2\"\nname: Summoner's Dominion\nscc: mcdm.summoner.v1/feature.summoner.level-2/summoners-dominion\ntype: feature\n---\n\nYour circle allows you to call forth a piece of your [portfolio's](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) dominion like any [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n\nOnce per encounter, you can use a maneuver to summon a fixture from your [minions'](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) native manifold or origin into an unoccupied space on the ground within your Summoner's Range. You can spend 1 [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) to relocate the fixture as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) on your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). The fixture stays until the end of the encounter, until its [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) is reduced to 0, or until you become [dying](scc.v1:mcdm.heroes.v1/rule.health/dying).\n\nYour fixture gains additional features at 5th and 9th level.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "circle",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-3/7-essence-ability",
+    "kind": "feature",
+    "name": "7-Essence Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/7-essence-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-3/7-essence-ability.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"3\"\nname: 7-Essence Ability\nscc: mcdm.summoner.v1/feature.summoner.level-3/7-essence-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) to use.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-3/conjured-ward",
+    "kind": "feature",
+    "name": "Conjured Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/conjured-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-3/conjured-ward.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"3\"\nname: Conjured Ward\nscc: mcdm.summoner.v1/feature.summoner.level-3/conjured-ward\ntype: feature\n---\n\nYou are clad in the natural defenses of your [portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio) (bones, fairy wood, stone, writhing flesh). You gain a +3 bonus to [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and that bonus increases by 3 at 4th, 7th, and 10th levels.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-3/emergency-ward",
+    "kind": "feature",
+    "name": "Emergency Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/emergency-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-3/emergency-ward.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"3\"\nname: Emergency Ward\nscc: mcdm.summoner.v1/feature.summoner.level-3/emergency-ward\ntype: feature\n---\n\nThe first time each [round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) you take [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage), you can use a [free triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 after the triggering effect resolves and summon a signature [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) into the square you left (as long as there is enough space).\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-3/howling-ward",
+    "kind": "feature",
+    "name": "Howling Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/howling-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-3/howling-ward.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"3\"\nname: Howling Ward\nscc: mcdm.summoner.v1/feature.summoner.level-3/howling-ward\ntype: feature\n---\n\nYou create a 1-[aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) vortex of slicing magic around you when you enter combat. An enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you takes [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason).\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-3/snare-ward",
+    "kind": "feature",
+    "name": "Snare Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/snare-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-3/snare-ward.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"3\"\nname: Snare Ward\nscc: mcdm.summoner.v1/feature.summoner.level-3/snare-ward\ntype: feature\n---\n\nWhenever an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to you, you can use a [free triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to pull that creature toward one of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within your Summoner's Range a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.summoner.level-3/summoners-kit",
+    "kind": "feature",
+    "name": "Summoner's Kit",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/summoners-kit.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/summoner/level-3/summoners-kit.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\nclass: summoner\nfeature_source: summoner\nlevel: \"3\"\nname: Summoner's Kit\nscc: mcdm.summoner.v1/feature.summoner.level-3/summoners-kit\ntype: feature\n---\n\nYou conjure a kit for yourself. This kit includes an [implement](scc.v1:mcdm.heroes.v1/rule.treasure/implement), such as a rod or a baton, which grants you the following benefits:\n\n- The [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) of your [Summoner Strike](scc.v1:mcdm.summoner.v1/feature.ability.summoner.level-1/summoner-strike) ability increases to twice your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n- The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of your [Summoner Strike](scc.v1:mcdm.summoner.v1/feature.ability.summoner.level-1/summoner-strike) ability increases to R < AVERAGE.\n- The distance of your [Summoner Strike](scc.v1:mcdm.summoner.v1/feature.ability.summoner.level-1/summoner-strike) ability is now equal to your Summoner's Range.\n\nYour kit also comes with wards like magic armor and transient [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) forces. Choose one of the following wards.\n",
+    "structured": {
+      "class": "summoner",
+      "feature_source": "summoner",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.tactician.level-1/1st-level-doctrine-feature",
     "kind": "feature",
     "name": "1st-Level Doctrine Feature",

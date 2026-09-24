@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:abd5891b0486af71897d67a3ad46583999adef2f79a6e7dc412bf5ac62fdaab5",
-  "entryCount": 1852,
+  "contentHash": "sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952",
+  "entryCount": 1881,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -382,6 +382,16 @@
         "feature/ability/talent/level-3"
       ],
       "basis": "docs/build/V136-talent-level-three.md#scope: Talent levels two and three."
+    },
+    {
+      "id": "summoner-levels-two-three",
+      "description": "Summoner levels two and three: perk, Summoner's Dominion, New Portfolio Minion, Summoner's Kit, wards and the four 7-essence abilities. Their 5-essence minions and circle fixtures are admitted from the monster selection.",
+      "paths": [
+        "feature/summoner/level-2",
+        "feature/summoner/level-3",
+        "feature/ability/summoner/level-3"
+      ],
+      "basis": "docs/build/V138-summoner-level-three.md#scope: Q-CHAR-14 supplemental editor inclusion."
     },
     {
       "id": "kits",
@@ -2625,6 +2635,38 @@
       "name": "Summoner's Sword",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-1/summoners-sword.md",
       "selection": "summoner-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/blitz-tactics",
+      "kind": "ability",
+      "name": "Blitz Tactics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+      "selection": "summoner-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call",
+      "kind": "ability",
+      "name": "Cavalry Call",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+      "selection": "summoner-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel",
+      "kind": "ability",
+      "name": "Essence Funnel",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+      "selection": "summoner-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example",
+      "kind": "ability",
+      "name": "Lead By Example",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+      "selection": "summoner-levels-two-three",
       "file": "ability.json"
     },
     {
@@ -7236,6 +7278,78 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.summoner.v1/feature.summoner.level-2/new-portfolio-minion",
+      "kind": "feature",
+      "name": "New Portfolio Minion",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-2/new-portfolio-minion.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.summoner.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-2/perk.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.summoner.level-2/summoners-dominion",
+      "kind": "feature",
+      "name": "Summoner's Dominion",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-2/summoners-dominion.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.summoner.level-3/7-essence-ability",
+      "kind": "feature",
+      "name": "7-Essence Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/7-essence-ability.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.summoner.level-3/conjured-ward",
+      "kind": "feature",
+      "name": "Conjured Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/conjured-ward.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.summoner.level-3/emergency-ward",
+      "kind": "feature",
+      "name": "Emergency Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/emergency-ward.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.summoner.level-3/howling-ward",
+      "kind": "feature",
+      "name": "Howling Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/howling-ward.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.summoner.level-3/snare-ward",
+      "kind": "feature",
+      "name": "Snare Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/snare-ward.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.summoner.level-3/summoners-kit",
+      "kind": "feature",
+      "name": "Summoner's Kit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/summoner/level-3/summoners-kit.md",
+      "selection": "summoner-levels-two-three",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.tactician.level-1/1st-level-doctrine-feature",
       "kind": "feature",
       "name": "1st-Level Doctrine Feature",
@@ -8184,6 +8298,38 @@
       "kind": "featureblock",
       "name": "Wode Elf Malice",
       "sourcePath": "vendor/steel-compendium/en/unified/md/monster/elf-wode/wode-elf-malice.md",
+      "selection": "core-monsters",
+      "file": "featureblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.fixture.demon.featureblock/the-boil",
+      "kind": "featureblock",
+      "name": "The Boil",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/fixture/demon/featureblock/the-boil.md",
+      "selection": "core-monsters",
+      "file": "featureblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.fixture.elemental.featureblock/primordial-crystal",
+      "kind": "featureblock",
+      "name": "Primordial Crystal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/fixture/elemental/featureblock/primordial-crystal.md",
+      "selection": "core-monsters",
+      "file": "featureblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.fixture.fey.featureblock/glade-pond",
+      "kind": "featureblock",
+      "name": "Glade Pond",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/fixture/fey/featureblock/glade-pond.md",
+      "selection": "core-monsters",
+      "file": "featureblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.fixture.undead.featureblock/barrow-gates",
+      "kind": "featureblock",
+      "name": "Barrow Gates",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/fixture/undead/featureblock/barrow-gates.md",
       "selection": "core-monsters",
       "file": "featureblock.json"
     },
@@ -12716,6 +12862,22 @@
       "file": "statblock.json"
     },
     {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/gushing-spewler",
+      "kind": "statblock",
+      "name": "Gushing Spewler",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/gushing-spewler.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/hulking-chimor",
+      "kind": "statblock",
+      "name": "Hulking Chimor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/hulking-chimor.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
       "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/rasquine",
       "kind": "statblock",
       "name": "Rasquine",
@@ -12740,6 +12902,14 @@
       "file": "statblock.json"
     },
     {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/violent",
+      "kind": "statblock",
+      "name": "Violent",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/demon/statblock/violent.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
       "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/brisk-gale",
       "kind": "statblock",
       "name": "Brisk Gale",
@@ -12752,6 +12922,14 @@
       "kind": "statblock",
       "name": "Crux of Ash",
       "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/crux-of-ash.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/dancing-silk",
+      "kind": "statblock",
+      "name": "Dancing Silk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/dancing-silk.md",
       "selection": "core-monsters",
       "file": "statblock.json"
     },
@@ -12788,10 +12966,34 @@
       "file": "statblock.json"
     },
     {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/principle-of-the-swamp",
+      "kind": "statblock",
+      "name": "Principle of the Swamp",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/principle-of-the-swamp.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/quiet-of-snow",
+      "kind": "statblock",
+      "name": "Quiet of Snow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/quiet-of-snow.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
       "id": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/walking-boulder",
       "kind": "statblock",
       "name": "Walking Boulder",
       "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/elemental/statblock/walking-boulder.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/nixie-hemloche",
+      "kind": "statblock",
+      "name": "Nixie Hemloche",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/nixie-hemloche.md",
       "selection": "core-monsters",
       "file": "statblock.json"
     },
@@ -12828,6 +13030,14 @@
       "file": "statblock.json"
     },
     {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/pixie-rosenthall",
+      "kind": "statblock",
+      "name": "Pixie Rosenthall",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/pixie-rosenthall.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
       "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-dandeknight",
       "kind": "statblock",
       "name": "Sprite Dandeknight",
@@ -12836,10 +13046,34 @@
       "file": "statblock.json"
     },
     {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-foxglow",
+      "kind": "statblock",
+      "name": "Sprite Foxglow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/sprite-foxglow.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
       "id": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-orchiguard",
       "kind": "statblock",
       "name": "Sprite Orchiguard",
       "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/fey/statblock/sprite-orchiguard.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/accursed-mummy",
+      "kind": "statblock",
+      "name": "Accursed Mummy",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/accursed-mummy.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/ceaseless-mournling",
+      "kind": "statblock",
+      "name": "Ceaseless Mournling",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/ceaseless-mournling.md",
       "selection": "core-monsters",
       "file": "statblock.json"
     },
@@ -12856,6 +13090,14 @@
       "kind": "statblock",
       "name": "Husk",
       "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/husk.md",
+      "selection": "core-monsters",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/phase-ghoul",
+      "kind": "statblock",
+      "name": "Phase Ghoul",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/minion/summoner/undead/statblock/phase-ghoul.md",
       "selection": "core-monsters",
       "file": "statblock.json"
     },
@@ -15533,18 +15775,8 @@
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "monster/fixture/demon/featureblock/the-boil.md",
-      "scc": "mcdm.summoner.v1/monster.fixture.demon.featureblock/the-boil",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "monster/fixture/elemental/advancement-features/primordial-crystal.md",
       "scc": "mcdm.summoner.v1/monster.fixture.elemental.advancement-features/primordial-crystal",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/fixture/elemental/featureblock/primordial-crystal.md",
-      "scc": "mcdm.summoner.v1/monster.fixture.elemental.featureblock/primordial-crystal",
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15553,18 +15785,8 @@
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "monster/fixture/fey/featureblock/glade-pond.md",
-      "scc": "mcdm.summoner.v1/monster.fixture.fey.featureblock/glade-pond",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "monster/fixture/undead/advancement-features/barrow-gates.md",
       "scc": "mcdm.summoner.v1/monster.fixture.undead.advancement-features/barrow-gates",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/fixture/undead/featureblock/barrow-gates.md",
-      "scc": "mcdm.summoner.v1/monster.fixture.undead.featureblock/barrow-gates",
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15578,28 +15800,8 @@
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "monster/minion/summoner/demon/statblock/gushing-spewler.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/gushing-spewler",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/demon/statblock/hulking-chimor.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/hulking-chimor",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "monster/minion/summoner/demon/statblock/vicisittante.md",
       "scc": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/vicisittante",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/demon/statblock/violent.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.demon.statblock/violent",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/elemental/statblock/dancing-silk.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/dancing-silk",
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15618,23 +15820,8 @@
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "monster/minion/summoner/elemental/statblock/principle-of-the-swamp.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/principle-of-the-swamp",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/elemental/statblock/quiet-of-snow.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.elemental.statblock/quiet-of-snow",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "monster/minion/summoner/fey/statblock/nixie-corallia.md",
       "scc": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/nixie-corallia",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/fey/statblock/nixie-hemloche.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/nixie-hemloche",
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15643,28 +15830,8 @@
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "monster/minion/summoner/fey/statblock/pixie-rosenthall.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/pixie-rosenthall",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/fey/statblock/sprite-foxglow.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-foxglow",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "monster/minion/summoner/fey/statblock/sprite-olyender.md",
       "scc": "mcdm.summoner.v1/monster.minion.summoner.fey.statblock/sprite-olyender",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/undead/statblock/accursed-mummy.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/accursed-mummy",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/undead/statblock/ceaseless-mournling.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/ceaseless-mournling",
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15675,11 +15842,6 @@
     {
       "path": "monster/minion/summoner/undead/statblock/phantom-of-the-ripper.md",
       "scc": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/phantom-of-the-ripper",
-      "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "monster/minion/summoner/undead/statblock/phase-ghoul.md",
-      "scc": "mcdm.summoner.v1/monster.minion.summoner.undead.statblock/phase-ghoul",
       "reason": "Sourcebook mcdm.summoner.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {

@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:abd5891b0486af71897d67a3ad46583999adef2f79a6e7dc412bf5ac62fdaab5",
+  "contentHash": "sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1107
     },
     "hero-standalone": {
-      "total": 367,
-      "supported": 46,
-      "manual": 321
+      "total": 371,
+      "supported": 47,
+      "manual": 324
     },
     "kit-signature": {
       "total": 25,
@@ -74556,6 +74556,512 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Summoner's Sword supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/blitz-tactics",
+      "name": "Blitz Tactics",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/blitz-tactics",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/blitz-tactics#block:0:0:43febda30e94e1f2",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) under your control during the encounter is the target of the following effect. The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target moves through an enemy's space, the enemy can choose to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square or be M < WEAK (or M < AVERAGE if the target is larger than the enemy) knocked [prone](scc.v1:mcdm.heroes.v1/condition/prone). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each subsequent target that moves through the enemy's space during the same move action.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) under your control during the encounter is the target of the following effect. The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target moves through an enemy's space, the enemy can choose to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square or be M < WEAK (or M < AVERAGE if the target is larger than the enemy) knocked [prone](scc.v1:mcdm.heroes.v1/condition/prone). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each subsequent target that moves through the enemy's space during the same move action.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Explicit supplemental class/minion/companion manual record; shared resource payment only. Creature combat and turn integration deferred.",
+      "grants": [
+        {
+          "name": "Blitz Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blitz Tactics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blitz Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blitz Tactics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blitz Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blitz Tactics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blitz Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blitz Tactics supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call",
+      "name": "Cavalry Call",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call#block:0:0:33e4755bbf0598eb",
+          "locator": "block:0:0",
+          "clause": "You summon a temporary squad containing 6 of your signature [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) regardless of your minion maximum within distance. Whenever one of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) (provoking [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for enemies targeted by two or more of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call#markdown:block:0:0:5781d7a47cb196d8",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You summon a temporary squad containing 6 of your signature minions regardless of your minion maximum within distance. Whenever one of these minions deals damage to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the damage (provoking opportunity attacks). The potency increases by 1 for enemies targeted by two or more of these minions.\nThese minions die at the end of your turn, activate no effects upon death, and you gain no essence from their deaths.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call#markdown:item:4:0:4dfa87e9244a8fa2",
+          "locator": "markdown:item:4:0",
+          "clause": "These minions die at the end of your turn, activate no effects upon death, and you gain no essence from their deaths.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: You summon a temporary squad containing 6 of your signature minions regardless of your minion maximum within distance. Whenever one of these minions deals damage to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the damage (provoking opportunity attacks). The potency increases by 1 for enemies targeted by two or more of these minions.\nThese minions die at the end of your turn, activate no effects upon death, and you gain no essence from their deaths.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "These minions die at the end of your turn, activate no effects upon death, and you gain no essence from their deaths.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You summon a temporary squad containing 6 of your signature [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) regardless of your minion maximum within distance. Whenever one of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) (provoking [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for enemies targeted by two or more of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You summon a temporary squad containing 6 of your signature minions regardless of your minion maximum within distance. Whenever one of these minions deals damage to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the damage (provoking opportunity attacks). The potency increases by 1 for enemies targeted by two or more of these minions.\nThese minions die at the end of your turn, activate no effects upon death, and you gain no essence from their deaths.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "These minions die at the end of your turn, activate no effects upon death, and you gain no essence from their deaths.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Explicit supplemental class/minion/companion manual record; shared resource payment only. Creature combat and turn integration deferred.",
+      "grants": [
+        {
+          "name": "Cavalry Call",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Cavalry Call supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cavalry Call",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Cavalry Call supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cavalry Call",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Cavalry Call supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cavalry Call",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Cavalry Call supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel",
+      "name": "Essence Funnel",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier1:0:7637be5221bb6670",
+            "locator": "block:0:tier1:0",
+            "clause": "5 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage)",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier1:1:4e9226361948973c",
+            "locator": "block:0:tier1:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "after": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier1:0:7637be5221bb6670"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier2:0:03bc27e4f3ecf0bc",
+            "locator": "block:0:tier2:0",
+            "clause": "9 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage)",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier2:1:4e922436194893d6",
+            "locator": "block:0:tier2:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+            "kind": "push",
+            "distance": 4,
+            "after": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier2:0:03bc27e4f3ecf0bc"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier3:0:360ad0728f65ab4a",
+            "locator": "block:0:tier3:0",
+            "clause": "12 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage)",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 12
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier3:1:4e92223619489070",
+            "locator": "block:0:tier3:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6",
+            "kind": "push",
+            "distance": 6,
+            "after": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:0:tier3:0:360ad0728f65ab4a"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel#block:1:0:c824bb9990ed2874",
+          "locator": "block:1:0",
+          "clause": "You can choose to kill any number of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within your Summoner's Range as a part of this ability, provided they haven't used a main action or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each target takes an additional 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage), plus 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) for each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) killed this way. These [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) activate no effects upon death, and you gain no [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) from their deaths.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:special",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can choose to kill any number of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within your Summoner's Range as a part of this ability, provided they haven't used a main action or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each target takes an additional 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage), plus 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) for each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) killed this way. These [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) activate no effects upon death, and you gain no [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) from their deaths.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Explicit supplemental class/minion/companion manual record; shared resource payment only. Creature combat and turn integration deferred.",
+      "grants": [
+        {
+          "name": "Essence Funnel",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Funnel supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Essence Funnel",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Funnel supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Essence Funnel",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Funnel supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Essence Funnel",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Funnel supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
+    },
+    {
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example",
+      "name": "Lead By Example",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier1:0:9bdec52bd08b224c",
+            "locator": "block:0:tier1:0",
+            "clause": "8 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage)",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier1:1:6bd791d9fe35a1f1",
+            "locator": "block:0:tier1:1",
+            "clause": "R < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier1:0:9bdec52bd08b224c"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier2:0:dca162c678e7e48b",
+            "locator": "block:0:tier2:0",
+            "clause": "12 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage)",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier2:1:0a07f737b8085e92",
+            "locator": "block:0:tier2:1",
+            "clause": "R < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier2:0:dca162c678e7e48b"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier3:0:25517fa30c765f77",
+            "locator": "block:0:tier3:0",
+            "clause": "16 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage)",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier3:1:3b7bd5e754c1b778",
+            "locator": "block:0:tier3:1",
+            "clause": "R < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example#block:0:tier3:0:25517fa30c765f77"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "legacy-compatibility",
+      "boundary": "Explicit supplemental class/minion/companion manual record; shared resource payment only. Creature combat and turn integration deferred.",
+      "grants": [
+        {
+          "name": "Lead By Example",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Lead By Example supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lead By Example",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Lead By Example supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lead By Example",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Lead By Example supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lead By Example",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Lead By Example supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -213801,7 +214307,7 @@
   ],
   "liveCounts": {
     "compiled": 108,
-    "compatibility": 1509,
+    "compatibility": 1513,
     "compiledButUnavailable": 0
   }
 }

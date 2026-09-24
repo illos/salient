@@ -1682,6 +1682,186 @@
     }
   },
   {
+    "id": "mcdm.summoner.v1/monster.fixture.demon.featureblock/the-boil",
+    "kind": "featureblock",
+    "name": "The Boil",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/fixture/demon/featureblock/the-boil.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/fixture/demon/featureblock/the-boil.json",
+    "selection": "core-monsters",
+    "text": "---\nfeatures:\n    - body: Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the boil is I < AVERAGE [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil, or I < WEAK [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil and can't move further from it.\n      effects:\n        - effect: Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the boil is I < AVERAGE [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil, or I < WEAK [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil and can't move further from it.\n      icon: ⭐️\n      name: Hunger Thrush\n    - body: When the boil is destroyed, each enemy within 3 squares of the boil takes acid [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your level and is A < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends).\n      effects:\n        - effect: When the boil is destroyed, each enemy within 3 squares of the boil takes acid [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your level and is A < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends).\n      icon: ⭐️\n      name: Oh, It Pops\nname: The Boil\nrole: Support\nscc: mcdm.summoner.v1/monster.fixture.demon.featureblock/the-boil\nstats:\n    - name: Stamina\n      value: 20 + your level\n    - name: Size\n      value: \"2\"\nterrain_type: Hazard\ntype: featureblock\n---\n\n*Hazard Support*\n\n| **Stamina:** 20 + your level | **Size:** 2 |\n|------------------------------|------------:|\n\n> ⭐️ **Hunger Thrush**\n>\n> Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the boil is I < AVERAGE [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil, or I < WEAK [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil and can't move further from it.\n\n> ⭐️ **Oh, It Pops**\n>\n> When the boil is destroyed, each enemy within 3 squares of the boil takes acid [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your level and is A < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends).\n",
+    "structured": {
+      "features": [
+        {
+          "body": "Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the boil is I < AVERAGE [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil, or I < WEAK [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil and can't move further from it.",
+          "effects": [
+            {
+              "effect": "Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the boil is I < AVERAGE [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil, or I < WEAK [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (EoT) by the boil and can't move further from it."
+            }
+          ],
+          "icon": "⭐️",
+          "name": "Hunger Thrush"
+        },
+        {
+          "body": "When the boil is destroyed, each enemy within 3 squares of the boil takes acid [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your level and is A < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends).",
+          "effects": [
+            {
+              "effect": "When the boil is destroyed, each enemy within 3 squares of the boil takes acid [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) equal to your level and is A < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)."
+            }
+          ],
+          "icon": "⭐️",
+          "name": "Oh, It Pops"
+        }
+      ],
+      "role": "Support",
+      "stats": [
+        {
+          "name": "Stamina",
+          "value": "20 + your level"
+        },
+        {
+          "name": "Size",
+          "value": "2"
+        }
+      ],
+      "terrain_type": "Hazard"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.fixture.elemental.featureblock/primordial-crystal",
+    "kind": "featureblock",
+    "name": "Primordial Crystal",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/fixture/elemental/featureblock/primordial-crystal.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/fixture/elemental/featureblock/primordial-crystal.json",
+    "selection": "core-monsters",
+    "text": "---\nfeatures:\n    - body: Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the crystal is vertically pulled 3.\n      effects:\n        - effect: Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the crystal is vertically pulled 3.\n      icon: ⭐️\n      name: Magnetic Pull\n    - body: When you or an ally uses a ranged ability that draws a line through the crystal, the distance increases by 5.\n      effects:\n        - effect: When you or an ally uses a ranged ability that draws a line through the crystal, the distance increases by 5.\n      icon: ⭐️\n      name: Elemental Boost\nname: Primordial Crystal\nrole: Artillery\nscc: mcdm.summoner.v1/monster.fixture.elemental.featureblock/primordial-crystal\nstats:\n    - name: Stamina\n      value: 20 + your level\n    - name: Size\n      value: \"2\"\nterrain_type: Relic\ntype: featureblock\n---\n\n*Relic Artillery*\n\n| **Stamina:** 20 + your level | **Size:** 2 |\n|------------------------------|------------:|\n\n> ⭐️ **Magnetic Pull**\n>\n> Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the crystal is vertically pulled 3.\n\n> ⭐️ **Elemental Boost**\n>\n> When you or an ally uses a ranged ability that draws a line through the crystal, the distance increases by 5.\n",
+    "structured": {
+      "features": [
+        {
+          "body": "Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the crystal is vertically pulled 3.",
+          "effects": [
+            {
+              "effect": "Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the crystal is vertically pulled 3."
+            }
+          ],
+          "icon": "⭐️",
+          "name": "Magnetic Pull"
+        },
+        {
+          "body": "When you or an ally uses a ranged ability that draws a line through the crystal, the distance increases by 5.",
+          "effects": [
+            {
+              "effect": "When you or an ally uses a ranged ability that draws a line through the crystal, the distance increases by 5."
+            }
+          ],
+          "icon": "⭐️",
+          "name": "Elemental Boost"
+        }
+      ],
+      "role": "Artillery",
+      "stats": [
+        {
+          "name": "Stamina",
+          "value": "20 + your level"
+        },
+        {
+          "name": "Size",
+          "value": "2"
+        }
+      ],
+      "terrain_type": "Relic"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.fixture.fey.featureblock/glade-pond",
+    "kind": "featureblock",
+    "name": "Glade Pond",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/fixture/fey/featureblock/glade-pond.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/fixture/fey/featureblock/glade-pond.json",
+    "selection": "core-monsters",
+    "text": "---\nfeatures:\n    - body: You and each non-minion ally that enters one or more squares within 3 squares of the pond or starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) there has their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) increased by 2 until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      effects:\n        - effect: You and each non-minion ally that enters one or more squares within 3 squares of the pond or starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) there has their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) increased by 2 until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      icon: ⭐️\n      name: Bubbling Boost\n    - body: Each of your fey [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) that ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the pond is hidden until the start of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      effects:\n        - effect: Each of your fey [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) that ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the pond is hidden until the start of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      icon: ⭐️\n      name: Overgrowth\nname: Glade Pond\nrole: Ambusher\nscc: mcdm.summoner.v1/monster.fixture.fey.featureblock/glade-pond\nstats:\n    - name: Stamina\n      value: 20 + your level\n    - name: Size\n      value: \"2\"\nterrain_type: Hazard\ntype: featureblock\n---\n\n*Hazard Ambusher*\n\n| **Stamina:** 20 + your level | **Size:** 2 |\n|------------------------------|------------:|\n\n> ⭐️ **Bubbling Boost**\n>\n> You and each non-minion ally that enters one or more squares within 3 squares of the pond or starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) there has their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) increased by 2 until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\n> ⭐️ **Overgrowth**\n>\n> Each of your fey [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) that ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the pond is hidden until the start of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "features": [
+        {
+          "body": "You and each non-minion ally that enters one or more squares within 3 squares of the pond or starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) there has their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) increased by 2 until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "effects": [
+            {
+              "effect": "You and each non-minion ally that enters one or more squares within 3 squares of the pond or starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) there has their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) increased by 2 until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn)."
+            }
+          ],
+          "icon": "⭐️",
+          "name": "Bubbling Boost"
+        },
+        {
+          "body": "Each of your fey [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) that ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the pond is hidden until the start of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "effects": [
+            {
+              "effect": "Each of your fey [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) that ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the pond is hidden until the start of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn)."
+            }
+          ],
+          "icon": "⭐️",
+          "name": "Overgrowth"
+        }
+      ],
+      "role": "Ambusher",
+      "stats": [
+        {
+          "name": "Stamina",
+          "value": "20 + your level"
+        },
+        {
+          "name": "Size",
+          "value": "2"
+        }
+      ],
+      "terrain_type": "Hazard"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/monster.fixture.undead.featureblock/barrow-gates",
+    "kind": "featureblock",
+    "name": "Barrow Gates",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/fixture/undead/featureblock/barrow-gates.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/fixture/undead/featureblock/barrow-gates.json",
+    "selection": "core-monsters",
+    "text": "---\nfeatures:\n    - body: Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the gates is I < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT) by the gates. The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) enemies.\n      effects:\n        - effect: Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the gates is I < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT) by the gates. The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) enemies.\n      icon: ⭐️\n      name: The Bell Tolls\n    - body: Each of your undead [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) has [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 2 while occupying a space within 3 squares of the gates.\n      effects:\n        - effect: Each of your undead [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) has [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 2 while occupying a space within 3 squares of the gates.\n      icon: ⭐️\n      name: Undead Dominion\nname: Barrow Gates\nrole: Defender\nscc: mcdm.summoner.v1/monster.fixture.undead.featureblock/barrow-gates\nstats:\n    - name: Stamina\n      value: 20 + your level\n    - name: Size\n      value: \"2\"\nterrain_type: Fortification\ntype: featureblock\n---\n\n*Fortification Defender*\n\n| **Stamina:** 20 + your level | **Size:** 2 |\n|------------------------------|------------:|\n\n> ⭐️ **The Bell Tolls**\n>\n> Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the gates is I < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT) by the gates. The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) enemies.\n\n> ⭐️ **Undead Dominion**\n>\n> Each of your undead [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) has [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 2 while occupying a space within 3 squares of the gates.\n",
+    "structured": {
+      "features": [
+        {
+          "body": "Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the gates is I < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT) by the gates. The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) enemies.",
+          "effects": [
+            {
+              "effect": "Each enemy that starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) within 3 squares of the gates is I < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT) by the gates. The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) enemies."
+            }
+          ],
+          "icon": "⭐️",
+          "name": "The Bell Tolls"
+        },
+        {
+          "body": "Each of your undead [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) has [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 2 while occupying a space within 3 squares of the gates.",
+          "effects": [
+            {
+              "effect": "Each of your undead [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) has [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 2 while occupying a space within 3 squares of the gates."
+            }
+          ],
+          "icon": "⭐️",
+          "name": "Undead Dominion"
+        }
+      ],
+      "role": "Defender",
+      "stats": [
+        {
+          "name": "Stamina",
+          "value": "20 + your level"
+        },
+        {
+          "name": "Size",
+          "value": "2"
+        }
+      ],
+      "terrain_type": "Fortification"
+    }
+  },
+  {
     "id": "mcdm.monsters.v1/monster.fossil-cryptic/fossil-cryptic-malice",
     "kind": "featureblock",
     "name": "Fossil Cryptic Malice",

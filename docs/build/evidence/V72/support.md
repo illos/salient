@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:abd5891b0486af71897d67a3ad46583999adef2f79a6e7dc412bf5ac62fdaab5`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 108; unchanged reachable compatibility: 1509; structurally supported but unavailable: 0.
+Currently reachable compiled: 108; unchanged reachable compatibility: 1513; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -495,6 +495,10 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1509; stru
 | Strike for Me | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary, action-type |
 | Summoner Strike | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Summoner's Sword | hero-standalone | manual | legacy-compatibility | manual-section |
+| Blitz Tactics | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Cavalry Call | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Essence Funnel | hero-standalone | manual | legacy-compatibility | manual-section |
+| Lead By Example | hero-standalone | supported | legacy-compatibility |  |
 | Shadow Chains | foe-ability | supported | compiled |  |
 | Portal to the Void | foe-ability | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
 | Drill Press | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |

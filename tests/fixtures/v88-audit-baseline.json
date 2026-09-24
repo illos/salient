@@ -372,7 +372,11 @@
     "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/shields-of-essence",
     "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/strike-for-me",
     "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/summoner-strike",
-    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/summoners-sword"
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-1/summoners-sword",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-3/blitz-tactics",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel",
+    "hero-standalone|mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example"
   ],
   "rows": {
     "hero-standalone|mcdm.heroes.v1/feature.ability.common/claw-dirt": {

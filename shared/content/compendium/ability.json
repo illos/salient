@@ -9463,6 +9463,134 @@
     }
   },
   {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/blitz-tactics",
+    "kind": "ability",
+    "name": "Blitz Tactics",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-3/blitz-tactics.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\naction_type: Free maneuver\nclass: summoner\ndistance: Self\neffects:\n    - effect: Until the end of the encounter or you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) under your control during the encounter is the target of the following effect. The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target moves through an enemy's space, the enemy can choose to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square or be M < WEAK (or M < AVERAGE if the target is larger than the enemy) knocked [prone](scc.v1:mcdm.heroes.v1/condition/prone). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each subsequent target that moves through the enemy's space during the same move action.\n      name: Effect\nfeature_source: summoner\nflavor: Rush 'em! CRUSH 'EM!\nkeywords:\n    - Magic\nlevel: \"3\"\nname: Blitz Tactics\nscc: mcdm.summoner.v1/feature.ability.summoner.level-3/blitz-tactics\ntarget: Special\ntype: ability\n---\n\n*Rush 'em! CRUSH 'EM!*\n\n| **Magic** | **Free maneuver** |\n|-----------|------------------:|\n| **📏 Self** | **🎯 Special** |\n\n**Effect:** Until the end of the encounter or you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) under your control during the encounter is the target of the following effect. The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target moves through an enemy's space, the enemy can choose to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square or be M < WEAK (or M < AVERAGE if the target is larger than the enemy) knocked [prone](scc.v1:mcdm.heroes.v1/condition/prone). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each subsequent target that moves through the enemy's space during the same move action.\n",
+    "structured": {
+      "action_type": "Free maneuver",
+      "class": "summoner",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) under your control during the encounter is the target of the following effect. The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target moves through an enemy's space, the enemy can choose to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square or be M < WEAK (or M < AVERAGE if the target is larger than the enemy) knocked [prone](scc.v1:mcdm.heroes.v1/condition/prone). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for each subsequent target that moves through the enemy's space during the same move action.",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "Rush 'em! CRUSH 'EM!",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Special"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call",
+    "kind": "ability",
+    "name": "Cavalry Call",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-3/cavalry-call.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\naction_type: Main action\nclass: summoner\ndistance: Summoner's Range\neffects:\n    - effect: You summon a temporary squad containing 6 of your signature [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) regardless of your minion maximum within distance. Whenever one of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) (provoking [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for enemies targeted by two or more of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n      name: Effect\nfeature_source: summoner\nflavor: A lone squad appears to disrupt the enemy's plans and peels off their forces, one by one.\nkeywords:\n    - Magic\nlevel: \"3\"\nname: Cavalry Call\nscc: mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call\ntarget: Special\ntype: ability\n---\n\n*A lone squad appears to disrupt the enemy's plans and peels off their forces, one by one.*\n\n| **Magic** | **Main action** |\n|-----------|----------------:|\n| **📏 Summoner's Range** | **🎯 Special** |\n\n**Effect:** You summon a temporary squad containing 6 of your signature [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) regardless of your minion maximum within distance. Whenever one of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) (provoking [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for enemies targeted by two or more of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).\n\nThese [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) die at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), activate no effects upon death, and you gain no [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) from their deaths.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "summoner",
+      "distance": "Summoner's Range",
+      "effects": [
+        {
+          "effect": "You summon a temporary squad containing 6 of your signature [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) regardless of your minion maximum within distance. Whenever one of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) deals [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) (provoking [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack)). The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) increases by 1 for enemies targeted by two or more of these [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).",
+          "name": "Effect"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "A lone squad appears to disrupt the enemy's plans and peels off their forces, one by one.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Special"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel",
+    "kind": "ability",
+    "name": "Essence Funnel",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-3/essence-funnel.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\naction_type: Main action\nclass: summoner\ndistance: 10 × 1 line within 1\neffects:\n    - roll: Power Roll + Reason\n      tier1: 5 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier2: 9 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n      tier3: 12 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n    - effect: You can choose to kill any number of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within your Summoner's Range as a part of this ability, provided they haven't used a main action or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each target takes an additional 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage), plus 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) for each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) killed this way. These [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) activate no effects upon death, and you gain no [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) from their deaths.\n      name: Special\nfeature_source: summoner\nflavor: You rapidly summon and sacrifice minions in order to power a devastating blast of magic.\nkeywords:\n    - Area\n    - Magic\nlevel: \"3\"\nname: Essence Funnel\npower_roll_characteristic: Reason\nscc: mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel\ntarget: Each enemy and object in the area\ntier1: 5 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier2: 9 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\ntier3: 12 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\ntype: ability\n---\n\n*You rapidly summon and sacrifice minions in order to power a devastating blast of magic.*\n\n| **Area, Magic** | **Main action** |\n|-----------------|----------------:|\n| **📏 10 × 1 line within 1** | **🎯 Each enemy and object in the area** |\n\n**Power Roll + Reason:**\n\n- **≤11:** 5 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **12-16:** 9 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n- **17+:** 12 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n\n**Special:** You can choose to kill any number of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within your Summoner's Range as a part of this ability, provided they haven't used a main action or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each target takes an additional 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage), plus 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) for each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) killed this way. These [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) activate no effects upon death, and you gain no [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) from their deaths.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "summoner",
+      "distance": "10 × 1 line within 1",
+      "effects": [
+        {
+          "roll": "Power Roll + Reason",
+          "tier1": "5 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier2": "9 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+          "tier3": "12 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6"
+        },
+        {
+          "effect": "You can choose to kill any number of your [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) within your Summoner's Range as a part of this ability, provided they haven't used a main action or maneuver during the [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each target takes an additional 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage), plus 1 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage) for each [minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) killed this way. These [minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions) activate no effects upon death, and you gain no [essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence) from their deaths.",
+          "name": "Special"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "You rapidly summon and sacrifice minions in order to power a devastating blast of magic.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "Reason",
+      "target": "Each enemy and object in the area",
+      "tier1": "5 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier2": "9 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+      "tier3": "12 [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6"
+    }
+  },
+  {
+    "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example",
+    "kind": "ability",
+    "name": "Lead By Example",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/summoner/level-3/lead-by-example.json",
+    "selection": "summoner-levels-two-three",
+    "text": "---\naction_type: Main action\nclass: summoner\ndistance: Melee 1 or Summoner's Range\neffects:\n    - roll: Power Roll + Reason\n      tier1: 8 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier2: 12 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier3: 16 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\nfeature_source: summoner\nflavor: Your minions watch as your implement crackles with power, ready to slam unbelievable force into your foe.\nkeywords:\n    - Magic\n    - Melee\n    - Ranged\n    - Strike\nlevel: \"3\"\nname: Lead By Example\npower_roll_characteristic: Reason\nscc: mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example\ntarget: One enemy or object\ntier1: 8 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier2: 12 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier3: 16 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntype: ability\n---\n\n*Your minions watch as your implement crackles with power, ready to slam unbelievable force into your foe.*\n\n| **Magic, Melee, Ranged, Strike** | **Main action** |\n|----------------------------------|----------------:|\n| **📏 Melee 1 or Summoner's Range** | **🎯 One enemy or object** |\n\n**Power Roll + Reason:**\n\n- **≤11:** 8 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **12-16:** 12 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **17+:** 16 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "summoner",
+      "distance": "Melee 1 or Summoner's Range",
+      "effects": [
+        {
+          "roll": "Power Roll + Reason",
+          "tier1": "8 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier2": "12 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier3": "16 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+        }
+      ],
+      "feature_source": "summoner",
+      "flavor": "Your minions watch as your implement crackles with power, ready to slam unbelievable force into your foe.",
+      "keywords": [
+        "Magic",
+        "Melee",
+        "Ranged",
+        "Strike"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "Reason",
+      "target": "One enemy or object",
+      "tier1": "8 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier2": "12 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier3": "16 + R [damage](scc.v1:mcdm.heroes.v1/rule.damage/damage); R < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics",
     "kind": "ability",
     "name": "Advanced Tactics",

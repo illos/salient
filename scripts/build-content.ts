@@ -344,6 +344,18 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V136-talent-level-three.md#scope: Talent levels two and three.',
   },
   {
+    id: 'summoner-levels-two-three',
+    description:
+      "Summoner levels two and three: perk, Summoner's Dominion, New Portfolio Minion, Summoner's Kit, wards and the four 7-essence abilities. Their 5-essence minions and circle fixtures are admitted from the monster selection.",
+    paths: [
+      'feature/summoner/level-2',
+      'feature/summoner/level-3',
+      'feature/ability/summoner/level-3',
+    ],
+    basis:
+      'docs/build/V138-summoner-level-three.md#scope: Q-CHAR-14 supplemental editor inclusion.',
+  },
+  {
     id: 'kits',
     description:
       'Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; Q-R-103 confirms Berserker and Reaver use ordinary Chapter 6 kits while Stormwight uses its four aspect kits; the pipeline preserves source fields rather than inferring eligibility.',
@@ -501,12 +513,15 @@ function loadFile(root: string, relativePath: string, selection: string): Loaded
   const summonerLevelOne =
     sourcebook === 'mcdm.summoner.v1' &&
     (relativePath === 'class/summoner.md' ||
-      /^feature\/(?:ability\/)?summoner\/level-1\/[^/]+\.md$/.test(relativePath) ||
+      /^feature\/(?:ability\/)?summoner\/level-[123]\/[^/]+\.md$/.test(relativePath) ||
+      /^monster\/fixture\/(demon|undead|fey|elemental)\/featureblock\/[^/]+\.md$/.test(
+        relativePath,
+      ) ||
       (/^monster\/minion\/summoner\/(demon|undead|fey|elemental)\/statblock\/[^/]+\.md$/.test(
         relativePath,
       ) &&
         typeof structured.cost === 'string' &&
-        /^[13] essence/.test(structured.cost)));
+        /^[135] essence/.test(structured.cost)));
   if (!INCLUDED_SOURCEBOOKS.has(sourcebook) && !beastheartLevelOne && !summonerLevelOne)
     return {
       exclusion: {

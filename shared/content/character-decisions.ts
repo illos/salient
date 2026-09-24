@@ -42,6 +42,10 @@ import {
   levelThreeDecisions as beastheartLevelThree,
   levelTwoDecisions as beastheartLevelTwo,
 } from './classes/beastheart/level-two-three.ts';
+import {
+  levelThreeDecisions as summonerLevelThree,
+  levelTwoDecisions as summonerLevelTwo,
+} from './classes/summoner/level-two-three.ts';
 import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
 import { levelThreeDecisions as shadowLevelThree } from './classes/shadow/level-three.ts';
 import { shadowLaterDecisions } from './classes/shadow/level-four-to-six.ts';
@@ -67,6 +71,7 @@ classStep.decisions.push(
     ...conduitLevelTwo,
     ...talentLevelTwo,
     ...beastheartLevelTwo,
+    ...summonerLevelTwo,
   ]),
 );
 
@@ -88,6 +93,7 @@ thirdClassStep.decisions.push(
     ...conduitLevelThree,
     ...talentLevelThree,
     ...beastheartLevelThree,
+    ...summonerLevelThree,
   ]),
 );
 

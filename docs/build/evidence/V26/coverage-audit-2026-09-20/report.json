@@ -1,15 +1,15 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:abd5891b0486af71897d67a3ad46583999adef2f79a6e7dc412bf5ac62fdaab5",
+  "contentHash": "sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 22,
-      "COMPILES_WITH_REMAINDER": 146,
-      "NO_MATCH": 199,
-      "total": 367,
-      "withinV26Bounded": 16
+      "COMPILES_WITH_REMAINDER": 148,
+      "NO_MATCH": 201,
+      "total": 371,
+      "withinV26Bounded": 17
     },
     "kit-signature": {
       "COMPILES": 6,
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 2969,
-    "resolvedToStandalone": 2114,
+    "total": 2985,
+    "resolvedToStandalone": 2130,
     "resolvedToKit": 150,
     "ownText": 705,
     "unresolved": []
@@ -27465,6 +27465,331 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Summoner's Sword supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/blitz-tactics",
+      "name": "Blitz Tactics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+      "usage": "Free maneuver",
+      "target": "Special",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or you are dying, each minion under your control during the encounter is the target of the following effect. The first time on a turn that the target moves through an enemy's space, the enemy can choose to shift 1 square or be M < WEAK (or M < AVERAGE if the target is larger than the enemy) knocked prone. The potency increases by 1 for each subsequent target that moves through the enemy's space during the same move action.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Blitz Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blitz Tactics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blitz Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blitz Tactics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blitz Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blitz Tactics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blitz Tactics",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/blitz-tactics.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blitz Tactics supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/cavalry-call",
+      "name": "Cavalry Call",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+      "usage": "Main action",
+      "target": "Special",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You summon a temporary squad containing 6 of your signature minions regardless of your minion maximum within distance. Whenever one of these minions deals damage to an enemy, the enemy is R < AVERAGE compelled to move 5 squares toward the source of the damage (provoking opportunity attacks). The potency increases by 1 for enemies targeted by two or more of these minions.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Cavalry Call",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Cavalry Call supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cavalry Call",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Cavalry Call supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cavalry Call",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Cavalry Call supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cavalry Call",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/cavalry-call.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Cavalry Call supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/essence-funnel",
+      "name": "Essence Funnel",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+      "usage": "Main action",
+      "target": "Each enemy and object in the area",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "push": 2
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "push": 4
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 12
+            },
+            "push": 6
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:special",
+            "text": "You can choose to kill any number of your minions within your Summoner's Range as a part of this ability, provided they haven't used a main action or maneuver during the turn. Each target takes an additional 1 damage, plus 1 damage for each minion killed this way. These minions activate no effects upon death, and you gain no essence from their deaths.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Essence Funnel",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Funnel supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Essence Funnel",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Funnel supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Essence Funnel",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Funnel supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Essence Funnel",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/essence-funnel.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Essence Funnel supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example",
+      "name": "Lead By Example",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+      "usage": "Main action",
+      "target": "One enemy or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM dazed (save ends)",
+            "text": "R < WEAK dazed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM dazed (save ends)",
+            "text": "R < AVERAGE dazed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM dazed (save ends)",
+            "text": "R < STRONG dazed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": true,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Lead By Example",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Lead By Example supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lead By Example",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Lead By Example supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lead By Example",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Lead By Example supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lead By Example",
+          "sourcePath": "en/unified/md/feature/ability/summoner/level-3/lead-by-example.md",
+          "decisionId": "class.summoner.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Lead By Example supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -107192,8 +107517,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1261,
-      "abilities": 1247,
+      "count": 1263,
+      "abilities": 1249,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -107203,8 +107528,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 721,
-      "abilities": 721,
+      "count": 723,
+      "abilities": 723,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -107291,8 +107616,8 @@
     {
       "shape": "effect-paragraph:special",
       "type": "effect-paragraph",
-      "count": 48,
-      "abilities": 48,
+      "count": 49,
+      "abilities": 49,
       "examples": [
         "complication:Gnoll-Mauled/gnoll-mauled-retaliate",
         "complication:Stripped of Rank/issue-order",
@@ -108941,6 +109266,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:a617691c-4527-4c4d-9fa8-e77ab6af01b7"
+      ]
+    },
+    {
+      "shape": "potency:R < SYM dazed (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.summoner.v1/feature.ability.summoner.level-3/lead-by-example"
       ]
     },
     {
@@ -112011,11 +112345,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 464,
+      "total": 468,
       "compiles": 29,
-      "withRemainder": 163,
-      "withinV26Bounded": 17,
-      "noMatch": 272
+      "withRemainder": 165,
+      "withinV26Bounded": 18,
+      "noMatch": 274
     }
   }
 }

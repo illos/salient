@@ -2,6 +2,9 @@
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
 import statblockSources from '../../compendium/statblock.json' with { type: 'json' };
+import featureblockSources from '../../compendium/featureblock.json' with { type: 'json' };
+import { SUMMONER_MINIONS } from './minions.ts';
+import { SUMMONER_FIXTURES } from './level-two-three.ts';
 export interface SummonerAction {
   name: string;
   parent: string;
@@ -11,7 +14,7 @@ export interface SummonerAction {
   cost?: number;
   trigger?: string;
 }
-export const SUMMONER_ACTIONS: SummonerAction[] = [
+const LEVEL_ONE_ACTIONS: SummonerAction[] = [
   {
     name: 'Summoner: Distraction Tactics',
     parent: 'Distraction Tactics',
@@ -1212,10 +1215,141 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     cost: 1,
   },
 ];
+const MANUAL =
+  'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. ';
+const feature = (level: number, slug: string) =>
+  `en/unified/md/feature/summoner/level-${level}/${slug}.md`;
+const ability = (slug: string) => `en/unified/md/feature/ability/summoner/level-3/${slug}.md`;
+/** Level-two and level-three records (V138): Dominion, 5-essence minions, Summoner's Kit and wards. */
+const LEVEL_TWO_THREE_ACTIONS: SummonerAction[] = [
+  {
+    name: "Summoner: Summoner's Dominion",
+    parent: "Summoner's Dominion",
+    sourcePath: feature(2, 'summoners-dominion'),
+    actionType: 'Maneuver',
+    activationCondition:
+      MANUAL +
+      "Once per encounter. Summon your circle's fixture into an unoccupied space on the ground within your Summoner's Range; it stays until the end of the encounter, until its Stamina is 0, or until you are dying. No fixture actor is created.",
+  },
+  {
+    name: "Summoner: Summoner's Dominion: Relocate fixture",
+    parent: "Summoner's Dominion",
+    sourcePath: feature(2, 'summoners-dominion'),
+    actionType: 'Free maneuver',
+    activationCondition:
+      MANUAL + 'On your turn, with your fixture summoned; move the fixture manually.',
+    cost: 1,
+  },
+  ...SUMMONER_FIXTURES.flatMap(fixture =>
+    fixture.traits.map(trait => ({
+      name: `Fixture ${fixture.name}: ${trait}`,
+      parent: fixture.name,
+      sourcePath: fixture.sourcePath,
+      actionType: 'Source-timed effect',
+      activationCondition:
+        MANUAL + 'Requires your summoned fixture and its printed trigger/conditions.',
+    })),
+  ),
+  ...SUMMONER_MINIONS.filter(m => m.cost === 5).flatMap((m): SummonerAction[] => [
+    {
+      name: `Call Forth: ${m.name}`,
+      parent: m.name,
+      sourcePath: 'en/unified/md/feature/ability/summoner/level-1/call-forth.md',
+      actionType: 'Main action',
+      activationCondition:
+        MANUAL +
+        `Summon ${m.count} ${m.name}; requires portfolio, range, unoccupied spaces, minion and squad capacity. Outside combat requires signature or Victories ≥ ${m.cost}; no summoned actors are created.`,
+      cost: m.cost,
+    },
+    {
+      name: `Minion ${m.name}: Free strike`,
+      parent: m.name,
+      sourcePath: m.sourcePath,
+      actionType: 'Main action',
+      activationCondition:
+        MANUAL +
+        'Use selected minion printed free strike and any traits; summoner Reason replaces R, not minion Reason.',
+    },
+    // Trait headings: "Name 2d10 + R (Signature Ability)" is a main action; "Name (N Essence)" costs N.
+    ...m.traits.map(trait => {
+      const signature = / 2d10 \+ R \(Signature Ability\)$/.test(trait);
+      const cost = trait.match(/ \((\d+) Essence\)$/)?.[1];
+      return {
+        name: `Minion ${m.name}: ${trait.replace(/ 2d10 \+ R \(Signature Ability\)$| \(\d+ Essence\)$/, '')}`,
+        parent: m.name,
+        sourcePath: m.sourcePath,
+        actionType: signature ? 'Main action' : 'Source-timed effect',
+        activationCondition:
+          MANUAL + 'Requires this summoned minion and its printed trigger/conditions.',
+        ...(cost ? { cost: Number(cost) } : {}),
+      };
+    }),
+  ]),
+  {
+    name: "Summoner: Summoner Strike: Summoner's Kit",
+    parent: "Summoner's Kit",
+    sourcePath: feature(3, 'summoners-kit'),
+    actionType: 'Part of parent ability',
+    activationCondition:
+      MANUAL +
+      "Use only with Summoner Strike: damage is twice your Reason, potency R < AVERAGE, and distance your Summoner's Range (the sheet's Summoner summary shows the values).",
+  },
+  {
+    name: 'Summoner: Emergency Ward',
+    parent: 'Emergency Ward',
+    sourcePath: feature(3, 'emergency-ward'),
+    actionType: 'Free triggered action',
+    activationCondition:
+      MANUAL +
+      'Once per round. After the triggering effect resolves, shift 1 and summon a signature minion into the square you left if there is space.',
+    trigger: 'The first time each round you take damage.',
+  },
+  {
+    name: 'Summoner: Howling Ward',
+    parent: 'Howling Ward',
+    sourcePath: feature(3, 'howling-ward'),
+    actionType: 'Source-timed effect',
+    activationCondition:
+      MANUAL +
+      'A 1-aura vortex from when you enter combat: an enemy that starts their turn adjacent to you takes damage equal to your Reason.',
+  },
+  {
+    name: 'Summoner: Snare Ward',
+    parent: 'Snare Ward',
+    sourcePath: feature(3, 'snare-ward'),
+    actionType: 'Free triggered action',
+    activationCondition:
+      MANUAL +
+      "Pull the creature toward one of your minions within your Summoner's Range a number of squares equal to your Reason.",
+    trigger: 'An adjacent creature deals damage to you.',
+  },
+  ...(
+    [
+      ['Blitz Tactics', 'Free maneuver'],
+      ['Cavalry Call', 'Main action'],
+      ['Essence Funnel', 'Main action'],
+      ['Lead By Example', 'Main action'],
+    ] as const
+  ).map(([name, actionType]) => ({
+    name: `Summoner: ${name}`,
+    parent: name,
+    sourcePath: ability(name.toLowerCase().replace(/[^a-z0-9]+/g, '-')),
+    actionType,
+    activationCondition: MANUAL,
+    cost: 7,
+  })),
+];
+export const SUMMONER_ACTIONS: SummonerAction[] = [
+  ...LEVEL_ONE_ACTIONS,
+  ...LEVEL_TWO_THREE_ACTIONS,
+];
 export function summonerSourceText(a: SummonerAction): string {
-  const source = [...abilitySources, ...featureSources, ...statblockSources].find(
-    s => s.sourcePath === 'vendor/steel-compendium/' + a.sourcePath,
-  );
+  const source = [
+    ...abilitySources,
+    ...featureSources,
+    ...statblockSources,
+    ...featureblockSources,
+  ].find(s => s.sourcePath === 'vendor/steel-compendium/' + a.sourcePath);
   if (!source) throw new Error('Missing Summoner source: ' + a.sourcePath);
   return source.text;
 }
