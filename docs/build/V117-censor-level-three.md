@@ -24,13 +24,12 @@ shared API. Guided advancement remains deferred.
   Edicts (Disruptive Isolation, Perfect Order, Purifying Pacifism, Stillness).
 - Embedded uses, each a manual record citing its clause: Saint's Vigilance judgment, It Was Foretold
   opening main action and montage test, Look On My Work and Despair's 1-Wrath frighten and its
-  retarget frighten/holy damage, Revelator's free Judgment, and the With My Blessing target's strike.
+  retarget frighten/holy damage, Judge of Character's Presence-for-Intuition test (as V99's Inspired
+  Deception), Revelator's free Judgment, and the With My Blessing target's strike.
 - Table routes: It Is Justice You Fear (8/12/15 + M holy) and Sentenced (5/9/12 + P, kit melee bonus)
   roll printed damage with frightened/restrained and effect clauses manual. Prescient Grace's
   `Triggered` action type is recorded, as Parry is. The others have no power roll and are recorded
-  with Wrath payment. Edict auras, surges, Recoveries, reveal and turn order stay manual. The four
-  test-edge features (A Sense for Truth, Judge of Character, Lead by Example, Stalwart Icon) grant no
-  action and change no sheet value.
+  with Wrath payment. Edict auras, surges, Recoveries, reveal and turn order stay manual. A Sense for Truth, Lead by Example and Stalwart Icon give edges or passive benefits, grant no action and change no sheet value. Interpretation: Look On My Work and Despair's closing already-frightened sentence is read with the retarget clause it follows; the alternative applies it to the 1-Wrath option too. Both texts say so and the outcome stays manual.
 
 ## Acceptance checks
 
@@ -53,3 +52,8 @@ shared API. Guided advancement remains deferred.
 - Author checks: both TypeScript projects and ESLint pass; focused V117, V99, V116, V114, Shadow and
   V45 engine files pass; V88 audit guard and live compiled report 34/34. Content 1708 entries;
   `compiled:check`, `content:check`, `supporting:check`, links pass.
+- Independent rules/implementation review (subagent, source-only) of `ab708f7`: PASS, four
+  non-blocking findings, all closed: Judge of Character now has its Presence-for-Intuition use (as
+  V99's Inspired Deception); the Look On My Work and Despair reading is labelled as an interpretation;
+  Revelator's Judgment is optional ("can"); the test takes the 1-Wrath cost from the ledger.
+  Eighteen new uses in total.

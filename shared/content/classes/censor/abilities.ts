@@ -230,6 +230,14 @@ export const CENSOR_ACTIONS: CensorAction[] = [
       'If you find a hidden creature, use Judgment against it as a free triggered action. Creatures judged by you cannot use the Hide maneuver. Resolve manually.',
   },
   {
+    name: 'Judge of Character: Use Presence',
+    parent: 'Judge of Character',
+    sourcePath: levelFeature(2, 'judge-of-character'),
+    actionType: 'Part of a test',
+    activationCondition:
+      'Whenever you would make an Intuition test, you can make a Presence test instead. Resolve the test manually.',
+  },
+  {
     name: 'It Was Foretold: Opening Action',
     parent: 'It Was Foretold',
     sourcePath: levelFeature(2, 'it-was-foretold'),
@@ -254,7 +262,7 @@ export const CENSOR_ACTIONS: CensorAction[] = [
     actionType: 'Part of Judgment',
     cost: 1,
     activationCondition:
-      'When you use Judgment, spend 1 Wrath: if the target has Presence below your average potency, it is frightened of you (save ends). Compare potency and apply the condition manually.',
+      'When you use Judgment, spend 1 Wrath: if the target has Presence below your average potency, it is frightened of you (save ends). Compare potency and apply the condition manually. Interpretation: the source’s closing already-frightened sentence is read with the retarget clause only (see Look On My Work and Despair: Retarget Frighten); the alternative reading applies it here too, so adjudicate an already-frightened target manually.',
   },
   {
     name: 'Look On My Work and Despair: Retarget Frighten',
@@ -262,7 +270,7 @@ export const CENSOR_ACTIONS: CensorAction[] = [
     sourcePath: levelFeature(3, 'look-on-my-work-and-despair'),
     actionType: 'Part of Judgment: Retarget',
     activationCondition:
-      'When a creature judged by you is reduced to 0 Stamina and you use Judgment as a free triggered action: if the new target has Presence below your strong potency it is frightened of you (save ends); if it is already frightened of you, it instead takes holy damage equal to twice your Presence. Resolve manually.',
+      'When a creature judged by you is reduced to 0 Stamina and you use Judgment as a free triggered action: if the new target has Presence below your strong potency it is frightened of you (save ends); if it is already frightened of you, it instead takes holy damage equal to twice your Presence. Interpretation: this closing sentence is read with the retarget clause, where it immediately follows; the alternative applies it to the 1-Wrath option too. Resolve manually.',
   },
   {
     name: 'Revelator: Judgment',
@@ -287,7 +295,7 @@ export const CENSOR_ACTIVATION: Record<string, string> = {
   'It Is Justice You Fear':
     'If the target is already frightened of you or another creature and this ability would frighten it again, it instead takes psychic damage equal to twice your Presence. Compare potency and resolve frightened or the psychic damage manually.',
   Revelator:
-    'Each target takes holy damage equal to twice your Presence; each hidden target is revealed and cannot become hidden again until the start of your next turn. Then use Revelator: Judgment. Damage and reveal are resolved manually.',
+    'Each target takes holy damage equal to twice your Presence; each hidden target is revealed and cannot become hidden again until the start of your next turn. You can then use Revelator: Judgment. Damage and reveal are resolved manually.',
   'Prescient Grace':
     'Trigger: an enemy within 10 squares starts its turn. You can spend a Recovery so the target regains Stamina equal to your recovery value; it can then take its turn immediately before the triggering enemy. Resolve manually.',
   'With My Blessing':

@@ -40,6 +40,7 @@ const cid = () => crypto.randomUUID();
 /** Source clauses granted as separate uses (feature/censor/level-2/3, level-2 abilities). */
 const embedded: Record<string, string[]> = {
   "Saint's Vigilance": ["Saint's Vigilance: Judgment"],
+  'Judge of Character': ['Judge of Character: Use Presence'],
   'It Was Foretold': ['It Was Foretold: Opening Action', 'It Was Foretold: Montage Test'],
   'Look On My Work and Despair': [
     'Look On My Work and Despair: Frighten',
@@ -72,7 +73,7 @@ export async function runCensorLevelThree({
   runId,
 }: ScenarioContext) {
   await run(
-    'Censor levels 2–3: six builds, level edits and seventeen new uses persist',
+    'Censor levels 2–3: six builds, level edits and eighteen new uses persist',
     async () => {
       const { definitions } = await director.query<{ definitions: DecisionDefinitions }>(
         'characterWizard:discover',
@@ -330,8 +331,8 @@ export async function runCensorLevelThree({
         }
         assert.equal(
           used.size,
-          17,
-          'six level-2 and four level-3 abilities plus seven embedded uses',
+          18,
+          'six level-2 and four level-3 abilities plus eight embedded uses',
         );
       } finally {
         const session = await director.query<{ revision: number }>('sessions:get', { sessionId });

@@ -33,6 +33,7 @@ const named = [
 /** Source clauses granted as separate uses (feature/censor/level-2/3, level-2 abilities). */
 const embedded: Record<string, string[]> = {
   "Saint's Vigilance": ["Saint's Vigilance: Judgment"],
+  'Judge of Character': ['Judge of Character: Use Presence'],
   'It Was Foretold': ['It Was Foretold: Opening Action', 'It Was Foretold: Montage Test'],
   'Look On My Work and Despair': [
     'Look On My Work and Despair: Frighten',
@@ -41,8 +42,12 @@ const embedded: Record<string, string[]> = {
   Revelator: ['Revelator: Judgment'],
   'With My Blessing': ['With My Blessing: Target Strike'],
 };
-/** look-on-my-work-and-despair.md: "you can spend 1 wrath". */
-const paid: Record<string, number> = { 'Look On My Work and Despair: Frighten': 1 };
+/** The ledger's embedded cost for look-on-my-work-and-despair.md ("you can spend 1 wrath"). */
+const paid: Record<string, number> = {
+  'Look On My Work and Despair: Frighten': ledger.levelThree.automaticFeatures.find(
+    f => f.name === 'Look On My Work and Despair',
+  )!.embeddedCost!.amount,
+};
 const cases = Object.entries(ledger.witnesses).map(([id, w]) => {
   const base = levelOne.witnesses.find(b => b.id === w.base)!;
   const two = w.levelTwo.addedSelections;
