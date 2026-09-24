@@ -144,3 +144,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V141 | [Summoner essence generation](V141-summoner-essence-generation.md) | In testing; independent review PASS |
 | V143 | [Beastheart ferocity generation](V143-beastheart-ferocity-generation.md) | In testing; independent review PASS |
 | V146 | [Talent clarity generation and strain damage](V146-talent-clarity-generation.md) | In testing; independent review PASS |
+| V142 | [Fury ferocity generation and observed damage triggers](V142-fury-ferocity-generation.md) | In testing; independent review PASS |

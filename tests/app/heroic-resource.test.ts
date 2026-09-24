@@ -43,9 +43,13 @@ test('V120: a Shadow gains insight from the clock and a claimed trigger, and los
   const ref = `@{character:${shadow}}`;
   const live = async () => (await t.run(ctx => ctx.db.get(shadow)))!.liveState!;
   const thornLive = async () => (await t.run(ctx => ctx.db.get(f.thornId)))!.liveState!;
+  // The Shade's firings only: V142 gives Thorn (Fury) her own ferocity firings.
   const clockEvents = async () =>
     (await t.run(ctx => ctx.db.query('events').take(500))).filter(
-      e => e.kind === 'clock.heroic-resource' && e.disposition !== 'undone',
+      e =>
+        e.kind === 'clock.heroic-resource' &&
+        e.disposition !== 'undone' &&
+        (e.payload as { data?: { characterId?: string } }).data?.characterId === shadow,
     );
   const triggers = async () =>
     (
@@ -63,16 +67,18 @@ test('V120: a Shadow gains insight from the clock and a claimed trigger, and los
   await command(`${ref} /adjust victories value=2`);
   await command(`${ref} /adjust heroic-resource value=1`);
 
-  // Combat start: + Victories (2). Thorn (Fury) has no profile yet and gets nothing.
+  // Combat start: + Victories (2). Thorn (Fury, V142) gains her Victories, 0.
   await command('/combat start');
   await command('/combat commit');
   expect((await live()).heroicResource).toEqual({ name: 'insight', current: 3 });
   expect((await thornLive()).heroicResource.current).toBe(0);
   const registrations = await t.run(ctx => ctx.db.query('clockRegistrations').take(50));
+  // V142: Thorn (Fury) registers her own three steps; these are the Shade's.
   expect(
     registrations
       .filter(r => (r.work as { kind: string }).kind === 'heroic-resource')
-      .map(r => (r.work as { step: string; characterId: string }).characterId),
+      .map(r => (r.work as { step: string; characterId: string }).characterId)
+      .filter(id => id === shadow),
   ).toEqual([shadow, shadow, shadow]);
   await expect(command(`${ref} /resource claim trigger=shadow-surge-damage`, true)).rejects.toThrow(
     /rounds have not started/,

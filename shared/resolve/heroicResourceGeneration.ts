@@ -35,6 +35,16 @@ export interface ResourceTrigger extends SourcedClause {
   /** Later features that change the amount ("you gain 2 insight instead of 1"), ascending. */
   levelAmounts?: ({ fromLevel: number; amount: number } & SourcedClause)[];
   limit: TriggerLimit;
+  /** A dice gain ("you gain 1d3 ferocity"); replaces `amount`, which is then 0. */
+  dice?: { sides: number };
+  /**
+   * Applied automatically when the app records the event, within the same limit; the claim stays
+   * available for what the app does not record.
+   * - `damage-taken`: a recorded damage write lowered the hero's Stamina or temporary Stamina.
+   * - `winded-or-dying`: a recorded damage write took Stamina from above the winded value to at
+   *   or below it (dying is Stamina 0 or lower, always at or below the winded value).
+   */
+  observe?: 'damage-taken' | 'winded-or-dying';
   /** Why the table confirms it: what the app cannot observe. */
   confirmation: string;
 }
@@ -83,6 +93,8 @@ const BEASTHEART_FEROCITY =
 
 const TALENT_CLARITY =
   'vendor/steel-compendium/en/unified/md/feature/talent/level-1/clarity-and-strain.md';
+
+const FURY_FEROCITY = 'vendor/steel-compendium/en/unified/md/feature/fury/level-1/ferocity.md';
 
 /** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
@@ -406,6 +418,66 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
           'Additionally, the first time each combat round that a creature is force moved, you gain 1 clarity.',
         confirmation:
           'Movement is not executed by the app; the table confirms a creature was actually force moved (any creature, by anyone).',
+      },
+    ],
+  },
+  {
+    className: 'Fury',
+    // feature/fury/level-7/greater-ferocity.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'ferocity',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: FURY_FEROCITY,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain ferocity equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'dice',
+      sides: 3,
+      sourcePath: FURY_FEROCITY,
+      quote: 'At the start of each of your turns during combat, you gain 1d3 ferocity.',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: FURY_FEROCITY,
+      quote: 'You lose any remaining ferocity at the end of the encounter.',
+    },
+    triggers: [
+      {
+        id: 'fury-first-damage',
+        label: 'You took damage',
+        amount: 1,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 2,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/fury/level-4/damaging-ferocity.md',
+            quote:
+              'The first time you take damage each combat round, you gain 2 ferocity instead of 1.',
+          },
+        ],
+        limit: 'round',
+        observe: 'damage-taken',
+        sourcePath: FURY_FEROCITY,
+        quote:
+          'Additionally, the first time each combat round that you take damage, you gain 1 ferocity.',
+        confirmation:
+          'Applied automatically when the app records damage to you. Claim it for damage the app did not record (for example falling, or Blood for Blood self-damage entered by hand). Stamina loss that is not damage (Q-RES-3) and damage reduced to 0 (Q-RES-4) are the table’s call.',
+      },
+      {
+        id: 'fury-winded-or-dying',
+        label: 'You became winded or are dying',
+        amount: 0,
+        dice: { sides: 3 },
+        limit: 'encounter',
+        observe: 'winded-or-dying',
+        sourcePath: FURY_FEROCITY,
+        quote:
+          'The first time you become winded or are dying in an encounter, you gain 1d3 ferocity.',
+        confirmation:
+          'Applied automatically the first time recorded damage takes you to your winded value or lower, or to 0 or lower. Once per encounter for either (Q-RES-2); claim it if it happened another way (for example Blood for Blood self-damage entered by hand).',
       },
     ],
   },

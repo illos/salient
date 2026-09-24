@@ -330,7 +330,8 @@ describe('A05 attacks, damage, costs and common actions', () => {
         id,
       ),
     ).toEqual(used);
-    expect(await rolls(t)).toHaveLength(2); // the initiative d10 and this 2d10
+    // The initiative d10, Thorn's turn-start ferocity d3 (V142 Fury automation) and this 2d10.
+    expect(await rolls(t)).toHaveLength(3);
     expect((await storedEvents(t, campaignId)).filter(e => e.kind === 'ability.use')).toHaveLength(
       1,
     );
@@ -524,6 +525,8 @@ describe('A05 attacks, damage, costs and common actions', () => {
       ferocity: 2,
       goblins: 3,
     });
+    // V142: Thorn's turn start rolled ferocity on top of the fixture's 2; restore it to 2.
+    await submit(director.client, campaignId, '@Thorn /adjust heroic-resource value=2', cid('adj'));
     const [w1, w2, w3] = goblins as [Id<'foes'>, Id<'foes'>, Id<'foes'>];
     const command = `@Thorn /ability use ability="Thunder Roar" targets=[@{foe:${w1}},@{foe:${w2}},@{foe:${w3}}] edges=[1,0,0] banes=[0,2,0]`;
     const rollsBefore = (await rolls(t)).length;
@@ -1071,6 +1074,8 @@ describe('A05 attacks, damage, costs and common actions', () => {
       goblins: 3,
       ferocity: 5,
     });
+    // V142: Thorn's turn start rolled ferocity on top of the fixture's 5; restore it to 5.
+    await submit(director.client, campaignId, '@Thorn /adjust heroic-resource value=5', cid('adj'));
     await atDice(t, campaignId, [7, 6]);
     const used = await submit(
       player.client,

@@ -420,9 +420,11 @@ describe('combat undo, rewind, redo and corrections (A05 shapes via fixture)', (
     const { player, campaignId, thornId, goblinId } = f;
     await openCombat(f);
     await submit(player.client, campaignId, '@Thorn /turn take');
+    // V142: Thorn's (Fury) turn start added 1d3 ferocity to the fixture's 3; read the pool back.
+    const pool = (await hero(t, thornId))!.liveState!.heroicResource.current;
     const struck = await strike(player.client, f, 'Thorn', 5, 1);
     expect((await foe(t, goblinId))!.live).toEqual({ stamina: 13, temporaryStamina: 0 });
-    expect((await hero(t, thornId))!.liveState!.heroicResource.current).toBe(2);
+    expect((await hero(t, thornId))!.liveState!.heroicResource.current).toBe(pool - 1);
     const events = await storedEvents(t, campaignId);
     const head = events.find(e => e._id === struck.eventId)!;
     const consequence = events.find(e => e.kind === 'fixture.damage')!;
@@ -431,7 +433,7 @@ describe('combat undo, rewind, redo and corrections (A05 shapes via fixture)', (
     const dice = await diceCounts(t, campaignId);
     const undone = await submit(player.client, campaignId, '/history undo');
     expect((await foe(t, goblinId))!.live).toEqual({ stamina: 15, temporaryStamina: 3 });
-    expect((await hero(t, thornId))!.liveState!.heroicResource.current).toBe(3);
+    expect((await hero(t, thornId))!.liveState!.heroicResource.current).toBe(pool);
     const after = await storedEvents(t, campaignId);
     expect(after.find(e => e._id === head._id)!.disposition).toBe('undone');
     expect(after.find(e => e._id === consequence._id)!.disposition).toBe('undone');
@@ -534,6 +536,8 @@ describe('combat undo, rewind, redo and corrections (A05 shapes via fixture)', (
     const { director, player, second, campaignId, sessionId, thornId, goblinId } = f;
     await openCombat(f);
     const took = await submit(player.client, campaignId, '@Thorn /turn take');
+    // V142: Thorn's (Fury) turn start added 1d3 ferocity to the fixture's 3; read the pool back.
+    const pool = (await hero(t, thornId))!.liveState!.heroicResource.current;
     const struck = await strike(player.client, f, 'Thorn', 5, 1);
     const playerUser = (await t.run(ctx => ctx.db.get(player.profile.userId)))!;
     const directorUser = (await t.run(ctx => ctx.db.get(director.profile.userId)))!;
@@ -582,7 +586,7 @@ describe('combat undo, rewind, redo and corrections (A05 shapes via fixture)', (
     });
     await submit(player.client, campaignId, '/history undo');
     expect((await foe(t, goblinId))!.live).toEqual({ stamina: 15, temporaryStamina: 3 });
-    expect((await hero(t, thornId))!.liveState!.heroicResource.current).toBe(3);
+    expect((await hero(t, thornId))!.liveState!.heroicResource.current).toBe(pool);
     expect(
       (await t.run(ctx => correctionWindow(ctx, struck.eventId, playerUser))).reason,
     ).toContain('is undone; redo it');
@@ -674,12 +678,20 @@ describe('combat undo, rewind, redo and corrections (A05 shapes via fixture)', (
       round: 2,
       activeTurnId: null,
       surprised: [false, false, false],
-      // 1 combat-start grant (one-shot, already fired at OK), 2 round gain, 3 end loss, 4 surprise.
+      // 1 combat-start grant (one-shot, already fired at OK), 2 round gain, 3 end loss; V142: Thorn's
+      // then Zik's (both Fury) ferocity grant (fired at OK), turn-start gain and end loss, 4–9;
+      // 10 surprise.
       registrations: [
         [1, 'retired'],
         [2, 'active'],
         [3, 'active'],
         [4, 'retired'],
+        [5, 'active'],
+        [6, 'active'],
+        [7, 'retired'],
+        [8, 'active'],
+        [9, 'active'],
+        [10, 'retired'],
       ],
     });
     expect(afterEnd.malice).toBe(beforeEnd.malice! + 2 + 2);

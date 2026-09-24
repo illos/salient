@@ -156,6 +156,8 @@ export const sheet = query({
         id: v.string(),
         label: v.string(),
         amount: v.number(),
+        dice: v.union(v.number(), v.null()),
+        observed: v.boolean(),
         resource: v.string(),
         limit: v.union(v.literal('round'), v.literal('turn'), v.literal('encounter')),
         sourcePath: v.string(),
