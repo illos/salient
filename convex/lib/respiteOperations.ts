@@ -24,13 +24,20 @@ import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { OperationDefinition, Role, TableContext } from './registry';
 import { journalPatch } from './journal';
-import { activateRevision, baselineOf, evaluateSelections, pendingReview } from './characterBuild';
+import {
+  activateRevision,
+  baselineOf,
+  evaluateSelections,
+  pendingReview,
+  requireEditable,
+} from './characterBuild';
 import { canonicalChoiceOrigins } from './characterChoiceOrigins';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { changeChoice } from '../../shared/evaluate/choiceTransition';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import { selectionsFrom } from '../../shared/evaluate/character';
 import type { SelectionValue } from '../../shared/contracts/characterEvaluation';
+import type { DraftSelection } from '../../shared/characterDraft';
 import { revisionLevel } from './characterProgression';
 import { sessionEncounter } from './combatOperations';
 import { reconciledCurrent } from '../../shared/evaluate/liveReconciliation';
@@ -160,20 +167,40 @@ const cancel: OperationDefinition = {
   execute: async (ctx, { context }) => {
     const respite = openRespite(context);
     const { present, left } = await participants(ctx, respite, context.campaign._id);
-    // A respite kit change is reverted by recording the earlier build again (V166); any later
-    // build change (a level-up or edit) is kept (Q-RESPITE-1).
+    // A respite kit change is reverted (V166): by recording the earlier build again while the kit
+    // change is still effective, or by reapplying the earlier kit to a later build (a level-up or edit,
+    // which itself stays, Q-RESPITE-1). If the earlier kit no longer fits, it is kept and named.
     const restored = await Promise.all(
       present.map(async ({ hero, snapshot }) => {
-        const revert =
-          snapshot.kitChange && hero.effectiveRevisionId === snapshot.kitChange.to
-            ? await ctx.db.get(snapshot.kitChange.from)
+        let revert: Doc<'characterRevisions'> | null = null;
+        let reapply: ReturnType<typeof withKit> | null = null;
+        let kitKept = false;
+        if (snapshot.kitChange) {
+          const from = await ctx.db.get(snapshot.kitChange.from);
+          const current = hero.effectiveRevisionId
+            ? await ctx.db.get(hero.effectiveRevisionId)
             : null;
-        const baseline = baselineOf(revert ? revert.derivedBaseline : hero.derivedBaseline);
+          if (from && hero.effectiveRevisionId === snapshot.kitChange.to) revert = from;
+          else if (from && current) {
+            const result = withKit(current, kitDecisionsOf(from));
+            if (result.evaluation.status === 'complete' && !result.unchanged) reapply = result;
+            else if (!result.unchanged) kitKept = true;
+          } else kitKept = true;
+        }
+        const baseline = baselineOf(
+          revert
+            ? revert.derivedBaseline
+            : reapply
+              ? reapply.evaluation.baseline
+              : hero.derivedBaseline,
+        );
         const stamina = baseline?.staminaMaximum.value ?? snapshot.staminaMaximum;
         const recoveries = baseline?.recoveriesMaximum.value ?? snapshot.recoveriesMaximum;
         return {
           hero,
           revert,
+          reapply,
+          kitKept,
           liveState: {
             ...snapshot.liveState,
             stamina: reconciledCurrent(
@@ -192,16 +219,35 @@ const cancel: OperationDefinition = {
         };
       }),
     );
+    const kept = restored.filter(r => r.kitKept).map(({ hero }) => hero.authored.name);
+    const keptNote = kept.length
+      ? ` Kit change kept because a later build no longer fits the earlier kit: ${kept.join(', ')}.`
+      : '';
     return {
       kind: 'respite.canceled',
-      description: `Respite canceled: every participant is back to their state before it.${leftNote(left)}`,
+      description: `Respite canceled: every participant is back to their state before it.${keptNote}${leftNote(left)}`,
       data: {
         characters: restored.map(({ hero }) => hero._id),
-        kitsReverted: restored.filter(r => r.revert).map(({ hero }) => hero._id),
+        kitsReverted: restored.filter(r => r.revert || r.reapply).map(({ hero }) => hero._id),
+        kitsKept: kept,
         left,
       },
       commit: async (mctx, scope) => {
-        for (const { hero, revert, liveState } of restored) {
+        for (const { hero, revert, reapply, liveState } of restored) {
+          if (reapply) {
+            const fresh = (await mctx.db.get(hero._id))!;
+            await activateNewBuild(mctx, fresh, context.campaign._id, {
+              parentRevisionId: fresh.effectiveRevisionId,
+              level: reapply.level,
+              kind: 'respite-kit',
+              choiceOrigins: reapply.choiceOrigins,
+              baseEffectiveRevisionId: fresh.effectiveRevisionId,
+              selections: reapply.selections,
+              evaluation: reapply.evaluation,
+              status: reapply.evaluation.status,
+              derivedBaseline: reapply.evaluation.baseline,
+            });
+          }
           if (revert) {
             const fresh = (await mctx.db.get(hero._id))!;
             await activateNewBuild(mctx, fresh, context.campaign._id, {
@@ -223,7 +269,7 @@ const cancel: OperationDefinition = {
             'characters',
             hero._id,
             { liveState },
-            revert ? undefined : hero,
+            revert || reapply ? undefined : hero,
           );
         }
         await journalPatch(mctx, scope, 'sessions', context.session!._id, { respite: null });
@@ -407,6 +453,56 @@ async function activateNewBuild(
   return { id, reconciliation };
 }
 
+/**
+ * Apply kit decisions to a build, in the kit step's order so a dependent value (a Tactician's second
+ * kit or arsenal) is set after the kit it depends on, and evaluate the result.
+ */
+function withKit(
+  base: Doc<'characterRevisions'>,
+  changes: { decisionId: string; value: SelectionValue | undefined }[],
+) {
+  const level = revisionLevel(base);
+  const definitions = getDefinitions(level, base.choiceOrigins);
+  const order =
+    definitions.steps.find(step => step.id === 'step.kit')?.decisions.map(d => d.id) ?? [];
+  const kitIds = new Set(order);
+  if (!changes.length || changes.some(c => !kitIds.has(c.decisionId)))
+    throw new ConvexError('A kit change accepts only kit decisions.');
+  const sorted = [...changes].sort(
+    (a, b) => order.indexOf(a.decisionId) - order.indexOf(b.decisionId),
+  );
+  const before = selectionsFrom(base.selections);
+  let working = before;
+  for (const change of sorted)
+    working = changeChoice(working, definitions, change.decisionId, change.value).selections;
+  const selections = draftSelectionsFrom(working, definitions);
+  const choiceOrigins = canonicalChoiceOrigins(selections, level, base);
+  const evaluation = evaluateSelections(selections, level, choiceOrigins);
+  const kitValues = (values: Record<string, unknown>) =>
+    JSON.stringify(order.map(id => values[id] ?? null));
+  return {
+    level,
+    selections,
+    choiceOrigins,
+    evaluation,
+    kit: working['kit.choice'],
+    unchanged: kitValues(working) === kitValues(before),
+  };
+}
+
+/** The kit decisions recorded in a build, as changes for `withKit`. */
+function kitDecisionsOf(revision: Doc<'characterRevisions'>) {
+  const level = revisionLevel(revision);
+  const ids = new Set(
+    getDefinitions(level, revision.choiceOrigins)
+      .steps.find(step => step.id === 'step.kit')
+      ?.decisions.map(d => d.id) ?? [],
+  );
+  return (revision.selections as DraftSelection[])
+    .filter(v => ids.has(v.decisionId))
+    .map(v => ({ decisionId: v.decisionId, value: v.value as SelectionValue }));
+}
+
 const changeKit: OperationDefinition = {
   id: 'respite.change-kit',
   family: 'respite',
@@ -426,28 +522,22 @@ const changeKit: OperationDefinition = {
     const respite = openRespite(context);
     const hero = await requireActingOwner(ctx, context, actor!.id as Id<'characters'>);
     const index = participantIndex(respite, hero._id);
+    await requireEditable(ctx, hero);
     const base = hero.effectiveRevisionId ? await ctx.db.get(hero.effectiveRevisionId) : null;
     if (!base || base.status !== 'complete')
       throw new ConvexError('The effective build is not complete.');
-    const level = revisionLevel(base);
-    const definitions = getDefinitions(level, base.choiceOrigins);
-    const kitIds = new Set(
-      definitions.steps.find(step => step.id === 'step.kit')?.decisions.map(d => d.id) ?? [],
+    const { level, selections, choiceOrigins, evaluation, kit, unchanged } = withKit(
+      base,
+      args.selections as { decisionId: string; value: SelectionValue }[],
     );
-    const changes = args.selections as { decisionId: string; value: SelectionValue }[];
-    if (!changes.length || changes.some(c => !kitIds.has(c.decisionId)))
-      throw new ConvexError('A kit change accepts only kit decisions.');
-    let working = selectionsFrom(base.selections);
-    for (const change of changes)
-      working = changeChoice(working, definitions, change.decisionId, change.value).selections;
-    const selections = draftSelectionsFrom(working, definitions);
-    const choiceOrigins = canonicalChoiceOrigins(selections, level, base);
-    const evaluation = evaluateSelections(selections, level, choiceOrigins);
-    if (evaluation.status !== 'complete')
+    if (typeof kit !== 'string' || !kit) throw new ConvexError('This hero has no kit to change.');
+    if (unchanged) throw new ConvexError(`${kit} is already this hero's kit.`);
+    if (evaluation.status !== 'complete') {
+      const owed = Object.keys(evaluation.diagnostics).join(', ');
       throw new ConvexError(
-        `The new kit leaves the build ${evaluation.status}; choose every kit decision it needs.`,
+        `The new kit leaves the build ${evaluation.status}${owed ? `: ${owed}` : ''}. Choose those values in the same change, or change it with a full edit.`,
       );
-    const kit = String(working['kit.choice'] ?? '');
+    }
     return {
       kind: 'respite.kit-changed',
       description: `${hero.authored.name} changed kit to ${kit} as their respite activity.`,

@@ -217,7 +217,15 @@ export async function loadHistory(ctx: ReadCtx, context: TableContext): Promise<
       }
     // V165: a respite is a boundary too; Cancel reverts an open one and a completed one is final.
     for (const event of events)
-      if (event.kind.startsWith('respite.') && event.sequence > floorSequence) {
+      if (
+        [
+          'respite.started',
+          'respite.canceled',
+          'respite.interrupted',
+          'respite.completed',
+        ].includes(event.kind) &&
+        event.sequence > floorSequence
+      ) {
         floorSequence = event.sequence;
         floorLabel = 'the respite';
       }

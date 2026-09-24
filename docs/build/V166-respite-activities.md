@@ -38,3 +38,12 @@ at completion, and Cancel reverting respite choices.
 - The table's respite display (start/end controls, participants and unused-activity notices) is a
   separate UI slice for user review; until then everything is reachable through the palette, slash
   commands and the API.
+- Independent review of `9b40137`: CHANGES REQUIRED, two blocking findings, both fixed: a kit change
+  on a kit-less class or to the same kit is refused (it was accepted empty and used the activity);
+  Cancel reapplies the earlier kit onto a later build (a level-up taken after the kit change stays,
+  Q-RESPITE-1), and names any hero whose later build no longer fits it. Non-blocking, fixed: kit
+  decisions apply in kit-step order; combat lock checked; the refusal names the decisions a new kit
+  leaves unmade; the two activity events are not undo units and only start/end events are the undo
+  floor. Documented: a pending full-edit review or draft made stale by a respite kit change stays stale
+  after Cancel; the owner resubmits. Tests: same kit, non-kit decision, peer refused, Director acting,
+  Cancel after a later level-up.

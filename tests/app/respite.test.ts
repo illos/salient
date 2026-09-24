@@ -10,6 +10,8 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { backend, table, storedEvents, admitHero } from './fixtures/table';
 import { levelUpsEarned } from '../../convex/lib/respiteOperations';
+import { getDefinitions } from '../../shared/content/character-decisions';
+import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 
 async function setup() {
   const t = backend();
@@ -207,4 +209,84 @@ test('complete keeps a kit change and names heroes who used no activity', async 
   expect((event.payload as { data: { unusedActivities: string[] } }).data.unusedActivities).toEqual(
     ['Thorn'],
   );
+});
+
+test('kit change refuses the same kit, non-kit decisions and peers; the Director may act', async () => {
+  const f = await setup();
+  const change = (
+    client: typeof f.player.client,
+    commandId: string,
+    selections: { decisionId: string; value: string }[],
+  ) =>
+    client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId,
+      operation: 'respite.change-kit',
+      actor: { refKind: 'character', id: f.thornId },
+      arguments: { selections },
+    });
+  await f.say('/respite start');
+  await expect(
+    change(f.player.client, 'same-kit-change', [{ decisionId: 'kit.choice', value: 'Mountain' }]),
+  ).rejects.toThrow('already');
+  await expect(
+    change(f.player.client, 'not-kit-change', [
+      { decisionId: 'class.fury.aspect', value: 'Reaver' },
+    ]),
+  ).rejects.toThrow('only kit decisions');
+  await expect(
+    change(f.observer.client, 'peer-kit-change', [{ decisionId: 'kit.choice', value: 'Panther' }]),
+  ).rejects.toThrow();
+  await change(f.director.client, 'director-kit', [{ decisionId: 'kit.choice', value: 'Panther' }]);
+  const hero = await f.hero();
+  expect((hero.derivedBaseline as { kit: { name: { value: string } } }).kit.name.value).toBe(
+    'Panther',
+  );
+});
+
+test('cancel reapplies the earlier kit on a level-up taken after the kit change', async () => {
+  const f = await setup();
+  await f.t.run(ctx => ctx.db.patch(f.thornId, { pendingLevelUps: 1 }));
+  await f.say('/respite start');
+  await f.player.client.mutation(api.commands.invoke, {
+    campaignId: f.campaignId,
+    commandId: 'kit-before-level-up',
+    operation: 'respite.change-kit',
+    actor: { refKind: 'character', id: f.thornId },
+    arguments: { selections: [{ decisionId: 'kit.choice', value: 'Panther' }] },
+  });
+  // Level 2 with the choices V32 used (class/fury.md; Danger Sense, Wrecking Ball).
+  const p = await f.player.client.query(api.characters.progression, { characterId: f.thornId });
+  const base = {
+    characterId: f.thornId,
+    expectedRevision: p.revision,
+    expectedBaseRevisionId: p.baseRevisionId!,
+  };
+  const version = await f.player.client.mutation(api.characters.saveAdvancement, {
+    ...base,
+    commandId: 'save-level-two',
+    expectedDraftVersion: 0,
+    selections: draftSelectionsFrom(
+      {
+        'class.fury.level-2.perk': 'Danger Sense',
+        'class.fury.level-2.aspect-ability': 'Wrecking Ball',
+      },
+      getDefinitions(2),
+    ).filter(s => s.decisionId.startsWith('class.fury.level-2.')),
+  });
+  await f.player.client.mutation(api.characters.finalizeAdvancement, {
+    ...base,
+    commandId: 'take-level-two',
+    expectedDraftVersion: version,
+  });
+  await f.say('/respite cancel');
+  const hero = await f.hero();
+  const baseline = hero.derivedBaseline as {
+    level: { value: number };
+    kit: { name: { value: string } };
+  };
+  expect(baseline.kit.name.value).toBe('Mountain');
+  expect(baseline.level.value).toBe(2);
+  const effective = hero.effectiveRevisionId!;
+  expect((await f.t.run(ctx => ctx.db.get(effective)))!.kind).toBe('respite-kit');
 });

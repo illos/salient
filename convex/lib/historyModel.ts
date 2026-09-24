@@ -18,6 +18,8 @@ export const NON_GAMEPLAY_KINDS = new Set([
   'respite.canceled',
   'respite.interrupted',
   'respite.completed',
+  'respite.kit-changed',
+  'respite.activity',
 ]);
 
 /**
