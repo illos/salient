@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V115 kit bonus correctness and known condition immunity
+## Current release — V119 grabs, Escape Grab and Stand Up
+
+Backend/frontend source `3c02939f3b71bec8a4a80427ddd971e72a972087` published on 2026-09-24 as
+Worker `28a58465-a6d3-4879-93d6-72dcc190d2ca`. Backend and schema validation, the hosted build and the upload succeeded. Content
+remains the 1687-entry snapshot, so no reseed was needed. Accepted TESTER results were reused, with
+no smoke test or rerun. See [V119](build/V119-grab-lifecycle.md) and the [ledger](../deploy.md).
+
+## Previous release — V115 kit bonus correctness and known condition immunity
 
 Backend/frontend source `4cc7f3175b0d4557783b47f3ce7189cd21126694` published on 2026-09-24 as
 Worker `690a35fd-e0b8-4b32-86f8-049f6dddb099`. Backend and schema validation, the hosted build and the upload succeeded. Content

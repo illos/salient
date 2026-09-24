@@ -142,3 +142,11 @@ sit beside Effect prose.
 - QC1 static fix review PASS at `85efd9d` (`../review-artifacts/2026-09-24-V119-QC1.md`). TESTER
   `test-V119-85efd9d-3` PASS: gate rc 0 (407 engine, 661 app); headless seed 1687 `grab` and
   `kit-bonus` pass. Artifacts: `test-artifacts/V119-85efd9d/`. Ready for integration.
+
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `3c02939` into main and published the backend
+and frontend using the DEPLOY2 hosted procedure. Backend and schema validation, the hosted build and
+the upload all succeeded. Worker: `28a58465-a6d3-4879-93d6-72dcc190d2ca`. Content is unchanged, so no reseed was needed. The
+accepted gates were reused, with no smoke test or rerun. Temporary credentials were removed and the
+private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V119-release-3c02939`.

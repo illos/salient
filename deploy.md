@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V119 | `3c02939` | Merged; backend/frontend published; accepted gates reused | complete |
 | V115 | `4cc7f31` | Merged; backend/frontend published; accepted gates reused | complete |
 | V116 | `3175606` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V114 | `3aa24ae` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -421,3 +422,20 @@ fast-forwarded into main. It adds a docs-only record to the tested `439e97e`.
   helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V115-release-4cc7f31`.
+
+### V119 grabs, Escape Grab and Stand Up publication: 2026-09-24
+
+The test and deploy thread published this release at ENGINE2's handoff. Reviewed tip `3c02939f3b71bec8a4a80427ddd971e72a972087` was
+fast-forwarded into main. It adds a docs-only record to the tested `85efd9d`.
+- Accepted evidence reused:
+  - full gate at `85efd9d` (226 s, run by the Test-support thread)
+  - isolated `grab` and `kit-bonus` journeys at `85efd9d`
+  - `tier-effects` and `effect-riders` journeys at `bbb5340`
+- Independent review and QC1 review passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `28a58465-a6d3-4879-93d6-72dcc190d2ca`.
+- Content is unchanged at 1687 entries, so no reseed was needed.
+- No smoke tests or test reruns. Temporary credentials were removed and the private hosted
+  helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V119-release-3c02939`.
