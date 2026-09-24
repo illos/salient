@@ -292,7 +292,8 @@ export async function runLifecycle(context: ScenarioContext): Promise<void> {
       assert.equal(after.level, 2);
       assert.equal(after.evaluation.baseline?.staminaMaximum.value, 39);
       assert.equal(after.evaluation.baseline?.recoveryValue.value, 13);
-      assert.deepEqual(after.liveState, before.liveState);
+      // Q-CHAR-2 revised: the 10 damage taken stays as the maximum rises (20/30 → 29/39).
+      assert.deepEqual(after.liveState, { ...before.liveState, stamina: 29 });
       assert.ok(
         after.evaluation.baseline?.abilities.some(ability => ability.name === 'Wrecking Ball'),
       );

@@ -66,7 +66,8 @@ test('Fury level-up persists, retries once and preserves every compatible live v
   const revisionId = await f.player.client.mutation(api.characters.finalizeAdvancement, args);
   expect(await f.player.client.mutation(api.characters.finalizeAdvancement, args)).toBe(revisionId);
   const after = (await f.t.run(ctx => ctx.db.get(f.thornId)))!;
-  expect(after.liveState).toEqual(before.liveState);
+  // Q-CHAR-2 revised: the 9 damage taken stays (21/30 → 30/39); Recoveries' maximum is unchanged.
+  expect(after.liveState).toEqual({ ...before.liveState, stamina: 30 });
   expect(after.authored).toEqual(before.authored);
   expect(after.entryLevelXpOffset).toBe(0);
   expect(after.effectiveRevisionId).toBe(revisionId);
@@ -292,7 +293,9 @@ test('history paginates privately, snapshots do not recalculate, and restore req
   expect(await f.player.client.mutation(api.characters.restore, restoreArgs)).toBe(restoredId);
   const pending = (await f.t.run(ctx => ctx.db.get(f.thornId)))!;
   expect(pending.effectiveRevisionId).toBe(advancedId);
-  expect(pending.liveState).toEqual(before.liveState);
+  // Q-CHAR-2 revised: level two kept the 9 damage (30/39); restoring level one returns 21/30.
+  expect(pending.liveState).toEqual({ ...before.liveState, stamina: 30 });
+  expect(pending.liveState).toEqual(advanced.liveState);
   const copy = (await f.t.run(ctx => ctx.db.get(restoredId)))!;
   expect(copy.restoredFromRevisionId).toBe(old._id);
   expect(copy.evaluation).toEqual(old.evaluation);
@@ -315,7 +318,7 @@ test('history paginates privately, snapshots do not recalculate, and restore req
   ).rejects.toThrow('changed');
 });
 
-test('owning Director restores with a logged activation and caps current values without healing or clearing effects', async () => {
+test('owning Director restores with a logged activation and keeps the damage taken without clearing effects', async () => {
   const f = await setup();
   const id = await admitHero(f.t, f.director, f.director, f.campaignId, 'DirectorFury');
   const before = (await f.t.run(ctx => ctx.db.get(id)))!;
@@ -358,10 +361,11 @@ test('owning Director restores with a logged activation and caps current values 
   });
   const restored = (await f.t.run(ctx => ctx.db.get(id)))!;
   expect(restored.effectiveRevisionId).toBe(restoredId);
-  expect(restored.liveState).toEqual({ ...advanced.liveState!, stamina: 30 });
+  // Q-CHAR-2 revised: 1 damage taken at 38/39 stays through the lower build (29/30) and back.
+  expect(restored.liveState).toEqual({ ...advanced.liveState!, stamina: 29 });
   const view = await f.director.client.query(api.characters.get, { characterId: id });
   expect(view.review?.status).toBe('logged');
-  // Restoring higher history is another new snapshot and never tops Stamina back up.
+  // Restoring higher history is another new snapshot; the damage taken still stays the same.
   const againId = await f.director.client.mutation(api.characters.restore, {
     characterId: id,
     expectedRevision: restored.revision,
@@ -371,7 +375,7 @@ test('owning Director restores with a logged activation and caps current values 
   });
   const again = (await f.t.run(ctx => ctx.db.get(id)))!;
   expect(again.effectiveRevisionId).toBe(againId);
-  expect(again.liveState!.stamina).toBe(30);
+  expect(again.liveState!.stamina).toBe(38);
   expect(again.derivedBaseline.staminaMaximum.value).toBe(39);
 });
 

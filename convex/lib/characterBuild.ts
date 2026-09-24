@@ -118,7 +118,7 @@ export function initialHeroLive(
 
 /**
  * Activates one complete revision as the effective build for `campaignId`. First admission
- * initializes the live record; later activation applies the confirmed Q-CHAR-2 downward caps atomically with the build.
+ * initializes the live record; later activation applies Q-CHAR-2 (damage taken and Recoveries spent kept) atomically with the build.
  * Compatible current amounts and other live state survive; incompatible resource types are refused.
  */
 export async function activateRevision(

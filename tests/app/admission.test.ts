@@ -617,24 +617,39 @@ async function futureDraft(
   });
 }
 
+// Q-CHAR-2 revised 2026-09-24: damage taken and Recoveries spent stay the same as maxima change,
+// never below 1 Stamina (or further below an existing 0-or-less) or 0 Recoveries. The Thorn's
+// effective build has Stamina 30 and Recoveries 10 (R03 first-admission values above).
 test.each([
   {
-    label: 'increased maxima do not refill',
+    label: 'increased maxima keep the damage taken',
     current: [20, 7],
     maxima: [36, 12],
-    expected: [20, 7],
+    expected: [26, 9],
   },
   {
-    label: 'decreased maxima cap current amounts',
+    label: 'decreased maxima keep the damage taken',
     current: [20, 7],
     maxima: [18, 6],
-    expected: [18, 6],
+    expected: [8, 3],
   },
   {
-    label: 'negative Stamina keeps its source-authorized value',
+    label: 'a decrease never drops the hero below 1 Stamina or 0 Recoveries',
+    current: [5, 1],
+    maxima: [18, 6],
+    expected: [1, 0],
+  },
+  {
+    label: 'negative Stamina is not pushed further down',
     current: [-4, 4],
     maxima: [18, 6],
-    expected: [-4, 4],
+    expected: [-4, 0],
+  },
+  {
+    label: 'a rested hero stays full',
+    current: [30, 10],
+    maxima: [36, 12],
+    expected: [36, 12],
   },
 ])(
   'Q-CHAR-2: $label, preview and commit agree atomically',
