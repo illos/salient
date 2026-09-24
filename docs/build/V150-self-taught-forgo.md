@@ -63,3 +63,4 @@ App test `tests/app/heroic-resource-forgo.test.ts`, on a Self-Taught Shadow:
   forgo is refused. The test points the anchor at a missing event and expects the refusal.
 - TESTER at `50f066d5` PASS: gate rc 0 in 281 s (engine 416, app 668); `heroic-resource` and
   `shadow-level-two` pass. QC1 static PASS at `50f066d5` (R1 and R1b closed).
+- QC1 final PASS at `50f066d5`. It merges first; V140 and V145 follow.
