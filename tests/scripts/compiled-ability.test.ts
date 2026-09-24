@@ -136,8 +136,8 @@ describe('V67 whole-envelope execution gate', () => {
       block.kind === 'roll'
         ? {
             ...block,
-            // V113 compiles a repeated condition; grabbed without save ends stays unsupported.
-            tiers: block.tiers.map(t => `${t}; A < 2 grabbed; A < 2 grabbed`) as [
+            // V113 compiles a repeated condition; an EoT grab stays unsupported.
+            tiers: block.tiers.map(t => `${t}; A < 2 grabbed (EoT); A < 2 grabbed (EoT)`) as [
               string,
               string,
               string,
@@ -147,7 +147,8 @@ describe('V67 whole-envelope execution gate', () => {
     );
     input.markdown = input.markdown.replace(
       /(^.*(?:≤11|12-16|17\+).*?;)([^\n]+)/gm,
-      (_all, start: string, rest: string) => `${start}${rest}; A < 2 grabbed; A < 2 grabbed`,
+      (_all, start: string, rest: string) =>
+        `${start}${rest}; A < 2 grabbed (EoT); A < 2 grabbed (EoT)`,
     );
     const first = compileAbility(input);
     const unsupported = first.tiers.flat().filter(n => n.kind === 'unsupported');
@@ -628,8 +629,8 @@ describe('V88 bounded potency conditions', () => {
   );
 
   // V113 admits bare prone, EoT and push/condition runs (see tests/scripts/tier-effects.test.ts).
+  // V119 admits a bare grab (condition/grabbed.md); an EoT grab stays unsupported.
   it.each([
-    'A < 2 grabbed',
     'A < 2 grabbed (EoT)',
     'M < 1 slowed',
     "A < STRONG, prone and can't stand (save ends)",

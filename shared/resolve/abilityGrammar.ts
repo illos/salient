@@ -467,8 +467,9 @@ export function tierConditionExpression(clause: string):
   const duration: ConditionDuration =
     match[4] === undefined ? 'none' : /^eot$/i.test(match[4]) ? 'eot' : 'save-ends';
   if (match[4] !== undefined && !['save ends', 'EoT'].includes(match[4])) return undefined;
-  if (duration === 'none' && condition !== 'prone') return undefined;
-  if (condition === 'grabbed' && duration !== 'save-ends') return undefined;
+  if (duration === 'none' && condition !== 'prone' && condition !== 'grabbed') return undefined;
+  // V119: a grab lasts until it ends by its own rules (condition/grabbed.md); no EoT grab form.
+  if (condition === 'grabbed' && duration === 'eot') return undefined;
   let threshold: ConditionThreshold | { kind: 'always' } = { kind: 'always' };
   if (match[2] !== undefined) {
     const value = Number(match[2]);

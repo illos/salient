@@ -129,3 +129,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V116 | [Tactician levels two and three](V116-tactician-level-three.md) | Merged (`3175606`); cloud dev published with content reseed; accepted TESTER results reused |
 | V118 | [Vendor path resolver for worktrees](V118-vendor-path-resolver.md) | Merged; worktree `pnpm check` and independent review PASS |
 | V115 | [Kit bonus correctness and known condition immunity](V115-kit-bonus-correctness.md) | Merged (`4cc7f31`); cloud dev published; accepted TESTER results reused |
+| V119 | [Grabs and the common grab and stand-up maneuvers](V119-grab-lifecycle.md) | In progress (ENGINE2); authoring checks pass; awaiting TESTER and review |

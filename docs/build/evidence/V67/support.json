@@ -1,6 +1,6 @@
 {
   "generator": "V67/1",
-  "contentHash": "sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf",
+  "contentHash": "sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Pure compilation only; no live execution migrated. Minions remain compile-only.",
@@ -12,18 +12,18 @@
     },
     "foe-ability": {
       "total": 1158,
-      "supported": 48,
-      "manual": 1110
+      "supported": 51,
+      "manual": 1107
     },
     "hero-standalone": {
-      "total": 267,
-      "supported": 39,
-      "manual": 228
+      "total": 285,
+      "supported": 40,
+      "manual": 245
     },
     "kit-signature": {
       "total": 25,
-      "supported": 12,
-      "manual": 13
+      "supported": 13,
+      "manual": 12
     },
     "malice": {
       "total": 14,
@@ -6391,10 +6391,13 @@
             "id": "foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac#block:0:tier3:0:8882180d6b03536f"
           }
         ]
       ],
@@ -6410,12 +6413,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -10713,10 +10710,15 @@
             "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close#block:0:tier1:1:bdcb28edd2fc838e",
             "locator": "block:0:tier1:1",
             "clause": "M < WEAK [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close#block:0:tier1:0:9fe2d4c3c3673aea"
           }
         ],
         [
@@ -10736,10 +10738,15 @@
             "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close#block:0:tier2:1:267dd014090771fb",
             "locator": "block:0:tier2:1",
             "clause": "M < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close#block:0:tier2:0:f2bf4036184bd381"
           }
         ],
         [
@@ -10759,10 +10766,15 @@
             "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close#block:0:tier3:1:fce52323d6cb41e3",
             "locator": "block:0:tier3:1",
             "clause": "M < STRONG [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close#block:0:tier3:0:c2e43b2d0270cae5"
           }
         ]
       ],
@@ -10778,24 +10790,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < WEAK [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < STRONG [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -11731,10 +11725,13 @@
             "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier1:1:bb9281cdde189617",
             "locator": "block:0:tier1:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier1:0:5d7d94631cf7c758"
           }
         ],
         [
@@ -11755,10 +11752,13 @@
             "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier2:1:bb9281cdde189617",
             "locator": "block:0:tier2:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier2:0:afc871927433a505"
           }
         ],
         [
@@ -11779,10 +11779,13 @@
             "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest#block:0:tier3:0:fb806da3d5ae4d34"
           }
         ]
       ],
@@ -11798,24 +11801,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -18638,10 +18623,15 @@
             "id": "mcdm.heroes.v1/feature.ability.fury.level-1/impaled#block:0:tier1:1:731a21f343052efa",
             "locator": "block:0:tier1:1",
             "clause": "M < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/impaled#block:0:tier1:0:0635173c4da6017c"
           }
         ],
         [
@@ -18661,10 +18651,15 @@
             "id": "mcdm.heroes.v1/feature.ability.fury.level-1/impaled#block:0:tier2:1:c38e7446c2ef5e45",
             "locator": "block:0:tier2:1",
             "clause": "M < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/impaled#block:0:tier2:0:58c74c83147f2d7b"
           }
         ],
         [
@@ -18684,33 +18679,20 @@
             "id": "mcdm.heroes.v1/feature.ability.fury.level-1/impaled#block:0:tier3:1:93d320945089c0ad",
             "locator": "block:0:tier3:1",
             "clause": "M < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/impaled#block:0:tier3:0:6734c806963ca47d"
           }
         ]
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
@@ -19522,6 +19504,353 @@
       "live": "not-wired"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator",
+      "name": "Apex Predator",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier1:0:2a44e212de1f4bf4",
+            "locator": "block:0:tier1:0",
+            "clause": "4 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier1:1:569f2b6cdfcbf460",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier1:0:2a44e212de1f4bf4"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier2:0:65723ebe74a7200a",
+            "locator": "block:0:tier2:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier2:1:d2dc1b5fd4c5e757",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier2:0:65723ebe74a7200a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier3:0:9520cecd344e9a4d",
+            "locator": "block:0:tier3:0",
+            "clause": "10 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 10
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier3:1:8e4c295f90482147",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier3:0:9520cecd344e9a4d"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:1:0:e8f6c563c46afe3f",
+          "locator": "block:1:0",
+          "clause": "The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to move.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to move.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death",
+      "name": "Death... Death!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/death-death.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:0:4eba022a22560d99",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:1:065c6fd8af6850ec",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:0:58c74c83147f2d7b",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:1:5891b12a082f29c3",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:0:9fe2d4c3c3673aea",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:1:8b1a3f067fd98edd",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker",
+      "name": "Phalanx-Breaker",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier1:0:1adb725bfe833afe",
+            "locator": "block:1:tier1:0",
+            "clause": "2 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier1:1:6f76e6135ab95718",
+            "locator": "block:1:tier1:1",
+            "clause": "A < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier1:0:1adb725bfe833afe"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier2:0:2a44e212de1f4bf4",
+            "locator": "block:1:tier2:0",
+            "clause": "4 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier2:1:f1077d1d37b03c0b",
+            "locator": "block:1:tier2:1",
+            "clause": "A < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier2:0:2a44e212de1f4bf4"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier3:0:65723ebe74a7200a",
+            "locator": "block:1:tier3:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier3:1:df0c8d5d7bc1036b",
+            "locator": "block:1:tier3:1",
+            "clause": "A < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier3:0:65723ebe74a7200a"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:0:0:a72218760764930d",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.fury.level-2/special-delivery",
       "name": "Special Delivery",
       "context": {
@@ -19568,6 +19897,147 @@
           "locator": "header:target",
           "clause": "One willing ally",
           "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
+      "name": "Visceral Roar",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:0:1adb725bfe833afe",
+            "locator": "block:0:tier1:0",
+            "clause": "2 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:1:4e92293619489c55",
+            "locator": "block:0:tier1:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "push",
+            "distance": 1,
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:0:1adb725bfe833afe"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:2:ee50acf29940d1f4",
+            "locator": "block:0:tier1:2",
+            "clause": "M < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:0:1adb725bfe833afe"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:0:4148a008d7858141",
+            "locator": "block:0:tier2:0",
+            "clause": "5 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:1:4e9226361948973c",
+            "locator": "block:0:tier2:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:0:4148a008d7858141"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:2:e7724b3c46ddf30f",
+            "locator": "block:0:tier2:2",
+            "clause": "M < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:0:4148a008d7858141"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:0:8882180d6b03536f",
+            "locator": "block:0:tier3:0",
+            "clause": "7 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:1:4e922736194898ef",
+            "locator": "block:0:tier3:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "push",
+            "distance": 3,
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:0:8882180d6b03536f"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:2:4250d4b9bc52e067",
+            "locator": "block:0:tier3:2",
+            "clause": "M < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:0:8882180d6b03536f"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:1:0:38a53643603718eb",
+          "locator": "block:1:0",
+          "clause": "This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
       "live": "not-wired"
@@ -19709,6 +20179,204 @@
           "locator": "header:target",
           "clause": "Self",
           "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed",
+      "name": "Demon Unleashed",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed#block:0:0:c0127100d8cf110f",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each enemy who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and has P < STRONG is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each enemy who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and has P < STRONG is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm",
+      "name": "Face the Storm!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm#block:0:0:5189f90e2e1a4df0",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each creature you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against who has P < AVERAGE is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, when you use an ability that deals [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) against any enemy [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you, the ability deals extra damage equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and increases its [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each creature you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against who has P < AVERAGE is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, when you use an ability that deals [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) against any enemy [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you, the ability deals extra damage equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and increases its [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker",
+      "name": "Steelbreaker",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker#block:0:0:8e081eb2a625444b",
+          "locator": "block:0:0",
+          "clause": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead",
+      "name": "You Are Already Dead",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead#block:0:0:070b941823676315",
+          "locator": "block:0:0",
+          "clause": "If the target is not a leader or solo creature, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If the target is a leader or solo creature, you gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) and can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "If the target is not a leader or solo creature, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If the target is a leader or solo creature, you gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) and can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
       "live": "not-wired"
@@ -20467,7 +21135,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/joint-lock.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -20486,10 +21154,15 @@
             "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier1:1:5fe7f10a698313b6",
             "locator": "block:0:tier1:1",
             "clause": "A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier1:0:ff347188e73e615a"
           }
         ],
         [
@@ -20509,10 +21182,15 @@
             "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier2:1:9f54fce0cb01fa29",
             "locator": "block:0:tier2:1",
             "clause": "A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier2:0:fc822cc1b0d91921"
           }
         ],
         [
@@ -20532,34 +21210,20 @@
             "id": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier3:1:0cbf3e09768f5b89",
             "locator": "block:0:tier3:1",
             "clause": "A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/joint-lock#block:0:tier3:0:59d6701840f609eb"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "A < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
+      "diagnostics": [],
       "live": "not-wired"
     },
     {
@@ -26288,6 +26952,843 @@
       "live": "not-wired"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war",
+      "name": "Fog of War",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war#block:0:0:e7519dbd8facfef7",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war#block:1:0:9806bc4a61d675a4",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:mark benefit",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war#markdown:block:0:0:18b7a26af4d17516",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war#markdown:item:4:0:c844ad6a3004119b",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*Your unorthodox strategy causes enemies to lash out in fear, heedless of who they might be attacking.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**       |         **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------|---------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10** | **🎯 Two creatures** |\n\n**Effect:** Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.\n\n**Mark Benefit:** Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
+      "name": "I've Got Your Back",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier1:0:cdb461272b8699c4",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier1:1:5bb41b8dd8dce27c",
+            "locator": "block:0:tier1:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier1:0:cdb461272b8699c4"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier2:0:65eb5e22d2b1cc40",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier2:1:5bb41b8dd8dce27c",
+            "locator": "block:0:tier2:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier2:0:65eb5e22d2b1cc40"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier3:0:287ac1ca0f2df6a6",
+            "locator": "block:0:tier3:0",
+            "clause": "12 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier3:1:5bb41b8dd8dce27c",
+            "locator": "block:0:tier3:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier3:0:287ac1ca0f2df6a6"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:1:0:16ff4069bae4d0d5",
+          "locator": "block:1:0",
+          "clause": "One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch",
+      "name": "No Dying on My Watch",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:2:tier1:0:fd82ab54db801001",
+            "locator": "block:2:tier1:0",
+            "clause": "R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target is frightened of the triggering ally (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:2:tier2:0:62be721210a1d1ca",
+            "locator": "block:2:tier2:0",
+            "clause": "R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target is frightened of the triggering ally (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:2:tier3:0:4413d38a7c23e48c",
+            "locator": "block:2:tier3:0",
+            "clause": "R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target is frightened of the triggering ally (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:0:0:bc1a9bd9f24fc237",
+          "locator": "block:0:0",
+          "clause": "The target deals damage to an ally.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:1:0:6b89c9e7f8701c09",
+          "locator": "block:1:0",
+          "clause": "You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward the triggering ally, ending this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them or in the nearest square if you can't reach an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) square. The triggering ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) for each enemy you came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during the move. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:2:tier1:0",
+          "clause": "R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:2:tier2:0",
+          "clause": "R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:2:tier3:0",
+          "clause": "R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target deals damage to an ally.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward the triggering ally, ending this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them or in the nearest square if you can't reach an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) square. The triggering ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) for each enemy you came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during the move. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me",
+      "name": "Squad! On Me!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me#block:0:0:bbaee7b2394dc8ee",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity",
+      "name": "Targets of Opportunity",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity#block:0:0:d46acbd348c06c88",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity#block:1:0:510dea590a2b7a64",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:mark benefit",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity#markdown:block:0:0:486d7cba3ebd711d",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and you gain two surges.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity#markdown:item:4:0:e937104752538c4e",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*You point out easy targets to your friends, allowing them to include more enemies in their attacks.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**      |         **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|---------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5** | **🎯 Two creatures** |\n\n**Effect:** Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n\n**Mark Benefit:** Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: Each target is marked by you, and you gain two surges.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and you gain two surges.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead",
+      "name": "Try Me Instead",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier1:0:c3eceefbb7c9fc43",
+            "locator": "block:1:tier1:0",
+            "clause": "2 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier1:1:01007bfdc3ead77b",
+            "locator": "block:1:tier1:1",
+            "clause": "R < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier1:0:c3eceefbb7c9fc43"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier2:0:191ef8dcd4620d8e",
+            "locator": "block:1:tier2:0",
+            "clause": "3 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier2:1:2b5a54a7ff6ddef6",
+            "locator": "block:1:tier2:1",
+            "clause": "R < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier2:0:191ef8dcd4620d8e"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier3:0:5090066f811dd5a1",
+            "locator": "block:1:tier3:0",
+            "clause": "4 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier3:1:0795113842a2b300",
+            "locator": "block:1:tier3:1",
+            "clause": "R < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier3:0:5090066f811dd5a1"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:0:0:03f149cf6f443aa9",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) directly toward an ally, ending [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and you can make the following weapon [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) with a [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 against a creature.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) directly toward an ally, ending [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and you can make the following weapon [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) with a [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 against a creature.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault",
+      "name": "Frontal Assault",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault#block:0:0:5bd5a9cade6f6da9",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard",
+      "name": "Hit 'Em Hard!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard#block:0:0:42e4971bb885f22c",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout",
+      "name": "Rout",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/rout.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout#block:0:0:a06311f651829f8a",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus",
+      "name": "Stay Strong and Focus!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus#block:0:0:f3427a5e3adc17c0",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "not-wired"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.talent.level-1/accelerate",
       "name": "Accelerate",
       "context": {
@@ -31605,7 +33106,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/boren.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -31624,10 +33125,15 @@
             "id": "mcdm.heroes.v1/kit/boren/bear-claws#block:0:tier1:1:a462f83ba3ca76c9",
             "locator": "block:0:tier1:1",
             "clause": "M < WEAK, grabbed",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/kit/boren/bear-claws#block:0:tier1:0:0635173c4da6017c"
           }
         ],
         [
@@ -31647,10 +33153,15 @@
             "id": "mcdm.heroes.v1/kit/boren/bear-claws#block:0:tier2:1:4a7d5a5064dfce1c",
             "locator": "block:0:tier2:1",
             "clause": "M < AVERAGE, grabbed",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/kit/boren/bear-claws#block:0:tier2:0:58c74c83147f2d7b"
           }
         ],
         [
@@ -31670,34 +33181,20 @@
             "id": "mcdm.heroes.v1/kit/boren/bear-claws#block:0:tier3:1:0c0ae5165c7d6ab4",
             "locator": "block:0:tier3:1",
             "clause": "M < STRONG, grabbed",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/kit/boren/bear-claws#block:0:tier3:0:d5dded38ae8be5da"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < WEAK, grabbed",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < AVERAGE, grabbed",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < STRONG, grabbed",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
+      "diagnostics": [],
       "live": "not-wired"
     },
     {
@@ -38131,21 +39628,18 @@
             "id": "salient:foe-feature:0111b484-e533-47e2-859b-2c8041af5214#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:0111b484-e533-47e2-859b-2c8041af5214#block:0:tier3:0:65723ebe74a7200a"
           }
         ]
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
@@ -40450,10 +41944,15 @@
             "id": "salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc#block:0:tier1:1:7f6315cd3329f1fc",
             "locator": "block:0:tier1:1",
             "clause": "M < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc#block:0:tier1:0:8882180d6b03536f"
           }
         ],
         [
@@ -40472,10 +41971,15 @@
             "id": "salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc#block:0:tier2:1:0fa2dc74e907087d",
             "locator": "block:0:tier2:1",
             "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc#block:0:tier2:0:9520cecd344e9a4d"
           }
         ],
         [
@@ -40494,10 +41998,15 @@
             "id": "salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc#block:0:tier3:1:ee4c4b02b9241cda",
             "locator": "block:0:tier3:1",
             "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc#block:0:tier3:0:9761dc8e4c2e4090"
           }
         ]
       ],
@@ -40513,24 +42022,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -41964,10 +43455,15 @@
             "id": "salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880#block:0:tier1:1:2218455c1aa5d590",
             "locator": "block:0:tier1:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880#block:0:tier1:0:148a6fa32a1cf6fd"
           }
         ],
         [
@@ -41987,10 +43483,15 @@
             "id": "salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880#block:0:tier2:1:5c3781926b9f1051",
             "locator": "block:0:tier2:1",
             "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880#block:0:tier2:0:204332a015815803"
           }
         ],
         [
@@ -42010,10 +43511,15 @@
             "id": "salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880#block:0:tier3:1:20c657d6b1892f16",
             "locator": "block:0:tier3:1",
             "clause": "A < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880#block:0:tier3:0:ad4e99ae319986b5"
           }
         ]
       ],
@@ -42029,24 +43535,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -66151,10 +67639,13 @@
             "id": "salient:foe-feature:33ca2918-cd88-454c-9eaa-abda315cffa6#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:33ca2918-cd88-454c-9eaa-abda315cffa6#block:0:tier3:0:d9cd8e0ee6e943a0"
           },
           {
             "id": "salient:foe-feature:33ca2918-cd88-454c-9eaa-abda315cffa6#block:0:tier3:2:bf6b210cdd957c23",
@@ -66179,12 +67670,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier3:2",
@@ -67845,10 +69330,15 @@
             "id": "salient:foe-feature:36454ca2-1178-487b-94bb-e5010d1ccf59#block:0:tier1:1:b61060c839758b73",
             "locator": "block:0:tier1:1",
             "clause": "A < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:36454ca2-1178-487b-94bb-e5010d1ccf59#block:0:tier1:0:abbf0071bed5821d"
           }
         ],
         [
@@ -67867,10 +69357,15 @@
             "id": "salient:foe-feature:36454ca2-1178-487b-94bb-e5010d1ccf59#block:0:tier2:1:2218455c1aa5d590",
             "locator": "block:0:tier2:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:36454ca2-1178-487b-94bb-e5010d1ccf59#block:0:tier2:0:ab4051da6c231d29"
           }
         ],
         [
@@ -67898,18 +69393,6 @@
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "A < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier3:1",
@@ -69820,10 +71303,15 @@
             "id": "salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9#block:0:tier1:1:b61060c839758b73",
             "locator": "block:0:tier1:1",
             "clause": "A < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9#block:0:tier1:0:4148a008d7858141"
           }
         ],
         [
@@ -69842,10 +71330,15 @@
             "id": "salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9#block:0:tier2:1:2218455c1aa5d590",
             "locator": "block:0:tier2:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9#block:0:tier2:0:d9cd8e0ee6e943a0"
           }
         ],
         [
@@ -69864,10 +71357,15 @@
             "id": "salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9#block:0:tier3:1:5c3781926b9f1051",
             "locator": "block:0:tier3:1",
             "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9#block:0:tier3:0:9761dc8e4c2e4090"
           }
         ]
       ],
@@ -69883,24 +71381,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "A < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -70988,10 +72468,15 @@
             "id": "salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22#block:0:tier1:1:0fa2dc74e907087d",
             "locator": "block:0:tier1:1",
             "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22#block:0:tier1:0:2ea56bbac3101626"
           }
         ],
         [
@@ -71010,10 +72495,15 @@
             "id": "salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22#block:0:tier2:1:ee4c4b02b9241cda",
             "locator": "block:0:tier2:1",
             "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22#block:0:tier2:0:42cd7dcc43485695"
           }
         ],
         [
@@ -71051,18 +72541,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier3:1",
@@ -78389,10 +79867,15 @@
             "id": "salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa#block:0:tier1:1:2ec4960fd5eeb69f",
             "locator": "block:0:tier1:1",
             "clause": "M < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa#block:0:tier1:0:9761dc8e4c2e4090"
           }
         ],
         [
@@ -78411,10 +79894,15 @@
             "id": "salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa#block:0:tier2:1:7f6315cd3329f1fc",
             "locator": "block:0:tier2:1",
             "clause": "M < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa#block:0:tier2:0:133a4e1c729a9477"
           }
         ],
         [
@@ -78433,10 +79921,15 @@
             "id": "salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa#block:0:tier3:1:0fa2dc74e907087d",
             "locator": "block:0:tier3:1",
             "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa#block:0:tier3:0:73a99fde4b79fa35"
           }
         ]
       ],
@@ -78452,24 +79945,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -79138,19 +80613,27 @@
             "id": "salient:foe-feature:4c2eb22d-b97c-4caa-ba06-24a26020d59b#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:4c2eb22d-b97c-4caa-ba06-24a26020d59b#block:0:tier3:0:a0513317cf6ae8b5"
           },
           {
             "id": "salient:foe-feature:4c2eb22d-b97c-4caa-ba06-24a26020d59b#block:0:tier3:2:ca88cd04581a63cd",
             "locator": "block:0:tier3:2",
             "clause": "P < 4 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < N bleeding (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:4c2eb22d-b97c-4caa-ba06-24a26020d59b#block:0:tier3:0:a0513317cf6ae8b5"
           }
         ]
       ],
@@ -79166,18 +80649,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "P < 4 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -83160,10 +84631,15 @@
             "id": "salient:foe-feature:5244a67c-e13c-470c-b53b-09852df57219#block:0:tier1:1:0fa2dc74e907087d",
             "locator": "block:0:tier1:1",
             "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:5244a67c-e13c-470c-b53b-09852df57219#block:0:tier1:0:4fb09bdd7b896edc"
           }
         ],
         [
@@ -83182,10 +84658,15 @@
             "id": "salient:foe-feature:5244a67c-e13c-470c-b53b-09852df57219#block:0:tier2:1:ee4c4b02b9241cda",
             "locator": "block:0:tier2:1",
             "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:5244a67c-e13c-470c-b53b-09852df57219#block:0:tier2:0:73a99fde4b79fa35"
           }
         ],
         [
@@ -83204,10 +84685,15 @@
             "id": "salient:foe-feature:5244a67c-e13c-470c-b53b-09852df57219#block:0:tier3:1:0a94f9758647a7ab",
             "locator": "block:0:tier3:1",
             "clause": "M < 5 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:5244a67c-e13c-470c-b53b-09852df57219#block:0:tier3:0:2cd14f2d7b8cfe11"
           }
         ]
       ],
@@ -83223,24 +84709,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 5 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -85393,10 +86861,13 @@
             "id": "salient:foe-feature:5733d42d-fb12-4139-930a-ea7c9412e52a#block:0:tier2:1:bb9281cdde189617",
             "locator": "block:0:tier2:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:5733d42d-fb12-4139-930a-ea7c9412e52a#block:0:tier2:0:9761dc8e4c2e4090"
           }
         ],
         [
@@ -85415,10 +86886,13 @@
             "id": "salient:foe-feature:5733d42d-fb12-4139-930a-ea7c9412e52a#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:5733d42d-fb12-4139-930a-ea7c9412e52a#block:0:tier3:0:ab4051da6c231d29"
           }
         ]
       ],
@@ -85434,18 +86908,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -101015,10 +102477,15 @@
             "id": "salient:foe-feature:7c68af40-0726-472c-948a-d8fe6f615d92#block:0:tier3:2:20c657d6b1892f16",
             "locator": "block:0:tier3:2",
             "clause": "A < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:7c68af40-0726-472c-948a-d8fe6f615d92#block:0:tier3:0:ee47d992b7ca8e82"
           }
         ]
       ],
@@ -101034,12 +102501,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "A < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -102771,10 +104232,15 @@
             "id": "salient:foe-feature:7f4f7e24-c078-4e98-afb1-845a1b54f246#block:0:tier2:1:2218455c1aa5d590",
             "locator": "block:0:tier2:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:7f4f7e24-c078-4e98-afb1-845a1b54f246#block:0:tier2:0:9520cecd344e9a4d"
           }
         ],
         [
@@ -102793,10 +104259,15 @@
             "id": "salient:foe-feature:7f4f7e24-c078-4e98-afb1-845a1b54f246#block:0:tier3:1:5c3781926b9f1051",
             "locator": "block:0:tier3:1",
             "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:7f4f7e24-c078-4e98-afb1-845a1b54f246#block:0:tier3:0:9761dc8e4c2e4090"
           }
         ]
       ],
@@ -102821,18 +104292,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -107370,10 +108829,15 @@
             "id": "salient:foe-feature:86759c69-2545-4bf9-a7ef-70180c786376#block:0:tier1:1:0fa2dc74e907087d",
             "locator": "block:0:tier1:1",
             "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:86759c69-2545-4bf9-a7ef-70180c786376#block:0:tier1:0:4fb09bdd7b896edc"
           }
         ],
         [
@@ -107392,10 +108856,15 @@
             "id": "salient:foe-feature:86759c69-2545-4bf9-a7ef-70180c786376#block:0:tier2:1:ee4c4b02b9241cda",
             "locator": "block:0:tier2:1",
             "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:86759c69-2545-4bf9-a7ef-70180c786376#block:0:tier2:0:73a99fde4b79fa35"
           }
         ],
         [
@@ -107414,10 +108883,15 @@
             "id": "salient:foe-feature:86759c69-2545-4bf9-a7ef-70180c786376#block:0:tier3:1:0a94f9758647a7ab",
             "locator": "block:0:tier3:1",
             "clause": "M < 5 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:86759c69-2545-4bf9-a7ef-70180c786376#block:0:tier3:0:180b6f69162e15da"
           }
         ]
       ],
@@ -107433,24 +108907,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 5 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -117794,10 +119250,15 @@
             "id": "salient:foe-feature:9a17f754-07d2-4616-8788-f9d73ba0dc00#block:0:tier1:1:ee4c4b02b9241cda",
             "locator": "block:0:tier1:1",
             "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:9a17f754-07d2-4616-8788-f9d73ba0dc00#block:0:tier1:0:abbf0071bed5821d"
           }
         ],
         [
@@ -117816,10 +119277,15 @@
             "id": "salient:foe-feature:9a17f754-07d2-4616-8788-f9d73ba0dc00#block:0:tier2:1:0a94f9758647a7ab",
             "locator": "block:0:tier2:1",
             "clause": "M < 5 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:9a17f754-07d2-4616-8788-f9d73ba0dc00#block:0:tier2:0:cfa92550e9d3470b"
           }
         ],
         [
@@ -117838,10 +119304,13 @@
             "id": "salient:foe-feature:9a17f754-07d2-4616-8788-f9d73ba0dc00#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:9a17f754-07d2-4616-8788-f9d73ba0dc00#block:0:tier3:0:ab4051da6c231d29"
           }
         ]
       ],
@@ -117866,24 +119335,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 5 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -117943,7 +119394,7 @@
         "path": "en/books/monsters/md/monster/voiceless-talker/statblock/voiceless-talker-invader.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -117974,10 +119425,15 @@
             "id": "salient:foe-feature:9a18ca27-829b-4ed9-98f5-98de0fdf26d7#block:0:tier2:1:7f6315cd3329f1fc",
             "locator": "block:0:tier2:1",
             "clause": "M < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:9a18ca27-829b-4ed9-98f5-98de0fdf26d7#block:0:tier2:0:4fb09bdd7b896edc"
           }
         ],
         [
@@ -117996,28 +119452,20 @@
             "id": "salient:foe-feature:9a18ca27-829b-4ed9-98f5-98de0fdf26d7#block:0:tier3:1:0fa2dc74e907087d",
             "locator": "block:0:tier3:1",
             "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:9a18ca27-829b-4ed9-98f5-98de0fdf26d7#block:0:tier3:0:42cd7dcc43485695"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
+      "diagnostics": [],
       "live": "not-wired"
     },
     {
@@ -132757,10 +134205,13 @@
             "id": "salient:foe-feature:b4617f69-c714-4eed-95c0-fdfc7e70d2ae#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:b4617f69-c714-4eed-95c0-fdfc7e70d2ae#block:0:tier3:0:d9cd8e0ee6e943a0"
           }
         ]
       ],
@@ -132776,12 +134227,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -135595,10 +137040,15 @@
             "id": "salient:foe-feature:baf5b02b-857c-42d2-aaac-3628d60242d9#block:0:tier1:1:2218455c1aa5d590",
             "locator": "block:0:tier1:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:baf5b02b-857c-42d2-aaac-3628d60242d9#block:0:tier1:0:9761dc8e4c2e4090"
           }
         ],
         [
@@ -135617,10 +137067,15 @@
             "id": "salient:foe-feature:baf5b02b-857c-42d2-aaac-3628d60242d9#block:0:tier2:1:5c3781926b9f1051",
             "locator": "block:0:tier2:1",
             "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:baf5b02b-857c-42d2-aaac-3628d60242d9#block:0:tier2:0:11038f10936793b2"
           }
         ],
         [
@@ -135639,10 +137094,15 @@
             "id": "salient:foe-feature:baf5b02b-857c-42d2-aaac-3628d60242d9#block:0:tier3:1:20c657d6b1892f16",
             "locator": "block:0:tier3:1",
             "clause": "A < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:baf5b02b-857c-42d2-aaac-3628d60242d9#block:0:tier3:0:4b300aa389139d18"
           }
         ]
       ],
@@ -135658,24 +137118,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -136516,7 +137958,7 @@
         "path": "en/books/monsters/md/monster/voiceless-talker/statblock/mindkiller.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -136547,10 +137989,15 @@
             "id": "salient:foe-feature:bc766406-a9f9-408d-9f7b-ba6604fe2ec2#block:0:tier2:1:2218455c1aa5d590",
             "locator": "block:0:tier2:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:bc766406-a9f9-408d-9f7b-ba6604fe2ec2#block:0:tier2:0:11038f10936793b2"
           }
         ],
         [
@@ -136569,28 +138016,20 @@
             "id": "salient:foe-feature:bc766406-a9f9-408d-9f7b-ba6604fe2ec2#block:0:tier3:1:5c3781926b9f1051",
             "locator": "block:0:tier3:1",
             "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:bc766406-a9f9-408d-9f7b-ba6604fe2ec2#block:0:tier3:0:73a99fde4b79fa35"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
+      "diagnostics": [],
       "live": "not-wired"
     },
     {
@@ -139125,10 +140564,15 @@
             "id": "salient:foe-feature:c191f01b-81df-425e-81f7-f4e76fb90a5c#block:0:tier1:1:b61060c839758b73",
             "locator": "block:0:tier1:1",
             "clause": "A < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:c191f01b-81df-425e-81f7-f4e76fb90a5c#block:0:tier1:0:d9cd8e0ee6e943a0"
           }
         ],
         [
@@ -139147,10 +140591,15 @@
             "id": "salient:foe-feature:c191f01b-81df-425e-81f7-f4e76fb90a5c#block:0:tier2:1:2218455c1aa5d590",
             "locator": "block:0:tier2:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:c191f01b-81df-425e-81f7-f4e76fb90a5c#block:0:tier2:0:2ea56bbac3101626"
           }
         ],
         [
@@ -139169,10 +140618,13 @@
             "id": "salient:foe-feature:c191f01b-81df-425e-81f7-f4e76fb90a5c#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:c191f01b-81df-425e-81f7-f4e76fb90a5c#block:0:tier3:0:133a4e1c729a9477"
           }
         ]
       ],
@@ -139188,24 +140640,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "A < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -141870,10 +143304,15 @@
             "id": "salient:foe-feature:c5f8b70b-1fe7-4039-b0e0-f7890ea20ed7#block:0:tier3:2:2218455c1aa5d590",
             "locator": "block:0:tier3:2",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:c5f8b70b-1fe7-4039-b0e0-f7890ea20ed7#block:0:tier3:0:42cd7dcc43485695"
           }
         ]
       ],
@@ -141911,12 +143350,6 @@
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:2",
           "clause": "if the other target has A < 3 they are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -142087,10 +143520,15 @@
             "id": "salient:foe-feature:c665a67c-399b-4bd8-829d-af2752b8ff87#block:0:tier1:1:5c3781926b9f1051",
             "locator": "block:0:tier1:1",
             "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:c665a67c-399b-4bd8-829d-af2752b8ff87#block:0:tier1:0:9761dc8e4c2e4090"
           }
         ],
         [
@@ -142109,10 +143547,15 @@
             "id": "salient:foe-feature:c665a67c-399b-4bd8-829d-af2752b8ff87#block:0:tier2:1:20c657d6b1892f16",
             "locator": "block:0:tier2:1",
             "clause": "A < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:c665a67c-399b-4bd8-829d-af2752b8ff87#block:0:tier2:0:133a4e1c729a9477"
           }
         ],
         [
@@ -142131,10 +143574,13 @@
             "id": "salient:foe-feature:c665a67c-399b-4bd8-829d-af2752b8ff87#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:c665a67c-399b-4bd8-829d-af2752b8ff87#block:0:tier3:0:767f4de0fe65f6f8"
           }
         ]
       ],
@@ -142159,24 +143605,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -150223,10 +151651,15 @@
             "id": "salient:foe-feature:d68578c0-50c8-4634-90fd-09727f7497ca#block:0:tier1:1:0fa2dc74e907087d",
             "locator": "block:0:tier1:1",
             "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:d68578c0-50c8-4634-90fd-09727f7497ca#block:0:tier1:0:8882180d6b03536f"
           }
         ],
         [
@@ -150245,10 +151678,15 @@
             "id": "salient:foe-feature:d68578c0-50c8-4634-90fd-09727f7497ca#block:0:tier2:1:ee4c4b02b9241cda",
             "locator": "block:0:tier2:1",
             "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:d68578c0-50c8-4634-90fd-09727f7497ca#block:0:tier2:0:9520cecd344e9a4d"
           }
         ],
         [
@@ -150267,10 +151705,13 @@
             "id": "salient:foe-feature:d68578c0-50c8-4634-90fd-09727f7497ca#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:d68578c0-50c8-4634-90fd-09727f7497ca#block:0:tier3:0:9761dc8e4c2e4090"
           }
         ]
       ],
@@ -150286,24 +151727,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 4 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -151151,10 +152574,15 @@
             "id": "salient:foe-feature:d7ede5a2-b566-4789-bc9d-5a4ae07ea468#block:0:tier2:1:b61060c839758b73",
             "locator": "block:0:tier2:1",
             "clause": "A < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:d7ede5a2-b566-4789-bc9d-5a4ae07ea468#block:0:tier2:0:4148a008d7858141"
           }
         ],
         [
@@ -151173,10 +152601,15 @@
             "id": "salient:foe-feature:d7ede5a2-b566-4789-bc9d-5a4ae07ea468#block:0:tier3:1:2218455c1aa5d590",
             "locator": "block:0:tier3:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:d7ede5a2-b566-4789-bc9d-5a4ae07ea468#block:0:tier3:0:65723ebe74a7200a"
           }
         ]
       ],
@@ -151201,18 +152634,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -153449,10 +154870,13 @@
             "id": "salient:foe-feature:daa5901e-2fb0-498f-b19c-0a3489ef482c#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:daa5901e-2fb0-498f-b19c-0a3489ef482c#block:0:tier3:0:cfa92550e9d3470b"
           }
         ]
       ],
@@ -153468,12 +154892,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -153783,10 +155201,13 @@
             "id": "salient:foe-feature:db58b6e9-a184-455c-9ab6-8611166318cc#block:0:tier2:1:bb9281cdde189617",
             "locator": "block:0:tier2:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:db58b6e9-a184-455c-9ab6-8611166318cc#block:0:tier2:0:58e9525a25482fb3"
           }
         ],
         [
@@ -153805,10 +155226,13 @@
             "id": "salient:foe-feature:db58b6e9-a184-455c-9ab6-8611166318cc#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:db58b6e9-a184-455c-9ab6-8611166318cc#block:0:tier3:0:c2d4d427ecf27930"
           },
           {
             "id": "salient:foe-feature:db58b6e9-a184-455c-9ab6-8611166318cc#block:0:tier3:2:3aeac9a43041f2c6",
@@ -153823,18 +155247,6 @@
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier3:2",
@@ -158217,19 +159629,27 @@
             "id": "salient:foe-feature:e6299b95-cd33-4503-9348-e63610cbd680#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:e6299b95-cd33-4503-9348-e63610cbd680#block:0:tier3:0:cfa92550e9d3470b"
           },
           {
             "id": "salient:foe-feature:e6299b95-cd33-4503-9348-e63610cbd680#block:0:tier3:2:c5896431fbc20e62",
             "locator": "block:0:tier3:2",
             "clause": "I < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:e6299b95-cd33-4503-9348-e63610cbd680#block:0:tier3:0:cfa92550e9d3470b"
           }
         ]
       ],
@@ -158245,18 +159665,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "I < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -162472,10 +163880,15 @@
             "id": "salient:foe-feature:ee0c26e1-36f4-4256-90e1-099a05afc4e2#block:0:tier1:1:b0c5475e86f8e70e",
             "locator": "block:0:tier1:1",
             "clause": "M < 0 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:ee0c26e1-36f4-4256-90e1-099a05afc4e2#block:0:tier1:0:d9cd8e0ee6e943a0"
           }
         ],
         [
@@ -162494,10 +163907,15 @@
             "id": "salient:foe-feature:ee0c26e1-36f4-4256-90e1-099a05afc4e2#block:0:tier2:1:2ec4960fd5eeb69f",
             "locator": "block:0:tier2:1",
             "clause": "M < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:ee0c26e1-36f4-4256-90e1-099a05afc4e2#block:0:tier2:0:2ea56bbac3101626"
           }
         ],
         [
@@ -162516,10 +163934,15 @@
             "id": "salient:foe-feature:ee0c26e1-36f4-4256-90e1-099a05afc4e2#block:0:tier3:1:7f6315cd3329f1fc",
             "locator": "block:0:tier3:1",
             "clause": "M < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:M < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:ee0c26e1-36f4-4256-90e1-099a05afc4e2#block:0:tier3:0:133a4e1c729a9477"
           }
         ]
       ],
@@ -162535,24 +163958,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 0 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 1 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -166076,10 +167481,13 @@
             "id": "salient:foe-feature:f780e41f-c9c4-4df6-842b-ab9dded0fb58#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:f780e41f-c9c4-4df6-842b-ab9dded0fb58#block:0:tier3:0:4148a008d7858141"
           }
         ]
       ],
@@ -166095,12 +167503,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -168751,10 +170153,13 @@
             "id": "salient:foe-feature:fcb3dc63-2e11-4e74-8637-f4341d3e49de#block:0:tier1:1:bb9281cdde189617",
             "locator": "block:0:tier1:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:fcb3dc63-2e11-4e74-8637-f4341d3e49de#block:0:tier1:0:abbf0071bed5821d"
           }
         ],
         [
@@ -168773,10 +170178,13 @@
             "id": "salient:foe-feature:fcb3dc63-2e11-4e74-8637-f4341d3e49de#block:0:tier2:1:bb9281cdde189617",
             "locator": "block:0:tier2:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:fcb3dc63-2e11-4e74-8637-f4341d3e49de#block:0:tier2:0:2ea56bbac3101626"
           }
         ],
         [
@@ -168795,10 +170203,13 @@
             "id": "salient:foe-feature:fcb3dc63-2e11-4e74-8637-f4341d3e49de#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:fcb3dc63-2e11-4e74-8637-f4341d3e49de#block:0:tier3:0:133a4e1c729a9477"
           }
         ]
       ],
@@ -168814,24 +170225,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -169836,10 +171229,13 @@
             "id": "salient:foe-feature:ffbda556-599a-40f5-adb0-26e8adf91ce7#block:0:tier3:1:bb9281cdde189617",
             "locator": "block:0:tier3:1",
             "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "grabbed",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "salient:foe-feature:ffbda556-599a-40f5-adb0-26e8adf91ce7#block:0:tier3:0:abbf0071bed5821d"
           }
         ]
       ],
@@ -169855,12 +171251,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -171562,7 +172952,7 @@
         "path": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/giant-zombie.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -171593,10 +172983,15 @@
             "id": "urn:uuid:a6a61c9d-e051-4fe1-acf3-95d74a53de71#block:0:tier2:1:2218455c1aa5d590",
             "locator": "block:0:tier2:1",
             "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "urn:uuid:a6a61c9d-e051-4fe1-acf3-95d74a53de71#block:0:tier2:0:ab4051da6c231d29"
           }
         ],
         [
@@ -171615,28 +173010,20 @@
             "id": "urn:uuid:a6a61c9d-e051-4fe1-acf3-95d74a53de71#block:0:tier3:1:5c3781926b9f1051",
             "locator": "block:0:tier3:1",
             "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-            "kind": "unsupported",
-            "shape": "potency:A < N grabbed",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "grabbed",
+            "duration": "none",
+            "after": "urn:uuid:a6a61c9d-e051-4fe1-acf3-95d74a53de71#block:0:tier3:0:11038f10936793b2"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 2 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 3 [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
+      "diagnostics": [],
       "live": "not-wired"
     },
     {

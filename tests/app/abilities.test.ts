@@ -310,6 +310,13 @@ describe('A05 attacks, damage, costs and common actions', () => {
       'Ranged Weapon Free Strike',
       'Out of the Way!: Follow',
       'Lines of Force: Enhance',
+      // V119: every creature has the common maneuvers (feature/common/maneuvers/*.md).
+      'Grab',
+      'Knockback',
+      'Escape Grab',
+      'Hide',
+      'Search for Hidden Creatures',
+      'Stand Up',
       'Catch Breath',
       'Defend',
       'Aid Attack',

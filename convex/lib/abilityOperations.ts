@@ -27,7 +27,9 @@ import { heroicResourceFloor } from '../../shared/resolve/resourceFloor';
  */
 import { ConvexError, v } from 'convex/values';
 import {
+  grabEligibility,
   resolveCompiledAbility,
+  smallerSize,
   type CompiledAbilityInput,
 } from '../../shared/resolve/compiledOutcome';
 import { effectOccurrences, type CompiledResult } from '../../shared/contracts/compiledResult';
@@ -37,6 +39,7 @@ import {
   endConditionInstance,
   hasRolledConditionSave,
   replacedByUse,
+  setManualCondition,
 } from './conditionInstances';
 import { appendEvent } from './events';
 import type { Doc, Id } from '../_generated/dataModel';
@@ -81,6 +84,9 @@ import {
   CREATURE_FREE_STRIKE_RULE_ID,
   supportingSource,
   writeDamage,
+  ESCAPE_GRAB_ID,
+  GRAB_ID,
+  STAND_UP_ID,
   type AbilityDefinition,
   type TargetRecord,
 } from './resolve';
@@ -930,6 +936,169 @@ async function commitConditions(
   }
 }
 
+/** Current condition toggles of a hero or foe target; undefined for squads and unknown records. */
+function conditionsOf(record: TargetRecord): Record<string, boolean> | undefined {
+  if (record.character) return requireHeroLive(record.character).conditions;
+  if (record.foe) return record.foe.live.conditions;
+  return undefined;
+}
+
+function instancesOf(record: TargetRecord) {
+  if (record.character) return requireHeroLive(record.character).conditionInstances ?? [];
+  if (record.foe) return record.foe.live.conditionInstances ?? [];
+  return [];
+}
+
+type GrabPlan = {
+  note: (tier: number) => string;
+  commit: (
+    mctx: MutationCtx,
+    scope: JournalScope,
+    tier: number,
+    source: { abilityName: string; actorLabel: string; sourcePath: string },
+  ) => Promise<void>;
+};
+
+/**
+ * V119: Grab and Escape Grab (feature/ability/common/grab.md, escape-grab.md;
+ * condition/grabbed.md). Grab's tier 3 grabs the target when the size rule allows it; Escape Grab's
+ * tier 3 ends the actor's grab and takes a bane when smaller than its grabber. Tier 2 of each is the
+ * table's choice (a melee free strike comes first) and stays manual.
+ */
+async function grabManeuverPlan(
+  ctx: ReadCtx,
+  ability: AbilityDefinition,
+  actorRecord: TargetRecord,
+  targets: TargetRecord[],
+  banes: number[],
+  warnings: string[],
+): Promise<GrabPlan | undefined> {
+  if (ability.abilityId === ESCAPE_GRAB_ID) {
+    if (!conditionsOf(actorRecord)?.grabbed)
+      throw new ConvexError(`${actorRecord.actor.name} is not grabbed.`);
+    const actorSize = movementFacts(actorRecord).size;
+    const grabbers = [
+      ...new Set(
+        instancesOf(actorRecord)
+          .filter(i => i.status === 'active' && i.condition === 'grabbed' && i.sourceActorId)
+          .map(i => i.sourceActorId!),
+      ),
+    ];
+    let bane = false;
+    for (const id of grabbers) {
+      const heroId = ctx.db.normalizeId('characters', id);
+      const foeId = ctx.db.normalizeId('foes', id);
+      const character = heroId ? await ctx.db.get(heroId) : null;
+      const foe = foeId ? await ctx.db.get(foeId) : null;
+      const record = {
+        actor: { kind: character ? 'character' : 'foe', id, name: '' },
+        ...(character ? { character } : {}),
+        ...(foe ? { foe } : {}),
+      } as TargetRecord;
+      if (smallerSize(actorSize, movementFacts(record).size)) bane = true;
+    }
+    if (bane) {
+      banes[0] = (banes[0] ?? 0) + 1;
+      warnings.push(
+        'Escape Grab takes a bane: the actor is smaller than what has them grabbed (feature/ability/common/escape-grab.md).',
+      );
+    } else if (!grabbers.length)
+      warnings.push(
+        'Escape Grab: the grab has no recorded source; apply its bane manually if the actor is smaller than what holds them.',
+      );
+    return {
+      note: tier =>
+        tier === 3
+          ? ` ${actorRecord.actor.name} is no longer grabbed.`
+          : tier === 2
+            ? ` ${actorRecord.actor.name} can escape, but the grabber can first make a melee free strike; record an escape with condition off grabbed.`
+            : ' No effect.',
+      commit: async (mctx, scope, tier) => {
+        if (tier !== 3) return;
+        const kind = actorRecord.actor.kind;
+        if (kind === 'character' || kind === 'foe')
+          await setManualCondition(
+            mctx,
+            scope,
+            { kind, id: actorRecord.actor.id },
+            'grabbed',
+            false,
+          );
+      },
+    };
+  }
+  if (ability.abilityId !== GRAB_ID) return undefined;
+  const target = targets[0]!;
+  const creature =
+    !target.squad && (target.actor.kind === 'character' || target.actor.kind === 'foe');
+  const eligibility = grabEligibility(
+    movementFacts(actorRecord).size,
+    movementFacts(target).size,
+    actorRollFacts(actorRecord.actor, actorRecord).characteristics.M,
+  );
+  if (eligibility === 'ineligible')
+    throw new ConvexError(
+      `${actorRecord.actor.name} can't grab ${target.actor.name}: it is larger than they can grab (condition/grabbed.md).`,
+    );
+  const holding = await activeGrabsBy(ctx, actorRecord);
+  if (holding.length)
+    warnings.push(
+      `Rule note: ${actorRecord.actor.name} already has ${holding.join(', ')} grabbed; a creature can grab only one creature at a time unless otherwise indicated (feature/ability/common/grab.md). Release one with condition off.`,
+    );
+  return {
+    note: tier =>
+      tier === 3
+        ? creature && eligibility === 'allowed'
+          ? ` ${target.actor.name} is grabbed by ${actorRecord.actor.name}.`
+          : ` ${target.actor.name} is grabbed by ${actorRecord.actor.name}; record it manually (size or squad facts unavailable).`
+        : tier === 2
+          ? ` ${actorRecord.actor.name} can grab ${target.actor.name}, but the target can first make a melee free strike; record the grab with condition on grabbed.`
+          : ' No effect.',
+    commit: async (mctx, scope, tier, source) => {
+      if (tier !== 3 || !creature || eligibility !== 'allowed') return;
+      await applyConditionInstance(
+        mctx,
+        scope,
+        { kind: target.actor.kind as 'character' | 'foe', id: target.actor.id },
+        {
+          id: `${scope.eventId}:grabbed`,
+          condition: 'grabbed',
+          duration: 'none',
+          sourceActorId: actorRecord.actor.id,
+          sourceUseEventId: scope.eventId,
+          ...source,
+        },
+      );
+    },
+  };
+}
+
+/** Names of creatures in this campaign the actor currently has grabbed through a recorded grab. */
+async function activeGrabsBy(ctx: ReadCtx, actorRecord: TargetRecord): Promise<string[]> {
+  const campaignId = actorRecord.character?.campaignId ?? actorRecord.foe?.campaignId;
+  if (!campaignId) return [];
+  const held = (instances: { status: string; condition: string; sourceActorId?: string }[]) =>
+    instances.some(
+      i =>
+        i.status === 'active' &&
+        i.condition === 'grabbed' &&
+        i.sourceActorId === actorRecord.actor.id,
+    );
+  const names: string[] = [];
+  for (const hero of await ctx.db
+    .query('characters')
+    .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+    .collect())
+    if (hero.liveState && held(hero.liveState.conditionInstances ?? []))
+      names.push(hero.authored?.name ?? 'a hero');
+  for (const foe of await ctx.db
+    .query('foes')
+    .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+    .collect())
+    if (held(foe.live.conditionInstances ?? [])) names.push(foe.name);
+  return names;
+}
+
 const abilityUse: OperationDefinition = {
   id: 'ability.use',
   family: 'ability',
@@ -980,6 +1149,8 @@ const abilityUse: OperationDefinition = {
         throw new ConvexError(`${ability.name} targets self only.`);
       if (!targets.length) targets.push(records);
     }
+    // feature/common/maneuvers/stand-up.md: yourself unless you name a willing adjacent creature.
+    if (ability.abilityId === STAND_UP_ID && !targets.length) targets.push(records);
     const counts = (value: unknown, name: string): number[] => {
       if (value === undefined) return targets.map(() => 0);
       const list = Array.isArray(value) ? value : [value];
@@ -1153,6 +1324,42 @@ const abilityUse: OperationDefinition = {
     }
 
     // ---- Defend, Aid Attack and any ability the app cannot resolve: recorded with full text.
+    if (ability.abilityId === STAND_UP_ID) {
+      const target = targets[0]!;
+      if (!conditionsOf(target)?.prone)
+        throw new ConvexError(`${target.actor.name} is not prone; Stand Up has nothing to end.`);
+      if (target.squad || (target.actor.kind !== 'character' && target.actor.kind !== 'foe'))
+        throw new ConvexError('Stand Up ends prone on a hero or foe; resolve squads manually.');
+      const other = !sameActor(target.actor, actor!);
+      const description = `${actor!.name} uses Stand Up (maneuver)${other ? ` to make ${target.actor.name} stand up (a willing adjacent creature; the table confirms)` : ''}: ${target.actor.name} is no longer prone.${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+      return {
+        kind: 'ability.recorded',
+        description,
+        data: {
+          ability: abilityData,
+          targets: [target.actor],
+          publicDescription: description,
+          allowance: {
+            inCombat: allowance.inCombat,
+            onTurn: allowance.onTurn,
+            turnId: allowance.turnId,
+          },
+          warnings,
+          source,
+        },
+        commit: async (mctx, scope) => {
+          await setManualCondition(
+            mctx,
+            scope,
+            { kind: target.actor.kind as 'character' | 'foe', id: target.actor.id },
+            'prone',
+            false,
+          );
+          await recordUse(mctx, scope, allowance, actor!, 'maneuver', ability.name, tracking);
+          await clear(mctx);
+        },
+      };
+    }
     if (ability.kind === 'recorded' || ability.unknownCost || !ability.actionType) {
       const reason = ability.unknownCost
         ? `Cost "${ability.unknownCost}" is not a fixed "N Resource" cost the app can check; the ability is recorded for manual resolution with no roll, no debit and no effect.`
@@ -1272,6 +1479,8 @@ const abilityUse: OperationDefinition = {
       throw new ConvexError(
         `${actor!.name} is a squad minion with a captain (With Captain: ${strikeBenefit.text}); use @{squad:${records.squad!._id}} /squad act ability="${ability.name}" with ${actor!.name} as the only participant so the benefit applies.`,
       );
+    // ---- V119 common grab maneuvers (feature/ability/common/grab.md, escape-grab.md).
+    const grabPlan = await grabManeuverPlan(ctx, ability, records, targets, banes, warnings);
     // ---- Rolled ability (R04 sections 1, 2, 4, 6, 9).
     const compiledDefinition =
       ability.compilation?.mode === 'compiled' ? ability.compilation.definition : undefined;
@@ -1408,8 +1617,10 @@ const abilityUse: OperationDefinition = {
     );
     const squadText = squadPlans.length ? ` ${describeSquadPlans(squadPlans)}` : '';
     const squadCard = squadCasualtyInteraction(squadPlans, envelope);
+    const grabTier = perTarget[0]?.outcome.tier ?? 1;
+    const grabText = grabPlan ? grabPlan.note(grabTier) : '';
     const describeUse = (payment: string) =>
-      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${squadText}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${grabText}${squadText}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
     return {
       kind: 'ability.use',
       description: describeUse(costText),
@@ -1448,6 +1659,12 @@ const abilityUse: OperationDefinition = {
           if (p.applied) await writeDamage(mctx, scope, record, p.applied);
         }
         await commitSquadPlans(mctx, scope, squadPlans);
+        if (grabPlan)
+          await grabPlan.commit(mctx, scope, grabTier, {
+            abilityName: ability.name,
+            actorLabel: actor!.name,
+            sourcePath: ability.source.path,
+          });
         // Post-damage conditions share the same journal and command as their original use.
         if (compiledOutcome?.kind === 'resolved')
           await commitConditions(

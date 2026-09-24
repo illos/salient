@@ -85,6 +85,9 @@ export const GRAB_ID = 'mcdm.heroes.v1/feature.ability.common/grab';
 export const KNOCKBACK_ID = 'mcdm.heroes.v1/feature.ability.common/knockback';
 export const HIDE_ID = 'mcdm.heroes.v1/feature.common.maneuvers/hide';
 export const SEARCH_ID = 'mcdm.heroes.v1/feature.common.maneuvers/search-for-hidden-creatures';
+/** V119: common maneuvers every creature has (feature/common/maneuvers/*.md). */
+export const ESCAPE_GRAB_ID = 'mcdm.heroes.v1/feature.ability.common/escape-grab';
+export const STAND_UP_ID = 'mcdm.heroes.v1/feature.common.maneuvers/stand-up';
 
 export type TargetShape =
   | { kind: 'self' }
@@ -485,10 +488,11 @@ async function commonActions(ctx: ReadCtx, actor: BoundActor, foe?: Doc<'foes'>)
         freeStrikeValue: value,
       });
   }
-  if (actor.kind === 'foe') {
-    // Grab and Knockback roll Might; Hide and Search are recorded with their text (V02 adds them
-    // for foes so squads can use them together; their single-creature use is the ordinary path).
-    for (const id of [GRAB_ID, KNOCKBACK_ID]) {
+  {
+    // Grab, Knockback and Escape Grab roll; Hide and Search are recorded with their text. V02 added
+    // them for foes so squads can act together; V119 gives every creature the common maneuvers
+    // (feature/common/maneuvers/*.md: any creature can use them).
+    for (const id of [GRAB_ID, KNOCKBACK_ID, ESCAPE_GRAB_ID]) {
       const entry = await findContent(ctx, id);
       if (entry) out.push(abilityFromEntry(entry));
     }
@@ -511,6 +515,24 @@ async function commonActions(ctx: ReadCtx, actor: BoundActor, foe?: Doc<'foes'>)
         });
     }
   }
+  // feature/common/maneuvers/stand-up.md: stand up yourself, or make a willing adjacent prone
+  // creature stand up. Recorded with its text; the operation ends the chosen creature's prone.
+  const standUp = await findContent(ctx, STAND_UP_ID);
+  if (standUp)
+    out.push({
+      abilityId: STAND_UP_ID,
+      name: standUp.name,
+      kind: 'recorded',
+      contentId: standUp.contentId,
+      source: sourceOf(standUp),
+      text: standUp.text,
+      usage: 'Maneuver',
+      actionType: 'maneuver',
+      distance: '',
+      target: 'Self or one willing adjacent prone creature',
+      keywords: [],
+      targetShape: { kind: 'single' },
+    });
   const catchBreath = await findContent(ctx, CATCH_BREATH_ID);
   if (catchBreath)
     out.push({

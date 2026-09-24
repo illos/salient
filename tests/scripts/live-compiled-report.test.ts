@@ -118,6 +118,12 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Unbalancing Attack',
       'Where I Want You',
       'Whip Frenzy',
+      // V119: a bare grab (condition/grabbed.md) after damage.
+      'Joint Lock',
+      'Bear Claws',
+      'Tentacle',
+      'Killer Claws',
+      'Rotten Smash',
     ].sort(),
   );
   expect(

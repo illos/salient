@@ -66,7 +66,7 @@ const facts = (
 });
 
 // rule/combat/end-of-turn.md (EoT); rule/general/saving-throw.md (save ends); condition/prone.md
-// (no duration: ends with Stand Up). Grabbed keeps only V88's save-ends form (condition/grabbed.md).
+// (no duration: ends with Stand Up). V119 adds a bare grab; an EoT grab stays unsupported.
 test('the V113 condition reader admits printed durations and rejects unbounded forms', () => {
   expect(tierConditionExpression('A < WEAK, [slowed](x) ([EoT](y))')).toEqual({
     characteristic: 'A',
@@ -86,7 +86,6 @@ test('the V113 condition reader admits printed durations and rejects unbounded f
   });
   for (const rejected of [
     'M < 1 slowed',
-    'A < 2 grabbed',
     'grabbed (EoT)',
     'm < 1 prone',
     "prone and can't stand (save ends)",

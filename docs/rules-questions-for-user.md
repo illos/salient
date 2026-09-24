@@ -878,3 +878,19 @@ share the question. Alternatives: exclude perks the hero already has from the ch
 repeat with no extra benefit. Current behaviour (interim interpretation, V114): the choice is
 allowed and grants nothing new. Recommendation: exclude already-held perks, since a repeat has no
 printed effect. Nothing else in V114 depends on the answer.
+
+## Q-GRAB-1: when a creature that already has someone grabbed grabs again
+
+`feature/ability/common/grab.md` and `condition/grabbed.md` both say "Unless otherwise indicated, a
+creature can grab only one creature at a time." Neither says what happens when a creature already
+holding one grab lands another. Examples are a second Grab maneuver, or a two-target ability such as
+Arixx's Claw Swing (`monster/arixx/statblock/arixx.md`), whose tiers say "grabbed" for each target.
+Alternatives:
+- (a) the earlier grab ends and the new one applies;
+- (b) the new grab fails while the old one holds;
+- (c) a multi-target grab counts as "otherwise indicated" and both apply.
+
+Current behaviour (V119, interim): the new grab applies and the old one stays. The use carries a
+rule note naming the creatures already held, and the table releases one with `condition off`.
+Recommendation: (a) for a Grab maneuver or a single-target ability, and (c) for a multi-target
+ability whose tiers grab each target. Nothing else in V119 depends on the answer.

@@ -89,8 +89,11 @@ export interface CompiledPushOutcome extends EffectIdentity {
 
 export interface CompiledConditionOutcome extends EffectIdentity {
   kind: 'condition';
-  /** `immune`: an evaluated immunity prevents the condition; damage is unaffected (V115). */
-  status: 'applied' | 'resisted' | 'immune' | 'fact-needed' | 'manual';
+  /**
+   * `immune`: an evaluated immunity prevents the condition; damage is unaffected (V115).
+   * `ineligible`: the grabber is too small to grab this target (condition/grabbed.md, V119).
+   */
+  status: 'applied' | 'resisted' | 'immune' | 'ineligible' | 'fact-needed' | 'manual';
   after: string;
   /** Absent for a V113 unconditional condition, which has no potency to resist. */
   characteristic?: Characteristic;
@@ -128,6 +131,11 @@ function conditionOutcome(
   const threshold = node.threshold;
   if (eligible && target.conditionImmunities?.includes(node.condition))
     return { ...identity, requirements: [], status: 'immune' };
+  if (eligible && node.condition === 'grabbed') {
+    const size = grabSize(input, targetId);
+    if (size.requirements.length) requirements.push(...size.requirements);
+    else if (!size.allowed) return { ...identity, requirements: [], status: 'ineligible' };
+  }
   if (eligible && target.conditionPreventionUnevaluated?.includes(node.condition))
     requirements.push(`target:${targetId}.conditionPrevention.${node.condition}`);
   if (threshold.kind === 'always' || !node.characteristic) {
@@ -196,6 +204,50 @@ export type CompiledAbilityOutcome =
       /** All targets' damage precedes any post-damage effect. */
       effects: CompiledEffectOutcome[];
     };
+
+/**
+ * V119, condition/grabbed.md: "A creature can grab only creatures of their size or smaller. If a
+ * creature's Might score is 2 or higher, they can grab any creature larger than them with a size
+ * equal to or less than their Might score." Sizes 1T–1L count as size 1 for that comparison.
+ */
+function grabSize(
+  input: CompiledAbilityInput,
+  targetId: string,
+): { allowed: boolean; requirements: string[] } {
+  const actorSize = input.movement?.actor.size;
+  const targetSize = input.movement?.targets.find(t => t.targetId === targetId)?.size;
+  const requirements: string[] = [];
+  if (sizeRank(actorSize) === undefined) requirements.push('actor.preciseSize');
+  if (sizeRank(targetSize) === undefined) requirements.push(`target:${targetId}.preciseSize`);
+  if (requirements.length) return { allowed: false, requirements };
+  return {
+    allowed: grabEligibility(actorSize, targetSize, input.actor.characteristics.M) === 'allowed',
+    requirements,
+  };
+}
+
+/** Shared by compiled grabs and the Grab maneuver: allowed, ineligible, or unknown sizes. */
+export function grabEligibility(
+  actorSize: string | undefined,
+  targetSize: string | undefined,
+  might: number | undefined,
+): 'allowed' | 'ineligible' | 'unknown' {
+  const actorRank = sizeRank(actorSize);
+  const targetRank = sizeRank(targetSize);
+  if (actorRank === undefined || targetRank === undefined) return 'unknown';
+  if (targetRank <= actorRank) return 'allowed';
+  const squares = targetRank <= 3 ? 1 : targetRank - 2;
+  return might !== undefined && Number.isSafeInteger(might) && might >= 2 && squares <= might
+    ? 'allowed'
+    : 'ineligible';
+}
+
+/** Whether the first size is smaller than the second; undefined when either is ambiguous. */
+export function smallerSize(a: string | undefined, b: string | undefined): boolean | undefined {
+  const x = sizeRank(a);
+  const y = sizeRank(b);
+  return x === undefined || y === undefined ? undefined : x < y;
+}
 
 /** Pinned rule.character/size: 1T < 1S < 1M < 1L < 2 < ...; ambiguous sizes stay unknown. */
 function sizeRank(size: string | undefined): number | undefined {
@@ -383,8 +435,10 @@ export function resolveCompiledAbility(
               nodes[0]?.kind !== 'damage' ||
               nodes[0].id !== node.after ||
               !['save-ends', 'eot', 'none'].includes(node.duration) ||
-              (node.duration === 'none' && node.condition !== 'prone') ||
-              (node.condition === 'grabbed' && node.duration !== 'save-ends') ||
+              (node.duration === 'none' &&
+                node.condition !== 'prone' &&
+                node.condition !== 'grabbed') ||
+              (node.condition === 'grabbed' && node.duration === 'eot') ||
               (node.threshold.kind === 'always') !== (node.characteristic === undefined) ||
               (node.threshold.kind === 'printed' && !Number.isSafeInteger(node.threshold.value))),
         ) ||
