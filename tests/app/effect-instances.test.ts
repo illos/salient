@@ -400,7 +400,12 @@ test('V158: a repeated same-ability effect follows the newest use and never revi
   const goblinRef = `@{foe:${goblin}}`;
   const thorn = { kind: 'character' as const, id: f.thornId, name: 'Thorn' };
   const gob = { kind: 'foe' as const, id: goblin, name: 'Goblin Warrior' };
-  const apply = (printedDuration: EffectDuration, text = 'Same table work.') =>
+  const apply = (
+    printedDuration: EffectDuration,
+    text = 'Same table work.',
+    owner: { kind: 'character' | 'foe'; id: string; name: string } = gob,
+    subject: { kind: 'character' | 'foe' | 'squad'; id: string; name: string } = thorn,
+  ) =>
     t.run(async ctx => {
       const session = (await ctx.db.get(f.sessionId!))!;
       const eventId = await appendEvent(ctx, {
@@ -420,14 +425,14 @@ test('V158: a repeated same-ability effect follows the newest use and never revi
           id: `overlap-${eventId}`,
           kind: 'instruction',
           sourceUseEventId: eventId,
-          sourceActorId: goblin,
+          sourceActorId: owner.id,
           abilityId: 'overlap-ability',
           abilityName: 'Overlap Ability',
           actorLabel: 'Goblin Warrior',
           sourcePath: 'feature/ability/null/level-1/relentless-nemesis.md',
           clause: 'Fixture clause.',
-          owner: gob,
-          subject: thorn,
+          owner,
+          subject,
           payload: { kind: 'instruction', text },
           printedDuration,
           endsWhen: [],
@@ -466,14 +471,15 @@ test('V158: a repeated same-ability effect follows the newest use and never revi
   expect(after.find(i => i.id === older.instance.id)!.status).toBe('ended');
   expect(after.filter(i => i.status === 'active')).toHaveLength(0);
 
-  // Order 2: the newer use's boundary (Thorn's next turn end) comes after the older's would have
-  // (the goblin's next turn start). The older is superseded, so the goblin's turn start removes
-  // nothing, and the newer ends at Thorn's turn end.
+  // Order 2: the older use's own boundary would be the goblin's next turn start; the newer governs
+  // until Thorn's next turn end. The older is superseded at once (its registration retired), so its
+  // boundary can't end anything, and the newer ends at Thorn's turn end.
   const older2 = await apply({ kind: 'start-of-next-turn', anchor: 'owner' });
   if (!older2 || !('instance' in older2)) throw new Error('older2 not tracked');
   const newer2 = await apply({ kind: 'end-of-next-turn', anchor: 'subject' });
   if (!newer2 || !('instance' in newer2)) throw new Error('newer2 not tracked');
   expect(newer2.superseded?.id).toBe(older2.instance.id);
+  expect((await reg(older2.instance.registrationIds[0]!))!.status).toBe('retired');
   await command('/turn end');
   await command('@Thorn /turn take', true);
   expect((await instances()).find(i => i.id === newer2.instance.id)!.status).toBe('active');
@@ -488,6 +494,30 @@ test('V158: a repeated same-ability effect follows the newest use and never revi
   if (!kept || !('instance' in kept)) throw new Error('kept not tracked');
   const different = await apply({ kind: 'encounter' }, 'Stronger table work.');
   expect(different && 'untracked' in different).toBe(true);
+  expect((await instances()).filter(i => i.status === 'active').map(i => i.id)).toEqual([
+    kept.instance.id,
+  ]);
+
+  // A different owner's use of the same ability is not settled by the printed rule (each use can
+  // benefit its own user), so it is not tracked and the first owner's effect remains.
+  const other = await f.director.client.mutation(api.foes.add, {
+    campaignId: f.campaignId,
+    definitionId: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
+    commandId: `overlap-${++sequence}`,
+  });
+  const byOther = await apply({ kind: 'encounter' }, 'Same table work.', {
+    kind: 'foe',
+    id: other,
+    name: 'Second Goblin',
+  });
+  expect(byOther && 'untracked' in byOther).toBe(true);
+  // A subject without its own record (a squad) isn't tracked: another owner's use couldn't be seen.
+  const onSquad = await apply({ kind: 'encounter' }, 'Same table work.', gob, {
+    kind: 'squad',
+    id: 'squad-without-record',
+    name: 'A squad',
+  });
+  expect(onSquad && 'untracked' in onSquad).toBe(true);
   expect((await instances()).filter(i => i.status === 'active').map(i => i.id)).toEqual([
     kept.instance.id,
   ]);

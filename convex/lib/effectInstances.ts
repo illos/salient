@@ -113,6 +113,10 @@ export async function applyEffectInstance(
   // the two are equally impactful, so the newer use governs alone and the older is ended as
   // superseded (provenance kept). Any other overlap is not tracked automatically: the table applies
   // the stacking rule until the lifecycle reconciliation of V159.
+  // A subject without its own record (a squad, an object) is held by its owner, so another owner's
+  // use of the same ability on it can't be seen here: such effects are not tracked automatically.
+  if (!holds(input.subject) && input.subject.id !== input.owner.id)
+    return { untracked: { ...(input as EffectInstance) }, holder };
   const overlap = current.effectInstances.find(
     other =>
       other.status === 'active' &&
@@ -121,7 +125,11 @@ export async function applyEffectInstance(
   );
   let superseded: EffectInstance | undefined;
   if (overlap) {
+    // Only the same owner's repeat is settled by the printed rule here. Whether two users' uses
+    // (for example two Nulls' Relentless Nemesis, each benefiting its own user) stack is not, so a
+    // different owner's overlap is left to the table.
     const equal =
+      overlap.owner.id === input.owner.id &&
       JSON.stringify(overlap.payload) === JSON.stringify(input.payload) &&
       !overlap.endsWhen.length &&
       !input.endsWhen.length;

@@ -168,4 +168,13 @@ are later slices (design section 8, items 2–5).
   - Full lifecycle reconciliation for differing payloads (numbers) is left to a later slice.
   - `tests/app/effect-instances.test.ts` proves both expiry orders through real clock boundaries,
     with no early loss and no revival, plus the untracked case.
+- V158-REVIEW on `53e8028`: changes required. The boundary is now narrower:
+  - Only the **same owner's** repeat of an identical payload is superseded.
+  - A different owner's use of the same ability is not tracked. Each use can benefit its own user,
+    as Relentless Nemesis does, and the printed stacking rule doesn't settle it.
+  - A lasting effect on a subject without its own record (a squad or an object) is not tracked,
+    since another owner's overlapping use on it couldn't be seen.
+  - The test covers both, and asserts that the older registration is retired in both orders.
+  - `effectiveAggregate` stays a pure helper with no live caller. No generic stacking foundation is
+    claimed yet.
 
