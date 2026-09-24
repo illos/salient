@@ -1,15 +1,10 @@
 import { runTactician } from './tactician.ts';
-import { runComplicationActions } from './complication-actions.ts';
-import { runStartingItems } from './starting-items.ts';
-import { runStartingRewards } from './starting-rewards.ts';
-import { runCulturePresets } from './culture-presets.ts';
 import { runSupportingActions } from './supporting-actions.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** Live public-operation proof. Expected mechanics come from the pinned V25/V60/V61/V70/V71 witnesses. */
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import type { ScenarioContext, Actor } from './character-client.ts';
-import { runRemainingAncestries } from './remaining-ancestries.ts';
 import { runTraitAbilities } from './trait-abilities.ts';
 import type { DraftSelection } from '../../shared/characterDraft.ts';
 import type { DecisionDefinitions } from '../../shared/evaluate/definitions.ts';
@@ -586,12 +581,8 @@ export async function runScenarios(context: ScenarioContext) {
       },
     );
   } else skip('wizard saved-state boundaries', 'Devil creation prerequisite failed.');
-  // The lifecycle journey is its own `lifecycle` cohort (V163: 'all' neared the 240 s deadline).
+  // Own cohorts, to keep 'all' under the 240 s runner deadline: `lifecycle` (V163), and `ancestries`,
+  // `culture`, `complication-choices`, `complication-table`, `starting-rewards`, `starting-items` (V180).
   await runTraitAbilities(context);
-  await runRemainingAncestries(context);
   await runSupportingActions(context);
-  await runCulturePresets(context);
-  await runComplicationActions(context);
-  await runStartingRewards(context);
-  await runStartingItems(context);
 }

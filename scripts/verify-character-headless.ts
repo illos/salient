@@ -55,6 +55,7 @@ import { runTactician } from './headless/tactician.ts';
 import { runTacticianLevelThree } from './headless/tactician-level-three.ts';
 import { runScenarios } from './headless/character-scenarios.ts';
 import { runCulturePresets } from './headless/culture-presets.ts';
+import { runRemainingAncestries } from './headless/remaining-ancestries.ts';
 import { runComplicationChoices, runComplicationTable } from './headless/complication-actions.ts';
 import { runStartingRewards } from './headless/starting-rewards.ts';
 import { runStartingItems } from './headless/starting-items.ts';
@@ -107,6 +108,7 @@ const cohorts = {
   'shadow-level-two': runShadowLevelTwo,
   'shadow-level-three': runShadowLevelThree,
   'shadow-level-six': runShadowLevelSix,
+  ancestries: runRemainingAncestries,
   culture: runCulturePresets,
   'complication-choices': runComplicationChoices,
   'complication-table': runComplicationTable,
