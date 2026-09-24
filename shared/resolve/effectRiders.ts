@@ -16,7 +16,9 @@ export interface EffectRider {
     | 'taunt'
     | 'terrain'
     | 'free-strike'
-    | 'push-followup';
+    | 'push-followup'
+    | 'forced-movement'
+    | 'end-effect';
   dependency: 'independent' | 'after-damage' | 'after-movement';
   /**
    * V110: `target` wording ("the target", a tier outcome) was written for one target. Pinned
@@ -27,7 +29,8 @@ export interface EffectRider {
 }
 
 // Source examples below are relative to the pinned Compendium en/unified/md.
-const independent: readonly [EffectRider['shape'], RegExp][] = [
+const CHARACTERISTIC = '(?:Might|Agility|Reason|Intuition|Presence)';
+const independent: readonly [EffectRider['shape'], RegExp, EffectRider['dependency']?][] = [
   // feature/ability/fury/level-1/hit-and-run.md; null/level-1/inertial-step.md;
   // shadow/level-1/get-in-get-out.md. Optional timing stays visible, never auto-movement.
   ['shift', /^You can shift (?:up to )?\d+ squares?\.$/],
@@ -94,6 +97,79 @@ const independent: readonly [EffectRider['shape'], RegExp][] = [
     'push-followup',
     /^You can shift up to your speed in a straight line toward the target after pushing them\.$/,
   ],
+  // V152. shadow/level-1/disorienting-strike.md; kit/pugilist.md (Let's Dance).
+  [
+    'push-followup',
+    /^You can shift into any square the target leaves (?:when|after) you slide them\.$/,
+  ],
+  // conduit/level-3/soul-siphon.md; conduit/level-3/words-of-wrath-and-grace.md;
+  // tactician/level-2/ive-got-your-back.md. Each creature spends through their own Recovery action.
+  ['recovery', /^One ally within distance can spend any number of Recoveries\.$/],
+  ['recovery', /^Each ally in the area can spend a Recovery\.$/],
+  ['recovery', /^One ally adjacent to the target can spend a Recovery\.$/],
+  // elementalist/level-1/afflict-a-bountiful-decay.md; elementalist/level-1/test-of-rain.md.
+  // rule/general/saving-throw.md and rule/combat/end-of-turn.md name the two effect kinds.
+  [
+    'end-effect',
+    /^Choose yourself or one ally within distance\. That character can end one effect on them that is ended by a saving throw or that ends at the end of their turn\.$/,
+  ],
+  [
+    'end-effect',
+    /^You can end one effect on yourself that is ended by a saving throw or that ends at the end of your turn\. Each ally in the area also gains this benefit\.$/,
+  ],
+  // conduit/level-1/sacrificial-offer.md. The bane is entered when that later roll is made.
+  [
+    'bane',
+    /^Choose yourself or one ally within distance\. That character can impose a bane on one power roll made against them before the end of their next turn\.$/,
+  ],
+  // conduit/level-1/lightfall.md.
+  [
+    'teleport',
+    /^You can teleport yourself and each ally in the area to unoccupied spaces in the area\.$/,
+  ],
+  // troubadour/level-3/infernal-gavotte.md; kit/corven.md (Wing Buffet);
+  // null/level-1/a-squad-unto-myself.md (Disengage, feature/common/move-actions).
+  ['shift', /^Each ally in the area can shift up to \d+ squares?\.$/],
+  ['shift', /^You can shift up to \d+ squares? before or after making the power roll\.$/],
+  [
+    'shift',
+    /^You can take the Disengage move action as a free maneuver before or after you use this ability\.$/,
+  ],
+  // Forced movement of creatures other than the tier's target (movement/forced-movement.md):
+  // censor/level-1/your-allies-cannot-save-you.md; elementalist/level-1/the-green-within-the-green-without.md;
+  // null/level-1/dance-of-blows.md.
+  [
+    'forced-movement',
+    new RegExp(
+      `^Each enemy adjacent to the target is pushed away from the target up to a number of squares equal to your ${CHARACTERISTIC} score\\.$`,
+    ),
+  ],
+  [
+    'forced-movement',
+    /^You slide one creature within \d+ squares of the target up to \d+ squares?\.$/,
+  ],
+  [
+    'forced-movement',
+    new RegExp(
+      `^You can slide one adjacent enemy up to a number of squares equal to your ${CHARACTERISTIC} score\\.$`,
+    ),
+  ],
+  // talent/level-1/choke.md: the stability exception reads the tier's restrained outcome.
+  [
+    'forced-movement',
+    /^You can vertical pull the target up to \d+ squares?\. If the target is made restrained by this ability, this forced movement ignores their stability\.$/,
+    'after-damage',
+  ],
+  // shadow/level-3/misdirecting-strike.md. The taunting creature is the chosen ally.
+  [
+    'taunt',
+    /^The target is taunted by a willing ally within \d+ squares of you until the end of the target's next turn\.$/,
+  ],
+  // troubadour/level-2/en-garde.md.
+  [
+    'free-strike',
+    /^The target can make a melee free strike against you\. If they do, you can make a melee free strike against the target\.$/,
+  ],
 ];
 
 /** Sections whose printed subject or measure is the (single) target or its tier outcome. */
@@ -116,7 +192,7 @@ export function effectRider(text: string): EffectRider | undefined {
   return match
     ? {
         shape: match[0],
-        dependency: match[0] === 'push-followup' ? 'after-movement' : 'independent',
+        dependency: match[2] ?? (match[0] === 'push-followup' ? 'after-movement' : 'independent'),
         subject,
       }
     : undefined;

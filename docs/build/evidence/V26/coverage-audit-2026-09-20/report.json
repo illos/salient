@@ -5,15 +5,15 @@
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
-      "COMPILES": 22,
-      "COMPILES_WITH_REMAINDER": 148,
+      "COMPILES": 34,
+      "COMPILES_WITH_REMAINDER": 136,
       "NO_MATCH": 201,
       "total": 371,
-      "withinV26Bounded": 17
+      "withinV26Bounded": 19
     },
     "kit-signature": {
-      "COMPILES": 6,
-      "COMPILES_WITH_REMAINDER": 15,
+      "COMPILES": 7,
+      "COMPILES_WITH_REMAINDER": 14,
       "NO_MATCH": 4,
       "total": 25,
       "withinV26Bounded": 1
@@ -5647,7 +5647,7 @@
       "usage": "Main action",
       "target": "One creature or object",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M"
@@ -5679,14 +5679,7 @@
             "damageType": "holy"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "Each enemy adjacent to the target is pushed away from the target up to a number of squares equal to your Presence score.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -9796,7 +9789,7 @@
       "usage": "Main action",
       "target": "Each enemy in the area",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "I"
@@ -9825,14 +9818,7 @@
             "damageType": "holy"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can teleport yourself and each ally in the area to unoccupied spaces in the area.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -10008,7 +9994,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "I"
@@ -10040,14 +10026,7 @@
             "damageType": "corruption"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "Choose yourself or one ally within distance. That character can impose a bane on one power roll made against them before the end of their next turn.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -12083,7 +12062,7 @@
       "target": "One enemy",
       "cost": "7 Piety",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "I"
@@ -12115,14 +12094,7 @@
             "damageType": "corruption"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "One ally within distance can spend any number of Recoveries.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -12175,7 +12147,7 @@
       "target": "Each enemy in the area",
       "cost": "7 Piety",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "I"
@@ -12204,14 +12176,7 @@
             "damageType": "holy"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "Each ally in the area can spend a Recovery.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -12574,7 +12539,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "R"
@@ -12606,14 +12571,7 @@
             "damageType": "corruption"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "Choose yourself or one ally within distance. That character can end one effect on them that is ended by a saving throw or that ends at the end of their turn.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -14726,7 +14684,7 @@
       "target": "Each enemy in the area",
       "cost": "5 Essence",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "R"
@@ -14755,14 +14713,7 @@
             "damageType": "acid"
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can end one effect on yourself that is ended by a saving throw or that ends at the end of your turn. Each ally in the area also gains this benefit.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -14987,7 +14938,7 @@
       "usage": "Main action",
       "target": "One creature",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "R"
@@ -15016,14 +14967,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You slide one creature within 10 squares of the target up to 2 squares.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -18886,7 +18830,7 @@
       "target": "Each enemy in the area",
       "cost": "5 Discipline",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -18912,14 +18856,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can take the Disengage move action as a free maneuver before or after you use this ability.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -19227,7 +19164,7 @@
       "usage": "Main action",
       "target": "Each enemy in the area",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -19253,14 +19190,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can slide one adjacent enemy up to a number of squares equal to your Intuition score.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -22955,12 +22885,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift into any square the target leaves when you slide them.",
-            "locator": "section:1"
-          },
-          {
             "type": "slide",
             "shape": "slide N",
             "text": "slide 2",
@@ -25089,7 +25013,7 @@
       "target": "One creature",
       "cost": "7 Insight",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -25118,14 +25042,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The target is taunted by a willing ally within 5 squares of you until the end of the target's next turn.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -29245,12 +29162,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "One ally adjacent to the target can spend a Recovery.",
-            "locator": "section:1"
-          },
-          {
             "type": "condition",
             "shape": "taunted (eot)",
             "text": "taunted (EoT)",
@@ -30331,12 +30242,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can vertical pull the target up to 2 squares. If the target is made restrained by this ability, this forced movement ignores their stability.",
-            "locator": "section:1"
-          },
-          {
             "type": "potency-condition",
             "shape": "potency:M < SYM slowed (save ends)",
             "text": "M < WEAK, slowed (save ends)",
@@ -30358,7 +30263,7 @@
             "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "single"
       },
       "grants": [
@@ -36588,7 +36493,7 @@
       "target": "One creature",
       "cost": "5 Drama",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -36617,14 +36522,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The target can make a melee free strike against you. If they do, you can make a melee free strike against the target.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -37240,12 +37138,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "Each ally in the area can shift up to 2 squares.",
-            "locator": "section:1"
-          },
-          {
             "type": "potency-condition",
             "shape": "potency:A < SYM weakened (save ends)",
             "text": "A < WEAK, weakened (save ends)",
@@ -37267,7 +37159,7 @@
             "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       },
       "grants": [
@@ -38189,7 +38081,7 @@
       "usage": "Main action",
       "target": "Each enemy in the area",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -38215,14 +38107,7 @@
             }
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift up to 2 squares before or after making the power roll.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -38904,12 +38789,6 @@
           }
         ],
         "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can shift into any square the target leaves after you slide them.",
-            "locator": "section:1"
-          },
           {
             "type": "slide",
             "shape": "slide N",
@@ -107517,8 +107396,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1263,
-      "abilities": 1249,
+      "count": 1245,
+      "abilities": 1231,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -112346,9 +112225,9 @@
     },
     "hero": {
       "total": 468,
-      "compiles": 29,
-      "withRemainder": 165,
-      "withinV26Bounded": 18,
+      "compiles": 42,
+      "withRemainder": 152,
+      "withinV26Bounded": 20,
       "noMatch": 274
     }
   }

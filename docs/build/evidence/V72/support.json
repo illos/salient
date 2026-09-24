@@ -17,13 +17,13 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 47,
-      "manual": 324
+      "supported": 63,
+      "manual": 308
     },
     "kit-signature": {
       "total": 25,
-      "supported": 13,
-      "manual": 12
+      "supported": 15,
+      "manual": 10
     },
     "malice": {
       "total": 14,
@@ -21489,7 +21489,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/your-allies-cannot-save-you.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -21542,22 +21542,14 @@
           "id": "mcdm.heroes.v1/feature.ability.censor.level-1/your-allies-cannot-save-you#block:1:0:9993ab2de1fb87ab",
           "locator": "block:1:0",
           "clause": "Each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) away from the target up to a number of squares equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "forced-movement",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target is [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) away from the target up to a number of squares equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Your Allies Cannot Save You!",
@@ -25559,7 +25551,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/lightfall.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -25609,22 +25601,14 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/lightfall#block:1:0:5df06627d5d376b2",
           "locator": "block:1:0",
           "clause": "You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) yourself and each ally in the area to unoccupied spaces in the area.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "teleport",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) yourself and each ally in the area to unoccupied spaces in the area.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Lightfall",
@@ -25831,7 +25815,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sacrificial-offer.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -25884,22 +25868,14 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sacrificial-offer#block:1:0:3e7a8ac00542e99a",
           "locator": "block:1:0",
           "clause": "Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can impose a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against them before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "bane",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can impose a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against them before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Sacrificial Offer",
@@ -28609,7 +28585,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -28662,22 +28638,14 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/soul-siphon#block:1:0:4c9af986faf5997e",
           "locator": "block:1:0",
           "clause": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend any number of [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "recovery",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend any number of [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Soul Siphon",
@@ -28730,7 +28698,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -28780,22 +28748,14 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/words-of-wrath-and-grace#block:1:0:b2491b19d82282f9",
           "locator": "block:1:0",
           "clause": "Each ally in the area can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "recovery",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Each ally in the area can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Words of Wrath and Grace",
@@ -29221,7 +29181,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -29274,22 +29234,14 @@
           "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/afflict-a-bountiful-decay#block:1:0:7713ac389421ca5d",
           "locator": "block:1:0",
           "clause": "Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "end-effect",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Choose yourself or one ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). That character can end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Afflict a Bountiful Decay",
@@ -32184,7 +32136,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -32234,22 +32186,14 @@
           "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/test-of-rain#block:1:0:112ca149f74a7fb1",
           "locator": "block:1:0",
           "clause": "You can end one effect on yourself that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally in the area also gains this benefit.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "end-effect",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can end one effect on yourself that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally in the area also gains this benefit.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Test of Rain",
@@ -32504,7 +32448,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -32554,22 +32498,14 @@
           "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/the-green-within-the-green-without#block:1:0:912071547437fea6",
           "locator": "block:1:0",
           "clause": "You [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one creature within 10 squares of the target up to 2 squares.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "forced-movement",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one creature within 10 squares of the target up to 2 squares.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "The Green Within, the Green Without",
@@ -38047,7 +37983,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/a-squad-unto-myself.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -38094,22 +38030,14 @@
           "id": "mcdm.heroes.v1/feature.ability.null.level-1/a-squad-unto-myself#block:1:0:ee6dee5865431cab",
           "locator": "block:1:0",
           "clause": "You can take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) before or after you use this ability.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "shift",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) before or after you use this ability.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "A Squad Unto Myself",
@@ -38497,7 +38425,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/dance-of-blows.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -38544,22 +38472,14 @@
           "id": "mcdm.heroes.v1/feature.ability.null.level-1/dance-of-blows#block:1:0:3634d62a5a87d45a",
           "locator": "block:1:0",
           "clause": "You can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) enemy up to a number of squares equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "forced-movement",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) enemy up to a number of squares equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Dance of Blows",
@@ -43495,7 +43415,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/disorienting-strike.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -43572,22 +43492,14 @@
           "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike#block:1:0:8ca9c76c399010e2",
           "locator": "block:1:0",
           "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into any square the target leaves when you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "push-followup",
+          "dependency": "after-movement"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into any square the target leaves when you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Disorienting Strike",
@@ -46440,7 +46352,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/misdirecting-strike.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -46490,22 +46402,14 @@
           "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/misdirecting-strike#block:1:0:8907a8ee4924c08a",
           "locator": "block:1:0",
           "clause": "The target is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by a willing ally within 5 squares of you until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "taunt",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The target is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by a willing ally within 5 squares of you until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Misdirecting Strike",
@@ -50105,7 +50009,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -50191,22 +50095,14 @@
           "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:1:0:16ff4069bae4d0d5",
           "locator": "block:1:0",
           "clause": "One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "recovery",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "I've Got Your Back",
@@ -51668,7 +51564,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/choke.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -51760,22 +51656,14 @@
           "id": "mcdm.heroes.v1/feature.ability.talent.level-1/choke#block:1:0:1e77ed7df28bc635",
           "locator": "block:1:0",
           "clause": "You can vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares. If the target is made [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by this ability, this [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "forced-movement",
+          "dependency": "after-damage"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares. If the target is made [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by this ability, this [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Choke",
@@ -61465,7 +61353,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -61515,22 +61403,14 @@
           "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/en-garde#block:1:0:64f028e9c7714fc9",
           "locator": "block:1:0",
           "clause": "The target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you. If they do, you can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "free-strike",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you. If they do, you can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "En Garde!",
@@ -62345,7 +62225,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -62437,22 +62317,14 @@
           "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/infernal-gavotte#block:1:0:1428bcfd1bf5c297",
           "locator": "block:1:0",
           "clause": "Each ally in the area can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "shift",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Each ally in the area can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Infernal Gavotte",
@@ -63729,7 +63601,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/corven.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -63776,22 +63648,14 @@
           "id": "mcdm.heroes.v1/kit/corven/wing-buffet#block:1:0:56d24ddb20ad6fd8",
           "locator": "block:1:0",
           "clause": "You can shift up to 2 squares before or after making the power roll.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "shift",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can shift up to 2 squares before or after making the power roll.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Wing Buffet",
@@ -64582,7 +64446,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/pugilist.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -64659,22 +64523,14 @@
           "id": "mcdm.heroes.v1/kit/pugilist/let-s-dance#block:1:0:9a2b45bb9241a4d9",
           "locator": "block:1:0",
           "clause": "You can shift into any square the target leaves after you slide them.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "push-followup",
+          "dependency": "after-movement"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can shift into any square the target leaves after you slide them.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Let's Dance",
@@ -214306,8 +214162,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 108,
-    "compatibility": 1513,
+    "compiled": 126,
+    "compatibility": 1495,
     "compiledButUnavailable": 0
   }
 }

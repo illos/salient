@@ -152,3 +152,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V151 | [Level 2–3 follow-up actions](V151-follow-up-actions.md) | Merged (`b0f7c53`); cloud dev published with content reseed; gate and headless PASS at tip |
 | V150 | [Self-Taught forgo for automatic heroic resources](V150-self-taught-forgo.md) | Ready for integration; TESTER PASS at 50f066d5, independent review and QC1 PASS |
 | V138 | [Summoner levels two and three](V138-summoner-level-three.md) | Merged (`b0f7c53`); cloud dev published with content reseed; gate and headless PASS at tip |
+| V152 | [Effect rider grammar II](V152-effect-rider-grammar.md) | In progress (ENGINE2) |

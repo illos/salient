@@ -56,6 +56,25 @@ test.each([
   ['Come On!', 'free-strike'],
   ['I Feed On Your Pain!', 'surges'],
   ['Command Saber', 'free-strike'],
+  // V152, pinned sources named in shared/resolve/effectRiders.ts.
+  ['Your Allies Cannot Save You!', 'forced-movement'],
+  ['Lightfall', 'teleport'],
+  ['Sacrificial Offer', 'bane'],
+  ['Soul Siphon', 'recovery'],
+  ['Words of Wrath and Grace', 'recovery'],
+  ['Afflict a Bountiful Decay', 'end-effect'],
+  ['Test of Rain', 'end-effect'],
+  ['The Green Within, the Green Without', 'forced-movement'],
+  ['A Squad Unto Myself', 'shift'],
+  ['Dance of Blows', 'forced-movement'],
+  ['Disorienting Strike', 'push-followup'],
+  ['Misdirecting Strike', 'taunt'],
+  ["I've Got Your Back", 'recovery'],
+  ['Choke', 'forced-movement'],
+  ['En Garde!', 'free-strike'],
+  ['Infernal Gavotte', 'shift'],
+  ['Wing Buffet', 'shift'],
+  ["Let's Dance", 'push-followup'],
 ])('%s retains a whole source-linked manual %s rider', (name, shape) => {
   const definition = compileAbility(envelope(name));
   expect(definition.execution).toBe('supported');
@@ -82,6 +101,38 @@ test.each([
   const definition = compileAbility(envelope(name));
   expect(definition.execution).toBe('manual');
   expect(definition.sections.some(n => n.kind === 'unsupported')).toBe(true);
+});
+
+// V152 exclusions. Call the Thunder Down's "the same distance" reads each target's tier push;
+// Thunder Roar orders the tier pushes on an area; Ripples in the Earth's use requirement would
+// only be shown after the roll it gates.
+test.each(['Call the Thunder Down', 'Thunder Roar', 'Ripples in the Earth'])(
+  '%s keeps its Effect section manual',
+  name => {
+    const definition = compileAbility(envelope(name));
+    expect(definition.execution).toBe('manual');
+    expect(definition.sections.some(n => n.kind === 'unsupported')).toBe(true);
+  },
+);
+
+test('V152 dependencies follow the printed reader', () => {
+  const choke = compileAbility(envelope('Choke')).sections[0]!;
+  expect(choke).toMatchObject({ kind: 'rider', dependency: 'after-damage' });
+  expect(compileAbility(envelope('Disorienting Strike')).sections[0]).toMatchObject({
+    dependency: 'after-movement',
+  });
+  expect(compileAbility(envelope('Soul Siphon')).sections[0]).toMatchObject({
+    dependency: 'independent',
+  });
+  // Whole-sentence admission: a changed amount or an added clause is not the printed rider.
+  expect(
+    effectRider('Each ally in the area can spend a Recovery and gain 5 surges.'),
+  ).toBeUndefined();
+  expect(
+    effectRider(
+      'You can slide one adjacent enemy up to a number of squares equal to your Luck score.',
+    ),
+  ).toBeUndefined();
 });
 
 test('whole text, explicit Effect label, and printed after-roll position bound admission', () => {

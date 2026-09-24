@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 108; unchanged reachable compatibility: 1513; structurally supported but unavailable: 0.
+Currently reachable compiled: 126; unchanged reachable compatibility: 1495; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -145,7 +145,7 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Purifying Fire | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Repent! | hero-standalone | supported | compiled |  |
 | The Gods Punish and Defend | hero-standalone | supported | compiled |  |
-| Your Allies Cannot Save You! | hero-standalone | manual | legacy-compatibility | manual-section |
+| Your Allies Cannot Save You! | hero-standalone | supported | compiled |  |
 | Blessing of the Faithful | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | It Is Justice You Fear | hero-standalone | manual | legacy-compatibility | manual-section |
 | Prescient Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
@@ -176,9 +176,9 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Healing Grace | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Holy Lash | hero-standalone | supported | compiled |  |
 | Judgment's Hammer | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
-| Lightfall | hero-standalone | manual | legacy-compatibility | manual-section |
+| Lightfall | hero-standalone | supported | compiled |  |
 | Ray of Wrath | hero-standalone | manual | legacy-compatibility | manual-section |
-| Sacrificial Offer | hero-standalone | manual | legacy-compatibility | manual-section |
+| Sacrificial Offer | hero-standalone | supported | compiled |  |
 | Sermon of Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Staggering Curse | hero-standalone | supported | compiled |  |
 | Violence Will Not Aid Thee | hero-standalone | manual | legacy-compatibility | manual-section |
@@ -200,11 +200,11 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Wellspring of Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Fear of the Gods | hero-standalone | manual | legacy-compatibility | manual-section |
 | Saint's Raiment | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
-| Soul Siphon | hero-standalone | manual | legacy-compatibility | manual-section |
-| Words of Wrath and Grace | hero-standalone | manual | legacy-compatibility | manual-section |
+| Soul Siphon | hero-standalone | supported | compiled |  |
+| Words of Wrath and Grace | hero-standalone | supported | compiled |  |
 | Draconian Pride | hero-standalone | supported | compiled |  |
 | Dragon Breath | hero-standalone | manual | legacy-compatibility | manual-section |
-| Afflict a Bountiful Decay | hero-standalone | manual | legacy-compatibility | manual-section |
+| Afflict a Bountiful Decay | hero-standalone | supported | compiled |  |
 | Behold the Mystery | hero-standalone | manual | legacy-compatibility | manual-section |
 | Bifurcated Incineration | hero-standalone | supported | compiled |  |
 | Breath of Dawn Remembered | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
@@ -224,9 +224,9 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Shared Void Sense | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Skin Like Castle Walls | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Subtle Relocation | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Test of Rain | hero-standalone | manual | legacy-compatibility | manual-section |
+| Test of Rain | hero-standalone | supported | compiled |  |
 | The Flesh, a Crucible | hero-standalone | manual | legacy-compatibility | manual-section |
-| The Green Within, the Green Without | hero-standalone | manual | legacy-compatibility | manual-section |
+| The Green Within, the Green Without | hero-standalone | supported | compiled |  |
 | Unquiet Ground | hero-standalone | supported | compiled |  |
 | Viscous Fire | hero-standalone | supported | compiled |  |
 | O Flower Aid, O Earth Defend | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
@@ -266,10 +266,10 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Steelbreaker | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | You Are Already Dead | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Aspect of the Wild | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| A Squad Unto Myself | hero-standalone | manual | legacy-compatibility | manual-section |
+| A Squad Unto Myself | hero-standalone | supported | compiled |  |
 | Arcane Disruptor | hero-standalone | manual | legacy-compatibility | manual-section |
 | Chronal Spike | hero-standalone | manual | legacy-compatibility | manual-section |
-| Dance of Blows | hero-standalone | manual | legacy-compatibility | manual-section |
+| Dance of Blows | hero-standalone | supported | compiled |  |
 | Faster Than the Eye | hero-standalone | manual | legacy-compatibility | manual-section |
 | Impart Force | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
 | Inertial Shield | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
@@ -301,7 +301,7 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Coat the Blade | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Coup de Grace | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder |
 | Defensive Roll | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Disorienting Strike | hero-standalone | manual | legacy-compatibility | manual-section |
+| Disorienting Strike | hero-standalone | supported | compiled |  |
 | Eviscerate | hero-standalone | supported | compiled |  |
 | Gasping in Pain | hero-standalone | supported | compiled |  |
 | Get In Get Out | hero-standalone | supported | compiled |  |
@@ -323,7 +323,7 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Too Slow | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Careful Observation | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Dancer | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Misdirecting Strike | hero-standalone | manual | legacy-compatibility | manual-section |
+| Misdirecting Strike | hero-standalone | supported | compiled |  |
 | Pinning Shot | hero-standalone | supported | compiled |  |
 | Staggering Blow | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Night Watch | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
@@ -351,7 +351,7 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | "Strike Now!" | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | This Is What We Planned For | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Fog of War | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| I've Got Your Back | hero-standalone | manual | legacy-compatibility | manual-section |
+| I've Got Your Back | hero-standalone | supported | compiled |  |
 | No Dying on My Watch | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, action-type |
 | Squad! On Me! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Targets of Opportunity | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
@@ -363,7 +363,7 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Accelerate | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Again | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Awe | hero-standalone | manual | legacy-compatibility | manual-section |
-| Choke | hero-standalone | manual | legacy-compatibility | manual-section |
+| Choke | hero-standalone | supported | compiled |  |
 | Entropic Bolt | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
 | Feedback Loop | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Flashback | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
@@ -421,14 +421,14 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Upstage | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Witty Banter | hero-standalone | manual | legacy-compatibility | manual-section |
 | Classic Chandelier Stunt | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| En Garde! | hero-standalone | manual | legacy-compatibility | manual-section |
+| En Garde! | hero-standalone | supported | compiled |  |
 | Encore | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Guest Star | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Tough Crowd | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Twist at the End | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Extensive Rewrites | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
 | "Fire Up the Night" | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Infernal Gavotte | hero-standalone | manual | legacy-compatibility | manual-section |
+| Infernal Gavotte | hero-standalone | supported | compiled |  |
 | "Never-Ending Hero" | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Star Solo | hero-standalone | manual | legacy-compatibility | manual-section |
 | We Meet at Last | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
@@ -437,13 +437,13 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1513; stru
 | Unmooring | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
 | Bear Claws | kit-signature | supported | compiled |  |
 | Fade | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder |
-| Wing Buffet | kit-signature | manual | legacy-compatibility | manual-section |
+| Wing Buffet | kit-signature | supported | compiled |  |
 | Double Strike | kit-signature | manual | legacy-compatibility | manual-section |
 | Forward Thrust, Backward Smash | kit-signature | supported | compiled |  |
 | Battle Grace | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Pain for Pain | kit-signature | manual | legacy-compatibility | manual-section |
 | Devastating Rush | kit-signature | manual | legacy-compatibility | manual-section |
-| Let's Dance | kit-signature | manual | legacy-compatibility | manual-section |
+| Let's Dance | kit-signature | supported | compiled |  |
 | Driving Pounce | kit-signature | supported | compiled |  |
 | Raider's Awe | kit-signature | supported | compiled |  |
 | Hamstring Shot | kit-signature | supported | compiled |  |
