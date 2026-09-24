@@ -146,7 +146,8 @@ coordination boundary for implementation, not a missing source threshold.
 
 The source also restores all Stamina and Recoveries at respite completion
 (`rule/resource/respite.md`). Keep that source restoration **separate** from build activation.
-Q-CHAR-2 defines the app's activation reconciliation, `newCurrent = min(oldCurrent, newMaximum)`,
+Q-CHAR-2 (revised 2026-09-24; this V32 contract used the 2026-09-15 rule) now defines activation
+reconciliation as `newCurrent = newMaximum − (oldMaximum − oldCurrent)`; V32 shipped the earlier `min(oldCurrent, newMaximum)`,
 without a zero floor or accidental refills. Examples for a build activation alone:
 
 - Stamina20/30 → 20/39; Recoveries7/10 → 7/10; keep conditions and compatible counters.

@@ -356,9 +356,9 @@ No user approval is implied by this classification.
   an edit changes Stamina/Recovery maxima or the resource type, the resulting current values are not.
 - **Original recommendation (superseded):** Preserve the damage/spending deficit when maxima rise,
   e.g. Stamina 20/30 → 26/36. The user's clarification instead keeps current amounts unchanged.
-- **Answer:** Maximum increases do not increase current values. Stamina 20/30 → 20/36; Recoveries
-  7/10 → 7/12. When a lower maximum is below the current amount, cap it to that maximum: 20/30 →
-  18/18 if the new maximum is 18. Preserve conditions and compatible counters. Derived statistics
+- **Answer (2026-09-15, superseded 2026-09-24):** maximum increases did not increase current values
+  (20/30 → 20/36), capping on decrease. **Current answer:** damage taken and Recoveries spent stay the
+  same both ways (20/30 → 26/36; 26/36 → 20/30; Recoveries 7/10 → 9/12). Preserve conditions and compatible counters. Derived statistics
   still recalculate; actual restoration remains separate. Replaced resource types require explicit
   reconciliation; no automatic conversion is established. Record and apply through shared UI/headless
   activation under existing locks/review.

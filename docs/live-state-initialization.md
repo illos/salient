@@ -35,8 +35,8 @@ Ferocity creation value is R02's interpretation (section 1.11 there) and is refe
 Damage application, winded, Slain and Catch Breath arithmetic are R04
 (`docs/roll-and-damage-resolution.md`, sections 6 and 7). Condition ids and toggle semantics are R05
 (`docs/conditions-and-clock.md`, section 1). Reconciliation of live values when an activated build
-changes a maximum follows **Q-CHAR-2, confirmed 2026-09-15** (section 3): retain current amounts,
-cap only amounts above a new maximum. Explicit resource-type reconciliation remains separate.
+changes a maximum follows **Q-CHAR-2, revised 2026-09-24** (section 3): keep damage taken and
+Recoveries spent unchanged as maxima rise or fall. Explicit resource-type reconciliation remains separate.
 
 ## 1. Terms
 
@@ -198,7 +198,7 @@ values (1 and 1 for the fixture) under the same rule as section 3.
 **In one sentence: saving a draft and re-evaluating a build recompute only the derived baseline and
 never read or write live values, which change only through registered table operations; the sole
 exception is activating a changed build on an existing live record, which applies the confirmed
-current-value/downward-cap policy (Q-CHAR-2) and explicitly reconciles incompatible resource types.**
+current-value policy (Q-CHAR-2: damage taken and Recoveries spent stay the same) and explicitly reconciles incompatible resource types.**
 
 Grounds: "Reopening the wizard or recalculating the character must not heal damage, replenish
 resources, remove conditions, or erase manual adjustments." and "Treat a build or item change that
@@ -212,13 +212,13 @@ Consequences for the application:
 
 1. A draft preview evaluates against the draft and shows the baseline it would produce; it is labeled
    and cannot act at the table (`docs/character-sheet-spec.md#views-permissions-and-persistence`).
-2. **Confirmed 2026-09-15 (Q-CHAR-2):** Activating a later build updates the baseline and retains
-   compatible current amounts. For a value with a maximum, use `min(oldCurrent, newMaximum)`:
-   Stamina 20/30 → 20/36 on increase, or 18/18 if the maximum falls to 18. Recoveries 7/10 → 7/12,
-   or 6/6 if the maximum falls to six. Do not preserve the old damage/spending deficit by adding
-   the maximum increase to current values. Preserve conditions/counters and source-authorized
+2. **Confirmed 2026-09-15, revised 2026-09-24 (Q-CHAR-2):** Activating a later build updates the
+   baseline and keeps the damage taken and Recoveries spent: `newCurrent = newMaximum − (oldMaximum −
+   oldCurrent)`, both when a maximum rises and falls. Stamina 20/30 → 26/36, or 20/30 from 26/36;
+   Recoveries 7/10 → 9/12. The floor on a decrease is an open proposal (1 Stamina, 0 Recoveries).
+   Preserve conditions/counters and source-authorized
    negative values. Derived statistics recalculate; actual respite restoration is separate.
-   Preview and commit the build and caps atomically using the same shared UI/headless operation.
+   Preview and commit the build and current values atomically using the same shared UI/headless operation.
    Replaced resource types require explicit reconciliation, with no automatic cross-resource mapping.
    See [the owning policy](character-wizard-spec.md#current-values-when-a-build-changes).
    **Implementation, 2026-09-15:** shared activation now consumes the same reconciliation preview
@@ -1059,7 +1059,7 @@ ability was the file body in the experiment and is the complete file here (S01 c
 
 | Id | Where | Status |
 | --- | --- | --- |
-| Q-CHAR-2 | section 3, build activation | resolved 2026-09-15; retain current amounts, cap above new maxima; explicit reconciliation for incompatible resource types |
+| Q-CHAR-2 | section 3, build activation | resolved 2026-09-15, revised 2026-09-24; keep damage taken and Recoveries spent as maxima change; explicit reconciliation for incompatible resource types |
 | Q-R-200 | section 2.3, foe `slain` label after a Director edit above zero | resolved 2026-09-14; user confirmed that raising Stamina above zero automatically clears Slain |
 | Q-R-201 | section 3, new-campaign admission | resolved 2026-09-15; campaign-tracked live state resets to full/normal initial values against the admitted build |
 | Q-CHAR-3 | section 2.1.7, XP of a transferred higher-level hero | resolved 2026-09-15; admission-level eligibility offset, campaign awards XP, character sheet owns level-up |

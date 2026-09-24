@@ -31,3 +31,6 @@ and generic level-up for all eleven classes can be built. Design only: no code.
   (30/30 → 36/36; 20/30 → 26/36; 26/36 → 20/30), which also covers late level-ups. Open proposal: floor
   a decrease at 1 Stamina / 0 Recoveries. Build handoff: the activation code implements the old
   keep-current/cap rule and must change with generic level-up.
+- Build handoff for Q-CHAR-2 revised: `shared/evaluate/liveReconciliation.ts` (preview/apply, contract in
+  `shared/contracts/liveState.ts`), used by `convex/lib/characterBuild.ts` activation, still implements
+  `min(oldCurrent, newMaximum)`; change it to keep damage taken and Recoveries spent, with its tests.
