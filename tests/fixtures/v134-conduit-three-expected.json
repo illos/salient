@@ -1,0 +1,3603 @@
+{
+  "schemaVersion": "v134-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "derivation": {
+    "method": "Authored from the pinned Steel Compendium only (canonical checkout at the main repo vendor/steel-compendium, HEAD fb83a789da8f0327a389c277a0c790b1648d5810 verified with git rev-parse, equal to the v100 compendiumRevision). Expected values are handwritten arithmetic from cited passages; no implementation code under shared/evaluate, shared/content/classes, shared/content/character-decisions.ts, convex or scripts/headless was read or run. Baselines are the reviewed v100 level-one witnesses.",
+    "staminaMaximum": "class/conduit.md Basics: Starting Stamina 18, Stamina Gained at 2nd and Higher Levels 6. The Conduit has no kit. Prayer of Steel +6 Stamina (feature/conduit/level-1/prayer-of-steel.md; increases only at 4th, 7th, 10th). Prayer of Soldier's Skill +3 Stamina only while wearing light armor: inactive, following the v100 convention that equipment effects are inactive (uncertainty soldiers-skill-armor). L2 = 24 (30 with Steel); L3 = 30 (36 with Steel).",
+    "recoveryValue": "floor(Stamina maximum / 3) (rule/health/recoveries.md \"one-third of their Stamina maximum, rounded down\")",
+    "windedValue": "floor(Stamina maximum / 2) (rule/health/winded.md; rule/general/always-round-down.md)",
+    "recoveriesMaximum": "class/conduit.md Basics: 8; unchanged at levels 2-3.",
+    "noNumericSheetChange": "EXPLICIT: no level-2 or level-3 Conduit feature changes a numeric sheet value. The Lists of Heaven (extra Recovery spend when you let another creature spend one), Perk, 2nd-Level Domain Feature (second domain's 1st-level feature + skill), 2nd-Level Domain Ability, Minor Miracle (respite resurrection; you regain only half your Recoveries at the end of that respite) and the 7-Piety Ability are all actions or situational/manual. Of the second-domain features actually gained, Revitalizing Ritual's bonus to recovery value equal to your level (2 at L2, 3 at L3) applies only to a character chosen at the end of a respite until the next respite, so it is NOT folded into the static recoveryValue; Hands of the Maker, Grave Speech, Oracular Visions and Blessing of Comprehension have no numeric sheet effect. None of the chosen perks has a numeric sheet effect. The only numeric changes are the level-driven Stamina +6 per level and the derived recovery/winded values. Speed, stability, disengage, saving-throw threshold, characteristics, potency and recoveries stay at v100 values.",
+    "abilityCounts": "Advancement table: level 2 adds one domain ability (Abilities column unchanged: two signature, 3, 5; Domain Abilities 5); level 3 adds one 7-piety ability (Abilities two signature, 3, 5, 7; Domain Abilities 5).",
+    "secondDomainFeature": "feature/conduit/level-2/2nd-level-domain-feature.md: gain the 1st-level domain feature and the ability to choose a skill for the domain selected at 1st level whose feature was not taken, i.e. the OTHER chosen domain. Feature and skill group per feature/conduit/level-1/1st-level-domain-feature.md table.",
+    "domainAbilityChoice": "feature/conduit/level-2/2nd-level-domain-ability.md: choose one of your domains, gain its table ability. Every witness chooses its level-one feature domain, so all twelve abilities are covered once.",
+    "ability7Choice": "Cycled in v100 witness order: Fear of the Gods, Saint's Raiment, Soul Siphon, Words of Wrath and Grace (repeat).",
+    "abilityDamage": "\"X + I\" adds the Intuition score (every witness I2). Prayer of Destruction +1 to rolled damage with magic abilities applied where the witness has that prayer (v100-creation, v100-love, v100-trickery) and the ability has the Magic keyword (all sixteen do), including non-Strike area abilities, matching the v100 method. No kit exists. Sanctified Weapon (v100-war) applies only to abilities that use the blessed weapon; Prayer of Soldier's Skill +1 only to weapon abilities; neither applies.",
+    "distance": "Prayer of Distance (v100-death, v100-nature, v100-war) +2 to the distance of ranged magic abilities: Ranged 10 -> Ranged 12; \"3 cube within 10\" -> \"3 cube within 12\" by interpretation (uncertainty prayer-of-distance-area-within). Bursts/auras have no Ranged keyword and are unchanged.",
+    "potency": "Conduit potency weak I-2 / average I-1 / strong I = 0/1/2 with Intuition 2 (class/conduit.md; rule/character/potency.md).",
+    "perkChoice": "One distinct eligible crafting/lore/supernatural perk per witness, none with sub-choices, none already owned (every base owns only Teamwork, an exploration perk).",
+    "secondDomainSkillChoice": "One skill per witness from the other domain's skill group, not already held (held = v100 expected skills)."
+  },
+  "sources": [
+    {
+      "path": "en/unified/md/class/conduit.md",
+      "sha256": "92961bfdac444aa8ff31cddba4e3c0587e3dbfa06bd771a02670a6d4d408f5f5"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-2/the-lists-of-heaven.md",
+      "sha256": "69820604199ef1e9ac6b5ff0303cd5db99f036a796655e231fe24387836e58fe"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-2/perk.md",
+      "sha256": "c22a48216281a0ced0fdc044e7513fc707ec6cdc591737a7470f8f1c831ccd68"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-2/2nd-level-domain-feature.md",
+      "sha256": "9ffc124b2de75beba04b27e45b20fdaf829f48b34c4e580866599801781f995f"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-2/2nd-level-domain-ability.md",
+      "sha256": "70c2c8c19dec4439034cf54008e855758db2032046c4233ec225208c9963ac85"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-3/minor-miracle.md",
+      "sha256": "a9c5d6e2c62ec41a0c4e8d164049a0e2fb700b85a3c1c9ed1db63198e345300e"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-3/7-piety-ability.md",
+      "sha256": "5b4c5757319615a23c190ce3f41a22735746fe53f15c0764d143e7df31c0faa3"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/1st-level-domain-feature.md",
+      "sha256": "93c3912178aa28e4086fd350ab37b5d7defc9c4d3fd4935237916c6ec9b52587"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/hands-of-the-maker.md",
+      "sha256": "d203190f36e552c5f91d057c2e4dce457b926d0aa28a27cd1e7cc05337b088de"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/grave-speech.md",
+      "sha256": "0b434b4e8745153f893a7bc171c361408dca2b624e18c4756aee88e74481c21e"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/oracular-visions.md",
+      "sha256": "0b6e2bd63a97c832836b08485c2fd44f578d6322c378790ad2a3c8bbae955cb6"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/blessing-of-comprehension.md",
+      "sha256": "a610afece34970830427dbd19ed09e6c6eccb41fe0b812f7f5433f73aca51868"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/revitalizing-ritual.md",
+      "sha256": "fb998adfb40ba69c4922f7b41c2a5b52065782b051ee050150313fc65ed51769"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/blessing-of-compassion.md",
+      "sha256": "984feeec2378cd71cc035b95ed49255e3742b4113555ca326d6af21c80bd63a2"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/faithful-friend.md",
+      "sha256": "ff52db5228329309870d4b6b55a31391d6b478cdca982611f3249ce193ddc2fd"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/protective-circle.md",
+      "sha256": "5702a33d90039c16b5ed648cdca918281f6f09fe22e30f5d2002e398c35aaea3"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/blessing-of-fortunate-weather.md",
+      "sha256": "1a3bfa837f11a2201857f15ed187f469b816a9fe1c874284adb62015022e7822"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/inner-light.md",
+      "sha256": "4aa196bec175047161e2dc8dd7f0057c1d39a3ab9905960673bab6b14831c72d"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/inspired-deception.md",
+      "sha256": "67f5b19efe978b1e743c36de322a84f5fe9df74ed4df90cc9b5c869e484a94af"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/sanctified-weapon.md",
+      "sha256": "74ab3c5a7235977da73e302817d4f5358c987aa1681b559e4f147bd5d8bc8c8a"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+      "sha256": "4b3e15ed017cc4932727fe2156d48cda05a9c11a1b000deaab35ea3afa7612e1"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+      "sha256": "9e8642b3dc22791e32eb3d40e6c7d5a42955d5ffe354f5a2704f687a90df496b"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/prayer-of-destruction.md",
+      "sha256": "8259938783941b8db5abd26c141e171ba7b575c6b92e4548e06aca6d4609cba8"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/prayer-of-distance.md",
+      "sha256": "89f448fc148b5aeeb763e975e5611f7ef7ee5a9b91a3187cae708de20e6dcf69"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/prayer-of-steel.md",
+      "sha256": "fa17ff6ff6429b45830827dc9aca1496e3eebf3bff62268e11e439bde147ce05"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/prayer-of-speed.md",
+      "sha256": "199a7a071866476402fde3eabac52e9cbdc848e47a518e51ab0d45e6e3b532b3"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/prayer-of-soldiers-skill.md",
+      "sha256": "2dd32e18072c19ac2e54725763a98bcf0612bb0829312b2512fdfc0d7490736b"
+    },
+    {
+      "path": "en/unified/md/feature/conduit/level-1/bastion-ward.md",
+      "sha256": "26ed693669a194c9f31d5d024227142426cc1558bad0e1df45dcd2753c8fafd0"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+      "sha256": "57338cc473a9c5d550e32cfa07e0b62f86d82360341d492f88c22eda43ecff01"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/reap.md",
+      "sha256": "7727bdac2a8b07c0ed6b18997906a30b257ad77ef4b131f6febcb5af4de6332b"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+      "sha256": "7d5f09dd2dfb0746374004daecbebf5317eb490306784c4ef5de40d114f99822"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+      "sha256": "7a59d0d48db00f824d42a0b217da54342a24ba5aa390ebd6566bb5ca118336b8"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+      "sha256": "7c500c48147797b2947fa1bffa9438e0cd077abbad5a47f965538969478caa45"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+      "sha256": "acb72758f7eacf400d00540c8fa3bcf2e8a37d67174d4f3c52f136ba133b9a85"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+      "sha256": "fe7f66f865bd6e3e96bb2b7101a5d5cf2ba9e1dc421d2a1abaea566f47cdb41c"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+      "sha256": "4da22232c4d38ad484540a2ca40b6c52953d3ce6e9a48ba25934cfa7cf0e5025"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+      "sha256": "9d69a3a094023d2cffc28405325a1dc266d388408b3a1f503e2c5a735738d5bd"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+      "sha256": "64bf85a31b605d67bc6db4300a2606de6d8525d13dad29667b12c5a4ae9eb8af"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+      "sha256": "a255888bf9966df8b02f4336c61b25494999a1a12ab1b2a275a928ac546590d8"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+      "sha256": "45f1a1c1ab19680f1c3b217173287af6bdfa6794e33a1919af464edf604f3059"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+      "sha256": "d4f9f4fed86fcdd49778ec6001ea7f897f47e49811521338810391f55e6496c4"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+      "sha256": "c6c64df45586e7a8b7088753fcbddd9cf480a5cf4736b1eceb55b0f0c4a098dd"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+      "sha256": "393f647bf615d7b2b349447500369d6fd13c2ed92372a71aee427543ceb97de2"
+    },
+    {
+      "path": "en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+      "sha256": "c1c3017392f4fa336392de3b45c4bc099414aba9f760ea6d5b448fc3c76f6ff3"
+    },
+    {
+      "path": "en/unified/md/rule/health/recoveries.md",
+      "sha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9"
+    },
+    {
+      "path": "en/unified/md/rule/health/winded.md",
+      "sha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee"
+    },
+    {
+      "path": "en/unified/md/rule/health/stamina.md",
+      "sha256": "d7eea9fb59d98e1efcc0527230cc862d911a621cc042d58b923565ac4c55b04b"
+    },
+    {
+      "path": "en/unified/md/rule/general/always-round-down.md",
+      "sha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783"
+    },
+    {
+      "path": "en/unified/md/rule/general/echelon.md",
+      "sha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3"
+    },
+    {
+      "path": "en/unified/md/rule/character/potency.md",
+      "sha256": "8c07c502b4576b369fbc6efba6da0327d84489b8f1343ee9dadf548b99a6c8d6"
+    },
+    {
+      "path": "en/unified/md/rule/combat/distance.md",
+      "sha256": "5992a7b80ecd7781c5819c63313a0c6c8f6f19748eb208c0f37dc2dad729c56f"
+    },
+    {
+      "path": "en/unified/md/rule/combat/area-of-effect.md",
+      "sha256": "45ee0fea829ce0d0331669be789d63adcfdc7c6e03ebf228b3350251cbf4044b"
+    },
+    {
+      "path": "en/unified/md/chapter/kits.md",
+      "sha256": "bc723dd87b9c660c589fb96f984b285b447eda457c468b89029fd11fec0d16ad"
+    },
+    {
+      "path": "en/unified/md/feature/trait/human/determination.md",
+      "sha256": "9c9b3caa6ddd8f0cf952e249dfd84377a178bbd0e6c84e3b48ed9785624eada8"
+    },
+    {
+      "path": "en/unified/md/feature/trait/human/cant-take-hold.md",
+      "sha256": "38329e075c92df1feb5838aeb0410fe339edbb569ef2ec9a42713d12fddc4e90"
+    },
+    {
+      "path": "en/unified/md/perk/area-of-expertise.md",
+      "sha256": "aea32a37cbc1c0c511c1fe0006d668f374555fb8c73d51220b601a06938e3518"
+    },
+    {
+      "path": "en/unified/md/perk/expert-artisan.md",
+      "sha256": "4039cf73d49f0fb402f196447831eba74d39bb078eb48082c61c2b29e9178cd9"
+    },
+    {
+      "path": "en/unified/md/perk/handy.md",
+      "sha256": "066998fed4b8d9d68a19c4d28bcbd372b5119e3b08feb95477721006bbf3783d"
+    },
+    {
+      "path": "en/unified/md/perk/improvisation-creation.md",
+      "sha256": "5c361a7a7ea6c15697884338407ffd7457982d58a91092fac0e6aa42b4b696fd"
+    },
+    {
+      "path": "en/unified/md/perk/inspired-artisan.md",
+      "sha256": "eb03d65996de23a173dc463490be5f485ea1dcb24b626aef629d6e3d7d8472bf"
+    },
+    {
+      "path": "en/unified/md/perk/traveling-artisan.md",
+      "sha256": "cc7fe99c1d2657e2796d4895037e787237b378324992093fd073fe3be2f32159"
+    },
+    {
+      "path": "en/unified/md/perk/but-i-know-who-does.md",
+      "sha256": "773041fb12df7f3b98026bd758b131f4d3e192a4409b5e39cff7039797efc747"
+    },
+    {
+      "path": "en/unified/md/perk/eidetic-memory.md",
+      "sha256": "4a9ebb9ace6832bc1823dbf953328274c8a8b15a8768ac85f87095aad9553b66"
+    },
+    {
+      "path": "en/unified/md/perk/expert-sage.md",
+      "sha256": "a5901ec4c7b8c1e19dc7666bb0f7dd90410fb390057523900c71e7eb28b98941"
+    },
+    {
+      "path": "en/unified/md/perk/ive-read-about-this-place.md",
+      "sha256": "0b095fa39be55c4bc88bd6496fe34251dd2551a246024e12e5ad2ae9995dd43d"
+    },
+    {
+      "path": "en/unified/md/perk/linguist.md",
+      "sha256": "f29f9ccb58efc38689ee82511550c1ca7f5ef4586284769562f0c54aaad3a34a"
+    },
+    {
+      "path": "en/unified/md/perk/polymath.md",
+      "sha256": "0881867c8e7df430e015843386efcde9bcfe52e64ef1efbd6034cc0a28306a51"
+    },
+    {
+      "path": "en/unified/md/perk/specialist.md",
+      "sha256": "9bc5dd8f63acb56f3b3cc4401756f572e57b798fcecac115ef2dc80abbf83959"
+    },
+    {
+      "path": "en/unified/md/perk/traveling-sage.md",
+      "sha256": "d748909cae863e8c24044b3c984bb706f3c73dda0cbeb296f03c8f730122f7e3"
+    },
+    {
+      "path": "en/unified/md/perk/arcane-trick.md",
+      "sha256": "9f68b9e9c20e26563d28902fde5be43406fe9bc86620e20d349b69d72238ecd9"
+    },
+    {
+      "path": "en/unified/md/perk/creature-sense.md",
+      "sha256": "629d9c29745e9b27ff98ea6fbb98f8bcde989246d6d3784504845962a45244f7"
+    },
+    {
+      "path": "en/unified/md/perk/familiar.md",
+      "sha256": "14b0c85eb82249a55187e52242f1303d7ef0c412809cd2e946454493e21d2a50"
+    },
+    {
+      "path": "en/unified/md/perk/invisible-force.md",
+      "sha256": "acf537f685a922148fef66e3a050cfa14c7ec295808837f16ce5ebeee417b8b8"
+    },
+    {
+      "path": "en/unified/md/perk/psychic-whisper.md",
+      "sha256": "44a02577f732e3c71662b66758769dbca1f61d1b73c445b9c1e44c32d6559506"
+    },
+    {
+      "path": "en/unified/md/perk/ritualist.md",
+      "sha256": "e6604fbbb3a559f45cc715f8fb8e8c1ecfdc694220126da1a139a4935fda9c73"
+    },
+    {
+      "path": "en/unified/md/perk/thingspeaker.md",
+      "sha256": "e04a3f7084ca7f3b7fd94477e9eaf9be88c264151b89adce7601e9fdecc8916f"
+    },
+    {
+      "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "unlinked-table-entries",
+      "passage": "en/unified/md/feature/conduit/level-2/2nd-level-domain-ability.md table rows \"Death | Reap\" (no link) and \"Storm | [Saint]'s Tempest\" (link covers only \"Saint\").",
+      "resolution": "en/unified/md/feature/ability/conduit/level-2/reap.md (subclass: death) and saints-tempest.md (subclass: storm) exist with 5 Piety cost; book lines 6546 and 6566 carry the same blocks. Mapping Death->Reap, Storm->Saint's Tempest.",
+      "alternatives": ["none needed; front matter subclass and book agree"]
+    },
+    {
+      "id": "prayer-of-distance-area-within",
+      "passage": "en/unified/md/feature/conduit/level-1/prayer-of-distance.md \"+2 bonus to the distance of your ranged magic abilities\"; en/unified/md/rule/combat/area-of-effect.md calls \"within X\" a distance; en/unified/md/chapter/kits.md \"A distance bonus doesn't increase the size of any ability's area of effect.\"",
+      "resolution": "INTERPRETATION: Nature Judges Thee (Area, Magic, Ranged; \"3 cube within 10\") for v100-nature resolves to \"3 cube within 12\", cube size unchanged. Only affects displayed distance, not any tested damage value.",
+      "alternatives": [
+        "Bonus applies only to \"Ranged X\" distances, leaving \"3 cube within 10\"."
+      ]
+    },
+    {
+      "id": "soldiers-skill-armor",
+      "passage": "en/unified/md/feature/conduit/level-1/prayer-of-soldiers-skill.md \"While you wear light armor, you gain a +3 bonus to Stamina\" (v100-fate, v100-protection).",
+      "resolution": "Treated as inactive (no equipment), matching the reviewed v100 baseline (Stamina 18). Expected L2 24 / L3 30.",
+      "alternatives": [
+        "If light armor is modelled as worn: L2 27 (recovery 9, winded 13), L3 33 (recovery 11, winded 16)."
+      ]
+    },
+    {
+      "id": "revitalizing-ritual-static",
+      "passage": "en/unified/md/feature/conduit/level-1/revitalizing-ritual.md \"bonus to their recovery value equal to your level that lasts until you finish another respite\" (gained at L2 by v100-creation, v100-nature, v100-war).",
+      "resolution": "Not folded into static recoveryValue; recorded as manualLevelScaledValues 2 (L2) / 3 (L3).",
+      "alternatives": [
+        "An app that tracks the active ritual target could show recoveryValue + level on the chosen character."
+      ]
+    },
+    {
+      "id": "fear-of-the-gods-effect",
+      "passage": "en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md tiers \"I < WEAK/AVERAGE/STRONG, frightened (save ends)\" plus Effect \"Each target is frightened of you or a creature you choose within distance.\"",
+      "resolution": "INTERPRETATION: the Effect names the source of the tier-gated frightened condition; frightened is applied only when the potency check succeeds.",
+      "alternatives": [
+        "Effect frightens every target unconditionally (and the tier text only sets save-ends duration)."
+      ]
+    },
+    {
+      "id": "statue-of-power-immunity",
+      "passage": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md \"It has immunity all to poison and psychic damage.\" (book line 6580 identical)",
+      "resolution": "Recorded verbatim; read as immunity to all poison and psychic damage. Manual; not tested numerically.",
+      "alternatives": [
+        "A missing immunity value (e.g., \"immunity X\") was intended; unresolved in source."
+      ]
+    },
+    {
+      "id": "blessing-of-fate-frontmatter",
+      "passage": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md front matter effects[0] ends with \"Choose one of the following effects ... :\" and omits the two options.",
+      "resolution": "The two bulleted options come from the file body and book line 6459; both agree.",
+      "alternatives": ["none needed"]
+    },
+    {
+      "id": "perk-groups-conduit",
+      "passage": "en/unified/md/feature/conduit/level-2/perk.md \"one crafting, lore, or supernatural perk\" (book line 6430 identical).",
+      "resolution": "Eligible groups: crafting, lore, supernatural (differs from the Censor's interpersonal/lore/supernatural). Group membership from the Heroes book perk chapter (unified perk front matter has no group field).",
+      "alternatives": ["none needed"]
+    },
+    {
+      "id": "destruction-non-strike",
+      "passage": "en/unified/md/feature/conduit/level-1/prayer-of-destruction.md \"+1 bonus to rolled damage with magic abilities\".",
+      "resolution": "Applied to area (non-Strike) magic abilities too (Fear of the Gods for v100-creation; Soul Siphon for v100-trickery is a Strike anyway), matching the v100 method line.",
+      "alternatives": ["Restrict to strikes: v100-creation Fear of the Gods would be [6,9,13]."]
+    },
+    {
+      "id": "second-feature-actions",
+      "passage": "Oracular Visions, Revitalizing Ritual, Blessing of Comprehension are features, not abilities; only Hands of the Maker, Grave Speech and Faithful Friend say \"You have the following ability.\"",
+      "resolution": "addedAbilities lists only source abilities; addedActionsByV100NamingConvention mirrors action names the reviewed v100 fixture used for these features (Hands of the Maker: Destroy, Oracular Visions: Grant Edge, Revitalizing Ritual) as a naming hint, not a rule.",
+      "alternatives": ["Implementation may expose different action ids for these features."]
+    }
+  ],
+  "levelTwo": {
+    "sourceAdvancementTable": "en/unified/md/class/conduit.md (Conduit Advancement Table, row 2nd: The Lists of Heaven, Perk, Domain Feature, Domain Ability; Abilities Two signature, 3, 5; Domain Abilities 5)",
+    "staminaGained": 6,
+    "staminaSource": "en/unified/md/class/conduit.md Basics: Stamina Gained at 2nd and Higher Levels: 6",
+    "commonFeatures": [
+      {
+        "name": "The Lists of Heaven",
+        "sourcePath": "en/unified/md/feature/conduit/level-2/the-lists-of-heaven.md",
+        "sourceSha256": "69820604199ef1e9ac6b5ff0303cd5db99f036a796655e231fe24387836e58fe",
+        "summary": "Whenever you allow another creature to spend a Recovery, you can also spend a Recovery.",
+        "numericSheetEffect": null
+      },
+      {
+        "name": "Perk",
+        "sourcePath": "en/unified/md/feature/conduit/level-2/perk.md",
+        "sourceSha256": "c22a48216281a0ced0fdc044e7513fc707ec6cdc591737a7470f8f1c831ccd68",
+        "choice": "one crafting, lore, or supernatural perk",
+        "numericSheetEffect": null
+      },
+      {
+        "name": "2nd-Level Domain Feature",
+        "sourcePath": "en/unified/md/feature/conduit/level-2/2nd-level-domain-feature.md",
+        "sourceSha256": "9ffc124b2de75beba04b27e45b20fdaf829f48b34c4e580866599801781f995f",
+        "rule": "Gain the 1st-level domain feature and a skill choice (from that domain's table skill group) for the chosen domain whose feature you did not take at 1st level.",
+        "numericSheetEffect": null
+      },
+      {
+        "name": "2nd-Level Domain Ability",
+        "sourcePath": "en/unified/md/feature/conduit/level-2/2nd-level-domain-ability.md",
+        "sourceSha256": "70c2c8c19dec4439034cf54008e855758db2032046c4233ec225208c9963ac85",
+        "rule": "Choose one of your two domains; gain its heroic ability from the 2nd-Level Conduit Domain Abilities table.",
+        "numericSheetEffect": null
+      }
+    ],
+    "domainAbilityTable": [
+      {
+        "domain": "Creation",
+        "ability": "Statue of Power",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+        "bookLine": 6580
+      },
+      {
+        "domain": "Death",
+        "ability": "Reap",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/reap.md",
+        "bookLine": 6546
+      },
+      {
+        "domain": "Fate",
+        "ability": "Blessing of Fate and Destiny",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+        "bookLine": 6459
+      },
+      {
+        "domain": "Knowledge",
+        "ability": "The Gods Command You Obey",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+        "bookLine": 6492
+      },
+      {
+        "domain": "Life",
+        "ability": "Wellspring of Grace",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+        "bookLine": 6590
+      },
+      {
+        "domain": "Love",
+        "ability": "Our Hearts Your Strength",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+        "bookLine": 6536
+      },
+      {
+        "domain": "Nature",
+        "ability": "Nature Judges Thee",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+        "bookLine": 6522
+      },
+      {
+        "domain": "Protection",
+        "ability": "Sacred Bond",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+        "bookLine": 6556
+      },
+      {
+        "domain": "Storm",
+        "ability": "Saint's Tempest",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+        "bookLine": 6566
+      },
+      {
+        "domain": "Sun",
+        "ability": "Morning Light",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+        "bookLine": 6506
+      },
+      {
+        "domain": "Trickery",
+        "ability": "Divine Comedy",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+        "bookLine": 6482
+      },
+      {
+        "domain": "War",
+        "ability": "Blessing of Insight",
+        "printedCost": "5 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+        "bookLine": 6472
+      }
+    ],
+    "secondDomainFeatureRule": {
+      "sourcePath": "en/unified/md/feature/conduit/level-2/2nd-level-domain-feature.md",
+      "rule": "other domain = the one of class.conduit.domains that is not class.conduit.domain-feature; gain its 1st-level feature and one skill from its skill group",
+      "firstLevelDomainFeatureTable": [
+        {
+          "domain": "Creation",
+          "feature": "Hands of the Maker",
+          "skillGroup": "Crafting",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/hands-of-the-maker.md",
+          "grantsAbility": true
+        },
+        {
+          "domain": "Death",
+          "feature": "Grave Speech",
+          "skillGroup": "Lore",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/grave-speech.md",
+          "grantsAbility": true
+        },
+        {
+          "domain": "Fate",
+          "feature": "Oracular Visions",
+          "skillGroup": "Lore",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/oracular-visions.md",
+          "grantsAbility": false
+        },
+        {
+          "domain": "Knowledge",
+          "feature": "Blessing of Comprehension",
+          "skillGroup": "Lore",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/blessing-of-comprehension.md",
+          "grantsAbility": false
+        },
+        {
+          "domain": "Life",
+          "feature": "Revitalizing Ritual",
+          "skillGroup": "Exploration",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/revitalizing-ritual.md",
+          "grantsAbility": false
+        },
+        {
+          "domain": "Love",
+          "feature": "Blessing of Compassion",
+          "skillGroup": "Interpersonal",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/blessing-of-compassion.md",
+          "grantsAbility": false
+        },
+        {
+          "domain": "Nature",
+          "feature": "Faithful Friend",
+          "skillGroup": "Exploration",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/faithful-friend.md",
+          "grantsAbility": true
+        },
+        {
+          "domain": "Protection",
+          "feature": "Protective Circle",
+          "skillGroup": "Exploration",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/protective-circle.md",
+          "grantsAbility": false
+        },
+        {
+          "domain": "Storm",
+          "feature": "Blessing of Fortunate Weather",
+          "skillGroup": "Exploration",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/blessing-of-fortunate-weather.md",
+          "grantsAbility": false
+        },
+        {
+          "domain": "Sun",
+          "feature": "Inner Light",
+          "skillGroup": "Lore",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/inner-light.md",
+          "grantsAbility": false
+        },
+        {
+          "domain": "Trickery",
+          "feature": "Inspired Deception",
+          "skillGroup": "Intrigue",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/inspired-deception.md",
+          "grantsAbility": false
+        },
+        {
+          "domain": "War",
+          "feature": "Sanctified Weapon",
+          "skillGroup": "Exploration",
+          "sourcePath": "en/unified/md/feature/conduit/level-1/sanctified-weapon.md",
+          "grantsAbility": false
+        }
+      ],
+      "skillGroups": {
+        "Crafting": [
+          "Alchemy",
+          "Architecture",
+          "Blacksmithing",
+          "Carpentry",
+          "Cooking",
+          "Fletching",
+          "Forgery",
+          "Jewelry",
+          "Mechanics",
+          "Tailoring"
+        ],
+        "Exploration": [
+          "Climb",
+          "Drive",
+          "Endurance",
+          "Gymnastics",
+          "Heal",
+          "Jump",
+          "Lift",
+          "Navigate",
+          "Ride",
+          "Swim"
+        ],
+        "Interpersonal": [
+          "Brag",
+          "Empathize",
+          "Flirt",
+          "Gamble",
+          "Handle Animals",
+          "Interrogate",
+          "Intimidate",
+          "Lead",
+          "Lie",
+          "Music",
+          "Perform",
+          "Persuade",
+          "Read Person"
+        ],
+        "Intrigue": [
+          "Alertness",
+          "Conceal Object",
+          "Disguise",
+          "Eavesdrop",
+          "Escape Artist",
+          "Hide",
+          "Pick Lock",
+          "Pick Pocket",
+          "Sabotage",
+          "Search",
+          "Sneak",
+          "Track"
+        ],
+        "Lore": [
+          "Criminal Underworld",
+          "Culture",
+          "History",
+          "Magic",
+          "Monsters",
+          "Nature",
+          "Psionics",
+          "Religion",
+          "Rumors",
+          "Society",
+          "Strategy",
+          "Timescape"
+        ]
+      }
+    },
+    "perkGroups": ["crafting", "lore", "supernatural"],
+    "perkGroupsSource": "en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Crafting Perks 17319, Lore Perks 17469, Supernatural Perks 17511",
+    "eligibleCorePerks": {
+      "crafting": [
+        {
+          "name": "Area of Expertise",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md"
+        },
+        {
+          "name": "Expert Artisan",
+          "sourcePath": "en/unified/md/perk/expert-artisan.md"
+        },
+        {
+          "name": "Handy",
+          "sourcePath": "en/unified/md/perk/handy.md"
+        },
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md"
+        },
+        {
+          "name": "Inspired Artisan",
+          "sourcePath": "en/unified/md/perk/inspired-artisan.md"
+        },
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md"
+        }
+      ],
+      "lore": [
+        {
+          "name": "But I Know Who Does",
+          "sourcePath": "en/unified/md/perk/but-i-know-who-does.md"
+        },
+        {
+          "name": "Eidetic Memory",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md"
+        },
+        {
+          "name": "Expert Sage",
+          "sourcePath": "en/unified/md/perk/expert-sage.md"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md"
+        },
+        {
+          "name": "Linguist",
+          "sourcePath": "en/unified/md/perk/linguist.md"
+        },
+        {
+          "name": "Polymath",
+          "sourcePath": "en/unified/md/perk/polymath.md"
+        },
+        {
+          "name": "Specialist",
+          "sourcePath": "en/unified/md/perk/specialist.md"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md"
+        }
+      ],
+      "supernatural": [
+        {
+          "name": "Arcane Trick",
+          "sourcePath": "en/unified/md/perk/arcane-trick.md",
+          "grantsAbility": "Arcane Trick"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md"
+        },
+        {
+          "name": "Familiar",
+          "sourcePath": "en/unified/md/perk/familiar.md"
+        },
+        {
+          "name": "Invisible Force",
+          "sourcePath": "en/unified/md/perk/invisible-force.md",
+          "grantsAbility": "Invisible Force"
+        },
+        {
+          "name": "Psychic Whisper",
+          "sourcePath": "en/unified/md/perk/psychic-whisper.md",
+          "grantsAbility": "Psychic Whisper"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md"
+        }
+      ]
+    },
+    "eligibleCorePerkCount": 21,
+    "excludedPerkGroups": "exploration, interpersonal, intrigue (not permitted by feature/conduit/level-2/perk.md). Unified perk/ also has companion perks (Born Tracker, People Sense, Ride Along, Trained Thief, Voice of the Wild, Wild Rumpus, Wilds Explorer, You Can Pet Them They're Friendly) absent from the Heroes book perk chapter; not core eligible. Teamwork (every base's career perk) is exploration.",
+    "perksWithSubChoices": [
+      "Area of Expertise (one crafting skill you have)",
+      "Linguist (two languages)",
+      "Specialist (one lore skill you have)",
+      "Eidetic Memory (lore skill chosen at each respite; avoided)"
+    ]
+  },
+  "levelThree": {
+    "sourceAdvancementTable": "en/unified/md/class/conduit.md (row 3rd: Minor Miracle, 7-Piety Ability; Abilities Two signature, 3, 5, 7; Domain Abilities 5)",
+    "staminaGained": 6,
+    "automaticFeatures": [
+      {
+        "name": "Minor Miracle",
+        "sourcePath": "en/unified/md/feature/conduit/level-3/minor-miracle.md",
+        "sourceSha256": "a9c5d6e2c62ec41a0c4e8d164049a0e2fb700b85a3c1c9ed1db63198e345300e",
+        "summary": "Respite activity: restore to life a creature dead within 24 hours (not age), with at least half its remains and a willing soul; it returns with full Stamina and half its Recoveries, and you regain only half your Recoveries at the end of that respite.",
+        "numericSheetEffect": null,
+        "manualClauses": [
+          "Respite activity; conditions (remains, 24 hours, not age-related, willing soul) are manual.",
+          "Caster regains only half Recoveries (floor(8/2) = 4 by always-round-down) at the end of that respite; does not change recoveriesMaximum."
+        ]
+      },
+      {
+        "name": "7-Piety Ability",
+        "sourcePath": "en/unified/md/feature/conduit/level-3/7-piety-ability.md",
+        "sourceSha256": "5b4c5757319615a23c190ce3f41a22735746fe53f15c0764d143e7df31c0faa3",
+        "choice": "one of four 7-piety heroic abilities",
+        "numericSheetEffect": null
+      }
+    ],
+    "ability7Options": [
+      {
+        "name": "Fear of the Gods",
+        "printedCost": "7 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6614"
+      },
+      {
+        "name": "Saint's Raiment",
+        "printedCost": "7 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6630"
+      },
+      {
+        "name": "Soul Siphon",
+        "printedCost": "7 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6640"
+      },
+      {
+        "name": "Words of Wrath and Grace",
+        "printedCost": "7 Piety",
+        "sourcePath": "en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6656"
+      }
+    ],
+    "ability7OptionsAreDomainIndependent": true,
+    "ability7DomainIndependenceBasis": "Unified level-3 ability front matter has no subclass field; book 7-Piety Ability section (line 6610) lists all four without domain headings."
+  },
+  "abilities": {
+    "Statue of Power": {
+      "name": "Statue of Power",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+      "sourceSha256": "57338cc473a9c5d550e32cfa07e0b62f86d82360341d492f88c22eda43ecff01",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6580",
+      "level": 2,
+      "domain": "Creation",
+      "subclassFrontMatter": "creation",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Special",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** A size 2 statue rises out of the ground in an unoccupied space within distance and lasts until the end of the encounter. While within 3 squares of the statue, you gain 1 surge at the start of each of your turns. Each ally within 3 squares of the statue gains this same benefit. The statue is destroyed if it takes 20 or more damage. It has immunity all to poison and psychic damage."
+      ],
+      "chosenBy": ["v100-creation"],
+      "resolvedDistanceByWitness": {
+        "v100-creation": "Ranged 10"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Size 2 statue in an unoccupied space within distance, lasts until end of encounter.",
+        "While within 3 squares of the statue you gain 1 surge at the start of each of your turns; each ally within 3 squares gains the same benefit.",
+        "Statue destroyed if it takes 20 or more damage; source text reads \"It has immunity all to poison and psychic damage\" (see uncertainty statue-of-power-immunity)."
+      ],
+      "fixedValuesByWitness": {
+        "v100-creation": {
+          "statueDestroyedAtDamage": 20,
+          "size": 2,
+          "surgeRadius": 3
+        }
+      }
+    },
+    "Reap": {
+      "name": "Reap",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/reap.md",
+      "sourceSha256": "7727bdac2a8b07c0ed6b18997906a30b257ad77ef4b131f6febcb5af4de6332b",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6546",
+      "level": 2,
+      "domain": "Death",
+      "subclassFrontMatter": "death",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Each ally",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the start of your next turn, each time a target kills an enemy, they regain Stamina equal to 5 + your Intuition score."
+      ],
+      "chosenBy": ["v100-death"],
+      "resolvedDistanceByWitness": {
+        "v100-death": "Ranged 12 (Prayer of Distance +2 to the distance of ranged magic abilities)"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Until the start of your next turn, each time a target (each ally within distance) kills an enemy, they regain Stamina equal to 5 + your Intuition = 5 + 2 = 7 for every witness (all I2)."
+      ],
+      "fixedValuesByWitness": {
+        "v100-death": {
+          "staminaRegainedPerKill": 7,
+          "formula": "5 + I2 = 7"
+        }
+      }
+    },
+    "Blessing of Fate and Destiny": {
+      "name": "Blessing of Fate and Destiny",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+      "sourceSha256": "7d5f09dd2dfb0746374004daecbebf5317eb490306784c4ef5de40d114f99822",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6459",
+      "level": 2,
+      "domain": "Fate",
+      "subclassFrontMatter": "fate",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Three creatures",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** You can target yourself instead of one creature with this ability. Choose one of the following effects, which lasts until the end of the encounter or until you are dying:",
+        "- Whenever a target makes a power roll, they can roll three dice and choose which two rolls to use.",
+        "- Whenever a target makes a power roll, they must roll three dice and use the lowest two rolls."
+      ],
+      "chosenBy": ["v100-fate"],
+      "resolvedDistanceByWitness": {
+        "v100-fate": "Ranged 10"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "You can target yourself instead of one creature. Choose one effect lasting until end of encounter or until you are dying: (a) whenever a target makes a power roll they can roll three dice and choose which two to use; (b) whenever a target makes a power roll they must roll three dice and use the lowest two.",
+        "Unified front matter effects list omits the two bulleted options; they are in the body and the book (uncertainty blessing-of-fate-frontmatter)."
+      ]
+    },
+    "The Gods Command You Obey": {
+      "name": "The Gods Command You Obey",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+      "sourceSha256": "7a59d0d48db00f824d42a0b217da54342a24ba5aa390ebd6566bb5ca118336b8",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6492",
+      "level": 2,
+      "domain": "Knowledge",
+      "subclassFrontMatter": "knowledge",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Ranged", "Strike"],
+      "distance": "Ranged 10",
+      "target": "One creature",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Intuition",
+      "tiersVerbatim": {
+        "tier1": "4 + I holy damage; P < WEAK, before taking damage, the target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a target you choose",
+        "tier2": "7 + I holy damage; P < AVERAGE, before taking damage, the target uses an ability of your choice and you choose any targets for that ability",
+        "tier3": "11 + I holy damage; P < STRONG, before taking damage, the target shifts up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) to a location you choose, uses an ability of your choice, and you choose any targets for that ability"
+      },
+      "tiersPlain": {
+        "tier1": "4 + I holy damage; P < WEAK, before taking damage, the target makes a free strike against a target you choose",
+        "tier2": "7 + I holy damage; P < AVERAGE, before taking damage, the target uses an ability of your choice and you choose any targets for that ability",
+        "tier3": "11 + I holy damage; P < STRONG, before taking damage, the target shifts up to their speed to a location you choose, uses an ability of your choice, and you choose any targets for that ability"
+      },
+      "effectsPlain": [
+        "- **≤11:** 4 + I holy damage; P < WEAK, before taking damage, the target makes a free strike against a target you choose",
+        "- **12-16:** 7 + I holy damage; P < AVERAGE, before taking damage, the target uses an ability of your choice and you choose any targets for that ability",
+        "- **17+:** 11 + I holy damage; P < STRONG, before taking damage, the target shifts up to their speed to a location you choose, uses an ability of your choice, and you choose any targets for that ability"
+      ],
+      "chosenBy": ["v100-knowledge"],
+      "resolvedDistanceByWitness": {
+        "v100-knowledge": "Ranged 10"
+      },
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "holy",
+      "damageByWitness": [
+        {
+          "witness": "v100-knowledge",
+          "intuition": 2,
+          "printedConstants": [4, 7, 11],
+          "characteristicAdded": "Intuition",
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Speed; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [6, 9, 13],
+          "formula": "[4, 7, 11] + I2 = [6, 9, 13]",
+          "damageType": "holy"
+        }
+      ],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": {
+        "v100-knowledge": {
+          "characteristic": "P",
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        }
+      },
+      "manualClauses": [
+        "Tier 1 P < WEAK (P < 0): before taking damage, the target makes a free strike against a target you choose.",
+        "Tier 2 P < AVERAGE (P < 1): before taking damage, the target uses an ability of your choice and you choose any targets.",
+        "Tier 3 P < STRONG (P < 2): before taking damage, the target shifts up to their speed to a location you choose, uses an ability of your choice, and you choose any targets."
+      ]
+    },
+    "Wellspring of Grace": {
+      "name": "Wellspring of Grace",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+      "sourceSha256": "7c500c48147797b2947fa1bffa9438e0cd077abbad5a47f965538969478caa45",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6590",
+      "level": 2,
+      "domain": "Life",
+      "subclassFrontMatter": "life",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic"],
+      "distance": "3 aura",
+      "target": "Each ally in the area",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, whenever a target starts their turn in the area, they can spend a Recovery."
+      ],
+      "chosenBy": ["v100-life"],
+      "resolvedDistanceByWitness": {
+        "v100-life": "3 aura"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "3 aura; until the end of the encounter or until you are dying, whenever a target (ally in the area) starts their turn in the area they can spend a Recovery."
+      ]
+    },
+    "Our Hearts Your Strength": {
+      "name": "Our Hearts Your Strength",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+      "sourceSha256": "acb72758f7eacf400d00540c8fa3bcf2e8a37d67174d4f3c52f136ba133b9a85",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6536",
+      "level": 2,
+      "domain": "Love",
+      "subclassFrontMatter": "love",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Self and one ally",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until the target is dying, at the start of each of the target's turns, they gain a bonus to speed and a bonus to rolled damage equal to the number of allies within 10 squares of them. This bonus lasts until the start of their next turn."
+      ],
+      "chosenBy": ["v100-love"],
+      "resolvedDistanceByWitness": {
+        "v100-love": "Ranged 10"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Until end of encounter or until the target is dying, at the start of each of the target's turns they gain a bonus to speed and to rolled damage equal to the number of allies within 10 squares of them, lasting until the start of their next turn. Value is positional; not a sheet value."
+      ]
+    },
+    "Nature Judges Thee": {
+      "name": "Nature Judges Thee",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+      "sourceSha256": "fe7f66f865bd6e3e96bb2b7101a5d5cf2ba9e1dc421d2a1abaea566f47cdb41c",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6522",
+      "level": 2,
+      "domain": "Nature",
+      "subclassFrontMatter": "nature",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic", "Ranged"],
+      "distance": "3 cube within 10",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Intuition",
+      "tiersVerbatim": {
+        "tier1": "2 damage; A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+        "tier2": "3 damage; A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+        "tier3": "7 damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "2 damage; A < WEAK, restrained (save ends)",
+        "tier2": "3 damage; A < AVERAGE, restrained (save ends)",
+        "tier3": "7 damage; A < STRONG, restrained (save ends)"
+      },
+      "effectsPlain": [
+        "- **≤11:** 2 damage; A < WEAK, restrained (save ends)",
+        "- **12-16:** 3 damage; A < AVERAGE, restrained (save ends)",
+        "- **17+:** 7 damage; A < STRONG, restrained (save ends)"
+      ],
+      "chosenBy": ["v100-nature"],
+      "resolvedDistanceByWitness": {
+        "v100-nature": "3 cube within 12 (INTERPRETATION (uncertainty prayer-of-distance-area-within): Prayer of Distance +2 applied to the \"within X\" distance; area size unchanged (chapter/kits.md: a distance bonus does not increase area size))"
+      },
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": null,
+      "damageByWitness": [
+        {
+          "witness": "v100-nature",
+          "intuition": 2,
+          "printedConstants": [2, 3, 7],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Distance; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [2, 3, 7],
+          "formula": "[2, 3, 7] = [2, 3, 7]",
+          "damageType": null
+        }
+      ],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": {
+        "v100-nature": {
+          "characteristic": "A",
+          "tier1": "A < 0",
+          "tier2": "A < 1",
+          "tier3": "A < 2"
+        }
+      },
+      "damageTypeNote": "Untyped (\"2 damage\"): no damage type printed.",
+      "manualClauses": ["Per tier A < WEAK/AVERAGE/STRONG (A < 0/1/2): restrained (save ends)."]
+    },
+    "Sacred Bond": {
+      "name": "Sacred Bond",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+      "sourceSha256": "4da22232c4d38ad484540a2ca40b6c52953d3ce6e9a48ba25934cfa7cf0e5025",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6556",
+      "level": 2,
+      "domain": "Protection",
+      "subclassFrontMatter": "protection",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Self and one ally",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter, whenever one target takes damage, the other target can use a free triggered action to take the damage instead. The original target suffers any effects associated with the damage. Additionally, whenever one target spends a Recovery, the other target can use a free triggered action to spend a Recovery."
+      ],
+      "chosenBy": ["v100-protection"],
+      "resolvedDistanceByWitness": {
+        "v100-protection": "Ranged 10"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Until end of encounter: whenever one target takes damage the other can use a free triggered action to take the damage instead (original target suffers associated effects); whenever one target spends a Recovery the other can use a free triggered action to spend a Recovery."
+      ]
+    },
+    "Saint's Tempest": {
+      "name": "Saint's Tempest",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+      "sourceSha256": "9d69a3a094023d2cffc28405325a1dc266d388408b3a1f503e2c5a735738d5bd",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6566",
+      "level": 2,
+      "domain": "Storm",
+      "subclassFrontMatter": "storm",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic", "Ranged"],
+      "distance": "3 cube within 10",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Intuition",
+      "tiersVerbatim": {
+        "tier1": "2 lightning damage; vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+        "tier2": "5 lightning damage; vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+        "tier3": "7 lightning damage; vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+      },
+      "tiersPlain": {
+        "tier1": "2 lightning damage; vertical slide 1",
+        "tier2": "5 lightning damage; vertical slide 2",
+        "tier3": "7 lightning damage; vertical slide 3"
+      },
+      "effectsPlain": [
+        "- **≤11:** 2 lightning damage; vertical slide 1",
+        "- **12-16:** 5 lightning damage; vertical slide 2",
+        "- **17+:** 7 lightning damage; vertical slide 3"
+      ],
+      "chosenBy": ["v100-storm"],
+      "resolvedDistanceByWitness": {
+        "v100-storm": "3 cube within 10"
+      },
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "lightning",
+      "damageByWitness": [
+        {
+          "witness": "v100-storm",
+          "intuition": 2,
+          "printedConstants": [2, 5, 7],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Speed; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [2, 5, 7],
+          "formula": "[2, 5, 7] = [2, 5, 7]",
+          "damageType": "lightning"
+        }
+      ],
+      "forcedMovementPerTier": [
+        {
+          "kind": "vertical slide",
+          "distance": 1
+        },
+        {
+          "kind": "vertical slide",
+          "distance": 2
+        },
+        {
+          "kind": "vertical slide",
+          "distance": 3
+        }
+      ],
+      "potencyByWitness": null,
+      "manualClauses": ["Vertical slide 1/2/3 per tier (forced movement)."]
+    },
+    "Morning Light": {
+      "name": "Morning Light",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+      "sourceSha256": "64bf85a31b605d67bc6db4300a2606de6d8525d13dad29667b12c5a4ae9eb8af",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6506",
+      "level": 2,
+      "domain": "Sun",
+      "subclassFrontMatter": "sun",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic"],
+      "distance": "3 burst",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Intuition",
+      "tiersVerbatim": {
+        "tier1": "4 fire damage",
+        "tier2": "6 fire damage",
+        "tier3": "10 fire damage"
+      },
+      "tiersPlain": {
+        "tier1": "4 fire damage",
+        "tier2": "6 fire damage",
+        "tier3": "10 fire damage"
+      },
+      "effectsPlain": [
+        "- **≤11:** 4 fire damage",
+        "- **12-16:** 6 fire damage",
+        "- **17+:** 10 fire damage",
+        "**Effect:** Each ally in the area deals fire damage equal to your Intuition score with their next strike made before the end of their next turn."
+      ],
+      "chosenBy": ["v100-sun"],
+      "resolvedDistanceByWitness": {
+        "v100-sun": "3 burst"
+      },
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "fire",
+      "damageByWitness": [
+        {
+          "witness": "v100-sun",
+          "intuition": 2,
+          "printedConstants": [4, 6, 10],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Steel; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [4, 6, 10],
+          "formula": "[4, 6, 10] = [4, 6, 10]",
+          "damageType": "fire"
+        }
+      ],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Each ally in the area deals fire damage equal to your Intuition score (2 for v100-sun) with their next strike made before the end of their next turn. This is ally damage, not the conduit's rolled damage; Prayer bonuses not applied."
+      ],
+      "fixedValuesByWitness": {
+        "v100-sun": {
+          "allyFireDamageOnNextStrike": 2,
+          "formula": "Intuition 2"
+        }
+      }
+    },
+    "Divine Comedy": {
+      "name": "Divine Comedy",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+      "sourceSha256": "a255888bf9966df8b02f4336c61b25494999a1a12ab1b2a275a928ac546590d8",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6482",
+      "level": 2,
+      "domain": "Trickery",
+      "subclassFrontMatter": "trickery",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Magic"],
+      "distance": "5 burst",
+      "target": "Self and each ally in the area",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Each target can choose another creature in the area, then swap places with that creature. The creature they choose must be able to fit into the space they leave and vice versa."
+      ],
+      "chosenBy": ["v100-trickery"],
+      "resolvedDistanceByWitness": {
+        "v100-trickery": "5 burst"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Each target can choose another creature in the area and swap places with it; the creature must fit into the space they leave and vice versa."
+      ]
+    },
+    "Blessing of Insight": {
+      "name": "Blessing of Insight",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+      "sourceSha256": "45f1a1c1ab19680f1c3b217173287af6bdfa6794e33a1919af464edf604f3059",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6472",
+      "level": 2,
+      "domain": "War",
+      "subclassFrontMatter": "war",
+      "feature": "2nd-Level Domain Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Self and each ally",
+      "cost": {
+        "resource": "piety",
+        "amount": 5,
+        "printed": "5 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, each target gains 1 surge at the end of each of your turns."
+      ],
+      "chosenBy": ["v100-war"],
+      "resolvedDistanceByWitness": {
+        "v100-war": "Ranged 12 (Prayer of Distance +2 to the distance of ranged magic abilities)"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Until end of encounter or until you are dying, each target (self and each ally within distance) gains 1 surge at the end of each of your turns."
+      ]
+    },
+    "Fear of the Gods": {
+      "name": "Fear of the Gods",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+      "sourceSha256": "d4f9f4fed86fcdd49778ec6001ea7f897f47e49811521338810391f55e6496c4",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6614",
+      "level": 3,
+      "domain": null,
+      "subclassFrontMatter": null,
+      "feature": "7-Piety Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic", "Ranged"],
+      "distance": "5 cube within 10",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "piety",
+        "amount": 7,
+        "printed": "7 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Intuition",
+      "tiersVerbatim": {
+        "tier1": "6 psychic damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+        "tier2": "9 psychic damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+        "tier3": "13 psychic damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "6 psychic damage; I < WEAK, frightened (save ends)",
+        "tier2": "9 psychic damage; I < AVERAGE, frightened (save ends)",
+        "tier3": "13 psychic damage; I < STRONG, frightened (save ends)"
+      },
+      "effectsPlain": [
+        "- **≤11:** 6 psychic damage; I < WEAK, frightened (save ends)",
+        "- **12-16:** 9 psychic damage; I < AVERAGE, frightened (save ends)",
+        "- **17+:** 13 psychic damage; I < STRONG, frightened (save ends)",
+        "**Effect:** Each target is frightened of you or a creature you choose within distance."
+      ],
+      "chosenBy": ["v100-creation", "v100-life", "v100-storm"],
+      "resolvedDistanceByWitness": {
+        "v100-creation": "5 cube within 10",
+        "v100-life": "5 cube within 10",
+        "v100-storm": "5 cube within 10"
+      },
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "psychic",
+      "damageByWitness": [
+        {
+          "witness": "v100-creation",
+          "intuition": 2,
+          "printedConstants": [6, 9, 13],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 1,
+          "rolledDamageBonusReason": "Prayer of Destruction +1 rolled damage with magic abilities (feature/conduit/level-1/prayer-of-destruction.md); ability has the Magic keyword",
+          "tiers": [7, 10, 14],
+          "formula": "[6, 9, 13] + Prayer of Destruction 1 = [7, 10, 14]",
+          "damageType": "psychic"
+        },
+        {
+          "witness": "v100-life",
+          "intuition": 2,
+          "printedConstants": [6, 9, 13],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Steel; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [6, 9, 13],
+          "formula": "[6, 9, 13] = [6, 9, 13]",
+          "damageType": "psychic"
+        },
+        {
+          "witness": "v100-storm",
+          "intuition": 2,
+          "printedConstants": [6, 9, 13],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Speed; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [6, 9, 13],
+          "formula": "[6, 9, 13] = [6, 9, 13]",
+          "damageType": "psychic"
+        }
+      ],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": {
+        "v100-creation": {
+          "characteristic": "I",
+          "tier1": "I < 0",
+          "tier2": "I < 1",
+          "tier3": "I < 2"
+        },
+        "v100-life": {
+          "characteristic": "I",
+          "tier1": "I < 0",
+          "tier2": "I < 1",
+          "tier3": "I < 2"
+        },
+        "v100-storm": {
+          "characteristic": "I",
+          "tier1": "I < 0",
+          "tier2": "I < 1",
+          "tier3": "I < 2"
+        }
+      },
+      "manualClauses": [
+        "Per tier I < WEAK/AVERAGE/STRONG (I < 0/1/2): frightened (save ends).",
+        "Effect: each target is frightened of you or a creature you choose within distance (see uncertainty fear-of-the-gods-effect)."
+      ]
+    },
+    "Saint's Raiment": {
+      "name": "Saint's Raiment",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+      "sourceSha256": "c6c64df45586e7a8b7088753fcbddd9cf480a5cf4736b1eceb55b0f0c4a098dd",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6630",
+      "level": 3,
+      "domain": null,
+      "subclassFrontMatter": null,
+      "feature": "7-Piety Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "One ally",
+      "cost": {
+        "resource": "piety",
+        "amount": 7,
+        "printed": "7 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": ["**Effect:** The target gains 20 temporary Stamina and 3 surges."],
+      "chosenBy": ["v100-death", "v100-love", "v100-sun"],
+      "resolvedDistanceByWitness": {
+        "v100-death": "Ranged 12 (Prayer of Distance +2 to the distance of ranged magic abilities)",
+        "v100-love": "Ranged 10",
+        "v100-sun": "Ranged 10"
+      },
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "The target (one ally) gains 20 temporary Stamina and 3 surges. Fixed values; no characteristic."
+      ],
+      "fixedValuesByWitness": {
+        "v100-death": {
+          "temporaryStamina": 20,
+          "surges": 3
+        },
+        "v100-love": {
+          "temporaryStamina": 20,
+          "surges": 3
+        },
+        "v100-sun": {
+          "temporaryStamina": 20,
+          "surges": 3
+        }
+      }
+    },
+    "Soul Siphon": {
+      "name": "Soul Siphon",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+      "sourceSha256": "393f647bf615d7b2b349447500369d6fd13c2ed92372a71aee427543ceb97de2",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6640",
+      "level": 3,
+      "domain": null,
+      "subclassFrontMatter": null,
+      "feature": "7-Piety Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Ranged", "Strike"],
+      "distance": "Ranged 10",
+      "target": "One enemy",
+      "cost": {
+        "resource": "piety",
+        "amount": 7,
+        "printed": "7 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Intuition",
+      "tiersVerbatim": {
+        "tier1": "7 + I corruption damage",
+        "tier2": "10 + I corruption damage",
+        "tier3": "15 + I corruption damage"
+      },
+      "tiersPlain": {
+        "tier1": "7 + I corruption damage",
+        "tier2": "10 + I corruption damage",
+        "tier3": "15 + I corruption damage"
+      },
+      "effectsPlain": [
+        "- **≤11:** 7 + I corruption damage",
+        "- **12-16:** 10 + I corruption damage",
+        "- **17+:** 15 + I corruption damage",
+        "**Effect:** One ally within distance can spend any number of Recoveries."
+      ],
+      "chosenBy": ["v100-fate", "v100-nature", "v100-trickery"],
+      "resolvedDistanceByWitness": {
+        "v100-fate": "Ranged 10",
+        "v100-nature": "Ranged 12 (Prayer of Distance +2 to the distance of ranged magic abilities)",
+        "v100-trickery": "Ranged 10"
+      },
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "corruption",
+      "damageByWitness": [
+        {
+          "witness": "v100-fate",
+          "intuition": 2,
+          "printedConstants": [7, 10, 15],
+          "characteristicAdded": "Intuition",
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Soldier's Skill; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [9, 12, 17],
+          "formula": "[7, 10, 15] + I2 = [9, 12, 17]",
+          "damageType": "corruption"
+        },
+        {
+          "witness": "v100-nature",
+          "intuition": 2,
+          "printedConstants": [7, 10, 15],
+          "characteristicAdded": "Intuition",
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Distance; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [9, 12, 17],
+          "formula": "[7, 10, 15] + I2 = [9, 12, 17]",
+          "damageType": "corruption"
+        },
+        {
+          "witness": "v100-trickery",
+          "intuition": 2,
+          "printedConstants": [7, 10, 15],
+          "characteristicAdded": "Intuition",
+          "rolledDamageBonus": 1,
+          "rolledDamageBonusReason": "Prayer of Destruction +1 rolled damage with magic abilities (feature/conduit/level-1/prayer-of-destruction.md); ability has the Magic keyword",
+          "tiers": [10, 13, 18],
+          "formula": "[7, 10, 15] + I2 + Prayer of Destruction 1 = [10, 13, 18]",
+          "damageType": "corruption"
+        }
+      ],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": ["Effect: one ally within distance can spend any number of Recoveries."]
+    },
+    "Words of Wrath and Grace": {
+      "name": "Words of Wrath and Grace",
+      "sourcePath": "en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+      "sourceSha256": "c1c3017392f4fa336392de3b45c4bc099414aba9f760ea6d5b448fc3c76f6ff3",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 6656",
+      "level": 3,
+      "domain": null,
+      "subclassFrontMatter": null,
+      "feature": "7-Piety Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic"],
+      "distance": "5 burst",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "piety",
+        "amount": 7,
+        "printed": "7 Piety"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Intuition",
+      "tiersVerbatim": {
+        "tier1": "2 holy damage",
+        "tier2": "5 holy damage",
+        "tier3": "7 holy damage"
+      },
+      "tiersPlain": {
+        "tier1": "2 holy damage",
+        "tier2": "5 holy damage",
+        "tier3": "7 holy damage"
+      },
+      "effectsPlain": [
+        "- **≤11:** 2 holy damage",
+        "- **12-16:** 5 holy damage",
+        "- **17+:** 7 holy damage",
+        "**Effect:** Each ally in the area can spend a Recovery."
+      ],
+      "chosenBy": ["v100-knowledge", "v100-protection", "v100-war"],
+      "resolvedDistanceByWitness": {
+        "v100-knowledge": "5 burst",
+        "v100-protection": "5 burst",
+        "v100-war": "5 burst"
+      },
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "holy",
+      "damageByWitness": [
+        {
+          "witness": "v100-knowledge",
+          "intuition": 2,
+          "printedConstants": [2, 5, 7],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Speed; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [2, 5, 7],
+          "formula": "[2, 5, 7] = [2, 5, 7]",
+          "damageType": "holy"
+        },
+        {
+          "witness": "v100-protection",
+          "intuition": 2,
+          "printedConstants": [2, 5, 7],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Soldier's Skill; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [2, 5, 7],
+          "formula": "[2, 5, 7] = [2, 5, 7]",
+          "damageType": "holy"
+        },
+        {
+          "witness": "v100-war",
+          "intuition": 2,
+          "printedConstants": [2, 5, 7],
+          "characteristicAdded": null,
+          "rolledDamageBonus": 0,
+          "rolledDamageBonusReason": "no rolled-damage bonus: prayer is Prayer of Distance; ward, domain features, Human traits and Soldier career add none; Sanctified Weapon (war) only affects abilities that use the blessed weapon; Prayer of Soldier's Skill +1 is weapon abilities only",
+          "tiers": [2, 5, 7],
+          "formula": "[2, 5, 7] = [2, 5, 7]",
+          "damageType": "holy"
+        }
+      ],
+      "forcedMovementPerTier": null,
+      "potencyByWitness": null,
+      "manualClauses": ["Effect: each ally in the area can spend a Recovery."]
+    }
+  },
+  "witnesses": {
+    "v100-creation": {
+      "base": "v100-creation",
+      "domains": ["Creation", "Life"],
+      "levelOneDomainFeatureDomain": "Creation",
+      "prayer": "Prayer of Destruction",
+      "ward": "Bastion Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Tailoring"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Expert Artisan",
+          "domainAbilityDomain": "Creation",
+          "domainAbility": "Statue of Power",
+          "secondDomainSkill": "Heal"
+        },
+        "secondDomain": "Life",
+        "secondDomainFeature": "Revitalizing Ritual",
+        "secondDomainSkillGroup": "Exploration",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Revitalizing Ritual",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Statue of Power"],
+        "addedActionsByV100NamingConvention": ["Revitalizing Ritual"],
+        "perks": ["Teamwork", "Expert Artisan"],
+        "perkType": "crafting",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Tailoring",
+          "Heal"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Revitalizing Ritual recovery-value bonus (respite-chosen character, until next respite)": 2
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Fear of the Gods"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Fear of the Gods"],
+        "cumulativeAddedAbilities": ["Statue of Power", "Fear of the Gods"],
+        "perks": ["Teamwork", "Expert Artisan"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Tailoring",
+          "Heal"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Revitalizing Ritual recovery-value bonus (respite-chosen character, until next respite)": 3
+        }
+      }
+    },
+    "v100-death": {
+      "base": "v100-death",
+      "domains": ["Death", "Fate"],
+      "levelOneDomainFeatureDomain": "Death",
+      "prayer": "Prayer of Distance",
+      "ward": "Quickness Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Handy",
+          "domainAbilityDomain": "Death",
+          "domainAbility": "Reap",
+          "secondDomainSkill": "Monsters"
+        },
+        "secondDomain": "Fate",
+        "secondDomainFeature": "Oracular Visions",
+        "secondDomainSkillGroup": "Lore",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Oracular Visions",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Reap"],
+        "addedActionsByV100NamingConvention": ["Oracular Visions: Grant Edge"],
+        "perks": ["Teamwork", "Handy"],
+        "perkType": "crafting",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion",
+          "Monsters"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Saint's Raiment"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Saint's Raiment"],
+        "cumulativeAddedAbilities": ["Reap", "Saint's Raiment"],
+        "perks": ["Teamwork", "Handy"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion",
+          "Monsters"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-fate": {
+      "base": "v100-fate",
+      "domains": ["Fate", "Death"],
+      "levelOneDomainFeatureDomain": "Fate",
+      "prayer": "Prayer of Soldier's Skill",
+      "ward": "Sanctuary Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Improvisation Creation",
+          "domainAbilityDomain": "Fate",
+          "domainAbility": "Blessing of Fate and Destiny",
+          "secondDomainSkill": "Magic"
+        },
+        "secondDomain": "Death",
+        "secondDomainFeature": "Grave Speech",
+        "secondDomainSkillGroup": "Lore",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Grave Speech",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Blessing of Fate and Destiny", "Grave Speech"],
+        "addedActionsByV100NamingConvention": ["Grave Speech"],
+        "perks": ["Teamwork", "Improvisation Creation"],
+        "perkType": "crafting",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion",
+          "Magic"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Soul Siphon"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Soul Siphon"],
+        "cumulativeAddedAbilities": ["Blessing of Fate and Destiny", "Grave Speech", "Soul Siphon"],
+        "perks": ["Teamwork", "Improvisation Creation"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion",
+          "Magic"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-knowledge": {
+      "base": "v100-knowledge",
+      "domains": ["Knowledge", "Death"],
+      "levelOneDomainFeatureDomain": "Knowledge",
+      "prayer": "Prayer of Speed",
+      "ward": "Spirit Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Inspired Artisan",
+          "domainAbilityDomain": "Knowledge",
+          "domainAbility": "The Gods Command You Obey",
+          "secondDomainSkill": "Culture"
+        },
+        "secondDomain": "Death",
+        "secondDomainFeature": "Grave Speech",
+        "secondDomainSkillGroup": "Lore",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Grave Speech",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["The Gods Command You Obey", "Grave Speech"],
+        "addedActionsByV100NamingConvention": ["Grave Speech"],
+        "perks": ["Teamwork", "Inspired Artisan"],
+        "perkType": "crafting",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion",
+          "Culture"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Words of Wrath and Grace"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Words of Wrath and Grace"],
+        "cumulativeAddedAbilities": [
+          "The Gods Command You Obey",
+          "Grave Speech",
+          "Words of Wrath and Grace"
+        ],
+        "perks": ["Teamwork", "Inspired Artisan"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion",
+          "Culture"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-life": {
+      "base": "v100-life",
+      "domains": ["Life", "Creation"],
+      "levelOneDomainFeatureDomain": "Life",
+      "prayer": "Prayer of Steel",
+      "ward": "Bastion Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Traveling Artisan",
+          "domainAbilityDomain": "Life",
+          "domainAbility": "Wellspring of Grace",
+          "secondDomainSkill": "Alchemy"
+        },
+        "secondDomain": "Creation",
+        "secondDomainFeature": "Hands of the Maker",
+        "secondDomainSkillGroup": "Crafting",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Hands of the Maker",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Wellspring of Grace", "Hands of the Maker"],
+        "addedActionsByV100NamingConvention": ["Hands of the Maker", "Hands of the Maker: Destroy"],
+        "perks": ["Teamwork", "Traveling Artisan"],
+        "perkType": "crafting",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Alchemy"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) + Prayer of Steel 6 (bonus increases only at 4th, 7th, 10th) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Hands of the Maker maintained objects (= Intuition)": 2
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Fear of the Gods"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Fear of the Gods"],
+        "cumulativeAddedAbilities": [
+          "Wellspring of Grace",
+          "Hands of the Maker",
+          "Fear of the Gods"
+        ],
+        "perks": ["Teamwork", "Traveling Artisan"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Alchemy"
+        ],
+        "staminaMaximum": 36,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) + Prayer of Steel 6 (bonus increases only at 4th, 7th, 10th) = 36; no kit (Conduit has none)",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-love": {
+      "base": "v100-love",
+      "domains": ["Love", "Creation"],
+      "levelOneDomainFeatureDomain": "Love",
+      "prayer": "Prayer of Destruction",
+      "ward": "Quickness Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Empathize"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "But I Know Who Does",
+          "domainAbilityDomain": "Love",
+          "domainAbility": "Our Hearts Your Strength",
+          "secondDomainSkill": "Cooking"
+        },
+        "secondDomain": "Creation",
+        "secondDomainFeature": "Hands of the Maker",
+        "secondDomainSkillGroup": "Crafting",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Hands of the Maker",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Our Hearts Your Strength", "Hands of the Maker"],
+        "addedActionsByV100NamingConvention": ["Hands of the Maker", "Hands of the Maker: Destroy"],
+        "perks": ["Teamwork", "But I Know Who Does"],
+        "perkType": "lore",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Empathize",
+          "Cooking"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Hands of the Maker maintained objects (= Intuition)": 2
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Saint's Raiment"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Saint's Raiment"],
+        "cumulativeAddedAbilities": [
+          "Our Hearts Your Strength",
+          "Hands of the Maker",
+          "Saint's Raiment"
+        ],
+        "perks": ["Teamwork", "But I Know Who Does"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Empathize",
+          "Cooking"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-nature": {
+      "base": "v100-nature",
+      "domains": ["Nature", "Life"],
+      "levelOneDomainFeatureDomain": "Nature",
+      "prayer": "Prayer of Distance",
+      "ward": "Sanctuary Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Expert Sage",
+          "domainAbilityDomain": "Nature",
+          "domainAbility": "Nature Judges Thee",
+          "secondDomainSkill": "Climb"
+        },
+        "secondDomain": "Life",
+        "secondDomainFeature": "Revitalizing Ritual",
+        "secondDomainSkillGroup": "Exploration",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Revitalizing Ritual",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Nature Judges Thee"],
+        "addedActionsByV100NamingConvention": ["Revitalizing Ritual"],
+        "perks": ["Teamwork", "Expert Sage"],
+        "perkType": "lore",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Climb"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Revitalizing Ritual recovery-value bonus (respite-chosen character, until next respite)": 2
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Soul Siphon"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Soul Siphon"],
+        "cumulativeAddedAbilities": ["Nature Judges Thee", "Soul Siphon"],
+        "perks": ["Teamwork", "Expert Sage"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Climb"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Revitalizing Ritual recovery-value bonus (respite-chosen character, until next respite)": 3
+        }
+      }
+    },
+    "v100-protection": {
+      "base": "v100-protection",
+      "domains": ["Protection", "Creation"],
+      "levelOneDomainFeatureDomain": "Protection",
+      "prayer": "Prayer of Soldier's Skill",
+      "ward": "Spirit Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "I've Read About This Place",
+          "domainAbilityDomain": "Protection",
+          "domainAbility": "Sacred Bond",
+          "secondDomainSkill": "Mechanics"
+        },
+        "secondDomain": "Creation",
+        "secondDomainFeature": "Hands of the Maker",
+        "secondDomainSkillGroup": "Crafting",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Hands of the Maker",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Sacred Bond", "Hands of the Maker"],
+        "addedActionsByV100NamingConvention": ["Hands of the Maker", "Hands of the Maker: Destroy"],
+        "perks": ["Teamwork", "I've Read About This Place"],
+        "perkType": "lore",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Mechanics"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Hands of the Maker maintained objects (= Intuition)": 2
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Words of Wrath and Grace"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Words of Wrath and Grace"],
+        "cumulativeAddedAbilities": [
+          "Sacred Bond",
+          "Hands of the Maker",
+          "Words of Wrath and Grace"
+        ],
+        "perks": ["Teamwork", "I've Read About This Place"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Mechanics"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-storm": {
+      "base": "v100-storm",
+      "domains": ["Storm", "Death"],
+      "levelOneDomainFeatureDomain": "Storm",
+      "prayer": "Prayer of Speed",
+      "ward": "Bastion Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Polymath",
+          "domainAbilityDomain": "Storm",
+          "domainAbility": "Saint's Tempest",
+          "secondDomainSkill": "Nature"
+        },
+        "secondDomain": "Death",
+        "secondDomainFeature": "Grave Speech",
+        "secondDomainSkillGroup": "Lore",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Grave Speech",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Saint's Tempest", "Grave Speech"],
+        "addedActionsByV100NamingConvention": ["Grave Speech"],
+        "perks": ["Teamwork", "Polymath"],
+        "perkType": "lore",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Nature"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Fear of the Gods"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Fear of the Gods"],
+        "cumulativeAddedAbilities": ["Saint's Tempest", "Grave Speech", "Fear of the Gods"],
+        "perks": ["Teamwork", "Polymath"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Nature"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 5,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-sun": {
+      "base": "v100-sun",
+      "domains": ["Sun", "Knowledge"],
+      "levelOneDomainFeatureDomain": "Sun",
+      "prayer": "Prayer of Steel",
+      "ward": "Quickness Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Traveling Sage",
+          "domainAbilityDomain": "Sun",
+          "domainAbility": "Morning Light",
+          "secondDomainSkill": "Society"
+        },
+        "secondDomain": "Knowledge",
+        "secondDomainFeature": "Blessing of Comprehension",
+        "secondDomainSkillGroup": "Lore",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Blessing of Comprehension",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Morning Light"],
+        "addedActionsByV100NamingConvention": [],
+        "perks": ["Teamwork", "Traveling Sage"],
+        "perkType": "lore",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion",
+          "Society"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) + Prayer of Steel 6 (bonus increases only at 4th, 7th, 10th) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Saint's Raiment"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Saint's Raiment"],
+        "cumulativeAddedAbilities": ["Morning Light", "Saint's Raiment"],
+        "perks": ["Teamwork", "Traveling Sage"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Religion",
+          "Society"
+        ],
+        "staminaMaximum": 36,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) + Prayer of Steel 6 (bonus increases only at 4th, 7th, 10th) = 36; no kit (Conduit has none)",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-trickery": {
+      "base": "v100-trickery",
+      "domains": ["Trickery", "Death"],
+      "levelOneDomainFeatureDomain": "Trickery",
+      "prayer": "Prayer of Destruction",
+      "ward": "Sanctuary Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Hide"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Arcane Trick",
+          "domainAbilityDomain": "Trickery",
+          "domainAbility": "Divine Comedy",
+          "secondDomainSkill": "Rumors"
+        },
+        "secondDomain": "Death",
+        "secondDomainFeature": "Grave Speech",
+        "secondDomainSkillGroup": "Lore",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Grave Speech",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Divine Comedy", "Grave Speech", "Arcane Trick"],
+        "addedActionsByV100NamingConvention": ["Grave Speech"],
+        "perks": ["Teamwork", "Arcane Trick"],
+        "perkType": "supernatural",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Hide",
+          "Rumors"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Soul Siphon"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Soul Siphon"],
+        "cumulativeAddedAbilities": [
+          "Divine Comedy",
+          "Grave Speech",
+          "Arcane Trick",
+          "Soul Siphon"
+        ],
+        "perks": ["Teamwork", "Arcane Trick"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Hide",
+          "Rumors"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        }
+      }
+    },
+    "v100-war": {
+      "base": "v100-war",
+      "domains": ["War", "Life"],
+      "levelOneDomainFeatureDomain": "War",
+      "prayer": "Prayer of Distance",
+      "ward": "Spirit Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate"
+        ]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Thingspeaker",
+          "domainAbilityDomain": "War",
+          "domainAbility": "Blessing of Insight",
+          "secondDomainSkill": "Ride"
+        },
+        "secondDomain": "Life",
+        "secondDomainFeature": "Revitalizing Ritual",
+        "secondDomainSkillGroup": "Exploration",
+        "addedFeatures": [
+          "The Lists of Heaven",
+          "Perk",
+          "2nd-Level Domain Feature",
+          "Revitalizing Ritual",
+          "2nd-Level Domain Ability"
+        ],
+        "addedAbilities": ["Blessing of Insight"],
+        "addedActionsByV100NamingConvention": ["Revitalizing Ritual"],
+        "perks": ["Teamwork", "Thingspeaker"],
+        "perkType": "supernatural",
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Ride"
+        ],
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (2 - 1) = 24; no kit (Conduit has none)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Revitalizing Ritual recovery-value bonus (respite-chosen character, until next respite)": 2
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Words of Wrath and Grace"
+        },
+        "addedFeatures": ["Minor Miracle", "7-Piety Ability"],
+        "addedAbilities": ["Words of Wrath and Grace"],
+        "cumulativeAddedAbilities": ["Blessing of Insight", "Words of Wrath and Grace"],
+        "perks": ["Teamwork", "Thingspeaker"],
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "History",
+          "Persuade",
+          "Navigate",
+          "Ride"
+        ],
+        "staminaMaximum": 30,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "recoveriesMaximum": 8,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "Conduit 18 + 6 x (3 - 1) = 30; no kit (Conduit has none)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries 8 (class/conduit.md Basics), speed, stability, disengage, saving-throw threshold, characteristics and potency equal the reviewed v100 level-one values: no level-2/3 Conduit feature, domain ability, 7-piety ability, second domain feature or selected perk changes them; levels 1-3 are echelon 1."
+        },
+        "manualLevelScaledValues": {
+          "Revitalizing Ritual recovery-value bonus (respite-chosen character, until next respite)": 3
+        }
+      }
+    }
+  }
+}

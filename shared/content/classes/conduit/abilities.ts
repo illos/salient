@@ -271,6 +271,39 @@ export const CONDUIT_ACTIONS: CensorAction[] = [
         'Only when praying for Piety activates a domain effect; choose one of your two domains. Up to three allies within 10, with yourself optionally replacing one, each gain two surges. Resolve the stated effects manually.',
     },
   ],
+  {
+    name: 'The Lists of Heaven: Spend Recovery',
+    parent: 'The Lists of Heaven',
+    sourcePath: 'en/unified/md/feature/conduit/level-2/the-lists-of-heaven.md',
+    actionType: 'When another creature spends a Recovery you allowed',
+    activationCondition:
+      'Whenever you allow another creature to spend a Recovery, you can also spend a Recovery. Spend it manually.',
+  },
+  {
+    name: 'Minor Miracle: Ritual',
+    parent: 'Minor Miracle',
+    sourcePath: 'en/unified/md/feature/conduit/level-3/minor-miracle.md',
+    actionType: 'Respite activity',
+    activationCondition:
+      'With at least half the remains of a creature that died within 24 hours of a cause that is not age, and whose soul is willing: at the end of the respite it returns with full Stamina and half its Recoveries, and you regain only half your Recoveries. Resolve manually.',
+  },
+  {
+    name: 'Sacred Bond: Take Damage',
+    parent: 'Sacred Bond',
+    sourcePath: 'en/unified/md/feature/ability/conduit/level-2/sacred-bond.md',
+    actionType: 'Free triggered action',
+    trigger: 'The other bonded target takes damage.',
+    activationCondition:
+      'Until the end of the encounter, take the damage instead; the original target still suffers its other effects. Move the damage manually.',
+  },
+  {
+    name: 'Sacred Bond: Spend Recovery',
+    parent: 'Sacred Bond',
+    sourcePath: 'en/unified/md/feature/ability/conduit/level-2/sacred-bond.md',
+    actionType: 'Free triggered action',
+    trigger: 'The other bonded target spends a Recovery.',
+    activationCondition: 'Until the end of the encounter, spend a Recovery too. Spend it manually.',
+  },
 ];
 export function conduitActionText(action: CensorAction): string {
   const entry = [...abilitySources, ...featureSources].find(
@@ -279,3 +312,36 @@ export function conduitActionText(action: CensorAction): string {
   if (!entry) throw new Error(`Missing Conduit source ${action.sourcePath}`);
   return entry.text;
 }
+
+/** Level-2/3 ability notes: what the table resolves automatically and which clauses stay manual. */
+export const CONDUIT_ACTIVATION: Record<string, string> = {
+  'Statue of Power':
+    'A size 2 statue rises within 10 squares until the end of the encounter; you and allies within 3 squares gain 1 surge at the start of each of your turns. It is destroyed at 20 damage and has immunity all to poison and psychic damage. Track it manually.',
+  Reap: 'Until the start of your next turn, each ally that kills an enemy regains Stamina equal to 5 + your Intuition. Resolve manually.',
+  'Blessing of Fate and Destiny':
+    'Up to three creatures (you can target yourself instead of one): until the end of the encounter or until you are dying, choose one effect: roll three dice and keep two of your choice, or roll three dice and keep the lowest two. Apply manually.',
+  'The Gods Command You Obey':
+    'At every tier the target acts before taking the damage (a free strike, an ability of your choice, or a shift and an ability), so the power roll, target actions and damage are resolved manually.',
+  'Wellspring of Grace':
+    'Until the end of the encounter or until you are dying, each ally who starts their turn in the aura can spend a Recovery. Resolve manually.',
+  'Our Hearts Your Strength':
+    'Until the end of the encounter or until the target is dying, at the start of each of its turns it gains a speed and rolled-damage bonus equal to the allies within 10 squares, until the start of its next turn. Apply manually.',
+  'Nature Judges Thee':
+    'The table resolves the damage and restrained (save ends) against Agility for each enemy in the 3 cube.',
+  'Sacred Bond':
+    'Use Sacred Bond: Take Damage and Sacred Bond: Spend Recovery while the bond lasts (until the end of the encounter).',
+  "Saint's Tempest":
+    'The table resolves lightning damage and records the vertical slide 1/2/3 as an instruction; move the targets on the map.',
+  'Morning Light':
+    'Each ally in the area deals fire damage equal to your Intuition with their next strike before the end of their next turn. Apply manually.',
+  'Divine Comedy':
+    'You and each ally in the 5 burst can swap places with another creature in the area that fits. Resolve manually.',
+  'Blessing of Insight':
+    'Until the end of the encounter or until you are dying, you and each ally within 10 squares gain 1 surge at the end of each of your turns. Adjust surges manually.',
+  'Fear of the Gods':
+    'Frightened (save ends) against Intuition potency is manual; each target is frightened of you or a creature you choose within distance.',
+  "Saint's Raiment": 'The ally gains 20 temporary Stamina and 3 surges. Apply both manually.',
+  'Soul Siphon':
+    'Afterward one ally within distance can spend any number of Recoveries. Resolve manually.',
+  'Words of Wrath and Grace': 'Each ally in the area can spend a Recovery. Resolve manually.',
+};

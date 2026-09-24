@@ -30,6 +30,10 @@ import {
   levelThreeDecisions as elementalistLevelThree,
   levelTwoDecisions as elementalistLevelTwo,
 } from './classes/elementalist/level-two-three.ts';
+import {
+  levelThreeDecisions as conduitLevelThree,
+  levelTwoDecisions as conduitLevelTwo,
+} from './classes/conduit/level-two-three.ts';
 import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
 import { levelThreeDecisions as shadowLevelThree } from './classes/shadow/level-three.ts';
 import { shadowLaterDecisions } from './classes/shadow/level-four-to-six.ts';
@@ -52,6 +56,7 @@ classStep.decisions.push(
     ...troubadourLevelTwo,
     ...nullLevelTwo,
     ...elementalistLevelTwo,
+    ...conduitLevelTwo,
   ]),
 );
 
@@ -70,6 +75,7 @@ thirdClassStep.decisions.push(
     ...troubadourLevelThree,
     ...nullLevelThree,
     ...elementalistLevelThree,
+    ...conduitLevelThree,
   ]),
 );
 
@@ -97,10 +103,14 @@ for (const definitions of levels) {
           value: 'Raised by Beasts',
           not: true,
         });
-  const skill = definitions.steps
+  // Pool-backed skill choices at later levels offer every value of their source skill groups.
+  for (const skill of definitions.steps
     .flatMap(s => s.decisions)
-    .find(d => d.id === 'class.shadow.level-4.skill');
-  if (skill)
+    .filter(
+      d =>
+        d.id === 'class.shadow.level-4.skill' ||
+        d.id.startsWith('class.conduit.level-2.domain-skill.'),
+    ))
     skill.supportedInV001 = (skill.optionsFrom as string[]).flatMap(
       id => definitions.pools[id]?.values ?? [],
     );

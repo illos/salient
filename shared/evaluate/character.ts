@@ -1803,14 +1803,19 @@ class Evaluation {
         'class-ability': 'class',
         'aspect-ability': 'aspect-triggered',
         'perk-ability': 'perk',
+        // A heroic ability granted by an option (e.g. Conduit 2nd-level domain ability); its quote
+        // carries the printed cost as "cost: N Resource".
+        'heroic-ability': 'heroic',
       };
       for (const grant of this.grantsOf(decision.id)) {
         const kind = kinds[grant.kind];
+        const cost = grant.kind === 'heroic-ability' ? parseCost(grant.quote) : undefined;
         if (kind)
           out.push({
             name: grant.value,
             kind,
             sourcePath: grant.source ?? decision.source,
+            ...(cost ? { cost } : {}),
             kitBonusesIncluded: false,
             provenance: this.grantProvenance(decision, grant),
           });

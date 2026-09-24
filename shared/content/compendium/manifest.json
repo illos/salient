@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:80fa2ba89b15028c06cc6941f6d4a8385c6a703b72865154908ff5cdafd23764",
-  "entryCount": 1775,
+  "contentHash": "sha256:27680f9ecc4531448301c820b7d8e722e0753da12217a43e8b03f5a13c48f421",
+  "entryCount": 1797,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -356,6 +356,17 @@
         "feature/ability/elementalist/level-3"
       ],
       "basis": "docs/build/V135-elementalist-level-three.md#scope: Elementalist levels two and three."
+    },
+    {
+      "id": "conduit-levels-two-three",
+      "description": "Conduit levels two and three: The Lists of Heaven, perk, second domain feature, all twelve domain abilities, Minor Miracle and four 7-Piety alternatives.",
+      "paths": [
+        "feature/conduit/level-2",
+        "feature/ability/conduit/level-2",
+        "feature/conduit/level-3",
+        "feature/ability/conduit/level-3"
+      ],
+      "basis": "docs/build/V134-conduit-level-three.md#scope: Conduit levels two and three."
     },
     {
       "id": "kits",
@@ -1175,6 +1186,134 @@
       "name": "Word of Judgment",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/word-of-judgment.md",
       "selection": "conduit-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-fate-and-destiny",
+      "kind": "ability",
+      "name": "Blessing of Fate and Destiny",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-insight",
+      "kind": "ability",
+      "name": "Blessing of Insight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/divine-comedy",
+      "kind": "ability",
+      "name": "Divine Comedy",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/morning-light",
+      "kind": "ability",
+      "name": "Morning Light",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee",
+      "kind": "ability",
+      "name": "Nature Judges Thee",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/our-hearts-your-strength",
+      "kind": "ability",
+      "name": "Our Hearts Your Strength",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/reap",
+      "kind": "ability",
+      "name": "Reap",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/reap.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/sacred-bond",
+      "kind": "ability",
+      "name": "Sacred Bond",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest",
+      "kind": "ability",
+      "name": "Saint's Tempest",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/statue-of-power",
+      "kind": "ability",
+      "name": "Statue of Power",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey",
+      "kind": "ability",
+      "name": "The Gods Command You Obey",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/wellspring-of-grace",
+      "kind": "ability",
+      "name": "Wellspring of Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods",
+      "kind": "ability",
+      "name": "Fear of the Gods",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/saints-raiment",
+      "kind": "ability",
+      "name": "Saint's Raiment",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/soul-siphon",
+      "kind": "ability",
+      "name": "Soul Siphon",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+      "selection": "conduit-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/words-of-wrath-and-grace",
+      "kind": "ability",
+      "name": "Words of Wrath and Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+      "selection": "conduit-levels-two-three",
       "file": "ability.json"
     },
     {
@@ -5223,6 +5362,54 @@
       "name": "Triggered Action",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-1/triggered-action.md",
       "selection": "conduit-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-2/2nd-level-domain-ability",
+      "kind": "feature",
+      "name": "2nd-Level Domain Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-2/2nd-level-domain-ability.md",
+      "selection": "conduit-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-2/2nd-level-domain-feature",
+      "kind": "feature",
+      "name": "2nd-Level Domain Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-2/2nd-level-domain-feature.md",
+      "selection": "conduit-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-2/perk.md",
+      "selection": "conduit-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-2/the-lists-of-heaven",
+      "kind": "feature",
+      "name": "The Lists of Heaven",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-2/the-lists-of-heaven.md",
+      "selection": "conduit-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-3/7-piety-ability",
+      "kind": "feature",
+      "name": "7-Piety Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-3/7-piety-ability.md",
+      "selection": "conduit-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.conduit.level-3/minor-miracle",
+      "kind": "feature",
+      "name": "Minor Miracle",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-3/minor-miracle.md",
+      "selection": "conduit-levels-two-three",
       "file": "feature.json"
     },
     {

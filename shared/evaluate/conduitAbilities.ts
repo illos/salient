@@ -1,5 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { CONDUIT_ACTIONS, conduitActionText } from '../content/classes/conduit/abilities.ts';
+import {
+  CONDUIT_ACTIONS,
+  conduitActionText,
+  CONDUIT_ACTIVATION,
+} from '../content/classes/conduit/abilities.ts';
 import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
 const managed = (ability: Pick<GrantedAbility, 'name' | 'sourcePath' | 'kind'>) =>
   ability.kind === 'class'
@@ -46,6 +50,10 @@ export function conduitAbilities(
   }
   return result.map(a => {
     if (!a.provenance.decisionId.startsWith('class.conduit.')) return a;
+    const later = a.provenance.decisionId.startsWith('class.conduit.level-')
+      ? CONDUIT_ACTIVATION[a.name]
+      : undefined;
+    if (later) return { ...a, activationCondition: later };
     if (a.name === 'Healing Grace')
       return {
         ...a,

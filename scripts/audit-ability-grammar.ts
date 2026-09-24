@@ -125,6 +125,8 @@ const GRANT_KINDS = new Set([
   'class-ability',
   'aspect-ability',
   'perk-ability',
+  // Option-granted heroic ability with its printed cost (Conduit 2nd-level domain ability).
+  'heroic-ability',
 ]);
 
 /** Every ability grant the evaluator would derive from the composed wizard definitions. */

@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:80fa2ba89b15028c06cc6941f6d4a8385c6a703b72865154908ff5cdafd23764",
+  "contentHash": "sha256:27680f9ecc4531448301c820b7d8e722e0753da12217a43e8b03f5a13c48f421",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1107
     },
     "hero-standalone": {
-      "total": 328,
-      "supported": 44,
-      "manual": 284
+      "total": 344,
+      "supported": 46,
+      "manual": 298
     },
     "kit-signature": {
       "total": 25,
@@ -22349,11 +22349,29 @@
         {
           "name": "Faithful Friend",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.level-2.domain-feature.nature",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
           "decisionId": "class.conduit.domain-feature.nature",
           "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.domain-feature\":\"Nature\"}"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.level-2.domain-feature.nature",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         },
         {
           "name": "Faithful Friend",
@@ -22367,6 +22385,15 @@
         {
           "name": "Faithful Friend",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.level-2.domain-feature.nature",
+          "level": 4,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
           "decisionId": "class.conduit.domain-feature.nature",
           "level": 5,
           "grantKind": "class-ability",
@@ -22376,11 +22403,29 @@
         {
           "name": "Faithful Friend",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.level-2.domain-feature.nature",
+          "level": 5,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
           "decisionId": "class.conduit.domain-feature.nature",
           "level": 6,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.domain-feature\":\"Nature\"}"
+        },
+        {
+          "name": "Faithful Friend",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/faithful-friend.md",
+          "decisionId": "class.conduit.level-2.domain-feature.nature",
+          "level": 6,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -22567,11 +22612,29 @@
         {
           "name": "Grave Speech",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.level-2.domain-feature.death",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
           "decisionId": "class.conduit.domain-feature.death",
           "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.domain-feature\":\"Death\"}"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.level-2.domain-feature.death",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         },
         {
           "name": "Grave Speech",
@@ -22585,6 +22648,15 @@
         {
           "name": "Grave Speech",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.level-2.domain-feature.death",
+          "level": 4,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
           "decisionId": "class.conduit.domain-feature.death",
           "level": 5,
           "grantKind": "class-ability",
@@ -22594,11 +22666,29 @@
         {
           "name": "Grave Speech",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.level-2.domain-feature.death",
+          "level": 5,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
           "decisionId": "class.conduit.domain-feature.death",
           "level": 6,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.domain-feature\":\"Death\"}"
+        },
+        {
+          "name": "Grave Speech",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/grave-speech.md",
+          "decisionId": "class.conduit.level-2.domain-feature.death",
+          "level": 6,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -22676,11 +22766,29 @@
         {
           "name": "Hands of the Maker",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.level-2.domain-feature.creation",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
           "decisionId": "class.conduit.domain-feature.creation",
           "level": 3,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.domain-feature\":\"Creation\"}"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.level-2.domain-feature.creation",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         },
         {
           "name": "Hands of the Maker",
@@ -22694,6 +22802,15 @@
         {
           "name": "Hands of the Maker",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.level-2.domain-feature.creation",
+          "level": 4,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
           "decisionId": "class.conduit.domain-feature.creation",
           "level": 5,
           "grantKind": "class-ability",
@@ -22703,11 +22820,29 @@
         {
           "name": "Hands of the Maker",
           "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.level-2.domain-feature.creation",
+          "level": 5,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
           "decisionId": "class.conduit.domain-feature.creation",
           "level": 6,
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.domain-feature\":\"Creation\"}"
+        },
+        {
+          "name": "Hands of the Maker",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-1/hands-of-the-maker.md",
+          "decisionId": "class.conduit.level-2.domain-feature.creation",
+          "level": 6,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -24634,6 +24769,1916 @@
           "grantKind": "class-ability",
           "selectable": "selectable",
           "detail": "grant of option Word of Judgment supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-fate-and-destiny",
+      "name": "Blessing of Fate and Destiny",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-fate-and-destiny",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-fate-and-destiny#block:0:0:5e8577ad7d1ecfa8",
+          "locator": "block:0:0",
+          "clause": "You can target yourself instead of one creature with this ability. Choose one of the following effects, which lasts until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying):",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-fate-and-destiny#markdown:block:0:0:0635dce9f045614e",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You can target yourself instead of one creature with this ability. Choose one of the following effects, which lasts until the end of the encounter or until you are dying:\n- Whenever a target makes a power roll, they can roll three dice and choose which two rolls to use.\n- Whenever a target makes a power roll, they must roll three dice and use the lowest two rolls.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-fate-and-destiny#markdown:item:4:0:cd2e6658b821d8d7",
+          "locator": "markdown:item:4:0",
+          "clause": "- Whenever a target makes a power roll, they can roll three dice and choose which two rolls to use.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-fate-and-destiny#markdown:item:5:0:ed979dca6e4adff2",
+          "locator": "markdown:item:5:0",
+          "clause": "- Whenever a target makes a power roll, they must roll three dice and use the lowest two rolls.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: You can target yourself instead of one creature with this ability. Choose one of the following effects, which lasts until the end of the encounter or until you are dying:\n- Whenever a target makes a power roll, they can roll three dice and choose which two rolls to use.\n- Whenever a target makes a power roll, they must roll three dice and use the lowest two rolls.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "- Whenever a target makes a power roll, they can roll three dice and choose which two rolls to use.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:5",
+          "clause": "- Whenever a target makes a power roll, they must roll three dice and use the lowest two rolls.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You can target yourself instead of one creature with this ability. Choose one of the following effects, which lasts until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying):",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You can target yourself instead of one creature with this ability. Choose one of the following effects, which lasts until the end of the encounter or until you are dying:\n- Whenever a target makes a power roll, they can roll three dice and choose which two rolls to use.\n- Whenever a target makes a power roll, they must roll three dice and use the lowest two rolls.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "- Whenever a target makes a power roll, they can roll three dice and choose which two rolls to use.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:5:0",
+          "clause": "- Whenever a target makes a power roll, they must roll three dice and use the lowest two rolls.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Blessing of Fate and Destiny",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+          "decisionId": "class.conduit.level-2.domain-ability.fate",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Fate\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Fate\"}"
+        },
+        {
+          "name": "Blessing of Fate and Destiny",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+          "decisionId": "class.conduit.level-2.domain-ability.fate",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Fate\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Fate\"}"
+        },
+        {
+          "name": "Blessing of Fate and Destiny",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+          "decisionId": "class.conduit.level-2.domain-ability.fate",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Fate\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Fate\"}"
+        },
+        {
+          "name": "Blessing of Fate and Destiny",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+          "decisionId": "class.conduit.level-2.domain-ability.fate",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Fate\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Fate\"}"
+        },
+        {
+          "name": "Blessing of Fate and Destiny",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-fate-and-destiny.md",
+          "decisionId": "class.conduit.level-2.domain-ability.fate",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Fate\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Fate\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-insight",
+      "name": "Blessing of Insight",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-insight",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-insight#block:0:0:682a231d40c9f8c0",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Blessing of Insight",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+          "decisionId": "class.conduit.level-2.domain-ability.war",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cavall\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"War\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"War\"}"
+        },
+        {
+          "name": "Blessing of Insight",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+          "decisionId": "class.conduit.level-2.domain-ability.war",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cavall\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"War\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"War\"}"
+        },
+        {
+          "name": "Blessing of Insight",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+          "decisionId": "class.conduit.level-2.domain-ability.war",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cavall\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"War\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"War\"}"
+        },
+        {
+          "name": "Blessing of Insight",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+          "decisionId": "class.conduit.level-2.domain-ability.war",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cavall\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"War\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"War\"}"
+        },
+        {
+          "name": "Blessing of Insight",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
+          "decisionId": "class.conduit.level-2.domain-ability.war",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cavall\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"War\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"War\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/divine-comedy",
+      "name": "Divine Comedy",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/divine-comedy",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/divine-comedy#block:0:0:8fae1f584fb82731",
+          "locator": "block:0:0",
+          "clause": "Each target can choose another creature in the area, then swap places with that creature. The creature they choose must be able to fit into the space they leave and vice versa.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target can choose another creature in the area, then swap places with that creature. The creature they choose must be able to fit into the space they leave and vice versa.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Divine Comedy",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+          "decisionId": "class.conduit.level-2.domain-ability.trickery",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Trickery\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Trickery\"}"
+        },
+        {
+          "name": "Divine Comedy",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+          "decisionId": "class.conduit.level-2.domain-ability.trickery",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Trickery\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Trickery\"}"
+        },
+        {
+          "name": "Divine Comedy",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+          "decisionId": "class.conduit.level-2.domain-ability.trickery",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Trickery\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Trickery\"}"
+        },
+        {
+          "name": "Divine Comedy",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+          "decisionId": "class.conduit.level-2.domain-ability.trickery",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Trickery\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Trickery\"}"
+        },
+        {
+          "name": "Divine Comedy",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/divine-comedy.md",
+          "decisionId": "class.conduit.level-2.domain-ability.trickery",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Trickery\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Trickery\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/morning-light",
+      "name": "Morning Light",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/morning-light",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/morning-light#block:0:tier1:0:e331033aa5c3dff6",
+            "locator": "block:0:tier1:0",
+            "clause": "4 fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/morning-light#block:0:tier2:0:f68c934b3334e560",
+            "locator": "block:0:tier2:0",
+            "clause": "6 fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/morning-light#block:0:tier3:0:e0908e9a30936d31",
+            "locator": "block:0:tier3:0",
+            "clause": "10 fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 10
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/morning-light#block:1:0:97070891c615d73d",
+          "locator": "block:1:0",
+          "clause": "Each ally in the area deals fire damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score with their next strike made before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Each ally in the area deals fire damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score with their next strike made before the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Morning Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+          "decisionId": "class.conduit.level-2.domain-ability.sun",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Kul\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Sun\",\"Knowledge\"],\"class.conduit.level-2.domain-ability\":\"Sun\"}"
+        },
+        {
+          "name": "Morning Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+          "decisionId": "class.conduit.level-2.domain-ability.sun",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Kul\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Sun\",\"Knowledge\"],\"class.conduit.level-2.domain-ability\":\"Sun\"}"
+        },
+        {
+          "name": "Morning Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+          "decisionId": "class.conduit.level-2.domain-ability.sun",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Kul\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Sun\",\"Knowledge\"],\"class.conduit.level-2.domain-ability\":\"Sun\"}"
+        },
+        {
+          "name": "Morning Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+          "decisionId": "class.conduit.level-2.domain-ability.sun",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Kul\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Sun\",\"Knowledge\"],\"class.conduit.level-2.domain-ability\":\"Sun\"}"
+        },
+        {
+          "name": "Morning Light",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/morning-light.md",
+          "decisionId": "class.conduit.level-2.domain-ability.sun",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Kul\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Sun\",\"Knowledge\"],\"class.conduit.level-2.domain-ability\":\"Sun\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee",
+      "name": "Nature Judges Thee",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier1:0:1adb725bfe833afe",
+            "locator": "block:0:tier1:0",
+            "clause": "2 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier1:1:b992fa2f916f5614",
+            "locator": "block:0:tier1:1",
+            "clause": "A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier1:0:1adb725bfe833afe"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier2:0:c31afe8fa82fb263",
+            "locator": "block:0:tier2:0",
+            "clause": "3 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier2:1:9b7cb0a7df6cee23",
+            "locator": "block:0:tier2:1",
+            "clause": "A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier2:0:c31afe8fa82fb263"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier3:0:8882180d6b03536f",
+            "locator": "block:0:tier3:0",
+            "clause": "7 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier3:1:1a0f7872e1e70883",
+            "locator": "block:0:tier3:1",
+            "clause": "A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee#block:0:tier3:0:8882180d6b03536f"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Nature Judges Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+          "decisionId": "class.conduit.level-2.domain-ability.nature",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Nature\"}"
+        },
+        {
+          "name": "Nature Judges Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+          "decisionId": "class.conduit.level-2.domain-ability.nature",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Nature\"}"
+        },
+        {
+          "name": "Nature Judges Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+          "decisionId": "class.conduit.level-2.domain-ability.nature",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Nature\"}"
+        },
+        {
+          "name": "Nature Judges Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+          "decisionId": "class.conduit.level-2.domain-ability.nature",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Nature\"}"
+        },
+        {
+          "name": "Nature Judges Thee",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/nature-judges-thee.md",
+          "decisionId": "class.conduit.level-2.domain-ability.nature",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Nature\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/our-hearts-your-strength",
+      "name": "Our Hearts Your Strength",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/our-hearts-your-strength",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/our-hearts-your-strength#block:0:0:8fd2167c7c758c8a",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until the target is [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), at the start of each of the target's [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), they gain a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) equal to the number of allies within 10 squares of them. This [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) lasts until the start of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until the target is [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), at the start of each of the target's [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), they gain a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) equal to the number of allies within 10 squares of them. This [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) lasts until the start of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and one ally",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Our Hearts Your Strength",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+          "decisionId": "class.conduit.level-2.domain-ability.love",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Love\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Love\"}"
+        },
+        {
+          "name": "Our Hearts Your Strength",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+          "decisionId": "class.conduit.level-2.domain-ability.love",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Love\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Love\"}"
+        },
+        {
+          "name": "Our Hearts Your Strength",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+          "decisionId": "class.conduit.level-2.domain-ability.love",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Love\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Love\"}"
+        },
+        {
+          "name": "Our Hearts Your Strength",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+          "decisionId": "class.conduit.level-2.domain-ability.love",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Love\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Love\"}"
+        },
+        {
+          "name": "Our Hearts Your Strength",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/our-hearts-your-strength.md",
+          "decisionId": "class.conduit.level-2.domain-ability.love",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Love\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Love\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/reap",
+      "name": "Reap",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/reap",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/reap.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/reap#block:0:0:fa56096456b82923",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each time a target kills an enemy, they regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to 5 + your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each time a target kills an enemy, they regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to 5 + your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each ally",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Reap",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/reap.md",
+          "decisionId": "class.conduit.level-2.domain-ability.death",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.level-2.domain-ability\":\"Death\"}"
+        },
+        {
+          "name": "Reap",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/reap.md",
+          "decisionId": "class.conduit.level-2.domain-ability.death",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.level-2.domain-ability\":\"Death\"}"
+        },
+        {
+          "name": "Reap",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/reap.md",
+          "decisionId": "class.conduit.level-2.domain-ability.death",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.level-2.domain-ability\":\"Death\"}"
+        },
+        {
+          "name": "Reap",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/reap.md",
+          "decisionId": "class.conduit.level-2.domain-ability.death",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.level-2.domain-ability\":\"Death\"}"
+        },
+        {
+          "name": "Reap",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/reap.md",
+          "decisionId": "class.conduit.level-2.domain-ability.death",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.level-2.domain-ability\":\"Death\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/sacred-bond",
+      "name": "Sacred Bond",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/sacred-bond",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/sacred-bond#block:0:0:5233fd80f0176050",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter, whenever one target takes damage, the other target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to take the damage instead. The original target suffers any effects associated with the damage. Additionally, whenever one target spends a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), the other target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter, whenever one target takes damage, the other target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to take the damage instead. The original target suffers any effects associated with the damage. Additionally, whenever one target spends a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), the other target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and one ally",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Sacred Bond",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+          "decisionId": "class.conduit.level-2.domain-ability.protection",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Protection\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Protection\"}"
+        },
+        {
+          "name": "Sacred Bond",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+          "decisionId": "class.conduit.level-2.domain-ability.protection",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Protection\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Protection\"}"
+        },
+        {
+          "name": "Sacred Bond",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+          "decisionId": "class.conduit.level-2.domain-ability.protection",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Protection\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Protection\"}"
+        },
+        {
+          "name": "Sacred Bond",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+          "decisionId": "class.conduit.level-2.domain-ability.protection",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Protection\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Protection\"}"
+        },
+        {
+          "name": "Sacred Bond",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/sacred-bond.md",
+          "decisionId": "class.conduit.level-2.domain-ability.protection",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Protection\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Protection\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest",
+      "name": "Saint's Tempest",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier1:0:ca70f6563b2f118c",
+            "locator": "block:0:tier1:0",
+            "clause": "2 lightning damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "lightning",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier1:1:0faf1708d5c1b4aa",
+            "locator": "block:0:tier1:1",
+            "clause": "vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "push",
+            "distance": 1,
+            "movement": "slide",
+            "vertical": true,
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier1:0:ca70f6563b2f118c"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier2:0:4343c35716d050f3",
+            "locator": "block:0:tier2:0",
+            "clause": "5 lightning damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "lightning",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier2:1:0faf1608d5c1b2f7",
+            "locator": "block:0:tier2:1",
+            "clause": "vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "movement": "slide",
+            "vertical": true,
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier2:0:4343c35716d050f3"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier3:0:2d122bd406f2bd01",
+            "locator": "block:0:tier3:0",
+            "clause": "7 lightning damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "damageType": "lightning",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier3:1:0faf1508d5c1b144",
+            "locator": "block:0:tier3:1",
+            "clause": "vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "push",
+            "distance": 3,
+            "movement": "slide",
+            "vertical": true,
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest#block:0:tier3:0:2d122bd406f2bd01"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Saint's Tempest",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+          "decisionId": "class.conduit.level-2.domain-ability.storm",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Nikros the Tyrant\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Storm\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Storm\"}"
+        },
+        {
+          "name": "Saint's Tempest",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+          "decisionId": "class.conduit.level-2.domain-ability.storm",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Nikros the Tyrant\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Storm\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Storm\"}"
+        },
+        {
+          "name": "Saint's Tempest",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+          "decisionId": "class.conduit.level-2.domain-ability.storm",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Nikros the Tyrant\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Storm\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Storm\"}"
+        },
+        {
+          "name": "Saint's Tempest",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+          "decisionId": "class.conduit.level-2.domain-ability.storm",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Nikros the Tyrant\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Storm\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Storm\"}"
+        },
+        {
+          "name": "Saint's Tempest",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/saints-tempest.md",
+          "decisionId": "class.conduit.level-2.domain-ability.storm",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Nikros the Tyrant\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Storm\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Storm\"}"
+        }
+      ],
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/statue-of-power",
+      "name": "Statue of Power",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/statue-of-power",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/statue-of-power#block:0:0:9bb7c4789dcffaa9",
+          "locator": "block:0:0",
+          "clause": "A [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 statue rises out of the ground in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) and lasts until the end of the encounter. While within 3 squares of the statue, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally within 3 squares of the statue gains this same benefit. The statue is destroyed if it takes 20 or more damage. It has immunity all to poison and psychic damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "A [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 statue rises out of the ground in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) and lasts until the end of the encounter. While within 3 squares of the statue, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally within 3 squares of the statue gains this same benefit. The statue is destroyed if it takes 20 or more damage. It has immunity all to poison and psychic damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Statue of Power",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+          "decisionId": "class.conduit.level-2.domain-ability.creation",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Creation\"}"
+        },
+        {
+          "name": "Statue of Power",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+          "decisionId": "class.conduit.level-2.domain-ability.creation",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Creation\"}"
+        },
+        {
+          "name": "Statue of Power",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+          "decisionId": "class.conduit.level-2.domain-ability.creation",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Creation\"}"
+        },
+        {
+          "name": "Statue of Power",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+          "decisionId": "class.conduit.level-2.domain-ability.creation",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Creation\"}"
+        },
+        {
+          "name": "Statue of Power",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/statue-of-power.md",
+          "decisionId": "class.conduit.level-2.domain-ability.creation",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.level-2.domain-ability\":\"Creation\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey",
+      "name": "The Gods Command You Obey",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey#block:0:tier1:0:3888faefd4ba9762",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey#block:0:tier1:1:04b4565a839a8282",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, before taking damage, the target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a target you choose",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM before taking damage, the target makes a free strike against a target you choose",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey#block:0:tier2:0:ea4c084b3041b497",
+            "locator": "block:0:tier2:0",
+            "clause": "7 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey#block:0:tier2:1:62a1e738ddf0330d",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, before taking damage, the target uses an ability of your choice and you choose any targets for that ability",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM before taking damage, the target uses an ability of your choice and you choose any targets for that ability",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey#block:0:tier3:0:e644d2bef2d0a6f6",
+            "locator": "block:0:tier3:0",
+            "clause": "11 + I holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "I"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey#block:0:tier3:1:2eb4eba260c6c429",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, before taking damage, the target shifts up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) to a location you choose, uses an ability of your choice, and you choose any targets for that ability",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM before taking damage, the target shifts up to their speed to a location you choose, uses an ability of your choice, and you choose any targets for that ability",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "P < WEAK, before taking damage, the target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a target you choose",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "P < AVERAGE, before taking damage, the target uses an ability of your choice and you choose any targets for that ability",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "P < STRONG, before taking damage, the target shifts up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) to a location you choose, uses an ability of your choice, and you choose any targets for that ability",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "The Gods Command You Obey",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+          "decisionId": "class.conduit.level-2.domain-ability.knowledge",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Knowledge\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Knowledge\"}"
+        },
+        {
+          "name": "The Gods Command You Obey",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+          "decisionId": "class.conduit.level-2.domain-ability.knowledge",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Knowledge\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Knowledge\"}"
+        },
+        {
+          "name": "The Gods Command You Obey",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+          "decisionId": "class.conduit.level-2.domain-ability.knowledge",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Knowledge\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Knowledge\"}"
+        },
+        {
+          "name": "The Gods Command You Obey",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+          "decisionId": "class.conduit.level-2.domain-ability.knowledge",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Knowledge\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Knowledge\"}"
+        },
+        {
+          "name": "The Gods Command You Obey",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/the-gods-command-you-obey.md",
+          "decisionId": "class.conduit.level-2.domain-ability.knowledge",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Knowledge\",\"Death\"],\"class.conduit.level-2.domain-ability\":\"Knowledge\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/wellspring-of-grace",
+      "name": "Wellspring of Grace",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/wellspring-of-grace",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/wellspring-of-grace#block:0:0:aa732e364b3eedbe",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area, they can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area, they can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Wellspring of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+          "decisionId": "class.conduit.level-2.domain-ability.life",
+          "level": 2,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Life\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Life\"}"
+        },
+        {
+          "name": "Wellspring of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+          "decisionId": "class.conduit.level-2.domain-ability.life",
+          "level": 3,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Life\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Life\"}"
+        },
+        {
+          "name": "Wellspring of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+          "decisionId": "class.conduit.level-2.domain-ability.life",
+          "level": 4,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Life\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Life\"}"
+        },
+        {
+          "name": "Wellspring of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+          "decisionId": "class.conduit.level-2.domain-ability.life",
+          "level": 5,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Life\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Life\"}"
+        },
+        {
+          "name": "Wellspring of Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
+          "decisionId": "class.conduit.level-2.domain-ability.life",
+          "level": 6,
+          "grantKind": "heroic-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Life\",\"Creation\"],\"class.conduit.level-2.domain-ability\":\"Life\"}"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods",
+      "name": "Fear of the Gods",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier1:0:3a074d34ffb2a84b",
+            "locator": "block:0:tier1:0",
+            "clause": "6 psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier1:1:ffe5a7c0b786a3c4",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier1:0:3a074d34ffb2a84b"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier2:0:31e43a23fb26de4c",
+            "locator": "block:0:tier2:0",
+            "clause": "9 psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier2:1:71fa25629efd631b",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier2:0:31e43a23fb26de4c"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier3:0:0f142b9a9c2b8eb7",
+            "locator": "block:0:tier3:0",
+            "clause": "13 psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 13
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier3:1:22233f5a1e90790b",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:0:tier3:0:0f142b9a9c2b8eb7"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/fear-of-the-gods#block:1:0:7417e8ce27522c1c",
+          "locator": "block:1:0",
+          "clause": "Each target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you or a creature you choose within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Each target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you or a creature you choose within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Fear of the Gods",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fear of the Gods supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fear of the Gods",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fear of the Gods supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fear of the Gods",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fear of the Gods supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fear of the Gods",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/fear-of-the-gods.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fear of the Gods supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/saints-raiment",
+      "name": "Saint's Raiment",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/saints-raiment",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/saints-raiment#block:0:0:c91334bb589d1d51",
+          "locator": "block:0:0",
+          "clause": "The target gains 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) and 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target gains 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) and 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Saint's Raiment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Saint's Raiment supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Saint's Raiment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Saint's Raiment supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Saint's Raiment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Saint's Raiment supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Saint's Raiment",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Saint's Raiment supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/soul-siphon",
+      "name": "Soul Siphon",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/soul-siphon",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/soul-siphon#block:0:tier1:0:5ad936e072db5c46",
+            "locator": "block:0:tier1:0",
+            "clause": "7 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/soul-siphon#block:0:tier2:0:2dc1abeafe2dea5c",
+            "locator": "block:0:tier2:0",
+            "clause": "10 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/soul-siphon#block:0:tier3:0:e32c09c6ae7d7d0b",
+            "locator": "block:0:tier3:0",
+            "clause": "15 + I corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 15,
+              "characteristic": "I"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/soul-siphon#block:1:0:4c9af986faf5997e",
+          "locator": "block:1:0",
+          "clause": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend any number of [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "One ally within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) can spend any number of [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Soul Siphon",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Siphon supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Siphon",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Siphon supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Siphon",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Siphon supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Siphon",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/soul-siphon.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Siphon supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/words-of-wrath-and-grace",
+      "name": "Words of Wrath and Grace",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/words-of-wrath-and-grace",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/words-of-wrath-and-grace#block:0:tier1:0:a8da508e0106de26",
+            "locator": "block:0:tier1:0",
+            "clause": "2 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/words-of-wrath-and-grace#block:0:tier2:0:c448d28effb4ddef",
+            "locator": "block:0:tier2:0",
+            "clause": "5 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/words-of-wrath-and-grace#block:0:tier3:0:f253fa9d77acafb5",
+            "locator": "block:0:tier3:0",
+            "clause": "7 holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/words-of-wrath-and-grace#block:1:0:b2491b19d82282f9",
+          "locator": "block:1:0",
+          "clause": "Each ally in the area can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Each ally in the area can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Words of Wrath and Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Words of Wrath and Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Words of Wrath and Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Words of Wrath and Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Words of Wrath and Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Words of Wrath and Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Words of Wrath and Grace",
+          "sourcePath": "en/unified/md/feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+          "decisionId": "class.conduit.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Words of Wrath and Grace supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -207537,8 +209582,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 106,
-    "compatibility": 1472,
+    "compiled": 108,
+    "compatibility": 1486,
     "compiledButUnavailable": 0
   }
 }

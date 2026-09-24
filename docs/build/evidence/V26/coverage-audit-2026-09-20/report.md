@@ -8,24 +8,24 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:80fa2ba89b15028c06cc6941f6d4a8385c6a703b72865154908ff5cdafd23764`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:27680f9ecc4531448301c820b7d8e722e0753da12217a43e8b03f5a13c48f421`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 328 | 22 | 125 | 15 | 181 |
+| Hero standalone (`ability.json`) | 344 | 22 | 132 | 16 | 190 |
 | Kit signature (`kit.json`) | 25 | 6 | 15 | 1 | 4 |
 | Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 21 | 565 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 2771 (1916 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 2862 (2007 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 21 fully (1.81%), 565 with a typed remainder (48.79%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 171 of 425 (40.24%) compile: 29 fully (6.82%), 142 with a typed remainder (33.41%), of which 16 (3.76%) are within the bounded potency remainder. 254 (59.76%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 178 of 441 (40.36%) compile: 29 fully (6.58%), 149 with a typed remainder (33.79%), of which 17 (3.85%) are within the bounded potency remainder. 263 (59.64%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -34,7 +34,7 @@ compiled entries:
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Hero standalone (`ability.json`) | COMPILES | 16 | 2 | 4 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 92 | 3 | 24 | 4 | 2 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 94 | 3 | 29 | 4 | 2 |
 | Kit signature (`kit.json`) | COMPILES | 4 | 2 | 0 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 13 | 1 | 1 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -110,6 +110,13 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Violence Will Not Aid Thee | COMPILES_WITH_REMAINDER | — | single | selectable | class.conduit.ability-3@1:selectable, class.conduit.ability-3@2:selectable, class.conduit.ability-3@3:selectable, class.conduit.ability-3@4:selectable, class.conduit.ability-3@5:selectable, class.conduit.ability-3@6:selectable | effect-paragraph:effect |
 | hero-standalone | Warrior's Prayer | COMPILES | — | single | selectable | class.conduit.signature-abilities@1:selectable, class.conduit.signature-abilities@2:selectable, class.conduit.signature-abilities@3:selectable, class.conduit.signature-abilities@4:selectable, class.conduit.signature-abilities@5:selectable, class.conduit.signature-abilities@6:selectable | — |
 | hero-standalone | Wither | COMPILES_WITH_REMAINDER | — | single | selectable | class.conduit.signature-abilities@1:selectable, class.conduit.signature-abilities@2:selectable, class.conduit.signature-abilities@3:selectable, class.conduit.signature-abilities@4:selectable, class.conduit.signature-abilities@5:selectable, class.conduit.signature-abilities@6:selectable | potency:P < SYM the target takes a bane on their next power roll |
+| hero-standalone | Morning Light | COMPILES_WITH_REMAINDER | — | area | selectable | class.conduit.level-2.domain-ability.sun@2:selectable, class.conduit.level-2.domain-ability.sun@3:selectable, class.conduit.level-2.domain-ability.sun@4:selectable, class.conduit.level-2.domain-ability.sun@5:selectable, class.conduit.level-2.domain-ability.sun@6:selectable | effect-paragraph:effect |
+| hero-standalone | Nature Judges Thee | COMPILES_WITH_REMAINDER | yes | area | selectable | class.conduit.level-2.domain-ability.nature@2:selectable, class.conduit.level-2.domain-ability.nature@3:selectable, class.conduit.level-2.domain-ability.nature@4:selectable, class.conduit.level-2.domain-ability.nature@5:selectable, class.conduit.level-2.domain-ability.nature@6:selectable | potency:A < SYM restrained (save ends) |
+| hero-standalone | Saint's Tempest | COMPILES_WITH_REMAINDER | — | area | selectable | class.conduit.level-2.domain-ability.storm@2:selectable, class.conduit.level-2.domain-ability.storm@3:selectable, class.conduit.level-2.domain-ability.storm@4:selectable, class.conduit.level-2.domain-ability.storm@5:selectable, class.conduit.level-2.domain-ability.storm@6:selectable | vertical slide N |
+| hero-standalone | The Gods Command You Obey | COMPILES_WITH_REMAINDER | — | single | selectable | class.conduit.level-2.domain-ability.knowledge@2:selectable, class.conduit.level-2.domain-ability.knowledge@3:selectable, class.conduit.level-2.domain-ability.knowledge@4:selectable, class.conduit.level-2.domain-ability.knowledge@5:selectable, class.conduit.level-2.domain-ability.knowledge@6:selectable | potency:P < SYM before taking damage, the target makes a free strike against a target you choose; potency:P < SYM before taking damage, the target uses an ability of your choice and you choose any targets for that ability; potency:P < SYM before taking damage, the target shifts up to their speed to a location you choose, uses an ability of your choice, and you choose any targets for that ability |
+| hero-standalone | Fear of the Gods | COMPILES_WITH_REMAINDER | — | area | selectable | class.conduit.level-3.ability-7@3:selectable, class.conduit.level-3.ability-7@4:selectable, class.conduit.level-3.ability-7@5:selectable, class.conduit.level-3.ability-7@6:selectable | effect-paragraph:effect; potency:I < SYM frightened (save ends) |
+| hero-standalone | Soul Siphon | COMPILES_WITH_REMAINDER | — | single | selectable | class.conduit.level-3.ability-7@3:selectable, class.conduit.level-3.ability-7@4:selectable, class.conduit.level-3.ability-7@5:selectable, class.conduit.level-3.ability-7@6:selectable | effect-paragraph:effect |
+| hero-standalone | Words of Wrath and Grace | COMPILES_WITH_REMAINDER | — | area | selectable | class.conduit.level-3.ability-7@3:selectable, class.conduit.level-3.ability-7@4:selectable, class.conduit.level-3.ability-7@5:selectable, class.conduit.level-3.ability-7@6:selectable | effect-paragraph:effect |
 | hero-standalone | Draconian Pride | COMPILES | — | area | selectable | ancestry.dragon-knight.purchased-traits@1:selectable, ancestry.revenant.dragon-knight.purchased-traits@1:selectable, ancestry.dragon-knight.purchased-traits@2:selectable, ancestry.revenant.dragon-knight.purchased-traits@2:selectable, ancestry.dragon-knight.purchased-traits@3:selectable, ancestry.revenant.dragon-knight.purchased-traits@3:selectable, ancestry.dragon-knight.purchased-traits@4:selectable, ancestry.revenant.dragon-knight.purchased-traits@4:selectable, ancestry.dragon-knight.purchased-traits@5:selectable, ancestry.revenant.dragon-knight.purchased-traits@5:selectable, ancestry.dragon-knight.purchased-traits@6:selectable, ancestry.revenant.dragon-knight.purchased-traits@6:selectable | — |
 | hero-standalone | Dragon Breath | COMPILES_WITH_REMAINDER | — | area | selectable | ancestry.dragon-knight.purchased-traits@1:selectable, ancestry.revenant.dragon-knight.purchased-traits@1:selectable, ancestry.dragon-knight.purchased-traits@2:selectable, ancestry.revenant.dragon-knight.purchased-traits@2:selectable, ancestry.dragon-knight.purchased-traits@3:selectable, ancestry.revenant.dragon-knight.purchased-traits@3:selectable, ancestry.dragon-knight.purchased-traits@4:selectable, ancestry.revenant.dragon-knight.purchased-traits@4:selectable, ancestry.dragon-knight.purchased-traits@5:selectable, ancestry.revenant.dragon-knight.purchased-traits@5:selectable, ancestry.dragon-knight.purchased-traits@6:selectable, ancestry.revenant.dragon-knight.purchased-traits@6:selectable | effect-paragraph:effect |
 | hero-standalone | Afflict a Bountiful Decay | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | effect-paragraph:effect |
@@ -297,6 +304,15 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Sermon of Grace | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Word of Guidance | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N piety |
 | hero-standalone | Word of Judgment | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N piety |
+| hero-standalone | Blessing of Fate and Destiny | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Blessing of Insight | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Divine Comedy | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Our Hearts Your Strength | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Reap | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Sacred Bond | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Statue of Power | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Wellspring of Grace | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Saint's Raiment | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Breath of Dawn Remembered | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N+ essence |
 | hero-standalone | Explosive Assistance | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N essence |
 | hero-standalone | Instantaneous Excavation | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; effect-paragraph:persistent N; tier:the target can shift N square from the edge of the hole to the nearest unoccupied space of their choice; tier:the target falls into the hole; tier:the target falls into the hole and can't reduce the height of the fall |
@@ -504,8 +520,8 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1229 | 1215 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
-| 2 | no-power-roll | no-power-roll | 709 | 709 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1242 | 1228 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 2 | no-power-roll | no-power-roll | 718 | 718 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
 | 3 | trigger | trigger | 210 | 210 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
 | 5 | unknown | unattached-paragraph | 130 | 59 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
@@ -530,8 +546,8 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | 24 | condition | grabbed | 23 | 17 | `foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac`, `mcdm.heroes.v1/feature.ability.censor.level-1/arrest`, `salient:foe-feature:0111b484-e533-47e2-859b-2c8041af5214` |
 | 25 | potency-condition | potency:M < N dazed (save ends) | 23 | 10 | `foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b`, `salient:foe-feature:01bf9520-d963-4137-87da-6b525b0b1c4c`, `salient:foe-feature:19cf3949-d026-43a6-9787-afe7890f0fc4` |
 | 26 | potency-condition | potency:M < N grabbed | 23 | 9 | `salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc`, `salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22`, `salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa` |
-| 27 | roll-expression | roll:power roll + highest characteristic | 20 | 20 | `salient:foe-feature:047c7929-7d37-4083-8817-40f7363da23f`, `salient:foe-feature:08262f07-e929-4223-9787-a05ea050db62`, `salient:foe-feature:08dd35a2-505e-4ab3-9eef-e0e9477f767d` |
-| 28 | slide | vertical slide N | 20 | 8 | `salient:foe-feature:3bed2cb6-3172-4f0e-a293-1656b2283263`, `salient:foe-feature:555cf154-f5a4-4a9a-9116-86e2606ab3f3`, `salient:foe-feature:582d9548-66ad-4a68-8ecb-67d22a4d2089` |
+| 27 | slide | vertical slide N | 23 | 9 | `mcdm.heroes.v1/feature.ability.conduit.level-2/saints-tempest`, `salient:foe-feature:3bed2cb6-3172-4f0e-a293-1656b2283263`, `salient:foe-feature:555cf154-f5a4-4a9a-9116-86e2606ab3f3` |
+| 28 | roll-expression | roll:power roll + highest characteristic | 20 | 20 | `salient:foe-feature:047c7929-7d37-4083-8817-40f7363da23f`, `salient:foe-feature:08262f07-e929-4223-9787-a05ea050db62`, `salient:foe-feature:08dd35a2-505e-4ab3-9eef-e0e9477f767d` |
 | 29 | tier-damage | tier:slide N | 20 | 7 | `mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound`, `mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones`, `mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites` |
 | 30 | potency-condition | potency:M < N restrained (save ends) | 19 | 11 | `salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce`, `salient:foe-feature:1e131435-884e-47c2-b6a2-dfcf2c15c398`, `salient:foe-feature:3976a9f6-8129-4ccc-8842-059de220d89e` |
 | 31 | potency-condition | potency:R < N dazed (save ends) | 18 | 9 | `salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c`, `salient:foe-feature:0b7cf3c6-6c5b-41e3-970a-03f1187d68aa`, `salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee` |
@@ -549,14 +565,14 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1306 | 13 |
-| potency-condition | 1068 | 214 |
-| no-power-roll | 709 | 1 |
+| effect-paragraph | 1319 | 13 |
+| potency-condition | 1077 | 217 |
+| no-power-roll | 718 | 1 |
 | tier-damage | 281 | 105 |
 | unknown | 247 | 57 |
 | trigger | 210 | 1 |
 | malice-spend | 151 | 2 |
-| slide | 123 | 9 |
+| slide | 126 | 9 |
 | condition | 105 | 14 |
 | pull | 79 | 3 |
 | resource-spend | 61 | 15 |
@@ -744,7 +760,7 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 | granted | roll-expression-outside-grammar | 5 |
 | granted | tier1-damage-outside-grammar | 1 |
 | granted | tiers-without-power-roll | 1 |
-| hero-standalone | no-power-roll | 151 |
+| hero-standalone | no-power-roll | 160 |
 | hero-standalone | roll-expression-outside-grammar | 4 |
 | hero-standalone | tier1-damage-outside-grammar | 26 |
 | kit-signature | roll-expression-outside-grammar | 4 |

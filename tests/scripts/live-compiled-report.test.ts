@@ -126,8 +126,10 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Gravitic Strike',
       'Tentacle',
       'Killer Claws',
+      'Nature Judges Thee',
       'Rotten Smash',
       "Volcano's Embrace",
+      "Saint's Tempest",
     ].sort(),
   );
   expect(

@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:80fa2ba89b15028c06cc6941f6d4a8385c6a703b72865154908ff5cdafd23764`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:27680f9ecc4531448301c820b7d8e722e0753da12217a43e8b03f5a13c48f421`.
 
-Currently reachable compiled: 106; unchanged reachable compatibility: 1472; structurally supported but unavailable: 0.
+Currently reachable compiled: 108; unchanged reachable compatibility: 1486; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -173,6 +173,22 @@ Currently reachable compiled: 106; unchanged reachable compatibility: 1472; stru
 | Wither | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Word of Guidance | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Word of Judgment | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
+| Blessing of Fate and Destiny | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Blessing of Insight | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Divine Comedy | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Morning Light | hero-standalone | manual | legacy-compatibility | manual-section |
+| Nature Judges Thee | hero-standalone | supported | compiled |  |
+| Our Hearts Your Strength | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Reap | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Sacred Bond | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Saint's Tempest | hero-standalone | supported | compiled |  |
+| Statue of Power | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| The Gods Command You Obey | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Wellspring of Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Fear of the Gods | hero-standalone | manual | legacy-compatibility | manual-section |
+| Saint's Raiment | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Soul Siphon | hero-standalone | manual | legacy-compatibility | manual-section |
+| Words of Wrath and Grace | hero-standalone | manual | legacy-compatibility | manual-section |
 | Draconian Pride | hero-standalone | supported | compiled |  |
 | Dragon Breath | hero-standalone | manual | legacy-compatibility | manual-section |
 | Afflict a Bountiful Decay | hero-standalone | manual | legacy-compatibility | manual-section |

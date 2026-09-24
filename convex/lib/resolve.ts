@@ -299,6 +299,8 @@ export function abilityFromEntry(
     // Return next turn precedes this roll; target actions precede Puppet Strings damage.
     '/feature/ability/shadow/level-5/into-the-shadows.md',
     '/feature/ability/shadow/level-6/puppet-strings.md',
+    // The Gods Command You Obey: at every tier the target acts before taking damage.
+    '/feature/ability/conduit/level-2/the-gods-command-you-obey.md',
     '/feature/ability/fury/level-1/tide-of-death.md',
     // Same Self-header movement shape: rolls target enemies moved adjacent to, never yourself.
     '/feature/ability/fury/level-2/phalanx-breaker.md',

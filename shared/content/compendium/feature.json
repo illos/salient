@@ -1385,6 +1385,84 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.conduit.level-2/2nd-level-domain-ability",
+    "kind": "feature",
+    "name": "2nd-Level Domain Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-2/2nd-level-domain-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/conduit/level-2/2nd-level-domain-ability.json",
+    "selection": "conduit-levels-two-three",
+    "text": "---\nclass: conduit\nlevel: \"2\"\nname: 2nd-Level Domain Ability\nscc: mcdm.heroes.v1/feature.conduit.level-2/2nd-level-domain-ability\ntype: feature\n---\n\nChoose one of your domains. You gain a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from that domain, as shown on the 2nd-Level [Conduit](scc.v1:mcdm.heroes.v1/class/conduit) Domain Abilities table.\n\n###### 2nd-Level Conduit Domain Abilities Table\n\n| Domain     | Ability                      |\n|------------|------------------------------|\n| Creation   | [Statue of Power](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/statue-of-power)              |\n| Death      | Reap                         |\n| Fate       | [Blessing of Fate and Destiny](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-fate-and-destiny) |\n| Knowledge  | [The Gods Command You Obey](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/the-gods-command-you-obey)    |\n| Life       | [Wellspring of Grace](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/wellspring-of-grace)          |\n| Love       | [Our Hearts Your Strength](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/our-hearts-your-strength)     |\n| Nature     | [Nature Judges Thee](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/nature-judges-thee)           |\n| Protection | [Sacred Bond](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/sacred-bond)                  |\n| Storm      | [Saint](scc.v1:mcdm.heroes.v1/rule.world/saint)'s Tempest              |\n| Sun        | [Morning Light](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/morning-light)                |\n| Trickery   | [Divine Comedy](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/divine-comedy)                |\n| War        | [Blessing of Insight](scc.v1:mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-insight)          |\n",
+    "structured": {
+      "class": "conduit",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.conduit.level-2/2nd-level-domain-feature",
+    "kind": "feature",
+    "name": "2nd-Level Domain Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-2/2nd-level-domain-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/conduit/level-2/2nd-level-domain-feature.json",
+    "selection": "conduit-levels-two-three",
+    "text": "---\nclass: conduit\nlevel: \"2\"\nname: 2nd-Level Domain Feature\nscc: mcdm.heroes.v1/feature.conduit.level-2/2nd-level-domain-feature\ntype: feature\n---\n\nYou gain the 1st-level domain feature and ability to choose a skill for the domain you selected at 1st level but whose domain feature you didn't take at that level (see 1st-Level Domain Feature).\n",
+    "structured": {
+      "class": "conduit",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.conduit.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/conduit/level-2/perk.json",
+    "selection": "conduit-levels-two-three",
+    "text": "---\nclass: conduit\nlevel: \"2\"\nname: Perk\nscc: mcdm.heroes.v1/feature.conduit.level-2/perk\ntype: feature\n---\n\nYou gain one crafting, lore, or [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) perk of your choice. See Chapter 7: [Perks](scc.v1:mcdm.heroes.v1/chapter/perks).\n",
+    "structured": {
+      "class": "conduit",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.conduit.level-2/the-lists-of-heaven",
+    "kind": "feature",
+    "name": "The Lists of Heaven",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-2/the-lists-of-heaven.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/conduit/level-2/the-lists-of-heaven.json",
+    "selection": "conduit-levels-two-three",
+    "text": "---\nclass: conduit\nlevel: \"2\"\nname: The Lists of Heaven\nscc: mcdm.heroes.v1/feature.conduit.level-2/the-lists-of-heaven\ntype: feature\n---\n\nYour deity is aware of your growing influence, making it easier to draw their attention and power when you heal your allies. Whenever you allow another creature to spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), you can also spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "class": "conduit",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.conduit.level-3/7-piety-ability",
+    "kind": "feature",
+    "name": "7-Piety Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-3/7-piety-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/conduit/level-3/7-piety-ability.json",
+    "selection": "conduit-levels-two-three",
+    "text": "---\nclass: conduit\nlevel: \"3\"\nname: 7-Piety Ability\nscc: mcdm.heroes.v1/feature.conduit.level-3/7-piety-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 piety to use.\n",
+    "structured": {
+      "class": "conduit",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.conduit.level-3/minor-miracle",
+    "kind": "feature",
+    "name": "Minor Miracle",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/conduit/level-3/minor-miracle.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/conduit/level-3/minor-miracle.json",
+    "selection": "conduit-levels-two-three",
+    "text": "---\nclass: conduit\nlevel: \"3\"\nname: Minor Miracle\nscc: mcdm.heroes.v1/feature.conduit.level-3/minor-miracle\ntype: feature\n---\n\nAs a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity, you can perform a religious ritual and beseech the gods to restore a dead creature to life. You must have at least half the creature's remains, and they must have died within the last 24 hours from an effect that isn't age related. The creature's soul must be willing to return to life for the ritual to work. If they are not willing, you instinctively understand that as you start the [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity and can cease it immediately.\n\nA creature with a willing soul returns to life at the end of the [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) with full [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and half their [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries). You regain only half your [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) at the end of the [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n",
+    "structured": {
+      "class": "conduit",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.elementalist.level-1/1st-level-specialization-feature",
     "kind": "feature",
     "name": "1st-Level Specialization Feature",
