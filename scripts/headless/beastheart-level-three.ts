@@ -32,13 +32,22 @@ type Log = {
   id: string;
   kind: string;
   payload?: {
-    data?: { manual?: boolean; ability?: { name?: string }; result?: AbilityRollResult };
+    data?: {
+      manual?: boolean;
+      ability?: { name?: string; effects?: { text: string }[] };
+      result?: AbilityRollResult;
+    };
   };
 };
 type Transition = { selections: DraftSelection[]; removed: string[]; evaluation: EvaluationResult };
 const cid = () => crypto.randomUUID();
 /** Every Beastheart use is a named manual record (V106): performer, cost and source, no automation. */
 type Records = Record<string, number>;
+const withoutResource = (state: Saved['liveState']) => {
+  if (!state) return state;
+  const { heroicResource: _resource, ...rest } = state;
+  return rest;
+};
 const recordsOf = (w: {
   levelTwo: { addedRecords: Records };
   levelThree: { addedRecords: Records };
@@ -139,7 +148,11 @@ export async function runBeastheartLevelThree({
         ] as const)
           assert.equal(hero[key].value, expected[key], `${name} ${key}`);
         for (const feature of [...b.w.levelTwo.addedFeatures, ...expected.addedFeatures, b.perk])
-          if (features.includes(feature) || feature === b.perk)
+          if (
+            features.includes(feature) ||
+            feature === b.perk ||
+            b.w.levelThree.addedFeatures.indexOf(feature) === 1
+          )
             assert.ok(
               sheet.features.some(f => f.name === feature),
               `${name} feature ${feature}`,
@@ -204,10 +217,10 @@ export async function runBeastheartLevelThree({
         characterId,
         view: 'draft',
       });
-      assert.ok(!draftSheet.abilities.some(a => a.name === first.seventh));
+      assert.ok(!draftSheet.abilities.some(a => a.name === `Beastheart: ${first.seventh}`));
       const effective = await director.query<HeroSheet>('characters:sheet', { characterId });
       assert.equal(effective.build?.baseline?.level.value, 3);
-      assert.ok(effective.abilities.some(a => a.name === first.seventh));
+      assert.ok(effective.abilities.some(a => a.name === `Beastheart: ${first.seventh}`));
 
       // Every new source ability and embedded use, once, with payment and persisted readback.
       const targetId = await director.mutation<string>('characters:create', {
@@ -281,15 +294,30 @@ export async function runBeastheartLevelThree({
             await invoke(id, 'adjust.heroic-resource', { value: cost });
             await invoke(affectedId, 'adjust.stamina', { value: 30 });
             const before = await get(affectedId);
+            const actorBefore = await get(id);
             const use = await invoke(id, 'ability.use', { ability: name, targets: [target] });
             const persisted = await event(use.eventId);
-            const after = await get(affectedId);
-            assert.equal((await get(id)).liveState?.heroicResource.current, 0, `${name} Ferocity`);
+            const actorAfter = await get(id);
+            assert.equal(actorAfter.liveState?.heroicResource.current, 0, `${name} Ferocity`);
             // companion-rules.md and V106: companion effects are recorded for manual resolution.
             assert.equal(persisted?.kind, 'ability.recorded', name);
             assert.equal(persisted?.payload?.data?.manual, true, name);
             assert.equal(persisted?.payload?.data?.ability?.name, name);
-            assert.equal(after.liveState?.stamina, before.liveState?.stamina, `${name} no damage`);
+            assert.match(
+              JSON.stringify(persisted?.payload?.data?.ability?.effects),
+              /Record and resolve manually/,
+            );
+            if (affectedId !== id)
+              assert.deepEqual(
+                (await get(affectedId)).liveState,
+                before.liveState,
+                `${name} no fabricated target effect`,
+              );
+            assert.deepEqual(
+              withoutResource(actorAfter.liveState),
+              withoutResource(actorBefore.liveState),
+              `${name} no fabricated actor effect`,
+            );
             if (cost) {
               const blocked = await invoke(id, 'ability.use', { ability: name, targets: [target] });
               assert.equal((await event(blocked.eventId))?.kind, 'ability.blocked', name);

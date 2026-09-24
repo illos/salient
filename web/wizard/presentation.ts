@@ -2,6 +2,7 @@
 import type { Decision, Step } from '../../shared/evaluate/definitions';
 import type { RuleReference } from '../rules/reference';
 import { sectionId } from '../rules/reference';
+import { BEASTHEART_COMPANIONS } from '../../shared/content/classes/beastheart/companions';
 
 export const DECISION_LABELS: Record<string, string> = {
   'think.prompts': 'Imagine your hero',
@@ -239,6 +240,12 @@ export const DECISION_LABELS: Record<string, string> = {
   'class.beastheart.level-2.spark-ability': 'Level 2 Spark ability',
   'class.beastheart.level-3.stamina': 'Level 3 Stamina',
   'class.beastheart.level-3.ability-7': 'Level 3 7-Ferocity ability',
+  ...Object.fromEntries(
+    BEASTHEART_COMPANIONS.map(c => [
+      `class.beastheart.level-3.companion.${c.slug}`,
+      'Companion advancement feature',
+    ]),
+  ),
   'career.mages-apprentice.skills': 'Career skills',
   'career.mages-apprentice.perk': 'Career perk',
   'career.mages-apprentice.inciting-incident': 'Inciting incident',

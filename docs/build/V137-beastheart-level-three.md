@@ -51,3 +51,10 @@ remains deferred.
 - Author checks: both TypeScript projects and ESLint pass; focused V137, V106, V45 and V32 engine files
   pass; V88 audit guard and live compiled report 34/34. Content 1788 entries; `compiled:check`,
   `content:check`, `supporting:check`, links pass.
+- Independent rules/implementation review (subagent, source-only) of `07354e7`: CHANGES REQUIRED, one
+  blocking finding: the cohort looked for plain 7-Ferocity names, but Beastheart sheets list the named
+  "Beastheart: …" records. Fixed on both checks. Non-blocking, also fixed: the cohort now compares the
+  whole target and actor live state (apart from Ferocity) and the manual effect text as V106 did, and
+  checks the species level-3 feature; the engine test asserts companion Stamina and winded against the
+  ledger; the fourteen companion advancement decisions have wizard labels; the Burning Lash spend text
+  says who wields the second whip is a manual interpretation.

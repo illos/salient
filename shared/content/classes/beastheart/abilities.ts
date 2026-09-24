@@ -1164,7 +1164,7 @@ export const BEASTHEART_ACTIONS: BeastheartAction[] = [
     performer: 'Companion',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Use only with the parent ability. If you are within distance of the target, you can use a free maneuver to wield a second whip, dealing extra fire or lightning damage equal to your Intuition score.',
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Use only with the parent ability. If you are within distance of the target, you can use a free maneuver to wield a second whip, dealing extra fire or lightning damage equal to your Intuition score. Who wields the second whip is resolved manually (interpretation; see the V137 ledger).',
     cost: 1,
   },
   {

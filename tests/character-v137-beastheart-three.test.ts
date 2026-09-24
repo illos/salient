@@ -71,6 +71,9 @@ test('Beastheart levels two and three match the independent ledger for every nat
         'disengage',
       ] as const)
         assert.equal(hero[field].value, expected[field], `${label} ${field}`);
+      // companion-rules.md: the companion's Stamina maximum equals yours.
+      assert.equal(hero.companion?.staminaMaximum, expected.companionStaminaMaximum, label);
+      assert.equal(hero.companion?.windedValue, expected.companionWindedValue, label);
       for (const field of ['characteristics', 'potency'] as const)
         assert.deepEqual(
           Object.fromEntries(Object.entries(hero[field]).map(([k, v]) => [k, v.value])),
