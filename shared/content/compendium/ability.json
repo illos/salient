@@ -813,6 +813,517 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/burning-lash",
+    "kind": "ability",
+    "name": "Burning Lash",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/burning-lash.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/burning-lash.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 5 Ferocity\ndistance: Melee 2\neffects:\n    - roll: Power Roll + Intuition\n      tier1: 6 + I fire or lightning damage; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n      tier2: 9 + I fire or lightning damage; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n      tier3: 14 + I fire or lightning damage; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)\n    - cost: Spend 1 Ferocity\n      effect: If you are within distance of the target, you can use a free maneuver to wield a second whip, dealing extra fire or lightning damage equal to your Intuition score.\nflavor: A blazing tongue of energy entangles a foe.\nkeywords:\n    - Companion\n    - Magic\n    - Melee\n    - Strike\n    - Weapon\nlevel: \"2\"\nname: Burning Lash\npower_roll_characteristic: Intuition\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/burning-lash\nsubclass: spark\ntarget: One creature\ntier1: 6 + I fire or lightning damage; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntier2: 9 + I fire or lightning damage; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntier3: 14 + I fire or lightning damage; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)\ntype: ability\n---\n\n*A blazing tongue of energy entangles a foe.*\n\n| **Companion, Magic, Melee, Strike, Weapon** | **Main action** |\n|---------------------------------------------|----------------:|\n| **📏 Melee 2**                              | **🎯 One creature** |\n\n**Power Roll + Intuition:**\n\n- **≤11:** 6 + I fire or lightning damage; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **12-16:** 9 + I fire or lightning damage; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **17+:** 14 + I fire or lightning damage; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)\n\n**Spend 1 Ferocity:** If you are within distance of the target, you can use a free maneuver to wield a second whip, dealing extra fire or lightning damage equal to your Intuition score.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "5 Ferocity",
+      "distance": "Melee 2",
+      "effects": [
+        {
+          "roll": "Power Roll + Intuition",
+          "tier1": "6 + I fire or lightning damage; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "tier2": "9 + I fire or lightning damage; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "tier3": "14 + I fire or lightning damage; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)"
+        },
+        {
+          "cost": "Spend 1 Ferocity",
+          "effect": "If you are within distance of the target, you can use a free maneuver to wield a second whip, dealing extra fire or lightning damage equal to your Intuition score."
+        }
+      ],
+      "flavor": "A blazing tongue of energy entangles a foe.",
+      "keywords": [
+        "Companion",
+        "Magic",
+        "Melee",
+        "Strike",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "Intuition",
+      "subclass": "spark",
+      "target": "One creature",
+      "tier1": "6 + I fire or lightning damage; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+      "tier2": "9 + I fire or lightning damage; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+      "tier3": "14 + I fire or lightning damage; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/fetch",
+    "kind": "ability",
+    "name": "Fetch!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/fetch.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/fetch.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 5 Ferocity\ndistance: Melee 1\neffects:\n    - effect: Your companion can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares before and after making the power roll. Instead of grabbing the target, your companion can pick up a target object that is smaller than they are. You can forgo dealing damage with this ability.\n      name: Effect\n    - roll: Power Roll + Might\n      tier1: 6 + M damage; M < WEAK [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n      tier2: 8 + M damage; M < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n      tier3: 12 + M damage; M < STRONG [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\nflavor: Your companion blinks out of existence, returning with a visitor you were particularly hoping to meet.\nkeywords:\n    - Companion\n    - Magic\n    - Melee\n    - Strike\n    - Weapon\nlevel: \"2\"\nname: Fetch!\npower_roll_characteristic: Might\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/fetch\nsubclass: guardian\ntarget: One creature or object\ntier1: 6 + M damage; M < WEAK [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntier2: 8 + M damage; M < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntier3: 12 + M damage; M < STRONG [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntype: ability\n---\n\n*Your companion blinks out of existence, returning with a visitor you were particularly hoping to meet.*\n\n| **Companion, Magic, Melee, Strike, Weapon** | **Main action** |\n|---------------------------------------------|----------------:|\n| **📏 Melee 1**                              | **🎯 One creature or object** |\n\n**Effect:** Your companion can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares before and after making the power roll. Instead of grabbing the target, your companion can pick up a target object that is smaller than they are. You can forgo dealing damage with this ability.\n\n**Power Roll + Might:**\n\n- **≤11:** 6 + M damage; M < WEAK [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n- **12-16:** 8 + M damage; M < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n- **17+:** 12 + M damage; M < STRONG [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n\nAfter making the power roll, your companion can teleport with a [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) creature or held object, provided the creature or object can fit in the destination. You choose which squares adjacent to your companion the [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) creature or held object is teleported to.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "5 Ferocity",
+      "distance": "Melee 1",
+      "effects": [
+        {
+          "effect": "Your companion can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares before and after making the power roll. Instead of grabbing the target, your companion can pick up a target object that is smaller than they are. You can forgo dealing damage with this ability.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + Might",
+          "tier1": "6 + M damage; M < WEAK [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "tier2": "8 + M damage; M < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "tier3": "12 + M damage; M < STRONG [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)"
+        }
+      ],
+      "flavor": "Your companion blinks out of existence, returning with a visitor you were particularly hoping to meet.",
+      "keywords": [
+        "Companion",
+        "Magic",
+        "Melee",
+        "Strike",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "Might",
+      "subclass": "guardian",
+      "target": "One creature or object",
+      "tier1": "6 + M damage; M < WEAK [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+      "tier2": "8 + M damage; M < AVERAGE [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+      "tier3": "12 + M damage; M < STRONG [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/foe-bowling",
+    "kind": "ability",
+    "name": "Foe Bowling",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/foe-bowling.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/foe-bowling.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 5 Ferocity\ndistance: Melee 1\neffects:\n    - roll: Power Roll + Might\n      tier1: 3 + M damage; push 2; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n      tier2: 5 + M damage; push 3; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n      tier3: 8 + M damage; push 4; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n    - effect: If the target is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) at least 1 square, an enemy adjacent to the target at the end of this forced movement is also targeted by this ability's power roll, but they don't trigger this effect.\n      name: Effect\nflavor: Your companion sends one enemy tumbling into another, taking them both out.\nkeywords:\n    - Charge\n    - Companion\n    - Melee\n    - Strike\n    - Weapon\nlevel: \"2\"\nname: Foe Bowling\npower_roll_characteristic: Might\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/foe-bowling\nsubclass: punisher\ntarget: One creature\ntier1: 3 + M damage; push 2; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntier2: 5 + M damage; push 3; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntier3: 8 + M damage; push 4; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntype: ability\n---\n\n*Your companion sends one enemy tumbling into another, taking them both out.*\n\n| **Charge, Companion, Melee, Strike, Weapon** | **Main action** |\n|----------------------------------------------|----------------:|\n| **📏 Melee 1**                               | **🎯 One creature** |\n\n**Power Roll + Might:**\n\n- **≤11:** 3 + M damage; push 2; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **12-16:** 5 + M damage; push 3; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **17+:** 8 + M damage; push 4; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n\n**Effect:** If the target is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) at least 1 square, an enemy adjacent to the target at the end of this forced movement is also targeted by this ability's power roll, but they don't trigger this effect.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "5 Ferocity",
+      "distance": "Melee 1",
+      "effects": [
+        {
+          "roll": "Power Roll + Might",
+          "tier1": "3 + M damage; push 2; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "tier2": "5 + M damage; push 3; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "tier3": "8 + M damage; push 4; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+        },
+        {
+          "effect": "If the target is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) at least 1 square, an enemy adjacent to the target at the end of this forced movement is also targeted by this ability's power roll, but they don't trigger this effect.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your companion sends one enemy tumbling into another, taking them both out.",
+      "keywords": [
+        "Charge",
+        "Companion",
+        "Melee",
+        "Strike",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "Might",
+      "subclass": "punisher",
+      "target": "One creature",
+      "tier1": "3 + M damage; push 2; M < WEAK [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+      "tier2": "5 + M damage; push 3; M < AVERAGE [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+      "tier3": "8 + M damage; push 4; M < STRONG [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/howling-gale",
+    "kind": "ability",
+    "name": "Howling Gale",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/howling-gale.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/howling-gale.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 5 Ferocity\ndistance: 3 cube within 5\neffects:\n    - roll: Power Roll + Might\n      tier1: 6 cold or sonic damage; slide 1\n      tier2: 9 cold or sonic damage; slide 2\n      tier3: 13 cold or sonic damage; slide 4\n    - effect: Until the end of your next turn, you and your companion can [fly](scc.v1:mcdm.heroes.v1/movement/fly) and gain a +3 bonus to speed.\n      name: Effect\nflavor: A blizzard or thunderstorm sends foes flying and lifts you like a feather.\nkeywords:\n    - Area\n    - Companion\n    - Magic\nlevel: \"2\"\nname: Howling Gale\npower_roll_characteristic: Might\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/howling-gale\nsubclass: spark\ntarget: Each enemy in the area\ntier1: 6 cold or sonic damage; slide 1\ntier2: 9 cold or sonic damage; slide 2\ntier3: 13 cold or sonic damage; slide 4\ntype: ability\n---\n\n*A blizzard or thunderstorm sends foes flying and lifts you like a feather.*\n\n| **Area, Companion, Magic** | **Main action** |\n|----------------------------|----------------:|\n| **📏 3 cube within 5**     | **🎯 Each enemy in the area** |\n\n**Power Roll + Might:**\n\n- **≤11:** 6 cold or sonic damage; slide 1\n- **12-16:** 9 cold or sonic damage; slide 2\n- **17+:** 13 cold or sonic damage; slide 4\n\n**Effect:** Until the end of your next turn, you and your companion can [fly](scc.v1:mcdm.heroes.v1/movement/fly) and gain a +3 bonus to speed.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "5 Ferocity",
+      "distance": "3 cube within 5",
+      "effects": [
+        {
+          "roll": "Power Roll + Might",
+          "tier1": "6 cold or sonic damage; slide 1",
+          "tier2": "9 cold or sonic damage; slide 2",
+          "tier3": "13 cold or sonic damage; slide 4"
+        },
+        {
+          "effect": "Until the end of your next turn, you and your companion can [fly](scc.v1:mcdm.heroes.v1/movement/fly) and gain a +3 bonus to speed.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A blizzard or thunderstorm sends foes flying and lifts you like a feather.",
+      "keywords": [
+        "Area",
+        "Companion",
+        "Magic"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "Might",
+      "subclass": "spark",
+      "target": "Each enemy in the area",
+      "tier1": "6 cold or sonic damage; slide 1",
+      "tier2": "9 cold or sonic damage; slide 2",
+      "tier3": "13 cold or sonic damage; slide 4"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/jump-scare",
+    "kind": "ability",
+    "name": "Jump Scare",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/jump-scare.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/jump-scare.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 5 Ferocity\ndistance: 2 burst\neffects:\n    - effect: This ability targets only enemies with line of effect to your companion.\n      name: Special\n    - effect: Your companion [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to their Intuition score. During this movement, they are invisible. They then make a power roll.\n      name: Effect\n    - roll: Power Roll + Intuition\n      tier1: 4 damage; P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier2: 6 damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier3: 10 damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\nflavor: Surprised to see me?\nkeywords:\n    - Area\n    - Companion\n    - Magic\nlevel: \"2\"\nname: Jump Scare\npower_roll_characteristic: Intuition\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/jump-scare\nsubclass: prowler\ntarget: Each enemy in the area\ntier1: 4 damage; P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier2: 6 damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier3: 10 damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntype: ability\n---\n\n*Surprised to see me?*\n\n| **Area, Companion, Magic** | **Main action** |\n|----------------------------|----------------:|\n| **📏 2 burst**             | **🎯 Each enemy in the area** |\n\n**Special:** This ability targets only enemies with line of effect to your companion.\n\n**Effect:** Your companion [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to their Intuition score. During this movement, they are invisible. They then make a power roll.\n\n**Power Roll + Intuition:**\n\n- **≤11:** 4 damage; P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **12-16:** 6 damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **17+:** 10 damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "5 Ferocity",
+      "distance": "2 burst",
+      "effects": [
+        {
+          "effect": "This ability targets only enemies with line of effect to your companion.",
+          "name": "Special"
+        },
+        {
+          "effect": "Your companion [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to their Intuition score. During this movement, they are invisible. They then make a power roll.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + Intuition",
+          "tier1": "4 damage; P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier2": "6 damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier3": "10 damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+        }
+      ],
+      "flavor": "Surprised to see me?",
+      "keywords": [
+        "Area",
+        "Companion",
+        "Magic"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "Intuition",
+      "subclass": "prowler",
+      "target": "Each enemy in the area",
+      "tier1": "4 damage; P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier2": "6 damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier3": "10 damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/omnomnom",
+    "kind": "ability",
+    "name": "Omnomnom",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/omnomnom.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/omnomnom.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 5 Ferocity\ndistance: Melee 1\neffects:\n    - effect: This ability targets only creatures who are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) and are your companion's size or smaller.\n      name: Special\n    - roll: Power Roll + Might\n      tier1: 6 + M damage; M < WEAK the target is swallowed\n      tier2: 10 + M damage; M < AVERAGE the target is swallowed\n      tier3: 14 + M damage; M < STRONG the target is swallowed\n    - effect: A swallowed creature shares your companion's space, is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), and has line of effect only to your companion. Nothing has line of effect to the swallowed creature.\n      name: Effect\nflavor: What do you have in your mouth? No! Bad boy!\nkeywords:\n    - Companion\n    - Melee\n    - Strike\n    - Weapon\nlevel: \"2\"\nname: Omnomnom\npower_roll_characteristic: Might\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/omnomnom\nsubclass: guardian\ntarget: One creature\ntier1: 6 + M damage; M < WEAK the target is swallowed\ntier2: 10 + M damage; M < AVERAGE the target is swallowed\ntier3: 14 + M damage; M < STRONG the target is swallowed\ntype: ability\n---\n\n*What do you have in your mouth? No! Bad boy!*\n\n| **Companion, Melee, Strike, Weapon** | **Main action** |\n|--------------------------------------|----------------:|\n| **📏 Melee 1**                       | **🎯 One creature** |\n\n**Special:** This ability targets only creatures who are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) and are your companion's size or smaller.\n\n**Power Roll + Might:**\n\n- **≤11:** 6 + M damage; M < WEAK the target is swallowed\n- **12-16:** 10 + M damage; M < AVERAGE the target is swallowed\n- **17+:** 14 + M damage; M < STRONG the target is swallowed\n\n**Effect:** A swallowed creature shares your companion's space, is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), and has line of effect only to your companion. Nothing has line of effect to the swallowed creature.\n\nOnce per round at the start of your turn, the swallowed creature takes acid damage equal to 1 + your companion's Might score. If the swallowed creature escapes the grab, your companion immediately regurgitates the creature, who lands [prone](scc.v1:mcdm.heroes.v1/condition/prone) in an unoccupied square adjacent to your companion. Your companion can also regurgitate a swallowed creature as a free maneuver. Your companion can have only one creature swallowed at a time.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "5 Ferocity",
+      "distance": "Melee 1",
+      "effects": [
+        {
+          "effect": "This ability targets only creatures who are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) and are your companion's size or smaller.",
+          "name": "Special"
+        },
+        {
+          "roll": "Power Roll + Might",
+          "tier1": "6 + M damage; M < WEAK the target is swallowed",
+          "tier2": "10 + M damage; M < AVERAGE the target is swallowed",
+          "tier3": "14 + M damage; M < STRONG the target is swallowed"
+        },
+        {
+          "effect": "A swallowed creature shares your companion's space, is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), and has line of effect only to your companion. Nothing has line of effect to the swallowed creature.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "What do you have in your mouth? No! Bad boy!",
+      "keywords": [
+        "Companion",
+        "Melee",
+        "Strike",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "Might",
+      "subclass": "guardian",
+      "target": "One creature",
+      "tier1": "6 + M damage; M < WEAK the target is swallowed",
+      "tier2": "10 + M damage; M < AVERAGE the target is swallowed",
+      "tier3": "14 + M damage; M < STRONG the target is swallowed"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/on-you-like-your-shadow",
+    "kind": "ability",
+    "name": "On You Like Your Shadow",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/on-you-like-your-shadow.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/on-you-like-your-shadow.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 5 Ferocity\ndistance: Melee 1\neffects:\n    - roll: Power Roll + Might\n      tier1: 5 + M damage\n      tier2: 8 + M damage\n      tier3: 12 + M damage\n    - effect: Your companion enters the target's space. Until your companion is no longer in the target's space, they can end their turn in that space, strikes against them also affect the target, and your strikes against the target gain an edge.\n      name: Effect\nflavor: Your companion darts around their target, staying out of reach and using them as a shield.\nkeywords:\n    - Charge\n    - Companion\n    - Melee\n    - Strike\n    - Weapon\nlevel: \"2\"\nname: On You Like Your Shadow\npower_roll_characteristic: Might\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/on-you-like-your-shadow\nsubclass: prowler\ntarget: One creature or object\ntier1: 5 + M damage\ntier2: 8 + M damage\ntier3: 12 + M damage\ntype: ability\n---\n\n*Your companion darts around their target, staying out of reach and using them as a shield.*\n\n| **Charge, Companion, Melee, Strike, Weapon** | **Main action** |\n|----------------------------------------------|----------------:|\n| **📏 Melee 1**                               | **🎯 One creature or object** |\n\n**Power Roll + Might:**\n\n- **≤11:** 5 + M damage\n- **12-16:** 8 + M damage\n- **17+:** 12 + M damage\n\n**Effect:** Your companion enters the target's space. Until your companion is no longer in the target's space, they can end their turn in that space, strikes against them also affect the target, and your strikes against the target gain an edge.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "5 Ferocity",
+      "distance": "Melee 1",
+      "effects": [
+        {
+          "roll": "Power Roll + Might",
+          "tier1": "5 + M damage",
+          "tier2": "8 + M damage",
+          "tier3": "12 + M damage"
+        },
+        {
+          "effect": "Your companion enters the target's space. Until your companion is no longer in the target's space, they can end their turn in that space, strikes against them also affect the target, and your strikes against the target gain an edge.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your companion darts around their target, staying out of reach and using them as a shield.",
+      "keywords": [
+        "Charge",
+        "Companion",
+        "Melee",
+        "Strike",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "Might",
+      "subclass": "prowler",
+      "target": "One creature or object",
+      "tier1": "5 + M damage",
+      "tier2": "8 + M damage",
+      "tier3": "12 + M damage"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/one-roar-and-were-back-in-the-fight",
+    "kind": "ability",
+    "name": "One Roar and We're Back In the Fight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/one-roar-and-were-back-in-the-fight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/one-roar-and-were-back-in-the-fight.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Maneuver\nclass: beastheart\ncost: 5 Ferocity\ndistance: Ranged 5\neffects:\n    - effect: Your companion and the target can each gain 2 surges, spend up to 2 Recoveries, and end one condition or effect on them that is ended by a saving throw or that ends at the end of their turn.\n      name: Effect\nflavor: Your companion builds up courage with a roar, growl, or aggressive display.\nkeywords:\n    - Companion\nlevel: \"2\"\nname: One Roar and We're Back In the Fight\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/one-roar-and-were-back-in-the-fight\nsubclass: punisher\ntarget: One ally\ntype: ability\n---\n\n*Your companion builds up courage with a roar, growl, or aggressive display.*\n\n| **Companion** |     **Maneuver** |\n|---------------|-----------------:|\n| **📏 Ranged 5** | **🎯 One ally** |\n\n**Effect:** Your companion and the target can each gain 2 surges, spend up to 2 Recoveries, and end one condition or effect on them that is ended by a saving throw or that ends at the end of their turn.\n",
+    "structured": {
+      "action_type": "Maneuver",
+      "class": "beastheart",
+      "cost": "5 Ferocity",
+      "distance": "Ranged 5",
+      "effects": [
+        {
+          "effect": "Your companion and the target can each gain 2 surges, spend up to 2 Recoveries, and end one condition or effect on them that is ended by a saving throw or that ends at the end of their turn.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your companion builds up courage with a roar, growl, or aggressive display.",
+      "keywords": [
+        "Companion"
+      ],
+      "level": "2",
+      "subclass": "punisher",
+      "target": "One ally"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/this-ones-yours",
+    "kind": "ability",
+    "name": "This One's Yours",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-2/this-ones-yours.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Triggered Action\nclass: beastheart\neffects:\n    - effect: You end the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement). You can then push the creature up to a number of squares equal to 1 + your Might score. The creature takes 1 damage for each square they are force moved this way.\n      name: Effect\n    - cost: Spend 1 Ferocity\n      effect: You and your companions can each use this free triggered action on the same turn.\nlevel: \"2\"\nname: This One's Yours\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-2/this-ones-yours\nsubclass: punisher\ntrigger: A creature [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by another creature enters a space adjacent to you.\ntype: ability\n---\n\nWhen someone is pushed into you, you reach out to steady an ally or send a foe careening off in another direction.\n\n**Trigger:** A creature [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by another creature enters a space adjacent to you.\n\n**Effect:** You end the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement). You can then push the creature up to a number of squares equal to 1 + your Might score. The creature takes 1 damage for each square they are force moved this way.\n\n**Spend 1 Ferocity:** You and your companions can each use this free triggered action on the same turn.\n",
+    "structured": {
+      "action_type": "Triggered Action",
+      "class": "beastheart",
+      "effects": [
+        {
+          "effect": "You end the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement). You can then push the creature up to a number of squares equal to 1 + your Might score. The creature takes 1 damage for each square they are force moved this way.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Ferocity",
+          "effect": "You and your companions can each use this free triggered action on the same turn."
+        }
+      ],
+      "level": "2",
+      "subclass": "punisher",
+      "trigger": "A creature [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by another creature enters a space adjacent to you."
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/death-and-violence",
+    "kind": "ability",
+    "name": "Death and Violence",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-3/death-and-violence.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-3/death-and-violence.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Triggered Action\nclass: beastheart\ncost: 7 Ferocity\ndistance: Ranged 10\neffects:\n    - effect: 'The target dies. You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) to the target''s space, [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your Might score, and can then make a melee free strike. You then make the following power roll, targeting each enemy within 5 squares of the target:'\n      name: Effect\n    - roll: Power Roll + Might\n      tier1: P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier2: 4 psychic damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier3: 8 psychic damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\nflavor: You leap from your foe's corpse.\nkeywords:\n    - Beastheart\n    - Magic\n    - Ranged\nlevel: \"3\"\nname: Death and Violence\npower_roll_characteristic: Might\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-3/death-and-violence\ntarget: One creature\ntier1: P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier2: 4 psychic damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier3: 8 psychic damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntrigger: Your companion uses an ability that reduces the target to 0 Stamina.\ntype: ability\n---\n\n*You leap from your foe's corpse.*\n\n| **Beastheart, Magic, Ranged** | **Triggered Action** |\n|-------------------------------|---------------------:|\n| **📏 Ranged 10**              | **🎯 One creature**  |\n\n**Trigger:** Your companion uses an ability that reduces the target to 0 Stamina.\n\n**Effect:** The target dies. You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) to the target's space, [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your Might score, and can then make a melee free strike. You then make the following power roll, targeting each enemy within 5 squares of the target:\n\n**Power Roll + Might:**\n\n- **≤11:** P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **12-16:** 4 psychic damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **17+:** 8 psychic damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n",
+    "structured": {
+      "action_type": "Triggered Action",
+      "class": "beastheart",
+      "cost": "7 Ferocity",
+      "distance": "Ranged 10",
+      "effects": [
+        {
+          "effect": "The target dies. You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) to the target's space, [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your Might score, and can then make a melee free strike. You then make the following power roll, targeting each enemy within 5 squares of the target:",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + Might",
+          "tier1": "P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier2": "4 psychic damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier3": "8 psychic damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+        }
+      ],
+      "flavor": "You leap from your foe's corpse.",
+      "keywords": [
+        "Beastheart",
+        "Magic",
+        "Ranged"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "Might",
+      "target": "One creature",
+      "tier1": "P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier2": "4 psychic damage; P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier3": "8 psychic damage; P < STRONG [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "trigger": "Your companion uses an ability that reduces the target to 0 Stamina."
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/head-to-head",
+    "kind": "ability",
+    "name": "Head to Head",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-3/head-to-head.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-3/head-to-head.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 7 Ferocity\ndistance: Melee 1\neffects:\n    - roll: Power Roll + Might\n      tier1: 13 + M damage; P < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier2: 19 + M damage; P < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier3: 25 + M damage; P < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n    - effect: You are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends). Until the end of your next turn, your companion gains an edge on power rolls.\n      name: Effect\nflavor: Your bloody-forehead smash drives your companion into a frenzy.\nkeywords:\n    - Beastheart\n    - Melee\n    - Strike\nlevel: \"3\"\nname: Head to Head\npower_roll_characteristic: Might\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-3/head-to-head\ntarget: One creature\ntier1: 13 + M damage; P < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier2: 19 + M damage; P < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier3: 25 + M damage; P < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntype: ability\n---\n\n*Your bloody-forehead smash drives your companion into a frenzy.*\n\n| **Beastheart, Melee, Strike** | **Main action** |\n|-------------------------------|----------------:|\n| **📏 Melee 1**                | **🎯 One creature** |\n\n**Power Roll + Might:**\n\n- **≤11:** 13 + M damage; P < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **12-16:** 19 + M damage; P < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **17+:** 25 + M damage; P < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n\n**Effect:** You are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends). Until the end of your next turn, your companion gains an edge on power rolls.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "7 Ferocity",
+      "distance": "Melee 1",
+      "effects": [
+        {
+          "roll": "Power Roll + Might",
+          "tier1": "13 + M damage; P < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier2": "19 + M damage; P < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier3": "25 + M damage; P < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+        },
+        {
+          "effect": "You are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends). Until the end of your next turn, your companion gains an edge on power rolls.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your bloody-forehead smash drives your companion into a frenzy.",
+      "keywords": [
+        "Beastheart",
+        "Melee",
+        "Strike"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "Might",
+      "target": "One creature",
+      "tier1": "13 + M damage; P < WEAK [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier2": "19 + M damage; P < AVERAGE [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier3": "25 + M damage; P < STRONG [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/jaws-of-death",
+    "kind": "ability",
+    "name": "Jaws of Death",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-3/jaws-of-death.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-3/jaws-of-death.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 7 Ferocity\ndistance: Melee 1 or ranged 5\neffects:\n    - roll: Power Roll + Intuition\n      tier1: 7 + I damage; P < WEAK [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier2: 10 + I damage; P < AVERAGE [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier3: 14 + I damage; P < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n    - effect: Whenever a target more than 3 squares away from you fails the saving throw while [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, you can pull the target up to a number of squares equal to your Intuition score as a free triggered action.\n      name: Effect\nflavor: Spectral teeth clamp on a foe, chaining them to you and draining their life essence.\nkeywords:\n    - Beastheart\n    - Magic\n    - Melee\n    - Ranged\nlevel: \"3\"\nname: Jaws of Death\npower_roll_characteristic: Intuition\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-3/jaws-of-death\ntarget: One creature\ntier1: 7 + I damage; P < WEAK [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier2: 10 + I damage; P < AVERAGE [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier3: 14 + I damage; P < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntype: ability\n---\n\n*Spectral teeth clamp on a foe, chaining them to you and draining their life essence.*\n\n| **Beastheart, Magic, Melee, Ranged** | **Main action** |\n|--------------------------------------|----------------:|\n| **📏 Melee 1 or ranged 5**           | **🎯 One creature** |\n\n**Power Roll + Intuition:**\n\n- **≤11:** 7 + I damage; P < WEAK [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **12-16:** 10 + I damage; P < AVERAGE [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 14 + I damage; P < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n\n**Effect:** Whenever a target more than 3 squares away from you fails the saving throw while [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, you can pull the target up to a number of squares equal to your Intuition score as a free triggered action.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "7 Ferocity",
+      "distance": "Melee 1 or ranged 5",
+      "effects": [
+        {
+          "roll": "Power Roll + Intuition",
+          "tier1": "7 + I damage; P < WEAK [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier2": "10 + I damage; P < AVERAGE [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier3": "14 + I damage; P < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+        },
+        {
+          "effect": "Whenever a target more than 3 squares away from you fails the saving throw while [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, you can pull the target up to a number of squares equal to your Intuition score as a free triggered action.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Spectral teeth clamp on a foe, chaining them to you and draining their life essence.",
+      "keywords": [
+        "Beastheart",
+        "Magic",
+        "Melee",
+        "Ranged"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "Intuition",
+      "target": "One creature",
+      "tier1": "7 + I damage; P < WEAK [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier2": "10 + I damage; P < AVERAGE [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier3": "14 + I damage; P < STRONG [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/shieldbreaker",
+    "kind": "ability",
+    "name": "Shieldbreaker",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-3/shieldbreaker.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/beastheart/level-3/shieldbreaker.json",
+    "selection": "beastheart-level-one",
+    "text": "---\naction_type: Main action\nclass: beastheart\ncost: 7 Ferocity\ndistance: Melee 1 or ranged 5\neffects:\n    - roll: Power Roll + Might\n      tier1: 9 + M damage\n      tier2: 14 + M damage\n      tier3: 19 + M damage\n    - effect: The next creature who damages the target before the start of your next turn gains 3 surges, which they can use on the triggering damage.\n      name: Effect\nflavor: You smash through their guard and shatter their armor, leaving them wide open.\nkeywords:\n    - Beastheart\n    - Melee\n    - Ranged\n    - Strike\n    - Weapon\nlevel: \"3\"\nname: Shieldbreaker\npower_roll_characteristic: Might\nscc: mcdm.beastheart.v1/feature.ability.beastheart.level-3/shieldbreaker\ntarget: One creature\ntier1: 9 + M damage\ntier2: 14 + M damage\ntier3: 19 + M damage\ntype: ability\n---\n\n*You smash through their guard and shatter their armor, leaving them wide open.*\n\n| **Beastheart, Melee, Ranged, Strike, Weapon** | **Main action** |\n|-----------------------------------------------|----------------:|\n| **📏 Melee 1 or ranged 5**                    | **🎯 One creature** |\n\n**Power Roll + Might:**\n\n- **≤11:** 9 + M damage\n- **12-16:** 14 + M damage\n- **17+:** 19 + M damage\n\n**Effect:** The next creature who damages the target before the start of your next turn gains 3 surges, which they can use on the triggering damage.\n",
+    "structured": {
+      "action_type": "Main action",
+      "class": "beastheart",
+      "cost": "7 Ferocity",
+      "distance": "Melee 1 or ranged 5",
+      "effects": [
+        {
+          "roll": "Power Roll + Might",
+          "tier1": "9 + M damage",
+          "tier2": "14 + M damage",
+          "tier3": "19 + M damage"
+        },
+        {
+          "effect": "The next creature who damages the target before the start of your next turn gains 3 surges, which they can use on the triggering damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You smash through their guard and shatter their armor, leaving them wide open.",
+      "keywords": [
+        "Beastheart",
+        "Melee",
+        "Ranged",
+        "Strike",
+        "Weapon"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "Might",
+      "target": "One creature",
+      "tier1": "9 + M damage",
+      "tier2": "14 + M damage",
+      "tier3": "19 + M damage"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.censor.level-1/arrest",
     "kind": "ability",
     "name": "Arrest",

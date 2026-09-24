@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:2b96f587f742ffa0c2eabd9786cbf022685e3b61524a79711712c11e7fcb6f1d",
-  "entryCount": 1815,
+  "contentHash": "sha256:abd5891b0486af71897d67a3ad46583999adef2f79a6e7dc412bf5ac62fdaab5",
+  "entryCount": 1852,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -31,10 +31,14 @@
         "class/beastheart.md",
         "feature/beastheart/level-1",
         "feature/ability/beastheart/level-1",
+        "feature/beastheart/level-2",
+        "feature/ability/beastheart/level-2",
+        "feature/beastheart/level-3",
+        "feature/ability/beastheart/level-3",
         "feature/companion/beastheart",
         "feature/ability/companion/beastheart"
       ],
-      "basis": "docs/build/V106-beastheart-level-one.md#scope: Q-CHAR-14 supplemental editor inclusion; only level-one entries admitted."
+      "basis": "docs/build/V137-beastheart-level-three.md#scope: Q-CHAR-14 supplemental editor inclusion; entries through level three admitted."
     },
     {
       "id": "supporting-character-choices",
@@ -628,6 +632,110 @@
       "kind": "ability",
       "name": "You Let Me Get Too Close",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-1/you-let-me-get-too-close.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/burning-lash",
+      "kind": "ability",
+      "name": "Burning Lash",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/burning-lash.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/fetch",
+      "kind": "ability",
+      "name": "Fetch!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/fetch.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/foe-bowling",
+      "kind": "ability",
+      "name": "Foe Bowling",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/foe-bowling.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/howling-gale",
+      "kind": "ability",
+      "name": "Howling Gale",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/howling-gale.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/jump-scare",
+      "kind": "ability",
+      "name": "Jump Scare",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/jump-scare.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/omnomnom",
+      "kind": "ability",
+      "name": "Omnomnom",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/omnomnom.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/on-you-like-your-shadow",
+      "kind": "ability",
+      "name": "On You Like Your Shadow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/on-you-like-your-shadow.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/one-roar-and-were-back-in-the-fight",
+      "kind": "ability",
+      "name": "One Roar and We're Back In the Fight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/one-roar-and-were-back-in-the-fight.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-2/this-ones-yours",
+      "kind": "ability",
+      "name": "This One's Yours",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/death-and-violence",
+      "kind": "ability",
+      "name": "Death and Violence",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-3/death-and-violence.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/head-to-head",
+      "kind": "ability",
+      "name": "Head to Head",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-3/head-to-head.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/jaws-of-death",
+      "kind": "ability",
+      "name": "Jaws of Death",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-3/jaws-of-death.md",
+      "selection": "beastheart-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/shieldbreaker",
+      "kind": "ability",
+      "name": "Shieldbreaker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/beastheart/level-3/shieldbreaker.md",
       "selection": "beastheart-level-one",
       "file": "ability.json"
     },
@@ -4696,6 +4804,86 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-ability",
+      "kind": "feature",
+      "name": "2nd-Level Wild Nature Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-ability.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-feature",
+      "kind": "feature",
+      "name": "2nd-Level Wild Nature Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-feature.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-2/everyones-best-friend",
+      "kind": "feature",
+      "name": "Everyone's Best Friend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/everyones-best-friend.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/perk.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-2/stormheart",
+      "kind": "feature",
+      "name": "Stormheart",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/stormheart.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-2/supersniffer",
+      "kind": "feature",
+      "name": "Supersniffer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/supersniffer.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-2/this-ones-yours",
+      "kind": "feature",
+      "name": "This One's Yours",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/this-ones-yours.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-2/watchdog",
+      "kind": "feature",
+      "name": "Watchdog",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/watchdog.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-3/7-ferocity-ability",
+      "kind": "feature",
+      "name": "7-Ferocity Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-3/7-ferocity-ability.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.beastheart.level-3/companion-advancement-feature",
+      "kind": "feature",
+      "name": "Companion Advancement Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-3/companion-advancement-feature.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.censor.level-1/1st-level-domain-feature",
       "kind": "feature",
       "name": "1st-Level Domain Feature",
@@ -5096,10 +5284,26 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.basilisk.level-3/foes-forever-frozen",
+      "kind": "feature",
+      "name": "Foes Forever Frozen",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/basilisk/level-3/foes-forever-frozen.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.beastheart.v1/feature.companion.beastheart.bear.level-1/strong-like-bear",
       "kind": "feature",
       "name": "Strong Like Bear",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/bear/level-1/strong-like-bear.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.bear.level-3/foe-thresher",
+      "kind": "feature",
+      "name": "Foe Thresher",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/bear/level-3/foe-thresher.md",
       "selection": "beastheart-level-one",
       "file": "feature.json"
     },
@@ -5112,6 +5316,14 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.boar.level-3/greased-pig",
+      "kind": "feature",
+      "name": "Greased Pig",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/boar/level-3/greased-pig.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.beastheart.v1/feature.companion.beastheart.condor.level-1/moving-target",
       "kind": "feature",
       "name": "Moving Target",
@@ -5120,10 +5332,26 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.condor.level-3/dive-bomb",
+      "kind": "feature",
+      "name": "Dive Bomb",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/condor/level-3/dive-bomb.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.beastheart.v1/feature.companion.beastheart.deinonychus.level-1/blood-frenzy",
       "kind": "feature",
       "name": "Blood Frenzy",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/deinonychus/level-1/blood-frenzy.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.deinonychus.level-3/tear-you-to-ribbons",
+      "kind": "feature",
+      "name": "Tear You to Ribbons",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/deinonychus/level-3/tear-you-to-ribbons.md",
       "selection": "beastheart-level-one",
       "file": "feature.json"
     },
@@ -5144,10 +5372,26 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.drake.level-3/endless-breath",
+      "kind": "feature",
+      "name": "Endless Breath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/drake/level-3/endless-breath.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.beastheart.v1/feature.companion.beastheart.elemental-spark.level-1/electric-surge",
       "kind": "feature",
       "name": "Electric Surge",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/elemental-spark/level-1/electric-surge.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.elemental-spark.level-3/electroshock",
+      "kind": "feature",
+      "name": "Electroshock",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/elemental-spark/level-3/electroshock.md",
       "selection": "beastheart-level-one",
       "file": "feature.json"
     },
@@ -5160,10 +5404,26 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.gummy-ball.level-3/suck-it-up",
+      "kind": "feature",
+      "name": "Suck It Up",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/gummy-ball/level-3/suck-it-up.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.beastheart.v1/feature.companion.beastheart.hellhound.level-1/hellish-pact",
       "kind": "feature",
       "name": "Hellish Pact",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/hellhound/level-1/hellish-pact.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.hellhound.level-3/infernal-apparition",
+      "kind": "feature",
+      "name": "Infernal Apparition",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/hellhound/level-3/infernal-apparition.md",
       "selection": "beastheart-level-one",
       "file": "feature.json"
     },
@@ -5176,10 +5436,26 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.lightbender.level-3/hit-and-run",
+      "kind": "feature",
+      "name": "Hit and Run",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/lightbender/level-3/hit-and-run.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.beastheart.v1/feature.companion.beastheart.panther.level-1/mighty-spring",
       "kind": "feature",
       "name": "Mighty Spring",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/panther/level-1/mighty-spring.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.panther.level-3/cat-and-mouse",
+      "kind": "feature",
+      "name": "Cat and Mouse",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/panther/level-3/cat-and-mouse.md",
       "selection": "beastheart-level-one",
       "file": "feature.json"
     },
@@ -5192,6 +5468,14 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.spider.level-3/dripping-fangs",
+      "kind": "feature",
+      "name": "Dripping Fangs",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/spider/level-3/dripping-fangs.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.beastheart.v1/feature.companion.beastheart.sporeling.level-1/skulker",
       "kind": "feature",
       "name": "Skulker",
@@ -5200,10 +5484,26 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.sporeling.level-3/slowing-spores",
+      "kind": "feature",
+      "name": "Slowing Spores",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/sporeling/level-3/slowing-spores.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.beastheart.v1/feature.companion.beastheart.wolf.level-1/retriever",
       "kind": "feature",
       "name": "Retriever",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/wolf/level-1/retriever.md",
+      "selection": "beastheart-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.beastheart.v1/feature.companion.beastheart.wolf.level-3/my-what-big-teeth-you-have",
+      "kind": "feature",
+      "name": "My, What Big Teeth You Have",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/wolf/level-3/my-what-big-teeth-you-have.md",
       "selection": "beastheart-level-one",
       "file": "feature.json"
     },
@@ -14983,11 +15283,6 @@
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "feature/companion/beastheart/basilisk/level-3/foes-forever-frozen.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.basilisk.level-3/foes-forever-frozen",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "feature/companion/beastheart/basilisk/level-6/rock-smasher.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.basilisk.level-6/rock-smasher",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
@@ -14995,11 +15290,6 @@
     {
       "path": "feature/companion/beastheart/bear/level-10/twin-colossi.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.bear.level-10/twin-colossi",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "feature/companion/beastheart/bear/level-3/foe-thresher.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.bear.level-3/foe-thresher",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15013,11 +15303,6 @@
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "feature/companion/beastheart/boar/level-3/greased-pig.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.boar.level-3/greased-pig",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "feature/companion/beastheart/boar/level-6/wild-rush.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.boar.level-6/wild-rush",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
@@ -15025,11 +15310,6 @@
     {
       "path": "feature/companion/beastheart/condor/level-10/flight-of-the-condor.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.condor.level-10/flight-of-the-condor",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "feature/companion/beastheart/condor/level-3/dive-bomb.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.condor.level-3/dive-bomb",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15043,11 +15323,6 @@
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "feature/companion/beastheart/deinonychus/level-3/tear-you-to-ribbons.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.deinonychus.level-3/tear-you-to-ribbons",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "feature/companion/beastheart/deinonychus/level-6/slake-my-thirst-in-blood.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.deinonychus.level-6/slake-my-thirst-in-blood",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
@@ -15055,11 +15330,6 @@
     {
       "path": "feature/companion/beastheart/drake/level-10/elemental-avatar.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.drake.level-10/elemental-avatar",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "feature/companion/beastheart/drake/level-3/endless-breath.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.drake.level-3/endless-breath",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15073,11 +15343,6 @@
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "feature/companion/beastheart/elemental-spark/level-3/electroshock.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.elemental-spark.level-3/electroshock",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "feature/companion/beastheart/elemental-spark/level-6/conductive.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.elemental-spark.level-6/conductive",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
@@ -15085,11 +15350,6 @@
     {
       "path": "feature/companion/beastheart/gummy-ball/level-10/runaway-expansion.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.gummy-ball.level-10/runaway-expansion",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "feature/companion/beastheart/gummy-ball/level-3/suck-it-up.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.gummy-ball.level-3/suck-it-up",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15103,11 +15363,6 @@
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "feature/companion/beastheart/hellhound/level-3/infernal-apparition.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.hellhound.level-3/infernal-apparition",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "feature/companion/beastheart/hellhound/level-6/slavering-jaws.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.hellhound.level-6/slavering-jaws",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
@@ -15115,11 +15370,6 @@
     {
       "path": "feature/companion/beastheart/lightbender/level-10/everywhere-and-nowhere.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.lightbender.level-10/everywhere-and-nowhere",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "feature/companion/beastheart/lightbender/level-3/hit-and-run.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.lightbender.level-3/hit-and-run",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15133,11 +15383,6 @@
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "feature/companion/beastheart/panther/level-3/cat-and-mouse.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.panther.level-3/cat-and-mouse",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "feature/companion/beastheart/panther/level-6/single-bound.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.panther.level-6/single-bound",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
@@ -15145,11 +15390,6 @@
     {
       "path": "feature/companion/beastheart/spider/level-10/life-drinker.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.spider.level-10/life-drinker",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "feature/companion/beastheart/spider/level-3/dripping-fangs.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.spider.level-3/dripping-fangs",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
@@ -15163,11 +15403,6 @@
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {
-      "path": "feature/companion/beastheart/sporeling/level-3/slowing-spores.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.sporeling.level-3/slowing-spores",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
       "path": "feature/companion/beastheart/sporeling/level-6/plant-walk.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.sporeling.level-6/plant-walk",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
@@ -15175,11 +15410,6 @@
     {
       "path": "feature/companion/beastheart/wolf/level-10/dire-wolf.md",
       "scc": "mcdm.beastheart.v1/feature.companion.beastheart.wolf.level-10/dire-wolf",
-      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
-    },
-    {
-      "path": "feature/companion/beastheart/wolf/level-3/my-what-big-teeth-you-have.md",
-      "scc": "mcdm.beastheart.v1/feature.companion.beastheart.wolf.level-3/my-what-big-teeth-you-have",
       "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
     },
     {

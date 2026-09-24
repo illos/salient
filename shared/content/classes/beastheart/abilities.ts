@@ -1076,6 +1076,318 @@ export const BEASTHEART_ACTIONS: BeastheartAction[] = [
     activationCondition:
       'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
   },
+  {
+    name: 'Companion: Fetch!',
+    parent: 'Fetch!',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/fetch.md',
+    performer: 'Companion',
+    actionType: 'Main action',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 5,
+  },
+  {
+    name: 'Companion: Omnomnom',
+    parent: 'Omnomnom',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/omnomnom.md',
+    performer: 'Companion',
+    actionType: 'Main action',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 5,
+  },
+  {
+    name: 'Companion: Jump Scare',
+    parent: 'Jump Scare',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/jump-scare.md',
+    performer: 'Companion',
+    actionType: 'Main action',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 5,
+  },
+  {
+    name: 'Companion: On You Like Your Shadow',
+    parent: 'On You Like Your Shadow',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/on-you-like-your-shadow.md',
+    performer: 'Companion',
+    actionType: 'Main action',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 5,
+  },
+  {
+    name: 'Companion: Foe Bowling',
+    parent: 'Foe Bowling',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/foe-bowling.md',
+    performer: 'Companion',
+    actionType: 'Main action',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 5,
+  },
+  {
+    name: "Companion: One Roar and We're Back In the Fight",
+    parent: "One Roar and We're Back In the Fight",
+    sourcePath:
+      'en/unified/md/feature/ability/beastheart/level-2/one-roar-and-were-back-in-the-fight.md',
+    performer: 'Companion',
+    actionType: 'Maneuver',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 5,
+  },
+  {
+    name: 'Companion: Burning Lash',
+    parent: 'Burning Lash',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/burning-lash.md',
+    performer: 'Companion',
+    actionType: 'Main action',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 5,
+  },
+  {
+    name: 'Companion: Howling Gale',
+    parent: 'Howling Gale',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/howling-gale.md',
+    performer: 'Companion',
+    actionType: 'Main action',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 5,
+  },
+  {
+    name: 'Companion: Burning Lash: Spend option 1 (1 Ferocity)',
+    parent: 'Burning Lash',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/burning-lash.md',
+    performer: 'Companion',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Use only with the parent ability. If you are within distance of the target, you can use a free maneuver to wield a second whip, dealing extra fire or lightning damage equal to your Intuition score.',
+    cost: 1,
+  },
+  {
+    name: "Beastheart: This One's Yours",
+    parent: "This One's Yours",
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md',
+    performer: 'Beastheart',
+    actionType: 'Free triggered action',
+    trigger: 'A creature force moved by another creature enters a space adjacent to you.',
+    activationCondition:
+      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Once per turn. You end the forced movement, then can push the creature up to 1 + your Might squares; it takes 1 damage per square.',
+  },
+  {
+    name: "Beastheart: This One's Yours: Spend option 1 (1 Ferocity)",
+    parent: "This One's Yours",
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md',
+    performer: 'Beastheart',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Use only with the parent ability. You and your companions can each use this free triggered action on the same turn.',
+    cost: 1,
+  },
+  {
+    name: "Companion: This One's Yours",
+    parent: "This One's Yours",
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md',
+    performer: 'Companion',
+    actionType: 'Free triggered action',
+    trigger: 'A creature force moved by another creature enters a space adjacent to you.',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Once per turn. You end the forced movement, then can push the creature up to 1 + your Might squares; it takes 1 damage per square.',
+  },
+  {
+    name: "Companion: This One's Yours: Spend option 1 (1 Ferocity)",
+    parent: "This One's Yours",
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md',
+    performer: 'Companion',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Use only with the parent ability. You and your companions can each use this free triggered action on the same turn.',
+    cost: 1,
+  },
+  {
+    name: "Companion: Everyone's Best Friend",
+    parent: "Everyone's Best Friend",
+    sourcePath: 'en/unified/md/feature/beastheart/level-2/everyones-best-friend.md',
+    performer: 'Companion',
+    actionType: 'During a montage test',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Once per round during a montage test, when you or another character makes a test, the companion can increase the tier outcome by one tier (to a maximum of tier 3).',
+  },
+  {
+    name: 'Beastheart: Death and Violence',
+    parent: 'Death and Violence',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-3/death-and-violence.md',
+    performer: 'Beastheart',
+    actionType: 'Triggered action',
+    trigger: 'Your companion uses an ability that reduces the target to 0 Stamina.',
+    activationCondition:
+      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 7,
+  },
+  {
+    name: 'Beastheart: Head to Head',
+    parent: 'Head to Head',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-3/head-to-head.md',
+    performer: 'Beastheart',
+    actionType: 'Main action',
+    activationCondition:
+      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 7,
+  },
+  {
+    name: 'Beastheart: Jaws of Death',
+    parent: 'Jaws of Death',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-3/jaws-of-death.md',
+    performer: 'Beastheart',
+    actionType: 'Main action',
+    activationCondition:
+      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 7,
+  },
+  {
+    name: 'Beastheart: Shieldbreaker',
+    parent: 'Shieldbreaker',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-3/shieldbreaker.md',
+    performer: 'Beastheart',
+    actionType: 'Main action',
+    activationCondition:
+      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
+    cost: 7,
+  },
+  {
+    name: 'Companion: Foes Forever Frozen',
+    parent: 'Foes Forever Frozen',
+    sourcePath:
+      'en/unified/md/feature/companion/beastheart/basilisk/level-3/foes-forever-frozen.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Foe Thresher',
+    parent: 'Foe Thresher',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/bear/level-3/foe-thresher.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Greased Pig',
+    parent: 'Greased Pig',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/boar/level-3/greased-pig.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Dive Bomb',
+    parent: 'Dive Bomb',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/condor/level-3/dive-bomb.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Tear You to Ribbons',
+    parent: 'Tear You to Ribbons',
+    sourcePath:
+      'en/unified/md/feature/companion/beastheart/deinonychus/level-3/tear-you-to-ribbons.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Endless Breath',
+    parent: 'Endless Breath',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/drake/level-3/endless-breath.md',
+    performer: 'Companion',
+    actionType: 'Part of Drake Breath',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Electroshock',
+    parent: 'Electroshock',
+    sourcePath:
+      'en/unified/md/feature/companion/beastheart/elemental-spark/level-3/electroshock.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Suck It Up',
+    parent: 'Suck It Up',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/gummy-ball/level-3/suck-it-up.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Infernal Apparition',
+    parent: 'Infernal Apparition',
+    sourcePath:
+      'en/unified/md/feature/companion/beastheart/hellhound/level-3/infernal-apparition.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Hit and Run',
+    parent: 'Hit and Run',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/lightbender/level-3/hit-and-run.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Cat and Mouse',
+    parent: 'Cat and Mouse',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/panther/level-3/cat-and-mouse.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Dripping Fangs',
+    parent: 'Dripping Fangs',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/spider/level-3/dripping-fangs.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: Slowing Spores',
+    parent: 'Slowing Spores',
+    sourcePath: 'en/unified/md/feature/companion/beastheart/sporeling/level-3/slowing-spores.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
+  {
+    name: 'Companion: My, What Big Teeth You Have',
+    parent: 'My, What Big Teeth You Have',
+    sourcePath:
+      'en/unified/md/feature/companion/beastheart/wolf/level-3/my-what-big-teeth-you-have.md',
+    performer: 'Companion',
+    actionType: 'While rampaging',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Level 3 companion advancement feature; its rampage or ability rider is resolved manually.',
+  },
 ];
 export function beastheartSourceText(a: BeastheartAction): string {
   const source = [...abilitySources, ...featureSources].find(

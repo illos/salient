@@ -1,0 +1,3224 @@
+{
+  "schemaVersion": "v137-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "derivation": {
+    "method": "Authored from the pinned Steel Compendium only (canonical checkout at the main repo vendor/steel-compendium, HEAD fb83a789 verified with git rev-parse; sha256 recorded per source). Level-one baselines and record naming copied from tests/fixtures/v106-beastheart-expected.json (reviewed) and docs/build/audits/V106-beastheart-rules-review.md. No evaluator, content, convex or headless code read or run.",
+    "staminaMaximum": "Beastheart Basics: Starting Stamina 21 + 12 per level after 1st; kit Stamina bonus per echelon (kit files: Shining Armor +12, Cloak and Dagger +3, Panther +6, Sniper none); levels 1-3 are echelon 1 (rule/general/echelon.md \"1st Echelon (1st to 3rd Level)\"). Matches V106 level-one values 33/24/27/21.",
+    "recoveryValue": "floor(Stamina maximum / 3) (rule/health/recoveries.md \"one-third of their Stamina maximum, rounded down\")",
+    "windedValue": "floor(Stamina maximum / 2) (rule/health/winded.md; rule/general/always-round-down.md)",
+    "recoveriesMaximum": "Beastheart Basics: 12; unchanged at levels 2-3. Companion has no Recoveries (companion-rules.md).",
+    "companionStaminaMaximum": "companion-rules.md: \"Your companion's Stamina maximum equals your Stamina maximum.\" No second kit addition (V106).",
+    "potency": "Beastheart Basics: weak Might - 2, average Might - 1, strong Might; every witness has Might 2 -> 0/1/2.",
+    "noNumericSheetChange": "No level-2 or level-3 feature, chosen ability, companion level-3 feature or chosen perk changes recoveries, speed, stability, disengage, characteristics or potency. Characteristic Increase first appears at 4th level; the Rampage table adds nothing at levels 2-3.",
+    "abilityCounts": "Advancement table: level 2 adds one 5-Ferocity wild nature ability (Wild Nature Abilities 5); level 3 adds one 7-Ferocity ability (Abilities Signature, 3, 5, 7) and the companion's level 3 feature.",
+    "performers": "companion-rules.md Shared Abilities: Beastheart keyword -> beastheart only; Companion keyword -> companion only; otherwise the granting text decides (V106 gives both performers to \"you or your companion\" actions). All eight 2nd-level wild nature abilities have the Companion keyword; all four 7-Ferocity abilities have the Beastheart keyword; This One's Yours has no keyword and its feature says \"you or your companion\".",
+    "recordConvention": "V106: \"<Performer>: <Ability>\" at the printed cost (0 when none); each printed \"Spend N Ferocity\" option is \"<Performer>: <Ability>: Spend option K (N Ferocity)\" under the same performer; species traits that are not sheet numbers are \"Companion: <Trait>\" at 0.",
+    "choices": "Nature ability alternates alphabetically within each wild nature in witness order; ability7 cycles Death and Violence, Head to Head, Jaws of Death, Shieldbreaker in witness order; perks are distinct, from the three level-2 groups, not already held (all bases hold Teamwork), no sub-choice, and grant no action."
+  },
+  "sources": [
+    {
+      "path": "en/unified/md/class/beastheart.md",
+      "sha256": "5e7ce81a06fee756d8fe72d14f3357404f36eb21a670fbed3875ef69d76f0755"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+      "sha256": "3af6ae61d78b9070ed1162c115757f66a0d626fbb123189976206d6507a5e80b"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-1/wild-nature-triggered-action.md",
+      "sha256": "4d2f58d291ba16b55ad916a65721a1c021bf7d5bb305ad45d7192d4cb73433e1"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-1/beastheart-abilities.md",
+      "sha256": "e6c1c596c78fdb42643f33bfe66af79c90b4b13bba0dd9e77cdc28a61e38129d"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-1/rampage.md",
+      "sha256": "723d9937bce6454c873ac6479794046d4c594c9af716babf0d0b10dc5293df0f"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-2/perk.md",
+      "sha256": "1a27c5ada46b4744ef1651816e52639f986e160d11233c2263b68caa012c8fd5"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-2/everyones-best-friend.md",
+      "sha256": "331cca1939a8b906525ba0805c29de3d5ca85c87db1422c0675e1ccd09979198"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-feature.md",
+      "sha256": "ad4d4492216bb8fce16ac14c7f216a6133f9e2deea4c49d313dd6560d665b085"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-ability.md",
+      "sha256": "f2d2f5b2c56eed2e4d94d43c81ace60e83c40b59f9dfe2b4fc5b1be67cf2b1ea"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-2/watchdog.md",
+      "sha256": "1aebc47f88f3aa63618dced57aa390410e70d76dc5549ad4da0ac02dd29d1e0a"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-2/supersniffer.md",
+      "sha256": "520525ae62882cb3167cb873a6e728bf9e44f3dd6bb78873a5e680cc85d83011"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-2/this-ones-yours.md",
+      "sha256": "30660b839c8caa5e7754667be7a4d8a2541846299ba5c9bafd50548525b4889d"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-2/stormheart.md",
+      "sha256": "26a71e2395e11bb8a8feef7437c92856afbb0b0da395832abaefbd35240df4c5"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-3/companion-advancement-feature.md",
+      "sha256": "6c899748499c7fd7b12a6de29d42f0ed8fd73760d301b11a4c7c59fbbc7c1956"
+    },
+    {
+      "path": "en/unified/md/feature/beastheart/level-3/7-ferocity-ability.md",
+      "sha256": "cf337a1c751736b0e5eac183058708b8908f7ed85a62d8ac741bfe73d1cd47f6"
+    },
+    {
+      "path": "en/unified/md/rule/health/recoveries.md",
+      "sha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9"
+    },
+    {
+      "path": "en/unified/md/rule/health/winded.md",
+      "sha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee"
+    },
+    {
+      "path": "en/unified/md/rule/health/stamina.md",
+      "sha256": "d7eea9fb59d98e1efcc0527230cc862d911a621cc042d58b923565ac4c55b04b"
+    },
+    {
+      "path": "en/unified/md/rule/general/always-round-down.md",
+      "sha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783"
+    },
+    {
+      "path": "en/unified/md/rule/general/echelon.md",
+      "sha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3"
+    },
+    {
+      "path": "en/unified/md/kit/shining-armor.md",
+      "sha256": "ece91429b909676d0abb987431475053e7dce1da82092bcb8cc9ed7fcc8f252a"
+    },
+    {
+      "path": "en/unified/md/kit/cloak-and-dagger.md",
+      "sha256": "a12702f91b0be983e269d4290497aff944761347d6846b9492f9e978c95dc846"
+    },
+    {
+      "path": "en/unified/md/kit/panther.md",
+      "sha256": "699d0a4f154daba08e4ebc0b70fce663668853b753e27b5e7b5d1431a3c76f90"
+    },
+    {
+      "path": "en/unified/md/kit/sniper.md",
+      "sha256": "d52d966ce3487270b83d062b3596f2a04974be66f57808ffc837807812fe4857"
+    },
+    {
+      "path": "en/unified/md/_index/perk.md",
+      "sha256": "25c9e4368bf0725a382bf7d56a1641ae3db12c027ceb41899eea00bd5c3226ef"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/fetch.md",
+      "sha256": "623ebb95271069df079c9ebd6e9fd8021c842811e10f7f83b4989ad42eb9de17"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/omnomnom.md",
+      "sha256": "618bff5caa599709638bdadd90445f8c1aab6705ebd3b8b4d7dbfc409b3da1db"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/jump-scare.md",
+      "sha256": "41f92915384f8fcac2c92a1dd0d708f63ad6d0648ddcc223053c646244c9a52d"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/on-you-like-your-shadow.md",
+      "sha256": "ea3e0fccd56bb347076ac1d2bb49fd20ce1ad36b37f69beb060feb12972a00f7"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/foe-bowling.md",
+      "sha256": "b9c3f0ddfbb85663f180c22dcddae61518950a8fb3015decbe24ce8fc4552cba"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/one-roar-and-were-back-in-the-fight.md",
+      "sha256": "ae00481f87dd3a3123e0c2f0c12ffc03bfa2f9cc54d94e066195be696a4088f9"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/burning-lash.md",
+      "sha256": "28974ac8fc8f6478ec7fc865cce0793540490b802d923a1bdd866df3bdbff51a"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/howling-gale.md",
+      "sha256": "b706a7a7c101514ba0c14f5135c9cc88eaf242768ea61d1aee09fbd7fc779330"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md",
+      "sha256": "c788c3e4630496962a871c13f27e6e9cb78ba4a294071f88908ddb74a5fc8bf8"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-3/death-and-violence.md",
+      "sha256": "954109ef2ac6c2da03e44d2f20cbea98922a5e7ee8abadda480e4c390c0992a1"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-3/head-to-head.md",
+      "sha256": "343dbece429a6cc7eb82477cb901460037ca70648af9d1981a8fe907b5c8ac56"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-3/jaws-of-death.md",
+      "sha256": "9a6b0deb7b66cf92623b52391ef1373a426f36b45dcdc9e93803d190acd6490a"
+    },
+    {
+      "path": "en/unified/md/feature/ability/beastheart/level-3/shieldbreaker.md",
+      "sha256": "d6d6ae1a43fe610f844bf68ef3f7b529150b24b156f954c7a5e58680416be4a0"
+    },
+    {
+      "path": "en/unified/md/perk/brawny.md",
+      "sha256": "ad7555bd6e311798df2897c8cde543cdf0018995e6e5250a35577111d05e05b1"
+    },
+    {
+      "path": "en/unified/md/perk/camouflage-hunter.md",
+      "sha256": "21d1c36edd997a2e3e9f6786fd3b8add70fc6c74a0ffe05eb7d7642b64076464"
+    },
+    {
+      "path": "en/unified/md/perk/danger-sense.md",
+      "sha256": "73e8273150af9533b0fa08c622f74e562b5cdac4e8948d925e437c50671e78ba"
+    },
+    {
+      "path": "en/unified/md/perk/friend-catapult.md",
+      "sha256": "d7c04e88ab598a1711b02085b647ec9dc24c13af70777160639dd00c3ca79df0"
+    },
+    {
+      "path": "en/unified/md/perk/ive-got-you.md",
+      "sha256": "ccc67007c4e1b43792a94190fc91a2b82d6df4d7f9a87970fb9357ebc33a43e3"
+    },
+    {
+      "path": "en/unified/md/perk/monster-whisperer.md",
+      "sha256": "2f4f464698587c1cc0c6b77fcf1059de0727034ccbd7929352c1c1190d4ee35c"
+    },
+    {
+      "path": "en/unified/md/perk/put-your-back-into-it.md",
+      "sha256": "b3686cb6db8a02d20f1bb94d7f4e9537c6827df31b9f41707bfbbf6269a3a813"
+    },
+    {
+      "path": "en/unified/md/perk/team-leader.md",
+      "sha256": "18ba0e2c380dff71db6d7a68c4c81fef3f3b90b528701006e6fe38ce63d758fc"
+    },
+    {
+      "path": "en/unified/md/perk/teamwork.md",
+      "sha256": "5d91951185e0e1b4a6a92910850206b51064f1a910209b3bbe9a649cfcb34859"
+    },
+    {
+      "path": "en/unified/md/perk/wood-wise.md",
+      "sha256": "67fd303d608348203c99e2f536872c234ab55dfc837f7d6d35fad33bd1eb1fac"
+    },
+    {
+      "path": "en/unified/md/perk/charming-liar.md",
+      "sha256": "147f2272e7e20c5a5db6a720d4b3e3e7414818a2472ded8113f020d8bc2c5ed8"
+    },
+    {
+      "path": "en/unified/md/perk/dazzler.md",
+      "sha256": "d8446a99b48f4dc207cd0ffb37ca0dc19d45828bd2033e2fe4ce6fa6805291e4"
+    },
+    {
+      "path": "en/unified/md/perk/engrossing-monologue.md",
+      "sha256": "2068b9ff3d329e181bf6c1c31ed6f595f8be2085dde2d3272efcd71fd56dfed2"
+    },
+    {
+      "path": "en/unified/md/perk/harmonizer.md",
+      "sha256": "9377588dfd5fc3675a3592afc43d1f83127cf698a336ebda641b6a1aec4ec138"
+    },
+    {
+      "path": "en/unified/md/perk/lie-detector.md",
+      "sha256": "f0492ab9df9d7105052d7dfb728a53d5c815d42a366202fa8eba3392e8388b6c"
+    },
+    {
+      "path": "en/unified/md/perk/open-book.md",
+      "sha256": "f101c05667ff48eff2158ac1b276ff11a9584861245794e333bdbb734374bf6a"
+    },
+    {
+      "path": "en/unified/md/perk/pardon-my-friend.md",
+      "sha256": "5a196d972b98dcc4e31a542c7fac100a530b0e306719deadc556f1a0ebad6dec"
+    },
+    {
+      "path": "en/unified/md/perk/power-player.md",
+      "sha256": "ba4eca5d8a9a83f12269e97791f5b9dbf73ed7b668e2d02b9b5cae13b9fafc8e"
+    },
+    {
+      "path": "en/unified/md/perk/so-tell-me.md",
+      "sha256": "b1c552a04532fad2faa61bed7c5d840b7fe7dd4358d7e921ba30b0df6413a487"
+    },
+    {
+      "path": "en/unified/md/perk/spot-the-tell.md",
+      "sha256": "9999a4c78414fb4ad6127a98d2782ebd4d064b0216182d4cecc0e7d6d5bca9a6"
+    },
+    {
+      "path": "en/unified/md/perk/criminal-contacts.md",
+      "sha256": "47ef9787d5cc9893009b69f1383af09745c4533fbe338229e61bde2d9a1d2fae"
+    },
+    {
+      "path": "en/unified/md/perk/forgettable-face.md",
+      "sha256": "f206c0d9a368fd5b22f70d1d00af4517b151316d3fa163ed39fd2b258bf7d1f6"
+    },
+    {
+      "path": "en/unified/md/perk/gum-up-the-works.md",
+      "sha256": "ce94d20bc68291e44aa7bc6f969807fe879a9bb0f8b361ce804440ff4000c35d"
+    },
+    {
+      "path": "en/unified/md/perk/lucky-dog.md",
+      "sha256": "7361b4cef8ae6851b017a111b7a4aa56e7f3cfa408aa1094779febbc2f137eba"
+    },
+    {
+      "path": "en/unified/md/perk/master-of-disguise.md",
+      "sha256": "28dfb8d76d62b015d07eccbe2680d439cb9648293dd2735ef8e23f58c8b9039f"
+    },
+    {
+      "path": "en/unified/md/perk/slipped-lead.md",
+      "sha256": "cb3d2da33169620d452717f33ab127813c90ca7f6b1273b28e857b606959845c"
+    },
+    {
+      "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/basilisk/level-3/foes-forever-frozen.md",
+      "sha256": "6776629d41b3ec4dfd8f56d14f64655f8bf2d54426c9bba10ff0644546384634"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/basilisk.md",
+      "sha256": "f74f601df7f623ba85c6e0fb4abff53ea36bf588e62aa0a16e97066c399e38c4"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/bear/level-3/foe-thresher.md",
+      "sha256": "301f7174963c1cd285f50ff18d7dd8caabf627128693aea79bd4048644fe369b"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/bear.md",
+      "sha256": "dcf48f0366e00236e204c6ddebb05cc377846d0d9b3c4b0ed1523672502ea21f"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/boar/level-3/greased-pig.md",
+      "sha256": "4fe555e15c94261caea011d7f6e63c36d99c833a9dfebfb736ec96434c74453b"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/boar.md",
+      "sha256": "6b3ee9228d7d7ca1cd3caeda35943482f0200a898e1f84a4eb7e41683f959d42"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/condor/level-3/dive-bomb.md",
+      "sha256": "a91a4fa837f89718ac9c7c370f5fe1b41ae4f62584e583d479b958d85712f409"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/condor.md",
+      "sha256": "40424b388019e9d5c320b0d22b3058c6abde1f19ea4cc6daf3c942608408e130"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/deinonychus/level-3/tear-you-to-ribbons.md",
+      "sha256": "80ff26c878e6d991fcf3712802c1c0cb1e666440dd33cb4d8f55db2104b56ce8"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/deinonychus.md",
+      "sha256": "51c162d5d7af0899f1a0cd3f04c4be21270672b0ad77e663ca0e20cc28a2744b"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/drake/level-3/endless-breath.md",
+      "sha256": "a01b0b6f8260aa573e16cb91a0deabfab5ee6bcefdfedb4b8d8b31caf4739631"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/drake.md",
+      "sha256": "70a4d1f395eb26e22e0d9edb887e9942e9d8ad455fbb175a7f09cc572f3a0809"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/elemental-spark/level-3/electroshock.md",
+      "sha256": "e0ba04e5c60dc1826ffbd6debc655b84dbb3b8a47d20ed1223845d1cd212e199"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/elemental-spark.md",
+      "sha256": "375247983447d1a041a833a09b2a6b7c9f743c4bf15eca9439580809854ce6a6"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/gummy-ball/level-3/suck-it-up.md",
+      "sha256": "8d42a9f00e73caabc87bacaa0f315cf5ff4a56946a623dd632f494227c3980a7"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/gummy-ball.md",
+      "sha256": "0dd05af9363f3ab7a39556c94d85a4e8014170ae3643fbee350f589b54acff82"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/hellhound/level-3/infernal-apparition.md",
+      "sha256": "e1ea15eb0121bac0ea91a80026e09f53db67883660afeb81bab04b9b9a0808be"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/hellhound.md",
+      "sha256": "8c797ff0fb322110eec81fd4f67e9605fc8a811d0b6006866e5b16f431de9b58"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/lightbender/level-3/hit-and-run.md",
+      "sha256": "88c8922e07cdc4c2251a98b49957eb594eeff9ee5f1afd1913f44f359b04b68e"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/lightbender.md",
+      "sha256": "c2a0bc098326ef60efc4bcdeb02a75fefb6922d3a1f259509f274b5537f70c2a"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/panther/level-3/cat-and-mouse.md",
+      "sha256": "93b76733954c7fa06f074546c99ac2b6af70426a9007d479dc688a9f399fa252"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/panther.md",
+      "sha256": "6b8de03aa8db941b39d51ae99d4ee42ac50b3d7be4999be3a34e92da53a9bf44"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/spider/level-3/dripping-fangs.md",
+      "sha256": "4beef4e9d17474b5b4544f9ff95c02c65da234f271717be9f34e75fbd9aec548"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/spider.md",
+      "sha256": "d9edb23511b62eb6ca5469dd7eccf2f95833b679e2900a4a3bf3d59c7b579135"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/sporeling/level-3/slowing-spores.md",
+      "sha256": "451059b0c83855bc189107612078d2b8789961981d3e4b6af0afd85f9e186701"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/sporeling.md",
+      "sha256": "bb55b3e1db1f668583b295a0f7baeab704dd70b8b738dd974827e0fbb6313103"
+    },
+    {
+      "path": "en/unified/md/feature/companion/beastheart/wolf/level-3/my-what-big-teeth-you-have.md",
+      "sha256": "2900843b1714f81318eb59af005d34fbece9aa02361f07119d338bae049140a8"
+    },
+    {
+      "path": "en/unified/md/monster/companion/beastheart/advancement-features/wolf.md",
+      "sha256": "dd194353b42f03385a06e121969080b11551c949eacf1dd497ac66b46a9abf1d"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "nature-ability-grouping",
+      "passage": "en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-ability.md: the four \"2nd-Level <Nature> Abilities\" sections contain only \"Choose one of the following abilities.\" with no list.",
+      "resolution": "Pairs derived from each ability file's subclass: frontmatter: guardian Fetch!/Omnomnom; prowler Jump Scare/On You Like Your Shadow; punisher Foe Bowling/One Roar and We're Back In the Fight; spark Burning Lash/Howling Gale. Every pair is two 5-Ferocity heroic abilities, consistent with the advancement table. Single source only (no Beastheart book text in the pinned books/).",
+      "alternatives": ["none available in the pinned Compendium"]
+    },
+    {
+      "id": "this-ones-yours-not-a-pair-option",
+      "passage": "en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md has subclass: punisher, no cost; feature/beastheart/level-2/this-ones-yours.md: \"Once per turn, you or your companion can use the following free triggered action.\"",
+      "resolution": "Excluded from the Punisher choice pair; granted to every Punisher at level 2 by the wild nature feature.",
+      "alternatives": [
+        "treat as a third Punisher choice option (rejected: the choice is \"one of two heroic abilities\" and it has no Ferocity cost)"
+      ]
+    },
+    {
+      "id": "this-ones-yours-action-type-and-plural",
+      "passage": "Ability frontmatter action_type \"Triggered Action\"; feature text and spend text call it a \"free triggered action\"; spend text \"You and your companions can each use this free triggered action on the same turn.\"",
+      "resolution": "Treated as a free triggered action (does not consume the shared one-triggered-action-per-round budget in companion-rules.md), once per turn; spend option lets the partner also use it that turn. \"companions\" plural read as the single companion. Recorded for both performers, each with Spend option 1 (1 Ferocity).",
+      "alternatives": [
+        "a non-free triggered action consuming the shared per-round triggered action",
+        "spend option recorded once rather than per performer"
+      ]
+    },
+    {
+      "id": "burning-lash-spend-you",
+      "passage": "burning-lash.md (Companion keyword): \"Spend 1 Ferocity: If you are within distance of the target, you can use a free maneuver to wield a second whip...\"; companion-rules.md defines \"you\"/\"partner\" only for abilities either can use.",
+      "resolution": "Record kept under the parent performer as \"Companion: Burning Lash: Spend option 1 (1 Ferocity)\" per V106 convention (Bring the Thunder's \"2 burst originating from you\" is also recorded under Companion). Who the \"you\" wielding the second whip is stays manual.",
+      "alternatives": [
+        "\"you\" is the beastheart (default meaning of \"you\" in class text), making the free maneuver the beastheart's",
+        "\"you\" is the companion as the ability user"
+      ]
+    },
+    {
+      "id": "level-two-feature-records",
+      "passage": "watchdog.md \"You and your companion can't be surprised.\"; supersniffer.md \"While a creature is adjacent to your companion, that creature can't be hidden or have concealment from your companion.\"; stormheart.md \"...you can change the damage type...\"; everyones-best-friend.md \"Once per round during a montage test ... your companion can increase the tier outcome by one tier\".",
+      "resolution": "INTERPRETATION: Watchdog, Supersniffer and Stormheart get no record (features only): passive or an in-resolution damage-type option, with no action, cost or frequency limit; the V106 record-every-situational-trait precedent covered companion species traits, while passive class rules (Shared Space, Shared Skills) got no record. Everyone's Best Friend gets \"Companion: Everyone's Best Friend\" (0) because it is a discretionary, once-per-round use, like V106's Communicate / Use treasure for companion.",
+      "alternatives": [
+        "record Stormheart for both performers (\"Beastheart: Stormheart\", \"Companion: Stormheart\", 0) as a situational trigger like Electric Surge",
+        "record Watchdog/Supersniffer as \"Companion: ...\" reminders",
+        "no record for Everyone's Best Friend (montage-only, outside combat tracking)"
+      ]
+    },
+    {
+      "id": "endless-breath-record",
+      "passage": "endless-breath.md \"The drake's Drake Breath maneuver deals an extra 2 damage.\"",
+      "resolution": "INTERPRETATION: recorded as \"Companion: Endless Breath\" (0), like V106 situational species traits; it is not a sheet number and Drake Breath damage is manual.",
+      "alternatives": ["no separate record; +2 folded into the Drake Breath record text/damage"]
+    },
+    {
+      "id": "rampaging-features-manual",
+      "passage": "All level-3 companion features except Endless Breath apply \"while rampaging\"; rampage.md: rampaging at 8 rampage.",
+      "resolution": "Rampage stays manual (V106), so these are 0-cost manual records; Greased Pig's +2 speed is conditional and not a sheet speed change.",
+      "alternatives": ["automate once rampage tracking exists"]
+    },
+    {
+      "id": "beastheart-perk-groups",
+      "passage": "Beastheart-book perks Born Tracker, People Sense, Ride Along, Trained Thief, Voice of the Wild, Wild Rumpus, Wilds Explorer, You Can Pet Them, They're Friendly (scc mcdm.beastheart.v1/perk/*) have no group in their files or in _index/perk.md; the Heroes book groups only core perks.",
+      "resolution": "Excluded from eligibleCorePerks and not chosen. Their eligibility for \"one exploration, interpersonal, or intrigue perk\" is undetermined by the pinned Compendium.",
+      "alternatives": [
+        "admit them by apparent theme (e.g. Born Tracker/Wilds Explorer exploration, People Sense/You Can Pet Them interpersonal, Trained Thief intrigue)",
+        "admit all as Beastheart-only options"
+      ]
+    },
+    {
+      "id": "perk-shared-with-companion",
+      "passage": "companion-rules.md Shared Perks: \"If you gain a benefit ... by earning a perk ... your companion shares the benefit ... only ... benefits ... that logically affect an animal\".",
+      "resolution": "Chosen perks change no sheet number for hero or companion; applicability to the companion is a Director call and stays manual.",
+      "alternatives": ["none needed for these values"]
+    },
+    {
+      "id": "naming-apostrophes",
+      "passage": "class/beastheart.md advancement table prints \"Everyone’s Best Friend\" and \"This One’s Yours\" (curly); feature/ability frontmatter names use straight apostrophes; \"Fetch!\" includes the exclamation mark.",
+      "resolution": "Record names use the frontmatter names with straight apostrophes.",
+      "alternatives": ["curly apostrophes as in the advancement table"]
+    },
+    {
+      "id": "death-and-violence-trigger-budget",
+      "passage": "death-and-violence.md Trigger \"Your companion uses an ability that reduces the target to 0 Stamina.\" (Beastheart keyword); companion-rules.md \"You can use one triggered action per round, which can be used by either you or your companion.\"",
+      "resolution": "Beastheart performs; the shared per-round triggered action budget is manual.",
+      "alternatives": ["none"]
+    }
+  ],
+  "levelTwo": {
+    "sourceAdvancementTable": "en/unified/md/class/beastheart.md (Beastheart Advancement Table, row 2nd: Perk, Everyone's Best Friend, Wild Nature Feature, Wild Nature Ability; Abilities Signature, 3, 5; Wild Nature Abilities 5)",
+    "staminaGained": 12,
+    "staminaSource": "en/unified/md/class/beastheart.md Basics: \"Stamina Gained at 2nd and Higher Levels: 12\"",
+    "commonFeatures": [
+      {
+        "name": "Perk",
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/perk.md",
+        "sourceSha256": "1a27c5ada46b4744ef1651816e52639f986e160d11233c2263b68caa012c8fd5",
+        "choice": "one exploration, interpersonal, or intrigue perk",
+        "textVerbatim": "You gain one exploration, interpersonal, or intrigue perk of your choice.",
+        "record": null
+      },
+      {
+        "name": "Everyone's Best Friend",
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/everyones-best-friend.md",
+        "sourceSha256": "331cca1939a8b906525ba0805c29de3d5ca85c87db1422c0675e1ccd09979198",
+        "textVerbatim": "Your companion may not be much of a talker, but they've got a lifetime of experience surviving the dangers of the wild. They can offer aid in nearly any circumstance: helping exhausted travelers find their way, leading panicked villagers out of a burning building, or even providing a comforting nuzzle at just the right time. Once per round during a montage test, when you or another character makes a test, your companion can increase the tier outcome by one tier (to a maximum of tier 3).",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Everyone's Best Friend": 0
+        },
+        "performerDecision": "\"your companion can increase the tier outcome by one tier\" -> Companion only. Record because it is a discretionary use with a frequency limit (\"Once per round during a montage test\"), like V106's discretionary records (Communicate, Use treasure for companion). See uncertainty level-two-feature-records."
+      },
+      {
+        "name": "2nd-Level Wild Nature Feature",
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-feature.md",
+        "sourceSha256": "ad4d4492216bb8fce16ac14c7f216a6133f9e2deea4c49d313dd6560d665b085",
+        "grants": "one feature per wild nature (2nd-Level Wild Nature Features table)"
+      },
+      {
+        "name": "2nd-Level Wild Nature Ability",
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-ability.md",
+        "sourceSha256": "f2d2f5b2c56eed2e4d94d43c81ace60e83c40b59f9dfe2b4fc5b1be67cf2b1ea",
+        "choice": "\"Your wild nature grants your choice of one of two heroic abilities.\" Cost 5 per advancement-table Wild Nature Abilities column \"5\".",
+        "groupingSource": "The unified file's four per-nature sections (\"Choose one of the following abilities.\") are EMPTY. Pairs derived from the subclass: frontmatter of each file in en/unified/md/feature/ability/beastheart/level-2/. No second source: the pinned books/ directory contains only heroes/, not the Beastheart book."
+      }
+    ],
+    "natureFeature": {
+      "Guardian": {
+        "name": "Watchdog",
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/watchdog.md",
+        "sourceSha256": "1aebc47f88f3aa63618dced57aa390410e70d76dc5549ad4da0ac02dd29d1e0a",
+        "textVerbatim": "You and your companion can't be surprised.",
+        "numericSheetEffect": null,
+        "recordDecision": "NONE: purely passive state (\"can't be surprised\") with no action, trigger choice, cost or frequency to record; not a species trait, so the V106 species-trait record precedent does not reach it. Surprise handling is manual."
+      },
+      "Prowler": {
+        "name": "Supersniffer",
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/supersniffer.md",
+        "sourceSha256": "520525ae62882cb3167cb873a6e728bf9e44f3dd6bb78873a5e680cc85d83011",
+        "textVerbatim": "While a creature is adjacent to your companion, that creature can't be hidden or have concealment from your companion.",
+        "numericSheetEffect": null,
+        "recordDecision": "NONE: purely passive restriction on hidden/concealment adjacent to the companion; no action, choice, cost or frequency; class feature, not a species trait."
+      },
+      "Punisher": {
+        "name": "This One's Yours",
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/this-ones-yours.md",
+        "sourceSha256": "30660b839c8caa5e7754667be7a4d8a2541846299ba5c9bafd50548525b4889d",
+        "textVerbatim": "Once per turn, you or your companion can use the following free triggered action.",
+        "numericSheetEffect": null,
+        "recordDecision": "RECORDS: grants the free triggered action This One's Yours usable by \"you or your companion\" -> Beastheart and Companion records plus each performer's Spend option 1 (1 Ferocity).",
+        "grantsAbility": "This One's Yours"
+      },
+      "Spark": {
+        "name": "Stormheart",
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/stormheart.md",
+        "sourceSha256": "26a71e2395e11bb8a8feef7437c92856afbb0b0da395832abaefbd35240df4c5",
+        "textVerbatim": "Whenever you or your companion deals cold, fire, lightning, sonic, or untyped damage, you can change the damage type to cold, fire, lightning, or sonic damage.",
+        "numericSheetEffect": null,
+        "recordDecision": "NONE (interpretation, see uncertainty level-two-feature-records): an optional damage-type substitution applied inside the resolution of other damage; no action, cost or frequency limit of its own."
+      }
+    },
+    "natureAbilityPairs": {
+      "Guardian": [
+        {
+          "name": "Fetch!",
+          "printedCost": "5 Ferocity",
+          "actionType": "Main action",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/fetch.md",
+          "groupedBy": "frontmatter subclass: guardian"
+        },
+        {
+          "name": "Omnomnom",
+          "printedCost": "5 Ferocity",
+          "actionType": "Main action",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/omnomnom.md",
+          "groupedBy": "frontmatter subclass: guardian"
+        }
+      ],
+      "Prowler": [
+        {
+          "name": "Jump Scare",
+          "printedCost": "5 Ferocity",
+          "actionType": "Main action",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/jump-scare.md",
+          "groupedBy": "frontmatter subclass: prowler"
+        },
+        {
+          "name": "On You Like Your Shadow",
+          "printedCost": "5 Ferocity",
+          "actionType": "Main action",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/on-you-like-your-shadow.md",
+          "groupedBy": "frontmatter subclass: prowler"
+        }
+      ],
+      "Punisher": [
+        {
+          "name": "Foe Bowling",
+          "printedCost": "5 Ferocity",
+          "actionType": "Main action",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/foe-bowling.md",
+          "groupedBy": "frontmatter subclass: punisher"
+        },
+        {
+          "name": "One Roar and We're Back In the Fight",
+          "printedCost": "5 Ferocity",
+          "actionType": "Maneuver",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/one-roar-and-were-back-in-the-fight.md",
+          "groupedBy": "frontmatter subclass: punisher"
+        }
+      ],
+      "Spark": [
+        {
+          "name": "Burning Lash",
+          "printedCost": "5 Ferocity",
+          "actionType": "Main action",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/burning-lash.md",
+          "groupedBy": "frontmatter subclass: spark"
+        },
+        {
+          "name": "Howling Gale",
+          "printedCost": "5 Ferocity",
+          "actionType": "Main action",
+          "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/howling-gale.md",
+          "groupedBy": "frontmatter subclass: spark"
+        }
+      ]
+    },
+    "natureAbilityPairsNote": "feature/ability/beastheart/level-2/this-ones-yours.md also carries subclass: punisher but is NOT a choice option: it has no cost (the choice is between heroic abilities, costing 5 per the advancement table) and it is granted by the Punisher 2nd-Level Wild Nature Feature.",
+    "perkGroups": ["exploration", "interpersonal", "intrigue"],
+    "perkGroupsSource": "en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Exploration Perks 17353, Interpersonal Perks 17397, Intrigue Perks 17441 (ends at Lore Perks 17469)",
+    "eligibleCorePerks": {
+      "exploration": [
+        {
+          "name": "Brawny",
+          "sourcePath": "en/unified/md/perk/brawny.md"
+        },
+        {
+          "name": "Camouflage Hunter",
+          "sourcePath": "en/unified/md/perk/camouflage-hunter.md"
+        },
+        {
+          "name": "Danger Sense",
+          "sourcePath": "en/unified/md/perk/danger-sense.md",
+          "note": "Overlaps Guardian Watchdog (can't be surprised); not chosen."
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "note": "Grants a maneuver (would add a record); not chosen."
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "note": "Grants a free triggered action (would add a record); not chosen."
+        },
+        {
+          "name": "Monster Whisperer",
+          "sourcePath": "en/unified/md/perk/monster-whisperer.md"
+        },
+        {
+          "name": "Put Your Back Into It!",
+          "sourcePath": "en/unified/md/perk/put-your-back-into-it.md"
+        },
+        {
+          "name": "Team Leader",
+          "sourcePath": "en/unified/md/perk/team-leader.md"
+        },
+        {
+          "name": "Teamwork",
+          "sourcePath": "en/unified/md/perk/teamwork.md",
+          "note": "Already held by every V106 base (career.soldier.perk); not eligible as a new pick."
+        },
+        {
+          "name": "Wood Wise",
+          "sourcePath": "en/unified/md/perk/wood-wise.md"
+        }
+      ],
+      "interpersonal": [
+        {
+          "name": "Charming Liar",
+          "sourcePath": "en/unified/md/perk/charming-liar.md"
+        },
+        {
+          "name": "Dazzler",
+          "sourcePath": "en/unified/md/perk/dazzler.md"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md"
+        },
+        {
+          "name": "Harmonizer",
+          "sourcePath": "en/unified/md/perk/harmonizer.md"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md"
+        },
+        {
+          "name": "Pardon My Friend",
+          "sourcePath": "en/unified/md/perk/pardon-my-friend.md"
+        },
+        {
+          "name": "Power Player",
+          "sourcePath": "en/unified/md/perk/power-player.md"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md"
+        },
+        {
+          "name": "Spot the Tell",
+          "sourcePath": "en/unified/md/perk/spot-the-tell.md"
+        }
+      ],
+      "intrigue": [
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "note": "Grants a triggered action (would add a record); not chosen."
+        },
+        {
+          "name": "Lucky Dog",
+          "sourcePath": "en/unified/md/perk/lucky-dog.md"
+        },
+        {
+          "name": "Master of Disguise",
+          "sourcePath": "en/unified/md/perk/master-of-disguise.md"
+        },
+        {
+          "name": "Slipped Lead",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md"
+        }
+      ]
+    },
+    "eligibleCorePerksNote": "Every perk in the three groups; none of them has a sub-choice. Beastheart-book perks are excluded because the Compendium gives them no group (uncertainty beastheart-perk-groups)."
+  },
+  "levelThree": {
+    "sourceAdvancementTable": "en/unified/md/class/beastheart.md (row 3rd: Companion Advancement Feature, 7-Ferocity Ability; Abilities Signature, 3, 5, 7; Wild Nature Abilities 5)",
+    "staminaGained": 12,
+    "automaticFeatures": [
+      {
+        "name": "Companion Advancement Feature",
+        "sourcePath": "en/unified/md/feature/beastheart/level-3/companion-advancement-feature.md",
+        "sourceSha256": "6c899748499c7fd7b12a6de29d42f0ed8fd73760d301b11a4c7c59fbbc7c1956",
+        "textVerbatim": "Your companion gains the level 3 advancement feature granted by their stat block.",
+        "grants": "the companion species' level 3 feature"
+      },
+      {
+        "name": "7-Ferocity Ability",
+        "sourcePath": "en/unified/md/feature/beastheart/level-3/7-ferocity-ability.md",
+        "sourceSha256": "cf337a1c751736b0e5eac183058708b8908f7ed85a62d8ac741bfe73d1cd47f6",
+        "textVerbatim": "Choose one heroic ability from the following options, each of which costs 7 ferocity to use.",
+        "choice": "one of four 7-ferocity heroic abilities",
+        "groupingSource": "The unified 7-ferocity file lists no options; options are the four files in en/unified/md/feature/ability/beastheart/level-3/ (all level: \"3\", cost: 7 Ferocity, no subclass)."
+      }
+    ],
+    "companionLevelThreeFeatures": {
+      "Basilisk": {
+        "name": "Foes Forever Frozen",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/basilisk/level-3/foes-forever-frozen.md",
+        "sourceSha256": "6776629d41b3ec4dfd8f56d14f64655f8bf2d54426c9bba10ff0644546384634",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/basilisk.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the basilisk makes a strike against a creature while rampaging, the target is stoned (save ends).",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Foes Forever Frozen": 0
+        }
+      },
+      "Bear": {
+        "name": "Foe Thresher",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/bear/level-3/foe-thresher.md",
+        "sourceSha256": "301f7174963c1cd285f50ff18d7dd8caabf627128693aea79bd4048644fe369b",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/bear.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the bear targets a creature with a strike that doesn't impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) while rampaging, the bear can push the target up to a number of squares equal to the bear's Might score.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Foe Thresher": 0
+        }
+      },
+      "Boar": {
+        "name": "Greased Pig",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/boar/level-3/greased-pig.md",
+        "sourceSha256": "4fe555e15c94261caea011d7f6e63c36d99c833a9dfebfb736ec96434c74453b",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/boar.md (level: 3 entry, same name and text)",
+        "textVerbatim": "While the boar is rampaging, they have a +2 bonus to speed and a double edge on the Escape Grab maneuver.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Greased Pig": 0
+        },
+        "recordNote": "+2 speed applies only while rampaging (Rampage is manual in V106), so it is not a sheet speed change."
+      },
+      "Condor": {
+        "name": "Dive Bomb",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/condor/level-3/dive-bomb.md",
+        "sourceSha256": "a91a4fa837f89718ac9c7c370f5fe1b41ae4f62584e583d479b958d85712f409",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/condor.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the condor makes a strike while rampaging, they deal extra damage equal to the number of squares they've moved on their turn (to a maximum of 5).",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Dive Bomb": 0
+        }
+      },
+      "Deinonychus": {
+        "name": "Tear You to Ribbons",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/deinonychus/level-3/tear-you-to-ribbons.md",
+        "sourceSha256": "80ff26c878e6d991fcf3712802c1c0cb1e666440dd33cb4d8f55db2104b56ce8",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/deinonychus.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the deinonychus makes a strike against a creature while rampaging, the target is [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the end of their next turn.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Tear You to Ribbons": 0
+        }
+      },
+      "Drake": {
+        "name": "Endless Breath",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/drake/level-3/endless-breath.md",
+        "sourceSha256": "a01b0b6f8260aa573e16cb91a0deabfab5ee6bcefdfedb4b8d8b31caf4739631",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/drake.md (level: 3 entry, same name and text)",
+        "textVerbatim": "The drake's Drake Breath maneuver deals an extra 2 damage.",
+        "conditional": "always (modifies Drake Breath)",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Endless Breath": 0
+        },
+        "recordNote": "Interpretation: recorded like V106's situational species traits; alternative is folding +2 into the manual Drake Breath record text (uncertainty endless-breath-record)."
+      },
+      "Elemental Spark": {
+        "name": "Electroshock",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/elemental-spark/level-3/electroshock.md",
+        "sourceSha256": "e0ba04e5c60dc1826ffbd6debc655b84dbb3b8a47d20ed1223845d1cd212e199",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/elemental-spark.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the spark makes a strike against a creature while rampaging, they can cause a target who has M < AVERAGE to be [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) until the end of the target's next turn.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Electroshock": 0
+        }
+      },
+      "Gummy Ball": {
+        "name": "Suck It Up",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/gummy-ball/level-3/suck-it-up.md",
+        "sourceSha256": "8d42a9f00e73caabc87bacaa0f315cf5ff4a56946a623dd632f494227c3980a7",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/gummy-ball.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the ball makes a strike while rampaging, one target is pulled up to 3 squares into the ball's space. If the target ends this movement and completely fits within the ball's space, the target is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by the ball.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Suck It Up": 0
+        }
+      },
+      "Hellhound": {
+        "name": "Infernal Apparition",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/hellhound/level-3/infernal-apparition.md",
+        "sourceSha256": "e1ea15eb0121bac0ea91a80026e09f53db67883660afeb81bab04b9b9a0808be",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/hellhound.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the hellhound makes a strike against a creature while rampaging, they can cause a target who has P < AVERAGE to be [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of the target's next turn.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Infernal Apparition": 0
+        }
+      },
+      "Lightbender": {
+        "name": "Hit and Run",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/lightbender/level-3/hit-and-run.md",
+        "sourceSha256": "88c8922e07cdc4c2251a98b49957eb594eeff9ee5f1afd1913f44f359b04b68e",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/lightbender.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the lightbender makes a strike against a creature while rampaging, the lightbender can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares and use the [Hide](scc.v1:mcdm.heroes.v1/skill.intrigue/hide) maneuver.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Hit and Run": 0
+        }
+      },
+      "Panther": {
+        "name": "Cat and Mouse",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/panther/level-3/cat-and-mouse.md",
+        "sourceSha256": "93b76733954c7fa06f074546c99ac2b6af70426a9007d479dc688a9f399fa252",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/panther.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the panther makes a strike against a creature while rampaging, the panther can knock the target [prone](scc.v1:mcdm.heroes.v1/condition/prone).",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Cat and Mouse": 0
+        }
+      },
+      "Spider": {
+        "name": "Dripping Fangs",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/spider/level-3/dripping-fangs.md",
+        "sourceSha256": "4beef4e9d17474b5b4544f9ff95c02c65da234f271717be9f34e75fbd9aec548",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/spider.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the spider makes a strike against a creature while rampaging, the spider can deal extra poison damage equal to their Might score.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Dripping Fangs": 0
+        }
+      },
+      "Sporeling": {
+        "name": "Slowing Spores",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/sporeling/level-3/slowing-spores.md",
+        "sourceSha256": "451059b0c83855bc189107612078d2b8789961981d3e4b6af0afd85f9e186701",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/sporeling.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the sporeling makes a strike against a creature while rampaging, the sporeling can cause the target to be [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) until the end of the target's next turn.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: Slowing Spores": 0
+        }
+      },
+      "Wolf": {
+        "name": "My, What Big Teeth You Have",
+        "sourcePath": "en/unified/md/feature/companion/beastheart/wolf/level-3/my-what-big-teeth-you-have.md",
+        "sourceSha256": "2900843b1714f81318eb59af005d34fbece9aa02361f07119d338bae049140a8",
+        "crossCheck": "en/unified/md/monster/companion/beastheart/advancement-features/wolf.md (level: 3 entry, same name and text)",
+        "textVerbatim": "Whenever the wolf makes a strike against a creature while rampaging, they can grab the target.",
+        "conditional": "while rampaging",
+        "numericSheetEffect": null,
+        "record": {
+          "Companion: My, What Big Teeth You Have": 0
+        }
+      }
+    },
+    "ability7Options": [
+      {
+        "name": "Death and Violence",
+        "printedCost": "7 Ferocity",
+        "actionType": "Triggered Action",
+        "sourcePath": "en/unified/md/feature/ability/beastheart/level-3/death-and-violence.md"
+      },
+      {
+        "name": "Head to Head",
+        "printedCost": "7 Ferocity",
+        "actionType": "Main action",
+        "sourcePath": "en/unified/md/feature/ability/beastheart/level-3/head-to-head.md"
+      },
+      {
+        "name": "Jaws of Death",
+        "printedCost": "7 Ferocity",
+        "actionType": "Main action",
+        "sourcePath": "en/unified/md/feature/ability/beastheart/level-3/jaws-of-death.md"
+      },
+      {
+        "name": "Shieldbreaker",
+        "printedCost": "7 Ferocity",
+        "actionType": "Main action",
+        "sourcePath": "en/unified/md/feature/ability/beastheart/level-3/shieldbreaker.md"
+      }
+    ]
+  },
+  "abilities": {
+    "Fetch!": {
+      "name": "Fetch!",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/fetch.md",
+      "sourceSha256": "623ebb95271069df079c9ebd6e9fd8021c842811e10f7f83b4989ad42eb9de17",
+      "level": 2,
+      "wildNature": "Guardian",
+      "grantedBy": "2nd-Level Wild Nature Ability",
+      "actionType": "Main action",
+      "keywords": ["Companion", "Magic", "Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature or object",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 5,
+        "printed": "5 Ferocity"
+      },
+      "performers": ["Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Companion."
+      },
+      "spendOptions": [],
+      "records": {
+        "Companion: Fetch!": 5
+      }
+    },
+    "Omnomnom": {
+      "name": "Omnomnom",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/omnomnom.md",
+      "sourceSha256": "618bff5caa599709638bdadd90445f8c1aab6705ebd3b8b4d7dbfc409b3da1db",
+      "level": 2,
+      "wildNature": "Guardian",
+      "grantedBy": "2nd-Level Wild Nature Ability",
+      "actionType": "Main action",
+      "keywords": ["Companion", "Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 5,
+        "printed": "5 Ferocity"
+      },
+      "performers": ["Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Companion."
+      },
+      "spendOptions": [],
+      "records": {
+        "Companion: Omnomnom": 5
+      }
+    },
+    "Jump Scare": {
+      "name": "Jump Scare",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/jump-scare.md",
+      "sourceSha256": "41f92915384f8fcac2c92a1dd0d708f63ad6d0648ddcc223053c646244c9a52d",
+      "level": 2,
+      "wildNature": "Prowler",
+      "grantedBy": "2nd-Level Wild Nature Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Companion", "Magic"],
+      "distance": "2 burst",
+      "target": "Each enemy in the area",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 5,
+        "printed": "5 Ferocity"
+      },
+      "performers": ["Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Companion."
+      },
+      "spendOptions": [],
+      "records": {
+        "Companion: Jump Scare": 5
+      }
+    },
+    "On You Like Your Shadow": {
+      "name": "On You Like Your Shadow",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/on-you-like-your-shadow.md",
+      "sourceSha256": "ea3e0fccd56bb347076ac1d2bb49fd20ce1ad36b37f69beb060feb12972a00f7",
+      "level": 2,
+      "wildNature": "Prowler",
+      "grantedBy": "2nd-Level Wild Nature Ability",
+      "actionType": "Main action",
+      "keywords": ["Charge", "Companion", "Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature or object",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 5,
+        "printed": "5 Ferocity"
+      },
+      "performers": ["Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Companion."
+      },
+      "spendOptions": [],
+      "records": {
+        "Companion: On You Like Your Shadow": 5
+      }
+    },
+    "Foe Bowling": {
+      "name": "Foe Bowling",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/foe-bowling.md",
+      "sourceSha256": "b9c3f0ddfbb85663f180c22dcddae61518950a8fb3015decbe24ce8fc4552cba",
+      "level": 2,
+      "wildNature": "Punisher",
+      "grantedBy": "2nd-Level Wild Nature Ability",
+      "actionType": "Main action",
+      "keywords": ["Charge", "Companion", "Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 5,
+        "printed": "5 Ferocity"
+      },
+      "performers": ["Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Companion."
+      },
+      "spendOptions": [],
+      "records": {
+        "Companion: Foe Bowling": 5
+      }
+    },
+    "One Roar and We're Back In the Fight": {
+      "name": "One Roar and We're Back In the Fight",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/one-roar-and-were-back-in-the-fight.md",
+      "sourceSha256": "ae00481f87dd3a3123e0c2f0c12ffc03bfa2f9cc54d94e066195be696a4088f9",
+      "level": 2,
+      "wildNature": "Punisher",
+      "grantedBy": "2nd-Level Wild Nature Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Companion"],
+      "distance": "Ranged 5",
+      "target": "One ally",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 5,
+        "printed": "5 Ferocity"
+      },
+      "performers": ["Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Companion."
+      },
+      "spendOptions": [],
+      "records": {
+        "Companion: One Roar and We're Back In the Fight": 5
+      }
+    },
+    "Burning Lash": {
+      "name": "Burning Lash",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/burning-lash.md",
+      "sourceSha256": "28974ac8fc8f6478ec7fc865cce0793540490b802d923a1bdd866df3bdbff51a",
+      "level": 2,
+      "wildNature": "Spark",
+      "grantedBy": "2nd-Level Wild Nature Ability",
+      "actionType": "Main action",
+      "keywords": ["Companion", "Magic", "Melee", "Strike", "Weapon"],
+      "distance": "Melee 2",
+      "target": "One creature",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 5,
+        "printed": "5 Ferocity"
+      },
+      "performers": ["Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Companion."
+      },
+      "spendOptions": [
+        {
+          "option": 1,
+          "amount": 1,
+          "printed": "Spend 1 Ferocity",
+          "textVerbatim": "If you are within distance of the target, you can use a free maneuver to wield a second whip, dealing extra fire or lightning damage equal to your Intuition score.",
+          "performerNote": "Recorded under the parent performer (Companion) per V106 convention (e.g. \"Companion: Bring the Thunder: Spend option 1\"); the text's \"you ... wield a second whip\" is ambiguous, see uncertainty burning-lash-spend-you."
+        }
+      ],
+      "records": {
+        "Companion: Burning Lash": 5,
+        "Companion: Burning Lash: Spend option 1 (1 Ferocity)": 1
+      }
+    },
+    "Howling Gale": {
+      "name": "Howling Gale",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/howling-gale.md",
+      "sourceSha256": "b706a7a7c101514ba0c14f5135c9cc88eaf242768ea61d1aee09fbd7fc779330",
+      "level": 2,
+      "wildNature": "Spark",
+      "grantedBy": "2nd-Level Wild Nature Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Companion", "Magic"],
+      "distance": "3 cube within 5",
+      "target": "Each enemy in the area",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 5,
+        "printed": "5 Ferocity"
+      },
+      "performers": ["Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Companion."
+      },
+      "spendOptions": [],
+      "records": {
+        "Companion: Howling Gale": 5
+      }
+    },
+    "This One's Yours": {
+      "name": "This One's Yours",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-2/this-ones-yours.md",
+      "sourceSha256": "c788c3e4630496962a871c13f27e6e9cb78ba4a294071f88908ddb74a5fc8bf8",
+      "level": 2,
+      "wildNature": "Punisher",
+      "grantedBy": "This One's Yours (2nd-Level Wild Nature Feature, Punisher)",
+      "actionType": "Triggered Action",
+      "keywords": [],
+      "distance": null,
+      "target": null,
+      "trigger": "A creature [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by another creature enters a space adjacent to you.",
+      "cost": {
+        "resource": null,
+        "amount": 0,
+        "printed": null,
+        "note": "No printed cost; base record cost 0 per V106 convention."
+      },
+      "performers": ["Beastheart", "Companion"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-2/this-ones-yours.md",
+        "quote": "\"Once per turn, you or your companion can use the following free triggered action.\"",
+        "reason": "The ability has no keywords (neither Beastheart nor Companion); the granting feature names both performers, matching the V106 precedent for wild nature triggered actions (\"Each triggered action can be used by either you or your companion.\")."
+      },
+      "spendOptions": [
+        {
+          "option": 1,
+          "amount": 1,
+          "printed": "Spend 1 Ferocity",
+          "textVerbatim": "You and your companions can each use this free triggered action on the same turn."
+        }
+      ],
+      "records": {
+        "Beastheart: This One's Yours": 0,
+        "Beastheart: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+        "Companion: This One's Yours": 0,
+        "Companion: This One's Yours: Spend option 1 (1 Ferocity)": 1
+      },
+      "frequency": "Once per turn (feature text); Spend 1 Ferocity lets \"You and your companions\" each use it on the same turn.",
+      "printedActionTypeNote": "Frontmatter action_type \"Triggered Action\"; granting feature and spend text call it a \"free triggered action\"."
+    },
+    "Death and Violence": {
+      "name": "Death and Violence",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-3/death-and-violence.md",
+      "sourceSha256": "954109ef2ac6c2da03e44d2f20cbea98922a5e7ee8abadda480e4c390c0992a1",
+      "level": 3,
+      "wildNature": null,
+      "grantedBy": "7-Ferocity Ability",
+      "actionType": "Triggered Action",
+      "keywords": ["Beastheart", "Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "One creature",
+      "trigger": "Your companion uses an ability that reduces the target to 0 Stamina.",
+      "cost": {
+        "resource": "ferocity",
+        "amount": 7,
+        "printed": "7 Ferocity"
+      },
+      "performers": ["Beastheart"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Beastheart."
+      },
+      "spendOptions": [],
+      "records": {
+        "Beastheart: Death and Violence": 7
+      }
+    },
+    "Head to Head": {
+      "name": "Head to Head",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-3/head-to-head.md",
+      "sourceSha256": "343dbece429a6cc7eb82477cb901460037ca70648af9d1981a8fe907b5c8ac56",
+      "level": 3,
+      "wildNature": null,
+      "grantedBy": "7-Ferocity Ability",
+      "actionType": "Main action",
+      "keywords": ["Beastheart", "Melee", "Strike"],
+      "distance": "Melee 1",
+      "target": "One creature",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 7,
+        "printed": "7 Ferocity"
+      },
+      "performers": ["Beastheart"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Beastheart."
+      },
+      "spendOptions": [],
+      "records": {
+        "Beastheart: Head to Head": 7
+      }
+    },
+    "Jaws of Death": {
+      "name": "Jaws of Death",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-3/jaws-of-death.md",
+      "sourceSha256": "9a6b0deb7b66cf92623b52391ef1373a426f36b45dcdc9e93803d190acd6490a",
+      "level": 3,
+      "wildNature": null,
+      "grantedBy": "7-Ferocity Ability",
+      "actionType": "Main action",
+      "keywords": ["Beastheart", "Magic", "Melee", "Ranged"],
+      "distance": "Melee 1 or ranged 5",
+      "target": "One creature",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 7,
+        "printed": "7 Ferocity"
+      },
+      "performers": ["Beastheart"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Beastheart."
+      },
+      "spendOptions": [],
+      "records": {
+        "Beastheart: Jaws of Death": 7
+      }
+    },
+    "Shieldbreaker": {
+      "name": "Shieldbreaker",
+      "sourcePath": "en/unified/md/feature/ability/beastheart/level-3/shieldbreaker.md",
+      "sourceSha256": "d6d6ae1a43fe610f844bf68ef3f7b529150b24b156f954c7a5e58680416be4a0",
+      "level": 3,
+      "wildNature": null,
+      "grantedBy": "7-Ferocity Ability",
+      "actionType": "Main action",
+      "keywords": ["Beastheart", "Melee", "Ranged", "Strike", "Weapon"],
+      "distance": "Melee 1 or ranged 5",
+      "target": "One creature",
+      "trigger": null,
+      "cost": {
+        "resource": "ferocity",
+        "amount": 7,
+        "printed": "7 Ferocity"
+      },
+      "performers": ["Beastheart"],
+      "performerDecision": {
+        "sourcePath": "en/unified/md/feature/beastheart/level-1/companion-rules.md",
+        "quote": "\"If a beastheart ability has the Beastheart keyword, it can be used by only the beastheart. If it has the Companion keyword, it can be used by only the companion.\" (Shared Abilities)",
+        "reason": "Keywords include Beastheart."
+      },
+      "spendOptions": [],
+      "records": {
+        "Beastheart: Shieldbreaker": 7
+      }
+    }
+  },
+  "witnesses": {
+    "v106-1": {
+      "base": "v106-1",
+      "wildNature": "Guardian",
+      "companion": "Basilisk",
+      "kit": "Shining Armor",
+      "levelOneBaseline": {
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 33
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Brawny",
+          "natureAbility": "Fetch!"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Watchdog",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Fetch!": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Brawny"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 45,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 22,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Shining Armor 12 x echelon 1 = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 45",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "exploration",
+        "featuresWithoutRecords": ["Watchdog", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Death and Violence"
+        },
+        "addedFeatures": [
+          "Companion Advancement Feature",
+          "Foes Forever Frozen",
+          "7-Ferocity Ability"
+        ],
+        "addedRecords": {
+          "Beastheart: Death and Violence": 7,
+          "Companion: Foes Forever Frozen": 0
+        },
+        "perks": ["Teamwork", "Brawny"],
+        "staminaMaximum": 57,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 19,
+        "windedValue": 28,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 57,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 28,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Shining Armor 12 x echelon 1 = 57",
+          "recoveryValue": "floor(57/3) = 19",
+          "windedValue": "floor(57/2) = 28",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 57",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Fetch!": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Death and Violence": 7,
+          "Companion: Foes Forever Frozen": 0
+        }
+      }
+    },
+    "v106-2": {
+      "base": "v106-2",
+      "wildNature": "Prowler",
+      "companion": "Bear",
+      "kit": "Cloak and Dagger",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 24
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Charming Liar",
+          "natureAbility": "Jump Scare"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Supersniffer",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Jump Scare": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Charming Liar"],
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 36,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 18,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Cloak and Dagger 3 x echelon 1 = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 36",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "interpersonal",
+        "featuresWithoutRecords": ["Supersniffer", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Head to Head"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Foe Thresher", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Head to Head": 7,
+          "Companion: Foe Thresher": 0
+        },
+        "perks": ["Teamwork", "Charming Liar"],
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 48,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 24,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Cloak and Dagger 3 x echelon 1 = 48",
+          "recoveryValue": "floor(48/3) = 16",
+          "windedValue": "floor(48/2) = 24",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 48",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Jump Scare": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Head to Head": 7,
+          "Companion: Foe Thresher": 0
+        }
+      }
+    },
+    "v106-3": {
+      "base": "v106-3",
+      "wildNature": "Punisher",
+      "companion": "Boar",
+      "kit": "Panther",
+      "levelOneBaseline": {
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 27
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Criminal Contacts",
+          "natureAbility": "Foe Bowling"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "This One's Yours",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Foe Bowling": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: This One's Yours": 0,
+          "Beastheart: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Companion: This One's Yours": 0,
+          "Companion: This One's Yours: Spend option 1 (1 Ferocity)": 1
+        },
+        "perks": ["Teamwork", "Criminal Contacts"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 39,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 19,
+        "cumulativeAddedRecordCount": 6,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Panther 6 x echelon 1 = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 39",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "intrigue",
+        "featuresWithoutRecords": ["Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Jaws of Death"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Greased Pig", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Jaws of Death": 7,
+          "Companion: Greased Pig": 0
+        },
+        "perks": ["Teamwork", "Criminal Contacts"],
+        "staminaMaximum": 51,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 17,
+        "windedValue": 25,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 51,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 25,
+        "cumulativeAddedRecordCount": 8,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Panther 6 x echelon 1 = 51",
+          "recoveryValue": "floor(51/3) = 17",
+          "windedValue": "floor(51/2) = 25",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 51",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Foe Bowling": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: This One's Yours": 0,
+          "Beastheart: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Companion: This One's Yours": 0,
+          "Companion: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Beastheart: Jaws of Death": 7,
+          "Companion: Greased Pig": 0
+        }
+      }
+    },
+    "v106-4": {
+      "base": "v106-4",
+      "wildNature": "Spark",
+      "companion": "Condor",
+      "kit": "Sniper",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 21
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Camouflage Hunter",
+          "natureAbility": "Burning Lash"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Stormheart",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Burning Lash": 5,
+          "Companion: Burning Lash: Spend option 1 (1 Ferocity)": 1,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Camouflage Hunter"],
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 33,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 16,
+        "cumulativeAddedRecordCount": 3,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Sniper 0 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 33",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "exploration",
+        "featuresWithoutRecords": ["Stormheart", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Shieldbreaker"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Dive Bomb", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Shieldbreaker": 7,
+          "Companion: Dive Bomb": 0
+        },
+        "perks": ["Teamwork", "Camouflage Hunter"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 45,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 22,
+        "cumulativeAddedRecordCount": 5,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Sniper 0 x echelon 1 = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 45",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Burning Lash": 5,
+          "Companion: Burning Lash: Spend option 1 (1 Ferocity)": 1,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Shieldbreaker": 7,
+          "Companion: Dive Bomb": 0
+        }
+      }
+    },
+    "v106-5": {
+      "base": "v106-5",
+      "wildNature": "Guardian",
+      "companion": "Deinonychus",
+      "kit": "Shining Armor",
+      "levelOneBaseline": {
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 33
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Dazzler",
+          "natureAbility": "Omnomnom"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Watchdog",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Omnomnom": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Dazzler"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 45,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 22,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Shining Armor 12 x echelon 1 = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 45",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "interpersonal",
+        "featuresWithoutRecords": ["Watchdog", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Death and Violence"
+        },
+        "addedFeatures": [
+          "Companion Advancement Feature",
+          "Tear You to Ribbons",
+          "7-Ferocity Ability"
+        ],
+        "addedRecords": {
+          "Beastheart: Death and Violence": 7,
+          "Companion: Tear You to Ribbons": 0
+        },
+        "perks": ["Teamwork", "Dazzler"],
+        "staminaMaximum": 57,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 19,
+        "windedValue": 28,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 57,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 28,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Shining Armor 12 x echelon 1 = 57",
+          "recoveryValue": "floor(57/3) = 19",
+          "windedValue": "floor(57/2) = 28",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 57",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Omnomnom": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Death and Violence": 7,
+          "Companion: Tear You to Ribbons": 0
+        }
+      }
+    },
+    "v106-6": {
+      "base": "v106-6",
+      "wildNature": "Prowler",
+      "companion": "Drake",
+      "kit": "Cloak and Dagger",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 24
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Forgettable Face",
+          "natureAbility": "On You Like Your Shadow"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Supersniffer",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: On You Like Your Shadow": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Forgettable Face"],
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 36,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 18,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Cloak and Dagger 3 x echelon 1 = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 36",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "intrigue",
+        "featuresWithoutRecords": ["Supersniffer", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Head to Head"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Endless Breath", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Head to Head": 7,
+          "Companion: Endless Breath": 0
+        },
+        "perks": ["Teamwork", "Forgettable Face"],
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 48,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 24,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Cloak and Dagger 3 x echelon 1 = 48",
+          "recoveryValue": "floor(48/3) = 16",
+          "windedValue": "floor(48/2) = 24",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 48",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: On You Like Your Shadow": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Head to Head": 7,
+          "Companion: Endless Breath": 0
+        }
+      }
+    },
+    "v106-7": {
+      "base": "v106-7",
+      "wildNature": "Punisher",
+      "companion": "Elemental Spark",
+      "kit": "Panther",
+      "levelOneBaseline": {
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 27
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Monster Whisperer",
+          "natureAbility": "One Roar and We're Back In the Fight"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "This One's Yours",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: One Roar and We're Back In the Fight": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: This One's Yours": 0,
+          "Beastheart: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Companion: This One's Yours": 0,
+          "Companion: This One's Yours: Spend option 1 (1 Ferocity)": 1
+        },
+        "perks": ["Teamwork", "Monster Whisperer"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 39,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 19,
+        "cumulativeAddedRecordCount": 6,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Panther 6 x echelon 1 = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 39",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "exploration",
+        "featuresWithoutRecords": ["Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Jaws of Death"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Electroshock", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Jaws of Death": 7,
+          "Companion: Electroshock": 0
+        },
+        "perks": ["Teamwork", "Monster Whisperer"],
+        "staminaMaximum": 51,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 17,
+        "windedValue": 25,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 51,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 25,
+        "cumulativeAddedRecordCount": 8,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Panther 6 x echelon 1 = 51",
+          "recoveryValue": "floor(51/3) = 17",
+          "windedValue": "floor(51/2) = 25",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 51",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: One Roar and We're Back In the Fight": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: This One's Yours": 0,
+          "Beastheart: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Companion: This One's Yours": 0,
+          "Companion: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Beastheart: Jaws of Death": 7,
+          "Companion: Electroshock": 0
+        }
+      }
+    },
+    "v106-8": {
+      "base": "v106-8",
+      "wildNature": "Spark",
+      "companion": "Gummy Ball",
+      "kit": "Sniper",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 21
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Harmonizer",
+          "natureAbility": "Howling Gale"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Stormheart",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Howling Gale": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Harmonizer"],
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 33,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 16,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Sniper 0 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 33",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "interpersonal",
+        "featuresWithoutRecords": ["Stormheart", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Shieldbreaker"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Suck It Up", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Shieldbreaker": 7,
+          "Companion: Suck It Up": 0
+        },
+        "perks": ["Teamwork", "Harmonizer"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 45,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 22,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Sniper 0 x echelon 1 = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 45",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Howling Gale": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Shieldbreaker": 7,
+          "Companion: Suck It Up": 0
+        }
+      }
+    },
+    "v106-9": {
+      "base": "v106-9",
+      "wildNature": "Guardian",
+      "companion": "Hellhound",
+      "kit": "Shining Armor",
+      "levelOneBaseline": {
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 33
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Lucky Dog",
+          "natureAbility": "Fetch!"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Watchdog",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Fetch!": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Lucky Dog"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 45,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 22,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Shining Armor 12 x echelon 1 = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 45",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "intrigue",
+        "featuresWithoutRecords": ["Watchdog", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Death and Violence"
+        },
+        "addedFeatures": [
+          "Companion Advancement Feature",
+          "Infernal Apparition",
+          "7-Ferocity Ability"
+        ],
+        "addedRecords": {
+          "Beastheart: Death and Violence": 7,
+          "Companion: Infernal Apparition": 0
+        },
+        "perks": ["Teamwork", "Lucky Dog"],
+        "staminaMaximum": 57,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 19,
+        "windedValue": 28,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 57,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 28,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Shining Armor 12 x echelon 1 = 57",
+          "recoveryValue": "floor(57/3) = 19",
+          "windedValue": "floor(57/2) = 28",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 57",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Fetch!": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Death and Violence": 7,
+          "Companion: Infernal Apparition": 0
+        }
+      }
+    },
+    "v106-10": {
+      "base": "v106-10",
+      "wildNature": "Prowler",
+      "companion": "Lightbender",
+      "kit": "Cloak and Dagger",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 24
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Put Your Back Into It!",
+          "natureAbility": "Jump Scare"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Supersniffer",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Jump Scare": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Put Your Back Into It!"],
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 36,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 18,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Cloak and Dagger 3 x echelon 1 = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 36",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "exploration",
+        "featuresWithoutRecords": ["Supersniffer", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Head to Head"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Hit and Run", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Head to Head": 7,
+          "Companion: Hit and Run": 0
+        },
+        "perks": ["Teamwork", "Put Your Back Into It!"],
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 48,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 24,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Cloak and Dagger 3 x echelon 1 = 48",
+          "recoveryValue": "floor(48/3) = 16",
+          "windedValue": "floor(48/2) = 24",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 48",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Jump Scare": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Head to Head": 7,
+          "Companion: Hit and Run": 0
+        }
+      }
+    },
+    "v106-11": {
+      "base": "v106-11",
+      "wildNature": "Punisher",
+      "companion": "Panther",
+      "kit": "Panther",
+      "levelOneBaseline": {
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 27
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Lie Detector",
+          "natureAbility": "Foe Bowling"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "This One's Yours",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Foe Bowling": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: This One's Yours": 0,
+          "Beastheart: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Companion: This One's Yours": 0,
+          "Companion: This One's Yours: Spend option 1 (1 Ferocity)": 1
+        },
+        "perks": ["Teamwork", "Lie Detector"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 39,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 19,
+        "cumulativeAddedRecordCount": 6,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Panther 6 x echelon 1 = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 39",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "interpersonal",
+        "featuresWithoutRecords": ["Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Jaws of Death"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Cat and Mouse", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Jaws of Death": 7,
+          "Companion: Cat and Mouse": 0
+        },
+        "perks": ["Teamwork", "Lie Detector"],
+        "staminaMaximum": 51,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 17,
+        "windedValue": 25,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 51,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 25,
+        "cumulativeAddedRecordCount": 8,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Panther 6 x echelon 1 = 51",
+          "recoveryValue": "floor(51/3) = 17",
+          "windedValue": "floor(51/2) = 25",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 51",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Foe Bowling": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: This One's Yours": 0,
+          "Beastheart: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Companion: This One's Yours": 0,
+          "Companion: This One's Yours: Spend option 1 (1 Ferocity)": 1,
+          "Beastheart: Jaws of Death": 7,
+          "Companion: Cat and Mouse": 0
+        }
+      }
+    },
+    "v106-12": {
+      "base": "v106-12",
+      "wildNature": "Spark",
+      "companion": "Spider",
+      "kit": "Sniper",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 21
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Master of Disguise",
+          "natureAbility": "Burning Lash"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Stormheart",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Burning Lash": 5,
+          "Companion: Burning Lash: Spend option 1 (1 Ferocity)": 1,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Master of Disguise"],
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 33,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 16,
+        "cumulativeAddedRecordCount": 3,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Sniper 0 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 33",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "intrigue",
+        "featuresWithoutRecords": ["Stormheart", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Shieldbreaker"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Dripping Fangs", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Shieldbreaker": 7,
+          "Companion: Dripping Fangs": 0
+        },
+        "perks": ["Teamwork", "Master of Disguise"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 45,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 22,
+        "cumulativeAddedRecordCount": 5,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Sniper 0 x echelon 1 = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 45",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Burning Lash": 5,
+          "Companion: Burning Lash: Spend option 1 (1 Ferocity)": 1,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Shieldbreaker": 7,
+          "Companion: Dripping Fangs": 0
+        }
+      }
+    },
+    "v106-13": {
+      "base": "v106-13",
+      "wildNature": "Guardian",
+      "companion": "Sporeling",
+      "kit": "Shining Armor",
+      "levelOneBaseline": {
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 33
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Wood Wise",
+          "natureAbility": "Omnomnom"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Watchdog",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: Omnomnom": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Wood Wise"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 45,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 22,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Shining Armor 12 x echelon 1 = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 45",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "exploration",
+        "featuresWithoutRecords": ["Watchdog", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Death and Violence"
+        },
+        "addedFeatures": ["Companion Advancement Feature", "Slowing Spores", "7-Ferocity Ability"],
+        "addedRecords": {
+          "Beastheart: Death and Violence": 7,
+          "Companion: Slowing Spores": 0
+        },
+        "perks": ["Teamwork", "Wood Wise"],
+        "staminaMaximum": 57,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 19,
+        "windedValue": 28,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 57,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 28,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Shining Armor 12 x echelon 1 = 57",
+          "recoveryValue": "floor(57/3) = 19",
+          "windedValue": "floor(57/2) = 28",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 57",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: Omnomnom": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Death and Violence": 7,
+          "Companion: Slowing Spores": 0
+        }
+      }
+    },
+    "v106-14": {
+      "base": "v106-14",
+      "wildNature": "Prowler",
+      "companion": "Wolf",
+      "kit": "Cloak and Dagger",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 24
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Slipped Lead",
+          "natureAbility": "On You Like Your Shadow"
+        },
+        "addedFeatures": [
+          "Perk",
+          "Everyone's Best Friend",
+          "2nd-Level Wild Nature Feature",
+          "Supersniffer",
+          "2nd-Level Wild Nature Ability"
+        ],
+        "addedRecords": {
+          "Companion: On You Like Your Shadow": 5,
+          "Companion: Everyone's Best Friend": 0
+        },
+        "perks": ["Teamwork", "Slipped Lead"],
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 36,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 18,
+        "cumulativeAddedRecordCount": 2,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (2 - 1) + kit Cloak and Dagger 3 x echelon 1 = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 36",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "perkType": "intrigue",
+        "featuresWithoutRecords": ["Supersniffer", "Perk (chosen perk grants no action)"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Head to Head"
+        },
+        "addedFeatures": [
+          "Companion Advancement Feature",
+          "My, What Big Teeth You Have",
+          "7-Ferocity Ability"
+        ],
+        "addedRecords": {
+          "Beastheart: Head to Head": 7,
+          "Companion: My, What Big Teeth You Have": 0
+        },
+        "perks": ["Teamwork", "Slipped Lead"],
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "companionStaminaMaximum": 48,
+        "companionRecoveriesMaximum": 0,
+        "companionWindedValue": 24,
+        "cumulativeAddedRecordCount": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 12 x (3 - 1) + kit Cloak and Dagger 3 x echelon 1 = 48",
+          "recoveryValue": "floor(48/3) = 16",
+          "windedValue": "floor(48/2) = 24",
+          "companionStaminaMaximum": "equals hero Stamina maximum (companion-rules.md \"Your companion's Stamina maximum equals your Stamina maximum.\") = 48",
+          "potency": "Might 2: weak M-2 = 0, average M-1 = 1, strong M = 2 (class/beastheart.md Basics)",
+          "unchanged": "Recoveries 12, speed, stability, disengage, characteristics and potency equal the reviewed V106 level-one values: no level-2/3 Beastheart feature, wild nature feature, chosen ability, companion level-3 feature or chosen perk changes a sheet number; Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2."
+        },
+        "cumulativeAddedRecords": {
+          "Companion: On You Like Your Shadow": 5,
+          "Companion: Everyone's Best Friend": 0,
+          "Beastheart: Head to Head": 7,
+          "Companion: My, What Big Teeth You Have": 0
+        }
+      }
+    }
+  }
+}

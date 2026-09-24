@@ -156,6 +156,140 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-ability",
+    "kind": "feature",
+    "name": "2nd-Level Wild Nature Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-2/2nd-level-wild-nature-ability.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"2\"\nname: 2nd-Level Wild Nature Ability\nscc: mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-ability\ntype: feature\n---\n\nYour wild nature grants your choice of one of two heroic abilities.\n\n##### 2nd-Level Guardian Abilities\n\nChoose one of the following abilities.\n\n##### 2nd-Level Prowler Abilities\n\nChoose one of the following abilities.\n\n##### 2nd-Level Punisher Abilities\n\nChoose one of the following abilities.\n\n##### 2nd-Level Spark Abilities\n\nChoose one of the following abilities.\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-feature",
+    "kind": "feature",
+    "name": "2nd-Level Wild Nature Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/2nd-level-wild-nature-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-2/2nd-level-wild-nature-feature.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"2\"\nname: 2nd-Level Wild Nature Feature\nscc: mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-feature\ntype: feature\n---\n\nYour wild nature grants you a feature, as shown on the 2nd-Level Wild Nature Features table.\n\n###### 2nd-Level Wild Nature Features\n\n| Wild Nature | Feature |\n| ---- | ---- |\n| Guardian | [Watchdog](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-2/watchdog) |\n| Prowler |  [Supersniffer](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-2/supersniffer) |\n| Punisher | [This One’s Yours](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-2/this-ones-yours) |\n| Spark | [Stormheart](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-2/stormheart) |\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-2/everyones-best-friend",
+    "kind": "feature",
+    "name": "Everyone's Best Friend",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/everyones-best-friend.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-2/everyones-best-friend.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"2\"\nname: Everyone's Best Friend\nscc: mcdm.beastheart.v1/feature.beastheart.level-2/everyones-best-friend\ntype: feature\n---\n\nYour companion may not be much of a talker, but they've got a lifetime of experience surviving the dangers of the wild. They can offer aid in nearly any circumstance: helping exhausted travelers find their way, leading panicked villagers out of a burning building, or even providing a comforting nuzzle at just the right time. Once per round during a montage test, when you or another character makes a test, your companion can increase the tier outcome by one tier (to a maximum of tier 3).\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-2/perk.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"2\"\nname: Perk\nscc: mcdm.beastheart.v1/feature.beastheart.level-2/perk\ntype: feature\n---\n\nYou gain one exploration, interpersonal, or intrigue perk of your choice.\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-2/stormheart",
+    "kind": "feature",
+    "name": "Stormheart",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/stormheart.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-2/stormheart.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"2\"\nname: Stormheart\nscc: mcdm.beastheart.v1/feature.beastheart.level-2/stormheart\nsubclass: spark\ntype: feature\n---\n\nWhenever you or your companion deals cold, fire, lightning, sonic, or untyped damage, you can change the damage type to cold, fire, lightning, or sonic damage.\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "2",
+      "subclass": "spark"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-2/supersniffer",
+    "kind": "feature",
+    "name": "Supersniffer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/supersniffer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-2/supersniffer.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"2\"\nname: Supersniffer\nscc: mcdm.beastheart.v1/feature.beastheart.level-2/supersniffer\nsubclass: prowler\ntype: feature\n---\n\nWhile a creature is adjacent to your companion, that creature can't be hidden or have concealment from your companion.\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "2",
+      "subclass": "prowler"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-2/this-ones-yours",
+    "kind": "feature",
+    "name": "This One's Yours",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/this-ones-yours.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-2/this-ones-yours.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"2\"\nname: This One's Yours\nscc: mcdm.beastheart.v1/feature.beastheart.level-2/this-ones-yours\nsubclass: punisher\ntype: feature\n---\n\nOnce per turn, you or your companion can use the following free triggered action.\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "2",
+      "subclass": "punisher"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-2/watchdog",
+    "kind": "feature",
+    "name": "Watchdog",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-2/watchdog.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-2/watchdog.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"2\"\nname: Watchdog\nscc: mcdm.beastheart.v1/feature.beastheart.level-2/watchdog\nsubclass: guardian\ntype: feature\n---\n\nYou and your companion can't be surprised.\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "2",
+      "subclass": "guardian"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-3/7-ferocity-ability",
+    "kind": "feature",
+    "name": "7-Ferocity Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-3/7-ferocity-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-3/7-ferocity-ability.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"3\"\nname: 7-Ferocity Ability\nscc: mcdm.beastheart.v1/feature.beastheart.level-3/7-ferocity-ability\ntype: feature\n---\n\nChoose one heroic ability from the following options, each of which costs 7 ferocity to use.\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.beastheart.level-3/companion-advancement-feature",
+    "kind": "feature",
+    "name": "Companion Advancement Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/beastheart/level-3/companion-advancement-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/beastheart/level-3/companion-advancement-feature.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\nlevel: \"3\"\nname: Companion Advancement Feature\nscc: mcdm.beastheart.v1/feature.beastheart.level-3/companion-advancement-feature\ntype: feature\n---\n\nYour companion gains the level 3 advancement feature granted by their stat block.\n",
+    "structured": {
+      "class": "beastheart",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.censor.level-1/1st-level-domain-feature",
     "kind": "feature",
     "name": "1st-Level Domain Feature",
@@ -774,6 +908,20 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.basilisk.level-3/foes-forever-frozen",
+    "kind": "feature",
+    "name": "Foes Forever Frozen",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/basilisk/level-3/foes-forever-frozen.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/basilisk/level-3/foes-forever-frozen.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: basilisk\nlevel: \"3\"\nname: Foes Forever Frozen\nscc: mcdm.beastheart.v1/feature.companion.beastheart.basilisk.level-3/foes-forever-frozen\ntype: feature\n---\n\nWhenever the basilisk makes a strike against a creature while rampaging, the target is stoned (save ends).\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "basilisk",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.beastheart.v1/feature.companion.beastheart.bear.level-1/strong-like-bear",
     "kind": "feature",
     "name": "Strong Like Bear",
@@ -785,6 +933,20 @@
       "class": "beastheart",
       "companion": "bear",
       "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.bear.level-3/foe-thresher",
+    "kind": "feature",
+    "name": "Foe Thresher",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/bear/level-3/foe-thresher.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/bear/level-3/foe-thresher.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: bear\nlevel: \"3\"\nname: Foe Thresher\nscc: mcdm.beastheart.v1/feature.companion.beastheart.bear.level-3/foe-thresher\ntype: feature\n---\n\nWhenever the bear targets a creature with a strike that doesn't impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) while rampaging, the bear can push the target up to a number of squares equal to the bear's Might score.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "bear",
+      "level": "3"
     }
   },
   {
@@ -802,6 +964,20 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.boar.level-3/greased-pig",
+    "kind": "feature",
+    "name": "Greased Pig",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/boar/level-3/greased-pig.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/boar/level-3/greased-pig.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: boar\nlevel: \"3\"\nname: Greased Pig\nscc: mcdm.beastheart.v1/feature.companion.beastheart.boar.level-3/greased-pig\ntype: feature\n---\n\nWhile the boar is rampaging, they have a +2 bonus to speed and a double edge on the Escape Grab maneuver.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "boar",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.beastheart.v1/feature.companion.beastheart.condor.level-1/moving-target",
     "kind": "feature",
     "name": "Moving Target",
@@ -816,6 +992,20 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.condor.level-3/dive-bomb",
+    "kind": "feature",
+    "name": "Dive Bomb",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/condor/level-3/dive-bomb.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/condor/level-3/dive-bomb.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: condor\nlevel: \"3\"\nname: Dive Bomb\nscc: mcdm.beastheart.v1/feature.companion.beastheart.condor.level-3/dive-bomb\ntype: feature\n---\n\nWhenever the condor makes a strike while rampaging, they deal extra damage equal to the number of squares they've moved on their turn (to a maximum of 5).\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "condor",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.beastheart.v1/feature.companion.beastheart.deinonychus.level-1/blood-frenzy",
     "kind": "feature",
     "name": "Blood Frenzy",
@@ -827,6 +1017,20 @@
       "class": "beastheart",
       "companion": "deinonychus",
       "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.deinonychus.level-3/tear-you-to-ribbons",
+    "kind": "feature",
+    "name": "Tear You to Ribbons",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/deinonychus/level-3/tear-you-to-ribbons.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/deinonychus/level-3/tear-you-to-ribbons.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: deinonychus\nlevel: \"3\"\nname: Tear You to Ribbons\nscc: mcdm.beastheart.v1/feature.companion.beastheart.deinonychus.level-3/tear-you-to-ribbons\ntype: feature\n---\n\nWhenever the deinonychus makes a strike against a creature while rampaging, the target is [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the end of their next turn.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "deinonychus",
+      "level": "3"
     }
   },
   {
@@ -858,6 +1062,20 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.drake.level-3/endless-breath",
+    "kind": "feature",
+    "name": "Endless Breath",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/drake/level-3/endless-breath.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/drake/level-3/endless-breath.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: drake\nlevel: \"3\"\nname: Endless Breath\nscc: mcdm.beastheart.v1/feature.companion.beastheart.drake.level-3/endless-breath\ntype: feature\n---\n\nThe drake's Drake Breath maneuver deals an extra 2 damage.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "drake",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.beastheart.v1/feature.companion.beastheart.elemental-spark.level-1/electric-surge",
     "kind": "feature",
     "name": "Electric Surge",
@@ -869,6 +1087,20 @@
       "class": "beastheart",
       "companion": "elemental-spark",
       "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.elemental-spark.level-3/electroshock",
+    "kind": "feature",
+    "name": "Electroshock",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/elemental-spark/level-3/electroshock.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/elemental-spark/level-3/electroshock.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: elemental-spark\nlevel: \"3\"\nname: Electroshock\nscc: mcdm.beastheart.v1/feature.companion.beastheart.elemental-spark.level-3/electroshock\ntype: feature\n---\n\nWhenever the spark makes a strike against a creature while rampaging, they can cause a target who has M < AVERAGE to be [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) until the end of the target's next turn.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "elemental-spark",
+      "level": "3"
     }
   },
   {
@@ -886,6 +1118,20 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.gummy-ball.level-3/suck-it-up",
+    "kind": "feature",
+    "name": "Suck It Up",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/gummy-ball/level-3/suck-it-up.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/gummy-ball/level-3/suck-it-up.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: gummy-ball\nlevel: \"3\"\nname: Suck It Up\nscc: mcdm.beastheart.v1/feature.companion.beastheart.gummy-ball.level-3/suck-it-up\ntype: feature\n---\n\nWhenever the ball makes a strike while rampaging, one target is pulled up to 3 squares into the ball's space. If the target ends this movement and completely fits within the ball's space, the target is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by the ball.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "gummy-ball",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.beastheart.v1/feature.companion.beastheart.hellhound.level-1/hellish-pact",
     "kind": "feature",
     "name": "Hellish Pact",
@@ -897,6 +1143,20 @@
       "class": "beastheart",
       "companion": "hellhound",
       "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.hellhound.level-3/infernal-apparition",
+    "kind": "feature",
+    "name": "Infernal Apparition",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/hellhound/level-3/infernal-apparition.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/hellhound/level-3/infernal-apparition.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: hellhound\nlevel: \"3\"\nname: Infernal Apparition\nscc: mcdm.beastheart.v1/feature.companion.beastheart.hellhound.level-3/infernal-apparition\ntype: feature\n---\n\nWhenever the hellhound makes a strike against a creature while rampaging, they can cause a target who has P < AVERAGE to be [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of the target's next turn.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "hellhound",
+      "level": "3"
     }
   },
   {
@@ -914,6 +1174,20 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.lightbender.level-3/hit-and-run",
+    "kind": "feature",
+    "name": "Hit and Run",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/lightbender/level-3/hit-and-run.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/lightbender/level-3/hit-and-run.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: lightbender\nlevel: \"3\"\nname: Hit and Run\nscc: mcdm.beastheart.v1/feature.companion.beastheart.lightbender.level-3/hit-and-run\ntype: feature\n---\n\nWhenever the lightbender makes a strike against a creature while rampaging, the lightbender can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares and use the [Hide](scc.v1:mcdm.heroes.v1/skill.intrigue/hide) maneuver.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "lightbender",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.beastheart.v1/feature.companion.beastheart.panther.level-1/mighty-spring",
     "kind": "feature",
     "name": "Mighty Spring",
@@ -925,6 +1199,20 @@
       "class": "beastheart",
       "companion": "panther",
       "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.panther.level-3/cat-and-mouse",
+    "kind": "feature",
+    "name": "Cat and Mouse",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/panther/level-3/cat-and-mouse.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/panther/level-3/cat-and-mouse.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: panther\nlevel: \"3\"\nname: Cat and Mouse\nscc: mcdm.beastheart.v1/feature.companion.beastheart.panther.level-3/cat-and-mouse\ntype: feature\n---\n\nWhenever the panther makes a strike against a creature while rampaging, the panther can knock the target [prone](scc.v1:mcdm.heroes.v1/condition/prone).\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "panther",
+      "level": "3"
     }
   },
   {
@@ -942,6 +1230,20 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.spider.level-3/dripping-fangs",
+    "kind": "feature",
+    "name": "Dripping Fangs",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/spider/level-3/dripping-fangs.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/spider/level-3/dripping-fangs.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: spider\nlevel: \"3\"\nname: Dripping Fangs\nscc: mcdm.beastheart.v1/feature.companion.beastheart.spider.level-3/dripping-fangs\ntype: feature\n---\n\nWhenever the spider makes a strike against a creature while rampaging, the spider can deal extra poison damage equal to their Might score.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "spider",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.beastheart.v1/feature.companion.beastheart.sporeling.level-1/skulker",
     "kind": "feature",
     "name": "Skulker",
@@ -956,6 +1258,20 @@
     }
   },
   {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.sporeling.level-3/slowing-spores",
+    "kind": "feature",
+    "name": "Slowing Spores",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/sporeling/level-3/slowing-spores.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/sporeling/level-3/slowing-spores.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: sporeling\nlevel: \"3\"\nname: Slowing Spores\nscc: mcdm.beastheart.v1/feature.companion.beastheart.sporeling.level-3/slowing-spores\ntype: feature\n---\n\nWhenever the sporeling makes a strike against a creature while rampaging, the sporeling can cause the target to be [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) until the end of the target's next turn.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "sporeling",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.beastheart.v1/feature.companion.beastheart.wolf.level-1/retriever",
     "kind": "feature",
     "name": "Retriever",
@@ -967,6 +1283,20 @@
       "class": "beastheart",
       "companion": "wolf",
       "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.beastheart.v1/feature.companion.beastheart.wolf.level-3/my-what-big-teeth-you-have",
+    "kind": "feature",
+    "name": "My, What Big Teeth You Have",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/companion/beastheart/wolf/level-3/my-what-big-teeth-you-have.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/companion/beastheart/wolf/level-3/my-what-big-teeth-you-have.json",
+    "selection": "beastheart-level-one",
+    "text": "---\nclass: beastheart\ncompanion: wolf\nlevel: \"3\"\nname: My, What Big Teeth You Have\nscc: mcdm.beastheart.v1/feature.companion.beastheart.wolf.level-3/my-what-big-teeth-you-have\ntype: feature\n---\n\nWhenever the wolf makes a strike against a creature while rampaging, they can grab the target.\n",
+    "structured": {
+      "class": "beastheart",
+      "companion": "wolf",
+      "level": "3"
     }
   },
   {

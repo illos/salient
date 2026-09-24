@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2b96f587f742ffa0c2eabd9786cbf022685e3b61524a79711712c11e7fcb6f1d`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:abd5891b0486af71897d67a3ad46583999adef2f79a6e7dc412bf5ac62fdaab5`.
 
-Currently reachable compiled: 108; unchanged reachable compatibility: 1496; structurally supported but unavailable: 0.
+Currently reachable compiled: 108; unchanged reachable compatibility: 1509; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -102,6 +102,19 @@ Currently reachable compiled: 108; unchanged reachable compatibility: 1496; stru
 | The Pack Defends | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Thunderclap | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | You Let Me Get Too Close | hero-standalone | manual | legacy-compatibility | manual-section |
+| Burning Lash | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
+| Fetch! | hero-standalone | manual | legacy-compatibility | unaccounted-paragraph, manual-section |
+| Foe Bowling | hero-standalone | manual | legacy-compatibility | manual-section |
+| Howling Gale | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
+| Jump Scare | hero-standalone | manual | legacy-compatibility | manual-section |
+| Omnomnom | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section |
+| On You Like Your Shadow | hero-standalone | manual | legacy-compatibility | manual-section |
+| One Roar and We're Back In the Fight | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| This One's Yours | hero-standalone | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary |
+| Death and Violence | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
+| Head to Head | hero-standalone | manual | legacy-compatibility | manual-section |
+| Jaws of Death | hero-standalone | manual | legacy-compatibility | manual-section |
+| Shieldbreaker | hero-standalone | manual | legacy-compatibility | manual-section |
 | Petrify | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Backhand | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Gore | hero-standalone | manual | legacy-compatibility | grammar, manual-section |

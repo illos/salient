@@ -7,6 +7,7 @@ import { runHeroicResource } from './headless/heroic-resource.ts';
 import { runHeroicResourceCensor } from './headless/heroic-resource-censor.ts';
 import { runSummoner } from './headless/summoner.ts';
 import { runBeastheart } from './headless/beastheart.ts';
+import { runBeastheartLevelThree } from './headless/beastheart-level-three.ts';
 import { runElementalist } from './headless/elementalist.ts';
 import { runElementalistLevelThree } from './headless/elementalist-level-three.ts';
 import { runTalent } from './headless/talent.ts';
@@ -64,6 +65,7 @@ const cohorts = {
   talent: runTalent,
   'talent-level-three': runTalentLevelThree,
   beastheart: runBeastheart,
+  'beastheart-level-three': runBeastheartLevelThree,
   summoner: runSummoner,
   censor: runCensor,
   'censor-level-three': runCensorLevelThree,

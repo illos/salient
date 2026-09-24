@@ -62,11 +62,15 @@ export const SELECTIONS: ManifestSelection[] = [
       'class/beastheart.md',
       'feature/beastheart/level-1',
       'feature/ability/beastheart/level-1',
+      'feature/beastheart/level-2',
+      'feature/ability/beastheart/level-2',
+      'feature/beastheart/level-3',
+      'feature/ability/beastheart/level-3',
       'feature/companion/beastheart',
       'feature/ability/companion/beastheart',
     ],
     basis:
-      'docs/build/V106-beastheart-level-one.md#scope: Q-CHAR-14 supplemental editor inclusion; only level-one entries admitted.',
+      'docs/build/V137-beastheart-level-three.md#scope: Q-CHAR-14 supplemental editor inclusion; entries through level three admitted.',
   },
   {
     id: 'supporting-character-choices',
@@ -491,7 +495,7 @@ function loadFile(root: string, relativePath: string, selection: string): Loaded
     sourcebook === 'mcdm.beastheart.v1' &&
     (relativePath === 'class/beastheart.md' ||
       /^monster\/companion\/beastheart\/statblock\/[^/]+\.md$/.test(relativePath) ||
-      /^(?:feature\/(?:ability\/)?beastheart\/level-1|feature\/(?:ability\/)?companion\/beastheart\/[^/]+\/level-1)\/[^/]+\.md$/.test(
+      /^(?:feature\/(?:ability\/)?beastheart\/level-[123]|feature\/(?:ability\/)?companion\/beastheart\/[^/]+\/level-[13])\/[^/]+\.md$/.test(
         relativePath,
       ));
   const summonerLevelOne =
