@@ -58,3 +58,4 @@ remains deferred.
   checks the species level-3 feature; the engine test asserts companion Stamina and winded against the
   ledger; the fourteen companion advancement decisions have wizard labels; the Burning Lash spend text
   says who wields the second whip is a manual interpretation.
+- Review re-verification at `a813a58`: PASS; all five findings closed, nothing new in the diff.
