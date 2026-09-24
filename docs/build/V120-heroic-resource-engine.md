@@ -115,3 +115,7 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
     - level 4 has been supported since V108, so the unsupported probe now uses level 7;
     - V115 made the Melee-or-Ranged mode required, so Misdirecting Strike passes `mode: 'melee'`,
       the Swashbuckler witness's melee kit bonus.
+- TESTER `test-V120-63b47d7-2` PASS: `heroic-resource`, `shadow-level-two` and `shadow-level-three`
+  pass (seed 1732). With the `eb32e21` gate and `shadow-level-six`, V120 is accepted. Artifacts:
+  `test-artifacts/V120-63b47d7/`. QC1 PASS at `63b47d7`
+  (`../review-artifacts/2026-09-24-V120-QC1.md`). Ready for integration.

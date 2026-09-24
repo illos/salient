@@ -132,4 +132,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V119 | [Grabs and the common grab and stand-up maneuvers](V119-grab-lifecycle.md) | Merged (`3c02939`); cloud dev published; accepted TESTER results reused |
 | V117 | [Censor levels two and three](V117-censor-level-three.md) | Merged (`2dcbf97`); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V132 | [Troubadour levels two and three](V132-troubadour-level-three.md) | Merged (`c3f9e35`); cloud dev published with content reseed; accepted TESTER results reused |
-| V120 | [Shared heroic-resource generation engine (Shadow first)](V120-heroic-resource-engine.md) | In testing; independent review PASS |
+| V120 | [Shared heroic-resource generation engine (Shadow first)](V120-heroic-resource-engine.md) | Ready for integration; TESTER PASS at 63b47d7, independent review and QC1 PASS |
