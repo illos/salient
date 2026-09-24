@@ -168,6 +168,8 @@ export async function runSummonerLevelThree({
           );
         assert.equal(hero.summoner?.fixture?.stamina, expected.dominionFixture.stamina, name);
         assert.equal(hero.summoner?.strike?.damage, expected.summonerStrike.damage, name);
+        assert.equal(hero.summoner?.strike?.potency, expected.summonerStrike.potency, name);
+        assert.equal(hero.summoner?.strike?.distance, expected.summonerStrike.distanceValue, name);
         for (const [record, amount] of Object.entries(recordsOf(b.w))) {
           const granted = sheet.abilities.find(a => a.name === record);
           assert.ok(granted?.content?.text, `${name} ${record} source`);

@@ -78,3 +78,4 @@ shared API. Guided advancement remains deferred.
   link, the one-minion reading and Leader Formation vs the class kit. Non-blocking, fixed: the test
   checks every printed action's type and trigger against the ledger and refuses out-of-pool perk, ward
   and 7-essence values; the perk filter matches its one decision; the strike reuses the range value.
+- Review re-verification at `e09040c`: PASS. The cohort also reads back the kit strike potency and distance.
