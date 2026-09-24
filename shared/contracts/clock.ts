@@ -72,8 +72,18 @@ export type TimingClause =
       creatureId: CreatureId;
       occurrence: 'each' | 'next';
     }
-  /** The end of the affected creature's current turn if imposed during it, else its next turn end. Source: rule/combat/end-of-turn.md. */
-  | { scope: 'end-of-next-turn'; creatureId: CreatureId; imposedDuringTurnId?: TurnId }
+  /**
+   * The end of the affected creature's current turn if imposed during it, else its next turn end.
+   * Source: rule/combat/end-of-turn.md. V172: `excludeTurnId` is a turn whose end does not count,
+   * so the clause waits for the creature's following turn end: the owner-anchored "until the end of
+   * your next turn" used on the owner's own turn (Q-EFFECT-1, ruled B 2026-09-24).
+   */
+  | {
+      scope: 'end-of-next-turn';
+      creatureId: CreatureId;
+      imposedDuringTurnId?: TurnId;
+      excludeTurnId?: TurnId;
+    }
   /** A round boundary: each round, or a specific round only (for example surprise ends at the end of round 1). */
   | { scope: 'round'; boundary: 'round-start' | 'round-end'; round?: number }
   /** Combat lifecycle boundaries (Malice start grant, encounter-end loss). */

@@ -119,8 +119,11 @@ export function isDue(timing: TimingClause, event: BoundaryEvent): boolean {
       // registration is the one; the clause is retired once fired.
       // A captain or squad member shares the squad's turn (rule/monster/captain.md), so match any
       // participant like `creature-turn` does.
+      // V172: an owner-anchored "end of your next turn" used on the owner's own turn skips that
+      // turn's end (Q-EFFECT-1, ruled B), so the owner's following turn end is the one.
       return (
         event.kind === 'turn-end' &&
+        (timing.excludeTurnId === undefined || event.turn?.turnId !== timing.excludeTurnId) &&
         (event.turn?.creatureId === timing.creatureId ||
           event.turn?.participantIds.includes(timing.creatureId) === true)
       );

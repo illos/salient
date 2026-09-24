@@ -16,6 +16,7 @@ import {
   bindDuration,
   effectiveAggregate,
   lastingInstruction,
+  ownTurnToSkip,
   timingFor,
   type AggregateInput,
 } from '../../shared/resolve/lastingEffects.ts';
@@ -71,11 +72,16 @@ test('pattern admission: whole sections, bound durations and admitted table work
   expect(
     lastingInstruction(`Until the end of the encounter or until you are dying, ${NEMESIS_BODY}`),
   ).toMatchObject({ duration: { kind: 'encounter' }, endsWhen: ['owner-dying'] });
+  // V172, Q-EFFECT-1 ruled B (2026-09-24): elementalist/level-3/swarm-of-spirits.md's "Until the
+  // end of your next turn" binds to the owner.
+  expect(lastingInstruction(`Until the end of your next turn, ${NEMESIS_BODY}`)).toMatchObject({
+    duration: { kind: 'end-of-next-turn', anchor: 'owner' },
+    endsWhen: [],
+    text: NEMESIS_BODY,
+  });
   for (const text of [
     // A duration the engine does not bind.
     `Until the end of the day, ${NEMESIS_BODY}`,
-    // Q-EFFECT-1 is open: the owner's "end of your next turn" stays manual until the user rules.
-    `Until the end of your next turn, ${NEMESIS_BODY}`,
     // Changed or added table work.
     `Until the start of your next turn, ${NEMESIS_BODY.replace('your speed', 'twice your speed')}`,
     `${NEMESIS} Each enemy is frightened.`,
@@ -255,4 +261,35 @@ test('a lasting instruction resolves with the use, and tampering is refused', ()
     'manual',
   );
   expect(tampered(n => delete n.lasting)).toBe('manual');
+});
+
+test("V172: an owner-anchored end of the next turn skips only the owner's own current turn", () => {
+  // Q-EFFECT-1 ruled B (docs/rules-questions-for-user.md, 2026-09-24): "until the end of your next
+  // turn" used on your own turn lasts through your following turn; used off it, it ends at the end
+  // of your next turn, the first one after it is applied.
+  const owner = { kind: 'end-of-next-turn', anchor: 'owner' } as const;
+  const onOwnTurn = { turnId: 'turn-1', participantIds: ['null'] };
+  expect(ownTurnToSkip(owner, 'null', onOwnTurn)).toBe('turn-1');
+  expect(ownTurnToSkip(owner, 'null', { turnId: 'turn-2', participantIds: ['goblin'] })).toBe(
+    undefined,
+  );
+  expect(ownTurnToSkip(owner, 'null', undefined)).toBe(undefined);
+  // A squad's shared turn lists each participant (rule/monster/captain.md).
+  expect(
+    ownTurnToSkip(owner, 'minion', { turnId: 'turn-3', participantIds: ['a', 'minion'] }),
+  ).toBe('turn-3');
+  // The ruling is for the user-anchored phrase only: "their next turn" and "(EoT)" keep
+  // rule/combat/end-of-turn.md's first turn end after application.
+  expect(ownTurnToSkip({ kind: 'end-of-next-turn', anchor: 'subject' }, 'null', onOwnTurn)).toBe(
+    undefined,
+  );
+  expect(ownTurnToSkip({ kind: 'eot' }, 'null', onOwnTurn)).toBe(undefined);
+  expect(timingFor({ kind: 'end-of-next-turn', creatureId: 'null' }, 'turn-1')).toEqual({
+    timing: { scope: 'end-of-next-turn', creatureId: 'null', excludeTurnId: 'turn-1' },
+    work: 'expire-effect',
+  });
+  expect(timingFor({ kind: 'eot', creatureId: 'null' }, 'turn-1')).toEqual({
+    timing: { scope: 'end-of-next-turn', creatureId: 'null' },
+    work: 'expire-effect',
+  });
 });

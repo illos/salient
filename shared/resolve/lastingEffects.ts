@@ -46,9 +46,14 @@ const DURATIONS: readonly {
     duration: { kind: 'start-of-next-turn', anchor: 'owner' },
     endsWhen: [],
   },
-  // "the end of your next turn" (feature/ability/elementalist/level-3/swarm-of-spirits.md) is not
-  // bound: whether it lasts through the user's following turn when used on their own turn is open
-  // (Q-EFFECT-1, docs/rules-questions-for-user.md). Such sentences stay manual until the user rules.
+  // feature/ability/elementalist/level-3/swarm-of-spirits.md. Q-EFFECT-1 ruled B (2026-09-24,
+  // docs/rules-questions-for-user.md): used on the owner's own turn it lasts through the owner's
+  // following turn (`ownTurnToSkip`); used off it, it ends at the end of the owner's next turn.
+  {
+    phrase: 'the end of your next turn',
+    duration: { kind: 'end-of-next-turn', anchor: 'owner' },
+    endsWhen: [],
+  },
   // kit/battlemind.md (Unmooring); kit/shining-armor.md ("until the end of their next turn").
   {
     phrase: "the end of the target's next turn",
@@ -160,19 +165,39 @@ export function bindDuration(
 }
 
 /**
+ * The turn whose end an owner-anchored "until the end of your next turn" must skip, or undefined.
+ * Q-EFFECT-1, ruled B by the user on 2026-09-24 (docs/rules-questions-for-user.md): used on the
+ * owner's own turn, the effect lasts through the owner's following turn and ends at its end. Used
+ * off the owner's turn (a triggered action on another creature's turn, or between turns), the
+ * owner's next turn end is the first one after application, so nothing is skipped. The ruling is
+ * for the user-anchored phrase only: "(EoT)" keeps rule/combat/end-of-turn.md's carve-out ("or the
+ * end of their current turn if the effect was imposed on their current turn") and a subject anchor
+ * ("their next turn") keeps the first turn end after application.
+ */
+export function ownTurnToSkip(
+  printed: EffectDuration,
+  ownerId: string,
+  activeTurn: { turnId: string; participantIds: readonly string[] } | undefined,
+): string | undefined {
+  if (printed.kind !== 'end-of-next-turn' || printed.anchor !== 'owner' || !activeTurn)
+    return undefined;
+  return activeTurn.participantIds.includes(ownerId) ? activeTurn.turnId : undefined;
+}
+
+/**
  * The clock registration a bound duration needs, from the existing timings of
  * shared/contracts/clock.ts. `maintained` and `none` have no clock timing: maintenance ends through
  * resource.maintain (V148) and `none` ends by its own rules or `effect.end`.
  * - start of the next turn: the anchor's next `turn-start`, once;
  * - end of the next turn and EoT: the anchor's first `turn-end` after registration
- *   (rule/combat/end-of-turn.md). The grammar refuses an owner-anchored "end of your next turn"
- *   until Q-EFFECT-1 is ruled, so for an owner anchor this is only the fallback timing of a stored
- *   duration;
+ *   (rule/combat/end-of-turn.md), except a turn named by `skipTurnId` (`ownTurnToSkip`: the
+ *   owner-anchored "end of your next turn" used on the owner's own turn, Q-EFFECT-1 ruling B);
  * - the encounter: `combat-end`, once;
  * - save ends: a saving throw at the end of each of the subject's turns (rule/general/saving-throw.md).
  */
 export function timingFor(
   duration: BoundDuration,
+  skipTurnId?: string,
 ):
   | { timing: TimingClause; work: 'expire-effect' }
   | { timing: TimingClause; work: 'saving-throw'; creatureId: string }
@@ -191,7 +216,13 @@ export function timingFor(
     case 'end-of-next-turn':
     case 'eot':
       return {
-        timing: { scope: 'end-of-next-turn', creatureId: duration.creatureId },
+        timing: {
+          scope: 'end-of-next-turn',
+          creatureId: duration.creatureId,
+          ...(skipTurnId !== undefined && duration.kind === 'end-of-next-turn'
+            ? { excludeTurnId: skipTurnId }
+            : {}),
+        },
         work: 'expire-effect',
       };
     case 'encounter':

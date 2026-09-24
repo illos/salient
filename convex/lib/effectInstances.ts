@@ -9,7 +9,7 @@
  * unchanged.
  */
 import { ConvexError } from 'convex/values';
-import type { Id } from '../_generated/dataModel';
+import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx, QueryCtx } from '../_generated/server';
 import type {
   ConditionInstance,
@@ -17,11 +17,17 @@ import type {
   EffectParty,
   OwnedEffect,
 } from '../../shared/contracts/liveState';
-import { bindDuration, expiryReason, timingFor } from '../../shared/resolve/lastingEffects';
+import {
+  bindDuration,
+  expiryReason,
+  ownTurnToSkip,
+  timingFor,
+} from '../../shared/resolve/lastingEffects';
 import { journalPatch, type JournalScope } from './journal';
 import { appendEvent } from './events';
 import { registerWork, retireWork } from './clock';
 import { resolveHistoricalId } from './history';
+import { squadParticipantIds } from './squads';
 import type { ReadCtx } from './access';
 
 export type EffectHolder = { kind: 'character' | 'foe'; id: string };
@@ -108,6 +114,20 @@ export type EffectInput = Omit<
   EffectInstance,
   'status' | 'registrationIds' | 'duration' | 'endedReason' | 'endedEventId' | 'lastSave'
 >;
+
+/** The encounter's turn in progress and its participants (a squad's shared turn lists each). */
+async function activeTurnOf(ctx: MutationCtx, encounter: Doc<'encounters'> | null) {
+  if (!encounter?.activeTurnId) return undefined;
+  const turn = await ctx.db.get(encounter.activeTurnId);
+  if (!turn || turn.status !== 'active') return undefined;
+  return {
+    turnId: turn._id as string,
+    participantIds:
+      turn.actor.kind === 'squad'
+        ? await squadParticipantIds(ctx, turn.actor.id as Id<'squads'>)
+        : [turn.actor.id],
+  };
+}
 
 /**
  * Stores one instance, binds its duration to creatures and registers its clock work in a current
@@ -211,9 +231,6 @@ export async function applyEffectInstance(
     // ("the first time on a turn" is not reset by using the ability again).
     ...(superseded?.firings?.length ? { firings: superseded.firings } : {}),
   };
-  const timing = manualGroup ? undefined : timingFor(duration);
-  // A saving throw needs a creature that holds its own record (rule/general/saving-throw.md).
-  const schedulable = timing && (timing.work !== 'saving-throw' || holds(input.subject));
   const encounter = encounterId ? await ctx.db.get(encounterId) : null;
   const committed =
     encounter?.status === 'committed' &&
@@ -221,6 +238,16 @@ export async function applyEffectInstance(
     encounter.campaignId === scope.campaignId
       ? encounter
       : null;
+  // V172 (Q-EFFECT-1, ruled B): an owner-anchored "until the end of your next turn" applied during
+  // one of the owner's turns skips that turn's end.
+  const timing = manualGroup
+    ? undefined
+    : timingFor(
+        duration,
+        ownTurnToSkip(input.printedDuration, input.owner.id, await activeTurnOf(ctx, committed)),
+      );
+  // A saving throw needs a creature that holds its own record (rule/general/saving-throw.md).
+  const schedulable = timing && (timing.work !== 'saving-throw' || holds(input.subject));
   // V171: a watcher of turn boundaries fires at each of the watched creature's turn starts or ends
   // (clock boundaries). Registered before the duration's own work, so at a shared boundary the
   // watcher fires before the effect expires.
