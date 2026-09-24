@@ -66,7 +66,7 @@ test('V119: Grab, the size rule, Escape Grab with its bane, and Stand Up', async
   await position(t, f.campaignId, [10, 9]);
   await command(`@Thorn /ability use ability="Grab" targets=[@{foe:${goblin}}]`, true);
   const grabbed = await goblinLive();
-  expect(grabbed.conditions.grabbed).toBe(true);
+  expect(grabbed.conditions?.grabbed).toBe(true);
   expect(grabbed.conditionInstances).toMatchObject([
     { condition: 'grabbed', duration: 'none', status: 'active', sourceActorId: f.thornId },
   ]);
@@ -77,7 +77,7 @@ test('V119: Grab, the size rule, Escape Grab with its bane, and Stand Up', async
   const escape = await command(`@{foe:${goblin}} /ability use ability="Escape Grab"`);
   expect(await describe(escape.eventId)).toMatch(/Escape Grab takes a bane/);
   expect(await describe(escape.eventId)).toMatch(/no longer grabbed/);
-  expect((await goblinLive()).conditions.grabbed).toBe(false);
+  expect((await goblinLive()).conditions?.grabbed).toBe(false);
   await expect(command(`@{foe:${goblin}} /ability use ability="Escape Grab"`)).rejects.toThrow(
     /not grabbed/,
   );
