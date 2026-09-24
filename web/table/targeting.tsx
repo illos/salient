@@ -367,6 +367,22 @@ export function AbilityPanel({
           <RuleLink sourcePath={sheet.resourceForgo.sourcePath} label="Self-Taught" />
         </p>
       )}
+      {sheet.resourcePrayer && (
+        <p className="flex flex-wrap items-center gap-2 text-sm">
+          <span>
+            {sheet.resourcePrayer.prayNext
+              ? 'Praying before the next turn-start roll.'
+              : 'Not praying at the next turn start.'}
+          </span>
+          <Command
+            campaignId={campaignId}
+            text={`${ref(actor)} /resource pray value=${sheet.resourcePrayer.prayNext ? 'off' : 'on'}`}
+            label={sheet.resourcePrayer.prayNext ? 'Stop praying' : 'Pray'}
+            title={sheet.resourcePrayer.quote}
+          />
+          <RuleLink sourcePath={sheet.resourcePrayer.sourcePath} label="Piety prayer" />
+        </p>
+      )}
       {sheet.resourceTriggers.length > 0 && (
         <ul className="m-0 flex list-none flex-col gap-1 p-0" aria-label="Resource triggers">
           {sheet.resourceTriggers.map(trigger => (

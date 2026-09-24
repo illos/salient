@@ -146,3 +146,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V146 | [Talent clarity generation and strain damage](V146-talent-clarity-generation.md) | Merged (`7e9f731`, resource train 3); cloud dev published; gate and headless PASS at tip |
 | V142 | [Fury ferocity generation and observed damage triggers](V142-fury-ferocity-generation.md) | Merged (`7e9f731`, resource train 3); cloud dev published; gate and headless PASS at tip |
 | V144 | [Null discipline generation and the observed Malice trigger](V144-null-discipline-generation.md) | In progress (ENGINE2); depends on V142 |
+| V147 | [Conduit piety generation: prayer and domain triggers](V147-conduit-piety-generation.md) | Ready for testing after V142/V144; independent review PASS |

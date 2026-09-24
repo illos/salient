@@ -277,6 +277,14 @@ export async function voidEncounter(
         liveState: { ...live, forgoing: false, forgoNext: false, lastTurnGain: undefined },
       });
     }
+    // V147: a keep-mode void skips the encounter-end step; a declared prayer does not carry over.
+    for (const id of encounter.heroParticipantIds ?? []) {
+      const hero = await ctx.db.get(id);
+      if (!hero?.liveState?.prayNext) continue;
+      await journalPatch(ctx, scope, 'characters', id, {
+        liveState: { ...hero.liveState, prayNext: false },
+      });
+    }
     // V120 interpretation (Q-RES-1): voiding in keep mode discards the combat record without
     // finishing it, so the class encounter-end loss ("You lose any remaining insight at the end of
     // the encounter.") does not run. Say so for each generating hero; the table adjusts manually.

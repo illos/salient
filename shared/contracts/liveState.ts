@@ -125,6 +125,8 @@ export interface HeroLiveState {
     /** The operation whose turn start wrote the gain (its journal rows carry this id). */
     eventId: string;
   };
+  /** V147: pray before the next turn-start resource roll (the Conduit's piety prayer). */
+  prayNext?: boolean;
 }
 
 /** One claimed class resource trigger and the window (round or turn) its limit applies to. */

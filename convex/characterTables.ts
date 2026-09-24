@@ -97,6 +97,8 @@ export const heroLiveValidator = v.object({
       eventId: v.string(),
     }),
   ),
+  /** V147: the hero prays before their next turn-start resource roll (Conduit). */
+  prayNext: v.optional(v.boolean()),
   /** V120: table-confirmed class resource triggers claimed in the current encounter. */
   resourceClaims: v.optional(
     v.array(

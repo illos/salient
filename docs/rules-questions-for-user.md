@@ -1068,3 +1068,46 @@ Alternatives: (b) count enhancements; (c) count any Malice spend.
 
 Recommendation: keep reading A automatic and B and C as table claims, since only A is unambiguously
 "an ability that costs Malice".
+
+## Q-RES-6: does temporary Stamina absorb the Conduit's angered-gods damage?
+
+`feature/conduit/level-1/piety.md`: on a prayer roll of 1, "You take psychic damage equal to 1d6 +
+your level, which can't be reduced in any way."
+
+Current behaviour (V147, labelled interpretation):
+- Immunity does not apply.
+- Temporary Stamina still decreases first, as for any damage taken
+  (`rule/health/temporary-stamina.md`). Absorbing damage is not reducing it.
+
+Alternative: the damage bypasses temporary Stamina too.
+
+Recommendation: keep the current behaviour.
+
+## Q-RES-9: the Death domain's two "first time" clauses
+
+`feature/conduit/level-1/domain-piety-and-effects.md`: "You gain 2 piety the first time in an
+encounter that a creature within 10 squares who isn't a minion is reduced to 0 Stamina, or the first
+time in an encounter that a solo creature within 10 squares becomes winded."
+
+Current behaviour (V147, labelled interpretation): two separate claims, each once per encounter. The
+sentence repeats "the first time in an encounter" for each event.
+
+Alternative: one grant for whichever happens first.
+
+Recommendation: keep two, following the repeated clause. Compare the Fury's single "The first time
+you become winded or are dying" (Q-RES-2).
+
+## Q-RES-11: what does the Conduit's Blessed Domain add to?
+
+`feature/conduit/level-4/blessed-domain.md`: "Whenever you gain piety from a domain effect, you gain 1
+additional piety."
+
+Current behaviour (V147, labelled interpretation): each domain piety trigger gives 3 instead of 2 from
+level 4.
+
+Alternatives:
+- **(a)** Literally, a "domain effect" is the prayer effect, which grants no piety, so the feature
+  does nothing.
+- **(b)** Add 1 to the prayer's roll-of-3 outcome, which activates a domain effect.
+
+Recommendation: keep the current behaviour, the only reading that has an effect on domain piety.

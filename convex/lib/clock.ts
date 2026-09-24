@@ -378,6 +378,9 @@ async function fireHeroicResource(
   let clause: { sourcePath: string; quote: string };
   let detail: string;
   let dice: DieResult[] | undefined;
+  /** V147: an unreducible psychic damage roll from an angered prayer, applied after the gain. */
+  let prayerDamage: { amount: number; die: DieResult } | undefined;
+  const praying = step === 'turn-start-gain' && !!profile.prayer && live.prayNext === true;
   if (step === 'combat-start-grant') {
     clause = profile.combatStart;
     after = before + live.victories;
@@ -399,6 +402,31 @@ async function fireHeroicResource(
       const rolled = accepted.dice[0]!.value;
       after = before + rolled;
       detail = `turn-start gain 1d${profile.turnStart.sides} = ${rolled}`;
+      if (praying) {
+        // feature/conduit/level-1/piety.md: "If the roll is a 1, you gain 1 additional piety but
+        // anger the gods! You take psychic damage equal to 1d6 + your level, which can't be reduced
+        // in any way. If the roll is a 2, you gain 1 additional piety. If the roll is a 3, you gain
+        // 2 additional piety and can activate a domain effect of your choice".
+        const extra = rolled === 3 ? 2 : 1;
+        after += extra;
+        detail += `; prayed: +${extra}`;
+        if (rolled === 1) {
+          const damageRoll = await rollDice(
+            ctx,
+            firing.encounter.campaignId,
+            `hrp_${firing.boundaryEventId}_${firing.registration._id}`,
+            [{ id: 'anger', sides: 6 }],
+            null,
+          );
+          const level = baselineOf(hero.derivedBaseline)!.level.value;
+          prayerDamage = { amount: damageRoll.dice[0]!.value + level, die: damageRoll.dice[0]! };
+          dice = [...dice, damageRoll.dice[0]!];
+          detail += `, the gods are angered: psychic damage 1d6 (${damageRoll.dice[0]!.value}) + level ${level} = ${prayerDamage.amount}, which can't be reduced`;
+        }
+        if (rolled === 3)
+          detail +=
+            ', and a domain prayer effect of your choice can be activated (resolve it manually)';
+      }
     }
   } else {
     clause = profile.encounterEnd;
@@ -413,7 +441,13 @@ async function fireHeroicResource(
         ...live,
         heroicResource: { ...pool, current: after },
         ...(step === 'encounter-end-loss'
-          ? { resourceClaims: [], forgoNext: false, forgoing: false, lastTurnGain: undefined }
+          ? {
+              resourceClaims: [],
+              forgoNext: false,
+              forgoing: false,
+              lastTurnGain: undefined,
+              prayNext: false,
+            }
           : {}),
         ...(windowEnded ? { forgoing: false } : {}),
         ...(step === 'turn-start-gain' && firing.event.turn
@@ -427,8 +461,32 @@ async function fireHeroicResource(
               },
             }
           : {}),
+        ...(praying ? { prayNext: false } : {}),
       },
     });
+  if (prayerDamage) {
+    // Q-RES-6 (labelled interpretation): "can't be reduced in any way" removes immunity; temporary
+    // Stamina still absorbs it first, because it takes damage rather than reducing it
+    // (rule/health/temporary-stamina.md).
+    const record = {
+      actor: { kind: 'character' as const, id: hero._id, name: hero.authored.name },
+      character: (await ctx.db.get(hero._id))!,
+    };
+    const facts = damageTargetFacts(record);
+    if (!('missing' in facts)) {
+      const application = applyDamage(
+        { ...facts.facts, immunities: [] },
+        {
+          targetId: hero._id,
+          amount: prayerDamage.amount,
+          damageType: 'psychic',
+          causeLabel: 'angered gods',
+        },
+      );
+      await writeDamage(ctx, firing.scope, record, application);
+      detail += ` (Stamina ${application.staminaBefore} → ${application.staminaAfter})`;
+    }
+  }
   return {
     kind: 'clock.heroic-resource',
     description: `${hero.authored.name}'s ${pool.name}: ${detail}; ${before} → ${after}.`,
@@ -442,6 +500,10 @@ async function fireHeroicResource(
       after,
       sourcePath: clause.sourcePath,
       quote: clause.quote,
+      ...(praying
+        ? { prayer: { sourcePath: profile.prayer!.sourcePath, quote: profile.prayer!.quote } }
+        : {}),
+      ...(prayerDamage ? { prayerDamage: prayerDamage.amount } : {}),
     },
     ...(dice ? { dice } : {}),
   };

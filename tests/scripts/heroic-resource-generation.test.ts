@@ -9,6 +9,7 @@ import {
   claimWindow,
   generationProfile,
   triggerAmount,
+  triggersFor,
 } from '../../shared/resolve/heroicResourceGeneration.ts';
 
 const plain = (markdown: string) =>
@@ -21,6 +22,7 @@ test('every profile clause is quoted verbatim from its pinned source', () => {
       profile.turnStart,
       profile.encounterEnd,
       ...(profile.turnEndStrain ? [profile.turnEndStrain] : []),
+      ...(profile.prayer ? [profile.prayer] : []),
       ...profile.triggers,
       ...profile.triggers.flatMap(trigger => trigger.levelAmounts ?? []),
     ];
@@ -204,4 +206,42 @@ test('the Null profile matches its source amounts', () => {
   });
   expect(triggerAmount(nullProfile.triggers[0]!, 4).amount).toBe(2);
   expect(triggerAmount(nullProfile.triggers[1]!, 6).amount).toBe(1);
+});
+
+// feature/conduit/level-1/piety.md and domain-piety-and-effects.md; level-4/blessed-domain.md
+// ("1 additional piety"); level-7/faithfuls-reward.md (turn-start 1d3 + 1), so levels 1–6.
+test('the Conduit profile matches its source amounts and binds triggers to domains', () => {
+  const conduit = GENERATION_PROFILES.find(p => p.className === 'Conduit')!;
+  expect(conduit).toMatchObject({
+    resource: 'piety',
+    verifiedThroughLevel: 6,
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'dice', sides: 3 },
+    encounterEnd: { kind: 'lose' },
+    prayer: {},
+  });
+  expect(conduit.triggers.map(t => t.subclass)).toEqual([
+    'Creation',
+    'Death',
+    'Death',
+    'Fate',
+    'Knowledge',
+    'Life',
+    'Love',
+    'Nature',
+    'Protection',
+    'Storm',
+    'Sun',
+    'Trickery',
+    'War',
+  ]);
+  for (const trigger of conduit.triggers) {
+    expect([trigger.amount, trigger.limit], trigger.id).toEqual([2, 'encounter']);
+    expect(triggerAmount(trigger, 4).amount, trigger.id).toBe(3);
+  }
+  const baseline = { subclass: { value: 'Creation / Life' } } as Parameters<typeof triggersFor>[1];
+  expect(triggersFor(conduit, baseline).map(t => t.id)).toEqual([
+    'conduit-creation',
+    'conduit-life',
+  ]);
 });

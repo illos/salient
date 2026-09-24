@@ -14,6 +14,7 @@ import {
   claimWindow,
   generationProfile,
   triggerAmount,
+  triggersFor,
   type GenerationProfile,
   type ResourceTrigger,
 } from '../../shared/resolve/heroicResourceGeneration';
@@ -272,7 +273,7 @@ export async function observeHeroDamage(
   const profile = generationProfile(baseline);
   if (!character?.liveState || !baseline || !profile || character.campaignId !== scope.campaignId)
     return;
-  const due = profile.triggers.filter(trigger =>
+  const due = triggersFor(profile, baseline).filter(trigger =>
     damageSatisfies(trigger.observe, baseline.windedValue.value, before, after),
   );
   if (!due.length) return;
@@ -367,7 +368,9 @@ export async function observeMaliceAbility(ctx: MutationCtx, scope: JournalScope
     const character = await ctx.db.get(characterId);
     const profile = generationProfile(baselineOf(character?.derivedBaseline));
     if (!character?.liveState || !profile) continue;
-    for (const trigger of profile.triggers.filter(t => t.observe === 'malice-ability'))
+    for (const trigger of triggersFor(profile, baselineOf(character.derivedBaseline)).filter(
+      t => t.observe === 'malice-ability',
+    ))
       await applyObserved(ctx, scope, characterId, profile, trigger, encounter, scope.eventId);
   }
 }

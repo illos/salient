@@ -46,7 +46,7 @@ export const CONDUIT_ACTIONS: CensorAction[] = [
       sourcePath: 'en/unified/md/feature/conduit/level-1/piety.md',
       actionType: 'No action',
       activationCondition:
-        'Before your start-of-turn d3 Piety roll in combat: resolve the source extra Piety, possible irreducible damage and domain effect; resource generation is manual. Resolve the stated effects manually.',
+        'Before your start-of-turn d3 Piety roll in combat. Levels 1–6: declare it with /resource pray before your turn starts; the app adds the extra Piety and applies the angered-gods psychic damage on a 1, and on a 3 you resolve the chosen domain effect manually. Domain piety: claim your two domains once per encounter (/resource claim). Level 7+: resolve the stated effects manually.',
     },
     {
       name: 'Prayer and Ward: Change',

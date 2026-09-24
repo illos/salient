@@ -48,6 +48,11 @@ export interface ResourceTrigger extends SourcedClause {
   observe?: 'damage-taken' | 'winded-or-dying' | 'malice-ability';
   /** Why the table confirms it: what the app cannot observe. */
   confirmation: string;
+  /**
+   * Only for a hero whose evaluated subclass includes this value (a Conduit domain; the subclass
+   * reads "Creation / Life").
+   */
+  subclass?: string;
 }
 
 export interface GenerationProfile {
@@ -77,6 +82,11 @@ export interface GenerationProfile {
     /** Features the strain damage can set off; named in the log when the hero has one. */
     notedBy?: { name: string; sourcePath: string }[];
   };
+  /**
+   * An optional prayer declared before the turn-start roll (the Conduit): 1 adds 1 and deals
+   * 1d6 + level unreducible psychic damage, 2 adds 1, 3 adds 2 and allows a domain prayer effect.
+   */
+  prayer?: SourcedClause;
   triggers: ResourceTrigger[];
 }
 
@@ -98,6 +108,22 @@ const TALENT_CLARITY =
 const FURY_FEROCITY = 'vendor/steel-compendium/en/unified/md/feature/fury/level-1/ferocity.md';
 
 const NULL_DISCIPLINE = 'vendor/steel-compendium/en/unified/md/feature/null/level-1/discipline.md';
+
+const CONDUIT_PIETY = 'vendor/steel-compendium/en/unified/md/feature/conduit/level-1/piety.md';
+const CONDUIT_DOMAINS =
+  'vendor/steel-compendium/en/unified/md/feature/conduit/level-1/domain-piety-and-effects.md';
+/**
+ * feature/conduit/level-4/blessed-domain.md: "Whenever you gain piety from a domain effect, you gain
+ * 1 additional piety." Labelled interpretation (Q-RES-11): it raises each domain piety trigger to 3.
+ * Read literally, "domain effect" is the prayer effect, which grants no piety, so it would do
+ * nothing. The other alternative adds 1 to the prayer's roll-of-3 outcome.
+ */
+const BLESSED_DOMAIN = {
+  fromLevel: 4,
+  amount: 3,
+  sourcePath: 'vendor/steel-compendium/en/unified/md/feature/conduit/level-4/blessed-domain.md',
+  quote: 'Whenever you gain piety from a domain effect, you gain 1 additional piety.',
+};
 
 /** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
@@ -542,6 +568,211 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
       },
     ],
   },
+  {
+    className: 'Conduit',
+    // feature/conduit/level-7/faithfuls-reward.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'piety',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: CONDUIT_PIETY,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain piety equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'dice',
+      sides: 3,
+      sourcePath: CONDUIT_PIETY,
+      quote: 'At the start of each of your turns during combat, you gain 1d3 piety.',
+    },
+    prayer: {
+      sourcePath: CONDUIT_PIETY,
+      quote:
+        'Before you roll to gain piety at the start of your turn, you can pray (no action required).',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: CONDUIT_PIETY,
+      quote: 'You lose any remaining piety at the end of the encounter.',
+    },
+    // feature/conduit/level-1/domain-piety-and-effects.md: each domain's piety, first time in an
+    // encounter, for the hero's two domains only.
+    triggers: [
+      {
+        id: 'conduit-creation',
+        label: 'A creature within 10 squares used an area ability',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Creation',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that a creature within 10 squares uses an area ability.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-death-zero',
+        label: 'A non-minion within 10 squares was reduced to 0 Stamina',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Death',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          "the first time in an encounter that a creature within 10 squares who isn't a minion is reduced to 0 Stamina",
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-death-solo-winded',
+        label: 'A solo creature within 10 squares became winded',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Death',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'the first time in an encounter that a solo creature within 10 squares becomes winded',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-fate',
+        label: 'An ally got tier 3 or an enemy got tier 1 within 10 squares',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Fate',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that an ally within 10 squares obtains a tier 3 outcome on a power roll, or an enemy within 10 squares obtains a tier 1 outcome on a power roll.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-knowledge',
+        label: 'The Director spent Malice',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        observe: 'malice-ability',
+        subclass: 'Knowledge',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that the Director spends Malice (see *Draw Steel: Monsters*).',
+        confirmation:
+          "Applied automatically when a creature ability's own Malice cost is paid; claim it for other Malice spending.",
+      },
+      {
+        id: 'conduit-life',
+        label: 'A creature within 10 squares regained Stamina',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Life',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that a creature within 10 squares regains Stamina.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-love',
+        label: 'You or an ally within 10 squares used Aid Attack or an ally-targeting ability',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Love',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that you or any ally within 10 squares uses the Aid Attack maneuver or an ability that targets an ally.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-nature',
+        label:
+          'You or a creature within 10 squares took acid, cold, fire, lightning, poison or sonic damage',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Nature',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that you or a creature within 10 squares takes acid, cold, fire, lightning, poison, or sonic damage.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-protection',
+        label:
+          'You or an ally within 10 squares gained temporary Stamina or used a protective triggered action',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Protection',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          "You gain 2 piety the first time in an encounter that you or any ally within 10 squares gains temporary Stamina, or uses a triggered action to reduce incoming damage or to impose a bane or double bane on an enemy's power roll.",
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-storm',
+        label: 'An enemy within 10 squares was force moved',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Storm',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that an enemy within 10 squares is force moved.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-sun',
+        label: 'An enemy within 10 squares took fire or holy damage',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Sun',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that an enemy within 10 squares takes fire or holy damage.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-trickery',
+        label: 'You or a creature within 10 squares took the Aid Attack or Hide maneuver',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'Trickery',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that you or a creature within 10 squares takes the Aid Attack or Hide maneuver.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+      {
+        id: 'conduit-war',
+        label:
+          'You or a creature within 10 squares took more than 10 + your level damage in one turn',
+        amount: 2,
+        levelAmounts: [BLESSED_DOMAIN],
+        limit: 'encounter',
+        subclass: 'War',
+        sourcePath: CONDUIT_DOMAINS,
+        quote:
+          'You gain 2 piety the first time in an encounter that you or a creature within 10 squares takes damage greater than 10 + your level in a single turn.',
+        confirmation:
+          'Positions and this event are not tracked; the table confirms it (within 10 squares where the text says so).',
+      },
+    ],
+  },
 ];
 
 /** complication/self-taught.md: the forgo option, keyed by the complication feature's name. */
@@ -571,6 +802,17 @@ export function generationProfile(
   return profile && level !== undefined && level >= 1 && level <= profile.verifiedThroughLevel
     ? profile
     : undefined;
+}
+
+/** The profile's triggers that apply to this hero (subclass-bound ones only for that subclass). */
+export function triggersFor(
+  profile: GenerationProfile,
+  baseline: Pick<DerivedBaseline, 'subclass'> | null | undefined,
+): ResourceTrigger[] {
+  const subclasses = (baseline?.subclass?.value ?? '').split(' / ').map(part => part.trim());
+  return profile.triggers.filter(
+    trigger => !trigger.subclass || subclasses.includes(trigger.subclass),
+  );
 }
 
 /** A trigger's amount and the clause it comes from at the hero's level. */

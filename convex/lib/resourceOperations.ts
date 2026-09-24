@@ -16,6 +16,7 @@ import {
   SELF_TAUGHT,
   canForgo,
   generationProfile,
+  triggersFor,
   type ResourceTrigger,
 } from '../../shared/resolve/heroicResourceGeneration';
 import { baselineOf, requireHeroLive } from './characterBuild';
@@ -52,7 +53,7 @@ export async function resourceTriggers(
   const live = character.liveState;
   if (!profile || !live) return [];
   const encounter = await committedEncounter(ctx, campaign);
-  return profile.triggers.map(trigger => {
+  return triggersFor(profile, baselineOf(character.derivedBaseline)).map(trigger => {
     const state = claimState(character, profile, trigger, encounter);
     return {
       id: trigger.id,
@@ -90,13 +91,12 @@ const resourceClaim: OperationDefinition = {
       throw new ConvexError('That hero is not at this table.');
     const live = requireHeroLive(character);
     const profile = generationProfile(baselineOf(character.derivedBaseline));
-    const trigger = profile?.triggers.find(t => t.id === String(args.trigger));
+    const available = profile ? triggersFor(profile, baselineOf(character.derivedBaseline)) : [];
+    const trigger = available.find(t => t.id === String(args.trigger));
     if (!profile || !trigger)
       throw new ConvexError(
         `${character.authored.name} has no heroic-resource trigger "${String(args.trigger)}"${
-          profile?.triggers.length
-            ? `; available: ${profile.triggers.map(t => t.id).join(', ')}`
-            : ''
+          available.length ? `; available: ${available.map(t => t.id).join(', ')}` : ''
         }.`,
       );
     const encounter = await committedEncounter(ctx, context.campaign);
@@ -311,4 +311,74 @@ export function resourceForgoState(character: Doc<'characters'>) {
   };
 }
 
-export const resourceOperations: OperationDefinition[] = [resourceClaim, resourceForgo];
+/** V147: the hero's turn-start prayer state for `abilities:sheet`, or null without one. */
+export function resourcePrayer(character: Doc<'characters'>) {
+  const profile = generationProfile(baselineOf(character.derivedBaseline));
+  if (!profile?.prayer || !character.liveState) return null;
+  return {
+    prayNext: character.liveState.prayNext ?? false,
+    sourcePath: profile.prayer.sourcePath,
+    quote: profile.prayer.quote,
+  };
+}
+
+/**
+ * V147: declare (or withdraw) a prayer for the hero's next turn-start roll. "Before you roll to gain
+ * piety at the start of your turn, you can pray (no action required)."
+ * (feature/conduit/level-1/piety.md). The clock resolves it at that turn start and clears it.
+ */
+const resourcePray: OperationDefinition = {
+  id: 'resource.pray',
+  family: 'resource',
+  verb: 'pray',
+  title: 'Pray before the next turn-start roll',
+  description:
+    "Declare that the hero prays before their next turn-start heroic-resource roll (the Conduit's piety prayer), or withdraw it. The clock applies the prayer's outcome at that turn start.",
+  args: { value: v.optional(v.string()) },
+  argDescriptions: { value: '`on` (default) to pray at the next turn start, `off` to withdraw.' },
+  roles: ['director', 'player'],
+  session: 'running',
+  actor: 'required',
+  execute: async (ctx, { context, actor, args }): Promise<Outcome> => {
+    if (actor!.kind !== 'character')
+      throw new ConvexError(`${actor!.name} is not a hero; only heroes have heroic resources.`);
+    const character = await ctx.db.get(actor!.id as Id<'characters'>);
+    if (!character || character.campaignId !== context.campaign._id)
+      throw new ConvexError('That hero is not at this table.');
+    const live = requireHeroLive(character);
+    const profile = generationProfile(baselineOf(character.derivedBaseline));
+    if (!profile?.prayer)
+      throw new ConvexError(`${character.authored.name} has no turn-start prayer.`);
+    const value = String(args.value ?? 'on').toLowerCase();
+    if (value !== 'on' && value !== 'off') throw new ConvexError('"value" must be on or off.');
+    const on = value === 'on';
+    if ((live.prayNext ?? false) === on)
+      throw new ConvexError(
+        `${character.authored.name} ${on ? 'already prays' : 'is not praying'} at the next turn start.`,
+      );
+    return {
+      kind: 'resource.prayer',
+      description: on
+        ? `${character.authored.name} will pray before the next turn-start ${live.heroicResource.name} roll.`
+        : `${character.authored.name} will not pray at the next turn start.`,
+      data: {
+        characterId: character._id,
+        prayNext: on,
+        sourcePath: profile.prayer.sourcePath,
+        quote: profile.prayer.quote,
+      },
+      commit: async (mctx, scope) => {
+        const current = (await mctx.db.get(character._id))!;
+        await journalPatch(mctx, scope, 'characters', character._id, {
+          liveState: { ...current.liveState!, prayNext: on },
+        });
+      },
+    };
+  },
+};
+
+export const resourceOperations: OperationDefinition[] = [
+  resourceClaim,
+  resourceForgo,
+  resourcePray,
+];
