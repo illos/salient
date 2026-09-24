@@ -1,7 +1,7 @@
 # V167: Respite on the table
 
 Rules review: not required (presentation over V165/V166 operations). Depends on: V165, V166.
-User review required (UI).
+No user gate: the user reviews after merge (2026-09-24).
 
 ## Goal
 
@@ -24,7 +24,7 @@ The respite visible and usable at the table ([respite mode](../table-spec.md#res
 
 1. `tests/app/respite.test.ts`: roster readback of resting heroes and activities; kit options for the
    Thorn fixture (current Mountain, Panther offered).
-2. User review of the table. Table browser tests are under moratorium, so review is on a running app.
+2. Test-Deploy: gate, then the `respite` journey. Table browser tests are under moratorium.
 
 ## Work log
 
