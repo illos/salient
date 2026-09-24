@@ -167,7 +167,7 @@
             "Each target gains 2 surges.",
             "Each target gains 3 surges."
           ],
-          "derivation": "Ranged maneuver, Ranged 10, three allies, cost 3 Focus; Power Roll + Reason (Tactician R 2, class/tactician.md Basics). Tiers print only the surge sentence: no damage. Surge gains stay table work (resource/surge.md; executed surge gains are out of V154 scope), so no target's surges change."
+          "derivation": "Ranged maneuver, Ranged 10, three allies, cost 3 Focus; Power Roll + Reason (Tactician R 2, class/tactician.md Basics). Tiers print only the surge sentence: no damage. Surge gains stay table work (rule/resource/surge.md; executed surge gains are out of V154 scope), so no target's surges change."
         }
       ]
     },

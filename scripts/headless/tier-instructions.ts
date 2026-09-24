@@ -243,7 +243,13 @@ export async function runTierInstructions({ actors: { director }, run, runId }: 
             assert.equal(push.printed, a.pushByTier![tier - 1], `Power Chord target ${i} push`);
             assert.equal(push.movement, undefined, 'ordinary push');
             assert.equal(push.vertical, undefined, 'not vertical');
-            assert.equal(push.status, 'instruction', 'forced movement is an instruction');
+            // Live movement facts leave trait and modifier coverage unknown (V72), so the push may
+            // be fact-needed; with no damage in the tier it never waits on damage.
+            assert.ok(['instruction', 'fact-needed'].includes(push.status), 'push status');
+            assert.ok(
+              !push.requirements.some(r => r.startsWith('damage:')),
+              'a damage-free push waits on no damage',
+            );
             assert.equal(saved.targets[i]!.outcome.damage?.rolledDamage ?? 0, 0, 'no damage');
           }
           assert.deepEqual(await lives(targets), before, 'Power Chord changes no target state');
