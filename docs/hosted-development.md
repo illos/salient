@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V167 respite table controls and V169 Rapid Processing
+## Current release — V164 level-up screen
+
+Backend/frontend source `6686fbee51df636ba590546088e457288678fe4f` published on 2026-09-24 as
+Worker `0b1c92f9-495a-4ad9-bcfc-9d43a57191f8`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V164](build/V164-level-up-screen.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V167 respite table controls and V169 Rapid Processing
 
 Backend/frontend source `59b890c21fd7b8e1d53ce7d70478873502b82b7f` published on 2026-09-24 as
 Worker `089b650b-6979-4377-9527-34bf19876d72`. Backend and schema validation, the hosted build and the upload succeeded. Content

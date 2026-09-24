@@ -44,3 +44,8 @@ The confirmed first pass for taking a level-up ([level-up policy](../character-w
   Noted, not changed: "New at level N" is a by-name UI diff, and the "before" maxima are re-evaluated
   rather than read from the saved baseline. Both are presentation only.
 
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `6686fbe` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `0b1c92f9-495a-4ad9-bcfc-9d43a57191f8`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V164-release-6686fbe`.

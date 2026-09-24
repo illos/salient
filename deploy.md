@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V164 | `6686fbe` | Merged; backend/frontend published; accepted gates reused | complete |
 | V169 | `59b890c` | Merged with V167 and V169 stacked; backend/frontend published; gate and headless at tip | complete |
 | V167 | `59b890c` | Merged with V167 and V169 stacked; backend/frontend published; gate and headless at tip | complete |
 | V158 | `6632e95` | Merged with V157 and V158 stacked; backend/frontend published; gate and headless at tip | complete |
@@ -764,3 +765,16 @@ test and deploy thread fast-forwarded main to `59b890c21fd7b8e1d53ce7d7047887350
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V169-release-59b890c`.
+
+### V164 level-up screen publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed tip `6686fbee51df636ba590546088e457288678fe4f` into main.
+- Cherry-picked onto main `938d62e`; full gate at the tip (291 s, 443 engine and 782 app tests).
+- `level-up`, `lifecycle` and `all` (29/29) journeys at the tip.
+- Independent rules review passed after its review fixes. The user dropped the UI capture gate; the browser capture stops at the perk target step (fixed in V181).
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `0b1c92f9-495a-4ad9-bcfc-9d43a57191f8`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V164-release-6686fbe`.
