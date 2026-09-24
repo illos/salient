@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import pinned from './fixtures/v138-summoner-three-expected.json' with { type: 'json' };
+import shadowSix from './fixtures/v108-shadow-six-expected.json' with { type: 'json' };
 import { levelThreeBuilds } from './fixtures/level-three-builds.ts';
 import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { levelUpTarget } from '../shared/content/character-support.ts';
@@ -49,5 +50,28 @@ test('every class levels 1 → 2 → 3 by adding only each level’s new decisio
     // Level four is Shadow only (character-support.ts); every other class stops at three.
     const four = levelUpTarget(3, current);
     assert.equal(four.reason === null, build.className === 'Shadow', build.className);
+  }
+});
+
+// Shadow supports levels 4–6 (character-support.ts): its level-6 ledger builds split level by level.
+test('Shadow levels 1 → 4–6, one level per level-up', () => {
+  for (const witness of shadowSix.witnesses) {
+    const full = witness.selections as unknown as Selections;
+    let current = only(full, ids(1));
+    assert.equal(evaluate(current, 1).status, 'complete', `${witness.id} level 1`);
+    const top = witness.level;
+    for (let level = 2; level <= top; level++) {
+      assert.deepEqual(levelUpTarget(level - 1, current), { targetLevel: level, reason: null });
+      const added = only(full, ids(level));
+      for (const id of Object.keys(current)) delete added[id];
+      current = { ...current, ...added };
+      assert.equal(evaluate(current, level).status, 'complete', `${witness.id} level ${level}`);
+    }
+    assert.equal(
+      evaluate(current, top).baseline!.staminaMaximum.value,
+      witness.expected.staminaMaximum,
+      witness.id,
+    );
+    assert.equal(levelUpTarget(top, current).reason === null, top < 6, witness.id);
   }
 });

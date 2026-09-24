@@ -24,7 +24,7 @@ const evaluate = (selections: Record<string, SelectionValue>, level: number) => 
   );
 };
 
-test('V45 level-two Reaver/Stormwight definitions (V114) do not make guided advancement available', () => {
+test('V45 level-two Reaver/Stormwight definitions (V114) stay incomplete without their choices', () => {
   for (const subclass of ['Reaver', 'Stormwight']) {
     const selections = { ...fury.selections, 'class.fury.aspect': subclass };
     // Even a future level-one option expansion cannot accidentally authorize its level-two build.

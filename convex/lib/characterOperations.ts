@@ -342,10 +342,67 @@ const grantLevelUp: OperationDefinition = {
   },
 };
 
+/**
+ * V163 `/character withdraw-level-up`: the Director's correction for a mistaken grant. Removes one
+ * pending (not yet taken) level-up from each chosen hero; a level already taken is not affected.
+ */
+const withdrawLevelUp: OperationDefinition = {
+  id: 'character.withdraw-level-up',
+  family: 'character',
+  verb: 'withdraw-level-up',
+  title: 'Withdraw a pending level-up',
+  description:
+    'Director: remove one granted level-up that has not been taken yet from each chosen hero, to correct a mistaken grant. Levels already taken are unchanged.',
+  args: { characters: v.array(characterArg) },
+  argDescriptions: {
+    characters: 'Heroes to withdraw a pending level-up from, as @{character:id}.',
+  },
+  roles: ['director'],
+  session: 'none',
+  actor: 'none',
+  execute: async (ctx, { context, args }) => {
+    const heroes = await Promise.all(
+      (args.characters as unknown[]).map(reference => loadCharacter(ctx, reference)),
+    );
+    if (!heroes.length) throw new ConvexError('Name at least one hero.');
+    if (new Set(heroes.map(hero => hero._id)).size !== heroes.length)
+      throw new ConvexError('Name each hero once.');
+    for (const hero of heroes) {
+      if (hero.campaignId !== context.campaign._id || !hero.liveState)
+        throw new ConvexError(`${hero.authored.name} is not an admitted hero in this campaign.`);
+      if ((hero.pendingLevelUps ?? 0) < 1)
+        throw new ConvexError(`${hero.authored.name} has no pending level-up to withdraw.`);
+    }
+    return {
+      kind: 'character.level-up-withdrawn',
+      description: `The Director withdrew a pending level-up from ${heroes.map(hero => hero.authored.name).join(', ')}.`,
+      data: {
+        characters: heroes.map(hero => ({
+          characterId: hero._id,
+          pendingLevelUpsBefore: hero.pendingLevelUps ?? 0,
+          pendingLevelUpsAfter: (hero.pendingLevelUps ?? 0) - 1,
+        })),
+      },
+      commit: async (mctx, scope) => {
+        for (const hero of heroes)
+          await journalPatch(
+            mctx,
+            scope,
+            'characters',
+            hero._id,
+            { pendingLevelUps: (hero.pendingLevelUps ?? 0) - 1 },
+            hero,
+          );
+      },
+    };
+  },
+};
+
 export const characterOperations: OperationDefinition[] = [
   submit,
   withdraw,
   approve,
   decline,
   grantLevelUp,
+  withdrawLevelUp,
 ];

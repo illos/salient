@@ -12,7 +12,9 @@ Generalise V32's Fury 1→2 advancement to every class and supported level, driv
 - `characters.pendingLevelUps` counts granted level-ups not yet taken; `characters:get` returns it.
 - Registered shared operation `character.grant-level-up` (`/character grant-level-up`, palette, headless
   `commands:invoke`): Director only, one pending level-up to each chosen hero, the attached party by
-  default; journaled, so it undoes like other table operations. Respite completion adds grants in V165.
+  default. Character events are outside table undo, so a mistaken grant is corrected with
+  `character.withdraw-level-up` (Director; removes one not-yet-taken level-up). Respite completion adds
+  grants in V165.
 - `characters:progression`, `saveAdvancement`, `finalizeAdvancement`: from the effective build's level
   L to L+1 when L+1 supports the class (`levelUpTarget` in `shared/content/character-support.ts`); the
   level-up's decisions are those in L+1 but not L. Eligibility: attached to a campaign, complete build,
@@ -38,3 +40,9 @@ Generalise V32's Fury 1→2 advancement to every class and supported level, driv
 - Test-Deploy: `all` passed in 239 s of its 240 s deadline at V162. The lifecycle journey is now its own
   `lifecycle` cohort (no longer inside `all`); it grants its level-up with `/character grant-level-up`.
   Journeys for this slice: `level-up`, `lifecycle`, `all`.
+- Independent review of `3a38ea2`: CHANGES REQUIRED, one blocking finding: the slice claimed the grant was
+  undoable, but character events are outside table undo. Added `character.withdraw-level-up` (Director,
+  removes one not-yet-taken level-up, refused at zero) with app coverage, and corrected the doc.
+  Non-blocking, fixed: Shadow's level-4–6 ledger builds level up one level at a time to each witness's
+  level; the headless readback checks the effective build's level; a stale V45 test title. Accepted:
+  the interim panel's finish state (V164 replaces it).

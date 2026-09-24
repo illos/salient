@@ -19,6 +19,8 @@ import { levelThreeBuilds } from '../../tests/fixtures/level-three-builds.ts';
 type Selections = Record<string, SelectionValue>;
 type Saved = {
   level: number;
+  draftIsEffective: boolean;
+  derivedBaseline: { level: { value: number } } | null;
   revision: number;
   pendingLevelUps?: number;
   evaluation: EvaluationResult;
@@ -140,6 +142,12 @@ export async function runLevelUp({ actors: { director, player }, run, runId }: S
           });
           const saved = await get(id);
           assert.equal(saved.level, level, build.className);
+          assert.equal(saved.draftIsEffective, true, build.className);
+          assert.equal(
+            saved.derivedBaseline?.level.value,
+            level,
+            `${build.className} effective level`,
+          );
           assert.equal(saved.evaluation.status, 'complete', build.className);
           assert.equal(saved.pendingLevelUps, 3 - level, `${build.className} pending`);
         }

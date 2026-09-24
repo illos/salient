@@ -664,6 +664,21 @@ test('Director XP correction persists, but only a granted level-up makes a hero 
     text: '/character grant-level-up',
   });
   expect((await t.run(ctx => ctx.db.get(thornId)))!.pendingLevelUps).toBe(2);
+  // A mistaken grant is corrected by withdrawing one not-yet-taken level-up (never below zero).
+  const withdraw = {
+    campaignId,
+    commandId: 'withdraw-thorn',
+    operation: 'character.withdraw-level-up',
+    arguments: { characters: [{ refKind: 'character', id: thornId }] },
+  };
+  await expect(player.client.mutation(api.commands.invoke, withdraw)).rejects.toThrow();
+  await director.client.mutation(api.commands.invoke, withdraw);
+  expect((await t.run(ctx => ctx.db.get(thornId)))!.pendingLevelUps).toBe(1);
+  await director.client.mutation(api.commands.invoke, { ...withdraw, commandId: 'withdraw-2' });
+  await expect(
+    director.client.mutation(api.commands.invoke, { ...withdraw, commandId: 'withdraw-3' }),
+  ).rejects.toThrow('no pending level-up');
+  expect((await t.run(ctx => ctx.db.get(thornId)))!.pendingLevelUps).toBe(0);
 });
 
 test('distinct long restore command IDs sharing a prefix have independent submission receipts', async () => {
