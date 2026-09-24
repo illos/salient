@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V120 heroic resource generation engine
+## Current release — V133 Null levels two and three
+
+Backend/content/frontend source `b99b951784bd235b16174f507a8144929e89d262` published on 2026-09-24 as
+Worker `99cbb3c1-fad8-4f35-8715-1c94905601b6`. Backend and schema validation, the content reseed (1751 entries at
+`fb83a789`), the hosted build and the upload succeeded. The combined V133 and V120 tip passed the
+full gate and headless journeys before merge, with no smoke test. See
+[V133](build/V133-null-level-three.md) and the [ledger](../deploy.md).
+
+## Previous release — V120 heroic resource generation engine
 
 Backend/frontend source `f3acd97ce5a58c8a68df3d52e04a9852673ce4a1` published on 2026-09-24 as
 Worker `3d6cb3e2-2c3c-4cec-8d5c-83ec1a5c4a73`. Backend and schema validation, the hosted build and the upload succeeded. Content

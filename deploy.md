@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V133 | `b99b951` | Merged; backend/content/frontend published; combined gates at tip | complete |
 | V120 | `f3acd97` | Merged; backend/frontend published; accepted gates reused | complete |
 | V132 | `c3f9e35` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V117 | `2dcbf97` | Merged; backend/content/frontend published; combined gates at tip | complete |
@@ -490,3 +491,19 @@ fast-forwarded into main. It adds a docs-only record to the tested `63b47d7`.
   helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V120-release-f3acd97`.
+
+### V133 Null levels two and three publication: 2026-09-24
+
+The test and deploy thread published this release at WIZARD3's handoff. Reviewed tip `b99b951784bd235b16174f507a8144929e89d262` was
+fast-forwarded into main. Because the rebase combined V133 with V120's runtime code, the tip itself
+was tested before merge:
+- Full gate at `b99b951` (281 s). An earlier run hit six 60 s timeouts while a second gate shared
+  the four-core host, so it was rerun alone.
+- Isolated `null-level-three` and `heroic-resource` journeys at `b99b951`.
+- Independent rules review passed.
+- Backend publication and schema validation succeeded.
+- The content reseed read back 1751 entries at `fb83a789`.
+- The hosted build and the frontend upload succeeded. Worker `99cbb3c1-fad8-4f35-8715-1c94905601b6`.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V133-release-b99b951`.
