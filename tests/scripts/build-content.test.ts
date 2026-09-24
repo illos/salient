@@ -189,10 +189,10 @@ describe('committed snapshot', () => {
         );
       } else if (row.id.startsWith('mcdm.summoner.v1/')) {
         expect(row.sourcePath).toMatch(
-          /(?:class\/summoner\.md|feature\/(?:ability\/)?summoner\/level-1\/[^/]+\.md|monster\/minion\/summoner\/(demon|undead|fey|elemental)\/statblock\/[^/]+\.md)$/,
+          /(?:class\/summoner\.md|feature\/(?:ability\/)?summoner\/level-[123]\/[^/]+\.md|monster\/fixture\/(demon|undead|fey|elemental)\/featureblock\/[^/]+\.md|monster\/minion\/summoner\/(demon|undead|fey|elemental)\/statblock\/[^/]+\.md)$/,
         );
         if (row.kind === 'statblock')
-          expect(entry(row.id).structured.cost).toMatch(/^[13] essence/);
+          expect(entry(row.id).structured.cost).toMatch(/^[135] essence/);
       } else expect(INCLUDED_SOURCEBOOKS.has(row.id.split('/')[0]), row.id).toBe(true);
     }
     const excludedPaths = manifest.excluded.map(row => row.path);
@@ -327,9 +327,10 @@ test('all 438 core monster stat blocks retain exact Markdown and JSON features',
     row => !row.id.startsWith('mcdm.summoner.v1/'),
   );
   const minions = entriesIn('statblock.json').filter(row => row.id.startsWith('mcdm.summoner.v1/'));
-  expect(minions).toHaveLength(25);
+  // V107: 13 signature and 12 three-essence minions; V138: 12 five-essence minions.
+  expect(minions).toHaveLength(37);
   for (const row of minions) {
-    expect(row.structured.cost).toMatch(/^[13] essence/);
+    expect(row.structured.cost).toMatch(/^[135] essence/);
     expect(row.text).toBe(readPinnedSource(root, join(root, row.sourcePath)));
     const twin = JSON.parse(readPinnedSource(root, join(root, row.jsonPath!)));
     expect(row.features ?? []).toEqual(twin.features ?? []);
