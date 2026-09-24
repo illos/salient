@@ -1260,3 +1260,75 @@ Readings:
 Recommendation: B for effects anchored to the user, since the EoT sentence speaks about the target
 and "next turn" otherwise reads as the following turn. The binding changes before any sentence
 with this anchor compiles.
+
+### Q-V-3: Does imported Forge Steel damage and Recoveries used survive admission? (V09)
+
+- **Status:** open
+- **Raised by:** V09 part a, 2026-09-24
+- **Where:** `docs/character-wizard-spec.md#required-import` ("stores Stamina damage and Recoveries
+  used ... Reconcile those representations explicitly"); Q-R-201 above (destination admission starts
+  fresh); `docs/forge-steel-interchange.md#current-state-is-not-simply-current-totals`. Compendium
+  paths as read for Q-R-201: `rule/health/{stamina,recoveries}.md`; the source has no notion of
+  importing a hero.
+- **Conflict or gap:** A Forge file carries `state.staminaDamage`, `state.recoveriesUsed`, surges,
+  XP, Victories and conditions. Part a imports only the build as an unattached draft and reports
+  non-default play state as a diagnostic; the verbatim file keeps the values. The spec asks for
+  explicit reconciliation, but Q-R-201 says admission to a campaign starts full.
+- **Options:** A: admission starts full (Q-R-201); Forge play state stays preserved data only.
+  B: first admission seeds current Stamina = max − damage and Recoveries = max − used, clamped.
+  C: offer B as an owner choice at submission, shown to the Director for approval.
+- **Recommendation:** A. It matches the existing Q-R-201 ruling, keeps campaign values owned by the
+  campaign, and needs no new approval path. Part c can still show the Forge values to the owner.
+- **Blocked until answered:** V09 part c state reconciliation; part a is unaffected.
+- **Answer:**
+
+### Q-V-4: Which Forge Steel versions and file shapes does import support? (V09)
+
+- **Status:** open
+- **Raised by:** V09 part a, 2026-09-24
+- **Where:** `docs/character-wizard-spec.md#required-import` ("within an explicitly tested support
+  range") and `#12-open-decisions` (historical Forge shapes); `docs/forge-steel-interchange.md`
+  ("Do not infer an exact Forge Steel application version from a hero file that contains none").
+- **Conflict or gap:** A `.ds-hero` file carries no version. Part a validates the shape of the
+  vendor pin `5a846aadb623a9855a023e9403bb887a956c341f` and is tested only on exports from website
+  versions 14.198.0 and 14.199.0. Older or newer shapes may pass the guard yet use other feature ids.
+- **Options:** A: support the pinned shape only; any other shape is rejected or diagnosed.
+  B: also accept named older shapes, each with a retained fixture. C: accept anything that passes
+  the guard and rely on diagnostics.
+- **Recommendation:** A now, with B added per retained fixture when a real file needs it. C lets
+  unproven ids map silently.
+- **Blocked until answered:** nothing; part a applies A provisionally.
+- **Answer:**
+
+### Q-V-5: Is preserved unmapped Forge data shown to the owner? (V09)
+
+- **Status:** open
+- **Raised by:** V09 part a, 2026-09-24
+- **Where:** `docs/character-wizard-spec.md#required-import` ("Unmapped mechanics remain visible and
+  preserved"); V09 open question on preserved compatibility data.
+- **Conflict or gap:** Part a stores the verbatim file and a diagnostic list (path, Forge id, name,
+  reason) in `characterImports`, owner-only, and returns the diagnostics from the mutation and CLI.
+  Nothing yet shows them in the app after the import.
+- **Options:** A: show the diagnostics list on the imported character to its owner only.
+  B: also show it to the Director at admission review. C: report only at import time.
+- **Recommendation:** A, and B for items that affect the build (unmapped choices), since the
+  Director approves the build; play-state notes need not reach the Director.
+- **Blocked until answered:** V09 part b import UI; part a is unaffected.
+- **Answer:**
+
+### Q-V-6: What happens to a Forge file above the supported level? (V09)
+
+- **Status:** open
+- **Raised by:** V09 part a, 2026-09-24
+- **Where:** `docs/character-wizard-spec.md#required-import` ("If an earlier level is requested,
+  reconstruct only what the available data establishes"); `shared/content/character-support.ts`
+  (supported definition levels).
+- **Conflict or gap:** Salient's definitions stop below level 10 for most classes. Part a rejects a
+  file whose level has no Salient definitions, writing nothing. A file at a defined level whose class
+  lacks mappings for that level imports with those choices diagnosed.
+- **Options:** A: reject, as now. B: import at the highest supported level with only the choices
+  that level establishes, and say so. C: store the file as a pending import to finish once the level
+  is supported.
+- **Recommendation:** A until more levels exist; B risks presenting a build the player never had.
+- **Blocked until answered:** nothing; part a applies A.
+- **Answer:**

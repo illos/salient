@@ -29,42 +29,77 @@ the adapter boundary that would allow it is preserved.
 - `docs/forge-steel-interchange.md#first-compatibility-examples` — sample files and expected results.
 - `docs/v1-spec-checkpoint.md#release-scope` — Characters row: import included, export deferred.
 
+## Parts
+
+The slice is delivered in three parts, each merged separately.
+
+- **Part a (this branch):** the pure adapter under `shared/interchange/forge-steel/` (shape guard,
+  active-feature walker, scoped mappings, `importForgeHero`, export stub), the
+  `characterImport.importForge` mutation with a `characterImports` table, the CLI route
+  `pnpm character:import <file>`, a headless `forge-import` cohort, and tests. Levels 1–2 as the
+  retained exports prove them.
+- **Part b:** import UI in the wizard/character list; owner-visible diagnostics (Q-V-5); more scoped
+  mappings (remaining ancestries, careers and classes, level 3) as retained exports prove them.
+- **Part c:** play-state reconciliation (Stamina damage, Recoveries used, surges, XP, Victories,
+  conditions; Q-V-3), complications, titles and inventory as V07 allows.
+
 ## In scope
 
-- Parser for the two file extensions within a tested support range against Forge Steel pin `5a846aadb623a9855a023e9403bb887a956c341f`.
+- Parser for the two file extensions against Forge Steel pin
+  `5a846aadb623a9855a023e9403bb887a956c341f`; support range per Q-V-4 (pinned shape only for now).
 - Structural validation distinguishing malformed input from an incomplete valid draft.
-- Selection mapping to SCC ids; unmapped and ambiguous entries surfaced, never guessed.
-- Reconciliation of Stamina damage and Recoveries used into our current values, with the rule cited.
-- Snapshot stored as the first known revision; preserved original payload; excluded content (supplements, homebrew) preserved but not enabled.
+- Selection mapping to Salient decision ids through scope-keyed rules; unmapped and ambiguous entries
+  surfaced as diagnostics, never guessed.
+- The original payload preserved verbatim with its SHA-256 and the Forge pin, outside evaluation.
+- Summoner and Beastheart are supported classes (Q-CHAR-14); other supplements and homebrew are
+  preserved in the payload, diagnosed, and never enabled.
 
 ## Out of scope
 
-- Export implementation (`docs/character-wizard-spec.md#desired-export`).
-- Enabling Summoner/Beastheart/homebrew from imported data (`docs/character-wizard-spec.md#12-open-decisions`, last row).
+- Export implementation (`docs/character-wizard-spec.md#desired-export`); `export.ts` is a stub.
 - Reconstructing an earlier level than the snapshot beyond what the data establishes.
-- Importing items into inventories beyond recording them as preserved data unless V07 has landed.
+- Importing items into inventories (preserved data only unless V07 has landed).
 
 ## Inputs and dependencies
 
-- Hard: V08 (full core class choice model and SCC ids).
-- Hard: `vendor/forge-steel` at its pin, read-only; `docs/research/hero-sample.json` as the first fixture.
-- Soft: V07 for item placement; otherwise items stay in preserved data.
+- Hard: V08 (full core class choice model and decision ids).
+- Hard: `vendor/forge-steel` at its pin, read-only, from the main checkout.
+- Fixtures: `tests/fixtures/v45-reference/*.ds-hero` (real Forge exports; `docs/research/hero-sample.json`
+  is not a hero file) paired with the hand-derived `tests/fixtures/v25-fury.json`, `v25-bethell.json`
+  and `v32-fury-level-two.json`.
 
 ## Deliverables
 
-- `engine/interchange/forge-steel/` adapter with import only; export stub type left in place.
-- Mapping tables with scope keys; unmapped report per import.
-- Tests over real sample files with expected values derived from the files and the Compendium.
-- Implementation notes in `docs/character-wizard-spec.md#required-import`.
+- `shared/interchange/forge-steel/`: `shape.ts`, `walker.ts`, `names.ts`, `mappings.ts`, `import.ts`,
+  `export.ts` (stub).
+- `convex/characterImport.ts` (`importForge`), `convex/lib/characterDrafts.ts` (the creation path
+  shared with `characters.create`), `characterImports` in `convex/characterTables.ts`.
+- `scripts/forge/import.ts` (`pnpm character:import`), `scripts/headless/forge-import.ts`.
+- `tests/forge-import.test.ts`, `tests/app/forge-import.test.ts`.
 
 ## Acceptance checks
 
-1. Importing `docs/research/hero-sample.json` creates a character whose active build, level and derived values match a hand-derived table in the test; the original payload is stored verbatim.
-2. A file with Stamina damage 5 and 2 Recoveries used yields current Stamina = max − 5 and Recoveries = max − 2, with the reconciliation rule cited.
-3. A file containing a Summoner selection imports with that selection preserved as unmapped and no Summoner choice active; the wizard shows the incompatibility.
-4. A malformed file is rejected without creating a character; an incomplete valid draft creates a draft, not an effective build.
-5. Imported campaign references and approvals grant no membership, Director status or activation.
+Part a:
+
+1. Importing `Grug-level-1.ds-hero`, `Grug-level-2.ds-hero` and `Bethell-corrected-export.ds-hero`
+   yields exactly the selections of `v25-fury.json`, `v32-fury-level-two.json` and
+   `v25-bethell.json` (lists compared as multisets; Bethell's authored name differs as documented),
+   at levels 1, 2 and 1.
+2. Malformed JSON, a non-hero object and a wrong field type are rejected; through the mutation they
+   write no characters, revisions, imports or command receipts. An oversized file (> 512 KB) is
+   rejected the same way. A valid hero with null class or career imports as a partial draft.
+3. The mutation makes the caller the owner of an unattached draft at revision 1 (no campaign, no
+   effective build, no live state, no review) evaluated by the same path as `characters.create`,
+   and stores the payload verbatim with its SHA-256 and the Forge pin. Another user cannot read it.
+4. Complications, titles, inventory, projects, ability customizations, non-default play state,
+   folders and extra sourcebooks each produce a diagnostic; a Forge choice without a scoped rule,
+   a value outside the decision's Compendium options, and a Forge choice where the Compendium grants
+   a fixed value each produce a diagnostic and leave the decision empty.
+5. Imported hero ids, folders and campaign-looking state grant nothing.
 6. No code path claims export support.
+
+Parts b and c: a Summoner or other unsupported selection is shown as unmapped in the UI; Stamina
+damage and Recoveries used are reconciled per Q-V-3 with the rule cited.
 
 ## Rules research
 
@@ -74,11 +109,32 @@ the adapter boundary that would allow it is preserved.
 
 ## Open questions
 
-Candidate `Q-V-n` entries:
-
-- Historical Forge Steel shapes and the exact support range (`docs/character-wizard-spec.md#12-open-decisions`).
-- Whether preserved compatibility data is shown to the owner or only reported (`docs/character-wizard-spec.md#required-import`, "Unmapped mechanics remain visible").
+- Q-V-3: whether imported damage and Recoveries used survive admission.
+- Q-V-4: the supported Forge Steel version range.
+- Q-V-5: whether preserved unmapped data is shown to the owner.
+- Q-V-6: what to do with a file above the supported level.
 
 ## Work log
 
-_Empty._
+- 2026-09-24: part a started by WIZARD3 on `slice/V09` (`.worktrees/forge-import`) from main
+  `dd8c9ed`. Forge pin verified: `git -C vendor/forge-steel rev-parse HEAD` =
+  `5a846aadb623a9855a023e9403bb887a956c341f` (main checkout).
+- Mapped: ancestry (name, Devil Silver Tongue skill, purchased traits for any ancestry with a
+  Salient points decision, borrowed Revenant traits excepted), culture (name, language,
+  environment/organization/upbringing and their skills), career (name, inciting incident; Soldier
+  and Mage's Apprentice features), class, subclass (via the class profile), characteristic array and
+  assignment (checked against the profile's fixed scores), single-kit slots, Fury levels 1–2 and
+  Elementalist level 1 skills, abilities, enchantment, ward and perks, details name and notes. Forge
+  "free choice" slots the Compendium fixes (Fury Nature, Berserker Lift, Elementalist and
+  Mage's Apprentice Magic, Caelian) are checked; Forge's Magic-collision replacement on the career
+  maps to `class.elementalist.magic-replacement`.
+- Diagnosed only: everything else listed in acceptance check 4, plus unmapped active choices
+  (e.g. Tactician Field Arsenal, Revenant former life, Conduit domains, other classes' feature ids).
+- `forgeNameAliases` moved to `shared/interchange/forge-steel/names.ts`; `scripts/forge/` re-exports
+  it. `tests/helpers/v45-reference.ts` keeps its assertion-based projection for the V45 test.
+- 2026-09-24: part a committed on `slice/V09` (`8713d98` adapter, `7148cfe` mutation, CLI, headless
+  cohort and app test). Authoring checks: `npx tsc --noEmit` and `npx tsc -p tsconfig.web.json
+  --noEmit` clean, `pnpm -s lint` clean, `npx vitest run tests/forge-import.test.ts
+  tests/app/forge-import.test.ts` 10/10. Convex push of `git archive 7148cfe` to an anonymous local
+  deployment: "Convex functions ready"; codegen matches the committed `_generated/api.d.ts` entries
+  for the two new modules. TESTER has not run the suite or the `forge-import` headless cohort.

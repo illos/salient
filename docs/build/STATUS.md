@@ -33,7 +33,7 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V06 | [Monster catalog, saved encounters and party strength](V06-catalog-and-saved-encounters.md) | Registered |
 | V07 | [Inventory, loot and Director stash](V07-inventory-and-loot.md) | Registered |
 | V08 | [Eleven-class editor, advancement and progression history](V08-classes-and-advancement.md) | Registered |
-| V09 | [Forge Steel import](V09-forge-steel-import.md) | Registered |
+| V09 | [Forge Steel import](V09-forge-steel-import.md) | In progress (part a) |
 | V10 | [Accounts: settings, password reset, friends, blocking, share codes, deletion](V10-accounts-social.md) | Registered |
 | V11 | [Character grants and delegated play](V11-character-grants.md) | Registered |
 | V12 | [Campaign chat](V12-campaign-chat.md) | Registered |
