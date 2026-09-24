@@ -138,3 +138,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V135 | [Elementalist levels two and three](V135-elementalist-level-three.md) | Ready for integration; full gate, isolated headless and independent review PASS |
 | V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | In progress (ENGINE2); depends on V120 |
 | V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Ready for testing after V120; independent review PASS |
+| V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | In testing; independent review PASS |
