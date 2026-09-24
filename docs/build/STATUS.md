@@ -136,9 +136,5 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V133 | [Null levels two and three](V133-null-level-three.md) | Merged (`b99b951`); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V150 | [Self-Taught forgo for automatic heroic resources](V150-self-taught-forgo.md) | Merged (`fad564f`); cloud dev published; accepted TESTER results reused |
 | V135 | [Elementalist levels two and three](V135-elementalist-level-three.md) | Ready for integration; full gate, isolated headless and independent review PASS |
-| V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | In progress (ENGINE2); depends on V120 |
-| V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Ready for testing after V120; independent review PASS |
-| V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | In testing; independent review PASS |
 | V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Ready for integration; TESTER PASS at bae43ad, independent review and QC1 PASS |
-| V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | In progress (ENGINE2) |
-| V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | In testing; independent review PASS |
+| V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | Ready for integration; TESTER PASS at a44f6b7, independent review and QC1 PASS |

@@ -59,3 +59,5 @@ new one in the same round; the app refuses the second claim, which matches the p
 - Independent review ([audit](audits/V145-rules-review.md)): PASS. The reviewer checked every Censor
   feature and ability through level 6. R1 (advisory): the per-Censor reading is now labelled with its
   alternative. The Self-Taught limitation is recorded as engine-wide.
+- TESTER PASS at `a44f6b7` and QC1 final PASS (after V150). Rebased onto main `8c8aedf`. Ready for
+  integration.
