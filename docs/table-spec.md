@@ -1718,6 +1718,15 @@ cannot be closed while a respite is open and unresolved; the Director first fini
 the respite, then closes the session. Respite never spans closed sessions, so closed-session history
 stays immutable without a special respite context.
 
+**Ending a respite, confirmed 2026-09-24:** the Director ends an open respite in one of three ways:
+1. **Cancel:** every change made during the respite is reverted to the pre-respite state (activities,
+   kit swaps and other respite choices), as if it never started.
+2. **Interrupt:** the respite ends early with none of its completion benefits (no restoration, no
+   Victory-to-XP conversion, no level-up grants). What already happened during it stands, such as an
+   accepted activity or a kit swap. The table returns to ordinary play; an ambush then uses the normal
+   combat setup. It is not a combat void or rewind.
+3. **Complete:** the respite's benefits apply, as below.
+
 **Respite completion grants level-ups, confirmed 2026-09-24:** completing a respite converts Victories to
 XP, and each threshold a hero's XP crosses grants that hero one pending level-up. Taking it is the
 owner's separate character-sheet action (see the [level-up policy](character-wizard-spec.md#level-up));

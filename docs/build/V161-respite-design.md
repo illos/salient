@@ -34,3 +34,5 @@ and generic level-up for all eleven classes can be built. Design only: no code.
 - Build handoff for Q-CHAR-2 revised: `shared/evaluate/liveReconciliation.ts` (preview/apply, contract in
   `shared/contracts/liveState.ts`), used by `convex/lib/characterBuild.ts` activation, still implements
   `min(oldCurrent, newMaximum)`; change it to keep damage taken and Recoveries spent, with its tests.
+- 2026-09-24: Q5 settled: three endings, Cancel (revert to pre-respite), Interrupt (keep what happened, no
+  completion benefits) and Complete.
