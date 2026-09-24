@@ -56,9 +56,10 @@ Compendium (pinned `en/unified/md`): `condition/prone.md`; `feature/common/maneu
 | Mindpunk | `monster/time-raider/statblock/time-raider-mind-punk.md` | R < N prone and can't stand (save ends) |
 | Dizzying Hex | `monster/goblin/statblock/goblin-cursespitter.md` | tier 2 combined (EoT); tier 3 "Prone; I < 2 can't stand (save ends)" |
 
-Seven other abilities still have unrelated blockers and stay manual:
+Eight other abilities still have unrelated blockers and stay manual:
 - Earth Pillar, Hampering Roots, Writ of Execution, Stomp and Forward Assault have Effect or Malice
   sections.
+- Bull Rush (`hill-giant-clobberer.md`, split form) is blocked by its target and Effect section.
 - Upstage and Levity and Gravity are blocked by their target and a Strained section.
 
 ## Acceptance checks
@@ -89,3 +90,8 @@ Seven other abilities still have unrelated blockers and stay manual:
   - The grab, tier-effects, condition, compound, potency, compiled-effects and cant-stand app tests
     pass.
   - Both typechecks pass.
+- V155-REVIEW on `a11edd7`: changes required on text only; the rules behaviour passed. Fixed:
+  - The clock label, the combat-end text, the foe projection, the condition-source list and the
+    `condition.potency` payload now name the restriction "can't stand".
+  - The doc now counts eight other abilities, including Bull Rush.
+

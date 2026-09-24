@@ -4,7 +4,7 @@ import type { ConditionInstance } from '../shared/contracts/liveState';
 
 export type ConditionSource = Pick<
   ConditionInstance,
-  'id' | 'status' | 'duration' | 'abilityName' | 'actorLabel' | 'sourcePath'
+  'id' | 'status' | 'duration' | 'abilityName' | 'actorLabel' | 'sourcePath' | 'restriction'
 > & { condition: string };
 
 export function ConditionSources({
@@ -23,6 +23,7 @@ export function ConditionSources({
       {active.map(instance => (
         <span key={instance.id} title={instance.sourcePath}>
           {instance.actorLabel} · {instance.abilityName} ·{' '}
+          {instance.restriction === 'cant-stand' ? "can't stand, " : ''}
           {instance.duration === 'eot'
             ? 'EoT'
             : instance.duration === 'none'

@@ -906,7 +906,7 @@ export async function dispatchBoundary(
           commandId: cause.commandId,
           causeEventId: boundaryEventId,
           kind: 'condition.unscheduled',
-          description: `${found.instance.actorLabel}'s ${found.instance.abilityName}: ${found.instance.condition} remains active after combat ends. Its ${work.kind === 'saving-throw' ? 'saving throw' : 'end-of-turn expiry'} is no longer scheduled; resolve it manually.`,
+          description: `${found.instance.actorLabel}'s ${found.instance.abilityName}: ${found.instance.restriction ? "can't stand" : found.instance.condition} remains active after combat ends. Its ${work.kind === 'saving-throw' ? 'saving throw' : 'end-of-turn expiry'} is no longer scheduled; resolve it manually.`,
           payload: {
             effectInstanceId: found.instance.id,
             sourceUseEventId: found.instance.sourceUseEventId,

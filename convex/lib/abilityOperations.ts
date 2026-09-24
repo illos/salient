@@ -951,6 +951,7 @@ async function commitConditions(
         sourceUseEventId: source.eventId,
         occurrence: occurrence.id,
         condition: effect.condition,
+        ...(effect.restriction ? { restriction: effect.restriction } : {}),
         duration: effect.duration,
         status: effect.status,
         target: target.actor,

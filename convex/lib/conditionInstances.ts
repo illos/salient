@@ -135,7 +135,7 @@ export async function applyConditionInstance(
       const source = {
         logEntryId: input.sourceUseEventId,
         sourcePath: input.sourcePath,
-        label: `${input.actorLabel}: ${input.abilityName} (${input.condition})`,
+        label: `${input.actorLabel}: ${input.abilityName} (${input.restriction ? "can't stand; stays prone after" : input.condition})`,
       };
       instance.registrationId =
         duration === 'eot'
