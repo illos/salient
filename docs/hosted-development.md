@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V165 respite loop and V166 respite activities
+## Current release — V168 Field Arsenal kit lock during respite
+
+Backend/frontend source `79fc25f401ec2c9a1e467396cd772a660fec2138` published on 2026-09-24 as
+Worker `d48f300d-6adb-45aa-8841-74446a53ffa9`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V168](build/V168-field-arsenal-lock.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V165 respite loop and V166 respite activities
 
 Backend/frontend source `1811a3f030bccb39290d02fcb77095a33f202803` published on 2026-09-24 as
 Worker `d2a08201-500d-4593-8405-21075ed16284`. Backend and schema validation, the hosted build and the upload succeeded. Content

@@ -35,3 +35,9 @@ kept it.
   guard. The pair is now compared unordered, with a swap regression; the kit-change interpretation is
   labelled.
 - Review re-verification of `153a370`: PASS; the swap regression now sends a complete change.
+
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `79fc25f` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `d48f300d-6adb-45aa-8841-74446a53ffa9`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V168-release-79fc25f`.

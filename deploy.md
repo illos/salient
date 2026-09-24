@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V168 | `79fc25f` | Merged; backend/frontend published; accepted gates reused | complete |
 | V166 | `1811a3f` | Merged with V165 and V166 stacked; backend/frontend published; gate and headless at tip | complete |
 | V165 | `1811a3f` | Merged with V165 and V166 stacked; backend/frontend published; gate and headless at tip | complete |
 | V156 | `d266437` | Merged in train 8; backend/frontend published; gate and headless at tip | complete |
@@ -713,3 +714,16 @@ changes) on main `945f642`. The test and deploy thread fast-forwarded main to `1
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V166-release-1811a3f`.
+
+### V168 Field Arsenal kit lock during respite publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed tip `79fc25f401ec2c9a1e467396cd772a660fec2138` into main.
+- Full gate at the tip (275 s, 443 engine and 757 app tests).
+- `respite`, `tactician` and `tactician-level-three` journeys at the tip.
+- Independent rules review passed (QC1 V166 R1 fix).
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `d48f300d-6adb-45aa-8841-74446a53ffa9`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V168-release-79fc25f`.
