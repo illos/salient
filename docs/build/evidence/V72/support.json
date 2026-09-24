@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 83,
-      "manual": 288
+      "supported": 85,
+      "manual": 286
     },
     "kit-signature": {
       "total": 25,
@@ -26126,7 +26126,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/violence-will-not-aid-thee.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -26179,22 +26179,40 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/violence-will-not-aid-thee#block:1:0:dce299669a3241ca",
           "locator": "block:1:0",
           "clause": "The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "watcher",
+          "spec": {
+            "effect": "watcher",
+            "subject": "target",
+            "watcher": {
+              "event": "damage-dealt",
+              "whose": "subject",
+              "otherCreature": true,
+              "limit": "turn",
+              "responses": [
+                {
+                  "kind": "damage",
+                  "recipient": "subject",
+                  "amount": {
+                    "dice": {
+                      "count": 1,
+                      "sides": 10
+                    }
+                  },
+                  "damageType": "lightning"
+                }
+              ]
+            },
+            "duration": {
+              "kind": "save-ends"
+            },
+            "endsWhen": [],
+            "text": "The first time on a turn that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends)."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that the target deals damage to another creature, the target of this ability takes 1d10 lightning damage (save ends).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Violence Will Not Aid Thee",
@@ -26999,7 +27017,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/blessing-of-insight.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -27007,37 +27026,38 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-insight#block:0:0:682a231d40c9f8c0",
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/blessing-of-insight#block:0:0:a3bc7930814c8b01",
           "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "Until the end of the encounter or until you are dying, each target gains 1 surge at the end of each of your turns.",
+          "kind": "watcher",
+          "spec": {
+            "effect": "watcher",
+            "subject": "target",
+            "watcher": {
+              "event": "turn-end",
+              "whose": "owner",
+              "limit": "each",
+              "responses": [
+                {
+                  "kind": "gain",
+                  "recipient": "subject",
+                  "surges": 1
+                }
+              ]
+            },
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "owner-dying"
+            ],
+            "text": "Until the end of the encounter or until you are dying, each target gains 1 surge at the end of each of your turns."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self and each ally",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Blessing of Insight",
@@ -212548,9 +212568,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 158,
-    "compiledEffectOnly": 8,
-    "compatibility": 1463,
+    "compiled": 160,
+    "compiledEffectOnly": 9,
+    "compatibility": 1461,
     "compiledButUnavailable": 0
   }
 }

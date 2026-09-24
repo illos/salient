@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 158 (without a power roll: 8); unchanged reachable compatibility: 1463; structurally supported but unavailable: 0.
+Currently reachable compiled: 160 (without a power roll: 9); unchanged reachable compatibility: 1461; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -181,13 +181,13 @@ Currently reachable compiled: 158 (without a power roll: 8); unchanged reachable
 | Sacrificial Offer | hero-standalone | supported | compiled |  |
 | Sermon of Grace | hero-standalone | supported | compiled |  |
 | Staggering Curse | hero-standalone | supported | compiled |  |
-| Violence Will Not Aid Thee | hero-standalone | manual | legacy-compatibility | manual-section |
+| Violence Will Not Aid Thee | hero-standalone | supported | compiled |  |
 | Warrior's Prayer | hero-standalone | supported | compiled |  |
 | Wither | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Word of Guidance | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Word of Judgment | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Blessing of Fate and Destiny | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Blessing of Insight | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Blessing of Insight | hero-standalone | supported | compiled |  |
 | Divine Comedy | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Morning Light | hero-standalone | manual | legacy-compatibility | manual-section |
 | Nature Judges Thee | hero-standalone | supported | compiled |  |

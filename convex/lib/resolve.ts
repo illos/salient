@@ -58,9 +58,10 @@ import type {
   SourceRef,
 } from '../../shared/contracts/rollResolution';
 import { manifest } from '../../shared/content/compendium/index';
-import { parseTierText, plainText } from '../../shared/resolve/index';
+import { parseTierText, plainText, windedValueOf } from '../../shared/resolve/index';
 import { findContent, requireContent } from '../content';
-import { endOwnerDyingEffects } from './effectInstances';
+import { endOwnerDyingEffects, type EffectHolder } from './effectInstances';
+import { observeDamage, type DamageObservation, type Preloaded } from './watchers';
 import { journalPatch, type JournalScope } from './journal';
 import { observeHeroDamage } from './resourceTriggers';
 import { recordCaptainLoss, squadOfCaptain } from './squads';
@@ -1039,9 +1040,31 @@ export async function writeDamage(
   application: Pick<DamageApplication, 'staminaAfter' | 'temporaryStaminaAfter'>,
   /** The ability use this damage belongs to, when it is a correction of that use (V142). */
   useEventId?: string,
+  /**
+   * V171 watchers (convex/lib/watchers.ts): the creature dealing the damage, when a use deals it,
+   * for `damage-dealt` watchers; `defer` collects the observation for a watcher's own damage, so
+   * the firing that dealt it is logged first.
+   */
+  options: {
+    dealer?: EffectHolder;
+    /** The dealer's stored effects as the caller read them, so a hit reads no extra documents. */
+    dealerEffects?: Preloaded;
+    defer?: DamageObservation[];
+  } = {},
 ): Promise<void> {
   // V02: squad members take damage through their squad's pool (convex/lib/squads.ts commits it).
   if (target.squad) return;
+  const observe = async (observation: DamageObservation) => {
+    if (options.defer) options.defer.push(observation);
+    else
+      await observeDamage(ctx, scope, observation, {
+        ...(useEventId !== undefined ? { correction: true } : {}),
+      });
+  };
+  const dealer =
+    options.dealer && options.dealer.id !== (target.foe?._id ?? target.character?._id)
+      ? options.dealer
+      : undefined;
   if (target.foe) {
     const current = (await ctx.db.get(target.foe._id))!;
     await journalPatch(ctx, scope, 'foes', current._id, {
@@ -1057,6 +1080,24 @@ export async function writeDamage(
       const squad = await squadOfCaptain(ctx, current._id);
       if (squad) await recordCaptainLoss(ctx, scope, squad, 'slain');
     }
+    // V171: watchers of this damage (rule/health/winded.md: half the Stamina maximum).
+    await observe({
+      target: { kind: 'foe', id: current._id },
+      kind: 'foe',
+      winded: windedValueOf(current.maxStamina),
+      before: { stamina: current.live.stamina, temporaryStamina: current.live.temporaryStamina },
+      after: {
+        stamina: application.staminaAfter,
+        temporaryStamina: application.temporaryStaminaAfter,
+      },
+      ...(dealer
+        ? { dealer, ...(options.dealerEffects ? { dealerEffects: options.dealerEffects } : {}) }
+        : {}),
+      preloaded: {
+        effectInstances: current.live.effectInstances ?? [],
+        ownedEffects: current.live.ownedEffects ?? [],
+      },
+    });
     return;
   }
   const character = (await ctx.db.get(target.character!._id))!;
@@ -1082,6 +1123,26 @@ export async function writeDamage(
     { stamina: application.staminaAfter, temporaryStamina: application.temporaryStaminaAfter },
     useEventId,
   );
+  // V171: watchers of this damage. Winded is the evaluated baseline's value (rule/health/winded.md).
+  const baseline = baselineOf(character.derivedBaseline);
+  if (baseline)
+    await observe({
+      target: { kind: 'character', id: character._id },
+      kind: 'hero',
+      winded: baseline.windedValue.value,
+      before: { stamina: live.stamina, temporaryStamina: live.temporaryStamina },
+      after: {
+        stamina: application.staminaAfter,
+        temporaryStamina: application.temporaryStaminaAfter,
+      },
+      ...(dealer
+        ? { dealer, ...(options.dealerEffects ? { dealerEffects: options.dealerEffects } : {}) }
+        : {}),
+      preloaded: {
+        effectInstances: live.effectInstances ?? [],
+        ownedEffects: live.ownedEffects ?? [],
+      },
+    });
 }
 
 /** Verbatim source record for the game log (the shape web/table/index.tsx EventSource reads). */

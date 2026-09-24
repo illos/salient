@@ -1,0 +1,515 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/**
+ * V171 watchers (docs/build/V171-watchers.md, docs/lasting-effects-design.md#3-watchers). A watcher
+ * is an effect instance whose payload names an event, the creature whose event it is, a printed
+ * limit and responses. The engine observes events where it already writes them:
+ * - damage taken and dealt, made winded and dying: the damage writer (resolve.ts writeDamage);
+ * - turn starts and ends: clock boundaries (clock.ts, `watcher` work registered with the instance);
+ * - abilities used and strikes made: the ability use's commit.
+ * A firing is written in the triggering operation's journal scope, so undo of that operation
+ * reverts the firing, its limit record and every response with it. Its log entry is linked to the
+ * operation. Corrections that would change a firing are refused (design section 7): the table
+ * rewinds to the use instead.
+ */
+import { ConvexError } from 'convex/values';
+import type { Doc, Id } from '../_generated/dataModel';
+import type { MutationCtx } from '../_generated/server';
+import type { DieResult } from '../../shared/contracts/history';
+import type { EffectInstance, OwnedEffect, WatcherFiring } from '../../shared/contracts/liveState';
+import { applyDamage } from '../../shared/resolve/index';
+import {
+  damageEvents,
+  describeWatcher,
+  watcherDue,
+  watches,
+  type WatchedOccurrence,
+} from '../../shared/resolve/watchers';
+import { applyConditionInstance } from './conditionInstances';
+import { committedEncounter } from './encounters';
+import { rollDice } from './dice';
+import { appendEvent } from './events';
+import { resolveHistoricalId } from './history';
+import { journalPatch, type JournalScope } from './journal';
+import { patchEffectInstance, readHolder, type EffectHolder } from './effectInstances';
+import { damageTargetFacts, writeDamage, type TargetRecord } from './resolve';
+
+/**
+ * Watchers set off by a watcher's own responses fire too, to this depth; deeper chains are left
+ * to the table. Engine guard, not a rule: it keeps two watchers that answer each other's damage
+ * from looping inside one operation.
+ */
+const MAX_DEPTH = 3;
+
+export interface ObserveOptions {
+  /** A correction's damage write: any watcher that would fire refuses the correction instead. */
+  correction?: boolean;
+  /** How many watcher firings led to this observation. */
+  depth?: number;
+}
+
+/** A creature's stored effects, when the caller already read them. */
+export type Preloaded = { effectInstances: EffectInstance[]; ownedEffects: OwnedEffect[] };
+
+type Found = { holder: EffectHolder; instance: EffectInstance; occurrence: WatchedOccurrence };
+
+/**
+ * The active watchers that watch these occurrences of one creature: those it holds, and those it
+ * owns elsewhere whose owner pointer names the event (effectInstances.ts). `preloaded` is the
+ * creature's record when the caller already read it.
+ */
+async function watchersOn(
+  ctx: MutationCtx,
+  campaignId: Id<'campaigns'>,
+  creature: EffectHolder,
+  occurrences: readonly WatchedOccurrence[],
+  preloaded?: Preloaded,
+): Promise<Found[]> {
+  const record = preloaded ?? (await readHolder(ctx, creature));
+  if (!record) return [];
+  const found: Found[] = [];
+  for (const instance of record.effectInstances)
+    for (const occurrence of occurrences)
+      if (watches(instance, creature.id, occurrence))
+        found.push({ holder: creature, instance, occurrence });
+  for (const pointer of record.ownedEffects) {
+    if (!pointer.watches || !occurrences.some(o => o.event === pointer.watches)) continue;
+    const holder: EffectHolder = {
+      kind: pointer.holder.kind,
+      id: await resolveHistoricalId(ctx, campaignId, pointer.holder.id),
+    };
+    const held = await readHolder(ctx, holder);
+    const instance = held?.effectInstances.find(
+      item => item.id === pointer.id && item.status === 'active',
+    );
+    if (!instance || held!.campaignId !== campaignId) continue;
+    for (const occurrence of occurrences)
+      if (watches(instance, holder.id, occurrence)) found.push({ holder, instance, occurrence });
+  }
+  return found;
+}
+
+/** Where the current encounter's limit windows are: its round and active turn. */
+async function windowOf(ctx: MutationCtx, campaignId: Id<'campaigns'>) {
+  const campaign = await ctx.db.get(campaignId);
+  const encounter = campaign ? await committedEncounter(ctx, campaign) : null;
+  if (!encounter || encounter.phase === 'closeout' || (encounter.round ?? 0) < 1) return {};
+  return {
+    encounterId: encounter._id as string,
+    round: encounter.round ?? 0,
+    ...(encounter.activeTurnId ? { turnId: encounter.activeTurnId as string } : {}),
+  };
+}
+
+/** The record the damage writer needs for a hero or foe, or the reason there is none. */
+async function recordOf(
+  ctx: MutationCtx,
+  party: EffectHolder & { name: string },
+): Promise<TargetRecord | string> {
+  if (party.kind === 'character') {
+    const character = await ctx.db.get(party.id as Id<'characters'>);
+    if (!character) return `${party.name} is no longer at the table`;
+    return {
+      actor: { kind: 'character', id: character._id, name: character.authored.name },
+      character,
+    };
+  }
+  const foe = await ctx.db.get(party.id as Id<'foes'>);
+  if (!foe) return `${party.name} is no longer at the table`;
+  // V158: a squad member's health is its squad's pool, which the watcher doesn't track.
+  if (foe.squadId) return `${foe.name} is in a squad, whose pool the table adjusts`;
+  return { actor: { kind: 'foe', id: foe._id, name: foe.name }, foe };
+}
+
+/** A die key the dice service accepts (8–128 letters, digits, underscores, hyphens). */
+function diceKey(scope: JournalScope, instanceId: string, index: string): string {
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < instanceId.length; i++) {
+    hash ^= instanceId.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return `watch_${scope.eventId}_${hash.toString(16)}_${index}`.slice(0, 128);
+}
+
+export interface Firing {
+  description: string;
+  dice: DieResult[];
+  data: Record<string, unknown>;
+}
+
+/**
+ * Fires one due watcher in the operation's journal scope: records the firing (its limit record),
+ * then applies its responses in printed order. Damage goes through the damage writer; the damage
+ * observations it produces are returned, so the caller logs this firing before any watcher they
+ * set off.
+ */
+async function execute(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  holder: EffectHolder,
+  instance: EffectInstance,
+  window: Omit<WatcherFiring, 'causeEventId'>,
+  deferred: DamageObservation[],
+): Promise<Firing> {
+  if (instance.payload.kind !== 'watcher') throw new ConvexError('Not a watcher.');
+  const watcher = instance.payload.watcher;
+  await patchEffectInstance(ctx, scope, holder, instance.id, current => ({
+    ...current,
+    firings: [...(current.firings ?? []), { causeEventId: scope.eventId, ...window }].slice(-200),
+  }));
+  const texts: string[] = [];
+  const dice: DieResult[] = [];
+  const applied: unknown[] = [];
+  const subjectHolds = instance.subject.kind === 'character' || instance.subject.kind === 'foe';
+  for (const [index, response] of watcher.responses.entries()) {
+    if (response.kind === 'instruction') {
+      texts.push(`for the table: "${response.text}"`);
+      applied.push({ kind: 'instruction', status: 'manual' });
+      continue;
+    }
+    const party =
+      response.recipient === 'owner'
+        ? instance.owner.kind === 'character' || instance.owner.kind === 'foe'
+          ? {
+              kind: instance.owner.kind,
+              id: await resolveHistoricalId(ctx, scope.campaignId, instance.owner.id),
+              name: instance.owner.name,
+            }
+          : undefined
+        : subjectHolds
+          ? { ...holder, name: instance.subject.name }
+          : undefined;
+    const record = party
+      ? await recordOf(ctx, party)
+      : `${instance.subject.name} has no live record`;
+    const who = party?.name ?? instance.subject.name;
+    if (typeof record === 'string') {
+      texts.push(`${who}: resolve at the table (${record})`);
+      applied.push({ kind: response.kind, status: 'manual', reason: record });
+      continue;
+    }
+    if (response.kind === 'gain') {
+      // rule/resource/surge.md (surges add); rule/health/temporary-stamina.md (the greater amount).
+      if (!record.character?.liveState) {
+        texts.push(
+          `${who} gains ${response.surges ?? 0} surges: resolve at the table (only heroes track surges)`,
+        );
+        applied.push({ kind: 'gain', status: 'manual' });
+        continue;
+      }
+      const live = record.character.liveState;
+      const surges = live.surges + (response.surges ?? 0);
+      const temporaryStamina =
+        response.temporaryStamina === undefined
+          ? live.temporaryStamina
+          : Math.max(live.temporaryStamina, response.temporaryStamina);
+      await journalPatch(ctx, scope, 'characters', record.character._id, {
+        liveState: { ...live, surges, temporaryStamina },
+      });
+      texts.push(
+        `${who} gains ${[
+          response.surges
+            ? `${response.surges} surge${response.surges === 1 ? '' : 's'} (${live.surges} → ${surges})`
+            : '',
+          response.temporaryStamina !== undefined
+            ? `${response.temporaryStamina} temporary Stamina (${live.temporaryStamina} → ${temporaryStamina}, the greater amount is kept)`
+            : '',
+        ]
+          .filter(Boolean)
+          .join(' and ')}`,
+      );
+      applied.push({
+        kind: 'gain',
+        status: 'applied',
+        recipient: record.actor,
+        surges,
+        temporaryStamina,
+      });
+      continue;
+    }
+    if (response.kind === 'condition') {
+      const condition = await applyConditionInstance(
+        ctx,
+        scope,
+        { kind: record.actor.kind as 'character' | 'foe', id: record.actor.id },
+        {
+          id: `${instance.id}:${scope.eventId}:${index}`,
+          condition: response.condition,
+          duration: response.duration,
+          sourceActorId: instance.sourceActorId,
+          sourceUseEventId: instance.sourceUseEventId,
+          abilityName: instance.abilityName,
+          actorLabel: instance.actorLabel,
+          sourcePath: instance.sourcePath,
+        },
+        window.encounterId ? (window.encounterId as Id<'encounters'>) : undefined,
+      );
+      texts.push(
+        `${who} is ${response.condition} (${response.duration === 'eot' ? 'EoT' : 'save ends'})${condition.registrationId ? '' : '; unscheduled outside combat'}`,
+      );
+      applied.push({ kind: 'condition', status: 'applied', conditionInstanceId: condition.id });
+      continue;
+    }
+    // Damage: a fixed amount or a roll, applied with the target's immunities and weaknesses
+    // (rule/damage/damage-immunity.md, damage-weakness.md) through the damage writer.
+    let amount: number;
+    let rolled = '';
+    if (typeof response.amount === 'number') amount = response.amount;
+    else {
+      const { count, sides } = response.amount.dice;
+      const accepted = await rollDice(
+        ctx,
+        scope.campaignId,
+        diceKey(scope, instance.id, `${instance.firings?.length ?? 0}_${index}`),
+        Array.from({ length: count }, (_, i) => ({ id: `watch${i}`, sides })),
+        null,
+      );
+      dice.push(...accepted.dice);
+      amount = accepted.dice.reduce((sum, die) => sum + die.value, 0);
+      rolled = `${count}d${sides} (${accepted.dice.map(d => d.value).join(' + ')}) = `;
+    }
+    const facts = damageTargetFacts(record);
+    const type = response.damageType ? ` ${response.damageType}` : '';
+    if ('missing' in facts) {
+      texts.push(
+        `${who} takes ${rolled}${amount}${type} damage: apply it at the table (${facts.missing})`,
+      );
+      applied.push({ kind: 'damage', status: 'manual', amount, reason: facts.missing });
+      continue;
+    }
+    const application = applyDamage(facts.facts, {
+      targetId: facts.facts.targetId,
+      amount,
+      ...(response.damageType ? { damageType: response.damageType } : {}),
+      causeLabel: `${instance.actorLabel}'s ${instance.abilityName}`,
+    });
+    await writeDamage(ctx, scope, record, application, undefined, { defer: deferred });
+    texts.push(
+      `${who} takes ${rolled}${amount}${type} damage${application.afterImmunity !== amount ? ` (${application.afterImmunity} after immunity and weakness)` : ''}; Stamina ${application.staminaBefore} → ${application.staminaAfter}${application.absorbedByTemporaryStamina ? ` (${application.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}`,
+    );
+    applied.push({ kind: 'damage', status: 'applied', recipient: record.actor, application });
+  }
+  return {
+    description: `${instance.actorLabel}'s ${instance.abilityName} (${instance.subject.name}) fires: ${texts.join('; ')}.`,
+    dice,
+    data: {
+      effectInstanceId: instance.id,
+      sourceUseEventId: instance.sourceUseEventId,
+      event: watcher.event,
+      window,
+      responses: applied,
+      sourcePath: instance.sourcePath,
+    },
+  };
+}
+
+/** One damage write's observation, kept until the causing firing is logged. */
+export interface DamageObservation {
+  target: EffectHolder;
+  kind: 'hero' | 'foe';
+  winded: number;
+  before: { stamina: number; temporaryStamina: number };
+  after: { stamina: number; temporaryStamina: number };
+  dealer?: EffectHolder;
+  dealerEffects?: Preloaded;
+  preloaded?: Preloaded;
+}
+
+/** Logs a firing, or a watcher left to the table, as a consequence of the causing operation. */
+async function log(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  kind: string,
+  description: string,
+  data: Record<string, unknown>,
+  dice?: DieResult[],
+) {
+  const cause = (await ctx.db.get(scope.eventId))!;
+  await appendEvent(ctx, {
+    campaignId: scope.campaignId,
+    sessionId: cause.sessionId,
+    encounterId: cause.encounterId,
+    origin: 'engine',
+    commandId: cause.commandId,
+    causeEventId: scope.eventId,
+    kind,
+    description,
+    ...(dice?.length ? { dice } : {}),
+    payload: { data },
+  });
+}
+
+/**
+ * Fires every watcher due for these occurrences of one creature, each within its limit, as
+ * linked consequences of the causing operation. Watchers set off by a firing's own damage fire
+ * after it is logged, up to MAX_DEPTH.
+ */
+export async function observeWatchers(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  creature: EffectHolder,
+  occurrences: readonly WatchedOccurrence[],
+  options: ObserveOptions = {},
+  preloaded?: Preloaded,
+): Promise<void> {
+  if (!occurrences.length) return;
+  const found = await watchersOn(ctx, scope.campaignId, creature, occurrences, preloaded);
+  if (!found.length) return;
+  const at = await windowOf(ctx, scope.campaignId);
+  const depth = options.depth ?? 0;
+  for (const { holder, instance: seen } of found) {
+    // An earlier firing in this loop may have ended or used it.
+    const instance = (await readHolder(ctx, holder))?.effectInstances.find(
+      item => item.id === seen.id && item.status === 'active',
+    );
+    if (!instance || instance.payload.kind !== 'watcher') continue;
+    const due = watcherDue(instance, at);
+    if (due.status === 'limited') continue;
+    const label = `${instance.actorLabel}'s ${instance.abilityName} (${instance.subject.name}; ${describeWatcher(instance.payload.watcher)})`;
+    if (options.correction) {
+      if (due.status === 'manual') continue;
+      throw new ConvexError(
+        `${label} watches this damage, and a correction can't recompute a watcher's firing. Rewind to the use and record it again instead.`,
+      );
+    }
+    const data = { effectInstanceId: instance.id, sourceUseEventId: instance.sourceUseEventId };
+    if (due.status === 'manual' || depth >= MAX_DEPTH) {
+      await log(
+        ctx,
+        scope,
+        'effect.watcher-manual',
+        `${label}: resolve at the table — ${due.status === 'manual' ? due.reason : 'it answers another watcher’s response, and the engine stops the chain here'}.`,
+        { ...data, sourcePath: instance.sourcePath },
+      );
+      continue;
+    }
+    const deferred: DamageObservation[] = [];
+    const fired = await execute(ctx, scope, holder, instance, due.window, deferred);
+    await log(ctx, scope, 'effect.watcher-fired', fired.description, fired.data, fired.dice);
+    for (const observation of deferred)
+      await observeDamage(ctx, scope, observation, { depth: depth + 1 });
+  }
+}
+
+/**
+ * The watchers one damage write sets off: the damaged creature's `damage-taken`, `made-winded` and
+ * `dying`, and the dealer's `damage-dealt` (shared/resolve/watchers.ts damageEvents).
+ */
+export async function observeDamage(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  observation: DamageObservation,
+  options: ObserveOptions = {},
+): Promise<void> {
+  const events = damageEvents(
+    observation.kind,
+    observation.winded,
+    observation.before,
+    observation.after,
+  );
+  await observeWatchers(
+    ctx,
+    scope,
+    observation.target,
+    events.map(event => ({
+      event,
+      creatureId: observation.target.id,
+      ...(observation.dealer ? { otherId: observation.dealer.id } : {}),
+    })),
+    options,
+    observation.preloaded,
+  );
+  if (observation.dealer && events.includes('damage-taken'))
+    await observeWatchers(
+      ctx,
+      scope,
+      observation.dealer,
+      [
+        {
+          event: 'damage-dealt',
+          creatureId: observation.dealer.id,
+          otherId: observation.target.id,
+        },
+      ],
+      options,
+      observation.dealerEffects,
+    );
+}
+
+/**
+ * The clock's `watcher` work (a turn start or end of the watched creature): fires the instance
+ * within its limit in the boundary operation's scope. The damage it deals sets off other watchers
+ * in the same scope.
+ */
+export async function fireClockWatcher(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  holder: EffectHolder,
+  instance: EffectInstance,
+  at: { encounterId: string; round: number; turnId?: string },
+  label: string,
+): Promise<{
+  kind: string;
+  description: string;
+  payload: unknown;
+  dice?: DieResult[];
+  unsupported?: string;
+}> {
+  const due = watcherDue(instance, at);
+  if (due.status === 'limited')
+    return {
+      kind: 'effect.watcher-limited',
+      description: `${label}: already fired within its limit.`,
+      payload: { effectInstanceId: instance.id },
+    };
+  if (due.status === 'manual')
+    return {
+      kind: 'effect.watcher-manual',
+      description: `${label}: resolve at the table — ${due.reason}.`,
+      payload: { effectInstanceId: instance.id, sourcePath: instance.sourcePath },
+      unsupported: due.reason,
+    };
+  const deferred: DamageObservation[] = [];
+  const fired = await execute(ctx, scope, holder, instance, due.window, deferred);
+  for (const observation of deferred) await observeDamage(ctx, scope, observation, { depth: 1 });
+  return {
+    kind: 'effect.watcher-fired',
+    description: fired.description,
+    payload: fired.data,
+    ...(fired.dice.length ? { dice: fired.dice } : {}),
+  };
+}
+
+/**
+ * Design section 7: a correction never silently re-derives a watcher's firing. When any watcher of
+ * these creatures fired from the use being corrected, the correction is refused so the table
+ * rewinds to the use instead.
+ */
+export async function assertWatchersReconcilable(
+  ctx: MutationCtx,
+  campaignId: Id<'campaigns'>,
+  useEvent: Doc<'events'>,
+  creatures: readonly EffectHolder[],
+): Promise<void> {
+  for (const creature of creatures) {
+    const record = await readHolder(ctx, creature);
+    if (!record) continue;
+    const instances = [...record.effectInstances];
+    for (const pointer of record.ownedEffects) {
+      if (!pointer.watches) continue;
+      const holder: EffectHolder = {
+        kind: pointer.holder.kind,
+        id: await resolveHistoricalId(ctx, campaignId, pointer.holder.id),
+      };
+      const held = await readHolder(ctx, holder);
+      const instance = held?.effectInstances.find(item => item.id === pointer.id);
+      if (instance) instances.push(instance);
+    }
+    const fired = instances.find(instance =>
+      instance.firings?.some(firing => firing.causeEventId === useEvent._id),
+    );
+    if (fired)
+      throw new ConvexError(
+        `This use set off ${fired.actorLabel}'s ${fired.abilityName} (${fired.subject.name}), and a correction can't recompute a watcher's firing. Rewind to the use and record it again instead.`,
+      );
+  }
+}

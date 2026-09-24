@@ -26,6 +26,7 @@ import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { useCommand } from '../ui';
 import { describeContribution, describeModifier } from '../../shared/resolve/modifiers';
+import { describeWatcher } from '../../shared/resolve/watchers';
 import { describeDuration } from '../../shared/resolve/lastingEffects';
 
 type Actor = { kind: 'character' | 'foe' | 'squad'; id: string; name: string };
@@ -520,18 +521,20 @@ export function CompiledEffects({
                   ? 'Manual effect'
                   : effect.kind === 'strained'
                     ? 'Strained effect'
-                    : effect.kind === 'modifier'
-                      ? 'Modifier'
-                      : effect.kind === 'gain'
-                        ? 'Gain'
-                        : effect.kind === 'push'
-                          ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
-                              /^./,
-                              letter => letter.toUpperCase(),
-                            )
-                          : effect.kind === 'condition'
-                            ? 'Condition'
-                            : 'Damage'}
+                    : effect.kind === 'watcher'
+                      ? 'Watcher'
+                      : effect.kind === 'modifier'
+                        ? 'Modifier'
+                        : effect.kind === 'gain'
+                          ? 'Gain'
+                          : effect.kind === 'push'
+                            ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
+                                /^./,
+                                letter => letter.toUpperCase(),
+                              )
+                            : effect.kind === 'condition'
+                              ? 'Condition'
+                              : 'Damage'}
               </strong>
               <Badge variant="outline">
                 {effect.kind === 'damage'
@@ -546,29 +549,33 @@ export function CompiledEffects({
                         : effect.status === 'not-strained'
                           ? 'Not strained'
                           : 'Manual'
-                      : effect.kind === 'modifier'
+                      : effect.kind === 'watcher'
                         ? effect.status === 'applied'
                           ? 'Tracked effect'
-                          : 'Manual modifier'
-                        : effect.kind === 'gain'
+                          : 'Manual watcher'
+                        : effect.kind === 'modifier'
                           ? effect.status === 'applied'
-                            ? 'Applied gain'
-                            : 'Manual gain'
-                          : effect.kind === 'condition'
+                            ? 'Tracked effect'
+                            : 'Manual modifier'
+                          : effect.kind === 'gain'
                             ? effect.status === 'applied'
-                              ? 'Applied condition'
-                              : effect.status === 'resisted'
-                                ? 'Resisted'
-                                : effect.status === 'immune'
-                                  ? 'Immune'
-                                  : effect.status === 'ineligible'
-                                    ? 'Too large to grab'
-                                    : effect.status === 'fact-needed'
-                                      ? 'Facts needed'
-                                      : 'Manual condition'
-                            : effect.kind === 'push'
-                              ? 'Outstanding instruction'
-                              : 'Unresolved'}
+                              ? 'Applied gain'
+                              : 'Manual gain'
+                            : effect.kind === 'condition'
+                              ? effect.status === 'applied'
+                                ? 'Applied condition'
+                                : effect.status === 'resisted'
+                                  ? 'Resisted'
+                                  : effect.status === 'immune'
+                                    ? 'Immune'
+                                    : effect.status === 'ineligible'
+                                      ? 'Too large to grab'
+                                      : effect.status === 'fact-needed'
+                                        ? 'Facts needed'
+                                        : 'Manual condition'
+                              : effect.kind === 'push'
+                                ? 'Outstanding instruction'
+                                : 'Unresolved'}
               </Badge>
             </span>
             <span className="[overflow-wrap:anywhere]">
@@ -709,6 +716,15 @@ export function CompiledEffects({
                   : `Apply it at the table: ${effect.requirements.join('; ')}.`}
               </span>
             )}
+            {effect.kind === 'watcher' && (
+              <span>
+                {effect.payload ? describeWatcher(effect.payload) : 'Amount unknown'} ·{' '}
+                {describeDuration(effect.spec.duration, effect.spec.endsWhen)}.{' '}
+                {effect.status === 'applied'
+                  ? 'The engine fires it when that happens; end it with /effect end.'
+                  : `Resolve it at the table: ${effect.requirements.join('; ')}.`}
+              </span>
+            )}
             {effect.kind === 'strained' && (
               <span>
                 {effect.status === 'not-strained'
@@ -737,6 +753,7 @@ export function CompiledEffects({
             {effect.kind !== 'damage' &&
               (effect.kind !== 'gain' || effect.status === 'manual') &&
               (effect.kind !== 'modifier' || effect.status === 'manual') &&
+              (effect.kind !== 'watcher' || effect.status === 'manual') &&
               (effect.kind !== 'strained' || effect.status === 'manual') &&
               (effect.kind !== 'condition' ||
                 effect.status === 'fact-needed' ||

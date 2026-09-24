@@ -12,6 +12,7 @@
 import type { EffectRider } from './effectRiders.ts';
 import { plain } from './abilityGrammar.ts';
 import { EFFECT_ONLY_MODIFIERS, type ModifierSpec } from './modifiers.ts';
+import { EFFECT_ONLY_WATCHERS, type WatcherSpec } from './watchers.ts';
 
 /**
  * The effect-only target reader. rule/combat/target.md: the entry is the most that can be
@@ -23,12 +24,16 @@ import { EFFECT_ONLY_MODIFIERS, type ModifierSpec } from './modifiers.ts';
  * - `area`: "Each ally in the area"; the table selects the affected allies (V110). V159: "Self
  *   and each ally in the area" (feature/ability/tactician/level-2/squad-on-me.md) also names the
  *   user, who is always a target (`self`).
+ * - `each`: V171 "Self and each ally" without an area (feature/ability/conduit/level-2/
+ *   blessing-of-insight.md): every ally within distance, which the table selects (there is no map),
+ *   and the user, who is always a target.
  */
 export type EffectOnlyTarget =
   | { kind: 'self' }
   | { kind: 'one'; self: boolean }
   | { kind: 'allies'; max: number; self: boolean }
-  | { kind: 'area'; self?: true };
+  | { kind: 'area'; self?: true }
+  | { kind: 'each'; self: true };
 
 const COUNT: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 };
 
@@ -42,6 +47,7 @@ export function effectOnlyTarget(target: string, keywords: string[]): EffectOnly
         ? { kind: 'area', self: true }
         : undefined;
   if (text === 'self') return { kind: 'self' };
+  if (text === 'self and each ally') return { kind: 'each', self: true };
   if (text === 'one creature' || text === 'one ally') return { kind: 'one', self: false };
   if (text === 'self or one ally' || text === 'self or one creature')
     return { kind: 'one', self: true };
@@ -61,6 +67,7 @@ export function effectOnlyTargetLimit(shape: EffectOnlyTarget): number | undefin
     case 'allies':
       return shape.max + (shape.self ? 1 : 0);
     case 'area':
+    case 'each':
       return undefined;
   }
 }
@@ -83,6 +90,12 @@ export type EffectOnlyClause =
       kind: 'modifier';
       subject: 'actor' | 'target';
       spec: ModifierSpec;
+    }
+  | {
+      /** V171: a watcher the engine runs (shared/resolve/watchers.ts). */
+      kind: 'watcher';
+      subject: 'actor' | 'target';
+      spec: WatcherSpec;
     };
 
 interface Pattern {
@@ -156,6 +169,16 @@ const PATTERNS: readonly Pattern[] = [
       const spec = read(match);
       return spec
         ? { kind: 'modifier', subject: spec.subject === 'owner' ? 'actor' : 'target', spec }
+        : undefined;
+    },
+  })),
+  // ---- V171 watchers the engine runs, each citing its source in shared/resolve/watchers.ts.
+  ...EFFECT_ONLY_WATCHERS.map(({ pattern, read }) => ({
+    pattern,
+    read: (match: RegExpExecArray): EffectOnlyClause | undefined => {
+      const spec = read(match);
+      return spec
+        ? { kind: 'watcher', subject: spec.subject === 'owner' ? 'actor' : 'target', spec }
         : undefined;
     },
   })),

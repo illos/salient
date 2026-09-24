@@ -14,6 +14,7 @@
 import { v } from 'convex/values';
 import { query } from './_generated/server';
 import type { DerivedBaseline } from '../shared/contracts/characterEvaluation';
+import { describeWatcher } from '../shared/resolve/watchers';
 import type { Doc } from './_generated/dataModel';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
@@ -74,6 +75,9 @@ function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerica
         endsWhen: instance.endsWhen,
         scheduled: instance.registrationIds.length > 0,
         ...(instance.manualStacking ? { manualStacking: true } : {}),
+        ...(instance.payload.kind === 'watcher'
+          ? { watching: describeWatcher(instance.payload.watcher) }
+          : {}),
       })),
     health,
     summary: director ? foeSummary(foe.sourceSnapshot) : null,
@@ -243,6 +247,7 @@ export const roster = query({
             endsWhen: v.array(effectEndTriggerValidator),
             scheduled: v.boolean(),
             manualStacking: v.optional(v.boolean()),
+            watching: v.optional(v.string()),
           }),
         ),
         health: foeHealthValidator,

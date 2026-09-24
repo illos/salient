@@ -41,6 +41,7 @@ import {
   endUnmaintainedEffects,
   expireEffectInstance,
   findEffectInstance,
+  patchEffectInstance,
   recordEffectSave,
   unscheduleEffectInstance,
 } from './effectInstances';
@@ -54,6 +55,7 @@ import {
 import { applyDamage, saveSucceeds } from '../../shared/resolve/index';
 import { statModifiers, type StatContribution } from '../../shared/resolve/modifiers';
 import { damageTargetFacts, writeDamage } from './resolve';
+import { fireClockWatcher } from './watchers';
 
 export type Registration = Doc<'clockRegistrations'>;
 
@@ -732,6 +734,38 @@ async function fire(
         payload: { effectInstanceId: found.instance.id, creatureId },
       };
     }
+    case 'watcher': {
+      // V171 (docs/lasting-effects-design.md#3-watchers): a watcher of the watched creature's turn
+      // start or end fires within its limit.
+      const creatureId = firing.registration.affectedIds?.[0];
+      const effect = creatureId
+        ? await findEffectInstance(ctx, creatureId, work.effectInstanceId)
+        : null;
+      if (
+        !effect ||
+        effect.campaignId !== firing.encounter.campaignId ||
+        effect.instance.status !== 'active' ||
+        effect.instance.payload.kind !== 'watcher' ||
+        !effect.instance.registrationIds.includes(firing.registration._id)
+      )
+        return {
+          kind: 'clock.unsupported',
+          description: `${firing.registration.source.label}: no active watcher; resolve manually.`,
+          unsupported: 'no active watcher',
+        };
+      return fireClockWatcher(
+        ctx,
+        firing.scope,
+        effect.holder,
+        effect.instance,
+        {
+          encounterId: firing.encounter._id,
+          round: firing.event.round,
+          ...(firing.event.turn ? { turnId: firing.event.turn.turnId } : {}),
+        },
+        firing.registration.source.label,
+      );
+    }
     case 'saving-throw': {
       const found = await findConditionInstance(ctx, work.creatureId, work.effectInstanceId);
       // V158: a save-ends effect instance takes the same saving throw (rule/general/saving-throw.md).
@@ -1012,6 +1046,21 @@ export async function dispatchBoundary(
     knownHeroes?.clear();
     for (const registration of await activeRegistrations(ctx, encounterId)) {
       const work = registration.work as ScheduledWorkKind;
+      // V171: a watcher's turn work ends with the encounter (there are no turns outside combat);
+      // its expiry or save, if any, is unscheduled below as for every lasting effect.
+      if (work.kind === 'watcher') {
+        await retireWork(ctx, scope, registration._id);
+        const holderId = registration.affectedIds?.[0];
+        const effect = holderId
+          ? await findEffectInstance(ctx, holderId, work.effectInstanceId)
+          : null;
+        if (effect)
+          await patchEffectInstance(ctx, scope, effect.holder, effect.instance.id, instance => ({
+            ...instance,
+            registrationIds: instance.registrationIds.filter(id => id !== registration._id),
+          }));
+        continue;
+      }
       if (work.kind !== 'saving-throw' && work.kind !== 'expire-effect') continue;
       const creatureId =
         work.kind === 'saving-throw' ? work.creatureId : registration.affectedIds?.[0];

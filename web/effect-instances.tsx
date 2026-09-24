@@ -24,6 +24,8 @@ export interface ActiveEffect {
   scheduled: boolean;
   /** V158: part of a same-ability overlap the table resolves (QC1 R1b). */
   manualStacking?: boolean;
+  /** V171: what a watcher watches and does, as the shared describer words it. */
+  watching?: string;
 }
 
 export function ActiveEffects({
@@ -55,6 +57,9 @@ export function ActiveEffects({
                     : ' (unscheduled)'}
               </span>
               <span className="text-muted-foreground">{effect.text}</span>
+              {effect.watching && (
+                <span className="text-muted-foreground">Watcher: {effect.watching}.</span>
+              )}
             </span>
             {campaignId && (
               <Button

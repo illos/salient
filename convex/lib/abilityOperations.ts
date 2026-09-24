@@ -103,6 +103,8 @@ import {
 } from './resourceTriggers';
 import { rollDice } from './dice';
 import { commitStrained, planStrained, withStrainedPlan, type StrainedPlan } from './strainedUse';
+import { assertWatchersReconcilable, observeWatchers } from './watchers';
+import { describeWatcher } from '../../shared/resolve/watchers';
 import { strainedExtraDamage, strainedState } from '../../shared/resolve/strained';
 import {
   abilitiesFor,
@@ -1080,7 +1082,8 @@ function markManual<T extends import('../../shared/contracts/compiledResult').Ef
   manualIds: ReadonlySet<string>,
 ): T[] {
   return occurrences.map(occurrence =>
-    manualIds.has(occurrence.id) && occurrence.effect.kind === 'modifier'
+    manualIds.has(occurrence.id) &&
+    (occurrence.effect.kind === 'modifier' || occurrence.effect.kind === 'watcher')
       ? {
           ...occurrence,
           effect: {
@@ -1187,6 +1190,120 @@ async function commitModifiers(
     });
   }
   return manualIds;
+}
+
+/**
+ * V171: each applied watcher of a compiled use becomes a `watcher` effect instance on its subject
+ * (docs/lasting-effects-design.md#3-watchers), with its duration bound and its turn work
+ * registered. The engine fires it when the watched event happens (convex/lib/watchers.ts).
+ */
+async function commitWatchers(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  occurrences: import('../../shared/contracts/compiledResult').EffectOccurrence[],
+  recipients: { actor: Actor }[],
+  source: {
+    eventId: Id<'events'>;
+    abilityId: string;
+    abilityName: string;
+    actor: Actor;
+    sourcePath: string;
+  },
+  encounterId: Id<'encounters'> | null,
+): Promise<Set<string>> {
+  const manualIds = new Set<string>();
+  const cause = (await ctx.db.get(scope.eventId))!;
+  const use = (await ctx.db.get(source.eventId))!;
+  for (const occurrence of occurrences) {
+    const effect = occurrence.effect;
+    if (effect.kind !== 'watcher') continue;
+    const owner = { kind: source.actor.kind, id: source.actor.id, name: source.actor.name };
+    const recipient = recipients.find(r => r.actor.id === effect.targetId)?.actor;
+    const subject = recipient
+      ? { kind: recipient.kind, id: recipient.id, name: recipient.name }
+      : undefined;
+    const lasts = describeDuration(effect.spec.duration, effect.spec.endsWhen);
+    const result =
+      effect.status === 'applied' && effect.payload && subject
+        ? await applyEffectInstance(
+            ctx,
+            scope,
+            {
+              id: occurrence.id,
+              kind: 'watcher',
+              sourceUseEventId: source.eventId,
+              sourceActorId: source.actor.id,
+              abilityId: source.abilityId,
+              abilityName: source.abilityName,
+              actorLabel: source.actor.name,
+              sourcePath: source.sourcePath,
+              clause: plainText(effect.clause),
+              owner,
+              subject,
+              payload: { kind: 'watcher', text: effect.spec.text, watcher: effect.payload },
+              printedDuration: effect.spec.duration,
+              endsWhen: effect.spec.endsWhen,
+              appliedSequence: use.sequence,
+            },
+            encounterId ?? undefined,
+          )
+        : undefined;
+    const tracked = result && 'instance' in result ? result : undefined;
+    const manualGroup = tracked?.manualGroup === true;
+    if (manualGroup) manualIds.add(occurrence.id);
+    const stored = manualGroup ? undefined : tracked;
+    const untracked = result !== undefined && stored === undefined;
+    const turnWork = effect.payload?.event === 'turn-start' || effect.payload?.event === 'turn-end';
+    const scheduled = stored?.instance.registrationIds.length
+      ? ''
+      : turnWork || !['none', 'maintained'].includes(effect.spec.duration.kind)
+        ? '. Outside a committed encounter nothing is scheduled: resolve it at the table and end it with /effect end'
+        : '';
+    await appendEvent(ctx, {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      encounterId: cause.encounterId,
+      origin: 'engine',
+      commandId: cause.commandId,
+      causeEventId: scope.eventId,
+      kind: untracked ? 'effect.untracked' : 'effect.applied',
+      description: stored
+        ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}, ${lasts}: ${describeWatcher(effect.payload!)}. The engine fires it when that happens${scheduled}.${stored.superseded ? ` It replaces ${stored.superseded.actorLabel}'s earlier use, because the most recent use of the same ability sets the duration (Stacking Unique Effects).` : ''}`
+        : manualGroup
+          ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}, ${lasts}: "${effect.spec.text}" ${subject!.name} is already under ${source.abilityName} in a way the engine can't resolve, so this use and the earlier ones form a manual stacking group. The engine fires none of them: apply the stacking rule at the table (Stacking Unique Effects), then end them with /effect end.`
+          : untracked
+            ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}, ${lasts}: "${effect.spec.text}" This effect can't be tracked on a squad or object; resolve it at the table.`
+            : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); resolve it at the table.`,
+      payload: {
+        sourceUseEventId: source.eventId,
+        occurrence: occurrence.id,
+        effectInstanceId: stored?.instance.id ?? null,
+        holder: result?.holder ?? null,
+        duration: stored?.instance.duration ?? null,
+        watcher: effect.payload ?? null,
+        sourcePath: source.sourcePath,
+      },
+    });
+  }
+  return manualIds;
+}
+
+/**
+ * V171: the user's `ability-used` and, for a strike, `strike-made` watchers
+ * (rule/combat/strike.md: a strike is an ability with the Strike keyword).
+ */
+async function observeUse(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  actor: Actor,
+  keywords: readonly string[],
+) {
+  if (actor.kind !== 'character' && actor.kind !== 'foe') return;
+  const strike = keywords.some(keyword => plainText(keyword).toLowerCase() === 'strike');
+  await observeWatchers(ctx, scope, { kind: actor.kind, id: actor.id }, [
+    { event: 'ability-used', creatureId: actor.id },
+    ...(strike ? [{ event: 'strike-made' as const, creatureId: actor.id }] : []),
+  ]);
 }
 
 /** V159: a hero's or foe's stored effect instances; squads and objects hold none. */
@@ -1454,8 +1571,9 @@ const abilityUse: OperationDefinition = {
       ability.compilation?.mode === 'compiled' && ability.compilation.definition.effectOnly
         ? ability.compilation.definition.activation?.targetShape
         : undefined;
+    // V171: so does "Self and each ally" (feature/ability/conduit/level-2/blessing-of-insight.md).
     if (
-      effectOnlyShape?.kind === 'area' &&
+      (effectOnlyShape?.kind === 'area' || effectOnlyShape?.kind === 'each') &&
       effectOnlyShape.self === true &&
       !targets.some(t => sameActor(t.actor, actor!))
     )
@@ -1770,6 +1888,10 @@ const abilityUse: OperationDefinition = {
       const nameOf = (id: string) =>
         id === actor!.id ? actor!.name : (targets.find(t => t.actor.id === id)?.actor.name ?? id);
       const describeEffect = (effect: CompiledEffectOutcome) => {
+        if (effect.kind === 'watcher')
+          return effect.status === 'applied' && effect.payload
+            ? `${nameOf(effect.targetId)}: ${describeWatcher(effect.payload)}, ${describeDuration(effect.spec.duration, effect.spec.endsWhen)} (tracked; the linked effect entry records whether the engine fires it).`
+            : `For the table (${nameOf(effect.targetId)}): "${effect.clause}"`;
         if (effect.kind === 'modifier')
           return effect.status === 'applied' && effect.payload
             ? `${nameOf(effect.targetId)}: ${describeModifier(effect.payload)}, ${describeDuration(effect.spec.duration, effect.spec.endsWhen)} (tracked; the linked effect entry records whether it applies automatically).`
@@ -1824,6 +1946,8 @@ const abilityUse: OperationDefinition = {
             await debit(mctx, scope, records, context, outcome.cost.after, outcome.cost.resource);
           // V158: "until you use this ability again" ends the owner's earlier effects of it.
           await endReusedEffects(mctx, scope, actor!, ability.abilityId);
+          // V171: the user's watchers of their own ability use.
+          await observeUse(mctx, scope, actor!, ability.keywords);
           // 2. Gains on each hero's live state (temporary Stamina keeps the greater; surges add).
           for (const write of outcome.writes) {
             const record =
@@ -1853,6 +1977,21 @@ const abilityUse: OperationDefinition = {
             },
             allowance.encounterId,
           );
+          // V171: watchers become watcher effect instances on each subject.
+          const watcherIds = await commitWatchers(
+            mctx,
+            scope,
+            effects(scope.eventId),
+            [records, ...targets],
+            {
+              eventId: scope.eventId,
+              abilityId: ability.abilityId,
+              abilityName: ability.name,
+              actor: actor!,
+              sourcePath: ability.source.path,
+            },
+            allowance.encounterId,
+          );
           // 3. The effective record: occurrences and their dispositions; no dice or outcome.
           await journalInsert(mctx, scope, 'abilityResults', {
             campaignId: scope.campaignId,
@@ -1867,7 +2006,7 @@ const abilityUse: OperationDefinition = {
               definition,
               inputs: effectInput,
               revision: scope.eventId,
-              effects: markManual(effects(scope.eventId), manualIds),
+              effects: markManual(effects(scope.eventId), new Set([...manualIds, ...watcherIds])),
             } satisfies CompiledResult,
             abilityName: ability.name,
             selectedCharacteristic: null,
@@ -2003,7 +2142,19 @@ const abilityUse: OperationDefinition = {
           source: { ...source, supporting },
         },
         commit: async (mctx, scope) => {
-          if (application) await writeDamage(mctx, scope, target, application);
+          // V171: the user's watchers of their own ability use and strike.
+          await observeUse(mctx, scope, actor!, ability.keywords);
+          if (application)
+            await writeDamage(
+              mctx,
+              scope,
+              target,
+              application,
+              undefined,
+              actor!.kind === 'character' || actor!.kind === 'foe'
+                ? { dealer: { kind: actor!.kind, id: actor!.id } }
+                : {},
+            );
           await commitSquadPlans(mctx, scope, strikePlans);
           await recordUse(mctx, scope, allowance, actor!, 'main action', ability.name, tracking);
           await clear(mctx);
@@ -2292,10 +2443,31 @@ const abilityUse: OperationDefinition = {
           consumed.map(c => ({ holder: holderOf(c.subjectId), instanceId: c.instanceId })),
           `${actor!.name}'s ${ability.name} roll`,
         );
+        // V171: the user's watchers of their own ability use.
+        await observeUse(mctx, scope, actor!, ability.keywords);
         // 2. Damage to every target in target order (R04 4.5); squad pools once per squad.
+        // V171: the user deals it, for `damage-dealt` watchers.
+        const actorEffects = records.character
+          ? {
+              effectInstances: records.character.liveState?.effectInstances ?? [],
+              ownedEffects: records.character.liveState?.ownedEffects ?? [],
+            }
+          : records.foe
+            ? {
+                effectInstances: records.foe.live.effectInstances ?? [],
+                ownedEffects: records.foe.live.ownedEffects ?? [],
+              }
+            : undefined;
+        const dealer =
+          actor!.kind === 'character' || actor!.kind === 'foe'
+            ? {
+                dealer: { kind: actor!.kind, id: actor!.id },
+                ...(actorEffects ? { dealerEffects: actorEffects } : {}),
+              }
+            : {};
         for (const p of perTarget) {
           const record = targets.find(t => sameActor(t.actor, p.target))!;
-          if (p.applied) await writeDamage(mctx, scope, record, p.applied);
+          if (p.applied) await writeDamage(mctx, scope, record, p.applied, undefined, dealer);
         }
         await commitSquadPlans(mctx, scope, squadPlans);
         if (grabPlan)
@@ -2324,6 +2496,24 @@ const abilityUse: OperationDefinition = {
         const manualIds =
           compiledOutcome?.kind === 'resolved'
             ? await commitModifiers(
+                mctx,
+                scope,
+                effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+                targets,
+                {
+                  eventId: scope.eventId,
+                  abilityId: ability.abilityId,
+                  abilityName: ability.name,
+                  actor: actor!,
+                  sourcePath: ability.source.path,
+                },
+                allowance.encounterId,
+              )
+            : new Set<string>();
+        // V171: applied watchers become watcher effect instances on their subjects.
+        const watcherIds =
+          compiledOutcome?.kind === 'resolved'
+            ? await commitWatchers(
                 mctx,
                 scope,
                 effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
@@ -2373,7 +2563,7 @@ const abilityUse: OperationDefinition = {
                   revision: scope.eventId,
                   effects: markManual(
                     effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
-                    manualIds,
+                    new Set([...manualIds, ...watcherIds]),
                   ),
                 } satisfies CompiledResult,
               }
@@ -2673,6 +2863,27 @@ const abilityCorrect: OperationDefinition = {
         correction.temporaryStaminaReconciliationDelta !== 0)
     )
       await assertCorrectionReconcilable(ctx, event, targetRecord.character._id);
+    // V171 (docs/lasting-effects-design.md#7-history-and-corrections): a watcher this use set off
+    // can't be re-derived by a correction; the table rewinds instead.
+    const correctionDealer =
+      result.actor.kind === 'character' || result.actor.kind === 'foe'
+        ? {
+            kind: result.actor.kind,
+            id: await resolveHistoricalId(ctx, context.campaign._id, result.actor.id),
+          }
+        : undefined;
+    if (
+      correction.staminaReconciliationDelta !== 0 ||
+      correction.temporaryStaminaReconciliationDelta !== 0
+    )
+      await assertWatchersReconcilable(ctx, context.campaign._id, event, [
+        ...(correctionDealer ? [correctionDealer] : []),
+        ...(targetRecord.character
+          ? [{ kind: 'character' as const, id: targetRecord.character._id }]
+          : targetRecord.foe
+            ? [{ kind: 'foe' as const, id: targetRecord.foe._id }]
+            : []),
+      ]);
     // Only a rolled use reaches here (effect-only uses are refused above).
     const savedCompiled = result.compiled as
       (CompiledResult & { inputs: CompiledAbilityInput }) | undefined;
@@ -2716,6 +2927,8 @@ const abilityCorrect: OperationDefinition = {
               ((effect.kind !== 'rider' || effect.tier) && effect.targetId !== entry.target.id) ||
               (effect.kind === 'rider' && effect.lasting) ||
               effect.kind === 'modifier' ||
+              // V171: a watcher section is once per use too; it keeps its occurrence and instance.
+              effect.kind === 'watcher' ||
               // V170: the Strained outcome is once per use and records the user's damage as applied.
               effect.kind === 'strained'
             ) {
@@ -2837,6 +3050,7 @@ const abilityCorrect: OperationDefinition = {
                 facts.facts.temporaryStamina + correction.temporaryStaminaReconciliationDelta,
             },
             event._id,
+            correctionDealer ? { dealer: correctionDealer } : {},
           );
         if (savedCompiled && correctedCompiled?.kind === 'resolved') {
           for (const occurrence of savedCompiled.effects) {
@@ -2953,6 +3167,11 @@ const abilityResolved: OperationDefinition = {
       if (occurrence.effect.kind === 'modifier' && occurrence.effect.status === 'applied')
         throw new ConvexError(
           'An applied modifier is tracked by the engine; exclude it on a roll or end it with /effect end.',
+        );
+      // V171: an applied watcher is tracked by the engine, which fires it.
+      if (occurrence.effect.kind === 'watcher' && occurrence.effect.status === 'applied')
+        throw new ConvexError(
+          'An applied watcher is tracked by the engine, which fires it; end it with /effect end.',
         );
       // V170: an applied Strained section already dealt its damage; an inapplicable one did nothing.
       if (occurrence.effect.kind === 'strained' && occurrence.effect.status !== 'manual')

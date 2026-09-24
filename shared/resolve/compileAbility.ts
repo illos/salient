@@ -10,6 +10,7 @@ import { tierInstruction } from './effectRiders.ts';
 import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import { sectionModifier, type ModifierSpec } from './modifiers.ts';
 import { strainedSection, type StrainedSpec } from './strained.ts';
+import { sectionWatcher, type WatcherSpec } from './watchers.ts';
 import {
   effectOnlyTarget,
   readEffectOnlySection,
@@ -126,6 +127,15 @@ export interface ModifierNode extends NodeSource {
   spec: ModifierSpec;
 }
 /**
+ * V171 watcher: a whole printed sentence (a rolled ability's Effect section, or one sentence of an
+ * effect-only section) that a use stores as a `watcher` effect instance the engine fires when the
+ * watched event happens (shared/resolve/watchers.ts).
+ */
+export interface WatcherNode extends NodeSource {
+  kind: 'watcher';
+  spec: WatcherSpec;
+}
+/**
  * V170: a whole Strained section of a rolled ability (shared/resolve/strained.ts). It applies only
  * when the use is strained (feature/talent/level-1/clarity-and-strain.md), which the use decides
  * from the clarity pool or the table's declaration.
@@ -148,7 +158,13 @@ export type CompiledNode =
   DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
 /** Effect-section nodes: V109 riders, V157 effect-only gains and instructions, or manual work. */
 export type SectionNode =
-  UnsupportedNode | RiderNode | GainNode | InstructionNode | ModifierNode | StrainedNode;
+  | UnsupportedNode
+  | RiderNode
+  | GainNode
+  | InstructionNode
+  | ModifierNode
+  | StrainedNode
+  | WatcherNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -287,13 +303,15 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
             ? { ...node, ...clause }
             : clause.kind === 'modifier'
               ? { ...node, kind: 'modifier', spec: clause.spec }
-              : {
-                  ...node,
-                  kind: 'instruction',
-                  shape: clause.shape,
-                  after: '',
-                  subject: clause.subject,
-                },
+              : clause.kind === 'watcher'
+                ? { ...node, kind: 'watcher', spec: clause.spec }
+                : {
+                    ...node,
+                    kind: 'instruction',
+                    shape: clause.shape,
+                    after: '',
+                    subject: clause.subject,
+                  },
         );
       });
       return;
@@ -310,6 +328,20 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           ...sourceNode(envelope, locator, 0, block.text),
           kind: 'strained',
           spec: strained,
+        });
+        return;
+      }
+      // V171: a whole Effect section that is one watcher sentence the engine runs. "The target"
+      // work needs one target (V110), which holds the watcher.
+      const watcher =
+        block.label === 'Effect' && !block.cost && rollIndex >= 0
+          ? sectionWatcher(plain(block.text))
+          : undefined;
+      if (watcher && watcher.subject === 'target' && grammar.targetShape === 'single') {
+        sections.push({
+          ...sourceNode(envelope, locator, 0, block.text),
+          kind: 'watcher',
+          spec: watcher,
         });
         return;
       }
@@ -827,7 +859,11 @@ function readEffectOnly(
       read.some(
         sentence =>
           (sentence.singleTarget && target.kind !== 'one' && target.kind !== 'self') ||
-          (sentence.clause.subject === 'actor' && target.kind !== 'self'),
+          (sentence.clause.subject === 'actor' && target.kind !== 'self') ||
+          // V171: an area's (or an aura's, rule/combat/aura.md: it "moves with you for the
+          // duration") membership changes over a watcher's life; area membership is design
+          // section 6, so such a watcher stays manual (Blessing of the Faithful).
+          (sentence.clause.kind === 'watcher' && target.kind === 'area'),
       )
     )
       return undefined;

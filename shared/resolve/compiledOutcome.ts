@@ -28,7 +28,14 @@ import {
   type ModifierSpec,
   type StatContribution,
 } from './modifiers.ts';
-import type { ModifierPayload } from '../contracts/liveState.ts';
+import type { ModifierPayload, Watcher } from '../contracts/liveState.ts';
+import {
+  bindWatcher,
+  effectOnlyWatcher,
+  sameWatcherSpec,
+  sectionWatcher,
+  type WatcherSpec,
+} from './watchers.ts';
 import {
   sameStrainedSpec,
   strainedExtraDamage,
@@ -328,7 +335,24 @@ export interface CompiledStrainedOutcome extends EffectIdentity {
   requirements: string[];
 }
 
+/**
+ * V171 watcher of one subject (docs/lasting-effects-design.md#3-watchers). `applied`: the use stores
+ * a `watcher` effect instance on a hero or foe, and the engine fires it when the watched event
+ * happens. `manual`: the subject can't hold one (an object, or a squad minion, whose events the
+ * engine doesn't observe per creature) or a printed amount is unknown; the table resolves it.
+ */
+export interface CompiledWatcherOutcome extends EffectIdentity {
+  kind: 'watcher';
+  status: 'applied' | 'manual';
+  subject: 'actor' | 'target';
+  spec: WatcherSpec;
+  /** The watcher with its printed amounts bound at use; absent when an amount is unknown. */
+  payload?: Watcher;
+  requirements: string[];
+}
+
 export type CompiledEffectOutcome =
+  | CompiledWatcherOutcome
   | CompiledStrainedOutcome
   | CompiledDamageOutcome
   | CompiledPushOutcome
@@ -361,6 +385,35 @@ function modifierOutcome(
   return {
     ...identity,
     kind: 'modifier',
+    status: requirements.length ? 'manual' : 'applied',
+    subject,
+    spec,
+    ...('payload' in bound ? { payload: bound.payload } : {}),
+    requirements,
+  };
+}
+
+/**
+ * V171: one subject's watcher outcome. As for modifiers, only a hero or a foe outside a squad holds
+ * the instance (V158: squads and objects are not tracked).
+ */
+function watcherOutcome(
+  identity: EffectIdentity,
+  spec: WatcherSpec,
+  subject: 'actor' | 'target',
+  holder: 'hero' | 'foe' | 'object' | 'squad' | undefined,
+  characteristics: Partial<Record<Characteristic, number>> | undefined,
+): CompiledWatcherOutcome {
+  const requirements: string[] = [];
+  const bound = bindWatcher(spec.watcher, characteristics);
+  if ('requirement' in bound) requirements.push(bound.requirement);
+  if (holder !== 'hero' && holder !== 'foe')
+    requirements.push(
+      `${subject === 'actor' ? 'actor' : `target:${identity.targetId}`}.${holder ?? 'unknown'} holds no watcher the engine runs`,
+    );
+  return {
+    ...identity,
+    kind: 'watcher',
     status: requirements.length ? 'manual' : 'applied',
     subject,
     spec,
@@ -599,6 +652,16 @@ export function resolveCompiledAbility(
           !sameStrainedSpec(again, node.spec) ||
           !strainedAdmitted(again, definition.tiers, shape.kind) ||
           definition.sections.filter(other => other.kind === 'strained').length !== 1
+        );
+      }
+      // V171: a watcher re-reads to the same spec, or the definition was tampered with.
+      if (node.kind === 'watcher') {
+        const again = sectionWatcher(plain(node.clause));
+        return (
+          !again ||
+          !sameWatcherSpec(again, node.spec) ||
+          again.subject !== 'target' ||
+          shape.kind !== 'single'
         );
       }
       // V159: a modifier re-reads to the same spec, or the definition was tampered with.
@@ -844,6 +907,21 @@ export function resolveCompiledAbility(
       });
       continue;
     }
+    // V171: a watcher section is once per use and independent of the roll; "the target" is the
+    // single target (V110), which holds its instance.
+    if (node.kind === 'watcher') {
+      const targetId = roll.targets[0]!.targetId;
+      remainder.push(
+        watcherOutcome(
+          { nodeId: node.id, targetId, locator: node.locator, clause: node.clause },
+          node.spec,
+          'target',
+          input.conditionFacts?.targets.find(fact => fact.targetId === targetId)?.kind,
+          input.actor.characteristics,
+        ),
+      );
+      continue;
+    }
     // V159: a modifier section is once per use and independent of the roll; it applies to the
     // single target (V110), which holds its instance.
     if (node.kind === 'modifier') {
@@ -998,7 +1076,12 @@ export function resolveEffectOnly(
     definition.sections.some((node, index) => {
       const again = reread[index]!;
       if (!again.sentence || !node.locator.startsWith(`block:${again.index}:`)) return true;
-      if (node.kind !== 'gain' && node.kind !== 'instruction' && node.kind !== 'modifier')
+      if (
+        node.kind !== 'gain' &&
+        node.kind !== 'instruction' &&
+        node.kind !== 'modifier' &&
+        node.kind !== 'watcher'
+      )
         return true;
       const parsed = effectOnlyClause(node.clause);
       if (!parsed || parsed.text !== again.sentence.text) return true;
@@ -1008,6 +1091,16 @@ export function resolveEffectOnly(
         (clause.subject === 'actor' && shape.kind !== 'self')
       )
         return true;
+      if (node.kind === 'watcher') {
+        const again = effectOnlyWatcher(node.clause);
+        return (
+          clause.kind !== 'watcher' ||
+          shape.kind === 'area' ||
+          !again ||
+          !sameWatcherSpec(again, node.spec) ||
+          !sameWatcherSpec(clause.spec, node.spec)
+        );
+      }
       if (node.kind === 'modifier') {
         const again = effectOnlyModifier(node.clause);
         return (
@@ -1034,7 +1127,7 @@ export function resolveEffectOnly(
   const selfAllowed =
     shape.kind === 'self' ||
     ((shape.kind === 'one' || shape.kind === 'allies') && shape.self) ||
-    (shape.kind === 'area' && shape.self === true);
+    ((shape.kind === 'area' || shape.kind === 'each') && shape.self === true);
   const includesSelf = input.targets.some(target => target.id === input.actor.id);
   const others = input.targets.filter(target => target.id !== input.actor.id).length;
   if (
@@ -1042,15 +1135,18 @@ export function resolveEffectOnly(
     new Set(input.targets.map(target => target.id)).size !== input.targets.length ||
     (limit !== undefined && input.targets.length > limit) ||
     // V159: "Self and each ally in the area" always names the user.
-    ((shape.kind === 'self' || (shape.kind === 'area' && shape.self === true)) && !includesSelf) ||
+    // V171: so does "Self and each ally".
+    ((shape.kind === 'self' ||
+      ((shape.kind === 'area' || shape.kind === 'each') && shape.self === true)) &&
+      !includesSelf) ||
     (includesSelf && !selfAllowed) ||
     (shape.kind === 'allies' && others > shape.max)
   )
     return manual(
       shape.kind === 'self'
         ? 'This ability targets only its user.'
-        : shape.kind === 'area' && shape.self === true && !includesSelf
-          ? 'Include yourself: the target is Self and each ally in the area.'
+        : (shape.kind === 'area' || shape.kind === 'each') && shape.self === true && !includesSelf
+          ? `Include yourself: the target is Self and each ally${shape.kind === 'area' ? ' in the area' : ''}.`
           : `Give ${limit === 1 ? 'one target' : limit === undefined ? 'one or more distinct targets' : `one to ${limit} distinct targets`}${selfAllowed ? '' : ', not the user'}.`,
     );
   const affordability = checkAffordability(
@@ -1082,9 +1178,17 @@ export function resolveEffectOnly(
     id === input.actor.id ? input.actor : input.targets.find(target => target.id === id)!;
   const effects: CompiledEffectOutcome[] = [];
   for (const node of definition.sections) {
-    if (node.kind !== 'gain' && node.kind !== 'instruction' && node.kind !== 'modifier') continue;
+    if (
+      node.kind !== 'gain' &&
+      node.kind !== 'instruction' &&
+      node.kind !== 'modifier' &&
+      node.kind !== 'watcher'
+    )
+      continue;
     const subject = (
-      node.kind === 'modifier' ? node.spec.subject === 'owner' : node.subject === 'actor'
+      node.kind === 'modifier' || node.kind === 'watcher'
+        ? node.spec.subject === 'owner'
+        : node.subject === 'actor'
     )
       ? 'actor'
       : 'target';
@@ -1097,6 +1201,18 @@ export function resolveEffectOnly(
         locator: node.locator,
         clause: node.clause,
       };
+      if (node.kind === 'watcher') {
+        effects.push(
+          watcherOutcome(
+            identity,
+            node.spec,
+            subject,
+            recipientOf(id).kind,
+            input.actorCharacteristics,
+          ),
+        );
+        continue;
+      }
       if (node.kind === 'modifier') {
         effects.push(
           modifierOutcome(

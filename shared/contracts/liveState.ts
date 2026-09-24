@@ -144,7 +144,71 @@ export type ModifierPayload = RollModifier | StatModifier;
  */
 export type EffectPayload =
   | { kind: 'instruction'; text: string }
-  | { kind: 'modifier'; text: string; modifier: ModifierPayload };
+  | { kind: 'modifier'; text: string; modifier: ModifierPayload }
+  | { kind: 'watcher'; text: string; watcher: Watcher };
+
+/**
+ * V171 watcher events (docs/lasting-effects-design.md#3-watchers), each observed where the engine
+ * already writes: damage at the damage writer, turn boundaries at the clock, ability uses at the
+ * use's commit. `made-winded` and `dying` come from the same damage write.
+ */
+export type WatcherEvent =
+  | 'damage-taken'
+  | 'damage-dealt'
+  | 'made-winded'
+  | 'dying'
+  | 'turn-start'
+  | 'turn-end'
+  | 'ability-used'
+  | 'strike-made';
+
+/** Who a watcher's response applies to: the instance's subject or its owner. */
+export type WatcherParty = 'subject' | 'owner';
+
+/**
+ * V171 response of a watcher, with every amount bound at use: a gain (surges, temporary Stamina), a
+ * fixed or rolled amount of damage through the damage writer, a condition, or table work.
+ */
+export type WatcherResponse =
+  | { kind: 'gain'; recipient: WatcherParty; surges?: number; temporaryStamina?: number }
+  | {
+      kind: 'damage';
+      recipient: WatcherParty;
+      amount: number | { dice: { count: number; sides: number } };
+      damageType?: string;
+    }
+  | {
+      kind: 'condition';
+      recipient: WatcherParty;
+      condition: ConditionId;
+      duration: 'save-ends' | 'eot';
+    }
+  | { kind: 'instruction'; text: string };
+
+/**
+ * V171 watcher: which event of which creature (`whose`) it watches, an optional filter, the
+ * printed limit ("the first time on a turn": `turn`; "once per round": `round`; none: `each`) and
+ * its responses in printed order.
+ */
+export interface Watcher {
+  event: WatcherEvent;
+  whose: WatcherParty;
+  /** `damage-dealt`: only damage dealt to a creature other than the watched one. */
+  otherCreature?: true;
+  limit: 'turn' | 'round' | 'each';
+  responses: WatcherResponse[];
+}
+
+/**
+ * V171: one firing of a watcher, which is also its limit record (V120 claim windows): the
+ * operation that caused it and the round or turn it counts against.
+ */
+export interface WatcherFiring {
+  causeEventId: string;
+  encounterId?: string;
+  round?: number;
+  turnId?: string;
+}
 
 /** A creature an effect names. Objects and squads carry no live record of their own. */
 export interface EffectParty {
@@ -156,8 +220,8 @@ export interface EffectParty {
 /**
  * V158 effect instance (docs/lasting-effects-design.md#1-effect-instances). `instruction` instances
  * (V158) are printed table work the engine tracks and ends, never executes; `modifier` instances
- * (V159) feed later rolls and derived values. The other kinds are reserved for later slices;
- * condition instances keep their own V88 shape.
+ * (V159) feed later rolls and derived values; `watcher` instances (V171) respond to later events.
+ * The other kinds are reserved for later slices; condition instances keep their own V88 shape.
  */
 export interface EffectInstance {
   /** The occurrence id of the compiled use that created it. */
@@ -203,6 +267,8 @@ export interface EffectInstance {
   appliedSequence: number;
   /** A save-ends instance keeps its last saving throw, as condition instances do. */
   lastSave?: ConditionInstance['lastSave'];
+  /** V171: a watcher's firings, newest last; they are its per-turn and per-round limit records. */
+  firings?: WatcherFiring[];
 }
 
 /**
@@ -213,6 +279,8 @@ export interface OwnedEffect {
   id: string;
   holder: { kind: 'character' | 'foe'; id: string };
   abilityId: string;
+  /** V171: the event of an owner-watching watcher, so the owner's events find it without reads. */
+  watches?: WatcherEvent;
 }
 
 /** Every toggle off: the first-admission state of a hero and the loaded state of a foe. */

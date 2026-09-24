@@ -104,6 +104,11 @@ export type ScheduledWorkKind =
       step: 'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss' | 'turn-end-strain';
       characterId: CreatureId;
     }
+  /**
+   * V171: a watcher effect instance of a turn boundary (docs/lasting-effects-design.md#3-watchers)
+   * fires its responses at each of the watched creature's turn starts or ends.
+   */
+  | { kind: 'watcher'; effectInstanceId: string }
   /** Any other source-backed operation registered by A04/A05; must name its registered operation. */
   | { kind: 'operation'; operationId: OperationId };
 

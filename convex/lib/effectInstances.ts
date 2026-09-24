@@ -30,6 +30,11 @@ type Reader = Pick<QueryCtx, 'db'>;
 const holds = (party: { kind: string }): party is EffectHolder =>
   party.kind === 'character' || party.kind === 'foe';
 
+/** The effect records of one hero or foe, or null. */
+export async function readHolder(ctx: Reader, holder: EffectHolder) {
+  return read(ctx, holder);
+}
+
 async function read(ctx: Reader, holder: EffectHolder) {
   if (holder.kind === 'character') {
     const row = await ctx.db.get(holder.id as Id<'characters'>);
@@ -70,6 +75,23 @@ async function write(
   if (!foe || foe.campaignId !== scope.campaignId)
     throw new ConvexError('Effect holder is unavailable.');
   await journalPatch(ctx, scope, 'foes', foe._id, { live: { ...foe.live, ...change } });
+}
+
+/** V171: rewrites one stored instance on its holder, journaled (a watcher's firing record). */
+export async function patchEffectInstance(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  holder: EffectHolder,
+  id: string,
+  change: (instance: EffectInstance) => EffectInstance,
+) {
+  const current = await read(ctx, holder);
+  if (!current) return;
+  await write(ctx, scope, holder, {
+    effectInstances: current.effectInstances.map(instance =>
+      instance.id === id ? change(instance) : instance,
+    ),
+  });
 }
 
 /** The subject holds its effect; an object or squad subject leaves it with the owner. */
@@ -185,17 +207,53 @@ export async function applyEffectInstance(
     status: 'active',
     registrationIds: [],
     ...(manualGroup ? { manualStacking: true as const } : {}),
+    // V171: the newer use continues the same effect, so a watcher's limit records carry over
+    // ("the first time on a turn" is not reset by using the ability again).
+    ...(superseded?.firings?.length ? { firings: superseded.firings } : {}),
   };
   const timing = manualGroup ? undefined : timingFor(duration);
   // A saving throw needs a creature that holds its own record (rule/general/saving-throw.md).
   const schedulable = timing && (timing.work !== 'saving-throw' || holds(input.subject));
+  const encounter = encounterId ? await ctx.db.get(encounterId) : null;
+  const committed =
+    encounter?.status === 'committed' &&
+    encounter.archivedAt === null &&
+    encounter.campaignId === scope.campaignId
+      ? encounter
+      : null;
+  // V171: a watcher of turn boundaries fires at each of the watched creature's turn starts or ends
+  // (clock boundaries). Registered before the duration's own work, so at a shared boundary the
+  // watcher fires before the effect expires.
+  const watcher = input.payload.kind === 'watcher' ? input.payload.watcher : undefined;
+  if (
+    committed &&
+    !manualGroup &&
+    watcher &&
+    (watcher.event === 'turn-start' || watcher.event === 'turn-end')
+  ) {
+    const watched = watcher.whose === 'owner' ? input.owner : input.subject;
+    if (holds(watched))
+      instance.registrationIds.push(
+        await registerWork(ctx, scope, committed._id, {
+          timing: {
+            scope: 'creature-turn',
+            boundary: watcher.event,
+            creatureId: watched.id,
+            occurrence: 'each',
+          },
+          work: { kind: 'watcher', effectInstanceId: input.id },
+          source: {
+            logEntryId: input.sourceUseEventId,
+            originId: input.owner.id,
+            sourcePath: input.sourcePath,
+            label: `${input.actorLabel}: ${input.abilityName} (watching ${watched.name}'s turn ${watcher.event === 'turn-start' ? 'start' : 'end'}, for ${input.subject.name})`,
+          },
+          affectedIds: [holder.id],
+        }),
+      );
+  }
   if (encounterId && schedulable) {
-    const encounter = await ctx.db.get(encounterId);
-    if (
-      encounter?.status === 'committed' &&
-      encounter.archivedAt === null &&
-      encounter.campaignId === scope.campaignId
-    )
+    if (committed)
       instance.registrationIds.push(
         await registerWork(ctx, scope, encounterId, {
           timing: timing.timing,
@@ -224,7 +282,13 @@ export async function applyEffectInstance(
       await write(ctx, scope, input.owner, {
         ownedEffects: [
           ...owner.ownedEffects,
-          { id: instance.id, holder, abilityId: instance.abilityId },
+          {
+            id: instance.id,
+            holder,
+            abilityId: instance.abilityId,
+            // V171: an owner-watching watcher is found from the owner's own events.
+            ...(watcher?.whose === 'owner' ? { watches: watcher.event } : {}),
+          },
         ],
       });
   }

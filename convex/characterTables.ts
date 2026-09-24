@@ -130,9 +130,58 @@ export const modifierPayloadValidator = v.union(
     amount: v.number(),
   }),
 );
+const watcherPartyValidator = v.union(v.literal('subject'), v.literal('owner'));
+export const watcherEventValidator = v.union(
+  ...(
+    [
+      'damage-taken',
+      'damage-dealt',
+      'made-winded',
+      'dying',
+      'turn-start',
+      'turn-end',
+      'ability-used',
+      'strike-made',
+    ] as const
+  ).map(value => v.literal(value)),
+);
+/** V171 watcher (shared/contracts/liveState.ts Watcher). */
+export const watcherValidator = v.object({
+  event: watcherEventValidator,
+  whose: watcherPartyValidator,
+  otherCreature: v.optional(v.literal(true)),
+  limit: v.union(v.literal('turn'), v.literal('round'), v.literal('each')),
+  responses: v.array(
+    v.union(
+      v.object({
+        kind: v.literal('gain'),
+        recipient: watcherPartyValidator,
+        surges: v.optional(v.number()),
+        temporaryStamina: v.optional(v.number()),
+      }),
+      v.object({
+        kind: v.literal('damage'),
+        recipient: watcherPartyValidator,
+        amount: v.union(
+          v.number(),
+          v.object({ dice: v.object({ count: v.number(), sides: v.number() }) }),
+        ),
+        damageType: v.optional(v.string()),
+      }),
+      v.object({
+        kind: v.literal('condition'),
+        recipient: watcherPartyValidator,
+        condition: conditionInstanceValidator.fields.condition,
+        duration: v.union(v.literal('save-ends'), v.literal('eot')),
+      }),
+      v.object({ kind: v.literal('instruction'), text: v.string() }),
+    ),
+  ),
+});
 const effectPayloadValidator = v.union(
   v.object({ kind: v.literal('instruction'), text: v.string() }),
   v.object({ kind: v.literal('modifier'), text: v.string(), modifier: modifierPayloadValidator }),
+  v.object({ kind: v.literal('watcher'), text: v.string(), watcher: watcherValidator }),
 );
 /** V158 effect instance (shared/contracts/liveState.ts EffectInstance). */
 export const effectInstanceValidator = v.object({
@@ -169,6 +218,16 @@ export const effectInstanceValidator = v.object({
   ),
   appliedSequence: v.number(),
   lastSave: v.optional(lastSaveValidator),
+  firings: v.optional(
+    v.array(
+      v.object({
+        causeEventId: v.string(),
+        encounterId: v.optional(v.string()),
+        round: v.optional(v.number()),
+        turnId: v.optional(v.string()),
+      }),
+    ),
+  ),
 });
 /** V158: an owner's pointer to an active instance another creature holds. */
 export const ownedEffectValidator = v.object({
@@ -178,6 +237,7 @@ export const ownedEffectValidator = v.object({
     id: v.string(),
   }),
   abilityId: v.string(),
+  watches: v.optional(watcherEventValidator),
 });
 /**
  * A hero's live play values (shared/contracts/liveState.ts HeroLiveState plus LiveStateOrigin).

@@ -23,6 +23,7 @@ import type {
 } from '../../shared/contracts/characterSheet';
 import type { PartialBaseline } from '../../shared/contracts/characterEvaluation';
 import type { StartingRewards } from '../../shared/contracts/startingRewards';
+import { describeWatcher } from '../../shared/resolve/watchers';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Disc } from '../components/disc';
@@ -359,6 +360,9 @@ function Conditions({
                 endsWhen: instance.endsWhen,
                 scheduled: instance.registrationIds.length > 0,
                 ...(instance.manualStacking ? { manualStacking: true } : {}),
+                ...(instance.payload.kind === 'watcher'
+                  ? { watching: describeWatcher(instance.payload.watcher) }
+                  : {}),
               }))}
           />
         </div>

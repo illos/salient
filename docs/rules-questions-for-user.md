@@ -1357,3 +1357,26 @@ Current behaviour:
    the V146 turn-end strain is. Alternative: always leave the 1d6 to the table.
 
 Recommendation: keep all three.
+
+## Q-WATCH-1: who deals a lasting effect's damage, and does a repeat use reset "the first time"? (V171)
+
+Open; V171 binds labelled interpretations so watchers can compile. Pinned `en/unified/md`:
+- `feature/ability/conduit/level-1/violence-will-not-aid-thee.md`: "The first time on a turn that the
+  target deals damage to another creature, the target of this ability takes 1d10 lightning damage
+  (save ends)."
+- `rule/combat/turn.md` (turns exist only in combat); Heroes book, "Stacking Unique Effects" (the same
+  ability used again doesn't stack; the most recent use sets the duration).
+
+Current behaviour:
+1. **Dealer.** Damage a watcher deals (the 1d10 lightning above) has no dealer, so it sets off the
+   recipient's damage-taken watchers but no creature's damage-dealt watchers. Alternative: the effect's
+   owner (the Conduit) deals it, which could set off the owner's own "whenever you deal damage"
+   effects.
+2. **Repeat use.** When the same user's identical repeat supersedes an earlier use (V158), the newer
+   instance keeps the earlier firings, so "the first time on a turn" is not reset within that turn.
+   Alternative: the new use starts fresh and can fire again in the same turn.
+3. **Outside turns.** "The first time on a turn" and "once per round" need an active turn or round;
+   damage dealt outside combat or between turns is left to the table (logged), not fired.
+   Alternative: treat each out-of-turn damage as its own window.
+
+Recommendation: keep all three; nothing compiled yet depends on 1 beyond Violence Will Not Aid Thee.

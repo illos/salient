@@ -415,6 +415,21 @@ export async function runConduitLevelThree({
               assert.equal(now.surges, was.surges + 3, name);
               // Later uses on this target read damage against Stamina, as before V157.
               await invoke(affectedId, 'adjust.temporary-stamina', { value: 0 });
+            } else if (name === 'Blessing of Insight') {
+              // V171: compiled without a power roll. feature/ability/conduit/level-2/
+              // blessing-of-insight.md: "each target gains 1 surge at the end of each of your
+              // turns". The target (the Conduit) holds a watcher; nothing is gained at the use.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              type Watched = {
+                surges: number;
+                effectInstances?: { kind: string; status: string; sourceUseEventId: string }[];
+              };
+              const was = before.liveState as unknown as Watched;
+              const now = after.liveState as unknown as Watched;
+              const watcher = now.effectInstances?.find(e => e.sourceUseEventId === use.eventId);
+              assert.equal(watcher?.kind, 'watcher', name);
+              assert.equal(watcher?.status, 'active', name);
+              assert.equal(now.surges, was.surges, `${name} no surge at the use`);
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);
