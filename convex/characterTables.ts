@@ -284,6 +284,21 @@ export const forgeImportDiagnosticValidator = v.object({
   name: v.optional(v.string()),
   reason: v.string(),
 });
+/** V182: Forge play state reconciled against Salient's maxima (shared/interchange/forge-steel/state.ts). */
+export const forgeLiveSeedValidator = v.object({
+  stamina: v.number(),
+  recoveries: v.number(),
+  temporaryStamina: v.number(),
+  surges: v.number(),
+  staminaMaximum: v.number(),
+  recoveriesMaximum: v.number(),
+  forge: v.object({
+    staminaDamage: v.number(),
+    recoveriesUsed: v.number(),
+    staminaTemp: v.number(),
+    surges: v.number(),
+  }),
+});
 export const characterTables = {
   /** Director-private source selection; never embedded in public character revisions or events. */
   characterSecrets: defineTable({
@@ -403,6 +418,11 @@ export const characterTables = {
     level: v.number(),
     diagnostics: v.array(forgeImportDiagnosticValidator),
     unmapped: v.array(v.string()),
+    /**
+     * Stored only; not applied to live state while Q-V-3 is open. Null when the build has no
+     * maxima yet or the Forge fields are malformed. Optional for rows written before V182.
+     */
+    liveSeed: v.optional(v.union(v.null(), forgeLiveSeedValidator)),
     importedAt: v.number(),
   })
     .index('by_character', ['characterId'])
