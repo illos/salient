@@ -62,3 +62,4 @@ remains deferred.
 - Found while building V138: the Beastheart record replacement dropped every ability granted by a
   `class.beastheart.*` decision, including the level-2 perk's own action (for example Forgettable
   Face). Perk grants now stay beside the records; a focused case fails without the fix.
+- Review re-verification of the perk fix at `0b9e739`: PASS.
