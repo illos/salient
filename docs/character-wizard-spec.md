@@ -548,7 +548,10 @@ shared headless operation, under existing timing, encounter locks and validation
   implemented in V1.
 - **Campaign XP per level (requirement, design later).** The XP needed per level is a campaign setting
   the Director can change long-term; the rules' 16 per level is the default.
-- Replacing earlier choices during level-up remains open (V161).
+- **Earlier choices (confirmed 2026-09-24).** A level-up only adds that level's choices. Swapping an
+  earlier choice is an attribute of the specific higher-level option whose source permits it, and is
+  built together with that option when its level is implemented; no generic swap exists. Levels 2–3 have
+  none. Other changes use the full edit with Director approval.
 
 A transferred higher-level hero starts with zero destination-campaign XP and earns toward the next
 level from the admitted effective level. Keep an eligibility offset equal to that entry level's

@@ -41,3 +41,5 @@ and generic level-up for all eleven classes can be built. Design only: no code.
 - 2026-09-24: Q8 settled: Complete is final; corrections by Director adjustment.
 - 2026-09-24: Q6 advancement settled: manual Director level-up grant; milestone advancement not in V1.
 - 2026-09-24: optional Respite Ability Changes rule not in V1 (full edit with approval covers it).
+- 2026-09-24: level-up adds only that level's choices; source-permitted swaps are built with the specific
+  higher-level option that allows them.
