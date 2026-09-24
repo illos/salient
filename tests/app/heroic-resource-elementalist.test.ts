@@ -128,9 +128,13 @@ test('V148: maintaining persistent abilities reduces the turn-start essence and 
   await flesh();
   await maintain('The Flesh, a Crucible');
   // Use, use, maintain, maintain: the second use closed the first use's choice (QC1 R3 residual).
+  // Funded once, then two consecutive uses with nothing between them.
   await command(`${ref} /resource maintain ability="The Flesh, a Crucible" value=off`, true);
-  await flesh();
-  await flesh();
+  await command(`${ref} /adjust heroic-resource value=6`);
+  const cast = () =>
+    command(`${ref} /ability use ability="The Flesh, a Crucible" targets=[@{foe:${goblin}}]`, true);
+  await cast();
+  await cast();
   await maintain('The Flesh, a Crucible');
   await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/right after using it/);
   expect((await live()).maintained).toHaveLength(1);
