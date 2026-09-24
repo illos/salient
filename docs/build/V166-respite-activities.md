@@ -47,3 +47,4 @@ at completion, and Cancel reverting respite choices.
   floor. Documented: a pending full-edit review or draft made stale by a respite kit change stays stale
   after Cancel; the owner resubmits. Tests: same kit, non-kit decision, peer refused, Director acting,
   Cancel after a later level-up.
+- Review re-verification of `2b3a216`: PASS.
