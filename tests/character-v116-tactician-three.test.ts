@@ -132,13 +132,32 @@ test('Tactician levels two and three match the independent ledger for every doct
           },
           `${label} ${name} cost`,
         );
-      for (const name of ['Melee Superiority: Mark Free Strike', 'Fog of War: Forced Free Strike'])
-        if (hero.abilities.some(a => a.name === name))
-          assert.deepEqual(hero.abilities.find(a => a.name === name)!.cost, {
-            resource: 'focus',
-            amount: 2,
-          });
+      const paid = [
+        'Melee Superiority: Mark Free Strike',
+        'Fog of War: Forced Free Strike',
+        'Targets of Opportunity: Extra Target',
+      ];
+      for (const name of [...features, ...abilities].flatMap(n => embedded[n] ?? []))
+        assert.deepEqual(
+          hero.abilities.find(a => a.name === name)!.cost,
+          paid.includes(name) ? { resource: 'focus', amount: 2 } : undefined,
+          `${label} ${name} cost`,
+        );
     }
+});
+
+test('the level-two perk offers exactly the source exploration, interpersonal and intrigue perks', () => {
+  const perk = getDefinitions(2)
+    .steps.flatMap(step => step.decisions)
+    .find(d => d.id === 'class.tactician.level-2.perk')!;
+  assert.deepEqual(
+    sorted(perk.options!.map(o => o.value)),
+    sorted(
+      Object.values(ledger.levelTwo.eligibleCorePerks)
+        .flat()
+        .map(p => p.name),
+    ),
+  );
 });
 
 test('doctrine pools are exclusive; level and doctrine edits prune only dependent choices', () => {

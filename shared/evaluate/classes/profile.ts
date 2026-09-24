@@ -120,8 +120,10 @@ export function applyClassProfile(ctx: DerivationContext, out: PartialBaseline) 
     const prefix = id.replace(/\.baseline$/, '');
     for (let level = 2; level <= 10; level++) {
       const growth = ctx.decisions.get(`${prefix}.level-${level}.stamina`);
-      const amount = Number(/: (\d+)$/.exec(growth?.quote ?? '')?.[1]);
-      if (out.staminaMaximum && growth && amount && ctx.available.has(growth.id)) {
+      if (!growth || !ctx.available.has(growth.id)) continue;
+      const amount = Number(/: (\d+)$/.exec(growth.quote ?? '')?.[1]);
+      if (!amount) throw new Error(`${growth.id}: Stamina growth quote has no amount`);
+      if (out.staminaMaximum) {
         out.staminaMaximum.value += amount;
         out.staminaMaximum.provenance.push(
           sourced(growth.id, growth.source, growth.quote, { operation: 'add', amount }),

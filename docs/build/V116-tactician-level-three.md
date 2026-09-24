@@ -54,3 +54,7 @@ shared API. Guided advancement remains deferred.
 - Author checks: both TypeScript projects and ESLint pass; focused V116, V94, V92/V97/V98/V108
   Shadow and V45/V114 engine files pass; V88 audit guard 24/24; app Tactician and Shadow pass.
   Content 1687 entries; `compiled:check`, `content:check`, `supporting:check`, links pass.
+- Independent rules/implementation review (subagent, source-only) of `2125ca9`: PASS, six
+  non-blocking findings, all closed: every embedded use's cost is asserted, the perk pool is compared
+  with the ledger's 26 perks, an unreadable Stamina growth quote now fails loudly, and the Try Me
+  Instead, No Dying on My Watch and Out of Position texts restore their printed conditions.

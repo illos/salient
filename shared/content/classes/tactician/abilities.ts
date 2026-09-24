@@ -94,7 +94,7 @@ export const TACTICIAN_ACTIONS = [
     actionType: 'Free triggered action',
     trigger: 'An encounter starts.',
     activationCondition:
-      'At the start of an encounter, even if surprised: use Mark against one enemy you have line of effect to, then slide it up to 3 squares ignoring stability, never into harm, dying or a condition. Record the mark and slide manually.',
+      'At the start of an encounter, even if surprised: use Mark against one enemy you have line of effect to, then slide it up to 3 squares ignoring stability, never into harm, dying, a condition or other negative effect. Record the mark and slide manually.',
     text: source(levelFeature(3, 'out-of-position')),
   },
   {
@@ -128,9 +128,9 @@ export const TACTICIAN_ACTIVATION: Record<string, string> = {
   "I've Got Your Back":
     'After the roll, one ally adjacent to the target can spend a Recovery. Resolve the Recovery manually.',
   'Try Me Instead':
-    'Shift toward an ally, swap places, and the ally can spend a Recovery; then make the printed melee 1 weapon strike against a creature, never yourself. Movement, the Recovery, the power roll, damage and frightened are resolved manually.',
+    'Shift up to your speed directly toward an ally, ending adjacent, then swap places if you can fit into each other’s spaces; the ally can spend a Recovery, and you can make the printed melee 1 weapon strike against a creature, never yourself. Movement, the Recovery, the power roll, damage and frightened are resolved manually.',
   'No Dying on My Watch':
-    'Move up to your speed toward the triggering ally; it can spend a Recovery and gains 5 temporary Stamina per enemy you came adjacent to. Movement, the Recovery and temporary Stamina are manual; frightened of the triggering ally is manual.',
+    'Move up to your speed toward the triggering ally, ending adjacent to it or in the nearest square if you cannot reach one; it can spend a Recovery and gains 5 temporary Stamina per enemy you came adjacent to. Then make the power roll + Might against the target (Reason potency, frightened of the triggering ally). The ability is recorded: movement, the Recovery, temporary Stamina and the whole power roll are resolved manually.',
   'Squad! On Me!':
     'Until the start of your next turn, you and each ally in the area gain a stability bonus equal to your Might, and each gains 2 surges. Apply both manually.',
   'Frontal Assault':
