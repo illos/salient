@@ -1,0 +1,1157 @@
+{
+  "schemaVersion": "v114-source-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "compendiumRevisionSource": "tests/fixtures/v101-fury-expected.json (not read from the submodule with git)",
+  "sourceRoot": "vendor/steel-compendium/en/unified/md",
+  "derivation": "Handwritten from the pinned Compendium only; no evaluator or implementation code was read or run. Level-one values are the reviewed v101 witnesses (re-checked: 21 starting Stamina + kit Stamina per echelon, human speed 5/stability 0, disengage 1 + kit bonus, Fury potency M-2/M-1/M). Each level from 2nd adds 9 Stamina (class/fury.md Basics); levels 1-3 are the 1st echelon (rule/general/echelon.md) so per-echelon kit Stamina does not change; Recoveries stay 10; recovery value = floor(max/3) (rule/health/recoveries.md) and winded = half of max rounded down (rule/health/winded.md + rule/general/always-round-down.md). No characteristic increase occurs before 4th level, so characteristics and potency are unchanged. Reaver speed adds Inescapable Wrath (bonus equal to Agility); Berserker stability at 3rd level adds Immovable Object (bonus equal to Might); bonuses add together (rule/dice/bonuses-and-penalties.md). Ability damage at Might 2 substitutes M=2 into printed tier text; the kit melee damage bonus is added per tier only for damage-dealing abilities with both Melee and Weapon keywords (chapter/kits.md Damage Bonuses). The level-2 aspect-ability option grouping is taken from the Heroes book because the unified file omits the lists; perk group membership is taken from the Heroes book Perks chapter headings and restricted to mcdm.heroes.v1 perks.",
+  "sources": [
+    "vendor/steel-compendium/en/unified/md/class/fury.md",
+    "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-2/2nd-level-aspect-ability.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-2/2nd-level-aspect-feature.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-2/inescapable-wrath.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-2/perk.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-2/tooth-and-claw.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-2/unstoppable-force.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-3/3rd-level-aspect-feature.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-3/7-ferocity-ability.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-3/immovable-object.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-3/natures-knight.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/level-3/see-through-their-tricks.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/special-delivery.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/wrecking-ball.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/death-death.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+    "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+    "vendor/steel-compendium/en/unified/md/rule/health/recoveries.md",
+    "vendor/steel-compendium/en/unified/md/rule/health/stamina.md",
+    "vendor/steel-compendium/en/unified/md/rule/health/winded.md",
+    "vendor/steel-compendium/en/unified/md/rule/health/temporary-stamina.md",
+    "vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md",
+    "vendor/steel-compendium/en/unified/md/rule/general/echelon.md",
+    "vendor/steel-compendium/en/unified/md/rule/dice/bonuses-and-penalties.md",
+    "vendor/steel-compendium/en/unified/md/rule/character/speed.md",
+    "vendor/steel-compendium/en/unified/md/feature/common/move-actions/disengage.md",
+    "vendor/steel-compendium/en/unified/md/chapter/kits.md",
+    "vendor/steel-compendium/en/unified/md/kit/mountain.md",
+    "vendor/steel-compendium/en/unified/md/kit/panther.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/kit-bonuses.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/boren/kit-bonuses.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/corven/kit-bonuses.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/raden/kit-bonuses.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/vuken/kit-bonuses.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/primordial-storm.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/boren/primordial-storm-blizzard.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/corven/primordial-storm-anabatic-wind.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/raden/primordial-storm-rat-flood.md",
+    "vendor/steel-compendium/en/unified/md/feature/fury/vuken/primordial-storm-lightning-storm.md",
+    "vendor/steel-compendium/en/unified/md/perk/area-of-expertise.md",
+    "vendor/steel-compendium/en/unified/md/perk/expert-artisan.md",
+    "vendor/steel-compendium/en/unified/md/perk/handy.md",
+    "vendor/steel-compendium/en/unified/md/perk/improvisation-creation.md",
+    "vendor/steel-compendium/en/unified/md/perk/inspired-artisan.md",
+    "vendor/steel-compendium/en/unified/md/perk/traveling-artisan.md",
+    "vendor/steel-compendium/en/unified/md/perk/brawny.md",
+    "vendor/steel-compendium/en/unified/md/perk/camouflage-hunter.md",
+    "vendor/steel-compendium/en/unified/md/perk/danger-sense.md",
+    "vendor/steel-compendium/en/unified/md/perk/friend-catapult.md",
+    "vendor/steel-compendium/en/unified/md/perk/ive-got-you.md",
+    "vendor/steel-compendium/en/unified/md/perk/monster-whisperer.md",
+    "vendor/steel-compendium/en/unified/md/perk/put-your-back-into-it.md",
+    "vendor/steel-compendium/en/unified/md/perk/team-leader.md",
+    "vendor/steel-compendium/en/unified/md/perk/teamwork.md",
+    "vendor/steel-compendium/en/unified/md/perk/wood-wise.md",
+    "vendor/steel-compendium/en/unified/md/perk/criminal-contacts.md",
+    "vendor/steel-compendium/en/unified/md/perk/forgettable-face.md",
+    "vendor/steel-compendium/en/unified/md/perk/gum-up-the-works.md",
+    "vendor/steel-compendium/en/unified/md/perk/lucky-dog.md",
+    "vendor/steel-compendium/en/unified/md/perk/master-of-disguise.md",
+    "vendor/steel-compendium/en/unified/md/perk/slipped-lead.md",
+    "tests/fixtures/v101-fury-expected.json"
+  ],
+  "uncertainties": [
+    {
+      "topic": "Duplicate perk",
+      "passage": "feature/fury/level-2/perk.md: 'You gain one crafting, exploration, or intrigue perk of your choice.'",
+      "issue": "All six witnesses already hold Teamwork (exploration) from the Soldier career. The Compendium found no rule forbidding or allowing taking the same perk twice.",
+      "alternatives": [
+        "Exclude already-held perks from the level-2 choice",
+        "Allow re-selection (no benefit)"
+      ],
+      "handling": "Teamwork is listed as group-eligible but no witness selects it."
+    },
+    {
+      "topic": "Perk list scope",
+      "passage": "perk/ contains 47 mcdm.heroes.v1 perks and 8 mcdm.beastheart.v1 perks; chapter/perks.md in the unified tree is the Beastheart chapter ('can be taken only by beastheart characters').",
+      "issue": "Beastheart perks (e.g. Born Tracker, Wilds Explorer, Trained Thief) are excluded as class-restricted; group membership for core perks comes from the Heroes book because unified perk frontmatter carries no group field.",
+      "alternatives": ["Derive groups from another source if one exists in the pin"],
+      "handling": "Eligible list = Heroes book Crafting, Exploration and Intrigue Perks headings."
+    },
+    {
+      "topic": "Perks with further sub-choices or granted actions",
+      "passage": "perk/area-of-expertise.md ('Choose one skill you already have from the crafting skill group'); perk/friend-catapult.md ('As a maneuver, ...')",
+      "issue": "Some eligible perks need a follow-up choice or grant an action. No witness picks them, so no expected values are asserted for them.",
+      "alternatives": [],
+      "handling": "Listed as eligible only."
+    },
+    {
+      "topic": "Flat damage without characteristic",
+      "passage": "Apex Predator '4/6/10 damage', Visceral Roar '2/5/7 damage', Phalanx-Breaker '2/4/6 damage' (unified files and Heroes book agree).",
+      "issue": "Unlike Death... Death! ('3 + M'), these print no characteristic term. Not ambiguous in the source; recorded so an implementation does not add M by pattern.",
+      "alternatives": [],
+      "handling": "Values taken literally."
+    },
+    {
+      "topic": "Stormwight form",
+      "passage": "feature/fury/stormwight-kits/kit-bonuses.md: bonuses apply in true, animal and hybrid form.",
+      "issue": "Witness sheet values are for true form, as in v101; animal/hybrid form size or stat changes, Growing Ferocity thresholds and optional bonuses are not included.",
+      "alternatives": [],
+      "handling": "True-form sheet values only."
+    }
+  ],
+  "levelTwo": {
+    "Berserker": {
+      "staminaIncrement": 9,
+      "automaticFeatures": [
+        {
+          "name": "Unstoppable Force",
+          "source": "feature/fury/level-2/unstoppable-force.md",
+          "sheetEffect": "No numeric sheet effect. Charge may use a strike signature or strike heroic ability instead of a free strike, and you can jump as part of the charge: action-option change, manual."
+        },
+        {
+          "name": "Perk",
+          "source": "feature/fury/level-2/perk.md",
+          "sheetEffect": "Grants the perk choice below."
+        }
+      ],
+      "choices": [
+        {
+          "id": "2nd-level-aspect-ability",
+          "source": "feature/fury/level-2/2nd-level-aspect-ability.md",
+          "optionListSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (2nd-Level Berserker Ability, lines 9284-9384)",
+          "options": [
+            {
+              "name": "Special Delivery",
+              "cost": "5 Ferocity"
+            },
+            {
+              "name": "Wrecking Ball",
+              "cost": "5 Ferocity"
+            }
+          ]
+        },
+        {
+          "id": "perk",
+          "source": "feature/fury/level-2/perk.md",
+          "text": "You gain one crafting, exploration, or intrigue perk of your choice.",
+          "groupsAllowed": ["crafting", "exploration", "intrigue"],
+          "groupMembershipSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (Perks chapter, line 17295ff)",
+          "eligiblePerks": {
+            "crafting": [
+              "Area of Expertise",
+              "Expert Artisan",
+              "Handy",
+              "Improvisation Creation",
+              "Inspired Artisan",
+              "Traveling Artisan"
+            ],
+            "exploration": [
+              "Brawny",
+              "Camouflage Hunter",
+              "Danger Sense",
+              "Friend Catapult",
+              "I've Got You!",
+              "Monster Whisperer",
+              "Put Your Back Into It!",
+              "Team Leader",
+              "Teamwork",
+              "Wood Wise"
+            ],
+            "intrigue": [
+              "Criminal Contacts",
+              "Forgettable Face",
+              "Gum Up the Works",
+              "Lucky Dog",
+              "Master of Disguise",
+              "Slipped Lead"
+            ]
+          }
+        }
+      ],
+      "advancementRow": "Features: Perk, Aspect Feature, Aspect Ability; Abilities: Signature, 3, 5; Aspect Abilities: 5 (class/fury.md advancement table)"
+    },
+    "Reaver": {
+      "staminaIncrement": 9,
+      "automaticFeatures": [
+        {
+          "name": "Inescapable Wrath",
+          "source": "feature/fury/level-2/inescapable-wrath.md",
+          "sheetEffect": "Numeric: bonus to speed equal to Agility (+2 at A 2). Ignore difficult terrain: manual/narrative."
+        },
+        {
+          "name": "Perk",
+          "source": "feature/fury/level-2/perk.md",
+          "sheetEffect": "Grants the perk choice below."
+        }
+      ],
+      "choices": [
+        {
+          "id": "2nd-level-aspect-ability",
+          "source": "feature/fury/level-2/2nd-level-aspect-ability.md",
+          "optionListSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (2nd-Level Reaver Ability, lines 9284-9384)",
+          "options": [
+            {
+              "name": "Death... Death!",
+              "cost": "5 Ferocity"
+            },
+            {
+              "name": "Phalanx-Breaker",
+              "cost": "5 Ferocity"
+            }
+          ]
+        },
+        {
+          "id": "perk",
+          "source": "feature/fury/level-2/perk.md",
+          "text": "You gain one crafting, exploration, or intrigue perk of your choice.",
+          "groupsAllowed": ["crafting", "exploration", "intrigue"],
+          "groupMembershipSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (Perks chapter, line 17295ff)",
+          "eligiblePerks": {
+            "crafting": [
+              "Area of Expertise",
+              "Expert Artisan",
+              "Handy",
+              "Improvisation Creation",
+              "Inspired Artisan",
+              "Traveling Artisan"
+            ],
+            "exploration": [
+              "Brawny",
+              "Camouflage Hunter",
+              "Danger Sense",
+              "Friend Catapult",
+              "I've Got You!",
+              "Monster Whisperer",
+              "Put Your Back Into It!",
+              "Team Leader",
+              "Teamwork",
+              "Wood Wise"
+            ],
+            "intrigue": [
+              "Criminal Contacts",
+              "Forgettable Face",
+              "Gum Up the Works",
+              "Lucky Dog",
+              "Master of Disguise",
+              "Slipped Lead"
+            ]
+          }
+        }
+      ],
+      "advancementRow": "Features: Perk, Aspect Feature, Aspect Ability; Abilities: Signature, 3, 5; Aspect Abilities: 5 (class/fury.md advancement table)"
+    },
+    "Stormwight": {
+      "staminaIncrement": 9,
+      "automaticFeatures": [
+        {
+          "name": "Tooth and Claw",
+          "source": "feature/fury/level-2/tooth-and-claw.md",
+          "sheetEffect": "No numeric sheet-stat effect. At the end of each of your turns each adjacent enemy takes damage equal to your Might (2 at M 2): combat trigger, manual."
+        },
+        {
+          "name": "Perk",
+          "source": "feature/fury/level-2/perk.md",
+          "sheetEffect": "Grants the perk choice below."
+        }
+      ],
+      "choices": [
+        {
+          "id": "2nd-level-aspect-ability",
+          "source": "feature/fury/level-2/2nd-level-aspect-ability.md",
+          "optionListSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (2nd-Level Stormwight Ability, lines 9284-9384)",
+          "options": [
+            {
+              "name": "Apex Predator",
+              "cost": "5 Ferocity"
+            },
+            {
+              "name": "Visceral Roar",
+              "cost": "5 Ferocity"
+            }
+          ]
+        },
+        {
+          "id": "perk",
+          "source": "feature/fury/level-2/perk.md",
+          "text": "You gain one crafting, exploration, or intrigue perk of your choice.",
+          "groupsAllowed": ["crafting", "exploration", "intrigue"],
+          "groupMembershipSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (Perks chapter, line 17295ff)",
+          "eligiblePerks": {
+            "crafting": [
+              "Area of Expertise",
+              "Expert Artisan",
+              "Handy",
+              "Improvisation Creation",
+              "Inspired Artisan",
+              "Traveling Artisan"
+            ],
+            "exploration": [
+              "Brawny",
+              "Camouflage Hunter",
+              "Danger Sense",
+              "Friend Catapult",
+              "I've Got You!",
+              "Monster Whisperer",
+              "Put Your Back Into It!",
+              "Team Leader",
+              "Teamwork",
+              "Wood Wise"
+            ],
+            "intrigue": [
+              "Criminal Contacts",
+              "Forgettable Face",
+              "Gum Up the Works",
+              "Lucky Dog",
+              "Master of Disguise",
+              "Slipped Lead"
+            ]
+          }
+        }
+      ],
+      "advancementRow": "Features: Perk, Aspect Feature, Aspect Ability; Abilities: Signature, 3, 5; Aspect Abilities: 5 (class/fury.md advancement table)"
+    }
+  },
+  "levelThree": {
+    "Berserker": {
+      "staminaIncrement": 9,
+      "automaticFeatures": [
+        {
+          "name": "Immovable Object",
+          "source": "feature/fury/level-3/immovable-object.md",
+          "sheetEffect": "Numeric: bonus to stability equal to Might (+2 at M 2). Adding your level to effective size for lifting, forced movement and so forth (not grab) is manual/narrative."
+        }
+      ],
+      "choices": [
+        {
+          "id": "7-ferocity-ability",
+          "source": "feature/fury/level-3/7-ferocity-ability.md",
+          "optionListSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (7-Ferocity Ability, line 9418ff)",
+          "aspectRestricted": false,
+          "options": [
+            {
+              "name": "Demon Unleashed",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "Face the Storm!",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "Steelbreaker",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "You Are Already Dead",
+              "cost": "7 Ferocity"
+            }
+          ]
+        }
+      ],
+      "advancementRow": "Features: Aspect Feature, 7-Ferocity Ability; Abilities: Signature, 3, 5, 7; Aspect Abilities: 5 (class/fury.md advancement table)"
+    },
+    "Reaver": {
+      "staminaIncrement": 9,
+      "automaticFeatures": [
+        {
+          "name": "See Through Their Tricks",
+          "source": "feature/fury/level-3/see-through-their-tricks.md",
+          "sheetEffect": "No numeric sheet-stat effect. Double edge on tests to search for hidden creatures, discern hidden motives, detect lies, and to gamble: situational, manual."
+        }
+      ],
+      "choices": [
+        {
+          "id": "7-ferocity-ability",
+          "source": "feature/fury/level-3/7-ferocity-ability.md",
+          "optionListSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (7-Ferocity Ability, line 9418ff)",
+          "aspectRestricted": false,
+          "options": [
+            {
+              "name": "Demon Unleashed",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "Face the Storm!",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "Steelbreaker",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "You Are Already Dead",
+              "cost": "7 Ferocity"
+            }
+          ]
+        }
+      ],
+      "advancementRow": "Features: Aspect Feature, 7-Ferocity Ability; Abilities: Signature, 3, 5, 7; Aspect Abilities: 5 (class/fury.md advancement table)"
+    },
+    "Stormwight": {
+      "staminaIncrement": 9,
+      "automaticFeatures": [
+        {
+          "name": "Nature's Knight",
+          "source": "feature/fury/level-3/natures-knight.md",
+          "sheetEffect": "No numeric sheet-stat effect. Speak with animals and elementals, sense them within 10 squares, +1 effective Renown in negotiation with them: narrative/manual."
+        }
+      ],
+      "choices": [
+        {
+          "id": "7-ferocity-ability",
+          "source": "feature/fury/level-3/7-ferocity-ability.md",
+          "optionListSource": "vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md (7-Ferocity Ability, line 9418ff)",
+          "aspectRestricted": false,
+          "options": [
+            {
+              "name": "Demon Unleashed",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "Face the Storm!",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "Steelbreaker",
+              "cost": "7 Ferocity"
+            },
+            {
+              "name": "You Are Already Dead",
+              "cost": "7 Ferocity"
+            }
+          ]
+        }
+      ],
+      "advancementRow": "Features: Aspect Feature, 7-Ferocity Ability; Abilities: Signature, 3, 5, 7; Aspect Abilities: 5 (class/fury.md advancement table)"
+    }
+  },
+  "kitMeleeDamageBonusRule": {
+    "source": "chapter/kits.md#Damage Bonuses",
+    "rule": "chapter/kits.md#Damage Bonuses: 'If a kit has a melee damage bonus, that bonus is added to the rolled damage of any damage-dealing ability with both the Melee and Weapon keywords.' Bonuses Across Tiers: +X/+Y/+Z added to tier 1/2/3.",
+    "bonuses": {
+      "Mountain": "+0/+0/+4 (kit/mountain.md)",
+      "Panther": "+0/+0/+4 (kit/panther.md)",
+      "Boren": "+0/+0/+4 (feature/fury/boren/kit-bonuses.md)",
+      "Corven": "+2/+2/+2 (feature/fury/corven/kit-bonuses.md)",
+      "Raden": "+2/+2/+2 (feature/fury/raden/kit-bonuses.md)",
+      "Vuken": "+2/+2/+2 (feature/fury/vuken/kit-bonuses.md)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Special Delivery",
+      "source": "feature/ability/fury/level-2/special-delivery.md",
+      "actionType": "Maneuver",
+      "keywords": ["Melee", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One willing ally",
+      "cost": "5 Ferocity",
+      "powerRollCharacteristic": null,
+      "tierText": null,
+      "damageByTierMight2": null,
+      "kitMeleeDamageBonusApplies": false,
+      "manualClauses": [
+        "Vertical push of the willing ally up to 4 squares, ignoring the target's stability; the target takes no collision damage.",
+        "At the end of the movement the ally can make a free strike dealing extra damage equal to your Might score (2 at M 2); the ally's free strike is resolved by the ally, manual."
+      ],
+      "kitBonusNote": "No power roll and no rolled damage dealt by the fury; the kit melee damage bonus has nothing to add to."
+    },
+    {
+      "name": "Wrecking Ball",
+      "source": "feature/ability/fury/level-2/wrecking-ball.md",
+      "actionType": "Maneuver",
+      "keywords": ["Melee", "Weapon"],
+      "distance": "Self; see below",
+      "target": "Self",
+      "cost": "5 Ferocity",
+      "powerRollCharacteristic": "Might",
+      "tierText": {
+        "tier1": "Push 1",
+        "tier2": "Push 2",
+        "tier3": "Push 3"
+      },
+      "damageByTierMight2": null,
+      "kitMeleeDamageBonusApplies": false,
+      "manualClauses": [
+        "Move up to your speed in a straight line, may move through mundane structures (difficult terrain for you), destroying each square and leaving difficult terrain: movement/terrain is manual.",
+        "One power roll targets each enemy you move adjacent to during this movement: target selection is manual."
+      ],
+      "forcedMovementByTier": {
+        "push": [1, 2, 3]
+      },
+      "kitBonusNote": "Melee and Weapon keywords but not damage-dealing (tiers are push only), so the kit melee damage bonus does not apply."
+    },
+    {
+      "name": "Death... Death!",
+      "source": "feature/ability/fury/level-2/death-death.md",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature",
+      "cost": "5 Ferocity",
+      "powerRollCharacteristic": "Might",
+      "tierText": {
+        "tier1": "3 + M damage; P < WEAK, dazed and frightened (save ends)",
+        "tier2": "5 + M damage; P < AVERAGE, dazed and frightened (save ends)",
+        "tier3": "8 + M damage; P < STRONG, dazed and frightened (save ends)"
+      },
+      "damageByTierMight2": [5, 7, 10],
+      "kitMeleeDamageBonusApplies": true,
+      "manualClauses": [
+        "Potency riders: P < WEAK/AVERAGE/STRONG (0/1/2 for a Might 2 fury), dazed and frightened (save ends)."
+      ],
+      "damageByTierWithKit": {
+        "Mountain": [5, 7, 14],
+        "Panther": [5, 7, 14],
+        "Boren": [5, 7, 14],
+        "Corven": [7, 9, 12],
+        "Raden": [7, 9, 12],
+        "Vuken": [7, 9, 12]
+      }
+    },
+    {
+      "name": "Phalanx-Breaker",
+      "source": "feature/ability/fury/level-2/phalanx-breaker.md",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Weapon"],
+      "distance": "Self; see below",
+      "target": "Self",
+      "cost": "5 Ferocity",
+      "powerRollCharacteristic": "Might",
+      "tierText": {
+        "tier1": "2 damage; A < WEAK, dazed (save ends)",
+        "tier2": "4 damage; A < AVERAGE, dazed (save ends)",
+        "tier3": "6 damage; A < STRONG, dazed (save ends)"
+      },
+      "damageByTierMight2": [2, 4, 6],
+      "kitMeleeDamageBonusApplies": true,
+      "manualClauses": [
+        "Shift up to your speed; the power roll targets up to three enemies you move adjacent to during the shift: movement and target selection manual.",
+        "Potency riders: A < WEAK/AVERAGE/STRONG (0/1/2), dazed (save ends)."
+      ],
+      "damageByTierWithKit": {
+        "Mountain": [2, 4, 10],
+        "Panther": [2, 4, 10],
+        "Boren": [2, 4, 10],
+        "Corven": [4, 6, 8],
+        "Raden": [4, 6, 8],
+        "Vuken": [4, 6, 8]
+      },
+      "note": "Tier text prints flat damage with no characteristic term; Might is not added to damage (it is only the power roll characteristic)."
+    },
+    {
+      "name": "Apex Predator",
+      "source": "feature/ability/fury/level-2/apex-predator.md",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature",
+      "cost": "5 Ferocity",
+      "powerRollCharacteristic": "Might",
+      "tierText": {
+        "tier1": "4 damage; I < WEAK, slowed (save ends)",
+        "tier2": "6 damage; I < AVERAGE, slowed (save ends)",
+        "tier3": "10 damage; I < STRONG, slowed (save ends)"
+      },
+      "damageByTierMight2": [4, 6, 10],
+      "kitMeleeDamageBonusApplies": true,
+      "manualClauses": [
+        "Potency riders: I < WEAK/AVERAGE/STRONG (0/1/2), slowed (save ends).",
+        "Effect: the target can't be hidden from you for 24 hours; until the end of the encounter, whenever the target willingly moves, you can use a free triggered action to move. Manual."
+      ],
+      "damageByTierWithKit": {
+        "Mountain": [4, 6, 14],
+        "Panther": [4, 6, 14],
+        "Boren": [4, 6, 14],
+        "Corven": [6, 8, 12],
+        "Raden": [6, 8, 12],
+        "Vuken": [6, 8, 12]
+      },
+      "note": "Tier text prints flat damage with no '+ M'; Might is not added to damage."
+    },
+    {
+      "name": "Visceral Roar",
+      "source": "feature/ability/fury/level-2/visceral-roar.md",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic"],
+      "distance": "2 burst",
+      "target": "Each enemy in the area",
+      "cost": "5 Ferocity",
+      "powerRollCharacteristic": "Might",
+      "tierText": {
+        "tier1": "2 damage; push 1; M < WEAK, dazed (save ends)",
+        "tier2": "5 damage; push 2; M < AVERAGE, dazed (save ends)",
+        "tier3": "7 damage; push 3; M < STRONG, dazed (save ends)"
+      },
+      "damageByTierMight2": [2, 5, 7],
+      "kitMeleeDamageBonusApplies": false,
+      "manualClauses": [
+        "Push 1/2/3 by tier (forced movement, manual placement).",
+        "Potency riders: M < WEAK/AVERAGE/STRONG (0/1/2), dazed (save ends).",
+        "Effect: deals your primordial damage type (Boren blizzard = cold, feature/fury/boren/primordial-storm-blizzard.md; Vuken lightning storm = lightning, feature/fury/vuken/primordial-storm-lightning-storm.md; Corven fire; Raden corruption)."
+      ],
+      "forcedMovementByTier": {
+        "push": [1, 2, 3]
+      },
+      "kitBonusNote": "No Weapon keyword (Area, Magic), so no kit melee damage bonus. Flat damage, no '+ M'.",
+      "damageTypeByKit": {
+        "Boren": "cold",
+        "Corven": "fire",
+        "Raden": "corruption",
+        "Vuken": "lightning"
+      }
+    },
+    {
+      "name": "Demon Unleashed",
+      "source": "feature/ability/fury/level-3/demon-unleashed.md",
+      "actionType": "Maneuver",
+      "keywords": ["Magic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": "7 Ferocity",
+      "powerRollCharacteristic": null,
+      "tierText": null,
+      "damageByTierMight2": null,
+      "kitMeleeDamageBonusApplies": false,
+      "manualClauses": [
+        "Until the end of the encounter or until you are dying, each enemy who starts their turn adjacent to you and has P < STRONG (P < 2 at M 2) is frightened until the end of their turn. Entirely a persistent manual/aura effect; no power roll."
+      ]
+    },
+    {
+      "name": "Face the Storm!",
+      "source": "feature/ability/fury/level-3/face-the-storm.md",
+      "actionType": "Maneuver",
+      "keywords": ["Magic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": "7 Ferocity",
+      "powerRollCharacteristic": null,
+      "tierText": null,
+      "damageByTierMight2": null,
+      "kitMeleeDamageBonusApplies": false,
+      "manualClauses": [
+        "Until the end of the encounter or until you are dying, each creature you make a melee strike against who has P < AVERAGE (P < 1 at M 2) is taunted until the end of their next turn.",
+        "When you use an ability that deals rolled damage against any enemy taunted by you, the ability deals extra damage equal to twice your Might (4 at M 2) and its potency increases by 1. Conditional, manual."
+      ],
+      "conditionalExtraDamageMight2": 4
+    },
+    {
+      "name": "Steelbreaker",
+      "source": "feature/ability/fury/level-3/steelbreaker.md",
+      "actionType": "Maneuver",
+      "keywords": ["Magic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": "7 Ferocity",
+      "powerRollCharacteristic": null,
+      "tierText": null,
+      "damageByTierMight2": null,
+      "kitMeleeDamageBonusApplies": false,
+      "manualClauses": [],
+      "temporaryStamina": 20,
+      "note": "Effect: 'You gain 20 temporary Stamina.' Numeric and self-targeted; temporary Stamina is not included in Stamina maximum or recovery value (rule/health/temporary-stamina.md)."
+    },
+    {
+      "name": "You Are Already Dead",
+      "source": "feature/ability/fury/level-3/you-are-already-dead.md",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature",
+      "cost": "7 Ferocity",
+      "powerRollCharacteristic": null,
+      "tierText": null,
+      "damageByTierMight2": null,
+      "kitMeleeDamageBonusApplies": false,
+      "manualClauses": [
+        "If the target is not a leader or solo creature, they are reduced to 0 Stamina at the end of their next turn (delayed, manual).",
+        "If the target is a leader or solo creature, you gain 3 surges and can make a melee free strike against them (manual; that free strike is a separate weapon ability)."
+      ],
+      "kitBonusNote": "No power roll and no rolled damage in the ability itself; the kit melee damage bonus does not apply to this ability. The optional melee free strike would carry its own kit bonus under chapter/kits.md ('including your free strikes') but is resolved manually."
+    }
+  ],
+  "witnesses": [
+    {
+      "id": "v101-mountain",
+      "subclass": "Berserker",
+      "kit": "Mountain",
+      "baseline": {
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-2.perk": "Danger Sense",
+          "class.fury.level-2.aspect-ability": "Wrecking Ball"
+        },
+        "perkGroup": "exploration",
+        "addedFeatures": ["Unstoppable Force", "Perk", "Danger Sense"],
+        "addedAbilities": ["Wrecking Ball"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 5,
+        "stability": 4,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-3.7-ferocity-ability": "Steelbreaker"
+        },
+        "addedFeatures": ["Immovable Object"],
+        "addedAbilities": ["Steelbreaker"],
+        "cumulativeAddedAbilities": ["Wrecking Ball", "Steelbreaker"]
+      },
+      "derivationNotes": {
+        "stamina": "L1 30 (v101 baseline: 21 + kit stamina at echelon 1) + 9 per level after 1st; kit stamina unchanged because levels 1-3 are echelon 1.",
+        "speed": "Unchanged from L1 (no level 2/3 speed effect for this aspect).",
+        "stability": "L1 stability 2 at L2; L3 adds Immovable Object bonus equal to Might (2)"
+      }
+    },
+    {
+      "id": "v101-panther",
+      "subclass": "Reaver",
+      "kit": "Panther",
+      "baseline": {
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 8,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-2.perk": "Lucky Dog",
+          "class.fury.level-2.aspect-ability": "Death... Death!"
+        },
+        "perkGroup": "intrigue",
+        "addedFeatures": ["Inescapable Wrath", "Perk", "Lucky Dog"],
+        "addedAbilities": ["Death... Death!"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 8,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-3.7-ferocity-ability": "You Are Already Dead"
+        },
+        "addedFeatures": ["See Through Their Tricks"],
+        "addedAbilities": ["You Are Already Dead"],
+        "cumulativeAddedAbilities": ["Death... Death!", "You Are Already Dead"]
+      },
+      "derivationNotes": {
+        "stamina": "L1 27 (v101 baseline: 21 + kit stamina at echelon 1) + 9 per level after 1st; kit stamina unchanged because levels 1-3 are echelon 1.",
+        "speed": "L1 speed 6 + Inescapable Wrath bonus equal to Agility (2)",
+        "stability": "Unchanged from L1."
+      }
+    },
+    {
+      "id": "v101-boren",
+      "subclass": "Stormwight",
+      "kit": "Boren",
+      "baseline": {
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-2.perk": "Handy",
+          "class.fury.level-2.aspect-ability": "Visceral Roar"
+        },
+        "perkGroup": "crafting",
+        "addedFeatures": ["Tooth and Claw", "Perk", "Handy"],
+        "addedAbilities": ["Visceral Roar"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-3.7-ferocity-ability": "Face the Storm!"
+        },
+        "addedFeatures": ["Nature's Knight"],
+        "addedAbilities": ["Face the Storm!"],
+        "cumulativeAddedAbilities": ["Visceral Roar", "Face the Storm!"]
+      },
+      "derivationNotes": {
+        "stamina": "L1 30 (v101 baseline: 21 + kit stamina at echelon 1) + 9 per level after 1st; kit stamina unchanged because levels 1-3 are echelon 1.",
+        "speed": "Unchanged from L1 (no level 2/3 speed effect for this aspect).",
+        "stability": "Unchanged from L1."
+      }
+    },
+    {
+      "id": "v101-corven",
+      "subclass": "Stormwight",
+      "kit": "Corven",
+      "baseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-2.perk": "Camouflage Hunter",
+          "class.fury.level-2.aspect-ability": "Apex Predator"
+        },
+        "perkGroup": "exploration",
+        "addedFeatures": ["Tooth and Claw", "Perk", "Camouflage Hunter"],
+        "addedAbilities": ["Apex Predator"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-3.7-ferocity-ability": "Demon Unleashed"
+        },
+        "addedFeatures": ["Nature's Knight"],
+        "addedAbilities": ["Demon Unleashed"],
+        "cumulativeAddedAbilities": ["Apex Predator", "Demon Unleashed"]
+      },
+      "derivationNotes": {
+        "stamina": "L1 24 (v101 baseline: 21 + kit stamina at echelon 1) + 9 per level after 1st; kit stamina unchanged because levels 1-3 are echelon 1.",
+        "speed": "Unchanged from L1 (no level 2/3 speed effect for this aspect).",
+        "stability": "Unchanged from L1."
+      }
+    },
+    {
+      "id": "v101-raden",
+      "subclass": "Stormwight",
+      "kit": "Raden",
+      "baseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-2.perk": "Forgettable Face",
+          "class.fury.level-2.aspect-ability": "Apex Predator"
+        },
+        "perkGroup": "intrigue",
+        "addedFeatures": ["Tooth and Claw", "Perk", "Forgettable Face"],
+        "addedAbilities": ["Apex Predator"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-3.7-ferocity-ability": "Steelbreaker"
+        },
+        "addedFeatures": ["Nature's Knight"],
+        "addedAbilities": ["Steelbreaker"],
+        "cumulativeAddedAbilities": ["Apex Predator", "Steelbreaker"]
+      },
+      "derivationNotes": {
+        "stamina": "L1 24 (v101 baseline: 21 + kit stamina at echelon 1) + 9 per level after 1st; kit stamina unchanged because levels 1-3 are echelon 1.",
+        "speed": "Unchanged from L1 (no level 2/3 speed effect for this aspect).",
+        "stability": "Unchanged from L1."
+      }
+    },
+    {
+      "id": "v101-vuken",
+      "subclass": "Stormwight",
+      "kit": "Vuken",
+      "baseline": {
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-2.perk": "Wood Wise",
+          "class.fury.level-2.aspect-ability": "Visceral Roar"
+        },
+        "perkGroup": "exploration",
+        "addedFeatures": ["Tooth and Claw", "Perk", "Wood Wise"],
+        "addedAbilities": ["Visceral Roar"]
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "addedSelections": {
+          "class.fury.level-3.7-ferocity-ability": "Face the Storm!"
+        },
+        "addedFeatures": ["Nature's Knight"],
+        "addedAbilities": ["Face the Storm!"],
+        "cumulativeAddedAbilities": ["Visceral Roar", "Face the Storm!"]
+      },
+      "derivationNotes": {
+        "stamina": "L1 30 (v101 baseline: 21 + kit stamina at echelon 1) + 9 per level after 1st; kit stamina unchanged because levels 1-3 are echelon 1.",
+        "speed": "Unchanged from L1 (no level 2/3 speed effect for this aspect).",
+        "stability": "Unchanged from L1."
+      }
+    }
+  ]
+}

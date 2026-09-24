@@ -9,6 +9,7 @@ import { definitions as legacyLevelOne } from './level-one-decisions.ts';
 import type { DecisionDefinitions } from '../evaluate/definitions.ts';
 
 import { levelTwoDecisions } from './classes/fury/level-two.ts';
+import { levelThreeDecisions as furyLevelThree } from './classes/fury/level-three.ts';
 import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
 import { levelThreeDecisions as shadowLevelThree } from './classes/shadow/level-three.ts';
 import { shadowLaterDecisions } from './classes/shadow/level-four-to-six.ts';
@@ -30,7 +31,7 @@ const thirdClassStep = levelThree.steps.find(step => step.id === 'step.class')!;
 thirdClassStep.decisions.find(decision => decision.id === 'class.level')!.grants = [
   { kind: 'level', value: '3' },
 ];
-thirdClassStep.decisions.push(...structuredClone(shadowLevelThree));
+thirdClassStep.decisions.push(...structuredClone([...furyLevelThree, ...shadowLevelThree]));
 
 const levels = [levelOne, levelTwo, levelThree];
 for (const level of [4, 5, 6]) {

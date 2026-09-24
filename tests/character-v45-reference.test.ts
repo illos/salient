@@ -211,6 +211,7 @@ for (const example of examples)
               'Conflagration: Persistent Effect',
               'Lines of Force: Enhance',
               'Out of the Way!: Follow',
+              'Unstoppable Force: Charge With Ability',
             ].includes(name),
         ),
       ),

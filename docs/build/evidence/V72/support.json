@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf",
+  "contentHash": "sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1110
     },
     "hero-standalone": {
-      "total": 267,
+      "total": 275,
       "supported": 39,
-      "manual": 228
+      "manual": 236
     },
     "kit-signature": {
       "total": 25,
@@ -29678,6 +29678,500 @@
       "movementFacts": "No compiled push."
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator",
+      "name": "Apex Predator",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier1:0:2a44e212de1f4bf4",
+            "locator": "block:0:tier1:0",
+            "clause": "4 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier1:1:569f2b6cdfcbf460",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier1:0:2a44e212de1f4bf4"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier2:0:65723ebe74a7200a",
+            "locator": "block:0:tier2:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier2:1:d2dc1b5fd4c5e757",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier2:0:65723ebe74a7200a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier3:0:9520cecd344e9a4d",
+            "locator": "block:0:tier3:0",
+            "clause": "10 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 10
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier3:1:8e4c295f90482147",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:0:tier3:0:9520cecd344e9a4d"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator#block:1:0:e8f6c563c46afe3f",
+          "locator": "block:1:0",
+          "clause": "The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to move.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to move.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death",
+      "name": "Death... Death!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/death-death.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:0:4eba022a22560d99",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:1:065c6fd8af6850ec",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:0:58c74c83147f2d7b",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:1:5891b12a082f29c3",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:0:9fe2d4c3c3673aea",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:1:8b1a3f067fd98edd",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker",
+      "name": "Phalanx-Breaker",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier1:0:1adb725bfe833afe",
+            "locator": "block:1:tier1:0",
+            "clause": "2 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier1:1:6f76e6135ab95718",
+            "locator": "block:1:tier1:1",
+            "clause": "A < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier1:0:1adb725bfe833afe"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier2:0:2a44e212de1f4bf4",
+            "locator": "block:1:tier2:0",
+            "clause": "4 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier2:1:f1077d1d37b03c0b",
+            "locator": "block:1:tier2:1",
+            "clause": "A < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier2:0:2a44e212de1f4bf4"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier3:0:65723ebe74a7200a",
+            "locator": "block:1:tier3:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier3:1:df0c8d5d7bc1036b",
+            "locator": "block:1:tier3:1",
+            "clause": "A < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:1:tier3:0:65723ebe74a7200a"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker#block:0:0:a72218760764930d",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.fury.level-2/special-delivery",
       "name": "Special Delivery",
       "context": {
@@ -29776,6 +30270,196 @@
         }
       ],
       "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
+      "name": "Visceral Roar",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:0:1adb725bfe833afe",
+            "locator": "block:0:tier1:0",
+            "clause": "2 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:1:4e92293619489c55",
+            "locator": "block:0:tier1:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "push",
+            "distance": 1,
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:0:1adb725bfe833afe"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:2:ee50acf29940d1f4",
+            "locator": "block:0:tier1:2",
+            "clause": "M < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier1:0:1adb725bfe833afe"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:0:4148a008d7858141",
+            "locator": "block:0:tier2:0",
+            "clause": "5 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:1:4e9226361948973c",
+            "locator": "block:0:tier2:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:0:4148a008d7858141"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:2:e7724b3c46ddf30f",
+            "locator": "block:0:tier2:2",
+            "clause": "M < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier2:0:4148a008d7858141"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:0:8882180d6b03536f",
+            "locator": "block:0:tier3:0",
+            "clause": "7 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:1:4e922736194898ef",
+            "locator": "block:0:tier3:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "push",
+            "distance": 3,
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:0:8882180d6b03536f"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:2:4250d4b9bc52e067",
+            "locator": "block:0:tier3:2",
+            "clause": "M < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:0:tier3:0:8882180d6b03536f"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:1:0:38a53643603718eb",
+          "locator": "block:1:0",
+          "clause": "This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball",
@@ -29963,6 +30647,364 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Wrecking Ball supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed",
+      "name": "Demon Unleashed",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed#block:0:0:c0127100d8cf110f",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each enemy who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and has P < STRONG is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each enemy who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and has P < STRONG is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Demon Unleashed",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Demon Unleashed supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Demon Unleashed",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Demon Unleashed supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Demon Unleashed",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Demon Unleashed supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Demon Unleashed",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Demon Unleashed supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm",
+      "name": "Face the Storm!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm#block:0:0:5189f90e2e1a4df0",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each creature you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against who has P < AVERAGE is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, when you use an ability that deals [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) against any enemy [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you, the ability deals extra damage equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and increases its [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each creature you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against who has P < AVERAGE is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, when you use an ability that deals [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) against any enemy [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you, the ability deals extra damage equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and increases its [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Face the Storm!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Face the Storm! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Face the Storm!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Face the Storm! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Face the Storm!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Face the Storm! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Face the Storm!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Face the Storm! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker",
+      "name": "Steelbreaker",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker#block:0:0:8e081eb2a625444b",
+          "locator": "block:0:0",
+          "clause": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Steelbreaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Steelbreaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Steelbreaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Steelbreaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Steelbreaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Steelbreaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Steelbreaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Steelbreaker supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead",
+      "name": "You Are Already Dead",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead#block:0:0:070b941823676315",
+          "locator": "block:0:0",
+          "clause": "If the target is not a leader or solo creature, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If the target is a leader or solo creature, you gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) and can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "If the target is not a leader or solo creature, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If the target is a leader or solo creature, you gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) and can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "You Are Already Dead",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Are Already Dead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Are Already Dead",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Are Already Dead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Are Already Dead",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Are Already Dead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Are Already Dead",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Are Already Dead supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -199977,7 +201019,7 @@
   ],
   "liveCounts": {
     "compiled": 97,
-    "compatibility": 1420,
+    "compatibility": 1428,
     "compiledButUnavailable": 0
   }
 }

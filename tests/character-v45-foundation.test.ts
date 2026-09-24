@@ -25,7 +25,7 @@ const evaluate = (selections: Record<string, SelectionValue>, level: number) => 
   );
 };
 
-test('V45 registered level support does not make a future subclass transition playable', () => {
+test('V45 level-two Reaver/Stormwight definitions (V114) do not make guided advancement available', () => {
   for (const subclass of ['Reaver', 'Stormwight']) {
     const selections = { ...fury.selections, 'class.fury.aspect': subclass };
     // Even a future level-one option expansion cannot accidentally authorize its level-two build.
@@ -43,8 +43,9 @@ test('V45 registered level support does not make a future subclass transition pl
       },
       definitions,
     );
+    // Level two is supported for every aspect; the stale Berserker ability choice is not accepted.
+    assert.notEqual(result.status, 'complete');
     assert.equal(result.baseline, null);
-    assert.ok(result.diagnostics['class.fury.aspect'].some(d => d.code === 'unsupported-option'));
     assert.ok(!result.partial?.features?.some(feature => feature.name === 'Unstoppable Force'));
     assert.equal(supportsCurrentAdvancement(1, 'Fury', subclass), false);
   }

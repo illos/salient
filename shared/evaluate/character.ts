@@ -90,6 +90,7 @@ import {
   applyFurySubclass,
   applyFuryCharacteristics,
   applyFuryVitals,
+  applyFuryAspectBonuses,
   applyFuryResource,
 } from './classes/fury.ts';
 import { applyClassProfile } from './classes/profile.ts';
@@ -932,6 +933,7 @@ class Evaluation {
     this.deriveProfiles(out);
     this.deriveSupportingBenefits(out);
     this.citeSupportingKit(out);
+    applyFuryAspectBonuses(this, out);
 
     // 1.15 Granted content, in definition order per group.
     out.skills = this.skills();

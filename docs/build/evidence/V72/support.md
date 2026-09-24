@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299`.
 
-Currently reachable compiled: 97; unchanged reachable compatibility: 1420; structurally supported but unavailable: 0.
+Currently reachable compiled: 97; unchanged reachable compatibility: 1428; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -205,8 +205,16 @@ Currently reachable compiled: 97; unchanged reachable compatibility: 1420; struc
 | To the Uttermost End | hero-standalone | manual | legacy-compatibility | manual-section |
 | Unearthly Reflexes | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Your Entrails Are Your Extrails! | hero-standalone | manual | legacy-compatibility | manual-section |
+| Apex Predator | hero-standalone | manual | legacy-compatibility | manual-section |
+| Death... Death! | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Phalanx-Breaker | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Special Delivery | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Visceral Roar | hero-standalone | manual | legacy-compatibility | manual-section |
 | Wrecking Ball | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Demon Unleashed | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Face the Storm! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Steelbreaker | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| You Are Already Dead | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Aspect of the Wild | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | A Squad Unto Myself | hero-standalone | manual | legacy-compatibility | manual-section |
 | Arcane Disruptor | hero-standalone | manual | legacy-compatibility | manual-section |

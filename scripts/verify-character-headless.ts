@@ -19,6 +19,7 @@ import {
   type ScenarioContext,
 } from './headless/character-client.ts';
 import { runFury } from './headless/fury.ts';
+import { runFuryLevelThree } from './headless/fury-level-three.ts';
 import { runConduit } from './headless/conduit.ts';
 import { runCensor } from './headless/censor.ts';
 import { runShadowLevelSix } from './headless/shadow-level-six.ts';
@@ -38,6 +39,7 @@ const cohorts = {
   'multi-target': runMultiTarget,
   'tier-effects': runTierEffects,
   fury: runFury,
+  'fury-level-three': runFuryLevelThree,
   troubadour: runTroubadour,
   null: runNull,
   elementalist: runElementalist,

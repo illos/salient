@@ -4431,6 +4431,118 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator",
+    "kind": "ability",
+    "name": "Apex Predator",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-2/apex-predator.json",
+    "selection": "fury-level-two",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 4 damage; I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier2: 6 damage; I < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier3: 10 damage; I < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n    - effect: The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to move.\n      name: Effect\nflavor: I will hunt you down.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: Apex Predator\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator\ntarget: One creature\ntier1: 4 damage; I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier2: 6 damage; I < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier3: 10 damage; I < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntype: ability\n---\n\n\n*I will hunt you down.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 4 damage; I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 6 damage; I < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **17+:** 10 damage; I < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n\n**Effect:** The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to move.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "4 damage; I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier2": "6 damage; I < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier3": "10 damage; I < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+        },
+        {
+          "effect": "The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to move.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "I will hunt you down.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "4 damage; I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier2": "6 damage; I < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier3": "10 damage; I < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death",
+    "kind": "ability",
+    "name": "Death... Death!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/death-death.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-2/death-death.json",
+    "selection": "fury-level-two",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M damage; P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier2: 5 + M damage; P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier3: 8 + M damage; P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\nflavor: Your unbridled rage strikes terror in their hearts.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: Death... Death!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-2/death-death\ntarget: One creature\ntier1: 3 + M damage; P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier2: 5 + M damage; P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier3: 8 + M damage; P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntype: ability\n---\n\n\n*Your unbridled rage strikes terror in their hearts.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M damage; P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **12-16:** 5 + M damage; P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **17+:** 8 + M damage; P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M damage; P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier2": "5 + M damage; P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier3": "8 + M damage; P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+        }
+      ],
+      "flavor": "Your unbridled rage strikes terror in their hearts.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "3 + M damage; P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier2": "5 + M damage; P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier3": "8 + M damage; P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker",
+    "kind": "ability",
+    "name": "Phalanx-Breaker",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-2/phalanx-breaker.json",
+    "selection": "fury-level-two",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: Self; see below\neffects:\n    - effect: You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).\n      name: Effect\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 2 damage; A < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier2: 4 damage; A < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier3: 6 damage; A < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\nflavor: Organizing your forces like feckless creatures of Law. Pitiful.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"2\"\nname: Phalanx-Breaker\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker\ntarget: Self\ntier1: 2 damage; A < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier2: 4 damage; A < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier3: 6 damage; A < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntype: ability\n---\n\n\n*Organizing your forces like feckless creatures of Law. Pitiful.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon**      | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------|----------------:|\n| **📏 Self; see below** |     **🎯 Self** |\n\n**Effect:** You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 2 damage; A < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **12-16:** 4 damage; A < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **17+:** 6 damage; A < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "Self; see below",
+      "effects": [
+        {
+          "effect": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "2 damage; A < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier2": "4 damage; A < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier3": "6 damage; A < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+        }
+      ],
+      "flavor": "Organizing your forces like feckless creatures of Law. Pitiful.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "Self",
+      "tier1": "2 damage; A < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier2": "4 damage; A < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier3": "6 damage; A < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.fury.level-2/special-delivery",
     "kind": "ability",
     "name": "Special Delivery",
@@ -4456,6 +4568,44 @@
       ],
       "level": "2",
       "target": "One willing ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
+    "kind": "ability",
+    "name": "Visceral Roar",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-2/visceral-roar.json",
+    "selection": "fury-level-two",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: 2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1; M < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier2: 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n      tier3: 7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n    - effect: This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).\n      name: Effect\nflavor: The sound of the storm within you staggers your opponents.\nkeywords:\n    - Area\n    - Magic\nlevel: \"2\"\nname: Visceral Roar\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar\ntarget: Each enemy in the area\ntier1: 2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1; M < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier2: 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntier3: 7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\ntype: ability\n---\n\n\n*The sound of the storm within you staggers your opponents.*\n\n| **Area, Magic** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|------------------------------:|\n| **📏 2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**  | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1; M < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **12-16:** 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **17+:** 7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n\n**Effect:** This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "2 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1; M < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier2": "5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "tier3": "7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+        },
+        {
+          "effect": "This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "The sound of the storm within you staggers your opponents.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "Each enemy in the area",
+      "tier1": "2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1; M < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier2": "5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+      "tier3": "7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
     }
   },
   {
@@ -4494,6 +4644,116 @@
       "tier1": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
       "tier2": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
       "tier3": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed",
+    "kind": "ability",
+    "name": "Demon Unleashed",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-3/demon-unleashed.json",
+    "selection": "fury-level-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 7 Ferocity\ndistance: Self\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each enemy who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and has P < STRONG is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Effect\nflavor: Foes tremble at the sight of you.\nkeywords:\n    - Magic\nlevel: \"3\"\nname: Demon Unleashed\nscc: mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed\ntarget: Self\ntype: ability\n---\n\n\n*Foes tremble at the sight of you.*\n\n| **Magic**   | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each enemy who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and has P < STRONG is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "7 Ferocity",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each enemy who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and has P < STRONG is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Foes tremble at the sight of you.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm",
+    "kind": "ability",
+    "name": "Face the Storm!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-3/face-the-storm.json",
+    "selection": "fury-level-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 7 Ferocity\ndistance: Self\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each creature you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against who has P < AVERAGE is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, when you use an ability that deals [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) against any enemy [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you, the ability deals extra damage equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and increases its [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.\n      name: Effect\nflavor: Shocked in the face of your naked brutality, your enemy's instincts take over.\nkeywords:\n    - Magic\nlevel: \"3\"\nname: Face the Storm!\nscc: mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm\ntarget: Self\ntype: ability\n---\n\n\n*Shocked in the face of your naked brutality, your enemy's instincts take over.*\n\n| **Magic**   | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each creature you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against who has P < AVERAGE is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, when you use an ability that deals [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) against any enemy [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you, the ability deals extra damage equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and increases its [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "7 Ferocity",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each creature you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against who has P < AVERAGE is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, when you use an ability that deals [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage) against any enemy [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you, the ability deals extra damage equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and increases its [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Shocked in the face of your naked brutality, your enemy's instincts take over.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker",
+    "kind": "ability",
+    "name": "Steelbreaker",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-3/steelbreaker.json",
+    "selection": "fury-level-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 7 Ferocity\ndistance: Self\neffects:\n    - effect: You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n      name: Effect\nflavor: See how useless their weapons are!\nkeywords:\n    - Magic\nlevel: \"3\"\nname: Steelbreaker\nscc: mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker\ntarget: Self\ntype: ability\n---\n\n\n*See how useless their weapons are!*\n\n| **Magic**   | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "7 Ferocity",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "See how useless their weapons are!",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead",
+    "kind": "ability",
+    "name": "You Are Already Dead",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-3/you-are-already-dead.json",
+    "selection": "fury-level-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 7 Ferocity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - effect: If the target is not a leader or solo creature, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If the target is a leader or solo creature, you gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) and can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.\n      name: Effect\nflavor: Slash. Walk away.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"3\"\nname: You Are Already Dead\nscc: mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead\ntarget: One creature\ntype: ability\n---\n\n\n*Slash. Walk away.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**Effect:** If the target is not a leader or solo creature, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If the target is a leader or solo creature, you gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) and can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "7 Ferocity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "effect": "If the target is not a leader or solo creature, they are reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If the target is a leader or solo creature, you gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) and can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Slash. Walk away.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "3",
+      "target": "One creature"
     }
   },
   {

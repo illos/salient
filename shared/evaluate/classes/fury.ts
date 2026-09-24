@@ -103,17 +103,19 @@ export function applyFuryVitals(
     ]);
   }
   // V32 progression is an explicit sourced contribution, never a live-state refill.
-  const levelTwoStamina = ctx.decisions.get('class.fury.level-2.stamina');
-  if (out.staminaMaximum && levelTwoStamina && ctx.available.has(levelTwoStamina.id)) {
-    out.staminaMaximum.value += 9;
-    out.staminaMaximum.provenance.push(
-      p({
-        decisionId: levelTwoStamina.id,
-        source: ctx.own(levelTwoStamina, 'Basics'),
-        operation: 'add',
-        amount: 9,
-      }),
-    );
+  for (const level of [2, 3]) {
+    const growth = ctx.decisions.get(`class.fury.level-${level}.stamina`);
+    if (out.staminaMaximum && growth && ctx.available.has(growth.id)) {
+      out.staminaMaximum.value += 9;
+      out.staminaMaximum.provenance.push(
+        p({
+          decisionId: growth.id,
+          source: ctx.own(growth, 'Basics'),
+          operation: 'add',
+          amount: 9,
+        }),
+      );
+    }
   }
   // 1.4 Recoveries and recovery value.
   if (ctx.available.has('class.fury.baseline'))
@@ -193,6 +195,45 @@ export function applyFuryResource(ctx: DerivationContext, out: PartialBaseline) 
           note: 'Interpretation: a newly created hero has not been in combat and cannot have gained ferocity; see also "You lose any remaining ferocity at the end of the encounter." R03 owns live initialization.',
         }),
       ]),
+    };
+  }
+}
+
+/**
+ * Numeric parts of level-two/three aspect features. Inescapable Wrath (feature/fury/level-2/
+ * inescapable-wrath.md): speed bonus equal to Agility. Immovable Object (feature/fury/level-3/
+ * immovable-object.md): stability bonus equal to Might. Both add to the kit-derived value, as kit
+ * speed/stability bonuses do. Ignoring difficult terrain and the effective-size increase stay
+ * manual feature text: no terrain or size-comparison state is modelled.
+ */
+export function applyFuryAspectBonuses(ctx: DerivationContext, out: PartialBaseline) {
+  const bonuses = [
+    ['class.fury.level-2.reaver-feature', 'speed', 'A', 'inescapable-wrath', 2],
+    ['class.fury.level-3.immovable-object', 'stability', 'M', 'immovable-object', 3],
+  ] as const;
+  for (const [decisionId, field, characteristic, slug, level] of bonuses) {
+    const target = out[field];
+    const score = out.characteristics?.[characteristic].value;
+    if (!ctx.available.has(decisionId) || !target || score === undefined) continue;
+    const quote =
+      field === 'speed'
+        ? 'You have a bonus to speed equal to your Agility score'
+        : 'you have a bonus to stability equal to your Might score';
+    out[field] = {
+      value: target.value + score,
+      provenance: [
+        ...target.provenance,
+        ctx.provenance({
+          decisionId,
+          source: ctx.sentence({
+            path: `en/unified/md/feature/fury/level-${level}/${slug}.md`,
+            quote,
+          }),
+          operation: 'add',
+          amount: score,
+          note: `${characteristic === 'A' ? 'Agility' : 'Might'} ${score}`,
+        }),
+      ],
     };
   }
 }

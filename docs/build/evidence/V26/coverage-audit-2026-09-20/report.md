@@ -8,24 +8,24 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 267 | 22 | 105 | 13 | 140 |
+| Hero standalone (`ability.json`) | 275 | 22 | 109 | 13 | 144 |
 | Kit signature (`kit.json`) | 25 | 6 | 15 | 1 | 4 |
 | Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 21 | 565 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 2474 (1619 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 2510 (1655 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 21 fully (1.81%), 565 with a typed remainder (48.79%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 151 of 364 (41.48%) compile: 29 fully (7.97%), 122 with a typed remainder (33.52%), of which 14 (3.85%) are within the bounded potency remainder. 213 (58.52%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 155 of 372 (41.67%) compile: 29 fully (7.80%), 126 with a typed remainder (33.87%), of which 14 (3.76%) are within the bounded potency remainder. 217 (58.33%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -34,7 +34,7 @@ compiled entries:
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Hero standalone (`ability.json`) | COMPILES | 16 | 2 | 4 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 81 | 3 | 18 | 2 | 1 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 83 | 3 | 19 | 3 | 1 |
 | Kit signature (`kit.json`) | COMPILES | 4 | 2 | 0 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 13 | 1 | 1 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -136,6 +136,10 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | To the Death! | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.signature-ability@1:selectable, class.fury.signature-ability@2:selectable, class.fury.signature-ability@3:selectable, class.fury.signature-ability@4:selectable, class.fury.signature-ability@5:selectable, class.fury.signature-ability@6:selectable | effect-paragraph:effect |
 | hero-standalone | To the Uttermost End | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.ability-5@1:selectable, class.fury.ability-5@2:selectable, class.fury.ability-5@3:selectable, class.fury.ability-5@4:selectable, class.fury.ability-5@5:selectable, class.fury.ability-5@6:selectable | resource-spend:spend N+ ferocity |
 | hero-standalone | Your Entrails Are Your Extrails! | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.ability-3@1:selectable, class.fury.ability-3@2:selectable, class.fury.ability-3@3:selectable, class.fury.ability-3@4:selectable, class.fury.ability-3@5:selectable, class.fury.ability-3@6:selectable | effect-paragraph:effect; potency:M < SYM bleeding (save ends) |
+| hero-standalone | Apex Predator | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.level-2.stormwight-ability@2:selectable, class.fury.level-2.stormwight-ability@3:selectable, class.fury.level-2.stormwight-ability@4:selectable, class.fury.level-2.stormwight-ability@5:selectable, class.fury.level-2.stormwight-ability@6:selectable | effect-paragraph:effect; potency:I < SYM slowed (save ends) |
+| hero-standalone | Death... Death! | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.level-2.reaver-ability@2:selectable, class.fury.level-2.reaver-ability@3:selectable, class.fury.level-2.reaver-ability@4:selectable, class.fury.level-2.reaver-ability@5:selectable, class.fury.level-2.reaver-ability@6:selectable | potency:P < SYM dazed and frightened (save ends) |
+| hero-standalone | Phalanx-Breaker | COMPILES_WITH_REMAINDER | — | self | selectable | class.fury.level-2.reaver-ability@2:selectable, class.fury.level-2.reaver-ability@3:selectable, class.fury.level-2.reaver-ability@4:selectable, class.fury.level-2.reaver-ability@5:selectable, class.fury.level-2.reaver-ability@6:selectable | effect-paragraph:effect; potency:A < SYM dazed (save ends) |
+| hero-standalone | Visceral Roar | COMPILES_WITH_REMAINDER | — | area | selectable | class.fury.level-2.stormwight-ability@2:selectable, class.fury.level-2.stormwight-ability@3:selectable, class.fury.level-2.stormwight-ability@4:selectable, class.fury.level-2.stormwight-ability@5:selectable, class.fury.level-2.stormwight-ability@6:selectable | effect-paragraph:effect; potency:M < SYM dazed (save ends) |
 | hero-standalone | A Squad Unto Myself | COMPILES_WITH_REMAINDER | — | area | selectable | class.null.ability-5@1:selectable, class.null.ability-5@2:selectable, class.null.ability-5@3:selectable, class.null.ability-5@4:selectable, class.null.ability-5@5:selectable, class.null.ability-5@6:selectable | effect-paragraph:effect |
 | hero-standalone | Arcane Disruptor | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.ability-5@1:selectable, class.null.ability-5@2:selectable, class.null.ability-5@3:selectable, class.null.ability-5@4:selectable, class.null.ability-5@5:selectable, class.null.ability-5@6:selectable | effect-paragraph:effect; potency:M < SYM weakened (save ends) |
 | hero-standalone | Chronal Spike | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.ability-3@1:selectable, class.null.ability-3@2:selectable, class.null.ability-3@3:selectable, class.null.ability-3@4:selectable, class.null.ability-3@5:selectable, class.null.ability-3@6:selectable | effect-paragraph:effect |
@@ -285,6 +289,10 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Unearthly Reflexes | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
 | hero-standalone | Special Delivery | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Wrecking Ball | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:push N |
+| hero-standalone | Demon Unleashed | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Face the Storm! | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Steelbreaker | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | You Are Already Dead | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Aspect of the Wild | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N ferocity |
 | hero-standalone | Impart Force | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:push N |
 | hero-standalone | Inertial Shield | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N discipline |
@@ -443,8 +451,8 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1173 | 1159 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
-| 2 | no-power-roll | no-power-roll | 672 | 672 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1180 | 1166 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 2 | no-power-roll | no-power-roll | 676 | 676 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
 | 3 | trigger | trigger | 208 | 208 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
 | 5 | unknown | unattached-paragraph | 130 | 59 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
@@ -488,9 +496,9 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1244 | 12 |
-| potency-condition | 1032 | 208 |
-| no-power-roll | 672 | 1 |
+| effect-paragraph | 1251 | 12 |
+| potency-condition | 1044 | 211 |
+| no-power-roll | 676 | 1 |
 | tier-damage | 269 | 101 |
 | unknown | 245 | 57 |
 | trigger | 208 | 1 |
@@ -681,7 +689,7 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 | granted | roll-expression-outside-grammar | 5 |
 | granted | tier1-damage-outside-grammar | 1 |
 | granted | tiers-without-power-roll | 1 |
-| hero-standalone | no-power-roll | 114 |
+| hero-standalone | no-power-roll | 118 |
 | hero-standalone | roll-expression-outside-grammar | 4 |
 | hero-standalone | tier1-damage-outside-grammar | 22 |
 | kit-signature | roll-expression-outside-grammar | 4 |

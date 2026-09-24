@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf",
+  "contentHash": "sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 22,
-      "COMPILES_WITH_REMAINDER": 105,
-      "NO_MATCH": 140,
-      "total": 267,
+      "COMPILES_WITH_REMAINDER": 109,
+      "NO_MATCH": 144,
+      "total": 275,
       "withinV26Bounded": 13
     },
     "kit-signature": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 2474,
-    "resolvedToStandalone": 1619,
+    "total": 2510,
+    "resolvedToStandalone": 1655,
     "resolvedToKit": 150,
     "ownText": 705,
     "unresolved": []
@@ -12987,6 +12987,351 @@
     },
     {
       "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator",
+      "name": "Apex Predator",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 4
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 6
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 10
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free triggered action to move.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM slowed (save ends)",
+            "text": "I < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM slowed (save ends)",
+            "text": "I < AVERAGE, slowed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM slowed (save ends)",
+            "text": "I < STRONG, slowed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Apex Predator",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Apex Predator supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death",
+      "name": "Death... Death!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/death-death.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "text": "P < WEAK, dazed and frightened (save ends)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "text": "P < AVERAGE, dazed and frightened (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM dazed and frightened (save ends)",
+            "text": "P < STRONG, dazed and frightened (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Death... Death!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/death-death.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Death... Death! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker",
+      "name": "Phalanx-Breaker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+      "usage": "Main action",
+      "target": "Self",
+      "cost": "5 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 4
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 6
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You shift up to your speed and make one power roll that targets up to three enemies you move adjacent to during this shift.",
+            "locator": "section:0"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM dazed (save ends)",
+            "text": "A < WEAK, dazed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM dazed (save ends)",
+            "text": "A < AVERAGE, dazed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM dazed (save ends)",
+            "text": "A < STRONG, dazed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Phalanx-Breaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+          "decisionId": "class.fury.level-2.reaver-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Phalanx-Breaker supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
       "id": "mcdm.heroes.v1/feature.ability.fury.level-2/special-delivery",
       "name": "Special Delivery",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/special-delivery.md",
@@ -13058,6 +13403,125 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Special Delivery supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
+      "name": "Visceral Roar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "5 Ferocity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "push": 1
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "push": 2
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "push": 3
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "This ability deals your primordial damage type (see Stormwight Kits).",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM dazed (save ends)",
+            "text": "M < WEAK, dazed (save ends)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM dazed (save ends)",
+            "text": "M < AVERAGE, dazed (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM dazed (save ends)",
+            "text": "M < STRONG, dazed (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Visceral Roar",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
+          "decisionId": "class.fury.level-2.stormwight-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Visceral Roar supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -13152,6 +13616,278 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Wrecking Ball supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed",
+      "name": "Demon Unleashed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Ferocity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, each enemy who starts their turn adjacent to you and has P < STRONG is frightened until the end of their turn.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Demon Unleashed",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Demon Unleashed supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Demon Unleashed",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Demon Unleashed supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Demon Unleashed",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Demon Unleashed supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Demon Unleashed",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Demon Unleashed supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm",
+      "name": "Face the Storm!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Ferocity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, each creature you make a melee strike against who has P < AVERAGE is taunted until the end of their next turn. Additionally, when you use an ability that deals rolled damage against any enemy taunted by you, the ability deals extra damage equal to twice your Might score and increases its potency by 1.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Face the Storm!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Face the Storm! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Face the Storm!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Face the Storm! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Face the Storm!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Face the Storm! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Face the Storm!",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Face the Storm! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker",
+      "name": "Steelbreaker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Ferocity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You gain 20 temporary Stamina.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Steelbreaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Steelbreaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Steelbreaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Steelbreaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Steelbreaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Steelbreaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Steelbreaker",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Steelbreaker supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead",
+      "name": "You Are Already Dead",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "7 Ferocity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If the target is not a leader or solo creature, they are reduced to 0 Stamina at the end of their next turn. If the target is a leader or solo creature, you gain 3 surges and can make a melee free strike against them.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "You Are Already Dead",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Are Already Dead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Are Already Dead",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Are Already Dead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Are Already Dead",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Are Already Dead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Are Already Dead",
+          "sourcePath": "en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+          "decisionId": "class.fury.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option You Are Already Dead supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -97697,8 +98433,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1173,
-      "abilities": 1159,
+      "count": 1180,
+      "abilities": 1166,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -97708,8 +98444,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 672,
-      "abilities": 672,
+      "count": 676,
+      "abilities": 676,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -98428,6 +99164,16 @@
       ]
     },
     {
+      "shape": "potency:M < SYM dazed (save ends)",
+      "type": "potency-condition",
+      "count": 6,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
+        "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike"
+      ]
+    },
+    {
       "shape": "tier:i < N dazed (save ends)",
       "type": "tier-damage",
       "count": 6,
@@ -98964,6 +99710,15 @@
       ]
     },
     {
+      "shape": "potency:A < SYM dazed (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker"
+      ]
+    },
+    {
       "shape": "potency:A < SYM grabbed",
       "type": "potency-condition",
       "count": 3,
@@ -99024,6 +99779,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow"
+      ]
+    },
+    {
+      "shape": "potency:I < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator"
       ]
     },
     {
@@ -99144,15 +99908,6 @@
       ]
     },
     {
-      "shape": "potency:M < SYM dazed (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike"
-      ]
-    },
-    {
       "shape": "potency:M < SYM slowed (eot)",
       "type": "potency-condition",
       "count": 3,
@@ -99258,6 +100013,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.shadow.level-5/you-talk-too-much"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM dazed and frightened (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.fury.level-2/death-death"
       ]
     },
     {
@@ -102254,11 +103018,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 364,
+      "total": 372,
       "compiles": 29,
-      "withRemainder": 122,
+      "withRemainder": 126,
       "withinV26Bounded": 14,
-      "noMatch": 213
+      "noMatch": 217
     }
   }
 }

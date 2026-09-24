@@ -46,19 +46,33 @@ export function furyAbilities(
       },
     });
   }
-  return result.map(a =>
-    a.name === 'Tide of Death' && a.provenance.decisionId.startsWith('class.fury.')
-      ? {
-          ...a,
-          activationCondition:
-            'The Self header describes your movement. Its power roll damages traversed enemies, never yourself. Movement, enemy selection, the roll, kit bonuses and last-target extra damage are resolved manually.',
-        }
-      : a.name === 'Aspect of the Wild' && a.provenance.decisionId.startsWith('class.fury.')
-        ? {
-            ...a,
-            activationCondition:
-              'Transform only into forms granted by your Stormwight kit or back to your true form. Track form, size, movement, negotiation and equipment manually. Crow and rat animal forms cannot use abilities except Aspect of the Wild.',
-          }
-        : a,
-  );
+  return result.map(a => {
+    const condition = a.provenance.decisionId.startsWith('class.fury.')
+      ? FURY_ACTIVATION[a.name]
+      : undefined;
+    return condition ? { ...a, activationCondition: condition } : a;
+  });
 }
+
+/** Printed clauses the resolver does not model; each is resolved manually at the table. */
+const FURY_ACTIVATION: Record<string, string> = {
+  'Tide of Death':
+    'The Self header describes your movement. Its power roll damages traversed enemies, never yourself. Movement, enemy selection, the roll, kit bonuses and last-target extra damage are resolved manually.',
+  'Aspect of the Wild':
+    'Transform only into forms granted by your Stormwight kit or back to your true form. Track form, size, movement, negotiation and equipment manually. Crow and rat animal forms cannot use abilities except Aspect of the Wild.',
+  'Wrecking Ball':
+    'Move up to your speed in a straight line through mundane structures, leaving difficult terrain. One power roll targets each enemy you move adjacent to. Movement, structure destruction, target selection and pushes are resolved manually.',
+  'Phalanx-Breaker':
+    'Shift up to your speed; one power roll targets up to three enemies you move adjacent to during the shift. Movement and target selection are manual.',
+  'Apex Predator':
+    'The target cannot be hidden from you for 24 hours. Until the end of the encounter, use Apex Predator: Pursue when it willingly moves. Hidden-state tracking is manual.',
+  'Visceral Roar':
+    'Deals your primordial damage type from your Stormwight kit. Pushes are resolved manually.',
+  'Demon Unleashed':
+    'Until the end of the encounter or until you are dying, each enemy who starts its turn adjacent to you with Presence below your strong potency is frightened until the end of its turn. Adjacency, duration and the condition are manual.',
+  'Face the Storm!':
+    'Until the end of the encounter or until you are dying, each creature you make a melee strike against with Presence below your average potency is taunted until the end of its next turn. Rolled damage against an enemy you taunted gains twice your Might and +1 potency. Resolve manually.',
+  Steelbreaker: 'Gain 20 temporary Stamina. Apply the temporary Stamina manually.',
+  'You Are Already Dead':
+    'A target that is not a leader or solo creature is reduced to 0 Stamina at the end of its next turn; resolve that manually. Against a leader or solo creature use You Are Already Dead: Free Strike.',
+};

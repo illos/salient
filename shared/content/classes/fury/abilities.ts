@@ -14,6 +14,10 @@ export interface FuryAction {
 }
 const ability = (slug: string) => `en/unified/md/feature/ability/fury/level-1/${slug}.md`;
 const kitFeature = (kit: string, slug: string) => `en/unified/md/feature/fury/${kit}/${slug}.md`;
+const levelFeature = (level: number, slug: string) =>
+  `en/unified/md/feature/fury/level-${level}/${slug}.md`;
+const levelAbility = (level: number, slug: string) =>
+  `en/unified/md/feature/ability/fury/level-${level}/${slug}.md`;
 const wild = 'en/unified/md/feature/ability/fury/stormwight-kits/aspect-of-the-wild.md';
 export const FURY_ACTIONS: FuryAction[] = [
   {
@@ -158,6 +162,47 @@ export const FURY_ACTIONS: FuryAction[] = [
     actionType: 'End of your turn',
     activationCondition:
       'Only while the target is bleeding from this ability: at the end of each of your turns it takes damage equal to your Might. Track the effect and apply damage manually.',
+  },
+  {
+    name: 'Unstoppable Force: Charge With Ability',
+    parent: 'Unstoppable Force',
+    sourcePath: levelFeature(2, 'unstoppable-force'),
+    actionType: 'Part of Charge',
+    activationCondition:
+      'Only when using the Charge main action: use a strike signature or strike heroic ability instead of the free strike, and you can jump as part of the charge. Pay any heroic cost and resolve movement manually.',
+  },
+  {
+    name: 'Tooth and Claw: Adjacent Damage',
+    parent: 'Tooth and Claw',
+    sourcePath: levelFeature(2, 'tooth-and-claw'),
+    actionType: 'End of your turn',
+    activationCondition:
+      'At the end of each of your turns, each enemy adjacent to you takes damage equal to your Might score. Confirm adjacency and apply damage manually.',
+  },
+  {
+    name: 'Special Delivery: Ally Free Strike',
+    parent: 'Special Delivery',
+    sourcePath: levelAbility(2, 'special-delivery'),
+    actionType: 'Target free strike',
+    activationCondition:
+      'Manual proxy for the pushed ally: at the end of the vertical push, the ally can make a free strike that deals extra damage equal to your Might score. Resolve with the ally’s free strike manually.',
+  },
+  {
+    name: 'Apex Predator: Pursue',
+    parent: 'Apex Predator',
+    sourcePath: levelAbility(2, 'apex-predator'),
+    actionType: 'Free triggered action',
+    trigger: 'The Apex Predator target willingly moves.',
+    activationCondition:
+      'Only after Apex Predator and until the end of the encounter, when its target willingly moves: move. Resolve movement manually; the target also cannot be hidden from you for 24 hours.',
+  },
+  {
+    name: 'You Are Already Dead: Free Strike',
+    parent: 'You Are Already Dead',
+    sourcePath: levelAbility(3, 'you-are-already-dead'),
+    actionType: 'Part of You Are Already Dead',
+    activationCondition:
+      'Only if the target is a leader or solo creature: gain 3 surges and make a melee free strike against it. Adjust surges and resolve the free strike manually.',
   },
 ];
 export function furyActionText(action: FuryAction): string {

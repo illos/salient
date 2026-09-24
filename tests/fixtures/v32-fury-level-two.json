@@ -110,7 +110,8 @@
       "Ranged Weapon Free Strike",
       "Wrecking Ball",
       "Lines of Force: Enhance",
-      "Out of the Way!: Follow"
+      "Out of the Way!: Follow",
+      "Unstoppable Force: Charge With Ability"
     ],
     "abilityDamageTiers": {
       "Brutal Slam": [5, 8, 15],

@@ -96,17 +96,15 @@ export const SELECTIONS: ManifestSelection[] = [
   {
     id: 'fury-level-two',
     description:
-      'V32 bounded Berserker Fury advancement: automatic feature, both aspect abilities and supported Danger Sense perk.',
-    paths: [
-      'feature/fury/level-2/unstoppable-force.md',
-      'feature/fury/level-2/perk.md',
-      'feature/fury/level-2/2nd-level-aspect-ability.md',
-      'feature/fury/level-2/2nd-level-aspect-feature.md',
-      'feature/ability/fury/level-2/special-delivery.md',
-      'feature/ability/fury/level-2/wrecking-ball.md',
-    ],
-    basis:
-      'docs/research/v32-fury-progression-contract.md: verified Fury level-two automatic and selected grants.',
+      'Fury level two for every aspect: perk, aspect features and all six aspect ability alternatives.',
+    paths: ['feature/fury/level-2', 'feature/ability/fury/level-2'],
+    basis: 'docs/build/V114-fury-level-three.md#scope: complete Fury level-two build choices.',
+  },
+  {
+    id: 'fury-level-three',
+    description: 'Fury level-three aspect features and four 7-Ferocity alternatives.',
+    paths: ['feature/fury/level-3', 'feature/ability/fury/level-3'],
+    basis: 'docs/build/V114-fury-level-three.md#scope: Fury level-three build choices.',
   },
   {
     id: 'fury-level-one',

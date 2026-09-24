@@ -297,6 +297,11 @@ export function abilityFromEntry(
     '/feature/ability/shadow/level-5/into-the-shadows.md',
     '/feature/ability/shadow/level-6/puppet-strings.md',
     '/feature/ability/fury/level-1/tide-of-death.md',
+    // Same Self-header movement shape: rolls target enemies moved adjacent to, never yourself.
+    '/feature/ability/fury/level-2/phalanx-breaker.md',
+    '/feature/ability/fury/level-2/wrecking-ball.md',
+    // Deals the Stormwight kit's primordial damage type, which the generic roll cannot carry.
+    '/feature/ability/fury/level-2/visceral-roar.md',
     // Upstage selects enemies passed during movement; never apply its roll to Self.
     '/feature/ability/troubadour/level-1/upstage.md',
     // Performance activation is not its optional end-round attack.

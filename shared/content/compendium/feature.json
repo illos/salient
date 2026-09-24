@@ -1937,6 +1937,20 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.fury.level-2/inescapable-wrath",
+    "kind": "feature",
+    "name": "Inescapable Wrath",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/inescapable-wrath.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-2/inescapable-wrath.json",
+    "selection": "fury-level-two",
+    "text": "---\nclass: fury\nlevel: \"2\"\nname: Inescapable Wrath\nscc: mcdm.heroes.v1/feature.fury.level-2/inescapable-wrath\nsubclass: reaver\ntype: feature\n---\n\nYou have a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score, and you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain).\n",
+    "structured": {
+      "class": "fury",
+      "level": "2",
+      "subclass": "reaver"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.fury.level-2/perk",
     "kind": "feature",
     "name": "Perk",
@@ -1947,6 +1961,20 @@
     "structured": {
       "class": "fury",
       "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-2/tooth-and-claw",
+    "kind": "feature",
+    "name": "Tooth and Claw",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/tooth-and-claw.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-2/tooth-and-claw.json",
+    "selection": "fury-level-two",
+    "text": "---\nclass: fury\nlevel: \"2\"\nname: Tooth and Claw\nscc: mcdm.heroes.v1/feature.fury.level-2/tooth-and-claw\nsubclass: stormwight\ntype: feature\n---\n\nAt the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you takes damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n",
+    "structured": {
+      "class": "fury",
+      "level": "2",
+      "subclass": "stormwight"
     }
   },
   {
@@ -1961,6 +1989,74 @@
       "class": "fury",
       "level": "2",
       "subclass": "berserker"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-3/3rd-level-aspect-feature",
+    "kind": "feature",
+    "name": "3rd-Level Aspect Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/3rd-level-aspect-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-3/3rd-level-aspect-feature.json",
+    "selection": "fury-level-three",
+    "text": "---\nclass: fury\nlevel: \"3\"\nname: 3rd-Level Aspect Feature\nscc: mcdm.heroes.v1/feature.fury.level-3/3rd-level-aspect-feature\ntype: feature\n---\n\nYour [primordial aspect](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-aspect) grants you a feature, as shown on the 3rd-Level Aspect Features table.\n\n###### 3rd-Level Aspect Features Table\n\n| Aspect                    | Feature                  |\n|---------------------------|--------------------------|\n| Berserker                 | [Immovable Object](scc.v1:mcdm.heroes.v1/feature.fury.level-3/immovable-object)         |\n| Reaver                    | [See Through Their Tricks](scc.v1:mcdm.heroes.v1/feature.fury.level-3/see-through-their-tricks) |\n| Stormwight                | Nature's Knight          |\n",
+    "structured": {
+      "class": "fury",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-3/7-ferocity-ability",
+    "kind": "feature",
+    "name": "7-Ferocity Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/7-ferocity-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-3/7-ferocity-ability.json",
+    "selection": "fury-level-three",
+    "text": "---\nclass: fury\nlevel: \"3\"\nname: 7-Ferocity Ability\nscc: mcdm.heroes.v1/feature.fury.level-3/7-ferocity-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 ferocity to use.\n",
+    "structured": {
+      "class": "fury",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-3/immovable-object",
+    "kind": "feature",
+    "name": "Immovable Object",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/immovable-object.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-3/immovable-object.json",
+    "selection": "fury-level-three",
+    "text": "---\nclass: fury\nlevel: \"3\"\nname: Immovable Object\nscc: mcdm.heroes.v1/feature.fury.level-3/immovable-object\nsubclass: berserker\ntype: feature\n---\n\nYou add your level to your effective [size](scc.v1:mcdm.heroes.v1/rule.character/size) for the purpose of interacting with creatures and objects, including determining whether you can lift an object, are affected by [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement), and so forth. This has no effect on whether you can be [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n\nAdditionally, you have a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n",
+    "structured": {
+      "class": "fury",
+      "level": "3",
+      "subclass": "berserker"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-3/natures-knight",
+    "kind": "feature",
+    "name": "Nature's Knight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/natures-knight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-3/natures-knight.json",
+    "selection": "fury-level-three",
+    "text": "---\nclass: fury\nlevel: \"3\"\nname: Nature's Knight\nscc: mcdm.heroes.v1/feature.fury.level-3/natures-knight\nsubclass: stormwight\ntype: feature\n---\n\nYou can speak with animals and elementals. Additionally, you automatically sense the presence of animals and elementals within 10 squares of you, even if they are hidden.\n\nWhen you are in a negotiation with an animal or elemental, you treat your [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) as 1 higher than usual. This stacks with the increase to your effective [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) in a negotiation with an animal of your type while in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).\n",
+    "structured": {
+      "class": "fury",
+      "level": "3",
+      "subclass": "stormwight"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-3/see-through-their-tricks",
+    "kind": "feature",
+    "name": "See Through Their Tricks",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/see-through-their-tricks.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-3/see-through-their-tricks.json",
+    "selection": "fury-level-three",
+    "text": "---\nclass: fury\nlevel: \"3\"\nname: See Through Their Tricks\nscc: mcdm.heroes.v1/feature.fury.level-3/see-through-their-tricks\nsubclass: reaver\ntype: feature\n---\n\nYou have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to search for hidden creatures, discern hidden motives, or detect lies. You also have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to gamble!\n",
+    "structured": {
+      "class": "fury",
+      "level": "3",
+      "subclass": "reaver"
     }
   },
   {

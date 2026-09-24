@@ -252,21 +252,27 @@ test('V32 class and aspect changes invalidate only dependent progression choices
   ];
   for (const change of changes) {
     const changed = { ...selections, ...change };
+    // V114: the perk belongs to every Fury (feature/fury/level-2/perk.md), not only Berserker.
+    const classChange = 'class.choice' in change;
     for (const id of [
       'class.fury.level-2.perk',
       'class.fury.level-2.aspect-ability',
       'class.fury.level-2.aspect-feature',
     ])
-      assert.equal(isAvailable(decisions.get(id)!, changed, decisions), false, id);
+      assert.equal(
+        isAvailable(decisions.get(id)!, changed, decisions),
+        id === 'class.fury.level-2.perk' && !classChange,
+        id,
+      );
     const pruned = pruneUnavailable(changed, definitions);
-    assert.ok(pruned.removed.includes('class.fury.level-2.perk'));
+    assert.equal(pruned.removed.includes('class.fury.level-2.perk'), classChange);
     assert.ok(pruned.removed.includes('class.fury.level-2.aspect-ability'));
     assert.equal(pruned.selections['career.soldier.perk'], 'Teamwork');
     const result = evaluate(changed);
     assert.equal(result.baseline, null);
     assert.ok(!result.partial?.features?.some(row => row.name === 'Unstoppable Force'));
     assert.ok(!result.partial?.abilities?.some(row => row.name === 'Wrecking Ball'));
-    assert.ok(!result.partial?.perks?.some(row => row.name === 'Danger Sense'));
+    if (classChange) assert.ok(!result.partial?.perks?.some(row => row.name === 'Danger Sense'));
   }
 });
 

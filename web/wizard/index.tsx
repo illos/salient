@@ -1668,12 +1668,12 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
               ))}
             </select>
           </label>
-          {targetLevel === 2 && (
+          {(targetLevel === 2 || targetLevel === 3) && (
             <p className="mb-4 text-sm text-muted-foreground">
-              Level 2 supports Shadow and Berserker Fury.
+              Level {targetLevel} supports Shadow and Fury.
             </p>
           )}
-          {targetLevel >= 3 && targetLevel <= 6 && (
+          {targetLevel >= 4 && targetLevel <= 6 && (
             <p className="mb-4 text-sm text-muted-foreground">
               Level {targetLevel} supports Shadow.
             </p>

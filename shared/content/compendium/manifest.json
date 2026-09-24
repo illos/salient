@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf",
-  "entryCount": 1654,
+  "contentHash": "sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299",
+  "entryCount": 1669,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -66,16 +66,21 @@
     },
     {
       "id": "fury-level-two",
-      "description": "V32 bounded Berserker Fury advancement: automatic feature, both aspect abilities and supported Danger Sense perk.",
+      "description": "Fury level two for every aspect: perk, aspect features and all six aspect ability alternatives.",
       "paths": [
-        "feature/fury/level-2/unstoppable-force.md",
-        "feature/fury/level-2/perk.md",
-        "feature/fury/level-2/2nd-level-aspect-ability.md",
-        "feature/fury/level-2/2nd-level-aspect-feature.md",
-        "feature/ability/fury/level-2/special-delivery.md",
-        "feature/ability/fury/level-2/wrecking-ball.md"
+        "feature/fury/level-2",
+        "feature/ability/fury/level-2"
       ],
-      "basis": "docs/research/v32-fury-progression-contract.md: verified Fury level-two automatic and selected grants."
+      "basis": "docs/build/V114-fury-level-three.md#scope: complete Fury level-two build choices."
+    },
+    {
+      "id": "fury-level-three",
+      "description": "Fury level-three aspect features and four 7-Ferocity alternatives.",
+      "paths": [
+        "feature/fury/level-3",
+        "feature/ability/fury/level-3"
+      ],
+      "basis": "docs/build/V114-fury-level-three.md#scope: Fury level-three build choices."
     },
     {
       "id": "fury-level-one",
@@ -1374,10 +1379,42 @@
       "file": "ability.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator",
+      "kind": "ability",
+      "name": "Apex Predator",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/apex-predator.md",
+      "selection": "fury-level-two",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death",
+      "kind": "ability",
+      "name": "Death... Death!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/death-death.md",
+      "selection": "fury-level-two",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/phalanx-breaker",
+      "kind": "ability",
+      "name": "Phalanx-Breaker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/phalanx-breaker.md",
+      "selection": "fury-level-two",
+      "file": "ability.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.fury.level-2/special-delivery",
       "kind": "ability",
       "name": "Special Delivery",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/special-delivery.md",
+      "selection": "fury-level-two",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
+      "kind": "ability",
+      "name": "Visceral Roar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
       "selection": "fury-level-two",
       "file": "ability.json"
     },
@@ -1387,6 +1424,38 @@
       "name": "Wrecking Ball",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/wrecking-ball.md",
       "selection": "fury-level-two",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed",
+      "kind": "ability",
+      "name": "Demon Unleashed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/demon-unleashed.md",
+      "selection": "fury-level-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm",
+      "kind": "ability",
+      "name": "Face the Storm!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+      "selection": "fury-level-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker",
+      "kind": "ability",
+      "name": "Steelbreaker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
+      "selection": "fury-level-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-3/you-are-already-dead",
+      "kind": "ability",
+      "name": "You Are Already Dead",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/you-are-already-dead.md",
+      "selection": "fury-level-three",
       "file": "ability.json"
     },
     {
@@ -5014,10 +5083,26 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.fury.level-2/inescapable-wrath",
+      "kind": "feature",
+      "name": "Inescapable Wrath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/inescapable-wrath.md",
+      "selection": "fury-level-two",
+      "file": "feature.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.fury.level-2/perk",
       "kind": "feature",
       "name": "Perk",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/perk.md",
+      "selection": "fury-level-two",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-2/tooth-and-claw",
+      "kind": "feature",
+      "name": "Tooth and Claw",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/tooth-and-claw.md",
       "selection": "fury-level-two",
       "file": "feature.json"
     },
@@ -5027,6 +5112,46 @@
       "name": "Unstoppable Force",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/unstoppable-force.md",
       "selection": "fury-level-two",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-3/3rd-level-aspect-feature",
+      "kind": "feature",
+      "name": "3rd-Level Aspect Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/3rd-level-aspect-feature.md",
+      "selection": "fury-level-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-3/7-ferocity-ability",
+      "kind": "feature",
+      "name": "7-Ferocity Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/7-ferocity-ability.md",
+      "selection": "fury-level-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-3/immovable-object",
+      "kind": "feature",
+      "name": "Immovable Object",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/immovable-object.md",
+      "selection": "fury-level-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-3/natures-knight",
+      "kind": "feature",
+      "name": "Nature's Knight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/natures-knight.md",
+      "selection": "fury-level-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-3/see-through-their-tricks",
+      "kind": "feature",
+      "name": "See Through Their Tricks",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/see-through-their-tricks.md",
+      "selection": "fury-level-three",
       "file": "feature.json"
     },
     {
