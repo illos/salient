@@ -84,6 +84,9 @@ export const heroLiveValidator = v.object({
   conditions: conditionsValidator,
   manualConditions: v.optional(conditionsValidator),
   conditionInstances: v.optional(v.array(conditionInstanceValidator)),
+  /** V150: Self-Taught — forgo gains at the next turn start (`forgoNext`), or forgoing now. */
+  forgoNext: v.optional(v.boolean()),
+  forgoing: v.optional(v.boolean()),
   /** V120: table-confirmed class resource triggers claimed in the current encounter. */
   resourceClaims: v.optional(
     v.array(

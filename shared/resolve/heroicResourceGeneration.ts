@@ -107,6 +107,20 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
   },
 ];
 
+/** complication/self-taught.md: the forgo option, keyed by the complication feature's name. */
+export const SELF_TAUGHT = {
+  sourcePath: 'vendor/steel-compendium/en/unified/md/complication/self-taught.md',
+  quote:
+    'At the start of each of your turns during combat, you can forgo gaining your Heroic Resource until the start of your next turn.',
+};
+
+/** Whether the hero has the Self-Taught complication, which lets them forgo resource gains. */
+export function canForgo(baseline: Pick<DerivedBaseline, 'features'> | null | undefined): boolean {
+  return (baseline?.features ?? []).some(
+    feature => feature.kind === 'complication' && feature.name === 'Self-Taught',
+  );
+}
+
 /**
  * The profile that applies to an evaluated hero: its class has one and its level is within the
  * profile's verified range. Otherwise generation stays manual.

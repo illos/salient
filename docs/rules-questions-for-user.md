@@ -951,3 +951,20 @@ Alternatives considered:
 
 Recommendation: keep the current behaviour. A void is the "undo this combat" path, and finishing is
 the rules path.
+
+## Q-RES-7: when does a Self-Taught forgo end?
+
+`complication/self-taught.md`: "At the start of each of your turns during combat, you can forgo
+gaining your Heroic Resource until the start of your next turn."
+
+Current behaviour (V150, labelled interpretation):
+- The forgo covers the turn-start gain of the turn it is declared for, and every class trigger until
+  the start of the hero's next turn.
+- At that next turn start the window has ended, so that turn's gain applies, unless the hero forgoes
+  again.
+- The forgo is declared before the turn start with `/resource forgo`, because the app grants the
+  gain at the start of the turn.
+
+Alternative: "until the start of your next turn" also covers the next turn's gain.
+
+Recommendation: keep the current behaviour, since "until" ends the window at that boundary.

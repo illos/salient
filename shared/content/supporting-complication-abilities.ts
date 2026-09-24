@@ -170,7 +170,7 @@ export const COMPLICATION_ABILITIES: ComplicationAbilitySource[] = [
   prose('Self-Taught', 'Self-Taught: Forgo Heroic Resource', 'Start of your turn', {
     trigger: 'At the start of each of your turns during combat.',
     condition:
-      'Forgo gaining Heroic Resource until the start of your next turn in exchange for a highest-characteristic strike damage bonus over that period. Resolve manually.',
+      'Forgo gaining Heroic Resource until the start of your next turn in exchange for a highest-characteristic strike damage bonus over that period. For a class whose Heroic Resource the app generates, declare it before the turn starts with /resource forgo; the app then adds nothing and refuses claims until your next turn start. Resolve the damage bonus manually.',
   }),
   prose('Shared Spirit', 'Shared Spirit: Determine Controller', 'Start of day', {
     condition:

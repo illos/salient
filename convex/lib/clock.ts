@@ -38,7 +38,7 @@ import {
 } from './conditionInstances';
 import type { DieResult } from '../../shared/contracts/history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
-import { generationProfile } from '../../shared/resolve/heroicResourceGeneration';
+import { SELF_TAUGHT, generationProfile } from '../../shared/resolve/heroicResourceGeneration';
 
 export type Registration = Doc<'clockRegistrations'>;
 
@@ -276,6 +276,33 @@ async function fireHeroicResource(
       description: `${label}: ${hero.authored.name}'s pool is ${pool.name}, not ${profile.resource}; resolve manually.`,
       unsupported: 'pool does not match the generation profile',
     };
+  // V150 (complication/self-taught.md): a forgo declared for this turn start suppresses the gain
+  // "until the start of your next turn"; an earlier forgo window ends here.
+  let windowEnded = false;
+  if (step === 'turn-start-gain') {
+    if (live.forgoNext) {
+      await journalPatch(ctx, firing.scope, 'characters', hero._id, {
+        liveState: { ...live, forgoNext: false, forgoing: true },
+      });
+      return {
+        kind: 'clock.heroic-resource',
+        description: `${hero.authored.name} forgoes ${pool.name} until the start of their next turn (Self-Taught); ${pool.current} unchanged.`,
+        payload: {
+          step,
+          characterId,
+          className: profile.className,
+          resource: pool.name,
+          before: pool.current,
+          delta: 0,
+          after: pool.current,
+          forgo: true,
+          sourcePath: SELF_TAUGHT.sourcePath,
+          quote: SELF_TAUGHT.quote,
+        },
+      };
+    }
+    windowEnded = live.forgoing === true;
+  }
   const before = pool.current;
   let after: number;
   let clause: { sourcePath: string; quote: string };
@@ -313,7 +340,10 @@ async function fireHeroicResource(
     liveState: {
       ...live,
       heroicResource: { ...pool, current: after },
-      ...(step === 'encounter-end-loss' ? { resourceClaims: [] } : {}),
+      ...(step === 'encounter-end-loss'
+        ? { resourceClaims: [], forgoNext: false, forgoing: false }
+        : {}),
+      ...(windowEnded ? { forgoing: false } : {}),
     },
   });
   return {

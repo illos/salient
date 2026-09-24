@@ -110,6 +110,12 @@ export interface HeroLiveState {
   conditionInstances?: ConditionInstance[];
   /** V120: table-confirmed class resource triggers claimed this encounter; cleared at encounter end. */
   resourceClaims?: ResourceClaim[];
+  /**
+   * V150 (complication/self-taught.md): forgo gaining the Heroic Resource at the next turn start
+   * (`forgoNext`); while `forgoing`, no gain applies until the start of the hero's next turn.
+   */
+  forgoNext?: boolean;
+  forgoing?: boolean;
 }
 
 /** One claimed class resource trigger and the window (round or turn) its limit applies to. */

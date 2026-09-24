@@ -24,7 +24,7 @@ import { allowanceFor, loadActorRecords } from './lib/abilityOperations';
 import { settingsOf } from './lib/audience';
 import { resolveHistoricalId } from './lib/history';
 import { loadReadCorrectionWindows } from './lib/historyRead';
-import { resourceTriggers } from './lib/resourceOperations';
+import { resourceForgoState, resourceTriggers } from './lib/resourceOperations';
 
 export { abilityOperations } from './lib/abilityOperations';
 
@@ -140,6 +140,16 @@ export const sheet = query({
     ),
     /** Facts a hero needs before rolled abilities resolve; null when present or not a hero. */
     missingFacts: v.union(v.string(), v.null()),
+    /** V150: the Self-Taught forgo state (`resource.forgo`), when the hero can forgo. */
+    resourceForgo: v.union(
+      v.null(),
+      v.object({
+        forgoNext: v.boolean(),
+        forgoing: v.boolean(),
+        sourcePath: v.string(),
+        quote: v.string(),
+      }),
+    ),
     /** V120: class heroic-resource triggers the table claims with `resource.claim`. */
     resourceTriggers: v.array(
       v.object({
@@ -213,6 +223,7 @@ export const sheet = query({
         !records.character?.derivedBaseline
           ? `${args.actor.name} has no recorded characteristics or kit bonuses (no evaluated build); the Director records them with /hero facts.`
           : null,
+      resourceForgo: mayRead && records.character ? resourceForgoState(records.character) : null,
       resourceTriggers:
         mayRead && records.character
           ? await resourceTriggers(ctx, context.campaign, records.character)

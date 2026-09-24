@@ -13,6 +13,8 @@ import { ConvexError, v } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { ReadCtx } from './access';
 import {
+  SELF_TAUGHT,
+  canForgo,
   claimWindow,
   generationProfile,
   triggerAmount,
@@ -57,6 +59,8 @@ function blocked(
   if ((encounter.round ?? 0) < 1) return 'Combat rounds have not started yet.';
   if (character.liveState?.heroicResource.name.toLowerCase() !== profile.resource)
     return `${character.authored.name}'s pool is not ${profile.resource}; adjust it manually.`;
+  if (character.liveState?.forgoing)
+    return `${character.authored.name} is forgoing their Heroic Resource until the start of their next turn (Self-Taught).`;
   return null;
 }
 
@@ -190,4 +194,78 @@ const resourceClaim: OperationDefinition = {
   },
 };
 
-export const resourceOperations: OperationDefinition[] = [resourceClaim];
+/**
+ * V150: declare (or withdraw) forgoing the next turn-start gain under the Self-Taught complication:
+ * "At the start of each of your turns during combat, you can forgo gaining your Heroic Resource until
+ * the start of your next turn." (complication/self-taught.md). The clock applies it at that turn
+ * start; the strike damage bonus stays manual.
+ */
+const resourceForgo: OperationDefinition = {
+  id: 'resource.forgo',
+  family: 'resource',
+  verb: 'forgo',
+  title: 'Forgo the next turn-start Heroic Resource (Self-Taught)',
+  description:
+    'For a Self-Taught hero: at the next turn start, gain no Heroic Resource until the start of the following turn (the strike damage bonus is resolved manually). `value=off` withdraws it before that turn starts.',
+  args: { value: v.optional(v.string()) },
+  argDescriptions: { value: '`on` (default) to forgo at the next turn start, `off` to withdraw.' },
+  roles: ['director', 'player'],
+  session: 'running',
+  actor: 'required',
+  execute: async (ctx, { context, actor, args }): Promise<Outcome> => {
+    if (actor!.kind !== 'character')
+      throw new ConvexError(`${actor!.name} is not a hero; only heroes have heroic resources.`);
+    const character = await ctx.db.get(actor!.id as Id<'characters'>);
+    if (!character || character.campaignId !== context.campaign._id)
+      throw new ConvexError('That hero is not at this table.');
+    const live = requireHeroLive(character);
+    const baseline = baselineOf(character.derivedBaseline);
+    if (!canForgo(baseline))
+      throw new ConvexError(
+        `${character.authored.name} does not have the Self-Taught complication.`,
+      );
+    if (!generationProfile(baseline))
+      throw new ConvexError(
+        `${character.authored.name}'s Heroic Resource is not generated automatically; forgo it by not adding it.`,
+      );
+    const value = String(args.value ?? 'on').toLowerCase();
+    if (value !== 'on' && value !== 'off') throw new ConvexError('"value" must be on or off.');
+    const on = value === 'on';
+    if ((live.forgoNext ?? false) === on)
+      throw new ConvexError(
+        `${character.authored.name} ${on ? 'already forgoes' : 'is not forgoing'} the next turn-start gain.`,
+      );
+    return {
+      kind: 'resource.forgo',
+      description: on
+        ? `${character.authored.name} will forgo their Heroic Resource at the next turn start (Self-Taught).`
+        : `${character.authored.name} will not forgo their Heroic Resource at the next turn start.`,
+      data: {
+        characterId: character._id,
+        forgoNext: on,
+        sourcePath: SELF_TAUGHT.sourcePath,
+        quote: SELF_TAUGHT.quote,
+      },
+      commit: async (mctx, scope) => {
+        const current = (await mctx.db.get(character._id))!;
+        await journalPatch(mctx, scope, 'characters', character._id, {
+          liveState: { ...current.liveState!, forgoNext: on },
+        });
+      },
+    };
+  },
+};
+
+/** V150: the hero's Self-Taught forgo state for `abilities:sheet`, or null without it. */
+export function resourceForgoState(character: Doc<'characters'>) {
+  const baseline = baselineOf(character.derivedBaseline);
+  if (!canForgo(baseline) || !generationProfile(baseline) || !character.liveState) return null;
+  return {
+    forgoNext: character.liveState.forgoNext ?? false,
+    forgoing: character.liveState.forgoing ?? false,
+    sourcePath: SELF_TAUGHT.sourcePath,
+    quote: SELF_TAUGHT.quote,
+  };
+}
+
+export const resourceOperations: OperationDefinition[] = [resourceClaim, resourceForgo];

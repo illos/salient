@@ -341,6 +341,24 @@ export function AbilityPanel({
           />
         </div>
       )}
+      {sheet.resourceForgo && (
+        <p className="flex flex-wrap items-center gap-2 text-sm">
+          <span>
+            {sheet.resourceForgo.forgoing
+              ? 'Forgoing Heroic Resource until the start of the next turn (Self-Taught).'
+              : sheet.resourceForgo.forgoNext
+                ? 'Will forgo Heroic Resource at the next turn start (Self-Taught).'
+                : 'Self-Taught: can forgo Heroic Resource at the next turn start.'}
+          </span>
+          <Command
+            campaignId={campaignId}
+            text={`${ref(actor)} /resource forgo value=${sheet.resourceForgo.forgoNext ? 'off' : 'on'}`}
+            label={sheet.resourceForgo.forgoNext ? 'Keep gaining' : 'Forgo next'}
+            title={sheet.resourceForgo.quote}
+          />
+          <RuleLink sourcePath={sheet.resourceForgo.sourcePath} label="Self-Taught" />
+        </p>
+      )}
       {sheet.resourceTriggers.length > 0 && (
         <ul className="m-0 flex list-none flex-col gap-1 p-0" aria-label="Resource triggers">
           {sheet.resourceTriggers.map(trigger => (
