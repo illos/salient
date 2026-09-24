@@ -879,18 +879,54 @@ repeat with no extra benefit. Current behaviour (interim interpretation, V114): 
 allowed and grants nothing new. Recommendation: exclude already-held perks, since a repeat has no
 printed effect. Nothing else in V114 depends on the answer.
 
-## Q-GRAB-1: when a creature that already has someone grabbed grabs again
+## Q-GRAB-1: how many creatures may a hero or foe hold grabbed, and when does a stat block say otherwise?
 
-`feature/ability/common/grab.md` and `condition/grabbed.md` both say "Unless otherwise indicated, a
-creature can grab only one creature at a time." Neither says what happens when a creature already
-holding one grab lands another. Examples are a second Grab maneuver, or a two-target ability such as
-Arixx's Claw Swing (`monster/arixx/statblock/arixx.md`), whose tiers say "grabbed" for each target.
+Sources:
+- `chapter/monster-basics.md`, Creatures Who Grab: a creature "can have only one creature or object
+  grabbed at a time unless their stat block specifies otherwise". Once at that maximum, the grabbing
+  ability "can't be used against another target unless the creature releases an already grabbed
+  target".
+- `chapter/classes.md`, Stacking Unique Effects: "A character who is grabbed by an enemy can't be
+  grabbed again by another enemy."
+- For heroes, `feature/ability/common/grab.md` and `condition/grabbed.md` say only "Unless otherwise
+  indicated, a creature can grab only one creature at a time".
+- `feature/fury/boren/growing-ferocity.md` ("up to two creatures grabbed at a time") is an example of
+  a feature that says otherwise.
+
+Open:
+- (1) For heroes, the source does not say whether a second grab fails or replaces the first.
+- (2) Does a stat block "specify otherwise" only through explicit text, or also by implication? For
+  example, Giant Zombie's Knocking Heads "grabs two creatures or objects", while its Rotten Smash
+  targets two with "grabbed". Arixx's Claw Swing (`monster/arixx/statblock/arixx.md`) targets two
+  and has no exception, so the monster rule limits it to one.
+
+Current behaviour (V119, interim):
+- Compiled grabs apply only when the actor holds no other grab and the use would grab a single
+  target.
+- A grab on a target already held by another creature is left to the table as `fact-needed`.
+- The Grab maneuver's tier 3 is likewise withheld, with a note, in those cases.
+
+Recommendation: for heroes, (b) the new grab fails until one is released, which matches the monster
+rule. Treat only explicit text such as Growing Ferocity as "otherwise".
+
+## Q-GRAB-2: does the grab size rule bind grabs imposed by abilities?
+
+`condition/grabbed.md` says "A creature can grab only creatures of their size or smaller" and allows a
+Might 2+ creature to grab larger creatures up to their Might. `feature/ability/common/grab.md` says the
+Grab maneuver "can usually target only creatures of your size or smaller".
+
+Current behaviour (V119, labelled interpretation):
+- The rule is applied to grabs from ability tiers as well.
+- A grab the grabber is too small for is `ineligible`.
+- The Grab maneuver refuses such a target before rolling, reading "usually" as the Might exception.
+
+Consequences: the Mindkiller (`monster/voiceless-talker/statblock/mindkiller.md`, 1S, Might −1)
+cannot grab 1M or 1L heroes with Killer Claws, and the Voiceless Talker Invader (1M, Might −1) cannot
+grab a 1L target with Tentacle.
+
 Alternatives:
-- (a) the earlier grab ends and the new one applies;
-- (b) the new grab fails while the old one holds;
-- (c) a multi-target grab counts as "otherwise indicated" and both apply.
+- (a) grabs imposed by abilities ignore size;
+- (b) the table decides each case.
 
-Current behaviour (V119, interim): the new grab applies and the old one stays. The use carries a
-rule note naming the creatures already held, and the table releases one with `condition off`.
-Recommendation: (a) for a Grab maneuver or a single-target ability, and (c) for a multi-target
-ability whose tiers grab each target. Nothing else in V119 depends on the answer.
+Recommendation: keep the literal rule, since it is the only printed statement, unless you want (b)
+for monsters whose signature grabs would never land.

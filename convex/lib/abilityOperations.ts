@@ -86,6 +86,7 @@ import {
   writeDamage,
   ESCAPE_GRAB_ID,
   GRAB_ID,
+  KNOCKBACK_ID,
   STAND_UP_ID,
   type AbilityDefinition,
   type TargetRecord,
@@ -904,7 +905,9 @@ async function commitConditions(
       );
       schedule =
         effect.duration === 'none'
-          ? ' No printed duration: it lasts until the creature stands up (Stand Up); record that with condition off.'
+          ? effect.condition === 'grabbed'
+            ? ' No printed duration: the grab lasts until the grabber releases it, the creature escapes (Escape Grab), or a teleport or forced movement separates them (condition/grabbed.md); record that with condition off.'
+            : ' No printed duration: it lasts until the creature stands up (Stand Up); record that with condition off.'
           : effect.duration === 'eot'
             ? instance.registrationId
               ? ' Ends at the end of the target’s current or next turn (EoT).'
@@ -985,6 +988,7 @@ async function grabManeuverPlan(
       ),
     ];
     let bane = false;
+    let unknownSize = conditionsOf(actorRecord)?.grabbed === true && !grabbers.length;
     for (const id of grabbers) {
       const heroId = ctx.db.normalizeId('characters', id);
       const foeId = ctx.db.normalizeId('foes', id);
@@ -995,16 +999,21 @@ async function grabManeuverPlan(
         ...(character ? { character } : {}),
         ...(foe ? { foe } : {}),
       } as TargetRecord;
-      if (smallerSize(actorSize, movementFacts(record).size)) bane = true;
+      const smaller = smallerSize(actorSize, movementFacts(record).size);
+      if (smaller) bane = true;
+      if (smaller === undefined) unknownSize = true;
     }
+    if (instancesOf(actorRecord).every(i => i.condition !== 'grabbed' || i.status !== 'active'))
+      unknownSize = true;
     if (bane) {
       banes[0] = (banes[0] ?? 0) + 1;
       warnings.push(
         'Escape Grab takes a bane: the actor is smaller than what has them grabbed (feature/ability/common/escape-grab.md).',
       );
-    } else if (!grabbers.length)
+    }
+    if (unknownSize)
       warnings.push(
-        'Escape Grab: the grab has no recorded source; apply its bane manually if the actor is smaller than what holds them.',
+        'Escape Grab: a grab source or size is not recorded; apply the bane manually if the actor is smaller than what holds them (feature/ability/common/escape-grab.md).',
       );
     return {
       note: tier =>
@@ -1040,22 +1049,40 @@ async function grabManeuverPlan(
     throw new ConvexError(
       `${actorRecord.actor.name} can't grab ${target.actor.name}: it is larger than they can grab (condition/grabbed.md).`,
     );
-  const holding = await activeGrabsBy(ctx, actorRecord);
-  if (holding.length)
-    warnings.push(
-      `Rule note: ${actorRecord.actor.name} already has ${holding.join(', ')} grabbed; a creature can grab only one creature at a time unless otherwise indicated (feature/ability/common/grab.md). Release one with condition off.`,
-    );
+  // Withheld, not refused, so the table decides:
+  //   chapter/monster-basics.md, Creatures Who Grab: one grab at a time;
+  //   chapter/classes.md, Stacking Unique Effects: no second grab by another enemy;
+  //   and a known grabbed immunity.
+  const holding = (await activeGrabsBy(ctx, actorRecord)).filter(h => h.id !== target.actor.id);
+  const otherGrabbers = (
+    instancesOf(target) as { status: string; condition: string; sourceActorId?: string }[]
+  )
+    .filter(i => i.status === 'active' && i.condition === 'grabbed')
+    .some(i => i.sourceActorId !== actorRecord.actor.id);
+  const immune = (
+    target.character
+      ? (baselineOf(target.character.derivedBaseline)?.conditionImmunities ?? [])
+      : []
+  ).some(i => i.condition === 'grabbed');
+  const withheld = holding.length
+    ? `${actorRecord.actor.name} already has ${holding.map(h => h.name).join(', ')} grabbed; a creature grabs one at a time unless its stat block or feature says otherwise (chapter/monster-basics.md; Q-GRAB-1). Release one with condition off, then record this grab`
+    : otherGrabbers || (conditionsOf(target)?.grabbed && !instancesOf(target).length)
+      ? `${target.actor.name} is already grabbed by another creature (chapter/classes.md, Stacking Unique Effects); the table decides`
+      : immune
+        ? `${target.actor.name} can't be grabbed (evaluated immunity)`
+        : undefined;
+  const automatic = creature && eligibility === 'allowed' && !withheld;
   return {
     note: tier =>
       tier === 3
-        ? creature && eligibility === 'allowed'
+        ? automatic
           ? ` ${target.actor.name} is grabbed by ${actorRecord.actor.name}.`
-          : ` ${target.actor.name} is grabbed by ${actorRecord.actor.name}; record it manually (size or squad facts unavailable).`
+          : ` The grab is not recorded automatically: ${withheld ?? 'size or squad facts are unavailable'}.`
         : tier === 2
           ? ` ${actorRecord.actor.name} can grab ${target.actor.name}, but the target can first make a melee free strike; record the grab with condition on grabbed.`
           : ' No effect.',
     commit: async (mctx, scope, tier, source) => {
-      if (tier !== 3 || !creature || eligibility !== 'allowed') return;
+      if (tier !== 3 || !automatic) return;
       await applyConditionInstance(
         mctx,
         scope,
@@ -1073,8 +1100,11 @@ async function grabManeuverPlan(
   };
 }
 
-/** Names of creatures in this campaign the actor currently has grabbed through a recorded grab. */
-async function activeGrabsBy(ctx: ReadCtx, actorRecord: TargetRecord): Promise<string[]> {
+/** Creatures in this campaign the actor currently has grabbed through a recorded grab. */
+async function activeGrabsBy(
+  ctx: ReadCtx,
+  actorRecord: TargetRecord,
+): Promise<{ id: string; name: string }[]> {
   const campaignId = actorRecord.character?.campaignId ?? actorRecord.foe?.campaignId;
   if (!campaignId) return [];
   const held = (instances: { status: string; condition: string; sourceActorId?: string }[]) =>
@@ -1084,19 +1114,19 @@ async function activeGrabsBy(ctx: ReadCtx, actorRecord: TargetRecord): Promise<s
         i.condition === 'grabbed' &&
         i.sourceActorId === actorRecord.actor.id,
     );
-  const names: string[] = [];
+  const held_: { id: string; name: string }[] = [];
   for (const hero of await ctx.db
     .query('characters')
     .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
     .collect())
     if (hero.liveState && held(hero.liveState.conditionInstances ?? []))
-      names.push(hero.authored?.name ?? 'a hero');
+      held_.push({ id: hero._id, name: hero.authored?.name ?? 'a hero' });
   for (const foe of await ctx.db
     .query('foes')
     .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
     .collect())
-    if (held(foe.live.conditionInstances ?? [])) names.push(foe.name);
-  return names;
+    if (held(foe.live.conditionInstances ?? [])) held_.push({ id: foe._id, name: foe.name });
+  return held_;
 }
 
 const abilityUse: OperationDefinition = {
@@ -1325,6 +1355,9 @@ const abilityUse: OperationDefinition = {
 
     // ---- Defend, Aid Attack and any ability the app cannot resolve: recorded with full text.
     if (ability.abilityId === STAND_UP_ID) {
+      // condition/restrained.md: a restrained creature can't use the Stand Up maneuver.
+      if (conditionsOf(records)?.restrained)
+        throw new ConvexError(`${actor!.name} is restrained and can't use Stand Up.`);
       const target = targets[0]!;
       if (!conditionsOf(target)?.prone)
         throw new ConvexError(`${target.actor.name} is not prone; Stand Up has nothing to end.`);
@@ -1480,6 +1513,9 @@ const abilityUse: OperationDefinition = {
         `${actor!.name} is a squad minion with a captain (With Captain: ${strikeBenefit.text}); use @{squad:${records.squad!._id}} /squad act ability="${ability.name}" with ${actor!.name} as the only participant so the benefit applies.`,
       );
     // ---- V119 common grab maneuvers (feature/ability/common/grab.md, escape-grab.md).
+    // condition/grabbed.md: a grabbed creature can't use the Knockback maneuver.
+    if (ability.abilityId === KNOCKBACK_ID && conditionsOf(records)?.grabbed)
+      throw new ConvexError(`${actor!.name} is grabbed and can't use Knockback.`);
     const grabPlan = await grabManeuverPlan(ctx, ability, records, targets, banes, warnings);
     // ---- Rolled ability (R04 sections 1, 2, 4, 6, 9).
     const compiledDefinition =
@@ -1566,7 +1602,15 @@ const abilityUse: OperationDefinition = {
       ...(!compiledDefinition && ability.effects ? { effectClauses: ability.effects } : {}),
       ...(compiledDefinition
         ? {
-            conditionFacts: conditionFacts(records, targets),
+            conditionFacts: conditionFacts(
+              records,
+              targets,
+              compiledDefinition.tiers.some(nodes =>
+                nodes.some(n => n.kind === 'condition' && n.condition === 'grabbed'),
+              )
+                ? (await activeGrabsBy(ctx, records)).map(h => h.id)
+                : [],
+            ),
             movement: {
               actor: movementFacts(records),
               targets: targets.map(t => ({ ...movementFacts(t), targetId: t.actor.id })),
@@ -1786,6 +1830,11 @@ const abilityCorrect: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context, args }) => {
     const { event, result } = await resultByEvent(ctx, context, String(args.event));
+    // V119: a Grab or Escape Grab correction cannot re-decide its tier-3 grab write safely.
+    if (result.abilityId === GRAB_ID || result.abilityId === ESCAPE_GRAB_ID)
+      throw new ConvexError(
+        `${result.abilityName} changes who is grabbed at tier 3; rewind the use instead of correcting it.`,
+      );
     // A06 window check: latest unit on the branch; acting player within their undo window; Director
     // always subject to the sequential-rewind rule for older events.
     // Archived encounters may have removed their foes. Preserve the history refusal before

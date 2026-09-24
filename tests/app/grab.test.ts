@@ -32,16 +32,19 @@ async function position(t: Backend, campaignId: Id<'campaigns'>, faces: number[]
 }
 
 // Thorn is size 1M. monster/goblin/statblock/goblin-warrior.md: size 1S, Might −2.
-// A natural 19 is tier 3 whatever the edges or banes (rule/dice/power-roll.md).
+// A natural 19 is tier 3 whatever the edges or banes (rule/dice/natural-roll.md).
 test('V119: Grab, the size rule, Escape Grab with its bane, and Stand Up', async () => {
   const t = backend();
   const f = await table(t);
   await t.action(internal.content.reseed, {});
-  const goblin = await f.director.client.mutation(api.foes.add, {
-    campaignId: f.campaignId,
-    definitionId: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
-    commandId: `grabtest-${++sequence}`,
-  });
+  const addGoblin = () =>
+    f.director.client.mutation(api.foes.add, {
+      campaignId: f.campaignId,
+      definitionId: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
+      commandId: `grabtest-${++sequence}`,
+    });
+  const goblin = await addGoblin();
+  const other = await addGoblin();
   const command = (text: string, player = false) =>
     (player ? f.player : f.director).client.mutation(api.commands.submit, {
       campaignId: f.campaignId,
@@ -64,13 +67,31 @@ test('V119: Grab, the size rule, Escape Grab with its bane, and Stand Up', async
 
   // Grab tier 3: "The target is grabbed by you."
   await position(t, f.campaignId, [10, 9]);
-  await command(`@Thorn /ability use ability="Grab" targets=[@{foe:${goblin}}]`, true);
+  const grabUse = await command(
+    `@Thorn /ability use ability="Grab" targets=[@{foe:${goblin}}]`,
+    true,
+  );
   const grabbed = await goblinLive();
   expect(grabbed.conditions?.grabbed).toBe(true);
   expect(grabbed.conditionInstances).toMatchObject([
     { condition: 'grabbed', duration: 'none', status: 'active', sourceActorId: f.thornId },
   ]);
   expect(grabbed.conditionInstances![0]!.registrationId).toBeUndefined();
+  // A Grab use is rewound, not corrected: its tier-3 grab write can't be re-decided safely.
+  await expect(
+    command(`/ability correct event="${grabUse.eventId}" target=@{foe:${goblin}} edges=0 banes=2`),
+  ).rejects.toThrow(/rewind the use/);
+  // chapter/classes.md, Stacking Unique Effects: a second grabber's tier 3 is left to the table.
+  await position(t, f.campaignId, [10, 9]);
+  const second = await command(
+    `@{foe:${other}} /ability use ability="Grab" targets=[@{foe:${goblin}}]`,
+  );
+  expect(await describe(second.eventId)).toMatch(/already grabbed by another creature/);
+  expect((await goblinLive()).conditionInstances).toHaveLength(1);
+  // condition/grabbed.md: a grabbed creature can't use Knockback.
+  await expect(
+    command(`@{foe:${goblin}} /ability use ability="Knockback" targets=[@Thorn]`),
+  ).rejects.toThrow(/grabbed and can't use Knockback/);
 
   // Escape Grab takes a bane (the 1S goblin is smaller than 1M Thorn); tier 3 ends the grab.
   await position(t, f.campaignId, [10, 9]);
@@ -85,6 +106,12 @@ test('V119: Grab, the size rule, Escape Grab with its bane, and Stand Up', async
   // Stand Up ends prone and refuses when there is nothing to end.
   await command('@Thorn /condition on name=prone', true);
   expect((await thornLive()).conditions.prone).toBe(true);
+  // condition/restrained.md: a restrained creature can't use Stand Up.
+  await command('@Thorn /condition on name=restrained', true);
+  await expect(command('@Thorn /ability use ability="Stand Up"', true)).rejects.toThrow(
+    /restrained and can't use Stand Up/,
+  );
+  await command('@Thorn /condition off name=restrained', true);
   await command('@Thorn /ability use ability="Stand Up"', true);
   expect((await thornLive()).conditions.prone).toBe(false);
   await expect(command('@Thorn /ability use ability="Stand Up"', true)).rejects.toThrow(

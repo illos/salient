@@ -41,8 +41,16 @@ export interface CompiledAbilityInput extends Omit<AbilityRollInput, 'ability'> 
       conditionImmunities?: ConditionNode['condition'][];
       /** V115: printed prevention text the app has not evaluated; never assumed susceptible. */
       conditionPreventionUnevaluated?: ConditionNode['condition'][];
+      /**
+       * V119: who already has this target grabbed (creature ids, or `unrecorded` for a manual
+       * toggle). chapter/classes.md, Stacking Unique Effects: a character grabbed by an enemy
+       * can't be grabbed again by another enemy.
+       */
+      grabbedBy?: string[];
     }[];
     potency?: { characteristic: Characteristic; weak: number; average: number; strong: number };
+    /** V119: creatures the actor already has grabbed (chapter/monster-basics.md, Creatures Who Grab). */
+    actorHolding?: string[];
   };
   movement?: {
     actor: MovementFacts;
@@ -135,6 +143,12 @@ function conditionOutcome(
     const size = grabSize(input, targetId);
     if (size.requirements.length) requirements.push(...size.requirements);
     else if (!size.allowed) return { ...identity, requirements: [], status: 'ineligible' };
+    // Stacking Unique Effects: an existing grab by someone else is left to the table.
+    if (target.grabbedBy?.some(source => source !== input.actor.actorId))
+      requirements.push(`target:${targetId}.alreadyGrabbed`);
+    // Creatures Who Grab: one grab at a time unless a stat block says otherwise.
+    if (input.conditionFacts?.actorHolding?.some(id => id !== targetId))
+      requirements.push('actor.grabLimit');
   }
   if (eligible && target.conditionPreventionUnevaluated?.includes(node.condition))
     requirements.push(`target:${targetId}.conditionPrevention.${node.condition}`);
@@ -208,7 +222,10 @@ export type CompiledAbilityOutcome =
 /**
  * V119, condition/grabbed.md: "A creature can grab only creatures of their size or smaller. If a
  * creature's Might score is 2 or higher, they can grab any creature larger than them with a size
- * equal to or less than their Might score." Sizes 1T–1L count as size 1 for that comparison.
+ * equal to or less than their Might score." Sizes 1T–1L count as size 1 (rule/character/size.md: a
+ * mechanic naming size 1 applies to all size-1 creatures).
+ * Interpretation (Q-GRAB-2): the sentence is read as applying to grabs imposed by abilities too.
+ * The alternatives are that such grabs ignore size, or that the table decides.
  */
 function grabSize(
   input: CompiledAbilityInput,
@@ -553,5 +570,16 @@ export function resolveCompiledAbility(
       status: requirements.length ? 'fact-needed' : 'manual',
     });
   }
+  // V119, chapter/monster-basics.md, Creatures Who Grab ("only one creature … grabbed at a time
+  // unless their stat block specifies otherwise"): one use never grabs several targets on its own.
+  const grabs = remainder.filter(
+    (e): e is CompiledConditionOutcome =>
+      e.kind === 'condition' && e.condition === 'grabbed' && e.status === 'applied',
+  );
+  if (new Set(grabs.map(g => g.targetId)).size > 1)
+    for (const grab of grabs) {
+      grab.status = 'fact-needed';
+      grab.requirements = [...grab.requirements, 'actor.grabLimit'];
+    }
   return { kind: 'resolved', definition, roll, effects: [...effects, ...remainder] };
 }

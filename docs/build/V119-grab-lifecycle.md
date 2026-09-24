@@ -43,7 +43,23 @@ one-grab-at-a-time question (Q-GRAB-1).
     - tier 2 is the table's choice.
   - Stand Up (`feature/common/maneuvers/stand-up.md`): it ends prone on yourself or a named willing
     adjacent creature, and is refused when that creature is not prone.
-- UI badge "Too large to grab". Rules question Q-GRAB-1. Regenerated reports.
+- Stacking and limits (review R1, R2):
+  - `chapter/classes.md`, Stacking Unique Effects: a creature already grabbed by another creature
+    is not grabbed again automatically.
+  - `chapter/monster-basics.md`, Creatures Who Grab: an actor that already holds a grab, or a use
+    that would grab several targets, leaves the grab to the table (`fact-needed` or a withheld
+    tier 3).
+- Refusals (R6): Stand Up while restrained (`condition/restrained.md`) and Knockback while grabbed
+  (`condition/grabbed.md`).
+- Corrections of Grab and Escape Grab uses are refused in favour of a rewind (R5).
+- Escape Grab warns to apply its bane by hand whenever a grab source or size is unknown (R7).
+- Grab log text names release, escape and separation, not Stand Up (R4).
+- Labelled interpretations (R8):
+  - The size rule binds grabs imposed by abilities (Q-GRAB-2).
+  - "Usually" in `grab.md` is read as the Might exception, so an ineligible Grab target is refused
+    before rolling.
+  - 1T–1L count as size 1 (`rule/character/size.md`).
+- UI badge "Too large to grab". Rules questions Q-GRAB-1 and Q-GRAB-2. Regenerated reports.
 
 Spec references:
 
@@ -102,3 +118,14 @@ sit beside Effect prose.
   - app grab 1/1 and abilities 19/19 (list updated);
   - kit-bonus and tier-effects app tests pass;
   - `tsc` clean and eslint clean.
+- TESTER `test-V119-a72c650-1` PASS:
+  - `pnpm check` exit 0 in 243 s (407 engine, 660 app);
+  - `grab`, `kit-bonus`, `tier-effects` and `effect-riders` pass.
+
+  This is superseded by the review fixes.
+- Independent review ([audit](audits/V119-rules-review.md)): changes required, R1–R8, all fixed as
+  listed in Scope. Tests were added:
+  - pure: stacked, held and multi-target (Rotten Smash) grabs are withheld;
+  - app: second grabber withheld, Grab correction refused, Knockback refused while grabbed, Stand
+    Up refused while restrained;
+  - journey: the grab log text.

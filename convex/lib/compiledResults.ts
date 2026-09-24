@@ -107,6 +107,16 @@ export function printedPrevention(text: string): ConditionId[] {
   return [...found];
 }
 
+/** Who holds this creature's active grabs; a toggle without a sourced instance is `unrecorded`. */
+function grabbedBy(record: TargetRecord): string[] {
+  const live = record.character?.liveState ?? record.foe?.live;
+  if (!live?.conditions?.grabbed) return [];
+  const sources = (live.conditionInstances ?? [])
+    .filter(i => i.status === 'active' && i.condition === 'grabbed')
+    .map(i => i.sourceActorId ?? 'unrecorded');
+  return sources.length ? [...new Set(sources)] : ['unrecorded'];
+}
+
 /** A stat block's trait text only: ability text describes its targets, not the creature. */
 function traitText(snapshot: { text: string; features?: unknown[] }): string {
   if (!Array.isArray(snapshot.features)) return snapshot.text;
@@ -125,6 +135,7 @@ function traitText(snapshot: { text: string; features?: unknown[] }): string {
 export function conditionFacts(
   actor: TargetRecord,
   targets: TargetRecord[],
+  actorHolding: string[] = [],
 ): NonNullable<
   import('../../shared/resolve/compiledOutcome').CompiledAbilityInput['conditionFacts']
 > {
@@ -132,6 +143,7 @@ export function conditionFacts(
   const letters = ['M', 'A', 'R', 'I', 'P'] as const;
   const names = { M: 'might', A: 'agility', R: 'reason', I: 'intuition', P: 'presence' };
   return {
+    ...(actorHolding.length ? { actorHolding } : {}),
     ...(baseline?.potency && baseline.potencyCharacteristic
       ? {
           potency: {
@@ -176,6 +188,7 @@ export function conditionFacts(
         characteristics,
         ...(immunities.length ? { conditionImmunities: immunities } : {}),
         ...(prevention.length ? { conditionPreventionUnevaluated: prevention } : {}),
+        ...(grabbedBy(record).length ? { grabbedBy: grabbedBy(record) } : {}),
       };
     }),
   };

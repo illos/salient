@@ -125,6 +125,16 @@ export async function runGrab({ actors: { director }, run, runId }: ScenarioCont
       assert.equal(held[0]!.duration, 'none');
       assert.equal(held[0]!.sourceActorId, grappler);
       assert.equal(held[0]!.registrationId, undefined);
+      // condition/grabbed.md: a grab ends by release, Escape Grab or separation, not Stand Up.
+      const grabLog = (
+        await director.query<{
+          events: (Event & { kind: string; payload?: { sourceUseEventId?: string } })[];
+        }>('events:list', { campaignId })
+      ).events.find(
+        e => e.kind === 'condition.potency' && e.payload?.sourceUseEventId === lock.eventId,
+      )!;
+      assert.match(grabLog.description, /grabber releases it, the creature escapes/);
+      assert.doesNotMatch(grabLog.description, /stands up/);
 
       // feature/ability/common/escape-grab.md: equal sizes take no bane; tier 3 ends the grab,
       // tier 2 leaves the choice to the table, tier 1 does nothing.
