@@ -145,6 +145,32 @@ Rules question: [Q-TRIG-1](../rules-questions-for-user.md#q-trig-1-the-triggerin
   - Q-TRIG-1 records three labelled interpretations: the triggering damage is taken after immunity,
     "an ally" excludes yourself, and there are no offers outside combat.
   - Passing (`card.close`) is not journaled, as for every card, so undo of a pass doesn't reopen it.
+- Review follow-ups (changes required, 2026-09-24):
+  1. Q-TRIG-1 now quotes `rule/combat/target.md` (Creature) exactly, and "an ally excludes yourself"
+     is labelled an interpretation there and in `shared/resolve/triggers.ts`.
+  2. A dead owner (Stamina at or below the negative of the winded value, `rule/health/dying.md`, the
+     test `respiteOperations.ts` uses) is neither offered a card nor allowed to accept one. A dying
+     owner still is ("you can still act").
+  3. Accepting refuses a card whose round is not the current round.
+  4. A bleeding owner, including a dying one, gets a warning on the triggered use. It gives
+     `condition/bleeding.md`'s 1d6 + level Stamina loss for the table; nothing is applied.
+  5. `tests/app/triggered-actions.test.ts` adds:
+     - undo of the triggering hit deletes its card;
+     - a stale round is refused;
+     - a dead owner is offered nothing and can't accept;
+     - a dying owner accepts, with the bleeding warning and Stamina unchanged.
+     `tests/scripts/triggered-actions.test.ts` adds `dead` to the prevention cases.
+  6. Known limits, recorded rather than fixed:
+     - Squad strikes (`squadOperations.ts` 958 and 1092) pass no dealer and no `meleeStrike`, so they
+       offer no Feedback Loop or Riposte.
+     - A creature's free strike doesn't say it's melee.
+     - Corrections pass no `meleeStrike`. They are refused whenever a holder's trigger matches the
+       changed damage.
+     - Other preventions are the table's to check, and the card text says so briefly. These include
+       unconscious and a printed "can't use triggered actions until …", as on foes such as the
+       Bugbear Sneak.
+     - Later optimisation: the damage hot path re-reads the campaign and encounter per damage write;
+       the caller could pass the encounter in.
 - Next steps:
   - Turn-boundary triggers from the clock's turn start and end (My Life for Yours, Breath of Dawn
     Remembered, Hesitation Is Weakness), once their effects compile.

@@ -31,6 +31,7 @@ import {
   type TriggerEligibilityInput,
   type TriggerSpec,
 } from '../../shared/resolve/triggers';
+import { baselineOf } from './characterBuild';
 import { committedEncounter } from './encounters';
 import { appendEvent } from './events';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
@@ -131,6 +132,11 @@ export async function eligibilityFacts(
   const preventions: TriggerEligibilityInput['preventions'][number][] = [];
   const hero = await ctx.db.get(owner.id as Id<'characters'>);
   if (hero?.liveState?.conditions.dazed) preventions.push('dazed');
+  // rule/health/dying.md: dead at Stamina at or below the negative of the winded value (the test
+  // respiteOperations.ts uses). A dying hero "can still act" and is still offered.
+  const baseline = baselineOf(hero?.derivedBaseline);
+  if (hero?.liveState && baseline && hero.liveState.stamina <= -baseline.windedValue.value)
+    preventions.push('dead');
   const entries = await ctx.db
     .query('turnEntries')
     .withIndex('by_encounter', q => q.eq('encounterId', encounter._id))
@@ -191,7 +197,7 @@ export async function offerForDamage(
     const targetActor =
       targetId === damage.damaged.id ? damage.damaged : (damage.dealer ?? damage.damaged);
     const distance = distanceNote(holder.distance);
-    const text = `${owner.name} may use ${holder.abilityName} (${holder.actionType}) on ${targetActor.name}: "${spec.text}" Distance ${distance}. Accept or pass.`;
+    const text = `${owner.name} may use ${holder.abilityName} (${holder.actionType}) on ${targetActor.name}: "${spec.text}" Distance ${distance}. Other preventions (unconscious, an effect that forbids triggered actions) are the table's check. Accept or pass.`;
     const offer: TriggerOffer = {
       encounterId: encounter._id,
       round: encounter.round ?? 0,
@@ -370,6 +376,9 @@ export async function recheckOffer(
   const encounter = await roundOf(ctx, context.campaign._id);
   if (!encounter || encounter._id !== offer.encounterId)
     throw new ConvexError('This offer’s combat is no longer running.');
+  // A stale card can't spend a later round's allowance.
+  if ((encounter.round ?? 0) !== offer.round)
+    throw new ConvexError(`This offer was for round ${offer.round}; its window has passed.`);
   if (
     use.abilityId !== offer.abilityId ||
     use.actorId !== offer.owner.id ||

@@ -382,3 +382,46 @@ test('V173: two responses to one melee strike are each offered and resolve in ac
       .sort(),
   ).toEqual(['Bard', 'Seer']);
 });
+
+test('V173: undo of the hit withdraws its card; stale rounds, dead and dying owners', async () => {
+  const s = await setup();
+  // Undo of the triggering hit withdraws the card it opened.
+  await s.strike([5, 5]);
+  const [withdrawn] = await s.cards();
+  expect(withdrawn).toMatchObject({ status: 'awaiting-input' });
+  await s.command('/history undo');
+  expect(await s.t.run(ctx => ctx.db.get(withdrawn!._id))).toBeNull();
+  expect(await s.cards()).toEqual([]);
+
+  await s.strike([5, 5]);
+  const [open] = await s.cards();
+  // A stale card can't use a later round's allowance.
+  const encounterId = open!.offer.encounterId as Id<'encounters'>;
+  await s.t.run(ctx => ctx.db.patch(encounterId, { round: 2 }));
+  await expect(s.respond(open!._id, 'player')).rejects.toThrow(/round 1/);
+  await s.t.run(ctx => ctx.db.patch(encounterId, { round: 1 }));
+
+  // rule/health/dying.md: dead at Stamina at or below the negative of the winded value.
+  const setStamina = (value: (winded: number) => number) =>
+    s.t.run(async ctx => {
+      const hero = (await ctx.db.get(s.seer))!;
+      const winded = (hero.derivedBaseline as { windedValue: { value: number } }).windedValue.value;
+      await ctx.db.patch(s.seer, { liveState: { ...hero.liveState!, stamina: value(winded) } });
+    });
+  await setStamina(winded => -winded);
+  // A dead Talent is offered nothing for a new hit, and can't accept the open card.
+  await s.strike([5, 5]);
+  expect((await s.cards()).filter(c => c.status === 'awaiting-input')).toHaveLength(1);
+  await expect(s.respond(open!._id, 'player')).rejects.toThrow(/is dead/);
+  expect(await s.card(open!._id)).toMatchObject({ status: 'awaiting-input' });
+
+  // Dying (0 Stamina) "can still act": accepting works, and condition/bleeding.md's 1d6 + level
+  // Stamina loss (level 1) is logged for the table, not applied.
+  await setStamina(() => 0);
+  const accepted = await s.respond(open!._id, 'player');
+  expect(await s.goblinStamina()).toBe(13);
+  expect((await s.t.run(ctx => ctx.db.get(accepted.eventId)))!.description).toMatch(
+    /bleeding \(dying\): after this triggered action resolves they lose 1d6 \+ 1 Stamina/,
+  );
+  expect((await s.t.run(ctx => ctx.db.get(s.seer)))!.liveState!.stamina).toBe(0);
+});

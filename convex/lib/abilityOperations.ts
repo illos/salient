@@ -1699,6 +1699,18 @@ const abilityUse: OperationDefinition = {
       warnings.push(
         `Rule warning: ${actor!.name} is dazed and can't use triggered actions or free triggered actions (condition/dazed.md).`,
       );
+    // V173: condition/bleeding.md: using a triggered action while bleeding (a dying hero is,
+    // rule/health/dying.md) costs 1d6 + level Stamina after it resolves. Left to the table.
+    const bleedingLive = records.character?.liveState;
+    if (
+      triggeredUse &&
+      allowance.inCombat &&
+      bleedingLive &&
+      (bleedingLive.conditions.bleeding || bleedingLive.stamina <= 0)
+    )
+      warnings.push(
+        `Rule warning: ${actor!.name} is bleeding${bleedingLive.stamina <= 0 ? ' (dying)' : ''}: after this triggered action resolves they lose 1d6 + ${baselineOf(records.character!.derivedBaseline)?.level.value ?? 'their level'} Stamina, which can't be prevented (condition/bleeding.md). The table applies it.`,
+      );
     // V173: a response to a triggered-action card (convex/lib/triggeredActions.ts).
     const answered = respondsTo ? await offerOf(ctx, respondsTo.interactionId) : null;
     if (answered)

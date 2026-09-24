@@ -14,8 +14,9 @@
  * - feature/ability/troubadour/level-1/riposte.md: Triggered, Melee 1, Self or one ally; Trigger "The
  *   target takes damage from a melee strike."; Effect "The target makes a free strike against the
  *   creature who made the triggering strike."
- * - rule/combat/target.md: you aren't an eligible target for your own abilities that target allies
- *   unless they also have "self" as a target.
+ * - rule/combat/target.md: "You aren't an eligible creature target for your own abilities unless
+ *   those abilities also have "self" as a target (see below), or unless the ability indicates
+ *   otherwise." ("An ally" excluding yourself is Q-TRIG-1's labelled interpretation.)
  * - Manual examples: censor/level-1/my-life-for-yours.md (turn start or damage, and a Spend section),
  *   elementalist/level-1/skin-like-castle-walls.md ("take half the damage": V174),
  *   conduit/level-1/word-of-judgment.md ("would take damage"), shadow/level-1/hesitation-is-weakness.md
@@ -213,7 +214,8 @@ test('eligibility: one ordinary triggered action per round; free ones still offe
   });
   // A free triggered action is still offered after the ordinary one is used.
   expect(triggerEligibility({ ...free, ordinaryUsedThisRound: true })).toEqual({ eligible: true });
-  for (const prevention of ['dazed', 'surprised'] as const)
+  // rule/health/dying.md: a dead hero is prevented; dying alone is not ("you can still act").
+  for (const prevention of ['dazed', 'surprised', 'dead'] as const)
     for (const kind of [ordinary, free])
       expect(
         triggerEligibility({ ...kind, ordinaryUsedThisRound: false, preventions: [prevention] }),

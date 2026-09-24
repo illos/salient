@@ -162,9 +162,10 @@ export function triggeredActionType(usage: string): ActionType | undefined {
 // Offers.
 
 /**
- * Who a triggered ability may target, read from its Target entry. rule/combat/target.md: "You
- * aren't an eligible creature target for your own abilities unless those abilities also have
- * 'self' as a target"; an ally-targeting ability excludes you the same way.
+ * Who a triggered ability may target, read from its Target entry. rule/combat/target.md, Creature:
+ * "You aren't an eligible creature target for your own abilities unless those abilities also have
+ * "self" as a target (see below), or unless the ability indicates otherwise." Interpretation
+ * (Q-TRIG-1, point 2): "an ally" in a target or trigger is another creature on your side, never you.
  */
 export interface TriggerTarget {
   self: boolean;
@@ -250,8 +251,11 @@ export interface TriggerEligibilityInput {
   actionType: 'triggered action' | 'free triggered action';
   /** The owner already used their ordinary triggered action this round. */
   ordinaryUsedThisRound: boolean;
-  /** Printed effects on the owner that prevent triggered actions (`dazed`, `surprised`). */
-  preventions: readonly ('dazed' | 'surprised')[];
+  /**
+   * What prevents the owner from taking triggered actions: `dazed`, `surprised`, or `dead`. Other
+   * preventions (unconscious, a printed "can't use triggered actions until …") are the table's check.
+   */
+  preventions: readonly ('dazed' | 'surprised' | 'dead')[];
 }
 
 const PREVENTION: Record<TriggerEligibilityInput['preventions'][number], string> = {
@@ -261,6 +265,9 @@ const PREVENTION: Record<TriggerEligibilityInput['preventions'][number], string>
   // triggered actions".
   surprised:
     'is surprised and can’t take triggered actions or free triggered actions (rule/combat/surprised.md)',
+  // rule/health/dying.md: at the negative of the winded value "you die"; a dying hero "can still
+  // act", so dying alone is not a prevention.
+  dead: 'is dead (Stamina at or below the negative of their winded value, rule/health/dying.md)',
 };
 
 /**
