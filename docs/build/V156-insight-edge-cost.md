@@ -71,3 +71,7 @@ Compendium (pinned `en/unified/md`):
   - A correction that changes edge eligibility now says the cost would differ.
   - Added pure test cases.
 
+## Publication: 2026-09-24
+
+Merged in train 8 (V155, V156) as main `d266437` and published as Worker `dd30feb0-bf87-4f0d-b420-03b67b68cced`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/train8-release-d266437`.

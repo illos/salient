@@ -95,3 +95,7 @@ Eight other abilities still have unrelated blockers and stay manual:
     `condition.potency` payload now name the restriction "can't stand".
   - The doc now counts eight other abilities, including Bull Rush.
 
+## Publication: 2026-09-24
+
+Merged in train 8 (V155, V156) as main `d266437` and published as Worker `dd30feb0-bf87-4f0d-b420-03b67b68cced`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/train8-release-d266437`.

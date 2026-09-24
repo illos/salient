@@ -158,5 +158,5 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V161 | [Respite and level-up design](V161-respite-design.md) | In progress |
 | V162 | [Build changes keep damage taken](V162-current-values.md) | Merged (`b724eea`); cloud dev published; gate and headless PASS at tip |
 | V163 | [Level-up for every class, one granted level at a time](V163-level-up.md) | Merged (`b724eea`); cloud dev published; gate and headless PASS at tip |
-| V155 | [Prone and can't stand](V155-cant-stand.md) | In progress (ENGINE2) |
-| V156 | [Shadow insight costs 1 less with an edge](V156-insight-edge-cost.md) | In progress (ENGINE2) |
+| V155 | [Prone and can't stand](V155-cant-stand.md) | Merged (`d266437`, train 8); cloud dev published; gate and headless PASS at tip |
+| V156 | [Shadow insight costs 1 less with an edge](V156-insight-edge-cost.md) | Merged (`d266437`, train 8); cloud dev published; gate and headless PASS at tip |

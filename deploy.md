@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V156 | `d266437` | Merged in train 8; backend/frontend published; gate and headless at tip | complete |
+| V155 | `d266437` | Merged in train 8; backend/frontend published; gate and headless at tip | complete |
 | V163 | `b724eea` | Merged with V162 and V163 stacked; backend/frontend published; gate and headless at tip | complete |
 | V162 | `b724eea` | Merged with V162 and V163 stacked; backend/frontend published; gate and headless at tip | complete |
 | V160 | `4b87799` | Merged in train 7; backend/frontend published; gate and headless at tip | complete |
@@ -678,3 +680,19 @@ V163 (pending level-ups, Director grant and withdraw operations, level-up for ev
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V163-release-b724eea`.
+
+### Train 8 (V155, V156) publication: 2026-09-24
+
+ENGINE2's V155 can't-stand (Q-COND-1 per the 2026-09-24 rulings) and V156 Shadow insight edge
+discount were cherry-picked onto main `46286e8` and fast-forwarded as `d266437b69f2f2f1c16693e547eda6f004a81c71`.
+- Full gate at the tip (287 s, 443 engine and 745 app tests).
+- Journeys at the tip: cant-stand, insight-edge, heroic-resource, tier-effects, grab, the Shadow
+  level-two, level-three and level-six journeys, conduit-level-three, conduit, level-up and
+  lifecycle.
+- Independent reviews and QC1 clearance passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `dd30feb0-bf87-4f0d-b420-03b67b68cced`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/train8-release-d266437`.
