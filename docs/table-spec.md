@@ -1713,6 +1713,11 @@ exemptions are not established by this ruling. See [the owning wizard policy](ch
 and [Changing Your Kit](../vendor/steel-compendium/en/unified/md/chapter/kits.md#changing-your-kit).
 This is fuller V1 work and remains outside v0.01.
 
+**Respite and sessions, confirmed 2026-09-24:** a respite lives inside one game session. The session
+cannot be closed while a respite is open and unresolved; the Director first finishes (or interrupts)
+the respite, then closes the session. Respite never spans closed sessions, so closed-session history
+stays immutable without a special respite context.
+
 Confirmed: respite is its own dedicated table mode, with a self-contained gameplay loop that the Director
 starts and ends. It has mechanics to support rather than being only a pause or a descriptive log entry.
 

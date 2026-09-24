@@ -199,6 +199,5 @@ Participation revised 2026-09-14: include Director-controlled participant select
 current party and allowing individual exclusions. This supersedes the earlier whole-party-only choice.
 Individual sourced benefits and exceptions remain distinct; see [the owning contract](table-spec.md#respite-mode).
 
-Next within respite: whether respite can continue between closed game sessions, allowing players to complete their
-choices asynchronously. This is still a proposal and would need an explicit contract against the current
-running-session gameplay boundary. Keep confirmed requirements, proposals and source findings distinct.
+Sessions settled 2026-09-24: a session cannot close while a respite is open and unresolved, so respite
+never spans sessions. Next within respite: level-up ordering, interruption and finishing (V161). Keep confirmed requirements, proposals and source findings distinct.

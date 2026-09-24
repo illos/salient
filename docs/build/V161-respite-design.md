@@ -22,3 +22,5 @@ and generic level-up for all eleven classes can be built. Design only: no code.
 - 2026-09-24: user rulings recorded in `character-wizard-spec.md#level-up`: level-up only inside a
   campaign (outside, use the full edit), and one level per level-up event (banked XP for two levels
   means two separate flows).
+- 2026-09-24: Q2 settled: a session cannot be closed while a respite is open and unresolved (table spec,
+  respite research queue, roadmap).
