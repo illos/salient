@@ -51,3 +51,5 @@ App test `tests/app/heroic-resource-forgo.test.ts`, on a Self-Taught Shadow:
     next turn.
   - R4: `value=now` is refused once the pool has moved after the turn-start gain (a claim or a spend).
     `lastTurnGain.after` records the value; a test claims first and expects the refusal.
+- Review closure: PASS at `319d1b65`. Follow-up noted: a claim and a spend that cancel out still
+  allow a late forgo. Closing that would need a check against the event log.

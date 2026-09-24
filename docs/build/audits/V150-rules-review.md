@@ -204,3 +204,30 @@ Checks run by the reviewer at `15a7d32`:
 - `npx vitest run tests/app/heroic-resource-forgo.test.ts`: 1 file, 1 test passed (10.84 s), run
   once.
 - No other suites, journeys or services were run.
+
+## Re-review at `319d1b65`
+
+Reviewed `git diff 15a7d328 319d1b65` in the same worktree.
+
+Verdict at `319d1b6`: PASS. R1 to R4 are closed.
+
+- **R4: closed.**
+  - The clock now records the pool right after the turn-start gain as `lastTurnGain.after`
+    (`convex/lib/clock.ts:353`; validator in `convex/characterTables.ts`).
+  - `value=now` is refused unless `heroicResource.current === lastTurnGain.after`
+    (`convex/lib/resourceOperations.ts:255-260`). This covers both failure scenarios: a claim raises
+    the pool, and a spend lowers it.
+  - The test claims, expects the "changed" refusal, undoes the claim, and then forgoes successfully.
+    This also exercises undo of a journaled claim.
+- **Advisory residual, not blocking.** A claim and a spend that cancel exactly, for example +1
+  then spending 1, leave the pool equal to `after`, so the check passes. Removing the turn-start
+  delta then still accounts for the whole turn-start gain. The claimed +1 has already been spent,
+  so a forgo at that point cannot occur under a correct reading of "at the start of each of your
+  turns". Closing this completely would take a check on the event log, for example refusing when a
+  `resource.claim` or spend event exists after the turn-start event. Consider it if observed
+  triggers make mid-turn pool changes more common.
+
+Checks run by the reviewer at `319d1b6`:
+- `npx tsc --noEmit` and `npx tsc --noEmit -p convex/tsconfig.json`: both exit 0.
+- `npx vitest run tests/app/heroic-resource-forgo.test.ts`: 1 file, 1 test passed (5.25 s), run once.
+- No other suites, journeys or services were run.
