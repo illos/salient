@@ -413,6 +413,8 @@ export async function runConduitLevelThree({
               assert.equal(now.stamina, was.stamina, `${name} no damage`);
               assert.equal(now.temporaryStamina, Math.max(was.temporaryStamina, 20), name);
               assert.equal(now.surges, was.surges + 3, name);
+              // Later uses on this target read damage against Stamina, as before V157.
+              await invoke(affectedId, 'adjust.temporary-stamina', { value: 0 });
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);

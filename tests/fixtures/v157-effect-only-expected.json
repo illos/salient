@@ -1,0 +1,435 @@
+{
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "method": "V157 abilities without a power roll. Builds reuse reviewed source-derived witnesses unchanged (paths in each 'base'); their selections are copied here. Every expected value below is read from the pinned ability file named in 'source' (frontmatter cost, action type and target; the Effect section with link markup removed), never from the evaluator, compiler or a run of the code under test. Gains: rule/health/temporary-stamina.md ('you get whichever amount of temporary Stamina is greater, rather than adding the two pools together'); rule/resource/surge.md (surges are gained and kept track of, so they add). Every other sentence is a table instruction that changes no state (docs/build/V157-effect-only-abilities.md). A fixed cost is paid from the hero's Heroic Resource (class/*.md, Heroic Resource).",
+  "witnesses": [
+    {
+      "id": "fury-steelbreaker",
+      "level": 3,
+      "base": "tests/fixtures/v114-fury-three-expected.json v101-mountain over tests/fixtures/v101-fury-expected.json v101-mountain",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Berserker Mountain",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, −1, −1",
+        "class.fury.array-assignment": {
+          "Reason": -1,
+          "Intuition": 2,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Mountain",
+        "class.fury.level-2.perk": "Danger Sense",
+        "class.fury.level-2.aspect-ability": "Wrecking Ball",
+        "class.fury.level-3.ability-7": "Steelbreaker"
+      }
+    },
+    {
+      "id": "conduit-saints-raiment",
+      "level": 3,
+      "base": "tests/fixtures/v134-conduit-three-expected.json v100-death over tests/fixtures/v100-conduit-expected.json v100-death",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V100 Conduit Death",
+        "class.choice": "Conduit",
+        "class.conduit.characteristic-array": "2, 1, 1, −1",
+        "class.conduit.array-assignment": {
+          "Might": 2,
+          "Agility": 1,
+          "Reason": 1,
+          "Presence": -1
+        },
+        "class.conduit.skills": ["History", "Persuade"],
+        "class.conduit.deity": "Cyrvis",
+        "class.conduit.domains": ["Death", "Fate"],
+        "class.conduit.domain-feature": "Death",
+        "class.conduit.domain-skill": "Religion",
+        "class.conduit.prayer": "Prayer of Distance",
+        "class.conduit.ward": "Quickness Ward",
+        "class.conduit.triggered-action": "Word of Judgment",
+        "class.conduit.signature-abilities": ["Holy Lash", "Lightfall"],
+        "class.conduit.ability-3": "Font of Wrath",
+        "class.conduit.ability-5": "Curse of Terror",
+        "class.conduit.level-2.perk": "Handy",
+        "class.conduit.level-2.domain-ability": "Death",
+        "class.conduit.level-2.domain-skill.fate": "Monsters",
+        "class.conduit.level-3.ability-7": "Saint's Raiment"
+      }
+    },
+    {
+      "id": "conduit-sermon",
+      "level": 1,
+      "base": "tests/fixtures/v100-conduit-expected.json v100-knowledge (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V100 Conduit Knowledge",
+        "class.choice": "Conduit",
+        "class.conduit.characteristic-array": "1, 1, 1, 0",
+        "class.conduit.array-assignment": {
+          "Might": 1,
+          "Agility": 1,
+          "Reason": 1,
+          "Presence": 0
+        },
+        "class.conduit.skills": ["History", "Persuade"],
+        "class.conduit.deity": "Cyrvis",
+        "class.conduit.domains": ["Knowledge", "Death"],
+        "class.conduit.domain-feature": "Knowledge",
+        "class.conduit.domain-skill": "Religion",
+        "class.conduit.prayer": "Prayer of Speed",
+        "class.conduit.ward": "Spirit Ward",
+        "class.conduit.triggered-action": "Word of Judgment",
+        "class.conduit.signature-abilities": ["Warrior's Prayer", "Wither"],
+        "class.conduit.ability-3": "Violence Will Not Aid Thee",
+        "class.conduit.ability-5": "Sermon of Grace"
+      }
+    },
+    {
+      "id": "tactician-now",
+      "level": 1,
+      "base": "tests/fixtures/v94-tactician-expected.json v94-tactician-3 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "1, 0, 0",
+        "class.tactician.array-assignment": {
+          "Agility": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Vanguard",
+        "class.tactician.doctrine-skill": "Persuade",
+        "class.tactician.ability-3": "Inspiring Strike",
+        "class.tactician.ability-5": "Now!",
+        "kit.choice": "Martial Artist",
+        "class.tactician.second-kit": "Mountain",
+        "details.name": "V94 Tactician 3",
+        "class.tactician.arsenal.stamina": "Mountain",
+        "class.tactician.arsenal.meleeDamage": "Mountain"
+      }
+    },
+    {
+      "id": "tactician-squad",
+      "level": 1,
+      "base": "tests/fixtures/v94-tactician-expected.json v94-tactician-4 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "2, −1, −1",
+        "class.tactician.array-assignment": {
+          "Agility": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Insurgent",
+        "class.tactician.doctrine-skill": "Hide",
+        "class.tactician.ability-3": "Squad! Forward!",
+        "class.tactician.ability-5": "This Is What We Planned For",
+        "kit.choice": "Martial Artist",
+        "class.tactician.second-kit": "Swashbuckler",
+        "details.name": "V94 Tactician 4"
+      }
+    },
+    {
+      "id": "shadow-shadowstrike",
+      "level": 1,
+      "base": "tests/fixtures/v92-shadow-expected.json v92-shadow-4 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "1, 1, 1, 0",
+        "class.shadow.array-assignment": {
+          "Might": 1,
+          "Reason": 1,
+          "Intuition": 1,
+          "Presence": 0
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Black Ash",
+        "class.shadow.signature-ability": "You Were Watching the Wrong One",
+        "class.shadow.ability-3": "Two Throats at Once",
+        "class.shadow.ability-5": "Shadowstrike",
+        "kit.choice": "Panther",
+        "details.name": "V92 Shadow 4"
+      }
+    },
+    {
+      "id": "null-blur",
+      "level": 3,
+      "base": "tests/fixtures/v133-null-three-expected.json v103-1 over tests/fixtures/v103-null-expected.json v103-1",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V103 Chronokinetic Force",
+        "class.choice": "Null",
+        "class.null.tradition": "Chronokinetic",
+        "class.null.augmentation": "Force Augmentation",
+        "class.null.characteristic-array": "2, −1, −1",
+        "class.null.array-assignment": {
+          "Might": 2,
+          "Reason": -1,
+          "Presence": -1
+        },
+        "class.null.skills": ["Read Person", "Timescape"],
+        "class.null.tradition-skill.chronokinetic": ["Monsters"],
+        "class.null.signature-abilities": ["Dance of Blows", "Faster Than the Eye"],
+        "class.null.ability-3": "Chronal Spike",
+        "class.null.ability-5": "A Squad Unto Myself",
+        "class.null.level-2.perk": "Brawny",
+        "class.null.level-2.chronokinetic-ability": "Blur",
+        "class.null.level-3.ability-7": "Absorption Field"
+      }
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Steelbreaker",
+      "witness": "fury-steelbreaker",
+      "source": "feature/ability/fury/level-3/steelbreaker.md",
+      "actionType": "maneuver",
+      "target": "Self",
+      "cost": {
+        "resource": "ferocity",
+        "amount": 7
+      },
+      "effects": [
+        {
+          "kind": "gain",
+          "subject": "actor",
+          "clause": "You gain 20 temporary Stamina.",
+          "temporaryStamina": 20
+        }
+      ]
+    },
+    {
+      "name": "Saint's Raiment",
+      "witness": "conduit-saints-raiment",
+      "source": "feature/ability/conduit/level-3/saints-raiment.md",
+      "actionType": "maneuver",
+      "target": "One ally",
+      "cost": {
+        "resource": "piety",
+        "amount": 7
+      },
+      "effects": [
+        {
+          "kind": "gain",
+          "subject": "target",
+          "clause": "The target gains 20 temporary Stamina and 3 surges.",
+          "temporaryStamina": 20,
+          "surges": 3
+        }
+      ]
+    },
+    {
+      "name": "Sermon of Grace",
+      "witness": "conduit-sermon",
+      "source": "feature/ability/conduit/level-1/sermon-of-grace.md",
+      "actionType": "main action",
+      "target": "Each ally in the area",
+      "cost": {
+        "resource": "piety",
+        "amount": 5
+      },
+      "effects": [
+        {
+          "kind": "instruction",
+          "subject": "target",
+          "shape": "recovery",
+          "clause": "Each target can spend a Recovery. Additionally, each target can use a free triggered action to end one effect on them that is ended by a saving throw or that ends at the end of their turn, or to stand up if prone."
+        }
+      ]
+    },
+    {
+      "name": "Now!",
+      "witness": "tactician-now",
+      "source": "feature/ability/tactician/level-1/now.md",
+      "actionType": "maneuver",
+      "target": "Three allies",
+      "cost": {
+        "resource": "focus",
+        "amount": 5
+      },
+      "effects": [
+        {
+          "kind": "instruction",
+          "subject": "target",
+          "shape": "free-strike",
+          "clause": "Each target can make a free strike."
+        }
+      ]
+    },
+    {
+      "name": "Squad! Forward!",
+      "witness": "tactician-squad",
+      "source": "feature/ability/tactician/level-1/squad-forward.md",
+      "actionType": "maneuver",
+      "target": "Self and two allies",
+      "cost": {
+        "resource": "focus",
+        "amount": 3
+      },
+      "effects": [
+        {
+          "kind": "instruction",
+          "subject": "target",
+          "shape": "move",
+          "clause": "Each target can move up to their speed."
+        }
+      ]
+    },
+    {
+      "name": "Shadowstrike",
+      "witness": "shadow-shadowstrike",
+      "source": "feature/ability/shadow/level-1/shadowstrike.md",
+      "actionType": "main action",
+      "target": "Self",
+      "cost": {
+        "resource": "insight",
+        "amount": 5
+      },
+      "effects": [
+        {
+          "kind": "instruction",
+          "subject": "actor",
+          "shape": "ability-use",
+          "clause": "You use a strike signature ability twice."
+        }
+      ]
+    },
+    {
+      "name": "Blur",
+      "witness": "null-blur",
+      "source": "feature/ability/null/level-2/blur.md",
+      "actionType": "maneuver",
+      "target": "Self",
+      "cost": {
+        "resource": "discipline",
+        "amount": 5
+      },
+      "effects": [
+        {
+          "kind": "instruction",
+          "subject": "actor",
+          "shape": "ability-use",
+          "clause": "You can use a signature or heroic ability. You gain an edge on that ability's power rolls."
+        }
+      ]
+    }
+  ]
+}
