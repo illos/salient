@@ -150,6 +150,11 @@ export interface FiringContext {
   /** The boundary's own log entry; each firing links to it as its cause. */
   boundaryEventId: Id<'events'>;
   commandId: string;
+  /**
+   * Hero documents the caller already read in this mutation, kept current by the Malice and
+   * heroic-resource work that reads and writes them. Any other work clears it before firing.
+   */
+  knownHeroes?: Map<string, Doc<'characters'>>;
 }
 
 export type WorkHandler = (
@@ -164,7 +169,11 @@ export const operationHandlers = new Map<string, WorkHandler>();
 const MALICE_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/monster/malice.md';
 
 /** Q-R-50: distinct currently participating heroes; dying heroes still count. */
-async function heroParticipants(ctx: MutationCtx, encounter: Doc<'encounters'>) {
+async function heroParticipants(
+  ctx: MutationCtx,
+  encounter: Doc<'encounters'>,
+  known?: Map<string, Doc<'characters'>>,
+) {
   const entries = await ctx.db
     .query('turnEntries')
     .withIndex('by_encounter', q => q.eq('encounterId', encounter._id))
@@ -176,8 +185,11 @@ async function heroParticipants(ctx: MutationCtx, encounter: Doc<'encounters'>) 
   );
   const heroes: Doc<'characters'>[] = [];
   for (const id of ids) {
-    const hero = await ctx.db.get(id);
-    if (hero) heroes.push(hero);
+    const hero = known?.get(id) ?? (await ctx.db.get(id));
+    if (hero) {
+      heroes.push(hero);
+      known?.set(id, hero);
+    }
   }
   return heroes;
 }
@@ -190,7 +202,7 @@ async function fireMalice(
   const campaign = await ctx.db.get(firing.encounter.campaignId);
   if (!campaign) throw new ConvexError('Campaign unavailable.');
   const before = campaign.malice ?? 0;
-  const heroes = await heroParticipants(ctx, firing.encounter);
+  const heroes = await heroParticipants(ctx, firing.encounter, firing.knownHeroes);
   const heroCount = heroes.length;
   let change: MaliceChange;
   let description: string;
@@ -265,7 +277,8 @@ async function fireHeroicResource(
   unsupported?: string;
   dice?: DieResult[];
 }> {
-  const hero = await ctx.db.get(characterId as Id<'characters'>);
+  const hero =
+    firing.knownHeroes?.get(characterId) ?? (await ctx.db.get(characterId as Id<'characters'>));
   const live = hero?.liveState;
   const profile = generationProfile(baselineOf(hero?.derivedBaseline));
   const label = firing.registration.source.label;
@@ -484,37 +497,42 @@ async function fireHeroicResource(
       profile.encounterEnd.kind === 'lose' ? 'encounter-end loss' : 'encounter-end reset to 0';
   }
   // A combat-start grant of 0 (no Victories) changes nothing: skip the write and its extra read.
+  const nextLive = {
+    ...live,
+    heroicResource: { ...pool, current: after },
+    ...(step === 'encounter-end-loss'
+      ? {
+          resourceClaims: [],
+          forgoNext: false,
+          forgoing: false,
+          lastTurnGain: undefined,
+          prayNext: false,
+          maintained: [],
+          turnDamage: undefined,
+        }
+      : {}),
+    ...(windowEnded ? { forgoing: false } : {}),
+    ...(step === 'turn-start-gain' && firing.event.turn
+      ? {
+          lastTurnGain: {
+            encounterId: firing.encounter._id,
+            turnId: firing.event.turn.turnId,
+            delta: after - before,
+            after,
+            eventId: firing.scope.eventId,
+          },
+        }
+      : {}),
+    ...(praying ? { prayNext: false } : {}),
+  };
   if (!(step === 'combat-start-grant' && after === before))
-    await journalPatch(ctx, firing.scope, 'characters', hero._id, {
-      liveState: {
-        ...live,
-        heroicResource: { ...pool, current: after },
-        ...(step === 'encounter-end-loss'
-          ? {
-              resourceClaims: [],
-              forgoNext: false,
-              forgoing: false,
-              lastTurnGain: undefined,
-              prayNext: false,
-              maintained: [],
-              turnDamage: undefined,
-            }
-          : {}),
-        ...(windowEnded ? { forgoing: false } : {}),
-        ...(step === 'turn-start-gain' && firing.event.turn
-          ? {
-              lastTurnGain: {
-                encounterId: firing.encounter._id,
-                turnId: firing.event.turn.turnId,
-                delta: after - before,
-                after,
-                eventId: firing.scope.eventId,
-              },
-            }
-          : {}),
-        ...(praying ? { prayNext: false } : {}),
-      },
-    });
+    await journalPatch(ctx, firing.scope, 'characters', hero._id, { liveState: nextLive }, hero);
+  // The angered-gods damage below writes this hero again, so it is then left out.
+  if (!prayerDamage)
+    firing.knownHeroes?.set(
+      hero._id,
+      after === before && step === 'combat-start-grant' ? hero : { ...hero, liveState: nextLive },
+    );
   if (appealMalice) {
     const campaign = (await ctx.db.get(firing.encounter.campaignId))!;
     const maliceBefore = campaign.malice ?? 0;
@@ -733,6 +751,8 @@ export async function dispatchBoundary(
   encounterId: Id<'encounters'>,
   input: { kind: BoundaryEvent['kind']; round: number; turn?: BoundaryEvent['turn'] },
   actorName?: string,
+  /** Hero documents the caller read in this mutation and has not written since. */
+  knownHeroes?: Map<string, Doc<'characters'>>,
 ): Promise<DispatchResult> {
   const encounter = await ctx.db.get(encounterId);
   if (!encounter || encounter.status !== 'committed' || encounter.archivedAt !== null)
@@ -780,6 +800,10 @@ export async function dispatchBoundary(
     )
       return;
     const current = await ctx.db.get(encounterId);
+    // Only Malice and heroic-resource work keep the known heroes current; other work may write a
+    // hero through its own reads, so the known documents are dropped before it runs.
+    const kind = (registration.work as ScheduledWorkKind).kind;
+    if (kind !== 'malice' && kind !== 'heroic-resource') knownHeroes?.clear();
     const result = await fire(ctx, {
       scope,
       encounter: current!,
@@ -787,6 +811,7 @@ export async function dispatchBoundary(
       registration,
       boundaryEventId,
       commandId: cause.commandId,
+      ...(knownHeroes ? { knownHeroes } : {}),
     });
     const logEntryId = await appendEvent(ctx, {
       campaignId: encounter.campaignId,
@@ -829,6 +854,8 @@ export async function dispatchBoundary(
     .filter(row => isDue(row.timing as TimingClause, event));
   for (const registration of saves) await fireOne(registration, 'saves');
   if (event.kind === 'combat-end') {
+    // Unscheduling below writes heroes' condition instances directly.
+    knownHeroes?.clear();
     for (const registration of await activeRegistrations(ctx, encounterId)) {
       const work = registration.work as ScheduledWorkKind;
       if (work.kind !== 'saving-throw' && work.kind !== 'expire-effect') continue;

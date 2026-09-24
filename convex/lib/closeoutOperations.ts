@@ -34,10 +34,16 @@ async function active(
   return encounter;
 }
 
-export async function closeoutHeroes(ctx: ReadCtx, encounter: Doc<'encounters'>) {
+export async function closeoutHeroes(
+  ctx: ReadCtx,
+  encounter: Doc<'encounters'>,
+  /** Hero documents already read in this mutation and current (see `dispatchBoundary`). */
+  known?: Map<string, Doc<'characters'>>,
+) {
   const heroes: Doc<'characters'>[] = [];
   for (const id of encounter.heroParticipantIds ?? []) {
-    const hero = await ctx.db.get(id);
+    const hero = known?.get(id) ?? (await ctx.db.get(id));
+    if (hero) known?.set(id, hero);
     if (hero?.campaignId === encounter.campaignId && hero.liveState) heroes.push(hero);
   }
   return heroes;
@@ -119,6 +125,7 @@ async function archive(
   scope: JournalScope,
   encounter: Doc<'encounters'>,
   status: 'voided' | 'closed-out',
+  knownHeroes?: Map<string, Doc<'characters'>>,
 ) {
   await closeCards(ctx, scope, encounter);
   await closePreparations(ctx, scope, encounter);
@@ -132,8 +139,8 @@ async function archive(
   for (const registration of registrations)
     if (registration.status === 'active')
       await journalPatch(ctx, scope, 'clockRegistrations', registration._id, { status: 'retired' });
-  for (const hero of await closeoutHeroes(ctx, encounter))
-    await journalPatch(ctx, scope, 'characters', hero._id, { combatLocked: false });
+  for (const hero of await closeoutHeroes(ctx, encounter, knownHeroes))
+    await journalPatch(ctx, scope, 'characters', hero._id, { combatLocked: false }, hero);
   await journalPatch(ctx, scope, 'encounters', encounter._id, { status, archivedAt: Date.now() });
   await indexArchivedEncounter(ctx, encounter);
   // Keep the session pointer to the archive: currentEncounter excludes it, and history sees the boundary.
@@ -455,7 +462,10 @@ const finish: OperationDefinition = {
       description:
         'Cleanup finished; unused cleanup choices closed and the encounter archived. The table returns to FreePlay.',
       commit: async (writer, scope) => {
-        for (const hero of await closeoutHeroes(writer, encounter)) {
+        // Hero documents are large (the evaluated build). Read them once and keep them current
+        // through cleanup, the combat-end work and the archive, under the per-mutation read limit.
+        const heroDocs = new Map<string, Doc<'characters'>>();
+        for (const hero of await closeoutHeroes(writer, encounter, heroDocs)) {
           let liveState = hero.liveState!;
           for (const field of ['surges', 'temporaryStamina'] as const) {
             const before = liveState[field];
@@ -469,14 +479,20 @@ const finish: OperationDefinition = {
               `${hero.authored.name}: ${field === 'surges' ? 'surges' : 'temporary Stamina'} ${before} → 0 (combat cleanup).`,
               { characterId: hero._id, field, before, after: 0, sourcePath },
             );
+            const current = heroDocs.get(hero._id)!;
             liveState = { ...liveState, [field]: 0 };
-            await journalPatch(writer, child, 'characters', hero._id, { liveState });
+            await journalPatch(writer, child, 'characters', hero._id, { liveState }, current);
+            heroDocs.set(hero._id, { ...current, liveState });
           }
         }
-        await dispatchBoundary(writer, scope, encounter._id, {
-          kind: 'combat-end',
-          round: encounter.round ?? 0,
-        });
+        await dispatchBoundary(
+          writer,
+          scope,
+          encounter._id,
+          { kind: 'combat-end', round: encounter.round ?? 0 },
+          undefined,
+          heroDocs,
+        );
         const foes = await writer.db
           .query('foes')
           .withIndex('by_campaign', q => q.eq('campaignId', encounter.campaignId))
@@ -534,7 +550,7 @@ const finish: OperationDefinition = {
           );
           await journalDelete(writer, child, 'squads', squad._id);
         }
-        await archive(writer, scope, encounter, 'closed-out');
+        await archive(writer, scope, encounter, 'closed-out', heroDocs);
       },
     };
   },

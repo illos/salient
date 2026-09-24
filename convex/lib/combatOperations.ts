@@ -75,11 +75,14 @@ export async function effectiveDraft(
   ctx: ReadCtx,
   campaignId: Id<'campaigns'>,
   draft: NonNullable<Doc<'encounters'>['draft']>,
+  /** Filled with the hero documents read here, for reuse later in the same mutation. */
+  characterDocs?: Map<string, Doc<'characters'>>,
 ): Promise<DraftParticipant[]> {
   const characters = await ctx.db
     .query('characters')
     .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
     .take(200);
+  for (const character of characters) characterDocs?.set(character._id, character);
   const foes = await ctx.db
     .query('foes')
     .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
@@ -331,9 +334,12 @@ const combatCommit: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context, respondsTo }) => {
     const encounter = await requireDraft(ctx, context);
-    const participants = (await effectiveDraft(ctx, context.campaign._id, encounter.draft!)).filter(
-      p => p.included,
-    );
+    // Hero documents are large (the evaluated build). Read them once here and reuse them in the
+    // commit below, so a large party stays under the per-mutation read limit.
+    const heroDocs = new Map<string, Doc<'characters'>>();
+    const participants = (
+      await effectiveDraft(ctx, context.campaign._id, encounter.draft!, heroDocs)
+    ).filter(p => p.included);
     if (!participants.length) throw new ConvexError('Include at least one hero or foe before OK.');
     const heroes = participants.filter(p => p.side === 'heroes');
     const foes = participants.filter(p => p.side === 'director');
@@ -380,12 +386,10 @@ const combatCommit: OperationDefinition = {
       commit: async (mctx, scope) => {
         // 1. Baseline before any combat-start effect (restoration record, not an editable sheet).
         const state: Record<string, unknown> = { characters: {}, foes: {}, campaign: {} };
-        // Hero documents are large (the evaluated build); read each once here and reuse it below,
-        // so a large party stays under the per-mutation read limit.
-        const heroDocs = new Map<string, Doc<'characters'>>();
+        // The documents read by the effective draft above, in this same mutation: nothing has
+        // written a hero since.
         for (const hero of heroes) {
-          const doc = await mctx.db.get(hero.actor.id as Id<'characters'>);
-          if (doc) heroDocs.set(doc._id, doc);
+          const doc = heroDocs.get(hero.actor.id);
           if (doc)
             (state.characters as Record<string, unknown>)[doc._id] = {
               liveState: doc.liveState,
@@ -436,10 +440,18 @@ const combatCommit: OperationDefinition = {
           opening: { path, surprisedSides, roll: null, chosenBy: null },
         });
         // 3. Character-edit lock on participating heroes (the party-roster lock is combatActive).
-        for (const hero of heroes)
-          await journalPatch(mctx, scope, 'characters', hero.actor.id as Id<'characters'>, {
-            combatLocked: true,
-          });
+        for (const hero of heroes) {
+          const doc = heroDocs.get(hero.actor.id);
+          await journalPatch(
+            mctx,
+            scope,
+            'characters',
+            hero.actor.id as Id<'characters'>,
+            { combatLocked: true },
+            doc,
+          );
+          if (doc) heroDocs.set(doc._id, { ...doc, combatLocked: true });
+        }
         // 4. Groups and entries: heroes first, then foes; one group per creature unless combined.
         const committed = (await mctx.db.get(encounter._id))!;
         for (const side of ['heroes', 'director'] as Side[]) {
@@ -492,9 +504,9 @@ const combatCommit: OperationDefinition = {
             profile.deadStaysSilent &&
             record.liveState.stamina <= -recordBaseline.windedValue.value
           ) {
-            await journalPatch(mctx, scope, 'characters', characterId, {
-              liveState: { ...record.liveState, generationSuspended: encounter._id },
-            });
+            const liveState = { ...record.liveState, generationSuspended: encounter._id };
+            await journalPatch(mctx, scope, 'characters', characterId, { liveState }, record);
+            heroDocs.set(characterId, { ...record, liveState });
             continue;
           }
           const work = (
@@ -560,9 +572,23 @@ const combatCommit: OperationDefinition = {
             affectedIds: participants.filter(p => p.surprised).map(p => p.actor.id),
           });
         // 6. Boundaries: combat-start now; round 1 starts when the starting side is known.
-        await dispatchBoundary(mctx, scope, encounter._id, { kind: 'combat-start', round: 0 });
+        await dispatchBoundary(
+          mctx,
+          scope,
+          encounter._id,
+          { kind: 'combat-start', round: 0 },
+          undefined,
+          heroDocs,
+        );
         if (path === 'surprise-determined')
-          await dispatchBoundary(mctx, scope, encounter._id, { kind: 'round-start', round: 1 });
+          await dispatchBoundary(
+            mctx,
+            scope,
+            encounter._id,
+            { kind: 'round-start', round: 1 },
+            undefined,
+            heroDocs,
+          );
         if (card)
           await mctx.db.patch(card._id, {
             status: 'resolved',

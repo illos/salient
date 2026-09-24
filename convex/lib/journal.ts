@@ -91,9 +91,14 @@ export async function journalPatch<T extends TableNames>(
   table: T,
   id: Id<T>,
   patch: Partial<DataModel[T]['document']>,
+  /**
+   * The document as already read in this mutation and unchanged since. Large documents (heroes
+   * carry their evaluated build) then count once against the per-mutation read limit.
+   */
+  known?: DataModel[T]['document'],
 ): Promise<number> {
   const event = await scopedEvent(ctx, scope);
-  const current = await ctx.db.get(id);
+  const current = known ?? (await ctx.db.get(id));
   if (!current) throw new ConvexError(`Cannot patch a missing ${table} document.`);
   const changes = diffFields(current as Record<string, unknown>, patch as Record<string, unknown>);
   let ordinal = await nextOrdinal(ctx, scope.eventId);
