@@ -35,3 +35,8 @@ generic level-up.
   above-the-old-maximum case (never carried above the new maximum) is now stated in the spec and, with
   the no-previous-maximum, zero and floor cases, covered by `tests/live-reconciliation.test.ts`.
 - Review re-verification: the above-maximum sentence is now labelled an implementation interpretation with its alternative; otherwise PASS.
+
+## Publication: 2026-09-24
+
+Merged with V162 and V163 stacked as main `b724eea` and published as Worker `ea49dd4d-0946-43ce-8e65-25bb1c7f270d`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V163-release-b724eea`.

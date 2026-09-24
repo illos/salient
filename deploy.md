@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V163 | `b724eea` | Merged with V162 and V163 stacked; backend/frontend published; gate and headless at tip | complete |
+| V162 | `b724eea` | Merged with V162 and V163 stacked; backend/frontend published; gate and headless at tip | complete |
 | V160 | `4b87799` | Merged in train 7; backend/frontend published; gate and headless at tip | complete |
 | V154 | `4b87799` | Merged in train 7; backend/frontend published; gate and headless at tip | complete |
 | V153 | `4b87799` | Merged in train 7; backend/frontend published; gate and headless at tip | complete |
@@ -660,3 +662,19 @@ fast-forwarded into main as `4b8779941ac57ad766f78b956d513faa6e9553ec`.
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/train7-release`.
+
+### V162 current values and V163 level-up publication: 2026-09-24
+
+WIZARD3 stacked V162 (build changes keep damage taken and Recoveries spent, revised Q-CHAR-2) and
+V163 (pending level-ups, Director grant and withdraw operations, level-up for every class) on main
+`c7aa637`. The test and deploy thread fast-forwarded main to `b724eea9fc51a9c613aaa96b4b424aa1c8908456`.
+- Full gate at the tip (308 s, 443 engine and 730 app tests).
+- Journeys at the tip: `level-up` (1/1), `lifecycle` (8/8, moved out of `all`) and `all` (29/29,
+  214 s). V162 alone also passed its gate and `all` (37/37).
+- Independent rules reviews passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `ea49dd4d-0946-43ce-8e65-25bb1c7f270d`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V163-release-b724eea`.

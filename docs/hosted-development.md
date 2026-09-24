@@ -114,7 +114,13 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — train 7 (V152, V153, V154, V160)
+## Current release — V162 current values and V163 level-up
+
+Backend/frontend source `b724eea9fc51a9c613aaa96b4b424aa1c8908456` published on 2026-09-24 as
+Worker `ea49dd4d-0946-43ce-8e65-25bb1c7f270d`. Backend and schema validation, the hosted build and the upload succeeded. Content
+remains the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
+
+## Previous release — train 7 (V152, V153, V154, V160)
 
 Backend/frontend source `4b8779941ac57ad766f78b956d513faa6e9553ec` published on 2026-09-24 as
 Worker `bde8df86-9a57-4299-87f1-b6b564085f9f`: table-work effect riders, compound tier conditions and tier instructions (143 compiled

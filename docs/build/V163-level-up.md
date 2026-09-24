@@ -47,3 +47,8 @@ Generalise V32's Fury 1→2 advancement to every class and supported level, driv
   level; the headless readback checks the effective build's level; a stale V45 test title. Accepted:
   the interim panel's finish state (V164 replaces it).
 - Review re-verification of `81519dc`: PASS.
+
+## Publication: 2026-09-24
+
+Merged with V162 and V163 stacked as main `b724eea` and published as Worker `ea49dd4d-0946-43ce-8e65-25bb1c7f270d`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V163-release-b724eea`.
