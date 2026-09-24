@@ -1727,6 +1727,13 @@ stays immutable without a special respite context.
    combat setup. It is not a combat void or rewind.
 3. **Complete:** the respite's benefits apply, as below.
 
+**Completing with unused options, confirmed 2026-09-24:** Complete never waits for players and has no
+mechanical "everyone ready" state; players confirm verbally before the Director completes. Unused
+optional respite activities and choices lapse. They must be clearly visible before and while
+completing, per hero, in the same style as the wizard's unspent-points notice (for example "1 activity
+still unused"). Nothing mandatory can be left undone: completion benefits need no player input, and
+level-ups are taken later.
+
 **Respite completion grants level-ups, confirmed 2026-09-24:** completing a respite converts Victories to
 XP, and each threshold a hero's XP crosses grants that hero one pending level-up. Taking it is the
 owner's separate character-sheet action (see the [level-up policy](character-wizard-spec.md#level-up));

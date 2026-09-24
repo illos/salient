@@ -36,3 +36,5 @@ and generic level-up for all eleven classes can be built. Design only: no code.
   `min(oldCurrent, newMaximum)`; change it to keep damage taken and Recoveries spent, with its tests.
 - 2026-09-24: Q5 settled: three endings, Cancel (revert to pre-respite), Interrupt (keep what happened, no
   completion benefits) and Complete.
+- 2026-09-24: Q7 settled: no ready gate; unused options lapse on Complete, visible per hero like the
+  wizard's unspent-points notice.
