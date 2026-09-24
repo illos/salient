@@ -1172,3 +1172,29 @@ leaving. Current behaviour: "Earth Accepts Me: Exit Object" is its own record la
 stated", resolved manually. Alternatives: a maneuver (like ending other effects) or part of your
 movement. Recommendation: treat it as part of your movement, since the text frames leaving as the end
 of travelling through the object. Nothing else depends on the answer.
+
+## Q-SUMMONER-2 — Summoner levels 2–3 readings (V138)
+
+The pinned Compendium leaves these open; V138 builds the reading marked "current" and keeps the
+effects manual.
+
+- **Which fixture?** `feature/summoner/level-2/summoners-dominion.md` summons "a fixture from your
+  minions' native manifold or origin". No rule maps circles to fixtures. Current: one per circle through
+  its portfolio family (`feature/summoner/level-1/portfolio.md`) and the only featureblock under
+  `monster/fixture/<family>/`: The Boil, Barrow Gates, Glade Pond, Primordial Crystal (the crystal's only
+  tie to Storms is its path). Alternative: any fixture.
+- **How many new minions?** `new-portfolio-minion.md` says "new minions"; the advancement row adds one
+  "5" (`1, 1, 3, 3, 5`). Current: one 5-essence minion from the circle's family. Alternatives: all three,
+  or a number the Director sets.
+- **Is the fixture a minion?** It is called forth "like any minion"; Elite Formation gives "each of your
+  minions" +3 Stamina and +1 stability. Current: the printed 20 + your level only, not counted against
+  the minion maximum. Alternative: Elite applies (25/26) and it counts as a minion.
+- **Summoner Strike distance with the kit.** `summoners-kit.md`: the distance "is now equal to your
+  Summoner's Range"; the strike printed "Melee 1 or Ranged 5" with a Charge special. Current: Summoner's
+  Range. Alternative: "Melee 1 or Ranged (Summoner's Range)", keeping melee and Charge (Lead By Example
+  prints that dual form).
+- **Leader Formation and the class kit.** `leader-formation.md` grants its benefit "while you don't have
+  a kit"; Summoner's Kit arrives at 3rd level. Nothing is implemented either way yet.
+
+Recommendation: keep the current readings except the strike distance, where keeping Melee 1 matches
+Lead By Example and the Charge special.

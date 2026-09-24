@@ -70,6 +70,7 @@ export function deriveSummonerPortfolio(ctx: DerivationContext, out: PartialBase
     formation = ctx.single('class.summoner.formation'),
     r = out.characteristics.R.value;
   if (!circle || !formation) return;
+  const range = 5 + r;
   const chosen = [
     ...(ctx.list(`class.summoner.portfolio.${circle.toLowerCase()}.1`) ?? []),
     ...(ctx.list(`class.summoner.portfolio.${circle.toLowerCase()}.3`) ?? []),
@@ -94,7 +95,7 @@ export function deriveSummonerPortfolio(ctx: DerivationContext, out: PartialBase
   out.summoner = {
     circle,
     formation,
-    range: 5 + r,
+    range,
     minionMaximum: formation === 'Horde' ? 12 : 8,
     squadMaximum: 2,
     squadSizeMaximum: 8,
@@ -140,14 +141,17 @@ export function deriveSummonerPortfolio(ctx: DerivationContext, out: PartialBase
             name: fixture.name,
             sourcePath: fixture.sourcePath,
             size: fixture.size,
+            // Labelled interpretation (Q-SUMMONER-2): the printed "20 + your level" only; Elite
+            // Formation's minion +3 is not applied, since whether the fixture is a minion is open.
             stamina: 20 + ctx.level,
             traits: [...fixture.traits],
           },
         }
       : {}),
     // feature/summoner/level-3/summoners-kit.md: Summoner Strike damage 2 × Reason, potency
-    // R < AVERAGE, distance your Summoner's Range.
-    ...(kit ? { strike: { damage: 2 * r, potency: 'R < AVERAGE', distance: 5 + r } } : {}),
+    // R < AVERAGE, distance your Summoner's Range. Labelled interpretation (Q-SUMMONER-2): the
+    // literal distance replaces "Melee 1 or Ranged 5"; the alternative keeps the Melee 1 option.
+    ...(kit ? { strike: { damage: 2 * r, potency: 'R < AVERAGE', distance: range } } : {}),
     provenance: [
       ...(formation === 'Horde' ? [provenance] : []),
       {

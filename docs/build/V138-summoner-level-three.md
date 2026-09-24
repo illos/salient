@@ -14,17 +14,21 @@ shared API. Guided advancement remains deferred.
 - Pinned `en/unified/md/class/summoner.md`, Basics and Summoner Advancement: +6 Stamina at levels 2
   and 3 (shared class-profile growth), 8 Recoveries, first echelon, unchanged characteristics.
 - `feature/summoner/level-2/`: one intrigue, lore or supernatural perk; Summoner's Dominion; New
-  Portfolio Minion. The advancement row `1, 1, 3, 3, 5` adds one 5-essence minion from the circle's
-  portfolio (the V107 reading of the row, extended by one entry).
+  Portfolio Minion. Labelled interpretation (Q-SUMMONER-2): the advancement row `1, 1, 3, 3, 5` adds one
+  5-essence minion from the circle's portfolio, extending V107's reading; alternatives are all three or a
+  Director-set number.
 - Summoner's Dominion fixture. Labelled interpretation: the feature summons "a fixture from your
   minions' native manifold or origin"; the Compendium files one fixture per portfolio family under
   `monster/fixture/<family>/featureblock/`, and `feature/summoner/level-1/portfolio.md` maps each
   circle to its family: Blight → The Boil, Graves → Barrow Gates, Spring → Glade Pond, Storms →
   Primordial Crystal. Alternative considered: any fixture may be chosen; the text ties it to your
-  minions' origin, so it is not offered. Fixture Stamina is 20 + your level; its 5th- and 9th-level
-  advancement features stay excluded.
+  minions' origin, so it is not offered. Fixture Stamina is the printed 20 + your level; labelled
+  interpretation (Q-SUMMONER-2): Elite Formation's minion bonus is not applied and the fixture does not
+  count as a minion (alternative: it is a minion, 25/26 with Elite). Its 5th- and 9th-level advancement
+  features stay excluded.
 - `feature/summoner/level-3/`: Summoner's Kit (Summoner Strike damage 2 × Reason, potency R < AVERAGE,
-  distance your Summoner's Range) and one ward: Conjured Ward (+3 Stamina, derived, with recovery and
+  distance your Summoner's Range; labelled interpretation (Q-SUMMONER-2): the literal distance replaces
+  "Melee 1 or Ranged 5", the alternative keeps Melee 1) and one ward: Conjured Ward (+3 Stamina, derived, with recovery and
   winded values), Emergency Ward, Howling Ward, Snare Ward. `feature/ability/summoner/level-3/`: Blitz
   Tactics, Cavalry Call, Essence Funnel, Lead By Example, each 7 essence.
 - Everything a Summoner does stays a V107 manual record through `commands:invoke`: the Dominion
@@ -68,3 +72,9 @@ shared API. Guided advancement remains deferred.
   total; `build:web` rc0. Both TypeScript projects, ESLint, focused V138/V107/V32 engine tests (14),
   build-content, audit, report and rules script tests (66), and content, compiled, supporting, foes
   and link checks pass.
+- Independent rules/implementation review (subagent, source-only) of `d276576`: CHANGES REQUIRED, three
+  labelling findings, all fixed: fixture Stamina ignoring Elite and the kit's strike distance are now
+  labelled interpretations in scope, code and contract, and Q-SUMMONER-2 records them with the fixture
+  link, the one-minion reading and Leader Formation vs the class kit. Non-blocking, fixed: the test
+  checks every printed action's type and trigger against the ledger and refuses out-of-pool perk, ward
+  and 7-essence values; the perk filter matches its one decision; the strike reuses the range value.

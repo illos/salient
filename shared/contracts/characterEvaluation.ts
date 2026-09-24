@@ -311,9 +311,9 @@ export interface DerivedBaseline {
     startOfCombatMinions: number;
     startOfTurnMinions: number;
     outsideCombatMaximum: number;
-    /** Summoner's Dominion fixture (2nd level); Stamina is 20 + your level. */
+    /** Summoner's Dominion fixture (2nd level); Stamina is the printed 20 + your level (Q-SUMMONER-2). */
     fixture?: { name: string; sourcePath: string; size: string; stamina: number; traits: string[] };
-    /** Summoner Strike after Summoner's Kit (3rd level); distance is your Summoner's Range. */
+    /** Summoner Strike after Summoner's Kit (3rd level); distance is your Summoner's Range (Q-SUMMONER-2). */
     strike?: { damage: number; potency: string; distance: number };
     provenance: Provenance[];
     portfolio: {

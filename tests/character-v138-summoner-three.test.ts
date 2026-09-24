@@ -6,6 +6,7 @@ import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
 import { changeChoice } from '../shared/evaluate/choiceTransition.ts';
 import { changeLevel } from '../shared/evaluate/levelTransition.ts';
+import { SUMMONER_ACTIONS } from '../shared/content/classes/summoner/abilities.ts';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
 type Selections = Record<string, SelectionValue>;
 const evaluate = (selections: Selections, level: number) =>
@@ -166,4 +167,38 @@ test('portfolio pools are exclusive; level and circle edits prune dependents', (
     !features.some(f => f.name === 'The Boil' || f.name === blight.w.newPortfolioMinion.name),
   );
   assert.ok(features.some(f => f.name === 'Barrow Gates'));
+});
+
+test('each printed level-2/3 action keeps its source action type and trigger', () => {
+  // Ledger "Trait (…)" rows (automatic, passive or strike riders) are source-timed records.
+  const expectedType = (printed: string) =>
+    printed.startsWith('Trait') || printed.includes('automatic')
+      ? 'Source-timed effect'
+      : printed.replace(/ \(.*\)$/, '');
+  for (const printed of ledger.abilities.filter(a => !a.name.startsWith('Perk: '))) {
+    const record = SUMMONER_ACTIONS.find(a => a.name === printed.name);
+    assert.ok(record, printed.name);
+    const type = expectedType(printed.actionType);
+    assert.equal(record.actionType, type, printed.name);
+    // Trait timings are not triggered actions; only real actions carry a printed trigger.
+    if (type !== 'Source-timed effect')
+      assert.equal(Boolean(record.trigger), Boolean(printed.trigger), `${printed.name} trigger`);
+  }
+});
+
+test('the level-2 perk, ward and 7-essence choices refuse values outside their source pools', () => {
+  const { l3 } = cases[0]!;
+  for (const [id, value] of [
+    // feature/summoner/level-2/perk.md names intrigue, lore or supernatural; Expert Artisan is crafting.
+    ['class.summoner.level-2.perk', 'Expert Artisan'],
+    ['class.summoner.level-3.ward', 'Conjured Armor'],
+    ['class.summoner.level-3.ability-7', 'Distraction Tactics'],
+  ] as const) {
+    const result = evaluate({ ...l3, [id]: value }, 3);
+    assert.equal(result.status, 'invalid', id);
+    assert.ok(
+      result.diagnostics[id]!.some(d => d.code === 'value-not-in-pool'),
+      id,
+    );
+  }
 });

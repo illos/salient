@@ -31,7 +31,7 @@ export function summonerAbilities(
   const result = existing.filter(
     a =>
       (!a.provenance.decisionId.startsWith('class.summoner.') ||
-        a.provenance.decisionId.endsWith('.perk')) &&
+        a.provenance.decisionId === 'class.summoner.level-2.perk') &&
       !(isSummoner && a.kind === 'free-strike'),
   );
   for (const a of SUMMONER_ACTIONS) {
