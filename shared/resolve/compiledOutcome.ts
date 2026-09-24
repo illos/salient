@@ -3,8 +3,10 @@
 import type {
   AbilityRollBlocked,
   AbilityRollResult,
+  CostApplication,
   DamageApplication,
   DamageBreakdown,
+  ResourcePoolFacts,
   TierDamageText,
 } from '../contracts/rollResolution.ts';
 import type { CompiledAbility, CompiledNode, PushNode, ConditionNode } from './compileAbility.ts';
@@ -17,7 +19,19 @@ import {
 } from './abilityGrammar.ts';
 import type { RiderNode } from './compileAbility.ts';
 import { tierInstruction } from './effectRiders.ts';
-import { plainText, resolveAbilityRoll, withMode, type AbilityRollInput } from './index.ts';
+import {
+  effectOnlyClause,
+  effectOnlyTarget,
+  effectOnlyTargetLimit,
+  readEffectOnlySection,
+} from './effectOnly.ts';
+import {
+  checkAffordability,
+  plainText,
+  resolveAbilityRoll,
+  withMode,
+  type AbilityRollInput,
+} from './index.ts';
 
 /** Absence is unknown. `none` asserts coverage of this category for forced movement. */
 export type MovementCoverage = { kind: 'none' } | { kind: 'unhandled'; labels: string[] };
@@ -213,12 +227,33 @@ export interface CompiledRiderOutcome extends EffectIdentity {
   tier?: true;
 }
 
+/**
+ * V157 executed gain of an effect-only use for one recipient. `applied` for a hero, whose live
+ * state carries temporary Stamina and surges; `manual` otherwise (foes carry no surge counter).
+ */
+export interface CompiledGainOutcome extends EffectIdentity {
+  kind: 'gain';
+  status: 'applied' | 'manual';
+  subject: 'actor' | 'target';
+  temporaryStamina?: number;
+  surges?: number;
+  /** Present when applied: the recipient's values before and after this gain. */
+  application?: {
+    temporaryStaminaBefore?: number;
+    temporaryStaminaAfter?: number;
+    surgesBefore?: number;
+    surgesAfter?: number;
+  };
+  requirements: string[];
+}
+
 export type CompiledEffectOutcome =
   | CompiledDamageOutcome
   | CompiledPushOutcome
   | CompiledConditionOutcome
   | CompiledManualOutcome
-  | CompiledRiderOutcome;
+  | CompiledRiderOutcome
+  | CompiledGainOutcome;
 
 export type CompiledAbilityOutcome =
   | { kind: 'manual'; definition: CompiledAbility; reason: string; effects: [] }
@@ -683,4 +718,247 @@ export function resolveCompiledAbility(
       grab.requirements = [...grab.requirements, 'actor.grabLimit'];
     }
   return { kind: 'resolved', definition, roll, effects: [...effects, ...remainder] };
+}
+
+/** V157: a creature an effect-only use names, with the live values a gain changes. */
+export interface EffectOnlyRecipient {
+  id: string;
+  kind: 'hero' | 'foe' | 'object' | 'squad';
+  /** Required for a hero recipient; a hero without them keeps its gains manual. */
+  temporaryStamina?: number;
+  surges?: number;
+}
+export interface EffectOnlyInput {
+  actor: EffectOnlyRecipient;
+  /** In the given order; the user is one of them only when the target shape allows self. */
+  targets: EffectOnlyRecipient[];
+  inCombat: boolean;
+  resourcePool?: ResourcePoolFacts;
+}
+export type EffectOnlyOutcome =
+  | { kind: 'manual'; definition: CompiledAbility; reason: string; effects: [] }
+  | { kind: 'blocked'; definition: CompiledAbility; reason: string; effects: [] }
+  | {
+      kind: 'resolved';
+      definition: CompiledAbility;
+      cost?: CostApplication;
+      warnings: string[];
+      /** In printed order: each sentence's outcomes for its recipients in target order. */
+      effects: CompiledEffectOutcome[];
+      /** The final live values to write for each hero recipient whose gains applied. */
+      writes: { id: string; temporaryStamina: number; surges: number }[];
+    };
+
+/**
+ * V157 abilities without a power roll (docs/build/V157-effect-only-abilities.md#resolve). The saved
+ * definition is validated as the rolled path's is: every section node re-reads from its clause,
+ * the activation re-reads from the envelope, and target counts stay within the target shape.
+ * Gains apply in printed order: temporary Stamina keeps the greater of the current and granted
+ * amounts (rule/health/temporary-stamina.md); surges add (rule/resource/surge.md). Instructions
+ * are rider outcomes that change no state.
+ */
+export function resolveEffectOnly(
+  definition: CompiledAbility,
+  input: EffectOnlyInput,
+): EffectOnlyOutcome {
+  const manual = (reason: string): EffectOnlyOutcome => ({
+    kind: 'manual',
+    definition,
+    reason,
+    effects: [],
+  });
+  if (
+    definition.execution !== 'supported' ||
+    definition.effectOnly !== true ||
+    !definition.activation ||
+    definition.metadata
+  )
+    return manual('Compiled envelope is not an executable ability without a power roll.');
+  const activation = definition.activation;
+  const shape = effectOnlyTarget(definition.envelope.target, definition.envelope.keywords);
+  const usage = plain(definition.envelope.usage).toLowerCase();
+  const cost = definition.envelope.cost
+    ? /^(\d+)\s+([A-Za-z]+)$/.exec(plain(definition.envelope.cost))
+    : null;
+  const expectedCost = cost
+    ? { resource: cost[2]!.toLowerCase(), amount: Number(cost[1]) }
+    : undefined;
+  // Every Effect section, read whole again, must give exactly the saved nodes in order.
+  const reread = definition.envelope.blocks.flatMap((block, index) =>
+    block.kind === 'section' && block.label === 'Effect' && !block.cost
+      ? (readEffectOnlySection(block.text) ?? [undefined]).map(sentence => ({ index, sentence }))
+      : [{ index, sentence: undefined }],
+  );
+  if (
+    definition.format !== 'salient.compiled-ability' ||
+    definition.version !== 1 ||
+    !shape ||
+    JSON.stringify(shape) !== JSON.stringify(activation.targetShape) ||
+    usage !== activation.actionType ||
+    JSON.stringify(expectedCost) !== JSON.stringify(activation.fixedCost) ||
+    (expectedCost && !Number.isSafeInteger(expectedCost.amount)) ||
+    definition.tiers.length !== 3 ||
+    definition.tiers.some(nodes => nodes.length) ||
+    !definition.sections.length ||
+    reread.length !== definition.sections.length ||
+    definition.sections.some((node, index) => {
+      const again = reread[index]!;
+      if (!again.sentence || !node.locator.startsWith(`block:${again.index}:`)) return true;
+      if (node.kind !== 'gain' && node.kind !== 'instruction') return true;
+      const parsed = effectOnlyClause(node.clause);
+      if (!parsed || parsed.text !== again.sentence.text) return true;
+      const clause = parsed.clause;
+      if (
+        (parsed.singleTarget && shape.kind !== 'one' && shape.kind !== 'self') ||
+        (clause.subject === 'actor' && shape.kind !== 'self')
+      )
+        return true;
+      return node.kind === 'gain'
+        ? clause.kind !== 'gain' ||
+            node.subject !== clause.subject ||
+            node.temporaryStamina !== clause.temporaryStamina ||
+            node.surges !== clause.surges
+        : clause.kind !== 'instruction' ||
+            node.subject !== clause.subject ||
+            node.shape !== clause.shape ||
+            node.after !== '';
+    })
+  )
+    return manual('Compiled structure is outside the supported envelope.');
+  // rule/combat/target.md: fewer targets are legal; the user is a target only when "self" is.
+  const limit = effectOnlyTargetLimit(shape);
+  const selfAllowed =
+    shape.kind === 'self' || ((shape.kind === 'one' || shape.kind === 'allies') && shape.self);
+  const includesSelf = input.targets.some(target => target.id === input.actor.id);
+  const others = input.targets.filter(target => target.id !== input.actor.id).length;
+  if (
+    !input.targets.length ||
+    new Set(input.targets.map(target => target.id)).size !== input.targets.length ||
+    (limit !== undefined && input.targets.length > limit) ||
+    (shape.kind === 'self' && !includesSelf) ||
+    (includesSelf && !selfAllowed) ||
+    (shape.kind === 'allies' && others > shape.max)
+  )
+    return manual(
+      shape.kind === 'self'
+        ? 'This ability targets only its user.'
+        : `Give ${limit === undefined ? 'one or more' : `one to ${limit}`} distinct targets${selfAllowed ? '' : ', not the user'}.`,
+    );
+  const affordability = checkAffordability(
+    activation.fixedCost,
+    input.resourcePool,
+    input.inCombat,
+  );
+  if (affordability.kind === 'blocked')
+    return { kind: 'blocked', definition, reason: affordability.reason, effects: [] };
+  const costApplication: CostApplication | undefined =
+    affordability.kind === 'affordable'
+      ? {
+          ...affordability.cost,
+          waived: false,
+          before: affordability.before,
+          after: affordability.after,
+        }
+      : affordability.kind === 'waived'
+        ? {
+            ...affordability.cost,
+            waived: true,
+            before: affordability.pool,
+            after: affordability.pool,
+          }
+        : undefined;
+  // The running values of each hero recipient, so several gains apply in printed order.
+  const state = new Map<string, { temporaryStamina: number; surges: number }>();
+  const recipientOf = (id: string) =>
+    id === input.actor.id ? input.actor : input.targets.find(target => target.id === id)!;
+  const effects: CompiledEffectOutcome[] = [];
+  for (const node of definition.sections) {
+    if (node.kind !== 'gain' && node.kind !== 'instruction') continue;
+    const recipients =
+      node.subject === 'actor' ? [input.actor.id] : input.targets.map(target => target.id);
+    for (const id of recipients) {
+      const identity = {
+        nodeId: node.id,
+        targetId: id,
+        locator: node.locator,
+        clause: node.clause,
+      };
+      if (node.kind === 'instruction') {
+        effects.push({
+          ...identity,
+          kind: 'rider',
+          status: 'manual',
+          shape: node.shape,
+          dependency: 'independent',
+          after: [],
+          requirements: [],
+          ...(node.subject === 'target' ? { tier: true as const } : {}),
+        });
+        continue;
+      }
+      const recipient = recipientOf(id);
+      const amounts = {
+        ...(node.temporaryStamina !== undefined ? { temporaryStamina: node.temporaryStamina } : {}),
+        ...(node.surges !== undefined ? { surges: node.surges } : {}),
+      };
+      const known =
+        recipient.kind === 'hero' &&
+        Number.isSafeInteger(recipient.temporaryStamina) &&
+        Number.isSafeInteger(recipient.surges);
+      if (!known) {
+        effects.push({
+          ...identity,
+          kind: 'gain',
+          status: 'manual',
+          subject: node.subject,
+          ...amounts,
+          requirements: [
+            recipient.kind === 'hero'
+              ? `target:${id}.liveState`
+              : `target:${id}.heroLiveState (a ${recipient.kind} records its gains at the table)`,
+          ],
+        });
+        continue;
+      }
+      const before = state.get(id) ?? {
+        temporaryStamina: recipient.temporaryStamina!,
+        surges: recipient.surges!,
+      };
+      const after = {
+        temporaryStamina:
+          node.temporaryStamina === undefined
+            ? before.temporaryStamina
+            : Math.max(before.temporaryStamina, node.temporaryStamina),
+        surges: node.surges === undefined ? before.surges : before.surges + node.surges,
+      };
+      state.set(id, after);
+      effects.push({
+        ...identity,
+        kind: 'gain',
+        status: 'applied',
+        subject: node.subject,
+        ...amounts,
+        application: {
+          ...(node.temporaryStamina !== undefined
+            ? {
+                temporaryStaminaBefore: before.temporaryStamina,
+                temporaryStaminaAfter: after.temporaryStamina,
+              }
+            : {}),
+          ...(node.surges !== undefined
+            ? { surgesBefore: before.surges, surgesAfter: after.surges }
+            : {}),
+        },
+        requirements: [],
+      });
+    }
+  }
+  return {
+    kind: 'resolved',
+    definition,
+    ...(costApplication ? { cost: costApplication } : {}),
+    warnings: affordability.kind === 'waived' ? affordability.warnings : [],
+    effects,
+    writes: [...state].map(([id, values]) => ({ id, ...values })),
+  };
 }

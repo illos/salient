@@ -18,7 +18,11 @@ export interface EffectRider {
     | 'free-strike'
     | 'push-followup'
     | 'forced-movement'
-    | 'end-effect';
+    | 'end-effect'
+    /** V157: a creature's own movement ("Each target can move up to their speed"). */
+    | 'move'
+    /** V157: the user's later ability use, made by the table through the ability operation. */
+    | 'ability-use';
   /**
    * V152 `after-effects`: the section reads a tier outcome other than damage (Choke's "made
    * restrained by this ability"), so it waits for that target's condition outcomes too.

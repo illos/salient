@@ -8,6 +8,12 @@ import type {
 } from '../contracts/rollResolution.ts';
 import { tierInstruction } from './effectRiders.ts';
 import {
+  effectOnlyTarget,
+  readEffectOnlySection,
+  type EffectOnlySentence,
+  type EffectOnlyTarget,
+} from './effectOnly.ts';
+import {
   blocksFromMarkdown,
   classify,
   forcedMovementExpression,
@@ -96,9 +102,26 @@ export interface InstructionNode extends NodeSource {
   shape: import('./effectRiders.ts').EffectRider['shape'];
   /** The tier's damage node, or '' in a tier without damage. */
   after: string;
+  /**
+   * V157, effect-only sections only: `actor` work happens once for the user; `target` work once
+   * for each target. Tier instructions carry no subject.
+   */
+  subject?: 'actor' | 'target';
+}
+/**
+ * V157 executed gain of an effect-only section: temporary Stamina (the greater of the current and
+ * granted amounts, rule/health/temporary-stamina.md) and/or surges (added, rule/resource/surge.md).
+ */
+export interface GainNode extends NodeSource {
+  kind: 'gain';
+  subject: 'actor' | 'target';
+  temporaryStamina?: number;
+  surges?: number;
 }
 export type CompiledNode =
   DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
+/** Effect-section nodes: V109 riders, V157 effect-only gains and instructions, or manual work. */
+export type SectionNode = UnsupportedNode | RiderNode | GainNode | InstructionNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -114,8 +137,16 @@ export interface CompiledAbility {
   /** Complete bounded source retained; parsing does not certify live eligibility. */
   envelope: CompileEnvelope;
   metadata?: AbilityRollMetadata;
+  /** V157: an ability without a power roll; its work is `sections` and it has no `metadata`. */
+  effectOnly?: true;
+  /** V157, effect-only only: what a use needs in place of roll metadata. */
+  activation?: {
+    actionType: ActionType;
+    fixedCost?: { resource: string; amount: number };
+    targetShape: EffectOnlyTarget;
+  };
   tiers: CompiledNode[][];
-  sections: (UnsupportedNode | RiderNode)[];
+  sections: SectionNode[];
   diagnostics: CompileDiagnostic[];
   execution: 'supported' | 'manual';
   context: {
@@ -180,7 +211,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
   const envelope = structuredClone(input);
   const grammar = classify(envelope);
   const diagnostics: CompileDiagnostic[] = [];
-  const sections: (UnsupportedNode | RiderNode)[] = [];
+  const sections: SectionNode[] = [];
   const tiers: CompiledNode[][] = [[], [], []];
   const diagnose = (code: string, locator: string, clause: string, message: string) => {
     diagnostics.push({ code, locator, clause, message });
@@ -207,17 +238,37 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       '',
       'Content identity, source path and revision are required.',
     );
+  const effectOnly = readEffectOnly(envelope);
   // V154: a tier that opens without damage is judged clause by clause in the tier loop below,
   // which diagnoses every clause it can't support; other grammar failures stay fatal here.
+  // V157: "no-power-roll" is not a failure for an ability read whole as effect-only.
   if (
     grammar.category === 'NO_MATCH' &&
-    !/^tier[123]-damage-outside-grammar$/.test(grammar.reason ?? '')
+    !/^tier[123]-damage-outside-grammar$/.test(grammar.reason ?? '') &&
+    !(effectOnly && grammar.reason === 'no-power-roll')
   )
     diagnose('grammar', 'envelope', '', grammar.reason ?? 'No bounded power roll.');
 
   let rollIndex = -1;
   envelope.blocks.forEach((block, index) => {
     const locator = `block:${index}`;
+    if (block.kind === 'section' && effectOnly) {
+      effectOnly.sections[index]!.forEach(({ text, clause }, ordinal) => {
+        const node = sourceNode(envelope, locator, ordinal, text);
+        sections.push(
+          clause.kind === 'gain'
+            ? { ...node, ...clause }
+            : {
+                ...node,
+                kind: 'instruction',
+                shape: clause.shape,
+                after: '',
+                subject: clause.subject,
+              },
+        );
+      });
+      return;
+    }
     if (block.kind === 'section') {
       const rider =
         block.label === 'Effect' && !block.cost && rollIndex >= 0
@@ -564,11 +615,15 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       );
   // V110: counted (`multi`) and area targets share one roll with per-target edges/banes and tiers;
   // area placement and target eligibility remain the user's table selection.
+  // V157: an effect-only envelope's target was read by the effect-only target reader instead.
   const area = envelope.keywords.some(k => plain(k).toLowerCase() === 'area');
-  if (!(
-    (grammar.targetShape === 'area' && eachAreaTarget(envelope.target)) ||
-    ((grammar.targetShape === 'single' || grammar.targetShape === 'multi') && !area)
-  ))
+  if (
+    !effectOnly &&
+    !(
+      (grammar.targetShape === 'area' && eachAreaTarget(envelope.target)) ||
+      ((grammar.targetShape === 'single' || grammar.targetShape === 'multi') && !area)
+    )
+  )
     diagnose(
       'target-boundary',
       'header:target',
@@ -627,10 +682,23 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
     source,
     envelope,
     ...(metadata ? { metadata } : {}),
+    ...(effectOnly && action
+      ? {
+          effectOnly: true as const,
+          activation: {
+            actionType: action,
+            ...(cost && Number.isSafeInteger(Number(cost[1]))
+              ? { fixedCost: { resource: cost[2]!.toLowerCase(), amount: Number(cost[1]) } }
+              : {}),
+            targetShape: effectOnly.target,
+          },
+        }
+      : {}),
     tiers,
     sections,
     diagnostics,
-    execution: diagnostics.length === 0 && metadata ? 'supported' : 'manual',
+    execution:
+      diagnostics.length === 0 && (metadata || (effectOnly && action)) ? 'supported' : 'manual',
     context: {
       corpus: envelope.corpus,
       ...(envelope.parent ? { parent: envelope.parent } : {}),
@@ -639,4 +707,40 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       scope: 'pure-only',
     },
   };
+}
+
+/** V157 actions a use without a power roll may take; triggered actions stay manual (piece 5). */
+const EFFECT_ONLY_ACTIONS: ActionType[] = ['main action', 'maneuver', 'free maneuver'];
+
+/**
+ * V157: the whole envelope read as an ability without a power roll, or `undefined`. Every block is
+ * a cost-free Effect section (no roll, tiers, Trigger, Spend, Strained, Persistent or unattached
+ * Paragraph) read whole by `readEffectOnlySection`, the action is a main action, maneuver or free
+ * maneuver, and the effect-only target reader accepts the target. "The target" sentences need a
+ * one-target envelope (V110) and "You" sentences a Self one, so that once-per-use work is
+ * addressed to a creature the use names.
+ */
+function readEffectOnly(
+  envelope: Envelope,
+): { target: EffectOnlyTarget; sections: Record<number, EffectOnlySentence[]> } | undefined {
+  if (!envelope.blocks.length) return undefined;
+  const action = EFFECT_ONLY_ACTIONS.find(value => value === plain(envelope.usage).toLowerCase());
+  const target = effectOnlyTarget(envelope.target, envelope.keywords);
+  if (!action || !target) return undefined;
+  const sections: Record<number, EffectOnlySentence[]> = {};
+  for (const [index, block] of envelope.blocks.entries()) {
+    if (block.kind !== 'section' || block.label !== 'Effect' || block.cost) return undefined;
+    const read = readEffectOnlySection(block.text);
+    if (
+      !read ||
+      read.some(
+        sentence =>
+          (sentence.singleTarget && target.kind !== 'one' && target.kind !== 'self') ||
+          (sentence.clause.subject === 'actor' && target.kind !== 'self'),
+      )
+    )
+      return undefined;
+    sections[index] = read;
+  }
+  return { target, sections };
 }
