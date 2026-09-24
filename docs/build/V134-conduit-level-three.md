@@ -70,3 +70,9 @@ shared API. Guided advancement remains deferred.
   667/667, content 1773 entries at the pin, links, vendor, foes and build pass. Artifacts
   `/srv/presidium/projects/salient/test-artifacts/V134-a538f9d`. The Test-Deploy headless run there hit
   a `sessions:get` request timeout under host load (not a code failure); it reruns at the rebased tip.
+
+## Publication: 2026-09-24
+
+Merged in merge train 2 (V134, V136, V137) as main `ca5f562`. The tip passed the full gate (431
+engine and 672 app tests) and the train's headless journeys. The backend, content (1852 entries) and
+frontend were published as Worker `d097d610-cf1f-4dcd-8ce5-9096cfd765b2`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train2-release-ca5f562`.

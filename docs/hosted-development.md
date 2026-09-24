@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — merge train 1 (V135, V140, V145)
+## Current release — merge train 2 (V134, V136, V137)
+
+Backend/content/frontend source `ca5f562bb0eee8e7e84984c976d76d483b53d959` published on 2026-09-24 as
+Worker `d097d610-cf1f-4dcd-8ce5-9096cfd765b2`: Conduit, Talent and Beastheart levels two and three. Backend and schema validation,
+the content reseed (1852 entries at `fb83a789`), the hosted build and the upload succeeded. The tip
+passed the full gate and headless journeys before merge, with no smoke test. See the
+[ledger](../deploy.md).
+
+## Previous release — merge train 1 (V135, V140, V145)
 
 Backend/content/frontend source `764695471245f02c56ae579adb42dd12fe1375d9` published on 2026-09-24 as
 Worker `5224599e-bc2e-40c5-9330-546ea0feae12`: V135 Elementalist levels two and three, V140 Tactician focus generation and V145

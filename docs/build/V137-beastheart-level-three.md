@@ -70,3 +70,9 @@ remains deferred.
 - The same gate stopped before `build:web`, whose reference-coverage pins (`scripts/check-web-budget.ts`)
   still expected 122 Beastheart references. `pnpm rules:ingest` on this stack reads 2614 core and 253
   supplemental (149 Beastheart, 104 Summoner), 2867 in total; the pins now say so.
+
+## Publication: 2026-09-24
+
+Merged in merge train 2 (V134, V136, V137) as main `ca5f562`. The tip passed the full gate (431
+engine and 672 app tests) and the train's headless journeys. The backend, content (1852 entries) and
+frontend were published as Worker `d097d610-cf1f-4dcd-8ce5-9096cfd765b2`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train2-release-ca5f562`.

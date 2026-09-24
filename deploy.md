@@ -42,6 +42,9 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V137 | `ca5f562` | Merged in train 2; backend/content/frontend published; gate and headless at tip | complete |
+| V136 | `ca5f562` | Merged in train 2; backend/content/frontend published; gate and headless at tip | complete |
+| V134 | `ca5f562` | Merged in train 2; backend/content/frontend published; gate and headless at tip | complete |
 | V145 | `7646954` | Merged in train 1; backend/content/frontend published; combined gates at tip | complete |
 | V140 | `7646954` | Merged in train 1; backend/content/frontend published; combined gates at tip | complete |
 | V135 | `7646954` | Merged in train 1; backend/content/frontend published; combined gates at tip | complete |
@@ -540,3 +543,20 @@ fast-forwarded main to `764695471245f02c56ae579adb42dd12fe1375d9`.
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/train1-release-34a2dd6`.
+
+### Merge train 2 (V134, V136, V137) publication: 2026-09-24
+
+WIZARD3 stacked V134 Conduit, V136 Talent and V137 Beastheart levels two and three on main
+`82f2bfd`, regenerating content and reports at each step. The test and deploy thread fast-forwarded
+main to `ca5f562bb0eee8e7e84984c976d76d483b53d959`.
+- Full gate at `ca5f562` (226 s, 431 engine and 672 app tests), including the web budget check.
+- `conduit-level-three`, `talent-level-three` and `beastheart-level-three` journeys at `f6c18bb`;
+  `ca5f562` changes only the content-test allow-list and the reference pins. The existing
+  `beastheart` journey passed at `ca5f562`.
+- Independent rules reviews passed for each slice.
+- Backend publication and schema validation succeeded.
+- The content reseed read back 1852 entries at `fb83a789`.
+- The hosted build and the frontend upload succeeded. Worker `d097d610-cf1f-4dcd-8ce5-9096cfd765b2`.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/train2-release-ca5f562`.
