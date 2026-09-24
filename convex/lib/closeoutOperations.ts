@@ -13,6 +13,8 @@ import { appendEvent } from './events';
 import { dispatchBoundary } from './clock';
 import { journalDelete, journalInsert, journalPatch, type JournalScope } from './journal';
 import { squadMembers } from './squads';
+import { baselineOf } from './characterBuild';
+import { generationProfile } from '../../shared/resolve/heroicResourceGeneration';
 
 const SOURCE_ROOT = 'vendor/steel-compendium/en/unified/md/rule/';
 export type VoidMode = 'keep' | 'reset';
@@ -265,6 +267,31 @@ export async function voidEncounter(
   if (encounter.archivedAt !== null || encounter.status !== 'committed')
     throw new ConvexError('No active combat.');
   if (mode === 'reset') await restoreStart(ctx, scope, encounter);
+  else {
+    // V120 interpretation (Q-RES-1): voiding in keep mode discards the combat record without
+    // finishing it, so the class encounter-end loss ("You lose any remaining insight at the end of
+    // the encounter.") does not run. Say so for each generating hero; the table adjusts manually.
+    for (const id of encounter.heroParticipantIds ?? []) {
+      const hero = await ctx.db.get(id);
+      const pool = hero?.liveState?.heroicResource;
+      if (!hero || !pool || pool.current === 0) continue;
+      const profile = generationProfile(baselineOf(hero.derivedBaseline));
+      if (!profile) continue;
+      await consequence(
+        ctx,
+        scope,
+        encounter,
+        'combat.resource-kept',
+        `${hero.authored.name} keeps ${pool.current} ${pool.name}: voiding combat skips the encounter-end loss. If the encounter is over, set it to 0 with /adjust heroic-resource.`,
+        {
+          characterId: hero._id,
+          resource: pool.name,
+          current: pool.current,
+          sourcePath: profile.encounterEnd.sourcePath,
+        },
+      );
+    }
+  }
   await archive(ctx, scope, encounter, 'voided');
 }
 

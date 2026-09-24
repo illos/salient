@@ -15,6 +15,7 @@ import type { ReadCtx } from './access';
 import {
   claimWindow,
   generationProfile,
+  triggerAmount,
   type GenerationProfile,
   type ResourceTrigger,
 } from '../../shared/resolve/heroicResourceGeneration';
@@ -43,32 +44,50 @@ const LIMIT_TEXT: Record<ResourceTrigger['limit'], string> = {
   encounter: 'this encounter',
 };
 
-function claimed(
-  claims: ResourceClaim[] | undefined,
-  trigger: ResourceTrigger,
-  encounter: Doc<'encounters'>,
-): boolean {
-  const window = claimWindow(trigger.limit, {
-    round: encounter.round ?? 0,
-    turnId: encounter.activeTurnId ?? undefined,
-  });
-  return (claims ?? []).some(
-    claim =>
-      claim.triggerId === trigger.id &&
-      claim.encounterId === encounter._id &&
-      claim.round === window.round &&
-      claim.turnId === window.turnId,
-  );
-}
-
-/** Why no trigger of this hero can be claimed now, or null. */
-function blocked(character: Doc<'characters'>, encounter: Doc<'encounters'> | null): string | null {
+/** Why this hero can't claim anything now, or null. */
+function blocked(
+  character: Doc<'characters'>,
+  profile: GenerationProfile,
+  encounter: Doc<'encounters'> | null,
+): string | null {
   if (!encounter) return 'Only during combat: there is no gain outside of combat.';
   if (encounter.phase === 'closeout') return 'Combat has ended.';
   if (!(encounter.heroParticipantIds ?? []).includes(character._id))
     return `${character.authored.name} is not in this combat.`;
   if ((encounter.round ?? 0) < 1) return 'Combat rounds have not started yet.';
+  if (character.liveState?.heroicResource.name.toLowerCase() !== profile.resource)
+    return `${character.authored.name}'s pool is not ${profile.resource}; adjust it manually.`;
   return null;
+}
+
+/**
+ * Whether one trigger can be claimed now: the reason it can't, or the claim window that enforces
+ * its limit and the sourced amount at the hero's level.
+ */
+function claimState(
+  character: Doc<'characters'>,
+  profile: GenerationProfile,
+  trigger: ResourceTrigger,
+  encounter: Doc<'encounters'> | null,
+) {
+  const clause = triggerAmount(trigger, baselineOf(character.derivedBaseline)!.level.value);
+  const reason = blocked(character, profile, encounter);
+  if (reason) return { reason, clause } as const;
+  const window = claimWindow(trigger.limit, {
+    round: encounter!.round ?? 0,
+    turnId: encounter!.activeTurnId ?? undefined,
+  });
+  if (!window) return { reason: 'No turn is active.', clause } as const;
+  const taken = (character.liveState?.resourceClaims ?? []).some(
+    claim =>
+      claim.triggerId === trigger.id &&
+      claim.encounterId === encounter!._id &&
+      claim.round === window.round &&
+      claim.turnId === window.turnId,
+  );
+  return taken
+    ? ({ reason: `Already claimed ${LIMIT_TEXT[trigger.limit]}.`, clause } as const)
+    : ({ reason: null, clause, window } as const);
 }
 
 /** The hero's enabled class triggers and whether each can be claimed now (for `abilities:sheet`). */
@@ -77,30 +96,24 @@ export async function resourceTriggers(
   campaign: Doc<'campaigns'>,
   character: Doc<'characters'>,
 ): Promise<TriggerAvailability[]> {
-  const profile = generationProfile(baselineOf(character.derivedBaseline)?.class.value);
+  const profile = generationProfile(baselineOf(character.derivedBaseline));
   const live = character.liveState;
   if (!profile || !live) return [];
   const encounter = await committedEncounter(ctx, campaign);
-  const reason = blocked(character, encounter);
-  return profile.triggers.map(trigger => ({
-    id: trigger.id,
-    label: trigger.label,
-    amount: trigger.amount,
-    resource: live.heroicResource.name,
-    limit: trigger.limit,
-    sourcePath: trigger.sourcePath,
-    quote: trigger.quote,
-    confirmation: trigger.confirmation,
-    unavailable:
-      reason ??
-      (claimed(live.resourceClaims, trigger, encounter!)
-        ? `Already claimed ${LIMIT_TEXT[trigger.limit]}.`
-        : null),
-  }));
-}
-
-function findTrigger(profile: GenerationProfile | undefined, id: string) {
-  return profile?.triggers.find(trigger => trigger.id === id);
+  return profile.triggers.map(trigger => {
+    const state = claimState(character, profile, trigger, encounter);
+    return {
+      id: trigger.id,
+      label: trigger.label,
+      amount: state.clause.amount,
+      resource: live.heroicResource.name,
+      limit: trigger.limit,
+      sourcePath: state.clause.sourcePath,
+      quote: state.clause.quote,
+      confirmation: trigger.confirmation,
+      unavailable: state.reason,
+    };
+  });
 }
 
 const resourceClaim: OperationDefinition = {
@@ -122,8 +135,8 @@ const resourceClaim: OperationDefinition = {
     if (!character || character.campaignId !== context.campaign._id)
       throw new ConvexError('That hero is not at this table.');
     const live = requireHeroLive(character);
-    const profile = generationProfile(baselineOf(character.derivedBaseline)?.class.value);
-    const trigger = findTrigger(profile, String(args.trigger));
+    const profile = generationProfile(baselineOf(character.derivedBaseline));
+    const trigger = profile?.triggers.find(t => t.id === String(args.trigger));
     if (!profile || !trigger)
       throw new ConvexError(
         `${character.authored.name} has no heroic-resource trigger "${String(args.trigger)}"${
@@ -133,38 +146,36 @@ const resourceClaim: OperationDefinition = {
         }.`,
       );
     const encounter = await committedEncounter(ctx, context.campaign);
-    const reason = blocked(character, encounter);
-    if (reason) throw new ConvexError(reason);
-    if (claimed(live.resourceClaims, trigger, encounter!))
+    const state = claimState(character, profile, trigger, encounter);
+    if (state.reason !== null)
       throw new ConvexError(
-        `${character.authored.name} already claimed "${trigger.label}" ${LIMIT_TEXT[trigger.limit]}.`,
+        state.reason.startsWith('Already claimed')
+          ? `${character.authored.name} already claimed "${trigger.label}" ${LIMIT_TEXT[trigger.limit]}.`
+          : state.reason,
       );
     const pool = live.heroicResource;
     const before = pool.current;
-    const after = before + trigger.amount;
-    const window = claimWindow(trigger.limit, {
-      round: encounter!.round ?? 0,
-      turnId: encounter!.activeTurnId ?? undefined,
-    });
+    const amount = state.clause.amount;
+    const after = before + amount;
     return {
       kind: 'resource.claimed',
-      description: `${character.authored.name}: ${trigger.label} — +${trigger.amount} ${pool.name} (${before} → ${after}).`,
+      description: `${character.authored.name}: ${trigger.label} — +${amount} ${pool.name} (${before} → ${after}).`,
       data: {
         characterId: character._id,
         triggerId: trigger.id,
         resource: pool.name,
         before,
-        delta: trigger.amount,
+        delta: amount,
         after,
         round: encounter!.round ?? 0,
-        sourcePath: trigger.sourcePath,
-        quote: trigger.quote,
+        sourcePath: state.clause.sourcePath,
+        quote: state.clause.quote,
       },
       commit: async (mctx, scope) => {
         const claim: ResourceClaim = {
           triggerId: trigger.id,
           encounterId: encounter!._id,
-          ...window,
+          ...state.window,
           eventId: scope.eventId,
         };
         await journalPatch(mctx, scope, 'characters', character._id, {

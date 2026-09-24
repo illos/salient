@@ -261,7 +261,7 @@ async function fireHeroicResource(
 }> {
   const hero = await ctx.db.get(characterId as Id<'characters'>);
   const live = hero?.liveState;
-  const profile = generationProfile(baselineOf(hero?.derivedBaseline)?.class.value);
+  const profile = generationProfile(baselineOf(hero?.derivedBaseline));
   const label = firing.registration.source.label;
   if (!hero || !live || !profile || hero.campaignId !== firing.encounter.campaignId)
     return {

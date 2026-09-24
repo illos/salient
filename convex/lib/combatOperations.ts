@@ -477,7 +477,7 @@ const combatCommit: OperationDefinition = {
         for (const hero of heroes) {
           const characterId = hero.actor.id as Id<'characters'>;
           const record = await mctx.db.get(characterId);
-          const profile = generationProfile(baselineOf(record?.derivedBaseline)?.class.value);
+          const profile = generationProfile(baselineOf(record?.derivedBaseline));
           if (!record?.liveState || !profile) continue;
           const resource = record.liveState.heroicResource.name;
           const work = (step: 'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss') =>

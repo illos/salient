@@ -17,7 +17,7 @@ export const SHADOW_LATER_ACTIONS = [
     quote:
       'The first time each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that you deal damage incorporating 1 or more [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), you gain 2 insight instead of 1.',
     activationCondition:
-      'First damage incorporating one or more surges this combat round: gain 2 Insight INSTEAD OF 1. Confirm eligibility and adjust the resource manually, once per round.',
+      'First damage incorporating one or more surges this combat round: gain 2 Insight INSTEAD OF 1. Claim it with the Dealt damage with surges resource trigger (/resource claim trigger=shadow-surge-damage), which applies 2 from level 4 once per round; do not also adjust the resource by hand.',
   },
   {
     name: 'Trail of Cinders: Teleport',

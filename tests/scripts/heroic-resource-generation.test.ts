@@ -4,7 +4,12 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
 import { vendorPath } from '../../scripts/lib/vendor.ts';
-import { GENERATION_PROFILES } from '../../shared/resolve/heroicResourceGeneration.ts';
+import {
+  GENERATION_PROFILES,
+  claimWindow,
+  generationProfile,
+  triggerAmount,
+} from '../../shared/resolve/heroicResourceGeneration.ts';
 
 const plain = (markdown: string) =>
   markdown.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/\s+/g, ' ');
@@ -16,6 +21,7 @@ test('every profile clause is quoted verbatim from its pinned source', () => {
       profile.turnStart,
       profile.encounterEnd,
       ...profile.triggers,
+      ...profile.triggers.flatMap(trigger => trigger.levelAmounts ?? []),
     ];
     for (const clause of clauses) {
       expect(clause.sourcePath, profile.className).toMatch(/^vendor\/steel-compendium\/en\//);
@@ -44,4 +50,23 @@ test('the Shadow profile matches its source amounts', () => {
     encounterEnd: { kind: 'lose' },
     triggers: [{ id: 'shadow-surge-damage', amount: 1, limit: 'round' }],
   });
+});
+
+test('amounts follow later features and profiles stop at their verified level', () => {
+  const shadow = GENERATION_PROFILES.find(p => p.className === 'Shadow')!;
+  const trigger = shadow.triggers[0]!;
+  expect(triggerAmount(trigger, 3).amount).toBe(1);
+  expect(triggerAmount(trigger, 4)).toMatchObject({
+    amount: 2,
+    sourcePath: 'vendor/steel-compendium/en/unified/md/feature/shadow/level-4/surge-of-insight.md',
+  });
+  const baseline = (level: number) =>
+    ({
+      class: { value: 'Shadow' },
+      level: { value: level },
+    }) as Parameters<typeof generationProfile>[0];
+  expect(generationProfile(baseline(6))).toBe(shadow);
+  expect(generationProfile(baseline(7))).toBeUndefined();
+  expect(claimWindow('turn', { round: 2 })).toBeNull();
+  expect(claimWindow('round', { round: 2 })).toEqual({ round: 2 });
 });

@@ -21,7 +21,8 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
   - the class's triggered gains, each with a limit (round, turn or encounter);
   - the pinned source path and quote for every clause.
 
-  A class with no profile keeps fully manual generation. A class with a profile is keyed by class,
+  A class with no profile keeps fully manual generation, and so does a hero above the profile's
+  `verifiedThroughLevel`. A trigger's `levelAmounts` apply later features that change its amount. A class with a profile is keyed by class,
   never by resource name, because ferocity and essence each belong to two classes.
 - **Clock work.** `combat.commit` registers three pieces of work per hero participant that has a
   profile: the combat-start grant, the turn-start gain on that hero's turn, and the encounter-end
@@ -46,7 +47,11 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
   - +Victories at combat start.
   - 1d3 at the start of each of the Shadow's turns.
   - Claim +1 insight for "the first time each combat round that you deal damage incorporating 1 or
-    more surges". This is a table claim because surge spending is not recorded.
+    more surges". This is a table claim because surge spending is not recorded. From level 4 the claim
+    is +2 (`feature/shadow/level-4/surge-of-insight.md`: "you gain 2 insight instead of 1"). The
+    level-4 manual row points at the claim so it isn't added twice.
+  - Verified through level 6. `feature/shadow/level-7/keen-insight.md` changes the turn-start gain, so
+    a Shadow of level 7 or higher stays manual.
   - Lose all insight at encounter end.
   - The edge discount is a cost rule and is out of scope.
 
@@ -56,8 +61,11 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
 - Non-combat "stressful situations tracked in combat rounds". These stay manual until the Director
   has a control for them.
 - Heroes admitted after `combat.commit`.
-- `combat.end` followed by `combat.void`: neither fires combat-end, exactly as with Malice. Finishing
-  through closeout does.
+- **Voiding combat (labelled interpretation, [Q-RES-1](../rules-questions-for-user.md)).** The
+  encounter-end loss runs on `combat.finish`, as the Malice loss does. A reset-mode void restores the
+  pre-combat pool. A keep-mode void keeps the pool and logs `combat.resource-kept` for each
+  generating hero with a nonzero pool. The alternatives were to apply the loss on a keep void, or to
+  ask the Director.
 
 ## Acceptance
 
@@ -89,3 +97,13 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
     so does the Shadow Eviscerate file `potency-conditions` (8/8).
   - Void keep mode keeps the pool, as it does Malice. Claims are keyed by encounter, so stale ones
     never block a new combat.
+- Independent review ([audit](audits/V120-rules-review.md)): changes required, R1–R5. Fixes:
+  - **R1:** the claim amount follows the level (+2 from level 4), and the manual row points at the
+    claim.
+  - **R2:** `verifiedThroughLevel` was added; the Shadow's is 6.
+  - **R3:** Q-RES-1 is labelled, and the keep-void note was added.
+  - **R4:** a `turn` limit with no active turn is unavailable.
+  - **R5:** a claim checks that the pool matches the profile.
+
+  Tests were added: the level amount, the level ceiling, the turn window and the keep-void note. The
+  focused files pass (2/2 and 4/4); `tsc` and eslint are clean.

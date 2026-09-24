@@ -930,3 +930,24 @@ Alternatives:
 
 Recommendation: keep the literal rule, since it is the only printed statement, unless you want (b)
 for monsters whose signature grabs would never land.
+
+## Q-RES-1: does voiding combat end the encounter for heroic resources?
+
+Every class resource text ends with a variant of "You lose any remaining insight at the end of the
+encounter." (`feature/shadow/level-1/insight.md`). Salient ends combat in one of two ways:
+- finishing it through closeout (`combat.finish`);
+- voiding it (`combat.void`, or closing the session), in reset mode (restore the start snapshot) or
+  keep mode (keep the live values).
+
+Current behaviour (V120, labelled interpretation):
+- The encounter-end loss runs on `combat.finish`, as the common Malice loss does.
+- Reset mode restores the pre-combat pool.
+- Keep mode leaves the pool and logs a `combat.resource-kept` note for each generating hero, naming
+  the amount kept.
+
+Alternatives considered:
+- **(a)** Keep mode applies the loss, treating a void as the end of the encounter.
+- **(b)** Keep mode asks the Director whether the encounter is over.
+
+Recommendation: keep the current behaviour. A void is the "undo this combat" path, and finishing is
+the rules path.

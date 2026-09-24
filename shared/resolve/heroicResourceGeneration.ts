@@ -9,7 +9,7 @@
  * slice with an independent rules review; the source ledgers are in docs/build/evidence/V120/.
  * Every clause carries its pinned Compendium path and the quoted sentence (link markup removed).
  */
-import type { HeroicResourceName } from '../contracts/characterEvaluation.ts';
+import type { DerivedBaseline, HeroicResourceName } from '../contracts/characterEvaluation.ts';
 
 export interface SourcedClause {
   /** Repo-relative pinned Compendium path. */
@@ -30,7 +30,10 @@ export interface ResourceTrigger extends SourcedClause {
   id: string;
   /** Short label for the claim control. */
   label: string;
+  /** The amount at the lowest level; `levelAmounts` replace it from their level on. */
   amount: number;
+  /** Later features that change the amount ("you gain 2 insight instead of 1"), ascending. */
+  levelAmounts?: ({ fromLevel: number; amount: number } & SourcedClause)[];
   limit: TriggerLimit;
   /** Why the table confirms it: what the app cannot observe. */
   confirmation: string;
@@ -39,6 +42,11 @@ export interface ResourceTrigger extends SourcedClause {
 export interface GenerationProfile {
   /** Evaluated `baseline.class.value`. */
   className: string;
+  /**
+   * The highest level whose features were checked against this profile. A hero above it keeps
+   * manual generation: a later feature (for example a larger turn-start gain) is not modelled.
+   */
+  verifiedThroughLevel: number;
   resource: HeroicResourceName;
   /** "At the start of a combat encounter … you gain <resource> equal to your Victories." */
   combatStart: { kind: 'victories' } & SourcedClause;
@@ -54,6 +62,8 @@ const SHADOW_INSIGHT = 'vendor/steel-compendium/en/unified/md/feature/shadow/lev
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
   {
     className: 'Shadow',
+    // feature/shadow/level-7/keen-insight.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
     resource: 'insight',
     combatStart: {
       kind: 'victories',
@@ -77,6 +87,16 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
         id: 'shadow-surge-damage',
         label: 'Dealt damage with surges',
         amount: 1,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 2,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/shadow/level-4/surge-of-insight.md',
+            quote:
+              'The first time each combat round that you deal damage incorporating 1 or more surges, you gain 2 insight instead of 1.',
+          },
+        ],
         limit: 'round',
         sourcePath: SHADOW_INSIGHT,
         quote:
@@ -87,20 +107,43 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
   },
 ];
 
-export function generationProfile(className: string | undefined): GenerationProfile | undefined {
-  return className ? GENERATION_PROFILES.find(p => p.className === className) : undefined;
+/**
+ * The profile that applies to an evaluated hero: its class has one and its level is within the
+ * profile's verified range. Otherwise generation stays manual.
+ */
+export function generationProfile(
+  baseline: Pick<DerivedBaseline, 'class' | 'level'> | null | undefined,
+): GenerationProfile | undefined {
+  const className = baseline?.class.value;
+  const level = baseline?.level.value;
+  const profile = className ? GENERATION_PROFILES.find(p => p.className === className) : undefined;
+  return profile && level !== undefined && level >= 1 && level <= profile.verifiedThroughLevel
+    ? profile
+    : undefined;
 }
 
-/** The claim key that enforces a trigger's limit within one encounter. */
+/** A trigger's amount and the clause it comes from at the hero's level. */
+export function triggerAmount(
+  trigger: ResourceTrigger,
+  level: number,
+): SourcedClause & { amount: number } {
+  const later = (trigger.levelAmounts ?? []).filter(entry => entry.fromLevel <= level).at(-1);
+  return later ?? { amount: trigger.amount, sourcePath: trigger.sourcePath, quote: trigger.quote };
+}
+
+/**
+ * The claim key that enforces a trigger's limit within one encounter, or null when the limit can't
+ * be placed (a per-turn trigger while no turn is active).
+ */
 export function claimWindow(
   limit: TriggerLimit,
   at: { round: number; turnId?: string },
-): { round?: number; turnId?: string } {
+): { round?: number; turnId?: string } | null {
   switch (limit) {
     case 'round':
       return { round: at.round };
     case 'turn':
-      return { turnId: at.turnId ?? `round-${at.round}` };
+      return at.turnId ? { turnId: at.turnId } : null;
     case 'encounter':
       return {};
   }

@@ -120,3 +120,85 @@ test('V120: a Shadow gains insight from the clock and a claimed trigger, and los
     (await clockEvents()).map(e => (e.payload as { data: { step: string } }).data.step),
   ).toEqual(['combat-start-grant', 'turn-start-gain', 'encounter-end-loss']);
 });
+
+// feature/shadow/level-4/surge-of-insight.md: "you gain 2 insight instead of 1". Level 7
+// (feature/shadow/level-7/keen-insight.md) changes the turn-start gain, which the profile does not
+// model, so a level-7 Shadow keeps manual generation. The evaluated level is set directly here:
+// the engine reads only `baseline.level`, and building level-4 and level-7 Shadows is covered by
+// the V108 ledgers. Q-RES-1: a keep-mode void skips the loss and says so.
+test('V120: the claim amount follows the level, the profile stops at its verified level, and a void keeps the pool with a note', async () => {
+  const t = backend();
+  const f = await table(t);
+  await t.action(internal.content.reseed, {});
+  const admit = (name: string) =>
+    admitHero(
+      t,
+      f.player,
+      f.director,
+      f.campaignId,
+      name,
+      draftSelectionsFrom(
+        {
+          ...(shadowLedger.witnesses[0]!.selections as EvaluationInput['selections']),
+          'details.name': name,
+        },
+        definitions,
+      ),
+    );
+  const setLevel = (id: Id<'characters'>, level: number) =>
+    t.run(async ctx => {
+      const hero = (await ctx.db.get(id))!;
+      const baseline = hero.derivedBaseline as { level: { value: number } };
+      await ctx.db.patch(id, {
+        derivedBaseline: { ...baseline, level: { ...baseline.level, value: level } },
+      });
+    });
+  const four = await admit('Umbra');
+  const seven = await admit('Gloam');
+  await setLevel(four, 4);
+  await setLevel(seven, 7);
+  const command = (text: string, player = false) =>
+    (player ? f.player : f.director).client.mutation(api.commands.submit, {
+      campaignId: f.campaignId,
+      commandId: `resource-level-${++sequence}`,
+      text,
+    });
+  const pool = async (id: Id<'characters'>) =>
+    (await t.run(ctx => ctx.db.get(id)))!.liveState!.heroicResource.current;
+  const sheet = (id: Id<'characters'>, name: string) =>
+    f.player.client.query(api.abilities.sheet, {
+      campaignId: f.campaignId,
+      actor: { kind: 'character', id, name },
+    });
+  expect((await sheet(seven, 'Gloam')).resourceTriggers).toEqual([]);
+  await command('/combat start');
+  await command('/combat commit');
+  await command('/combat first side=heroes');
+  const registered = (await t.run(ctx => ctx.db.query('clockRegistrations').take(50)))
+    .filter(r => (r.work as { kind: string }).kind === 'heroic-resource')
+    .map(r => (r.work as { characterId: string }).characterId);
+  expect(registered).toContain(four);
+  expect(registered).not.toContain(seven);
+  expect((await sheet(four, 'Umbra')).resourceTriggers).toMatchObject([
+    {
+      amount: 2,
+      sourcePath:
+        'vendor/steel-compendium/en/unified/md/feature/shadow/level-4/surge-of-insight.md',
+      unavailable: null,
+    },
+  ]);
+  await command(`@{character:${four}} /resource claim trigger=shadow-surge-damage`, true);
+  expect(await pool(four)).toBe(2);
+  await expect(
+    command(`@{character:${seven}} /resource claim trigger=shadow-surge-damage`, true),
+  ).rejects.toThrow(/no heroic-resource trigger/);
+
+  await command('/combat void mode=keep');
+  expect(await pool(four)).toBe(2);
+  const kept = (await t.run(ctx => ctx.db.query('events').take(500))).filter(
+    e => e.kind === 'combat.resource-kept',
+  );
+  expect(kept.map(e => (e.payload as { data: { characterId: string } }).data.characterId)).toEqual([
+    four,
+  ]);
+});
