@@ -74,6 +74,8 @@ test('pattern admission: whole sections, bound durations and admitted table work
   for (const text of [
     // A duration the engine does not bind.
     `Until the end of the day, ${NEMESIS_BODY}`,
+    // Q-EFFECT-1 is open: the owner's "end of your next turn" stays manual until the user rules.
+    `Until the end of your next turn, ${NEMESIS_BODY}`,
     // Changed or added table work.
     `Until the start of your next turn, ${NEMESIS_BODY.replace('your speed', 'twice your speed')}`,
     `${NEMESIS} Each enemy is frightened.`,

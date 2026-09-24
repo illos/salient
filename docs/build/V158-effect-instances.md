@@ -126,7 +126,7 @@ are later slices (design section 8, items 2–5).
     Soul Burn, Incinerate, Iron, Inertia Soak, Fling Through Time, Reflector Field): out of scope.
   - Already compiled lasting riders (Behold a Shield of Faith!, Sacrificial Offer, Raider's Awe,
     the taunt riders) keep their V109/V152 behaviour and create no instance.
-- Flip list: the regenerated V72 report moves exactly Relentless Nemesis to compiled, 150 → 151
+- Flip list: the regenerated V72 report moves exactly Relentless Nemesis to compiled, 154 → 155
   reachable (7 without a power roll, unchanged). No foe ability changes. The V64 audit regenerates
   unchanged (classify is untouched). The live inventory test names the addition.
 - Deviations and choices:

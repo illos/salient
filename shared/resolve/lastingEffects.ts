@@ -46,12 +46,9 @@ const DURATIONS: readonly {
     duration: { kind: 'start-of-next-turn', anchor: 'owner' },
     endsWhen: [],
   },
-  // feature/ability/elementalist/level-3/swarm-of-spirits.md.
-  {
-    phrase: 'the end of your next turn',
-    duration: { kind: 'end-of-next-turn', anchor: 'owner' },
-    endsWhen: [],
-  },
+  // "the end of your next turn" (feature/ability/elementalist/level-3/swarm-of-spirits.md) is not
+  // bound: whether it lasts through the user's following turn when used on their own turn is open
+  // (Q-EFFECT-1, docs/rules-questions-for-user.md). Such sentences stay manual until the user rules.
   // kit/battlemind.md (Unmooring); kit/shining-armor.md ("until the end of their next turn").
   {
     phrase: "the end of the target's next turn",

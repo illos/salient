@@ -321,7 +321,7 @@ test('V158: lasting instructions are stored, listed, expire at their boundaries 
   });
 
   // 8. `owner-dying`: the damage writer ends it when Nyx reaches 0 Stamina; others remain.
-  // The goblin is defeated by now and leaves at cleanup, so these rest on Thorn.
+  // Synthetic instances for durations no admitted sentence prints yet.
   const encounterLong = await synthetic({
     owner: nyxParty,
     subject: thornParty,
