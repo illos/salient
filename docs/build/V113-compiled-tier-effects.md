@@ -96,8 +96,8 @@ choices, compounds, or prose Effects.
 
 | Ability | Source | Expected (source plus characteristic or kit) | Proof |
 | --- | --- | --- | --- |
-| Holy Lash | `conduit/level-1/holy-lash.md` | 3/5/8 + I (I 2 → 5/7/10) holy; vertical pull 2/3/4 | headless `tier-effects`; pure |
-| Staggering Curse | `conduit/level-1/staggering-curse.md` | 5/7/10 holy; slide 1/2/3 | headless |
+| Holy Lash | `conduit/level-1/holy-lash.md` | 3/5/8 + I (I 2) + 1 Prayer of Destruction (magic) → 6/8/11 holy; vertical pull 2/3/4 | headless `tier-effects`; pure |
+| Staggering Curse | `conduit/level-1/staggering-curse.md` | 6/8/11 holy (with Prayer of Destruction); slide 1/2/3 | headless |
 | Magnetic Strike | `null/level-1/magnetic-strike.md` | 5/8/11 + A (A 2 → 7/10/13) psychic; vertical pull 1/2/3 | headless |
 | Unbalancing Attack | `kit/vuken.md` | 4/7/9 + M (6/9/11); A < WEAK/AVERAGE/STRONG prone (no duration) | headless |
 | Net and Stab | `kit/retiarius.md` | 4/6/8 + M or A (6/8/10); slowed/restrained (EoT) expiring at the target's own turn end | headless; pure |
@@ -173,3 +173,7 @@ choices, compounds, or prose Effects.
     - The STATUS row order is fixed.
   - Remaining observations (manual/unknown-source taunts, objects receiving movement instructions,
     the unused `imposedDuringTurnId`) are recorded in the audit.
+- TESTER `test-V113-d748e47-2`: `tier-effects` failed. Holy Lash rolled 6/8/11. The engine was
+  right: the Conduit witness's Prayer of Destruction adds +1 rolled damage to magic abilities
+  (`feature/conduit/level-1/prayer-of-destruction.md`), and both conduit abilities are Magic.
+  The journey's expected values are corrected.

@@ -48,10 +48,12 @@ type Result = { compiled: PublicCompiledResult; targets: { outcome: TargetRollOu
  *   A < STRONG restrained (EoT).
  * - kit/vuken.md Unbalancing Attack: 4/7/9 + M; A < WEAK/AVERAGE/STRONG prone.
  * Characteristics come from the V109 witness builds: Conduit I 2, Null A 2, Fury M 2 / A 2.
+ * The Conduit witness has Prayer of Destruction (feature/conduit/level-1/prayer-of-destruction.md):
+ * +1 rolled damage with magic abilities, so both Magic conduit abilities deal 3/5/8 + I + 1.
  */
 const tiers = {
-  holyLash: { damage: [5, 7, 10], movement: 'pull', vertical: true, distance: [2, 3, 4] },
-  staggeringCurse: { damage: [5, 7, 10], movement: 'slide', vertical: false, distance: [1, 2, 3] },
+  holyLash: { damage: [6, 8, 11], movement: 'pull', vertical: true, distance: [2, 3, 4] },
+  staggeringCurse: { damage: [6, 8, 11], movement: 'slide', vertical: false, distance: [1, 2, 3] },
   magneticStrike: { damage: [7, 10, 13], movement: 'pull', vertical: true, distance: [1, 2, 3] },
 };
 
