@@ -111,6 +111,8 @@ export interface CompiledConditionOutcome extends EffectIdentity {
   targetScore?: number;
   condition: ConditionNode['condition'];
   duration: ConditionNode['duration'];
+  /** V153: shared by the conditions of one compound clause; they take one saving throw. */
+  group?: string;
   requirements: string[];
 }
 
@@ -135,6 +137,7 @@ function conditionOutcome(
     thresholdSource: node.threshold,
     condition: node.condition,
     duration: node.duration,
+    ...(node.group !== undefined ? { group: node.group } : {}),
   };
   const threshold = node.threshold;
   if (eligible && target.conditionImmunities?.includes(node.condition))
@@ -457,7 +460,13 @@ export function resolveCompiledAbility(
                 node.condition !== 'grabbed') ||
               (node.condition === 'grabbed' && node.duration === 'eot') ||
               (node.threshold.kind === 'always') !== (node.characteristic === undefined) ||
-              (node.threshold.kind === 'printed' && !Number.isSafeInteger(node.threshold.value))),
+              (node.threshold.kind === 'printed' && !Number.isSafeInteger(node.threshold.value)) ||
+              // V153: a compound member carries its clause's id, never a bare or grab duration.
+              (node.group !== undefined &&
+                (node.duration === 'none' ||
+                  node.condition === 'grabbed' ||
+                  node.condition === 'prone' ||
+                  !node.id.startsWith(`${node.group}~`)))),
         ) ||
         nodes.some(node => node.kind === 'unsupported' && node.dependency !== 'after-damage') ||
         nodes.some(

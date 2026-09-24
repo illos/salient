@@ -10,7 +10,9 @@ import {
   blocksFromMarkdown,
   classify,
   forcedMovementExpression,
+  tierCompoundConditionExpression,
   tierConditionExpression,
+  tierConditionMovementExpression,
   type Characteristic,
   type ConditionDuration,
   type ConditionThreshold,
@@ -53,6 +55,11 @@ export interface ConditionNode extends NodeSource {
   condition: import('../contracts/liveState.ts').ConditionId;
   duration: ConditionDuration;
   after: string;
+  /**
+   * V153: the node id shared by the conditions of one compound clause ("dazed and slowed (save
+   * ends)"). They resolve against one potency and are removed by one saving throw.
+   */
+  group?: string;
 }
 /** Forced movement. V26 push nodes have no `movement`; V113 adds pull, slide and vertical. */
 export interface PushNode extends NodeSource {
@@ -238,9 +245,12 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       const nodes = tiers[tierIndex]!;
       const tierLocator = `${locator}:tier${tierIndex + 1}`;
       const clauses = text.split(';');
+      // V153: whether every clause so far was damage then supported push/condition work.
+      let intact = true;
       clauses.forEach((raw, ordinal) => {
         const clause = raw.trim();
         if (!clause) {
+          intact = false;
           diagnose('empty-clause', tierLocator, raw, 'A missing clause cannot be interpreted.');
           return;
         }
@@ -259,13 +269,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         // V113: tier effects follow the damage in printed order (rule/dice/ability-roll.md), so a
         // run of supported push/condition clauses directly after the damage clause is admitted.
         const damage = nodes[0]?.kind === 'damage' ? nodes[0] : undefined;
-        const supportedRun =
-          ordinal >= 1 &&
-          damage !== undefined &&
-          nodes.length === ordinal &&
-          nodes.every((node, i) =>
-            i === 0 ? node.kind === 'damage' : node.kind === 'push' || node.kind === 'condition',
-          );
+        const supportedRun = ordinal >= 1 && damage !== undefined && intact;
         const forced = forcedMovementExpression(clause);
         if (supportedRun && forced) {
           nodes.push({
@@ -288,6 +292,45 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           });
           return;
         }
+        // V153: one node per condition, each with its own id so occurrences stay distinct.
+        const compound = tierCompoundConditionExpression(clause);
+        if (supportedRun && compound) {
+          const base = sourceNode(envelope, tierLocator, ordinal, clause);
+          for (const name of compound.conditions)
+            nodes.push({
+              ...base,
+              id: `${base.id}~${name}`,
+              kind: 'condition',
+              ...(compound.characteristic ? { characteristic: compound.characteristic } : {}),
+              threshold: compound.threshold,
+              condition: name,
+              duration: compound.duration,
+              after: damage.id,
+              group: base.id,
+            });
+          return;
+        }
+        const both = tierConditionMovementExpression(clause);
+        if (supportedRun && both) {
+          const base = sourceNode(envelope, tierLocator, ordinal, clause);
+          nodes.push({
+            ...base,
+            id: `${base.id}~condition`,
+            kind: 'condition',
+            ...both.condition,
+            after: damage.id,
+          });
+          nodes.push({
+            ...base,
+            id: `${base.id}~movement`,
+            kind: 'push',
+            distance: both.movement.distance,
+            ...(both.movement.movement !== 'push' ? { movement: both.movement.movement } : {}),
+            ...(both.movement.vertical ? { vertical: true as const } : {}),
+            after: damage.id,
+          });
+          return;
+        }
         const typed = typeTierClause(
           clause,
           tierLocator,
@@ -295,6 +338,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           clauses.length === 2,
         );
         const bounded = typed?.type === 'potency-condition' && typed.bounded === true;
+        intact = false;
         nodes.push(
           unsupported(
             tierLocator,

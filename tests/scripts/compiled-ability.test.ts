@@ -630,13 +630,14 @@ describe('V88 bounded potency conditions', () => {
 
   // V113 admits bare prone, EoT and push/condition runs (see tests/scripts/tier-effects.test.ts).
   // V119 admits a bare grab (condition/grabbed.md); an EoT grab stays unsupported.
+  // V153 admits "M < 1 dazed and slowed (save ends)" and "taunted (EoT), slide 1"
+  // (tests/scripts/compound-conditions.test.ts); a potency before condition and movement stays out.
   it.each([
     'A < 2 grabbed (EoT)',
     'M < 1 slowed',
     "A < STRONG, prone and can't stand (save ends)",
-    'M < 1 dazed and slowed (save ends)',
     'M < 1 bleeding (save ends) then shift 1',
-    'taunted (EoT), slide 1',
+    'M < 1 slowed (save ends), slide 1',
     'M < 1 vertical push 3',
   ])('keeps unsafe remainder %s unsupported', remainder => {
     const input = warrior('Bury the Point');

@@ -12,13 +12,13 @@
     },
     "foe-ability": {
       "total": 1158,
-      "supported": 51,
-      "manual": 1107
+      "supported": 58,
+      "manual": 1100
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 63,
-      "manual": 308
+      "supported": 66,
+      "manual": 305
     },
     "kit-signature": {
       "total": 25,
@@ -10070,13 +10070,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58#block:0:tier3:1:7a31ec1b4364937d",
+            "id": "foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58#block:0:tier3:1:7a31ec1b4364937d~slowed",
             "locator": "block:0:tier3:1",
             "clause": "M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N slowed and weakened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58#block:0:tier3:0:33c13bcd423042de",
+            "group": "foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58#block:0:tier3:1:7a31ec1b4364937d"
+          },
+          {
+            "id": "foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58#block:0:tier3:1:7a31ec1b4364937d~weakened",
+            "locator": "block:0:tier3:1",
+            "clause": "M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58#block:0:tier3:0:33c13bcd423042de",
+            "group": "foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58#block:0:tier3:1:7a31ec1b4364937d"
           }
         ]
       ],
@@ -10092,12 +10113,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -34441,13 +34456,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier1:1:95f163278039c75f",
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier1:1:95f163278039c75f~bleeding",
             "locator": "block:0:tier1:1",
             "clause": "M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM bleeding and weakened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier1:0:efe755158639bfc6",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier1:1:95f163278039c75f"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier1:1:95f163278039c75f~weakened",
+            "locator": "block:0:tier1:1",
+            "clause": "M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier1:0:efe755158639bfc6",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier1:1:95f163278039c75f"
           }
         ],
         [
@@ -34464,13 +34500,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier2:1:d0248962899ae302",
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier2:1:d0248962899ae302~bleeding",
             "locator": "block:0:tier2:1",
             "clause": "M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM bleeding and weakened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier2:0:19deb37cda1175f0",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier2:1:d0248962899ae302"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier2:1:d0248962899ae302~weakened",
+            "locator": "block:0:tier2:1",
+            "clause": "M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier2:0:19deb37cda1175f0",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier2:1:d0248962899ae302"
           }
         ],
         [
@@ -34487,13 +34544,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier3:1:9b00b7d33701aa9a",
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier3:1:9b00b7d33701aa9a~bleeding",
             "locator": "block:0:tier3:1",
             "clause": "M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM bleeding and weakened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier3:0:bb58574b595d13ef",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier3:1:9b00b7d33701aa9a"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier3:1:9b00b7d33701aa9a~weakened",
+            "locator": "block:0:tier3:1",
+            "clause": "M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier3:0:bb58574b595d13ef",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood#block:0:tier3:1:9b00b7d33701aa9a"
           }
         ]
       ],
@@ -34509,24 +34587,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -36693,7 +36753,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/death-death.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -36709,13 +36769,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:1:065c6fd8af6850ec",
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:1:065c6fd8af6850ec~dazed",
             "locator": "block:0:tier1:1",
             "clause": "P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < SYM dazed and frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:0:4eba022a22560d99",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:1:065c6fd8af6850ec"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:1:065c6fd8af6850ec~frightened",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:0:4eba022a22560d99",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier1:1:065c6fd8af6850ec"
           }
         ],
         [
@@ -36732,13 +36813,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:1:5891b12a082f29c3",
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:1:5891b12a082f29c3~dazed",
             "locator": "block:0:tier2:1",
             "clause": "P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < SYM dazed and frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:0:58c74c83147f2d7b",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:1:5891b12a082f29c3"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:1:5891b12a082f29c3~frightened",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:0:58c74c83147f2d7b",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier2:1:5891b12a082f29c3"
           }
         ],
         [
@@ -36755,39 +36857,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:1:8b1a3f067fd98edd",
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:1:8b1a3f067fd98edd~dazed",
             "locator": "block:0:tier3:1",
             "clause": "P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < SYM dazed and frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:0:9fe2d4c3c3673aea",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:1:8b1a3f067fd98edd"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:1:8b1a3f067fd98edd~frightened",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:0:9fe2d4c3c3673aea",
+            "group": "mcdm.heroes.v1/feature.ability.fury.level-2/death-death#block:0:tier3:1:8b1a3f067fd98edd"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Death... Death!",
@@ -39268,7 +39372,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/kinetic-strike.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -39310,13 +39414,25 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier2:1:03c1bc7f533d523d",
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier2:1:03c1bc7f533d523d~condition",
             "locator": "block:0:tier2:1",
             "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-            "kind": "unsupported",
-            "shape": "taunted (eot), slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier2:0:7238ed4d4beac54f"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier2:1:03c1bc7f533d523d~movement",
+            "locator": "block:0:tier2:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "push",
+            "distance": 1,
+            "movement": "slide",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier2:0:7238ed4d4beac54f"
           }
         ],
         [
@@ -39333,33 +39449,32 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier3:1:03c1b97f533d4d24",
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier3:1:03c1b97f533d4d24~condition",
             "locator": "block:0:tier3:1",
             "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "taunted (eot), slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier3:0:c242b54eeae60b04"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier3:1:03c1b97f533d4d24~movement",
+            "locator": "block:0:tier3:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "movement": "slide",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike#block:0:tier3:0:c242b54eeae60b04"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)), [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Kinetic Strike",
@@ -39416,7 +39531,7 @@
           "detail": "option Kinetic Strike supportedInV001=true; chain selectable"
         }
       ],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike",
@@ -40555,7 +40670,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/stunning-blow.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -40571,13 +40686,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:1:b30721af67d18dab",
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:1:b30721af67d18dab~dazed",
             "locator": "block:0:tier1:1",
             "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < SYM dazed and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:0:ff347188e73e615a",
+            "group": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:1:b30721af67d18dab"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:1:b30721af67d18dab~slowed",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:0:ff347188e73e615a",
+            "group": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier1:1:b30721af67d18dab"
           }
         ],
         [
@@ -40594,13 +40730,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:1:0f9232813c5fec9a",
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:1:0f9232813c5fec9a~dazed",
             "locator": "block:0:tier2:1",
             "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < SYM dazed and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:0:7238ed4d4beac54f",
+            "group": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:1:0f9232813c5fec9a"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:1:0f9232813c5fec9a~slowed",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:0:7238ed4d4beac54f",
+            "group": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier2:1:0f9232813c5fec9a"
           }
         ],
         [
@@ -40617,39 +40774,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:1:dfe43f199e50d18a",
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:1:dfe43f199e50d18a~dazed",
             "locator": "block:0:tier3:1",
             "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < SYM dazed and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:0:fc822cc1b0d91921",
+            "group": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:1:dfe43f199e50d18a"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:1:dfe43f199e50d18a~slowed",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:0:fc822cc1b0d91921",
+            "group": "mcdm.heroes.v1/feature.ability.null.level-1/stunning-blow#block:0:tier3:1:dfe43f199e50d18a"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Stunning Blow",
@@ -77374,7 +77533,7 @@
         "path": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-null.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -77443,27 +77602,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c#block:0:tier3:1:e50c302740c2084a",
+            "id": "salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c#block:0:tier3:1:e50c302740c2084a~dazed",
             "locator": "block:0:tier3:1",
             "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c#block:0:tier3:0:73a99fde4b79fa35",
+            "group": "salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c#block:0:tier3:1:e50c302740c2084a"
+          },
+          {
+            "id": "salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c#block:0:tier3:1:e50c302740c2084a~restrained",
+            "locator": "block:0:tier3:1",
+            "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c#block:0:tier3:0:73a99fde4b79fa35",
+            "group": "salient:foe-feature:037c426b-6d74-4051-a62c-156599057c2c#block:0:tier3:1:e50c302740c2084a"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -90224,7 +90397,7 @@
         "path": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-talent.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -90296,27 +90469,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee#block:0:tier3:1:326faa60991f9f6f",
+            "id": "salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee#block:0:tier3:1:326faa60991f9f6f~dazed",
             "locator": "block:0:tier3:1",
             "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee#block:0:tier3:0:3a074d34ffb2a84b",
+            "group": "salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee#block:0:tier3:1:326faa60991f9f6f"
+          },
+          {
+            "id": "salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee#block:0:tier3:1:326faa60991f9f6f~slowed",
+            "locator": "block:0:tier3:1",
+            "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee#block:0:tier3:0:3a074d34ffb2a84b",
+            "group": "salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee#block:0:tier3:1:326faa60991f9f6f"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -96881,13 +97068,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:25c703fe-eb8a-47b9-881b-b3749e64c43e#block:0:tier3:1:b1e9ef3c61c202d2",
+            "id": "salient:foe-feature:25c703fe-eb8a-47b9-881b-b3749e64c43e#block:0:tier3:1:b1e9ef3c61c202d2~bleeding",
             "locator": "block:0:tier3:1",
             "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N bleeding and restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:25c703fe-eb8a-47b9-881b-b3749e64c43e#block:0:tier3:0:11038f10936793b2",
+            "group": "salient:foe-feature:25c703fe-eb8a-47b9-881b-b3749e64c43e#block:0:tier3:1:b1e9ef3c61c202d2"
+          },
+          {
+            "id": "salient:foe-feature:25c703fe-eb8a-47b9-881b-b3749e64c43e#block:0:tier3:1:b1e9ef3c61c202d2~restrained",
+            "locator": "block:0:tier3:1",
+            "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:25c703fe-eb8a-47b9-881b-b3749e64c43e#block:0:tier3:0:11038f10936793b2",
+            "group": "salient:foe-feature:25c703fe-eb8a-47b9-881b-b3749e64c43e#block:0:tier3:1:b1e9ef3c61c202d2"
           }
         ]
       ],
@@ -96903,12 +97111,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -109172,7 +109374,7 @@
         "path": "en/books/monsters/md/monster/rival/4th-echelon/statblock/rival-null.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -109187,13 +109389,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier1:1:14f5e794f092dd43",
+            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier1:1:14f5e794f092dd43~dazed",
             "locator": "block:0:tier1:1",
             "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier1:0:2ea56bbac3101626",
+            "group": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier1:1:14f5e794f092dd43"
+          },
+          {
+            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier1:1:14f5e794f092dd43~restrained",
+            "locator": "block:0:tier1:1",
+            "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier1:0:2ea56bbac3101626",
+            "group": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier1:1:14f5e794f092dd43"
           }
         ],
         [
@@ -109209,13 +109432,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier2:1:e50c302740c2084a",
+            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier2:1:e50c302740c2084a~dazed",
             "locator": "block:0:tier2:1",
             "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier2:0:11038f10936793b2",
+            "group": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier2:1:e50c302740c2084a"
+          },
+          {
+            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier2:1:e50c302740c2084a~restrained",
+            "locator": "block:0:tier2:1",
+            "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier2:0:11038f10936793b2",
+            "group": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier2:1:e50c302740c2084a"
           }
         ],
         [
@@ -109231,39 +109475,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier3:1:50e318e973ac41e1",
+            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier3:1:50e318e973ac41e1~dazed",
             "locator": "block:0:tier3:1",
             "clause": "R < 5 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier3:0:4b300aa389139d18",
+            "group": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier3:1:50e318e973ac41e1"
+          },
+          {
+            "id": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier3:1:50e318e973ac41e1~restrained",
+            "locator": "block:0:tier3:1",
+            "clause": "R < 5 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier3:0:4b300aa389139d18",
+            "group": "salient:foe-feature:3b3bde6e-98ae-460e-be79-fd7be35446dd#block:0:tier3:1:50e318e973ac41e1"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 5 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -111182,7 +111428,7 @@
         "path": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-null.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -111251,27 +111497,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:3f84aec4-1518-4b53-be1a-0941a61d8d97#block:0:tier3:1:14f5e794f092dd43",
+            "id": "salient:foe-feature:3f84aec4-1518-4b53-be1a-0941a61d8d97#block:0:tier3:1:14f5e794f092dd43~dazed",
             "locator": "block:0:tier3:1",
             "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:3f84aec4-1518-4b53-be1a-0941a61d8d97#block:0:tier3:0:11038f10936793b2",
+            "group": "salient:foe-feature:3f84aec4-1518-4b53-be1a-0941a61d8d97#block:0:tier3:1:14f5e794f092dd43"
+          },
+          {
+            "id": "salient:foe-feature:3f84aec4-1518-4b53-be1a-0941a61d8d97#block:0:tier3:1:14f5e794f092dd43~restrained",
+            "locator": "block:0:tier3:1",
+            "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:3f84aec4-1518-4b53-be1a-0941a61d8d97#block:0:tier3:0:11038f10936793b2",
+            "group": "salient:foe-feature:3f84aec4-1518-4b53-be1a-0941a61d8d97#block:0:tier3:1:14f5e794f092dd43"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -126311,13 +126571,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:5b9ba0ec-dc03-416b-aa19-c0640fa10dec#block:0:tier3:1:fbb04c5afc57492e",
+            "id": "salient:foe-feature:5b9ba0ec-dc03-416b-aa19-c0640fa10dec#block:0:tier3:1:fbb04c5afc57492e~bleeding",
             "locator": "block:0:tier3:1",
             "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N bleeding and weakened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:5b9ba0ec-dc03-416b-aa19-c0640fa10dec#block:0:tier3:0:9520cecd344e9a4d",
+            "group": "salient:foe-feature:5b9ba0ec-dc03-416b-aa19-c0640fa10dec#block:0:tier3:1:fbb04c5afc57492e"
+          },
+          {
+            "id": "salient:foe-feature:5b9ba0ec-dc03-416b-aa19-c0640fa10dec#block:0:tier3:1:fbb04c5afc57492e~weakened",
+            "locator": "block:0:tier3:1",
+            "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:5b9ba0ec-dc03-416b-aa19-c0640fa10dec#block:0:tier3:0:9520cecd344e9a4d",
+            "group": "salient:foe-feature:5b9ba0ec-dc03-416b-aa19-c0640fa10dec#block:0:tier3:1:fbb04c5afc57492e"
           }
         ]
       ],
@@ -126333,12 +126614,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -143122,13 +143397,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:80663ae8-7b28-495c-8923-760fcfd561c5#block:0:tier3:1:8d3575e34de721a0",
+            "id": "salient:foe-feature:80663ae8-7b28-495c-8923-760fcfd561c5#block:0:tier3:1:8d3575e34de721a0~dazed",
             "locator": "block:0:tier3:1",
             "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:80663ae8-7b28-495c-8923-760fcfd561c5#block:0:tier3:0:62ec23b1e72a8a16",
+            "group": "salient:foe-feature:80663ae8-7b28-495c-8923-760fcfd561c5#block:0:tier3:1:8d3575e34de721a0"
+          },
+          {
+            "id": "salient:foe-feature:80663ae8-7b28-495c-8923-760fcfd561c5#block:0:tier3:1:8d3575e34de721a0~slowed",
+            "locator": "block:0:tier3:1",
+            "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:80663ae8-7b28-495c-8923-760fcfd561c5#block:0:tier3:0:62ec23b1e72a8a16",
+            "group": "salient:foe-feature:80663ae8-7b28-495c-8923-760fcfd561c5#block:0:tier3:1:8d3575e34de721a0"
           }
         ]
       ],
@@ -143144,12 +143440,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -159377,13 +159667,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:9db03fe4-ef75-4b54-b9ae-843674baf71e#block:0:tier3:1:679b0e39d6d92726",
+            "id": "salient:foe-feature:9db03fe4-ef75-4b54-b9ae-843674baf71e#block:0:tier3:1:679b0e39d6d92726~bleeding",
             "locator": "block:0:tier3:1",
             "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N bleeding and dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:9db03fe4-ef75-4b54-b9ae-843674baf71e#block:0:tier3:0:ab4051da6c231d29",
+            "group": "salient:foe-feature:9db03fe4-ef75-4b54-b9ae-843674baf71e#block:0:tier3:1:679b0e39d6d92726"
+          },
+          {
+            "id": "salient:foe-feature:9db03fe4-ef75-4b54-b9ae-843674baf71e#block:0:tier3:1:679b0e39d6d92726~dazed",
+            "locator": "block:0:tier3:1",
+            "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:9db03fe4-ef75-4b54-b9ae-843674baf71e#block:0:tier3:0:ab4051da6c231d29",
+            "group": "salient:foe-feature:9db03fe4-ef75-4b54-b9ae-843674baf71e#block:0:tier3:1:679b0e39d6d92726"
           }
         ]
       ],
@@ -159399,12 +159710,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 3 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -162445,7 +162750,7 @@
         "path": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-talent.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -162489,13 +162794,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier2:1:326faa60991f9f6f",
+            "id": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier2:1:326faa60991f9f6f~dazed",
             "locator": "block:0:tier2:1",
             "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier2:0:35dad291f6074eed",
+            "group": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier2:1:326faa60991f9f6f"
+          },
+          {
+            "id": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier2:1:326faa60991f9f6f~slowed",
+            "locator": "block:0:tier2:1",
+            "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier2:0:35dad291f6074eed",
+            "group": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier2:1:326faa60991f9f6f"
           }
         ],
         [
@@ -162512,33 +162838,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier3:1:8e6f3f67a79bdbae",
+            "id": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier3:1:8e6f3f67a79bdbae~dazed",
             "locator": "block:0:tier3:1",
             "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier3:0:35dad291f6074eed",
+            "group": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier3:1:8e6f3f67a79bdbae"
+          },
+          {
+            "id": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier3:1:8e6f3f67a79bdbae~slowed",
+            "locator": "block:0:tier3:1",
+            "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier3:0:35dad291f6074eed",
+            "group": "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554#block:0:tier3:1:8e6f3f67a79bdbae"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "R < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -175760,7 +176094,7 @@
         "path": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-null.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -175829,27 +176163,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:ba8ea895-cc34-4a11-be2a-557838e2e4a0#block:0:tier3:1:58c7f2e64e7f9d8b",
+            "id": "salient:foe-feature:ba8ea895-cc34-4a11-be2a-557838e2e4a0#block:0:tier3:1:58c7f2e64e7f9d8b~dazed",
             "locator": "block:0:tier3:1",
             "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (EoT)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and slowed (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "dazed",
+            "duration": "eot",
+            "after": "salient:foe-feature:ba8ea895-cc34-4a11-be2a-557838e2e4a0#block:0:tier3:0:2ea56bbac3101626",
+            "group": "salient:foe-feature:ba8ea895-cc34-4a11-be2a-557838e2e4a0#block:0:tier3:1:58c7f2e64e7f9d8b"
+          },
+          {
+            "id": "salient:foe-feature:ba8ea895-cc34-4a11-be2a-557838e2e4a0#block:0:tier3:1:58c7f2e64e7f9d8b~slowed",
+            "locator": "block:0:tier3:1",
+            "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (EoT)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "eot",
+            "after": "salient:foe-feature:ba8ea895-cc34-4a11-be2a-557838e2e4a0#block:0:tier3:0:2ea56bbac3101626",
+            "group": "salient:foe-feature:ba8ea895-cc34-4a11-be2a-557838e2e4a0#block:0:tier3:1:58c7f2e64e7f9d8b"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -187997,7 +188345,7 @@
         "path": "en/books/monsters/md/monster/basilisk/statblock/basilisk.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -188041,13 +188389,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier2:1:e2787a768276fde0",
+            "id": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier2:1:e2787a768276fde0~weakened",
             "locator": "block:0:tier2:1",
             "clause": "M < 1 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N weakened and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier2:0:109f169dfc69c9d0",
+            "group": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier2:1:e2787a768276fde0"
+          },
+          {
+            "id": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier2:1:e2787a768276fde0~slowed",
+            "locator": "block:0:tier2:1",
+            "clause": "M < 1 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier2:0:109f169dfc69c9d0",
+            "group": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier2:1:e2787a768276fde0"
           }
         ],
         [
@@ -188064,33 +188433,41 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier3:1:055faa065f2e369d",
+            "id": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier3:1:055faa065f2e369d~weakened",
             "locator": "block:0:tier3:1",
             "clause": "M < 2 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N weakened and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier3:0:d3f53d04a8f68bb5",
+            "group": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier3:1:055faa065f2e369d"
+          },
+          {
+            "id": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier3:1:055faa065f2e369d~slowed",
+            "locator": "block:0:tier3:1",
+            "clause": "M < 2 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier3:0:d3f53d04a8f68bb5",
+            "group": "salient:foe-feature:d12d3c36-7dbd-436d-8631-a2a7c28450e2#block:0:tier3:1:055faa065f2e369d"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 1 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 2 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -196139,13 +196516,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:e0893958-8166-4570-8719-b672610bdfa7#block:0:tier3:1:3c834b452fa7143f",
+            "id": "salient:foe-feature:e0893958-8166-4570-8719-b672610bdfa7#block:0:tier3:1:3c834b452fa7143f~bleeding",
             "locator": "block:0:tier3:1",
             "clause": "M < 4 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N bleeding and weakened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:e0893958-8166-4570-8719-b672610bdfa7#block:0:tier3:0:cfa92550e9d3470b",
+            "group": "salient:foe-feature:e0893958-8166-4570-8719-b672610bdfa7#block:0:tier3:1:3c834b452fa7143f"
+          },
+          {
+            "id": "salient:foe-feature:e0893958-8166-4570-8719-b672610bdfa7#block:0:tier3:1:3c834b452fa7143f~weakened",
+            "locator": "block:0:tier3:1",
+            "clause": "M < 4 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:e0893958-8166-4570-8719-b672610bdfa7#block:0:tier3:0:cfa92550e9d3470b",
+            "group": "salient:foe-feature:e0893958-8166-4570-8719-b672610bdfa7#block:0:tier3:1:3c834b452fa7143f"
           }
         ]
       ],
@@ -196161,12 +196559,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 4 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -198244,13 +198636,34 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:e40c296d-5f78-4217-8bf0-0dc908ffc562#block:0:tier3:1:8263bd96505226db",
+            "id": "salient:foe-feature:e40c296d-5f78-4217-8bf0-0dc908ffc562#block:0:tier3:1:8263bd96505226db~bleeding",
             "locator": "block:0:tier3:1",
             "clause": "A < 4 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N bleeding and weakened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:e40c296d-5f78-4217-8bf0-0dc908ffc562#block:0:tier3:0:a9ec45918bf6548e",
+            "group": "salient:foe-feature:e40c296d-5f78-4217-8bf0-0dc908ffc562#block:0:tier3:1:8263bd96505226db"
+          },
+          {
+            "id": "salient:foe-feature:e40c296d-5f78-4217-8bf0-0dc908ffc562#block:0:tier3:1:8263bd96505226db~weakened",
+            "locator": "block:0:tier3:1",
+            "clause": "A < 4 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "salient:foe-feature:e40c296d-5f78-4217-8bf0-0dc908ffc562#block:0:tier3:0:a9ec45918bf6548e",
+            "group": "salient:foe-feature:e40c296d-5f78-4217-8bf0-0dc908ffc562#block:0:tier3:1:8263bd96505226db"
           }
         ]
       ],
@@ -198266,12 +198679,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 4 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -212122,24 +212529,39 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "urn:uuid:3ad9ac22-0ac8-4f5f-96a8-401fe57fa5af#block:0:tier3:1:630011b9eb1cc2ab",
+            "id": "urn:uuid:3ad9ac22-0ac8-4f5f-96a8-401fe57fa5af#block:0:tier3:1:630011b9eb1cc2ab~frightened",
             "locator": "block:0:tier3:1",
             "clause": "I < 4 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened and restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "urn:uuid:3ad9ac22-0ac8-4f5f-96a8-401fe57fa5af#block:0:tier3:0:b78ef8cf0743fb1a",
+            "group": "urn:uuid:3ad9ac22-0ac8-4f5f-96a8-401fe57fa5af#block:0:tier3:1:630011b9eb1cc2ab"
+          },
+          {
+            "id": "urn:uuid:3ad9ac22-0ac8-4f5f-96a8-401fe57fa5af#block:0:tier3:1:630011b9eb1cc2ab~restrained",
+            "locator": "block:0:tier3:1",
+            "clause": "I < 4 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "urn:uuid:3ad9ac22-0ac8-4f5f-96a8-401fe57fa5af#block:0:tier3:0:b78ef8cf0743fb1a",
+            "group": "urn:uuid:3ad9ac22-0ac8-4f5f-96a8-401fe57fa5af#block:0:tier3:1:630011b9eb1cc2ab"
           }
         ]
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "I < 4 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) and [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "action-type",
           "locator": "header:usage",
@@ -214162,8 +214584,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 126,
-    "compatibility": 1495,
+    "compiled": 136,
+    "compatibility": 1485,
     "compiledButUnavailable": 0
   }
 }

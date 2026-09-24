@@ -34,6 +34,7 @@ import {
   endConditionInstance,
   findConditionInstance,
   recordConditionSave,
+  sharedGroupSave,
   unscheduleConditionInstance,
 } from './conditionInstances';
 import type { DieResult } from '../../shared/contracts/history';
@@ -660,6 +661,30 @@ async function fire(
           description: `${firing.registration.source.label}: no active supported condition instance; resolve manually.`,
           unsupported: 'no active supported condition instance',
         };
+      // V153: one saving throw per compound effect at a boundary; a member reuses the roll.
+      const shared = await sharedGroupSave(
+        ctx,
+        found.target,
+        found.instance,
+        firing.boundaryEventId,
+      );
+      if (shared) {
+        await recordConditionSave(ctx, firing.scope, found.target, found.instance.id, shared);
+        return {
+          kind: 'clock.saving-throw',
+          description: `${firing.registration.source.label}: shares the saving throw of the same effect, ${shared.roll} (needs ${shared.threshold}+) — ${shared.success ? 'success; effect ends.' : 'failure; effect remains.'}`,
+          payload: {
+            effectInstanceId: found.instance.id,
+            creatureId: work.creatureId,
+            roll: shared.roll,
+            success: shared.success,
+            threshold: shared.threshold,
+            thresholdSource: shared.thresholdSource,
+            shared: true,
+          },
+          save: { roll: shared.roll, success: shared.success },
+        };
+      }
       const accepted = await rollDice(
         ctx,
         firing.encounter.campaignId,

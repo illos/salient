@@ -89,7 +89,7 @@ export async function applyConditionInstance(
     ConditionInstance,
     'id' | 'condition' | 'sourceUseEventId' | 'abilityName' | 'actorLabel' | 'sourcePath'
   > &
-    Partial<Pick<ConditionInstance, 'duration' | 'sourceActorId'>>,
+    Partial<Pick<ConditionInstance, 'duration' | 'sourceActorId' | 'saveGroup'>>,
   encounterId?: Id<'encounters'>,
 ): Promise<ConditionInstance> {
   const initial = await read(ctx, target);
@@ -239,7 +239,42 @@ export async function recordConditionSave(
     instance.id === id ? { ...instance, lastSave: save } : instance,
   );
   await write(ctx, scope, target, { conditionInstances: instances });
-  if (save.success) await endConditionInstance(ctx, scope, target, id, 'successful saving throw');
+  if (!save.success) return;
+  await endConditionInstance(ctx, scope, target, id, 'successful saving throw');
+  // V153: the save removes the whole compound effect, including members whose own turn-end save
+  // has not fired yet at this boundary.
+  const group = instances.find(instance => instance.id === id)?.saveGroup;
+  if (group === undefined) return;
+  for (const member of instances)
+    if (member.id !== id && member.saveGroup === group && member.status === 'active') {
+      const current = (await read(ctx, target)).live.conditionInstances ?? [];
+      await write(ctx, scope, target, {
+        conditionInstances: current.map(instance =>
+          instance.id === member.id ? { ...instance, lastSave: save } : instance,
+        ),
+      });
+      await endConditionInstance(ctx, scope, target, member.id, 'successful saving throw');
+    }
+}
+
+/**
+ * V153: a failed save already rolled at this boundary by another member of the same compound
+ * effect. Members keep their own registrations, so one ended early never strands the others.
+ */
+export async function sharedGroupSave(
+  ctx: Pick<QueryCtx, 'db'>,
+  target: ConditionTarget,
+  instance: ConditionInstance,
+  boundaryEventId: string,
+): Promise<NonNullable<ConditionInstance['lastSave']> | undefined> {
+  if (instance.saveGroup === undefined) return undefined;
+  const instances = (await read(ctx, target)).live.conditionInstances ?? [];
+  return instances.find(
+    other =>
+      other.id !== instance.id &&
+      other.saveGroup === instance.saveGroup &&
+      other.lastSave?.boundaryEventId === boundaryEventId,
+  )?.lastSave;
 }
 
 export async function findConditionInstance(

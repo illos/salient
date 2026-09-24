@@ -149,6 +149,17 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Infernal Gavotte',
       'Wing Buffet',
       "Let's Dance",
+      // V153: compound conditions with one shared save, and a condition then forced movement.
+      'Death... Death!',
+      'Kinetic Strike',
+      'Stunning Blow',
+      'Stun',
+      'Disarrange Thoughts',
+      'Incapacitate',
+      'Deaden',
+      'Disorientate',
+      'Numb',
+      'Poison Fumes',
     ].sort(),
   );
   expect(

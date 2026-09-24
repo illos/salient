@@ -883,9 +883,16 @@ async function commitConditions(
   originalTargetId?: string,
 ) {
   const cause = (await ctx.db.get(scope.eventId))!;
+  // V153: a compound clause's conditions share one saving throw, keyed by its first occurrence.
+  const saveGroups = new Map<string, string>();
   for (const occurrence of occurrences) {
     const effect = occurrence.effect;
     if (effect.kind !== 'condition') continue;
+    const groupKey =
+      effect.group !== undefined ? JSON.stringify([effect.group, effect.targetId]) : undefined;
+    if (groupKey !== undefined && !saveGroups.has(groupKey))
+      saveGroups.set(groupKey, occurrence.id);
+    const saveGroup = groupKey !== undefined ? saveGroups.get(groupKey) : undefined;
     const target = targets.find(
       t =>
         t.actor.id === effect.targetId ||
@@ -904,6 +911,7 @@ async function commitConditions(
           id: occurrence.id,
           condition: effect.condition,
           duration: effect.duration,
+          ...(saveGroup !== undefined ? { saveGroup } : {}),
           sourceActorId: source.actorId,
           sourceUseEventId: source.eventId,
           abilityName: source.abilityName,

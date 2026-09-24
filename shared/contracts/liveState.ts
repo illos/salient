@@ -71,6 +71,11 @@ export interface ConditionInstance {
   endedReason?: string;
   /** V113: the occurrence whose taunt replaced this one (condition/taunted.md). */
   replacedBy?: string;
+  /**
+   * V153: the first occurrence of a compound effect ("dazed and slowed (save ends)"). One saving
+   * throw removes the whole effect (rule/general/saving-throw.md), so members share each roll.
+   */
+  saveGroup?: string;
 }
 
 /** Every toggle off: the first-admission state of a hero and the loaded state of a foe. */

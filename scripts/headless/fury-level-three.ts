@@ -257,6 +257,16 @@ export async function runFuryLevelThree({
       campaignId,
       selectedPlayerIds: [],
     });
+    // Tier conditions compile into occurrences (V113/V153); the remainder may appear there.
+    const compiledClauses = async (id: string) =>
+      (
+        (
+          await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
+            'abilities:results',
+            { campaignId, eventIds: [id] },
+          )
+        )[0]?.compiled?.effects ?? []
+      ).map(o => o.effect.clause ?? '');
     const invoke = (id: string, operation: string, args: Record<string, unknown> = {}) =>
       director.mutation<{ eventId: string }>('commands:invoke', {
         campaignId,
@@ -310,7 +320,11 @@ export async function runFuryLevelThree({
             assert.equal(outcome.damage?.rolledDamage, damage, `${name} ${b.w.kit}`);
             assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
             assert.match(
-              JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
+              JSON.stringify([
+                outcome.unresolvedClauses,
+                result.manualResolutions,
+                await compiledClauses(use.eventId),
+              ]),
               remainder,
               name,
             );

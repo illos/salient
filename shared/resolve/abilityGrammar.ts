@@ -492,6 +492,78 @@ export function tierConditionExpression(clause: string):
 }
 
 /**
+ * V153 compound tier condition: one optional potency and one printed duration shared by two or more
+ * core conditions ("P < WEAK, dazed and frightened (save ends)"). rule/general/saving-throw.md: an
+ * effect ending "(save ends)" takes one saving throw "to remove the effect", so the conditions
+ * share one save. A duration is required. Grabbed (condition/grabbed.md relationships) and prone
+ * (condition/prone.md, Stand Up unless the effect says otherwise) stay single-condition forms.
+ */
+export function tierCompoundConditionExpression(clause: string):
+  | {
+      characteristic?: Characteristic;
+      threshold: ConditionThreshold | { kind: 'always' };
+      conditions: ConditionId[];
+      duration: Exclude<ConditionDuration, 'none'>;
+    }
+  | undefined {
+  const text = plain(clause).replace(/\.$/, '').replace(/\s+/g, ' ').trim();
+  const match = /^(?:([MARIP]) < (-?\d+|WEAK|AVERAGE|STRONG),? )?(.+) \((save ends|EoT)\)$/.exec(
+    text,
+  );
+  if (!match) return undefined;
+  const list = /^([a-z]+)(?:, ([a-z]+))*,? and ([a-z]+)$/.exec(match[3]!);
+  if (!list) return undefined;
+  const names = match[3]!.replace(/,? and /, ', ').split(', ');
+  const allowed = [
+    'bleeding',
+    'dazed',
+    'frightened',
+    'restrained',
+    'slowed',
+    'taunted',
+    'weakened',
+  ];
+  if (
+    names.length < 2 ||
+    names.some(n => !allowed.includes(n)) ||
+    new Set(names).size !== names.length
+  )
+    return undefined;
+  const single = tierConditionExpression(
+    `${match[1] ? `${match[1]} < ${match[2]}, ` : ''}${names[0]} (${match[4]})`,
+  );
+  if (!single) return undefined;
+  return {
+    ...(single.characteristic ? { characteristic: single.characteristic } : {}),
+    threshold: single.threshold,
+    conditions: names as ConditionId[],
+    duration: match[4] === 'EoT' ? 'eot' : 'save-ends',
+  };
+}
+
+/**
+ * V153 unconditional condition then forced movement in one clause ("taunted (EoT), slide 1"),
+ * applied in printed order. A potency before the condition is refused: whether it also gates the
+ * movement is not stated.
+ */
+export function tierConditionMovementExpression(clause: string):
+  | {
+      condition: NonNullable<ReturnType<typeof tierConditionExpression>>;
+      movement: NonNullable<ReturnType<typeof forcedMovementExpression>>;
+      parts: [string, string];
+    }
+  | undefined {
+  const text = plain(clause).replace(/\.$/, '').replace(/\s+/g, ' ').trim();
+  const match = /^(.+ \((?:save ends|EoT)\)), ((?:vertical )?(?:push|pull|slide) \d+)$/.exec(text);
+  if (!match) return undefined;
+  const condition = tierConditionExpression(match[1]!);
+  const movement = forcedMovementExpression(match[2]!);
+  if (!condition || !movement || condition.threshold.kind !== 'always') return undefined;
+  if (condition.condition === 'grabbed') return undefined;
+  return { condition, movement, parts: [match[1]!, match[2]!] };
+}
+
+/**
  * V113 post-damage forced movement (movement/forced-movement.md): push, pull or slide N, optionally
  * "vertical". Potency-gated or combined movement stays unsupported.
  */
