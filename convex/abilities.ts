@@ -24,7 +24,12 @@ import { allowanceFor, loadActorRecords } from './lib/abilityOperations';
 import { settingsOf } from './lib/audience';
 import { resolveHistoricalId } from './lib/history';
 import { loadReadCorrectionWindows } from './lib/historyRead';
-import { resourceForgoState, resourcePrayer, resourceTriggers } from './lib/resourceOperations';
+import {
+  resourceForgoState,
+  resourceMaintenance,
+  resourcePrayer,
+  resourceTriggers,
+} from './lib/resourceOperations';
 
 export { abilityOperations } from './lib/abilityOperations';
 
@@ -160,6 +165,24 @@ export const sheet = query({
         quote: v.string(),
       }),
     ),
+    /** V148: persistent abilities the hero can maintain (`resource.maintain`), when any. */
+    resourceMaintenance: v.union(
+      v.null(),
+      v.object({
+        sourcePath: v.string(),
+        quote: v.string(),
+        inCombat: v.boolean(),
+        abilities: v.array(
+          v.object({
+            name: v.string(),
+            value: v.number(),
+            sourcePath: v.string(),
+            /** Instances currently maintained (one per target). */
+            maintained: v.number(),
+          }),
+        ),
+      }),
+    ),
     /** V120: class heroic-resource triggers the table claims with `resource.claim`. */
     resourceTriggers: v.array(
       v.object({
@@ -242,6 +265,10 @@ export const sheet = query({
           : null,
       resourceForgo: mayRead && records.character ? resourceForgoState(records.character) : null,
       resourcePrayer: mayRead && records.character ? resourcePrayer(records.character) : null,
+      resourceMaintenance:
+        mayRead && records.character
+          ? await resourceMaintenance(ctx, context.campaign, records.character)
+          : null,
       resourceTriggers:
         mayRead && records.character
           ? await resourceTriggers(ctx, context.campaign, records.character)

@@ -35,7 +35,7 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
     sourcePath: 'en/unified/md/feature/elementalist/level-1/persistent-magic.md',
     actionType: 'No action',
     activationCondition:
-      'After using a persistent ability, choose to maintain it. Reduce start-of-turn Essence by its persistent value; never below zero. No stacking on a creature; same roll for all targets. Ends with encounter or damage in one turn at least five times Reason. Outside combat maintain up to Victories rounds. Resolve the stated effects manually.',
+      'After using a persistent ability, choose to maintain it. Levels 1–6 in combat: record it with /resource maintain ability="…" (and value=off to stop); the app reduces the start-of-turn Essence gain by its persistent value, refuses maintenance that would make the gain negative, and stops all maintenance when you take damage of at least five times Reason in one turn. No stacking on a creature; same roll for all targets. Outside combat maintain up to Victories rounds. Resolve the persistent effects themselves manually.',
   },
   {
     name: 'Persistent Magic: End',
@@ -43,7 +43,7 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
     sourcePath: 'en/unified/md/feature/elementalist/level-1/persistent-magic.md',
     actionType: 'No action',
     activationCondition:
-      'Stop maintaining an ability at any time. Resolve the stated effects manually.',
+      'Stop maintaining an ability at any time. In combat record it with /resource maintain ability="…" value=off, so the upkeep stops reducing your turn-start Essence. Resolve the stated effects manually.',
   },
   {
     name: 'Practical Magic: Knockback',

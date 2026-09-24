@@ -24,6 +24,7 @@ test('every profile clause is quoted verbatim from its pinned source', () => {
       profile.encounterEnd,
       ...(profile.turnEndStrain ? [profile.turnEndStrain] : []),
       ...(profile.prayer ? [profile.prayer] : []),
+      ...(profile.persistent ? [profile.persistent] : []),
       ...profile.triggers,
       ...profile.triggers.flatMap(trigger => trigger.levelAmounts ?? []),
     ];
@@ -267,4 +268,27 @@ test('the Troubadour profile matches its source amounts', () => {
   const level = (value: number) => ({ level: { value } }) as Parameters<typeof prayerFor>[1];
   expect(prayerFor(troubadour, level(1))).toBeUndefined();
   expect(prayerFor(troubadour, level(2))).toMatchObject({ label: 'Appeal to the Muses' });
+});
+
+// feature/elementalist/level-1/essence.md and persistent-magic.md, level-4/font-of-essence.md ("2
+// essence instead of 1") and level-7/surging-essence.md (turn-start gain 3), so levels 1–6. Each
+// persistent value is read from its ability's pinned "Persistent N" entry.
+test('the Elementalist profile matches its source amounts and persistent values', () => {
+  const elementalist = GENERATION_PROFILES.find(p => p.className === 'Elementalist')!;
+  expect(elementalist).toMatchObject({
+    resource: 'essence',
+    verifiedThroughLevel: 6,
+    turnStart: { kind: 'fixed', amount: 2 },
+    encounterEnd: { kind: 'lose' },
+    persistent: { breakMultiplierOfReason: 5 },
+    triggers: [{ id: 'elementalist-typed-damage', amount: 1, limit: 'round' }],
+  });
+  expect(triggerAmount(elementalist.triggers[0]!, 4).amount).toBe(2);
+  for (const ability of elementalist.persistent!.abilities) {
+    const text = readFileSync(vendorPath(ability.sourcePath), 'utf8');
+    expect(text, ability.name).toMatch(
+      new RegExp(`name: ${ability.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`),
+    );
+    expect(text, ability.name).toContain(`Persistent ${ability.value}:`);
+  }
 });

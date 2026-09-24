@@ -110,6 +110,10 @@ export interface HeroLiveState {
   conditionInstances?: ConditionInstance[];
   /** V120: table-confirmed class resource triggers claimed this encounter; cleared at encounter end. */
   resourceClaims?: ResourceClaim[];
+  /** V148: persistent abilities maintained this encounter (Elementalist Persistent Magic). */
+  maintained?: { ability: string; value: number; encounterId: string }[];
+  /** V148: damage taken during the current turn, for Persistent Magic's break. */
+  turnDamage?: { turnId: string; amount: number };
   /**
    * V150 (complication/self-taught.md): forgo gaining the Heroic Resource at the next turn start
    * (`forgoNext`); while `forgoing`, no gain applies until the start of the hero's next turn.

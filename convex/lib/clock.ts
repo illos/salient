@@ -398,8 +398,17 @@ async function fireHeroicResource(
   } else if (step === 'turn-start-gain') {
     clause = profile.turnStart;
     if (profile.turnStart.kind === 'fixed') {
-      after = before + profile.turnStart.amount;
-      detail = `turn-start gain of ${profile.turnStart.amount}`;
+      // V148 (feature/elementalist/level-1/persistent-magic.md): each maintained persistent ability
+      // reduces the turn-start gain by its persistent value; maintenance never makes it negative.
+      const maintained = (live.maintained ?? []).filter(
+        entry => entry.encounterId === firing.encounter._id,
+      );
+      const upkeep = maintained.reduce((sum, entry) => sum + entry.value, 0);
+      const gain = Math.max(0, profile.turnStart.amount - upkeep);
+      after = before + gain;
+      detail = upkeep
+        ? `turn-start gain of ${profile.turnStart.amount} minus ${upkeep} to maintain ${maintained.map(entry => entry.ability).join(', ')} = ${gain}`
+        : `turn-start gain of ${profile.turnStart.amount}`;
     } else {
       const accepted = await rollDice(
         ctx,
@@ -483,6 +492,8 @@ async function fireHeroicResource(
               forgoing: false,
               lastTurnGain: undefined,
               prayNext: false,
+              maintained: [],
+              turnDamage: undefined,
             }
           : {}),
         ...(windowEnded ? { forgoing: false } : {}),

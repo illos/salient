@@ -380,8 +380,173 @@ const resourcePray: OperationDefinition = {
   },
 };
 
+/**
+ * V148: this encounter's recorded uses of an ability by the hero, and how many times it was put
+ * under maintenance (undone events excluded).
+ */
+async function maintenanceCounts(
+  ctx: ReadCtx,
+  encounterId: Id<'encounters'>,
+  characterId: Id<'characters'>,
+  ability: string,
+): Promise<{ uses: number; maintains: number }> {
+  let uses = 0;
+  let maintains = 0;
+  const events = ctx.db
+    .query('events')
+    .withIndex('by_encounter_sequence', q => q.eq('encounterId', encounterId));
+  for await (const event of events) {
+    if (event.disposition === 'undone') continue;
+    const payload = event.payload as
+      | {
+          envelope?: { boundActor?: { id?: string } | null };
+          data?: { ability?: { name?: string } | string; value?: unknown; characterId?: string };
+        }
+      | undefined;
+    if (payload?.envelope?.boundActor?.id !== characterId) continue;
+    if (
+      (event.kind === 'ability.use' || event.kind === 'ability.recorded') &&
+      typeof payload.data?.ability === 'object' &&
+      payload.data.ability.name === ability
+    )
+      uses++;
+    if (
+      event.kind === 'resource.maintain' &&
+      payload.data?.ability === ability &&
+      payload.data.value !== 'off'
+    )
+      maintains++;
+  }
+  return { uses, maintains };
+}
+
+/** V148: the hero's maintainable persistent abilities for `abilities:sheet`, or null. */
+export async function resourceMaintenance(
+  ctx: ReadCtx,
+  campaign: Doc<'campaigns'>,
+  character: Doc<'characters'>,
+) {
+  const baseline = baselineOf(character.derivedBaseline);
+  const profile = generationProfile(baseline);
+  if (!profile?.persistent || !character.liveState || !baseline) return null;
+  const owned = new Set(baseline.abilities.map(ability => ability.name));
+  const encounter = await committedEncounter(ctx, campaign);
+  const maintained = (character.liveState.maintained ?? []).filter(
+    entry => entry.encounterId === encounter?._id,
+  );
+  return {
+    sourcePath: profile.persistent.sourcePath,
+    quote: profile.persistent.quote,
+    inCombat: encounter !== null,
+    abilities: profile.persistent.abilities
+      .filter(ability => owned.has(ability.name))
+      .map(ability => ({
+        name: ability.name,
+        value: ability.value,
+        sourcePath: ability.sourcePath,
+        maintained: maintained.filter(entry => entry.ability === ability.name).length,
+      })),
+  };
+}
+
+/**
+ * V148: start or stop maintaining a persistent ability in combat (feature/elementalist/level-1/
+ * persistent-magic.md): "You can't maintain any abilities that would make you earn a negative
+ * amount of essence at the start of your turn. You can stop maintaining an ability at any time (no
+ * action required)." The effect itself is resolved at the table.
+ */
+const resourceMaintain: OperationDefinition = {
+  id: 'resource.maintain',
+  family: 'resource',
+  verb: 'maintain',
+  title: 'Maintain a persistent ability',
+  description:
+    'Start (value=on, default) or stop (value=off) maintaining one of the hero’s persistent abilities in combat. Each maintained ability reduces the turn-start Heroic Resource gain by its persistent value.',
+  args: { ability: v.string(), value: v.optional(v.string()) },
+  argDescriptions: {
+    ability: 'The persistent ability’s name.',
+    value: '`on` (default) to maintain, `off` to stop.',
+  },
+  roles: ['director', 'player'],
+  session: 'running',
+  actor: 'required',
+  execute: async (ctx, { context, actor, args }): Promise<Outcome> => {
+    if (actor!.kind !== 'character')
+      throw new ConvexError(`${actor!.name} is not a hero; only heroes maintain abilities.`);
+    const character = await ctx.db.get(actor!.id as Id<'characters'>);
+    if (!character || character.campaignId !== context.campaign._id)
+      throw new ConvexError('That hero is not at this table.');
+    const live = requireHeroLive(character);
+    const baseline = baselineOf(character.derivedBaseline);
+    const profile = generationProfile(baseline);
+    if (!profile?.persistent || !baseline)
+      throw new ConvexError(`${character.authored.name} has no persistent abilities to maintain.`);
+    const name = String(args.ability);
+    const ability = profile.persistent.abilities.find(entry => entry.name === name);
+    if (!ability || !baseline.abilities.some(owned => owned.name === name))
+      throw new ConvexError(`${character.authored.name} has no persistent ability "${name}".`);
+    const encounter = await committedEncounter(ctx, context.campaign);
+    if (!encounter || !(encounter.heroParticipantIds ?? []).includes(character._id))
+      throw new ConvexError(
+        'Maintaining is tracked in combat; outside combat you maintain it for rounds equal to your Victories, resolved manually.',
+      );
+    const value = String(args.value ?? 'on').toLowerCase();
+    if (value !== 'on' && value !== 'off') throw new ConvexError('"value" must be on or off.');
+    const current = (live.maintained ?? []).filter(entry => entry.encounterId === encounter._id);
+    const already = current.some(entry => entry.ability === name);
+    if (value === 'off' && !already)
+      throw new ConvexError(`${character.authored.name} is not maintaining ${name}.`);
+    if (value === 'on') {
+      // "Whenever you use a persistent ability, you decide whether you want to maintain it, and start
+      // doing so immediately after you first use the ability": each maintained instance needs its
+      // own recorded use of the ability this encounter (V148 review R3). Instances on different
+      // targets may run at once (R2; "A creature can't be affected by multiple instances").
+      const counts = await maintenanceCounts(ctx, encounter._id, character._id, name);
+      if (counts.uses <= counts.maintains)
+        throw new ConvexError(
+          `${character.authored.name} has no unmaintained use of ${name} this encounter; use the ability first, then maintain it.`,
+        );
+      const upkeep = current.reduce((sum, entry) => sum + entry.value, 0) + ability.value;
+      const gain = profile.turnStart.kind === 'fixed' ? profile.turnStart.amount : 0;
+      if (upkeep > gain)
+        throw new ConvexError(
+          `Maintaining ${name} (persistent ${ability.value}) would make ${character.authored.name} earn a negative amount of ${live.heroicResource.name} at the start of their turn (${gain} − ${upkeep}).`,
+        );
+    }
+    const removeAt = current.findIndex(entry => entry.ability === name);
+    const next =
+      value === 'on'
+        ? [...current, { ability: name, value: ability.value, encounterId: encounter._id }]
+        : current.filter((_, index) => index !== removeAt);
+    return {
+      kind: 'resource.maintain',
+      description:
+        value === 'on'
+          ? `${character.authored.name} maintains ${name} (persistent ${ability.value}): the turn-start ${live.heroicResource.name} gain is reduced by ${next.reduce((s, e) => s + e.value, 0)}.`
+          : `${character.authored.name} stops maintaining one instance of ${name}.`,
+      data: {
+        characterId: character._id,
+        ability: name,
+        value,
+        persistentValue: ability.value,
+        maintained: next.map(entry => entry.ability),
+        instances: next.filter(entry => entry.ability === name).length,
+        sourcePath: profile.persistent.sourcePath,
+        abilitySourcePath: ability.sourcePath,
+      },
+      commit: async (mctx, scope) => {
+        const latest = (await mctx.db.get(character._id))!;
+        await journalPatch(mctx, scope, 'characters', character._id, {
+          liveState: { ...latest.liveState!, maintained: next },
+        });
+      },
+    };
+  },
+};
+
 export const resourceOperations: OperationDefinition[] = [
   resourceClaim,
   resourceForgo,
   resourcePray,
+  resourceMaintain,
 ];

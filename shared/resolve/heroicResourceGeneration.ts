@@ -78,6 +78,16 @@ export interface GenerationProfile {
   /** `lose`: remaining resource is lost (to 0); `reset`: any value, negative included, returns to 0. */
   encounterEnd: { kind: 'lose' | 'reset' } & SourcedClause;
   /**
+   * Persistent abilities (the Elementalist): maintaining one reduces the turn-start gain by its
+   * persistent value; the gain can't go negative; enough damage in one turn ends all maintenance.
+   */
+  persistent?: SourcedClause & {
+    /** "Persistent N" per ability, from each ability's pinned source. */
+    abilities: { name: string; value: number; sourcePath: string }[];
+    /** Damage in one turn of at least this multiple of Reason stops all maintenance. */
+    breakMultiplierOfReason: number;
+  };
+  /**
    * Damage at the end of each of the hero's turns for each negative point of the resource (the
    * Talent's strain). Registered as its own clock step when present.
    */
@@ -148,6 +158,11 @@ const BLESSED_DOMAIN = {
 
 const TROUBADOUR_DRAMA =
   'vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/drama.md';
+
+const ELEMENTALIST_ESSENCE =
+  'vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/essence.md';
+const PERSISTENT_MAGIC =
+  'vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/persistent-magic.md';
 
 /** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
@@ -880,6 +895,138 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
         quote: 'When you or another hero dies, you gain 10 drama.',
         confirmation:
           'Applied automatically when recorded damage takes a hero to the death threshold; claim it for a death the app did not record.',
+      },
+    ],
+  },
+  {
+    className: 'Elementalist',
+    // feature/elementalist/level-7/surging-essence.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'essence',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: ELEMENTALIST_ESSENCE,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain essence equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'fixed',
+      amount: 2,
+      sourcePath: ELEMENTALIST_ESSENCE,
+      quote: 'At the start of each of your turns during combat, you gain 2 essence.',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: ELEMENTALIST_ESSENCE,
+      quote: 'You lose any remaining essence at the end of the encounter.',
+    },
+    persistent: {
+      sourcePath: PERSISTENT_MAGIC,
+      quote:
+        "If you maintain a persistent ability in combat, you reduce the amount of essence you earn at the start of your turn by an amount equal to the ability's persistent value, which enables the ability's persistent effect.",
+      breakMultiplierOfReason: 5,
+      abilities: [
+        {
+          name: 'Behold the Mystery',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md',
+        },
+        {
+          name: 'Conflagration',
+          value: 2,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/conflagration.md',
+        },
+        {
+          name: 'Instantaneous Excavation',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md',
+        },
+        {
+          name: 'No More Than a Breeze',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md',
+        },
+        {
+          name: 'The Flesh, a Crucible',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/the-flesh-a-crucible.md',
+        },
+        {
+          name: 'O Flower Aid, O Earth Defend',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md',
+        },
+        {
+          name: 'Swarm of Spirits',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md',
+        },
+        {
+          name: 'Wall of Fire',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md',
+        },
+        {
+          name: 'Storm of Sands',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-5/storm-of-sands.md',
+        },
+        {
+          name: "Web of All That's Come Before",
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-5/web-of-all-thats-come-before.md',
+        },
+        {
+          name: 'Luminous Champion Aloft',
+          value: 1,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-6/luminous-champion-aloft.md',
+        },
+        {
+          name: 'Magma Titan',
+          value: 2,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-6/magma-titan.md',
+        },
+        {
+          name: 'The Wode Remembers and Returns',
+          value: 2,
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-6/the-wode-remembers-and-returns.md',
+        },
+      ],
+    },
+    triggers: [
+      {
+        id: 'elementalist-typed-damage',
+        label: 'You or a creature within 10 squares took typed damage (not holy)',
+        amount: 1,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 2,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/elementalist/level-4/font-of-essence.md',
+            quote:
+              "The first time each combat round that you or a creature within 10 squares takes damage that isn't untyped or holy damage, you gain 2 essence instead of 1.",
+          },
+        ],
+        limit: 'round',
+        sourcePath: ELEMENTALIST_ESSENCE,
+        quote:
+          "Additionally, the first time each combat round that you or a creature within 10 squares takes damage that isn't untyped or holy damage, you gain 1 essence.",
+        confirmation:
+          'Damage types and positions are not tracked; the table confirms damage that is not untyped or holy, to you or a creature within 10 squares.',
       },
     ],
   },

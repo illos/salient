@@ -148,3 +148,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V144 | [Null discipline generation and the observed Malice trigger](V144-null-discipline-generation.md) | In progress (ENGINE2); depends on V142 |
 | V147 | [Conduit piety generation: prayer and domain triggers](V147-conduit-piety-generation.md) | Ready for testing after V142/V144; independent review PASS |
 | V149 | [Troubadour drama generation](V149-troubadour-drama-generation.md) | Ready for testing after V142/V144/V147; independent review PASS |
+| V148 | [Elementalist essence generation with Persistent Magic](V148-elementalist-essence-generation.md) | Ready for testing after V142; independent review PASS |

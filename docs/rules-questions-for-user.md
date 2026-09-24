@@ -1136,3 +1136,28 @@ Alternatives: once per turn for the three-heroes trigger; no turn-start gain whi
 pre-winded hero counting at encounter start.
 
 Recommendation: keep the current behaviour.
+## Q-RES-10: whose "one turn" ends Persistent Magic?
+
+`feature/elementalist/level-1/persistent-magic.md`: "If you take damage equal to or greater than 5
+times your Reason score in one turn, you stop maintaining any persistent abilities."
+
+Current behaviour (V148, labelled interpretation):
+- Damage is totalled per turn of whichever creature is acting: the encounter's active turn when the
+  damage is recorded.
+- Damage recorded between turns counts on its own.
+- Maintenance stops when the total reaches the threshold.
+
+Alternatives:
+- **(a)** Only damage during the Elementalist's own turn counts.
+- **(b)** Use a rolling window from the Elementalist's turn to their next turn.
+
+Recommendation: keep the current behaviour. A turn is any creature's turn, and each is counted
+separately.
+
+Related V148 limits (labelled):
+- The tally counts damage earlier in the same turn, even before maintenance began.
+- A correction that lowers damage after a break doesn't restore maintenance, and the broken
+  instance's use stays spent. To recover, undo back to the damage and re-record it as corrected, or
+  adjust essence by hand to match. Automatic restoration is a follow-up.
+- A use may be maintained later in the encounter rather than immediately after it. The alternative
+  is only immediately after the use.

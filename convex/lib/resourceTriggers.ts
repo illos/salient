@@ -278,6 +278,8 @@ export async function observeHeroDamage(
   if (!character?.liveState || !baseline || character.campaignId !== scope.campaignId) return;
   const winded = baseline.windedValue.value;
   const profile = generationProfile(baseline);
+  if (profile)
+    await observePersistentBreak(ctx, scope, characterId, profile, baseline, before, after);
   const own = profile
     ? triggersFor(profile, baseline).filter(trigger =>
         damageSatisfies(trigger.observe, winded, before, after),
@@ -407,4 +409,66 @@ export async function observeMaliceAbility(ctx: MutationCtx, scope: JournalScope
     ))
       await applyObserved(ctx, scope, characterId, profile, trigger, encounter, scope.eventId);
   }
+}
+
+/**
+ * V148 (feature/elementalist/level-1/persistent-magic.md): "If you take damage equal to or greater
+ * than 5 times your Reason score in one turn, you stop maintaining any persistent abilities."
+ * Labelled interpretation (Q-RES-10): "one turn" is the turn during which the damage is recorded
+ * (the encounter's active turn, whoever's it is); damage recorded between turns counts alone.
+ */
+async function observePersistentBreak(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  characterId: Id<'characters'>,
+  profile: GenerationProfile,
+  baseline: NonNullable<ReturnType<typeof baselineOf>>,
+  before: Pools,
+  after: Pools,
+): Promise<void> {
+  if (!profile.persistent) return;
+  const taken = before.stamina + before.temporaryStamina - (after.stamina + after.temporaryStamina);
+  if (taken <= 0) return;
+  const campaign = await ctx.db.get(scope.campaignId);
+  const encounter = campaign ? await committedEncounter(ctx, campaign) : null;
+  if (!encounter) return;
+  const hero = (await ctx.db.get(characterId))!;
+  const live = hero.liveState!;
+  const maintained = (live.maintained ?? []).filter(entry => entry.encounterId === encounter._id);
+  // The tally runs whether or not anything is maintained yet, so damage earlier in the same turn
+  // counts toward a break once maintenance starts (V148 review R4).
+  const turnId = encounter.activeTurnId ?? `between-${scope.eventId}`;
+  const sofar = live.turnDamage?.turnId === turnId ? live.turnDamage.amount : 0;
+  const total = sofar + taken;
+  const threshold = profile.persistent.breakMultiplierOfReason * baseline.characteristics.R.value;
+  const broken = maintained.length > 0 && total >= threshold;
+  if (broken) {
+    const cause = (await ctx.db.get(scope.eventId))!;
+    await appendEvent(ctx, {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      encounterId: encounter._id,
+      origin: 'engine',
+      commandId: cause.commandId,
+      causeEventId: scope.eventId,
+      kind: 'resource.maintenance-ended',
+      description: `${hero.authored.name} took ${total} damage this turn (at least ${profile.persistent.breakMultiplierOfReason} × Reason = ${threshold}): stops maintaining ${maintained.map(entry => entry.ability).join(', ')}.`,
+      payload: {
+        data: {
+          characterId,
+          damageThisTurn: total,
+          threshold,
+          ended: maintained.map(entry => entry.ability),
+          sourcePath: profile.persistent.sourcePath,
+        },
+      },
+    });
+  }
+  await journalPatch(ctx, scope, 'characters', characterId, {
+    liveState: {
+      ...live,
+      turnDamage: { turnId, amount: total },
+      ...(broken ? { maintained: [] } : {}),
+    },
+  });
 }

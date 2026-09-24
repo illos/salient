@@ -101,6 +101,12 @@ export const heroLiveValidator = v.object({
   prayNext: v.optional(v.boolean()),
   /** V149: generation suspended for this encounter (a Troubadour still dead from an earlier one). */
   generationSuspended: v.optional(v.string()),
+  /** V148: persistent abilities maintained this encounter (Elementalist). */
+  maintained: v.optional(
+    v.array(v.object({ ability: v.string(), value: v.number(), encounterId: v.string() })),
+  ),
+  /** V148: damage taken during the current turn, for Persistent Magic's break. */
+  turnDamage: v.optional(v.object({ turnId: v.string(), amount: v.number() })),
   /** V120: table-confirmed class resource triggers claimed in the current encounter. */
   resourceClaims: v.optional(
     v.array(

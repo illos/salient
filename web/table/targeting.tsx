@@ -390,6 +390,32 @@ export function AbilityPanel({
           />
         </p>
       )}
+      {sheet.resourceMaintenance && sheet.resourceMaintenance.inCombat && (
+        <ul className="m-0 flex list-none flex-col gap-1 p-0" aria-label="Persistent abilities">
+          {sheet.resourceMaintenance.abilities.map(ability => (
+            <li key={ability.name} className="flex flex-wrap items-center gap-2 text-sm">
+              <span>
+                {ability.name}: persistent {ability.value}
+                {ability.maintained ? ` (maintained × ${ability.maintained})` : ''}
+              </span>
+              <Command
+                campaignId={campaignId}
+                text={`${ref(actor)} /resource maintain ability="${ability.name}" value=on`}
+                label="Maintain"
+                title={sheet.resourceMaintenance!.quote}
+              />
+              {ability.maintained > 0 && (
+                <Command
+                  campaignId={campaignId}
+                  text={`${ref(actor)} /resource maintain ability="${ability.name}" value=off`}
+                  label="Stop one"
+                />
+              )}
+              <RuleLink sourcePath={ability.sourcePath} label={ability.name} />
+            </li>
+          ))}
+        </ul>
+      )}
       {sheet.resourceTriggers.length > 0 && (
         <ul className="m-0 flex list-none flex-col gap-1 p-0" aria-label="Resource triggers">
           {sheet.resourceTriggers.map(trigger => (
