@@ -48,7 +48,8 @@ export interface TableFixture {
  */
 export async function createTable(
   browser: Browser,
-  options: { combat?: boolean; viewport?: Viewport } = {},
+  /** `foes: false` skips loading foes for journeys that need only a Director, a player and a hero. */
+  options: { combat?: boolean; foes?: boolean; viewport?: Viewport } = {},
 ): Promise<TableFixture> {
   const viewport = options.viewport ?? VIEWPORTS[0]!;
   const contexts: BrowserContext[] = await Promise.all(
@@ -73,6 +74,9 @@ export async function createTable(
   await player.goto(invite);
   await player.getByRole('button', { name: 'Request to join' }).click();
   await director.getByRole('button', { name: 'Approve', exact: true }).click();
+  // Close the Manage players card before using the campaign header again.
+  await director.keyboard.press('Escape');
+  await expect(director.getByRole('dialog')).toHaveCount(0);
   const heroName = `Thorn ${stamp}`;
   const heroId = await seedLocalHero(
     campaignId,
@@ -84,14 +88,18 @@ export async function createTable(
   // one Stamina bar per loaded foe (journey.spec.ts asserts the same).
   await player.goto(campaignUrl);
   await expect(player.getByRole('heading', { name: `Blackcastle ${stamp}` })).toBeVisible();
-  for (const count of [1, 2]) {
+  for (const count of options.foes === false ? [] : [1, 2]) {
     await director.getByRole('button', { name: 'Add foe', exact: true }).click();
     await expect(player.getByRole('progressbar', { name: 'Goblin Warrior Stamina' })).toHaveCount(
       count,
     );
   }
-  await director.getByRole('checkbox', { name: `Player ${stamp}`, exact: true }).check();
+  // Start session opens a card where every member plays; confirm it there.
   await director.getByRole('button', { name: 'Start session', exact: true }).click();
+  await director
+    .getByRole('dialog')
+    .getByRole('button', { name: 'Start session', exact: true })
+    .click();
   await expect(director.getByRole('button', { name: 'Pause session', exact: true })).toBeVisible();
   const tableUrl = `${campaignUrl}/table`;
   await Promise.all([director, player].map(page => page.goto(tableUrl)));

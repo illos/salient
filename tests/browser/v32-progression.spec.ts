@@ -30,7 +30,7 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
   browser,
 }) => {
   test.setTimeout(600_000);
-  const fixture = await createTable(browser);
+  const fixture = await createTable(browser, { foes: false });
   const { player, director, heroId: characterId, campaignId, heroName } = fixture;
   const owner = fixture.credentials('player');
   const dm = fixture.credentials('director');
