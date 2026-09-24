@@ -57,3 +57,9 @@ ferocity.
 - Review closure: PASS at `e6cc919`.
 - TESTER gate at `0fb9bb1c`: `tsc -p tsconfig.web.json` failed in the new app test. The witness
   selections needed an `unknown` cast (TS2352). Fixed.
+- Train 2c (`test-artifacts/train2c-5bc03ef/`): the `beastheart` journey (14 heroes of about 170 KB
+  each in one campaign) hit Convex's 16 MB read limit in `combat.commit`. V120's registration loop
+  and the combat-start grant each re-read every hero, adding two passes over the 14 documents.
+  - `combat.commit` now reuses the documents it read for the snapshot.
+  - A combat-start grant of 0 skips its write and the read inside it.
+  - With 0 Victories, the commit reads each hero one more time than on main, instead of three.
