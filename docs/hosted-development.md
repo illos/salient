@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — resource train 3 (V141, V143, V146, V142)
+## Current release — resource train 4 (V144, V147, V149, V148)
+
+Backend/frontend source `71a3fa5053e753ef98f380f90f9faae52d0a0023` published on 2026-09-24 as
+Worker `e7cd0093-3a28-400a-8853-df89561e8a77`: automatic Null, Conduit, Troubadour and Elementalist heroic resources, completing all
+eleven classes. Backend and schema validation, the hosted build and the upload succeeded. Content
+remains the 1852-entry snapshot, so no reseed was needed. The tip passed the full gate and headless
+journeys before merge, with no smoke test. See the [ledger](../deploy.md).
+
+## Previous release — resource train 3 (V141, V143, V146, V142)
 
 Backend/frontend source `7e9f7317088f6db0c8b93750d4a790eeb4607aa0` published on 2026-09-24 as
 Worker `35639817-fb01-4132-9428-728b6512c8ec`: automatic Summoner, Beastheart, Talent and Fury heroic resources. Backend and schema

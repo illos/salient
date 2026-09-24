@@ -42,6 +42,10 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V148 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
+| V149 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
+| V147 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
+| V144 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
 | V142 | `7e9f731` | Merged in resource train 3; backend/frontend published; gate and headless at tip | complete |
 | V146 | `7e9f731` | Merged in resource train 3; backend/frontend published; gate and headless at tip | complete |
 | V143 | `7e9f731` | Merged in resource train 3; backend/frontend published; gate and headless at tip | complete |
@@ -581,3 +585,22 @@ The test and deploy thread fast-forwarded main to `7e9f7317088f6db0c8b93750d4a79
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/rtrain3-release-7e9f731`.
+
+### Resource train 4 (V144, V147, V149, V148) publication: 2026-09-24
+
+ENGINE2 stacked V144 Null discipline, V147 Conduit piety, V149 Troubadour drama and V148 Elementalist
+essence with QC1's correction fixes on main `16bc742`. The test and deploy thread added ENGINE2's
+reviewed Fury journey fix on top and fast-forwarded main to `71a3fa5053e753ef98f380f90f9faae52d0a0023`. Automatic heroic resources now
+cover all eleven classes.
+- Full gate at `44d4cc1` (256 s, 431 engine and 691 app tests); the tip adds only the reviewed
+  `scripts/headless/fury.ts` change (tsc and eslint clean).
+- Journeys at the tip: `heroic-resource`, the Null, Conduit, Troubadour and Elementalist level-three
+  journeys and `fury`. The base `null`, `conduit`, `troubadour` and `elementalist` journeys failed
+  identically on main (stale expectations, fixed separately).
+- Independent reviews and QC1 final clearance passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `e7cd0093-3a28-400a-8853-df89561e8a77`.
+- Content is unchanged at 1852 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/rtrain4-release-71a3fa5`.

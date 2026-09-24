@@ -60,3 +60,9 @@ rules review, including a trigger observed from a paid Malice cost.
 - Closure round: R3, the regression corrected Thorn rather than the Null. The first Bury the Point
   now hits the Null and the correction targets the Null, asserting no `resource.reversed`. Checked
   by removing the V142 guard: the test fails without it and passes with it.
+
+## Publication: 2026-09-24
+
+Merged in resource train 4 (V144, V147, V149, V148) as main `71a3fa5`. The train passed the full
+gate (431 engine and 691 app tests) and its headless journeys. The backend and frontend were
+published as Worker `e7cd0093-3a28-400a-8853-df89561e8a77`. Release logs: `/srv/presidium/projects/salient/test-artifacts/rtrain4-release-71a3fa5`.

@@ -80,3 +80,9 @@ two domains.
 
 - QC1 train-4 advisory: a declared prayer is cancelled, and logged, when a Self-Taught forgo removes
   that turn's roll, instead of being silently carried to a later turn.
+
+## Publication: 2026-09-24
+
+Merged in resource train 4 (V144, V147, V149, V148) as main `71a3fa5`. The train passed the full
+gate (431 engine and 691 app tests) and its headless journeys. The backend and frontend were
+published as Worker `e7cd0093-3a28-400a-8853-df89561e8a77`. Release logs: `/srv/presidium/projects/salient/test-artifacts/rtrain4-release-71a3fa5`.
