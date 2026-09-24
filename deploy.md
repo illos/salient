@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V117 | `2dcbf97` | Merged; backend/content/frontend published; combined gates at tip | complete |
 | V119 | `3c02939` | Merged; backend/frontend published; accepted gates reused | complete |
 | V115 | `4cc7f31` | Merged; backend/frontend published; accepted gates reused | complete |
 | V116 | `3175606` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -439,3 +440,18 @@ fast-forwarded into main. It adds a docs-only record to the tested `85efd9d`.
   helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V119-release-3c02939`.
+
+### V117 Censor levels two and three publication: 2026-09-24
+
+The test and deploy thread published this release at WIZARD3's handoff. Reviewed tip `2dcbf978bbf763825c71e5a4a598963f1cbab52f` was
+fast-forwarded into main. Because the rebase combined V117 with V119's runtime code, the tip itself
+was tested before merge:
+- Full gate at `2dcbf97` (241 s, run by the Test-support thread).
+- Isolated `censor-level-three` and `grab` journeys at `2dcbf97`.
+- Independent rules review passed.
+- Backend publication and schema validation succeeded.
+- The content reseed read back 1708 entries at `fb83a789`.
+- The hosted build and the frontend upload succeeded. Worker `18bbb949-22f5-4349-8083-305f3b96defa`.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V117-release-2dcbf97`.

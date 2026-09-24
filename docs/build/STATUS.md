@@ -130,4 +130,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V118 | [Vendor path resolver for worktrees](V118-vendor-path-resolver.md) | Merged; worktree `pnpm check` and independent review PASS |
 | V115 | [Kit bonus correctness and known condition immunity](V115-kit-bonus-correctness.md) | Merged (`4cc7f31`); cloud dev published; accepted TESTER results reused |
 | V119 | [Grabs and the common grab and stand-up maneuvers](V119-grab-lifecycle.md) | Merged (`3c02939`); cloud dev published; accepted TESTER results reused |
-| V117 | [Censor levels two and three](V117-censor-level-three.md) | Ready for integration; full gate, isolated headless and independent review PASS |
+| V117 | [Censor levels two and three](V117-censor-level-three.md) | Merged (`2dcbf97`); cloud dev published with content reseed; combined gate and headless PASS at tip |

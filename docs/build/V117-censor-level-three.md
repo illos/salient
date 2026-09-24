@@ -62,3 +62,13 @@ shared API. Guided advancement remains deferred.
   47 s: six builds, level edits and eighteen new uses persisted, seed 1708; the only backend error was
   the deliberate peer owner refusal. Artifacts `/srv/presidium/projects/salient/test-artifacts/V117-e4fe41e`.
 - Ready for integration and cloud dev publication, reusing these results.
+
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `2dcbf97` into main. The rebase onto V119 combined
+runtime code, so the tip itself was tested first: the full gate (241 s, 410 engine and 661 app
+tests) and the `censor-level-three` and `grab` journeys passed. The backend, content and frontend
+were then published using the DEPLOY2 hosted procedure. Backend and schema validation succeeded,
+the reseed read back 1708 entries at `fb83a789`, and the hosted build and upload succeeded.
+Worker: `18bbb949-22f5-4349-8083-305f3b96defa`. Temporary credentials were removed and the private hosted helpers stopped. Release
+logs: `/srv/presidium/projects/salient/test-artifacts/V117-release-2dcbf97`.

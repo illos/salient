@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V119 grabs, Escape Grab and Stand Up
+## Current release — V117 Censor levels two and three
+
+Backend/content/frontend source `2dcbf978bbf763825c71e5a4a598963f1cbab52f` published on 2026-09-24 as
+Worker `18bbb949-22f5-4349-8083-305f3b96defa`. Backend and schema validation, the content reseed (1708 entries at
+`fb83a789`), the hosted build and the upload succeeded. The combined V117 and V119 tip passed the
+full gate and headless journeys before merge, with no smoke test. See
+[V117](build/V117-censor-level-three.md) and the [ledger](../deploy.md).
+
+## Previous release — V119 grabs, Escape Grab and Stand Up
 
 Backend/frontend source `3c02939f3b71bec8a4a80427ddd971e72a972087` published on 2026-09-24 as
 Worker `28a58465-a6d3-4879-93d6-72dcc190d2ca`. Backend and schema validation, the hosted build and the upload succeeded. Content
