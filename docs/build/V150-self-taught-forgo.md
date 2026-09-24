@@ -58,3 +58,6 @@ App test `tests/app/heroic-resource-forgo.test.ts`, on a Self-Taught Shadow:
   journal back to the turn-start gain. Any change to the pool that stands (the event was not undone
   and is not a history event) refuses it. The test claims, adjusts back to the post-gain value,
   expects the refusal, and forgoes after undoing both.
+- QC1 R1b: the journal scan stopped after 500 rows and then assumed no change. It now iterates the
+  hero's journal without a cap until it reaches the gain's own rows. If it never reaches them, the
+  forgo is refused. The test points the anchor at a missing event and expects the refusal.

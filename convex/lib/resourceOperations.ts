@@ -324,12 +324,13 @@ async function poolChangedSince(
   characterId: Id<'characters'>,
   gainEventId: string,
 ): Promise<boolean> {
-  const rows = await ctx.db
+  // Walk the hero's journal newest first, without a cap, until the gain's own rows. If the gain is
+  // never reached, the history can't confirm the pool is untouched, so treat it as changed.
+  const rows = ctx.db
     .query('changes')
     .withIndex('by_entity', q => q.eq('entityTable', 'characters').eq('entityId', characterId))
-    .order('desc')
-    .take(500);
-  for (const row of rows) {
+    .order('desc');
+  for await (const row of rows) {
     if (row.eventId === gainEventId) return false;
     if (row.path !== 'liveState.heroicResource.current') continue;
     const event = await ctx.db.get(row.eventId);
@@ -337,7 +338,7 @@ async function poolChangedSince(
     // disposition says whether its change stands.
     if (event && event.disposition !== 'undone' && !event.kind.startsWith('history.')) return true;
   }
-  return false;
+  return true;
 }
 
 /** V150: the hero's Self-Taught forgo state for `abilities:sheet`, or null without it. */

@@ -81,6 +81,19 @@ test('V150: a Self-Taught Shadow forgoes insight until the start of their next t
   await expect(command(`${ref} /resource forgo value=now`, true)).rejects.toThrow(/changed/);
   await command('/history undo');
   await command('/history undo', true);
+  // QC1 R1b: if the gain's journal entry can't be found, the pool can't be confirmed untouched.
+  const kept = (await live()).lastTurnGain!;
+  await t.run(async ctx => {
+    const hero = (await ctx.db.get(shadow))!;
+    await ctx.db.patch(shadow, {
+      liveState: { ...hero.liveState!, lastTurnGain: { ...kept, eventId: 'missing-anchor' } },
+    });
+  });
+  await expect(command(`${ref} /resource forgo value=now`, true)).rejects.toThrow(/changed/);
+  await t.run(async ctx => {
+    const hero = (await ctx.db.get(shadow))!;
+    await ctx.db.patch(shadow, { liveState: { ...hero.liveState!, lastTurnGain: kept } });
+  });
   // Decided at this turn's start after the gain: value=now removes this turn's gain and forgoes.
   await command(`${ref} /resource forgo value=now`, true);
   expect((await live()).heroicResource.current).toBe(0);
