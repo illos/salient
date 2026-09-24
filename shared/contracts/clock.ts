@@ -101,7 +101,7 @@ export type ScheduledWorkKind =
    */
   | {
       kind: 'heroic-resource';
-      step: 'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss';
+      step: 'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss' | 'turn-end-strain';
       characterId: CreatureId;
     }
   /** Any other source-backed operation registered by A04/A05; must name its registered operation. */

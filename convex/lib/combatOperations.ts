@@ -485,8 +485,10 @@ const combatCommit: OperationDefinition = {
           const profile = generationProfile(baselineOf(record?.derivedBaseline));
           if (!record?.liveState || !profile) continue;
           const resource = record.liveState.heroicResource.name;
-          const work = (step: 'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss') =>
-            ({ kind: 'heroic-resource', step, characterId }) as const;
+          const work = (
+            step:
+              'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss' | 'turn-end-strain',
+          ) => ({ kind: 'heroic-resource', step, characterId }) as const;
           const affectedIds = [characterId];
           await registerWork(mctx, scope, encounter._id, {
             timing: { scope: 'combat', boundary: 'combat-start' },
@@ -511,6 +513,22 @@ const combatCommit: OperationDefinition = {
             ),
             affectedIds,
           });
+          // V146: the Talent's strain damage at the end of each of its turns.
+          if (profile.turnEndStrain)
+            await registerWork(mctx, scope, encounter._id, {
+              timing: {
+                scope: 'creature-turn',
+                boundary: 'turn-end',
+                creatureId: characterId,
+                occurrence: 'each',
+              },
+              work: work('turn-end-strain'),
+              source: source(
+                `${record.authored.name}'s ${resource}: strain damage at turn end`,
+                profile.turnEndStrain.sourcePath,
+              ),
+              affectedIds,
+            });
           await registerWork(mctx, scope, encounter._id, {
             timing: { scope: 'combat', boundary: 'combat-end' },
             work: work('encounter-end-loss'),

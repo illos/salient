@@ -979,3 +979,17 @@ strike is a manual record. Recommendation: apply the bonus, since the orb strike
 Several level-2/3 Strained paragraphs say "The potency of this ability increases by 1" (`slow.md`,
 `soul-burn.md`). Interim reading: each tier's potency threshold rises by 1. The Strain records are
 manual, so nothing is automated either way. Nothing else in V136 depends on either answer.
+## Q-RES-8: strain when combat ends during the Talent's turn
+
+`feature/talent/level-1/clarity-and-strain.md`: "At the end of each of your turns, you take 1 damage
+for each negative point of clarity."
+
+Current behaviour (V146, labelled interpretation):
+- `combat.end` closes the active turn without a turn-end step, as it does for every other effect.
+- A Talent still strained when the Director ends combat during their turn takes no strain for that
+  turn. `combat.finish` then resets clarity to 0.
+
+Alternative: apply that turn's strain at `combat.end`.
+
+Recommendation: keep the current behaviour. Ending combat ends the encounter before the turn's end.
+The table can apply the damage with `/adjust stamina` if it rules otherwise.

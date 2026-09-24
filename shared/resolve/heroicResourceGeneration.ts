@@ -53,6 +53,19 @@ export interface GenerationProfile {
   turnStart: TurnStartGain;
   /** `lose`: remaining resource is lost (to 0); `reset`: any value, negative included, returns to 0. */
   encounterEnd: { kind: 'lose' | 'reset' } & SourcedClause;
+  /**
+   * Damage at the end of each of the hero's turns for each negative point of the resource (the
+   * Talent's strain). Registered as its own clock step when present.
+   */
+  turnEndStrain?: SourcedClause & {
+    /**
+     * Features whose damage immunity the table tracks by hand and which can reduce the strain; for a
+     * hero with one, the strain is logged as due and left to the table instead of applied.
+     */
+    heldBy?: { name: string; sourcePath: string }[];
+    /** Features the strain damage can set off; named in the log when the hero has one. */
+    notedBy?: { name: string; sourcePath: string }[];
+  };
   triggers: ResourceTrigger[];
 }
 
@@ -67,6 +80,9 @@ const SUMMONER_ESSENCE =
 
 const BEASTHEART_FEROCITY =
   'vendor/steel-compendium/en/unified/md/feature/beastheart/level-1/ferocity.md';
+
+const TALENT_CLARITY =
+  'vendor/steel-compendium/en/unified/md/feature/talent/level-1/clarity-and-strain.md';
 
 /** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
@@ -318,6 +334,78 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
           'Additionally, the first time each combat round that a creature adjacent to your companion takes damage, you gain 2 ferocity.',
         confirmation:
           'Your companion and positions are not tracked; the table confirms a creature adjacent to your companion took damage.',
+      },
+    ],
+  },
+  {
+    className: 'Talent',
+    // feature/talent/level-7/lucid-mind.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'clarity',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: TALENT_CLARITY,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain clarity equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'dice',
+      sides: 3,
+      sourcePath: TALENT_CLARITY,
+      quote: 'At the start of each of your turns during combat, you gain 1d3 clarity.',
+    },
+    encounterEnd: {
+      kind: 'reset',
+      sourcePath: TALENT_CLARITY,
+      quote:
+        'You lose any remaining clarity or reset any negative clarity at the end of the encounter.',
+    },
+    turnEndStrain: {
+      sourcePath: TALENT_CLARITY,
+      quote:
+        'At the end of each of your turns, you take 1 damage for each negative point of clarity.',
+      // Steel Ward: "damage immunity equal to your Reason score until the end of your next turn"
+      // after any damage; Force Orbs also grants immunity. Both are tracked by hand.
+      heldBy: [
+        {
+          name: 'Steel Ward',
+          sourcePath: 'vendor/steel-compendium/en/unified/md/feature/talent/level-1/steel-ward.md',
+        },
+        {
+          name: 'Force Orbs',
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/force-orbs.md',
+        },
+      ],
+      notedBy: [
+        {
+          name: 'Vanishing Ward',
+          sourcePath:
+            'vendor/steel-compendium/en/unified/md/feature/talent/level-1/vanishing-ward.md',
+        },
+      ],
+    },
+    triggers: [
+      {
+        id: 'talent-forced-movement',
+        label: 'A creature was force moved',
+        amount: 1,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 2,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/talent/level-4/mind-recovery.md',
+            quote:
+              'Additionally, the first time each combat round that a creature is force moved, you gain 2 clarity instead of 1.',
+          },
+        ],
+        limit: 'round',
+        sourcePath: TALENT_CLARITY,
+        quote:
+          'Additionally, the first time each combat round that a creature is force moved, you gain 1 clarity.',
+        confirmation:
+          'Movement is not executed by the app; the table confirms a creature was actually force moved (any creature, by anyone).',
       },
     ],
   },
