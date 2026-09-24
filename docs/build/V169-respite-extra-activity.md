@@ -19,8 +19,12 @@ V166 refused any second activity.
   `feature/fury/level-8/menagerie.md` (a stormwight kit swap uses no activity),
   `treasure/artifact/mortal-coil.md` (one more per creature in its area),
   `feature/tactician/level-7/grand-strategy.md` and `shock-and-awe.md` (a project roll in addition),
-  `title/master-librarian.md` (a project with no activity), and the monster abilities that deny the
-  next respite's activity (`flesh-mournling.md`, `high-elf-palinode.md`). Inspired Artisan adds a
+  `title/master-librarian.md` (a project with no activity), and at any level
+  `project/spend-time-with-loved-ones.md` (Event 2: a project roll that is not an activity). Conditional losses of the activity, at any
+  level: the complications `complication/evanesceria.md` (a rolled drawback) and `complication/ward.md`
+  (when the ward needs help), and monster effects on the next respite (`flesh-mournling.md`,
+  `high-elf-palinode.md`, `radenwight/radenwight-malice.md`). The Director records a lost activity
+  by name with `/respite activity`. Inspired Artisan adds a
   second project roll within one activity, which stays manual.
 
 ## Scope
@@ -53,3 +57,5 @@ V166 refused any second activity.
 
 - Built on `slice/V169`, `.worktrees/respite-extra`, stacked on V167. Author checks: lint, both
   TypeScript projects, respite app tests (14/14).
+- Re-review FAIL (doc only): the denial list lacked Evanesceria, Ward and Radenwight malice; added.
+- Confirmation pass added Spend Time with Loved Ones (Event 2); otherwise PASS.

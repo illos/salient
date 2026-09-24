@@ -6,11 +6,15 @@
  * - feature/null/level-2/rapid-processing.md (Chronokinetic): "during any respite, you can take an
  *   additional respite activity." It is the only such grant at levels 1–3.
  *
- * Deferred, all above level 3 or outside hero builds (docs/build/V169-respite-extra-activity.md):
- * feature/talent/level-8/doubling-the-hours.md, feature/fury/level-8/menagerie.md,
- * treasure/artifact/mortal-coil.md, feature/tactician/level-7/grand-strategy.md and
- * shock-and-awe.md, title/master-librarian.md, and monster abilities that deny the next respite's
- * activity (flesh-mournling, high-elf-palinode). Until then these are resolved manually.
+ * Deferred and resolved manually (docs/build/V169-respite-extra-activity.md):
+ * - Further grants above level 3: feature/talent/level-8/doubling-the-hours.md,
+ *   feature/fury/level-8/menagerie.md, feature/tactician/level-7/grand-strategy.md and
+ *   shock-and-awe.md, title/master-librarian.md; and, at any level, treasure/artifact/mortal-coil.md
+ *   and project/spend-time-with-loved-ones.md (Event 2: a project roll that is not an activity).
+ * - Conditional losses of the activity, at any level: complication/evanesceria.md (a rolled
+ *   drawback), complication/ward.md (when the ward needs help), and monster effects on the next
+ *   respite (flesh-mournling, high-elf-palinode, radenwight-malice). The Director records the lost
+ *   activity by name with `/respite activity`.
  */
 import type { GrantedFeature } from '../contracts/characterEvaluation.ts';
 
