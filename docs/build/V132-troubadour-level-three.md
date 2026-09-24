@@ -67,3 +67,8 @@ and shared API. Guided advancement remains deferred.
 - Follow-up (engine, not in this slice): Star Solo's free repeat for two rounds is a full use with its
   roll at no Drama. It is recorded as manual here; a cost-waived `ability.use` against the same target
   would automate it.
+- Test-support gate PASS at `5bacf33`: `CI=true pnpm check` rc0 in 252 s, engine 413/413, app+scripts
+  661/661, content 1732 entries at the pin. Test-Deploy isolated `troubadour-level-three` cohort rc0 in
+  50 s: six builds, level edits and twenty-four new uses persisted, seed 1732; the only backend error
+  was the deliberate peer owner refusal. Artifacts `/srv/presidium/projects/salient/test-artifacts/V132-5bacf33`.
+- Ready for integration and cloud dev publication, reusing these results.
