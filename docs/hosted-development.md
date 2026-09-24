@@ -114,7 +114,13 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V157 abilities without a power roll and V158 effect instances
+## Current release — V167 respite table controls and V169 Rapid Processing
+
+Backend/frontend source `59b890c21fd7b8e1d53ce7d70478873502b82b7f` published on 2026-09-24 as
+Worker `089b650b-6979-4377-9527-34bf19876d72`. Backend and schema validation, the hosted build and the upload succeeded. Content
+remains the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
+
+## Previous release — V157 abilities without a power roll and V158 effect instances
 
 Backend/frontend source `6632e95def1e4797c504e3ab79a51fb9bc3d29b2` published on 2026-09-24 as
 Worker `c594c5db-1402-41a2-b460-d3efe7352912`. Backend and schema validation, the hosted build and the upload succeeded. Content

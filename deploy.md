@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V169 | `59b890c` | Merged with V167 and V169 stacked; backend/frontend published; gate and headless at tip | complete |
+| V167 | `59b890c` | Merged with V167 and V169 stacked; backend/frontend published; gate and headless at tip | complete |
 | V158 | `6632e95` | Merged with V157 and V158 stacked; backend/frontend published; gate and headless at tip | complete |
 | V157 | `6632e95` | Merged with V157 and V158 stacked; backend/frontend published; gate and headless at tip | complete |
 | V168 | `79fc25f` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -746,3 +748,19 @@ compiled abilities) on main `02ff1fd`. The test and deploy thread fast-forwarded
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V158-release-6632e95`.
+
+### V167 respite table controls and V169 Rapid Processing publication: 2026-09-24
+
+WIZARD3 stacked V167 (respite card and activity controls on the table, with the Director choosing
+the resting heroes) and V169 (the Rapid Processing extra respite activity) on main `dd8c9ed`. The
+test and deploy thread fast-forwarded main to `59b890c21fd7b8e1d53ce7d70478873502b82b7f`.
+- Full gate at the tip (272 s, 443 engine and 782 app tests); V167 alone also passed its gate.
+- Journeys at the tip: `respite`, `level-up`, `lifecycle` and `all` (29/29, 240 s: at the runner's
+  deadline, so `all` needs splitting again).
+- Independent rules reviews passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `089b650b-6979-4377-9527-34bf19876d72`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V169-release-59b890c`.

@@ -59,3 +59,8 @@ V166 refused any second activity.
   TypeScript projects, respite app tests (14/14).
 - Re-review FAIL (doc only): the denial list lacked Evanesceria, Ward and Radenwight malice; added.
 - Confirmation pass added Spend Time with Loved Ones (Event 2); otherwise PASS.
+
+## Publication: 2026-09-24
+
+Merged with V167 and V169 stacked as main `59b890c` and published as Worker `089b650b-6979-4377-9527-34bf19876d72`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V169-release-59b890c`.

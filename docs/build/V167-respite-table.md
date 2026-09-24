@@ -34,3 +34,8 @@ The respite visible and usable at the table ([respite mode](../table-spec.md#res
   resting heroes, as the spec's participant selection requires, instead of resting every hero.
   Noted, not changed: the owner's kit picker shows for an incomplete build or an observer-owner; the
   server refuses both.
+
+## Publication: 2026-09-24
+
+Merged with V167 and V169 stacked as main `59b890c` and published as Worker `089b650b-6979-4377-9527-34bf19876d72`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V169-release-59b890c`.
