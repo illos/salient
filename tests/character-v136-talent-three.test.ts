@@ -174,3 +174,16 @@ test('tradition pools are exclusive; level and tradition edits prune only depend
   assert.ok(features);
   assert.ok(!features.some(f => f.name === 'Ease Their Fall'));
 });
+
+test('perk-granted abilities keep their own text, not the Talent strain note', () => {
+  // feature/talent/level-1/clarity-and-strain.md: strain belongs to Clarity-costing talent effects.
+  const c = cases[0]!;
+  const result = evaluate({ ...c.l2, 'class.talent.level-2.perk': 'Psychic Whisper' }, 2);
+  assert.equal(result.status, 'complete', JSON.stringify(result.diagnostics));
+  const perk = result.baseline!.abilities.filter(
+    a => a.provenance.decisionId === 'class.talent.level-2.perk',
+  );
+  assert.ok(perk.length);
+  for (const a of perk)
+    assert.doesNotMatch(a.activationCondition ?? '', /Strain effects are manual/);
+});

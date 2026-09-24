@@ -326,7 +326,7 @@ export const TALENT_ACTIONS: TalentAction[] = [
     sourcePath: 'en/unified/md/feature/ability/talent/level-3/force-orbs.md',
     actionType: 'Free maneuver',
     activationCondition:
-      'Once on each of your turns, fire an orb at a creature or object within 5 squares as a ranged strike (power roll + Reason: 2/3/5 damage), losing the orb. Resolve the roll and damage manually.',
+      'Once on each of your turns, fire an orb at a creature or object within 5 squares as a ranged strike (power roll + Reason: 2/3/5 damage), losing the orb. Whether a distance bonus extends the 5 squares is Q-TALENT-2. Resolve the roll and damage manually.',
   },
   {
     name: 'Applied Chronometrics: Strain',
@@ -366,7 +366,7 @@ export const TALENT_ACTIONS: TalentAction[] = [
     sourcePath: 'en/unified/md/feature/ability/talent/level-2/overwhelm.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. You cannot use triggered actions or make free strikes until the end of the target’s next turn. Resolve the stated effects manually.',
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. You start crying, and you cannot use triggered actions or make free strikes until the end of the target’s next turn. Resolve the stated effects manually.',
   },
   {
     name: 'Synaptic Override: Strain',
@@ -423,12 +423,13 @@ export const TALENT_ACTIVATION: Record<string, string> = {
     'The power roll sets how many creatures are targeted (two, three or four, one of which can be you); until the start of your next turn each gains +5 speed, cannot be made dazed (ending dazed) and gains an extra maneuver. The roll and effects are resolved manually.',
   Slow: 'Speed halved, slowed or speed 0 by tier and Presence potency (save ends), and a target so reduced cannot use triggered actions. Resolve manually.',
   'Synaptic Override':
-    'You control the target: a free strike, or a shift or move and its signature ability against enemies you choose; it cannot be moved into harm, dying or a condition, but can provoke opportunity attacks. Resolve manually.',
+    'You control the target: a free strike, or a shift or move and its signature ability against enemies you choose; it cannot be moved into harm, dying, a condition or other negative effect, but can provoke opportunity attacks. Resolve manually.',
   'Fling Through Time':
     'A flung target leaves the map until the end of its next turn, reappearing in its space or the nearest unoccupied one; weakened by Presence potency. Resolve manually.',
   'Force Orbs':
     'Three size 1T orbs each give cumulative damage immunity 1; you lose one each time you take damage. Use Force Orbs: Fire Orb for the orb strikes. Resolve manually.',
   'Reflector Field':
     'Until the start of your next turn, a ranged ability an enemy uses against an ally in the aura is negated and reflected back at half damage without its other effects. Resolve manually.',
-  'Soul Burn': 'The target also takes a bane on Presence tests until the end of the encounter.',
+  'Soul Burn':
+    'The target also takes a bane on Presence tests until the end of the encounter. Resolve manually.',
 };

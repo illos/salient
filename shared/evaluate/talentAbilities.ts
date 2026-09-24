@@ -46,8 +46,10 @@ export function talentAbilities(
       },
     });
   }
+  // Perk grants carry their own perk text: they cost no Clarity and have no Strained effect.
   return result.map(a =>
-    a.provenance.decisionId.startsWith('class.talent.')
+    a.provenance.decisionId.startsWith('class.talent.') &&
+    !a.provenance.decisionId.endsWith('.perk')
       ? {
           ...a,
           activationCondition:

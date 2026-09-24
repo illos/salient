@@ -968,3 +968,14 @@ Current behaviour (V150, labelled interpretation):
 Alternative: "until the start of your next turn" also covers the next turn's gain.
 
 Recommendation: keep the current behaviour, since "until" ends the window at that boundary.
+
+## Q-TALENT-2 — Talent Force Orbs range and Strained potency (V136)
+
+`feature/ability/talent/level-3/force-orbs.md` fires an orb "at a creature or object within 5 squares";
+the ability's own distance is Self. Alternatives: a Talent distance bonus (Distance Augmentation, +2)
+extends the 5 squares, or it does not. Current behaviour: the 5 squares are printed as-is and the orb
+strike is a manual record. Recommendation: apply the bonus, since the orb strike is a ranged strike.
+
+Several level-2/3 Strained paragraphs say "The potency of this ability increases by 1" (`slow.md`,
+`soul-burn.md`). Interim reading: each tier's potency threshold rises by 1. The Strain records are
+manual, so nothing is automated either way. Nothing else in V136 depends on either answer.

@@ -49,3 +49,9 @@ shared API. Guided advancement remains deferred.
   pass; V88 audit guard and live compiled report 34/34; an evaluator and route dry run of the cohort
   (six builds, 24 uses) is clean. Content 1769 entries; `compiled:check`, `content:check`,
   `supporting:check`, links pass.
+- Independent rules/implementation review (subagent, source-only) of `4100b3b`: CHANGES REQUIRED, one
+  blocking finding: the Talent strain default note was also applied to perk-granted abilities. Perk
+  grants are now excluded, with a test. Non-blocking closed: real manual-clause patterns for rolled
+  abilities in the cohort, dead compiled-branch code removed, Overwhelm/Synaptic Override/Soul Burn note
+  wording, and the Force Orbs range and Strained potency readings recorded as
+  [Q-TALENT-2](../rules-questions-for-user.md#q-talent-2--talent-force-orbs-range-and-strained-potency-v136).

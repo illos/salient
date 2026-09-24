@@ -62,31 +62,14 @@ const features = ['Ease the Hours', 'Ease Their Fall', 'Ease the Mind', 'Scan'];
 const selfTargets = ['Force Orbs', 'Reflector Field'];
 /** Abilities the table rolls on the legacy route; their clauses stay manual text. */
 const rolledRemainder: Record<string, RegExp | null> = {
-  Slow: null,
-  'Gravitic Burst': null,
-  'Levity and Gravity': null,
-  Overwhelm: null,
-  'Synaptic Override': null,
-  'Fling Through Time': null,
-  'Soul Burn': null,
+  Slow: /slowed|speed/i,
+  'Gravitic Burst': /vertical/i,
+  'Levity and Gravity': /prone/i,
+  Overwhelm: /slowed|weakened|dazed/i,
+  'Synaptic Override': /free strike|signature/i,
+  'Fling Through Time': /weakened|flung/i,
+  'Soul Burn': /dazed/i,
 };
-const compiled = new Set<string>();
-type CompiledRead = {
-  compiled: {
-    definition: { execution: string };
-    effects: {
-      effect: {
-        kind: string;
-        movement?: string;
-        vertical?: boolean;
-        printed?: number;
-        condition?: string;
-        status?: string;
-      };
-    }[];
-  };
-};
-
 export async function runTalentLevelThree({
   actors: { director, peer },
   run,
@@ -353,36 +336,6 @@ export async function runTalentLevelThree({
                   remainder,
                   name,
                 );
-              if (compiled.has(name)) {
-                // Compiled route: movement is an instruction and potency conditions are adjudicated.
-                const read = (
-                  await director.query<CompiledRead[]>('abilities:results', {
-                    campaignId,
-                    eventIds: [use.eventId],
-                  })
-                )[0]!;
-                assert.equal(read.compiled.definition.execution, 'supported', name);
-                const move = (
-                  ledger.abilities as Record<
-                    string,
-                    { forcedMovementPerTier?: { kind: string; distance: number }[] | null }
-                  >
-                )[name]!.forcedMovementPerTier?.[outcome.tier - 1];
-                if (move) {
-                  const effect = read.compiled.effects.find(o => o.effect.kind === 'push')!.effect;
-                  assert.equal(effect.movement, move.kind.replace('vertical ', ''), name);
-                  assert.equal(effect.vertical === true, move.kind.startsWith('vertical'), name);
-                  assert.equal(effect.printed, move.distance, name);
-                }
-                if (name === 'none') {
-                  // The target (v100-creation) has Agility 2, never below the Conduit's 0/1/2 potencies.
-                  const held = read.compiled.effects.find(
-                    o => o.effect.kind === 'condition',
-                  )!.effect;
-                  assert.equal(held.condition, 'restrained', name);
-                  assert.equal(held.status, 'resisted', name);
-                }
-              }
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);
