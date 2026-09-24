@@ -466,7 +466,7 @@ export function resolveCompiledAbility(
                 (node.duration === 'none' ||
                   node.condition === 'grabbed' ||
                   node.condition === 'prone' ||
-                  !node.id.startsWith(`${node.group}~`)))),
+                  node.id !== `${node.group}~${node.condition}`))),
         ) ||
         nodes.some(node => node.kind === 'unsupported' && node.dependency !== 'after-damage') ||
         nodes.some(
