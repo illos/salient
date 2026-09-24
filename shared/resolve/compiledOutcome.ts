@@ -8,7 +8,7 @@ import type {
   TierDamageText,
 } from '../contracts/rollResolution.ts';
 import type { CompiledAbility, CompiledNode, PushNode, ConditionNode } from './compileAbility.ts';
-import { effectRider, plain, type Characteristic } from './abilityGrammar.ts';
+import { effectRider, plain, targetShapeDetail, type Characteristic } from './abilityGrammar.ts';
 import type { RiderNode } from './compileAbility.ts';
 import { plainText, resolveAbilityRoll, type AbilityRollInput } from './index.ts';
 
@@ -282,11 +282,22 @@ export function resolveCompiledAbility(
       reason: 'Compiled envelope is not executable.',
       effects: [],
     };
-  if (input.targets.length !== 1)
+  // V110: pinned rule/combat/target.md: the entry is the most that can be targeted; fewer is legal.
+  const shape = targetShapeDetail(definition.envelope.target, definition.envelope.keywords);
+  const limit = shape.kind === 'single' ? 1 : shape.kind === 'multi' ? shape.max! : undefined;
+  if (
+    !input.targets.length ||
+    (shape.kind === 'single' && input.targets.length !== 1) ||
+    (limit !== undefined && input.targets.length > limit) ||
+    new Set(input.targets.map(target => target.targetId)).size !== input.targets.length
+  )
     return {
       kind: 'manual',
       definition,
-      reason: 'Compiled execution requires exactly one target.',
+      reason:
+        shape.kind === 'single'
+          ? 'Compiled execution requires exactly one target.'
+          : `Compiled execution requires one or more distinct targets${limit !== undefined ? `, at most ${limit}` : ''}.`,
       effects: [],
     };
   if (input.effectClauses?.length)
@@ -300,10 +311,16 @@ export function resolveCompiledAbility(
     definition.format !== 'salient.compiled-ability' ||
     definition.version !== 1 ||
     definition.tiers.length !== 3 ||
+    !['single', 'multi', 'area'].includes(shape.kind) ||
     definition.sections.some(node => {
       if (node.kind !== 'rider') return true;
       const parsed = effectRider(plain(node.clause));
-      return !parsed || parsed.shape !== node.shape || parsed.dependency !== node.dependency;
+      return (
+        !parsed ||
+        parsed.shape !== node.shape ||
+        parsed.dependency !== node.dependency ||
+        (shape.kind !== 'single' && parsed.subject !== 'use')
+      );
     }) ||
     definition.tiers.some(
       nodes =>
@@ -400,8 +417,8 @@ export function resolveCompiledAbility(
       }
     }
   }
-  // Sections occur once per use, after tier effects in printed order. Current admission is
-  // single-target; never turn an actor/ally rider into one award for each future target.
+  // Sections occur once per use, after tier effects in printed order; never one award per target.
+  // Multi/area envelopes admit only use-subject sections, addressed through the first target.
   for (const node of definition.sections) {
     if (node.kind !== 'rider') continue;
     const after = node.dependency === 'after-damage' ? effects.map(effect => effect.nodeId) : [];

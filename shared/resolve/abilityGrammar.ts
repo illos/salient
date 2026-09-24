@@ -523,20 +523,28 @@ export function typeSection(block: Extract<Block, { kind: 'section' }>, index: n
   };
 }
 
-/** Copy of convex/lib/resolve.ts targetShapeOf, returning only the shape kind. */
+/** Copy of convex/lib/resolve.ts targetShapeOf; `max` is the printed count for `multi`. */
 const COUNT_WORDS: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 };
-export function targetShapeOf(target: string, keywords: string[]): TargetShape {
+export function targetShapeDetail(
+  target: string,
+  keywords: string[],
+): { kind: TargetShape; max?: number } {
   const text = plain(target).toLowerCase();
-  if (text === 'self') return 'self';
-  if (/^one (creature|enemy|ally)( or object)?$/.test(text)) return 'single';
+  if (text === 'self') return { kind: 'self' };
+  if (/^one (creature|enemy|ally)( or object)?$/.test(text)) return { kind: 'single' };
   const upTo = /^(?:up to )?(\w+) (creatures|enemies|allies)( or objects)?$/.exec(text);
   if (upTo) {
     const max = COUNT_WORDS[upTo[1]!] ?? Number(upTo[1]);
-    if (Number.isInteger(max) && max > 0) return max === 1 ? 'single' : 'multi';
+    if (Number.isInteger(max) && max > 0)
+      return max === 1 ? { kind: 'single' } : { kind: 'multi', max };
   }
   const area = keywords.some(k => plain(k).toLowerCase() === 'area');
-  if (area || /in the area|in the line|in the burst|in the cube/.test(text)) return 'area';
-  return 'unknown';
+  if (area || /in the area|in the line|in the burst|in the cube/.test(text))
+    return { kind: 'area' };
+  return { kind: 'unknown' };
+}
+export function targetShapeOf(target: string, keywords: string[]): TargetShape {
+  return targetShapeDetail(target, keywords).kind;
 }
 
 /**

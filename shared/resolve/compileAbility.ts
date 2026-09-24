@@ -186,8 +186,14 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         block.label === 'Effect' && !block.cost && rollIndex >= 0
           ? effectRider(plain(block.text))
           : undefined;
-      if (rider) {
-        sections.push({ ...sourceNode(envelope, locator, 0, block.text), kind: 'rider', ...rider });
+      // V110: a section written about "the target" stays manual when several targets can differ.
+      if (rider && (grammar.targetShape === 'single' || rider.subject === 'use')) {
+        sections.push({
+          ...sourceNode(envelope, locator, 0, block.text),
+          kind: 'rider',
+          shape: rider.shape,
+          dependency: rider.dependency,
+        });
         return;
       }
       const diagnostic = typeSection(block, index);
@@ -419,15 +425,18 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         section.clause,
         'Section preserved as manual work; its effect on automation is not assumed independent.',
       );
-  if (
-    grammar.targetShape !== 'single' ||
-    envelope.keywords.some(k => plain(k).toLowerCase() === 'area')
-  )
+  // V110: counted (`multi`) and area targets share one roll with per-target edges/banes and tiers;
+  // area placement and target eligibility remain the user's table selection.
+  const area = envelope.keywords.some(k => plain(k).toLowerCase() === 'area');
+  if (!(
+    grammar.targetShape === 'area' ||
+    ((grammar.targetShape === 'single' || grammar.targetShape === 'multi') && !area)
+  ))
     diagnose(
       'target-boundary',
       'header:target',
       envelope.target,
-      'Only the designed single-target envelope is eligible.',
+      'Only one, counted or area target envelopes are eligible.',
     );
   if (envelope.corpus === 'granted' || envelope.corpus === 'malice')
     diagnose(

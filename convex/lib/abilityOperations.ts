@@ -945,6 +945,16 @@ const abilityUse: OperationDefinition = {
     const warnings: string[] = [];
     if (ability.targetShape.kind === 'single' && targets.length !== 1)
       throw new ConvexError(`${ability.name} targets one creature; give exactly one target.`);
+    // V110: compiled automation applies tier effects to every given target, so it keeps the printed
+    // maximum (pinned rule/combat/target.md); compatibility records retain the rule warning.
+    if (
+      ability.compilation?.mode === 'compiled' &&
+      ability.targetShape.kind === 'multi' &&
+      targets.length > ability.targetShape.max
+    )
+      throw new ConvexError(
+        `${ability.name} targets up to ${ability.targetShape.max}; give at most ${ability.targetShape.max} targets.`,
+      );
     if (ability.targetShape.kind === 'multi' && targets.length > ability.targetShape.max)
       warnings.push(
         `Rule warning: ${ability.name} targets up to ${ability.targetShape.max} creatures; ${targets.length} were given.`,
@@ -1598,20 +1608,48 @@ const abilityCorrect: OperationDefinition = {
       banes,
     );
     const savedCompiled = result.compiled as CompiledResult | undefined;
-    const correctedCompiled = savedCompiled
-      ? resolveCompiledAbility(savedCompiled.definition, {
-          ...savedCompiled.inputs,
-          targets: savedCompiled.inputs.targets.map(t =>
-            t.targetId === entry.target.id ? { ...t, edges, banes } : t,
-          ),
-        })
-      : undefined;
+    // V110: other targets keep their current (possibly already corrected) edges and banes.
+    const correctedInputs = savedCompiled && {
+      ...savedCompiled.inputs,
+      targets: savedCompiled.inputs.targets.map(t => {
+        if (t.targetId === entry.target.id) return { ...t, edges, banes };
+        const current = result.targets.find(r => r.target.id === t.targetId);
+        return current ? { ...t, edges: current.edges, banes: current.banes } : t;
+      }),
+    };
+    const correctedCompiled =
+      savedCompiled && correctedInputs
+        ? resolveCompiledAbility(savedCompiled.definition, correctedInputs)
+        : undefined;
     if (correctedCompiled && correctedCompiled.kind !== 'resolved')
       throw new ConvexError('The saved compiled result cannot be corrected safely.');
     if (correctedCompiled?.kind === 'resolved') {
       const outcome = correctedCompiled.roll.targets.find(t => t.targetId === entry.target.id);
       if (outcome) correction.after = outcome;
     }
+    // V110: only the corrected target's occurrences and once-per-use sections get the correction
+    // revision. Other targets keep their recorded occurrence identities, dispositions and instances.
+    const correctedOccurrences = (revision: string) =>
+      savedCompiled && correctedCompiled?.kind === 'resolved'
+        ? correctedCompiled.effects.flatMap(effect => {
+            if (effect.kind !== 'rider' && effect.targetId !== entry.target.id) {
+              const kept = savedCompiled.effects.find(
+                o => o.effect.nodeId === effect.nodeId && o.effect.targetId === effect.targetId,
+              );
+              if (kept) return [kept];
+            }
+            let current = effect;
+            if (effect.kind === 'damage' && effect.targetId === entry.target.id) {
+              const { application, ...rest } = effect;
+              void application;
+              current = {
+                ...rest,
+                ...(correction.damageAfter ? { application: correction.damageAfter } : {}),
+              };
+            }
+            return effectOccurrences(event._id, revision, [current]);
+          })
+        : [];
     const name = targetRecord.actor.name;
     const stamina =
       'facts' in facts && correction.damageAfter
@@ -1651,21 +1689,9 @@ const abilityCorrect: OperationDefinition = {
             ? {
                 compiled: {
                   ...savedCompiled,
+                  inputs: correctedInputs!,
                   revision: scope.eventId,
-                  effects: effectOccurrences(
-                    event._id,
-                    scope.eventId,
-                    correctedCompiled.effects.map(effect => {
-                      if (effect.kind !== 'damage' || effect.targetId !== entry.target.id)
-                        return effect;
-                      const { application, ...rest } = effect;
-                      void application;
-                      return {
-                        ...rest,
-                        ...(correction.damageAfter ? { application: correction.damageAfter } : {}),
-                      };
-                    }),
-                  ),
+                  effects: correctedOccurrences(scope.eventId),
                 } satisfies CompiledResult,
               }
             : {}),
@@ -1695,7 +1721,11 @@ const abilityCorrect: OperationDefinition = {
           await commitConditions(
             mctx,
             scope,
-            effectOccurrences(event._id, scope.eventId, correctedCompiled.effects),
+            effectOccurrences(
+              event._id,
+              scope.eventId,
+              correctedCompiled.effects.filter(effect => effect.targetId === entry.target.id),
+            ),
             [targetRecord],
             {
               eventId: event._id,
@@ -1782,8 +1812,8 @@ const abilityResolved: OperationDefinition = {
         );
       if (clause && plainText(clause) !== plainText(occurrence.effect.clause))
         throw new ConvexError('The clause does not match that occurrence.');
-      if (occurrence.revision !== compiled.revision || occurrence.useEventId !== event._id)
-        throw new ConvexError('That occurrence is stale.');
+      // Candidates come from the current effects; V110 corrections keep other targets' revisions.
+      if (occurrence.useEventId !== event._id) throw new ConvexError('That occurrence is stale.');
       if (occurrence.disposition)
         throw new ConvexError('That occurrence is already resolved at table.');
       await assertManualResolutionAllowed(ctx, event._id, context.user);

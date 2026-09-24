@@ -18,6 +18,12 @@ export interface EffectRider {
     | 'free-strike'
     | 'push-followup';
   dependency: 'independent' | 'after-damage' | 'after-movement';
+  /**
+   * V110: `target` wording ("the target", a tier outcome) was written for one target. Pinned
+   * rule/dice/ability-roll.md, "Abilities With Damage and Effects": with several targets, tiers can
+   * differ and the user picks the applicable tier; such sections stay manual on multi/area envelopes.
+   */
+  subject: 'use' | 'target';
 }
 
 // Source examples below are relative to the pinned Compendium en/unified/md.
@@ -90,8 +96,12 @@ const independent: readonly [EffectRider['shape'], RegExp][] = [
   ],
 ];
 
+/** Sections whose printed subject or measure is the (single) target or its tier outcome. */
+const targetSubject = /\bthe target\b|\btier outcome\b/i;
+
 export function effectRider(text: string): EffectRider | undefined {
   const normalized = text.replace(/\s+/g, ' ').trim();
+  const subject = targetSubject.test(normalized) ? 'target' : 'use';
   // beastheart/level-1/i-feed-on-your-pain.md and conduit/level-1/blessed-light.md.
   if (
     /^If the target is killed by this damage, or is winded or bleeding after taking this damage, you gain \d+ surges\.$/.test(
@@ -101,12 +111,13 @@ export function effectRider(text: string): EffectRider | undefined {
       normalized,
     )
   )
-    return { shape: 'surges', dependency: 'after-damage' };
+    return { shape: 'surges', dependency: 'after-damage', subject };
   const match = independent.find(([, pattern]) => pattern.test(normalized));
   return match
     ? {
         shape: match[0],
         dependency: match[0] === 'push-followup' ? 'after-movement' : 'independent',
+        subject,
       }
     : undefined;
 }
