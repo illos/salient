@@ -153,3 +153,10 @@ slices.
   - Enemy eligibility is not enforced.
   - Riders are addressed through the first target, which is cosmetic in closeout.
   - The correction save guard could be narrowed to the corrected target.
+- Review R1 closed: PASS at `b636b65` ([audit](audits/V110-rules-review.md)). TESTER subagent rerun at
+  `b636b65` was blocked by a full host disk (ENOSPC, not a test failure). ENGINE2 freed space by
+  removing its scratch copy, stale engine worktrees and cached Convex binaries. Final full gate at
+  `59679ed`: `CI=true VITEST_MAX_WORKERS=3 pnpm check` exit 0 in 200.9 s, 402 engine plus 644
+  app/scripts tests, all freshness gates and web build
+  (`/srv/presidium/projects/salient/test-artifacts/V110-59679ed`). The headless journeys at `eca2cee`
+  are reused: the later delta narrows only non-compiled boundary diagnostics. Ready for integration.
