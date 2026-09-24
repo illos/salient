@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V114 | `3aa24ae` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V113 | `bd6e8e4` | Merged; backend/frontend published; accepted gates reused | complete |
 | V110 | `2921a57` | Merged; backend/frontend published; accepted gates reused | complete |
 | V109 | `7d82b59` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -370,3 +371,18 @@ main.
   helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V113-release-bd6e8e4`.
+
+### V114 Fury levels two and three publication: 2026-09-24
+
+The test and deploy thread published this release at the V114 thread's handoff. Reviewed tip
+`3aa24aed75ec7b33db94dabf8ab0690a678f9298` was fast-forwarded into main. Its code is identical to the tested `ff6f9c7`.
+- Accepted evidence reused:
+  - full gate at `ff6f9c7` (238 s)
+  - isolated `fury-level-three` journey at `ff6f9c7`
+- Backend publication and schema validation succeeded.
+- The content reseed read back 1669 entries at `fb83a789`.
+- The hosted build and the frontend upload succeeded. Worker `283ae7db-6658-40c3-9007-d02a79ad9978`.
+- No smoke tests or test reruns. Temporary credentials were removed and the private hosted
+  helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V114-release-3aa24ae`.

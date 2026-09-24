@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V113 compiled tier forced movement, EoT and prone conditions
+## Current release — V114 Fury levels two and three
+
+Backend/content/frontend source `3aa24aed75ec7b33db94dabf8ab0690a678f9298` published on 2026-09-24 as
+Worker `283ae7db-6658-40c3-9007-d02a79ad9978`. Backend and schema validation, the content reseed (1669 entries at
+`fb83a789`), the hosted build and the upload succeeded. Accepted TESTER results were reused, with
+no smoke test or rerun. See [V114](build/V114-fury-level-three.md) and the [ledger](../deploy.md).
+
+## Previous release — V113 compiled tier forced movement, EoT and prone conditions
 
 Backend/frontend source `bd6e8e4d85a00072a0f1f318b26b14269969ca07` published on 2026-09-24 as
 Worker `5d0f8637-0103-430d-b260-6b29072da6c2`. Backend and schema validation, the hosted build and

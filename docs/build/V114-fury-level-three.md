@@ -70,3 +70,12 @@ wizard and shared API. Guided advancement stays the V32 Berserker 1→2 transiti
   `transitionLevel` owner error is the cohort's deliberate peer refusal. Artifacts
   `/srv/presidium/projects/salient/test-artifacts/V114-ff6f9c7`.
 - Ready for integration and cloud dev publication, reusing these results.
+
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `3aa24ae` into main and published the backend,
+content and frontend using the DEPLOY2 hosted procedure. Backend and schema validation succeeded,
+the reseed read back 1669 entries at `fb83a789`, and the hosted build and upload succeeded.
+Worker: `283ae7db-6658-40c3-9007-d02a79ad9978`. The accepted gates were reused, with no smoke test or rerun. Temporary
+credentials were removed and the private hosted helpers stopped. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V114-release-3aa24ae`.
