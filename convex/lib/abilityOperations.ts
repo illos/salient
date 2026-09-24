@@ -46,6 +46,8 @@ import {
   setManualCondition,
 } from './conditionInstances';
 import { appendEvent } from './events';
+import { applyEffectInstance, endReusedEffects } from './effectInstances';
+import { describeDuration } from '../../shared/resolve/lastingEffects';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { BoundActor, CommandEnvelope, Reference } from '../../shared/commands/envelope';
@@ -966,6 +968,83 @@ async function commitConditions(
   }
 }
 
+/**
+ * V158: each lasting instruction of a compiled use becomes an `instruction` effect instance
+ * (docs/lasting-effects-design.md#1-effect-instances), held by its subject, with its duration bound
+ * to creatures and registered on the clock. The occurrence stays table work for the log card.
+ */
+async function commitLasting(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  occurrences: import('../../shared/contracts/compiledResult').EffectOccurrence[],
+  targets: TargetRecord[],
+  source: {
+    eventId: Id<'events'>;
+    abilityId: string;
+    abilityName: string;
+    actor: Actor;
+    sourcePath: string;
+  },
+  encounterId: Id<'encounters'> | null,
+) {
+  const cause = (await ctx.db.get(scope.eventId))!;
+  const use = (await ctx.db.get(source.eventId))!;
+  for (const occurrence of occurrences) {
+    const effect = occurrence.effect;
+    if (effect.kind !== 'rider' || !effect.lasting) continue;
+    const lasting = effect.lasting;
+    const owner = { kind: source.actor.kind, id: source.actor.id, name: source.actor.name };
+    const target = targets.find(t => t.actor.id === effect.targetId);
+    const subject =
+      lasting.subject === 'owner' || !target
+        ? owner
+        : { kind: target.actor.kind, id: target.actor.id, name: target.actor.name };
+    const stored = await applyEffectInstance(
+      ctx,
+      scope,
+      {
+        id: occurrence.id,
+        kind: 'instruction',
+        sourceUseEventId: source.eventId,
+        sourceActorId: source.actor.id,
+        abilityId: source.abilityId,
+        abilityName: source.abilityName,
+        actorLabel: source.actor.name,
+        sourcePath: source.sourcePath,
+        clause: plainText(effect.clause),
+        owner,
+        subject,
+        payload: { kind: 'instruction', text: lasting.text },
+        printedDuration: lasting.duration,
+        endsWhen: lasting.endsWhen,
+        appliedSequence: use.sequence,
+      },
+      encounterId ?? undefined,
+    );
+    const lasts = describeDuration(lasting.duration, lasting.endsWhen);
+    await appendEvent(ctx, {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      encounterId: cause.encounterId,
+      origin: 'engine',
+      commandId: cause.commandId,
+      causeEventId: scope.eventId,
+      kind: 'effect.applied',
+      description: stored
+        ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" Tracked as an effect${stored.instance.registrationIds.length ? '; its end is scheduled' : lasting.duration.kind === 'none' || lasting.duration.kind === 'maintained' ? '' : '; its end is unscheduled outside a committed encounter, so end it with /effect end'}. The table resolves the instruction itself.`
+        : `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" No hero or foe can hold this effect; resolve it at the table.`,
+      payload: {
+        sourceUseEventId: source.eventId,
+        occurrence: occurrence.id,
+        effectInstanceId: stored?.instance.id ?? null,
+        holder: stored?.holder ?? null,
+        duration: stored?.instance.duration ?? null,
+        sourcePath: source.sourcePath,
+      },
+    });
+  }
+}
+
 /** Current condition toggles of a hero or foe target; undefined for squads and unknown records. */
 function conditionsOf(record: TargetRecord): Record<string, boolean> | undefined {
   if (record.character) return requireHeroLive(record.character).conditions;
@@ -1517,6 +1596,8 @@ const abilityUse: OperationDefinition = {
           // 1. The fixed cost once, before any effect.
           if (outcome.cost && !outcome.cost.waived)
             await debit(mctx, scope, records, context, outcome.cost.after, outcome.cost.resource);
+          // V158: "until you use this ability again" ends the owner's earlier effects of it.
+          await endReusedEffects(mctx, scope, actor!, ability.abilityId);
           // 2. Gains on each hero's live state (temporary Stamina keeps the greater; surges add).
           for (const write of outcome.writes) {
             const record =
@@ -1888,6 +1969,9 @@ const abilityUse: OperationDefinition = {
         // 1. Debit the fixed cost once, before any effect.
         if (result.cost && !result.cost.waived)
           await debit(mctx, scope, records, context, result.cost.after, result.cost.resource);
+        // V158: "until you use this ability again" ends the owner's earlier effects of it.
+        if (compiledOutcome?.kind === 'resolved')
+          await endReusedEffects(mctx, scope, actor!, ability.abilityId);
         // 2. Damage to every target in target order (R04 4.5); squad pools once per squad.
         for (const p of perTarget) {
           const record = targets.find(t => sameActor(t.actor, p.target))!;
@@ -1913,6 +1997,22 @@ const abilityUse: OperationDefinition = {
               actorLabel: actor!.name,
               sourcePath: ability.source.path,
               actorId: actor!.id,
+            },
+            allowance.encounterId,
+          );
+        // V158: lasting instructions become tracked effect instances after the conditions.
+        if (compiledOutcome?.kind === 'resolved')
+          await commitLasting(
+            mctx,
+            scope,
+            effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+            targets,
+            {
+              eventId: scope.eventId,
+              abilityId: ability.abilityId,
+              abilityName: ability.name,
+              actor: actor!,
+              sourcePath: ability.source.path,
             },
             allowance.encounterId,
           );
@@ -2187,7 +2287,12 @@ const abilityCorrect: OperationDefinition = {
       savedCompiled && correctedCompiled?.kind === 'resolved'
         ? correctedCompiled.effects.flatMap(effect => {
             // V154: tier instructions belong to their target, like its other tier effects.
-            if ((effect.kind !== 'rider' || effect.tier) && effect.targetId !== entry.target.id) {
+            // V158: a lasting instruction is once per use and independent of the roll; it keeps its
+            // occurrence, which is its effect instance's identity.
+            if (
+              ((effect.kind !== 'rider' || effect.tier) && effect.targetId !== entry.target.id) ||
+              (effect.kind === 'rider' && effect.lasting)
+            ) {
               const kept = savedCompiled.effects.find(
                 o => o.effect.nodeId === effect.nodeId && o.effect.targetId === effect.targetId,
               );

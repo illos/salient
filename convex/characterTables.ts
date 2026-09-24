@@ -70,6 +70,92 @@ export const conditionInstanceValidator = v.object({
   saveGroup: v.optional(v.string()),
   restriction: v.optional(v.literal('cant-stand')),
 });
+const lastSaveValidator = v.object({
+  roll: v.number(),
+  success: v.boolean(),
+  boundaryEventId: v.string(),
+  threshold: v.number(),
+  thresholdSource: v.union(
+    v.object({ kind: v.literal('hero-baseline'), provenance: v.array(v.any()) }),
+    v.object({ kind: v.literal('printed'), sourcePath: v.string() }),
+  ),
+});
+const partyValidator = v.object({
+  kind: v.union(v.literal('character'), v.literal('foe'), v.literal('squad'), v.literal('object')),
+  id: v.string(),
+  name: v.string(),
+});
+/** V158 printed duration (shared/contracts/liveState.ts EffectDuration). */
+export const effectDurationValidator = v.union(
+  v.object({ kind: v.literal('start-of-next-turn'), anchor: v.literal('owner') }),
+  v.object({
+    kind: v.literal('end-of-next-turn'),
+    anchor: v.union(v.literal('owner'), v.literal('subject')),
+  }),
+  v.object({ kind: v.literal('encounter') }),
+  v.object({ kind: v.literal('save-ends') }),
+  v.object({ kind: v.literal('eot') }),
+  v.object({ kind: v.literal('maintained') }),
+  v.object({ kind: v.literal('none') }),
+);
+const boundDurationValidator = v.union(
+  v.object({ kind: v.literal('start-of-next-turn'), creatureId: v.string() }),
+  v.object({ kind: v.literal('end-of-next-turn'), creatureId: v.string() }),
+  v.object({ kind: v.literal('encounter') }),
+  v.object({ kind: v.literal('save-ends'), creatureId: v.string() }),
+  v.object({ kind: v.literal('eot'), creatureId: v.string() }),
+  v.object({ kind: v.literal('maintained'), creatureId: v.string() }),
+  v.object({ kind: v.literal('none') }),
+);
+export const effectEndTriggerValidator = v.union(
+  v.literal('owner-dying'),
+  v.literal('reused'),
+  v.literal('willingly-ended'),
+);
+/** V158 effect instance (shared/contracts/liveState.ts EffectInstance). */
+export const effectInstanceValidator = v.object({
+  id: v.string(),
+  kind: v.union(
+    v.literal('instruction'),
+    v.literal('modifier'),
+    v.literal('aura'),
+    v.literal('mark'),
+    v.literal('watcher'),
+    v.literal('maintained'),
+  ),
+  sourceUseEventId: v.string(),
+  sourceActorId: v.string(),
+  abilityId: v.string(),
+  abilityName: v.string(),
+  actorLabel: v.string(),
+  sourcePath: v.string(),
+  clause: v.string(),
+  owner: partyValidator,
+  subject: partyValidator,
+  payload: v.object({ kind: v.literal('instruction'), text: v.string() }),
+  printedDuration: effectDurationValidator,
+  duration: boundDurationValidator,
+  endsWhen: v.array(effectEndTriggerValidator),
+  status: v.union(v.literal('active'), v.literal('ended'), v.literal('consumed')),
+  endedReason: v.optional(v.string()),
+  endedEventId: v.optional(v.string()),
+  registrationIds: v.array(v.string()),
+  group: v.optional(v.string()),
+  consumeOn: v.optional(
+    v.object({ event: v.union(v.literal('power-roll'), v.literal('ability-roll')) }),
+  ),
+  appliedSequence: v.number(),
+  lastSave: v.optional(lastSaveValidator),
+});
+/** V158: an owner's pointer to an active instance another creature holds. */
+export const ownedEffectValidator = v.object({
+  id: v.string(),
+  holder: v.object({
+    kind: v.union(v.literal('character'), v.literal('foe')),
+    id: v.string(),
+  }),
+  abilityId: v.string(),
+});
 /**
  * A hero's live play values (shared/contracts/liveState.ts HeroLiveState plus LiveStateOrigin).
  * Written once by first admission from the effective build's baseline (R03 section 2.1) and then
@@ -86,6 +172,9 @@ export const heroLiveValidator = v.object({
   conditions: conditionsValidator,
   manualConditions: v.optional(conditionsValidator),
   conditionInstances: v.optional(v.array(conditionInstanceValidator)),
+  /** V158: lasting effects this hero holds, and pointers to the ones it owns elsewhere. */
+  effectInstances: v.optional(v.array(effectInstanceValidator)),
+  ownedEffects: v.optional(v.array(ownedEffectValidator)),
   /** V150: Self-Taught — forgo gains at the next turn start (`forgoNext`), or forgoing now. */
   forgoNext: v.optional(v.boolean()),
   forgoing: v.optional(v.boolean()),

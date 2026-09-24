@@ -8,6 +8,7 @@
  * Profiles and quotes: shared/resolve/heroicResourceGeneration.ts. Decision:
  * docs/decisions/2026-09-24-heroic-resource-automation.md.
  */
+import { endUnmaintainedEffects } from './effectInstances';
 import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
@@ -472,6 +473,8 @@ async function observePersistentBreak(
       ...(broken ? { maintained: [] } : {}),
     },
   });
+  // V158: lasting effects that last while maintained end with the maintenance.
+  if (broken) await endUnmaintainedEffects(ctx, scope, characterId, []);
 }
 
 /**

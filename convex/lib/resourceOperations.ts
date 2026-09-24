@@ -9,6 +9,7 @@
  * Profiles and quotes: shared/resolve/heroicResourceGeneration.ts. Decision:
  * docs/decisions/2026-09-24-heroic-resource-automation.md.
  */
+import { endUnmaintainedEffects } from './effectInstances';
 import { ConvexError, v } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { ReadCtx } from './access';
@@ -536,6 +537,8 @@ const resourceMaintain: OperationDefinition = {
         await journalPatch(mctx, scope, 'characters', character._id, {
           liveState: { ...latest.liveState!, maintained: next },
         });
+        // V158: a lasting effect that lasts while maintained ends when maintenance stops.
+        if (value === 'off') await endUnmaintainedEffects(mctx, scope, character._id, next);
       },
     };
   },

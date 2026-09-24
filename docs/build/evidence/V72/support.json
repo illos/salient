@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 79,
-      "manual": 292
+      "supported": 80,
+      "manual": 291
     },
     "kit-signature": {
       "total": 25,
@@ -40350,7 +40350,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/relentless-nemesis.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -40400,22 +40400,25 @@
           "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis#block:1:0:46dd4d34cc2d3c86",
           "locator": "block:1:0",
           "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), whenever the target finishes moving or being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You must end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "shift",
+          "dependency": "independent",
+          "lasting": {
+            "effect": "instruction",
+            "shape": "shift",
+            "subject": "target",
+            "duration": {
+              "kind": "start-of-next-turn",
+              "anchor": "owner"
+            },
+            "endsWhen": [],
+            "text": "whenever the target finishes moving or being force moved, you can use a free triggered action to shift up to your speed. You must end this shift adjacent to the target."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), whenever the target finishes moving or being [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You must end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Relentless Nemesis",
@@ -213598,9 +213601,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 154,
+    "compiled": 155,
     "compiledEffectOnly": 7,
-    "compatibility": 1467,
+    "compatibility": 1466,
     "compiledButUnavailable": 0
   }
 }

@@ -20,6 +20,8 @@ export const NON_GAMEPLAY_KINDS = new Set([
   'respite.completed',
   'respite.kit-changed',
   'respite.activity',
+  // V158: listing effects reads state and changes nothing to undo.
+  'effect.list',
 ]);
 
 /**

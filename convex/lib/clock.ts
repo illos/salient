@@ -37,6 +37,13 @@ import {
   sharedGroupSave,
   unscheduleConditionInstance,
 } from './conditionInstances';
+import {
+  endUnmaintainedEffects,
+  expireEffectInstance,
+  findEffectInstance,
+  recordEffectSave,
+  unscheduleEffectInstance,
+} from './effectInstances';
 import type { DieResult } from '../../shared/contracts/history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
 import {
@@ -536,6 +543,14 @@ async function fireHeroicResource(
       hero._id,
       after === before && step === 'combat-start-grant' ? hero : { ...hero, liveState: nextLive },
     );
+  // V158: the encounter-end reset stops every maintenance, so effects lasting while maintained end;
+  // ending one may write this or another hero, so the known documents are then dropped.
+  if (
+    step === 'encounter-end-loss' &&
+    (live.maintained ?? []).length &&
+    (await endUnmaintainedEffects(ctx, firing.scope, hero._id, [])).length
+  )
+    firing.knownHeroes?.clear();
   if (appealMalice) {
     const campaign = (await ctx.db.get(firing.encounter.campaignId))!;
     const maliceBefore = campaign.malice ?? 0;
@@ -591,6 +606,25 @@ async function fireHeroicResource(
   };
 }
 
+/** A hero's evaluated saving throw threshold, else the printed 6 (rule/general/saving-throw.md). */
+async function saveThreshold(
+  ctx: MutationCtx,
+  creature: { kind: string; id: string },
+): Promise<{ threshold: number; thresholdSource: SavingThrowSource }> {
+  const hero =
+    creature.kind === 'character' ? await ctx.db.get(creature.id as Id<'characters'>) : null;
+  const evaluated = baselineOf(hero?.derivedBaseline)?.savingThrowThreshold;
+  const threshold = evaluated && Number.isFinite(evaluated.value) ? evaluated.value : 6;
+  const thresholdSource: SavingThrowSource =
+    evaluated && Number.isFinite(evaluated.value)
+      ? { kind: 'hero-baseline', provenance: evaluated.provenance }
+      : {
+          kind: 'printed',
+          sourcePath: 'vendor/steel-compendium/en/unified/md/rule/general/saving-throw.md',
+        };
+  return { threshold, thresholdSource };
+}
+
 async function fire(
   ctx: MutationCtx,
   firing: FiringContext,
@@ -624,6 +658,34 @@ async function fire(
       const found = creatureId
         ? await findConditionInstance(ctx, creatureId, work.effectInstanceId)
         : null;
+      // V158: a lasting effect instance ends at its bound duration's boundary.
+      const effect =
+        !found && creatureId
+          ? await findEffectInstance(ctx, creatureId, work.effectInstanceId)
+          : null;
+      if (effect) {
+        if (
+          effect.campaignId !== firing.encounter.campaignId ||
+          effect.instance.status !== 'active' ||
+          !effect.instance.registrationIds.includes(firing.registration._id)
+        )
+          return {
+            kind: 'clock.unsupported',
+            description: `${firing.registration.source.label}: no active supported effect instance; resolve manually.`,
+            unsupported: 'no active supported effect instance',
+          };
+        const ended = await expireEffectInstance(ctx, firing.scope, effect.holder, effect.instance);
+        return {
+          kind: 'clock.effect-expired',
+          description: `${firing.registration.source.label}: ends (${ended?.endedReason ?? 'expired'}).`,
+          payload: {
+            effectInstanceId: effect.instance.id,
+            creatureId,
+            reason: ended?.endedReason,
+            sourcePath: effect.instance.sourcePath,
+          },
+        };
+      }
       if (
         !found ||
         found.campaignId !== firing.encounter.campaignId ||
@@ -650,6 +712,53 @@ async function fire(
     }
     case 'saving-throw': {
       const found = await findConditionInstance(ctx, work.creatureId, work.effectInstanceId);
+      // V158: a save-ends effect instance takes the same saving throw (rule/general/saving-throw.md).
+      const effect = found
+        ? null
+        : await findEffectInstance(ctx, work.creatureId, work.effectInstanceId);
+      if (effect) {
+        if (
+          effect.campaignId !== firing.encounter.campaignId ||
+          effect.instance.status !== 'active' ||
+          !effect.instance.registrationIds.includes(firing.registration._id)
+        )
+          return {
+            kind: 'clock.unsupported',
+            description: `${firing.registration.source.label}: no active supported effect instance; resolve manually.`,
+            unsupported: 'no active supported effect instance',
+          };
+        const accepted = await rollDice(
+          ctx,
+          firing.encounter.campaignId,
+          `save_${firing.boundaryEventId}_${firing.registration._id}`,
+          [{ id: 'save', sides: 10 }],
+          null,
+        );
+        const roll = accepted.dice[0]!.value;
+        const { threshold, thresholdSource } = await saveThreshold(ctx, effect.holder);
+        const success = roll >= threshold;
+        await recordEffectSave(ctx, firing.scope, effect.holder, effect.instance.id, {
+          roll,
+          success,
+          boundaryEventId: firing.boundaryEventId,
+          threshold,
+          thresholdSource,
+        });
+        return {
+          kind: 'clock.saving-throw',
+          description: `${firing.registration.source.label}: saving throw ${roll} (needs ${threshold}+) — ${success ? 'success; effect ends.' : 'failure; effect remains.'}`,
+          payload: {
+            effectInstanceId: effect.instance.id,
+            creatureId: work.creatureId,
+            roll,
+            success,
+            threshold,
+            thresholdSource,
+          },
+          dice: accepted.dice,
+          save: { roll, success },
+        };
+      }
       if (
         !found ||
         found.campaignId !== firing.encounter.campaignId ||
@@ -693,19 +802,7 @@ async function fire(
         null,
       );
       const roll = accepted.dice[0]!.value;
-      const hero =
-        found.target.kind === 'character'
-          ? await ctx.db.get(found.target.id as Id<'characters'>)
-          : null;
-      const evaluated = baselineOf(hero?.derivedBaseline)?.savingThrowThreshold;
-      const threshold = evaluated && Number.isFinite(evaluated.value) ? evaluated.value : 6;
-      const thresholdSource: SavingThrowSource =
-        evaluated && Number.isFinite(evaluated.value)
-          ? { kind: 'hero-baseline', provenance: evaluated.provenance }
-          : {
-              kind: 'printed',
-              sourcePath: 'vendor/steel-compendium/en/unified/md/rule/general/saving-throw.md',
-            };
+      const { threshold, thresholdSource } = await saveThreshold(ctx, found.target);
       const success = roll >= threshold;
       await recordConditionSave(ctx, firing.scope, found.target, found.instance.id, {
         roll,
@@ -892,6 +989,36 @@ export async function dispatchBoundary(
         work.kind === 'saving-throw' ? work.creatureId : registration.affectedIds?.[0];
       if (!creatureId) continue;
       const found = await findConditionInstance(ctx, creatureId, work.effectInstanceId);
+      // V158: a lasting effect other than `encounter` (which expired above) stays active with its
+      // schedule removed, as conditions do; the table ends it with effect.end.
+      const effect = found
+        ? null
+        : await findEffectInstance(ctx, creatureId, work.effectInstanceId);
+      if (
+        effect &&
+        effect.campaignId === scope.campaignId &&
+        effect.instance.status === 'active' &&
+        effect.instance.registrationIds.includes(registration._id)
+      ) {
+        await unscheduleEffectInstance(ctx, scope, effect.holder, effect.instance.id);
+        await appendEvent(ctx, {
+          campaignId: scope.campaignId,
+          sessionId: cause.sessionId,
+          encounterId,
+          origin: 'clock',
+          commandId: cause.commandId,
+          causeEventId: boundaryEventId,
+          kind: 'effect.unscheduled',
+          description: `${effect.instance.actorLabel}'s ${effect.instance.abilityName} on ${effect.instance.subject.name} remains active after combat ends. Its ${work.kind === 'saving-throw' ? 'saving throw' : 'expiry'} is no longer scheduled; end it with /effect end.`,
+          payload: {
+            effectInstanceId: effect.instance.id,
+            sourceUseEventId: effect.instance.sourceUseEventId,
+            creatureId,
+            sourcePath: effect.instance.sourcePath,
+          },
+        });
+        continue;
+      }
       if (
         found &&
         found.campaignId === scope.campaignId &&

@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
-import { conditionsValidator, conditionInstanceValidator } from './characterTables';
+import {
+  conditionsValidator,
+  conditionInstanceValidator,
+  effectInstanceValidator,
+  ownedEffectValidator,
+} from './characterTables';
 
 export const foeTables = {
   foes: defineTable({
@@ -18,6 +23,9 @@ export const foeTables = {
       conditions: v.optional(conditionsValidator),
       manualConditions: v.optional(conditionsValidator),
       conditionInstances: v.optional(v.array(conditionInstanceValidator)),
+      /** V158: lasting effects this foe holds, and pointers to the ones it owns elsewhere. */
+      effectInstances: v.optional(v.array(effectInstanceValidator)),
+      ownedEffects: v.optional(v.array(ownedEffectValidator)),
     }),
     /**
      * V02: set on a minion that belongs to a squad. Its `live.stamina` is the printed per-member

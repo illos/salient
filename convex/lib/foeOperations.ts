@@ -1,4 +1,5 @@
 import { unscheduleTargetConditions } from './conditionInstances';
+import { unscheduleHolderEffects } from './effectInstances';
 // SPDX-License-Identifier: GPL-3.0-only
 // Table buttons, API wrappers and slash commands use the same authorized roster operations.
 // Spec: docs/table-spec.md#confirmed-action-and-log-contract and #foes-roster.
@@ -107,6 +108,7 @@ const remove: OperationDefinition = {
         // (docs/table-spec.md#mid-combat-additions-and-regrouping, confirmed current-monster removal).
         await onFoeRemoved(writer, scope, context.campaign, foe._id);
         await unscheduleTargetConditions(writer, scope, { kind: 'foe', id: foe._id });
+        await unscheduleHolderEffects(writer, scope, { kind: 'foe', id: foe._id });
         await journalDelete(writer, scope, 'foes', foe._id);
       },
     };

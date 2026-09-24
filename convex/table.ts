@@ -17,7 +17,12 @@ import type { DerivedBaseline } from '../shared/contracts/characterEvaluation';
 import type { Doc } from './_generated/dataModel';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
-import { conditionsValidator, heroLiveValidator } from './characterTables';
+import {
+  conditionsValidator,
+  effectDurationValidator,
+  effectEndTriggerValidator,
+  heroLiveValidator,
+} from './characterTables';
 import { noConditions } from './lib/tableOperations';
 import { foeHealthValidator, projectFoeHealth, settingsOf } from './lib/audience';
 import { captainOf, isLiving, squadMembers } from './lib/squads';
@@ -55,6 +60,19 @@ function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerica
           ...(restriction ? { restriction } : {}),
         }),
       ),
+    effectInstances: (foe.live.effectInstances ?? [])
+      .filter(instance => instance.status === 'active')
+      .map(instance => ({
+        id: instance.id,
+        abilityName: instance.abilityName,
+        actorLabel: instance.actorLabel,
+        sourcePath: instance.sourcePath,
+        text: instance.payload.text,
+        subject: instance.subject.name,
+        printedDuration: instance.printedDuration,
+        endsWhen: instance.endsWhen,
+        scheduled: instance.registrationIds.length > 0,
+      })),
     health,
     summary: director ? foeSummary(foe.sourceSnapshot) : null,
     ...(foe.squadId ? { squadId: foe.squadId } : {}),
@@ -194,6 +212,19 @@ export const roster = query({
             actorLabel: v.string(),
             sourcePath: v.string(),
             restriction: v.optional(v.literal('cant-stand')),
+          }),
+        ),
+        effectInstances: v.array(
+          v.object({
+            id: v.string(),
+            abilityName: v.string(),
+            actorLabel: v.string(),
+            sourcePath: v.string(),
+            text: v.string(),
+            subject: v.string(),
+            printedDuration: effectDurationValidator,
+            endsWhen: v.array(effectEndTriggerValidator),
+            scheduled: v.boolean(),
           }),
         ),
         health: foeHealthValidator,

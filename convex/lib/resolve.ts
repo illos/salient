@@ -60,6 +60,7 @@ import type {
 import { manifest } from '../../shared/content/compendium/index';
 import { parseTierText, plainText } from '../../shared/resolve/index';
 import { findContent, requireContent } from '../content';
+import { endOwnerDyingEffects } from './effectInstances';
 import { journalPatch, type JournalScope } from './journal';
 import { observeHeroDamage } from './resourceTriggers';
 import { recordCaptainLoss, squadOfCaptain } from './squads';
@@ -1067,6 +1068,10 @@ export async function writeDamage(
       temporaryStamina: application.temporaryStaminaAfter,
     },
   });
+  // V158 (rule/health/dying.md, "When your Stamina is 0 or lower, you are dying"): lasting
+  // effects that end when their owner is dying end as the hero reaches dying.
+  if (live.stamina > 0 && application.staminaAfter <= 0)
+    await endOwnerDyingEffects(ctx, scope, character._id);
   // V142: class resource triggers observed from recorded damage (Fury's first damage each round,
   // first winded or dying), each within its limit.
   await observeHeroDamage(
