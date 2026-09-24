@@ -36,6 +36,7 @@ import { foeOperations } from './foeOperations';
 import { combatOperations } from './combatOperations';
 import { closeoutOperations } from './closeoutOperations';
 import { resourceOperations } from './resourceOperations';
+import { respiteOperations } from './respiteOperations';
 import { historyOperations } from './history';
 import { currentEncounter } from './encounters';
 import { abilityOperations } from './abilityOperations';
@@ -432,6 +433,7 @@ export function registeredOperations(): OperationDefinition[] {
     ...abilityOperations,
     ...characterOperations,
     ...resourceOperations,
+    ...respiteOperations,
     runeOperation,
   ]);
 }

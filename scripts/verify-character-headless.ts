@@ -16,6 +16,7 @@ import { runHeroicResourceCensor } from './headless/heroic-resource-censor.ts';
 import { runSummoner } from './headless/summoner.ts';
 import { runSummonerLevelThree } from './headless/summoner-level-three.ts';
 import { runLevelUp } from './headless/level-up.ts';
+import { runRespite } from './headless/respite.ts';
 import { runLifecycle } from './headless/character-lifecycle.ts';
 import { runBeastheart } from './headless/beastheart.ts';
 import { runBeastheartLevelThree } from './headless/beastheart-level-three.ts';
@@ -90,6 +91,7 @@ const cohorts = {
   summoner: runSummoner,
   'summoner-level-three': runSummonerLevelThree,
   'level-up': runLevelUp,
+  respite: runRespite,
   lifecycle: runLifecycle,
   censor: runCensor,
   'censor-level-three': runCensorLevelThree,

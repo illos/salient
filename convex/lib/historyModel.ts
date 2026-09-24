@@ -14,6 +14,10 @@ export const NON_GAMEPLAY_KINDS = new Set([
   'interaction.closed',
   'target.draft',
   'ability.blocked',
+  'respite.started',
+  'respite.canceled',
+  'respite.interrupted',
+  'respite.completed',
 ]);
 
 /**

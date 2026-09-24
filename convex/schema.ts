@@ -1,4 +1,5 @@
 import { defineSchema, defineTable } from 'convex/server';
+import { heroLiveValidator } from './characterTables';
 import { v } from 'convex/values';
 import { abilityTables } from './abilityTables';
 import { characterTables } from './characterTables';
@@ -79,6 +80,25 @@ export default defineSchema({
     closedAt: v.union(v.number(), v.null()),
     /** V68 optional Director-set title (docs/table-spec.md#reading-session-history); absent means untitled. */
     title: v.optional(v.string()),
+    /**
+     * V165 open respite (docs/table-spec.md#respite-mode): participants and each one's state when it
+     * started, restored by Cancel. Absent or null when no respite is open. The session cannot close
+     * while this is set.
+     */
+    respite: v.optional(
+      v.union(
+        v.null(),
+        v.object({
+          startedAt: v.number(),
+          participants: v.array(
+            v.object({
+              characterId: v.id('characters'),
+              liveState: heroLiveValidator,
+            }),
+          ),
+        }),
+      ),
+    ),
   }).index('by_campaign', ['campaignId']),
   /** V68 connected-member presence (docs/table-spec.md#2-participation-and-presence): one row per member per campaign. */
   presence: defineTable({

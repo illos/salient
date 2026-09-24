@@ -215,6 +215,12 @@ export async function loadHistory(ctx: ReadCtx, context: TableContext): Promise<
         floorSequence = event.sequence;
         floorLabel = 'the archived encounter';
       }
+    // V165: a respite is a boundary too; Cancel reverts an open one and a completed one is final.
+    for (const event of events)
+      if (event.kind.startsWith('respite.') && event.sequence > floorSequence) {
+        floorSequence = event.sequence;
+        floorLabel = 'the respite';
+      }
   }
   return { session, encounter, floorSequence, floorLabel, walk, events };
 }

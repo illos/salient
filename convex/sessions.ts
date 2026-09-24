@@ -161,6 +161,11 @@ export const transition = mutation({
       throw new ConvexError('Only a running session can pause.');
     if (args.action === 'resume' && session.status !== 'paused')
       throw new ConvexError('Only a paused session can resume.');
+    // V165 (docs/table-spec.md#respite-mode): a session cannot close while a respite is open.
+    if (args.action === 'close' && session.respite)
+      throw new ConvexError(
+        'A respite is open. Complete, interrupt or cancel it before closing the session.',
+      );
     if (args.voidMode && args.action !== 'close')
       throw new ConvexError('A Void choice applies only when closing the session.');
     const encounter = await currentEncounter(ctx, session);

@@ -114,7 +114,7 @@ export async function effectiveDraft(
   });
 }
 
-async function sessionEncounter(ctx: MutationCtx, context: TableContext) {
+export async function sessionEncounter(ctx: MutationCtx, context: TableContext) {
   if (!context.session) throw new ConvexError('Combat needs an active session.');
   return currentEncounter(ctx, context.session);
 }
@@ -174,6 +174,9 @@ const combatStart: OperationDefinition = {
           ? 'A combat setup card is already open.'
           : 'Combat is already active in this session.',
       );
+    // V165: an open respite ends first (Interrupt for an ambush), then combat starts normally.
+    if (context.session?.respite)
+      throw new ConvexError('A respite is open. Interrupt, cancel or complete it before combat.');
     const session = context.session!;
     return {
       kind: 'combat.setup-opened',
