@@ -74,24 +74,20 @@ export function characterSupportDiagnostics(
   ).map(({ decisionId, message }) => ({ decisionId, message }));
 }
 
-/** No new transition is enabled by this refactor. Future transitions need their own verified unit. */
-export const CURRENT_ADVANCEMENT = {
-  fromLevel: 1,
-  targetLevel: 2,
-  className: 'Fury',
-  subclassName: 'Berserker',
-  requiredXp: 16,
-  unavailableReason: 'This slice supports a complete level-one Fury advancing to level two.',
-} as const;
-
-export function supportsCurrentAdvancement(
+/**
+ * The level a hero at `level` advances to (V163): the next level, when that level's definitions exist
+ * and support this build's class. docs/character-wizard-spec.md#level-up: one level per level-up.
+ */
+export function levelUpTarget(
   level: number,
-  className: string | undefined,
-  subclassName: string | undefined,
-): boolean {
-  return (
-    level === CURRENT_ADVANCEMENT.fromLevel &&
-    className === CURRENT_ADVANCEMENT.className &&
-    subclassName === CURRENT_ADVANCEMENT.subclassName
-  );
+  selections: Record<string, SelectionValue>,
+): { targetLevel: number; reason: string | null } {
+  const targetLevel = level + 1;
+  const diagnostics = characterSupportDiagnostics(targetLevel, selections);
+  return {
+    targetLevel,
+    reason: diagnostics.length
+      ? `Level ${targetLevel} is not yet available for this class: ${diagnostics[0]!.message}`
+      : null,
+  };
 }

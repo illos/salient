@@ -22,6 +22,7 @@ import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { OperationDefinition, TableContext } from './registry';
 import { activateRevision, pendingReview, requireEditable } from './characterBuild';
+import { journalPatch } from './journal';
 
 const characterArg = v.object({ refKind: v.literal('character'), id: v.string() });
 const characterArgDescription = 'The character, as @{character:id}.';
@@ -281,4 +282,70 @@ const decline: OperationDefinition = {
   },
 };
 
-export const characterOperations: OperationDefinition[] = [submit, withdraw, approve, decline];
+/**
+ * V163 `/character grant-level-up`: the Director's manual grant (docs/character-wizard-spec.md#level-up,
+ * "Manual Director grant"; the rules' Director Says So advancement in chapter/making-a-hero.md,
+ * Alternative Advancement). Each chosen hero, the whole attached party by default, gains one pending
+ * level-up that its owner takes later through the level-up flow. Nothing waits for it.
+ */
+const grantLevelUp: OperationDefinition = {
+  id: 'character.grant-level-up',
+  family: 'character',
+  verb: 'grant-level-up',
+  title: 'Grant a level-up',
+  description:
+    'Director: grant one pending level-up to chosen heroes (default: every hero attached to this campaign). Each owner takes it later from the character sheet, one level at a time.',
+  args: { characters: v.optional(v.array(characterArg)) },
+  argDescriptions: {
+    characters: 'Heroes to grant a level-up, as @{character:id}; omit for every attached hero.',
+  },
+  roles: ['director'],
+  session: 'none',
+  actor: 'none',
+  execute: async (ctx, { context, args }) => {
+    const chosen = args.characters as unknown[] | undefined;
+    const heroes = chosen?.length
+      ? await Promise.all(chosen.map(reference => loadCharacter(ctx, reference)))
+      : await ctx.db
+          .query('characters')
+          .withIndex('by_campaign', q => q.eq('campaignId', context.campaign._id))
+          .collect();
+    if (new Set(heroes.map(hero => hero._id)).size !== heroes.length)
+      throw new ConvexError('Name each hero once.');
+    for (const hero of heroes)
+      if (hero.campaignId !== context.campaign._id || !hero.liveState)
+        throw new ConvexError(`${hero.authored.name} is not an admitted hero in this campaign.`);
+    if (!heroes.length) throw new ConvexError('No hero is attached to this campaign.');
+    const names = heroes.map(hero => hero.authored.name).join(', ');
+    return {
+      kind: 'character.level-up-granted',
+      description: `The Director granted a level-up to ${names}.`,
+      data: {
+        characters: heroes.map(hero => ({
+          characterId: hero._id,
+          pendingLevelUpsBefore: hero.pendingLevelUps ?? 0,
+          pendingLevelUpsAfter: (hero.pendingLevelUps ?? 0) + 1,
+        })),
+      },
+      commit: async (mctx, scope) => {
+        for (const hero of heroes)
+          await journalPatch(
+            mctx,
+            scope,
+            'characters',
+            hero._id,
+            { pendingLevelUps: (hero.pendingLevelUps ?? 0) + 1 },
+            hero,
+          );
+      },
+    };
+  },
+};
+
+export const characterOperations: OperationDefinition[] = [
+  submit,
+  withdraw,
+  approve,
+  decline,
+  grantLevelUp,
+];

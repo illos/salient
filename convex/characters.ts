@@ -49,10 +49,7 @@ import {
 import { pendingDirectorSetup } from './lib/characterDirectorSetup';
 import { canonicalChoiceOrigins } from './lib/characterChoiceOrigins';
 import { COMPLICATION_ABILITIES } from '../shared/content/supporting-complication-abilities';
-import {
-  CURRENT_ADVANCEMENT,
-  isSupportedDefinitionLevel,
-} from '../shared/content/character-support';
+import { isSupportedDefinitionLevel } from '../shared/content/character-support';
 import { getDefinitions } from '../shared/content/character-decisions';
 import { mutation, query } from './_generated/server';
 import type { Doc, Id } from './_generated/dataModel';
@@ -174,6 +171,7 @@ const detail = v.object({
   choiceOrigins: v.record(v.string(), v.object({ value: v.string(), level: v.number() })),
   fullEditIsStale: v.boolean(),
   combatLocked: v.boolean(),
+  pendingLevelUps: v.number(),
   campaignId: v.union(v.id('campaigns'), v.null()),
   campaignName: v.union(v.string(), v.null()),
   effectiveRevisionId: v.union(v.id('characterRevisions'), v.null()),
@@ -310,6 +308,8 @@ export const get = query({
             draft._id !== character.effectiveRevisionId &&
             draft.baseEffectiveRevisionId !== character.effectiveRevisionId)),
       combatLocked: character.combatLocked,
+      /** Granted level-ups not yet taken (V163). */
+      pendingLevelUps: character.pendingLevelUps ?? 0,
       campaignId: character.campaignId,
       campaignName: character.campaignId
         ? ((await ctx.db.get(character.campaignId))?.name ?? null)
@@ -1042,23 +1042,25 @@ export const progression = query({
     const character = await owned(ctx, args.characterId, user._id);
     const base = await progressionBase(ctx, character);
     const draft = character.advancementDraft ?? null;
-    const draftIsStale = !!draft && draft.baseRevisionId !== base?._id;
+    const eligibility = progressionEligibility(character, base);
+    const draftIsStale =
+      !!draft &&
+      (draft.baseRevisionId !== base?._id || draft.targetLevel !== eligibility.targetLevel);
     return {
       revision: character.revision,
       baseRevisionId: base?._id ?? null,
-      baseLevel: base ? revisionLevel(base) : 1,
-      targetLevel: CURRENT_ADVANCEMENT.targetLevel,
-      ...progressionEligibility(character, base),
+      baseLevel: eligibility.fromLevel,
+      ...eligibility,
       draft,
       draftIsStale,
       baseSelections: base?.selections ?? [],
       choiceOrigins: base?.choiceOrigins ?? {},
-      newDecisionIds: advancementDecisionIds(),
+      newDecisionIds: advancementDecisionIds(eligibility.fromLevel),
       evaluation: base
         ? evaluateSelections(
             [...base.selections, ...(draft && !draftIsStale ? draft.selections : [])],
-            CURRENT_ADVANCEMENT.targetLevel,
-            canonicalChoiceOrigins(base.selections, CURRENT_ADVANCEMENT.targetLevel, base),
+            eligibility.targetLevel,
+            canonicalChoiceOrigins(base.selections, eligibility.targetLevel, base),
           )
         : null,
     };
@@ -1102,9 +1104,9 @@ export const saveAdvancement = mutation({
     await ctx.db.patch(character._id, {
       advancementDraft: {
         baseRevisionId: base._id,
-        targetLevel: CURRENT_ADVANCEMENT.targetLevel,
+        targetLevel: eligibility.targetLevel,
         version,
-        selections: advancementSelections(args.selections),
+        selections: advancementSelections(args.selections, eligibility.fromLevel),
       },
     });
     await receipt.save(String(version));
@@ -1112,7 +1114,7 @@ export const saveAdvancement = mutation({
   },
 });
 export const finalizeAdvancement = mutation({
-  args: { ...advancementArgs, duringRespite: v.boolean() },
+  args: advancementArgs,
   returns: v.id('characterRevisions'),
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
@@ -1134,22 +1136,19 @@ export const finalizeAdvancement = mutation({
     );
     const eligibility = progressionEligibility(character, base);
     if (!eligibility.eligible) throw new ConvexError(eligibility.reason!);
-    if (!args.duringRespite)
-      throw new ConvexError(
-        'Level advancement occurs during a respite. Confirm the normal source timing; this does not restore resources.',
-      );
     const draft = character.advancementDraft;
     if (!draft || draft.version !== args.expectedDraftVersion || draft.baseRevisionId !== base._id)
       throw new ConvexError(
         'The advancement draft changed or has a different effective base. Reload before finalizing.',
       );
-    const selections = [...base.selections, ...advancementSelections(draft.selections)];
-    const choiceOrigins = canonicalChoiceOrigins(selections, CURRENT_ADVANCEMENT.targetLevel, base);
-    const evaluation = evaluateSelections(
-      selections,
-      CURRENT_ADVANCEMENT.targetLevel,
-      choiceOrigins,
-    );
+    const { fromLevel, targetLevel } = eligibility;
+    if (draft.targetLevel !== targetLevel)
+      throw new ConvexError(
+        'The advancement draft is for another level. Reload before finalizing.',
+      );
+    const selections = [...base.selections, ...advancementSelections(draft.selections, fromLevel)];
+    const choiceOrigins = canonicalChoiceOrigins(selections, targetLevel, base);
+    const evaluation = evaluateSelections(selections, targetLevel, choiceOrigins);
     if (evaluation.status !== 'complete')
       throw new ConvexError(
         `The level-up is ${evaluation.status}; resolve its choices before finalizing.`,
@@ -1159,7 +1158,7 @@ export const finalizeAdvancement = mutation({
       characterId: character._id,
       revision,
       parentRevisionId: base._id,
-      level: CURRENT_ADVANCEMENT.targetLevel,
+      level: targetLevel,
       kind: 'level-up',
       choiceOrigins,
       baseEffectiveRevisionId: base._id,
@@ -1180,6 +1179,8 @@ export const finalizeAdvancement = mutation({
     await ctx.db.patch(character._id, {
       revision,
       advancementDraft: null,
+      // One pending level-up is spent per flow (docs/character-wizard-spec.md#level-up).
+      pendingLevelUps: eligibility.pendingLevelUps - 1,
       staleFullEditRevisionId:
         character.draftRevisionId !== base._id ? character.draftRevisionId : null,
       ...(character.draftRevisionId === base._id ? { draftRevisionId: id } : {}),
@@ -1192,13 +1193,13 @@ export const finalizeAdvancement = mutation({
       actor: user,
       commandId: args.commandId,
       kind: 'character.level-up',
-      description: `${character.authored.name} advanced from level 1 to level 2 during a respite (revision ${revision}); current resources retained.`,
+      description: `${character.authored.name} advanced from level ${fromLevel} to level ${targetLevel} (revision ${revision}); damage taken and Recoveries spent are unchanged.`,
       payload: {
         characterId: character._id,
         revisionBefore: base._id,
         revisionAfter: id,
         reconciliation,
-        timing: 'owner-declared-respite',
+        pendingLevelUpsAfter: eligibility.pendingLevelUps - 1,
         xp: eligibility.xp,
         entryLevelXpOffset: eligibility.entryLevelXpOffset,
       },

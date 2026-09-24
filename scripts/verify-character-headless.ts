@@ -13,6 +13,7 @@ import { runHeroicResourceSummoner } from './headless/heroic-resource-summoner.t
 import { runHeroicResourceCensor } from './headless/heroic-resource-censor.ts';
 import { runSummoner } from './headless/summoner.ts';
 import { runSummonerLevelThree } from './headless/summoner-level-three.ts';
+import { runLevelUp } from './headless/level-up.ts';
 import { runBeastheart } from './headless/beastheart.ts';
 import { runBeastheartLevelThree } from './headless/beastheart-level-three.ts';
 import { runFollowUpActions } from './headless/follow-up-actions.ts';
@@ -83,6 +84,7 @@ const cohorts = {
   'follow-up-actions': runFollowUpActions,
   summoner: runSummoner,
   'summoner-level-three': runSummonerLevelThree,
+  'level-up': runLevelUp,
   censor: runCensor,
   'censor-level-three': runCensorLevelThree,
   conduit: runConduit,

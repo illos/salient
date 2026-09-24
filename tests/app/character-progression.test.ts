@@ -27,6 +27,7 @@ async function setup() {
   await t.run(async ctx => {
     const character = (await ctx.db.get(fixture.thornId))!;
     await ctx.db.patch(character._id, {
+      pendingLevelUps: 1,
       liveState: {
         ...character.liveState!,
         xp: 16,
@@ -55,7 +56,7 @@ async function prepared(f: Awaited<ReturnType<typeof setup>>) {
     expectedDraftVersion: p.draft?.version ?? 0,
     selections: choices(),
   });
-  return { ...base, expectedDraftVersion: version, duringRespite: true };
+  return { ...base, expectedDraftVersion: version };
 }
 
 test('Fury level-up persists, retries once and preserves every compatible live value', async () => {
@@ -138,13 +139,6 @@ test('eligibility, source timing, owner authority, bounded choices, base races a
   const f = await setup();
   const args = await prepared(f);
   await expect(
-    f.player.client.mutation(api.characters.finalizeAdvancement, {
-      ...args,
-      commandId: 'outside-respite',
-      duringRespite: false,
-    }),
-  ).rejects.toThrow('during a respite');
-  await expect(
     f.director.client.mutation(api.characters.finalizeAdvancement, {
       ...args,
       commandId: 'director-not-owner',
@@ -178,14 +172,16 @@ test('eligibility, source timing, owner authority, bounded choices, base races a
   ).rejects.toThrow('changed');
   await f.t.run(async ctx => {
     const row = (await ctx.db.get(f.thornId))!;
-    await ctx.db.patch(row._id, { liveState: { ...row.liveState!, xp: 15 } });
+    await ctx.db.patch(row._id, { pendingLevelUps: 0 });
   });
+  // docs/character-wizard-spec.md#level-up: taking a level-up spends a pending grant; XP alone does not.
   await expect(
     f.player.client.mutation(api.characters.finalizeAdvancement, {
       ...args,
-      commandId: 'insufficient-xp',
+      commandId: 'no-pending-level-up',
     }),
-  ).rejects.toThrow('16 cumulative XP');
+  ).rejects.toThrow('No level-up is pending');
+  await f.t.run(ctx => ctx.db.patch(f.thornId, { pendingLevelUps: 1 }));
   await f.t.run(ctx => ctx.db.patch(f.thornId, { combatLocked: true }));
   await expect(
     f.player.client.mutation(api.characters.finalizeAdvancement, {
@@ -322,7 +318,9 @@ test('owning Director restores with a logged activation and keeps the damage tak
   const f = await setup();
   const id = await admitHero(f.t, f.director, f.director, f.campaignId, 'DirectorFury');
   const before = (await f.t.run(ctx => ctx.db.get(id)))!;
-  await f.t.run(ctx => ctx.db.patch(id, { liveState: { ...before.liveState!, xp: 16 } }));
+  await f.t.run(ctx =>
+    ctx.db.patch(id, { pendingLevelUps: 1, liveState: { ...before.liveState!, xp: 16 } }),
+  );
   const base = {
     characterId: id,
     expectedRevision: before.revision,
@@ -338,7 +336,6 @@ test('owning Director restores with a logged activation and keeps the damage tak
     ...base,
     commandId: 'director-level-final',
     expectedDraftVersion: 1,
-    duringRespite: true,
   });
   await f.t.run(async ctx => {
     const c = (await ctx.db.get(id))!;
@@ -424,7 +421,7 @@ test('unattached history restoration preserves authored data, refuses campaignle
       expectedDraftVersion: 0,
       selections: choices(),
     }),
-  ).rejects.toThrow('campaign-attached');
+  ).rejects.toThrow('Level-up happens inside a campaign');
   await f.player.client.mutation(api.characters.save, {
     characterId: id,
     commandId: 'standalone-edit-after-restore',
@@ -614,7 +611,7 @@ test('level-up marks a legacy pending full edit stale without rewriting its snap
   ).rejects.toThrow('predates the effective build');
 });
 
-test('Director XP correction persists through the shared command path and changes eligibility without automatic advancement', async () => {
+test('Director XP correction persists, but only a granted level-up makes a hero eligible', async () => {
   const t = backend();
   const { director, player, observer, thornId, campaignId } = await table(t);
   const before = (await t.run(ctx => ctx.db.get(thornId)))!;
@@ -637,14 +634,36 @@ test('Director XP correction persists through the shared command path and change
   const after = (await t.run(ctx => ctx.db.get(thornId)))!;
   expect(after.liveState).toEqual({ ...before.liveState!, xp: 16 });
   expect(after.effectiveRevisionId).toBe(before.effectiveRevisionId);
-  const eligibility = await player.client.query(api.characters.progression, {
-    characterId: thornId,
-  });
-  expect(eligibility.eligible).toBe(true);
   const events = await storedEvents(t, campaignId);
   const event = events.find(row => row.commandId === command.commandId)!;
   expect(event.description).toBe('Manual adjustment — Thorn XP 0 → 16.');
   expect(event.payload).toMatchObject({ data: { field: 'xp', before: 0, after: 16 } });
+  // docs/character-wizard-spec.md#level-up: XP converts at a respite; eligibility is a pending grant.
+  const progression = () =>
+    player.client.query(api.characters.progression, { characterId: thornId });
+  expect((await progression()).eligible).toBe(false);
+  expect((await progression()).reason).toContain('No level-up is pending');
+  const grant = {
+    campaignId,
+    commandId: 'grant-thorn',
+    operation: 'character.grant-level-up',
+    arguments: { characters: [{ refKind: 'character', id: thornId }] },
+  };
+  await expect(player.client.mutation(api.commands.invoke, grant)).rejects.toThrow();
+  const granted = await director.client.mutation(api.commands.invoke, grant);
+  expect(await director.client.mutation(api.commands.invoke, grant)).toEqual(granted);
+  expect((await t.run(ctx => ctx.db.get(thornId)))!.pendingLevelUps).toBe(1);
+  expect((await progression()).eligible).toBe(true);
+  expect((await progression()).targetLevel).toBe(2);
+  const grantEvent = (await storedEvents(t, campaignId)).find(e => e._id === granted.eventId)!;
+  expect(grantEvent.kind).toBe('character.level-up-granted');
+  // Slash text with no heroes grants every attached hero: Thorn now holds two, taken separately.
+  await director.client.mutation(api.commands.submit, {
+    campaignId,
+    commandId: 'grant-party',
+    text: '/character grant-level-up',
+  });
+  expect((await t.run(ctx => ctx.db.get(thornId)))!.pendingLevelUps).toBe(2);
 });
 
 test('distinct long restore command IDs sharing a prefix have independent submission receipts', async () => {

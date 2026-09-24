@@ -63,7 +63,12 @@ test('immutable revisions retain the future choice through advancement, edits an
   const creation = (await t.run(ctx => ctx.db.get(characterId)))!;
   const first = (await t.run(ctx => ctx.db.get(creation.effectiveRevisionId!)))!;
   expect(first.choiceOrigins).toEqual({ [futureId]: { value: 'Wrecking Ball', level: 1 } });
-  await t.run(ctx => ctx.db.patch(characterId, { liveState: { ...creation.liveState!, xp: 16 } }));
+  await t.run(ctx =>
+    ctx.db.patch(characterId, {
+      pendingLevelUps: 1,
+      liveState: { ...creation.liveState!, xp: 16 },
+    }),
+  );
   const progression = await f.player.client.query(api.characters.progression, { characterId });
   const baseArgs = {
     characterId,
@@ -86,7 +91,6 @@ test('immutable revisions retain the future choice through advancement, edits an
     ...baseArgs,
     commandId: 'footsteps-learn',
     expectedDraftVersion: version,
-    duringRespite: true,
   });
   const learned = (await t.run(ctx => ctx.db.get(learnedId)))!;
   expect(learned.status).toBe('complete');

@@ -32,11 +32,12 @@ interface Advancement {
   baseRevisionId: Id<'characterRevisions'> | null;
   baseLevel: number;
   targetLevel: number;
+  fromLevel: number;
   eligible: boolean;
   reason: string | null;
   xp: number;
   entryLevelXpOffset: number;
-  requiredXp: number;
+  pendingLevelUps: number;
   baseSelections: DraftSelection[];
   choiceOrigins: CharacterChoiceOrigins;
   draft: {
@@ -137,10 +138,13 @@ function AdvancementEditor({
     revision: progression.revision,
     id: progression.baseRevisionId,
     selections: progression.baseSelections,
-    definitions: getDefinitions(2, progression.choiceOrigins),
+    targetLevel: progression.targetLevel,
+    definitions: getDefinitions(progression.targetLevel, progression.choiceOrigins),
   }));
   const definitions = base.definitions;
-  const firstLevelIds = new Set(getDefinitions(1).steps.flatMap(s => s.decisions.map(d => d.id)));
+  const firstLevelIds = new Set(
+    getDefinitions(progression.fromLevel).steps.flatMap(s => s.decisions.map(d => d.id)),
+  );
   const newDecisions = definitions.steps.flatMap(step =>
     step.decisions
       .filter(decision => !firstLevelIds.has(decision.id))
@@ -152,7 +156,6 @@ function AdvancementEditor({
   );
   const [draftVersion, setDraftVersion] = useState(progression.draft?.version ?? 0);
   const [dirty, setDirty] = useState(false);
-  const [duringRespite, setDuringRespite] = useState(false);
   const [finished, setFinished] = useState(false);
   const [message, setMessage] = useState('');
   const save = useMutation(api.characters.saveAdvancement);
@@ -166,7 +169,7 @@ function AdvancementEditor({
     characterId,
     context: 'progression',
     selections: merged,
-    targetLevel: 2,
+    targetLevel: base.targetLevel,
   }) as EvaluationResult | undefined;
   const stale =
     progression.revision !== base.revision ||
@@ -184,15 +187,12 @@ function AdvancementEditor({
     : null;
   return (
     <section aria-label="Level advancement" className={`${PANEL} flex flex-col gap-4`}>
-      <h2>Advance Fury to level 2</h2>
+      <h2>Level up to level {base.targetLevel}</h2>
       <p className="m-0 text-base">
-        Keep your earlier choices and add this level’s grants. Advancement takes place during a
-        respite; this action does not heal or refill resources and needs no Director approval.
+        Keep your earlier choices and add this level’s grants. Taking a level-up needs no Director
+        approval; damage taken and Recoveries spent stay the same.
       </p>
-      <p className="m-0 text-base">
-        Campaign XP: {progression.xp}; entry-level credit: {progression.entryLevelXpOffset}. Level 2
-        requires {progression.requiredXp} cumulative XP.
-      </p>
+      <p className="m-0 text-base">Pending level-ups: {progression.pendingLevelUps}.</p>
       {!progression.eligible && !finished && <Notice>{progression.reason}</Notice>}
       {character.combatLocked && <Notice>Progression is locked during combat.</Notice>}
       {stale && !finished && (
@@ -206,16 +206,16 @@ function AdvancementEditor({
       )}
       {progression.draftIsStale && !stale && !finished && (
         <Notice>
-          The previous advancement draft belongs to an older build. Save new level-two choices for
+          The previous advancement draft belongs to an older build or level. Save new choices for
           this build.
         </Notice>
       )}
       {message && <Notice role="status">{message}</Notice>}
-      {!finished && base.id && progression.baseLevel === 1 && (
+      {!finished && base.id && progression.eligible && (
         <div className="grid items-start gap-6 lg:grid-cols-2">
           <div className="flex flex-col gap-5">
             <fieldset disabled={blocked} className="min-w-0 space-y-5">
-              <legend className="sr-only">New level-two choices</legend>
+              <legend className="sr-only">New level {base.targetLevel} choices</legend>
               {newDecisions.map(({ decision, step }) => (
                 <DecisionEditor
                   key={decision.id}
@@ -265,39 +265,25 @@ function AdvancementEditor({
             >
               Save advancement draft
             </Button>
-            <label className="flex items-start gap-2 text-base">
-              <input
-                type="checkbox"
-                checked={duringRespite}
-                disabled={blocked}
-                onChange={event => setDuringRespite(event.target.checked)}
-              />
-              This advancement occurs during a respite
-            </label>
             <Button
               disabled={
-                blocked ||
-                !args ||
-                dirty ||
-                draftVersion === 0 ||
-                !duringRespite ||
-                evaluation?.status !== 'complete'
+                blocked || !args || dirty || draftVersion === 0 || evaluation?.status !== 'complete'
               }
               onClick={async () => {
                 if (!args) return;
                 const ok = await command.run(
-                  commandId => finalize({ ...args, commandId, duringRespite }),
-                  JSON.stringify(['finalize-advancement', args, duringRespite]),
+                  commandId => finalize({ ...args, commandId }),
+                  JSON.stringify(['finalize-advancement', args]),
                 );
                 if (ok) {
                   setFinished(true);
                   setMessage(
-                    'Advanced to level 2. The active sheet and build history have been updated.',
+                    `Advanced to level ${base.targetLevel}. The active sheet and build history have been updated.`,
                   );
                 }
               }}
             >
-              Advance to level 2
+              Take level {base.targetLevel}
             </Button>
             {dirty && (
               <p className="m-0 text-sm text-muted-foreground">
@@ -307,7 +293,7 @@ function AdvancementEditor({
           </div>
           <div>
             <p className="mt-0 text-sm text-muted-foreground">
-              Proposed level-two build. Current resources are unchanged.
+              Proposed level {base.targetLevel} build.
             </p>
             <BuildPreview evaluation={evaluation} name={character.authored.name} />
           </div>
@@ -328,6 +314,8 @@ function OwnerAdvancement({
     Advancement | undefined;
   const [reloadVersion, setReloadVersion] = useState(0);
   if (!progression) return <Loading>Loading advancement…</Loading>;
+  // The level-up panel appears only while a granted level-up waits to be taken (V163).
+  if (progression.pendingLevelUps < 1 && !progression.draft) return null;
   return (
     <AdvancementEditor
       key={`${characterId}-${reloadVersion}`}

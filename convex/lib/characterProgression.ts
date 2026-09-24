@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** V32 progression boundaries: immutable saved builds, scoped choices and private history reads. */
+/**
+ * V32 progression boundaries, generalised by V163: immutable saved builds, scoped choices for one
+ * level at a time (docs/character-wizard-spec.md#level-up) and private history reads.
+ */
 import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { ReadCtx } from './access';
 import { baselineOf, pendingReview } from './characterBuild';
-import {
-  CURRENT_ADVANCEMENT,
-  supportsCurrentAdvancement,
-} from '../../shared/content/character-support';
+import { levelUpTarget } from '../../shared/content/character-support';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { isJsonValue, type DraftSelection } from '../../shared/characterDraft';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
@@ -16,32 +16,31 @@ import { selectionsFrom } from '../../shared/evaluate/character';
 export function revisionLevel(revision: Doc<'characterRevisions'>): number {
   return revision.level ?? baselineOf(revision.derivedBaseline)?.level.value ?? 1;
 }
-export function advancementDecisionIds(): string[] {
+/** Decisions that exist at `fromLevel + 1` but not at `fromLevel`: the level-up's own choices. */
+export function advancementDecisionIds(fromLevel: number): string[] {
   const oldIds = new Set(
-    getDefinitions(CURRENT_ADVANCEMENT.fromLevel).steps.flatMap(step =>
-      step.decisions.map(d => d.id),
-    ),
+    getDefinitions(fromLevel).steps.flatMap(step => step.decisions.map(d => d.id)),
   );
-  return getDefinitions(CURRENT_ADVANCEMENT.targetLevel).steps.flatMap(step =>
+  return getDefinitions(fromLevel + 1).steps.flatMap(step =>
     step.decisions.filter(d => !oldIds.has(d.id)).map(d => d.id),
   );
 }
-export function advancementSelections(input: DraftSelection[]): DraftSelection[] {
-  const allowed = new Set(advancementDecisionIds());
+export function advancementSelections(
+  input: DraftSelection[],
+  fromLevel: number,
+): DraftSelection[] {
+  const allowed = new Set(advancementDecisionIds(fromLevel));
   if (
-    input.length > 20 ||
-    JSON.stringify(input).length > 16000 ||
+    input.length > 40 ||
+    JSON.stringify(input).length > 32000 ||
     input.some(s => !allowed.has(s.decisionId) || !isJsonValue(s.value))
   )
     throw new ConvexError(
-      'Level-up accepts only the new level-two decisions; earlier choices must remain unchanged.',
+      `Level-up accepts only the new level-${fromLevel + 1} decisions; earlier choices must remain unchanged.`,
     );
   if (new Set(input.map(s => s.decisionId)).size !== input.length)
     throw new ConvexError('A level-up decision may appear only once.');
-  return draftSelectionsFrom(
-    selectionsFrom(input),
-    getDefinitions(CURRENT_ADVANCEMENT.targetLevel),
-  );
+  return draftSelectionsFrom(selectionsFrom(input), getDefinitions(fromLevel + 1));
 }
 export async function progressionBase(ctx: ReadCtx, character: Doc<'characters'>) {
   const id = character.effectiveRevisionId ?? character.draftRevisionId;
@@ -53,27 +52,26 @@ export function progressionEligibility(
 ) {
   const xp = character.liveState?.xp ?? 0;
   const offset = character.entryLevelXpOffset ?? 0;
-  const baseline = base ? baselineOf(base.derivedBaseline) : null;
+  const pendingLevelUps = character.pendingLevelUps ?? 0;
+  const fromLevel = base ? revisionLevel(base) : 1;
+  const target = levelUpTarget(fromLevel, base ? selectionsFrom(base.selections) : {});
+  // docs/character-wizard-spec.md#level-up: only inside a campaign; one pending level-up per flow.
   const reason =
     !character.campaignId || !character.liveState
-      ? 'Scoped advancement currently requires a campaign-attached character with recorded campaign XP.'
-      : !base ||
-          base.status !== 'complete' ||
-          !supportsCurrentAdvancement(
-            revisionLevel(base),
-            baseline?.class.value,
-            baseline?.subclass.value,
-          )
-        ? CURRENT_ADVANCEMENT.unavailableReason
-        : character.combatLocked
-          ? 'Character progression is locked during combat.'
-          : xp + offset < CURRENT_ADVANCEMENT.requiredXp
-            ? 'Level two requires 16 cumulative XP.'
-            : null;
+      ? 'Level-up happens inside a campaign. Outside a campaign, change the level with a full edit.'
+      : !base || base.status !== 'complete'
+        ? 'The effective build is not complete.'
+        : pendingLevelUps < 1
+          ? 'No level-up is pending. Level-ups are granted when a respite completes or by the Director.'
+          : character.combatLocked
+            ? 'Character progression is locked during combat.'
+            : target.reason;
   return {
     xp,
     entryLevelXpOffset: offset,
-    requiredXp: CURRENT_ADVANCEMENT.requiredXp,
+    pendingLevelUps,
+    fromLevel,
+    targetLevel: target.targetLevel,
     eligible: reason === null,
     reason,
   };

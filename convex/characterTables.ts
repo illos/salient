@@ -233,13 +233,18 @@ export const characterTables = {
      * every character that has been saved, both of which are listed.
      */
     wizardDraft: v.optional(v.boolean()),
+    /**
+     * Level-ups granted but not yet taken (V163; docs/character-wizard-spec.md#level-up): a respite
+     * completion or the Director's manual grant adds one per level; each level-up flow spends one.
+     */
+    pendingLevelUps: v.optional(v.number()),
     /** Scoped advancement is independent of the ordinary full-edit draft. */
     advancementDraft: v.optional(
       v.union(
         v.null(),
         v.object({
           baseRevisionId: v.id('characterRevisions'),
-          targetLevel: v.literal(2),
+          targetLevel: v.number(),
           version: v.number(),
           selections: v.array(selectionValidator),
         }),

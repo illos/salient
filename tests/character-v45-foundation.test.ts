@@ -6,7 +6,6 @@ import { getDefinitions } from '../shared/content/character-decisions.ts';
 import {
   characterSupportDiagnostics,
   isSupportedDefinitionLevel,
-  supportsCurrentAdvancement,
 } from '../shared/content/character-support.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
@@ -51,11 +50,7 @@ test('V45 level-two Reaver/Stormwight definitions (V114) do not make guided adva
       assert.equal(result.diagnostics[id]?.[0]?.code, 'required-choice-missing', id);
     assert.equal(result.baseline, null);
     assert.ok(!result.partial?.features?.some(feature => feature.name === 'Unstoppable Force'));
-    assert.equal(supportsCurrentAdvancement(1, 'Fury', subclass), false);
   }
-  assert.equal(supportsCurrentAdvancement(1, 'Fury', 'Berserker'), true);
-  assert.equal(supportsCurrentAdvancement(2, 'Fury', 'Berserker'), false);
-  assert.equal(supportsCurrentAdvancement(1, 'Elementalist', 'Fire'), false);
 });
 
 test('V45 incomplete kit and invalid levels retain absent values and explicit diagnostics', () => {

@@ -6,7 +6,6 @@ import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
 import { changeChoice } from '../shared/evaluate/choiceTransition.ts';
 import { changeLevel } from '../shared/evaluate/levelTransition.ts';
-import { supportsCurrentAdvancement } from '../shared/content/character-support.ts';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
 type Selections = Record<string, SelectionValue>;
 const evaluate = (selections: Selections, level = 2) =>
@@ -85,7 +84,6 @@ test('Shadow level-two missing and foreign options remain invalid; other classes
     evaluate({ ...first.selections, 'class.choice': 'Elementalist' }).status,
     'complete',
   );
-  assert.equal(supportsCurrentAdvancement(1, 'Shadow', 'Black Ash'), false);
 });
 
 test('target-level and college edits remove later grants and preserve earlier choices without restoring stale choices', () => {

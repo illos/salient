@@ -7,7 +7,6 @@ import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
 import { changeChoice } from '../shared/evaluate/choiceTransition.ts';
 import { changeLevel } from '../shared/evaluate/levelTransition.ts';
-import { supportsCurrentAdvancement } from '../shared/content/character-support.ts';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
 type Selections = Record<string, SelectionValue>;
 const evaluate = (selections: Selections, level: number) =>
@@ -174,7 +173,4 @@ test('aspect ability pools are exclusive, level edits prune only higher-level ch
   const berserker = evaluate(aspect.selections, 3);
   assert.notEqual(berserker.status, 'complete');
   assert.ok(!berserker.partial?.features?.some(f => f.name === 'Inescapable Wrath'));
-  // Guided advancement stays the V32 Berserker 1→2 transition.
-  assert.equal(supportsCurrentAdvancement(1, 'Fury', 'Reaver'), false);
-  assert.equal(supportsCurrentAdvancement(2, 'Fury', 'Berserker'), false);
 });

@@ -183,11 +183,14 @@ describe('V68 campaign home operations', () => {
       authored: { name: 'Pending', appearance: '', biography: '', notes: '' },
     });
     const ownHero = await admitHero(t, f.director, f.director, f.campaignId, 'Mora');
-    // Fixture XP so the advancement route accepts a level-up (the same fixture value the V32
-    // progression test uses); the expected level comes from the level-2 definitions, not from XP.
+    // Fixture a pending level-up so the advancement route accepts it (V163); the expected level
+    // comes from the level-2 definitions, not from XP.
     await t.run(async ctx => {
       const character = (await ctx.db.get(f.thornId))!;
-      await ctx.db.patch(character._id, { liveState: { ...character.liveState!, xp: 16 } });
+      await ctx.db.patch(character._id, {
+        pendingLevelUps: 1,
+        liveState: { ...character.liveState!, xp: 16 },
+      });
     });
     const progression = await f.player.client.query(api.characters.progression, {
       characterId: f.thornId,
@@ -212,7 +215,6 @@ describe('V68 campaign home operations', () => {
     await f.player.client.mutation(api.characters.finalizeAdvancement, {
       ...base,
       expectedDraftVersion: version,
-      duringRespite: true,
       commandId: 'finalize-level-two',
     });
     const campaign = await f.observer.client.query(api.campaigns.get, { campaignId: f.campaignId });

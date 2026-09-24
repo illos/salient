@@ -6,7 +6,6 @@ import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
 import { changeChoice } from '../shared/evaluate/choiceTransition.ts';
 import { changeLevel } from '../shared/evaluate/levelTransition.ts';
-import { supportsCurrentAdvancement } from '../shared/content/character-support.ts';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
 type Selections = Record<string, SelectionValue>;
 const evaluate = (selections: Selections, level = 3) =>
@@ -111,5 +110,4 @@ test('level three rejects missing/foreign choices and prunes only unavailable hi
   assert.ok(!college.selections['class.shadow.level-2.burning-ash-ability']);
   const changedClass = changeChoice(first.selections, getDefinitions(3), 'class.choice', 'Fury');
   assert.ok(!changedClass.selections[first.abilityDecision]);
-  assert.equal(supportsCurrentAdvancement(2, 'Shadow', 'Black Ash'), false);
 });

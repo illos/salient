@@ -577,6 +577,10 @@ advancement mode. Source restoration remains distinct from activating the level-
 [the current-value policy](#current-values-when-a-build-changes) and
 [source research](research/remaining-character-questions-review.md#q-char-3).
 
+**Implementation note — 2026-09-24 (V163):** pending level-ups, the Director's `character.grant-level-up`
+operation and level-up for every class and supported level replace V32's Fury-only, XP-gated flow.
+See the [V163 slice](build/V163-level-up.md).
+
 **Implementation note — 2026-09-16 (V32):** The first progression slice supports a campaign-attached
 Berserker Fury from level one to two, with Danger Sense and either sourced Berserker ability. It uses
 an owner-confirmed respite timing field, cumulative XP plus the retained entry-level offset, and the

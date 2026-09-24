@@ -1080,6 +1080,7 @@ const unsavedCharacter: WizardCharacter = {
   choiceOrigins: {},
   fullEditIsStale: false,
   combatLocked: false,
+  pendingLevelUps: 0,
   campaignId: null,
   campaignName: null,
   effectiveRevisionId: null,

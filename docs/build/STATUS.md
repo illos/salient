@@ -158,3 +158,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V160 | [Talent ability cards defer resource bookkeeping to the engine](V160-talent-resource-note.md) | Merged (`4b87799`, train 7); cloud dev published; gate and headless PASS |
 | V161 | [Respite and level-up design](V161-respite-design.md) | In progress |
 | V162 | [Build changes keep damage taken](V162-current-values.md) | In progress |
+| V163 | [Level-up for every class, one granted level at a time](V163-level-up.md) | In progress |

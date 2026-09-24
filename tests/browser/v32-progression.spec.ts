@@ -46,10 +46,13 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
   try {
     await player.goto(`/characters/${characterId}`);
     await player.getByRole('link', { name: 'Progression', exact: true }).click();
-    await expect(
-      player.getByText('Level two requires 16 cumulative XP.', { exact: true }),
-    ).toBeVisible();
-    // Director setup goes through public authorized commands, never database patching.
+    // V163: no panel until the Director grants a level-up. Setup uses public commands only.
+    await expect(player.getByRole('heading', { name: 'Level up to level 2' })).toHaveCount(0);
+    await app(dm, 'mutation', 'commands:submit', {
+      campaignId,
+      commandId: crypto.randomUUID(),
+      text: `/character grant-level-up`,
+    });
     for (const [field, value] of [
       ['xp', 16],
       ['stamina', 20],
@@ -82,19 +85,16 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await player.reload();
     await expect(player.getByLabel('Danger Sense', { exact: true })).toBeChecked();
     await expect(player.getByLabel('Wrecking Ball', { exact: true })).toBeChecked();
-    await expect(
-      player.getByRole('button', { name: 'Advance to level 2', exact: true }),
-    ).toBeDisabled();
-    await player.getByLabel('This advancement occurs during a respite', { exact: true }).check();
     await player.screenshot({ path: `${directory}/advancement-ready.png`, fullPage: true });
-    await player.getByRole('button', { name: 'Advance to level 2', exact: true }).click();
+    await player.getByRole('button', { name: 'Take level 2', exact: true }).click();
     await expect
       .poll(
         async () => (await query('characters:sheet', { characterId })).build?.baseline?.level.value,
       )
       .toBe(2);
     await player.goto(`/characters/${characterId}`);
-    await expect(player.getByText('20 / 39', { exact: true }).first()).toBeVisible();
+    // Q-CHAR-2 revised: 10 damage taken stays (20/30 → 29/39).
+    await expect(player.getByText('29 / 39', { exact: true }).first()).toBeVisible();
     const featureRows = player.getByRole('list', { name: 'Features', exact: true });
     await expect(
       featureRows.getByRole('listitem').filter({ hasText: 'Ferocity' }).first(),
