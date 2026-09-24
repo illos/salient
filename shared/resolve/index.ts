@@ -69,6 +69,24 @@ export function resolveEdgeBane(edges: number, banes: number): EdgeBaneResolutio
   return { edges, banes, effectiveEdges, effectiveBanes, net, modifier, tierShift };
 }
 
+/**
+ * V156, feature/shadow/level-1/insight.md: "Whenever you use a heroic ability that makes use of a
+ * power roll, that ability costs 1 fewer insight if you have an edge or double edge on it. If the
+ * ability has multiple targets, the cost is reduced even if the ability gains an edge or has a
+ * double edge against only one target." Edges and banes cancel first (rule/dice/power-roll.md,
+ * "Rolling With Edges and Banes"), so an edge means a net edge after cancelling.
+ */
+export function effectiveFixedCost(
+  cost: ResourceCost | undefined,
+  actor: Pick<ActorRollFacts, 'edgeCostReduction'>,
+  targets: readonly { edges: number; banes: number }[],
+): ResourceCost | undefined {
+  const reduction = actor.edgeCostReduction;
+  if (!cost || !reduction || cost.resource !== reduction.resource || cost.amount <= 0) return cost;
+  if (!targets.some(t => resolveEdgeBane(t.edges, t.banes).net > 0)) return cost;
+  return { ...cost, amount: Math.max(0, cost.amount - reduction.amount) };
+}
+
 /** Section 1.5: 11 or lower is tier 1, 12 to 16 tier 2, 17 or higher tier 3. */
 export function baseTierOf(total: number): Tier {
   return total <= 11 ? 1 : total <= 16 ? 2 : 3;
@@ -533,7 +551,11 @@ export function resolveAbilityRoll(input: AbilityRollInput): AbilityRollResponse
       'Choose melee or ranged: this Melee-and-Ranged ability deals different damage in each mode (rule/combat/distance.md).',
     );
   const ability = withMode(input.ability, input.selectedMode);
-  const affordability = checkAffordability(ability.fixedCost, input.resourcePool, input.inCombat);
+  const affordability = checkAffordability(
+    effectiveFixedCost(ability.fixedCost, actor, input.targets),
+    input.resourcePool,
+    input.inCombat,
+  );
   if (affordability.kind === 'blocked')
     return {
       kind: 'blocked',

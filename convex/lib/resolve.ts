@@ -945,6 +945,16 @@ export function actorRollFacts(
           })),
         }
       : {}),
+    // V156, feature/shadow/level-1/insight.md: an edged heroic ability costs 1 fewer insight.
+    ...(baseline.class.value === 'Shadow'
+      ? {
+          edgeCostReduction: {
+            resource: 'insight',
+            amount: 1,
+            sourcePath: 'vendor/steel-compendium/en/unified/md/feature/shadow/level-1/insight.md',
+          },
+        }
+      : {}),
   };
 }
 

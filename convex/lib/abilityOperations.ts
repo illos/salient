@@ -59,6 +59,7 @@ import {
   CHARACTERISTICS,
   plainText,
   checkAffordability,
+  effectiveFixedCost,
   correctTarget,
   modeMatters,
   resolveAbilityRoll,
@@ -1277,7 +1278,16 @@ const abilityUse: OperationDefinition = {
     const costPool = ability.fixedCost
       ? poolFor(records, context, ability.fixedCost.resource)
       : undefined;
-    const affordability = checkAffordability(ability.fixedCost, costPool, allowance.inCombat);
+    // V156: the same edge-reduced cost the roll resolver charges (effectiveFixedCost).
+    const affordability = checkAffordability(
+      effectiveFixedCost(
+        ability.fixedCost,
+        actorRollFacts(actor!, records),
+        targets.map((_, i) => ({ edges: edges[i]!, banes: banes[i]! })),
+      ),
+      costPool,
+      allowance.inCombat,
+    );
     if (affordability.kind === 'blocked')
       return {
         kind: 'ability.blocked',

@@ -102,6 +102,11 @@ export interface ResourceCost {
 /** Actor facts for a roll (sections 1.1, 1.8, 4.2). */
 export interface ActorRollFacts {
   actorId: string;
+  /**
+   * V156: a class feature that lowers a heroic ability's cost when the actor has an edge or double
+   * edge on its power roll (feature/shadow/level-1/insight.md: "costs 1 fewer insight").
+   */
+  edgeCostReduction?: { resource: string; amount: number; sourcePath: string };
   characteristics: Record<Characteristic, number>;
   /** Kit bonuses by tier index 0..2, e.g. Mountain [0, 0, 4]. Absent when the actor has no kit. */
   kitMeleeDamageBonus?: [number, number, number];
