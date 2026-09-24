@@ -243,7 +243,7 @@ export function nullActionText(action: NullAction): string {
   return `${action.activationCondition}\n\n${entry.text}`;
 }
 
-/** Printed clauses of chosen level-2/3 abilities the resolver does not model. */
+/** Level-2/3 ability notes: what the table resolves automatically and which clauses stay manual. */
 export const NULL_ACTIVATION: Record<string, string> = {
   'Force Redirected':
     'The table resolves damage and records the slide 1/3/5 as an instruction; move the target on the map.',
