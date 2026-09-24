@@ -50,3 +50,7 @@ prose inside the parent's activation text.
   Kept: Burning Lash's spend record stays "Part of parent ability", since the second whip is part of
   that paid option (V137).
 - Review re-verification at `143674b`: PASS.
+- Test-support gate PASS at `ed3affa`: rc0 in 295 s (engine 433, app+scripts 691). Test-Deploy:
+  `follow-up-actions` rc0 in 26 s, `elementalist-level-three` and `talent-level-three` rc0;
+  `beastheart-level-three` failed identically on main (the party read limit, fixed in `5ee2d8b`).
+  Rebased onto `5ee2d8b` and stacked with V138 for one combined gate and journeys.
