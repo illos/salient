@@ -10,6 +10,8 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { backend, table, storedEvents, admitHero } from './fixtures/table';
 import { levelUpsEarned } from '../../convex/lib/respiteOperations';
+import tacticianLedger from '../fixtures/v94-tactician-expected.json';
+import { definitions as levelOneDefinitions } from '../../shared/content/level-one-decisions';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 
@@ -289,4 +291,43 @@ test('cancel reapplies the earlier kit on a level-up taken after the kit change'
   expect(baseline.level.value).toBe(2);
   const effective = hero.effectiveRevisionId!;
   expect((await f.t.run(ctx => ctx.db.get(effective)))!.kind).toBe('respite-kit');
+});
+
+// QC1 V166 R1 (V168): feature/tactician/level-1/field-arsenal.md — where both kits grant a benefit,
+// "you take one or the other and can't change your choice until you finish a respite."
+test('a Tactician cannot switch a Field Arsenal choice mid-respite while keeping both kits', async () => {
+  const f = await setup();
+  const witness = tacticianLedger.witnesses.find(w => w.id === 'v94-tactician-3')!;
+  const id = await admitHero(
+    f.t,
+    f.player,
+    f.director,
+    f.campaignId,
+    'Planner',
+    draftSelectionsFrom(witness.selections as never, levelOneDefinitions),
+  );
+  const arsenal = async () => {
+    const hero = (await f.t.run(ctx => ctx.db.get(id)))!;
+    const revision = hero.effectiveRevisionId!;
+    const build = (await f.t.run(ctx => ctx.db.get(revision)))!;
+    return build.selections.find(s => s.decisionId === 'class.tactician.arsenal.meleeDamage')
+      ?.value;
+  };
+  expect(await arsenal()).toBe('Mountain');
+  await f.say('/respite start');
+  await expect(
+    f.player.client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId: 'arsenal-only-change',
+      operation: 'respite.change-kit',
+      actor: { refKind: 'character', id },
+      arguments: {
+        selections: [
+          { decisionId: 'class.tactician.arsenal.meleeDamage', value: 'Martial Artist' },
+        ],
+      },
+    }),
+  ).rejects.toThrow("can't change until a respite finishes");
+  await f.say('/respite interrupt');
+  expect(await arsenal()).toBe('Mountain');
 });

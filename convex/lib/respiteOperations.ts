@@ -453,6 +453,9 @@ async function activateNewBuild(
   return { id, reconciliation };
 }
 
+/** The kit identities a respite kit change replaces: the kit, and a Tactician's second kit. */
+const KIT_IDENTITIES = ['kit.choice', 'class.tactician.second-kit'];
+
 /**
  * Apply kit decisions to a build, in the kit step's order so a dependent value (a Tactician's second
  * kit or arsenal) is set after the kit it depends on, and evaluate the result.
@@ -487,6 +490,8 @@ function withKit(
     evaluation,
     kit: working['kit.choice'],
     unchanged: kitValues(working) === kitValues(before),
+    /** The kits themselves (not an arsenal choice between them) are the same. */
+    kitsUnchanged: KIT_IDENTITIES.every(id => (working[id] ?? null) === (before[id] ?? null)),
   };
 }
 
@@ -526,12 +531,19 @@ const changeKit: OperationDefinition = {
     const base = hero.effectiveRevisionId ? await ctx.db.get(hero.effectiveRevisionId) : null;
     if (!base || base.status !== 'complete')
       throw new ConvexError('The effective build is not complete.');
-    const { level, selections, choiceOrigins, evaluation, kit, unchanged } = withKit(
+    const { level, selections, choiceOrigins, evaluation, kit, unchanged, kitsUnchanged } = withKit(
       base,
       args.selections as { decisionId: string; value: SelectionValue }[],
     );
     if (typeof kit !== 'string' || !kit) throw new ConvexError('This hero has no kit to change.');
     if (unchanged) throw new ConvexError(`${kit} is already this hero's kit.`);
+    // feature/tactician/level-1/field-arsenal.md: where both kits grant a benefit, "you take one or
+    // the other and can't change your choice until you finish a respite." Changing that choice while
+    // keeping both kits is not a kit change and cannot take effect mid-respite (QC1 V166 R1).
+    if (kitsUnchanged)
+      throw new ConvexError(
+        "A Field Arsenal choice between the same two kits can't change until a respite finishes; change a kit to choose again.",
+      );
     if (evaluation.status !== 'complete') {
       const owed = Object.keys(evaluation.diagnostics).join(', ');
       throw new ConvexError(
