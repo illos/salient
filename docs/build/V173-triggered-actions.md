@@ -115,6 +115,7 @@ Rules question: [Q-TRIG-1](../rules-questions-for-user.md#q-trig-1-the-triggerin
 ## Work log
 
 - 2026-09-24: `slice/V173` in `.worktrees/triggered`, stacked on `slice/V172` `3d1e27e4`.
+  Implementation commit: `fb9d7c51` (committed on the branch, not pushed).
 - Flipped to fully compiled:
   - **Feedback Loop** (`feature/ability/talent/level-1/feedback-loop.md`), offered when any creature
     damages an ally of the Talent. It targets the dealer, for half the damage.
