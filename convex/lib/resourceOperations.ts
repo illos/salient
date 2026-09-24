@@ -254,7 +254,10 @@ const resourceForgo: OperationDefinition = {
         throw new ConvexError(`${character.authored.name} is already forgoing this turn.`);
       // The choice belongs to the turn start: once the pool moved (a claim or a spend), the gain
       // can no longer be cleanly forgone.
-      if (live.heroicResource.current !== last.after)
+      if (
+        live.heroicResource.current !== last.after ||
+        (await poolChangedSince(ctx, character._id, last.eventId))
+      )
         throw new ConvexError(
           `${character.authored.name}'s ${live.heroicResource.name} changed after the turn-start gain (a claim or a spend); forgo at the turn start, before using it.`,
         );
@@ -310,6 +313,32 @@ const resourceForgo: OperationDefinition = {
     };
   },
 };
+
+/**
+ * V150 (QC1 R1): whether anything other than the turn-start gain changed the hero's pool after it,
+ * from the journal. Changes whose event was undone don't count. A claim followed by a spend that
+ * restores the value is still a change.
+ */
+async function poolChangedSince(
+  ctx: ReadCtx,
+  characterId: Id<'characters'>,
+  gainEventId: string,
+): Promise<boolean> {
+  const rows = await ctx.db
+    .query('changes')
+    .withIndex('by_entity', q => q.eq('entityTable', 'characters').eq('entityId', characterId))
+    .order('desc')
+    .take(500);
+  for (const row of rows) {
+    if (row.eventId === gainEventId) return false;
+    if (row.path !== 'liveState.heroicResource.current') continue;
+    const event = await ctx.db.get(row.eventId);
+    // Undo/redo/rewind write restoring rows under history events; the original event's
+    // disposition says whether its change stands.
+    if (event && event.disposition !== 'undone' && !event.kind.startsWith('history.')) return true;
+  }
+  return false;
+}
 
 /** V150: the hero's Self-Taught forgo state for `abilities:sheet`, or null without it. */
 export function resourceForgoState(character: Doc<'characters'>) {

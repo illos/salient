@@ -72,9 +72,14 @@ test('V150: a Self-Taught Shadow forgoes insight until the start of their next t
   expect(gained).toBeGreaterThanOrEqual(1);
   expect(gained).toBeLessThanOrEqual(3);
 
-  // After a claim this turn the pool has moved, so forgoing now is refused (V150 review R4).
+  // After a claim this turn the pool has moved, so forgoing now is refused (V150 review R4), even
+  // when a later change brings it back to the post-gain value (QC1 R1: claim +1, then spend 1).
   await claim();
   await expect(command(`${ref} /resource forgo value=now`, true)).rejects.toThrow(/changed/);
+  await command(`${ref} /adjust heroic-resource value=${gained}`);
+  expect((await live()).heroicResource.current).toBe(gained);
+  await expect(command(`${ref} /resource forgo value=now`, true)).rejects.toThrow(/changed/);
+  await command('/history undo');
   await command('/history undo', true);
   // Decided at this turn's start after the gain: value=now removes this turn's gain and forgoes.
   await command(`${ref} /resource forgo value=now`, true);

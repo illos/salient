@@ -94,6 +94,7 @@ export const heroLiveValidator = v.object({
       turnId: v.string(),
       delta: v.number(),
       after: v.number(),
+      eventId: v.string(),
     }),
   ),
   /** V120: table-confirmed class resource triggers claimed in the current encounter. */

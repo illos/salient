@@ -53,3 +53,8 @@ App test `tests/app/heroic-resource-forgo.test.ts`, on a Self-Taught Shadow:
     `lastTurnGain.after` records the value; a test claims first and expects the refusal.
 - Review closure: PASS at `319d1b65`. Follow-up noted: a claim and a spend that cancel out still
   allow a late forgo. Closing that would need a check against the event log.
+- QC1 (`../review-artifacts/2026-09-24-V150-QC1.md`) R1: a claim of +1 followed by a spend of 1
+  restored the post-gain value, so a late forgo was accepted. `value=now` now also checks the hero's
+  journal back to the turn-start gain. Any change to the pool that stands (the event was not undone
+  and is not a history event) refuses it. The test claims, adjusts back to the post-gain value,
+  expects the refusal, and forgoes after undoing both.
