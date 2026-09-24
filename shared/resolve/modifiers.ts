@@ -239,7 +239,9 @@ function rollModifiersOf(
   roll: RollFacts,
 ): RollInstance[] {
   return instances.filter((instance): instance is RollInstance => {
-    if (instance.status !== 'active' || instance.kind !== 'modifier') return false;
+    // V158 R1b: an unresolved same-ability group is the table's; never apply it automatically.
+    if (instance.status !== 'active' || instance.kind !== 'modifier' || instance.manualStacking)
+      return false;
     if (!aboutHolder(instance) || instance.payload.kind !== 'modifier') return false;
     const modifier = instance.payload.modifier;
     if (modifier.kind !== 'roll') return false;
@@ -412,6 +414,8 @@ export function statModifiers(
   const matching = instances.filter(
     (instance): instance is StatInstance =>
       instance.status === 'active' &&
+      // V158 R1b: an unresolved same-ability group is the table's; never apply it automatically.
+      !instance.manualStacking &&
       instance.kind === 'modifier' &&
       aboutHolder(instance) &&
       instance.payload.kind === 'modifier' &&

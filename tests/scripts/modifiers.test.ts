@@ -263,6 +263,14 @@ test('aggregation follows the printed stacking', () => {
   expect(derivedValue(1, [old, penalty], 'stability').value).toBe(2);
   // Ended and consumed instances no longer count.
   expect(statModifiers([{ ...old, status: 'ended' }], 'stability').total).toBe(0);
+  // V158 R1b: an unresolved same-ability group (manual stacking) is the table's; it never applies.
+  expect(statModifiers([{ ...old, manualStacking: true }], 'stability').total).toBe(0);
+  const [manual] = rollContributions({
+    actor: { id: 'goblin', instances: [{ ...first, manualStacking: true }] },
+    targets: [{ id: 'hero', instances: [] }],
+    roll: { strike: true },
+  });
+  expect(manual!.contributions).toHaveLength(0);
 });
 
 test('scope matching: by versus against, strikes versus every power roll', () => {

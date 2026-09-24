@@ -109,7 +109,7 @@ test('V159: a lasting edge applies to the next matching roll; exclude drops it a
       description: 'Synthetic source occurrence for a lasting edge.',
     });
     const thorn = { kind: 'character' as const, id: f.thornId, name: 'Thorn' };
-    return (await applyEffectInstance(
+    const stored = await applyEffectInstance(
       ctx,
       { campaignId: f.campaignId, eventId },
       {
@@ -129,7 +129,9 @@ test('V159: a lasting edge applies to the next matching roll; exclude drops it a
         endsWhen: [],
         appliedSequence: (await ctx.db.get(eventId))!.sequence,
       },
-    ))!.instance;
+    );
+    if (!stored || !('instance' in stored)) throw new Error('Expected a tracked instance.');
+    return stored.instance;
   });
   const goblinRef = `@{foe:${goblin}}`;
   const heal = () =>
