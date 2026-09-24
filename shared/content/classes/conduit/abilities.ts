@@ -316,12 +316,12 @@ export function conduitActionText(action: CensorAction): string {
 /** Level-2/3 ability notes: what the table resolves automatically and which clauses stay manual. */
 export const CONDUIT_ACTIVATION: Record<string, string> = {
   'Statue of Power':
-    'A size 2 statue rises within 10 squares until the end of the encounter; you and allies within 3 squares gain 1 surge at the start of each of your turns. It is destroyed at 20 damage and has immunity all to poison and psychic damage. Track it manually.',
+    'A size 2 statue rises within 10 squares until the end of the encounter; while within 3 squares of it you gain 1 surge at the start of each of your turns, and each ally within 3 squares gains the same benefit. It is destroyed at 20 damage and has immunity all to poison and psychic damage. Track it manually.',
   Reap: 'Until the start of your next turn, each ally that kills an enemy regains Stamina equal to 5 + your Intuition. Resolve manually.',
   'Blessing of Fate and Destiny':
-    'Up to three creatures (you can target yourself instead of one): until the end of the encounter or until you are dying, choose one effect: roll three dice and keep two of your choice, or roll three dice and keep the lowest two. Apply manually.',
+    'Three creatures (you can target yourself instead of one): until the end of the encounter or until you are dying, choose one effect: roll three dice and keep two of your choice, or roll three dice and keep the lowest two. Apply manually.',
   'The Gods Command You Obey':
-    'At every tier the target acts before taking the damage (a free strike, an ability of your choice, or a shift and an ability), so the power roll, target actions and damage are resolved manually.',
+    'At every tier, a target whose Presence is below the potency acts before taking the damage (a free strike, an ability of your choice, or a shift and an ability), so the power roll, target actions and damage are resolved manually.',
   'Wellspring of Grace':
     'Until the end of the encounter or until you are dying, each ally who starts their turn in the aura can spend a Recovery. Resolve manually.',
   'Our Hearts Your Strength':

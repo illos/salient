@@ -52,13 +52,13 @@ const selfTargets = [
   'Divine Comedy',
 ];
 /** Abilities the table rolls; compiled ones also carry forced movement and potency outcomes. */
-const rolledRemainder: Record<string, RegExp> = {
-  'Nature Judges Thee': /./,
-  "Saint's Tempest": /./,
-  'Morning Light': /./,
+const rolledRemainder: Record<string, RegExp | null> = {
+  'Nature Judges Thee': null,
+  "Saint's Tempest": null,
+  'Morning Light': null,
   'Fear of the Gods': /frightened/i,
-  'Soul Siphon': /./,
-  'Words of Wrath and Grace': /./,
+  'Soul Siphon': null,
+  'Words of Wrath and Grace': null,
 };
 const compiled = new Set(['Nature Judges Thee', "Saint's Tempest"]);
 type CompiledRead = {
@@ -169,6 +169,15 @@ export async function runConduitLevelThree({
               sheet.features.some(f => f.name === feature),
               `${name} feature ${feature}`,
             );
+        // 2nd-level-domain-feature.md: the other domain's level-1 feature and its skill persist.
+        assert.ok(
+          sheet.features.some(f => f.name === b.w.levelTwo.secondDomainFeature),
+          `${name} second domain feature`,
+        );
+        assert.ok(
+          hero.skills.some(s => s.name === b.w.levelTwo.addedSelections.secondDomainSkill),
+          `${name} second domain skill`,
+        );
         for (const [ability, amount] of [
           [b.second, 5],
           [b.seventh, 7],
@@ -316,7 +325,8 @@ export async function runConduitLevelThree({
             const after = await get(affectedId);
             assert.equal((await get(id)).liveState?.heroicResource.current, 0, `${name} Piety`);
             const remainder = rolledRemainder[name];
-            if (remainder) {
+            const rolled = name in rolledRemainder;
+            if (rolled) {
               assert.equal(persisted?.kind, 'ability.use', name);
               const result = persisted?.payload?.data?.result;
               assert.ok(result, name);
@@ -331,11 +341,13 @@ export async function runConduitLevelThree({
               const damage = row ? row.tiers[outcome.tier - 1]! : 0;
               assert.equal(outcome.damage?.rolledDamage ?? 0, damage, name);
               assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
-              assert.match(
-                JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
-                remainder,
-                name,
-              );
+              // Only tier clauses the resolver leaves manual are checked; Effect paragraphs are text.
+              if (remainder)
+                assert.match(
+                  JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
+                  remainder,
+                  name,
+                );
               if (compiled.has(name)) {
                 // Compiled route: movement is an instruction and potency conditions are adjudicated.
                 const read = (

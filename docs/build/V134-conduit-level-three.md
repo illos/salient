@@ -53,3 +53,7 @@ shared API. Guided advancement remains deferred.
 - Author checks: both TypeScript projects and ESLint pass; focused V134, V100 and V45 engine files pass;
   V88 audit guard and live compiled report 34/34. Content 1754 entries; `compiled:check`,
   `content:check`, `supporting:check`, links pass.
+- Independent rules/implementation review (subagent, source-only) of `87dfac3`: PASS, four
+  non-blocking findings, all closed: The Gods Command You Obey's note names the Presence potency gate;
+  Statue of Power and Blessing of Fate and Destiny notes follow the printed text; the cohort reads the
+  second domain feature and skill back from the persisted sheet; catch-all remainder patterns removed.
