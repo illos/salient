@@ -242,9 +242,9 @@ applies equally to level-ups taken long after the respite that granted them, so 
 full stays full. It supersedes the 2026-09-15 rule (keep the current amount; cap on decrease) and
 restores the original deficit proposal.
 
-**Open (proposal, not confirmed):** when a decrease would push current Stamina to 0 or below, or
-Recoveries below 0, the build change stops at 1 Stamina and 0 Recoveries rather than making the hero
-dying through an edit. Do not add a zero floor to source-authorized negative values such as Clarity.
+**Floor, confirmed 2026-09-24:** a build change can never drop a hero to 0 Stamina or below. When a
+decrease would push current Stamina to 0 or below, or Recoveries below 0, the change stops at 1 Stamina
+and 0 Recoveries; normal play then takes over. Do not add a zero floor to source-authorized negative values such as Clarity.
 
 This applies to values that actually have separate current amounts and maxima. Derived values such
 as recovery value, characteristics and winded threshold still recalculate from the effective build;

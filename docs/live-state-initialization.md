@@ -215,7 +215,7 @@ Consequences for the application:
 2. **Confirmed 2026-09-15, revised 2026-09-24 (Q-CHAR-2):** Activating a later build updates the
    baseline and keeps the damage taken and Recoveries spent: `newCurrent = newMaximum − (oldMaximum −
    oldCurrent)`, both when a maximum rises and falls. Stamina 20/30 → 26/36, or 20/30 from 26/36;
-   Recoveries 7/10 → 9/12. The floor on a decrease is an open proposal (1 Stamina, 0 Recoveries).
+   Recoveries 7/10 → 9/12. A decrease never takes current Stamina below 1 or Recoveries below 0 (confirmed 2026-09-24).
    Preserve conditions/counters and source-authorized
    negative values. Derived statistics recalculate; actual respite restoration is separate.
    Preview and commit the build and current values atomically using the same shared UI/headless operation.

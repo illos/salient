@@ -28,8 +28,8 @@ and generic level-up for all eleven classes can be built. Design only: no code.
   action later, never blocking the respite or the next session. New requirement: Director-adjustable
   campaign XP per level (default 16), to design later.
 - 2026-09-24: Q-CHAR-2 revised: build changes keep damage taken and Recoveries spent in both directions
-  (30/30 → 36/36; 20/30 → 26/36; 26/36 → 20/30), which also covers late level-ups. Open proposal: floor
-  a decrease at 1 Stamina / 0 Recoveries. Build handoff: the activation code implements the old
+  (30/30 → 36/36; 20/30 → 26/36; 26/36 → 20/30), which also covers late level-ups. Floor confirmed: a build change
+  never drops Stamina below 1 or Recoveries below 0. Build handoff: the activation code implements the old
   keep-current/cap rule and must change with generic level-up.
 - Build handoff for Q-CHAR-2 revised: `shared/evaluate/liveReconciliation.ts` (preview/apply, contract in
   `shared/contracts/liveState.ts`), used by `convex/lib/characterBuild.ts` activation, still implements
