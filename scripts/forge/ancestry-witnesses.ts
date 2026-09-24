@@ -19,6 +19,9 @@ import { FeatureType } from '@/enums/feature-type';
 import type { Ancestry } from '@/models/ancestry';
 import type { Feature, FeatureChoice } from '@/models/feature';
 import type { Hero } from '@/models/hero';
+import { forgeNameAliases } from '../../shared/interchange/forge-steel/names.ts';
+
+export { forgeNameAliases };
 
 export interface ForgeWitness {
   id: string;
@@ -29,15 +32,6 @@ export interface ForgeWitness {
   /** Explicit adapter differences; these must not be mistaken for independent Forge proof. */
   calibration: string[];
 }
-
-export const forgeNameAliases: Record<string, string> = {
-  'Elf (high)': 'High Elf',
-  'Elf (wode)': 'Wode Elf',
-  'Draconic Pride': 'Draconian Pride',
-  'Remember your Oath': 'Remember Your Oath',
-  Perseverence: 'Perseverance',
-  'All Is A Feather': 'All Is a Feather',
-};
 
 const interpersonal = [
   'Brag',
