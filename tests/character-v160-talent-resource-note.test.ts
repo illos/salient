@@ -5,6 +5,7 @@ import levelOne from './fixtures/v105-talent-expected.json' with { type: 'json' 
 import ledger from './fixtures/v136-talent-three-expected.json' with { type: 'json' };
 import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
+import { TALENT_ACTIONS } from '../shared/content/classes/talent/abilities.ts';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
 type Selections = Record<string, SelectionValue>;
 
@@ -47,7 +48,14 @@ test('a level-two Talent ability card defers resource bookkeeping to the automat
       a => a.name === w.levelTwo.addedSelections.traditionAbility,
     )!;
     // Gravitic Burst has no ability-specific note, so it shows the shared fallback (QC1's repro).
-    if (chosen.name === 'Gravitic Burst')
-      assert.match(chosen.activationCondition!, /Clarity and Strain: Turn-End Damage/, id);
+    if (chosen.name === 'Gravitic Burst') {
+      const note = chosen.activationCondition!;
+      assert.match(note, /Clarity and Strain: Turn-End Damage/, id);
+      assert.ok(TALENT_ACTIONS.some(a => a.name === 'Clarity and Strain: Turn-End Damage'));
+      // The engine holds strain for Steel Ward and Force Orbs and leaves forced movement to a claim.
+      assert.match(note, /Steel Ward or Force Orbs/, id);
+      assert.match(note, /first forced movement/, id);
+      assert.match(note, /levels 1–6 in combat/, id);
+    }
   }
 });

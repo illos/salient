@@ -31,3 +31,7 @@ apply strain twice.
   stale note: the Summoner, Beastheart and Elementalist resource records already describe the
   automation. Author checks: full lint, TypeScript, focused V160/V136 tests (5) pass; the new test
   fails against the old fallback.
+- Independent review of `1c599cb`: CHANGES REQUIRED, the new note overclaimed twice, both fixed: it
+  now keeps the Steel Ward and Force Orbs exception (the engine holds that strain for the player to
+  apply) and names only the automated gains (combat start, turn start), leaving the first forced
+  movement each round to a claim. The test asserts both and that the referenced record exists.
