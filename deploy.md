@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V120 | `f3acd97` | Merged; backend/frontend published; accepted gates reused | complete |
 | V132 | `c3f9e35` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V117 | `2dcbf97` | Merged; backend/content/frontend published; combined gates at tip | complete |
 | V119 | `3c02939` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -471,3 +472,21 @@ fast-forwarded into main. Its code is identical to the tested `5bacf33`.
   helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V132-release-c3f9e35`.
+
+### V120 heroic resource generation engine publication: 2026-09-24
+
+The test and deploy thread published this release at ENGINE2's handoff. Reviewed tip `f3acd97ce5a58c8a68df3d52e04a9852673ce4a1` was
+fast-forwarded into main. It adds a docs-only record to the tested `63b47d7`.
+- Accepted evidence reused:
+  - full gate at `eb32e21` (284 s, run by the Test-support thread)
+  - `heroic-resource`, `shadow-level-two` and `shadow-level-three` journeys at `63b47d7`
+  - `shadow-level-six` journey at `eb32e21`
+- Independent review and QC1 review passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `3d6cb3e2-2c3c-4cec-8d5c-83ec1a5c4a73`.
+- The schema adds the optional `liveState.resourceClaims`. Content is unchanged at 1732 entries,
+  so no reseed was needed.
+- No smoke tests or test reruns. Temporary credentials were removed and the private hosted
+  helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V120-release-f3acd97`.

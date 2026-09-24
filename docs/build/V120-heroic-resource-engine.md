@@ -119,3 +119,11 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
   pass (seed 1732). With the `eb32e21` gate and `shadow-level-six`, V120 is accepted. Artifacts:
   `test-artifacts/V120-63b47d7/`. QC1 PASS at `63b47d7`
   (`../review-artifacts/2026-09-24-V120-QC1.md`). Ready for integration.
+
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `f3acd97` into main and published the backend
+and frontend using the DEPLOY2 hosted procedure. Backend and schema validation, the hosted build and
+the upload all succeeded. Worker: `3d6cb3e2-2c3c-4cec-8d5c-83ec1a5c4a73`. Content is unchanged, so no reseed was needed. The
+accepted gates were reused, with no smoke test or rerun. Temporary credentials were removed and the
+private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V120-release-f3acd97`.

@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V132 Troubadour levels two and three
+## Current release — V120 heroic resource generation engine
+
+Backend/frontend source `f3acd97ce5a58c8a68df3d52e04a9852673ce4a1` published on 2026-09-24 as
+Worker `3d6cb3e2-2c3c-4cec-8d5c-83ec1a5c4a73`. Backend and schema validation, the hosted build and the upload succeeded. Content
+remains the 1732-entry snapshot, so no reseed was needed. Accepted TESTER results were reused, with
+no smoke test or rerun. See [V120](build/V120-heroic-resource-engine.md) and the
+[ledger](../deploy.md).
+
+## Previous release — V132 Troubadour levels two and three
 
 Backend/content/frontend source `c3f9e353432a274ce7c7f22b5db734ef6e18bfc7` published on 2026-09-24 as
 Worker `1d9acb09-8147-4839-911e-bbb6664df299`. Backend and schema validation, the content reseed (1732 entries at
