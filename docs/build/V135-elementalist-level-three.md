@@ -69,3 +69,8 @@ wizard and shared API. Guided advancement remains deferred.
   cohort now requires source text for every use, activation text for embedded uses (as V101), and aims
   printed-Self abilities at the actor. An evaluator and route dry run over all five builds is clean.
   Artifacts `/srv/presidium/projects/salient/test-artifacts/V135-a5aa9c8`.
+- Test-support gate PASS at `b1aa80b`: `CI=true pnpm check` rc0 in 346 s, engine 420/420, app+scripts
+  667/667, content 1775 entries at the pin, compiled report current. Test-Deploy isolated
+  `elementalist-level-three` cohort rc0 in 73 s: five builds, level edits and twenty-one new uses
+  persisted, seed 1775. Artifacts `/srv/presidium/projects/salient/test-artifacts/V135-b1aa80b`.
+- Ready for integration and cloud dev publication, reusing these results.
