@@ -58,3 +58,8 @@ shared API. Guided advancement remains deferred.
   non-blocking findings, all closed: every embedded use's cost is asserted, the perk pool is compared
   with the ledger's 26 perks, an unreadable Stamina growth quote now fails loudly, and the Try Me
   Instead, No Dying on My Watch and Out of Position texts restore their printed conditions.
+- Testing thread PASS at `cb9f4c7` (on main `828c82a`): `CI=true pnpm check` rc0 in 235 s, engine
+  407/407 and app 652/652; isolated `tactician-level-three` cohort rc0 in 36 s with six builds, level
+  edits and seventeen new uses persisted, seed 1687. The only backend error was the deliberate peer
+  owner refusal. Artifacts `/srv/presidium/projects/salient/test-artifacts/V116-cb9f4c7`.
+- Ready for integration and cloud dev publication, reusing these results.
