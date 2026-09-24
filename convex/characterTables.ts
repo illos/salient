@@ -87,6 +87,10 @@ export const heroLiveValidator = v.object({
   /** V150: Self-Taught — forgo gains at the next turn start (`forgoNext`), or forgoing now. */
   forgoNext: v.optional(v.boolean()),
   forgoing: v.optional(v.boolean()),
+  /** V150: this turn's automatic turn-start gain, so a forgo at that turn start can reverse it. */
+  lastTurnGain: v.optional(
+    v.object({ encounterId: v.string(), turnId: v.string(), delta: v.number() }),
+  ),
   /** V120: table-confirmed class resource triggers claimed in the current encounter. */
   resourceClaims: v.optional(
     v.array(

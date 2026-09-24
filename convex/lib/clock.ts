@@ -341,9 +341,18 @@ async function fireHeroicResource(
       ...live,
       heroicResource: { ...pool, current: after },
       ...(step === 'encounter-end-loss'
-        ? { resourceClaims: [], forgoNext: false, forgoing: false }
+        ? { resourceClaims: [], forgoNext: false, forgoing: false, lastTurnGain: undefined }
         : {}),
       ...(windowEnded ? { forgoing: false } : {}),
+      ...(step === 'turn-start-gain' && firing.event.turn
+        ? {
+            lastTurnGain: {
+              encounterId: firing.encounter._id,
+              turnId: firing.event.turn.turnId,
+              delta: after - before,
+            },
+          }
+        : {}),
     },
   });
   return {

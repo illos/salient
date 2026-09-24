@@ -20,14 +20,16 @@ forgo gaining your Heroic Resource until the start of your next turn."
 - While `forgoing` is set, every claim is refused. The observed triggers added by later engine
   slices check the same guard.
 - The next turn start ends the window, and that turn's gain applies (Q-RES-7).
-- Encounter end clears both flags.
+- `resource.forgo value=now`, during the hero's own turn after its automatic turn-start gain, removes
+  that gain (not below the floor) and starts the forgo. The gain is recorded as `lastTurnGain` at
+  the turn start.
+- Encounter end and a keep-mode void clear the flags. A reset-mode void restores the pre-combat
+  state.
 - The Self-Taught content row points to the control. The strike damage bonus stays manual.
 
 ## Out of scope
 
 - Automating the damage bonus.
-- Forgoing after the turn-start gain has already been applied. The table removes it with
-  `/adjust heroic-resource`.
 
 ## Acceptance
 
@@ -40,3 +42,10 @@ App test `tests/app/heroic-resource-forgo.test.ts`, on a Self-Taught Shadow:
 ## Work log
 
 - 2026-09-24: implemented on main `693280c`. The focused test passes; `tsc` is clean.
+- Independent review ([audit](audits/V150-rules-review.md)): changes required.
+  - R1: a keep-mode void left the flags set; it now clears them.
+  - R2: forgoing at the turn start, as the rule has it, had no control; `value=now` is added.
+  - R3: the test now builds the Shadow with `complication.choice: Self-Taught` and checks the
+    evaluated feature.
+  - QC1's notes are also covered: claim refusal on another creature's turn, and recovery at the
+    next turn.

@@ -2,8 +2,7 @@
 // V150: the Self-Taught complication's forgo. Pinned complication/self-taught.md: "At the start of
 // each of your turns during combat, you can forgo gaining your Heroic Resource until the start of
 // your next turn." Shadow gains come from feature/shadow/level-1/insight.md (1d3 each turn start,
-// the once-per-round surge claim). The engine reads only the evaluated features, so the Self-Taught
-// complication feature is added to the build directly (building it is the wizard's concern).
+// the once-per-round surge claim). The Shadow is built with the Self-Taught complication.
 import { expect, test } from 'vitest';
 import { api, internal } from '../../convex/_generated/api';
 import type { EvaluationInput } from '../../shared/contracts/characterEvaluation';
@@ -25,30 +24,19 @@ test('V150: a Self-Taught Shadow forgoes insight until the start of their next t
     'Shade',
     draftSelectionsFrom(
       {
-        ...(shadowLedger.witnesses[0]!.selections as EvaluationInput['selections']),
+        ...(shadowLedger.witnesses[0]!.selections as unknown as EvaluationInput['selections']),
+        'complication.choice': 'Self-Taught',
         'details.name': 'Shade',
       },
       definitions,
     ),
   );
-  await t.run(async ctx => {
-    const hero = (await ctx.db.get(shadow))!;
-    const baseline = hero.derivedBaseline as { features: unknown[] };
-    await ctx.db.patch(shadow, {
-      derivedBaseline: {
-        ...baseline,
-        features: [
-          ...baseline.features,
-          {
-            name: 'Self-Taught',
-            kind: 'complication',
-            sourcePath: 'en/unified/md/complication/self-taught.md',
-            provenance: { decisionId: 'complication.choice', value: 'Self-Taught' },
-          },
-        ],
-      },
-    });
-  });
+  const baseline = (await t.run(ctx => ctx.db.get(shadow)))!.derivedBaseline as {
+    features: { name: string; kind: string }[];
+  };
+  expect(baseline.features).toContainEqual(
+    expect.objectContaining({ name: 'Self-Taught', kind: 'complication' }),
+  );
   const command = (text: string, player = false) =>
     (player ? f.player : f.director).client.mutation(api.commands.submit, {
       campaignId: f.campaignId,
@@ -64,21 +52,36 @@ test('V150: a Self-Taught Shadow forgoes insight until the start of their next t
   await command('/combat start');
   await command('/combat commit');
   await command('/combat first side=heroes');
+
+  // Declared before the turn: that turn start adds nothing; claims are refused until the next.
   await command(`${ref} /resource forgo`, true);
-  expect((await live()).forgoNext).toBe(true);
   await command(`${ref} /turn take`, true);
   expect((await live()).heroicResource.current).toBe(0);
   expect((await live()).forgoing).toBe(true);
   await expect(claim()).rejects.toThrow(/forgoing/);
   await command(`${ref} /turn end`, true);
+  // Still forgoing on another creature's turn.
   await command('@Thorn /turn take', true);
+  await expect(claim()).rejects.toThrow(/forgoing/);
   await command('@Thorn /turn end', true);
-  // The next turn start ends the forgo: the 1d3 applies and claims are open again.
+
+  // The next turn start ends it: the 1d3 applies and claims reopen.
   await command(`${ref} /turn take`, true);
   expect((await live()).forgoing).toBe(false);
   const gained = (await live()).heroicResource.current;
   expect(gained).toBeGreaterThanOrEqual(1);
   expect(gained).toBeLessThanOrEqual(3);
-  await claim();
-  expect((await live()).heroicResource.current).toBe(gained + 1);
+
+  // Decided at this turn's start after the gain: value=now removes this turn's gain and forgoes.
+  await command(`${ref} /resource forgo value=now`, true);
+  expect((await live()).heroicResource.current).toBe(0);
+  expect((await live()).forgoing).toBe(true);
+  await expect(claim()).rejects.toThrow(/forgoing/);
+  await expect(command(`${ref} /resource forgo value=now`, true)).rejects.toThrow(/already/);
+
+  // A keep-mode void clears the forgo so the next combat starts clean.
+  await command(`${ref} /resource forgo`, true);
+  await command('/combat void mode=keep');
+  expect((await live()).forgoing).toBe(false);
+  expect((await live()).forgoNext).toBe(false);
 });

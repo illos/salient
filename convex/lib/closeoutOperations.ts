@@ -268,6 +268,15 @@ export async function voidEncounter(
     throw new ConvexError('No active combat.');
   if (mode === 'reset') await restoreStart(ctx, scope, encounter);
   else {
+    // V150: a keep-mode void skips the encounter-end step, so clear per-encounter forgo state here.
+    for (const id of encounter.heroParticipantIds ?? []) {
+      const hero = await ctx.db.get(id);
+      const live = hero?.liveState;
+      if (!live || (!live.forgoing && !live.forgoNext && !live.lastTurnGain)) continue;
+      await journalPatch(ctx, scope, 'characters', id, {
+        liveState: { ...live, forgoing: false, forgoNext: false, lastTurnGain: undefined },
+      });
+    }
     // V120 interpretation (Q-RES-1): voiding in keep mode discards the combat record without
     // finishing it, so the class encounter-end loss ("You lose any remaining insight at the end of
     // the encounter.") does not run. Say so for each generating hero; the table adjusts manually.

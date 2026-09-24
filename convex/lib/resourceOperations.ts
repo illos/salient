@@ -23,6 +23,7 @@ import {
 } from '../../shared/resolve/heroicResourceGeneration';
 import type { ResourceClaim } from '../../shared/contracts/liveState';
 import { baselineOf, requireHeroLive } from './characterBuild';
+import { heroicResourceFloor } from '../../shared/resolve/resourceFloor';
 import { committedEncounter } from './encounters';
 import { journalPatch } from './journal';
 import type { OperationDefinition, Outcome } from './registry';
@@ -208,7 +209,10 @@ const resourceForgo: OperationDefinition = {
   description:
     'For a Self-Taught hero: at the next turn start, gain no Heroic Resource until the start of the following turn (the strike damage bonus is resolved manually). `value=off` withdraws it before that turn starts.',
   args: { value: v.optional(v.string()) },
-  argDescriptions: { value: '`on` (default) to forgo at the next turn start, `off` to withdraw.' },
+  argDescriptions: {
+    value:
+      '`on` (default) to forgo at the next turn start, `off` to withdraw, `now` during your own turn to forgo this turn (its turn-start gain is removed).',
+  },
   roles: ['director', 'player'],
   session: 'running',
   actor: 'required',
@@ -229,7 +233,52 @@ const resourceForgo: OperationDefinition = {
         `${character.authored.name}'s Heroic Resource is not generated automatically; forgo it by not adding it.`,
       );
     const value = String(args.value ?? 'on').toLowerCase();
-    if (value !== 'on' && value !== 'off') throw new ConvexError('"value" must be on or off.');
+    if (value !== 'on' && value !== 'off' && value !== 'now')
+      throw new ConvexError('"value" must be on, off or now.');
+    if (value === 'now') {
+      // "At the start of each of your turns during combat, you can forgo …": decided at this turn's
+      // start, after the app already added the gain, so that gain is reversed.
+      const encounter = await committedEncounter(ctx, context.campaign);
+      const last = live.lastTurnGain;
+      if (
+        !encounter ||
+        !encounter.activeTurnId ||
+        !last ||
+        last.encounterId !== encounter._id ||
+        last.turnId !== encounter.activeTurnId
+      )
+        throw new ConvexError(
+          `${character.authored.name} can forgo now only during their own turn, after its turn-start gain; otherwise use value=on before the next turn.`,
+        );
+      if (live.forgoing)
+        throw new ConvexError(`${character.authored.name} is already forgoing this turn.`);
+      const floor = heroicResourceFloor(baseline, live.heroicResource.name);
+      const before = live.heroicResource.current;
+      const after = Math.max(floor, before - last.delta);
+      return {
+        kind: 'resource.forgo',
+        description: `${character.authored.name} forgoes ${live.heroicResource.name} until the start of their next turn (Self-Taught): this turn's gain is removed, ${before} → ${after}.`,
+        data: {
+          characterId: character._id,
+          forgoing: true,
+          before,
+          after,
+          sourcePath: SELF_TAUGHT.sourcePath,
+          quote: SELF_TAUGHT.quote,
+        },
+        commit: async (mctx, scope) => {
+          const current = (await mctx.db.get(character._id))!;
+          await journalPatch(mctx, scope, 'characters', character._id, {
+            liveState: {
+              ...current.liveState!,
+              heroicResource: { ...current.liveState!.heroicResource, current: after },
+              forgoing: true,
+              forgoNext: false,
+            },
+          });
+        },
+      };
+    }
     const on = value === 'on';
     if ((live.forgoNext ?? false) === on)
       throw new ConvexError(

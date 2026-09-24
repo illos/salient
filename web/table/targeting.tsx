@@ -356,6 +356,14 @@ export function AbilityPanel({
             label={sheet.resourceForgo.forgoNext ? 'Keep gaining' : 'Forgo next'}
             title={sheet.resourceForgo.quote}
           />
+          {!sheet.resourceForgo.forgoing && (
+            <Command
+              campaignId={campaignId}
+              text={`${ref(actor)} /resource forgo value=now`}
+              label="Forgo this turn"
+              title="At the start of your turn: remove this turn's gain and forgo until your next turn."
+            />
+          )}
           <RuleLink sourcePath={sheet.resourceForgo.sourcePath} label="Self-Taught" />
         </p>
       )}
