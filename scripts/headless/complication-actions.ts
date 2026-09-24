@@ -407,7 +407,3 @@ export async function runComplicationTable({
     },
   );
 }
-export async function runComplicationActions(context: ScenarioContext) {
-  await runComplicationChoices(context);
-  await runComplicationTable(context);
-}
