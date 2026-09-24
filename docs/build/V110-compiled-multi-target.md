@@ -160,3 +160,12 @@ slices.
   app/scripts tests, all freshness gates and web build
   (`/srv/presidium/projects/salient/test-artifacts/V110-59679ed`). The headless journeys at `eca2cee`
   are reused: the later delta narrows only non-compiled boundary diagnostics. Ready for integration.
+
+## Publication: 2026-09-24
+
+ENGINE2 fast-forwarded reviewed `2921a57` into main and published the backend and frontend under
+the user's 2026-09-24 direction, using the DEPLOY2 hosted procedure. Backend and schema validation,
+the hosted build and the upload all succeeded. Worker: `ed93b686-8a97-4cd9-9eed-7e38d6fc4012`.
+Content remains V108's 1654-entry snapshot, so no reseed was needed. The accepted gates were
+reused, with no smoke test or rerun. Temporary credentials were removed and the private hosted
+helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V110-release-2921a57`.

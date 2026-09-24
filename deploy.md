@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V110 | `2921a57` | Merged; backend/frontend published; accepted gates reused | complete |
 | V109 | `7d82b59` | Merged; backend/frontend published; accepted gates reused | complete |
 | V108 | `8744738` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V107 | `ca190a9` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -335,3 +336,18 @@ Worker `afc19386-cef9-48b7-9979-748a9456ddca`. Content remains V108's 1654-entry
 no reseed needed. Effect riders remain manual table work as documented in the slice.
 No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V109-release-7d82b59`.
+
+### V110 compiled multi-target and area abilities publication: 2026-09-24
+
+ENGINE2 performed this release under the user's 2026-09-24 instruction to run its own deploy.
+Reviewed owner `2921a57f994f6ce2b3da2713123967b69a33c6ae` was fast-forwarded into main.
+- Accepted evidence reused:
+  - full gate at `59679ed` (200.9 s)
+  - isolated `multi-target` and `effect-riders` journeys at `eca2cee`
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `ed93b686-8a97-4cd9-9eed-7e38d6fc4012`.
+- Content remains the 1654-entry snapshot, so no reseed was needed.
+- No smoke tests or test reruns. Temporary credentials were removed and the private hosted
+  helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V110-release-2921a57`.

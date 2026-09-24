@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V109 Effect riders and kit signatures
+## Current release — V110 compiled multi-target and area abilities
+
+Backend/frontend source `2921a57f994f6ce2b3da2713123967b69a33c6ae` published on 2026-09-24 as
+Worker `ed93b686-8a97-4cd9-9eed-7e38d6fc4012`. Backend and schema validation, the hosted build and
+the upload succeeded. Content remains the 1654-entry snapshot, so no reseed was needed. Accepted
+TESTER results were reused, with no smoke test or rerun. See
+[V110](build/V110-compiled-multi-target.md) and the [ledger](../deploy.md).
+
+## Previous release — V109 Effect riders and kit signatures
 
 Backend/frontend source `7d82b594181e22dfcd1ba108cc41a930d83ebf5e` published on 2026-09-22 as
 Worker `afc19386-cef9-48b7-9979-748a9456ddca`. Backend/schema validation, hosted build and upload
