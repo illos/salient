@@ -87,3 +87,7 @@ gain.
     record, so an old unmaintained use can't start maintenance later.
   - Regressions: the correction of the breaking hit is refused, and a round-2 maintain of a round-1
     use is refused.
+- QC1 re-review: the same-turn rule still let a use be maintained after intervening play. Now the
+  hero's latest standing command must be an unpaired use of the ability (`maintenanceWindowOpen`).
+  The regression refuses the stale third use after the hits, maintains a fresh use, and refuses a
+  genuine unmaintained use carried across a turn.

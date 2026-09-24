@@ -88,10 +88,10 @@ test('V148: maintaining persistent abilities reduces the turn-start essence and 
   await command('/combat first side=heroes');
   await command(`${ref} /turn take`, true);
   // "start doing so immediately after you first use the ability": a use is required first.
-  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/no unmaintained use/);
+  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/right after using it/);
   await flesh();
   await maintain('The Flesh, a Crucible');
-  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/no unmaintained use/);
+  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/right after using it/);
   // A second instance on another use: upkeep 2, allowed (at most the gain of 2).
   await flesh();
   await maintain('The Flesh, a Crucible');
@@ -122,8 +122,13 @@ test('V148: maintaining persistent abilities reduces the turn-start essence and 
     ),
   ).toHaveLength(1);
 
-  // The third use was never maintained, so one instance can start; the next gain is 2 − 1 = 1.
+  // QC1 train-4 R3: the third use's choice closed when play moved on (the hits), so it can't start
+  // maintenance now; a fresh use can.
+  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/right after using it/);
+  await flesh();
   await maintain('The Flesh, a Crucible');
+  // A genuine unmaintained use carried across the turn boundary can't start maintenance either.
+  await flesh();
   await command(`${ref} /turn end`, true);
   await command('@Thorn /turn take', true);
   await command('@Thorn /turn end', true);
@@ -131,10 +136,10 @@ test('V148: maintaining persistent abilities reduces the turn-start essence and 
   await command(`@{foe:${goblin}} /turn end`);
   const before = (await live()).heroicResource.current;
   await command(`${ref} /turn take`, true);
+  // One instance maintained: the next gain is 2 − 1 = 1.
   expect((await live()).heroicResource.current).toBe(before + 1);
-  // QC1 train-4 R3: the choice to maintain closes when play moves on: an unmaintained use from an
-  // earlier turn can't start maintenance now.
-  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/this turn/);
+  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/right after using it/);
+  expect((await live()).maintained).toHaveLength(1);
 
   await command('/combat end');
   await command('/combat victories amount=0 recipients=[]');

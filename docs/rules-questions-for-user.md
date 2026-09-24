@@ -1159,6 +1159,7 @@ Related V148 limits (labelled):
 - The tally counts damage earlier in the same turn, even before maintenance began.
 - A correction of damage to an Elementalist in combat is refused, because the turn's tally and any
   break can't be recomputed. The table rewinds to the hit and records it again (QC1 train-4 R2).
-- Maintenance starts only from a use in the current turn, on the hero's own turn: "start doing so
-  immediately after you first use the ability" (QC1 train-4 R3). A use from an earlier turn can't
-  start it.
+- Maintenance starts only right after the use: "start doing so immediately after you first use the
+  ability" (QC1 train-4 R3). The hero's latest command must be that use, with each earlier
+  maintain paired to its own use. Any other command in between, or a turn change, closes the
+  choice.

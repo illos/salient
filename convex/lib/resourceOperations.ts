@@ -381,52 +381,55 @@ const resourcePray: OperationDefinition = {
 };
 
 /**
- * V148: this encounter's recorded uses of an ability by the hero, and how many times it was put
- * under maintenance (undone events excluded).
+ * V148 (QC1 train-4 R3): whether the hero's latest gameplay is an unmaintained use of this ability,
+ * i.e. the choice to maintain is still "immediately after you first use the ability"
+ * (feature/elementalist/level-1/persistent-magic.md). Walking this encounter's standing user
+ * commands newest first, each earlier maintain of the ability pairs off with the use before it;
+ * the first unpaired command must be a use of this ability by this hero. Anything else in between
+ * (another command, a turn change) closes the choice. Engine and clock consequences are ignored.
  */
-async function maintenanceCounts(
+async function maintenanceWindowOpen(
   ctx: ReadCtx,
   encounterId: Id<'encounters'>,
   characterId: Id<'characters'>,
   ability: string,
-  turnId: string,
-): Promise<{ uses: number; maintains: number }> {
-  let uses = 0;
-  let maintains = 0;
+): Promise<boolean> {
+  let pending = 0;
   const events = ctx.db
     .query('events')
-    .withIndex('by_encounter_sequence', q => q.eq('encounterId', encounterId));
+    .withIndex('by_encounter_sequence', q => q.eq('encounterId', encounterId))
+    .order('desc');
   for await (const event of events) {
-    if (event.disposition === 'undone') continue;
+    if (event.origin !== 'user' || event.disposition === 'undone') continue;
+    if (event.kind.startsWith('history.')) continue;
     const payload = event.payload as
       | {
           envelope?: { boundActor?: { id?: string } | null };
-          data?: {
-            ability?: { name?: string } | string;
-            value?: unknown;
-            characterId?: string;
-            turnId?: string;
-            allowance?: { turnId?: string | null };
-          };
+          data?: { ability?: { name?: string } | string; value?: unknown };
         }
       | undefined;
-    if (payload?.envelope?.boundActor?.id !== characterId) continue;
+    const mine = payload?.envelope?.boundActor?.id === characterId;
     if (
-      (event.kind === 'ability.use' || event.kind === 'ability.recorded') &&
-      typeof payload.data?.ability === 'object' &&
-      payload.data.ability.name === ability &&
-      payload.data.allowance?.turnId === turnId
-    )
-      uses++;
-    if (
+      mine &&
       event.kind === 'resource.maintain' &&
-      payload.data?.ability === ability &&
-      payload.data.value !== 'off' &&
-      payload.data.turnId === turnId
-    )
-      maintains++;
+      payload?.data?.ability === ability &&
+      payload.data.value !== 'off'
+    ) {
+      pending++;
+      continue;
+    }
+    const isUse =
+      mine &&
+      (event.kind === 'ability.use' || event.kind === 'ability.recorded') &&
+      typeof payload?.data?.ability === 'object' &&
+      payload.data.ability.name === ability;
+    if (isUse && pending > 0) {
+      pending--;
+      continue;
+    }
+    return isUse;
   }
-  return { uses, maintains };
+  return false;
 }
 
 /** V148: the hero's maintainable persistent abilities for `abilities:sheet`, or null. */
@@ -511,20 +514,9 @@ const resourceMaintain: OperationDefinition = {
       // own recorded use of the ability in the current turn (QC1 train-4 R3: the choice closes when
       // play moves on). Instances on different targets may run at once ("A creature can't be
       // affected by multiple instances").
-      if (!encounter.activeTurnId)
+      if (!(await maintenanceWindowOpen(ctx, encounter._id, character._id, name)))
         throw new ConvexError(
-          'Maintain a persistent ability right after using it, during the turn it was used.',
-        );
-      const counts = await maintenanceCounts(
-        ctx,
-        encounter._id,
-        character._id,
-        name,
-        encounter.activeTurnId,
-      );
-      if (counts.uses <= counts.maintains)
-        throw new ConvexError(
-          `${character.authored.name} has no unmaintained use of ${name} this turn; the choice to maintain is made right after using it.`,
+          `${character.authored.name} can maintain ${name} only right after using it: use the ability, then maintain it before anything else happens.`,
         );
       const upkeep = current.reduce((sum, entry) => sum + entry.value, 0) + ability.value;
       const gain = profile.turnStart.kind === 'fixed' ? profile.turnStart.amount : 0;
