@@ -328,6 +328,22 @@ test('a Tactician cannot switch a Field Arsenal choice mid-respite while keeping
       },
     }),
   ).rejects.toThrow("can't change until a respite finishes");
+  // Swapping which kit is primary keeps the same pair of kits: still locked.
+  await expect(
+    f.player.client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId: 'arsenal-by-swapping-kits',
+      operation: 'respite.change-kit',
+      actor: { refKind: 'character', id },
+      arguments: {
+        selections: [
+          { decisionId: 'kit.choice', value: 'Mountain' },
+          { decisionId: 'class.tactician.second-kit', value: 'Martial Artist' },
+          { decisionId: 'class.tactician.arsenal.meleeDamage', value: 'Martial Artist' },
+        ],
+      },
+    }),
+  ).rejects.toThrow("can't change until a respite finishes");
   await f.say('/respite interrupt');
   expect(await arsenal()).toBe('Mountain');
 });

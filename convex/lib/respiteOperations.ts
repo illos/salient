@@ -491,7 +491,10 @@ function withKit(
     kit: working['kit.choice'],
     unchanged: kitValues(working) === kitValues(before),
     /** The kits themselves (not an arsenal choice between them) are the same. */
-    kitsUnchanged: KIT_IDENTITIES.every(id => (working[id] ?? null) === (before[id] ?? null)),
+    // The pair of kits, whatever slot each sits in: swapping them keeps the same pair.
+    kitsUnchanged:
+      JSON.stringify(KIT_IDENTITIES.map(id => String(working[id] ?? '')).sort()) ===
+      JSON.stringify(KIT_IDENTITIES.map(id => String(before[id] ?? '')).sort()),
   };
 }
 
@@ -539,7 +542,9 @@ const changeKit: OperationDefinition = {
     if (unchanged) throw new ConvexError(`${kit} is already this hero's kit.`);
     // feature/tactician/level-1/field-arsenal.md: where both kits grant a benefit, "you take one or
     // the other and can't change your choice until you finish a respite." Changing that choice while
-    // keeping both kits is not a kit change and cannot take effect mid-respite (QC1 V166 R1).
+    // keeping both kits (in either slot) is not a kit change and cannot take effect mid-respite (QC1
+    // V166 R1). Implementation interpretation: a change to the pair of kits re-opens the choice for
+    // the new pair; the alternative keeps a shared benefit's choice locked while one of its kits stays.
     if (kitsUnchanged)
       throw new ConvexError(
         "A Field Arsenal choice between the same two kits can't change until a respite finishes; change a kit to choose again.",
