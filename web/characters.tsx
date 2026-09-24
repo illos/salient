@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * Your characters: the list, creation (which opens the wizard), and the standalone character
- * page: the sheet, the wizard entry, and the admission controls (submit to a campaign, withdraw).
+ * Your characters: the list, creation (which opens the wizard), Forge Steel import (V182), and the
+ * standalone character page: the sheet, the wizard entry, the owner's import diagnostics, and the
+ * admission controls (submit to a campaign, withdraw).
  * Owning specifications: docs/character-wizard-spec.md#main-creation-and-editing and
  * #7-revision-and-review-lifecycle; docs/character-sheet-spec.md#views-permissions-and-persistence
  * (the standalone page prioritizes inspection and eligible editing; Open table when applicable).
@@ -18,6 +19,7 @@ import { Card, CardContent } from './components/ui/card';
 import { Eyebrow, Loading, SectionHeading, useCommand } from './ui';
 import { CharacterSheet } from './character-sheet';
 import { SecretInheritance } from './character-sheet/secret-inheritance';
+import { ForgeImportCard, ImportDiagnostics } from './forge-import';
 
 export function CharactersPage() {
   const characters = useQuery(api.characters.listMine);
@@ -69,26 +71,29 @@ export function CharactersPage() {
             </ul>
           )}
         </section>
-        <Card>
-          <CardContent className="flex flex-col gap-4">
-            <h2>Start a character</h2>
-            <p className="text-base text-muted-foreground">
-              The wizard supports level-one Devil Fury and Polder Elementalist builds through Making
-              a Hero. Supported choices are enabled; additional options remain visible for
-              reference.
-            </p>
-            <p className="text-base text-muted-foreground">
-              Choose a name in the Details step. Your character is created only when you save.
-            </p>
-            <Link
-              to="/characters/$characterId/wizard"
-              params={{ characterId: 'new' }}
-              className={buttonVariants({ className: 'w-fit' })}
-            >
-              Open character wizard
-            </Link>
-          </CardContent>
-        </Card>
+        <div className="flex flex-col gap-4">
+          <Card>
+            <CardContent className="flex flex-col gap-4">
+              <h2>Start a character</h2>
+              <p className="text-base text-muted-foreground">
+                The wizard supports level-one Devil Fury and Polder Elementalist builds through
+                Making a Hero. Supported choices are enabled; additional options remain visible for
+                reference.
+              </p>
+              <p className="text-base text-muted-foreground">
+                Choose a name in the Details step. Your character is created only when you save.
+              </p>
+              <Link
+                to="/characters/$characterId/wizard"
+                params={{ characterId: 'new' }}
+                className={buttonVariants({ className: 'w-fit' })}
+              >
+                Open character wizard
+              </Link>
+            </CardContent>
+          </Card>
+          <ForgeImportCard />
+        </div>
       </div>
     </>
   );
@@ -346,6 +351,7 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
           {owner && <SubmitControls characterId={characterId} />}
         </div>
       </div>
+      {owner && <ImportDiagnostics characterId={characterId} />}
       <CharacterSheet characterId={characterId} view={owner && hasEffective ? view : undefined} />
     </>
   );
