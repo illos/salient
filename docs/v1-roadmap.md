@@ -19,8 +19,9 @@ conflict; the owning specifications still define how included features behave.
   readable actions and paid manual records alone do not meet the automation target.
 - **Foes:** a useful, varied roster for low-level play, with the selected foes' combat behavior
   implemented and tested. Complete monster bands/families and full-catalog automation are not V1
-  requirements. Select the actual roster from the pinned Compendium for the intended party levels;
-  the roster and count remain to be chosen.
+  requirements. The roster was confirmed on 2026-09-24: 36 stat blocks (goblins and bugbears,
+  undead, humans, and the Arixx, Werewolf and Thorn Dragon), with orcs as a later stretch wave.
+  See the [V1 foe roster](decisions/2026-09-24-v1-foe-roster.md).
 - **App:** most app features working and tested, supporting practical play. The exact release
   checklist and any feature deferrals remain to be settled; this does not silently require every
   item in the older, broader V1 specifications.

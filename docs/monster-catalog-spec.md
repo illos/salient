@@ -25,6 +25,9 @@ even though the v0.01 scope below now defers hiding; the scope decision, not the
 Resolved 2026-09-14 (Q-REC-1): the code is not removed. It stays dormant: the controls are not exposed in
 the v0.01 UI or command registry, and every loaded foe is visible until foe hiding returns in V1.
 
+**V1 roster, 2026-09-24:** the user confirmed which foes get combat behavior implemented and
+tested for V1: the [V1 foe roster](decisions/2026-09-24-v1-foe-roster.md).
+
 **Ingestion assessment, 2026-09-15:** all 438 core stat blocks are already readable in the generated
 Rules library, while the shared structured snapshot and live add operation still select only Goblin
 Warrior. The [foe-track kickoff](research/foe-catalog-kickoff.md) and
