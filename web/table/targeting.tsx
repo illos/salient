@@ -25,6 +25,8 @@ import type { FunctionReturnType } from 'convex/server';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { useCommand } from '../ui';
+import { describeContribution, describeModifier } from '../../shared/resolve/modifiers';
+import { describeDuration } from '../../shared/resolve/lastingEffects';
 
 type Actor = { kind: 'character' | 'foe' | 'squad'; id: string; name: string };
 type Sheet = FunctionReturnType<typeof api.abilities.sheet>;
@@ -516,16 +518,18 @@ export function CompiledEffects({
                 ·{' '}
                 {effect.kind === 'unsupported' || effect.kind === 'rider'
                   ? 'Manual effect'
-                  : effect.kind === 'gain'
-                    ? 'Gain'
-                    : effect.kind === 'push'
-                      ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
-                          /^./,
-                          letter => letter.toUpperCase(),
-                        )
-                      : effect.kind === 'condition'
-                        ? 'Condition'
-                        : 'Damage'}
+                  : effect.kind === 'modifier'
+                    ? 'Modifier'
+                    : effect.kind === 'gain'
+                      ? 'Gain'
+                      : effect.kind === 'push'
+                        ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
+                            /^./,
+                            letter => letter.toUpperCase(),
+                          )
+                        : effect.kind === 'condition'
+                          ? 'Condition'
+                          : 'Damage'}
               </strong>
               <Badge variant="outline">
                 {effect.kind === 'damage'
@@ -534,25 +538,29 @@ export function CompiledEffects({
                     : 'Damage not applied'
                   : occurrence.disposition
                     ? 'Resolved at table'
-                    : effect.kind === 'gain'
+                    : effect.kind === 'modifier'
                       ? effect.status === 'applied'
-                        ? 'Applied gain'
-                        : 'Manual gain'
-                      : effect.kind === 'condition'
+                        ? 'Tracked effect'
+                        : 'Manual modifier'
+                      : effect.kind === 'gain'
                         ? effect.status === 'applied'
-                          ? 'Applied condition'
-                          : effect.status === 'resisted'
-                            ? 'Resisted'
-                            : effect.status === 'immune'
-                              ? 'Immune'
-                              : effect.status === 'ineligible'
-                                ? 'Too large to grab'
-                                : effect.status === 'fact-needed'
-                                  ? 'Facts needed'
-                                  : 'Manual condition'
-                        : effect.kind === 'push'
-                          ? 'Outstanding instruction'
-                          : 'Unresolved'}
+                          ? 'Applied gain'
+                          : 'Manual gain'
+                        : effect.kind === 'condition'
+                          ? effect.status === 'applied'
+                            ? 'Applied condition'
+                            : effect.status === 'resisted'
+                              ? 'Resisted'
+                              : effect.status === 'immune'
+                                ? 'Immune'
+                                : effect.status === 'ineligible'
+                                  ? 'Too large to grab'
+                                  : effect.status === 'fact-needed'
+                                    ? 'Facts needed'
+                                    : 'Manual condition'
+                          : effect.kind === 'push'
+                            ? 'Outstanding instruction'
+                            : 'Unresolved'}
               </Badge>
             </span>
             <span className="[overflow-wrap:anywhere]">
@@ -629,8 +637,16 @@ export function CompiledEffects({
                       : ' · Final allowance not established.'}
                 </span>
                 <span>
-                  Optional stability reduction: {effect.stability ?? 'unknown'}. Physical movement
-                  remains manual.
+                  Optional stability reduction: {effect.stability ?? 'unknown'}
+                  {effect.stabilityEffects?.length
+                    ? ` (includes ${effect.stabilityEffects
+                        .map(
+                          e =>
+                            `${e.amount >= 0 ? '+' : '−'}${Math.abs(e.amount)} from ${e.actorLabel}'s ${e.abilityName}`,
+                        )
+                        .join(', ')})`
+                    : ''}
+                  . Physical movement remains manual.
                 </span>
                 {!!effect.requirements.length && (
                   <span>Needed: {effect.requirements.join('; ')}.</span>
@@ -675,6 +691,16 @@ export function CompiledEffects({
                 )}
               </>
             )}
+            {effect.kind === 'modifier' && (
+              <span>
+                {effect.payload ? describeModifier(effect.payload) : 'Amount unknown'} ·{' '}
+                {describeDuration(effect.spec.duration, effect.spec.endsWhen)}
+                {effect.spec.consumeOn ? ' · used up by their next roll' : ''}.{' '}
+                {effect.status === 'applied'
+                  ? 'Applied automatically to later rolls and derived values; exclude it on a roll it doesn’t fit.'
+                  : `Apply it at the table: ${effect.requirements.join('; ')}.`}
+              </span>
+            )}
             {effect.kind === 'rider' && (
               <span>
                 Resolve the printed effect at the table; this entry applies no additional state
@@ -693,6 +719,7 @@ export function CompiledEffects({
             )}
             {effect.kind !== 'damage' &&
               (effect.kind !== 'gain' || effect.status === 'manual') &&
+              (effect.kind !== 'modifier' || effect.status === 'manual') &&
               (effect.kind !== 'condition' ||
                 effect.status === 'fact-needed' ||
                 effect.status === 'manual') &&
@@ -776,6 +803,9 @@ export function AbilityCard({
           <div key={key(target)} className="flex flex-col gap-1">
             <span>
               <strong className="font-medium">{target.name}</strong>: {t.edges} edge, {t.banes} bane
+              {t.contributions?.some(c => !c.excluded)
+                ? ` (${outcome.edgeBane.edges} edge, ${outcome.edgeBane.banes} bane with effects)`
+                : ''}{' '}
               → total {outcome.total}, tier {outcome.tier}
               {outcome.uncertainty ? ` (${outcome.uncertainty})` : ''}
               {outcome.damage
@@ -784,6 +814,37 @@ export function AbilityCard({
                   : ` · ${outcome.damage.rolledDamage} damage not applied`
                 : ' · no supported damage'}
             </span>
+            {/* V159: automatic contributions of active effects, with the exclude command. */}
+            {(t.contributions ?? []).map(contribution => {
+              const excluded = (t.contributions ?? [])
+                .filter(c => c.excluded)
+                .map(c => c.instanceId);
+              const next = contribution.excluded
+                ? excluded.filter(id => id !== contribution.instanceId)
+                : [...excluded, contribution.instanceId];
+              return (
+                <span
+                  key={contribution.instanceId}
+                  className="flex flex-wrap items-center gap-2 text-muted-foreground"
+                  data-roll-contribution
+                >
+                  <Badge variant="outline">
+                    {contribution.excluded ? 'Excluded' : 'Automatic'}
+                  </Badge>
+                  <span className="[overflow-wrap:anywhere]" title={contribution.sourcePath}>
+                    {describeContribution(contribution)}
+                  </span>
+                  {mayCorrect && (!contribution.excluded || !contribution.consumes.length) && (
+                    <Command
+                      campaignId={campaignId}
+                      text={`/ability correct event="${eventId}" target=${ref(target)} exclude=${JSON.stringify(next)}`}
+                      label={contribution.excluded ? 'Include' : 'Exclude'}
+                      variant="ghost"
+                    />
+                  )}
+                </span>
+              );
+            })}
             {mayCorrect && (
               <span className="flex flex-wrap gap-1">
                 <Command

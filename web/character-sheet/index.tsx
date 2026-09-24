@@ -495,7 +495,13 @@ export function HeroSheetView({
             </div>
           </SheetSection>
           <SheetSection title="Stats" compact id="sheet-stats">
-            <StatsList partial={partial} xp={live?.xp ?? null} compact />
+            <StatsList
+              partial={partial}
+              xp={live?.xp ?? null}
+              compact
+              holderId={sheet.id}
+              effects={live?.effectInstances}
+            />
           </SheetSection>
           <SheetSection title="Details" compact id="sheet-details">
             <div className="flex flex-col gap-4">
@@ -553,7 +559,12 @@ export function HeroSheetView({
         <div className="flex flex-col gap-4">
           {stamina}
           <SheetSection title="Stats" id="sheet-stats">
-            <StatsList partial={partial} xp={live?.xp ?? null} />
+            <StatsList
+              partial={partial}
+              xp={live?.xp ?? null}
+              holderId={sheet.id}
+              effects={live?.effectInstances}
+            />
           </SheetSection>
           <SheetSection title="Skills" aside={`${skills.length}`} id="sheet-skills">
             <SkillChips partial={partial} />

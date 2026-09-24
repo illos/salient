@@ -17,6 +17,8 @@ import { CoreSource } from '../components/core-content';
 import { SupportingBuildFacts } from '../wizard/supporting-components';
 import { SecretInheritance } from './secret-inheritance';
 import type { Id } from '../../convex/_generated/dataModel';
+import type { EffectInstance } from '../../shared/contracts/liveState';
+import { derivedValue, statModifiers } from '../../shared/resolve/modifiers';
 
 /** A value the baseline has not derived yet is shown as pending, never as a zero. */
 export function pending(value: number | string | undefined | null): string {
@@ -109,19 +111,46 @@ export function RuledRow({
   );
 }
 
+/**
+ * V159: a derived value as base plus its active effects, each with its source
+ * (docs/lasting-effects-design.md#2-modifier-pipeline, derived values). The sum is the shared
+ * engine's (statModifiers); nothing here resolves a rule.
+ */
+function withEffects(
+  base: number | undefined,
+  holderId: string | undefined,
+  effects: readonly EffectInstance[] | undefined,
+  stat: 'speed' | 'stability',
+): string {
+  if (base === undefined) return 'pending';
+  const { value, contributions } = derivedValue(base, holderId ?? '', effects ?? [], stat);
+  if (!holderId || !contributions.length) return String(base);
+  return `${value} (${base} ${contributions
+    .map(
+      c => `${c.amount >= 0 ? '+' : '−'} ${Math.abs(c.amount)} ${c.actorLabel}'s ${c.abilityName}`,
+    )
+    .join(' ')})`;
+}
+
 export function StatsList({
   partial,
   xp,
   compact,
+  holderId,
+  effects,
 }: {
   partial: PartialBaseline | null;
   xp: number | null;
   compact?: boolean;
+  /** V159: the hero whose active effects add to its derived values. */
+  holderId?: string;
+  effects?: readonly EffectInstance[];
 }) {
+  const saves = statModifiers(holderId ?? '', effects ?? [], 'saving-throw');
   const rows: [string, React.ReactNode][] = [
     ['Size', pending(partial?.size?.value)],
-    ['Speed', pending(partial?.speed?.value)],
-    ['Stability', pending(partial?.stability?.value)],
+    ['Speed', withEffects(partial?.speed?.value, holderId, effects, 'speed')],
+    ['Stability', withEffects(partial?.stability?.value, holderId, effects, 'stability')],
     ['Disengage', pending(partial?.disengage?.value)],
     [
       'Potency',
@@ -131,7 +160,18 @@ export function StatsList({
     ],
     [
       'Saves on',
-      partial?.savingThrowThreshold ? `${partial.savingThrowThreshold.value}+` : 'pending',
+      partial?.savingThrowThreshold
+        ? `${partial.savingThrowThreshold.value}+${
+            holderId && saves.contributions.length
+              ? ` (${saves.contributions
+                  .map(
+                    c =>
+                      `${c.amount >= 0 ? '+' : '−'}${Math.abs(c.amount)} to the roll from ${c.actorLabel}'s ${c.abilityName}`,
+                  )
+                  .join(', ')})`
+              : ''
+          }`
+        : 'pending',
     ],
     ['Renown', pending(partial?.renown?.value)],
     ['Wealth', pending(partial?.wealth?.value)],
