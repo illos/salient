@@ -28,9 +28,17 @@ The Censor profile in `shared/resolve/heroicResourceGeneration.ts`, with sources
 ## Out of scope
 
 - Tracking Judgment, which would let both triggers be observed from recorded damage.
-- The ledger's ambiguities: zero damage, damage absorbed by temporary Stamina, and whether the round
-  limit is per Censor. The limit is per Censor, one claim each round, labelled as the ledger's
-  reading. These stay with the table's confirmation.
+- The ledger's ambiguities: zero damage and damage absorbed by temporary Stamina. These stay with the
+  table's confirmation.
+
+**Labelled interpretation: each limit is per Censor, once per round.** Each trigger reads "the first
+time each combat round that …" (`feature/censor/level-1/wrath.md`). The alternative is one gain per
+judged creature each round. That would matter when a judged creature drops and the Censor judges a
+new one in the same round; the app refuses the second claim, which matches the plain text.
+- **Engine-wide limitation (not Censor-specific).** A hero with the Self-Taught complication
+  (`complication/self-taught.md`) who forgoes the turn-start gain still receives it automatically.
+  The table removes it with `/adjust heroic-resource`. This affects every enabled class and is a
+  follow-up for the shared engine.
 - The Self-Taught and Feytouched complications, and non-combat stressful situations.
 
 ## Acceptance
@@ -48,3 +56,6 @@ The Censor profile in `shared/resolve/heroicResourceGeneration.ts`, with sources
 - 2026-09-24: implemented on main `a804a02`. The focused files pass; `tsc` and eslint are clean. No
   Censor content row adds wrath by hand. `censor.ts` and `censor-level-three.ts` take no turn and set
   wrath with absolute adjustments.
+- Independent review ([audit](audits/V145-rules-review.md)): PASS. The reviewer checked every Censor
+  feature and ability through level 6. R1 (advisory): the per-Censor reading is now labelled with its
+  alternative. The Self-Taught limitation is recorded as engine-wide.

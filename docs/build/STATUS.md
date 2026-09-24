@@ -141,3 +141,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | In testing; independent review PASS |
 | V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Ready for integration; TESTER PASS at bae43ad, independent review and QC1 PASS |
 | V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | In progress (ENGINE2) |
+| V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | In testing; independent review PASS |
