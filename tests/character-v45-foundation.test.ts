@@ -43,8 +43,12 @@ test('V45 level-two Reaver/Stormwight definitions (V114) do not make guided adva
       },
       definitions,
     );
-    // Level two is supported for every aspect; the stale Berserker ability choice is not accepted.
-    assert.notEqual(result.status, 'complete');
+    // V114 supports every aspect at level two; the level-one build still owes its level-two choices
+    // (the Stormwight variant also lacks a Stormwight kit, so its status is invalid).
+    assert.equal(result.status, subclass === 'Reaver' ? 'incomplete' : 'invalid');
+    const owed = `class.fury.level-2.${subclass.toLowerCase()}-ability`;
+    for (const id of ['class.fury.level-2.perk', owed])
+      assert.equal(result.diagnostics[id]?.[0]?.code, 'required-choice-missing', id);
     assert.equal(result.baseline, null);
     assert.ok(!result.partial?.features?.some(feature => feature.name === 'Unstoppable Force'));
     assert.equal(supportsCurrentAdvancement(1, 'Fury', subclass), false);

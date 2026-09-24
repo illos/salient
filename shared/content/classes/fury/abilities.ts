@@ -202,7 +202,7 @@ export const FURY_ACTIONS: FuryAction[] = [
     sourcePath: levelAbility(3, 'you-are-already-dead'),
     actionType: 'Part of You Are Already Dead',
     activationCondition:
-      'Only if the target is a leader or solo creature: gain 3 surges and make a melee free strike against it. Adjust surges and resolve the free strike manually.',
+      'Only if the target is a leader or solo creature: you can make a melee free strike against it. Resolve the free strike manually.',
   },
 ];
 export function furyActionText(action: FuryAction): string {

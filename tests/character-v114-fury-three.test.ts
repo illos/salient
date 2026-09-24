@@ -140,10 +140,16 @@ test('Fury levels two and three match the independent ledger for every aspect an
 
 test('aspect ability pools are exclusive, level edits prune only higher-level choices', () => {
   const reaver = cases.find(c => c.w.subclass === 'Reaver')!;
-  // A Berserker ability is not in the Reaver pool; the Reaver decision is still missing.
-  assert.notEqual(
-    evaluate({ ...reaver.l2, 'class.fury.level-2.reaver-ability': 'Wrecking Ball' }, 2).status,
-    'complete',
+  // A Berserker ability is not in the Reaver pool.
+  const foreign = evaluate(
+    { ...reaver.l2, 'class.fury.level-2.reaver-ability': 'Wrecking Ball' },
+    2,
+  );
+  assert.equal(foreign.status, 'invalid');
+  assert.ok(
+    foreign.diagnostics['class.fury.level-2.reaver-ability']!.some(
+      d => d.code === 'value-not-in-pool',
+    ),
   );
   const missing: Selections = { ...reaver.l3 };
   delete missing['class.fury.level-3.ability-7'];

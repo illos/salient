@@ -868,3 +868,13 @@ without unambiguously specifying one reduction per minion. Discount adjudication
 no one-for-one discount or unwilling-death gain is inferred. `monster/minion/summoner/elemental/statblock/brisk-gale.md`
 Whirlwind does not specify shift distance. `monster/minion/summoner/demon/statblock/twisted-bengrul.md`
 Soulsight names ensnarer. Both source passages stay verbatim/manual, without invented correction.
+
+## Q-FURY-2 — may a class perk duplicate a perk the hero already has?
+
+`feature/fury/level-2/perk.md` says "You gain one crafting, exploration, or intrigue perk of your
+choice." Neither it nor the perk entries under `perk/` say whether a perk already held (for example
+Teamwork from the Soldier career) may be chosen again. The Shadow level-two and career perk choices
+share the question. Alternatives: exclude perks the hero already has from the choice, or allow the
+repeat with no extra benefit. Current behaviour (interim interpretation, V114): the choice is
+allowed and grants nothing new. Recommendation: exclude already-held perks, since a repeat has no
+printed effect. Nothing else in V114 depends on the answer.

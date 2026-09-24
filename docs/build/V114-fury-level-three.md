@@ -59,3 +59,8 @@ wizard and shared API. Guided advancement stays the V32 Berserker 1→2 transiti
   progression/choice-origin 15/15. Content 1669 entries; `compiled:check`, `content:check` and
   `supporting:check` pass. Intended updates: V32 perk/aspect pruning and the V45 unsupported-aspect
   sentinel, the new Unstoppable Force use in the V32 fixture, eight IDs added to the V88 allowance.
+- Independent rules/implementation review (subagent, source-only) of `bf72805`: PASS, five
+  non-blocking findings, all closed here. Manual text for the three unrolled abilities now names the
+  roll and damage; You Are Already Dead's 3 surges belong to the ability, not its free strike; the
+  foreign-pool and V45 assertions check exact diagnostics; the duplicate-perk question is
+  [Q-FURY-2](../rules-questions-for-user.md#q-fury-2--may-a-class-perk-duplicate-a-perk-the-hero-already-has).
