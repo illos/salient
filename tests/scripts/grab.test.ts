@@ -155,7 +155,7 @@ test('stacked, held and multi-target grabs are withheld for the table', () => {
   );
   expect(smash.execution).toBe('supported');
   const two: CompiledAbilityInput = {
-    actor: { actorId: 'zombie', characteristics: { M: 4, A: -1, R: -5, I: -2, P: -1 } },
+    actor: { actorId: 'zombie', characteristics: { M: 3, A: -1, R: -5, I: -2, P: -1 } },
     targets: ['a', 'b'].map(targetId => ({ targetId, edges: 0, banes: 0 })),
     targetFacts: ['a', 'b'].map(targetId => ({
       targetId,
@@ -177,7 +177,7 @@ test('stacked, held and multi-target grabs are withheld for the table', () => {
       })),
     },
     movement: {
-      actor: { kind: 'creature', size: '2' },
+      actor: { kind: 'creature', size: '3' },
       targets: ['a', 'b'].map(targetId => ({ targetId, size: '1M' })),
     },
   };

@@ -129,3 +129,8 @@ sit beside Effect prose.
   - app: second grabber withheld, Grab correction refused, Knockback refused while grabbed, Stand
     Up refused while restrained;
   - journey: the grab log text.
+- Review R1–R8 closed: PASS at `bbb5340`. TESTER `test-V119-bbb5340-2` PASS: `pnpm check` exit 0 in
+  239 s (407 engine, 661 app); `grab`, `kit-bonus`, `tier-effects` and `effect-riders` pass.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V119-bbb5340`. The follow-up commit
+  only moves the Rotten Smash fixture to its printed Might 3 and size 3 (same asserted outcome).
+  Awaiting second-round review.

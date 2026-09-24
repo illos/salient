@@ -52,3 +52,30 @@ Verdict at `a72c650`: changes required (R1–R8).
 9. The pure test covers only Joint Lock's compilation.
 
 No tests, builds, services or pnpm were run by the reviewer.
+
+## R1–R8 closure: `bbb5340cc5289191a28c85bdeabdad383ac552c3`
+
+Final static verdict: PASS.
+- **R1.** `grabbedBy` puts an existing grab by another creature, including an unrecorded toggle,
+  into `fact-needed`. The maneuver's tier 3 is withheld with the Stacking Unique Effects note.
+- **R2.** `actorHolding` and the multi-target post-pass leave the grab to the table. This is a
+  cautious reading of Creatures Who Grab, documented and tested (including Rotten Smash with two
+  targets).
+- **R3.** Q-GRAB-1 is rewritten with both passages, a hero-only question and Knocking Heads. Claw
+  Swing is correctly limited to one grab.
+- **R4.** The grab text names release, Escape Grab and separation; prone keeps its Stand Up text.
+  The journey asserts it.
+- **R5.** Grab and Escape Grab corrections are refused with a rewind message (app test).
+- **R6.** Stand Up while restrained and Knockback while grabbed are refused before any roll or
+  debit (app test).
+- **R7.** Escape Grab warns whenever a grab source or size can't be compared.
+- **R8.** The size-1 citation, the Q-GRAB-2 interpretation and the "usually" reading are labelled.
+
+Nits 5 and 8 fixed. Non-blocking:
+- The Rotten Smash fixture should use the printed Might 3 and size 3 (fixed afterwards).
+- The maneuver's immunity check ignores printed foe prevention text.
+- First-round observations 1–4, 6 and 7 remain.
+
+No tests or services were run by the reviewer.
+
+Reviewed-By: V119-REVIEW (pass, 2026-09-24)
