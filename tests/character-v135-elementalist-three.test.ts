@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import levelOne from './fixtures/v104-elementalist-expected.json' with { type: 'json' };
+import followUps from './fixtures/v151-follow-up-actions.json' with { type: 'json' };
 import ledger from './fixtures/v135-elementalist-three-expected.json' with { type: 'json' };
 import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
@@ -48,6 +49,16 @@ const embedded: Record<string, string[]> = {
   // Level-1 persistent upkeep already modelled for the level-1 alternative (V104).
   Conflagration: ['Conflagration: Persistent Effect'],
 };
+/** V151 (QC1 V135 R1): separate follow-up actions each parent's source grants. */
+const followUpsOf = (cls: string, parents: string[], level: number) =>
+  followUps.actions
+    .filter(
+      a =>
+        a.class === cls &&
+        parents.includes(a.parent) &&
+        level >= ((a as { minLevel?: number }).minLevel ?? 0),
+    )
+    .map(a => a.name);
 const cases = Object.entries(ledger.witnesses).map(([id, w]) => {
   const base = levelOne.witnesses.find(b => b.id === w.base)!;
   const l2: Selections = {
@@ -115,7 +126,11 @@ test('Elementalist levels two and three match the independent ledger for every s
         sorted(expected.perks),
         `${label} perks`,
       );
-      const added = [...new Set([...features, ...abilities])].flatMap(name => embedded[name] ?? []);
+      const parents = [...new Set([...features, ...abilities])];
+      const added = [
+        ...parents.flatMap(name => embedded[name] ?? []),
+        ...followUpsOf('Elementalist', parents, level),
+      ];
       assert.deepEqual(
         sorted(
           hero.abilities

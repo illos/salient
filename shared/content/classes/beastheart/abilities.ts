@@ -1097,6 +1097,15 @@ export const BEASTHEART_ACTIONS: BeastheartAction[] = [
     cost: 5,
   },
   {
+    name: 'Companion: Omnomnom: Regurgitate',
+    parent: 'Omnomnom',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/omnomnom.md',
+    performer: 'Companion',
+    actionType: 'Free maneuver',
+    activationCondition:
+      'Companion performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Only while your companion has a creature swallowed: regurgitate it; it lands prone in an unoccupied square adjacent to your companion.',
+  },
+  {
     name: 'Companion: Jump Scare',
     parent: 'Jump Scare',
     sourcePath: 'en/unified/md/feature/ability/beastheart/level-2/jump-scare.md',
@@ -1246,6 +1255,17 @@ export const BEASTHEART_ACTIONS: BeastheartAction[] = [
     activationCondition:
       'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. ',
     cost: 7,
+  },
+  {
+    name: 'Beastheart: Jaws of Death: Pull',
+    parent: 'Jaws of Death',
+    sourcePath: 'en/unified/md/feature/ability/beastheart/level-3/jaws-of-death.md',
+    performer: 'Beastheart',
+    actionType: 'Free triggered action',
+    activationCondition:
+      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Only while a target is weakened by Jaws of Death: pull it up to a number of squares equal to your Intuition score.',
+    trigger:
+      'A target more than 3 squares away from you fails the saving throw while weakened by Jaws of Death.',
   },
   {
     name: 'Beastheart: Shieldbreaker',

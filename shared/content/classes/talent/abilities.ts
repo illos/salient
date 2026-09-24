@@ -326,7 +326,7 @@ export const TALENT_ACTIONS: TalentAction[] = [
     sourcePath: 'en/unified/md/feature/ability/talent/level-3/force-orbs.md',
     actionType: 'Free maneuver',
     activationCondition:
-      'Once on each of your turns, fire an orb at a creature or object within 5 squares as a ranged strike (power roll + Reason: 2/3/5 damage), losing the orb. Whether a distance bonus extends the 5 squares is Q-TALENT-2. Resolve the roll and damage manually.',
+      'Only while you have at least one orb, once on each of your turns: fire an orb at a creature or object within 5 squares as a ranged strike (power roll + Reason: 2/3/5 damage), losing the orb. Whether a distance bonus extends the 5 squares is Q-TALENT-2. Resolve the roll and damage manually.',
   },
   {
     name: 'Applied Chronometrics: Strain',
@@ -342,7 +342,16 @@ export const TALENT_ACTIONS: TalentAction[] = [
     sourcePath: 'en/unified/md/feature/ability/talent/level-2/slow.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. The potency increases by 1 and you take 1d6 damage; at the start of each combat round while any target is affected you take 1d6 damage, and you can end the effect on all targets at any time. Resolve the stated effects manually.',
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. The potency increases by 1 and you take 1d6 damage; at the start of each combat round while any target is affected you take 1d6 damage (use Slow: End Effect to end it). Resolve the stated effects manually.',
+  },
+  // V151 (QC1 V135 R1): the strained Slow's own end choice.
+  {
+    name: 'Slow: End Effect',
+    parent: 'Slow',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-2/slow.md',
+    actionType: 'No action',
+    activationCondition:
+      'Only after a strained Slow while any target is still affected: end the effect on all affected targets at any time, which stops the 1d6 damage you take each combat round. Resolve manually.',
   },
   {
     name: 'Gravitic Burst: Strain',

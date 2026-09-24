@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import levelOne from './fixtures/v106-beastheart-expected.json' with { type: 'json' };
+import followUps from './fixtures/v151-follow-up-actions.json' with { type: 'json' };
 import ledger from './fixtures/v137-beastheart-three-expected.json' with { type: 'json' };
 import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
@@ -28,6 +29,16 @@ const structural = [
   'Companion Advancement Feature',
   '7-Ferocity Ability',
 ];
+/** V151 (QC1 V135 R1): separate follow-up actions each parent's source grants. */
+const followUpsOf = (cls: string, parents: string[], level: number) =>
+  followUps.actions
+    .filter(
+      a =>
+        a.class === cls &&
+        parents.includes(a.parent) &&
+        level >= ((a as { minLevel?: number }).minLevel ?? 0),
+    )
+    .map(a => a.name);
 const cases = Object.entries(ledger.witnesses).map(([id, w]) => {
   const base = levelOne.witnesses.find(b => b.id === w.base)!;
   const l2: Selections = {
@@ -100,7 +111,12 @@ test('Beastheart levels two and three match the independent ledger for every nat
       );
       const now = records(selections, level);
       const fresh = Object.fromEntries(Object.entries(now).filter(([name]) => !(name in one)));
-      assert.deepEqual(fresh, added, `${label} new records and Ferocity costs`);
+      const parents = Object.keys(added).map(name => name.split(': ')[1]!);
+      const withFollowUps = {
+        ...added,
+        ...Object.fromEntries(followUpsOf('Beastheart', parents, level).map(name => [name, 0])),
+      };
+      assert.deepEqual(fresh, withFollowUps, `${label} new records and Ferocity costs`);
     }
   }
 });

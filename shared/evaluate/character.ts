@@ -953,7 +953,7 @@ class Evaluation {
       ),
     );
     out.abilities = troubadourAbilities(out.features, out.abilities);
-    out.abilities = elementalistAbilities(out.features, out.abilities);
+    out.abilities = elementalistAbilities(out.features, out.abilities, this.level);
     out.abilities = talentAbilities(out.features, out.abilities);
     out.abilities = nullAbilities(out.features, out.abilities);
     if (this.available.has('class.fury.action-options'))

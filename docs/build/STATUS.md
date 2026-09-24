@@ -149,3 +149,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V147 | [Conduit piety generation: prayer and domain triggers](V147-conduit-piety-generation.md) | Merged (`71a3fa5`, resource train 4); cloud dev published; gate and headless PASS at tip |
 | V149 | [Troubadour drama generation](V149-troubadour-drama-generation.md) | Merged (`71a3fa5`, resource train 4); cloud dev published; gate and headless PASS at tip |
 | V148 | [Elementalist essence generation with Persistent Magic](V148-elementalist-essence-generation.md) | Merged (`71a3fa5`, resource train 4); cloud dev published; gate and headless PASS at tip |
+| V151 | [Level 2–3 follow-up actions](V151-follow-up-actions.md) | In progress |

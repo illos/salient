@@ -25,9 +25,11 @@ export function elementalistAbilitySource(
 export function elementalistAbilities(
   features: GrantedFeature[],
   existing: GrantedAbility[],
+  level = 1,
 ): GrantedAbility[] {
   const result = existing.filter(a => !managed(a));
   for (const action of ELEMENTALIST_ACTIONS) {
+    if (action.minLevel && level < action.minLevel) continue;
     const parent = [...features, ...result].find(
       p => p.name === action.parent && p.provenance.decisionId.startsWith('class.elementalist.'),
     );

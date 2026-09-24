@@ -11,6 +11,8 @@ export interface ElementalistAction {
   cost?: number;
   damageType?: string;
   trigger?: string;
+  /** Lowest character level at which the source makes this use available. */
+  minLevel?: number;
 }
 export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
   ...['acid', 'cold', 'corruption', 'fire', 'lightning', 'poison', 'sonic'].map(damageType => ({
@@ -256,7 +258,7 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
     sourcePath: 'en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md',
     actionType: 'Maneuver',
     activationCondition:
-      'Only in your true form and not dying: shapeshift into a Green Animal Forms type whose prerequisite level you have (canine, fish or rodent at 2nd; bird or great cat at 3rd). Apply the form’s temporary Stamina, speed, size, stability and melee damage bonus and its special rule manually; melee free strikes use Reason.',
+      'Only in your true form and not dying: shapeshift into a Green Animal Forms type whose prerequisite level you have (canine, fish or rodent at 2nd; bird or great cat at 3rd). Apply the form’s temporary Stamina, speed, size, stability and melee damage bonus and its special rule manually (the great cat’s jump is Great Cat Jump); melee free strikes use Reason.',
   },
   {
     name: 'Disciple of the Green: Revert',
@@ -272,7 +274,7 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
     sourcePath: 'en/unified/md/feature/elementalist/level-3/a-conversation-with-fire.md',
     actionType: '1 uninterrupted minute before a fire',
     activationCondition:
-      'Speak another creature’s name; if it is willing, you speak through images in the fire as if together. Either of you ends it as a maneuver. Resolve manually.',
+      'Speak another creature’s name; if it is willing, you speak through images in the fire as if together. Either of you ends it as a maneuver (End Conversation). Resolve manually.',
   },
   {
     name: 'Distance Is Only Memory: Open Portal',
@@ -280,15 +282,83 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
     sourcePath: 'en/unified/md/feature/elementalist/level-3/distance-is-only-memory.md',
     actionType: 'After a respite',
     activationCondition:
-      'Each time you finish a respite, open a two-way portal to any place you have previously been; you and allies can pass through. It lasts 1 hour or until you dismiss it as a main action. Resolve manually.',
+      'Each time you finish a respite, open a two-way portal to any place you have previously been; you and allies can pass through. It lasts 1 hour or until you dismiss it as a main action (Dismiss Portal). Resolve manually.',
   },
   {
     name: 'O Flower Aid, O Earth Defend: Persistent Effect',
     parent: 'O Flower Aid, O Earth Defend',
     sourcePath: 'en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md',
+    actionType: 'No action',
+    activationCondition:
+      'While maintaining Persistent 1, the area remains until the start of your next turn; it ends if the area leaves your line of effect. Use Move Area to move it. Resolve the area manually.',
+  },
+  // V151 (QC1 V135 R1): follow-up actions the level-2/3 sources grant as separate choices.
+  {
+    name: 'O Flower Aid, O Earth Defend: Move Area',
+    parent: 'O Flower Aid, O Earth Defend',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md',
     actionType: 'Maneuver',
     activationCondition:
-      'While maintaining Persistent 1, the area remains until the start of your next turn and you can move it up to 5 squares as a maneuver; it ends if the area leaves your line of effect. Resolve the area manually.',
+      'Only while you maintain Persistent 1 and the area is within your line of effect: move the area up to 5 squares. Resolve the area manually.',
+  },
+  {
+    name: 'O Flower Aid, O Earth Defend: Allow Recoveries',
+    parent: 'O Flower Aid, O Earth Defend',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md',
+    actionType: 'Free maneuver',
+    activationCondition:
+      'Once, at the start of your turn, only while the area exists: you and each ally in the area can spend any number of Recoveries. Resolve Recovery spending manually.',
+    trigger: 'The start of your turn while the area exists.',
+  },
+  {
+    name: 'Disciple of the Green: Great Cat Jump',
+    parent: 'Disciple of the Green',
+    sourcePath: 'en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md',
+    actionType: 'Maneuver',
+    activationCondition:
+      'Only in great-cat form (3rd level): jump up to 3 squares in any direction. If you land on an enemy of your size or smaller, it is knocked prone and you can make a melee free strike against it (no action required). Resolve movement, prone and the strike manually.',
+    minLevel: 3,
+  },
+  {
+    name: 'There Is No Space Between: Additional Portal',
+    parent: 'There Is No Space Between',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md',
+    actionType: 'Start of turn (no action)',
+    activationCondition:
+      'Only while your portals are active: open a new portal connected to the others. Resolve placement manually.',
+    trigger: 'The start of your turn while the portals are active.',
+  },
+  {
+    name: 'There Is No Space Between: End Portals',
+    parent: 'There Is No Space Between',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md',
+    actionType: 'Maneuver',
+    activationCondition:
+      'Only while your portals are active: end the effect. They also end if you move beyond distance from any portal or are dying. Resolve manually.',
+  },
+  {
+    name: 'A Conversation With Fire: End Conversation',
+    parent: 'A Conversation With Fire',
+    sourcePath: 'en/unified/md/feature/elementalist/level-3/a-conversation-with-fire.md',
+    actionType: 'Maneuver',
+    activationCondition:
+      'Only while a conversation is active: you (or the other creature) end it. Resolve manually.',
+  },
+  {
+    name: 'Distance Is Only Memory: Dismiss Portal',
+    parent: 'Distance Is Only Memory',
+    sourcePath: 'en/unified/md/feature/elementalist/level-3/distance-is-only-memory.md',
+    actionType: 'Main action',
+    activationCondition:
+      'Only while your portal is open: dismiss it before its hour ends. Resolve manually.',
+  },
+  {
+    name: 'Earth Accepts Me: Exit Object',
+    parent: 'Earth Accepts Me',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md',
+    actionType: 'Action type not stated',
+    activationCondition:
+      'Only while melded with an object: exit it. The source states no action type (see Q-ELEMENTALIST-2); being expelled when the object is destroyed is automatic. Resolve manually.',
   },
   {
     name: 'Swarm of Spirits: Persistent Effect',
@@ -322,15 +392,15 @@ export function elementalistActionText(action: ElementalistAction): string {
 /** Level-2/3 ability notes: what the table resolves automatically and which clauses stay manual. */
 export const ELEMENTALIST_ACTIVATION: Record<string, string> = {
   'There Is No Space Between':
-    'Open two size 1 portals within 10 squares, no higher than 1 square; you and allies touching one can emerge from another. Open another at the start of each of your turns. Portals end if you move beyond distance, end them as a maneuver or are dying. Resolve manually.',
+    'Open two size 1 portals within 10 squares, no higher than 1 square; you and allies touching one can emerge from another. Portals end if you move beyond distance or are dying; use Additional Portal and End Portals for the follow-up actions. Resolve manually.',
   'O Flower Aid, O Earth Defend':
-    'Until the start of your next turn: once as a free maneuver at the start of your turn you and allies in the area can spend any number of Recoveries; it is difficult terrain for enemies; enemies entering it first each round or starting there take damage equal to your Reason. Resolve manually.',
+    'Until the start of your next turn (use Allow Recoveries at the start of your turn): it is difficult terrain for enemies; enemies entering it first each round or starting there take damage equal to your Reason. Resolve manually.',
   'Subvert the Green Within':
     'The target first uses its signature ability against a creature of your choice, then you make the power roll against it; the target action, roll and poison damage are resolved manually.',
   'Translated Through Flame':
     'Teleport yourself or an ally within 10 squares, then the power roll affects each enemy adjacent to the new space, never the teleported creature; the roll and fire damage are resolved manually.',
   'Earth Accepts Me':
-    'Step into a mundane dirt, metal or stone object at least your size and stay as long as you like, observing and speaking but without line of effect outside. Resolve manually.',
+    'Step into a mundane dirt, metal or stone object at least your size and stay as long as you like, observing and speaking but without line of effect outside; use Exit Object to leave. Resolve manually.',
   'Remember Growth and Sun and Rain':
     'See and hear events within 10 squares of a mundane wooden object from the last 12 hours, from its location. Resolve manually.',
   Erase:

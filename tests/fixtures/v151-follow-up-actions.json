@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "slice": "V151",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium/en/unified/md/",
+  "method": "Each entry is a separate action a level-2/3 source clause grants (QC1 V135 R1), found by source-only audit agents and quoted verbatim (link markup removed). Conduit had none; Summoner is V138.",
+  "actions": [
+    {
+      "parent": "Disciple of the Green",
+      "name": "Disciple of the Green: Great Cat Jump",
+      "actionType": "Maneuver",
+      "minLevel": 3,
+      "source": "feature/elementalist/level-2/disciple-of-the-green.md",
+      "quote": "As a maneuver, you can jump up to 3 squares in any direction.",
+      "note": "Great cat row, prerequisite level 3rd.",
+      "class": "Elementalist"
+    },
+    {
+      "parent": "There Is No Space Between",
+      "name": "There Is No Space Between: Additional Portal",
+      "actionType": "Start of turn (no action)",
+      "source": "feature/ability/elementalist/level-2/there-is-no-space-between.md",
+      "quote": "At the start of each of your turns while the portals are active, you can open a new portal connected to the others.",
+      "class": "Elementalist"
+    },
+    {
+      "parent": "There Is No Space Between",
+      "name": "There Is No Space Between: End Portals",
+      "actionType": "Maneuver",
+      "source": "feature/ability/elementalist/level-2/there-is-no-space-between.md",
+      "quote": "end the effect as a maneuver",
+      "class": "Elementalist"
+    },
+    {
+      "parent": "A Conversation With Fire",
+      "name": "A Conversation With Fire: End Conversation",
+      "actionType": "Maneuver",
+      "source": "feature/elementalist/level-3/a-conversation-with-fire.md",
+      "quote": "As a maneuver, you or the creature can end the conversation.",
+      "class": "Elementalist"
+    },
+    {
+      "parent": "Distance Is Only Memory",
+      "name": "Distance Is Only Memory: Dismiss Portal",
+      "actionType": "Main action",
+      "source": "feature/elementalist/level-3/distance-is-only-memory.md",
+      "quote": "until you dismiss it as a main action",
+      "class": "Elementalist"
+    },
+    {
+      "parent": "O Flower Aid, O Earth Defend",
+      "name": "O Flower Aid, O Earth Defend: Allow Recoveries",
+      "actionType": "Free maneuver",
+      "source": "feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+      "quote": "Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.",
+      "class": "Elementalist"
+    },
+    {
+      "parent": "O Flower Aid, O Earth Defend",
+      "name": "O Flower Aid, O Earth Defend: Move Area",
+      "actionType": "Maneuver",
+      "source": "feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+      "quote": "As a maneuver, you can move the area up to 5 squares.",
+      "class": "Elementalist"
+    },
+    {
+      "parent": "Earth Accepts Me",
+      "name": "Earth Accepts Me: Exit Object",
+      "actionType": "Action type not stated",
+      "source": "feature/ability/elementalist/level-3/earth-accepts-me.md",
+      "quote": "You can travel through the object freely until you exit it.",
+      "class": "Elementalist"
+    },
+    {
+      "parent": "Slow",
+      "name": "Slow: End Effect",
+      "actionType": "No action",
+      "source": "feature/ability/talent/level-2/slow.md",
+      "quote": "You can end the effect on all affected targets at any time (no action required).",
+      "class": "Talent"
+    },
+    {
+      "parent": "Omnomnom",
+      "name": "Companion: Omnomnom: Regurgitate",
+      "actionType": "Free maneuver",
+      "source": "feature/ability/beastheart/level-2/omnomnom.md",
+      "quote": "Your companion can also regurgitate a swallowed creature as a free maneuver.",
+      "class": "Beastheart"
+    },
+    {
+      "parent": "Jaws of Death",
+      "name": "Beastheart: Jaws of Death: Pull",
+      "actionType": "Free triggered action",
+      "source": "feature/ability/beastheart/level-3/jaws-of-death.md",
+      "quote": "you can pull the target up to a number of squares equal to your Intuition score as a free triggered action.",
+      "class": "Beastheart"
+    }
+  ]
+}

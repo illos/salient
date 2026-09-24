@@ -1163,3 +1163,12 @@ Related V148 limits (labelled):
   ability" (QC1 train-4 R3). The latest standing command must be that use. Any command after it,
   including another use or a maintain already made, or a turn change, closes the choice. Several
   instances are made as use, maintain, use, maintain.
+
+## Q-ELEMENTALIST-2 — what action exits Earth Accepts Me? (V151)
+
+`feature/ability/elementalist/level-3/earth-accepts-me.md`: "You can remain inside the object for as long
+as you like … You can travel through the object freely until you exit it." No action type is printed for
+leaving. Current behaviour: "Earth Accepts Me: Exit Object" is its own record labelled "Action type not
+stated", resolved manually. Alternatives: a maneuver (like ending other effects) or part of your
+movement. Recommendation: treat it as part of your movement, since the text frames leaving as the end
+of travelling through the object. Nothing else depends on the answer.

@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import levelOne from './fixtures/v105-talent-expected.json' with { type: 'json' };
+import followUps from './fixtures/v151-follow-up-actions.json' with { type: 'json' };
 import ledger from './fixtures/v136-talent-three-expected.json' with { type: 'json' };
 import { getDefinitions } from '../shared/content/character-decisions.ts';
 import { evaluateCharacter } from '../shared/evaluate/character.ts';
@@ -42,6 +43,16 @@ const embedded: Record<string, string[]> = {
   ...Object.fromEntries(strained.map(name => [name, [`${name}: Strain`]])),
 };
 embedded['Force Orbs'] = ['Force Orbs: Fire Orb', 'Force Orbs: Strain'];
+/** V151 (QC1 V135 R1): separate follow-up actions each parent's source grants. */
+const followUpsOf = (cls: string, parents: string[], level: number) =>
+  followUps.actions
+    .filter(
+      a =>
+        a.class === cls &&
+        parents.includes(a.parent) &&
+        level >= ((a as { minLevel?: number }).minLevel ?? 0),
+    )
+    .map(a => a.name);
 const cases = Object.entries(ledger.witnesses).map(([id, w]) => {
   const base = levelOne.witnesses.find(b => b.id === w.base)!;
   const two = w.levelTwo.addedSelections;
@@ -103,7 +114,10 @@ test('Talent levels two and three match the independent ledger for every traditi
         sorted(expected.perks),
         `${label} perks`,
       );
-      const added = [...features, ...abilities].flatMap(name => embedded[name] ?? []);
+      const added = [
+        ...[...features, ...abilities].flatMap(name => embedded[name] ?? []),
+        ...followUpsOf('Talent', [...features, ...abilities], level),
+      ];
       assert.deepEqual(
         sorted(
           hero.abilities
