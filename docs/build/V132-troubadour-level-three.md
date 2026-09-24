@@ -72,3 +72,12 @@ and shared API. Guided advancement remains deferred.
   50 s: six builds, level edits and twenty-four new uses persisted, seed 1732; the only backend error
   was the deliberate peer owner refusal. Artifacts `/srv/presidium/projects/salient/test-artifacts/V132-5bacf33`.
 - Ready for integration and cloud dev publication, reusing these results.
+
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `c3f9e35` into main and published the backend,
+content and frontend using the DEPLOY2 hosted procedure. Backend and schema validation succeeded,
+the reseed read back 1732 entries at `fb83a789`, and the hosted build and upload succeeded.
+Worker: `1d9acb09-8147-4839-911e-bbb6664df299`. The accepted gates were reused, with no smoke test or rerun. Temporary
+credentials were removed and the private hosted helpers stopped. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V132-release-c3f9e35`.

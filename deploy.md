@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V132 | `c3f9e35` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V117 | `2dcbf97` | Merged; backend/content/frontend published; combined gates at tip | complete |
 | V119 | `3c02939` | Merged; backend/frontend published; accepted gates reused | complete |
 | V115 | `4cc7f31` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -455,3 +456,18 @@ was tested before merge:
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V117-release-2dcbf97`.
+
+### V132 Troubadour levels two and three publication: 2026-09-24
+
+The test and deploy thread published this release at WIZARD3's handoff. Reviewed tip `c3f9e353432a274ce7c7f22b5db734ef6e18bfc7` was
+fast-forwarded into main. Its code is identical to the tested `5bacf33`.
+- Accepted evidence reused:
+  - full gate at `5bacf33` (run by the Test-support thread)
+  - isolated `troubadour-level-three` journey at `5bacf33`
+- Backend publication and schema validation succeeded.
+- The content reseed read back 1732 entries at `fb83a789`.
+- The hosted build and the frontend upload succeeded. Worker `1d9acb09-8147-4839-911e-bbb6664df299`.
+- No smoke tests or test reruns. Temporary credentials were removed and the private hosted
+  helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V132-release-c3f9e35`.
