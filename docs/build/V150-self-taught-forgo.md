@@ -61,3 +61,5 @@ App test `tests/app/heroic-resource-forgo.test.ts`, on a Self-Taught Shadow:
 - QC1 R1b: the journal scan stopped after 500 rows and then assumed no change. It now iterates the
   hero's journal without a cap until it reaches the gain's own rows. If it never reaches them, the
   forgo is refused. The test points the anchor at a missing event and expects the refusal.
+- TESTER at `50f066d5` PASS: gate rc 0 in 281 s (engine 416, app 668); `heroic-resource` and
+  `shadow-level-two` pass. QC1 static PASS at `50f066d5` (R1 and R1b closed).
