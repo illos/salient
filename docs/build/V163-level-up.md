@@ -46,3 +46,4 @@ Generalise V32's Fury 1→2 advancement to every class and supported level, driv
   Non-blocking, fixed: Shadow's level-4–6 ledger builds level up one level at a time to each witness's
   level; the headless readback checks the effective build's level; a stale V45 test title. Accepted:
   the interim panel's finish state (V164 replaces it).
+- Review re-verification of `81519dc`: PASS.
