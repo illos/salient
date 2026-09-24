@@ -97,8 +97,10 @@ export default defineSchema({
               /** Maxima at the start, so Cancel restores damage taken against later maxima. */
               staminaMaximum: v.number(),
               recoveriesMaximum: v.number(),
-              /** V166: the one respite activity this hero undertook, if any. */
+              /** V166: the first respite activity this hero undertook, if any. */
               activity: v.optional(v.string()),
+              /** V169: further activities a feature allows (Rapid Processing), in order. */
+              moreActivities: v.optional(v.array(v.string())),
               /** V166: a respite kit change (from → to revision), reverted by Cancel. */
               kitChange: v.optional(
                 v.object({ from: v.id('characterRevisions'), to: v.id('characterRevisions') }),

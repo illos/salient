@@ -81,7 +81,9 @@ export async function runRespite({ actors: { director }, run, runId }: ScenarioC
       const open = await director.query<{
         respite: { activities: { characterId: string; activity: string | null }[] } | null;
       }>('sessions:get', { sessionId });
-      assert.deepEqual(open.respite?.activities, [{ characterId, activity: 'Change kit' }]);
+      assert.deepEqual(open.respite?.activities, [
+        { characterId, activity: 'Change kit', all: ['Change kit'], unused: 0 },
+      ]);
       await invoke('respite.cancel');
       assert.equal((await get()).derivedBaseline!.kit?.name.value, kitBefore);
       assert.deepEqual((await get()).liveState, before);

@@ -26,6 +26,7 @@ import {
 import { noConditions } from './lib/tableOperations';
 import { foeHealthValidator, projectFoeHealth, settingsOf } from './lib/audience';
 import { captainOf, isLiving, squadMembers } from './lib/squads';
+import { activitiesOf, respiteActivityAllowance } from '../shared/evaluate/respiteActivities';
 
 export { tableOperations } from './lib/tableOperations';
 
@@ -192,6 +193,9 @@ export const roster = query({
               v.object({
                 characterId: v.id('characters'),
                 activity: v.union(v.string(), v.null()),
+                /** V169: every activity taken, and how many the hero may still take. */
+                activities: v.array(v.string()),
+                unused: v.number(),
               }),
             ),
           }),
@@ -397,10 +401,19 @@ export const roster = query({
             number: sessions.length - sessions.findIndex(s => s._id === context.session!._id),
             respite: context.session.respite
               ? {
-                  participants: context.session.respite.participants.map(p => ({
-                    characterId: p.characterId,
-                    activity: p.activity ?? null,
-                  })),
+                  participants: context.session.respite.participants.map(p => {
+                    const hero = characters.find(c => c._id === p.characterId);
+                    const allowance = respiteActivityAllowance(
+                      (hero?.derivedBaseline as DerivedBaseline | null | undefined)?.features,
+                    );
+                    const activities = activitiesOf(p);
+                    return {
+                      characterId: p.characterId,
+                      activity: p.activity ?? null,
+                      activities,
+                      unused: Math.max(0, allowance - activities.length),
+                    };
+                  }),
                 }
               : null,
           }

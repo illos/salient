@@ -41,6 +41,7 @@ import type { DraftSelection } from '../../shared/characterDraft';
 import { revisionLevel } from './characterProgression';
 import { sessionEncounter } from './combatOperations';
 import { reconciledCurrent } from '../../shared/evaluate/liveReconciliation';
+import { activitiesOf, respiteActivityAllowance } from '../../shared/evaluate/respiteActivities';
 
 const XP_PER_LEVEL = 16;
 const MAX_LEVEL = 10;
@@ -358,10 +359,18 @@ const complete: OperationDefinition = {
       )
       .join('; ');
     // docs/table-spec.md (completing with unused options): unused activities lapse but are named.
-    const unused = present
-      .filter(({ snapshot }) => !snapshot.activity)
-      .map(({ hero }) => hero.authored.name);
-    const unusedNote = unused.length ? ` No respite activity used: ${unused.join(', ')}.` : '';
+    const counts = present.map(({ hero, snapshot }) => ({
+      name: hero.authored.name,
+      used: activitiesOf(snapshot).length,
+      left: activityAllowance(hero) - activitiesOf(snapshot).length,
+    }));
+    const none = counts.filter(c => c.used === 0).map(c => c.name);
+    const partly = counts.filter(c => c.used > 0 && c.left > 0);
+    const unusedNote =
+      (none.length ? ` No respite activity used: ${none.join(', ')}.` : '') +
+      (partly.length
+        ? ` Respite activities left unused: ${partly.map(c => `${c.name} (${c.left})`).join(', ')}.`
+        : '');
     const deadNote = dead.length
       ? ` Dead, unchanged (resolve manually): ${dead.map(({ hero }) => hero.authored.name).join(', ')}.`
       : '';
@@ -380,7 +389,7 @@ const complete: OperationDefinition = {
           levelUpsGranted: r.earned,
         })),
         dead: dead.map(({ hero }) => hero._id),
-        unusedActivities: unused,
+        unusedActivities: counts.filter(c => c.left > 0).map(c => c.name),
         left,
       },
       commit: async (mctx, scope) => {
@@ -403,14 +412,32 @@ const complete: OperationDefinition = {
 // V166 respite activities: rule/resource/respite.md "You can also undertake one respite activity,
 // such as making a project roll … or changing your kit"; chapter/kits.md, Changing Your Kit.
 
-function participantIndex(respite: OpenRespite, characterId: Id<'characters'>) {
-  const index = respite.participants.findIndex(p => p.characterId === characterId);
+/** V169: one activity, plus one per additional-activity feature of the current build. */
+function activityAllowance(hero: Doc<'characters'>): number {
+  return respiteActivityAllowance(baselineOf(hero.derivedBaseline)?.features);
+}
+
+function participantIndex(respite: OpenRespite, hero: Doc<'characters'>) {
+  const index = respite.participants.findIndex(p => p.characterId === hero._id);
   if (index < 0) throw new ConvexError('This hero is not resting in the open respite.');
-  if (respite.participants[index]!.activity)
+  const used = activitiesOf(respite.participants[index]!);
+  if (used.length >= activityAllowance(hero))
     throw new ConvexError(
-      `This hero already undertook a respite activity (${respite.participants[index]!.activity}).`,
+      used.length === 1
+        ? `This hero already undertook a respite activity (${used[0]}).`
+        : `This hero already undertook their ${used.length} respite activities (${used.join(', ')}).`,
     );
   return index;
+}
+
+/** Record one more activity on a participant. */
+function withActivity<P extends { activity?: string; moreActivities?: string[] }>(
+  participant: P,
+  name: string,
+): P {
+  return participant.activity
+    ? { ...participant, moreActivities: [...(participant.moreActivities ?? []), name] }
+    : { ...participant, activity: name };
 }
 
 async function requireActingOwner(
@@ -517,7 +544,7 @@ const changeKit: OperationDefinition = {
   verb: 'change-kit',
   title: 'Change kit (respite activity)',
   description:
-    'During an open respite, a resting hero changes their kit as their one respite activity. The new build takes effect without Director review; Cancel reverts it.',
+    'During an open respite, a resting hero changes their kit as a respite activity. The new build takes effect without Director review; Cancel reverts it.',
   args: { selections: v.array(v.object({ decisionId: v.string(), value: v.any() })) },
   argDescriptions: {
     selections:
@@ -529,7 +556,7 @@ const changeKit: OperationDefinition = {
   execute: async (ctx, { context, actor, args }) => {
     const respite = openRespite(context);
     const hero = await requireActingOwner(ctx, context, actor!.id as Id<'characters'>);
-    const index = participantIndex(respite, hero._id);
+    const index = participantIndex(respite, hero);
     await requireEditable(ctx, hero);
     const base = hero.effectiveRevisionId ? await ctx.db.get(hero.effectiveRevisionId) : null;
     if (!base || base.status !== 'complete')
@@ -573,7 +600,13 @@ const changeKit: OperationDefinition = {
           derivedBaseline: evaluation.baseline,
         });
         const participants = respite.participants.map((p, i) =>
-          i === index ? { ...p, activity: 'Change kit', kitChange: { from: base._id, to: id } } : p,
+          // A second kit change (V169) still reverts to the pre-respite build on Cancel.
+          i === index
+            ? {
+                ...withActivity(p, 'Change kit'),
+                kitChange: { from: p.kitChange?.from ?? base._id, to: id },
+              }
+            : p,
         );
         await journalPatch(mctx, scope, 'sessions', context.session!._id, {
           respite: { ...respite, participants },
@@ -589,7 +622,7 @@ const activity: OperationDefinition = {
   verb: 'activity',
   title: 'Record a respite activity',
   description:
-    'During an open respite, record the one respite activity a resting hero undertakes (for example a project roll or a class feature that changes as a respite activity). Its effects are resolved manually.',
+    'During an open respite, record a respite activity a resting hero undertakes (one, or more with Rapid Processing) (for example a project roll or a class feature that changes as a respite activity). Its effects are resolved manually.',
   args: { name: v.string() },
   argDescriptions: { name: 'The activity, e.g. "Project roll".' },
   roles: ['director', 'player'],
@@ -598,7 +631,7 @@ const activity: OperationDefinition = {
   execute: async (ctx, { context, actor, args }) => {
     const respite = openRespite(context);
     const hero = await requireActingOwner(ctx, context, actor!.id as Id<'characters'>);
-    const index = participantIndex(respite, hero._id);
+    const index = participantIndex(respite, hero);
     const name = String(args.name).trim().slice(0, 80);
     if (!name) throw new ConvexError('Name the respite activity.');
     return {
@@ -607,7 +640,7 @@ const activity: OperationDefinition = {
       data: { characterId: hero._id, name },
       commit: async (mctx, scope) => {
         const participants = respite.participants.map((p, i) =>
-          i === index ? { ...p, activity: name } : p,
+          i === index ? withActivity(p, name) : p,
         );
         await journalPatch(mctx, scope, 'sessions', context.session!._id, {
           respite: { ...respite, participants },

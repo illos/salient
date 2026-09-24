@@ -11,6 +11,8 @@ import type { Id } from '../../convex/_generated/dataModel';
 import { backend, table, storedEvents, admitHero } from './fixtures/table';
 import { levelUpsEarned } from '../../convex/lib/respiteOperations';
 import tacticianLedger from '../fixtures/v94-tactician-expected.json';
+import nullOne from '../fixtures/v103-null-expected.json';
+import nullThree from '../fixtures/v133-null-three-expected.json';
 import { definitions as levelOneDefinitions } from '../../shared/content/level-one-decisions';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
@@ -185,7 +187,7 @@ test('a resting hero changes kit once without review; cancel reverts it', async 
     sessionId: f.sessionId as Id<'sessions'>,
   });
   expect(readback.respite?.activities).toEqual([
-    { characterId: f.thornId, activity: 'Change kit' },
+    { characterId: f.thornId, activity: 'Change kit', all: ['Change kit'], unused: 0 },
   ]);
   await f.say('/respite cancel');
   expect(await kitOf()).toBe('Mountain');
@@ -359,7 +361,7 @@ test('the table roster shows resting heroes and their activity; kit options list
   await f.say('/respite start');
   const roster = await f.player.client.query(api.table.roster, { campaignId: f.campaignId });
   expect(roster.session?.respite?.participants).toEqual([
-    { characterId: f.thornId, activity: null },
+    { characterId: f.thornId, activity: null, activities: [], unused: 1 },
   ]);
   await f.player.client.mutation(api.commands.invoke, {
     campaignId: f.campaignId,
@@ -370,4 +372,76 @@ test('the table roster shows resting heroes and their activity; kit options list
   });
   const after = await f.player.client.query(api.table.roster, { campaignId: f.campaignId });
   expect(after.session?.respite?.participants[0]?.activity).toBe('Project roll');
+});
+
+// V169: feature/null/level-2/rapid-processing.md (Chronokinetic) — "during any respite, you can take
+// an additional respite activity"; rule/resource/respite.md gives everyone else one. The Null is the
+// v103-1 ledger witness, levelled to 2 through the shared level-up path with its ledger choices.
+test('a Chronokinetic Null with Rapid Processing takes two respite activities; others take one', async () => {
+  const f = await setup();
+  const witness = nullThree.witnesses['v103-1'];
+  const one = nullOne.witnesses.find(w => w.id === witness.base)!;
+  const id = await admitHero(
+    f.t,
+    f.player,
+    f.director,
+    f.campaignId,
+    'Vessel',
+    draftSelectionsFrom(one.selections as never, levelOneDefinitions),
+  );
+  await f.director.client.mutation(api.commands.invoke, {
+    campaignId: f.campaignId,
+    commandId: 'grant-vessel-level-up',
+    operation: 'character.grant-level-up',
+    arguments: { characters: [{ refKind: 'character', id }] },
+  });
+  const p = await f.player.client.query(api.characters.progression, { characterId: id });
+  expect(p.targetLevel).toBe(2);
+  const added = {
+    'class.null.level-2.perk': witness.levelTwo.addedSelections.perk,
+    'class.null.level-2.chronokinetic-ability': witness.levelTwo.addedSelections.traditionAbility,
+  };
+  const selections = draftSelectionsFrom(added as never, getDefinitions(2)).filter(s =>
+    p.newDecisionIds.includes(s.decisionId),
+  );
+  expect(selections.map(s => s.decisionId).sort()).toEqual(Object.keys(added).sort());
+  const advancement = {
+    characterId: id,
+    expectedRevision: p.revision,
+    expectedBaseRevisionId: p.baseRevisionId!,
+  };
+  const version = await f.player.client.mutation(api.characters.saveAdvancement, {
+    ...advancement,
+    commandId: 'save-vessel-level-two',
+    expectedDraftVersion: p.draft?.version ?? 0,
+    selections,
+  });
+  await f.player.client.mutation(api.characters.finalizeAdvancement, {
+    ...advancement,
+    commandId: 'take-vessel-level-two',
+    expectedDraftVersion: version,
+  });
+
+  await f.say('/respite start');
+  const record = (character: Id<'characters'>, name: string, n: number) =>
+    f.player.client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId: `respite-activity-${n}-${character}`,
+      operation: 'respite.activity',
+      actor: { refKind: 'character', id: character },
+      arguments: { name },
+    });
+  await record(id, 'Project roll', 1);
+  let roster = await f.player.client.query(api.table.roster, { campaignId: f.campaignId });
+  const vessel = () => roster.session!.respite!.participants.find(r => r.characterId === id)!;
+  expect(vessel()).toMatchObject({ activities: ['Project roll'], unused: 1 });
+  await record(id, 'Read the archive', 2);
+  roster = await f.player.client.query(api.table.roster, { campaignId: f.campaignId });
+  expect(vessel()).toMatchObject({ activities: ['Project roll', 'Read the archive'], unused: 0 });
+  await expect(record(id, 'A third', 3)).rejects.toThrow('already undertook their 2');
+  // Thorn (no Rapid Processing) still has exactly one.
+  await record(f.thornId, 'Project roll', 4);
+  await expect(record(f.thornId, 'Another', 5)).rejects.toThrow('already undertook a respite');
+  const stored = (await f.session()).respite!.participants.find(r => r.characterId === id)!;
+  expect(stored).toMatchObject({ activity: 'Project roll', moreActivities: ['Read the archive'] });
 });

@@ -3,7 +3,8 @@
  * V167 respite on the table (docs/table-spec.md#respite-mode). The Director's card starts a respite
  * or shows who is resting with each hero's respite activity, unused ones marked as the wizard marks
  * unspent points, and ends it by Complete, Interrupt or Cancel. A resting hero's owner records their
- * one activity or changes kit. Every control submits a registered respite operation.
+ * activities (one, or two with Rapid Processing, V169) or changes kit. Every control submits a
+ * registered respite operation.
  */
 import { useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
@@ -28,7 +29,7 @@ export function RespiteDirectorCard({
   const respite = roster.session?.respite ?? null;
   if (!respite) return <RespiteStart campaignId={campaignId} roster={roster} />;
   const name = (id: string) => roster.heroes.find(h => h.id === id)?.name ?? 'A hero';
-  const unused = respite.participants.filter(p => !p.activity).length;
+  const unused = respite.participants.reduce((sum, p) => sum + p.unused, 0);
   return (
     <section
       className="flex flex-col gap-3 rounded-md bg-muted p-5"
@@ -44,8 +45,11 @@ export function RespiteDirectorCard({
         {respite.participants.map(p => (
           <li key={p.characterId} className="flex items-baseline justify-between gap-3">
             <span>{name(p.characterId)}</span>
-            <span className={p.activity ? '' : 'text-sm text-muted-foreground'}>
-              {p.activity ?? 'No activity yet'}
+            <span className={p.activities.length ? '' : 'text-sm text-muted-foreground'}>
+              {p.activities.length ? p.activities.join(', ') : 'No activity yet'}
+              {p.activities.length > 0 && p.unused > 0 && (
+                <span className="text-sm text-muted-foreground"> · {p.unused} more</span>
+              )}
             </span>
           </li>
         ))}
@@ -147,12 +151,13 @@ export function RespiteActivity({
   const [activity, setActivity] = useState('');
   const [kit, setKit] = useState('');
   if (!mine) return null;
-  if (mine.activity)
-    return (
-      <p className="m-0 text-sm text-muted-foreground">
-        Respite activity: <span className="text-foreground">{mine.activity}</span>
-      </p>
-    );
+  const taken = mine.activities.length ? (
+    <p className="m-0 text-sm text-muted-foreground">
+      Respite {mine.activities.length === 1 ? 'activity' : 'activities'}:{' '}
+      <span className="text-foreground">{mine.activities.join(', ')}</span>
+    </p>
+  ) : null;
+  if (mine.unused === 0) return taken;
   const run = (operation: string, args: Record<string, unknown>) =>
     void command.run(
       commandId =>
@@ -168,8 +173,10 @@ export function RespiteActivity({
   const choices = (kits?.options ?? []).filter(option => option !== kits?.current);
   return (
     <section className="flex flex-col gap-3 rounded-md bg-muted p-4" aria-label="Respite activity">
+      {taken}
       <p className="m-0 text-sm text-muted-foreground">
-        {hero.name} is resting and has one respite activity.
+        {hero.name} is resting and has {mine.unused === 1 ? 'one' : mine.unused} respite{' '}
+        {mine.unused === 1 ? 'activity' : 'activities'} left.
       </p>
       {kits && kits.current && !kits.multiple && choices.length > 0 && (
         <div className="flex items-stretch gap-2">

@@ -166,3 +166,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V157 | [Abilities without a power roll, and executed gains](V157-effect-only-abilities.md) | Merged (`6632e95`); cloud dev published; gate and headless PASS at tip |
 | V158 | [Effect instances and durations](V158-effect-instances.md) | Merged (`6632e95`); cloud dev published; gate and headless PASS at tip |
 | V167 | [Respite on the table](V167-respite-table.md) | Ready for gate |
+| V169 | [Rapid Processing's extra respite activity](V169-respite-extra-activity.md) | In progress |

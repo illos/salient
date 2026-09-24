@@ -8,6 +8,8 @@ import { appendEvent } from './lib/events';
 import { combatActive, currentEncounter } from './lib/encounters';
 import { encounterStatus } from './encounterTables';
 import { voidEncounter } from './lib/closeoutOperations';
+import type { DerivedBaseline } from '../shared/contracts/characterEvaluation';
+import { activitiesOf, respiteActivityAllowance } from '../shared/evaluate/respiteActivities';
 
 const sessionValue = v.object({
   id: v.id('sessions'),
@@ -30,7 +32,13 @@ const sessionValue = v.object({
       participants: v.array(v.id('characters')),
       /** V166: each resting hero's respite activity, or null while unused (shown before Complete). */
       activities: v.array(
-        v.object({ characterId: v.id('characters'), activity: v.union(v.string(), v.null()) }),
+        v.object({
+          characterId: v.id('characters'),
+          activity: v.union(v.string(), v.null()),
+          /** V169: every activity taken, and how many the hero may still take. */
+          all: v.array(v.string()),
+          unused: v.number(),
+        }),
       ),
     }),
     v.null(),
@@ -66,10 +74,21 @@ async function project(ctx: ReadCtx, s: Doc<'sessions'>, ordered?: Doc<'sessions
       ? {
           startedAt: s.respite.startedAt,
           participants: s.respite.participants.map(p => p.characterId),
-          activities: s.respite.participants.map(p => ({
-            characterId: p.characterId,
-            activity: p.activity ?? null,
-          })),
+          activities: await Promise.all(
+            s.respite.participants.map(async p => {
+              const hero = await ctx.db.get(p.characterId);
+              const all = activitiesOf(p);
+              const allowance = respiteActivityAllowance(
+                (hero?.derivedBaseline as DerivedBaseline | null | undefined)?.features,
+              );
+              return {
+                characterId: p.characterId,
+                activity: p.activity ?? null,
+                all,
+                unused: Math.max(0, allowance - all.length),
+              };
+            }),
+          ),
         }
       : null,
   };
