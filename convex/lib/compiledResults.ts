@@ -107,13 +107,17 @@ export function printedPrevention(text: string): ConditionId[] {
   return [...found];
 }
 
-/** Who holds this creature's active grabs; a toggle without a sourced instance is `unrecorded`. */
-function grabbedBy(record: TargetRecord): string[] {
+/**
+ * Who holds this creature's active grabs. A manual grabbed toggle, or a toggle with no active
+ * sourced instance, is `unrecorded`; retained history of ended or other conditions never counts.
+ */
+export function grabbedBy(record: TargetRecord): string[] {
   const live = record.character?.liveState ?? record.foe?.live;
   if (!live?.conditions?.grabbed) return [];
   const sources = (live.conditionInstances ?? [])
     .filter(i => i.status === 'active' && i.condition === 'grabbed')
     .map(i => i.sourceActorId ?? 'unrecorded');
+  if (live.manualConditions?.grabbed) sources.push('unrecorded');
   return sources.length ? [...new Set(sources)] : ['unrecorded'];
 }
 

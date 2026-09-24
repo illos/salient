@@ -134,3 +134,8 @@ sit beside Effect prose.
   Artifacts: `/srv/presidium/projects/salient/test-artifacts/V119-bbb5340`. The follow-up commit
   only moves the Rotten Smash fixture to its printed Might 3 and size 3 (same asserted outcome).
   Awaiting second-round review.
+- QC1 second review: changes required, R1. The Grab maneuver's stacking guard counted any retained
+  condition history, so a manual grab alongside ended or unrelated instances was treated as free.
+  Both paths now share `grabbedBy` (`convex/lib/compiledResults.ts`): active sourced grabs, plus
+  `unrecorded` for a manual toggle or an unsourced grab. The app regression covers ended history
+  plus a manual grab: another creature's tier 3 is withheld and no new instance is written.

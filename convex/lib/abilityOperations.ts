@@ -33,7 +33,7 @@ import {
   type CompiledAbilityInput,
 } from '../../shared/resolve/compiledOutcome';
 import { effectOccurrences, type CompiledResult } from '../../shared/contracts/compiledResult';
-import { movementFacts, conditionFacts } from './compiledResults';
+import { movementFacts, conditionFacts, grabbedBy } from './compiledResults';
 import {
   applyConditionInstance,
   endConditionInstance,
@@ -1054,11 +1054,8 @@ async function grabManeuverPlan(
   //   chapter/classes.md, Stacking Unique Effects: no second grab by another enemy;
   //   and a known grabbed immunity.
   const holding = (await activeGrabsBy(ctx, actorRecord)).filter(h => h.id !== target.actor.id);
-  const otherGrabbers = (
-    instancesOf(target) as { status: string; condition: string; sourceActorId?: string }[]
-  )
-    .filter(i => i.status === 'active' && i.condition === 'grabbed')
-    .some(i => i.sourceActorId !== actorRecord.actor.id);
+  // The same source detection as compiled grabs (QC1 R1): manual or unsourced grabs count.
+  const otherGrabbers = grabbedBy(target).some(source => source !== actorRecord.actor.id);
   const immune = (
     target.character
       ? (baselineOf(target.character.derivedBaseline)?.conditionImmunities ?? [])
@@ -1066,7 +1063,7 @@ async function grabManeuverPlan(
   ).some(i => i.condition === 'grabbed');
   const withheld = holding.length
     ? `${actorRecord.actor.name} already has ${holding.map(h => h.name).join(', ')} grabbed; a creature grabs one at a time unless its stat block or feature says otherwise (chapter/monster-basics.md; Q-GRAB-1). Release one with condition off, then record this grab`
-    : otherGrabbers || (conditionsOf(target)?.grabbed && !instancesOf(target).length)
+    : otherGrabbers
       ? `${target.actor.name} is already grabbed by another creature (chapter/classes.md, Stacking Unique Effects); the table decides`
       : immune
         ? `${target.actor.name} can't be grabbed (evaluated immunity)`

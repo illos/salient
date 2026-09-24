@@ -102,6 +102,19 @@ test('V119: Grab, the size rule, Escape Grab with its bane, and Stand Up', async
   await expect(command(`@{foe:${goblin}} /ability use ability="Escape Grab"`)).rejects.toThrow(
     /not grabbed/,
   );
+  // QC1 R1: ended grab history plus a manual (table-resolved) grab is still a grab by someone.
+  await command(`@{foe:${goblin}} /condition on name=grabbed`);
+  await position(t, f.campaignId, [10, 9]);
+  const manual = await command(
+    `@{foe:${other}} /ability use ability="Grab" targets=[@{foe:${goblin}}]`,
+  );
+  expect(await describe(manual.eventId)).toMatch(/already grabbed by another creature/);
+  expect(
+    (await goblinLive()).conditionInstances!.filter(
+      i => i.status === 'active' && i.condition === 'grabbed',
+    ),
+  ).toEqual([]);
+  await command(`@{foe:${goblin}} /condition off name=grabbed`);
 
   // Stand Up ends prone and refuses when there is nothing to end.
   await command('@Thorn /condition on name=prone', true);
