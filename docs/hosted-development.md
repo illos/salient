@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — resource train 4 (V144, V147, V149, V148)
+## Current release — party read-limit fix
+
+Backend/frontend source `9240044e4be4516ac13cf798670b3c6e6f901bb1` published on 2026-09-24 as
+Worker `509f7b29-b09f-46ce-838a-0e7de40c2865`: combat commit and finish read each hero once, keeping large parties under Convex's
+per-function read limit. Backend and schema validation, the hosted build and the upload succeeded.
+Content remains the 1852-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
+
+## Previous release — resource train 4 (V144, V147, V149, V148)
 
 Backend/frontend source `71a3fa5053e753ef98f380f90f9faae52d0a0023` published on 2026-09-24 as
 Worker `e7cd0093-3a28-400a-8853-df89561e8a77`: automatic Null, Conduit, Troubadour and Elementalist heroic resources, completing all

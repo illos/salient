@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| party read-limit fix | `9240044` | Merged; backend/frontend published (priority fix) | complete |
 | V148 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
 | V149 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
 | V147 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
@@ -604,3 +605,19 @@ cover all eleven classes.
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/rtrain4-release-71a3fa5`.
+
+### Party read-limit fix publication: 2026-09-24
+
+Resource train 3 let `combat.commit` and `combat.finish` re-read every hero several times, so large
+parties of level-three Beastheart heroes exceeded Convex's 16 MB per-function read limit
+(`beastheart-level-three` failed from `7e9f731` onward). ENGINE2's fix reads a party once. The
+test and deploy thread fast-forwarded main to `9240044e4be4516ac13cf798670b3c6e6f901bb1` as a priority fix.
+- Full gate at the tip (281 s, 431 engine and 692 app tests).
+- `beastheart-level-three`, `beastheart` and `tier-effects` journeys at the tip, idle host.
+- Independent review and QC1 clearance passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `509f7b29-b09f-46ce-838a-0e7de40c2865`.
+- Content is unchanged at 1852 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/readfix-release-9240044`.
