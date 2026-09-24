@@ -29,6 +29,7 @@ import { HealthBar } from '../components/health-bar';
 import { Loading, Notice, useCommand } from '../ui';
 import { AbilityCard, CommonActionCard } from './ability-card';
 import { ActiveConditionBadges, ConditionToggles, actorRef } from './controls';
+import { ActiveEffects } from '../effect-instances';
 import { CHARACTERISTICS, SheetHeader, type CharacteristicKey } from './header';
 import {
   DetailsRows,
@@ -324,21 +325,40 @@ function Conditions({
       }
     >
       {live ? (
-        <ConditionToggles
-          campaignId={campaignId}
-          characterId={sheet.id}
-          conditions={live.conditions}
-          canToggle={canAct}
-          reason={
-            !campaignId
-              ? 'Conditions are toggled at the table.'
-              : !running
-                ? 'Toggles need a running session.'
-                : !sheet.viewer.controls
-                  ? 'Only the hero’s controller or the Director toggles conditions.'
-                  : null
-          }
-        />
+        <div className="flex flex-col gap-4">
+          <ConditionToggles
+            campaignId={campaignId}
+            characterId={sheet.id}
+            conditions={live.conditions}
+            canToggle={canAct}
+            reason={
+              !campaignId
+                ? 'Conditions are toggled at the table.'
+                : !running
+                  ? 'Toggles need a running session.'
+                  : !sheet.viewer.controls
+                    ? 'Only the hero’s controller or the Director toggles conditions.'
+                    : null
+            }
+          />
+          <ActiveEffects
+            campaignId={campaignId}
+            canEnd={canAct}
+            effects={(live.effectInstances ?? [])
+              .filter(instance => instance.status === 'active')
+              .map(instance => ({
+                id: instance.id,
+                abilityName: instance.abilityName,
+                actorLabel: instance.actorLabel,
+                sourcePath: instance.sourcePath,
+                text: instance.payload.text,
+                subject: instance.subject.name,
+                printedDuration: instance.printedDuration,
+                endsWhen: instance.endsWhen,
+                scheduled: instance.registrationIds.length > 0,
+              }))}
+          />
+        </div>
       ) : (
         <p className="m-0 text-base text-muted-foreground">No live record yet.</p>
       )}

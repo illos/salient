@@ -27,6 +27,7 @@ import { Loading, useCommand } from '../ui';
 import { AbilityPanel } from './targeting';
 import { TargetReticle } from './roster-card';
 import { CoreSource } from '../components/core-content';
+import { ActiveEffects } from '../effect-instances';
 
 export type Roster = FunctionReturnType<typeof api.table.roster>;
 export type Foe = Roster['foes'][number];
@@ -314,6 +315,7 @@ export function FoeSheet({
         {running && (
           <ConditionControls campaignId={campaignId} actor={actor} conditions={foe.conditions} />
         )}
+        <ActiveEffects campaignId={campaignId} effects={foe.effectInstances} canEnd={running} />
       </div>
       {running && abilitiesAllowed && (
         <div className="flex flex-col gap-2">
