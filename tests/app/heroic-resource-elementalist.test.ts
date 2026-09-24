@@ -88,7 +88,7 @@ test('V148: maintaining persistent abilities reduces the turn-start essence and 
   await command('/combat first side=heroes');
   await command(`${ref} /turn take`, true);
   // "start doing so immediately after you first use the ability": a use is required first.
-  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/use the ability first/);
+  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/no unmaintained use/);
   await flesh();
   await maintain('The Flesh, a Crucible');
   await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/no unmaintained use/);
@@ -110,6 +110,12 @@ test('V148: maintaining persistent abilities reduces the turn-start essence and 
     `@{foe:${goblin}} /ability use ability="Spear Charge" targets=[${ref}]`,
   );
   expect((await live()).maintained).toEqual([]);
+  // QC1 train-4 R2: the turn's tally can't be recomputed from a corrected hit, so the correction is
+  // refused before anything changes and the table rewinds instead.
+  await expect(
+    command(`/ability correct event="${second.eventId}" target=${ref} edges=0 banes=1`),
+  ).rejects.toThrow(/Rewind/);
+  expect((await live()).maintained).toEqual([]);
   expect(
     (await t.run(ctx => ctx.db.query('events').take(1000))).filter(
       e => e.kind === 'resource.maintenance-ended' && e.causeEventId === second.eventId,
@@ -126,6 +132,9 @@ test('V148: maintaining persistent abilities reduces the turn-start essence and 
   const before = (await live()).heroicResource.current;
   await command(`${ref} /turn take`, true);
   expect((await live()).heroicResource.current).toBe(before + 1);
+  // QC1 train-4 R3: the choice to maintain closes when play moves on: an unmaintained use from an
+  // earlier turn can't start maintenance now.
+  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/this turn/);
 
   await command('/combat end');
   await command('/combat victories amount=0 recipients=[]');

@@ -389,6 +389,7 @@ async function maintenanceCounts(
   encounterId: Id<'encounters'>,
   characterId: Id<'characters'>,
   ability: string,
+  turnId: string,
 ): Promise<{ uses: number; maintains: number }> {
   let uses = 0;
   let maintains = 0;
@@ -400,20 +401,28 @@ async function maintenanceCounts(
     const payload = event.payload as
       | {
           envelope?: { boundActor?: { id?: string } | null };
-          data?: { ability?: { name?: string } | string; value?: unknown; characterId?: string };
+          data?: {
+            ability?: { name?: string } | string;
+            value?: unknown;
+            characterId?: string;
+            turnId?: string;
+            allowance?: { turnId?: string | null };
+          };
         }
       | undefined;
     if (payload?.envelope?.boundActor?.id !== characterId) continue;
     if (
       (event.kind === 'ability.use' || event.kind === 'ability.recorded') &&
       typeof payload.data?.ability === 'object' &&
-      payload.data.ability.name === ability
+      payload.data.ability.name === ability &&
+      payload.data.allowance?.turnId === turnId
     )
       uses++;
     if (
       event.kind === 'resource.maintain' &&
       payload.data?.ability === ability &&
-      payload.data.value !== 'off'
+      payload.data.value !== 'off' &&
+      payload.data.turnId === turnId
     )
       maintains++;
   }
@@ -499,12 +508,23 @@ const resourceMaintain: OperationDefinition = {
     if (value === 'on') {
       // "Whenever you use a persistent ability, you decide whether you want to maintain it, and start
       // doing so immediately after you first use the ability": each maintained instance needs its
-      // own recorded use of the ability this encounter (V148 review R3). Instances on different
-      // targets may run at once (R2; "A creature can't be affected by multiple instances").
-      const counts = await maintenanceCounts(ctx, encounter._id, character._id, name);
+      // own recorded use of the ability in the current turn (QC1 train-4 R3: the choice closes when
+      // play moves on). Instances on different targets may run at once ("A creature can't be
+      // affected by multiple instances").
+      if (!encounter.activeTurnId)
+        throw new ConvexError(
+          'Maintain a persistent ability right after using it, during the turn it was used.',
+        );
+      const counts = await maintenanceCounts(
+        ctx,
+        encounter._id,
+        character._id,
+        name,
+        encounter.activeTurnId,
+      );
       if (counts.uses <= counts.maintains)
         throw new ConvexError(
-          `${character.authored.name} has no unmaintained use of ${name} this encounter; use the ability first, then maintain it.`,
+          `${character.authored.name} has no unmaintained use of ${name} this turn; the choice to maintain is made right after using it.`,
         );
       const upkeep = current.reduce((sum, entry) => sum + entry.value, 0) + ability.value;
       const gain = profile.turnStart.kind === 'fixed' ? profile.turnStart.amount : 0;
@@ -529,6 +549,7 @@ const resourceMaintain: OperationDefinition = {
         ability: name,
         value,
         persistentValue: ability.value,
+        turnId: encounter.activeTurnId ?? null,
         maintained: next.map(entry => entry.ability),
         instances: next.filter(entry => entry.ability === name).length,
         sourcePath: profile.persistent.sourcePath,

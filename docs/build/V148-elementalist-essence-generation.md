@@ -79,3 +79,11 @@ gain.
   - Encounter end clears forgo and maintenance state together.
   - `resource.forgo` and `resource.maintain` are both registered.
   - `tsc` (root, convex, web) is clean. The Elementalist, forgo, Fury and pure tests pass (11/11).
+
+- QC1 train-4:
+  - R2: correcting damage to an Elementalist in combat is refused (same guard), since the turn's tally
+    and any break can't be recomputed. Rewind instead.
+  - R3: maintenance counts only uses and maintains in the current turn, which maintain events now
+    record, so an old unmaintained use can't start maintenance later.
+  - Regressions: the correction of the breaking hit is refused, and a round-2 maintain of a round-1
+    use is refused.
