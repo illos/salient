@@ -1736,7 +1736,7 @@ operations; see the [V165 slice](build/V165-respite-loop.md). Cancel keeps a lev
 (implementation interpretation, Q-RESPITE-1). V166 adds
 `/respite change-kit` and `/respite activity` ([V166](build/V166-respite-activities.md)); the table's respite
 display follows. Each hero takes one respite activity (`rule/resource/respite.md`); a Chronokinetic Null
-with Rapid Processing (`feature/null/level-2/rapid-processing.md`) takes one more ([V169](build/V169-respite-extra-activity.md)).
+with Rapid Processing (`feature/null/level-2/rapid-processing.md`) takes one more; later-level grants are deferred ([V169](build/V169-respite-extra-activity.md)).
 
 **Complete is final, confirmed 2026-09-24:** a completed respite cannot be undone or rewound. The
 Director corrects mistakes with the existing adjustments (XP, Victories, Stamina, Recoveries). Cancel

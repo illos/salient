@@ -13,14 +13,26 @@ V166 refused any second activity.
   roll … or changing your kit".
 - `feature/null/level-2/rapid-processing.md`: "Additionally, during any respite, you can take an
   additional respite activity."
-- No other Compendium feature, perk or treasure grants an additional respite activity (searched for
-  "respite activit" across `feature/`, `perk/`, `treasure/`). Inspired Artisan adds a second project
-  roll within one activity, which stays manual.
+- Rapid Processing is the only additional-activity grant at levels 1–3. Deferred and resolved manually
+  until built (the review found these; a plain-text search misses them because "respite" is a link):
+  `feature/talent/level-8/doubling-the-hours.md` (one more while at 5+ Victories),
+  `feature/fury/level-8/menagerie.md` (a stormwight kit swap uses no activity),
+  `treasure/artifact/mortal-coil.md` (one more per creature in its area),
+  `feature/tactician/level-7/grand-strategy.md` and `shock-and-awe.md` (a project roll in addition),
+  `title/master-librarian.md` (a project with no activity), and the monster abilities that deny the
+  next respite's activity (`flesh-mournling.md`, `high-elf-palinode.md`). Inspired Artisan adds a
+  second project roll within one activity, which stays manual.
 
 ## Scope
 
 - `shared/evaluate/respiteActivities.ts`: allowance is 1 plus one per additional-activity feature in the
-  hero's current build, read when the activity is recorded. A level-up taken during the respite counts.
+  hero's current build. **Implementation interpretation:** it is read when the activity is recorded,
+  so a level-up taken during the respite counts. By the rules a hero levels up after a respite, so the
+  mid-respite level-up is an app convenience. The alternative, fixing the allowance at start, was
+  rejected because the feature applies "during any respite" the hero has it for.
+- Cancel after two kit changes: it reverts to the pre-respite build only when the kit change is the one
+  revision since it. Otherwise it reapplies the earlier kit, keeping a level-up taken in between
+  (Q-RESPITE-1).
 - `respite.activity` and `respite.change-kit` accept activities up to the allowance. The first is still
   `activity`; later ones are stored in `moreActivities`. A second kit change still makes Cancel revert
   to the build from before the respite.
@@ -31,9 +43,10 @@ V166 refused any second activity.
 
 ## Acceptance checks
 
-1. `tests/app/respite.test.ts`: the v103-1 Chronokinetic witness, levelled to 2 through the shared
-   level-up path with its ledger choices, records two activities. A third is refused, and Thorn still
-   gets exactly one. Roster and stored readback are checked.
+1. `tests/app/respite.test.ts`: the v103-1 Chronokinetic witness at level 1 gets one activity. Levelled
+   to 2 during the respite through the shared level-up path, its build shows Rapid Processing and it
+   takes a second activity; a third is refused. Thorn gets exactly one. A later respite names the
+   Null's one unused activity on Complete. Roster, stored and event readback are checked.
 2. Test-Deploy: gate, then the `respite` and `level-up` journeys.
 
 ## Work log

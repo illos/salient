@@ -181,7 +181,16 @@ const cancel: OperationDefinition = {
           const current = hero.effectiveRevisionId
             ? await ctx.db.get(hero.effectiveRevisionId)
             : null;
-          if (from && hero.effectiveRevisionId === snapshot.kitChange.to) revert = from;
+          const to = await ctx.db.get(snapshot.kitChange.to);
+          // Revert only when the kit change is the one revision since `from`. After a second kit
+          // change (V169) with a level-up between, reapply `from`'s kit instead, keeping the
+          // level-up (Q-RESPITE-1).
+          if (
+            from &&
+            hero.effectiveRevisionId === snapshot.kitChange.to &&
+            to?.parentRevisionId === from._id
+          )
+            revert = from;
           else if (from && current) {
             const result = withKit(current, kitDecisionsOf(from));
             if (result.evaluation.status === 'complete' && !result.unchanged) reapply = result;
@@ -389,7 +398,9 @@ const complete: OperationDefinition = {
           levelUpsGranted: r.earned,
         })),
         dead: dead.map(({ hero }) => hero._id),
-        unusedActivities: counts.filter(c => c.left > 0).map(c => c.name),
+        unusedActivities: counts
+          .filter(c => c.left > 0)
+          .map(c => ({ name: c.name, used: c.used, left: c.left })),
         left,
       },
       commit: async (mctx, scope) => {
@@ -412,7 +423,13 @@ const complete: OperationDefinition = {
 // V166 respite activities: rule/resource/respite.md "You can also undertake one respite activity,
 // such as making a project roll … or changing your kit"; chapter/kits.md, Changing Your Kit.
 
-/** V169: one activity, plus one per additional-activity feature of the current build. */
+/**
+ * V169: one activity, plus one per additional-activity feature of the current build.
+ * Implementation interpretation: the allowance is read when an activity is recorded, so a level-up
+ * taken during the respite (an app convenience; by the rules a hero levels up after it) counts. The
+ * alternative, fixing the allowance when the respite starts, was not chosen because the feature
+ * applies "during any respite" the hero has it for.
+ */
 function activityAllowance(hero: Doc<'characters'>): number {
   return respiteActivityAllowance(baselineOf(hero.derivedBaseline)?.features);
 }

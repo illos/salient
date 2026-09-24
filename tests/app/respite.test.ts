@@ -210,9 +210,9 @@ test('complete keeps a kit change and names heroes who used no activity', async 
   const result = await f.say('/respite complete');
   const event = (await storedEvents(f.t, f.campaignId)).find(e => e._id === result.eventId)!;
   expect(event.description).toContain('No respite activity used: Thorn.');
-  expect((event.payload as { data: { unusedActivities: string[] } }).data.unusedActivities).toEqual(
-    ['Thorn'],
-  );
+  expect(
+    (event.payload as { data: { unusedActivities: unknown[] } }).data.unusedActivities,
+  ).toEqual([{ name: 'Thorn', used: 0, left: 1 }]);
 });
 
 test('kit change refuses the same kit, non-kit decisions and peers; the Director may act', async () => {
@@ -374,12 +374,15 @@ test('the table roster shows resting heroes and their activity; kit options list
   expect(after.session?.respite?.participants[0]?.activity).toBe('Project roll');
 });
 
-// V169: feature/null/level-2/rapid-processing.md (Chronokinetic) — "during any respite, you can take
-// an additional respite activity"; rule/resource/respite.md gives everyone else one. The Null is the
-// v103-1 ledger witness, levelled to 2 through the shared level-up path with its ledger choices.
-test('a Chronokinetic Null with Rapid Processing takes two respite activities; others take one', async () => {
+// V169: feature/null/level-2/rapid-processing.md (Chronokinetic): "during any respite, you can take
+// an additional respite activity"; rule/resource/respite.md gives everyone one. The Null is the
+// v103-1 ledger witness (Chronokinetic; Rapid Processing among its level-2 added features), levelled
+// to 2 during the respite through the shared level-up path with its ledger choices.
+test('a Null gains a second respite activity from Rapid Processing, even mid-respite', async () => {
   const f = await setup();
   const witness = nullThree.witnesses['v103-1'];
+  expect(witness.tradition).toBe('Chronokinetic');
+  expect(witness.levelTwo.addedFeatures).toContain('Rapid Processing');
   const one = nullOne.witnesses.find(w => w.id === witness.base)!;
   const id = await admitHero(
     f.t,
@@ -389,6 +392,26 @@ test('a Chronokinetic Null with Rapid Processing takes two respite activities; o
     'Vessel',
     draftSelectionsFrom(one.selections as never, levelOneDefinitions),
   );
+  let n = 0;
+  const record = (character: Id<'characters'>, name: string) =>
+    f.player.client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId: `respite-activity-${n++}-${character}`,
+      operation: 'respite.activity',
+      actor: { refKind: 'character', id: character },
+      arguments: { name },
+    });
+  const roster = async () =>
+    (await f.player.client.query(api.table.roster, { campaignId: f.campaignId })).session!.respite!
+      .participants;
+  const vessel = async () => (await roster()).find(r => r.characterId === id)!;
+
+  await f.say('/respite start');
+  // Level 1: no Rapid Processing, one activity.
+  await record(id, 'Project roll');
+  await expect(record(id, 'Read the archive')).rejects.toThrow('already undertook a respite');
+  expect(await vessel()).toMatchObject({ activities: ['Project roll'], unused: 0 });
+
   await f.director.client.mutation(api.commands.invoke, {
     campaignId: f.campaignId,
     commandId: 'grant-vessel-level-up',
@@ -421,27 +444,30 @@ test('a Chronokinetic Null with Rapid Processing takes two respite activities; o
     commandId: 'take-vessel-level-two',
     expectedDraftVersion: version,
   });
+  const hero = (await f.t.run(ctx => ctx.db.get(id)))!;
+  const features = (hero.derivedBaseline as { features: { name: string }[] }).features;
+  expect(features.map(feature => feature.name)).toContain('Rapid Processing');
 
-  await f.say('/respite start');
-  const record = (character: Id<'characters'>, name: string, n: number) =>
-    f.player.client.mutation(api.commands.invoke, {
-      campaignId: f.campaignId,
-      commandId: `respite-activity-${n}-${character}`,
-      operation: 'respite.activity',
-      actor: { refKind: 'character', id: character },
-      arguments: { name },
-    });
-  await record(id, 'Project roll', 1);
-  let roster = await f.player.client.query(api.table.roster, { campaignId: f.campaignId });
-  const vessel = () => roster.session!.respite!.participants.find(r => r.characterId === id)!;
-  expect(vessel()).toMatchObject({ activities: ['Project roll'], unused: 1 });
-  await record(id, 'Read the archive', 2);
-  roster = await f.player.client.query(api.table.roster, { campaignId: f.campaignId });
-  expect(vessel()).toMatchObject({ activities: ['Project roll', 'Read the archive'], unused: 0 });
-  await expect(record(id, 'A third', 3)).rejects.toThrow('already undertook their 2');
-  // Thorn (no Rapid Processing) still has exactly one.
-  await record(f.thornId, 'Project roll', 4);
-  await expect(record(f.thornId, 'Another', 5)).rejects.toThrow('already undertook a respite');
+  // Level 2 with Rapid Processing: a second activity, and no third.
+  expect(await vessel()).toMatchObject({ unused: 1 });
+  await record(id, 'Read the archive');
+  expect(await vessel()).toMatchObject({
+    activities: ['Project roll', 'Read the archive'],
+    unused: 0,
+  });
+  await expect(record(id, 'A third')).rejects.toThrow('already undertook their 2');
+  // Thorn has no Rapid Processing: exactly one.
+  await record(f.thornId, 'Project roll');
+  await expect(record(f.thornId, 'Another')).rejects.toThrow('already undertook a respite');
   const stored = (await f.session()).respite!.participants.find(r => r.characterId === id)!;
   expect(stored).toMatchObject({ activity: 'Project roll', moreActivities: ['Read the archive'] });
+  await f.say('/respite complete');
+
+  // A later respite: one of the Null's two activities used; Complete names the one left.
+  await f.say('/respite start');
+  await record(id, 'Project roll');
+  const result = await f.say('/respite complete');
+  const event = (await storedEvents(f.t, f.campaignId)).find(e => e._id === result.eventId)!;
+  expect(event.description).toContain('Respite activities left unused: Vessel (1).');
+  expect(event.description).toContain('No respite activity used: Thorn.');
 });

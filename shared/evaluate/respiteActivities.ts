@@ -4,7 +4,13 @@
  *
  * - rule/resource/respite.md: "You can also undertake one respite activity".
  * - feature/null/level-2/rapid-processing.md (Chronokinetic): "during any respite, you can take an
- *   additional respite activity." It is the only additional-activity grant in the Compendium.
+ *   additional respite activity." It is the only such grant at levels 1–3.
+ *
+ * Deferred, all above level 3 or outside hero builds (docs/build/V169-respite-extra-activity.md):
+ * feature/talent/level-8/doubling-the-hours.md, feature/fury/level-8/menagerie.md,
+ * treasure/artifact/mortal-coil.md, feature/tactician/level-7/grand-strategy.md and
+ * shock-and-awe.md, title/master-librarian.md, and monster abilities that deny the next respite's
+ * activity (flesh-mournling, high-elf-palinode). Until then these are resolved manually.
  */
 import type { GrantedFeature } from '../contracts/characterEvaluation.ts';
 
