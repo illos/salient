@@ -66,6 +66,8 @@ export async function createTable(
   await expect(director.getByRole('heading', { name: `Blackcastle ${stamp}` })).toBeVisible();
   const campaignUrl = director.url();
   const campaignId = campaignUrl.split('/').at(-1)!;
+  // The invitation link lives in the Manage players card, opened from the campaign header.
+  await director.getByRole('button', { name: 'Invite players', exact: true }).click();
   const invite = await director.getByLabel('Invitation link').inputValue();
   await register(player, `Player ${stamp}`, credentials('player').email);
   await player.goto(invite);
