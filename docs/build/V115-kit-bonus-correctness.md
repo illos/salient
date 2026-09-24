@@ -128,3 +128,7 @@ Spec references:
 - TESTER `test-V115-1673c01-3` PASS: `censor` exit 0 in 79 s. The `fb3ce1f` gate (658/658) and the
   kit-bonus, tier-effects and effect-riders passes carry over. Artifacts:
   `/srv/presidium/projects/salient/test-artifacts/V115-1673c01`. Ready for integration.
+- Rebased onto main `f54296a` (V116 Tactician levels 2–3, V118 vendor resolver). TESTER
+  `test-V115-439e97e-4` PASS: `pnpm check` exit 0 in 290 s (407 engine, 658 app), and `kit-bonus`
+  exit 0 in 17 s from a vendor-less copy. Artifacts:
+  `/srv/presidium/projects/salient/test-artifacts/V115-439e97e`. Awaiting second-round fix review.
