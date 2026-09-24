@@ -74,8 +74,12 @@ const input = (
 test('tier instructions match whole printed clauses only', () => {
   expect(tierInstruction('you can teleport the target up to 3 squares')).toEqual({
     shape: 'teleport',
+    subject: 'target',
   });
-  expect(tierInstruction('Each target gains 2 surges.')).toEqual({ shape: 'surges' });
+  expect(tierInstruction('Each target gains 2 surges.')).toEqual({
+    shape: 'surges',
+    subject: 'target',
+  });
   for (const refused of [
     'you can teleport the target up to 3 squares and deal 2 damage',
     'Each target gains 2 surges and 5 temporary Stamina',
@@ -159,4 +163,41 @@ test('a tampered instruction or misplaced damage is outside the supported envelo
   const reordered = structuredClone(definition);
   reordered.tiers[1]!.reverse();
   expect(resolveCompiledAbility(reordered, input([6, 6], ['a'])).kind).toBe('manual');
+});
+
+// monster/goblin/statblock/war-spider.md, Web: "A < 0/1/2 restrained (save ends)" with no damage.
+// Nothing to wait for: the condition resolves against the target's Agility at once.
+test('a condition in a tier without damage resolves without waiting for damage', () => {
+  const definition = compiled('Web', 'foe-ability');
+  expect(definition.execution).toBe('supported');
+  const result = resolveCompiledAbility(definition, {
+    ...input([6, 6], ['a'], { resource: 'malice', current: 5 }),
+    conditionFacts: {
+      targets: [{ targetId: 'a', kind: 'hero', characteristics: { A: -1 } }],
+    },
+  } as CompiledAbilityInput);
+  if (result.kind !== 'resolved') throw new Error(result.kind);
+  expect(result.effects.find(e => e.kind === 'condition')).toMatchObject({
+    condition: 'restrained',
+    status: 'applied',
+    requirements: [],
+  });
+});
+
+// feature/ability/tactician/level-1/inspiring-strike.md tier 3 keeps the whole sentence, edge
+// included, as one instruction; an actor instruction is refused on a counted or area envelope.
+test('Inspiring Strike tier 3 is one whole instruction; actor instructions stay single-target', () => {
+  const definition = compiled('Inspiring Strike');
+  const instruction = definition.tiers[2]!.find(n => n.kind === 'instruction')!;
+  expect(plain(instruction.clause)).toBe(
+    'you and one ally within 10 squares of you can spend a Recovery, and each of you gains an edge on the next ability roll you make during the encounter',
+  );
+  expect(tierInstruction('you can shift up to 2 squares')).toEqual({
+    shape: 'shift',
+    subject: 'actor',
+  });
+  const area = structuredClone(definition);
+  area.envelope.target = 'Each enemy in the area';
+  area.envelope.keywords = [...area.envelope.keywords, 'Area'];
+  expect(resolveCompiledAbility(area, input([6, 6], ['a'])).kind).toBe('manual');
 });

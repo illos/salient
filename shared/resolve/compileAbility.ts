@@ -355,7 +355,11 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         }
         // V154: tier table work, after the tier's damage when it has any.
         const instruction = tierInstruction(plain(clause));
-        if (supportedRun && instruction) {
+        if (
+          supportedRun &&
+          instruction &&
+          (instruction.subject === 'target' || grammar.targetShape === 'single')
+        ) {
           nodes.push({
             ...sourceNode(envelope, tierLocator, ordinal, clause),
             kind: 'instruction',

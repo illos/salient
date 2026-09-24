@@ -206,23 +206,31 @@ export function effectRider(text: string): EffectRider | undefined {
  * V154 tier instructions: a whole tier clause that is table work for that target's outcome. Like
  * section riders they never change state; the table records them. Printed casing is matched.
  */
-const tierInstructions: readonly [EffectRider['shape'], RegExp][] = [
+const tierInstructions: readonly [EffectRider['shape'], RegExp, ('actor' | 'target')?][] = [
   // feature/ability/shadow/level-2/in-a-puff-of-ash.md.
   ['teleport', /^you can teleport the target (?:up to )?\d+ squares?$/],
   // kit/cloak-and-dagger.md (Fade).
-  ['shift', /^you can shift (?:up to )?\d+ squares?$/],
+  ['shift', /^you can shift (?:up to )?\d+ squares?$/, 'actor'],
   // feature/ability/tactician/level-1/inspiring-strike.md. The edge is entered at that later roll.
-  ['recovery', /^you or one ally within \d+ squares of you can spend a Recovery$/],
+  ['recovery', /^you or one ally within \d+ squares of you can spend a Recovery$/, 'actor'],
   [
     'recovery',
     /^you and one ally within \d+ squares of you can spend a Recovery, and each of you gains an edge on the next ability roll you make during the encounter$/,
+    'actor',
   ],
   // feature/ability/tactician/level-1/battle-cry.md. Surges stay table work, as V109's riders.
   ['surges', /^Each target gains \d+ surges?$/],
 ];
 
-export function tierInstruction(text: string): { shape: EffectRider['shape'] } | undefined {
+/**
+ * `actor` instructions are about the creature using the ability, which rule/dice/ability-roll.md
+ * ("Abilities With Damage and Effects") says happens once, not once per target: they are admitted
+ * only on single-target abilities.
+ */
+export function tierInstruction(
+  text: string,
+): { shape: EffectRider['shape']; subject: 'actor' | 'target' } | undefined {
   const normalized = text.replace(/\s+/g, ' ').trim().replace(/\.$/, '');
   const match = tierInstructions.find(([, pattern]) => pattern.test(normalized));
-  return match ? { shape: match[0] } : undefined;
+  return match ? { shape: match[0], subject: match[2] ?? 'target' } : undefined;
 }

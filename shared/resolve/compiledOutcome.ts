@@ -459,11 +459,15 @@ export function resolveCompiledAbility(
             (node.kind === 'push' || node.kind === 'condition' || node.kind === 'instruction') &&
             node.after !== (nodes[0]?.kind === 'damage' ? nodes[0].id : ''),
         ) ||
-        nodes.some(
-          node =>
-            node.kind === 'instruction' &&
-            tierInstruction(plain(node.clause))?.shape !== node.shape,
-        ) ||
+        nodes.some(node => {
+          if (node.kind !== 'instruction') return false;
+          const parsed = tierInstruction(plain(node.clause));
+          return (
+            parsed?.shape !== node.shape || (parsed.subject === 'actor' && shape.kind !== 'single')
+          );
+        }) ||
+        // An after-damage remainder needs damage to follow.
+        (nodes[0]?.kind !== 'damage' && nodes.some(node => node.kind === 'unsupported')) ||
         nodes.some(
           (node, index) =>
             node.kind === 'condition' &&

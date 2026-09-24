@@ -43,7 +43,7 @@ Spec references:
 - `docs/rules-adaptation-principles.md#manual-play-is-a-supported-mode`
 
 Compendium (pinned `en/unified/md`): `rule/dice/ability-roll.md` (tier effects, printed order);
-`movement/forced-movement.md`; `resource/surge.md`.
+`movement/forced-movement.md`; `rule/resource/surge.md`.
 
 | Ability | Source | Tiers |
 | --- | --- | --- |
