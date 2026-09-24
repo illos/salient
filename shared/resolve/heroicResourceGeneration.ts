@@ -58,7 +58,9 @@ export interface GenerationProfile {
 
 const SHADOW_INSIGHT = 'vendor/steel-compendium/en/unified/md/feature/shadow/level-1/insight.md';
 
-/** Enabled classes. Each entry is added by its own class slice (V120 Shadow; V140–V149 the rest). */
+const TACTICIAN_FOCUS = 'vendor/steel-compendium/en/unified/md/feature/tactician/level-1/focus.md';
+
+/** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician; V141–V149 the rest). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
   {
     className: 'Shadow',
@@ -102,6 +104,62 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
         quote:
           'Additionally, the first time each combat round that you deal damage incorporating 1 or more surges, you gain 1 insight.',
         confirmation: 'Surge spending on damage is not recorded; the table confirms it.',
+      },
+    ],
+  },
+  {
+    className: 'Tactician',
+    // feature/tactician/level-7/heightened-focus.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'focus',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: TACTICIAN_FOCUS,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain focus equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'fixed',
+      amount: 2,
+      sourcePath: TACTICIAN_FOCUS,
+      quote: 'At the start of each of your turns during combat, you gain 2 focus.',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: TACTICIAN_FOCUS,
+      quote: 'You lose any remaining focus at the end of the encounter.',
+    },
+    triggers: [
+      {
+        id: 'tactician-marked-damage',
+        label: 'You or an ally damaged a creature you marked',
+        amount: 1,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 2,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/tactician/level-4/focus-on-their-weaknesses.md',
+            quote:
+              'The first time each combat round that you or any ally damages a target marked by you, you gain 2 focus instead of 1.',
+          },
+        ],
+        limit: 'round',
+        sourcePath: TACTICIAN_FOCUS,
+        quote:
+          'Additionally, the first time each combat round that you or any ally damages a creature marked by you (see Mark below), you gain 1 focus.',
+        confirmation:
+          'Marks are not tracked; the table confirms the damaged creature was marked by you.',
+      },
+      {
+        id: 'tactician-ally-heroic',
+        label: 'An ally within 10 squares used a heroic ability',
+        amount: 1,
+        limit: 'round',
+        sourcePath: TACTICIAN_FOCUS,
+        quote:
+          'The first time in a combat round that any ally within 10 squares of you uses a heroic ability, you gain 1 focus.',
+        confirmation: 'Distance is not tracked; the table confirms the ally was within 10 squares.',
       },
     ],
   },

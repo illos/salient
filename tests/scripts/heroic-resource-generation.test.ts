@@ -70,3 +70,28 @@ test('amounts follow later features and profiles stop at their verified level', 
   expect(claimWindow('turn', { round: 2 })).toBeNull();
   expect(claimWindow('round', { round: 2 })).toEqual({ round: 2 });
 });
+
+// feature/tactician/level-1/focus.md and level-4/focus-on-their-weaknesses.md ("you gain 2 focus
+// instead of 1"); level-7/heightened-focus.md changes the turn-start gain, so levels 1–6 are checked.
+test('the Tactician profile matches its source amounts', () => {
+  const tactician = GENERATION_PROFILES.find(p => p.className === 'Tactician')!;
+  expect(tactician).toMatchObject({
+    resource: 'focus',
+    verifiedThroughLevel: 6,
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'fixed', amount: 2 },
+    encounterEnd: { kind: 'lose' },
+  });
+  const [marked, ally] = tactician.triggers;
+  expect([marked!.id, marked!.limit, triggerAmount(marked!, 3).amount]).toEqual([
+    'tactician-marked-damage',
+    'round',
+    1,
+  ]);
+  expect(triggerAmount(marked!, 4).amount).toBe(2);
+  expect([ally!.id, ally!.limit, triggerAmount(ally!, 6).amount]).toEqual([
+    'tactician-ally-heroic',
+    'round',
+    1,
+  ]);
+});
