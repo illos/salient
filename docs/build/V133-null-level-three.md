@@ -62,3 +62,9 @@ shared API. Guided advancement remains deferred.
   (the table resolves damage, movement instructions and slowed), and Kinetic Shield's empty damage row
   reads as zero. Non-blocking closed: Stabilizing Field's ally potency wording; the tradition-change
   test proves the cold immunity is removed; unused cost maps dropped.
+- Test-support gate PASS at `187fa3f`: `CI=true pnpm check` rc0 in 268 s, engine 416/416, app+scripts
+  661/661, content 1751 entries at the pin, compiled report current. Test-Deploy isolated
+  `null-level-three` cohort rc0 in 37 s: six builds, level edits and sixteen new uses persisted,
+  including compiled readback, seed 1751; the only backend error was the deliberate peer owner refusal.
+  Artifacts `/srv/presidium/projects/salient/test-artifacts/V133-187fa3f`.
+- Ready for integration and cloud dev publication, reusing these results.

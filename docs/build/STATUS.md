@@ -133,4 +133,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V117 | [Censor levels two and three](V117-censor-level-three.md) | Merged (`2dcbf97`); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V132 | [Troubadour levels two and three](V132-troubadour-level-three.md) | Merged (`c3f9e35`); cloud dev published with content reseed; accepted TESTER results reused |
 | V120 | [Shared heroic-resource generation engine (Shadow first)](V120-heroic-resource-engine.md) | Merged (`f3acd97`); cloud dev published; accepted TESTER results reused |
-| V133 | [Null levels two and three](V133-null-level-three.md) | In progress |
+| V133 | [Null levels two and three](V133-null-level-three.md) | Ready for integration; full gate, isolated headless and independent review PASS |
