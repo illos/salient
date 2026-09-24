@@ -114,3 +114,18 @@ test('the Censor profile matches its source amounts', () => {
   expect(triggerAmount(censor.triggers[0]!, 6).amount).toBe(1);
   expect(triggerAmount(censor.triggers[1]!, 4).amount).toBe(2);
 });
+// feature/summoner/level-1/essence.md, level-4/essence-salvage.md ("2 essence instead of 1") and
+// level-7/font-of-creation.md (turn-start gain 3), so levels 1–6 are checked.
+test('the Summoner profile matches its source amounts', () => {
+  const summoner = GENERATION_PROFILES.find(p => p.className === 'Summoner')!;
+  expect(summoner).toMatchObject({
+    resource: 'essence',
+    verifiedThroughLevel: 6,
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'fixed', amount: 2 },
+    encounterEnd: { kind: 'lose' },
+    triggers: [{ id: 'summoner-minion-death', limit: 'round' }],
+  });
+  expect(triggerAmount(summoner.triggers[0]!, 3).amount).toBe(1);
+  expect(triggerAmount(summoner.triggers[0]!, 4).amount).toBe(2);
+});

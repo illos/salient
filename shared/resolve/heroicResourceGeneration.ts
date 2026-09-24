@@ -62,6 +62,9 @@ const TACTICIAN_FOCUS = 'vendor/steel-compendium/en/unified/md/feature/tactician
 
 const CENSOR_WRATH = 'vendor/steel-compendium/en/unified/md/feature/censor/level-1/wrath.md';
 
+const SUMMONER_ESSENCE =
+  'vendor/steel-compendium/en/unified/md/feature/summoner/level-1/essence.md';
+
 /** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
   {
@@ -220,6 +223,52 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
           'The first time each combat round that you deal damage to a creature judged by you, you gain 1 wrath.',
         confirmation:
           'Judgment is not tracked; the table confirms the creature you damaged is judged by you.',
+      },
+    ],
+  },
+  {
+    className: 'Summoner',
+    // feature/summoner/level-7/font-of-creation.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'essence',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: SUMMONER_ESSENCE,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain essence equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'fixed',
+      amount: 2,
+      sourcePath: SUMMONER_ESSENCE,
+      quote: 'At the start of each of your turns during combat, you gain 2 essence.',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: SUMMONER_ESSENCE,
+      quote: 'You lose any remaining essence at the end of the encounter.',
+    },
+    triggers: [
+      {
+        id: 'summoner-minion-death',
+        label: 'A minion died unwillingly within your Summoner’s Range',
+        amount: 1,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 2,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/summoner/level-4/essence-salvage.md',
+            quote:
+              "The first time each combat round that any minion unwillingly dies within your Summoner's Range, you gain 2 essence instead of 1.",
+          },
+        ],
+        limit: 'round',
+        sourcePath: SUMMONER_ESSENCE,
+        quote:
+          "The first time each round that any minion (either yours or an enemy) dies unwillingly within your Summoner's Range, you gain 1 essence.",
+        confirmation:
+          'Your minions and positions are not tracked; the table confirms an unwilling death in range. Sacrifices, and deaths from abilities that say you gain no essence from them (Explosive Parade, Cavalry Call, Essence Funnel), do not count.',
       },
     ],
   },

@@ -138,3 +138,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V135 | [Elementalist levels two and three](V135-elementalist-level-three.md) | Merged (`7646954`, train 1); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Merged (`7646954`, train 1); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | Merged (`7646954`, train 1); cloud dev published with content reseed; combined gate and headless PASS at tip |
+| V141 | [Summoner essence generation](V141-summoner-essence-generation.md) | In testing; independent review PASS |

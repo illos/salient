@@ -92,3 +92,13 @@ I only read files. I edited nothing and ran nothing. All paths below are relativ
 The Summoner's own minions not being app actors is what stops the level-1 death trigger from being fully automated. Until they are modelled, with positions or a Summoner's Range check, it has to stay a confirmed or manual grant. The per-round cap has to cover both the automatic prompt and the manual claim so the Essence is never added twice. That fits `docs/pre-alpha-design-gaps.md` L44–55: no invented grants, and manual adjustments kept separate from automated ones.
 
 **Salient code today:** there is no Essence generation. It has only cost plumbing: the `essence` resource in `shared/content/classes/summoner/level-one.ts` L41–45, abilities marked "Essence payment is automatic unless waived outside combat" in `shared/content/classes/summoner/abilities.ts`, and cost parsing in `shared/evaluate/character.ts` L143–158 and `shared/evaluate/summonerAbilities.ts`. The Salient files I read are in the main checkout at `/srv/presidium/projects/salient/code/` (main at 635113a).
+
+## Levels 4–6 (V141 review, 2026-09-24)
+
+Every Summoner feature, ability and circle feature at levels 4–6 was checked against the pinned
+source. Only `feature/summoner/level-4/essence-salvage.md` changes essence generation: the minion
+death gives "2 essence instead of 1". The next change is at level 7
+(`level-7/font-of-creation.md`, turn-start gain 3).
+
+Ambiguity 6.4, the turn-start gain while dying, is resolved on the source: `rule/health/dying.md`,
+"While you are dying, you can still act". The gain applies.
