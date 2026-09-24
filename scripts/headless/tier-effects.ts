@@ -94,7 +94,8 @@ export async function runTierEffects({ actors: { director }, run, runId }: Scena
     const netSelections = witness('kit-ranger');
     netSelections['kit.choice'] = 'Retiarius';
     const netter = await admit('Retiarius', netSelections);
-    const vukenSelections = witness('kit-ranger');
+    // Vuken is a stormwight kit (feature/fury/level-1/beast-shape.md): use the Stormwight witness.
+    const vukenSelections = witness('kit-raden');
     vukenSelections['kit.choice'] = 'Vuken';
     const vuken = await admit('Vuken', vukenSelections);
     // Target: the V109 Elementalist array with A-1 (fixed R2; M2, I2, P-1), below every
