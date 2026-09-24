@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b`.
 
-Currently reachable compiled: 97; unchanged reachable compatibility: 1428; structurally supported but unavailable: 0.
+Currently reachable compiled: 97; unchanged reachable compatibility: 1438; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -290,6 +290,16 @@ Currently reachable compiled: 97; unchanged reachable compatibility: 1428; struc
 | Squad! Forward! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | "Strike Now!" | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | This Is What We Planned For | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Fog of War | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| I've Got Your Back | hero-standalone | manual | legacy-compatibility | manual-section |
+| No Dying on My Watch | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, action-type |
+| Squad! On Me! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Targets of Opportunity | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Try Me Instead | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Frontal Assault | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Hit 'Em Hard! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Rout | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Stay Strong and Focus! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Accelerate | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Again | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Awe | hero-standalone | manual | legacy-compatibility | manual-section |

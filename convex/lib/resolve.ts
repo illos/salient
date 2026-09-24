@@ -302,6 +302,8 @@ export function abilityFromEntry(
     '/feature/ability/fury/level-2/wrecking-ball.md',
     // Deals the Stormwight kit's primordial damage type, which the generic roll cannot carry.
     '/feature/ability/fury/level-2/visceral-roar.md',
+    // Self header: movement and swap come first, then a strike against another creature.
+    '/feature/ability/tactician/level-2/try-me-instead.md',
     // Upstage selects enemies passed during movement; never apply its roll to Self.
     '/feature/ability/troubadour/level-1/upstage.md',
     // Performance activation is not its optional end-round attack.

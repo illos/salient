@@ -3506,6 +3506,113 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.tactician.level-2/2nd-level-doctrine-ability",
+    "kind": "feature",
+    "name": "2nd-Level Doctrine Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/2nd-level-doctrine-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-2/2nd-level-doctrine-ability.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\nclass: tactician\nlevel: \"2\"\nname: 2nd-Level Doctrine Ability\nscc: mcdm.heroes.v1/feature.tactician.level-2/2nd-level-doctrine-ability\ntype: feature\n---\n\nYour [tactical doctrine](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine) grants your choice of one of two [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability).\n\n##### 2nd-Level Insurgent Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Mastermind Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Vanguard Ability\n\nChoose one of the following abilities.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-2/2nd-level-doctrine-feature",
+    "kind": "feature",
+    "name": "2nd-Level Doctrine Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/2nd-level-doctrine-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-2/2nd-level-doctrine-feature.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\nclass: tactician\nlevel: \"2\"\nname: 2nd-Level Doctrine Feature\nscc: mcdm.heroes.v1/feature.tactician.level-2/2nd-level-doctrine-feature\ntype: feature\n---\n\nYour [tactical doctrine](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine) grants you a feature, as shown on the 2nd-Level Doctrine Features table.\n\n###### 2nd-Level Doctrine Features Table\n\n| Doctrine                    | Feature              |\n|-----------------------------|----------------------|\n| Insurgent                   | [Infiltration Tactics](scc.v1:mcdm.heroes.v1/feature.tactician.level-2/infiltration-tactics) |\n| Mastermind                  | Goaded               |\n| Vanguard                    | [Melee Superiority](scc.v1:mcdm.heroes.v1/feature.tactician.level-2/melee-superiority)    |\n",
+    "structured": {
+      "class": "tactician",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-2/goaded",
+    "kind": "feature",
+    "name": "Goaded",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/goaded.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-2/goaded.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\nclass: tactician\nlevel: \"2\"\nname: Goaded\nscc: mcdm.heroes.v1/feature.tactician.level-2/goaded\nsubclass: mastermind\ntype: feature\n---\n\nYou have learned to leverage your marked foes' psychology and goad them into acting before they're tactically ready. Whenever a creature marked by you uses a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) that targets you or any ally within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to change one target of the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) to you or another ally within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect). The new target must be within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the ability and within [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) of the creature using it.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "2",
+      "subclass": "mastermind"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-2/infiltration-tactics",
+    "kind": "feature",
+    "name": "Infiltration Tactics",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/infiltration-tactics.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-2/infiltration-tactics.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\nclass: tactician\nlevel: \"2\"\nname: Infiltration Tactics\nscc: mcdm.heroes.v1/feature.tactician.level-2/infiltration-tactics\nsubclass: insurgent\ntype: feature\n---\n\nYou have trained your squad to work together, stay silent, and wait for the opportune time to strike. Whenever you or any ally within 10 squares of you becomes hidden, that creature gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n",
+    "structured": {
+      "class": "tactician",
+      "level": "2",
+      "subclass": "insurgent"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-2/melee-superiority",
+    "kind": "feature",
+    "name": "Melee Superiority",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/melee-superiority.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-2/melee-superiority.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\nclass: tactician\nlevel: \"2\"\nname: Melee Superiority\nscc: mcdm.heroes.v1/feature.tactician.level-2/melee-superiority\nsubclass: vanguard\ntype: feature\n---\n\nAfter constant drills, you can more accurately anticipate an enemy's plan and thwart their attempts to move across the battlefield. Whenever you make an [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack), the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced to 0 until the end of the current [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\n**Mark Benefit:** When a creature marked by you attempts to move or [shift](scc.v1:mcdm.heroes.v1/movement/shifting) within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) and spend 2 focus to make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against that creature.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "2",
+      "subclass": "vanguard"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-2/perk.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\nclass: tactician\nlevel: \"2\"\nname: Perk\nscc: mcdm.heroes.v1/feature.tactician.level-2/perk\ntype: feature\n---\n\nYou gain one exploration, interpersonal, or intrigue perk of your choice. See Chapter 7: [Perks](scc.v1:mcdm.heroes.v1/chapter/perks).\n",
+    "structured": {
+      "class": "tactician",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-3/7-focus-ability",
+    "kind": "feature",
+    "name": "7-Focus Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-3/7-focus-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-3/7-focus-ability.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\nclass: tactician\nlevel: \"3\"\nname: 7-Focus Ability\nscc: mcdm.heroes.v1/feature.tactician.level-3/7-focus-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 focus to use.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-3/out-of-position",
+    "kind": "feature",
+    "name": "Out of Position",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-3/out-of-position.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-3/out-of-position.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\nclass: tactician\nlevel: \"3\"\nname: Out of Position\nscc: mcdm.heroes.v1/feature.tactician.level-3/out-of-position\ntype: feature\n---\n\nEven before battle begins, your enemies struggle to keep up with your tactics. At the start of an encounter, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to use your Mark ability against one enemy you have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to, even if you are [surprised](scc.v1:mcdm.heroes.v1/rule.combat/surprised). You can then [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the marked target up to 3 squares, ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). The target can't be moved in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.talent.level-1/1st-level-tradition-features",
     "kind": "feature",
     "name": "1st-Level Tradition Features",

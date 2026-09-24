@@ -116,15 +116,15 @@ export function applyClassProfile(ctx: DerivationContext, out: PartialBaseline) 
         })),
       ]);
     }
-    for (const level of [2, 3, 4, 5, 6]) {
-      const growth = ctx.decisions.get(`class.shadow.level-${level}.stamina`);
-      if (out.staminaMaximum && growth && ctx.available.has(growth.id)) {
-        out.staminaMaximum.value += 6;
+    // Each level's automatic growth decision quotes the class Basics line, e.g. "...Levels: 6".
+    const prefix = id.replace(/\.baseline$/, '');
+    for (let level = 2; level <= 10; level++) {
+      const growth = ctx.decisions.get(`${prefix}.level-${level}.stamina`);
+      const amount = Number(/: (\d+)$/.exec(growth?.quote ?? '')?.[1]);
+      if (out.staminaMaximum && growth && amount && ctx.available.has(growth.id)) {
+        out.staminaMaximum.value += amount;
         out.staminaMaximum.provenance.push(
-          sourced(growth.id, growth.source, growth.quote, {
-            operation: 'add',
-            amount: 6,
-          }),
+          sourced(growth.id, growth.source, growth.quote, { operation: 'add', amount }),
         );
       }
     }

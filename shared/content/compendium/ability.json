@@ -7832,6 +7832,320 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war",
+    "kind": "ability",
+    "name": "Fog of War",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-2/fog-of-war.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 5 Focus\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.\n      name: Effect\n    - effect: Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.\n      name: Mark Benefit\nflavor: Your unorthodox strategy causes enemies to lash out in fear, heedless of who they might be attacking.\nkeywords:\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"2\"\nname: Fog of War\nscc: mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war\nsubclass: insurgent\ntarget: Two creatures\ntype: ability\n---\n\n\n*Your unorthodox strategy causes enemies to lash out in fear, heedless of who they might be attacking.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**       |         **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------|---------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10** | **🎯 Two creatures** |\n\n**Effect:** Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.\n\n**Mark Benefit:** Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "5 Focus",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "name": "Effect"
+        },
+        {
+          "effect": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "name": "Mark Benefit"
+        }
+      ],
+      "flavor": "Your unorthodox strategy causes enemies to lash out in fear, heedless of who they might be attacking.",
+      "keywords": [
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "2",
+      "subclass": "insurgent",
+      "target": "Two creatures"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
+    "kind": "ability",
+    "name": "I've Got Your Back",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-2/ive-got-your-back.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 5 Focus\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 5 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n      tier2: 9 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n      tier3: 12 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n    - effect: One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n      name: Effect\nflavor: Your enemy will think twice about attacking your friend.\nkeywords:\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: I've Got Your Back\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back\nsubclass: mastermind\ntarget: One creature\ntier1: 5 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\ntier2: 9 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\ntier3: 12 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\ntype: ability\n---\n\n\n*Your enemy will think twice about attacking your friend.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 5 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n- **12-16:** 9 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n- **17+:** 12 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n\n**Effect:** One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "5 Focus",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "5 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "tier2": "9 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "tier3": "12 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))"
+        },
+        {
+          "effect": "One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your enemy will think twice about attacking your friend.",
+      "keywords": [
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "subclass": "mastermind",
+      "target": "One creature",
+      "tier1": "5 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+      "tier2": "9 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+      "tier3": "12 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch",
+    "kind": "ability",
+    "name": "No Dying on My Watch",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-2/no-dying-on-my-watch.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: tactician\ncost: 5 Focus\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - effect: You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward the triggering ally, ending this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them or in the nearest square if you can't reach an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) square. The triggering ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) for each enemy you came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during the move. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target.\n      name: Effect\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\n      tier2: R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\n      tier3: R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\nflavor: You prioritize saving an ally over your own safety.\nkeywords:\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: No Dying on My Watch\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch\nsubclass: vanguard\nsubtype: triggered\ntarget: One enemy\ntier1: R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\ntier2: R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\ntier3: R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\ntrigger: The target deals damage to an ally.\ntype: ability\n---\n\n\n*You prioritize saving an ally over your own safety.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |    **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|----------------------------|-----------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**            | **🎯 One enemy** |\n\n**Trigger:** The target deals damage to an ally.\n\n**Effect:** You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward the triggering ally, ending this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them or in the nearest square if you can't reach an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) square. The triggering ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) for each enemy you came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during the move. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\n- **12-16:** R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\n- **17+:** R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "tactician",
+      "cost": "5 Focus",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "effect": "You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward the triggering ally, ending this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them or in the nearest square if you can't reach an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) square. The triggering ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) for each enemy you came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during the move. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+          "tier2": "R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+          "tier3": "R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)"
+        }
+      ],
+      "flavor": "You prioritize saving an ally over your own safety.",
+      "keywords": [
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "subclass": "vanguard",
+      "subtype": "triggered",
+      "target": "One enemy",
+      "tier1": "R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+      "tier2": "R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+      "tier3": "R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+      "trigger": "The target deals damage to an ally."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me",
+    "kind": "ability",
+    "name": "Squad! On Me!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-2/squad-on-me.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 5 Focus\ndistance: 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - effect: Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n      name: Effect\nflavor: Together we are invincible!\nkeywords:\n    - Area\nlevel: \"2\"\nname: Squad! On Me!\nscc: mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me\nsubclass: vanguard\ntarget: Self and each ally in the area\ntype: ability\n---\n\n\n*Together we are invincible!*\n\n| **Area**       |                          **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------|--------------------------------------:|\n| **📏 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)** | **🎯 Self and each ally in the area** |\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "5 Focus",
+      "distance": "1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "effect": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Together we are invincible!",
+      "keywords": [
+        "Area"
+      ],
+      "level": "2",
+      "subclass": "vanguard",
+      "target": "Self and each ally in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity",
+    "kind": "ability",
+    "name": "Targets of Opportunity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-2/targets-of-opportunity.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 5 Focus\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - effect: Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n      name: Effect\n    - effect: Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n      name: Mark Benefit\nflavor: You point out easy targets to your friends, allowing them to include more enemies in their attacks.\nkeywords:\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"2\"\nname: Targets of Opportunity\nscc: mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity\nsubclass: mastermind\ntarget: Two creatures\ntype: ability\n---\n\n\n*You point out easy targets to your friends, allowing them to include more enemies in their attacks.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**      |         **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|---------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5** | **🎯 Two creatures** |\n\n**Effect:** Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n\n**Mark Benefit:** Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "5 Focus",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "effect": "Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "name": "Effect"
+        },
+        {
+          "effect": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "name": "Mark Benefit"
+        }
+      ],
+      "flavor": "You point out easy targets to your friends, allowing them to include more enemies in their attacks.",
+      "keywords": [
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "2",
+      "subclass": "mastermind",
+      "target": "Two creatures"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead",
+    "kind": "ability",
+    "name": "Try Me Instead",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-2/try-me-instead.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 5 Focus\ndistance: Self; see below\neffects:\n    - effect: You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) directly toward an ally, ending [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and you can make the following weapon [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) with a [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 against a creature.\n      name: Effect\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 2 + R damage; R < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier2: 3 + R damage; R < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier3: 4 + R damage; R < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\nflavor: '\"Try picking on someone my [size](scc.v1:mcdm.heroes.v1/rule.character/size).\"'\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: Try Me Instead\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead\nsubclass: insurgent\ntarget: Self\ntier1: 2 + R damage; R < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier2: 3 + R damage; R < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier3: 4 + R damage; R < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntype: ability\n---\n\n\n*\"Try picking on someone my [size](scc.v1:mcdm.heroes.v1/rule.character/size).\"*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|----------------:|\n| **📏 Self; see below**    |     **🎯 Self** |\n\n**Effect:** You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) directly toward an ally, ending [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and you can make the following weapon [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) with a [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 against a creature.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 + R damage; R < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **12-16:** 3 + R damage; R < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **17+:** 4 + R damage; R < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "5 Focus",
+      "distance": "Self; see below",
+      "effects": [
+        {
+          "effect": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) directly toward an ally, ending [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and you can make the following weapon [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) with a [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 against a creature.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "2 + R damage; R < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier2": "3 + R damage; R < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier3": "4 + R damage; R < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+        }
+      ],
+      "flavor": "\"Try picking on someone my [size](scc.v1:mcdm.heroes.v1/rule.character/size).\"",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "subclass": "insurgent",
+      "target": "Self",
+      "tier1": "2 + R damage; R < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier2": "3 + R damage; R < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier3": "4 + R damage; R < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault",
+    "kind": "ability",
+    "name": "Frontal Assault",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-3/frontal-assault.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 7 Focus\ndistance: Self\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n      name: Effect\nflavor: The purpose of a charge is to break their morale and force a retreat.\nkeywords: []\nlevel: \"3\"\nname: Frontal Assault\nscc: mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault\ntarget: Self\ntype: ability\n---\n\n\n*The purpose of a charge is to break their morale and force a retreat.*\n\n| **-**       | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "7 Focus",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "The purpose of a charge is to break their morale and force a retreat.",
+      "keywords": [],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard",
+    "kind": "ability",
+    "name": "Hit 'Em Hard!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-3/hit-em-hard.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 7 Focus\ndistance: Self\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.\n      name: Effect\nflavor: Your allies see the advantages in attacking the targets you select.\nkeywords: []\nlevel: \"3\"\nname: Hit 'Em Hard!\nscc: mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard\ntarget: Self\ntype: ability\n---\n\n\n*Your allies see the advantages in attacking the targets you select.*\n\n| **-**       | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "7 Focus",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your allies see the advantages in attacking the targets you select.",
+      "keywords": [],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout",
+    "kind": "ability",
+    "name": "Rout",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/rout.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-3/rout.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 7 Focus\ndistance: Self\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).\n      name: Effect\nflavor: The tide begins to [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\nkeywords: []\nlevel: \"3\"\nname: Rout\nscc: mcdm.heroes.v1/feature.ability.tactician.level-3/rout\ntarget: Self\ntype: ability\n---\n\n\n*The tide begins to [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).*\n\n| **-**       | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "7 Focus",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "The tide begins to [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+      "keywords": [],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus",
+    "kind": "ability",
+    "name": "Stay Strong and Focus!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/tactician/level-3/stay-strong-and-focus.json",
+    "selection": "tactician-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: tactician\ncost: 7 Focus\ndistance: Self\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n      name: Effect\nflavor: '\"We can do this! Keep faith and hold fast!\"'\nkeywords: []\nlevel: \"3\"\nname: Stay Strong and Focus!\nscc: mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus\ntarget: Self\ntype: ability\n---\n\n\n*\"We can do this! Keep faith and hold fast!\"*\n\n| **-**       | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "tactician",
+      "cost": "7 Focus",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "\"We can do this! Keep faith and hold fast!\"",
+      "keywords": [],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.talent.level-1/accelerate",
     "kind": "ability",
     "name": "Accelerate",

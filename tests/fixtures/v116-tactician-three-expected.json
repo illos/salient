@@ -1,0 +1,1619 @@
+{
+  "schemaVersion": "v116-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "derivation": {
+    "method": "Authored from the pinned Steel Compendium only (verified pin fb83a789 via git ls-tree). Level-one baselines copied from tests/fixtures/v94-tactician-expected.json (reviewed). No evaluator, content, convex or headless code read or run.",
+    "staminaMaximum": "Tactician Basics: 21 at 1st level + 9 per level after 1st; kit Stamina bonus x echelon; levels 1-3 are echelon 1 (rule/general/echelon.md). Field Arsenal overlapping Stamina is the single chosen value (unchanged from level one).",
+    "recoveryValue": "floor(Stamina maximum / 3) (rule/health/recoveries.md; rule/general/always-round-down.md)",
+    "windedValue": "floor(Stamina maximum / 2) (rule/health/winded.md)",
+    "recoveriesMaximum": "Tactician Basics: 10; no level-2/3 feature changes it.",
+    "noNumericSheetChange": "EXPLICIT: no level-2 or level-3 Tactician feature (Perk, Infiltration Tactics, Goaded, Melee Superiority, Out of Position), no doctrine ability, no 7-focus ability and none of the selected perks changes any numeric sheet value (recoveries, speed, stability, disengage, characteristics, potency, size). The only numeric changes are Stamina maximum (+9 per level) and the recovery/winded values derived from it. Characteristic Increase first appears at 4th level.",
+    "abilityCounts": "Advancement table: level 2 adds one 5-focus doctrine ability (Abilities column stays 3, 5); level 3 adds one 7-focus ability (Abilities 3, 5, 7).",
+    "abilityDamage": "\"X + R damage\" adds the Reason score (rule/dice/ability-roll.md Characteristics and Damage); kit damage bonus added per chapter/kits.md Damage Bonuses and Field Arsenal overlap choice; all witnesses have Reason 2.",
+    "potency": "Tactician potency weak R-2 / average R-1 / strong R = 0/1/2 with Reason 2 (class/tactician.md; rule/character/potency.md)."
+  },
+  "sources": [
+    {
+      "path": "en/unified/md/class/tactician.md",
+      "sha256": "6e6147d6fd65972a6b3ac7c8b635ed94799df4b61eaf50a838665cabf6b999aa"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-2/perk.md",
+      "sha256": "53993043c39dd6329423ac6996d56237e975c6a7ce0981a614999fa80d7d4e5a"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-2/2nd-level-doctrine-feature.md",
+      "sha256": "bd0f6b2161e6cd0c963b06bfa018c79283cc47620b79e822f8ea8815c1be3e43"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-2/2nd-level-doctrine-ability.md",
+      "sha256": "9ebd70b58dfc5b306c7d2ae535731206e649f3a5ac640af2531c164c5bf60ec7"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-2/goaded.md",
+      "sha256": "5065b7fa3cfd0e954004208a081149184f1290f03cab2162003b311144e42a21"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-2/infiltration-tactics.md",
+      "sha256": "aeb7aa50f59382a15e69c6e8251d3927646f6f89b12bf79adc9d05bd5d2ad748"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-2/melee-superiority.md",
+      "sha256": "42aba8ba6cf93406a05cd20d5410010e52d3614fa8ce149797de91341328c065"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-3/out-of-position.md",
+      "sha256": "91b9f636b9202c62ced90cdae104bcbb31b0b1768d9c02e1c862aee219055297"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-3/7-focus-ability.md",
+      "sha256": "ec5c432f26ecbf32416e438f10ed17b12695cdd8f9eaa5eb6ec579be75680529"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+      "sha256": "22a778cf209615ec30d536b5e4eea27ed76f7516fc96cc948ea411688ca6b333"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+      "sha256": "07c25b563de1876438299e843d43d9ca70a1756eb97c89f31b3145cc2b729105"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+      "sha256": "3961e9e6af1469ead8d3866bbd494ab8d5b2f89a87d5047627e19cdff7ef124b"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+      "sha256": "5405631dc7ec8e5155081428ce869fd7802a63d35a6f70a2e0aa55904a641136"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+      "sha256": "015fb68eaafa1896c89e3cd770148d3132bb5076851890cfe6ec8bf2a84fb7a7"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+      "sha256": "63bccee6958abc0e42bdc4ec6a48a80087339467673910f95ed28bb8a8f7e17a"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+      "sha256": "54c43faaee7b31933bda5c62bc0a8372bae036a82132799b98070d2c89a80c9b"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+      "sha256": "199a63c28d7758058aec12403293c9056c768dabb0aacbed564d4222428f227f"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+      "sha256": "3d05c34e536266c9b960028f5eb7f5fb0096cd88bd5c17334d9cec89a4aa72d9"
+    },
+    {
+      "path": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+      "sha256": "6f33120be1adefdb51ae186436cf061fcdfa88f717376719888a6f9c6eb2d54e"
+    },
+    {
+      "path": "en/unified/md/chapter/kits.md",
+      "sha256": "bc723dd87b9c660c589fb96f984b285b447eda457c468b89029fd11fec0d16ad"
+    },
+    {
+      "path": "en/unified/md/feature/tactician/level-1/field-arsenal.md",
+      "sha256": "474b482646bf1a0806968bbd864072f57a407d9f8180fe67f5a38476b521e6e4"
+    },
+    {
+      "path": "en/unified/md/rule/general/echelon.md",
+      "sha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3"
+    },
+    {
+      "path": "en/unified/md/rule/health/recoveries.md",
+      "sha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9"
+    },
+    {
+      "path": "en/unified/md/rule/health/winded.md",
+      "sha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee"
+    },
+    {
+      "path": "en/unified/md/rule/general/always-round-down.md",
+      "sha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783"
+    },
+    {
+      "path": "en/unified/md/rule/character/potency.md",
+      "sha256": "8c07c502b4576b369fbc6efba6da0327d84489b8f1343ee9dadf548b99a6c8d6"
+    },
+    {
+      "path": "en/unified/md/rule/dice/ability-roll.md",
+      "sha256": "4a2df993597d044400c3f46e8302b0ea21d2540f833834392600fab2d7e188fd"
+    },
+    {
+      "path": "en/unified/md/condition/taunted.md",
+      "sha256": "13bc642a8e3ee937720f981e49a4dcc4c3587083ba0812f52147dce5c08ad698"
+    },
+    {
+      "path": "en/unified/md/condition/frightened.md",
+      "sha256": "e80d92486d4fd8e95bf10fed804d0fba722022011cfecd278a641ceb84c13756"
+    },
+    {
+      "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01"
+    },
+    {
+      "path": "tests/fixtures/v94-tactician-expected.json",
+      "role": "reviewed level-one baseline"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "doctrine-ability-grouping",
+      "passage": "en/unified/md/feature/tactician/level-2/2nd-level-doctrine-ability.md has empty \"2nd-Level Insurgent/Mastermind/Vanguard Ability\" sections.",
+      "resolution": "Grouping taken from en/books/heroes/clean/Draw Steel Heroes.md lines 13012-13106 (Insurgent: Fog of War, Try Me Instead; Mastermind: I've Got Your Back, Targets of Opportunity; Vanguard: No Dying on My Watch, Squad! On Me!). Unified ability front matter \"subclass\" agrees for all six.",
+      "alternatives": ["none needed; two sources agree"]
+    },
+    {
+      "id": "goaded-link",
+      "passage": "2nd-Level Doctrine Features Table lists Mastermind \"Goaded\" without a hyperlink (unified and book).",
+      "resolution": "feature/tactician/level-2/goaded.md (subclass: mastermind) is the feature; book line 12994 prints it under the table.",
+      "alternatives": ["none"]
+    },
+    {
+      "id": "hit-em-hard-recipient",
+      "passage": "hit-em-hard.md: \"whenever you or any ally deals damage to a target marked by you, that creature gains 2 surges, which they can use immediately.\"",
+      "resolution": "INTERPRETATION: \"that creature\" = the creature who dealt the damage (you or the ally); surges are a hero benefit and \"use immediately\" fits the attacker.",
+      "alternatives": [
+        "the marked target gains the surges (grammatically nearest noun, but contrary to intent of a tactician buff)"
+      ]
+    },
+    {
+      "id": "try-me-instead-shape",
+      "passage": "try-me-instead.md: target \"Self\", distance \"Self; see below\", keywords Melee, Strike, Weapon; Effect: \"you can make the following weapon strike with a distance of melee 1 against a creature.\"",
+      "resolution": "INTERPRETATION: the power roll resolves only the optional embedded strike against one creature at melee 1; kit melee damage bonus applies (ability has Melee and Weapon keywords and deals rolled damage per chapter/kits.md). Kit melee distance bonus would also extend melee 1 but is 0 for every eligible witness.",
+      "alternatives": [
+        "treat the strike as mandatory",
+        "treat target Self literally (no damage target) - rejected, contradicts Effect text"
+      ]
+    },
+    {
+      "id": "condition-source",
+      "passage": "I've Got Your Back tiers: taunted (EoT); Try Me Instead tiers: frightened (save ends) with no named source.",
+      "resolution": "INTERPRETATION: the source of the taunted / frightened condition is the ability user (the tactician). condition/taunted.md and condition/frightened.md require a source creature.",
+      "alternatives": ["source is the ally who was protected (not supported by text)"]
+    },
+    {
+      "id": "ndomw-kit-bonus",
+      "passage": "no-dying-on-my-watch.md has Ranged, Strike, Weapon keywords but no damage in any tier.",
+      "resolution": "No kit damage bonus (chapter/kits.md applies damage bonuses to damage-dealing abilities only). Ranged distance bonus would apply to Ranged 5 but both witness kits (Martial Artist, Mountain) have none.",
+      "alternatives": ["none"]
+    },
+    {
+      "id": "perk-duplicates",
+      "passage": "feature/tactician/level-2/perk.md and Heroes book # Perks do not state whether a perk already owned (e.g. Teamwork) may be taken again.",
+      "resolution": "Not resolved; witnesses avoid Teamwork. Teamwork is listed as eligible by group only.",
+      "alternatives": ["duplicates forbidden", "duplicates permitted with no extra benefit"]
+    },
+    {
+      "id": "fog-of-war-distance",
+      "passage": "fog-of-war.md keywords: Ranged only (no Weapon).",
+      "resolution": "chapter/kits.md Distance Bonus applies to Ranged AND Weapon abilities; Fog of War stays Ranged 10 even for v94-tactician-1 with Sniper +10.",
+      "alternatives": ["none"]
+    },
+    {
+      "id": "squad-on-me-stability",
+      "passage": "squad-on-me.md: bonus to stability equal to your Might score until the start of your next turn.",
+      "resolution": "Temporary combat effect; sheet stability unchanged (v94-tactician-3-alt stays 2).",
+      "alternatives": ["none"]
+    }
+  ],
+  "levelTwo": {
+    "sourceAdvancementTable": "en/unified/md/class/tactician.md (Tactician Advancement Table, row 2nd: Perk, Doctrine Feature, Doctrine Ability; Abilities 3, 5; Doctrine Abilities 5)",
+    "staminaGained": 9,
+    "staminaSource": "en/unified/md/class/tactician.md Basics: Stamina Gained at 2nd and Higher Levels: 9",
+    "commonFeatures": [
+      {
+        "name": "Perk",
+        "sourcePath": "en/unified/md/feature/tactician/level-2/perk.md",
+        "sourceSha256": "53993043c39dd6329423ac6996d56237e975c6a7ce0981a614999fa80d7d4e5a",
+        "choice": "one exploration, interpersonal, or intrigue perk"
+      },
+      {
+        "name": "2nd-Level Doctrine Feature",
+        "sourcePath": "en/unified/md/feature/tactician/level-2/2nd-level-doctrine-feature.md",
+        "sourceSha256": "bd0f6b2161e6cd0c963b06bfa018c79283cc47620b79e822f8ea8815c1be3e43"
+      },
+      {
+        "name": "2nd-Level Doctrine Ability",
+        "sourcePath": "en/unified/md/feature/tactician/level-2/2nd-level-doctrine-ability.md",
+        "sourceSha256": "9ebd70b58dfc5b306c7d2ae535731206e649f3a5ac640af2531c164c5bf60ec7",
+        "groupingSource": "en/books/heroes/clean/Draw Steel Heroes.md lines 13008-13106"
+      }
+    ],
+    "perkGroups": ["exploration", "interpersonal", "intrigue"],
+    "perkGroupsSource": "en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Exploration Perks 17353, Interpersonal Perks 17397, Intrigue Perks 17441",
+    "eligibleCorePerks": {
+      "exploration": [
+        {
+          "name": "Brawny",
+          "sourcePath": "en/unified/md/perk/brawny.md"
+        },
+        {
+          "name": "Camouflage Hunter",
+          "sourcePath": "en/unified/md/perk/camouflage-hunter.md"
+        },
+        {
+          "name": "Danger Sense",
+          "sourcePath": "en/unified/md/perk/danger-sense.md"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md"
+        },
+        {
+          "name": "Monster Whisperer",
+          "sourcePath": "en/unified/md/perk/monster-whisperer.md"
+        },
+        {
+          "name": "Put Your Back Into It!",
+          "sourcePath": "en/unified/md/perk/put-your-back-into-it.md"
+        },
+        {
+          "name": "Team Leader",
+          "sourcePath": "en/unified/md/perk/team-leader.md"
+        },
+        {
+          "name": "Teamwork",
+          "sourcePath": "en/unified/md/perk/teamwork.md"
+        },
+        {
+          "name": "Wood Wise",
+          "sourcePath": "en/unified/md/perk/wood-wise.md"
+        }
+      ],
+      "interpersonal": [
+        {
+          "name": "Charming Liar",
+          "sourcePath": "en/unified/md/perk/charming-liar.md"
+        },
+        {
+          "name": "Dazzler",
+          "sourcePath": "en/unified/md/perk/dazzler.md"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md"
+        },
+        {
+          "name": "Harmonizer",
+          "sourcePath": "en/unified/md/perk/harmonizer.md"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md"
+        },
+        {
+          "name": "Pardon My Friend",
+          "sourcePath": "en/unified/md/perk/pardon-my-friend.md"
+        },
+        {
+          "name": "Power Player",
+          "sourcePath": "en/unified/md/perk/power-player.md"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md"
+        },
+        {
+          "name": "Spot the Tell",
+          "sourcePath": "en/unified/md/perk/spot-the-tell.md"
+        }
+      ],
+      "intrigue": [
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md"
+        },
+        {
+          "name": "Lucky Dog",
+          "sourcePath": "en/unified/md/perk/lucky-dog.md"
+        },
+        {
+          "name": "Master of Disguise",
+          "sourcePath": "en/unified/md/perk/master-of-disguise.md"
+        },
+        {
+          "name": "Slipped Lead",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md"
+        }
+      ]
+    },
+    "eligibleCorePerkCount": 26,
+    "excludedPerkGroups": "crafting, lore, supernatural (not permitted by feature/tactician/level-2/perk.md). Unified perk/ also contains companion perks (Born Tracker, People Sense, Ride Along, Trained Thief, Voice of the Wild, Wild Rumpus, Wilds Explorer, You Can Pet Them, They're Friendly) that are not in the Heroes book perk chapter; they are not core eligible.",
+    "byDoctrine": {
+      "Insurgent": {
+        "automaticFeatures": [
+          {
+            "name": "Infiltration Tactics",
+            "sourcePath": "en/unified/md/feature/tactician/level-2/infiltration-tactics.md",
+            "sourceSha256": "aeb7aa50f59382a15e69c6e8251d3927646f6f89b12bf79adc9d05bd5d2ad748",
+            "summary": "You have trained your squad to work together, stay silent, and wait for the opportune time to strike. Whenever you or any ally within 10 squares of you becomes hidden, that creature gains 1 surge.",
+            "numericSheetEffect": null
+          }
+        ],
+        "doctrineAbilityOptions": [
+          {
+            "name": "Fog of War",
+            "printedCost": "5 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md"
+          },
+          {
+            "name": "Try Me Instead",
+            "printedCost": "5 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md"
+          }
+        ]
+      },
+      "Mastermind": {
+        "automaticFeatures": [
+          {
+            "name": "Goaded",
+            "sourcePath": "en/unified/md/feature/tactician/level-2/goaded.md",
+            "sourceSha256": "5065b7fa3cfd0e954004208a081149184f1290f03cab2162003b311144e42a21",
+            "summary": "You have learned to leverage your marked foes' psychology and goad them into acting before they're tactically ready. Whenever a creature marked by you uses a strike that targets you or any ally within your line of effect, you can use a free triggered action to change one target of the strike to you or another ally within your line of effect. The new target must be within distance of the ability and within line of effect of the creature using it.",
+            "numericSheetEffect": null
+          }
+        ],
+        "doctrineAbilityOptions": [
+          {
+            "name": "I've Got Your Back",
+            "printedCost": "5 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md"
+          },
+          {
+            "name": "Targets of Opportunity",
+            "printedCost": "5 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md"
+          }
+        ]
+      },
+      "Vanguard": {
+        "automaticFeatures": [
+          {
+            "name": "Melee Superiority",
+            "sourcePath": "en/unified/md/feature/tactician/level-2/melee-superiority.md",
+            "sourceSha256": "42aba8ba6cf93406a05cd20d5410010e52d3614fa8ce149797de91341328c065",
+            "summary": "After constant drills, you can more accurately anticipate an enemy's plan and thwart their attempts to move across the battlefield. Whenever you make an opportunity attack, the target's speed is reduced to 0 until the end of the current turn.\n\n**Mark Benefit:** When a creature marked by you attempts to move or shift within distance of your melee free strike, you can use a free triggered action and spend 2 focus to make a melee free strike against that creature.",
+            "numericSheetEffect": null
+          }
+        ],
+        "doctrineAbilityOptions": [
+          {
+            "name": "No Dying on My Watch",
+            "printedCost": "5 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md"
+          },
+          {
+            "name": "Squad! On Me!",
+            "printedCost": "5 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md"
+          }
+        ]
+      }
+    }
+  },
+  "levelThree": {
+    "sourceAdvancementTable": "en/unified/md/class/tactician.md (row 3rd: Out of Position, 7-Focus Ability; Abilities 3, 5, 7; Doctrine Abilities 5)",
+    "staminaGained": 9,
+    "automaticFeatures": [
+      {
+        "name": "Out of Position",
+        "sourcePath": "en/unified/md/feature/tactician/level-3/out-of-position.md",
+        "sourceSha256": "91b9f636b9202c62ced90cdae104bcbb31b0b1768d9c02e1c862aee219055297",
+        "summary": "Even before battle begins, your enemies struggle to keep up with your tactics. At the start of an encounter, you can use a free triggered action to use your Mark ability against one enemy you have line of effect to, even if you are surprised. You can then slide the marked target up to 3 squares, ignoring stability. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect.",
+        "numericSheetEffect": null
+      },
+      {
+        "name": "7-Focus Ability",
+        "sourcePath": "en/unified/md/feature/tactician/level-3/7-focus-ability.md",
+        "sourceSha256": "ec5c432f26ecbf32416e438f10ed17b12695cdd8f9eaa5eb6ec579be75680529"
+      }
+    ],
+    "byDoctrine": {
+      "Insurgent": {
+        "automaticFeatures": ["Out of Position", "7-Focus Ability"],
+        "ability7Options": [
+          {
+            "name": "Frontal Assault",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md"
+          },
+          {
+            "name": "Hit 'Em Hard!",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md"
+          },
+          {
+            "name": "Rout",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md"
+          },
+          {
+            "name": "Stay Strong and Focus!",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md"
+          }
+        ]
+      },
+      "Mastermind": {
+        "automaticFeatures": ["Out of Position", "7-Focus Ability"],
+        "ability7Options": [
+          {
+            "name": "Frontal Assault",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md"
+          },
+          {
+            "name": "Hit 'Em Hard!",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md"
+          },
+          {
+            "name": "Rout",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md"
+          },
+          {
+            "name": "Stay Strong and Focus!",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md"
+          }
+        ]
+      },
+      "Vanguard": {
+        "automaticFeatures": ["Out of Position", "7-Focus Ability"],
+        "ability7Options": [
+          {
+            "name": "Frontal Assault",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md"
+          },
+          {
+            "name": "Hit 'Em Hard!",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md"
+          },
+          {
+            "name": "Rout",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md"
+          },
+          {
+            "name": "Stay Strong and Focus!",
+            "printedCost": "7 Focus",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md"
+          }
+        ]
+      }
+    },
+    "ability7OptionsAreDoctrineIndependent": true
+  },
+  "abilities": {
+    "Fog of War": {
+      "name": "Fog of War",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+      "sourceSha256": "22a778cf209615ec30d536b5e4eea27ed76f7516fc96cc948ea411688ca6b333",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13016 (2nd-Level Insurgent Ability)",
+      "level": 2,
+      "doctrine": "Insurgent",
+      "feature": "2nd-Level Doctrine Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Ranged"],
+      "distance": "Ranged 10",
+      "target": "Two creatures",
+      "cost": {
+        "resource": "focus",
+        "amount": 5,
+        "printed": "5 Focus"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "effectsPlain": [
+        "**Effect:** Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.",
+        "**Mark Benefit:** Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them."
+      ],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage and no Weapon keyword (chapter/kits.md Damage Bonuses: melee bonus added to rolled damage of damage-dealing abilities with both Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords.)",
+      "kitDistanceBonusApplies": false,
+      "kitDistanceReason": "Keywords are Ranged only (no Weapon), so chapter/kits.md Distance Bonus does not apply; v94-tactician-1 Sniper +10 ranged distance does NOT extend Fog of War; distance stays Ranged 10.",
+      "resolvedDistanceByWitness": {
+        "v94-tactician-1": "Ranged 10",
+        "v94-tactician-4": "Ranged 10"
+      },
+      "manualClauses": [
+        "Each target is marked by you (two creatures) and must immediately make a free strike against a creature of your choice within 5 squares of them.",
+        "Mark Benefit (until end of encounter): whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them."
+      ]
+    },
+    "Try Me Instead": {
+      "name": "Try Me Instead",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+      "sourceSha256": "07c25b563de1876438299e843d43d9ca70a1756eb97c89f31b3145cc2b729105",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13028 (2nd-Level Insurgent Ability)",
+      "level": 2,
+      "doctrine": "Insurgent",
+      "feature": "2nd-Level Doctrine Ability",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Strike", "Weapon"],
+      "distance": "Self; see below",
+      "target": "Self",
+      "cost": {
+        "resource": "focus",
+        "amount": 5,
+        "printed": "5 Focus"
+      },
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "2 + R damage; R < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+        "tier2": "3 + R damage; R < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+        "tier3": "4 + R damage; R < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "2 + R damage; R < WEAK, frightened (save ends)",
+        "tier2": "3 + R damage; R < AVERAGE, frightened (save ends)",
+        "tier3": "4 + R damage; R < STRONG, frightened (save ends)"
+      },
+      "effectsPlain": [
+        "**Effect:** You shift up to your speed directly toward an ally, ending adjacent to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a Recovery, and you can make the following weapon strike with a distance of melee 1 against a creature."
+      ],
+      "dealsDamage": true,
+      "kitDamageBonusApplies": "melee",
+      "kitDamageBonusReason": "Keywords Melee, Strike, Weapon and deals rolled damage -> kit melee damage bonus applies (chapter/kits.md Damage Bonuses: melee bonus added to rolled damage of damage-dealing abilities with both Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords.)",
+      "kitDistanceBonusApplies": "melee (moot: every eligible witness has melee distance bonus 0)",
+      "resolvedDistanceByWitness": {
+        "v94-tactician-1": "Self; strike at melee 1",
+        "v94-tactician-4": "Self; strike at melee 1"
+      },
+      "damageByWitness": [
+        {
+          "witness": "v94-tactician-1",
+          "reason": 2,
+          "printedConstants": [2, 3, 4],
+          "kitBonusKind": "meleeDamage",
+          "kitBonusApplied": [2, 2, 2],
+          "whichKit": "Only Shining Armor grants a meleeDamage bonus ([2, 2, 2]); no Field Arsenal choice needed.",
+          "tiers": [6, 7, 8],
+          "formula": "[2,3,4] + R2 + kit [2, 2, 2] = [6, 7, 8]"
+        },
+        {
+          "witness": "v94-tactician-4",
+          "reason": 2,
+          "printedConstants": [2, 3, 4],
+          "kitBonusKind": "meleeDamage",
+          "kitBonusApplied": [2, 2, 2],
+          "whichKit": "Both kits grant an equal meleeDamage bonus [2, 2, 2]; either choice yields the same tuple.",
+          "tiers": [6, 7, 8],
+          "formula": "[2,3,4] + R2 + kit [2, 2, 2] = [6, 7, 8]"
+        }
+      ],
+      "potencyByWitness": {
+        "v94-tactician-1": {
+          "tier1": "R < 0",
+          "tier2": "R < 1",
+          "tier3": "R < 2"
+        },
+        "v94-tactician-4": {
+          "tier1": "R < 0",
+          "tier2": "R < 1",
+          "tier3": "R < 2"
+        }
+      },
+      "manualClauses": [
+        "Shift up to your speed directly toward an ally, ending adjacent, then swap locations with that ally if each fits the other's space.",
+        "The ally can spend a Recovery.",
+        "You can make the weapon strike (melee 1) against a creature; the power roll and damage apply only to that strike.",
+        "Frightened (save ends) potency clause per tier; source of fear is you (interpretation, see uncertainties)."
+      ]
+    },
+    "I've Got Your Back": {
+      "name": "I've Got Your Back",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+      "sourceSha256": "3961e9e6af1469ead8d3866bbd494ab8d5b2f89a87d5047627e19cdff7ef124b",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13048 (2nd-Level Mastermind Ability)",
+      "level": 2,
+      "doctrine": "Mastermind",
+      "feature": "2nd-Level Doctrine Ability",
+      "actionType": "Main action",
+      "keywords": ["Ranged", "Strike", "Weapon"],
+      "distance": "Ranged 5",
+      "target": "One creature",
+      "cost": {
+        "resource": "focus",
+        "amount": 5,
+        "printed": "5 Focus"
+      },
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "5 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+        "tier2": "9 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+        "tier3": "12 + R damage; [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))"
+      },
+      "tiersPlain": {
+        "tier1": "5 + R damage; taunted (EoT)",
+        "tier2": "9 + R damage; taunted (EoT)",
+        "tier3": "12 + R damage; taunted (EoT)"
+      },
+      "effectsPlain": ["**Effect:** One ally adjacent to the target can spend a Recovery."],
+      "dealsDamage": true,
+      "kitDamageBonusApplies": "ranged",
+      "kitDamageBonusReason": "Keywords Ranged, Strike, Weapon and deals rolled damage -> kit ranged damage bonus applies (chapter/kits.md Damage Bonuses: melee bonus added to rolled damage of damage-dealing abilities with both Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords.)",
+      "kitDistanceBonusApplies": "ranged",
+      "resolvedDistanceByWitness": {
+        "v94-tactician-2": "Ranged 5 (Martial Artist and Mountain have no ranged distance bonus)",
+        "v94-tactician-2-alt": "Ranged 5"
+      },
+      "damageByWitness": [
+        {
+          "witness": "v94-tactician-2",
+          "reason": 2,
+          "printedConstants": [5, 9, 12],
+          "kitBonusKind": "rangedDamage",
+          "kitBonusApplied": [0, 0, 0],
+          "whichKit": "Neither kit (Martial Artist / Mountain) grants a rangedDamage bonus; bonus +0/+0/+0.",
+          "tiers": [7, 11, 14],
+          "formula": "[5,9,12] + R2 + kit [0, 0, 0] = [7, 11, 14]"
+        },
+        {
+          "witness": "v94-tactician-2-alt",
+          "reason": 2,
+          "printedConstants": [5, 9, 12],
+          "kitBonusKind": "rangedDamage",
+          "kitBonusApplied": [0, 0, 0],
+          "whichKit": "Neither kit (Martial Artist / Mountain) grants a rangedDamage bonus; bonus +0/+0/+0.",
+          "tiers": [7, 11, 14],
+          "formula": "[5,9,12] + R2 + kit [0, 0, 0] = [7, 11, 14]",
+          "note": "v94-tactician-2-alt does not select this ability; value shown only as the Mastermind alternative."
+        }
+      ],
+      "manualClauses": [
+        "Taunted (EoT) on every tier; the taunting creature is the user (interpretation).",
+        "Effect: one ally adjacent to the target can spend a Recovery."
+      ]
+    },
+    "Targets of Opportunity": {
+      "name": "Targets of Opportunity",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+      "sourceSha256": "5405631dc7ec8e5155081428ce869fd7802a63d35a6f70a2e0aa55904a641136",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13064 (2nd-Level Mastermind Ability)",
+      "level": 2,
+      "doctrine": "Mastermind",
+      "feature": "2nd-Level Doctrine Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Ranged"],
+      "distance": "Ranged 5",
+      "target": "Two creatures",
+      "cost": {
+        "resource": "focus",
+        "amount": 5,
+        "printed": "5 Focus"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "effectsPlain": [
+        "**Effect:** Each target is marked by you, and you gain two surges.",
+        "**Mark Benefit:** Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike."
+      ],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage and no Weapon keyword.",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v94-tactician-2-alt": "Ranged 5",
+        "v94-tactician-2": "Ranged 5"
+      },
+      "manualClauses": [
+        "Each target (two creatures) is marked by you, and you gain two surges.",
+        "Mark Benefit (until end of encounter): whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike."
+      ]
+    },
+    "No Dying on My Watch": {
+      "name": "No Dying on My Watch",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+      "sourceSha256": "015fb68eaafa1896c89e3cd770148d3132bb5076851890cfe6ec8bf2a84fb7a7",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13080 (2nd-Level Vanguard Ability)",
+      "level": 2,
+      "doctrine": "Vanguard",
+      "feature": "2nd-Level Doctrine Ability",
+      "actionType": "Triggered",
+      "keywords": ["Ranged", "Strike", "Weapon"],
+      "distance": "Ranged 5",
+      "target": "One enemy",
+      "cost": {
+        "resource": "focus",
+        "amount": 5,
+        "printed": "5 Focus"
+      },
+      "trigger": "The target deals damage to an ally.",
+      "rollCharacteristic": "Might",
+      "tiersVerbatim": {
+        "tier1": "R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+        "tier2": "R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+        "tier3": "R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "R < WEAK, the target is frightened of the triggering ally (save ends)",
+        "tier2": "R < AVERAGE, the target is frightened of the triggering ally (save ends)",
+        "tier3": "R < STRONG, the target is frightened of the triggering ally (save ends)"
+      },
+      "effectsPlain": [
+        "**Trigger:** The target deals damage to an ally.",
+        "**Effect:** You move up to your speed toward the triggering ally, ending this movement adjacent to them or in the nearest square if you can't reach an adjacent square. The triggering ally can spend a Recovery and gains 5 temporary Stamina for each enemy you came adjacent to during the move. You then make a power roll against the target."
+      ],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "Has Ranged and Weapon keywords but no tier deals damage; kit damage bonuses apply only to damage-dealing abilities.",
+      "kitDistanceBonusApplies": "ranged (moot: Martial Artist and Mountain have no ranged distance bonus)",
+      "resolvedDistanceByWitness": {
+        "v94-tactician-3": "Ranged 5",
+        "v94-tactician-3-alt": "Ranged 5"
+      },
+      "potencyByWitness": {
+        "v94-tactician-3": {
+          "tier1": "R < 0",
+          "tier2": "R < 1",
+          "tier3": "R < 2"
+        },
+        "v94-tactician-3-alt": {
+          "tier1": "R < 0",
+          "tier2": "R < 1",
+          "tier3": "R < 2"
+        }
+      },
+      "rollBonus": {
+        "v94-tactician-3": "Might 2",
+        "v94-tactician-3-alt": "Might 2"
+      },
+      "manualClauses": [
+        "Trigger: the target deals damage to an ally.",
+        "You move up to your speed (8 for the v94-tactician-3 witnesses) toward the triggering ally, ending adjacent or in the nearest square.",
+        "The triggering ally can spend a Recovery and gains 5 temporary Stamina for each enemy you came adjacent to during the move.",
+        "Then power roll + Might against the target; frightened of the triggering ally (save ends) on potency R < WEAK/AVERAGE/STRONG."
+      ]
+    },
+    "Squad! On Me!": {
+      "name": "Squad! On Me!",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+      "sourceSha256": "63bccee6958abc0e42bdc4ec6a48a80087339467673910f95ed28bb8a8f7e17a",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13098 (2nd-Level Vanguard Ability)",
+      "level": 2,
+      "doctrine": "Vanguard",
+      "feature": "2nd-Level Doctrine Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area"],
+      "distance": "1 burst",
+      "target": "Self and each ally in the area",
+      "cost": {
+        "resource": "focus",
+        "amount": 5,
+        "printed": "5 Focus"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "effectsPlain": [
+        "**Effect:** Until the start of your next turn, each target has a bonus to stability equal to your Might score. Additionally, each target gains 2 surges."
+      ],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "Area, no Weapon keyword, no damage.",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v94-tactician-3-alt": "1 burst"
+      },
+      "temporaryEffects": {
+        "v94-tactician-3-alt": {
+          "stabilityBonusToEachTarget": 2,
+          "basis": "Might 2",
+          "duration": "until the start of your next turn",
+          "surgesPerTarget": 2
+        }
+      },
+      "manualClauses": [
+        "Until the start of your next turn each target (self and each ally in the 1 burst) has a stability bonus equal to your Might score (2 for v94-tactician-3-alt); this is a temporary effect and does NOT change the sheet stability value.",
+        "Each target gains 2 surges."
+      ]
+    },
+    "Frontal Assault": {
+      "name": "Frontal Assault",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+      "sourceSha256": "54c43faaee7b31933bda5c62bc0a8372bae036a82132799b98070d2c89a80c9b",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13120 (7-Focus Ability)",
+      "level": 3,
+      "doctrine": null,
+      "feature": "7-Focus Ability",
+      "actionType": "Maneuver",
+      "keywords": [],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "focus",
+        "amount": 7,
+        "printed": "7 Focus"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, the first time on a turn that you or any ally deals damage to a target marked by you, the creature who dealt the damage can push the target up to 2 squares and then shift up to 2 squares. Additionally, any ally using the Charge main action to target a creature marked by you can use a melee strike signature ability or a melee strike heroic ability instead of a melee free strike."
+      ],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No keywords, no damage.",
+      "kitDistanceBonusApplies": false,
+      "manualClauses": [
+        "Duration: until end of encounter or until you are dying.",
+        "First time on a turn that you or any ally deals damage to a target marked by you, the creature who dealt the damage can push the target up to 2 squares and then shift up to 2 squares.",
+        "Any ally using Charge to target a creature marked by you can use a melee strike signature ability or melee strike heroic ability instead of a melee free strike."
+      ]
+    },
+    "Hit 'Em Hard!": {
+      "name": "Hit 'Em Hard!",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+      "sourceSha256": "199a63c28d7758058aec12403293c9056c768dabb0aacbed564d4222428f227f",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13130 (7-Focus Ability)",
+      "level": 3,
+      "doctrine": null,
+      "feature": "7-Focus Ability",
+      "actionType": "Maneuver",
+      "keywords": [],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "focus",
+        "amount": 7,
+        "printed": "7 Focus"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, that creature gains 2 surges, which they can use immediately."
+      ],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No keywords, no damage.",
+      "kitDistanceBonusApplies": false,
+      "manualClauses": [
+        "Duration: until end of encounter or until you are dying.",
+        "Whenever you or any ally deals damage to a target marked by you, \"that creature\" gains 2 surges usable immediately (recipient read as the damage dealer; see uncertainties)."
+      ]
+    },
+    "Rout": {
+      "name": "Rout",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+      "sourceSha256": "3d05c34e536266c9b960028f5eb7f5fb0096cd88bd5c17334d9cec89a4aa72d9",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13140 (7-Focus Ability)",
+      "level": 3,
+      "doctrine": null,
+      "feature": "7-Focus Ability",
+      "actionType": "Maneuver",
+      "keywords": [],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "focus",
+        "amount": 7,
+        "printed": "7 Focus"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is frightened of the creature who dealt the damage (save ends)."
+      ],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No keywords, no damage.",
+      "kitDistanceBonusApplies": false,
+      "potencyByWitness": {
+        "v94-tactician-3": "R < 1 (average potency = Reason 2 - 1)",
+        "v94-tactician-3-alt": "R < 1 (average potency = Reason 2 - 1)",
+        "v94-tactician-2": "R < 1 (average potency = Reason 2 - 1)",
+        "v94-tactician-2-alt": "R < 1 (average potency = Reason 2 - 1)",
+        "v94-tactician-1": "R < 1 (average potency = Reason 2 - 1)",
+        "v94-tactician-4": "R < 1 (average potency = Reason 2 - 1)"
+      },
+      "manualClauses": [
+        "Duration: until end of encounter or until you are dying.",
+        "Whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is frightened of the creature who dealt the damage (save ends)."
+      ]
+    },
+    "Stay Strong and Focus!": {
+      "name": "Stay Strong and Focus!",
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+      "sourceSha256": "6f33120be1adefdb51ae186436cf061fcdfa88f717376719888a6f9c6eb2d54e",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 13150 (7-Focus Ability)",
+      "level": 3,
+      "doctrine": null,
+      "feature": "7-Focus Ability",
+      "actionType": "Maneuver",
+      "keywords": [],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "focus",
+        "amount": 7,
+        "printed": "7 Focus"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a Recovery."
+      ],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No keywords, no damage.",
+      "kitDistanceBonusApplies": false,
+      "manualClauses": [
+        "Duration: until end of encounter or until you are dying.",
+        "Whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a Recovery."
+      ]
+    }
+  },
+  "witnesses": {
+    "v94-tactician-1": {
+      "base": "v94-tactician-1",
+      "doctrine": "Insurgent",
+      "kits": ["Shining Armor", "Sniper"],
+      "levelOneBaseline": {
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Camouflage Hunter",
+          "doctrineAbility": "Fog of War"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Doctrine Feature",
+          "Infiltration Tactics",
+          "2nd-Level Doctrine Ability"
+        ],
+        "addedAbilities": ["Fog of War"],
+        "perks": ["Teamwork", "Camouflage Hunter"],
+        "perkType": "exploration",
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit 12 x echelon 1 = 42",
+          "recoveryValue": "floor(42/3) = 14",
+          "windedValue": "floor(42/2) = 21",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Frontal Assault"
+        },
+        "addedFeatures": ["Out of Position", "7-Focus Ability"],
+        "addedAbilities": ["Frontal Assault"],
+        "perks": ["Teamwork", "Camouflage Hunter"],
+        "cumulativeAddedAbilities": ["Fog of War", "Frontal Assault"],
+        "staminaMaximum": 51,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 17,
+        "windedValue": 25,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit 12 x echelon 1 = 51",
+          "recoveryValue": "floor(51/3) = 17",
+          "windedValue": "floor(51/2) = 25",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v94-tactician-2": {
+      "base": "v94-tactician-2",
+      "doctrine": "Mastermind",
+      "kits": ["Martial Artist", "Mountain"],
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Lie Detector",
+          "doctrineAbility": "I've Got Your Back"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Doctrine Feature",
+          "Goaded",
+          "2nd-Level Doctrine Ability"
+        ],
+        "addedAbilities": ["I've Got Your Back"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        },
+        "abilityDamage": {
+          "I've Got Your Back": {
+            "witness": "v94-tactician-2",
+            "reason": 2,
+            "printedConstants": [5, 9, 12],
+            "kitBonusKind": "rangedDamage",
+            "kitBonusApplied": [0, 0, 0],
+            "whichKit": "Neither kit (Martial Artist / Mountain) grants a rangedDamage bonus; bonus +0/+0/+0.",
+            "tiers": [7, 11, 14],
+            "formula": "[5,9,12] + R2 + kit [0, 0, 0] = [7, 11, 14]"
+          }
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Hit 'Em Hard!"
+        },
+        "addedFeatures": ["Out of Position", "7-Focus Ability"],
+        "addedAbilities": ["Hit 'Em Hard!"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "cumulativeAddedAbilities": ["I've Got Your Back", "Hit 'Em Hard!"],
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit 3 x echelon 1 = 42",
+          "recoveryValue": "floor(42/3) = 14",
+          "windedValue": "floor(42/2) = 21",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v94-tactician-3": {
+      "base": "v94-tactician-3",
+      "doctrine": "Vanguard",
+      "kits": ["Martial Artist", "Mountain"],
+      "levelOneBaseline": {
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Danger Sense",
+          "doctrineAbility": "No Dying on My Watch"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Doctrine Feature",
+          "Melee Superiority",
+          "2nd-Level Doctrine Ability"
+        ],
+        "addedAbilities": ["No Dying on My Watch"],
+        "perks": ["Teamwork", "Danger Sense"],
+        "perkType": "exploration",
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit 9 x echelon 1 = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Rout"
+        },
+        "addedFeatures": ["Out of Position", "7-Focus Ability"],
+        "addedAbilities": ["Rout"],
+        "perks": ["Teamwork", "Danger Sense"],
+        "cumulativeAddedAbilities": ["No Dying on My Watch", "Rout"],
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit 9 x echelon 1 = 48",
+          "recoveryValue": "floor(48/3) = 16",
+          "windedValue": "floor(48/2) = 24",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v94-tactician-4": {
+      "base": "v94-tactician-4",
+      "doctrine": "Insurgent",
+      "kits": ["Martial Artist", "Swashbuckler"],
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Master of Disguise",
+          "doctrineAbility": "Try Me Instead"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Doctrine Feature",
+          "Infiltration Tactics",
+          "2nd-Level Doctrine Ability"
+        ],
+        "addedAbilities": ["Try Me Instead"],
+        "perks": ["Teamwork", "Master of Disguise"],
+        "perkType": "intrigue",
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        },
+        "abilityDamage": {
+          "Try Me Instead": {
+            "witness": "v94-tactician-4",
+            "reason": 2,
+            "printedConstants": [2, 3, 4],
+            "kitBonusKind": "meleeDamage",
+            "kitBonusApplied": [2, 2, 2],
+            "whichKit": "Both kits grant an equal meleeDamage bonus [2, 2, 2]; either choice yields the same tuple.",
+            "tiers": [6, 7, 8],
+            "formula": "[2,3,4] + R2 + kit [2, 2, 2] = [6, 7, 8]"
+          }
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Stay Strong and Focus!"
+        },
+        "addedFeatures": ["Out of Position", "7-Focus Ability"],
+        "addedAbilities": ["Stay Strong and Focus!"],
+        "perks": ["Teamwork", "Master of Disguise"],
+        "cumulativeAddedAbilities": ["Try Me Instead", "Stay Strong and Focus!"],
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit 3 x echelon 1 = 42",
+          "recoveryValue": "floor(42/3) = 14",
+          "windedValue": "floor(42/2) = 21",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v94-tactician-2-alt": {
+      "base": "v94-tactician-2",
+      "doctrine": "Mastermind",
+      "kits": ["Martial Artist", "Mountain"],
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Spot the Tell",
+          "doctrineAbility": "Targets of Opportunity"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Doctrine Feature",
+          "Goaded",
+          "2nd-Level Doctrine Ability"
+        ],
+        "addedAbilities": ["Targets of Opportunity"],
+        "perks": ["Teamwork", "Spot the Tell"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Hit 'Em Hard!"
+        },
+        "addedFeatures": ["Out of Position", "7-Focus Ability"],
+        "addedAbilities": ["Hit 'Em Hard!"],
+        "perks": ["Teamwork", "Spot the Tell"],
+        "cumulativeAddedAbilities": ["Targets of Opportunity", "Hit 'Em Hard!"],
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit 3 x echelon 1 = 42",
+          "recoveryValue": "floor(42/3) = 14",
+          "windedValue": "floor(42/2) = 21",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v94-tactician-3-alt": {
+      "base": "v94-tactician-3",
+      "doctrine": "Vanguard",
+      "kits": ["Martial Artist", "Mountain"],
+      "levelOneBaseline": {
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Forgettable Face",
+          "doctrineAbility": "Squad! On Me!"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Doctrine Feature",
+          "Melee Superiority",
+          "2nd-Level Doctrine Ability"
+        ],
+        "addedAbilities": ["Squad! On Me!"],
+        "perks": ["Teamwork", "Forgettable Face"],
+        "perkType": "intrigue",
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit 9 x echelon 1 = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Rout"
+        },
+        "addedFeatures": ["Out of Position", "7-Focus Ability"],
+        "addedAbilities": ["Rout"],
+        "perks": ["Teamwork", "Forgettable Face"],
+        "cumulativeAddedAbilities": ["Squad! On Me!", "Rout"],
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 8,
+        "stability": 2,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit 9 x echelon 1 = 48",
+          "recoveryValue": "floor(48/3) = 16",
+          "windedValue": "floor(48/2) = 24",
+          "unchanged": "Recoveries, speed, stability, disengage, characteristics and potency equal the level-one reviewed values: no level-2/3 Tactician feature, doctrine ability, 7-focus ability or selected perk changes them; echelon stays 1 (levels 1-3) so kit Stamina is unchanged."
+        }
+      }
+    }
+  }
+}

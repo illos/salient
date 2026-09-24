@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299",
-  "entryCount": 1669,
+  "contentHash": "sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b",
+  "entryCount": 1687,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -301,6 +301,17 @@
         "feature/ability/tactician/level-1"
       ],
       "basis": "docs/build/V94-tactician-level-one.md#scope: complete level-one Tactician."
+    },
+    {
+      "id": "tactician-levels-two-three",
+      "description": "Tactician levels two and three: doctrine features, perk, Out of Position and all ten ability alternatives.",
+      "paths": [
+        "feature/tactician/level-2",
+        "feature/ability/tactician/level-2",
+        "feature/tactician/level-3",
+        "feature/ability/tactician/level-3"
+      ],
+      "basis": "docs/build/V116-tactician-level-three.md#scope: Tactician levels two and three."
     },
     {
       "id": "kits",
@@ -2168,6 +2179,86 @@
       "name": "This Is What We Planned For",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/this-is-what-we-planned-for.md",
       "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war",
+      "kind": "ability",
+      "name": "Fog of War",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
+      "kind": "ability",
+      "name": "I've Got Your Back",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch",
+      "kind": "ability",
+      "name": "No Dying on My Watch",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me",
+      "kind": "ability",
+      "name": "Squad! On Me!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity",
+      "kind": "ability",
+      "name": "Targets of Opportunity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead",
+      "kind": "ability",
+      "name": "Try Me Instead",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault",
+      "kind": "ability",
+      "name": "Frontal Assault",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard",
+      "kind": "ability",
+      "name": "Hit 'Em Hard!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout",
+      "kind": "ability",
+      "name": "Rout",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/rout.md",
+      "selection": "tactician-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus",
+      "kind": "ability",
+      "name": "Stay Strong and Focus!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+      "selection": "tactician-levels-two-three",
       "file": "ability.json"
     },
     {
@@ -6016,6 +6107,70 @@
       "name": "Tactician Abilities",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/tactician-abilities.md",
       "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-2/2nd-level-doctrine-ability",
+      "kind": "feature",
+      "name": "2nd-Level Doctrine Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/2nd-level-doctrine-ability.md",
+      "selection": "tactician-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-2/2nd-level-doctrine-feature",
+      "kind": "feature",
+      "name": "2nd-Level Doctrine Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/2nd-level-doctrine-feature.md",
+      "selection": "tactician-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-2/goaded",
+      "kind": "feature",
+      "name": "Goaded",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/goaded.md",
+      "selection": "tactician-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-2/infiltration-tactics",
+      "kind": "feature",
+      "name": "Infiltration Tactics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/infiltration-tactics.md",
+      "selection": "tactician-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-2/melee-superiority",
+      "kind": "feature",
+      "name": "Melee Superiority",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/melee-superiority.md",
+      "selection": "tactician-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-2/perk.md",
+      "selection": "tactician-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-3/7-focus-ability",
+      "kind": "feature",
+      "name": "7-Focus Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-3/7-focus-ability.md",
+      "selection": "tactician-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-3/out-of-position",
+      "kind": "feature",
+      "name": "Out of Position",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-3/out-of-position.md",
+      "selection": "tactician-levels-two-three",
       "file": "feature.json"
     },
     {

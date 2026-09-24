@@ -26,6 +26,7 @@ import { runShadowLevelSix } from './headless/shadow-level-six.ts';
 import { runShadowLevelThree } from './headless/shadow-level-three.ts';
 import { runShadowLevelTwo } from './headless/shadow-level-two.ts';
 import { runTactician } from './headless/tactician.ts';
+import { runTacticianLevelThree } from './headless/tactician-level-three.ts';
 import { runScenarios } from './headless/character-scenarios.ts';
 import { runCulturePresets } from './headless/culture-presets.ts';
 import { runComplicationChoices, runComplicationTable } from './headless/complication-actions.ts';
@@ -50,6 +51,7 @@ const cohorts = {
   conduit: runConduit,
   all: runScenarios,
   tactician: runTactician,
+  'tactician-level-three': runTacticianLevelThree,
   'shadow-level-two': runShadowLevelTwo,
   'shadow-level-three': runShadowLevelThree,
   'shadow-level-six': runShadowLevelSix,

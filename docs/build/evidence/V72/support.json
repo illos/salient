@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299",
+  "contentHash": "sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1110
     },
     "hero-standalone": {
-      "total": 275,
+      "total": 285,
       "supported": 39,
-      "manual": 236
+      "manual": 246
     },
     "kit-signature": {
       "total": 25,
@@ -41884,6 +41884,1297 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option This Is What We Planned For supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war",
+      "name": "Fog of War",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war#block:0:0:e7519dbd8facfef7",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war#block:1:0:9806bc4a61d675a4",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:mark benefit",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war#markdown:block:0:0:18b7a26af4d17516",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war#markdown:item:4:0:c844ad6a3004119b",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*Your unorthodox strategy causes enemies to lash out in fear, heedless of who they might be attacking.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**       |         **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------|---------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10** | **🎯 Two creatures** |\n\n**Effect:** Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.\n\n**Mark Benefit:** Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to force that target to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
+      "name": "I've Got Your Back",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier1:0:cdb461272b8699c4",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier1:1:5bb41b8dd8dce27c",
+            "locator": "block:0:tier1:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier1:0:cdb461272b8699c4"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier2:0:65eb5e22d2b1cc40",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier2:1:5bb41b8dd8dce27c",
+            "locator": "block:0:tier2:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier2:0:65eb5e22d2b1cc40"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier3:0:287ac1ca0f2df6a6",
+            "locator": "block:0:tier3:0",
+            "clause": "12 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier3:1:5bb41b8dd8dce27c",
+            "locator": "block:0:tier3:1",
+            "clause": "[taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:0:tier3:0:287ac1ca0f2df6a6"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back#block:1:0:16ff4069bae4d0d5",
+          "locator": "block:1:0",
+          "clause": "One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch",
+      "name": "No Dying on My Watch",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:2:tier1:0:fd82ab54db801001",
+            "locator": "block:2:tier1:0",
+            "clause": "R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target is frightened of the triggering ally (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:2:tier2:0:62be721210a1d1ca",
+            "locator": "block:2:tier2:0",
+            "clause": "R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target is frightened of the triggering ally (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:2:tier3:0:4413d38a7c23e48c",
+            "locator": "block:2:tier3:0",
+            "clause": "R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target is frightened of the triggering ally (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:0:0:bc1a9bd9f24fc237",
+          "locator": "block:0:0",
+          "clause": "The target deals damage to an ally.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch#block:1:0:6b89c9e7f8701c09",
+          "locator": "block:1:0",
+          "clause": "You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward the triggering ally, ending this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them or in the nearest square if you can't reach an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) square. The triggering ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) for each enemy you came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during the move. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:2:tier1:0",
+          "clause": "R < WEAK, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:2:tier2:0",
+          "clause": "R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:2:tier3:0",
+          "clause": "R < STRONG, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the triggering ally (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target deals damage to an ally.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) toward the triggering ally, ending this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them or in the nearest square if you can't reach an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) square. The triggering ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and gains 5 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) for each enemy you came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during the move. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me",
+      "name": "Squad! On Me!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me#block:0:0:bbaee7b2394dc8ee",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity",
+      "name": "Targets of Opportunity",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity#block:0:0:d46acbd348c06c88",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity#block:1:0:510dea590a2b7a64",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:mark benefit",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity#markdown:block:0:0:486d7cba3ebd711d",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and you gain two surges.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity#markdown:item:4:0:e937104752538c4e",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*You point out easy targets to your friends, allowing them to include more enemies in their attacks.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**      |         **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|---------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5** | **🎯 Two creatures** |\n\n**Effect:** Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n\n**Mark Benefit:** Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: Each target is marked by you, and you gain two surges.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, whenever you or any ally makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature marked by you, you can spend 2 focus to add one additional target to the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and you gain two surges.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead",
+      "name": "Try Me Instead",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier1:0:c3eceefbb7c9fc43",
+            "locator": "block:1:tier1:0",
+            "clause": "2 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier1:1:01007bfdc3ead77b",
+            "locator": "block:1:tier1:1",
+            "clause": "R < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier1:0:c3eceefbb7c9fc43"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier2:0:191ef8dcd4620d8e",
+            "locator": "block:1:tier2:0",
+            "clause": "3 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier2:1:2b5a54a7ff6ddef6",
+            "locator": "block:1:tier2:1",
+            "clause": "R < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier2:0:191ef8dcd4620d8e"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier3:0:5090066f811dd5a1",
+            "locator": "block:1:tier3:0",
+            "clause": "4 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier3:1:0795113842a2b300",
+            "locator": "block:1:tier3:1",
+            "clause": "R < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:1:tier3:0:5090066f811dd5a1"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead#block:0:0:03f149cf6f443aa9",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) directly toward an ally, ending [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and you can make the following weapon [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) with a [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 against a creature.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) directly toward an ally, ending [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and you can make the following weapon [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) with a [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 against a creature.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault",
+      "name": "Frontal Assault",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault#block:0:0:5bd5a9cade6f6da9",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Frontal Assault",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Frontal Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Frontal Assault",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Frontal Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Frontal Assault",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Frontal Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Frontal Assault",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Frontal Assault supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard",
+      "name": "Hit 'Em Hard!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard#block:0:0:42e4971bb885f22c",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Hit 'Em Hard!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hit 'Em Hard! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hit 'Em Hard!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hit 'Em Hard! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hit 'Em Hard!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hit 'Em Hard! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hit 'Em Hard!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hit 'Em Hard! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout",
+      "name": "Rout",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/rout.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout#block:0:0:a06311f651829f8a",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Rout",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rout supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rout",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rout supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rout",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rout supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rout",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rout supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus",
+      "name": "Stay Strong and Focus!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus#block:0:0:f3427a5e3adc17c0",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Stay Strong and Focus!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stay Strong and Focus! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stay Strong and Focus!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stay Strong and Focus! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stay Strong and Focus!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stay Strong and Focus! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stay Strong and Focus!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stay Strong and Focus! supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -201019,7 +202310,7 @@
   ],
   "liveCounts": {
     "compiled": 97,
-    "compatibility": 1428,
+    "compatibility": 1438,
     "compiledButUnavailable": 0
   }
 }

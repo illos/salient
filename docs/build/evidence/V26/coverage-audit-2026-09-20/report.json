@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:379475c1a7e5552c26452259f2857c638ca945d482b5e50981a89d1331c1c299",
+  "contentHash": "sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 22,
-      "COMPILES_WITH_REMAINDER": 109,
-      "NO_MATCH": 144,
-      "total": 275,
+      "COMPILES_WITH_REMAINDER": 111,
+      "NO_MATCH": 152,
+      "total": 285,
       "withinV26Bounded": 13
     },
     "kit-signature": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 2510,
-    "resolvedToStandalone": 1655,
+    "total": 2556,
+    "resolvedToStandalone": 1701,
     "resolvedToKit": 150,
     "ownText": 705,
     "unresolved": []
@@ -23037,6 +23037,868 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option This Is What We Planned For supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war",
+      "name": "Fog of War",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+      "usage": "Maneuver",
+      "target": "Two creatures",
+      "cost": "5 Focus",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:mark benefit",
+            "text": "Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "multi"
+      },
+      "grants": [
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fog of War",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/fog-of-war.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fog of War supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
+      "name": "I've Got Your Back",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Focus",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "One ally adjacent to the target can spend a Recovery.",
+            "locator": "section:1"
+          },
+          {
+            "type": "condition",
+            "shape": "taunted (eot)",
+            "text": "taunted (EoT)",
+            "locator": "tier1"
+          },
+          {
+            "type": "condition",
+            "shape": "taunted (eot)",
+            "text": "taunted (EoT)",
+            "locator": "tier2"
+          },
+          {
+            "type": "condition",
+            "shape": "taunted (eot)",
+            "text": "taunted (EoT)",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got Your Back",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/ive-got-your-back.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option I've Got Your Back supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch",
+      "name": "No Dying on My Watch",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+      "usage": "Triggered",
+      "target": "One enemy",
+      "cost": "5 Focus",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target deals damage to an ally.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You move up to your speed toward the triggering ally, ending this movement adjacent to them or in the nearest square if you can't reach an adjacent square. The triggering ally can spend a Recovery and gains 5 temporary Stamina for each enemy you came adjacent to during the move. You then make a power roll against the target.",
+            "locator": "section:1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:r < SYM, the target is frightened of the triggering ally (save ends)",
+            "text": "R < WEAK, the target is frightened of the triggering ally (save ends)",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:r < SYM, the target is frightened of the triggering ally (save ends)",
+            "text": "R < AVERAGE, the target is frightened of the triggering ally (save ends)",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:r < SYM, the target is frightened of the triggering ally (save ends)",
+            "text": "R < STRONG, the target is frightened of the triggering ally (save ends)",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No Dying on My Watch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/no-dying-on-my-watch.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No Dying on My Watch supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me",
+      "name": "Squad! On Me!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+      "usage": "Maneuver",
+      "target": "Self and each ally in the area",
+      "cost": "5 Focus",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the start of your next turn, each target has a bonus to stability equal to your Might score. Additionally, each target gains 2 surges.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! On Me!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
+          "decisionId": "class.tactician.level-2.vanguard-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! On Me! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity",
+      "name": "Targets of Opportunity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+      "usage": "Maneuver",
+      "target": "Two creatures",
+      "cost": "5 Focus",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each target is marked by you, and you gain two surges.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:mark benefit",
+            "text": "Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "multi"
+      },
+      "grants": [
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Targets of Opportunity",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/targets-of-opportunity.md",
+          "decisionId": "class.tactician.level-2.mastermind-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Targets of Opportunity supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead",
+      "name": "Try Me Instead",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+      "usage": "Main action",
+      "target": "Self",
+      "cost": "5 Focus",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You shift up to your speed directly toward an ally, ending adjacent to them, then swapping locations with that ally as long as you can fit into each other's spaces. The ally can spend a Recovery, and you can make the following weapon strike with a distance of melee 1 against a creature.",
+            "locator": "section:0"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM frightened (save ends)",
+            "text": "R < WEAK, frightened (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM frightened (save ends)",
+            "text": "R < AVERAGE, frightened (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM frightened (save ends)",
+            "text": "R < STRONG, frightened (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Try Me Instead",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-2/try-me-instead.md",
+          "decisionId": "class.tactician.level-2.insurgent-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Try Me Instead supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/frontal-assault",
+      "name": "Frontal Assault",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Focus",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, the first time on a turn that you or any ally deals damage to a target marked by you, the creature who dealt the damage can push the target up to 2 squares and then shift up to 2 squares. Additionally, any ally using the Charge main action to target a creature marked by you can use a melee strike signature ability or a melee strike heroic ability instead of a melee free strike.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Frontal Assault",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Frontal Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Frontal Assault",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Frontal Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Frontal Assault",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Frontal Assault supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Frontal Assault",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/frontal-assault.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Frontal Assault supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard",
+      "name": "Hit 'Em Hard!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Focus",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, that creature gains 2 surges, which they can use immediately.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Hit 'Em Hard!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hit 'Em Hard! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hit 'Em Hard!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hit 'Em Hard! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hit 'Em Hard!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hit 'Em Hard! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hit 'Em Hard!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hit 'Em Hard! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout",
+      "name": "Rout",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/rout.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Focus",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is frightened of the creature who dealt the damage (save ends).",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Rout",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rout supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rout",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rout supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rout",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rout supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Rout",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/rout.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Rout supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus",
+      "name": "Stay Strong and Focus!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Focus",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a Recovery.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Stay Strong and Focus!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stay Strong and Focus! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stay Strong and Focus!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stay Strong and Focus! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stay Strong and Focus!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stay Strong and Focus! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stay Strong and Focus!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
+          "decisionId": "class.tactician.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stay Strong and Focus! supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -98433,8 +99295,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1180,
-      "abilities": 1166,
+      "count": 1190,
+      "abilities": 1176,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -98444,8 +99306,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 676,
-      "abilities": 676,
+      "count": 683,
+      "abilities": 683,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -98455,8 +99317,8 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 208,
-      "abilities": 208,
+      "count": 209,
+      "abilities": 209,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
         "mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre",
@@ -98651,6 +99513,17 @@
       ]
     },
     {
+      "shape": "envelope:structured-markdown-mismatch",
+      "type": "unknown",
+      "count": 26,
+      "abilities": 26,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
+        "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath"
+      ]
+    },
+    {
       "shape": "potency:A < N grabbed",
       "type": "potency-condition",
       "count": 25,
@@ -98670,17 +99543,6 @@
         "salient:foe-feature:003d77fe-6a8e-4074-8c91-96a50c77c5fb",
         "salient:foe-feature:38b42d43-df0b-4a76-b424-ebb8dcda3e9d",
         "salient:foe-feature:47396d85-c934-4cf0-805b-1330420e73b5"
-      ]
-    },
-    {
-      "shape": "envelope:structured-markdown-mismatch",
-      "type": "unknown",
-      "count": 24,
-      "abilities": 24,
-      "examples": [
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
-        "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath"
       ]
     },
     {
@@ -98794,6 +99656,17 @@
       ]
     },
     {
+      "shape": "taunted (eot)",
+      "type": "condition",
+      "count": 15,
+      "abilities": 8,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike",
+        "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
+        "salient:foe-feature:20e69c78-4894-473d-b84c-3ccf17f2ef2d"
+      ]
+    },
+    {
       "shape": "effect-paragraph:strained",
       "type": "effect-paragraph",
       "count": 13,
@@ -98813,17 +99686,6 @@
         "foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462",
         "salient:foe-feature:60c6b21f-a947-4c0d-b1b2-714c2c99d7bc",
         "salient:foe-feature:85414376-9c50-4589-aa4d-67458d7a1d8f"
-      ]
-    },
-    {
-      "shape": "taunted (eot)",
-      "type": "condition",
-      "count": 12,
-      "abilities": 7,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike",
-        "salient:foe-feature:20e69c78-4894-473d-b84c-3ccf17f2ef2d",
-        "salient:foe-feature:33263d55-4161-4fa6-811e-f5bbd1d3381b"
       ]
     },
     {
@@ -100106,6 +100968,15 @@
       ]
     },
     {
+      "shape": "potency:R < SYM frightened (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.tactician.level-2/try-me-instead"
+      ]
+    },
+    {
       "shape": "potency:R < SYM slowed (save ends)",
       "type": "potency-condition",
       "count": 3,
@@ -100286,6 +101157,15 @@
       ]
     },
     {
+      "shape": "tier:r < SYM, the target is frightened of the triggering ally (save ends)",
+      "type": "tier-damage",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.tactician.level-2/no-dying-on-my-watch"
+      ]
+    },
+    {
       "shape": "tier:slide N + r",
       "type": "tier-damage",
       "count": 3,
@@ -100328,6 +101208,16 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:67903115-71ac-44a5-82bb-c0cf353ea844"
+      ]
+    },
+    {
+      "shape": "effect-paragraph:mark benefit",
+      "type": "effect-paragraph",
+      "count": 2,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.tactician.level-2/fog-of-war",
+        "mcdm.heroes.v1/feature.ability.tactician.level-2/targets-of-opportunity"
       ]
     },
     {
@@ -103018,11 +103908,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 372,
+      "total": 382,
       "compiles": 29,
-      "withRemainder": 126,
+      "withRemainder": 128,
       "withinV26Bounded": 14,
-      "noMatch": 217
+      "noMatch": 225
     }
   }
 }

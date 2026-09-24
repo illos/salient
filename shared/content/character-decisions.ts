@@ -10,6 +10,10 @@ import type { DecisionDefinitions } from '../evaluate/definitions.ts';
 
 import { levelTwoDecisions } from './classes/fury/level-two.ts';
 import { levelThreeDecisions as furyLevelThree } from './classes/fury/level-three.ts';
+import {
+  levelThreeDecisions as tacticianLevelThree,
+  levelTwoDecisions as tacticianLevelTwo,
+} from './classes/tactician/level-two-three.ts';
 import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
 import { levelThreeDecisions as shadowLevelThree } from './classes/shadow/level-three.ts';
 import { shadowLaterDecisions } from './classes/shadow/level-four-to-six.ts';
@@ -23,7 +27,9 @@ const levelDecision = classStep.decisions.find(decision => decision.id === 'clas
 levelDecision.quote =
   "Each time you gain a new level in your class, your Stamina increases, and you gain new features or abilities according to your class's advancement, as detailed in Chapter 5: Classes.";
 levelDecision.grants = [{ kind: 'level', value: '2' }];
-classStep.decisions.push(...structuredClone([...levelTwoDecisions, ...shadowLevelTwo]));
+classStep.decisions.push(
+  ...structuredClone([...levelTwoDecisions, ...shadowLevelTwo, ...tacticianLevelTwo]),
+);
 
 const levelThree: DecisionDefinitions = structuredClone(levelTwo);
 levelThree.level = 3;
@@ -31,7 +37,9 @@ const thirdClassStep = levelThree.steps.find(step => step.id === 'step.class')!;
 thirdClassStep.decisions.find(decision => decision.id === 'class.level')!.grants = [
   { kind: 'level', value: '3' },
 ];
-thirdClassStep.decisions.push(...structuredClone([...furyLevelThree, ...shadowLevelThree]));
+thirdClassStep.decisions.push(
+  ...structuredClone([...furyLevelThree, ...shadowLevelThree, ...tacticianLevelThree]),
+);
 
 const levels = [levelOne, levelTwo, levelThree];
 for (const level of [4, 5, 6]) {
