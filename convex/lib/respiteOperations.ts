@@ -274,7 +274,7 @@ const complete: OperationDefinition = {
       : '';
     return {
       kind: 'respite.completed',
-      description: `Respite complete. ${summary}.${deadNote}${leftNote(left)}`,
+      description: `Respite complete.${summary ? ` ${summary}.` : ''}${deadNote}${leftNote(left)}`,
       data: {
         characters: results.map(r => ({
           characterId: r.hero._id,

@@ -53,3 +53,4 @@ start, and end by Cancel, Interrupt or Complete, with completion benefits and le
   skipped. Non-blocking, fixed: dead heroes are left unchanged; the open respite is readable through
   `sessions:get`; exact rewind assertion, a hero left out stays untouched, start refused in combat;
   the headless cleanup interrupts an open respite without masking failures.
+- Review re-verification of `23a1269`: PASS (the empty-summary wording is also tidied).
