@@ -107,3 +107,49 @@ Both reports are regenerated.
 ## Work log
 
 - 2026-09-24: ENGINE2 cut `slice/V157` at `c7aa637` in `.worktrees/effect-only`.
+- Implemented on `slice/V157`:
+  - `shared/resolve/effectOnly.ts`: the target reader and eleven whole-sentence patterns, each
+    citing its source. `compileAbility` reads the whole envelope first. `resolveEffectOnly` is in
+    `compiledOutcome.ts`.
+  - `ability.use` has an effect-only branch. `abilityResults.dice` and `characteristicValue` are
+    optional, and `effectOnly` is new. `ability.correct` refuses these uses. `ability.resolved` and
+    closeout skip applied gains. The log card shows "No power roll".
+  - Headless cohort `effect-only`, with its ledger in `tests/fixtures/v157-effect-only-expected.json`.
+- Choices made within the design:
+  - Two rider shapes are new: `move` (Squad! Forward!) and `ability-use` (Shadowstrike, Blur).
+  - "You" sentences are admitted only on a Self envelope, so once-per-use work is addressed to a
+    creature the use names. "The target" sentences need a one-target envelope (V110).
+  - Blur is admitted under "further whole sentences" (`null/level-2/blur.md`). The later ability
+    and its edge are entered by the table, as with V154's Inspiring Strike edge.
+  - rule/combat/target.md: the user is refused as a target unless the target names "self".
+  - As in V152, printed amounts are `\d+` by design. A saved amount that no longer matches its
+    clause is refused as tampering.
+- Flip list: the regenerated V72 report moves exactly these 7 to compiled, 143 → 150 reachable
+  (7 without a power roll). No foe ability changes, and none are supported-but-unavailable. The
+  V64 audit regenerates unchanged.
+  - Steelbreaker
+  - Saint's Raiment
+  - Sermon of Grace
+  - Now!
+  - Squad! Forward!
+  - Shadowstrike
+  - Blur
+- Journeys updated from `ability.recorded` to the compiled use:
+  - `conduit` (Sermon of Grace)
+  - `conduit-level-three` (Saint's Raiment). It also clears the Raiment's temporary Stamina so that
+    the later Soul Siphon damage reads Stamina.
+  - `fury-level-three` (Steelbreaker)
+  - `null-level-three` (Blur)
+- Authoring runs:
+  - `pnpm exec tsc --noEmit` and `pnpm exec tsc -p tsconfig.web.json --noEmit` are clean, and
+    eslint on the changed files is clean.
+  - `vitest run` on 9 focused files passed 159 tests: the effect-only, live report,
+    compiled-ability, compiled-effects-presentation, effect-riders, tier-instructions and
+    compiled-condition-privacy script tests, and the effect-only and compiled-effects app tests.
+  - `vitest run tests/app/abilities.test.ts tests/app/closeout.test.ts` passed 26 tests.
+  - The `effect-only`, `conduit`, `conduit-level-three`, `fury-level-three` and `null-level-three`
+    journeys passed under a throwaway local convex-test harness, which was not committed. This is
+    not the TESTER gate.
+- Open for the content owner: `shared/evaluate/furyAbilities.ts` still tells the table to apply
+  Steelbreaker's temporary Stamina manually. The "Sermon of Grace: Cleanse" and "Blur: Use Ability"
+  manual records remain, as Choke's did in V152.
