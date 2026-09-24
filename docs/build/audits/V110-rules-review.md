@@ -72,3 +72,22 @@ eligible targets affected only for unnumbered "each … in the area" Targets. Re
 7. The correction save guard could be narrowed to the corrected target.
 
 No tests, builds, generators or services were run by the reviewer.
+
+## R1 closure: `b636b6511e0d5adf689d41fe74163651815b1f04`
+
+Final static verdict: PASS.
+- `eachAreaTarget` admits only unnumbered "each creature/enemy/ally [and/or object(s)] in the
+  area/line/burst/cube" Targets (`rule/combat/target.md`, Each [Target]).
+- The compiler requires it, and the resolver independently returns `manual` for any area
+  definition that fails it.
+- Special, "Self and …", numbered, triggering and corpse Targets keep the boundary with the Area
+  keyword.
+- Qualified Each forms ("each war dog", "each winded enemy") conservatively stay on compatibility.
+- The new Area-keyword tests assert both the compiler diagnostic and the manual resolver outcome.
+- The regenerated V72 report still has 72 compiled entries (hero 35, kit 7, foe 30). This is the
+  identical set to `eca2cee`, and no other diagnostic, tier or section changed.
+- The V26 §3 wording matches the implemented revision rule (observation 5 closed).
+
+No tests, builds, generators or services were run by the reviewer.
+
+Reviewed-By: V110-REVIEW (pass, 2026-09-24)
