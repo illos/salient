@@ -37,6 +37,9 @@ are not all V1 release gates. Prioritize and report work against this target.
   extract or vendor it anywhere else: worktrees leave `vendor/*` empty and read the canonical path.
   Never run `git submodule update --init`/`--checkout` on one outside main, change its sparse set,
   commit into it, or merge it. Local git config sets `update = none` on each to block re-initialization.
+  In this project this overrides the submodule step of the Presidium git workflow
+  (`/srv/presidium/projects/presidium/code/docs/git-workflow.md`): do not initialize a submodule in
+  a worktree, even with `--reference`, since that still checks out a second copy of the files.
 - Rules resolution stays out of UI components. Every table control is a registered shared operation
   usable from the UI, the command palette, slash commands and headless calls. Every UI capability has
   a supported programmatic CLI/API route.
