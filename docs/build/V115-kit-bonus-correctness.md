@@ -125,3 +125,6 @@ Spec references:
   - `censor` still failed on Behold a Shield of Faith!, whose bane is a V109 rider. The journey now
     matches every compiled occurrence's printed clause, which covers V109 riders and V110 pushes. All
     ten remainder patterns are confirmed against the V72 report's clauses.
+- TESTER `test-V115-1673c01-3` PASS: `censor` exit 0 in 79 s. The `fb3ce1f` gate (658/658) and the
+  kit-bonus, tier-effects and effect-riders passes carry over. Artifacts:
+  `/srv/presidium/projects/salient/test-artifacts/V115-1673c01`. Ready for integration.
