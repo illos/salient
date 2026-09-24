@@ -22,6 +22,8 @@ export interface ActiveEffect {
   printedDuration: EffectDuration;
   endsWhen: EffectEndTrigger[];
   scheduled: boolean;
+  /** V158: part of a same-ability overlap the table resolves (QC1 R1b). */
+  manualStacking?: boolean;
 }
 
 export function ActiveEffects({
@@ -46,7 +48,11 @@ export function ActiveEffects({
               <span title={effect.sourcePath}>
                 {effect.actorLabel} · {effect.abilityName} · on {effect.subject} ·{' '}
                 {describeDuration(effect.printedDuration, effect.endsWhen)}
-                {effect.scheduled ? '' : ' (unscheduled)'}
+                {effect.manualStacking
+                  ? ' (manual stacking: apply the stacking rule and end it at the table)'
+                  : effect.scheduled
+                    ? ''
+                    : ' (unscheduled)'}
               </span>
               <span className="text-muted-foreground">{effect.text}</span>
             </span>

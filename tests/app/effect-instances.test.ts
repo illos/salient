@@ -488,18 +488,36 @@ test('V158: a repeated same-ability effect follows the newest use and never revi
   expect(after2.find(i => i.id === newer2.instance.id)!.status).toBe('ended');
   expect(after2.find(i => i.id === older2.instance.id)!.status).toBe('ended');
 
-  // A different payload from the same ability is not tracked automatically: the table applies the
-  // stacking rule, and the tracked effect keeps its own duration.
-  const kept = await apply({ kind: 'encounter' });
+  // QC1 R1b: a different payload from the same ability is handed to the table as a whole group. The
+  // tracked source stops being scheduled, both stay visible as manual stacking, and reaching the old
+  // boundary ends nothing.
+  const kept = await apply({ kind: 'end-of-next-turn', anchor: 'subject' });
   if (!kept || !('instance' in kept)) throw new Error('kept not tracked');
+  expect(kept.instance.registrationIds).toHaveLength(1);
   const different = await apply({ kind: 'encounter' }, 'Stronger table work.');
-  expect(different && 'untracked' in different).toBe(true);
-  expect((await instances()).filter(i => i.status === 'active').map(i => i.id)).toEqual([
-    kept.instance.id,
-  ]);
-
-  // A different owner's use of the same ability is not settled by the printed rule (each use can
-  // benefit its own user), so it is not tracked and the first owner's effect remains.
+  if (!different || !('instance' in different)) throw new Error('different not stored');
+  expect(different.manualGroup).toBe(true);
+  expect(different.instance).toMatchObject({ manualStacking: true, registrationIds: [] });
+  const keptNow = (await instances()).find(i => i.id === kept.instance.id)!;
+  expect(keptNow).toMatchObject({ status: 'active', manualStacking: true, registrationIds: [] });
+  expect((await reg(kept.instance.registrationIds[0]!))!.status).toBe('retired');
+  await command(`${goblinRef} /turn take`);
+  await command('/turn end');
+  await command('@Thorn /turn take', true);
+  await command('@Thorn /turn end', true);
+  // Thorn's turn end was the old source's boundary: nothing ended it.
+  expect((await instances()).find(i => i.id === kept.instance.id)!.status).toBe('active');
+  // A later identical same-owner repeat joins the manual group instead of superseding it.
+  const repeat = await apply({ kind: 'end-of-next-turn', anchor: 'subject' });
+  if (!repeat || !('instance' in repeat)) throw new Error('repeat not stored');
+  expect(repeat.manualGroup).toBe(true);
+  expect(repeat.superseded).toBeUndefined();
+  expect(
+    (await instances())
+      .filter(i => i.status === 'active')
+      .every(i => i.manualStacking === true && i.registrationIds.length === 0),
+  ).toBe(true);
+  // A different owner's use of the same ability also joins the manual group.
   const other = await f.director.client.mutation(api.foes.add, {
     campaignId: f.campaignId,
     definitionId: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
@@ -510,15 +528,12 @@ test('V158: a repeated same-ability effect follows the newest use and never revi
     id: other,
     name: 'Second Goblin',
   });
-  expect(byOther && 'untracked' in byOther).toBe(true);
-  // A subject without its own record (a squad) isn't tracked: another owner's use couldn't be seen.
+  expect(byOther && 'instance' in byOther && byOther.manualGroup).toBe(true);
+  // A subject without its own record (a squad) isn't tracked at all.
   const onSquad = await apply({ kind: 'encounter' }, 'Same table work.', gob, {
     kind: 'squad',
     id: 'squad-without-record',
     name: 'A squad',
   });
   expect(onSquad && 'untracked' in onSquad).toBe(true);
-  expect((await instances()).filter(i => i.status === 'active').map(i => i.id)).toEqual([
-    kept.instance.id,
-  ]);
 });

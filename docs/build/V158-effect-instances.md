@@ -177,4 +177,15 @@ are later slices (design section 8, items 2–5).
   - The test covers both, and asserts that the older registration is retired in both orders.
   - `effectiveAggregate` stays a pure helper with no live caller. No generic stacking foundation is
     claimed yet.
+- QC1 R1b on `891d04d`: an untracked overlap left the older source on its original clock, so the
+  unresolved group could still expire automatically. Fixed:
+  - An overlap the engine can't resolve now hands the **whole group** to the table: a different
+    payload, a different owner, or a group that is already manual.
+  - The existing sources' registrations are retired, and every member is marked `manualStacking`,
+    kept visible ("manual stacking" on the sheets) and ended only through `effect.end`.
+  - Later uses of the ability on that subject join the group, even an identical same-owner repeat,
+    and never re-enter automatic tracking while it remains.
+  - Only a subject without its own record returns untracked, with nothing stored.
+  - The test reaches the old boundary and proves that nothing ends, and that a later repeat joins
+    the manual group.
 

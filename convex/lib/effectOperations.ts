@@ -32,6 +32,7 @@ function summary(instance: EffectInstance, holder: { kind: string; id: string; n
     duration: instance.duration,
     endsWhen: instance.endsWhen,
     scheduled: instance.registrationIds.length > 0,
+    ...(instance.manualStacking ? { manualStacking: true } : {}),
     sourceUseEventId: instance.sourceUseEventId,
   };
 }

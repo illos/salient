@@ -140,6 +140,7 @@ export const effectInstanceValidator = v.object({
   endedReason: v.optional(v.string()),
   endedEventId: v.optional(v.string()),
   registrationIds: v.array(v.string()),
+  manualStacking: v.optional(v.literal(true)),
   group: v.optional(v.string()),
   consumeOn: v.optional(
     v.object({ event: v.union(v.literal('power-roll'), v.literal('ability-roll')) }),

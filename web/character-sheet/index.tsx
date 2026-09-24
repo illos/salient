@@ -356,6 +356,7 @@ function Conditions({
                 printedDuration: instance.printedDuration,
                 endsWhen: instance.endsWhen,
                 scheduled: instance.registrationIds.length > 0,
+                ...(instance.manualStacking ? { manualStacking: true } : {}),
               }))}
           />
         </div>

@@ -151,6 +151,12 @@ export interface EffectInstance {
   /** The log entry of the operation that ended it. */
   endedEventId?: string;
   registrationIds: string[];
+  /**
+   * V158 (QC1 R1b): part of a same-ability overlap the engine can't resolve by "Stacking Unique
+   * Effects". The table resolves it: no clock work ends it, it stays visible, and later uses of the
+   * ability on the subject join the manual group rather than re-entering automatic tracking.
+   */
+  manualStacking?: true;
   /** Shared end (as V153 saveGroup): one save ends every member. */
   group?: string;
   /** Reserved for consumable effects (design section 5a). */

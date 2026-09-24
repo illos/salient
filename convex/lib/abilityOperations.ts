@@ -1024,11 +1024,13 @@ async function commitLasting(
     const lasts = describeDuration(lasting.duration, lasting.endsWhen);
     const tracked = stored && 'instance' in stored ? stored : undefined;
     const untracked = stored && 'untracked' in stored ? stored : undefined;
-    const description = tracked
-      ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" Tracked as an effect${tracked.instance.registrationIds.length ? '; its end is scheduled' : lasting.duration.kind === 'none' || lasting.duration.kind === 'maintained' ? '' : '; its end is unscheduled outside a committed encounter, so end it with /effect end'}.${tracked.superseded ? ` It replaces ${tracked.superseded.actorLabel}'s earlier use, because the most recent use of the same ability sets the duration (Stacking Unique Effects).` : ''} The table resolves the instruction itself.`
-      : untracked
-        ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" ${subject.name} is already under this ability's effect, so the repeat isn't tracked automatically. Apply the stacking rule at the table: the most impactful effect applies, and the most recent use sets the duration.`
-        : `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" No hero or foe can hold this effect; resolve it at the table.`;
+    const description = tracked?.manualGroup
+      ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" ${subject.name} is already under this ability's effect in a way the engine can't resolve. This use and the earlier ones are kept as a manual stacking group: no clock ends them. Apply the stacking rule at the table (the most impactful effect applies, and the most recent use sets the duration), then end them with /effect end.`
+      : tracked
+        ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" Tracked as an effect${tracked.instance.registrationIds.length ? '; its end is scheduled' : lasting.duration.kind === 'none' || lasting.duration.kind === 'maintained' ? '' : '; its end is unscheduled outside a committed encounter, so end it with /effect end'}.${tracked.superseded ? ` It replaces ${tracked.superseded.actorLabel}'s earlier use, because the most recent use of the same ability sets the duration (Stacking Unique Effects).` : ''} The table resolves the instruction itself.`
+        : untracked
+          ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" This effect can't be tracked on a squad or object, because another use of the same ability on it couldn't be seen. Resolve it at the table.`
+          : `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" No hero or foe can hold this effect; resolve it at the table.`;
     await appendEvent(ctx, {
       campaignId: scope.campaignId,
       sessionId: cause.sessionId,
@@ -1036,7 +1038,7 @@ async function commitLasting(
       origin: 'engine',
       commandId: cause.commandId,
       causeEventId: scope.eventId,
-      kind: untracked ? 'effect.untracked' : 'effect.applied',
+      kind: untracked || tracked?.manualGroup ? 'effect.untracked' : 'effect.applied',
       description,
       payload: {
         sourceUseEventId: source.eventId,

@@ -98,7 +98,13 @@ export async function applyEffectInstance(
   input: EffectInput,
   encounterId?: Id<'encounters'>,
 ): Promise<
-  | { instance: EffectInstance; holder: EffectHolder; superseded?: EffectInstance }
+  | {
+      instance: EffectInstance;
+      holder: EffectHolder;
+      superseded?: EffectInstance;
+      /** QC1 R1b: joined an unresolved same-ability group the table resolves. */
+      manualGroup?: true;
+    }
   | { untracked: EffectInstance; holder: EffectHolder }
   | undefined
 > {
@@ -117,13 +123,15 @@ export async function applyEffectInstance(
   // use of the same ability on it can't be seen here: such effects are not tracked automatically.
   if (!holds(input.subject) && input.subject.id !== input.owner.id)
     return { untracked: { ...(input as EffectInstance) }, holder };
-  const overlap = current.effectInstances.find(
+  const group = current.effectInstances.filter(
     other =>
       other.status === 'active' &&
       other.abilityId === input.abilityId &&
       other.subject.id === input.subject.id,
   );
+  const overlap = group[group.length - 1];
   let superseded: EffectInstance | undefined;
+  let manualGroup = false;
   if (overlap) {
     // Only the same owner's repeat is settled by the printed rule here. Whether two users' uses
     // (for example two Nulls' Relentless Nemesis, each benefiting its own user) stack is not, so a
@@ -133,15 +141,36 @@ export async function applyEffectInstance(
       JSON.stringify(overlap.payload) === JSON.stringify(input.payload) &&
       !overlap.endsWhen.length &&
       !input.endsWhen.length;
-    if (!equal) return { untracked: { ...(input as EffectInstance) }, holder };
-    superseded = await endEffectInstance(
-      ctx,
-      scope,
-      holder,
-      overlap.id,
-      'superseded by a newer use of the same ability (the most recent use sets the duration)',
-    );
-    current = (await read(ctx, holder))!;
+    if (!equal || group.some(other => other.manualStacking)) {
+      // QC1 R1b: hand the whole group to the table. The existing sources stop being ended by the
+      // clock (their registrations are retired) and stay visible as manual stacking; the new use
+      // joins them unscheduled. Later uses join the group rather than re-entering automation.
+      for (const other of group) {
+        for (const id of other.registrationIds) {
+          const registration = await ctx.db.get(id as Id<'clockRegistrations'>);
+          if (registration?.status === 'active') await retireWork(ctx, scope, registration._id);
+        }
+      }
+      const fresh = (await read(ctx, holder))!;
+      await write(ctx, scope, holder, {
+        effectInstances: fresh.effectInstances.map(other =>
+          group.some(g => g.id === other.id)
+            ? { ...other, registrationIds: [], manualStacking: true as const }
+            : other,
+        ),
+      });
+      current = (await read(ctx, holder))!;
+      manualGroup = true;
+    } else {
+      superseded = await endEffectInstance(
+        ctx,
+        scope,
+        holder,
+        overlap.id,
+        'superseded by a newer use of the same ability (the most recent use sets the duration)',
+      );
+      current = (await read(ctx, holder))!;
+    }
   }
   if (current.effectInstances.some(instance => instance.id === input.id))
     throw new ConvexError('Effect instance already exists.');
@@ -155,8 +184,9 @@ export async function applyEffectInstance(
     duration,
     status: 'active',
     registrationIds: [],
+    ...(manualGroup ? { manualStacking: true as const } : {}),
   };
-  const timing = timingFor(duration);
+  const timing = manualGroup ? undefined : timingFor(duration);
   // A saving throw needs a creature that holds its own record (rule/general/saving-throw.md).
   const schedulable = timing && (timing.work !== 'saving-throw' || holds(input.subject));
   if (encounterId && schedulable) {
@@ -198,7 +228,12 @@ export async function applyEffectInstance(
         ],
       });
   }
-  return { instance, holder, ...(superseded ? { superseded } : {}) };
+  return {
+    instance,
+    holder,
+    ...(superseded ? { superseded } : {}),
+    ...(manualGroup ? { manualGroup: true as const } : {}),
+  };
 }
 
 /** Ends one active instance with a reason, retiring its clock work and its owner's pointer. */
