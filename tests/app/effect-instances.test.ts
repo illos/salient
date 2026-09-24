@@ -507,8 +507,9 @@ test('V158: a repeated same-ability effect follows the newest use and never revi
   await command('@Thorn /turn end', true);
   // Thorn's turn end was the old source's boundary: nothing ended it.
   expect((await instances()).find(i => i.id === kept.instance.id)!.status).toBe('active');
-  // A later identical same-owner repeat joins the manual group instead of superseding it.
-  const repeat = await apply({ kind: 'end-of-next-turn', anchor: 'subject' });
+  // A later same-owner repeat identical to the latest member (so only the manual-group guard, not a
+  // payload difference, keeps it out of supersession) joins the group.
+  const repeat = await apply({ kind: 'encounter' }, 'Stronger table work.');
   if (!repeat || !('instance' in repeat)) throw new Error('repeat not stored');
   expect(repeat.manualGroup).toBe(true);
   expect(repeat.superseded).toBeUndefined();
