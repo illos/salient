@@ -224,9 +224,15 @@ written:
 - **Other abilities that add marks** (Fog of War, Targets of Opportunity, and so on) are handled per
   source.
 - Judgment (Censor) is **not** assumed to share these rules; it gets its own reading.
-- **Line of effect has no map.** The automatic mark edge is offered on the roll as an automatic
-  contribution. The table rejects it with `exclude` (section 2) when line of effect is blocked.
-  The per-damage benefit is a free-triggered response card.
+- **Line of effect has no map.** The Mark edge needs **both** relationships: the marked creature
+  within the Tactician's line of effect, **and** the creature rolling (the Tactician or an ally)
+  within the Tactician's line of effect ("you and allies within your line of effect", mark.md).
+  - The engine offers the edge on the roll as an automatic contribution labelled with both
+    conditions.
+  - The table rejects it with `exclude` (section 2) when either fails. Example: the Tactician sees
+    the marked foe and the ally sees the foe, but the Tactician can't see the ally. That ally gets no
+    Mark edge.
+  - The per-damage benefit is a free-triggered response card.
 
 Product question: can players see marks on foes? (Recommended: yes.)
 
@@ -240,11 +246,36 @@ Some effects are used up by the next qualifying event rather than lasting for a 
   an edge" (`talent/level-1/remote-assistance.md`);
 - "the target takes a bane on their next power roll" (Wither's tier text).
 
-Each is an instance with a `consumeOn` filter (roll by whom, against whom, of what kind) plus its
-printed expiry. The first roll that matches and applies it consumes it: `status: consumed`, with the
-roll's event id recorded. Undo of that roll restores the instance through the journal. A correction
-that removes the roll's eligibility reports the instance as "would not have been consumed", the same
-way V156 reports a cost change. It never re-consumes silently.
+Consumable parts are **separate components** from any lasting parts of the same effect:
+- One use creates **sibling instances** that share source provenance (use event, owner, clause).
+- Each sibling has its own lifetime: a lasting duration, or `consumeOn` plus its printed expiry.
+- Consuming one sibling never ends another.
+
+**Consumption:**
+- The first roll that matches a consumable's filter (by whom, against whom, what kind) **consumes
+  it**. Its status becomes `consumed`, with the roll's event id recorded.
+- A qualifying roll consumes it **even if banes cancel its numerical benefit**. "The next power
+  roll" means the next power roll, not the next roll it actually helps (perfect-clarity.md;
+  rule/dice/power-roll.md, "Rolling With Edges and Banes").
+
+**History:**
+- Undo of that roll restores the component through the journal.
+- A correction that removes the roll's eligibility reports the component as "would not have been
+  consumed", as V156 reports a cost change. It never silently consumes again.
+
+**Roll-outcome watchers.** A consumable can carry one, such as "If the target obtains a tier 3
+outcome on that roll, you gain 1 clarity". It fires from the same roll that consumes the component,
+and a correction that changes the tier re-evaluates it through the V142 reconciliation path.
+
+**Acceptance case: Perfect Clarity** (`talent/level-1/perfect-clarity.md`, on an ally). It creates
+three siblings:
+1. +3 speed, lasting until the start of the **caster's** next turn;
+2. a double edge, consumed by the **ally's** next power roll;
+3. a watcher on that roll: tier 3 gives the caster 1 clarity.
+
+The ally's next power roll, made with two banes, consumes the double edge and gives no net edge.
+The speed bonus remains until the caster's next turn starts. The clarity watcher resolves from that
+roll's actual tier. Undo of the roll restores the double edge and withdraws any clarity it gave.
 
 ## 5b. Response revision accounting (ruling 3, option B)
 
