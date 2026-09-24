@@ -114,7 +114,8 @@ test('V158: lasting instructions are stored, listed, expire at their boundaries 
           kind: 'instruction',
           sourceUseEventId: eventId,
           sourceActorId: input.owner.id,
-          abilityId: input.abilityId ?? 'fixture-ability',
+          // Distinct abilities by default, so the V158 same-ability overlap rule doesn't apply.
+          abilityId: input.abilityId ?? `fixture-ability-${eventId}`,
           abilityName: input.abilityName ?? 'Fixture Ability',
           actorLabel: input.owner.name,
           sourcePath: 'feature/ability/null/level-1/relentless-nemesis.md',
@@ -128,7 +129,8 @@ test('V158: lasting instructions are stored, listed, expire at their boundaries 
         },
         session.encounterId ?? undefined,
       );
-      return stored!.instance;
+      if (!stored || !('instance' in stored)) throw new Error('Expected a tracked instance.');
+      return stored.instance;
     });
   const find = async (id: string) =>
     [
@@ -374,4 +376,119 @@ test('V158: lasting instructions are stored, listed, expire at their boundaries 
   // The table can still end it.
   await invoke('effect.end', { instance: lingering.id });
   expect((await find(lingering.id)).status).toBe('ended');
+});
+
+// QC1 R1 (V158), "Stacking Unique Effects" (en/books/heroes/clean/Draw Steel Heroes.md): the same
+// ability doesn't stack; the most impactful effect applies and the most recent use sets the duration.
+// V158's safe boundary: an identical payload with no extra end conditions is superseded by the newer
+// use; any other overlap is not tracked. Proven through real clock boundaries in both orders.
+test('V158: a repeated same-ability effect follows the newest use and never revives the older', async () => {
+  const t = backend();
+  const f = await table(t);
+  await t.action(internal.content.reseed, {});
+  const goblin = await f.director.client.mutation(api.foes.add, {
+    campaignId: f.campaignId,
+    definitionId: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
+    commandId: `overlap-${++sequence}`,
+  });
+  const command = (text: string, player = false) =>
+    (player ? f.player : f.director).client.mutation(api.commands.submit, {
+      campaignId: f.campaignId,
+      commandId: `overlap-${++sequence}`,
+      text,
+    });
+  const goblinRef = `@{foe:${goblin}}`;
+  const thorn = { kind: 'character' as const, id: f.thornId, name: 'Thorn' };
+  const gob = { kind: 'foe' as const, id: goblin, name: 'Goblin Warrior' };
+  const apply = (printedDuration: EffectDuration, text = 'Same table work.') =>
+    t.run(async ctx => {
+      const session = (await ctx.db.get(f.sessionId!))!;
+      const eventId = await appendEvent(ctx, {
+        campaignId: f.campaignId,
+        sessionId: f.sessionId!,
+        encounterId: session.encounterId ?? null,
+        origin: 'user',
+        actor: (await ctx.db.get(f.director.profile.userId))!,
+        commandId: `overlap-source-${++sequence}`,
+        kind: 'test.effect',
+        description: 'Synthetic source occurrence.',
+      });
+      return applyEffectInstance(
+        ctx,
+        { campaignId: f.campaignId, eventId },
+        {
+          id: `overlap-${eventId}`,
+          kind: 'instruction',
+          sourceUseEventId: eventId,
+          sourceActorId: goblin,
+          abilityId: 'overlap-ability',
+          abilityName: 'Overlap Ability',
+          actorLabel: 'Goblin Warrior',
+          sourcePath: 'feature/ability/null/level-1/relentless-nemesis.md',
+          clause: 'Fixture clause.',
+          owner: gob,
+          subject: thorn,
+          payload: { kind: 'instruction', text },
+          printedDuration,
+          endsWhen: [],
+          appliedSequence: (await ctx.db.get(eventId))!.sequence,
+        },
+        session.encounterId ?? undefined,
+      );
+    });
+  const instances = async () =>
+    (await t.run(ctx => ctx.db.get(f.thornId)))!.liveState!.effectInstances ?? [];
+  const reg = (id: string) => t.run(ctx => ctx.db.get(id as Id<'clockRegistrations'>));
+  await command('/combat start');
+  await command('/combat commit');
+  await command('/combat roll', true);
+  await command('/combat first side=heroes');
+  await command('@Thorn /turn take', true);
+
+  // Order 1: the older use's boundary (Thorn's turn end) comes first. The older is superseded at
+  // once and its registration retired, so that boundary removes nothing; the newer (the goblin's
+  // next turn start) governs.
+  const older = await apply({ kind: 'end-of-next-turn', anchor: 'subject' });
+  if (!older || !('instance' in older)) throw new Error('older not tracked');
+  const newer = await apply({ kind: 'start-of-next-turn', anchor: 'owner' });
+  if (!newer || !('instance' in newer)) throw new Error('newer not tracked');
+  expect(newer.superseded?.id).toBe(older.instance.id);
+  expect((await instances()).find(i => i.id === older.instance.id)).toMatchObject({
+    status: 'ended',
+  });
+  expect((await reg(older.instance.registrationIds[0]!))!.status).toBe('retired');
+  await command('@Thorn /turn end', true);
+  expect((await instances()).find(i => i.id === newer.instance.id)!.status).toBe('active');
+  // The newer use's boundary ends it; the older stays ended (no revival).
+  await command(`${goblinRef} /turn take`);
+  const after = await instances();
+  expect(after.find(i => i.id === newer.instance.id)!.status).toBe('ended');
+  expect(after.find(i => i.id === older.instance.id)!.status).toBe('ended');
+  expect(after.filter(i => i.status === 'active')).toHaveLength(0);
+
+  // Order 2: the newer use's boundary (Thorn's next turn end) comes after the older's would have
+  // (the goblin's next turn start). The older is superseded, so the goblin's turn start removes
+  // nothing, and the newer ends at Thorn's turn end.
+  const older2 = await apply({ kind: 'start-of-next-turn', anchor: 'owner' });
+  if (!older2 || !('instance' in older2)) throw new Error('older2 not tracked');
+  const newer2 = await apply({ kind: 'end-of-next-turn', anchor: 'subject' });
+  if (!newer2 || !('instance' in newer2)) throw new Error('newer2 not tracked');
+  expect(newer2.superseded?.id).toBe(older2.instance.id);
+  await command('/turn end');
+  await command('@Thorn /turn take', true);
+  expect((await instances()).find(i => i.id === newer2.instance.id)!.status).toBe('active');
+  await command('@Thorn /turn end', true);
+  const after2 = await instances();
+  expect(after2.find(i => i.id === newer2.instance.id)!.status).toBe('ended');
+  expect(after2.find(i => i.id === older2.instance.id)!.status).toBe('ended');
+
+  // A different payload from the same ability is not tracked automatically: the table applies the
+  // stacking rule, and the tracked effect keeps its own duration.
+  const kept = await apply({ kind: 'encounter' });
+  if (!kept || !('instance' in kept)) throw new Error('kept not tracked');
+  const different = await apply({ kind: 'encounter' }, 'Stronger table work.');
+  expect(different && 'untracked' in different).toBe(true);
+  expect((await instances()).filter(i => i.status === 'active').map(i => i.id)).toEqual([
+    kept.instance.id,
+  ]);
 });

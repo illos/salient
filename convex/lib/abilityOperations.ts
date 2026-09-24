@@ -1022,6 +1022,13 @@ async function commitLasting(
       encounterId ?? undefined,
     );
     const lasts = describeDuration(lasting.duration, lasting.endsWhen);
+    const tracked = stored && 'instance' in stored ? stored : undefined;
+    const untracked = stored && 'untracked' in stored ? stored : undefined;
+    const description = tracked
+      ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" Tracked as an effect${tracked.instance.registrationIds.length ? '; its end is scheduled' : lasting.duration.kind === 'none' || lasting.duration.kind === 'maintained' ? '' : '; its end is unscheduled outside a committed encounter, so end it with /effect end'}.${tracked.superseded ? ` It replaces ${tracked.superseded.actorLabel}'s earlier use, because the most recent use of the same ability sets the duration (Stacking Unique Effects).` : ''} The table resolves the instruction itself.`
+      : untracked
+        ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" ${subject.name} is already under this ability's effect, so the repeat isn't tracked automatically. Apply the stacking rule at the table: the most impactful effect applies, and the most recent use sets the duration.`
+        : `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" No hero or foe can hold this effect; resolve it at the table.`;
     await appendEvent(ctx, {
       campaignId: scope.campaignId,
       sessionId: cause.sessionId,
@@ -1029,16 +1036,15 @@ async function commitLasting(
       origin: 'engine',
       commandId: cause.commandId,
       causeEventId: scope.eventId,
-      kind: 'effect.applied',
-      description: stored
-        ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" Tracked as an effect${stored.instance.registrationIds.length ? '; its end is scheduled' : lasting.duration.kind === 'none' || lasting.duration.kind === 'maintained' ? '' : '; its end is unscheduled outside a committed encounter, so end it with /effect end'}. The table resolves the instruction itself.`
-        : `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" No hero or foe can hold this effect; resolve it at the table.`,
+      kind: untracked ? 'effect.untracked' : 'effect.applied',
+      description,
       payload: {
         sourceUseEventId: source.eventId,
         occurrence: occurrence.id,
-        effectInstanceId: stored?.instance.id ?? null,
+        effectInstanceId: tracked?.instance.id ?? null,
         holder: stored?.holder ?? null,
-        duration: stored?.instance.duration ?? null,
+        duration: tracked?.instance.duration ?? null,
+        ...(tracked?.superseded ? { superseded: tracked.superseded.id } : {}),
         sourcePath: source.sourcePath,
       },
     });

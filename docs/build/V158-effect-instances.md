@@ -156,3 +156,16 @@ are later slices (design section 8, items 2–5).
     `party-read-limit`: 4 files, 53 passed.
   - The `effect-instances`, `null` and `compound-conditions` journeys passed under a throwaway
     convex-test harness, which was not committed. This is not the TESTER gate.
+- QC1 on `8ec28fe`: V157 passed. V158 R1 (high): each source expired on its own clock, so with two
+  overlapping uses of the same ability an early boundary could drop the strongest contribution, or a
+  late one could revive an older use. That contradicts "Stacking Unique Effects". `effectiveAggregate`
+  had no live caller. Fixed with a safe boundary in `applyEffectInstance`:
+  - With an identical payload and no extra end conditions on either use, the two are equally
+    impactful. The newer use governs alone: the older is ended as superseded, keeping its provenance,
+    and its registration is retired.
+  - Any other same-ability overlap is not tracked. An `effect.untracked` log entry tells the table to
+    apply the stacking rule.
+  - Full lifecycle reconciliation for differing payloads (numbers) is left to a later slice.
+  - `tests/app/effect-instances.test.ts` proves both expiry orders through real clock boundaries,
+    with no early loss and no revival, plus the untracked case.
+

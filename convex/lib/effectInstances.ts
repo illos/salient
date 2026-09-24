@@ -97,12 +97,44 @@ export async function applyEffectInstance(
   scope: JournalScope,
   input: EffectInput,
   encounterId?: Id<'encounters'>,
-): Promise<{ instance: EffectInstance; holder: EffectHolder } | undefined> {
+): Promise<
+  | { instance: EffectInstance; holder: EffectHolder; superseded?: EffectInstance }
+  | { untracked: EffectInstance; holder: EffectHolder }
+  | undefined
+> {
   const holder = holderOf(input.owner, input.subject);
   if (!holder) return undefined;
-  const current = await read(ctx, holder);
+  let current = await read(ctx, holder);
   if (!current || current.campaignId !== scope.campaignId)
     throw new ConvexError('Effect holder is outside this campaign.');
+  // "Stacking Unique Effects" (en/books/heroes/clean/Draw Steel Heroes.md): the same ability used
+  // again doesn't stack; the most impactful effect applies and the most recent use sets the duration.
+  // V158 safe boundary (QC1 R1): with an identical payload and no extra end conditions on either use,
+  // the two are equally impactful, so the newer use governs alone and the older is ended as
+  // superseded (provenance kept). Any other overlap is not tracked automatically: the table applies
+  // the stacking rule until the lifecycle reconciliation of V159.
+  const overlap = current.effectInstances.find(
+    other =>
+      other.status === 'active' &&
+      other.abilityId === input.abilityId &&
+      other.subject.id === input.subject.id,
+  );
+  let superseded: EffectInstance | undefined;
+  if (overlap) {
+    const equal =
+      JSON.stringify(overlap.payload) === JSON.stringify(input.payload) &&
+      !overlap.endsWhen.length &&
+      !input.endsWhen.length;
+    if (!equal) return { untracked: { ...(input as EffectInstance) }, holder };
+    superseded = await endEffectInstance(
+      ctx,
+      scope,
+      holder,
+      overlap.id,
+      'superseded by a newer use of the same ability (the most recent use sets the duration)',
+    );
+    current = (await read(ctx, holder))!;
+  }
   if (current.effectInstances.some(instance => instance.id === input.id))
     throw new ConvexError('Effect instance already exists.');
   if (current.effectInstances.length >= 1000)
@@ -158,7 +190,7 @@ export async function applyEffectInstance(
         ],
       });
   }
-  return { instance, holder };
+  return { instance, holder, ...(superseded ? { superseded } : {}) };
 }
 
 /** Ends one active instance with a reason, retiring its clock work and its owner's pointer. */
