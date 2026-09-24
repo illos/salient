@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V116 Tactician levels two and three
+## Current release — V115 kit bonus correctness and known condition immunity
+
+Backend/frontend source `4cc7f3175b0d4557783b47f3ce7189cd21126694` published on 2026-09-24 as
+Worker `690a35fd-e0b8-4b32-86f8-049f6dddb099`. Backend and schema validation, the hosted build and the upload succeeded. Content
+remains the 1687-entry snapshot, so no reseed was needed. Accepted TESTER results were reused, with
+no smoke test or rerun. See [V115](build/V115-kit-bonus-correctness.md) and the
+[ledger](../deploy.md).
+
+## Previous release — V116 Tactician levels two and three
 
 Backend/content/frontend source `3175606b82eb0f8505c480a08a997e96b7e35d02` published on 2026-09-24 as
 Worker `d603e11b-f449-4f84-88fa-daf498a8ddd6`. Backend and schema validation, the content reseed (1687 entries at

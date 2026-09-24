@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V115 | `4cc7f31` | Merged; backend/frontend published; accepted gates reused | complete |
 | V116 | `3175606` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V114 | `3aa24ae` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V113 | `bd6e8e4` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -402,3 +403,21 @@ The test and deploy thread published this release at the V116 thread's handoff. 
   helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V116-release-3175606`.
+
+### V115 kit bonus correctness and known condition immunity publication: 2026-09-24
+
+The test and deploy thread published this release at ENGINE2's handoff. Reviewed tip `4cc7f3175b0d4557783b47f3ce7189cd21126694` was
+fast-forwarded into main. It adds a docs-only record to the tested `439e97e`.
+- Accepted evidence reused:
+  - full gate at `439e97e` (290 s, run by the Test-support thread)
+  - isolated `kit-bonus` journey at `439e97e`
+  - the `censor`, `tier-effects` and `effect-riders` journeys at `fb3ce1f`/`1673c01`
+- Independent review and QC1 second review passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `690a35fd-e0b8-4b32-86f8-049f6dddb099`.
+- The schema change only adds an optional draft field and widens live-state unions. Content is
+  unchanged at 1687 entries, so no reseed was needed.
+- No smoke tests or test reruns. Temporary credentials were removed and the private hosted
+  helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V115-release-4cc7f31`.
