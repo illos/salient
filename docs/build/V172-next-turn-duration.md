@@ -60,6 +60,7 @@ Rules question: [Q-EFFECT-1](../rules-questions-for-user.md#q-effect-1-when-does
 ## Work log
 
 - 2026-09-24: `slice/V172` in `.worktrees/next-turn`, cut from `slice/V171` `c47e5514`.
+- Implementation commit: `3883a567`. Rulings recorded in the following docs commit.
 - Flip list: none. The V72 report (`--check`) and the V64 audit regenerate unchanged; the live
   inventory test is unchanged. The L1–3 hero abilities that print the phrase
   (`feature/ability/...`, from a Compendium grep) each have another blocker:

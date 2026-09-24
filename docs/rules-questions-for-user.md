@@ -1239,8 +1239,31 @@ Recommendation: keep the current behaviour; players often take their level-up wh
 
 ## Q-EFFECT-1: when does "until the end of your next turn" end if used on your own turn? (V158)
 
-Open. No ability V158 compiles depends on it; the engine's binding is recorded here so a later
-slice that admits such a sentence does not rely on it silently.
+**Answered 2026-09-24: (B).** An effect that lasts "until the end of your next turn", used on your
+own turn, lasts through your following turn and ends at the end of that turn. Used off your turn (a
+triggered action, say), it ends at the end of your next turn, the next one you take. V172
+([slice](build/V172-next-turn-duration.md)) binds it. The ruling covers the user-anchored ("your")
+phrase only: the "(EoT)" tag keeps its explicit carve-out, and the target-anchored "their next turn"
+keeps its V158 binding (the first end of the subject's turn after the effect is applied).
+
+No passage defines the phrase; a Compendium research pass supports B by inference (pinned
+`en/unified/md`):
+- `rule/combat/end-of-turn.md` lines 2 and 7: "A creature suffers from such an effect until the end
+  of their next turn, or the end of their current turn if the effect was imposed on their current
+  turn". The carve-out is stated for the "(EoT)" tag only.
+- `feature/ability/shadow/level-2/sticky-bomb.md` line 35: the creature can disarm the bomb "as a main
+  action. If they don't, at the end of your next turn, the bomb detonates". Under A the bomb, placed
+  on your turn, would detonate before the creature could take a main action.
+- `feature/ability/shadow/level-5/blackout.md` line 27: a cloud "until the end of your next turn"
+  that lets you strike enemies who end their turn in it, which under A would end before any enemy's
+  turn.
+- `feature/ability/elementalist/level-3/swarm-of-spirits.md` lines 44 and 46: the Persistent rider
+  "lasts until the start of your next turn" beside a base "until the end of your next turn", so the
+  two are distinct spans.
+- `feature/ability/common/claw-dirt.md`: "(EoT)" on yourself is the explicit rule, with different
+  wording.
+
+The question as raised:
 
 Example: Swarm of Spirits (`feature/ability/elementalist/level-3/swarm-of-spirits.md`), "Until the
 end of your next turn, …", used on the elementalist's own turn.
@@ -1335,7 +1358,12 @@ with this anchor compiles.
 
 ## Q-STRAIN-1: how a strained Mind Spike or Spirit Sword deals its damage (V170)
 
-Open; V170 binds labelled interpretations so the two abilities can compile. Pinned `en/unified/md`:
+**Answered 2026-09-24: yes to all three current behaviours** (below): the extra damage is folded
+into the hit; "can't be reduced in any way" skips immunity only; outside combat the engine rolls the
+automatic 1d6, except for a Talent with Steel Ward or Force Orbs, where it is left to the table. V170
+already does this; no code changes.
+
+V170 bound these as labelled interpretations so the two abilities could compile. Pinned `en/unified/md`:
 - `feature/ability/talent/level-1/mind-spike.md`: "Strained: The target takes an extra 2 psychic
   damage. You also take 2 psychic damage that can't be reduced in any way." Spirit Sword
   (`spirit-sword.md`) prints the same with an untyped 3.

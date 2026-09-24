@@ -69,6 +69,13 @@ Each duration maps to existing clock timing:
 Relative anchors ("your", "their") bind to creatures when the effect is applied, as
 `docs/table-spec.md` "Game clock and scheduled rules work" already requires.
 
+"Until the end of your next turn" follows the user's ruling on Q-EFFECT-1 (B, 2026-09-24,
+`docs/rules-questions-for-user.md`): used on the owner's own turn, it lasts through the owner's
+following turn, so the clock skips the end of the turn it was applied in; used off the owner's turn,
+it ends at the end of the owner's next turn. "(EoT)" and "their next turn" keep the first end of the
+subject's turn after application (rule/combat/end-of-turn.md). Outside combat none of these is
+scheduled; the table ends them with `effect.end`.
+
 ### Extra end conditions
 
 `endsWhen` holds extra printed end conditions, checked by the engine where observable:
