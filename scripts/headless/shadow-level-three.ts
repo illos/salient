@@ -249,6 +249,16 @@ export async function runShadowLevelThree({
           actor: { refKind: 'character', id },
           arguments: args,
         });
+      // Effect riders compile into occurrences (V109/V152); a manual remainder may appear there.
+      const compiledClauses = async (id: string) =>
+        (
+          (
+            await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
+              'abilities:results',
+              { campaignId, eventIds: [id] },
+            )
+          )[0]?.compiled?.effects ?? []
+        ).map(o => o.effect.clause ?? '');
       const event = async (eventId: string) =>
         (
           await director.query<{
@@ -319,7 +329,11 @@ export async function runShadowLevelThree({
               assert.equal(condition?.payload?.status, 'resisted');
             } else {
               assert.match(
-                JSON.stringify([outcome.unresolvedClauses, roll.manualResolutions]),
+                JSON.stringify([
+                  outcome.unresolvedClauses,
+                  roll.manualResolutions,
+                  await compiledClauses(used.eventId),
+                ]),
                 witness.newAbility === 'Misdirecting Strike' ? /taunted/ : /slowed|can't stand/,
               );
             }

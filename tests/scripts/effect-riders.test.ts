@@ -13,7 +13,10 @@ const corpus = buildCorpus(inputs).envelopes;
 const envelope = (name: string) =>
   structuredClone(
     compilerEnvelope(
-      corpus.find(e => e.name === name)!,
+      // A griffon foe shares Wing Buffet's name; the Corven kit signature is the V152 witness.
+      corpus.find(
+        e => e.name === name && (name !== 'Wing Buffet' || e.corpus === 'kit-signature'),
+      )!,
       inputs,
     ),
   );
@@ -117,7 +120,7 @@ test.each(['Call the Thunder Down', 'Thunder Roar', 'Ripples in the Earth'])(
 
 test('V152 dependencies follow the printed reader', () => {
   const choke = compileAbility(envelope('Choke')).sections[0]!;
-  expect(choke).toMatchObject({ kind: 'rider', dependency: 'after-damage' });
+  expect(choke).toMatchObject({ kind: 'rider', dependency: 'after-effects' });
   expect(compileAbility(envelope('Disorienting Strike')).sections[0]).toMatchObject({
     dependency: 'after-movement',
   });
@@ -133,6 +136,40 @@ test('V152 dependencies follow the printed reader', () => {
       'You can slide one adjacent enemy up to a number of squares equal to your Luck score.',
     ),
   ).toBeUndefined();
+});
+
+// talent/level-1/choke.md: "If the target is made restrained by this ability, this forced movement
+// ignores their stability." Tier 3 is "8 + R damage; M < STRONG, restrained (save ends)"; dice 10 + 10
+// with R2 is tier 3. The rider must wait for that restrained outcome, not only for damage.
+test('Choke waits for the restrained outcome it reads', () => {
+  const definition = compileAbility(envelope('Choke'));
+  const tier3 = {
+    ...facts,
+    dice: { d10a: 10, d10b: 10 },
+    resourcePool: { resource: 'clarity', current: 3 },
+  };
+  const unknown = resolveCompiledAbility(definition, tier3);
+  if (unknown.kind !== 'resolved') throw new Error('Missing result');
+  const condition = unknown.effects.find(e => e.kind === 'condition')!;
+  expect(condition).toMatchObject({ condition: 'restrained', status: 'fact-needed' });
+  expect(unknown.effects.find(e => e.kind === 'rider')).toMatchObject({
+    status: 'fact-needed',
+    requirements: [`condition:${condition.nodeId}.outcome`],
+    after: expect.arrayContaining([condition.nodeId]),
+  });
+  const known = resolveCompiledAbility(definition, {
+    ...tier3,
+    conditionFacts: {
+      targets: [{ targetId: 'target', kind: 'hero', characteristics: { M: 0 } }],
+      potency: { characteristic: 'R', weak: 0, average: 1, strong: 2 },
+    },
+  });
+  if (known.kind !== 'resolved') throw new Error('Missing result');
+  expect(known.effects.find(e => e.kind === 'condition')).toMatchObject({ status: 'applied' });
+  expect(known.effects.find(e => e.kind === 'rider')).toMatchObject({
+    status: 'manual',
+    requirements: [],
+  });
 });
 
 test('whole text, explicit Effect label, and printed after-roll position bound admission', () => {

@@ -15,8 +15,9 @@ no clause that changes a number the engine computes for the same use.
 - `shared/resolve/effectRiders.ts`: 18 whole-sentence patterns, each citing its pinned source.
   - Two new shapes: `forced-movement` (moving a creature other than the tier's target) and
     `end-effect`.
-  - A per-pattern dependency where the printed reader requires it: Choke reads the tier's
-    restrained outcome, so its rider is `after-damage`.
+  - A per-pattern dependency where the printed reader requires it. Choke reads the tier's
+    restrained outcome, so its rider uses a new `after-effects` dependency. It waits for damage
+    and for that target's condition outcomes, and reports `fact-needed` while one is unresolved.
 - Regenerated V72 support report. The live inventory test names the 18 additions.
 - A public headless journey through `ability.use`, `abilities:results` and `ability.resolved`.
 - Kept manual on purpose:
@@ -50,7 +51,7 @@ damage, in printed order); `movement/forced-movement.md`; `rule/general/saving-t
 | Disorienting Strike | `feature/ability/shadow/level-1/disorienting-strike.md` | push-followup | after-movement |
 | Misdirecting Strike | `feature/ability/shadow/level-3/misdirecting-strike.md` | taunt | independent |
 | I've Got Your Back | `feature/ability/tactician/level-2/ive-got-your-back.md` | recovery | independent |
-| Choke | `feature/ability/talent/level-1/choke.md` | forced-movement | after-damage |
+| Choke | `feature/ability/talent/level-1/choke.md` | forced-movement | after-effects |
 | En Garde! | `feature/ability/troubadour/level-2/en-garde.md` | free-strike | independent |
 | Infernal Gavotte | `feature/ability/troubadour/level-3/infernal-gavotte.md` | shift | independent |
 | Wing Buffet | `kit/corven.md` | shift | independent |
@@ -67,7 +68,9 @@ target-subject boundary still holds.
      clause.
    - The three exclusions stay manual.
    - Dependencies follow the printed reader.
-   - A changed amount or an added clause is not admitted.
+   - Choke's rider stays `fact-needed` until its restrained outcome is known.
+   - An added clause or a non-characteristic score word is not admitted. Printed distances are
+     `\d+` by design.
 2. `tests/scripts/live-compiled-report.test.ts` names the 18 additions. No foe ability changes.
    `pnpm compiled:check` is fresh.
 3. TESTER: `CI=true pnpm check` and `SALIENT_HEADLESS_COHORT=rider-grammar node
@@ -78,6 +81,18 @@ target-subject boundary still holds.
    - an unchanged actor and target apart from printed tier effects;
    - a recorded disposition.
 4. An independent rules and implementation review passes, then QC1.
+
+Table notes:
+- Some riders change conditions the engine tracks: Lightfall's teleport ends restrained
+  (`condition/restrained.md`), and Afflict a Bountiful Decay and Test of Rain end save-ends or EoT
+  effects. The table records these through `condition off` when it resolves the rider.
+- Choke and En Garde! also have manual part-of-parent records, "Choke: Vertical Pull" and
+  "En Garde!: Exchange Free Strikes" (WIZARD3 content in `shared/content/classes/`). Both are
+  manual records of the same printed text, so neither changes state. Reconciling them is left to
+  the content owner.
+- A Squad Unto Myself and Wing Buffet allow movement before the power roll. As with V109's Hit and
+  Run, the engine takes targets as input, and the rider records the printed option after the
+  roll.
 
 ## Work log
 
@@ -92,3 +107,15 @@ target-subject boundary still holds.
   0 supported-but-unavailable. The stale V67 pure report (no check reads it) was left untouched.
 - Focused authoring run: `vitest run tests/scripts/effect-riders.test.ts
   tests/scripts/live-compiled-report.test.ts`, 2 files, 65 tests passed. Lint clean.
+- V152-REVIEW (independent, fresh context), on `c0f03ea`: changes required.
+  - The rules side was accepted: all 18 Effect sections match whole, sit inside the boundary and
+    carry the right dependencies. The corpus sweep found exactly 18 changes and no foe changes.
+  - Blocking: the promised journey was missing (being built now).
+  - Blocking: four existing journeys asserted only against the old manual fields: tactician and
+    shadow level three, troubadour level three, and talent. Each now also reads the compiled
+    occurrence clauses, as `f093d37` did.
+  - Blocking: Choke's `after-damage` did not wait for the restrained outcome it reads. Fixed with
+    `after-effects` and a pure test.
+  - Notes adopted: the decision doc now states when a lasting effect counts as table work, and
+    the Wing Buffet test lookup is by kit corpus.
+

@@ -21,8 +21,12 @@ An ability compiles (`execution: supported`) when every printed clause is one of
 
 A clause cannot be a manual instruction if it changes a number the engine computes for the same
 use: roll, damage, damage type, cost, target count or resources. Those clauses get executed
-support or keep the ability manual. Lasting effects with later triggers stay manual until the
-engine can track them. Each admitted sentence is matched whole against its pinned source. There is
+support or keep the ability manual.
+
+A lasting effect is table work only when the table later enters it through an existing operation:
+a bane at the later roll, or a condition through the condition operation. A lasting effect that
+needs the engine to notice a later trigger (movement, damage dealt, a turn boundary) stays manual
+until the engine can track it. Each admitted sentence is matched whole against its pinned source. There is
 no keyword or ability-name dispatch.
 
 ## Delivery

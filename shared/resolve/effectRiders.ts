@@ -19,7 +19,11 @@ export interface EffectRider {
     | 'push-followup'
     | 'forced-movement'
     | 'end-effect';
-  dependency: 'independent' | 'after-damage' | 'after-movement';
+  /**
+   * V152 `after-effects`: the section reads a tier outcome other than damage (Choke's "made
+   * restrained by this ability"), so it waits for that target's condition outcomes too.
+   */
+  dependency: 'independent' | 'after-damage' | 'after-movement' | 'after-effects';
   /**
    * V110: `target` wording ("the target", a tier outcome) was written for one target. Pinned
    * rule/dice/ability-roll.md, "Abilities With Damage and Effects": with several targets, tiers can
@@ -158,7 +162,7 @@ const independent: readonly [EffectRider['shape'], RegExp, EffectRider['dependen
   [
     'forced-movement',
     /^You can vertical pull the target up to \d+ squares?\. If the target is made restrained by this ability, this forced movement ignores their stability\.$/,
-    'after-damage',
+    'after-effects',
   ],
   // shadow/level-3/misdirecting-strike.md. The taunting creature is the chosen ally.
   [

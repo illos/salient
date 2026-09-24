@@ -544,19 +544,36 @@ export function resolveCompiledAbility(
   }
   // Sections occur once per use, after tier effects in printed order; never one award per target.
   // Multi/area envelopes admit only use-subject sections, addressed through the first target.
+  // V152: an `after-effects` reader also waits for the condition outcomes it reads.
+  const tierConditions = remainder.filter(
+    (effect): effect is CompiledConditionOutcome => effect.kind === 'condition',
+  );
   for (const node of definition.sections) {
     if (node.kind !== 'rider') continue;
-    const after = node.dependency === 'after-damage' ? effects.map(effect => effect.nodeId) : [];
+    const after =
+      node.dependency === 'after-damage'
+        ? effects.map(effect => effect.nodeId)
+        : node.dependency === 'after-effects'
+          ? [...effects, ...tierConditions].map(effect => effect.nodeId)
+          : [];
+    const damageRequirements = effects
+      .filter(effect => effect.kind === 'damage' && !effect.application)
+      .map(effect => `damage:${effect.nodeId}.completion`);
     const requirements =
       node.dependency === 'after-movement'
         ? [
             'Actual table-resolved push and the printed movement prerequisite; a calculated allowance or disposition is not movement',
           ]
         : node.dependency === 'after-damage'
-          ? effects
-              .filter(effect => effect.kind === 'damage' && !effect.application)
-              .map(effect => `damage:${effect.nodeId}.completion`)
-          : [];
+          ? damageRequirements
+          : node.dependency === 'after-effects'
+            ? [
+                ...damageRequirements,
+                ...tierConditions
+                  .filter(effect => effect.status === 'fact-needed')
+                  .map(effect => `condition:${effect.nodeId}.outcome`),
+              ]
+            : [];
     remainder.push({
       kind: 'rider',
       nodeId: node.id,

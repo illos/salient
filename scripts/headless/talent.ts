@@ -184,6 +184,16 @@ export async function runTalent({ actors: { director, peer }, run, runId }: Scen
           actor: { refKind: 'character', id },
           arguments: args,
         });
+      // Effect riders compile into occurrences (V109/V152); a manual remainder may appear there.
+      const compiledClauses = async (id: string) =>
+        (
+          (
+            await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
+              'abilities:results',
+              { campaignId, eventIds: [id] },
+            )
+          )[0]?.compiled?.effects ?? []
+        ).map(o => o.effect.clause ?? '');
       const log = () => director.query<{ events: Log[] }>('events:list', { campaignId });
       const event = async (id: string) => (await log()).events.find(e => e.id === id);
       const usedNames = new Set<string>();
@@ -243,7 +253,11 @@ export async function runTalent({ actors: { director, peer }, run, runId }: Scen
               assert.equal(outcome.damage?.rolledDamage ?? 0, damage, name);
               assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
               assert.match(
-                JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
+                JSON.stringify([
+                  outcome.unresolvedClauses,
+                  result.manualResolutions,
+                  await compiledClauses(used.eventId),
+                ]),
                 new RegExp(rolled.manualRemainder, 'i'),
                 name,
               );

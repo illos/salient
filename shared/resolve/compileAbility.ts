@@ -71,7 +71,7 @@ export interface UnsupportedNode extends NodeSource {
 export interface RiderNode extends NodeSource {
   kind: 'rider';
   shape: import('./effectRiders.ts').EffectRider['shape'];
-  dependency: 'independent' | 'after-damage' | 'after-movement';
+  dependency: 'independent' | 'after-damage' | 'after-movement' | 'after-effects';
 }
 export type CompiledNode = DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode;
 export interface CompileDiagnostic {
