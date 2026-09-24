@@ -18,7 +18,8 @@ export function reconciledCurrent(
 ): number {
   // Without a previous maximum there is no known deficit; keep the amount within the new maximum.
   if (maximumBefore === null) return Math.min(currentBefore, maximumAfter);
-  // A current amount above its old maximum is not carried above the new one (spec, current values).
+  // Interpretation (not a user ruling; spec, current values): an amount above its old maximum is
+  // not carried above the new one. The literal formula would carry the surplus.
   const kept = Math.min(maximumAfter, maximumAfter - (maximumBefore - currentBefore));
   if (kept >= FLOOR[field]) return kept;
   return Math.max(kept, Math.min(currentBefore, FLOOR[field]));

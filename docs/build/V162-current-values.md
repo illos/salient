@@ -34,3 +34,4 @@ generic level-up.
   the approval event description, schema and contract comments and two docs; all updated. The
   above-the-old-maximum case (never carried above the new maximum) is now stated in the spec and, with
   the no-previous-maximum, zero and floor cases, covered by `tests/live-reconciliation.test.ts`.
+- Review re-verification: the above-maximum sentence is now labelled an implementation interpretation with its alternative; otherwise PASS.
