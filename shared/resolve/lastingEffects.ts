@@ -164,11 +164,10 @@ export function bindDuration(
  * shared/contracts/clock.ts. `maintained` and `none` have no clock timing: maintenance ends through
  * resource.maintain (V148) and `none` ends by its own rules or `effect.end`.
  * - start of the next turn: the anchor's next `turn-start`, once;
- * - end of the next turn and EoT: the anchor's first `turn-end` after registration. Interpretation
- *   for an owner anchor: rule/combat/end-of-turn.md ("or the end of their current turn if the effect
- *   was imposed on their current turn") is applied as for EoT. The alternative, skipping the
- *   owner's current turn, is recorded in the slice's open questions; no admitted V158 sentence
- *   uses an owner end-of-next-turn anchor;
+ * - end of the next turn and EoT: the anchor's first `turn-end` after registration
+ *   (rule/combat/end-of-turn.md). The grammar refuses an owner-anchored "end of your next turn"
+ *   until Q-EFFECT-1 is ruled, so for an owner anchor this is only the fallback timing of a stored
+ *   duration;
  * - the encounter: `combat-end`, once;
  * - save ends: a saving throw at the end of each of the subject's turns (rule/general/saving-throw.md).
  */

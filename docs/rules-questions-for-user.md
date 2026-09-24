@@ -1252,7 +1252,8 @@ What the sources say (pinned `en/unified/md`):
 
 Readings:
 - **(A)** Apply the EoT rule to the user as well: used on your turn, it ends at the end of that
-  turn. This is what V158 binds today (`shared/resolve/lastingEffects.ts`, `timingFor`).
+  turn. V158 does not bind either reading: the grammar refuses the phrase, so such sentences stay
+  manual until the user rules.
 - **(B)** "Next" means the turn after the current one: used on your turn, it lasts through your
   following turn.
 

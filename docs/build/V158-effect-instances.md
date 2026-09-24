@@ -137,8 +137,8 @@ are later slices (design section 8, items 2–5).
     the compiled Relentless Nemesis.
   - `effect.list` records a log entry like every operation, classed non-gameplay so history undo
     skips it.
-  - Owner-anchored "end of your next turn" binds the EoT rule (ends at the end of the current turn
-    when used on it): labelled interpretation, recorded as Q-EFFECT-1. No admitted sentence uses it.
+  - The grammar refuses the owner-anchored "end of your next turn", so such sentences stay manual
+    until the user rules on Q-EFFECT-1.
   - `maintained` ends the oldest excess instance when maintenance of an ability drops (labelled
     interpretation in `endUnmaintainedEffects`; `effect.end` corrects the pick). Nothing admitted
     uses it yet.
