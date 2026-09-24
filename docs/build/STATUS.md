@@ -168,3 +168,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V167 | [Respite on the table](V167-respite-table.md) | Merged (`59b890c`); cloud dev published; gate and headless PASS at tip |
 | V169 | [Rapid Processing's extra respite activity](V169-respite-extra-activity.md) | Merged (`59b890c`); cloud dev published; gate and headless PASS at tip |
 | V164 | [Level-up screen, first design pass](V164-level-up-screen.md) | In progress (awaiting user review) |
+| V164 | [Level-up screen, first design pass](V164-level-up-screen.md) | Ready for gate |

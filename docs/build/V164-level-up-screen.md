@@ -1,7 +1,7 @@
 # V164: Level-up screen, first design pass
 
 Rules review: not required (presentation over V163's shared operations). Depends on: V163.
-User review required before TESTER handoff (UI).
+No user gate: the user reviews after merge and asks for changes if the form is wrong (2026-09-24).
 
 ## Goal
 
@@ -25,7 +25,7 @@ The confirmed first pass for taking a level-up ([level-up policy](../character-w
 
 ## Acceptance checks
 
-1. User review of the captures from `tests/browser/v32-progression.spec.ts` (non-table): sheet button,
+1. Captures from `tests/browser/v32-progression.spec.ts` (non-table): sheet button,
    perk step, ability step, review, taken.
 2. The same spec asserts persisted readback: saved draft without the discarded Area of Expertise target,
    resume after reload, review values 20/30 → 29/39, level 2 after taking it.
@@ -34,3 +34,5 @@ The confirmed first pass for taking a level-up ([level-up policy](../character-w
 ## Work log
 
 - Built on `slice/V164`, `.worktrees/level-up-ui`, stacked on V163. Author checks: TypeScript, ESLint.
+- 2026-09-24: capture spec fixed (step headings, hidden option radios). User saw the sheet and perk
+  captures: "Your screenshots are good. Let's keep going." No merge gate.
