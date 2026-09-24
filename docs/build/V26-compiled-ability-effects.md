@@ -195,8 +195,9 @@ facts is outside scope. This avoids settling outstanding cross-user response aut
 
 ### 3. Persisted results and clients
 
-Each executed occurrence is bound to the use event, compiled node, target and effective result
-revision. Preserve historical target identity using the existing A06 alias-resolution path when
+Each executed occurrence is bound to the use event, compiled node, target and the result revision
+that last changed it (V110: a correction re-revisions only the corrected target and once-per-use
+sections; an occurrence is current while it is in the result's current effects). Preserve historical target identity using the existing A06 alias-resolution path when
 rows are recreated during restoration; do not regenerate occurrence identity from a new row ID.
 Expose whether it is applied damage, an outstanding movement instruction, unsupported
 manual work, missing facts, or manually resolved. Keep recognition/support separate from disposition.

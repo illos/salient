@@ -14,8 +14,9 @@ unknown Target entries stay on the compatibility path.
 
 ## Scope
 
-- Compiler (`shared/resolve/compileAbility.ts`, `abilityGrammar.ts`): `target-boundary` now fires
-  only for self, unknown and inconsistent Area-keyword envelopes. An Effect section whose subject is
+- Compiler (`shared/resolve/compileAbility.ts`, `abilityGrammar.ts`): `target-boundary` is lifted
+  only for counted Targets and unnumbered "Each … in the area" Targets (`eachAreaTarget`); self,
+  special, triggering, numbered-area, per-minion and Area-inconsistent envelopes keep it. An Effect section whose subject is
   "the target", or which reads a tier outcome, stays a manual section on counted and area
   envelopes (`effectRiders.ts` `subject`).
 - Pure resolver (`compiledOutcome.ts`): one or more distinct targets, capped at the printed count
@@ -127,6 +128,28 @@ slices.
   code re-resolved from the original inputs, so a second correction reverted the first corrected
   target's tier. It also re-revisioned every target's occurrences, which orphaned other targets'
   condition instances. The app test covers both.
-- Authoring checks: focused scripts tests 103/103 and app tests 1/1 (V110) plus 8/8 (V88
+- Authoring checks at `eca2cee`: focused scripts tests 103/103 and app tests 1/1 (V110) plus 8/8 (V88
   regression) passed. Engine `tsc` and eslint on the changed files are clean. Full suite and
   headless run are TESTER's job.
+- TESTER subagent job at `eca2cee` PASS: `CI=true VITEST_MAX_WORKERS=3 pnpm check` exit 0, about
+  217 s (402 engine plus 644 app/scripts tests, all report freshness gates). Isolated local-backend
+  headless `multi-target` exit 0 in 18.5 s and `effect-riders` regression exit 0 in 50.6 s, both with
+  real dice and source `eca2cee`. Artifacts: `/srv/presidium/projects/salient/test-artifacts/V110-eca2cee`.
+  Tester note: never run `pnpm` in a copy whose `node_modules` is a symlink to the main checkout,
+  because pnpm's dependency check tries to remove it. Call the binaries directly instead.
+- Independent review ([audit](audits/V110-rules-review.md)): changes required, R1. The Area keyword
+  admitted non-"Each" Targets (Special, "Self and each ally", numbered "One creature in the area",
+  triggering), so a later slice could promote them uncapped. Fix: `eachAreaTarget` in
+  `abilityGrammar.ts` admits only unnumbered "each creature/enemy/ally [and/or object] in the area"
+  Targets, in both the compiler and the resolver. Area-keyword negative cases were added to
+  `tests/scripts/multi-target.test.ts`. The regenerated reports are unchanged at 72 compiled, the
+  same 30 additions. The boundary is now lifted only for "Each … in the area" and counted Targets.
+  V26 §3 wording was updated to match the per-target revision rule (observation 5).
+- Review observations kept for later slices:
+  - Kit bonus mode for Melee-or-Ranged abilities, already owed since V92.
+  - War Spider Trample and Wode Hag Predator's Alacrity reuse a capped ability against more
+    targets. Neither foe is on the roster; they are now refused rather than warned.
+  - Squad weakness and immunity per minion, which predates this slice.
+  - Enemy eligibility is not enforced.
+  - Riders are addressed through the first target, which is cosmetic in closeout.
+  - The correction save guard could be narrowed to the corrected target.

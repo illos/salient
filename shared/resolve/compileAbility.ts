@@ -14,6 +14,7 @@ import {
   type ConditionThreshold,
   damageExpression,
   effectRider,
+  eachAreaTarget,
   plain,
   readMarkdownItems,
   shapeOf,
@@ -429,7 +430,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
   // area placement and target eligibility remain the user's table selection.
   const area = envelope.keywords.some(k => plain(k).toLowerCase() === 'area');
   if (!(
-    grammar.targetShape === 'area' ||
+    (grammar.targetShape === 'area' && eachAreaTarget(envelope.target)) ||
     ((grammar.targetShape === 'single' || grammar.targetShape === 'multi') && !area)
   ))
     diagnose(

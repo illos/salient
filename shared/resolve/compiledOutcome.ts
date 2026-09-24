@@ -8,7 +8,13 @@ import type {
   TierDamageText,
 } from '../contracts/rollResolution.ts';
 import type { CompiledAbility, CompiledNode, PushNode, ConditionNode } from './compileAbility.ts';
-import { effectRider, plain, targetShapeDetail, type Characteristic } from './abilityGrammar.ts';
+import {
+  eachAreaTarget,
+  effectRider,
+  plain,
+  targetShapeDetail,
+  type Characteristic,
+} from './abilityGrammar.ts';
 import type { RiderNode } from './compileAbility.ts';
 import { plainText, resolveAbilityRoll, type AbilityRollInput } from './index.ts';
 
@@ -312,6 +318,7 @@ export function resolveCompiledAbility(
     definition.version !== 1 ||
     definition.tiers.length !== 3 ||
     !['single', 'multi', 'area'].includes(shape.kind) ||
+    (shape.kind === 'area' && !eachAreaTarget(definition.envelope.target)) ||
     definition.sections.some(node => {
       if (node.kind !== 'rider') return true;
       const parsed = effectRider(plain(node.clause));

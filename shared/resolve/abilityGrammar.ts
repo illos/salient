@@ -543,6 +543,16 @@ export function targetShapeDetail(
     return { kind: 'area' };
   return { kind: 'unknown' };
 }
+/**
+ * V110: pinned rule/combat/target.md, Each [Target]: only an area Target that gives no number and
+ * applies to each creature, enemy, ally or object in the area affects all eligible targets. Self,
+ * numbered, special and triggering Targets are not this form, whatever the keywords say.
+ */
+export function eachAreaTarget(target: string): boolean {
+  return /^each (creature|enemy|ally)(,? (and|or) objects?)? in the (area|line|burst|cube)$/.test(
+    plain(target).toLowerCase(),
+  );
+}
 export function targetShapeOf(target: string, keywords: string[]): TargetShape {
   return targetShapeDetail(target, keywords).kind;
 }

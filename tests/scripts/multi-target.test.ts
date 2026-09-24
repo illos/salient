@@ -153,4 +153,23 @@ test('self, unknown and inconsistent Area envelopes keep the target boundary', (
   unknown.target = 'One creature or object per minion';
   for (const changed of [area, self, unknown])
     expect(compileAbility(changed).diagnostics.map(d => d.code)).toContain('target-boundary');
+  // rule/combat/target.md, Each [Target]: only an unnumbered "each … in the area" Target affects
+  // every eligible target; the Area keyword does not admit self, numbered, special or triggering
+  // Targets. feature/ability/fury/level-1/back.md is an Area ability targeting each enemy.
+  const back = compileAbility(envelope('Back!'));
+  expect(back.diagnostics).toEqual([]);
+  for (const text of [
+    'Special',
+    'Self and each ally in the area',
+    'One creature in the area',
+    'The triggering creature',
+  ]) {
+    const changed = envelope('Back!');
+    changed.target = text;
+    const definition = compileAbility(changed);
+    expect(definition.diagnostics.map(d => d.code)).toContain('target-boundary');
+    expect(
+      resolveCompiledAbility({ ...back, envelope: changed }, facts('ferocity', ['a'])).kind,
+    ).toBe('manual');
+  }
 });
