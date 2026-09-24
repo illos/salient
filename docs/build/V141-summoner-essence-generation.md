@@ -61,3 +61,9 @@ while dying. The rejected alternative was no gain while dying.
   selections needed an `unknown` cast (TS2352). Fixed.
 - A stale manual row the review missed: `Summoner: Essence` still said to add the Victories, +2 and
   +1 by hand, the same defect as V143 R1. It now points to the automation and the claim.
+
+## Publication: 2026-09-24
+
+Merged in resource train 3 (V141, V143, V146, V142) as main `7e9f731`. The tip passed the full
+gate (431 engine and 683 app tests) and the train's headless journeys. The backend and frontend were
+published as Worker `35639817-fb01-4132-9428-728b6512c8ec`. Release logs: `/srv/presidium/projects/salient/test-artifacts/rtrain3-release-7e9f731`.

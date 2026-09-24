@@ -42,6 +42,10 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V142 | `7e9f731` | Merged in resource train 3; backend/frontend published; gate and headless at tip | complete |
+| V146 | `7e9f731` | Merged in resource train 3; backend/frontend published; gate and headless at tip | complete |
+| V143 | `7e9f731` | Merged in resource train 3; backend/frontend published; gate and headless at tip | complete |
+| V141 | `7e9f731` | Merged in resource train 3; backend/frontend published; gate and headless at tip | complete |
 | V137 | `ca5f562` | Merged in train 2; backend/content/frontend published; gate and headless at tip | complete |
 | V136 | `ca5f562` | Merged in train 2; backend/content/frontend published; gate and headless at tip | complete |
 | V134 | `ca5f562` | Merged in train 2; backend/content/frontend published; gate and headless at tip | complete |
@@ -560,3 +564,20 @@ main to `ca5f562bb0eee8e7e84984c976d76d483b53d959`.
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/train2-release-ca5f562`.
+
+### Resource train 3 (V141, V143, V146, V142) publication: 2026-09-24
+
+ENGINE2 stacked V141 Summoner essence, V143 Beastheart ferocity (with its per-invoke read fix), V146
+Talent clarity and strain, and V142 Fury ferocity with observed damage triggers on main `f923386`.
+The test and deploy thread fast-forwarded main to `7e9f7317088f6db0c8b93750d4a790eeb4607aa0`.
+- Full gate at the tip (250 s, 431 engine and 683 app tests).
+- Journeys at the tip, idle host: five `heroic-resource` journeys, `fury-level-three`, `talent`,
+  `beastheart` and `summoner`. The `fury` journey failed identically on main (a stale expectation,
+  fixed separately).
+- Independent reviews and QC1 final clearance passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `35639817-fb01-4132-9428-728b6512c8ec`.
+- Content is unchanged at 1852 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/rtrain3-release-7e9f731`.

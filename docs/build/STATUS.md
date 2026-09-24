@@ -141,7 +141,7 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V134 | [Conduit levels two and three](V134-conduit-level-three.md) | Merged (`ca5f562`, train 2); cloud dev published with content reseed; gate and headless PASS at tip |
 | V136 | [Talent levels two and three](V136-talent-level-three.md) | Merged (`ca5f562`, train 2); cloud dev published with content reseed; gate and headless PASS at tip |
 | V137 | [Beastheart levels two and three](V137-beastheart-level-three.md) | Merged (`ca5f562`, train 2); cloud dev published with content reseed; gate and headless PASS at tip |
-| V141 | [Summoner essence generation](V141-summoner-essence-generation.md) | In testing; independent review PASS |
-| V143 | [Beastheart ferocity generation](V143-beastheart-ferocity-generation.md) | In testing; independent review PASS |
-| V146 | [Talent clarity generation and strain damage](V146-talent-clarity-generation.md) | In testing; independent review PASS |
-| V142 | [Fury ferocity generation and observed damage triggers](V142-fury-ferocity-generation.md) | In testing; independent review PASS |
+| V141 | [Summoner essence generation](V141-summoner-essence-generation.md) | Merged (`7e9f731`, resource train 3); cloud dev published; gate and headless PASS at tip |
+| V143 | [Beastheart ferocity generation](V143-beastheart-ferocity-generation.md) | Merged (`7e9f731`, resource train 3); cloud dev published; gate and headless PASS at tip |
+| V146 | [Talent clarity generation and strain damage](V146-talent-clarity-generation.md) | Merged (`7e9f731`, resource train 3); cloud dev published; gate and headless PASS at tip |
+| V142 | [Fury ferocity generation and observed damage triggers](V142-fury-ferocity-generation.md) | Merged (`7e9f731`, resource train 3); cloud dev published; gate and headless PASS at tip |

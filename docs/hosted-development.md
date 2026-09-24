@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — merge train 2 (V134, V136, V137)
+## Current release — resource train 3 (V141, V143, V146, V142)
+
+Backend/frontend source `7e9f7317088f6db0c8b93750d4a790eeb4607aa0` published on 2026-09-24 as
+Worker `35639817-fb01-4132-9428-728b6512c8ec`: automatic Summoner, Beastheart, Talent and Fury heroic resources. Backend and schema
+validation, the hosted build and the upload succeeded. Content remains the 1852-entry snapshot, so no
+reseed was needed. The tip passed the full gate and headless journeys before merge, with no smoke
+test. See the [ledger](../deploy.md).
+
+## Previous release — merge train 2 (V134, V136, V137)
 
 Backend/content/frontend source `ca5f562bb0eee8e7e84984c976d76d483b53d959` published on 2026-09-24 as
 Worker `d097d610-cf1f-4dcd-8ce5-9096cfd765b2`: Conduit, Talent and Beastheart levels two and three. Backend and schema validation,

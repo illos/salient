@@ -100,3 +100,9 @@ the table.
   - Without the fix the test fails.
 - Rebuilt onto main `82f2bfd` (merge train 1: V135, V140, V145) as one commit. The gate passed at
   `b639cf23` on the old main; this rebuild needs a new gate.
+
+## Publication: 2026-09-24
+
+Merged in resource train 3 (V141, V143, V146, V142) as main `7e9f731`. The tip passed the full
+gate (431 engine and 683 app tests) and the train's headless journeys. The backend and frontend were
+published as Worker `35639817-fb01-4132-9428-728b6512c8ec`. Release logs: `/srv/presidium/projects/salient/test-artifacts/rtrain3-release-7e9f731`.

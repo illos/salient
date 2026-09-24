@@ -63,3 +63,9 @@ ferocity.
   - `combat.commit` now reuses the documents it read for the snapshot.
   - A combat-start grant of 0 skips its write and the read inside it.
   - With 0 Victories, the commit reads each hero one more time than on main, instead of three.
+
+## Publication: 2026-09-24
+
+Merged in resource train 3 (V141, V143, V146, V142) as main `7e9f731`. The tip passed the full
+gate (431 engine and 683 app tests) and the train's headless journeys. The backend and frontend were
+published as Worker `35639817-fb01-4132-9428-728b6512c8ec`. Release logs: `/srv/presidium/projects/salient/test-artifacts/rtrain3-release-7e9f731`.
