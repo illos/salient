@@ -124,4 +124,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V110 | [Compiled multi-target and area abilities](V110-compiled-multi-target.md) | Merged (`2921a57`); cloud dev published; accepted TESTER results reused |
 | V111 | [Current V1 release target](V111-v1-release-target.md) | Merged (`105f7d5`); independent documentation review passed |
 | V112 | [Live sign-in latency investigation](V112-signin-latency.md) | Merged (`8b166cc`); evidence and table-only pause recorded; user's 20s session gap remains unresolved |
-| V113 | [Compiled tier forced movement, EoT and prone conditions](V113-compiled-tier-effects.md) | Ready for integration; full gate, isolated headless and independent review PASS |
+| V113 | [Compiled tier forced movement, EoT and prone conditions](V113-compiled-tier-effects.md) | Merged (`bd6e8e4`); cloud dev published; accepted TESTER results reused |

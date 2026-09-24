@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V110 compiled multi-target and area abilities
+## Current release — V113 compiled tier forced movement, EoT and prone conditions
+
+Backend/frontend source `bd6e8e4d85a00072a0f1f318b26b14269969ca07` published on 2026-09-24 as
+Worker `5d0f8637-0103-430d-b260-6b29072da6c2`. Backend and schema validation, the hosted build and
+the upload succeeded. Content remains the 1654-entry snapshot, so no reseed was needed. Accepted
+TESTER results were reused, with no smoke test or rerun. See
+[V113](build/V113-compiled-tier-effects.md) and the [ledger](../deploy.md).
+
+## Previous release — V110 compiled multi-target and area abilities
 
 Backend/frontend source `2921a57f994f6ce2b3da2713123967b69a33c6ae` published on 2026-09-24 as
 Worker `ed93b686-8a97-4cd9-9eed-7e38d6fc4012`. Backend and schema validation, the hosted build and

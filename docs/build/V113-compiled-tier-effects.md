@@ -189,3 +189,12 @@ choices, compounds, or prose Effects.
   app tests) and the `multi-target` and `effect-riders` passes carry over (docs and journey-only
   delta). Artifacts: `/srv/presidium/projects/salient/test-artifacts/V113-1fe1091`. Ready for
   integration.
+
+## Publication: 2026-09-24
+
+The test and deploy thread fast-forwarded reviewed `bd6e8e4` into main and published the backend
+and frontend using the DEPLOY2 hosted procedure. Backend and schema validation, the hosted build
+and the upload all succeeded. Worker: `5d0f8637-0103-430d-b260-6b29072da6c2`. Content remains the 1654-entry snapshot, so no
+reseed was needed. The accepted gates were reused, with no smoke test or rerun. Temporary
+credentials were removed and the private hosted helpers stopped. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V113-release-bd6e8e4`.

@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V113 | `bd6e8e4` | Merged; backend/frontend published; accepted gates reused | complete |
 | V110 | `2921a57` | Merged; backend/frontend published; accepted gates reused | complete |
 | V109 | `7d82b59` | Merged; backend/frontend published; accepted gates reused | complete |
 | V108 | `8744738` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -351,3 +352,21 @@ Reviewed owner `2921a57f994f6ce2b3da2713123967b69a33c6ae` was fast-forwarded int
   helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V110-release-2921a57`.
+
+### V113 compiled tier forced movement, EoT and prone conditions publication: 2026-09-24
+
+The test and deploy thread published this release at ENGINE2's handoff, under the user's
+2026-09-24 routing of engine-track deployment to it. Reviewed tip `bd6e8e4d85a00072a0f1f318b26b14269969ca07` was fast-forwarded into
+main.
+- Accepted evidence reused:
+  - full gate at `38a43f7` (212 s)
+  - isolated `multi-target` and `effect-riders` journeys at `38a43f7`
+  - `tier-effects` journey at `1fe1091`
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `5d0f8637-0103-430d-b260-6b29072da6c2`.
+- The schema change only adds optional fields and widens a union. Content remains the 1654-entry
+  snapshot, so no reseed was needed.
+- No smoke tests or test reruns. Temporary credentials were removed and the private hosted
+  helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V113-release-bd6e8e4`.
