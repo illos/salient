@@ -202,6 +202,14 @@ export async function runNull({ actors: { director, peer }, run, runId }: Scenar
       });
     const log = () => director.query<{ events: Log[] }>('events:list', { campaignId });
     const event = async (id: string) => (await log()).events.find(e => e.id === id);
+    // Effect riders compile into occurrences (V109/V113); a manual remainder may appear there.
+    const compiledEffects = async (id: string) =>
+      (
+        await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
+          'abilities:results',
+          { campaignId, eventIds: [id] },
+        )
+      )[0]?.compiled?.effects ?? [];
     const usedNames = new Set<string>();
     try {
       // Paid optional trigger outside combat uses the shared waiver, retaining a zero pool.
@@ -278,7 +286,12 @@ export async function runNull({ actors: { director, peer }, run, runId }: Scenar
               );
             } else
               assert.match(
-                JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
+                JSON.stringify([
+                  outcome.unresolvedClauses,
+                  result.manualResolutions,
+                  // Clause text only, so a compiled occurrence's kind can't stand in for the remainder.
+                  (await compiledEffects(used.eventId)).map(o => o.effect.clause ?? ''),
+                ]),
                 new RegExp(rolled.manualRemainder, 'i'),
                 name,
               );
