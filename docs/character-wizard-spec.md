@@ -541,6 +541,11 @@ shared headless operation, under existing timing, encounter locks and validation
   separate owner action on the character sheet, done whenever the player gets to it, one level per
   flow. Nothing waits for it: the Director resolves the respite, closes the session and starts the
   next one regardless. Reason: never block play on a player who has not updated their character.
+- **Manual Director grant (confirmed 2026-09-24).** The Director can grant a pending level-up directly
+  to chosen heroes (the party by default), outside any respite or XP threshold. It creates the same
+  pending level-up the respite creates, taken the same way. This covers the rules' "Director Says So"
+  advancement (`chapter/making-a-hero.md`, Alternative Advancement). Milestone advancement is not
+  implemented in V1.
 - **Campaign XP per level (requirement, design later).** The XP needed per level is a campaign setting
   the Director can change long-term; the rules' 16 per level is the default.
 - Replacing earlier choices during level-up remains open (V161).

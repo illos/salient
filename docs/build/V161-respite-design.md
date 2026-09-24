@@ -39,3 +39,4 @@ and generic level-up for all eleven classes can be built. Design only: no code.
 - 2026-09-24: Q7 settled: no ready gate; unused options lapse on Complete, visible per hero like the
   wizard's unspent-points notice.
 - 2026-09-24: Q8 settled: Complete is final; corrections by Director adjustment.
+- 2026-09-24: Q6 advancement settled: manual Director level-up grant; milestone advancement not in V1.
