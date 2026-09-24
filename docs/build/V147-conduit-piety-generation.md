@@ -77,3 +77,6 @@ two domains.
   - Encounter end and a keep void clear both forgo and prayer state.
   - Both operations are registered.
   - `tsc` (root, convex, web) is clean. The conduit, forgo, null and pure tests pass (10/10).
+
+- QC1 train-4 advisory: a declared prayer is cancelled, and logged, when a Self-Taught forgo removes
+  that turn's roll, instead of being silently carried to a later turn.

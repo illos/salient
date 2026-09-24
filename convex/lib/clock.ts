@@ -356,11 +356,15 @@ async function fireHeroicResource(
   if (step === 'turn-start-gain') {
     if (live.forgoNext) {
       await journalPatch(ctx, firing.scope, 'characters', hero._id, {
-        liveState: { ...live, forgoNext: false, forgoing: true },
+        liveState: { ...live, forgoNext: false, forgoing: true, prayNext: false },
       });
       return {
         kind: 'clock.heroic-resource',
-        description: `${hero.authored.name} forgoes ${pool.name} until the start of their next turn (Self-Taught); ${pool.current} unchanged.`,
+        // QC1 train-4: a declared prayer needs this turn's roll, which the forgo removes, so it is
+        // not made (and not carried to a later turn).
+        description: `${hero.authored.name} forgoes ${pool.name} until the start of their next turn (Self-Taught); ${pool.current} unchanged.${
+          live.prayNext ? ' The declared prayer is not made: there is no roll to pray before.' : ''
+        }`,
         payload: {
           step,
           characterId,
