@@ -143,10 +143,10 @@ test('V152 dependencies follow the printed reader', () => {
 // with R2 is tier 3. The rider must wait for that restrained outcome, not only for damage.
 test('Choke waits for the restrained outcome it reads', () => {
   const definition = compileAbility(envelope('Choke'));
-  const tier3 = {
+  const tier3: CompiledAbilityInput = {
     ...facts,
     dice: { d10a: 10, d10b: 10 },
-    resourcePool: { resource: 'clarity', current: 3 },
+    resourcePool: { resource: 'clarity', current: 3, legalFloor: 0 },
   };
   const unknown = resolveCompiledAbility(definition, tier3);
   if (unknown.kind !== 'resolved') throw new Error('Missing result');

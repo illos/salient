@@ -1,4 +1,5 @@
 import { runEffectRiders } from './headless/effect-riders.ts';
+import { runRiderGrammar } from './headless/rider-grammar.ts';
 import { runMultiTarget } from './headless/multi-target.ts';
 import { runTierEffects } from './headless/tier-effects.ts';
 import { runKitBonus } from './headless/kit-bonus.ts';
@@ -53,6 +54,7 @@ import { runWizardDraft } from './headless/wizard-draft.ts';
 // Each selected cohort invokes the original scenario, including all assertions and setup.
 const cohorts = {
   'effect-riders': runEffectRiders,
+  'rider-grammar': runRiderGrammar,
   'multi-target': runMultiTarget,
   'tier-effects': runTierEffects,
   'kit-bonus': runKitBonus,

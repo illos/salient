@@ -1,0 +1,920 @@
+{
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "method": "V152 rider grammar. Builds reuse reviewed source-derived witnesses (paths in each 'base'); damageByTier is handwritten arithmetic from the pinned Compendium ability or kit file: printed tier constants + the named characteristic score + the kit melee/ranged damage bonus only for Melee+Weapon / Ranged+Weapon abilities (chapter/kits.md Damage Bonuses), never on kit signatures, which already include it (chapter/kits.md Kit Signature Ability). Magic/Psionic abilities without Weapon get no kit bonus. Riders are the printed Effect sentences with link markup removed. Nothing is derived from the evaluator, compiler or a run of the code under test.",
+  "target": {
+    "id": "v99-creation",
+    "note": "Human Censor (tests/fixtures/v99-censor-expected.json v99-creation), M 2 and A 2: not below any potency 0/1/2 of a highest-characteristic-2 hero (rule/character/potency.md).",
+    "selections": {
+      "culture.name": "wilderness mercenary commune",
+      "culture.language": "Anjali",
+      "culture.environment": "Wilderness",
+      "culture.environment.skill": "Swim",
+      "culture.organization": "Communal",
+      "culture.organization.skill": "Blacksmithing",
+      "culture.upbringing": "Martial",
+      "culture.upbringing.skill": "Intimidate",
+      "career.choice": "Soldier",
+      "career.soldier.skill.exploration": "Endurance",
+      "career.soldier.skill.intrigue": "Alertness",
+      "career.soldier.languages": ["Kalliak", "Vaslorian"],
+      "career.soldier.perk": "Teamwork",
+      "career.soldier.inciting-incident": "Sole Survivor",
+      "ancestry.choice": "Human",
+      "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+      "kit.choice": "Cloak and Dagger",
+      "details.name": "V99 Censor Creation",
+      "class.choice": "Censor",
+      "class.censor.characteristic-array": "2, −1, −1",
+      "class.censor.array-assignment": {
+        "Agility": 2,
+        "Reason": -1,
+        "Intuition": -1
+      },
+      "class.censor.skills": ["History", "Persuade"],
+      "class.censor.order": "Exorcist",
+      "class.censor.deity": "Val",
+      "class.censor.domain": "Creation",
+      "class.censor.domain-skill": "Tailoring",
+      "class.censor.signature-ability": "Back Blasphemer!",
+      "class.censor.ability-3": "Behold a Shield of Faith!",
+      "class.censor.ability-5": "Arrest"
+    },
+    "characteristics": {
+      "M": 2,
+      "A": 2,
+      "R": -1,
+      "I": -1,
+      "P": 2
+    },
+    "stamina": 40
+  },
+  "witnesses": [
+    {
+      "id": "censor-knowledge-mountain",
+      "level": 1,
+      "class": "Censor",
+      "kit": "Mountain",
+      "base": "tests/fixtures/v99-censor-expected.json v99-knowledge (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "kit.choice": "Mountain",
+        "details.name": "V99 Censor Knowledge",
+        "class.choice": "Censor",
+        "class.censor.characteristic-array": "2, −1, −1",
+        "class.censor.array-assignment": {
+          "Agility": 2,
+          "Reason": -1,
+          "Intuition": -1
+        },
+        "class.censor.skills": ["History", "Persuade"],
+        "class.censor.order": "Exorcist",
+        "class.censor.deity": "Val",
+        "class.censor.domain": "Knowledge",
+        "class.censor.domain-skill": "Religion",
+        "class.censor.signature-ability": "Your Allies Cannot Save You!",
+        "class.censor.ability-3": "The Gods Punish and Defend",
+        "class.censor.ability-5": "Purifying Fire"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": -1,
+        "P": 2
+      },
+      "actions": [
+        {
+          "name": "Your Allies Cannot Save You!",
+          "cost": 0,
+          "source": "feature/ability/censor/level-1/your-allies-cannot-save-you.md",
+          "damageByTier": [5, 7, 14],
+          "derivation": "Melee, Strike, Weapon: 3/5/8 + M2 + kit/mountain.md melee +0/+0/+4 = 5/7/14.",
+          "effect": "Each enemy adjacent to the target is pushed away from the target up to a number of squares equal to your Presence score.",
+          "riderShape": "forced-movement",
+          "riderDependency": "independent",
+          "riderStatus": "manual"
+        }
+      ]
+    },
+    {
+      "id": "conduit-death-l3",
+      "level": 3,
+      "class": "Conduit",
+      "kit": null,
+      "base": "tests/fixtures/v134-conduit-three-expected.json v100-death (unchanged, level 3)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V100 Conduit Death",
+        "class.choice": "Conduit",
+        "class.conduit.characteristic-array": "2, 1, 1, −1",
+        "class.conduit.array-assignment": {
+          "Might": 2,
+          "Agility": 1,
+          "Reason": 1,
+          "Presence": -1
+        },
+        "class.conduit.skills": ["History", "Persuade"],
+        "class.conduit.deity": "Cyrvis",
+        "class.conduit.domains": ["Death", "Fate"],
+        "class.conduit.domain-feature": "Death",
+        "class.conduit.domain-skill": "Religion",
+        "class.conduit.prayer": "Prayer of Distance",
+        "class.conduit.ward": "Quickness Ward",
+        "class.conduit.triggered-action": "Word of Judgment",
+        "class.conduit.signature-abilities": ["Holy Lash", "Lightfall"],
+        "class.conduit.ability-3": "Font of Wrath",
+        "class.conduit.ability-5": "Curse of Terror",
+        "class.conduit.level-2.perk": "Handy",
+        "class.conduit.level-2.domain-ability": "Death",
+        "class.conduit.level-2.domain-skill.fate": "Monsters",
+        "class.conduit.level-3.ability-7": "Saint's Raiment"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 1,
+        "R": 1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Lightfall",
+          "cost": 0,
+          "source": "feature/ability/conduit/level-1/lightfall.md",
+          "damageByTier": [2, 3, 5],
+          "derivation": "Area, Magic: printed 2/3/5 with no characteristic; no kit (class/conduit.md); Prayer of Distance changes distance only.",
+          "effect": "You can teleport yourself and each ally in the area to unoccupied spaces in the area.",
+          "riderShape": "teleport",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "area": true
+        }
+      ]
+    },
+    {
+      "id": "conduit-fate-l3",
+      "level": 3,
+      "class": "Conduit",
+      "kit": null,
+      "base": "tests/fixtures/v134-conduit-three-expected.json v100-fate (unchanged, level 3)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V100 Conduit Fate",
+        "class.choice": "Conduit",
+        "class.conduit.characteristic-array": "2, 1, 0, 0",
+        "class.conduit.array-assignment": {
+          "Might": 2,
+          "Agility": 1,
+          "Reason": 0,
+          "Presence": 0
+        },
+        "class.conduit.skills": ["History", "Persuade"],
+        "class.conduit.deity": "Cyrvis",
+        "class.conduit.domains": ["Fate", "Death"],
+        "class.conduit.domain-feature": "Fate",
+        "class.conduit.domain-skill": "Religion",
+        "class.conduit.prayer": "Prayer of Soldier's Skill",
+        "class.conduit.ward": "Sanctuary Ward",
+        "class.conduit.triggered-action": "Word of Guidance",
+        "class.conduit.signature-abilities": ["Sacrificial Offer", "Staggering Curse"],
+        "class.conduit.ability-3": "Judgment's Hammer",
+        "class.conduit.ability-5": "Faith Is Our Armor",
+        "class.conduit.level-2.perk": "Improvisation Creation",
+        "class.conduit.level-2.domain-ability": "Fate",
+        "class.conduit.level-2.domain-skill.death": "Magic",
+        "class.conduit.level-3.ability-7": "Soul Siphon"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 1,
+        "R": 0,
+        "I": 2,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Sacrificial Offer",
+          "cost": 0,
+          "source": "feature/ability/conduit/level-1/sacrificial-offer.md",
+          "damageByTier": [4, 6, 8],
+          "derivation": "Magic, Ranged, Strike: 2/4/6 + I2; no kit; Prayer of Soldier's Skill +1 applies to weapon abilities only (no Weapon keyword).",
+          "effect": "Choose yourself or one ally within distance. That character can impose a bane on one power roll made against them before the end of their next turn.",
+          "riderShape": "bane",
+          "riderDependency": "independent",
+          "riderStatus": "manual"
+        },
+        {
+          "name": "Soul Siphon",
+          "cost": 7,
+          "source": "feature/ability/conduit/level-3/soul-siphon.md",
+          "damageByTier": [9, 12, 17],
+          "derivation": "Magic, Ranged, Strike (7 Piety): 7/10/15 + I2; no kit; no weapon bonus.",
+          "effect": "One ally within distance can spend any number of Recoveries.",
+          "riderShape": "recovery",
+          "riderDependency": "independent",
+          "riderStatus": "manual"
+        }
+      ]
+    },
+    {
+      "id": "conduit-knowledge-l3",
+      "level": 3,
+      "class": "Conduit",
+      "kit": null,
+      "base": "tests/fixtures/v134-conduit-three-expected.json v100-knowledge (unchanged, level 3)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V100 Conduit Knowledge",
+        "class.choice": "Conduit",
+        "class.conduit.characteristic-array": "1, 1, 1, 0",
+        "class.conduit.array-assignment": {
+          "Might": 1,
+          "Agility": 1,
+          "Reason": 1,
+          "Presence": 0
+        },
+        "class.conduit.skills": ["History", "Persuade"],
+        "class.conduit.deity": "Cyrvis",
+        "class.conduit.domains": ["Knowledge", "Death"],
+        "class.conduit.domain-feature": "Knowledge",
+        "class.conduit.domain-skill": "Religion",
+        "class.conduit.prayer": "Prayer of Speed",
+        "class.conduit.ward": "Spirit Ward",
+        "class.conduit.triggered-action": "Word of Judgment",
+        "class.conduit.signature-abilities": ["Warrior's Prayer", "Wither"],
+        "class.conduit.ability-3": "Violence Will Not Aid Thee",
+        "class.conduit.ability-5": "Sermon of Grace",
+        "class.conduit.level-2.perk": "Inspired Artisan",
+        "class.conduit.level-2.domain-ability": "Knowledge",
+        "class.conduit.level-2.domain-skill.death": "Culture",
+        "class.conduit.level-3.ability-7": "Words of Wrath and Grace"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 1,
+        "R": 1,
+        "I": 2,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Words of Wrath and Grace",
+          "cost": 7,
+          "source": "feature/ability/conduit/level-3/words-of-wrath-and-grace.md",
+          "damageByTier": [2, 5, 7],
+          "derivation": "Area, Magic (7 Piety): printed 2/5/7 with no characteristic; no kit; Prayer of Speed changes speed/Disengage only.",
+          "effect": "Each ally in the area can spend a Recovery.",
+          "riderShape": "recovery",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "area": true
+        }
+      ]
+    },
+    {
+      "id": "elementalist-green",
+      "level": 1,
+      "class": "Elementalist",
+      "kit": null,
+      "base": "tests/fixtures/v104-elementalist-expected.json v104-3 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V104 Green Celerity",
+        "class.choice": "Elementalist",
+        "class.elementalist.specialization": "Green",
+        "class.elementalist.enchantment": "Enchantment of Celerity",
+        "class.elementalist.ward": "Ward of Nature's Affection",
+        "class.elementalist.skills": ["Alchemy", "History", "Timescape"],
+        "class.elementalist.characteristic-array": "2, 1, 0, 0",
+        "class.elementalist.array-assignment": {
+          "Might": 2,
+          "Agility": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.elementalist.signature-abilities": [
+          "Afflict a Bountiful Decay",
+          "The Green Within, the Green Without"
+        ],
+        "class.elementalist.ability-3": "Invigorating Growth",
+        "class.elementalist.ability-5": "Test of Rain"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 1,
+        "R": 2,
+        "I": 0,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Afflict a Bountiful Decay",
+          "cost": 0,
+          "source": "feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
+          "damageByTier": [4, 6, 8],
+          "derivation": "Green, Magic, Ranged, Rot, Strike: 2/4/6 + R2; the Elementalist has no kit; Enchantment of Celerity and Ward of Nature's Affection add no damage.",
+          "effect": "Choose yourself or one ally within distance. That character can end one effect on them that is ended by a saving throw or that ends at the end of their turn.",
+          "riderShape": "end-effect",
+          "riderDependency": "independent",
+          "riderStatus": "manual"
+        },
+        {
+          "name": "The Green Within, the Green Without",
+          "cost": 0,
+          "source": "feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
+          "damageByTier": [4, 7, 9],
+          "derivation": "Green, Magic, Ranged, Strike: 2/5/7 + R2; no kit.",
+          "effect": "You slide one creature within 10 squares of the target up to 2 squares.",
+          "riderShape": "forced-movement",
+          "riderDependency": "independent",
+          "riderStatus": "manual"
+        },
+        {
+          "name": "Test of Rain",
+          "cost": 5,
+          "source": "feature/ability/elementalist/level-1/test-of-rain.md",
+          "damageByTier": [4, 6, 10],
+          "derivation": "Area, Green, Magic, Ranged (5 Essence): printed 4/6/10 with no characteristic; no kit.",
+          "effect": "You can end one effect on yourself that is ended by a saving throw or that ends at the end of your turn. Each ally in the area also gains this benefit.",
+          "riderShape": "end-effect",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "area": true
+        }
+      ]
+    },
+    {
+      "id": "null-force",
+      "level": 1,
+      "class": "Null",
+      "kit": null,
+      "base": "tests/fixtures/v103-null-expected.json v103-1 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V103 Chronokinetic Force",
+        "class.choice": "Null",
+        "class.null.tradition": "Chronokinetic",
+        "class.null.augmentation": "Force Augmentation",
+        "class.null.characteristic-array": "2, −1, −1",
+        "class.null.array-assignment": {
+          "Might": 2,
+          "Reason": -1,
+          "Presence": -1
+        },
+        "class.null.skills": ["Read Person", "Timescape"],
+        "class.null.tradition-skill.chronokinetic": ["Monsters"],
+        "class.null.signature-abilities": ["Dance of Blows", "Faster Than the Eye"],
+        "class.null.ability-3": "Chronal Spike",
+        "class.null.ability-5": "A Squad Unto Myself"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Dance of Blows",
+          "cost": 0,
+          "source": "feature/ability/null/level-1/dance-of-blows.md",
+          "damageByTier": [4, 5, 6],
+          "derivation": "Area, Psionic, Weapon: printed 3/4/5 + feature/null/level-1/force-augmentation.md +1 rolled damage on damage-dealing psionic abilities; no Melee keyword and the Null has no kit, so no kit bonus.",
+          "effect": "You can slide one adjacent enemy up to a number of squares equal to your Intuition score.",
+          "riderShape": "forced-movement",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "area": true
+        },
+        {
+          "name": "A Squad Unto Myself",
+          "cost": 5,
+          "source": "feature/ability/null/level-1/a-squad-unto-myself.md",
+          "damageByTier": [7, 10, 14],
+          "derivation": "Area, Psionic, Weapon (5 Discipline): printed 6/9/13 + Force Augmentation +1; no kit.",
+          "effect": "You can take the Disengage move action as a free maneuver before or after you use this ability.",
+          "riderShape": "shift",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "area": true
+        }
+      ]
+    },
+    {
+      "id": "shadow-harlequin-swashbuckler-l3",
+      "level": 3,
+      "class": "Shadow",
+      "kit": "Swashbuckler",
+      "base": "tests/fixtures/v98-shadow-three-expected.json v98-shadow-3, level 3; 3-insight ability swapped from Get In Get Out to Disorienting Strike (feature/shadow/level-1/shadow-abilities.md choice)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "2, 1, 0, 0",
+        "class.shadow.array-assignment": {
+          "Might": 2,
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Harlequin Mask",
+        "class.shadow.signature-ability": "Teamwork Has Its Place",
+        "class.shadow.ability-3": "Disorienting Strike",
+        "class.shadow.ability-5": "Setup",
+        "kit.choice": "Swashbuckler",
+        "details.name": "V92 Shadow 3",
+        "class.shadow.level-2.friend-ability": "Machinations of Sound",
+        "class.shadow.level-2.perk": "Danger Sense",
+        "class.shadow.level-3.ability-7": "Misdirecting Strike"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 1,
+        "I": 0,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Disorienting Strike",
+          "cost": 3,
+          "source": "feature/ability/shadow/level-1/disorienting-strike.md",
+          "damageByTier": [8, 10, 14],
+          "derivation": "Melee, Strike, Weapon (3 Insight): 4/6/10 + A2 + kit/swashbuckler.md melee +2/+2/+2 = 8/10/14; tier slide 2/3/5.",
+          "effect": "You can shift into any square the target leaves when you slide them.",
+          "riderShape": "push-followup",
+          "riderDependency": "after-movement",
+          "riderStatus": "fact-needed",
+          "tierMovement": {
+            "movement": "slide",
+            "byTier": [2, 3, 5]
+          }
+        },
+        {
+          "name": "Misdirecting Strike",
+          "cost": 7,
+          "source": "feature/ability/shadow/level-3/misdirecting-strike.md",
+          "damageByTier": [13, 17, 22],
+          "derivation": "Melee, Ranged, Strike, Weapon (7 Insight), used in melee mode (rule/combat/distance.md: one mode's bonus only): 9/13/18 + A2 + Swashbuckler melee +2/+2/+2 = 13/17/22.",
+          "effect": "The target is taunted by a willing ally within 5 squares of you until the end of the target's next turn.",
+          "riderShape": "taunt",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "mode": "melee"
+        }
+      ]
+    },
+    {
+      "id": "tactician-mastermind-l2",
+      "level": 2,
+      "class": "Tactician",
+      "kit": "Martial Artist + Mountain",
+      "base": "tests/fixtures/v116-tactician-three-expected.json v94-tactician-2 level-2 selections (unchanged, level 2)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "1, 1, −1",
+        "class.tactician.array-assignment": {
+          "Agility": 1,
+          "Intuition": 1,
+          "Presence": -1
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Mastermind",
+        "class.tactician.doctrine-skill": "Magic",
+        "class.tactician.ability-3": "Concussive Strike",
+        "class.tactician.ability-5": "Mind Game",
+        "kit.choice": "Martial Artist",
+        "class.tactician.second-kit": "Mountain",
+        "details.name": "V94 Tactician 2",
+        "class.tactician.arsenal.stamina": "Martial Artist",
+        "class.tactician.arsenal.meleeDamage": "Martial Artist",
+        "class.tactician.level-2.perk": "Lie Detector",
+        "class.tactician.level-2.mastermind-ability": "I've Got Your Back"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 1,
+        "R": 2,
+        "I": 1,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "I've Got Your Back",
+          "cost": 5,
+          "source": "feature/ability/tactician/level-2/ive-got-your-back.md",
+          "damageByTier": [7, 11, 14],
+          "derivation": "Ranged, Strike, Weapon (5 Focus): 5/9/12 + R2; ranged kit bonus only (chapter/kits.md), and neither kit/martial-artist.md nor kit/mountain.md has one = 7/11/14. Every tier: taunted (EoT), no potency.",
+          "effect": "One ally adjacent to the target can spend a Recovery.",
+          "riderShape": "recovery",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "tierCondition": {
+            "byTier": ["taunted", "taunted", "taunted"],
+            "status": "applied",
+            "duration": "eot"
+          }
+        }
+      ]
+    },
+    {
+      "id": "talent-telekinesis",
+      "level": 1,
+      "class": "Talent",
+      "kit": null,
+      "base": "tests/fixtures/v105-talent-expected.json v105-2 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V105 Telekinesis Density",
+        "class.choice": "Talent",
+        "class.talent.tradition": "Telekinesis",
+        "class.talent.augmentation": "Density Augmentation",
+        "class.talent.ward": "Repulsive Ward",
+        "class.talent.skills": ["Empathize", "Timescape"],
+        "class.talent.characteristic-array": "1, 1, −1",
+        "class.talent.array-assignment": {
+          "Might": 1,
+          "Agility": 1,
+          "Intuition": -1
+        },
+        "class.talent.signature-abilities": ["Incinerate", "Kinetic Grip"],
+        "class.talent.ability-3": "Choke",
+        "class.talent.ability-5": "Inertia Soak"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 1,
+        "R": 2,
+        "I": -1,
+        "P": 2
+      },
+      "actions": [
+        {
+          "name": "Choke",
+          "cost": 3,
+          "source": "feature/ability/talent/level-1/choke.md",
+          "damageByTier": [5, 7, 10],
+          "derivation": "Psionic, Ranged, Strike, Telekinesis (3 Clarity): 3/5/8 + R2; the Talent has no kit. Tier conditions M < WEAK/AVERAGE slowed, M < STRONG restrained (save ends): Talent potency R-2/R-1/R = 0/1/2 (class/talent.md); target M 2 is not below any, so resisted. Rider waits for damage and the tier condition outcome (resisted here), so it is manual.",
+          "effect": "You can vertical pull the target up to 2 squares. If the target is made restrained by this ability, this forced movement ignores their stability.",
+          "riderShape": "forced-movement",
+          "riderDependency": "after-effects",
+          "riderStatus": "manual",
+          "tierCondition": {
+            "byTier": ["slowed", "slowed", "restrained"],
+            "status": "resisted",
+            "threshold": [0, 1, 2],
+            "targetScore": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "troubadour-duelist-l3",
+      "level": 3,
+      "class": "Troubadour",
+      "kit": "Cloak and Dagger",
+      "base": "tests/fixtures/v132-troubadour-three-expected.json v102-2, level 3; 7-drama ability Infernal Gavotte instead of Star Solo (feature/troubadour/level-3/7-drama-ability.md choice)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V102 Duelist Cloak and Dagger",
+        "class.choice": "Troubadour",
+        "class.troubadour.class-act": "Duelist",
+        "class.troubadour.characteristic-array": "1, 1, −1",
+        "class.troubadour.array-assignment": {
+          "Might": 1,
+          "Reason": 1,
+          "Intuition": -1
+        },
+        "class.troubadour.skills.interpersonal": ["Flirt", "Lead"],
+        "class.troubadour.skills.intrigue-lore": ["Rumors"],
+        "class.troubadour.signature-ability": "Cutting Sarcasm",
+        "class.troubadour.ability-3": "Hypnotic Overtones",
+        "class.troubadour.ability-5": "Fake Your Death",
+        "kit.choice": "Cloak and Dagger",
+        "class.troubadour.level-2.perk": "Lie Detector",
+        "class.troubadour.level-2.invocation": "My Reputation Precedes Me",
+        "class.troubadour.level-2.duelist-ability": "En Garde!",
+        "class.troubadour.level-3.ability-7": "Infernal Gavotte"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 2,
+        "R": 1,
+        "I": -1,
+        "P": 2
+      },
+      "actions": [
+        {
+          "name": "En Garde!",
+          "cost": 5,
+          "source": "feature/ability/troubadour/level-2/en-garde.md",
+          "damageByTier": [10, 14, 19],
+          "derivation": "Melee, Strike, Weapon (5 Drama): 7/11/16 + A2 + kit/cloak-and-dagger.md melee +1/+1/+1 = 10/14/19.",
+          "effect": "The target can make a melee free strike against you. If they do, you can make a melee free strike against the target.",
+          "riderShape": "free-strike",
+          "riderDependency": "independent",
+          "riderStatus": "manual"
+        },
+        {
+          "name": "Infernal Gavotte",
+          "cost": 7,
+          "source": "feature/ability/troubadour/level-3/infernal-gavotte.md",
+          "damageByTier": [6, 8, 11],
+          "derivation": "Area, Magic, Melee, Weapon (7 Drama): printed 5/7/10 + Cloak and Dagger melee +1/+1/+1 (INTERPRETATION, keyword-literal chapter/kits.md, as v132/v110; alternative: no kit bonus on area abilities = 5/7/10). A < WEAK/AVERAGE/STRONG weakened: Troubadour potency P-2/P-1/P = 0/1/2 (class/troubadour.md); target A 2 resists.",
+          "effect": "Each ally in the area can shift up to 2 squares.",
+          "riderShape": "shift",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "area": true,
+          "tierCondition": {
+            "byTier": ["weakened", "weakened", "weakened"],
+            "status": "resisted",
+            "threshold": [0, 1, 2],
+            "targetScore": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "fury-stormwight-corven",
+      "level": 1,
+      "class": "Fury",
+      "kit": "Corven",
+      "base": "tests/fixtures/v101-fury-expected.json v101-corven (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Stormwight Corven",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, −1, −1",
+        "class.fury.array-assignment": {
+          "Reason": -1,
+          "Intuition": 2,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Stormwight",
+        "class.fury.signature-ability": "To the Death!",
+        "class.fury.ability-3": "Your Entrails Are Your Extrails!",
+        "class.fury.ability-5": "To the Uttermost End",
+        "kit.choice": "Corven"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Wing Buffet",
+          "cost": 0,
+          "source": "kit/corven.md",
+          "damageByTier": [3, 6, 8],
+          "derivation": "Kit signature (Area, Melee, Weapon): printed 3/6/8 with no characteristic; chapter/kits.md Kit Signature Ability: damage already includes the kit bonuses, never added again.",
+          "effect": "You can shift up to 2 squares before or after making the power roll.",
+          "riderShape": "shift",
+          "riderDependency": "independent",
+          "riderStatus": "manual",
+          "area": true
+        }
+      ]
+    },
+    {
+      "id": "fury-berserker-pugilist",
+      "level": 1,
+      "class": "Fury",
+      "kit": "Pugilist",
+      "base": "tests/fixtures/v109-riders-expected.json kit-raider with kit.choice Pugilist (feature/fury/level-1/kit.md: a Berserker uses a kit)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V152 Berserker Pugilist",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, −1, −1",
+        "class.fury.array-assignment": {
+          "Reason": -1,
+          "Intuition": 2,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Pugilist"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": -1,
+        "I": 2,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Let's Dance",
+          "cost": 0,
+          "source": "kit/pugilist.md",
+          "damageByTier": [5, 8, 10],
+          "derivation": "Kit signature (Melee, Strike, Weapon): 3/6/8 + M or A (both 2); Pugilist +1/+1/+1 already included (chapter/kits.md Kit Signature Ability); tier slide -/1/2.",
+          "effect": "You can shift into any square the target leaves after you slide them.",
+          "riderShape": "push-followup",
+          "riderDependency": "after-movement",
+          "riderStatus": "fact-needed",
+          "tierMovement": {
+            "movement": "slide",
+            "byTier": [null, 1, 2]
+          }
+        }
+      ]
+    }
+  ]
+}
