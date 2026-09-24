@@ -1727,6 +1727,10 @@ stays immutable without a special respite context.
    combat setup. It is not a combat void or rewind.
 3. **Complete:** the respite's benefits apply, as below.
 
+**Optional Respite Ability Changes, confirmed 2026-09-24:** not in V1. The source's optional rule
+(`chapter/making-a-hero.md`, Changing Character Options) is covered by the ordinary full edit with
+Director approval; no respite ability-swap activity or campaign setting.
+
 **Complete is final, confirmed 2026-09-24:** a completed respite cannot be undone or rewound. The
 Director corrects mistakes with the existing adjustments (XP, Victories, Stamina, Recoveries). Cancel
 exists only while the respite is open.
