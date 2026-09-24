@@ -32,9 +32,9 @@ const core = rules.entries.filter(entry => entry.classification === 'core');
 const supplemental = rules.entries.filter(entry => entry.classification === 'supplemental');
 assert(
   core.length === 2614 &&
-    supplemental.length === 253 &&
+    supplemental.length === 277 &&
     supplemental.filter(entry => entry.id.startsWith('mcdm.beastheart.v1/')).length === 149 &&
-    supplemental.filter(entry => entry.id.startsWith('mcdm.summoner.v1/')).length === 104 &&
+    supplemental.filter(entry => entry.id.startsWith('mcdm.summoner.v1/')).length === 128 &&
     rules.entries.length === core.length + supplemental.length &&
     foes.entries.length === 2507,
   'Pinned reference coverage changed',

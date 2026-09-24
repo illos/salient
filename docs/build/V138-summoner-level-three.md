@@ -63,3 +63,8 @@ shared API. Guided advancement remains deferred.
 - Follow-up action audit (QC1 V135 R1, source-only): no separate Summoner level 2–3 action is missing.
   Essence Funnel's minion sacrifice gets its own "Part of parent ability" rider record, matching the
   level-1 Focus Fire! rider.
+- Rebased onto main `98f1c3a` (Beastheart levels 2–3 merged). Reference-coverage pins follow
+  `pnpm rules:ingest` there: 2614 core and 277 supplemental (149 Beastheart, 128 Summoner), 2891 in
+  total; `build:web` rc0. Both TypeScript projects, ESLint, focused V138/V107/V32 engine tests (14),
+  build-content, audit, report and rules script tests (66), and content, compiled, supporting, foes
+  and link checks pass.
