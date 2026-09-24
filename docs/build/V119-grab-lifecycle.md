@@ -139,3 +139,6 @@ sit beside Effect prose.
   Both paths now share `grabbedBy` (`convex/lib/compiledResults.ts`): active sourced grabs, plus
   `unrecorded` for a manual toggle or an unsourced grab. The app regression covers ended history
   plus a manual grab: another creature's tier 3 is withheld and no new instance is written.
+- QC1 static fix review PASS at `85efd9d` (`../review-artifacts/2026-09-24-V119-QC1.md`). TESTER
+  `test-V119-85efd9d-3` PASS: gate rc 0 (407 engine, 661 app); headless seed 1687 `grab` and
+  `kit-bonus` pass. Artifacts: `test-artifacts/V119-85efd9d/`. Ready for integration.
