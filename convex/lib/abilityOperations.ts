@@ -1100,7 +1100,7 @@ async function commitModifiers(
     const consumable = effect.spec.consumeOn
       ? `, used up by ${subject?.name ?? 'the subject'}'s next ${effect.spec.consumeOn.event === 'power-roll' ? 'power roll' : 'ability roll'}`
       : '';
-    const stored =
+    const result =
       effect.status === 'applied' && effect.payload && subject
         ? await applyEffectInstance(
             ctx,
@@ -1126,6 +1126,11 @@ async function commitModifiers(
             encounterId ?? undefined,
           )
         : undefined;
+    // The ENGINE2 V158 lifecycle boundary may decline to store a same-ability instance whose
+    // payload differs from an active one on the subject (Stacking Unique Effects is then applied at
+    // the table); such a result carries no instance.
+    const stored = result && 'instance' in result ? result : undefined;
+    const untracked = result !== undefined && stored === undefined;
     await appendEvent(ctx, {
       campaignId: scope.campaignId,
       sessionId: cause.sessionId,
@@ -1133,15 +1138,17 @@ async function commitModifiers(
       origin: 'engine',
       commandId: cause.commandId,
       causeEventId: scope.eventId,
-      kind: 'effect.applied',
+      kind: untracked ? 'effect.untracked' : 'effect.applied',
       description: stored
         ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}${consumable}. The engine applies it automatically; exclude it on a roll it doesn't fit${stored.instance.registrationIds.length ? '' : effect.spec.duration.kind === 'none' || effect.spec.duration.kind === 'maintained' ? '' : '. Its end is unscheduled outside a committed encounter, so end it with /effect end'}.`
-        : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); apply it at the table.`,
+        : untracked
+          ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. Another use of ${source.abilityName} with a different effect is already active on ${subject!.name}, so this one is not tracked: the same ability doesn't stack, and the table applies the most impactful effect and the most recent duration (Stacking Unique Effects).`
+          : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); apply it at the table.`,
       payload: {
         sourceUseEventId: source.eventId,
         occurrence: occurrence.id,
         effectInstanceId: stored?.instance.id ?? null,
-        holder: stored?.holder ?? null,
+        holder: result?.holder ?? null,
         duration: stored?.instance.duration ?? null,
         modifier: effect.payload ?? null,
         sourcePath: source.sourcePath,
