@@ -11,7 +11,6 @@ import { readFileSync } from 'node:fs';
 import type { ScenarioContext, Actor } from './character-client.ts';
 import { runRemainingAncestries } from './remaining-ancestries.ts';
 import { runTraitAbilities } from './trait-abilities.ts';
-import { runLifecycle } from './character-lifecycle.ts';
 import type { DraftSelection } from '../../shared/characterDraft.ts';
 import type { DecisionDefinitions } from '../../shared/evaluate/definitions.ts';
 import type {
@@ -108,7 +107,6 @@ export async function runScenarios(context: ScenarioContext) {
   );
   if (!discovered || !discovery) {
     skip('wizard choices and saved-state cases', 'Decision discovery prerequisite failed.');
-    await runLifecycle(context);
     await runTraitAbilities(context);
     return;
   }
@@ -588,7 +586,7 @@ export async function runScenarios(context: ScenarioContext) {
       },
     );
   } else skip('wizard saved-state boundaries', 'Devil creation prerequisite failed.');
-  await runLifecycle(context);
+  // The lifecycle journey is its own `lifecycle` cohort (V163: 'all' neared the 240 s deadline).
   await runTraitAbilities(context);
   await runRemainingAncestries(context);
   await runSupportingActions(context);

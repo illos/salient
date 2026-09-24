@@ -35,3 +35,6 @@ Generalise V32's Fury 1→2 advancement to every class and supported level, driv
 
 - Started on `slice/V163`, `.worktrees/level-up`, stacked on V162.
 - Removed V45/V97/V98/V114 assertions that encoded the old Fury-only advancement boundary.
+- Test-Deploy: `all` passed in 239 s of its 240 s deadline at V162. The lifecycle journey is now its own
+  `lifecycle` cohort (no longer inside `all`); it grants its level-up with `/character grant-level-up`.
+  Journeys for this slice: `level-up`, `lifecycle`, `all`.

@@ -246,6 +246,12 @@ export async function runLifecycle(context: ScenarioContext): Promise<void> {
         ['heroic-resource', 3],
       ] as const)
         await adjust(field, value);
+      // V163: XP alone grants nothing; the Director's shared operation grants the level-up.
+      await director.mutation('commands:submit', {
+        campaignId,
+        commandId: commandId(),
+        text: '/character grant-level-up',
+      });
       const before = await get(player);
       assert.equal(before.liveState?.xp, 16);
       assert.equal(before.liveState?.stamina, 20);
@@ -285,7 +291,6 @@ export async function runLifecycle(context: ScenarioContext): Promise<void> {
         ...base,
         commandId: commandId(),
         expectedDraftVersion: version,
-        duringRespite: true,
       });
       const after = await get(player);
       assert.equal(after.effectiveRevisionId, advancedRevisionId);
