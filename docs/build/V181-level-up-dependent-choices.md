@@ -24,3 +24,4 @@ choices now appears on its parent's step, directly under it, as the wizard shows
 
 - Built on `slice/V181`, `.worktrees/level-up-steps`, from `slice/V164`. Author checks: TypeScript,
   ESLint, Prettier.
+- Independent review PASS (2026-09-24): no independent level 2–3 choices merge (the only same-level link, Conduit domain abilities, is automatic).
