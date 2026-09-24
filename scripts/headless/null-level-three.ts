@@ -62,7 +62,6 @@ const selfTargets = [
   'Stabilizing Field',
   'Synapse Field',
 ];
-const paid: Record<string, number> = {};
 /** Abilities the table rolls; compiled ones also carry forced movement and potency outcomes. */
 const rolledRemainder: Record<string, RegExp> = {
   'Force Redirected': /./,
@@ -298,7 +297,7 @@ export async function runNullLevelThree({
             sheets[index]!.abilities.find(a => a.name === name)?.activationCondition,
             `${b.id} ${name} listed with its condition`,
           );
-          const cost = name === b.second ? 5 : name === b.seventh ? 7 : (paid[name] ?? 0);
+          const cost = name === b.second ? 5 : name === b.seventh ? 7 : 0;
           const affectedId = selfTargets.includes(name) ? id : targetId;
           const target = { refKind: 'character', id: affectedId };
           await invoke(id, 'adjust.heroic-resource', { value: cost });
@@ -319,9 +318,10 @@ export async function runNullLevelThree({
                 string,
                 { damageByWitness?: { witness: string; tiers: number[] }[] }
               >
-            )[name]!.damageByWitness!;
-            const damage = rows.find(r => r.witness === b.id)!.tiers[outcome.tier - 1]!;
-            assert.equal(outcome.damage?.rolledDamage, damage, name);
+            )[name]!.damageByWitness;
+            const row = rows?.find(r => r.witness === b.id);
+            const damage = row ? row.tiers[outcome.tier - 1]! : 0;
+            assert.equal(outcome.damage?.rolledDamage ?? 0, damage, name);
             assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
             assert.match(
               JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),

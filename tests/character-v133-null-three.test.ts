@@ -36,7 +36,6 @@ const embedded: Record<string, string[]> = {
   'Heat Sink': ['Heat Sink: End-of-Turn Cold'],
   'Stabilizing Field': ['Stabilizing Field: End Effect'],
 };
-const paid: Record<string, number> = {};
 const cases = Object.entries(ledger.witnesses).map(([id, w]) => {
   const base = levelOne.witnesses.find(b => b.id === w.base)!;
   const two = w.levelTwo.addedSelections;
@@ -129,7 +128,7 @@ test('Null levels two and three match the independent ledger for every tradition
       for (const name of added)
         assert.deepEqual(
           hero.abilities.find(a => a.name === name)!.cost,
-          paid[name] ? { resource: 'discipline', amount: paid[name] } : undefined,
+          undefined,
           `${label} ${name} cost`,
         );
     }
@@ -173,5 +172,7 @@ test('tradition pools are exclusive; level and tradition edits prune only depend
   assert.equal(tradition.selections['class.null.level-2.perk'], cryo.l3['class.null.level-2.perk']);
   const meta = evaluate(tradition.selections, 3);
   assert.notEqual(meta.status, 'complete');
-  assert.ok(!meta.partial?.features?.some(f => f.name === 'Entropic Adaptability'));
+  assert.ok(meta.partial);
+  assert.ok(!meta.partial.features?.some(f => f.name === 'Entropic Adaptability'));
+  assert.equal(meta.partial.damageImmunities, undefined);
 });

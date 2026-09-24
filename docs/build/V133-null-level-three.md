@@ -57,3 +57,8 @@ shared API. Guided advancement remains deferred.
   under Q-FURY-2's interim reading.
 - Author checks: both TypeScript projects and ESLint pass; focused V133, V103 and sibling class engine
   files pass; V88 audit guard and live compiled report (with the three new compiled names) 34/34.
+- Independent rules/implementation review (subagent, source-only) of `f9d0931`: CHANGES REQUIRED, two
+  blocking cohort bugs, both fixed: the three compiled abilities now carry accurate activation text
+  (the table resolves damage, movement instructions and slowed), and Kinetic Shield's empty damage row
+  reads as zero. Non-blocking closed: Stabilizing Field's ally potency wording; the tradition-change
+  test proves the cold immunity is removed; unused cost maps dropped.

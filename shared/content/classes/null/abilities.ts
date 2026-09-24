@@ -245,6 +245,12 @@ export function nullActionText(action: NullAction): string {
 
 /** Printed clauses of chosen level-2/3 abilities the resolver does not model. */
 export const NULL_ACTIVATION: Record<string, string> = {
+  'Force Redirected':
+    'The table resolves damage and records the slide 1/3/5 as an instruction; move the target on the map.',
+  'Gravitic Strike':
+    'The table resolves psychic damage and records the vertical pull 3/5/7 as an instruction; move the target on the map.',
+  'Entropic Field':
+    'The table resolves cold damage and slowed (save ends) against Agility for each enemy in the 3 cube within 1.',
   Blur: 'Use Blur: Use Ability for the granted ability with an edge.',
   'Heat Sink':
     'Until the start of your next turn your Null Field grows by 1 and you and allies in it have concealment; use Heat Sink: End-of-Turn Cold at the end of this turn. Resolve manually.',
@@ -255,7 +261,7 @@ export const NULL_ACTIVATION: Record<string, string> = {
   'Molecular Rearrangement Field':
     'Until the end of the encounter your Null Field grows by 1; while enlarged, enemies with Intuition below your average potency that enter it first each round or start their turn there are bleeding (save ends), and allies doing so gain temporary Stamina equal to your Intuition. Resolve manually.',
   'Stabilizing Field':
-    'Until the end of the encounter your Null Field grows by 1; while enlarged you and allies in it ignore difficult terrain and reduce the potency of enemy effects targeting you by 1; use Stabilizing Field: End Effect each turn. Resolve manually.',
+    'Until the end of the encounter your Null Field grows by 1; while enlarged you and allies in it ignore difficult terrain and reduce the potency of enemy effects targeting each of you by 1; use Stabilizing Field: End Effect each turn. Resolve manually.',
   'Synapse Field':
     'Until the end of the encounter your Null Field grows by 1; while enlarged, whenever an enemy in it takes rolled damage it takes extra psychic damage equal to twice your Intuition. Resolve manually.',
 };
