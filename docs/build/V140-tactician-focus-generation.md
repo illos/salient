@@ -65,3 +65,5 @@ The Tactician profile in `shared/resolve/heroicResourceGeneration.ts`, with sour
 - TESTER at `bae43ad` PASS: gate rc 0 in 271 s (engine 413/413, app 669/669); headless (seed 1732)
   `heroic-resource`, `tactician` and `tactician-level-three` pass. Artifacts:
   `test-artifacts/V140-bae43ad/`. Merge waits for V150 (the Self-Taught forgo, QC1's shared blocker).
+- TESTER PASS at `bae43ad` and QC1 final PASS (after V150). Rebased onto main `8c8aedf`. Ready for
+  integration.
