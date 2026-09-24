@@ -177,3 +177,9 @@ choices, compounds, or prose Effects.
   right: the Conduit witness's Prayer of Destruction adds +1 rolled damage to magic abilities
   (`feature/conduit/level-1/prayer-of-destruction.md`), and both conduit abilities are Magic.
   The journey's expected values are corrected.
+- Review R1–R3 closed: PASS at `38a43f7`. TESTER `test-V113-38a43f7-3`:
+  - `pnpm check` exit 0 in 212 s (402 engine, 652 app).
+  - `multi-target` and `effect-riders` PASS.
+  - `tier-effects` passed every movement and prone check, then failed at `combat.roll`. The
+    heroes-only campaign takes the adjudication path, where the Director picks the first side with
+    no roll due, so the call was removed.

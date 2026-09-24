@@ -179,7 +179,7 @@ export async function runTierEffects({ actors: { director }, run, runId }: Scena
       assert.equal(proneInstance.registrationId, undefined);
 
       // EoT imposed during the target's own turn ends at the end of that turn.
-      await invoke('combat.roll');
+      // Heroes only: the source gives no starting side, so the Director chooses without a roll.
       await invoke('combat.first', { side: 'heroes' });
       await submit(`@{character:${target}} /turn take`);
       const net = await use(netter, 'Net and Stab');

@@ -87,3 +87,29 @@ or restore the replaced instance and registration, and add a focused test.
 10. The STATUS row order.
 
 No tests, builds, generators or services were run by the reviewer.
+
+## R1–R3 closure: `38a43f74c2036ed619c276f9855a4812900eb850`
+
+Final static verdict: PASS. Reviewed `285813f..38a43f7` against the pinned Compendium `fb83a789`.
+
+- **R1 closed.** `end-of-next-turn` now matches the turn owner or any `participantIds` entry, the
+  same as `creature-turn`. EoT on an attached captain ends with the squad's shared turn
+  (`rule/monster/captain.md`, `rule/combat/end-of-turn.md`). The new `isDue` test covers a
+  participant, a non-participant and `turn-start`.
+- **R2 closed.** The Vuken actor uses the Stormwight `kit-raden` witness (M 2 / A 2). The Vuken
+  kit is legal for a Stormwight (`feature/fury/level-1/beast-shape.md`, `kit/vuken.md`,
+  Q-R-103). Expected prone at any tier and damage 6/9/11 are unchanged.
+- **Conduit expectations.** Holy Lash and Staggering Curse are Magic, so Prayer of Destruction
+  adds +1 (`feature/conduit/level-1/prayer-of-destruction.md`) and damage is 6/8/11. Magnetic
+  Strike stays 7/10/13 and Net and Stab 6/8/10.
+- **R3 closed.** A replaced taunt records `replacedBy` (contract and validator). `ability.correct`
+  refuses to correct the replacing use and tells the user to rewind, which restores the old taunt
+  and its registration through the journal. The app test asserts the refusal.
+- **Non-blocking fixes.** Observations 2, 3, 5 and 10 are fixed. Observations 1, 4 and 6–9 stay
+  open and are not regressions.
+- No compiler, grammar or resolver source changed in this range, so the 27-promotion inventory
+  still holds.
+
+No tests, builds, generators or services were run by the reviewer.
+
+Reviewed-By: V113-REVIEW (pass, 2026-09-24)
