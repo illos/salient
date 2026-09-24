@@ -719,7 +719,8 @@
           "cost": 0,
           "damageByTier": [5, 8, 10],
           "source": "kit/raider.md",
-          "rider": true
+          "rider": false,
+          "modifier": "V159: the Effect is a modifier the engine applies, a consumable bane on the target's next power roll (kit/raider.md); no longer a table-work rider"
         }
       ]
     },

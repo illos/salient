@@ -1,0 +1,133 @@
+{
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "method": "V159 modifiers. The builds reuse reviewed witnesses unchanged: the level-2 Vanguard Tactician v94-tactician-3-alt (tests/fixtures/v116-tactician-three-expected.json, on base v94-tactician-3 from tests/fixtures/v94-tactician-expected.json) and the Raider-kit Fury kit-raider (tests/fixtures/v109-riders-expected.json); their selections are copied here. Every expected value below is read from the pinned files named in each source, or from those reviewed ledgers, never from the compiler, the engine or a run of the code under test. Real campaign dice are used, so only dice-independent values are asserted: recorded contributions, exclusions, consumption, edge and bane counts, costs, surges and stability.",
+  "tactician": {
+    "witness": "v94-tactician-3-alt",
+    "level": 2,
+    "selections": {
+      "culture.name": "wilderness mercenary commune",
+      "culture.language": "Anjali",
+      "culture.environment": "Wilderness",
+      "culture.environment.skill": "Swim",
+      "culture.organization": "Communal",
+      "culture.organization.skill": "Blacksmithing",
+      "culture.upbringing": "Martial",
+      "culture.upbringing.skill": "Intimidate",
+      "career.choice": "Soldier",
+      "career.soldier.skill.exploration": "Endurance",
+      "career.soldier.skill.intrigue": "Alertness",
+      "career.soldier.languages": ["Kalliak", "Vaslorian"],
+      "career.soldier.perk": "Teamwork",
+      "career.soldier.inciting-incident": "Sole Survivor",
+      "ancestry.choice": "Human",
+      "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+      "class.choice": "Tactician",
+      "class.tactician.characteristic-array": "1, 0, 0",
+      "class.tactician.array-assignment": {
+        "Agility": 1,
+        "Intuition": 0,
+        "Presence": 0
+      },
+      "class.tactician.skills": ["Monsters", "Strategy"],
+      "class.tactician.doctrine": "Vanguard",
+      "class.tactician.doctrine-skill": "Persuade",
+      "class.tactician.ability-3": "Inspiring Strike",
+      "class.tactician.ability-5": "Now!",
+      "kit.choice": "Martial Artist",
+      "class.tactician.second-kit": "Mountain",
+      "details.name": "V159 Vanguard",
+      "class.tactician.arsenal.stamina": "Mountain",
+      "class.tactician.arsenal.meleeDamage": "Mountain",
+      "class.tactician.level-2.perk": "Forgettable Face",
+      "class.tactician.level-2.vanguard-ability": "Squad! On Me!"
+    },
+    "might": 2,
+    "stability": 2,
+    "stabilitySource": "tests/fixtures/v116-tactician-three-expected.json witnesses.v94-tactician-3-alt.levelTwo.stability and .characteristics.M"
+  },
+  "raider": {
+    "witness": "kit-raider",
+    "level": 1,
+    "selections": {
+      "culture.name": "wilderness mercenary commune",
+      "culture.language": "Anjali",
+      "culture.environment": "Wilderness",
+      "culture.environment.skill": "Swim",
+      "culture.organization": "Communal",
+      "culture.organization.skill": "Blacksmithing",
+      "culture.upbringing": "Martial",
+      "culture.upbringing.skill": "Intimidate",
+      "career.choice": "Soldier",
+      "career.soldier.skill.exploration": "Endurance",
+      "career.soldier.skill.intrigue": "Alertness",
+      "career.soldier.languages": ["Kalliak", "Vaslorian"],
+      "career.soldier.perk": "Teamwork",
+      "career.soldier.inciting-incident": "Sole Survivor",
+      "ancestry.choice": "Human",
+      "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+      "details.name": "V159 Raider",
+      "class.choice": "Fury",
+      "class.fury.characteristic-array": "2, −1, −1",
+      "class.fury.array-assignment": {
+        "Reason": -1,
+        "Intuition": 2,
+        "Presence": -1
+      },
+      "class.fury.skills": ["Jump", "Climb"],
+      "class.fury.aspect": "Berserker",
+      "class.fury.signature-ability": "Brutal Slam",
+      "class.fury.ability-3": "Out of the Way!",
+      "class.fury.ability-5": "Thunder Roar",
+      "kit.choice": "Raider"
+    }
+  },
+  "squad": {
+    "name": "Squad! On Me!",
+    "source": "feature/ability/tactician/level-2/squad-on-me.md",
+    "cost": {
+      "resource": "focus",
+      "amount": 5
+    },
+    "target": "Self and each ally in the area",
+    "effect": "Until the start of your next turn, each target has a bonus to stability equal to your Might score. Additionally, each target gains 2 surges.",
+    "surges": 2,
+    "modifier": {
+      "kind": "stat",
+      "stat": "stability",
+      "amount": 2
+    },
+    "duration": {
+      "kind": "start-of-next-turn",
+      "anchor": "owner"
+    }
+  },
+  "awe": {
+    "name": "Raider's Awe",
+    "source": "kit/raider.md",
+    "effect": "The target takes a bane on their next power roll made before the end of their next turn.",
+    "modifier": {
+      "kind": "roll",
+      "target": "rolls-by",
+      "scope": "power-roll",
+      "banes": 1
+    },
+    "consumeOn": {
+      "event": "power-roll"
+    },
+    "duration": {
+      "kind": "end-of-next-turn",
+      "anchor": "subject"
+    }
+  },
+  "slam": {
+    "name": "Brutal Slam",
+    "source": "feature/ability/fury/level-1/brutal-slam.md",
+    "push": [1, 2, 4]
+  },
+  "foe": {
+    "definition": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
+    "name": "Goblin Warrior",
+    "source": "monster/goblin/statblock/goblin-warrior.md",
+    "ability": "Spear Charge"
+  }
+}

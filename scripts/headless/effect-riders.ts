@@ -30,6 +30,7 @@ type Live = {
   }[];
   stamina: number;
   heroicResource: { current: number };
+  effectInstances?: { id: string; kind: string; status: string }[];
   [key: string]: unknown;
 };
 type Saved = { evaluation: EvaluationResult; liveState: Live };
@@ -180,21 +181,45 @@ export async function runEffectRiders({ actors: { director }, run, runId }: Scen
             assert.equal(saved.targets[0]!.outcome.damage!.rolledDamage, damage, action.name);
             const after = (await get(targetId)).liveState;
             assert.equal(after.stamina, 24 - damage, action.name);
+            // V159: a modifier Effect stores one modifier instance on the target and nothing else.
+            const modifiers = saved.compiled.effects.filter(o => o.effect.kind === 'modifier');
+            const modifier = 'modifier' in action;
+            assert.equal(modifiers.length, modifier ? 1 : 0, `${action.name} modifier`);
+            const added = (after.effectInstances ?? []).filter(
+              i => !(before.effectInstances ?? []).some(b => b.id === i.id),
+            );
             assert.deepEqual(
-              { ...after, stamina: before.stamina },
-              before,
+              added.map(i => [i.id, i.kind, i.status]),
+              modifier ? [[modifiers[0]!.id, 'modifier', 'active']] : [],
+              `${action.name} stored modifiers`,
+            );
+            const withoutEffects = ({ effectInstances, ...rest }: typeof after) => {
+              void effectInstances;
+              return rest;
+            };
+            assert.deepEqual(
+              withoutEffects({ ...after, stamina: before.stamina }),
+              withoutEffects(before),
               `${action.name} target rider manual`,
             );
             const actorAfter = (await get(actorId)).liveState;
             assert.equal(actorAfter.heroicResource.current, 0, `${action.name} cost`);
+            // V158: the owner of an effect another creature holds keeps a pointer to it.
+            const { ownedEffects, ...actorRest } = withoutResource(actorAfter);
+            const { ownedEffects: ownedBefore, ...actorBeforeRest } = withoutResource(actorBefore);
+            assert.deepEqual(actorRest, actorBeforeRest, `${action.name} actor rider manual`);
             assert.deepEqual(
-              withoutResource(actorAfter),
-              withoutResource(actorBefore),
-              `${action.name} actor rider manual`,
+              ((ownedEffects ?? []) as { id: string }[]).map(e => e.id),
+              [
+                ...((ownedBefore ?? []) as { id: string }[]).map(e => e.id),
+                ...(modifier ? [modifiers[0]!.id] : []),
+              ],
+              `${action.name} owner pointer`,
             );
             const riders = saved.compiled.effects.filter(o => o.effect.kind === 'rider');
             assert.equal(riders.length, action.rider ? 1 : 0, action.name);
             if (!action.rider) {
+              if (modifier) continue;
               assert.equal(
                 saved.compiled.effects.find(o => o.effect.kind === 'condition')!.effect.status,
                 'resisted',

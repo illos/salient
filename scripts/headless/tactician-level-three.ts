@@ -26,7 +26,12 @@ type Saved = {
   selections: DraftSelection[];
   authored: { name: string; appearance: string; biography: string; notes: string };
   evaluation: EvaluationResult;
-  liveState: { heroicResource: { current: number }; stamina: number } | null;
+  liveState: {
+    heroicResource: { current: number };
+    stamina: number;
+    surges: number;
+    effectInstances?: { sourceUseEventId: string; payload: unknown }[];
+  } | null;
 };
 type Log = {
   id: string;
@@ -315,6 +320,32 @@ export async function runTacticianLevelThree({
                 ]),
                 /taunted/i,
                 name,
+              );
+            } else if (name === 'Squad! On Me!') {
+              // V159 (feature/ability/tactician/level-2/squad-on-me.md): compiled without a power
+              // roll; 2 surges and a stability bonus equal to the Tactician's Might, both applied.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              assert.equal(after.liveState?.surges, before.liveState!.surges + 2, name);
+              const bonus = after.liveState?.effectInstances?.find(
+                i => i.sourceUseEventId === use.eventId,
+              );
+              assert.deepEqual(
+                bonus?.payload,
+                {
+                  kind: 'modifier',
+                  text: 'Until the start of your next turn, each target has a bonus to stability equal to your Might score.',
+                  modifier: {
+                    kind: 'stat',
+                    stat: 'stability',
+                    amount: b.w.levelTwo.characteristics.M,
+                  },
+                },
+                name,
+              );
+              assert.equal(
+                after.liveState?.stamina,
+                before.liveState?.stamina,
+                `${name} no damage`,
               );
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
