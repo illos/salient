@@ -10,15 +10,9 @@ import type { DraftSelection } from '../../shared/characterDraft';
 import type {
   CharacterChoiceOrigins,
   EvaluationResult,
-  SelectionValue,
 } from '../../shared/contracts/characterEvaluation';
 import type { CharacterSheet, HeroSheet } from '../../shared/contracts/characterSheet';
 import type { BuildReconciliation } from '../../shared/contracts/liveState';
-import { getDefinitions } from '../../shared/content/character-decisions';
-import { draftSelectionsFrom } from '../../shared/evaluate/draft';
-import type { Selections } from '../../shared/evaluate/structure';
-import { changeChoice } from '../../shared/evaluate/choiceTransition';
-import { DecisionEditor } from '../wizard';
 import { HeroSoFar } from '../wizard/hero-so-far';
 import { decisionLabel } from '../wizard/presentation';
 import { Button } from '../components/ui/button';
@@ -64,9 +58,6 @@ interface HistorySnapshot {
   evaluation: EvaluationResult | null;
   selections: DraftSelection[];
   activationPreview: BuildReconciliation | null;
-}
-function selectionMap(items: DraftSelection[]): Selections {
-  return Object.fromEntries(items.map(item => [item.decisionId, item.value as SelectionValue]));
 }
 
 /** The Quiet panel each progression section sits in; its previews are `sub` insets. */
@@ -121,209 +112,26 @@ function BuildPreview({ evaluation, name }: { evaluation?: EvaluationResult; nam
   );
 }
 
-function AdvancementEditor({
-  characterId,
-  character,
-  progression,
-  reload,
-}: {
-  characterId: Id<'characters'>;
-  character: OwnedCharacter;
-  progression: Advancement;
-  reload: () => void;
-}) {
-  // Freeze the edit base. Reactive updates must never overwrite an unsaved local choice or
-  // silently rebase it onto a different effective build or another tab's saved draft.
-  const [base] = useState(() => ({
-    revision: progression.revision,
-    id: progression.baseRevisionId,
-    selections: progression.baseSelections,
-    targetLevel: progression.targetLevel,
-    definitions: getDefinitions(progression.targetLevel, progression.choiceOrigins),
-  }));
-  const definitions = base.definitions;
-  const firstLevelIds = new Set(
-    getDefinitions(progression.fromLevel).steps.flatMap(s => s.decisions.map(d => d.id)),
-  );
-  const newDecisions = definitions.steps.flatMap(step =>
-    step.decisions
-      .filter(decision => !firstLevelIds.has(decision.id))
-      .map(decision => ({ step, decision })),
-  );
-  const newIds = new Set(newDecisions.map(({ decision }) => decision.id));
-  const [choices, setChoices] = useState<Selections>(() =>
-    selectionMap(progression.draftIsStale ? [] : (progression.draft?.selections ?? [])),
-  );
-  const [draftVersion, setDraftVersion] = useState(progression.draft?.version ?? 0);
-  const [dirty, setDirty] = useState(false);
-  const [finished, setFinished] = useState(false);
-  const [message, setMessage] = useState('');
-  const save = useMutation(api.characters.saveAdvancement);
-  const finalize = useMutation(api.characters.finalizeAdvancement);
-  const command = useCommand();
-  const newSelections = draftSelectionsFrom(choices, definitions).filter(s =>
-    newIds.has(s.decisionId),
-  );
-  const merged = [...base.selections, ...newSelections];
-  const evaluation = useQuery(api.characters.evaluate, {
-    characterId,
-    context: 'progression',
-    selections: merged,
-    targetLevel: base.targetLevel,
-  }) as EvaluationResult | undefined;
-  const stale =
-    progression.revision !== base.revision ||
-    progression.baseRevisionId !== base.id ||
-    (progression.draft?.version ?? 0) > draftVersion;
-  const blocked =
-    command.pending || character.combatLocked || stale || !progression.eligible || finished;
-  const args = base.id
-    ? {
-        characterId,
-        expectedRevision: base.revision,
-        expectedBaseRevisionId: base.id,
-        expectedDraftVersion: draftVersion,
-      }
-    : null;
-  return (
-    <section aria-label="Level advancement" className={`${PANEL} flex flex-col gap-4`}>
-      <h2>Level up to level {base.targetLevel}</h2>
-      <p className="m-0 text-base">
-        Keep your earlier choices and add this level’s grants. Taking a level-up needs no Director
-        approval; damage taken and Recoveries spent stay the same.
-      </p>
-      <p className="m-0 text-base">Pending level-ups: {progression.pendingLevelUps}.</p>
-      {!progression.eligible && !finished && <Notice>{progression.reason}</Notice>}
-      {character.combatLocked && <Notice>Progression is locked during combat.</Notice>}
-      {stale && !finished && (
-        <Notice role="status">
-          The character or advancement draft changed. Your local choices are still shown. Reload the
-          latest build before saving or advancing.
-          <Button variant="outline" className="ml-3 bg-placeholder" onClick={reload}>
-            Reload latest build
-          </Button>
-        </Notice>
-      )}
-      {progression.draftIsStale && !stale && !finished && (
-        <Notice>
-          The previous advancement draft belongs to an older build or level. Save new choices for
-          this build.
-        </Notice>
-      )}
-      {message && <Notice role="status">{message}</Notice>}
-      {!finished && base.id && progression.eligible && (
-        <div className="grid items-start gap-6 lg:grid-cols-2">
-          <div className="flex flex-col gap-5">
-            <fieldset disabled={blocked} className="min-w-0 space-y-5">
-              <legend className="sr-only">New level {base.targetLevel} choices</legend>
-              {newDecisions.map(({ decision, step }) => (
-                <DecisionEditor
-                  key={decision.id}
-                  definitions={definitions}
-                  decision={decision}
-                  step={step}
-                  selections={{ ...selectionMap(base.selections), ...choices }}
-                  authored={character.authored}
-                  onAuthored={() => undefined}
-                  diagnostics={evaluation?.diagnostics[decision.id]}
-                  onSelect={(id, value) => {
-                    if (blocked || !newIds.has(id)) return;
-                    setChoices(previous => {
-                      // Change the scoped choice against the frozen build using the shared transition.
-                      const pruned = changeChoice(
-                        { ...selectionMap(base.selections), ...previous },
-                        definitions,
-                        id,
-                        value,
-                      );
-                      return Object.fromEntries(
-                        Object.entries(pruned.selections).filter(([key]) => newIds.has(key)),
-                      );
-                    });
-                    setDirty(true);
-                    setMessage('');
-                  }}
-                />
-              ))}
-            </fieldset>
-            <Button
-              disabled={blocked || !args}
-              onClick={async () => {
-                if (!args) return;
-                const ok = await command.run(
-                  async commandId => {
-                    const version = await save({ ...args, commandId, selections: newSelections });
-                    setDraftVersion(version);
-                  },
-                  JSON.stringify(['save-advancement', args, newSelections]),
-                );
-                if (ok) {
-                  setDirty(false);
-                  setMessage('Advancement draft saved.');
-                }
-              }}
-            >
-              Save advancement draft
-            </Button>
-            <Button
-              disabled={
-                blocked || !args || dirty || draftVersion === 0 || evaluation?.status !== 'complete'
-              }
-              onClick={async () => {
-                if (!args) return;
-                const ok = await command.run(
-                  commandId => finalize({ ...args, commandId }),
-                  JSON.stringify(['finalize-advancement', args]),
-                );
-                if (ok) {
-                  setFinished(true);
-                  setMessage(
-                    `Advanced to level ${base.targetLevel}. The active sheet and build history have been updated.`,
-                  );
-                }
-              }}
-            >
-              Take level {base.targetLevel}
-            </Button>
-            {dirty && (
-              <p className="m-0 text-sm text-muted-foreground">
-                Save these choices before advancing.
-              </p>
-            )}
-          </div>
-          <div>
-            <p className="mt-0 text-sm text-muted-foreground">
-              Proposed level {base.targetLevel} build.
-            </p>
-            <BuildPreview evaluation={evaluation} name={character.authored.name} />
-          </div>
-        </div>
-      )}
-    </section>
-  );
-}
-
-function OwnerAdvancement({
-  characterId,
-  character,
-}: {
-  characterId: Id<'characters'>;
-  character: OwnedCharacter;
-}) {
+function OwnerAdvancement({ characterId }: { characterId: Id<'characters'> }) {
   const progression = useQuery(api.characters.progression, { characterId }) as
     Advancement | undefined;
-  const [reloadVersion, setReloadVersion] = useState(0);
   if (!progression) return <Loading>Loading advancement…</Loading>;
-  // The level-up panel appears only while a granted level-up waits to be taken (V163).
+  // A pending level-up is taken in the level-up screen (V164); this page keeps the history.
   if (progression.pendingLevelUps < 1 && !progression.draft) return null;
   return (
-    <AdvancementEditor
-      key={`${characterId}-${reloadVersion}`}
-      characterId={characterId}
-      character={character}
-      progression={progression}
-      reload={() => setReloadVersion(n => n + 1)}
-    />
+    <section aria-label="Level advancement" className={`${PANEL} flex flex-col gap-3`}>
+      <h2 className="m-0">Level up to level {progression.targetLevel}</h2>
+      <p className="m-0 text-base">
+        {progression.pendingLevelUps > 1
+          ? `${progression.pendingLevelUps} level-ups are waiting; take them one level at a time.`
+          : 'A level-up is waiting.'}
+      </p>
+      <div>
+        <Link to="/characters/$characterId/level-up" params={{ characterId }} className="text-base">
+          Open the level-up
+        </Link>
+      </div>
+    </section>
   );
 }
 
@@ -539,7 +347,7 @@ function AuthorizedProgression({
     <>
       {sheet.audience === 'owner' &&
         (character ? (
-          <OwnerAdvancement characterId={characterId} character={character} />
+          <OwnerAdvancement characterId={characterId} />
         ) : (
           <Loading>Loading character…</Loading>
         ))}

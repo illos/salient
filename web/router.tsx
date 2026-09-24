@@ -37,6 +37,9 @@ const WizardPage = lazy(() => import('./wizard').then(module => ({ default: modu
 const ProgressionPage = lazy(() =>
   import('./progression').then(module => ({ default: module.ProgressionPage })),
 );
+const LevelUpPage = lazy(() =>
+  import('./progression/level-up').then(module => ({ default: module.LevelUpPage })),
+);
 const AccountPage = lazy(() =>
   import('./account').then(module => ({ default: module.AccountPage })),
 );
@@ -455,6 +458,13 @@ const progressionRoute = createRoute({
     <ProgressionPage characterId={progressionRoute.useParams().characterId as Id<'characters'>} />
   ),
 });
+const levelUpRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/characters/$characterId/level-up',
+  component: () => (
+    <LevelUpPage characterId={levelUpRoute.useParams().characterId as Id<'characters'>} />
+  ),
+});
 const accountRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/account',
@@ -522,6 +532,7 @@ export const router = createRouter({
     characterRoute,
     wizardRoute,
     progressionRoute,
+    levelUpRoute,
     accountRoute,
     accountSectionRoute,
     foesRoute,

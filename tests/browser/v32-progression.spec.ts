@@ -62,6 +62,13 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
       await adjust(field, value);
     const before: HeroSheet = await query('characters:sheet', { characterId });
     const original = await query('characters:get', { characterId });
+    // V164: the owner's sheet offers the level-up; it opens the builder's level-up mode.
+    await player.goto(`/characters/${characterId}`);
+    const levelUp = player.getByRole('link', { name: 'Level up to 2', exact: true });
+    await expect(levelUp).toBeVisible();
+    await player.screenshot({ path: `${directory}/v164-sheet-level-up.png`, fullPage: true });
+    await levelUp.click();
+    await expect(player.getByRole('heading', { name: 'Level 2 perk' })).toBeVisible();
     // V37: switching a level-up perk removes its hidden modifier target before saving.
     await player.getByLabel('Area of Expertise', { exact: true }).check();
     const target = player.getByLabel('Area of Expertise: choose an owned crafting skill', {
@@ -70,8 +77,10 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await target.selectOption('Blacksmithing');
     await player.getByLabel('Danger Sense', { exact: true }).check();
     await expect(target).toHaveCount(0);
-    await player.getByLabel('Wrecking Ball', { exact: true }).check();
-    await player.getByRole('button', { name: 'Save advancement draft', exact: true }).click();
+    await player.screenshot({ path: `${directory}/v164-step-perk.png`, fullPage: true });
+    // Moving on saves the level-up's choices (the shared saveAdvancement operation).
+    await player.getByRole('button', { name: /Continue to Level 2 Berserker ability/ }).click();
+    await expect(player.getByRole('heading', { name: 'Level 2 Berserker ability' })).toBeVisible();
     await expect
       .poll(async () => (await query('characters:progression', { characterId })).draft?.version)
       .toBe(1);
@@ -82,11 +91,28 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
       ),
     ).toBe(false);
     expect(savedAdvancement.baseSelections).toEqual(original.selections);
+    await player.getByLabel('Wrecking Ball', { exact: true }).check();
+    await player.screenshot({ path: `${directory}/v164-step-ability.png`, fullPage: true });
+    await player.getByRole('button', { name: /Continue to Review and take/ }).click();
+    const review = player.getByRole('region', { name: 'Review' });
+    await expect(review).toBeVisible();
+    // Q-CHAR-2 revised: 10 damage taken stays (20/30 → 29/39); Recoveries 4/10 unchanged maximum.
+    await expect(review.getByRole('row', { name: /Stamina/ })).toContainText('20 / 30');
+    await expect(review.getByRole('row', { name: /Stamina/ })).toContainText('29 / 39');
+    await expect(review).toContainText('Wrecking Ball');
+    await player.screenshot({ path: `${directory}/v164-review.png`, fullPage: true });
+    // Reloading resumes the saved choices.
     await player.reload();
     await expect(player.getByLabel('Danger Sense', { exact: true })).toBeChecked();
+    await player.getByRole('button', { name: /Continue to Level 2 Berserker ability/ }).click();
     await expect(player.getByLabel('Wrecking Ball', { exact: true })).toBeChecked();
-    await player.screenshot({ path: `${directory}/advancement-ready.png`, fullPage: true });
-    await player.getByRole('button', { name: 'Take level 2', exact: true }).click();
+    await player.getByRole('button', { name: /Continue to Review and take/ }).click();
+    await player
+      .getByRole('region', { name: 'Review' })
+      .getByRole('button', { name: 'Take level 2', exact: true })
+      .click();
+    await expect(player.getByText(`${heroName} is now level 2.`)).toBeVisible();
+    await player.screenshot({ path: `${directory}/v164-taken.png`, fullPage: true });
     await expect
       .poll(
         async () => (await query('characters:sheet', { characterId })).build?.baseline?.level.value,

@@ -261,6 +261,11 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
   const navigate = useNavigate();
   const sheet = useQuery(api.characters.sheet, { characterId }) as SheetPayload | undefined;
   const mine = useQuery(api.characters.listMine);
+  // A pending level-up (V163) shows as the owner's "Level up" action (V164).
+  const progression = useQuery(
+    api.characters.progression,
+    sheet?.audience === 'owner' ? { characterId } : 'skip',
+  ) as { pendingLevelUps: number; targetLevel: number } | undefined;
   const [view, setView] = useState<'effective' | 'draft'>('effective');
   if (!sheet) return <Loading>Loading character…</Loading>;
   const owner = sheet.audience === 'owner';
@@ -314,6 +319,16 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
                 <option value="draft">Draft preview</option>
               </select>
             </label>
+          )}
+          {owner && (progression?.pendingLevelUps ?? 0) > 0 && (
+            <Link
+              to="/characters/$characterId/level-up"
+              params={{ characterId }}
+              className={buttonVariants({ size: 'sm', className: 'hover:no-underline' })}
+            >
+              Level up to {progression!.targetLevel}
+              {progression!.pendingLevelUps > 1 ? ` (${progression!.pendingLevelUps} pending)` : ''}
+            </Link>
           )}
           {sheet.audience !== 'peer' && (
             <Link
