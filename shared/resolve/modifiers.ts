@@ -189,9 +189,11 @@ export function describeModifier(payload: ModifierPayload): string {
 // ---------------------------------------------------------------------------------------------
 // Rolls (design section 2).
 
-/** What the engine knows about one roll: an ability roll, and whether the ability is a strike. */
+/** What the engine knows about one roll: whether it is a strike, and whether it is a test. */
 export interface RollFacts {
   strike: boolean;
+  /** A test is a power roll but not an ability roll (rule/dice/power-roll.md). */
+  test?: boolean;
 }
 
 /**
@@ -247,6 +249,7 @@ function rollModifiersOf(
     if (modifier.kind !== 'roll') return false;
     if (modifier.target !== (side === 'actor' ? 'rolls-by' : 'rolls-against')) return false;
     // rule/dice/power-roll.md: every ability roll is a power roll; `strike` needs a strike.
+    if (modifier.scope === 'ability-roll') return !roll.test;
     return modifier.scope !== 'strike' || roll.strike;
   });
 }

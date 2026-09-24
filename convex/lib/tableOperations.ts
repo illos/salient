@@ -43,6 +43,7 @@ import {
   withContributions,
 } from '../../shared/resolve/modifiers';
 import { consumeRollEffects } from './effectInstances';
+import { excludeList } from './abilityOperations';
 import { requireContent } from '../content';
 import { journalPatch } from './journal';
 import { run, type OperationDefinition, type Outcome, type TableContext } from './registry';
@@ -180,14 +181,11 @@ const testRoll: OperationDefinition = {
     // V159 (docs/lasting-effects-design.md#2-modifier-pipeline): "A test is a power roll"
     // (rule/dice/power-roll.md), so the tester's active power-roll modifiers apply to it. A test has
     // no target, so only the tester's own `rolls-by` modifiers count; a test is never a strike.
-    const exclude =
-      args.exclude === undefined
-        ? []
-        : (Array.isArray(args.exclude) ? args.exclude : [args.exclude]).map(String);
+    const exclude = excludeList(args.exclude);
     const contributions = rollContributions({
       actor: { id: actor!.id, instances: character.liveState?.effectInstances ?? [] },
       targets: [{ id: actor!.id, instances: [] }],
-      roll: { strike: false },
+      roll: { strike: false, test: true },
       exclude,
     })[0]!.contributions;
     const unknown = exclude.filter(id => !contributionIds(contributions).has(id));

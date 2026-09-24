@@ -424,3 +424,26 @@ test('saving throws: a bonus adds to the d10 before the 6-or-higher threshold', 
   const plusOne = instance('hero', 'swarm', { kind: 'stat', stat: 'saving-throw', amount: 1 });
   expect(statModifiers([plusOne], 'saving-throw').total).toBe(1);
 });
+
+test('V159: a test is a power roll but not an ability roll (rule/dice/power-roll.md)', () => {
+  const abilityEdge = instance('ally', 'ability-edge', {
+    kind: 'roll',
+    target: 'rolls-by',
+    scope: 'ability-roll',
+    edges: 1,
+  });
+  const powerBane = instance('ally', 'power-bane', {
+    kind: 'roll',
+    target: 'rolls-by',
+    scope: 'power-roll',
+    banes: 1,
+  });
+  const contributing = (test: boolean) =>
+    rollContributions({
+      actor: { id: 'ally', instances: [abilityEdge, powerBane] },
+      targets: [{ id: 'ally', instances: [] }],
+      roll: { strike: false, test },
+    })[0]!.contributions.map(c => c.instanceId);
+  expect(contributing(false).sort()).toEqual([abilityEdge.id, powerBane.id].sort());
+  expect(contributing(true)).toEqual([powerBane.id]);
+});

@@ -1195,7 +1195,7 @@ function effectsOf(record: { character?: Doc<'characters'>; foe?: Doc<'foes'> })
 }
 
 /** V159: the `exclude` argument, one instance id or a list of them. */
-function excludeList(value: unknown): string[] {
+export function excludeList(value: unknown): string[] {
   if (value === undefined) return [];
   const list = Array.isArray(value) ? value : [value];
   if (list.some(item => typeof item !== 'string' || !item))
@@ -1751,7 +1751,7 @@ const abilityUse: OperationDefinition = {
       const describeEffect = (effect: CompiledEffectOutcome) => {
         if (effect.kind === 'modifier')
           return effect.status === 'applied' && effect.payload
-            ? `${nameOf(effect.targetId)}: ${describeModifier(effect.payload)}, ${describeDuration(effect.spec.duration, effect.spec.endsWhen)} (applied automatically).`
+            ? `${nameOf(effect.targetId)}: ${describeModifier(effect.payload)}, ${describeDuration(effect.spec.duration, effect.spec.endsWhen)} (tracked; the linked effect entry records whether it applies automatically).`
             : `For the table (${nameOf(effect.targetId)}): "${effect.clause}"`;
         if (effect.kind === 'gain' && effect.application) {
           const a = effect.application;
