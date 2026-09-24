@@ -350,6 +350,8 @@ async function fireHeroicResource(
       amount,
       causeLabel: 'negative clarity (strain)',
     });
+    // Damage can set off other heroes' observed triggers (resourceTriggers.ts), which write them.
+    firing.knownHeroes?.clear();
     await writeDamage(ctx, firing.scope, record, application);
     return {
       kind: 'clock.heroic-resource',
@@ -560,6 +562,8 @@ async function fireHeroicResource(
           causeLabel: 'angered gods',
         },
       );
+      // Damage can set off other heroes' observed triggers (resourceTriggers.ts), which write them.
+      firing.knownHeroes?.clear();
       await writeDamage(ctx, firing.scope, record, application);
       detail += ` (Stamina ${application.staminaBefore} → ${application.staminaAfter})`;
     }
