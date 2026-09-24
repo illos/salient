@@ -346,7 +346,9 @@ No user approval is implied by this classification.
 
 ### Q-CHAR-2: How should activating an edited build reconcile a played hero's resources?
 
-- **Status:** resolved 2026-09-15; [owning policy](character-wizard-spec.md#current-values-when-a-build-changes)
+- **Status:** resolved 2026-09-15, **revised by the user 2026-09-24**: damage taken and Recoveries spent
+  stay unchanged when a maximum rises or falls (20/30 → 26/36; 26/36 → 20/30). The minimum floor on a
+  decrease is an open proposal. [owning policy](character-wizard-spec.md#current-values-when-a-build-changes)
 - **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-2).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `docs/character-wizard-spec.md#12-open-decisions`.

@@ -641,8 +641,8 @@ history alone makes no finalized revision, and pending revisions do not activate
 See [progression history](character-wizard-spec.md#5-progression-history). Shared UI/headless
 operations must preserve these semantics without requiring Git storage or branching UI.
 
-**Confirmed 2026-09-15 (Q-CHAR-2):** Maximum increases leave compatible current values unchanged;
-a lower maximum caps any current value above it. Stamina 20/30 becomes 20/36, not 26/36. See
+**Confirmed 2026-09-15, revised 2026-09-24 (Q-CHAR-2):** a build change keeps damage taken and
+Recoveries spent unchanged as maxima rise or fall. Stamina 20/30 becomes 26/36; 26/36 becomes 20/30. See
 [the owning policy](character-wizard-spec.md#current-values-when-a-build-changes). Replaced resource
 types require explicit reconciliation without an invented conversion. Apply against current live
 state atomically; source-defined restoration remains separate. A preview alone does not activate a build.

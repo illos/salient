@@ -231,15 +231,20 @@ because the wizard was reopened. Baseline changes use the following confirmed re
 
 ### Current values when a build changes
 
-**Confirmed 2026-09-15 (Q-CHAR-2):** Activating an edited, advanced or restored build updates its
-baseline and maxima while retaining each compatible current value. Increasing a maximum does not
-increase the current amount. If a new maximum is below the current amount, reduce the current amount
-to that maximum: `newCurrent = min(oldCurrent, newMaximum)` for a value with such a maximum.
+**Confirmed 2026-09-24 (Q-CHAR-2 revised):** Activating an edited, advanced or restored build updates
+its baseline and maxima while keeping the **damage taken and Recoveries spent** unchanged, in both
+directions: `newCurrent = newMaximum − (oldMaximum − oldCurrent)`. The whole bar grows or shrinks with
+the maximum; the gap below it stays.
 
-For example, Stamina 20/30 becomes 20/36 when the maximum rises, and 18/18 when the maximum falls to
-18. Recoveries 7/10 becomes 7/12, or 6/6 if the maximum falls to six. This preserves current amounts;
-the earlier proposal to preserve the numerical damage/spending deficit (20/30 → 26/36) is superseded.
-Do not add a zero floor to source-authorized negative values.
+For example, Stamina 30/30 becomes 36/36 when the maximum rises to 36, and 20/30 (10 damage) becomes
+26/36. When the maximum falls to 30, 26/36 becomes 20/30. Recoveries 7/10 (3 spent) becomes 9/12. This
+applies equally to level-ups taken long after the respite that granted them, so a hero who rested to
+full stays full. It supersedes the 2026-09-15 rule (keep the current amount; cap on decrease) and
+restores the original deficit proposal.
+
+**Open (proposal, not confirmed):** when a decrease would push current Stamina to 0 or below, or
+Recoveries below 0, the build change stops at 1 Stamina and 0 Recoveries rather than making the hero
+dying through an edit. Do not add a zero floor to source-authorized negative values such as Clarity.
 
 This applies to values that actually have separate current amounts and maxima. Derived values such
 as recovery value, characteristics and winded threshold still recalculate from the effective build;

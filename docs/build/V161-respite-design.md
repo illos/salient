@@ -27,3 +27,7 @@ and generic level-up for all eleven classes can be built. Design only: no code.
 - 2026-09-24: Q4 settled: respite completion grants pending level-ups; taking one is a separate owner
   action later, never blocking the respite or the next session. New requirement: Director-adjustable
   campaign XP per level (default 16), to design later.
+- 2026-09-24: Q-CHAR-2 revised: build changes keep damage taken and Recoveries spent in both directions
+  (30/30 → 36/36; 20/30 → 26/36; 26/36 → 20/30), which also covers late level-ups. Open proposal: floor
+  a decrease at 1 Stamina / 0 Recoveries. Build handoff: the activation code implements the old
+  keep-current/cap rule and must change with generic level-up.
