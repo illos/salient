@@ -8,6 +8,7 @@ import type {
 } from '../contracts/rollResolution.ts';
 import { tierInstruction } from './effectRiders.ts';
 import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
+import { sectionModifier, type ModifierSpec } from './modifiers.ts';
 import {
   effectOnlyTarget,
   readEffectOnlySection,
@@ -115,6 +116,15 @@ export interface InstructionNode extends NodeSource {
   subject?: 'actor' | 'target';
 }
 /**
+ * V159 modifier: a whole printed sentence (a rolled ability's Effect section, or one sentence of an
+ * effect-only section) that a use stores as a `modifier` effect instance the engine applies to
+ * later rolls or derived values (shared/resolve/modifiers.ts).
+ */
+export interface ModifierNode extends NodeSource {
+  kind: 'modifier';
+  spec: ModifierSpec;
+}
+/**
  * V157 executed gain of an effect-only section: temporary Stamina (the greater of the current and
  * granted amounts, rule/health/temporary-stamina.md) and/or surges (added, rule/resource/surge.md).
  */
@@ -127,7 +137,7 @@ export interface GainNode extends NodeSource {
 export type CompiledNode =
   DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
 /** Effect-section nodes: V109 riders, V157 effect-only gains and instructions, or manual work. */
-export type SectionNode = UnsupportedNode | RiderNode | GainNode | InstructionNode;
+export type SectionNode = UnsupportedNode | RiderNode | GainNode | InstructionNode | ModifierNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -264,18 +274,34 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         sections.push(
           clause.kind === 'gain'
             ? { ...node, ...clause }
-            : {
-                ...node,
-                kind: 'instruction',
-                shape: clause.shape,
-                after: '',
-                subject: clause.subject,
-              },
+            : clause.kind === 'modifier'
+              ? { ...node, kind: 'modifier', spec: clause.spec }
+              : {
+                  ...node,
+                  kind: 'instruction',
+                  shape: clause.shape,
+                  after: '',
+                  subject: clause.subject,
+                },
         );
       });
       return;
     }
     if (block.kind === 'section') {
+      // V159: a whole Effect section that is one modifier sentence the engine applies. It is read
+      // before V109 riders, so a sentence the engine now applies is no longer table work.
+      const modifier =
+        block.label === 'Effect' && !block.cost && rollIndex >= 0
+          ? sectionModifier(plain(block.text))
+          : undefined;
+      if (modifier && (grammar.targetShape === 'single' || modifier.subject === 'owner')) {
+        sections.push({
+          ...sourceNode(envelope, locator, 0, block.text),
+          kind: 'modifier',
+          spec: modifier,
+        });
+        return;
+      }
       const rider =
         block.label === 'Effect' && !block.cost && rollIndex >= 0
           ? effectRider(plain(block.text))

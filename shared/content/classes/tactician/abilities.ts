@@ -133,7 +133,7 @@ export const TACTICIAN_ACTIVATION: Record<string, string> = {
   'No Dying on My Watch':
     'Move up to your speed toward the triggering ally, ending adjacent to it or in the nearest square if you cannot reach one; it can spend a Recovery and gains 5 temporary Stamina per enemy you came adjacent to. Then make the power roll + Might against the target (Reason potency, frightened of the triggering ally). The ability is recorded: movement, the Recovery, temporary Stamina and the whole power roll are resolved manually.',
   'Squad! On Me!':
-    'Until the start of your next turn, you and each ally in the area gain a stability bonus equal to your Might, and each gains 2 surges. Apply both manually.',
+    'Until the start of your next turn, you and each ally in the area gain a stability bonus equal to your Might, and each gains 2 surges; the app applies both (V159): the surges at once and the stability to forced movement until the start of your next turn. Do not add them again by hand.',
   'Frontal Assault':
     'Until the end of the encounter or until you are dying: the first time each turn you or an ally damages a target marked by you, that creature can push it 2 and shift 2; allies charging a marked target can use a melee strike signature or heroic ability. Resolve manually.',
   "Hit 'Em Hard!":

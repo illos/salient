@@ -236,13 +236,17 @@ export async function applyEffectInstance(
   };
 }
 
-/** Ends one active instance with a reason, retiring its clock work and its owner's pointer. */
+/**
+ * Ends one active instance with a reason, retiring its clock work and its owner's pointer. V159:
+ * `consumed` marks a consumable component used up by a roll (design section 5a).
+ */
 export async function endEffectInstance(
   ctx: MutationCtx,
   scope: JournalScope,
   holder: EffectHolder,
   id: string,
   reason: string,
+  status: 'ended' | 'consumed' = 'ended',
 ): Promise<EffectInstance | undefined> {
   const current = await read(ctx, holder);
   if (!current) return undefined;
@@ -256,7 +260,7 @@ export async function endEffectInstance(
   }
   const ended: EffectInstance = {
     ...instance,
-    status: 'ended',
+    status,
     endedReason: reason,
     endedEventId: scope.eventId,
   };
@@ -367,6 +371,51 @@ async function logEnded(ctx: MutationCtx, scope: JournalScope, ended: EffectInst
         sourcePath: instance.sourcePath,
       },
     });
+}
+
+/**
+ * V159 (design 5a): the consumable instances a roll used up, each on the creature that holds it.
+ * Consumption is written in the roll's own operation, so undo of the roll restores them. A linked
+ * `effect.consumed` entry names each one.
+ */
+export async function consumeRollEffects(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  consumed: readonly { holder: EffectHolder; instanceId: string }[],
+  roll: string,
+): Promise<EffectInstance[]> {
+  const done: EffectInstance[] = [];
+  for (const { holder, instanceId } of consumed) {
+    const instance = await endEffectInstance(
+      ctx,
+      scope,
+      holder,
+      instanceId,
+      `used up by ${roll}`,
+      'consumed',
+    );
+    if (instance) done.push(instance);
+  }
+  if (!done.length) return done;
+  const cause = (await ctx.db.get(scope.eventId))!;
+  for (const instance of done)
+    await appendEvent(ctx, {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      encounterId: cause.encounterId,
+      origin: 'engine',
+      commandId: cause.commandId,
+      causeEventId: scope.eventId,
+      kind: 'effect.consumed',
+      description: `${instance.actorLabel}'s ${instance.abilityName} on ${instance.subject.name} is used up by ${roll}.`,
+      payload: {
+        effectInstanceId: instance.id,
+        sourceUseEventId: instance.sourceUseEventId,
+        rollEventId: scope.eventId,
+        sourcePath: instance.sourcePath,
+      },
+    });
+  return done;
 }
 
 /**

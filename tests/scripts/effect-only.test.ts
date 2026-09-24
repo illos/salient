@@ -85,7 +85,12 @@ test('the effect-only target reader (rule/combat/target.md)', () => {
   });
   expect(effectOnlyTarget('Each ally in the area', ['Area', 'Magic'])).toEqual({ kind: 'area' });
   expect(effectOnlyTarget('Each enemy in the area', ['Area'])).toBeUndefined();
-  expect(effectOnlyTarget('Self and each ally in the area', ['Area'])).toBeUndefined();
+  // V159: feature/ability/tactician/level-2/squad-on-me.md names the user as well.
+  expect(effectOnlyTarget('Self and each ally in the area', ['Area'])).toEqual({
+    kind: 'area',
+    self: true,
+  });
+  expect(effectOnlyTarget('Self and each enemy in the area', ['Area'])).toBeUndefined();
   expect(effectOnlyTarget('One willing ally', [])).toBeUndefined();
 });
 

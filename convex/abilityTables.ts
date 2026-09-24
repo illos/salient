@@ -17,6 +17,24 @@ import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
 import { actorRef } from './initiativeTables';
 
+/** V159 automatic contribution of an effect to one roll (shared/resolve/modifiers.ts). */
+export const rollContributionValidator = v.object({
+  instanceId: v.string(),
+  sources: v.array(v.string()),
+  consumes: v.array(v.string()),
+  abilityId: v.string(),
+  abilityName: v.string(),
+  actorLabel: v.string(),
+  sourcePath: v.string(),
+  text: v.string(),
+  side: v.union(v.literal('actor'), v.literal('target')),
+  subjectId: v.string(),
+  edges: v.number(),
+  banes: v.number(),
+  bonus: v.number(),
+  excluded: v.optional(v.literal(true)),
+});
+
 const characteristic = v.union(
   v.literal('M'),
   v.literal('A'),
@@ -121,8 +139,14 @@ export const abilityTables = {
     targets: v.array(
       v.object({
         target: actorRef,
+        /** Circumstance edges and banes the table entered (V159: automatic ones are separate). */
         edges: v.number(),
         banes: v.number(),
+        /**
+         * V159 automatic contributions of active modifiers (shared/resolve/modifiers.ts
+         * RollContribution), with the table's exclusions; absent when there were none.
+         */
+        contributions: v.optional(v.array(rollContributionValidator)),
         /** TargetRollOutcome (shared/contracts/rollResolution.ts) currently in force. */
         outcome: v.any(),
         /** DamageApplication currently applied, or null when no damage was applied. */

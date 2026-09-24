@@ -91,6 +91,7 @@ export const current = query({
               occurrence.effect.kind === 'damage' ||
               occurrence.disposition ||
               (occurrence.effect.kind === 'gain' && occurrence.effect.status === 'applied') ||
+              (occurrence.effect.kind === 'modifier' && occurrence.effect.status === 'applied') ||
               (occurrence.effect.kind === 'condition' &&
                 occurrence.effect.status !== 'fact-needed' &&
                 occurrence.effect.status !== 'manual')

@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 155 (without a power roll: 7); unchanged reachable compatibility: 1466; structurally supported but unavailable: 0.
+Currently reachable compiled: 156 (without a power roll: 8); unchanged reachable compatibility: 1465; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -353,7 +353,7 @@ Currently reachable compiled: 155 (without a power roll: 7); unchanged reachable
 | Fog of War | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
 | I've Got Your Back | hero-standalone | supported | compiled |  |
 | No Dying on My Watch | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, action-type |
-| Squad! On Me! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Squad! On Me! | hero-standalone | supported | compiled |  |
 | Targets of Opportunity | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
 | Try Me Instead | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Frontal Assault | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |

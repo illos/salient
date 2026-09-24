@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 80,
-      "manual": 291
+      "supported": 81,
+      "manual": 290
     },
     "kit-signature": {
       "total": 25,
@@ -50146,7 +50146,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-2/squad-on-me.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -50154,37 +50155,40 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me#block:0:0:bbaee7b2394dc8ee",
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me#block:0:0:27b2cee3a53aa255",
           "locator": "block:0:0",
-          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
-        }
-      ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
+          "clause": "Until the start of your next turn, each target has a bonus to stability equal to your Might score.",
+          "kind": "modifier",
+          "spec": {
+            "effect": "modifier",
+            "subject": "target",
+            "modifier": {
+              "kind": "stat",
+              "stat": "stability",
+              "amount": {
+                "characteristic": "M"
+              }
+            },
+            "duration": {
+              "kind": "start-of-next-turn",
+              "anchor": "owner"
+            },
+            "endsWhen": [],
+            "text": "Until the start of your next turn, each target has a bonus to stability equal to your Might score."
+          }
         },
         {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target has a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self and each ally in the area",
-          "message": "Only one, counted or area target envelopes are eligible."
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-2/squad-on-me#block:0:1:89faa78bd2af6bce",
+          "locator": "block:0:1",
+          "clause": "Additionally, each target gains 2 surges.",
+          "kind": "gain",
+          "subject": "target",
+          "surges": 2
         }
       ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Squad! On Me!",
@@ -64499,9 +64503,26 @@
           "id": "mcdm.heroes.v1/kit/raider/raider-s-awe#block:1:0:57adf390f77f445b",
           "locator": "block:1:0",
           "clause": "The target takes a bane on their next power roll made before the end of their next turn.",
-          "kind": "rider",
-          "shape": "bane",
-          "dependency": "independent"
+          "kind": "modifier",
+          "spec": {
+            "effect": "modifier",
+            "subject": "target",
+            "modifier": {
+              "kind": "roll",
+              "target": "rolls-by",
+              "scope": "power-roll",
+              "banes": 1
+            },
+            "duration": {
+              "kind": "end-of-next-turn",
+              "anchor": "subject"
+            },
+            "endsWhen": [],
+            "consumeOn": {
+              "event": "power-roll"
+            },
+            "text": "The target takes a bane on their next power roll made before the end of their next turn."
+          }
         }
       ],
       "diagnostics": [],
@@ -213601,9 +213622,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 155,
-    "compiledEffectOnly": 7,
-    "compatibility": 1466,
+    "compiled": 156,
+    "compiledEffectOnly": 8,
+    "compatibility": 1465,
     "compiledButUnavailable": 0
   }
 }

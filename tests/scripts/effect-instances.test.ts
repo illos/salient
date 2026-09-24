@@ -80,7 +80,7 @@ test('pattern admission: whole sections, bound durations and admitted table work
     `Until the start of your next turn, ${NEMESIS_BODY.replace('your speed', 'twice your speed')}`,
     `${NEMESIS} Each enemy is frightened.`,
     'Until the start of your next turn, whenever the target finishes moving or being force moved, you can use a free triggered action to shift up to your speed.',
-    // tactician/level-2/squad-on-me.md: changes stability, a number the engine computes.
+    // tactician/level-2/squad-on-me.md: a stability modifier, not table work (V159 reads it).
     'Until the start of your next turn, each target has a bonus to stability equal to your Might score. Additionally, each target gains 2 surges.',
     // talent/level-1/precognition.md: its triggered free strike watches damage the engine observes.
     'Ability rolls made against the target take a bane until the start of your next turn. Whenever the target takes damage while under this effect, they can use a triggered action to make a free strike against the source of the damage.',
@@ -90,7 +90,8 @@ test('pattern admission: whole sections, bound durations and admitted table work
     "The target can't be hidden from you for 24 hours. Until the end of the encounter, whenever the target willingly moves, you can use a free triggered action to move.",
   ])
     expect(lastingInstruction(text), text).toBeUndefined();
-  for (const name of ['Squad! On Me!', 'Precognition', 'Dancer', 'Apex Predator'])
+  // Squad! On Me! compiles since V159 as a stability modifier (tests/scripts/modifiers.test.ts).
+  for (const name of ['Precognition', 'Dancer', 'Apex Predator'])
     expect(compiled(name).execution, name).toBe('manual');
 });
 

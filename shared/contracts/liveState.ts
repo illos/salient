@@ -63,6 +63,8 @@ export interface ConditionInstance {
   registrationId?: string;
   lastSave?: {
     roll: number;
+    /** V159: the saving-throw bonus from active effects added to the d10 (absent when none). */
+    bonus?: number;
     success: boolean;
     boundaryEventId: string;
     threshold: number;
@@ -112,6 +114,38 @@ export type BoundDuration =
  */
 export type EffectEndTrigger = 'owner-dying' | 'reused' | 'willingly-ended';
 
+/**
+ * V159 roll modifier (docs/lasting-effects-design.md#2-modifier-pipeline): edges, banes and a bonus
+ * (negative for a penalty) on the rolls the subject makes (`rolls-by`) or the rolls made against
+ * the subject (`rolls-against`), limited to strikes when printed. `power-roll` and `ability-roll`
+ * both match every ability roll (rule/dice/power-roll.md: an ability roll is a power roll).
+ */
+export interface RollModifier {
+  kind: 'roll';
+  target: 'rolls-by' | 'rolls-against';
+  scope: 'power-roll' | 'ability-roll' | 'strike';
+  edges?: number;
+  banes?: number;
+  bonus?: number;
+}
+
+/** V159 derived-stat modifier: a bonus (or, when negative, a penalty) to a derived value. */
+export interface StatModifier {
+  kind: 'stat';
+  stat: 'speed' | 'stability' | 'saving-throw';
+  amount: number;
+}
+
+export type ModifierPayload = RollModifier | StatModifier;
+
+/**
+ * What an instance does: V158 table work the engine tracks and ends, or a V159 modifier the engine
+ * applies. `text` is the printed clause without its duration, for lists and the log.
+ */
+export type EffectPayload =
+  | { kind: 'instruction'; text: string }
+  | { kind: 'modifier'; text: string; modifier: ModifierPayload };
+
 /** A creature an effect names. Objects and squads carry no live record of their own. */
 export interface EffectParty {
   kind: 'character' | 'foe' | 'squad' | 'object';
@@ -120,9 +154,10 @@ export interface EffectParty {
 }
 
 /**
- * V158 effect instance (docs/lasting-effects-design.md#1-effect-instances). Only `instruction`
- * instances exist in V158: printed table work the engine tracks and ends, never executes. The other
- * kinds are reserved for later slices; condition instances keep their own V88 shape.
+ * V158 effect instance (docs/lasting-effects-design.md#1-effect-instances). `instruction` instances
+ * (V158) are printed table work the engine tracks and ends, never executes; `modifier` instances
+ * (V159) feed later rolls and derived values. The other kinds are reserved for later slices;
+ * condition instances keep their own V88 shape.
  */
 export interface EffectInstance {
   /** The occurrence id of the compiled use that created it. */
@@ -141,11 +176,11 @@ export interface EffectInstance {
   owner: EffectParty;
   /** The creature the effect applies to (the target, or the owner for self effects). */
   subject: EffectParty;
-  payload: { kind: 'instruction'; text: string };
+  payload: EffectPayload;
   printedDuration: EffectDuration;
   duration: BoundDuration;
   endsWhen: EffectEndTrigger[];
-  /** `consumed` is reserved for consumable effects (design section 5a). */
+  /** V159 `consumed`: a consumable effect used up by a qualifying roll (design section 5a). */
   status: 'active' | 'ended' | 'consumed';
   endedReason?: string;
   /** The log entry of the operation that ended it. */
@@ -159,7 +194,10 @@ export interface EffectInstance {
   manualStacking?: true;
   /** Shared end (as V153 saveGroup): one save ends every member. */
   group?: string;
-  /** Reserved for consumable effects (design section 5a). */
+  /**
+   * V159 consumable component (design section 5a): the first qualifying roll the modifier matches
+   * consumes it, even when banes cancel its benefit; `endedEventId` is that roll's log entry.
+   */
   consumeOn?: { event: 'power-roll' | 'ability-roll' };
   /** The source use's log sequence: the most recent use sets the duration when stacking. */
   appliedSequence: number;

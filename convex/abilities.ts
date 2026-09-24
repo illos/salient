@@ -19,6 +19,7 @@ import { query } from './_generated/server';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
 import { actorRef } from './initiativeTables';
+import { rollContributionValidator } from './abilityTables';
 import { abilitiesFor, type AbilityDefinition } from './lib/resolve';
 import { allowanceFor, loadActorRecords } from './lib/abilityOperations';
 import { settingsOf } from './lib/audience';
@@ -301,6 +302,8 @@ export const results = query({
           target: actorRef,
           edges: v.number(),
           banes: v.number(),
+          /** V159: automatic contributions of active effects, with the table's exclusions. */
+          contributions: v.optional(v.array(rollContributionValidator)),
           outcome: v.any(),
           applied: v.any(),
           dispositions: v.array(disposition),

@@ -21,6 +21,15 @@ import type { RiderNode } from './compileAbility.ts';
 import { tierInstruction } from './effectRiders.ts';
 import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import {
+  bindModifier,
+  effectOnlyModifier,
+  sameModifierSpec,
+  sectionModifier,
+  type ModifierSpec,
+  type StatContribution,
+} from './modifiers.ts';
+import type { ModifierPayload } from '../contracts/liveState.ts';
+import {
   effectOnlyClause,
   effectOnlyTarget,
   effectOnlyTargetLimit,
@@ -41,7 +50,10 @@ export interface MovementFacts {
   kind?: 'creature' | 'object';
   /** Bare `1` does not distinguish 1T, 1S, 1M and 1L. */
   size?: string;
+  /** V159: base stability plus `stabilityEffects`. */
   stability?: number;
+  /** V159: active effects included in `stability`, with their sources (rule/character/stability.md). */
+  stabilityEffects?: StatContribution[];
   conditions?: MovementCoverage;
   traits?: MovementCoverage;
   modifiers?: MovementCoverage;
@@ -103,6 +115,8 @@ export interface CompiledPushOutcome extends EffectIdentity {
   /** Allowance before optional stability reduction; never an executed distance. */
   allowance?: number;
   stability?: number;
+  /** V159: the effects included in `stability`, with their sources. */
+  stabilityEffects?: StatContribution[];
   stabilityReduction: 'optional';
   requirements: string[];
   manualReasons: string[];
@@ -264,13 +278,62 @@ export interface CompiledGainOutcome extends EffectIdentity {
   requirements: string[];
 }
 
+/**
+ * V159 modifier of one subject (docs/lasting-effects-design.md#2-modifier-pipeline). `applied`: the
+ * use stores a `modifier` effect instance on a hero or foe, and the engine applies it to later
+ * rolls or derived values. `manual`: the subject can't hold one the engine reads (an object, a
+ * squad minion whose squad action doesn't read modifiers) or its amount is unknown; the table
+ * applies it.
+ */
+export interface CompiledModifierOutcome extends EffectIdentity {
+  kind: 'modifier';
+  status: 'applied' | 'manual';
+  subject: 'actor' | 'target';
+  spec: ModifierSpec;
+  /** The modifier with its printed amount bound at use; absent when the amount is unknown. */
+  payload?: ModifierPayload;
+  requirements: string[];
+}
+
 export type CompiledEffectOutcome =
   | CompiledDamageOutcome
   | CompiledPushOutcome
   | CompiledConditionOutcome
   | CompiledManualOutcome
   | CompiledRiderOutcome
-  | CompiledGainOutcome;
+  | CompiledGainOutcome
+  | CompiledModifierOutcome;
+
+/**
+ * V159: one subject's modifier outcome. A subject holds the instance only when it is a hero or a
+ * foe outside a squad (rule/combat/target.md: objects are immune to an ability's other effects; a
+ * squad acts through /squad act, which doesn't read modifiers, so its minions' modifiers stay
+ * table work).
+ */
+function modifierOutcome(
+  identity: EffectIdentity,
+  spec: ModifierSpec,
+  subject: 'actor' | 'target',
+  holder: 'hero' | 'foe' | 'object' | 'squad' | undefined,
+  characteristics: Partial<Record<Characteristic, number>> | undefined,
+): CompiledModifierOutcome {
+  const requirements: string[] = [];
+  const bound = bindModifier(spec.modifier, characteristics);
+  if ('requirement' in bound) requirements.push(bound.requirement);
+  if (holder !== 'hero' && holder !== 'foe')
+    requirements.push(
+      `${subject === 'actor' ? 'actor' : `target:${identity.targetId}`}.${holder ?? 'unknown'} holds no modifier the engine reads`,
+    );
+  return {
+    ...identity,
+    kind: 'modifier',
+    status: requirements.length ? 'manual' : 'applied',
+    subject,
+    spec,
+    ...('payload' in bound ? { payload: bound.payload } : {}),
+    requirements,
+  };
+}
 
 export type CompiledAbilityOutcome =
   | { kind: 'manual'; definition: CompiledAbility; reason: string; effects: [] }
@@ -429,6 +492,7 @@ function pushOutcome(
     ...(stability !== undefined && Number.isSafeInteger(stability) && stability >= 0
       ? { stability }
       : {}),
+    ...(target?.stabilityEffects?.length ? { stabilityEffects: target.stabilityEffects } : {}),
     stabilityReduction: 'optional',
     requirements,
     manualReasons,
@@ -493,6 +557,16 @@ export function resolveCompiledAbility(
     !['single', 'multi', 'area'].includes(shape.kind) ||
     (shape.kind === 'area' && !eachAreaTarget(definition.envelope.target)) ||
     definition.sections.some(node => {
+      // V159: a modifier re-reads to the same spec, or the definition was tampered with.
+      if (node.kind === 'modifier') {
+        const again = sectionModifier(plain(node.clause));
+        return (
+          !again ||
+          !sameModifierSpec(again, node.spec) ||
+          again.subject !== 'target' ||
+          shape.kind !== 'single'
+        );
+      }
       if (node.kind !== 'rider') return true;
       // V158: a lasting instruction re-reads to the same spec, or the definition was tampered with.
       if (node.lasting) {
@@ -696,6 +770,21 @@ export function resolveCompiledAbility(
     (effect): effect is CompiledConditionOutcome => effect.kind === 'condition',
   );
   for (const node of definition.sections) {
+    // V159: a modifier section is once per use and independent of the roll; it applies to the
+    // single target (V110), which holds its instance.
+    if (node.kind === 'modifier') {
+      const targetId = roll.targets[0]!.targetId;
+      remainder.push(
+        modifierOutcome(
+          { nodeId: node.id, targetId, locator: node.locator, clause: node.clause },
+          node.spec,
+          'target',
+          input.conditionFacts?.targets.find(fact => fact.targetId === targetId)?.kind,
+          input.actor.characteristics,
+        ),
+      );
+      continue;
+    }
     if (node.kind !== 'rider') continue;
     const after =
       node.dependency === 'after-damage'
@@ -759,6 +848,8 @@ export interface EffectOnlyRecipient {
 }
 export interface EffectOnlyInput {
   actor: EffectOnlyRecipient;
+  /** V159: the user's characteristic scores, for a modifier "equal to your <score>". */
+  actorCharacteristics?: Partial<Record<Characteristic, number>>;
   /** In the given order; the user is one of them only when the target shape allows self. */
   targets: EffectOnlyRecipient[];
   inCombat: boolean;
@@ -833,7 +924,8 @@ export function resolveEffectOnly(
     definition.sections.some((node, index) => {
       const again = reread[index]!;
       if (!again.sentence || !node.locator.startsWith(`block:${again.index}:`)) return true;
-      if (node.kind !== 'gain' && node.kind !== 'instruction') return true;
+      if (node.kind !== 'gain' && node.kind !== 'instruction' && node.kind !== 'modifier')
+        return true;
       const parsed = effectOnlyClause(node.clause);
       if (!parsed || parsed.text !== again.sentence.text) return true;
       const clause = parsed.clause;
@@ -842,6 +934,15 @@ export function resolveEffectOnly(
         (clause.subject === 'actor' && shape.kind !== 'self')
       )
         return true;
+      if (node.kind === 'modifier') {
+        const again = effectOnlyModifier(node.clause);
+        return (
+          clause.kind !== 'modifier' ||
+          !again ||
+          !sameModifierSpec(again, node.spec) ||
+          !sameModifierSpec(clause.spec, node.spec)
+        );
+      }
       return node.kind === 'gain'
         ? clause.kind !== 'gain' ||
             node.subject !== clause.subject ||
@@ -857,21 +958,26 @@ export function resolveEffectOnly(
   // rule/combat/target.md: fewer targets are legal; the user is a target only when "self" is.
   const limit = effectOnlyTargetLimit(shape);
   const selfAllowed =
-    shape.kind === 'self' || ((shape.kind === 'one' || shape.kind === 'allies') && shape.self);
+    shape.kind === 'self' ||
+    ((shape.kind === 'one' || shape.kind === 'allies') && shape.self) ||
+    (shape.kind === 'area' && shape.self === true);
   const includesSelf = input.targets.some(target => target.id === input.actor.id);
   const others = input.targets.filter(target => target.id !== input.actor.id).length;
   if (
     !input.targets.length ||
     new Set(input.targets.map(target => target.id)).size !== input.targets.length ||
     (limit !== undefined && input.targets.length > limit) ||
-    (shape.kind === 'self' && !includesSelf) ||
+    // V159: "Self and each ally in the area" always names the user.
+    ((shape.kind === 'self' || (shape.kind === 'area' && shape.self === true)) && !includesSelf) ||
     (includesSelf && !selfAllowed) ||
     (shape.kind === 'allies' && others > shape.max)
   )
     return manual(
       shape.kind === 'self'
         ? 'This ability targets only its user.'
-        : `Give ${limit === 1 ? 'one target' : limit === undefined ? 'one or more distinct targets' : `one to ${limit} distinct targets`}${selfAllowed ? '' : ', not the user'}.`,
+        : shape.kind === 'area' && shape.self === true && !includesSelf
+          ? 'Include yourself: the target is Self and each ally in the area.'
+          : `Give ${limit === 1 ? 'one target' : limit === undefined ? 'one or more distinct targets' : `one to ${limit} distinct targets`}${selfAllowed ? '' : ', not the user'}.`,
     );
   const affordability = checkAffordability(
     activation.fixedCost,
@@ -902,9 +1008,14 @@ export function resolveEffectOnly(
     id === input.actor.id ? input.actor : input.targets.find(target => target.id === id)!;
   const effects: CompiledEffectOutcome[] = [];
   for (const node of definition.sections) {
-    if (node.kind !== 'gain' && node.kind !== 'instruction') continue;
+    if (node.kind !== 'gain' && node.kind !== 'instruction' && node.kind !== 'modifier') continue;
+    const subject = (
+      node.kind === 'modifier' ? node.spec.subject === 'owner' : node.subject === 'actor'
+    )
+      ? 'actor'
+      : 'target';
     const recipients =
-      node.subject === 'actor' ? [input.actor.id] : input.targets.map(target => target.id);
+      subject === 'actor' ? [input.actor.id] : input.targets.map(target => target.id);
     for (const id of recipients) {
       const identity = {
         nodeId: node.id,
@@ -912,6 +1023,18 @@ export function resolveEffectOnly(
         locator: node.locator,
         clause: node.clause,
       };
+      if (node.kind === 'modifier') {
+        effects.push(
+          modifierOutcome(
+            identity,
+            node.spec,
+            subject,
+            recipientOf(id).kind,
+            input.actorCharacteristics,
+          ),
+        );
+        continue;
+      }
       if (node.kind === 'instruction') {
         effects.push({
           ...identity,

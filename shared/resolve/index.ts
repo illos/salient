@@ -680,6 +680,8 @@ export function correctTarget(
   currentTarget: DamageTargetFacts | undefined,
   edges: number,
   banes: number,
+  /** V159: the automatic bonuses and penalties saved with the roll, kept by the correction. */
+  bonuses?: TargetRollInputs['bonuses'],
 ): PostRollCorrectionResult {
   if (edges < 0 || banes < 0) throw new Error('Edge and bane counts cannot be negative.');
   const naturalRoll = naturalRollOf(original.dice);
@@ -689,7 +691,7 @@ export function correctTarget(
     naturalRoll,
     original.characteristicValue,
     original.selectedCharacteristic,
-    { targetId: before.targetId, edges, banes },
+    { targetId: before.targetId, edges, banes, ...(bonuses?.length ? { bonuses } : {}) },
     original.selectedDamageCharacteristic,
   );
   const result: PostRollCorrectionResult = {
@@ -833,8 +835,20 @@ export function resolveSavingThrow(request: SavingThrowRequest): SavingThrowResu
     condition: request.condition,
     d10: request.d10,
     threshold,
-    success: request.d10 >= threshold,
+    success: saveSucceeds(request.d10, 0, threshold),
   };
+}
+
+/**
+ * rule/general/saving-throw.md: "a creature rolls a d10. On a 6 or higher, the effect ends." V159
+ * interpretation (labelled): a bonus to saving throws (feature/ability/elementalist/level-3/
+ * swarm-of-spirits.md prints "a +1 bonus to saving throws") adds to the d10 before it is compared
+ * with the threshold, as bonuses add to a power roll (rule/dice/bonuses-and-penalties.md). The
+ * alternative, lowering the threshold by the bonus, gives the same success on every roll; only
+ * the recorded numbers differ.
+ */
+export function saveSucceeds(d10: number, bonus: number, threshold: number): boolean {
+  return d10 + bonus >= threshold;
 }
 
 export type { D10 };

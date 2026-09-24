@@ -56,6 +56,7 @@ export const conditionInstanceValidator = v.object({
   lastSave: v.optional(
     v.object({
       roll: v.number(),
+      bonus: v.optional(v.number()),
       success: v.boolean(),
       boundaryEventId: v.string(),
       threshold: v.number(),
@@ -72,6 +73,7 @@ export const conditionInstanceValidator = v.object({
 });
 const lastSaveValidator = v.object({
   roll: v.number(),
+  bonus: v.optional(v.number()),
   success: v.boolean(),
   boundaryEventId: v.string(),
   threshold: v.number(),
@@ -112,6 +114,26 @@ export const effectEndTriggerValidator = v.union(
   v.literal('reused'),
   v.literal('willingly-ended'),
 );
+/** V159 modifier payload (shared/contracts/liveState.ts ModifierPayload). */
+export const modifierPayloadValidator = v.union(
+  v.object({
+    kind: v.literal('roll'),
+    target: v.union(v.literal('rolls-by'), v.literal('rolls-against')),
+    scope: v.union(v.literal('power-roll'), v.literal('ability-roll'), v.literal('strike')),
+    edges: v.optional(v.number()),
+    banes: v.optional(v.number()),
+    bonus: v.optional(v.number()),
+  }),
+  v.object({
+    kind: v.literal('stat'),
+    stat: v.union(v.literal('speed'), v.literal('stability'), v.literal('saving-throw')),
+    amount: v.number(),
+  }),
+);
+const effectPayloadValidator = v.union(
+  v.object({ kind: v.literal('instruction'), text: v.string() }),
+  v.object({ kind: v.literal('modifier'), text: v.string(), modifier: modifierPayloadValidator }),
+);
 /** V158 effect instance (shared/contracts/liveState.ts EffectInstance). */
 export const effectInstanceValidator = v.object({
   id: v.string(),
@@ -132,7 +154,7 @@ export const effectInstanceValidator = v.object({
   clause: v.string(),
   owner: partyValidator,
   subject: partyValidator,
-  payload: v.object({ kind: v.literal('instruction'), text: v.string() }),
+  payload: effectPayloadValidator,
   printedDuration: effectDurationValidator,
   duration: boundDurationValidator,
   endsWhen: v.array(effectEndTriggerValidator),

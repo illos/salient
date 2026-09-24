@@ -51,7 +51,8 @@ import {
   generationProfile,
   prayerFor,
 } from '../../shared/resolve/heroicResourceGeneration';
-import { applyDamage } from '../../shared/resolve/index';
+import { applyDamage, saveSucceeds } from '../../shared/resolve/index';
+import { statModifiers, type StatContribution } from '../../shared/resolve/modifiers';
 import { damageTargetFacts, writeDamage } from './resolve';
 
 export type Registration = Doc<'clockRegistrations'>;
@@ -625,6 +626,27 @@ async function saveThreshold(
   return { threshold, thresholdSource };
 }
 
+/**
+ * V159: the saving-throw bonus of a creature's active effects (docs/lasting-effects-design.md#2-
+ * modifier-pipeline, derived values), with its sources; added to the d10 (saveSucceeds).
+ */
+async function saveBonus(
+  ctx: MutationCtx,
+  creature: { kind: string; id: string },
+): Promise<{ bonus: number; sources: StatContribution[] }> {
+  const instances =
+    creature.kind === 'character'
+      ? (await ctx.db.get(creature.id as Id<'characters'>))?.liveState?.effectInstances
+      : creature.kind === 'foe'
+        ? (await ctx.db.get(creature.id as Id<'foes'>))?.live.effectInstances
+        : undefined;
+  const { total, contributions } = statModifiers(creature.id, instances ?? [], 'saving-throw');
+  return { bonus: total, sources: contributions };
+}
+
+const withBonus = (roll: number, bonus: number) =>
+  bonus ? `${roll} ${bonus > 0 ? '+' : '−'} ${Math.abs(bonus)}` : `${roll}`;
+
 async function fire(
   ctx: MutationCtx,
   firing: FiringContext,
@@ -736,9 +758,11 @@ async function fire(
         );
         const roll = accepted.dice[0]!.value;
         const { threshold, thresholdSource } = await saveThreshold(ctx, effect.holder);
-        const success = roll >= threshold;
+        const { bonus, sources } = await saveBonus(ctx, effect.holder);
+        const success = saveSucceeds(roll, bonus, threshold);
         await recordEffectSave(ctx, firing.scope, effect.holder, effect.instance.id, {
           roll,
+          ...(bonus ? { bonus } : {}),
           success,
           boundaryEventId: firing.boundaryEventId,
           threshold,
@@ -746,11 +770,12 @@ async function fire(
         });
         return {
           kind: 'clock.saving-throw',
-          description: `${firing.registration.source.label}: saving throw ${roll} (needs ${threshold}+) — ${success ? 'success; effect ends.' : 'failure; effect remains.'}`,
+          description: `${firing.registration.source.label}: saving throw ${withBonus(roll, bonus)} (needs ${threshold}+) — ${success ? 'success; effect ends.' : 'failure; effect remains.'}`,
           payload: {
             effectInstanceId: effect.instance.id,
             creatureId: work.creatureId,
             roll,
+            ...(bonus ? { bonus, bonusSources: sources } : {}),
             success,
             threshold,
             thresholdSource,
@@ -781,7 +806,7 @@ async function fire(
         await recordConditionSave(ctx, firing.scope, found.target, found.instance.id, shared);
         return {
           kind: 'clock.saving-throw',
-          description: `${firing.registration.source.label}: shares the saving throw of the same effect, ${shared.roll} (needs ${shared.threshold}+) — ${shared.success ? 'success; effect ends.' : 'failure; effect remains. Hero-token follow-up remains manual.'}`,
+          description: `${firing.registration.source.label}: shares the saving throw of the same effect, ${withBonus(shared.roll, shared.bonus ?? 0)} (needs ${shared.threshold}+) — ${shared.success ? 'success; effect ends.' : 'failure; effect remains. Hero-token follow-up remains manual.'}`,
           payload: {
             effectInstanceId: found.instance.id,
             creatureId: work.creatureId,
@@ -803,9 +828,11 @@ async function fire(
       );
       const roll = accepted.dice[0]!.value;
       const { threshold, thresholdSource } = await saveThreshold(ctx, found.target);
-      const success = roll >= threshold;
+      const { bonus, sources } = await saveBonus(ctx, found.target);
+      const success = saveSucceeds(roll, bonus, threshold);
       await recordConditionSave(ctx, firing.scope, found.target, found.instance.id, {
         roll,
+        ...(bonus ? { bonus } : {}),
         success,
         boundaryEventId: firing.boundaryEventId,
         threshold,
@@ -813,11 +840,12 @@ async function fire(
       });
       return {
         kind: 'clock.saving-throw',
-        description: `${firing.registration.source.label}: saving throw ${roll} (needs ${threshold}+) — ${success ? 'success; effect ends.' : 'failure; effect remains. Hero-token follow-up remains manual.'}`,
+        description: `${firing.registration.source.label}: saving throw ${withBonus(roll, bonus)} (needs ${threshold}+) — ${success ? 'success; effect ends.' : 'failure; effect remains. Hero-token follow-up remains manual.'}`,
         payload: {
           effectInstanceId: found.instance.id,
           creatureId: work.creatureId,
           roll,
+          ...(bonus ? { bonus, bonusSources: sources } : {}),
           success,
           threshold,
           thresholdSource,

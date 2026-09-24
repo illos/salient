@@ -11,6 +11,7 @@
  */
 import type { EffectRider } from './effectRiders.ts';
 import { plain } from './abilityGrammar.ts';
+import { EFFECT_ONLY_MODIFIERS, type ModifierSpec } from './modifiers.ts';
 
 /**
  * The effect-only target reader. rule/combat/target.md: the entry is the most that can be
@@ -19,20 +20,27 @@ import { plain } from './abilityGrammar.ts';
  * - `self`: only the user.
  * - `one`: exactly one target; `self` says whether the user may be it ("Self or one ally").
  * - `allies`: up to `max` others, plus the user when `self` ("Self and two allies").
- * - `area`: "Each ally in the area"; the table selects the affected allies (V110).
+ * - `area`: "Each ally in the area"; the table selects the affected allies (V110). V159: "Self
+ *   and each ally in the area" (feature/ability/tactician/level-2/squad-on-me.md) also names the
+ *   user, who is always a target (`self`).
  */
 export type EffectOnlyTarget =
   | { kind: 'self' }
   | { kind: 'one'; self: boolean }
   | { kind: 'allies'; max: number; self: boolean }
-  | { kind: 'area' };
+  | { kind: 'area'; self?: true };
 
 const COUNT: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 };
 
 export function effectOnlyTarget(target: string, keywords: string[]): EffectOnlyTarget | undefined {
   const text = plain(target).replace(/\s+/g, ' ').trim().toLowerCase();
   const area = keywords.some(k => plain(k).toLowerCase() === 'area');
-  if (area) return text === 'each ally in the area' ? { kind: 'area' } : undefined;
+  if (area)
+    return text === 'each ally in the area'
+      ? { kind: 'area' }
+      : text === 'self and each ally in the area'
+        ? { kind: 'area', self: true }
+        : undefined;
   if (text === 'self') return { kind: 'self' };
   if (text === 'one creature' || text === 'one ally') return { kind: 'one', self: false };
   if (text === 'self or one ally' || text === 'self or one creature')
@@ -69,6 +77,12 @@ export type EffectOnlyClause =
       kind: 'instruction';
       subject: 'actor' | 'target';
       shape: EffectRider['shape'];
+    }
+  | {
+      /** V159: a modifier the engine applies (shared/resolve/modifiers.ts). */
+      kind: 'modifier';
+      subject: 'actor' | 'target';
+      spec: ModifierSpec;
     };
 
 interface Pattern {
@@ -130,6 +144,21 @@ const PATTERNS: readonly Pattern[] = [
   // (feature/ability/tactician/level-1/battle-cry.md).
   { pattern: /^You gain (\d+) surges?\./, read: m => gain('actor', undefined, m[1]) },
   { pattern: /^Each target gains (\d+) surges?\./, read: m => gain('target', undefined, m[1]) },
+  // feature/ability/tactician/level-2/squad-on-me.md: "Additionally, each target gains 2 surges."
+  {
+    pattern: /^Additionally, each target gains (\d+) surges?\./,
+    read: m => gain('target', undefined, m[1]),
+  },
+  // ---- V159 modifiers the engine applies, each citing its source in shared/resolve/modifiers.ts.
+  ...EFFECT_ONLY_MODIFIERS.map(({ pattern, read }) => ({
+    pattern,
+    read: (match: RegExpExecArray): EffectOnlyClause | undefined => {
+      const spec = read(match);
+      return spec
+        ? { kind: 'modifier', subject: spec.subject === 'owner' ? 'actor' : 'target', spec }
+        : undefined;
+    },
+  })),
   // ---- Table work, recorded as ordered manual occurrences (V109, V152).
   // feature/ability/conduit/level-1/sermon-of-grace.md, the whole section. Each target spends
   // through their own Recovery; the free triggered action ends an effect (rule/general/saving-throw.md,

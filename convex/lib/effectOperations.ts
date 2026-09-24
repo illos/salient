@@ -10,6 +10,7 @@ import type { Id } from '../_generated/dataModel';
 import type { Reference } from '../../shared/commands/envelope';
 import type { EffectInstance } from '../../shared/contracts/liveState';
 import { describeDuration } from '../../shared/resolve/lastingEffects';
+import { describeModifier } from '../../shared/resolve/modifiers';
 import { bindActor } from './actors';
 import { campaignEffects, endEffectInstance, findCampaignEffect } from './effectInstances';
 import { resolveHistoricalId } from './history';
@@ -43,7 +44,7 @@ const effectList: OperationDefinition = {
   verb: 'list',
   title: 'List active effects',
   description:
-    'List the active lasting effects at the table, or those a creature holds, owns or is the subject of: source, duration and the printed table work.',
+    'List the active lasting effects at the table, or those a creature holds, owns or is the subject of: source, duration, the printed table work and any modifier the engine applies (its instance id is what ability.use and ability.correct exclude).',
   args: {
     creature: v.optional(
       v.union(v.object({ name: v.string() }), v.object({ refKind: v.string(), id: v.string() })),
@@ -78,7 +79,7 @@ const effectList: OperationDefinition = {
     );
     const lines = listed.map(
       ({ instance }, index) =>
-        `${index + 1}. ${instance.actorLabel}'s ${instance.abilityName} on ${instance.subject.name}, ${describeDuration(instance.printedDuration, instance.endsWhen)}${instance.registrationIds.length ? '' : ' (unscheduled)'}: "${instance.payload.text}"`,
+        `${index + 1}. ${instance.actorLabel}'s ${instance.abilityName} on ${instance.subject.name}, ${describeDuration(instance.printedDuration, instance.endsWhen)}${instance.registrationIds.length ? '' : ' (unscheduled)'}: "${instance.payload.text}"${instance.payload.kind === 'modifier' ? ` (${describeModifier(instance.payload.modifier)}${instance.consumeOn ? ', used up by the next roll' : ''})` : ''}`,
     );
     return {
       kind: 'effect.list',

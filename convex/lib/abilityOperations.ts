@@ -46,8 +46,22 @@ import {
   setManualCondition,
 } from './conditionInstances';
 import { appendEvent } from './events';
-import { applyEffectInstance, endReusedEffects } from './effectInstances';
+import {
+  applyEffectInstance,
+  consumeRollEffects,
+  endReusedEffects,
+  type EffectHolder,
+} from './effectInstances';
 import { describeDuration } from '../../shared/resolve/lastingEffects';
+import {
+  consumedBy,
+  contributionIds,
+  describeContribution,
+  describeModifier,
+  rollContributions,
+  withContributions,
+  type RollContribution,
+} from '../../shared/resolve/modifiers';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { BoundActor, CommandEnvelope, Reference } from '../../shared/commands/envelope';
@@ -1053,6 +1067,105 @@ async function commitLasting(
   }
 }
 
+/**
+ * V159: each applied modifier of a compiled use becomes a `modifier` effect instance on its subject
+ * (docs/lasting-effects-design.md#2-modifier-pipeline), with its duration bound and registered on
+ * the clock. The engine then applies it to later rolls and derived values automatically.
+ */
+async function commitModifiers(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  occurrences: import('../../shared/contracts/compiledResult').EffectOccurrence[],
+  recipients: { actor: Actor }[],
+  source: {
+    eventId: Id<'events'>;
+    abilityId: string;
+    abilityName: string;
+    actor: Actor;
+    sourcePath: string;
+  },
+  encounterId: Id<'encounters'> | null,
+) {
+  const cause = (await ctx.db.get(scope.eventId))!;
+  const use = (await ctx.db.get(source.eventId))!;
+  for (const occurrence of occurrences) {
+    const effect = occurrence.effect;
+    if (effect.kind !== 'modifier') continue;
+    const owner = { kind: source.actor.kind, id: source.actor.id, name: source.actor.name };
+    const recipient = recipients.find(r => r.actor.id === effect.targetId)?.actor;
+    const subject = recipient
+      ? { kind: recipient.kind, id: recipient.id, name: recipient.name }
+      : undefined;
+    const lasts = describeDuration(effect.spec.duration, effect.spec.endsWhen);
+    const consumable = effect.spec.consumeOn
+      ? `, used up by ${subject?.name ?? 'the subject'}'s next ${effect.spec.consumeOn.event === 'power-roll' ? 'power roll' : 'ability roll'}`
+      : '';
+    const stored =
+      effect.status === 'applied' && effect.payload && subject
+        ? await applyEffectInstance(
+            ctx,
+            scope,
+            {
+              id: occurrence.id,
+              kind: 'modifier',
+              sourceUseEventId: source.eventId,
+              sourceActorId: source.actor.id,
+              abilityId: source.abilityId,
+              abilityName: source.abilityName,
+              actorLabel: source.actor.name,
+              sourcePath: source.sourcePath,
+              clause: plainText(effect.clause),
+              owner,
+              subject,
+              payload: { kind: 'modifier', text: effect.spec.text, modifier: effect.payload },
+              printedDuration: effect.spec.duration,
+              endsWhen: effect.spec.endsWhen,
+              ...(effect.spec.consumeOn ? { consumeOn: effect.spec.consumeOn } : {}),
+              appliedSequence: use.sequence,
+            },
+            encounterId ?? undefined,
+          )
+        : undefined;
+    await appendEvent(ctx, {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      encounterId: cause.encounterId,
+      origin: 'engine',
+      commandId: cause.commandId,
+      causeEventId: scope.eventId,
+      kind: 'effect.applied',
+      description: stored
+        ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}${consumable}. The engine applies it automatically; exclude it on a roll it doesn't fit${stored.instance.registrationIds.length ? '' : effect.spec.duration.kind === 'none' || effect.spec.duration.kind === 'maintained' ? '' : '. Its end is unscheduled outside a committed encounter, so end it with /effect end'}.`
+        : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); apply it at the table.`,
+      payload: {
+        sourceUseEventId: source.eventId,
+        occurrence: occurrence.id,
+        effectInstanceId: stored?.instance.id ?? null,
+        holder: stored?.holder ?? null,
+        duration: stored?.instance.duration ?? null,
+        modifier: effect.payload ?? null,
+        sourcePath: source.sourcePath,
+      },
+    });
+  }
+}
+
+/** V159: a hero's or foe's stored effect instances; squads and objects hold none. */
+function effectsOf(record: { character?: Doc<'characters'>; foe?: Doc<'foes'> }) {
+  if (record.character) return record.character.liveState?.effectInstances ?? [];
+  if (record.foe) return record.foe.live.effectInstances ?? [];
+  return [];
+}
+
+/** V159: the `exclude` argument, one instance id or a list of them. */
+function excludeList(value: unknown): string[] {
+  if (value === undefined) return [];
+  const list = Array.isArray(value) ? value : [value];
+  if (list.some(item => typeof item !== 'string' || !item))
+    throw new ConvexError('"exclude" lists effect instance ids, as effect.list gives them.');
+  return [...new Set(list as string[])];
+}
+
 /** Current condition toggles of a hero or foe target; undefined for squads and unknown records. */
 function conditionsOf(record: TargetRecord): Record<string, boolean> | undefined {
   if (record.character) return requireHeroLive(record.character).conditions;
@@ -1255,6 +1368,7 @@ const abilityUse: OperationDefinition = {
     characteristic: v.optional(v.string()),
     'damage-characteristic': v.optional(v.string()),
     mode: v.optional(v.string()),
+    exclude: v.optional(v.union(v.string(), v.array(v.string()))),
     fromDraft: v.optional(v.boolean()),
   },
   argDescriptions: {
@@ -1266,6 +1380,8 @@ const abilityUse: OperationDefinition = {
     'damage-characteristic':
       'Independent choice among the printed damage characteristics; otherwise highest permitted.',
     mode: 'melee or ranged, required when a Melee-and-Ranged ability deals different damage in each mode.',
+    exclude:
+      'Effect instance ids whose automatic edge, bane or bonus does not apply to this roll (the table’s override). Edges and banes given here are circumstance, added to the automatic ones.',
     fromDraft: 'Set by the selection controls when they fire the invoking user’s draft.',
   },
   roles: PLAYERS,
@@ -1290,6 +1406,18 @@ const abilityUse: OperationDefinition = {
         throw new ConvexError(`${ability.name} targets self only.`);
       if (!targets.length) targets.push(records);
     }
+    // V159: "Self and each ally in the area" always names the user
+    // (feature/ability/tactician/level-2/squad-on-me.md).
+    const effectOnlyShape =
+      ability.compilation?.mode === 'compiled' && ability.compilation.definition.effectOnly
+        ? ability.compilation.definition.activation?.targetShape
+        : undefined;
+    if (
+      effectOnlyShape?.kind === 'area' &&
+      effectOnlyShape.self === true &&
+      !targets.some(t => sameActor(t.actor, actor!))
+    )
+      targets.unshift(records);
     // feature/common/maneuvers/stand-up.md: yourself unless you name a willing adjacent creature.
     if (ability.abilityId === STAND_UP_ID && !targets.length) targets.push(records);
     const counts = (value: unknown, name: string): number[] => {
@@ -1301,6 +1429,7 @@ const abilityUse: OperationDefinition = {
     };
     const edges = counts(args.edges, 'edges');
     const banes = counts(args.banes, 'banes');
+    const exclude = excludeList(args.exclude);
     const warnings: string[] = [];
     if (ability.targetShape.kind === 'single' && targets.length !== 1)
       throw new ConvexError(`${ability.name} targets one creature; give exactly one target.`);
@@ -1366,18 +1495,42 @@ const abilityUse: OperationDefinition = {
       };
     }
 
+    // V159 (docs/lasting-effects-design.md#2-modifier-pipeline): the automatic contributions of
+    // the active modifiers on the actor's roll and on each target's roll against, after printed
+    // stacking, less the table's exclusions. Circumstance edges and banes add to them.
+    const rolledAbility = ability.kind === 'rolled';
+    const automatic = rollContributions({
+      actor: { id: actor!.id, instances: effectsOf(records) },
+      targets: targets.map(t => ({ id: t.actor.id, instances: effectsOf(t) })),
+      roll: { strike: ability.keywords.some(k => plainText(k).toLowerCase() === 'strike') },
+      exclude,
+    });
+    if (exclude.length) {
+      if (!rolledAbility)
+        throw new ConvexError(`${ability.name} has no power roll: there is nothing to exclude.`);
+      const known = contributionIds(automatic.flatMap(t => t.contributions));
+      const unknown = exclude.filter(id => !known.has(id));
+      if (unknown.length)
+        throw new ConvexError(
+          `Not an automatic contribution to this roll: ${unknown.join(', ')}. effect.list names the active effects.`,
+        );
+    }
+    const rollTotals = () =>
+      targets.map((t, i) =>
+        withContributions(
+          { targetId: t.actor.id, edges: edges[i]!, banes: banes[i]! },
+          automatic[i]!.contributions,
+        ),
+      );
     const costPool = ability.fixedCost
       ? poolFor(records, context, ability.fixedCost.resource)
       : undefined;
     // V156: the same edge-reduced cost the roll resolver charges (effectiveFixedCost), only for an
-    // ability that makes use of a power roll (feature/shadow/level-1/insight.md).
+    // ability that makes use of a power roll (feature/shadow/level-1/insight.md). V159: automatic
+    // edges count.
     const affordability = checkAffordability(
-      ability.kind === 'rolled' && ability.fixedCost
-        ? effectiveFixedCost(
-            ability.fixedCost,
-            actorRollFacts(actor!, records),
-            targets.map((_, i) => ({ edges: edges[i]!, banes: banes[i]! })),
-          )
+      rolledAbility && ability.fixedCost
+        ? effectiveFixedCost(ability.fixedCost, actorRollFacts(actor!, records), rollTotals())
         : ability.fixedCost,
       costPool,
       allowance.inCombat,
@@ -1540,6 +1693,9 @@ const abilityUse: OperationDefinition = {
       };
       const effectInput: EffectOnlyInput = {
         actor: recipient(records),
+        ...(records.character || records.foe
+          ? { actorCharacteristics: actorRollFacts(actor!, records).characteristics }
+          : {}),
         targets: targets.map(recipient),
         inCombat: allowance.inCombat,
         ...(costPool ? { resourcePool: costPool } : {}),
@@ -1556,6 +1712,10 @@ const abilityUse: OperationDefinition = {
       const nameOf = (id: string) =>
         id === actor!.id ? actor!.name : (targets.find(t => t.actor.id === id)?.actor.name ?? id);
       const describeEffect = (effect: CompiledEffectOutcome) => {
+        if (effect.kind === 'modifier')
+          return effect.status === 'applied' && effect.payload
+            ? `${nameOf(effect.targetId)}: ${describeModifier(effect.payload)}, ${describeDuration(effect.spec.duration, effect.spec.endsWhen)} (applied automatically).`
+            : `For the table (${nameOf(effect.targetId)}): "${effect.clause}"`;
         if (effect.kind === 'gain' && effect.application) {
           const a = effect.application;
           const parts = [
@@ -1620,6 +1780,21 @@ const abilityUse: OperationDefinition = {
               },
             });
           }
+          // V159: modifiers become modifier effect instances on each subject.
+          await commitModifiers(
+            mctx,
+            scope,
+            effects(scope.eventId),
+            [records, ...targets],
+            {
+              eventId: scope.eventId,
+              abilityId: ability.abilityId,
+              abilityName: ability.name,
+              actor: actor!,
+              sourcePath: ability.source.path,
+            },
+            allowance.encounterId,
+          );
           // 3. The effective record: occurrences and their dispositions; no dice or outcome.
           await journalInsert(mctx, scope, 'abilityResults', {
             campaignId: scope.campaignId,
@@ -1819,14 +1994,12 @@ const abilityUse: OperationDefinition = {
       ? poolFor(records, context, metadata.fixedCost.resource)
       : undefined;
     // Affordability is decided before any dice are drawn (R04 9: no roll, no debit when blocked).
+    // V159: circumstance plus automatic contributions (after any Escape Grab bane above).
+    const totals = rollTotals();
     const probe = resolveAbilityRoll({
       ability: metadata,
       actor: actorFacts,
-      targets: targets.map((t, i) => ({
-        targetId: t.actor.id,
-        edges: edges[i]!,
-        banes: banes[i]!,
-      })),
+      targets: totals,
       targetFacts: [],
       dice: { d10a: 1, d10b: 1 },
       inCombat: allowance.inCombat,
@@ -1867,11 +2040,7 @@ const abilityUse: OperationDefinition = {
     });
     const resolutionInput: CompiledAbilityInput = {
       actor: actorFacts,
-      targets: targets.map((t, i) => ({
-        targetId: t.actor.id,
-        edges: edges[i]!,
-        banes: banes[i]!,
-      })),
+      targets: totals,
       targetFacts: targetFacts.flatMap(t => ('facts' in t.facts ? [t.facts.facts] : [])),
       dice: { d10a: a!.value as never, d10b: b!.value as never },
       inCombat: allowance.inCombat,
@@ -1918,8 +2087,28 @@ const abilityUse: OperationDefinition = {
         t,
         result.damageApplications.find(d => d.targetId === t.actor.id) ?? null,
       );
-      return { target: t.actor, edges: edges[i]!, banes: banes[i]!, outcome, applied };
+      const contributions = automatic[i]!.contributions;
+      return {
+        target: t.actor,
+        edges: edges[i]!,
+        banes: banes[i]!,
+        ...(contributions.length ? { contributions } : {}),
+        outcome,
+        applied,
+      };
     });
+    // V159 (design 5a): the consumables this roll uses up, even when banes cancel them.
+    const consumed = consumedBy(perTarget.map(p => ({ contributions: p.contributions ?? [] })));
+    const holderOf = (id: string): EffectHolder => {
+      const record = id === actor!.id ? records : targets.find(t => t.actor.id === id)!;
+      return record.character
+        ? { kind: 'character', id: record.character._id }
+        : { kind: 'foe', id: record.foe!._id };
+    };
+    const automaticText = perTarget
+      .filter(p => p.contributions?.length)
+      .map(p => `${p.target.name}: ${p.contributions!.map(describeContribution).join('; ')}`)
+      .join('. ');
     const costText = result.cost
       ? result.cost.waived
         ? ` Cost ${result.cost.amount} ${result.cost.resource} waived outside combat.`
@@ -1944,7 +2133,7 @@ const abilityUse: OperationDefinition = {
     const grabTier = perTarget[0]?.outcome.tier ?? 1;
     const grabText = grabPlan ? grabPlan.note(grabTier) : '';
     const describeUse = (payment: string) =>
-      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${grabText}${squadText}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment}${automaticText ? ` Automatic effects (${automaticText}).` : ''} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${grabText}${squadText}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
     return {
       kind: 'ability.use',
       description: describeUse(costText),
@@ -1956,7 +2145,13 @@ const abilityUse: OperationDefinition = {
           result.cost?.resource === 'malice' ? ` Spent ${result.cost.amount} malice.` : costText,
         ),
         rollId: accepted.rollId,
-        targets: perTarget.map(p => ({ target: p.target, edges: p.edges, banes: p.banes })),
+        targets: perTarget.map(p => ({
+          target: p.target,
+          edges: p.edges,
+          banes: p.banes,
+          ...(p.contributions ? { contributions: p.contributions } : {}),
+        })),
+        ...(consumed.length ? { consumed: consumed.map(c => c.instanceId) } : {}),
         damage: perTarget.map(p => ({
           target: p.target,
           application: p.applied,
@@ -1980,6 +2175,13 @@ const abilityUse: OperationDefinition = {
         // V158: "until you use this ability again" ends the owner's earlier effects of it.
         if (compiledOutcome?.kind === 'resolved')
           await endReusedEffects(mctx, scope, actor!, ability.abilityId);
+        // V159: the consumables this roll qualified for are used up by it (design 5a).
+        await consumeRollEffects(
+          mctx,
+          scope,
+          consumed.map(c => ({ holder: holderOf(c.subjectId), instanceId: c.instanceId })),
+          `${actor!.name}'s ${ability.name} roll`,
+        );
         // 2. Damage to every target in target order (R04 4.5); squad pools once per squad.
         for (const p of perTarget) {
           const record = targets.find(t => sameActor(t.actor, p.target))!;
@@ -2005,6 +2207,22 @@ const abilityUse: OperationDefinition = {
               actorLabel: actor!.name,
               sourcePath: ability.source.path,
               actorId: actor!.id,
+            },
+            allowance.encounterId,
+          );
+        // V159: applied modifiers become modifier effect instances on their subjects.
+        if (compiledOutcome?.kind === 'resolved')
+          await commitModifiers(
+            mctx,
+            scope,
+            effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+            targets,
+            {
+              eventId: scope.eventId,
+              abilityId: ability.abilityId,
+              abilityName: ability.name,
+              actor: actor!,
+              sourcePath: ability.source.path,
             },
             allowance.encounterId,
           );
@@ -2056,6 +2274,7 @@ const abilityUse: OperationDefinition = {
             target: p.target,
             edges: p.edges,
             banes: p.banes,
+            ...(p.contributions ? { contributions: p.contributions } : {}),
             outcome: p.outcome,
             applied: p.applied,
             dispositions: [],
@@ -2111,18 +2330,23 @@ const abilityCorrect: OperationDefinition = {
   verb: 'correct',
   title: 'Add or remove edges and banes after the roll',
   description:
-    'Set the corrected edge and bane counts for one target of a resolved ability use. The accepted dice are kept, that target’s tier and damage are recomputed, the applied damage is reconciled without dealing it twice, and a linked correction entry is appended; the original entry is unchanged.',
+    'Set the corrected circumstance edge and bane counts, or the excluded automatic effects, for one target of a resolved ability use. The accepted dice are kept, the saved automatic contributions are reused (never re-read), that target’s tier and damage are recomputed, the applied damage is reconciled without dealing it twice, and a linked correction entry is appended; the original entry is unchanged.',
   args: {
     event: v.string(),
     target: referenceValidator,
-    edges: v.number(),
-    banes: v.number(),
+    edges: v.optional(v.number()),
+    banes: v.optional(v.number()),
+    exclude: v.optional(v.union(v.string(), v.array(v.string()))),
   },
   argDescriptions: {
     event: 'The id of the ability use event being corrected.',
     target: 'Which target of that use.',
-    edges: 'The corrected number of edges against this target.',
-    banes: 'The corrected number of banes against this target.',
+    edges:
+      'The corrected number of circumstance edges against this target (automatic edges are separate); default unchanged.',
+    banes:
+      'The corrected number of circumstance banes against this target (automatic banes are separate); default unchanged.',
+    exclude:
+      'The corrected set of excluded automatic effects for this target, as effect instance ids; default unchanged. Give [] to exclude none.',
   },
   roles: PLAYERS,
   session: 'running',
@@ -2181,8 +2405,6 @@ const abilityCorrect: OperationDefinition = {
       }
     }
     await assertCorrectionAllowed(ctx, event._id, context.user);
-    const edges = integer(args.edges, 'edges', 0);
-    const banes = integer(args.banes, 'banes', 0);
     if (result.actor.kind === 'squad')
       throw new ConvexError(
         'Corrections of a squad action are not supported in V02: rewind the use, or adjust the squad pool with /adjust stamina on the squad.',
@@ -2202,9 +2424,68 @@ const abilityCorrect: OperationDefinition = {
     if (index < 0)
       throw new ConvexError(`${targetRecord.actor.name} was not a target of that use.`);
     const entry = result.targets[index]!;
-    if (entry.edges === edges && entry.banes === banes)
+    const edges = args.edges === undefined ? entry.edges : integer(args.edges, 'edges', 0);
+    const banes = args.banes === undefined ? entry.banes : integer(args.banes, 'banes', 0);
+    // V159: the saved automatic contributions, with the table's corrected exclusions. They are
+    // never re-read from current effects (docs/lasting-effects-design.md#2-modifier-pipeline).
+    const savedContributions = (entry.contributions ?? []) as RollContribution[];
+    const exclusionNotes: string[] = [];
+    let contributions = savedContributions;
+    if (args.exclude !== undefined) {
+      const wanted = new Set(excludeList(args.exclude));
+      const known = contributionIds(savedContributions);
+      const unknown = [...wanted].filter(id => !known.has(id));
+      if (unknown.length)
+        throw new ConvexError(
+          `Not an automatic contribution to that roll against ${targetRecord.actor.name}: ${unknown.join(', ')}.`,
+        );
+      contributions = savedContributions.map(c => {
+        const excluded = [c.instanceId, ...c.sources].some(id => wanted.has(id));
+        const { excluded: _was, ...rest } = c;
+        void _was;
+        return excluded ? { ...rest, excluded: true as const } : rest;
+      });
+      for (const [i, after] of contributions.entries()) {
+        const before = savedContributions[i]!;
+        if (!!before.excluded === !!after.excluded) continue;
+        if (before.excluded && before.consumes.length)
+          throw new ConvexError(
+            `${describeContribution({ ...before, excluded: undefined } as RollContribution)} was excluded when the roll was made, so the roll did not use it up; a correction never consumes it later. Rewind the use to apply it.`,
+          );
+        // "Stacking Unique Effects": the same ability doesn't stack on one roll.
+        if (
+          before.excluded &&
+          contributions.some(
+            (other, j) =>
+              j !== i &&
+              !other.excluded &&
+              other.abilityId === after.abilityId &&
+              other.side === after.side,
+          )
+        )
+          throw new ConvexError(
+            `${after.abilityName} already applies to that roll; the same ability doesn't stack.`,
+          );
+        // Design 5a: a correction that removes a roll's eligibility reports the consumable as
+        // "would not have been consumed"; it never restores or re-consumes it silently.
+        if (!before.excluded && before.consumes.length)
+          exclusionNotes.push(
+            `${after.abilityName} would not have been used up by this roll; it stays used up (end or re-apply it at the table if the table agrees).`,
+          );
+      }
+    }
+    const sameExclusions = contributions.every(
+      (c, i) => !!c.excluded === !!savedContributions[i]!.excluded,
+    );
+    if (entry.edges === edges && entry.banes === banes && sameExclusions)
       throw new ConvexError(
-        `${targetRecord.actor.name} already has ${edges} edges and ${banes} banes on that use.`,
+        `${targetRecord.actor.name} already has ${edges} edges and ${banes} banes on that use${savedContributions.length ? ', with those exclusions' : ''}.`,
+      );
+    const corrected = withContributions({ targetId: entry.target.id, edges, banes }, contributions);
+    const totalsOf = (t: (typeof result.targets)[number]) =>
+      withContributions(
+        { targetId: t.target.id, edges: t.edges, banes: t.banes },
+        (t.contributions ?? []) as RollContribution[],
       );
     const inputs = result.resolutionInputs as
       | {
@@ -2250,8 +2531,9 @@ const abilityCorrect: OperationDefinition = {
       entry.outcome as TargetRollOutcome,
       applied,
       'facts' in facts ? facts.facts : undefined,
-      edges,
-      banes,
+      corrected.edges,
+      corrected.banes,
+      corrected.bonuses,
     );
     if (
       targetRecord.character &&
@@ -2266,9 +2548,9 @@ const abilityCorrect: OperationDefinition = {
     const correctedInputs = savedCompiled && {
       ...savedCompiled.inputs,
       targets: savedCompiled.inputs.targets.map(t => {
-        if (t.targetId === entry.target.id) return { ...t, edges, banes };
+        if (t.targetId === entry.target.id) return corrected;
         const current = result.targets.find(r => r.target.id === t.targetId);
-        return current ? { ...t, edges: current.edges, banes: current.banes } : t;
+        return current ? totalsOf(current) : t;
       }),
     };
     let correctedCompiled: ReturnType<typeof resolveCompiledAbility> | undefined;
@@ -2297,9 +2579,11 @@ const abilityCorrect: OperationDefinition = {
             // V154: tier instructions belong to their target, like its other tier effects.
             // V158: a lasting instruction is once per use and independent of the roll; it keeps its
             // occurrence, which is its effect instance's identity.
+            // V159: a modifier section is once per use too; it keeps its occurrence and instance.
             if (
               ((effect.kind !== 'rider' || effect.tier) && effect.targetId !== entry.target.id) ||
-              (effect.kind === 'rider' && effect.lasting)
+              (effect.kind === 'rider' && effect.lasting) ||
+              effect.kind === 'modifier'
             ) {
               const kept = savedCompiled.effects.find(
                 o => o.effect.nodeId === effect.nodeId && o.effect.targetId === effect.targetId,
@@ -2334,19 +2618,23 @@ const abilityCorrect: OperationDefinition = {
     const dueAfter = effectiveFixedCost(
       inputs.ability.fixedCost,
       inputs.actor,
-      result.targets.map((t, i) =>
-        i === index ? { edges, banes } : { edges: t.edges, banes: t.banes },
-      ),
+      result.targets.map((t, i) => (i === index ? corrected : totalsOf(t))),
     )?.amount;
     const paidBefore = paid && !paid.waived ? paid.amount : undefined;
     const costNote =
       paidBefore !== undefined && dueAfter !== undefined && paidBefore !== dueAfter
         ? ` The ${paid!.resource} cost would now be ${dueAfter} instead of the ${paidBefore} paid; the payment is unchanged (adjust it with /adjust heroic-resource if the table agrees).`
         : '';
-    const publicDescription = `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${dice.d10a} + ${dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina.${costNote}`;
+    const excludedNames = (list: readonly RollContribution[]) =>
+      list.filter(c => c.excluded).map(c => `${c.actorLabel}'s ${c.abilityName}`);
+    const exclusionText = sameExclusions
+      ? ''
+      : `, excluded automatic effects ${excludedNames(savedContributions).join(', ') || 'none'} → ${excludedNames(contributions).join(', ') || 'none'}`;
+    const notes = exclusionNotes.length ? ` ${exclusionNotes.join(' ')}` : '';
+    const publicDescription = `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes}${exclusionText} (same dice ${dice.d10a} + ${dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina.${costNote}${notes}`;
     return {
       kind: 'correction.ability',
-      description: `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${dice.d10a} + ${dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina${stamina}.${costNote}`,
+      description: `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes}${exclusionText} (same dice ${dice.d10a} + ${dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina${stamina}.${costNote}${notes}`,
       causeEventId: event._id,
       data: {
         originalEventId: event._id,
@@ -2354,6 +2642,7 @@ const abilityCorrect: OperationDefinition = {
         actor: result.actor,
         target: targetRecord.actor,
         correction,
+        ...(sameExclusions ? {} : { contributions }),
         byRole: context.role,
       },
       commit: async (mctx, scope) => {
@@ -2364,6 +2653,7 @@ const abilityCorrect: OperationDefinition = {
                 ...t,
                 edges,
                 banes,
+                ...(contributions.length ? { contributions } : {}),
                 outcome: correction.after,
                 applied: correction.damageAfter ?? null,
               }
@@ -2525,6 +2815,11 @@ const abilityResolved: OperationDefinition = {
       // V157: an applied gain already changed the recipient's live state.
       if (occurrence.effect.kind === 'gain' && occurrence.effect.status === 'applied')
         throw new ConvexError('An applied gain cannot be resolved manually.');
+      // V159: an applied modifier is a tracked effect; exclude it on a roll or end it instead.
+      if (occurrence.effect.kind === 'modifier' && occurrence.effect.status === 'applied')
+        throw new ConvexError(
+          'An applied modifier is tracked by the engine; exclude it on a roll or end it with /effect end.',
+        );
       if (clause && plainText(clause) !== plainText(occurrence.effect.clause))
         throw new ConvexError('The clause does not match that occurrence.');
       // Candidates come from the current effects; V110 corrections keep other targets' revisions.

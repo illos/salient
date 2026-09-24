@@ -1,5 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** V109: source riders share V72 occurrence, authority and history behavior without rider writes. */
+/**
+ * V109: source riders share V72 occurrence, authority and history behavior without rider writes.
+ * V159: Raider's Awe's bane is now a modifier the engine applies (tests/app/modifiers.test.ts), so
+ * the kit witness is Shining Armor's Protective Attack (kit/shining-armor.md), whose taunt rider
+ * stays table work.
+ */
 import { expect, test } from 'vitest';
 import { api, internal } from '../../convex/_generated/api';
 import type { PublicCompiledResult } from '../../shared/contracts/compiledResult';
@@ -14,8 +19,8 @@ test('kit rider persists, remains table work, and follows correction/disposition
     f.player,
     f.director,
     f.campaignId,
-    'Raider',
-    heroFixtureSelections({ 'kit.choice': 'Raider' }),
+    'Guard',
+    heroFixtureSelections({ 'kit.choice': 'Shining Armor' }),
   );
   const targetId = await f.director.client.mutation(api.foes.add, {
     campaignId: f.campaignId,
@@ -33,7 +38,7 @@ test('kit rider persists, remains table work, and follows correction/disposition
     }));
   const before = await live();
   const used = await command(
-    `@Raider /ability use ability="Raider's Awe" targets=[${target}]`,
+    `@Guard /ability use ability="Protective Attack" targets=[${target}]`,
     f.player.client,
   );
   const read = async (client = f.director.client) =>
@@ -48,16 +53,16 @@ test('kit rider persists, remains table work, and follows correction/disposition
   const rider = compiled.effects.find(o => o.effect.kind === 'rider')!;
   expect(rider.effect).toMatchObject({
     kind: 'rider',
-    shape: 'bane',
+    shape: 'taunt',
     status: 'manual',
     dependency: 'independent',
   });
-  expect(rider.effect.clause).toMatch(/next.*power roll.*before the end/);
-  expect(compiled.definition.source.path).toMatch(/kit\/raider.md$/);
+  expect(rider.effect.clause).toMatch(/taunted.*until the end of their next/);
+  expect(compiled.definition.source.path).toMatch(/kit\/shining-armor.md$/);
   const after = await live();
   expect(after.actor).toEqual(before.actor);
   const tier = initial.targets[0]!.outcome.tier;
-  expect(after.target.stamina).toBe(before.target.stamina - [5, 8, 10][tier - 1]!); // kit printed3/6/8 + M2; no second kit bonus.
+  expect(after.target.stamina).toBe(before.target.stamina - [7, 10, 13][tier - 1]!); // kit printed 5/8/11 + M2; no second kit bonus.
   expect({ ...after.target, stamina: before.target.stamina }).toEqual(before.target);
   expect((await read(f.observer.client)).compiled).not.toHaveProperty('inputs');
   const publicRider = (
@@ -79,7 +84,7 @@ test('kit rider persists, remains table work, and follows correction/disposition
   await expect(
     command(`/ability resolved event="${used.eventId}" occurrence=${JSON.stringify(rider.id)}`),
   ).rejects.toThrow(/stale|current/);
-  const resolve = `/ability resolved event="${used.eventId}" occurrence=${JSON.stringify(current.id)} note="Bane tracked at table"`;
+  const resolve = `/ability resolved event="${used.eventId}" occurrence=${JSON.stringify(current.id)} note="Taunt tracked at table"`;
   await expect(command(resolve, f.player.client)).rejects.toThrow(/director/i);
   const state = await live();
   const disposed = await command(resolve, f.director.client, 'rider-disposition');
@@ -87,7 +92,7 @@ test('kit rider persists, remains table work, and follows correction/disposition
   const withDisposition = (await read()).compiled as PublicCompiledResult;
   expect(withDisposition.effects.find(o => o.id === current.id)!.disposition).toMatchObject({
     eventId: disposed.eventId,
-    note: 'Bane tracked at table',
+    note: 'Taunt tracked at table',
   });
   expect(await live()).toEqual(state);
   await expect(command(resolve)).rejects.toThrow(/already/);

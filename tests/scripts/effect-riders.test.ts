@@ -209,7 +209,8 @@ test('after-damage readers wait for completion and never award state or disclose
 // Printed kit damage already includes the kit's own bonuses. These must never be added twice.
 test.each([
   ['Hamstring Shot', 7, 0],
-  ["Raider's Awe", 8, 1],
+  // V159: Raider's Awe's Effect is a modifier the engine applies, no longer a table-work rider.
+  ["Raider's Awe", 8, 0],
   ['Protective Attack', 10, 1],
   ['Fancy Footwork', 9, 1],
   ['Driving Pounce', 9, 1],

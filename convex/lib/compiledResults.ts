@@ -5,12 +5,34 @@ import type { CompiledResult, PublicCompiledResult } from '../../shared/contract
 import { baselineOf, requireHeroLive } from './characterBuild';
 import { foeSnapshot, type TargetRecord } from './resolve';
 import type { ConditionId } from '../../shared/contracts/liveState';
+import { derivedValue } from '../../shared/resolve/modifiers';
 
 export function movementFacts(record: TargetRecord): MovementFacts {
   const baseline = record.character ? baselineOf(record.character.derivedBaseline) : null;
   const snapshot = record.foe ? foeSnapshot(record.foe).structured : undefined;
   const size = baseline?.size.value ?? snapshot?.size;
-  const stability = baseline?.stability.value ?? snapshot?.stability;
+  const base = baseline?.stability.value ?? snapshot?.stability;
+  // V159: active stability effects feed the forced-movement stability (rule/character/stability.md;
+  // docs/lasting-effects-design.md#2-modifier-pipeline, derived values).
+  const holderId = record.character?._id ?? record.foe?._id;
+  const numeric =
+    typeof base === 'number'
+      ? base
+      : typeof base === 'string' && /^\d+$/.test(base)
+        ? Number(base)
+        : undefined;
+  const effects =
+    numeric !== undefined && holderId
+      ? derivedValue(
+          numeric,
+          holderId,
+          (record.character
+            ? record.character.liveState?.effectInstances
+            : record.foe?.live.effectInstances) ?? [],
+          'stability',
+        )
+      : undefined;
+  const stability = effects?.value ?? numeric;
   const conditions = record.character
     ? requireHeroLive(record.character).conditions
     : record.foe?.live.conditions;
@@ -22,11 +44,8 @@ export function movementFacts(record: TargetRecord): MovementFacts {
   return {
     kind: 'creature',
     ...(typeof size === 'string' ? { size } : {}),
-    ...(typeof stability === 'number'
-      ? { stability }
-      : typeof stability === 'string' && /^\d+$/.test(stability)
-        ? { stability: Number(stability) }
-        : {}),
+    ...(stability !== undefined ? { stability } : {}),
+    ...(effects?.contributions.length ? { stabilityEffects: effects.contributions } : {}),
     ...(active.length ? { conditions: { kind: 'unhandled' as const, labels: active } } : {}),
   };
 }
