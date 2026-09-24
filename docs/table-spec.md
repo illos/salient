@@ -1718,6 +1718,11 @@ cannot be closed while a respite is open and unresolved; the Director first fini
 the respite, then closes the session. Respite never spans closed sessions, so closed-session history
 stays immutable without a special respite context.
 
+**Respite completion grants level-ups, confirmed 2026-09-24:** completing a respite converts Victories to
+XP, and each threshold a hero's XP crosses grants that hero one pending level-up. Taking it is the
+owner's separate character-sheet action (see the [level-up policy](character-wizard-spec.md#level-up));
+the respite never waits for it, and the Director can resolve the respite and move on.
+
 Confirmed: respite is its own dedicated table mode, with a self-contained gameplay loop that the Director
 starts and ends. It has mechanics to support rather than being only a pause or a descriptive log entry.
 

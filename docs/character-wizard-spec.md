@@ -530,8 +530,15 @@ shared headless operation, under existing timing, encounter locks and validation
   level-up flow; changing its level uses the existing full-edit flow (choose a target level).
 - **Each level-up is one event granting one level of choices.** A hero with enough banked XP for two
   levels runs the level-up flow twice, one level at a time; the two are never combined into one flow.
-- Level-up timing (during a respite), completing choices before or after the respite ends, and
-  replacing earlier choices are settled with the respite design (V161).
+- **Earning a level-up is separate from taking it (confirmed 2026-09-24).** When a respite completes,
+  Victories convert to XP; each XP threshold crossed grants one pending level-up to that hero (almost
+  always one; two or more only when the XP gain spans several thresholds). Taking a level-up is a
+  separate owner action on the character sheet, done whenever the player gets to it, one level per
+  flow. Nothing waits for it: the Director resolves the respite, closes the session and starts the
+  next one regardless. Reason: never block play on a player who has not updated their character.
+- **Campaign XP per level (requirement, design later).** The XP needed per level is a campaign setting
+  the Director can change long-term; the rules' 16 per level is the default.
+- Replacing earlier choices during level-up remains open (V161).
 
 A transferred higher-level hero starts with zero destination-campaign XP and earns toward the next
 level from the admitted effective level. Keep an eligibility offset equal to that entry level's

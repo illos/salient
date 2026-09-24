@@ -24,3 +24,6 @@ and generic level-up for all eleven classes can be built. Design only: no code.
   means two separate flows).
 - 2026-09-24: Q2 settled: a session cannot be closed while a respite is open and unresolved (table spec,
   respite research queue, roadmap).
+- 2026-09-24: Q4 settled: respite completion grants pending level-ups; taking one is a separate owner
+  action later, never blocking the respite or the next session. New requirement: Director-adjustable
+  campaign XP per level (default 16), to design later.
