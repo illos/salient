@@ -968,3 +968,57 @@ Current behaviour (V150, labelled interpretation):
 Alternative: "until the start of your next turn" also covers the next turn's gain.
 
 Recommendation: keep the current behaviour, since "until" ends the window at that boundary.
+
+## Q-RES-2: the Fury's "first time you become winded or are dying"
+
+`feature/fury/level-1/ferocity.md`: "The first time you become winded or are dying in an encounter,
+you gain 1d3 ferocity."
+
+Current behaviour (V142, labelled interpretation):
+- **One grant per encounter.** It applies on the first recorded damage that does either of these:
+  - takes Stamina from above the winded value to at or below it (becomes winded);
+  - takes Stamina from above 0 to 0 or lower (becomes dying).
+
+  A Fury who starts the encounter already winded and is then hit to dying gains then.
+- **No grant at encounter start.** A Fury who starts an encounter already winded or dying gets
+  nothing at that point. "Become" reads as a change.
+- **Corrections.** A correction that makes the triggering damage no longer cross either threshold
+  reverses the grant and frees it for later.
+- The table can claim the grant for a state reached another way, such as self-damage entered by
+  hand.
+
+Alternatives:
+- **(a)** Two grants: one for the first winded and one for the first dying.
+- **(b)** A Fury already winded or dying at encounter start gains at once.
+
+Recommendation: keep the single grant. The sentence has one "first time".
+
+## Q-RES-3: does Stamina loss count as taking damage for heroic-resource triggers?
+
+Examples:
+- The Fury gains ferocity "the first time each combat round that you take damage".
+- To the Uttermost End makes you "lose 1d6 Stamina".
+- Bleeding makes a creature "lose Stamina", though `condition/bleeding.md` also says "You take damage
+  from this condition".
+
+Current behaviour (V142): only recorded damage (a damage write from an ability, free strike or squad
+action) triggers automatically. Stamina loss that the table records with `/adjust stamina` does not.
+The table can claim the trigger when it judges the loss to be damage.
+
+Alternative: treat every Stamina decrease as damage.
+
+Recommendation: keep manual claiming, since the rules distinguish losing Stamina from taking damage.
+
+## Q-RES-4: does damage reduced to 0 count as taking damage?
+
+`rule/damage/damage-immunity.md` reduces damage "to a minimum of 0 damage".
+
+Current behaviour (V142): a damage write that changes neither Stamina nor temporary Stamina triggers
+nothing. Damage absorbed only by temporary Stamina does count, following
+`rule/health/temporary-stamina.md`: "Whenever you take damage while you have temporary Stamina, the
+temporary Stamina decreases first".
+
+Alternative: any damage instance, even 0, counts.
+
+Recommendation: keep "0 damage is not taking damage". The table can claim the trigger if it rules
+otherwise.

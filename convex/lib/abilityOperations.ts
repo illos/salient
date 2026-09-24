@@ -75,6 +75,7 @@ import {
   resolveHistoricalId,
 } from './history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
+import { reconcileObservedGains } from './resourceTriggers';
 import { rollDice } from './dice';
 import {
   abilitiesFor,
@@ -2054,12 +2055,37 @@ const abilityCorrect: OperationDefinition = {
             : {}),
           correctionEventIds: [...current.correctionEventIds, scope.eventId],
         });
+        // V142: resource gains the original damage triggered and the corrected damage no longer
+        // satisfies are reversed; newly satisfied ones follow from the damage write below.
+        if (targetRecord.character && applied)
+          await reconcileObservedGains(
+            mctx,
+            scope,
+            targetRecord.character._id,
+            event._id,
+            { stamina: applied.staminaBefore, temporaryStamina: applied.temporaryStaminaBefore },
+            correction.damageAfter
+              ? {
+                  stamina: correction.damageAfter.staminaAfter,
+                  temporaryStamina: correction.damageAfter.temporaryStaminaAfter,
+                }
+              : {
+                  stamina: applied.staminaBefore,
+                  temporaryStamina: applied.temporaryStaminaBefore,
+                },
+          );
         if ('facts' in facts && (applied || correction.damageAfter))
-          await writeDamage(mctx, scope, targetRecord, {
-            staminaAfter: facts.facts.stamina + correction.staminaReconciliationDelta,
-            temporaryStaminaAfter:
-              facts.facts.temporaryStamina + correction.temporaryStaminaReconciliationDelta,
-          });
+          await writeDamage(
+            mctx,
+            scope,
+            targetRecord,
+            {
+              staminaAfter: facts.facts.stamina + correction.staminaReconciliationDelta,
+              temporaryStaminaAfter:
+                facts.facts.temporaryStamina + correction.temporaryStaminaReconciliationDelta,
+            },
+            event._id,
+          );
         if (savedCompiled && correctedCompiled?.kind === 'resolved') {
           for (const occurrence of savedCompiled.effects) {
             if (

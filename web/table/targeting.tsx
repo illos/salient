@@ -372,8 +372,10 @@ export function AbilityPanel({
           {sheet.resourceTriggers.map(trigger => (
             <li key={trigger.id} className="flex flex-wrap items-center gap-2 text-sm">
               <span>
-                {trigger.label}: +{trigger.amount} {trigger.resource}, once{' '}
+                {trigger.label}: {trigger.dice ? `+1d${trigger.dice}` : `+${trigger.amount}`}{' '}
+                {trigger.resource}, once{' '}
                 {trigger.limit === 'encounter' ? 'per encounter' : `per ${trigger.limit}`}
+                {trigger.observed ? ' (automatic when recorded)' : ''}
               </span>
               <span className="text-muted-foreground">
                 {trigger.unavailable ?? trigger.confirmation}

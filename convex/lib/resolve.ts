@@ -61,6 +61,7 @@ import { manifest } from '../../shared/content/compendium/index';
 import { parseTierText, plainText } from '../../shared/resolve/index';
 import { findContent, requireContent } from '../content';
 import { journalPatch, type JournalScope } from './journal';
+import { observeHeroDamage } from './resourceTriggers';
 import { recordCaptainLoss, squadOfCaptain } from './squads';
 import { baselineOf, requireHeroLive, type HeroLive } from './characterBuild';
 import {
@@ -1019,6 +1020,8 @@ export async function writeDamage(
   scope: JournalScope,
   target: TargetRecord,
   application: Pick<DamageApplication, 'staminaAfter' | 'temporaryStaminaAfter'>,
+  /** The ability use this damage belongs to, when it is a correction of that use (V142). */
+  useEventId?: string,
 ): Promise<void> {
   // V02: squad members take damage through their squad's pool (convex/lib/squads.ts commits it).
   if (target.squad) return;
@@ -1048,6 +1051,16 @@ export async function writeDamage(
       temporaryStamina: application.temporaryStaminaAfter,
     },
   });
+  // V142: class resource triggers observed from recorded damage (Fury's first damage each round,
+  // first winded or dying), each within its limit.
+  await observeHeroDamage(
+    ctx,
+    scope,
+    character._id,
+    { stamina: live.stamina, temporaryStamina: live.temporaryStamina },
+    { stamina: application.staminaAfter, temporaryStamina: application.temporaryStaminaAfter },
+    useEventId,
+  );
 }
 
 /** Verbatim source record for the game log (the shape web/table/index.tsx EventSource reads). */

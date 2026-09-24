@@ -26,7 +26,7 @@ export const FURY_ACTIONS: FuryAction[] = [
     sourcePath: ability('blood-for-blood'),
     actionType: 'Part of Blood for Blood!',
     activationCondition:
-      'When using Blood for Blood, optionally take 1d6 damage to deal an additional 1d6 damage to the target. Resolve both rolls and damage manually.',
+      'When using Blood for Blood, optionally take 1d6 damage to deal an additional 1d6 damage to the target. Resolve both rolls and damage manually. That self-damage is damage you take: if it is your first damage this round, claim it with /resource claim trigger=fury-first-damage (and fury-winded-or-dying if it made you winded or dying).',
   },
   {
     name: 'To the Death!: Target Opportunity Attack',

@@ -293,7 +293,8 @@ describe('A04 combat opening, turns and clock', () => {
       ['director', [['Goblin Archer', false, false]]],
     ]);
     expect(state.foes[second]!.live.stamina).toBe(15);
-    // Registrations in enqueue order: three Malice steps, then surprise expiry at the end of round 1.
+    // Registrations in enqueue order: three Malice steps, Thorn's three ferocity steps (V142: Thorn
+    // is a Fury), then surprise expiry at the end of round 1.
     const registrations = await t.run(ctx =>
       ctx.db
         .query('clockRegistrations')
@@ -321,14 +322,37 @@ describe('A04 combat opening, turns and clock', () => {
       ],
       [
         4,
+        { kind: 'heroic-resource', step: 'combat-start-grant', characterId: thornId },
+        { scope: 'combat', boundary: 'combat-start' },
+        'retired',
+      ],
+      [
+        5,
+        { kind: 'heroic-resource', step: 'turn-start-gain', characterId: thornId },
+        { scope: 'creature-turn', boundary: 'turn-start', creatureId: thornId, occurrence: 'each' },
+        'active',
+      ],
+      [
+        6,
+        { kind: 'heroic-resource', step: 'encounter-end-loss', characterId: thornId },
+        { scope: 'combat', boundary: 'combat-end' },
+        'active',
+      ],
+      [
+        7,
         { kind: 'operation', operationId: 'combat.surprise-expiry' },
         { scope: 'round', boundary: 'round-end', round: 1 },
         'active',
       ],
     ]);
     // combat-start fired once: 0 Victories / 1 hero = 0, pool 4 → 4, logged with its inputs.
+    // V142: Thorn's ferocity combat-start grant fires after it.
     const clock = await clockEvents(t, campaignId);
-    expect(clock.map(e => e.kind)).toEqual(['clock.boundary', 'clock.malice']);
+    expect(clock.map(e => e.kind)).toEqual([
+      'clock.boundary',
+      'clock.malice',
+      'clock.heroic-resource',
+    ]);
     expect(clock[0]!.description).toBe('Combat starts.');
     expect(clock[0]!.causeEventId).toBe(ok.eventId);
     expect(clock[0]!.commandId).toBe('ok-commit-000001');
@@ -447,9 +471,11 @@ describe('A04 combat opening, turns and clock', () => {
       'No initiative roll is due',
     );
     // Both boundaries fired at OK in order: combat-start, then round-start with its gain.
+    // V142: Thorn's (Fury) ferocity combat-start grant fires after the Malice grant.
     expect((await clockEvents(t, campaignId)).map(e => e.kind)).toEqual([
       'clock.boundary',
       'clock.malice',
+      'clock.heroic-resource',
       'clock.boundary',
       'clock.malice',
     ]);
@@ -581,14 +607,18 @@ describe('A04 combat opening, turns and clock', () => {
     ).rejects.toThrow("Thorn's turn is in progress");
     expect(await submit(player.client, campaignId, '@Thorn /turn take', takeId)).toEqual(took);
     expect(await t.run(ctx => ctx.db.query('turns').take(5))).toHaveLength(1);
-    // The turn-start boundary fired once for this actual turn with nothing registered for it.
+    // The turn-start boundary fired once for this actual turn; V142: its only registered work is
+    // Thorn's (Fury) ferocity turn-start gain.
     const startBoundary = (await clockEvents(t, campaignId)).filter(e =>
       e.description.includes("Thorn's turn begins"),
     );
     expect(startBoundary).toHaveLength(1);
+    const ferocityGain = (await t.run(ctx => ctx.db.query('clockRegistrations').take(20))).find(
+      r => r.work.kind === 'heroic-resource' && r.work.step === 'turn-start-gain',
+    )!;
     expect(
       (startBoundary[0]!.payload as { plan: { ordinary: unknown[]; saves: unknown[] } }).plan,
-    ).toEqual({ ordinary: [], saves: [] });
+    ).toEqual({ ordinary: [ferocityGain._id], saves: [] });
     // Step 7: explicit End turn (the observer cannot; the Director could).
     await expect(submit(observer.client, campaignId, '/turn end', cid('o-end'))).rejects.toThrow(
       'observer',
@@ -623,12 +653,15 @@ describe('A04 combat opening, turns and clock', () => {
       activeTurnId: null,
     });
     const clock = await clockEvents(t, campaignId);
+    // V142: Thorn is a Fury, so her ferocity grant and turn-start d3 gain are logged too.
     expect(clock.map(e => e.description)).toEqual([
       'Combat starts.',
       'Malice: combat-start grant — average Victories 0 across 1 hero; pool 0 → 0.',
+      "Thorn's ferocity: combat-start grant equal to Victories (0); 0 → 0.",
       'Round 1 begins.',
       'Malice: round 1 gain — 1 hero + round 1 = 2; pool 0 → 2.',
       "Thorn's turn begins (round 1).",
+      expect.stringMatching(/^Thorn's ferocity: turn-start gain 1d3 = ([123]); 0 → \1\.$/),
       "Thorn's turn ends (round 1).",
       "Goblin Warrior's turn begins (round 1).",
       "Goblin Warrior's turn ends (round 1).",
@@ -968,8 +1001,9 @@ describe('A04 combat opening, turns and clock', () => {
         source: { logEntryId: eventId, label: 'Fixture save (dormant)' },
       });
     });
-    const rollsBefore = (await t.run(ctx => ctx.db.query('rolls').take(10))).length;
     await submit(player.client, campaignId, '@Thorn /turn take', cid('take'));
+    // Counted after the turn start, which rolls Thorn's ferocity d3 (V142 Fury automation).
+    const rollsBefore = (await t.run(ctx => ctx.db.query('rolls').take(10))).length;
     const ended = await submit(player.client, campaignId, '@Thorn /turn end', cid('end'));
     // Thorn's turn end: the save is in the save phase, last, and recorded as unsupported, not rolled.
     const endBoundary = (await clockEvents(t, campaignId)).find(
@@ -990,7 +1024,8 @@ describe('A04 combat opening, turns and clock', () => {
     expect(
       Object.values((await t.run(ctx => ctx.db.get(fixture.thornId)))!.liveState!.conditions),
     ).toEqual(Array(9).fill(false));
-    // Round 2 start: Malice (enqueueSeq 2) first, then third, first, second (enqueue order 4, 5, 6).
+    // Round 2 start: Malice (enqueueSeq 2) first, then third, first, second (enqueue order 7, 8, 9;
+    // V142: Thorn's three ferocity registrations take 4 to 6).
     await submit(director.client, campaignId, `@{foe:${goblin}} /turn take`, cid('take'));
     await submit(director.client, campaignId, '/turn end', cid('end'));
     const startBoundary = (await clockEvents(t, campaignId)).find(
@@ -1001,9 +1036,9 @@ describe('A04 combat opening, turns and clock', () => {
       .sort((a, b) => a.sequence - b.sequence);
     expect(firings.map(e => [(e.payload as { enqueueSeq: number }).enqueueSeq, e.kind])).toEqual([
       [2, 'clock.malice'],
-      [4, 'clock.unsupported'],
-      [5, 'clock.unsupported'],
-      [6, 'clock.unsupported'],
+      [7, 'clock.unsupported'],
+      [8, 'clock.unsupported'],
+      [9, 'clock.unsupported'],
     ]);
     expect(
       firings.slice(1).map(e => (e.payload as { source: { label: string } }).source.label),
@@ -1019,16 +1054,20 @@ describe('A04 combat opening, turns and clock', () => {
       ctx.db
         .query('clockRegistrations')
         .withIndex('by_encounter', q => q.eq('encounterId', row._id))
-        .take(10),
+        .take(20),
     );
     expect(registrations.map(r => [r.enqueueSeq, r.status])).toEqual([
       [1, 'retired'],
       [2, 'active'],
       [3, 'active'],
-      [4, 'active'],
+      // V142: Thorn's ferocity grant (retired at combat start), turn-start gain and end loss.
+      [4, 'retired'],
       [5, 'active'],
       [6, 'active'],
       [7, 'active'],
+      [8, 'active'],
+      [9, 'active'],
+      [10, 'active'],
     ]);
   });
 
@@ -1334,7 +1373,9 @@ test.each(['heroes', 'foes'] as const)(
     await submit(director.client, campaignId, `${actor} /turn take`, cid('take'));
     await submit(director.client, campaignId, '/turn end', cid('end'));
     expect((await encounterRow(t, sessionId!))!.round).toBe(2);
-    expect(await t.run(ctx => ctx.db.query('rolls').take(20))).toHaveLength(0);
+    // No initiative roll; V142: Thorn's own turn-start ferocity d3 (`hr_` key) is not one.
+    const rolls = await t.run(ctx => ctx.db.query('rolls').take(20));
+    expect(rolls.filter(r => !r.commandId.startsWith('hr_'))).toHaveLength(0);
   },
 );
 

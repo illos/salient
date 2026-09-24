@@ -95,7 +95,17 @@ test('A09: admitted hero → real combat → correction/history → closeout →
   const encounterId = await startCombat();
   expect((await t.run(ctx => ctx.db.get(campaignId)))!.malice).toBe(2);
   await command(player, '@Thorn /turn take');
-  expect((await hero())!.liveState!.heroicResource.current).toBe(0); // No invented Fury grants.
+  // V142: the Fury's combat-start grant is her Victories (0); her turn start adds the logged 1d3.
+  const gain = (await events()).find(
+    e =>
+      e.kind === 'clock.heroic-resource' &&
+      (e.payload as { data: { step: string } }).data.step === 'turn-start-gain',
+  )!;
+  expect(gain.dice).toHaveLength(1);
+  const ferocity = gain.dice![0]!.value;
+  expect(ferocity).toBeGreaterThanOrEqual(1);
+  expect(ferocity).toBeLessThanOrEqual(3);
+  expect((await hero())!.liveState!.heroicResource.current).toBe(ferocity);
 
   const roarText = `@Thorn /ability use ability="Thunder Roar" targets=[${goblins.map(id => `@{foe:${id}}`).join(',')}] edges=[1,0,0] banes=[0,2,0]`;
   const rollsBeforeBlock = await rolls();
@@ -105,7 +115,7 @@ test('A09: admitted hero → real combat → correction/history → closeout →
   expect(await command(player, roarText, blockedId)).toEqual(blocked);
   expect(await rolls()).toEqual(rollsBeforeBlock);
   expect(await t.run(ctx => ctx.db.query('actionUses').collect())).toHaveLength(0);
-  expect((await hero())!.liveState!.heroicResource.current).toBe(0);
+  expect((await hero())!.liveState!.heroicResource.current).toBe(ferocity);
   await command(director, '@Thorn /adjust heroic-resource value=6');
   expect((await hero())!.liveState!.heroicResource.current).toBe(6);
 
@@ -264,7 +274,7 @@ test('A09: admitted hero → real combat → correction/history → closeout →
     recoveries: 9,
     temporaryStamina: 0,
     surges: 0,
-    heroicResource: { current: 1 },
+    heroicResource: { current: 0 }, // V142: the Fury loses remaining ferocity at the end.
     victories: 1,
     conditions: { prone: true, bleeding: false },
   });

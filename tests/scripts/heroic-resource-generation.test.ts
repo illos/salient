@@ -114,3 +114,26 @@ test('the Censor profile matches its source amounts', () => {
   expect(triggerAmount(censor.triggers[0]!, 6).amount).toBe(1);
   expect(triggerAmount(censor.triggers[1]!, 4).amount).toBe(2);
 });
+
+// feature/fury/level-1/ferocity.md, level-4/damaging-ferocity.md ("2 ferocity instead of 1") and
+// level-7/greater-ferocity.md (turn-start gain 1d3 + 1), so levels 1–6 are checked.
+test('the Fury profile matches its source amounts', () => {
+  const fury = GENERATION_PROFILES.find(p => p.className === 'Fury')!;
+  expect(fury).toMatchObject({
+    resource: 'ferocity',
+    verifiedThroughLevel: 6,
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'dice', sides: 3 },
+    encounterEnd: { kind: 'lose' },
+    triggers: [
+      { id: 'fury-first-damage', amount: 1, limit: 'round', observe: 'damage-taken' },
+      {
+        id: 'fury-winded-or-dying',
+        dice: { sides: 3 },
+        limit: 'encounter',
+        observe: 'winded-or-dying',
+      },
+    ],
+  });
+  expect(triggerAmount(fury.triggers[0]!, 4).amount).toBe(2);
+});
