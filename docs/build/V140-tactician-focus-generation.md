@@ -62,3 +62,6 @@ The Tactician profile in `shared/resolve/heroicResourceGeneration.ts`, with sour
   - R2: the reviewer checked every Tactician feature through level 10, which confirms the levels 4–6
     range the V120 ledger (levels 1–3) did not cover. The only focus changes up to level 6 are
     `level-1/focus.md` and `level-4/focus-on-their-weaknesses.md`.
+- TESTER at `bae43ad` PASS: gate rc 0 in 271 s (engine 413/413, app 669/669); headless (seed 1732)
+  `heroic-resource`, `tactician` and `tactician-level-three` pass. Artifacts:
+  `test-artifacts/V140-bae43ad/`. Merge waits for V150 (the Self-Taught forgo, QC1's shared blocker).
