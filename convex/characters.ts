@@ -77,6 +77,7 @@ import {
 import { draftSelectionsFrom } from '../shared/evaluate/draft';
 import { previewBuildReconciliation } from '../shared/evaluate/liveReconciliation';
 import { selectionsFrom } from '../shared/evaluate/character';
+import { indexDecisions, poolOf } from '../shared/evaluate/structure';
 import { isJsonValue, type CharacterAuthored, type DraftSelection } from '../shared/characterDraft';
 import {
   activateRevision,
@@ -1321,5 +1322,39 @@ export const restore = mutation({
     }
     await receipt.save(id);
     return id;
+  },
+});
+
+/**
+ * V167: the kits a hero may change to as a respite activity (chapter/kits.md, Changing Your Kit):
+ * the options of their effective build's kit decision, for the owner's respite control.
+ */
+export const kitOptions = query({
+  args: { characterId: v.id('characters') },
+  returns: v.object({
+    current: v.union(v.string(), v.null()),
+    options: v.array(v.string()),
+    /** A Tactician changes two kits and arsenal values together; the table sends them from the palette. */
+    multiple: v.boolean(),
+  }),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    const character = await owned(ctx, args.characterId, user._id);
+    const base = character.effectiveRevisionId
+      ? await ctx.db.get(character.effectiveRevisionId)
+      : null;
+    if (!base) return { current: null, options: [], multiple: false };
+    const definitions = getDefinitions(revisionLevel(base), base.choiceOrigins);
+    const index = indexDecisions(definitions);
+    const decision = index.get('kit.choice');
+    const selections = selectionsFrom(base.selections);
+    const current = typeof selections['kit.choice'] === 'string' ? selections['kit.choice'] : null;
+    if (!decision || !current) return { current, options: [], multiple: false };
+    return {
+      current,
+      options: poolOf(decision, selections, definitions).values,
+      multiple:
+        index.has('class.tactician.second-kit') && selections['class.choice'] === 'Tactician',
+    };
   },
 });

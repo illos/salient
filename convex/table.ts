@@ -184,6 +184,18 @@ export const roster = query({
         revision: v.number(),
         startedAt: v.number(),
         number: v.number(),
+        /** V167: the open respite's resting heroes and each one's activity (null while unused). */
+        respite: v.union(
+          v.null(),
+          v.object({
+            participants: v.array(
+              v.object({
+                characterId: v.id('characters'),
+                activity: v.union(v.string(), v.null()),
+              }),
+            ),
+          }),
+        ),
       }),
     ),
     malice: v.union(v.number(), v.null()),
@@ -383,6 +395,14 @@ export const roster = query({
             revision: context.session.revision,
             startedAt: context.session.startedAt,
             number: sessions.length - sessions.findIndex(s => s._id === context.session!._id),
+            respite: context.session.respite
+              ? {
+                  participants: context.session.respite.participants.map(p => ({
+                    characterId: p.characterId,
+                    activity: p.activity ?? null,
+                  })),
+                }
+              : null,
           }
         : null,
       // Audience enforcement: the pool is absent from the payload unless the viewer may see it.

@@ -23,6 +23,7 @@ import { RosterCard, turnStateOf, type CardHealth } from './roster-card';
 import { RosterSection } from './roster-section';
 import { AbilityPanel } from './targeting';
 import { HeroRingRow } from './hero-ring-row';
+import { RespiteActivity } from './respite-card';
 
 export type Hero = Roster['heroes'][number];
 
@@ -279,6 +280,13 @@ export function HeroesPane({
                   aria-label="Selected sheet"
                 >
                   <span className="text-sm text-muted-foreground">Selected sheet</span>
+                  {running && roster.session?.respite && (
+                    <RespiteActivity
+                      campaignId={campaignId}
+                      hero={{ id: hero.id, name: hero.name }}
+                      respite={roster.session.respite}
+                    />
+                  )}
                   <CharacterSheet key={hero.id} characterId={hero.id} compact />
                   {/* The ability Use controls and their target flow stay with the selected hero:
                       the sheet's cards are readable presentation, the panel is the operation. */}

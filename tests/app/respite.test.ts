@@ -348,3 +348,26 @@ test('a Tactician cannot switch a Field Arsenal choice mid-respite while keeping
   await f.say('/respite interrupt');
   expect(await arsenal()).toBe('Mountain');
 });
+
+// V167: the table reads the open respite and a hero's kit options through shared queries.
+test('the table roster shows resting heroes and their activity; kit options list the kit pool', async () => {
+  const f = await setup();
+  const kits = await f.player.client.query(api.characters.kitOptions, { characterId: f.thornId });
+  expect(kits.current).toBe('Mountain');
+  expect(kits.options).toContain('Panther');
+  expect(kits.multiple).toBe(false);
+  await f.say('/respite start');
+  const roster = await f.player.client.query(api.table.roster, { campaignId: f.campaignId });
+  expect(roster.session?.respite?.participants).toEqual([
+    { characterId: f.thornId, activity: null },
+  ]);
+  await f.player.client.mutation(api.commands.invoke, {
+    campaignId: f.campaignId,
+    commandId: 'table-activity',
+    operation: 'respite.activity',
+    actor: { refKind: 'character', id: f.thornId },
+    arguments: { name: 'Project roll' },
+  });
+  const after = await f.player.client.query(api.table.roster, { campaignId: f.campaignId });
+  expect(after.session?.respite?.participants[0]?.activity).toBe('Project roll');
+});

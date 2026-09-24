@@ -21,6 +21,7 @@ import { useCommand } from '../ui';
 import { CommandButton, type Encounter } from './setup-card';
 import { TurnControls } from './initiative';
 import { VoidCard } from './void-card';
+import { RespiteDirectorCard } from './respite-card';
 import {
   AdjustAction,
   ConditionBadges,
@@ -426,8 +427,12 @@ export function DirectorPane({
           return (
             <div className="flex flex-col gap-4">
               {director && <AddFoe campaignId={campaignId} running={running} roster={roster} />}
-              {director && running && !encounter && (
+              {director && running && !encounter && !roster.session?.respite && (
                 <EncounterReady campaignId={campaignId} foes={roster.foes} />
+              )}
+              {/* V167: combat cannot start while a respite is open, so its card takes the slot. */}
+              {director && running && !encounter && (
+                <RespiteDirectorCard campaignId={campaignId} roster={roster} />
               )}
               {director && encounter?.status === 'committed' && (
                 <div className="flex flex-wrap items-center gap-2">
