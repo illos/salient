@@ -36,3 +36,11 @@ The confirmed first pass for taking a level-up ([level-up policy](../character-w
 - Built on `slice/V164`, `.worktrees/level-up-ui`, stacked on V163. Author checks: TypeScript, ESLint.
 - 2026-09-24: capture spec fixed (step headings, hidden option radios). User saw the sheet and perk
   captures: "Your screenshots are good. Let's keep going." No merge gate.
+- Independent review FAIL, fixed. (1) The "now level N" result and "Take the next level-up" were lost
+  when progression refreshed after taking; the result is now held above the keyed flow. (2) A stale draft is
+  replaced on the first save and named in a notice. (3) A draft saved elsewhere shows the stale
+  notice with a Reload button. (4) The sheet button needs an eligible level-up, not only a pending one.
+  (5) A failed save no longer moves to the next step. (6) The review says when nothing new is named.
+  Noted, not changed: "New at level N" is a by-name UI diff, and the "before" maxima are re-evaluated
+  rather than read from the saved baseline. Both are presentation only.
+

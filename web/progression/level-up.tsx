@@ -65,7 +65,38 @@ export function LevelUpPage({ characterId }: { characterId: Id<'characters'> }) 
     Progression | undefined;
   const character = useQuery(api.characters.get, { characterId });
   const [round, setRound] = useState(0);
+  // Held above the keyed flow: taking a level refreshes progression, which would otherwise unmount
+  // the flow (no level-up left) or remount it on the next level before the result shows.
+  const [taken, setTaken] = useState<{ level: number; remaining: number } | null>(null);
   if (!progression || !character) return <Loading>Loading level-up…</Loading>;
+  if (taken)
+    return (
+      <div className="flex flex-col gap-4">
+        <Notice role="status">
+          {character.authored.name} is now level {taken.level}.
+        </Notice>
+        <div className="flex flex-wrap gap-3">
+          {taken.remaining > 0 && progression.eligible && (
+            <Button
+              className="rounded-full"
+              onClick={() => {
+                setTaken(null);
+                setRound(n => n + 1);
+              }}
+            >
+              Take the next level-up
+            </Button>
+          )}
+          <Link
+            to="/characters/$characterId"
+            params={{ characterId }}
+            className={buttonVariants({ variant: 'outline', className: 'rounded-full' })}
+          >
+            Back to the character sheet
+          </Link>
+        </div>
+      </div>
+    );
   if (!progression.eligible && !progression.draft)
     return (
       <div className="flex flex-col gap-4">
@@ -83,7 +114,7 @@ export function LevelUpPage({ characterId }: { characterId: Id<'characters'> }) 
       live={character.liveState}
       combatLocked={character.combatLocked}
       progression={progression}
-      onNext={() => setRound(n => n + 1)}
+      onTaken={(level, remaining) => setTaken({ level, remaining })}
     />
   );
 }
@@ -94,14 +125,14 @@ function LevelUp({
   live,
   combatLocked,
   progression,
-  onNext,
+  onTaken,
 }: {
   characterId: Id<'characters'>;
   heroName: string;
   live: { stamina: number; recoveries: number } | null;
   combatLocked: boolean;
   progression: Progression;
-  onNext: () => void;
+  onTaken: (level: number, remaining: number) => void;
 }) {
   // The earlier build is frozen for this flow; only the new level's decisions can change.
   const [base] = useState(() => ({
@@ -118,8 +149,9 @@ function LevelUp({
     selectionMap(progression.draftIsStale ? [] : (progression.draft?.selections ?? [])),
   );
   const [draftVersion, setDraftVersion] = useState(progression.draft?.version ?? 0);
-  const [dirty, setDirty] = useState(false);
-  const [finished, setFinished] = useState<{ remaining: number } | null>(null);
+  // A stale draft (another base or level) is dropped: its choices are not loaded, and the first save
+  // replaces it.
+  const [dirty, setDirty] = useState(progression.draftIsStale);
   const [message, setMessage] = useState('');
   const [stepIndex, setStepIndex] = useState(0);
   const save = useMutation(api.characters.saveAdvancement);
@@ -188,14 +220,17 @@ function LevelUp({
       items: [],
       index: choiceSteps.length,
       children: [],
-      done: !!finished,
+      done: false,
       passed: false,
     },
   ];
   const onReview = stepIndex === choiceSteps.length;
   const current = choiceSteps[stepIndex];
-  const stale = progression.revision !== base.revision || progression.baseRevisionId !== base.id;
-  const blocked = command.pending || combatLocked || stale || !!finished;
+  const stale =
+    progression.revision !== base.revision ||
+    progression.baseRevisionId !== base.id ||
+    (progression.draft?.version ?? 0) > draftVersion;
+  const blocked = command.pending || combatLocked || stale;
   const args = base.id
     ? {
         characterId,
@@ -225,7 +260,7 @@ function LevelUp({
     return version;
   }
   async function goTo(index: number) {
-    if (dirty && !blocked) await persist();
+    if (dirty && !blocked && (await persist()) === null) return;
     setStepIndex(index);
   }
   async function take() {
@@ -236,10 +271,7 @@ function LevelUp({
       commandId => finalize({ ...args, commandId, expectedDraftVersion: version }),
       JSON.stringify(['take-level-up', args, version]),
     );
-    if (ok) {
-      setFinished({ remaining: progression.pendingLevelUps - 1 });
-      setMessage(`${heroName} is now level ${targetLevel}.`);
-    }
+    if (ok) onTaken(targetLevel, progression.pendingLevelUps - 1);
   }
 
   // New grants: what the target build has that the earlier build did not.
@@ -299,9 +331,17 @@ function LevelUp({
         </div>
         <div className="flex min-w-0 flex-col gap-(--page-gap)">
           {combatLocked && <Notice>Level-up is locked during combat.</Notice>}
-          {stale && !finished && (
+          {stale && (
             <Notice role="status">
-              This character changed since the level-up opened. Reload before continuing.
+              This character or its level-up draft changed since the level-up opened.{' '}
+              <Button size="sm" variant="outline" onClick={() => window.location.reload()}>
+                Reload
+              </Button>
+            </Notice>
+          )}
+          {progression.draftIsStale && (
+            <Notice>
+              An earlier level-up draft was for a different build or level and has been set aside.
             </Notice>
           )}
           {message && <Notice role="status">{message}</Notice>}
@@ -399,38 +439,21 @@ function LevelUp({
                     ))}
                   </ul>
                 ) : (
-                  <p className="m-0 text-sm text-muted-foreground">Evaluating…</p>
+                  <p className="m-0 text-sm text-muted-foreground">
+                    {evaluation && before ? 'No newly named features or abilities.' : 'Evaluating…'}
+                  </p>
                 )}
               </div>
-              {!ready && !finished && (
-                <Notice>Finish this level’s choices before taking it.</Notice>
-              )}
-              {finished ? (
-                <div className="flex flex-wrap gap-3">
-                  {finished.remaining > 0 && (
-                    <Button className="rounded-full" onClick={onNext}>
-                      Take the next level-up
-                    </Button>
-                  )}
-                  <Link
-                    to="/characters/$characterId"
-                    params={{ characterId }}
-                    className={buttonVariants({ variant: 'outline', className: 'rounded-full' })}
-                  >
-                    Back to the character sheet
-                  </Link>
-                </div>
-              ) : (
-                <div>
-                  <Button
-                    className="rounded-full"
-                    disabled={blocked || !ready}
-                    onClick={() => void take()}
-                  >
-                    {command.pending ? 'Saving…' : `Take level ${targetLevel}`}
-                  </Button>
-                </div>
-              )}
+              {!ready && <Notice>Finish this level’s choices before taking it.</Notice>}
+              <div>
+                <Button
+                  className="rounded-full"
+                  disabled={blocked || !ready}
+                  onClick={() => void take()}
+                >
+                  {command.pending ? 'Saving…' : `Take level ${targetLevel}`}
+                </Button>
+              </div>
             </section>
           )}
         </div>

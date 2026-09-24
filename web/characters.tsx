@@ -265,7 +265,7 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
   const progression = useQuery(
     api.characters.progression,
     sheet?.audience === 'owner' ? { characterId } : 'skip',
-  ) as { pendingLevelUps: number; targetLevel: number } | undefined;
+  ) as { eligible: boolean; pendingLevelUps: number; targetLevel: number } | undefined;
   const [view, setView] = useState<'effective' | 'draft'>('effective');
   if (!sheet) return <Loading>Loading character…</Loading>;
   const owner = sheet.audience === 'owner';
@@ -320,7 +320,7 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
               </select>
             </label>
           )}
-          {owner && (progression?.pendingLevelUps ?? 0) > 0 && (
+          {owner && progression?.eligible && progression.pendingLevelUps > 0 && (
             <Link
               to="/characters/$characterId/level-up"
               params={{ characterId }}
