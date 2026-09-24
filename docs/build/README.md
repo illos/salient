@@ -109,12 +109,17 @@ directory. Worktree recipe on Presidium (GitHub is unreachable there):
 
 ```
 git worktree add .worktrees/<name> -b slice/<id> main
-ln -s <main checkout>/node_modules .worktrees/<name>/node_modules
+(cd .worktrees/<name> && CI=true pnpm install --offline --frozen-lockfile)
 git -c protocol.file.allow=always \
   -c submodule.vendor/steel-compendium.url=<main checkout>/.git/modules/vendor/steel-compendium \
   submodule update --init vendor/steel-compendium
 cp -a <main checkout>/vendor/forge-steel/. vendor/forge-steel/
 ```
+
+Give each worktree its own `node_modules` (the offline install hard-links from the local store in
+about a second). Do not symlink it to the main checkout's: pnpm run in the worktree relinks the
+shared tree through the worktree path, and removing that worktree leaves main's packages dangling
+(2026-09-24).
 
 Backend or schema changes verify against an isolated development backend, never the user's shared
 app. Development data is disposable; do not reset another track's environment.

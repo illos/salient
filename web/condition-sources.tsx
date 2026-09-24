@@ -22,7 +22,12 @@ export function ConditionSources({
     <span className="flex flex-col text-xs font-normal normal-case text-muted-foreground">
       {active.map(instance => (
         <span key={instance.id} title={instance.sourcePath}>
-          {instance.actorLabel} · {instance.abilityName} · save ends
+          {instance.actorLabel} · {instance.abilityName} ·{' '}
+          {instance.duration === 'eot'
+            ? 'EoT'
+            : instance.duration === 'none'
+              ? 'until removed'
+              : 'save ends'}
         </span>
       ))}
     </span>

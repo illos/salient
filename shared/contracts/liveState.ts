@@ -44,11 +44,17 @@ export type ConditionToggles = Record<ConditionId, boolean>;
 export type SavingThrowSource =
   { kind: 'hero-baseline'; provenance: Provenance[] } | { kind: 'printed'; sourcePath: string };
 
-/** V88 source-linked save-ends effect; ended instances retain save evidence for corrections. */
+/**
+ * V88 source-linked condition effect; ended instances retain save evidence for corrections.
+ * V113 durations: `eot` expires at the affected creature's next turn end (rule/combat/end-of-turn.md);
+ * `none` has no printed duration and ends by the condition's own rules (prone: Stand Up).
+ */
 export interface ConditionInstance {
   id: string;
   condition: ConditionId;
-  duration: 'save-ends';
+  duration: 'save-ends' | 'eot' | 'none';
+  /** V113: the imposing creature, for condition/taunted.md source replacement. */
+  sourceActorId?: string;
   sourceUseEventId: string;
   abilityName: string;
   actorLabel: string;

@@ -826,7 +826,13 @@ async function commitConditions(
   scope: JournalScope,
   occurrences: import('../../shared/contracts/compiledResult').EffectOccurrence[],
   targets: TargetRecord[],
-  source: { eventId: Id<'events'>; abilityName: string; actorLabel: string; sourcePath: string },
+  source: {
+    eventId: Id<'events'>;
+    abilityName: string;
+    actorLabel: string;
+    sourcePath: string;
+    actorId: string;
+  },
   encounterId: Id<'encounters'> | null,
   originalTargetId?: string,
 ) {
@@ -851,6 +857,8 @@ async function commitConditions(
         {
           id: occurrence.id,
           condition: effect.condition,
+          duration: effect.duration,
+          sourceActorId: source.actorId,
           sourceUseEventId: source.eventId,
           abilityName: source.abilityName,
           actorLabel: source.actorLabel,
@@ -858,9 +866,16 @@ async function commitConditions(
         },
         encounterId ?? undefined,
       );
-      schedule = instance.registrationId
-        ? ' Save scheduled at each target turn end.'
-        : ' Save is unscheduled outside a committed encounter; resolve it manually.';
+      schedule =
+        effect.duration === 'none'
+          ? ' No printed duration: it lasts until the creature stands up (Stand Up); record that with condition off.'
+          : effect.duration === 'eot'
+            ? instance.registrationId
+              ? ' Ends at the end of the target’s current or next turn (EoT).'
+              : ' EoT expiry is unscheduled outside a committed encounter; resolve it manually.'
+            : instance.registrationId
+              ? ' Save scheduled at each target turn end.'
+              : ' Save is unscheduled outside a committed encounter; resolve it manually.';
     }
     // Never publish the target score through event descriptions/payloads, even for hero targets.
     await appendEvent(ctx, {
@@ -1406,6 +1421,7 @@ const abilityUse: OperationDefinition = {
               abilityName: ability.name,
               actorLabel: actor!.name,
               sourcePath: ability.source.path,
+              actorId: actor!.id,
             },
             allowance.encounterId,
           );
@@ -1732,6 +1748,7 @@ const abilityCorrect: OperationDefinition = {
               abilityName: result.abilityName,
               actorLabel: result.actor.name,
               sourcePath: savedCompiled.definition.source.path,
+              actorId: result.actor.id,
             },
             result.encounterId,
             entry.target.id,

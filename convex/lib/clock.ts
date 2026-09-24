@@ -31,6 +31,7 @@ import { rollDice } from './dice';
 import { baselineOf } from './characterBuild';
 import type { SavingThrowSource } from '../../shared/contracts/liveState';
 import {
+  endConditionInstance,
   findConditionInstance,
   recordConditionSave,
   unscheduleConditionInstance,
@@ -257,6 +258,36 @@ async function fire(
         };
       return handler(ctx, firing);
     }
+    case 'expire-effect': {
+      // V113 (rule/combat/end-of-turn.md): an EoT condition instance ends at this turn end.
+      const creatureId = firing.registration.affectedIds?.[0];
+      const found = creatureId
+        ? await findConditionInstance(ctx, creatureId, work.effectInstanceId)
+        : null;
+      if (
+        !found ||
+        found.campaignId !== firing.encounter.campaignId ||
+        found.instance.status !== 'active' ||
+        found.instance.registrationId !== firing.registration._id
+      )
+        return {
+          kind: 'clock.unsupported',
+          description: `${firing.registration.source.label}: no active supported effect instance; resolve manually.`,
+          unsupported: 'no active supported effect instance',
+        };
+      await endConditionInstance(
+        ctx,
+        firing.scope,
+        found.target,
+        found.instance.id,
+        'end of turn (EoT)',
+      );
+      return {
+        kind: 'clock.effect-expired',
+        description: `${firing.registration.source.label}: ends at the end of the turn (EoT).`,
+        payload: { effectInstanceId: found.instance.id, creatureId },
+      };
+    }
     case 'saving-throw': {
       const found = await findConditionInstance(ctx, work.creatureId, work.effectInstanceId);
       if (
@@ -463,8 +494,11 @@ export async function dispatchBoundary(
   if (event.kind === 'combat-end') {
     for (const registration of await activeRegistrations(ctx, encounterId)) {
       const work = registration.work as ScheduledWorkKind;
-      if (work.kind !== 'saving-throw') continue;
-      const found = await findConditionInstance(ctx, work.creatureId, work.effectInstanceId);
+      if (work.kind !== 'saving-throw' && work.kind !== 'expire-effect') continue;
+      const creatureId =
+        work.kind === 'saving-throw' ? work.creatureId : registration.affectedIds?.[0];
+      if (!creatureId) continue;
+      const found = await findConditionInstance(ctx, creatureId, work.effectInstanceId);
       if (
         found &&
         found.campaignId === scope.campaignId &&
@@ -479,11 +513,11 @@ export async function dispatchBoundary(
           commandId: cause.commandId,
           causeEventId: boundaryEventId,
           kind: 'condition.unscheduled',
-          description: `${found.instance.actorLabel}'s ${found.instance.abilityName}: ${found.instance.condition} remains active after combat ends. Its saving throw is no longer scheduled; resolve it manually.`,
+          description: `${found.instance.actorLabel}'s ${found.instance.abilityName}: ${found.instance.condition} remains active after combat ends. Its ${work.kind === 'saving-throw' ? 'saving throw' : 'end-of-turn expiry'} is no longer scheduled; resolve it manually.`,
           payload: {
             effectInstanceId: found.instance.id,
             sourceUseEventId: found.instance.sourceUseEventId,
-            creatureId: work.creatureId,
+            creatureId,
             sourcePath: found.instance.sourcePath,
           },
         });

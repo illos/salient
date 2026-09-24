@@ -136,7 +136,8 @@ describe('V67 whole-envelope execution gate', () => {
       block.kind === 'roll'
         ? {
             ...block,
-            tiers: block.tiers.map(t => `${t}; ${t.split(';')[1]!.trim()}`) as [
+            // V113 compiles a repeated condition; grabbed without save ends stays unsupported.
+            tiers: block.tiers.map(t => `${t}; A < 2 grabbed; A < 2 grabbed`) as [
               string,
               string,
               string,
@@ -146,7 +147,7 @@ describe('V67 whole-envelope execution gate', () => {
     );
     input.markdown = input.markdown.replace(
       /(^.*(?:≤11|12-16|17\+).*?;)([^\n]+)/gm,
-      (_all, start: string, rest: string) => `${start}${rest}; ${rest.trim()}`,
+      (_all, start: string, rest: string) => `${start}${rest}; A < 2 grabbed; A < 2 grabbed`,
     );
     const first = compileAbility(input);
     const unsupported = first.tiers.flat().filter(n => n.kind === 'unsupported');
@@ -626,14 +627,16 @@ describe('V88 bounded potency conditions', () => {
     },
   );
 
+  // V113 admits bare prone, EoT and push/condition runs (see tests/scripts/tier-effects.test.ts).
   it.each([
-    'M < 1 prone',
     'A < 2 grabbed',
-    'R < 1 slowed (EoT)',
+    'A < 2 grabbed (EoT)',
+    'M < 1 slowed',
     "A < STRONG, prone and can't stand (save ends)",
-    'push 1; M < 1 bleeding (save ends)',
+    'M < 1 dazed and slowed (save ends)',
     'M < 1 bleeding (save ends) then shift 1',
-    'M < 1 bleeding (save ends); push 1',
+    'taunted (EoT), slide 1',
+    'M < 1 vertical push 3',
   ])('keeps unsafe remainder %s unsupported', remainder => {
     const input = warrior('Bury the Point');
     input.blocks = input.blocks.map(block =>

@@ -383,7 +383,10 @@ export function CompiledEffects({
                 {effect.kind === 'unsupported' || effect.kind === 'rider'
                   ? 'Manual effect'
                   : effect.kind === 'push'
-                    ? 'Push'
+                    ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
+                        /^./,
+                        letter => letter.toUpperCase(),
+                      )
                     : effect.kind === 'condition'
                       ? 'Condition'
                       : 'Damage'}
@@ -436,13 +439,24 @@ export function CompiledEffects({
             {effect.kind === 'condition' && (
               <>
                 <span>
-                  {effect.condition} (save ends) · {effect.characteristic} &lt;{' '}
-                  {effect.thresholdSource.kind === 'printed'
-                    ? effect.thresholdSource.value
-                    : effect.thresholdSource.tier}
-                  {effect.thresholdSource.kind === 'potency' && effect.threshold !== undefined
-                    ? ` (potency ${effect.threshold})`
-                    : ''}
+                  {effect.condition} (
+                  {effect.duration === 'eot'
+                    ? 'EoT'
+                    : effect.duration === 'none'
+                      ? 'no printed duration'
+                      : 'save ends'}
+                  ) ·{' '}
+                  {effect.thresholdSource.kind === 'always'
+                    ? 'no potency'
+                    : `${effect.characteristic} < ${
+                        effect.thresholdSource.kind === 'printed'
+                          ? effect.thresholdSource.value
+                          : effect.thresholdSource.tier
+                      }${
+                        effect.thresholdSource.kind === 'potency' && effect.threshold !== undefined
+                          ? ` (potency ${effect.threshold})`
+                          : ''
+                      }`}
                   .
                 </span>
                 {effect.targetScore !== undefined && (

@@ -9,8 +9,10 @@ import type {
 import {
   blocksFromMarkdown,
   classify,
-  conditionExpression,
+  forcedMovementExpression,
+  tierConditionExpression,
   type Characteristic,
+  type ConditionDuration,
   type ConditionThreshold,
   damageExpression,
   effectRider,
@@ -45,15 +47,19 @@ export interface DamageNode extends NodeSource {
 }
 export interface ConditionNode extends NodeSource {
   kind: 'condition';
-  characteristic: Characteristic;
-  threshold: ConditionThreshold;
+  /** Absent only for V113 unconditional conditions (`threshold.kind === 'always'`). */
+  characteristic?: Characteristic;
+  threshold: ConditionThreshold | { kind: 'always' };
   condition: import('../contracts/liveState.ts').ConditionId;
-  duration: 'save-ends';
+  duration: ConditionDuration;
   after: string;
 }
+/** Forced movement. V26 push nodes have no `movement`; V113 adds pull, slide and vertical. */
 export interface PushNode extends NodeSource {
   kind: 'push';
   distance: number;
+  movement?: 'pull' | 'slide';
+  vertical?: true;
   after: string;
 }
 export interface UnsupportedNode extends NodeSource {
@@ -250,29 +256,35 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           return;
         }
         const previous = nodes[nodes.length - 1];
-        const push = /^push (\d+)$/i.exec(normalized(clause));
-        if (
-          ordinal === 1 &&
-          previous?.kind === 'damage' &&
-          push &&
-          Number.isSafeInteger(Number(push[1]))
-        ) {
+        // V113: tier effects follow the damage in printed order (rule/dice/ability-roll.md), so a
+        // run of supported push/condition clauses directly after the damage clause is admitted.
+        const damage = nodes[0]?.kind === 'damage' ? nodes[0] : undefined;
+        const supportedRun =
+          ordinal >= 1 &&
+          damage !== undefined &&
+          nodes.length === ordinal &&
+          nodes.every((node, i) =>
+            i === 0 ? node.kind === 'damage' : node.kind === 'push' || node.kind === 'condition',
+          );
+        const forced = forcedMovementExpression(clause);
+        if (supportedRun && forced) {
           nodes.push({
             ...sourceNode(envelope, tierLocator, ordinal, clause),
             kind: 'push',
-            distance: Number(push[1]),
-            after: previous.id,
+            distance: forced.distance,
+            ...(forced.movement !== 'push' ? { movement: forced.movement } : {}),
+            ...(forced.vertical ? { vertical: true as const } : {}),
+            after: damage.id,
           });
           return;
         }
-        const condition = conditionExpression(clause);
-        if (ordinal === 1 && clauses.length === 2 && previous?.kind === 'damage' && condition) {
+        const condition = tierConditionExpression(clause);
+        if (supportedRun && condition) {
           nodes.push({
             ...sourceNode(envelope, tierLocator, ordinal, clause),
             kind: 'condition',
             ...condition,
-            duration: 'save-ends',
-            after: previous.id,
+            after: damage.id,
           });
           return;
         }

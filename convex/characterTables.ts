@@ -45,7 +45,8 @@ export const conditionInstanceValidator = v.object({
       ] as const
     ).map(value => v.literal(value)),
   ),
-  duration: v.literal('save-ends'),
+  duration: v.union(v.literal('save-ends'), v.literal('eot'), v.literal('none')),
+  sourceActorId: v.optional(v.string()),
   sourceUseEventId: v.string(),
   abilityName: v.string(),
   actorLabel: v.string(),

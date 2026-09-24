@@ -76,43 +76,68 @@ export async function applyConditionInstance(
   input: Pick<
     ConditionInstance,
     'id' | 'condition' | 'sourceUseEventId' | 'abilityName' | 'actorLabel' | 'sourcePath'
-  >,
+  > &
+    Partial<Pick<ConditionInstance, 'duration' | 'sourceActorId'>>,
   encounterId?: Id<'encounters'>,
 ): Promise<ConditionInstance> {
-  const { live, campaignId } = await read(ctx, target);
-  if (campaignId !== scope.campaignId)
+  const initial = await read(ctx, target);
+  let live = initial.live;
+  if (initial.campaignId !== scope.campaignId)
     throw new ConvexError('Condition target is outside this campaign.');
-  const instances = [...(live.conditionInstances ?? [])];
-  if (instances.some(instance => instance.id === input.id))
+  if ((live.conditionInstances ?? []).some(instance => instance.id === input.id))
     throw new ConvexError('Condition occurrence already exists.');
+  // condition/taunted.md: a taunt from a different source replaces the old one.
+  if (input.condition === 'taunted' && input.sourceActorId) {
+    for (const instance of live.conditionInstances ?? [])
+      if (
+        instance.status === 'active' &&
+        instance.condition === 'taunted' &&
+        instance.sourceActorId !== undefined &&
+        instance.sourceActorId !== input.sourceActorId
+      )
+        await endConditionInstance(ctx, scope, target, instance.id, 'replaced by a new taunt');
+    ({ live } = await read(ctx, target));
+  }
+  const instances = [...(live.conditionInstances ?? [])];
   if (instances.length >= 1000)
     throw new ConvexError(
       'Too many retained condition instances; this target requires archival before another condition can be applied.',
     );
   const manual = live.manualConditions ?? live.conditions ?? noConditions();
-  const instance: ConditionInstance = { ...input, duration: 'save-ends', status: 'active' };
-  if (encounterId) {
+  const duration = input.duration ?? 'save-ends';
+  const instance: ConditionInstance = { ...input, duration, status: 'active' };
+  if (encounterId && duration !== 'none') {
     const encounter = await ctx.db.get(encounterId);
     if (
       encounter?.status === 'committed' &&
       encounter.archivedAt === null &&
       encounter.campaignId === scope.campaignId
     ) {
-      instance.registrationId = await registerWork(ctx, scope, encounterId, {
-        timing: {
-          scope: 'creature-turn',
-          boundary: 'turn-end',
-          creatureId: target.id,
-          occurrence: 'each',
-        },
-        work: { kind: 'saving-throw', effectInstanceId: input.id, creatureId: target.id },
-        source: {
-          logEntryId: input.sourceUseEventId,
-          sourcePath: input.sourcePath,
-          label: `${input.actorLabel}: ${input.abilityName} (${input.condition})`,
-        },
-        affectedIds: [target.id],
-      });
+      const source = {
+        logEntryId: input.sourceUseEventId,
+        sourcePath: input.sourcePath,
+        label: `${input.actorLabel}: ${input.abilityName} (${input.condition})`,
+      };
+      instance.registrationId =
+        duration === 'eot'
+          ? // rule/combat/end-of-turn.md: the first end of the affected creature's turn.
+            await registerWork(ctx, scope, encounterId, {
+              timing: { scope: 'end-of-next-turn', creatureId: target.id },
+              work: { kind: 'expire-effect', effectInstanceId: input.id },
+              source,
+              affectedIds: [target.id],
+            })
+          : await registerWork(ctx, scope, encounterId, {
+              timing: {
+                scope: 'creature-turn',
+                boundary: 'turn-end',
+                creatureId: target.id,
+                occurrence: 'each',
+              },
+              work: { kind: 'saving-throw', effectInstanceId: input.id, creatureId: target.id },
+              source,
+              affectedIds: [target.id],
+            });
     }
   }
   instances.push(instance);

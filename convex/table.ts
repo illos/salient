@@ -177,7 +177,7 @@ export const roster = query({
             id: v.string(),
             condition: v.string(),
             status: v.literal('active'),
-            duration: v.literal('save-ends'),
+            duration: v.union(v.literal('save-ends'), v.literal('eot'), v.literal('none')),
             abilityName: v.string(),
             actorLabel: v.string(),
             sourcePath: v.string(),

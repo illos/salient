@@ -1,5 +1,6 @@
 import { runEffectRiders } from './headless/effect-riders.ts';
 import { runMultiTarget } from './headless/multi-target.ts';
+import { runTierEffects } from './headless/tier-effects.ts';
 import { runSummoner } from './headless/summoner.ts';
 import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
@@ -35,6 +36,7 @@ import { runWizardDraft } from './headless/wizard-draft.ts';
 const cohorts = {
   'effect-riders': runEffectRiders,
   'multi-target': runMultiTarget,
+  'tier-effects': runTierEffects,
   fury: runFury,
   troubadour: runTroubadour,
   null: runNull,

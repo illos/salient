@@ -440,6 +440,76 @@ export function conditionExpression(clause: string):
   };
 }
 
+export type ConditionDuration = 'save-ends' | 'eot' | 'none';
+
+/**
+ * V113 post-damage condition clause: an optional potency, one core condition, and a printed
+ * duration. Sources (pinned en/unified/md): rule/general/saving-throw.md "(save ends)";
+ * rule/combat/end-of-turn.md "(EoT)"; condition/prone.md, whose own text ends it (Stand Up), so a
+ * bare condition is admitted only for prone. Grabbed keeps V88's save-ends form only; its grab
+ * relationships (condition/grabbed.md) are not modeled. V88's `conditionExpression` is unchanged.
+ */
+export function tierConditionExpression(clause: string):
+  | {
+      characteristic?: Characteristic;
+      threshold: ConditionThreshold | { kind: 'always' };
+      condition: ConditionId;
+      duration: ConditionDuration;
+    }
+  | undefined {
+  const match =
+    /^(?:([MARIP]) < (-?\d+|WEAK|AVERAGE|STRONG),? )?(bleeding|dazed|frightened|grabbed|prone|restrained|slowed|taunted|weakened)(?: \((save ends|EoT)\))?$/i.exec(
+      plain(clause),
+    );
+  if (!match) return undefined;
+  if (match[1] && match[1] !== match[1].toUpperCase()) return undefined;
+  const condition = match[3]!.toLowerCase() as ConditionId;
+  const duration: ConditionDuration =
+    match[4] === undefined ? 'none' : /^eot$/i.test(match[4]) ? 'eot' : 'save-ends';
+  if (match[4] !== undefined && !['save ends', 'EoT'].includes(match[4])) return undefined;
+  if (duration === 'none' && condition !== 'prone') return undefined;
+  if (condition === 'grabbed' && duration !== 'save-ends') return undefined;
+  let threshold: ConditionThreshold | { kind: 'always' } = { kind: 'always' };
+  if (match[2] !== undefined) {
+    const value = Number(match[2]);
+    if (/^-?\d+$/.test(match[2])) {
+      if (!Number.isSafeInteger(value)) return undefined;
+      threshold = { kind: 'printed', value };
+    } else if (/^(WEAK|AVERAGE|STRONG)$/.test(match[2]))
+      threshold = {
+        kind: 'potency',
+        tier: match[2].toLowerCase() as 'weak' | 'average' | 'strong',
+      };
+    else return undefined;
+  }
+  return {
+    ...(match[1] ? { characteristic: match[1] as Characteristic } : {}),
+    threshold,
+    condition,
+    duration,
+  };
+}
+
+/**
+ * V113 post-damage forced movement (movement/forced-movement.md): push, pull or slide N, optionally
+ * "vertical". Potency-gated or combined movement stays unsupported.
+ */
+export function forcedMovementExpression(
+  clause: string,
+): { movement: 'push' | 'pull' | 'slide'; vertical: boolean; distance: number } | undefined {
+  const match = /^(vertical )?(push|pull|slide) (\d+)$/i.exec(
+    plain(clause).replace(/\.$/, '').replace(/\s+/g, ' ').trim(),
+  );
+  if (!match || (match[1] && match[1] !== 'vertical ')) return undefined;
+  const distance = Number(match[3]);
+  if (!Number.isSafeInteger(distance)) return undefined;
+  return {
+    movement: match[2]!.toLowerCase() as 'push' | 'pull' | 'slide',
+    vertical: !!match[1],
+    distance,
+  };
+}
+
 /** Normalized clause-shape key: lowercase, dice → NdN, integers → N, symbolic potency → SYM. */
 export function shapeOf(text: string): string {
   return plain(text)

@@ -66,6 +66,9 @@ export interface CompiledPushOutcome extends EffectIdentity {
   kind: 'push';
   status: 'instruction' | 'fact-needed' | 'manual';
   after: string;
+  /** V113: absent for an ordinary push. */
+  movement?: 'pull' | 'slide';
+  vertical?: true;
   printed: number;
   sizeBonus?: number;
   subtotal?: number;
@@ -84,13 +87,14 @@ export interface CompiledConditionOutcome extends EffectIdentity {
   kind: 'condition';
   status: 'applied' | 'resisted' | 'fact-needed' | 'manual';
   after: string;
-  characteristic: Characteristic;
+  /** Absent for a V113 unconditional condition, which has no potency to resist. */
+  characteristic?: Characteristic;
   threshold?: number;
   thresholdSource: ConditionNode['threshold'];
   potencyCharacteristic?: Characteristic;
   targetScore?: number;
   condition: ConditionNode['condition'];
-  duration: 'save-ends';
+  duration: ConditionNode['duration'];
   requirements: string[];
 }
 
@@ -103,14 +107,31 @@ function conditionOutcome(
   const requirements: string[] = [];
   const target = input.conditionFacts?.targets.find(fact => fact.targetId === targetId);
   const potency = input.conditionFacts?.potency;
-  const rawThreshold =
-    node.threshold.kind === 'printed' ? node.threshold.value : potency?.[node.threshold.tier];
-  const threshold = Number.isSafeInteger(rawThreshold) ? rawThreshold : undefined;
-  if (threshold === undefined)
-    requirements.push(
-      `actor.potency.${node.threshold.kind === 'potency' ? node.threshold.tier : 'printed'}`,
-    );
+  // rule/combat/target.md: objects are immune to an ability's other effects; squads stay manual.
   const eligible = target?.kind === 'hero' || target?.kind === 'foe';
+  const identity = {
+    kind: 'condition' as const,
+    nodeId: node.id,
+    targetId,
+    locator: node.locator,
+    clause: node.clause,
+    after: node.after,
+    thresholdSource: node.threshold,
+    condition: node.condition,
+    duration: node.duration,
+  };
+  const threshold = node.threshold;
+  if (threshold.kind === 'always' || !node.characteristic) {
+    // V113: no potency to resist; an eligible creature is affected once damage is complete.
+    if (!eligible) requirements.push(`target:${targetId}.evaluatedCreatureCharacteristics`);
+    if (!damageComplete) requirements.push(`damage:${node.after}.completion`);
+    return { ...identity, requirements, status: requirements.length ? 'fact-needed' : 'applied' };
+  }
+  // V88 order and requirements unchanged.
+  const rawThreshold = threshold.kind === 'printed' ? threshold.value : potency?.[threshold.tier];
+  const value = Number.isSafeInteger(rawThreshold) ? rawThreshold : undefined;
+  if (value === undefined)
+    requirements.push(`actor.potency.${threshold.kind === 'potency' ? threshold.tier : 'printed'}`);
   if (!eligible) requirements.push(`target:${targetId}.evaluatedCreatureCharacteristics`);
   const rawScore = eligible ? target.characteristics?.[node.characteristic] : undefined;
   const targetScore = Number.isSafeInteger(rawScore) ? rawScore : undefined;
@@ -118,27 +139,15 @@ function conditionOutcome(
     requirements.push(`target:${targetId}.characteristics.${node.characteristic}`);
   if (!damageComplete) requirements.push(`damage:${node.after}.completion`);
   return {
-    kind: 'condition',
-    nodeId: node.id,
-    targetId,
-    locator: node.locator,
-    clause: node.clause,
-    after: node.after,
+    ...identity,
     characteristic: node.characteristic,
-    thresholdSource: node.threshold,
-    ...(threshold !== undefined ? { threshold } : {}),
+    ...(value !== undefined ? { threshold: value } : {}),
     ...(targetScore !== undefined ? { targetScore } : {}),
-    ...(node.threshold.kind === 'potency' && potency
+    ...(threshold.kind === 'potency' && potency
       ? { potencyCharacteristic: potency.characteristic }
       : {}),
-    condition: node.condition,
-    duration: node.duration,
     requirements,
-    status: requirements.length
-      ? 'fact-needed'
-      : targetScore! < threshold!
-        ? 'applied'
-        : 'resisted',
+    status: requirements.length ? 'fact-needed' : targetScore! < value! ? 'applied' : 'resisted',
   };
 }
 
@@ -189,6 +198,23 @@ function sizeRank(size: string | undefined): number | undefined {
   return Number.isSafeInteger(squares) && squares <= Number.MAX_SAFE_INTEGER - 2
     ? squares + 2
     : undefined;
+}
+
+/** movement/forced-movement.md: Push X, Pull X, Slide X and Vertical. Instructions only. */
+function forcedInstruction(node: PushNode): string {
+  const vertical = node.vertical
+    ? " Vertical: the target can also be moved up or down; a creature who can't fly left in midair falls."
+    : '';
+  switch (node.movement) {
+    case 'pull':
+      return `Pull: up to the allowance, including zero, in a straight line toward the source; each square must be closer${node.vertical ? '' : ', without moving vertically'}. No route or destination is established.${vertical}`;
+    case 'slide':
+      return `Slide: up to the allowance, including zero, in any direction${node.vertical ? '' : ' except vertically'}; the path need not be straight. No route or destination is established.${vertical}`;
+    default:
+      return node.vertical
+        ? `Vertical push: up to the allowance, including zero, in a straight line away from the source; each square must be farther away. No route or destination is established.${vertical}`
+        : 'Ordinary push: up to the allowance, including zero, in a straight line away from the source; each square must be farther away. No route or destination is established.';
+  }
 }
 
 function pushOutcome(
@@ -260,8 +286,9 @@ function pushOutcome(
     stabilityReduction: 'optional',
     requirements,
     manualReasons,
-    instruction:
-      'Ordinary push: up to the allowance, including zero, in a straight line away from the source; each square must be farther away. No route or destination is established.',
+    ...(node.movement ? { movement: node.movement } : {}),
+    ...(node.vertical ? { vertical: true as const } : {}),
+    instruction: forcedInstruction(node),
     manualScope: [
       'Actual movement and voluntary stability reduction',
       'Flying, vertical and slope exceptions',
@@ -336,11 +363,16 @@ export function resolveCompiledAbility(
         nodes.some(
           (node, index) =>
             node.kind === 'condition' &&
-            (nodes.length !== 2 ||
-              index !== 1 ||
+            (index < 1 ||
+              nodes
+                .slice(1, index)
+                .some(prior => prior.kind !== 'push' && prior.kind !== 'condition') ||
               nodes[0]?.kind !== 'damage' ||
               nodes[0].id !== node.after ||
-              node.duration !== 'save-ends' ||
+              !['save-ends', 'eot', 'none'].includes(node.duration) ||
+              (node.duration === 'none' && node.condition !== 'prone') ||
+              (node.condition === 'grabbed' && node.duration !== 'save-ends') ||
+              (node.threshold.kind === 'always') !== (node.characteristic === undefined) ||
               (node.threshold.kind === 'printed' && !Number.isSafeInteger(node.threshold.value))),
         ) ||
         nodes.some(node => node.kind === 'unsupported' && node.dependency !== 'after-damage') ||
@@ -352,7 +384,9 @@ export function resolveCompiledAbility(
         nodes.some(
           node =>
             node.kind === 'push' &&
-            (!Number.isSafeInteger(node.distance) ||
+            (![undefined, 'pull', 'slide'].includes(node.movement) ||
+              ![undefined, true].includes(node.vertical) ||
+              !Number.isSafeInteger(node.distance) ||
               node.distance < 0 ||
               node.distance >= Number.MAX_SAFE_INTEGER ||
               !nodes.some(prior => prior.kind === 'damage' && prior.id === node.after)),
