@@ -54,3 +54,9 @@ prose inside the parent's activation text.
   `follow-up-actions` rc0 in 26 s, `elementalist-level-three` and `talent-level-three` rc0;
   `beastheart-level-three` failed identically on main (the party read limit, fixed in `5ee2d8b`).
   Rebased onto `5ee2d8b` and stacked with V138 for one combined gate and journeys.
+
+## Publication: 2026-09-24
+
+Merged with V151 and V138 stacked as main `b0f7c53`. The tip passed the full gate (439 engine
+and 692 app tests) and the stack's headless journeys. The backend, content (1881 entries) and
+frontend were published as Worker `5aee5766-b59e-4552-a208-839d72d73dbb`. Release logs: `/srv/presidium/projects/salient/test-artifacts/wtrain-release-b0f7c53`.

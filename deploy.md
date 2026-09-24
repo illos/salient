@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V138 | `b0f7c53` | Merged in WIZARD3 stack; backend/content/frontend published; gate and headless at tip | complete |
+| V151 | `b0f7c53` | Merged in WIZARD3 stack; backend/content/frontend published; gate and headless at tip | complete |
 | party read-limit fix | `9240044` | Merged; backend/frontend published (priority fix) | complete |
 | V148 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
 | V149 | `71a3fa5` | Merged in resource train 4; backend/frontend published; gate and headless at tip | complete |
@@ -621,3 +623,18 @@ test and deploy thread fast-forwarded main to `9240044e4be4516ac13cf798670b3c6e6
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/readfix-release-9240044`.
+
+### V151 follow-up actions and V138 Summoner levels two and three publication: 2026-09-24
+
+WIZARD3 stacked V151 (QC1's V135 follow-up action records) and V138 Summoner levels two and three
+on main `5ee2d8b`. The test and deploy thread fast-forwarded main to `b0f7c53f52b48b64b3442d90672d725d891da330`.
+- Full gate at the tip (270 s, 439 engine and 692 app tests, Test-support).
+- Journeys at the tip: `follow-up-actions`, the Elementalist, Talent, Beastheart and Summoner
+  level-three journeys, and `summoner`.
+- Independent rules reviews passed.
+- Backend publication and schema validation succeeded.
+- The content reseed read back 1881 entries at `fb83a789`.
+- The hosted build and the frontend upload succeeded. Worker `5aee5766-b59e-4552-a208-839d72d73dbb`.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/wtrain-release-b0f7c53`.

@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — party read-limit fix
+## Current release — V151 follow-up actions and V138 Summoner levels two and three
+
+Backend/content/frontend source `b0f7c53f52b48b64b3442d90672d725d891da330` published on 2026-09-24 as
+Worker `5aee5766-b59e-4552-a208-839d72d73dbb`. Backend and schema validation, the content reseed (1881 entries at `fb83a789`), the
+hosted build and the upload succeeded. The tip passed the full gate and headless journeys before
+merge, with no smoke test. See the [ledger](../deploy.md).
+
+## Previous release — party read-limit fix
 
 Backend/frontend source `9240044e4be4516ac13cf798670b3c6e6f901bb1` published on 2026-09-24 as
 Worker `509f7b29-b09f-46ce-838a-0e7de40c2865`: combat commit and finish read each hero once, keeping large parties under Convex's

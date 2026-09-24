@@ -84,3 +84,9 @@ shared API. Guided advancement remains deferred.
   the whole `featureblock.json` (0.87 MB) into every function bundle for four fixture texts. Those texts
   are now embedded verbatim in `SUMMONER_FIXTURES` (as `minions.ts`), and a focused test compares them
   with the pinned featureblocks. The same recipe on the fix is ready.
+
+## Publication: 2026-09-24
+
+Merged with V151 and V138 stacked as main `b0f7c53`. The tip passed the full gate (439 engine
+and 692 app tests) and the stack's headless journeys. The backend, content (1881 entries) and
+frontend were published as Worker `5aee5766-b59e-4552-a208-839d72d73dbb`. Release logs: `/srv/presidium/projects/salient/test-artifacts/wtrain-release-b0f7c53`.
