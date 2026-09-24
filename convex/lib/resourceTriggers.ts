@@ -31,6 +31,7 @@ export const LIMIT_TEXT: Record<ResourceTrigger['limit'], string> = {
   round: 'this round',
   turn: 'this turn',
   encounter: 'this encounter',
+  each: 'for this occurrence',
 };
 
 /** Why this hero can't gain from a trigger now, or null. */
@@ -46,6 +47,8 @@ function blocked(
   if ((encounter.round ?? 0) < 1) return 'Combat rounds have not started yet.';
   if (character.liveState?.heroicResource.name.toLowerCase() !== profile.resource)
     return `${character.authored.name}'s pool is not ${profile.resource}; adjust it manually.`;
+  if (character.liveState?.generationSuspended === encounter._id)
+    return `${character.authored.name} was still dead when this encounter began, so gains no ${profile.resource} in it.`;
   return null;
 }
 
@@ -72,13 +75,15 @@ export function claimState(
     turnId: encounter!.activeTurnId ?? undefined,
   });
   if (!window) return { reason: 'No turn is active.', clause } as const;
-  const taken = (character.liveState?.resourceClaims ?? []).some(
-    claim =>
-      claim.triggerId === trigger.id &&
-      claim.encounterId === encounter!._id &&
-      claim.round === window.round &&
-      claim.turnId === window.turnId,
-  );
+  const taken =
+    trigger.limit !== 'each' &&
+    (character.liveState?.resourceClaims ?? []).some(
+      claim =>
+        claim.triggerId === trigger.id &&
+        claim.encounterId === encounter!._id &&
+        claim.round === window.round &&
+        claim.turnId === window.turnId,
+    );
   if (taken) return { reason: `Already claimed ${LIMIT_TEXT[trigger.limit]}.`, clause } as const;
   // V150: no gain while forgoing. The occurrence still happened, so observers record it (QC1 V142
   // R1): a forgone "first time" is still the first time.
@@ -162,7 +167,7 @@ async function applyObserved(
       commandId: cause.commandId,
       causeEventId: scope.eventId,
       kind: 'resource.forgone',
-      description: `${current.authored.name}: ${trigger.label} — no ${current.liveState!.heroicResource.name} while forgoing (Self-Taught); this counts as the ${LIMIT_TEXT[trigger.limit].replace('this ', '')}'s occurrence.`,
+      description: `${current.authored.name}: ${trigger.label} — no ${current.liveState!.heroicResource.name} while forgoing (Self-Taught); it still counts toward the trigger's limit (${LIMIT_TEXT[trigger.limit]}).`,
       payload: {
         data: {
           characterId,
@@ -270,17 +275,46 @@ export async function observeHeroDamage(
 ): Promise<void> {
   const character = await ctx.db.get(characterId);
   const baseline = baselineOf(character?.derivedBaseline);
+  if (!character?.liveState || !baseline || character.campaignId !== scope.campaignId) return;
+  const winded = baseline.windedValue.value;
   const profile = generationProfile(baseline);
-  if (!character?.liveState || !baseline || !profile || character.campaignId !== scope.campaignId)
-    return;
-  const due = triggersFor(profile, baseline).filter(trigger =>
-    damageSatisfies(trigger.observe, baseline.windedValue.value, before, after),
-  );
-  if (!due.length) return;
+  const own = profile
+    ? triggersFor(profile, baseline).filter(trigger =>
+        damageSatisfies(trigger.observe, winded, before, after),
+      )
+    : [];
+  // V149: events about any hero, observed by other heroes' profiles (the Troubadour). Winded is
+  // Stamina at or below the winded value (rule/health/winded.md); death is Stamina at or below the
+  // negative of the winded value (rule/health/dying.md).
+  const madeWinded = before.stamina > winded && after.stamina <= winded;
+  const died = before.stamina > -winded && after.stamina <= -winded;
+  if (!own.length && !madeWinded && !died) return;
   const campaign = await ctx.db.get(scope.campaignId);
   const encounter = campaign ? await committedEncounter(ctx, campaign) : null;
-  for (const trigger of due)
-    await applyObserved(ctx, scope, characterId, profile, trigger, encounter, useEventId);
+  for (const trigger of own)
+    await applyObserved(ctx, scope, characterId, profile!, trigger, encounter, useEventId);
+  if (!encounter || (!madeWinded && !died)) return;
+  for (const observerId of encounter.heroParticipantIds ?? []) {
+    const observer = await ctx.db.get(observerId);
+    const observerBaseline = baselineOf(observer?.derivedBaseline);
+    const observerProfile = generationProfile(observerBaseline);
+    if (!observer?.liveState || !observerProfile) continue;
+    for (const trigger of triggersFor(observerProfile, observerBaseline)) {
+      if (
+        (trigger.observe === 'any-hero-winded' && madeWinded) ||
+        (trigger.observe === 'any-hero-dies' && died)
+      )
+        await applyObserved(
+          ctx,
+          scope,
+          observerId,
+          observerProfile,
+          trigger,
+          encounter,
+          `${useEventId}:${characterId}`,
+        );
+    }
+  }
 }
 
 /**

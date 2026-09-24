@@ -23,7 +23,8 @@ export type TurnStartGain =
   | ({ kind: 'dice'; sides: number } & SourcedClause);
 
 /** How often a triggered gain may apply: "the first time each combat round", and so on. */
-export type TriggerLimit = 'round' | 'turn' | 'encounter';
+/** `each`: no limit ("Whenever …"); every confirmed occurrence applies. */
+export type TriggerLimit = 'round' | 'turn' | 'encounter' | 'each';
 
 export interface ResourceTrigger extends SourcedClause {
   /** Stable id used by `resource.claim trigger=<id>`: `<class>-<trigger>`, no dots (slash syntax). */
@@ -45,7 +46,14 @@ export interface ResourceTrigger extends SourcedClause {
    *   or below it (dying is Stamina 0 or lower, always at or below the winded value).
    * - `malice-ability`: a creature ability's own Malice cost was paid through `ability.use`.
    */
-  observe?: 'damage-taken' | 'winded-or-dying' | 'malice-ability';
+  observe?:
+    | 'damage-taken'
+    | 'winded-or-dying'
+    | 'malice-ability'
+    /** V149: any participating hero (including this one) is made winded by recorded damage. */
+    | 'any-hero-winded'
+    /** V149: any participating hero dies from recorded damage (Stamina at −winded value). */
+    | 'any-hero-dies';
   /** Why the table confirms it: what the app cannot observe. */
   confirmation: string;
   /**
@@ -86,8 +94,21 @@ export interface GenerationProfile {
    * An optional prayer declared before the turn-start roll (the Conduit): 1 adds 1 and deals
    * 1d6 + level unreducible psychic damage, 2 adds 1, 3 adds 2 and allows a domain prayer effect.
    */
-  prayer?: SourcedClause;
+  prayer?: SourcedClause & {
+    /** `conduit`: piety prayer; `appeal`: the Troubadour's Appeal to the Muses. */
+    kind: 'conduit' | 'appeal';
+    /** Control label ("Pray", "Appeal to the Muses"). */
+    label: string;
+    /** The level the feature is gained at, when above 1. */
+    fromLevel?: number;
+  };
   triggers: ResourceTrigger[];
+  /**
+   * A hero still dead when a later encounter starts gains nothing in it (the Troubadour: "If you are
+   * still dead after the encounter in which you died, you can't gain drama during future
+   * encounters.").
+   */
+  deadStaysSilent?: SourcedClause;
 }
 
 const SHADOW_INSIGHT = 'vendor/steel-compendium/en/unified/md/feature/shadow/level-1/insight.md';
@@ -124,6 +145,9 @@ const BLESSED_DOMAIN = {
   sourcePath: 'vendor/steel-compendium/en/unified/md/feature/conduit/level-4/blessed-domain.md',
   quote: 'Whenever you gain piety from a domain effect, you gain 1 additional piety.',
 };
+
+const TROUBADOUR_DRAMA =
+  'vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/drama.md';
 
 /** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
@@ -586,6 +610,8 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
       quote: 'At the start of each of your turns during combat, you gain 1d3 piety.',
     },
     prayer: {
+      kind: 'conduit',
+      label: 'Pray',
       sourcePath: CONDUIT_PIETY,
       quote:
         'Before you roll to gain piety at the start of your turn, you can pray (no action required).',
@@ -773,6 +799,90 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
       },
     ],
   },
+  {
+    className: 'Troubadour',
+    deadStaysSilent: {
+      sourcePath: TROUBADOUR_DRAMA,
+      quote:
+        "If you are still dead after the encounter in which you died, you can't gain drama during future encounters.",
+    },
+    // feature/troubadour/level-4/melodrama.md adds new drama triggers that are not modelled, so only
+    // levels 1–3 are checked; level 7 (a-muses-muse.md) also changes the turn-start gain.
+    verifiedThroughLevel: 3,
+    resource: 'drama',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: TROUBADOUR_DRAMA,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain drama equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'dice',
+      sides: 3,
+      sourcePath: TROUBADOUR_DRAMA,
+      quote: 'At the start of each of your turns during combat, you gain 1d3 drama.',
+    },
+    prayer: {
+      kind: 'appeal',
+      label: 'Appeal to the Muses',
+      fromLevel: 2,
+      sourcePath:
+        'vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/appeal-to-the-muses.md',
+      quote:
+        'Before you roll to gain drama at the start of your turn, you can make your appeal (no action required).',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: TROUBADOUR_DRAMA,
+      quote: 'You lose any remaining drama at the end of the encounter.',
+    },
+    triggers: [
+      {
+        id: 'troubadour-three-heroes',
+        label: 'Three or more heroes used an ability on the same turn',
+        amount: 2,
+        limit: 'encounter',
+        sourcePath: TROUBADOUR_DRAMA,
+        quote:
+          'The first time three or more heroes use an ability on the same turn, you gain 2 drama.',
+        confirmation:
+          'Confirm that three or more heroes used an ability on one turn (triggered actions and free strikes count). Once per encounter (Q-RES-12).',
+      },
+      {
+        id: 'troubadour-hero-winded',
+        label: 'A hero was made winded',
+        amount: 2,
+        limit: 'encounter',
+        observe: 'any-hero-winded',
+        sourcePath: TROUBADOUR_DRAMA,
+        quote: 'The first time any hero is made winded during the encounter, you gain 2 drama.',
+        confirmation:
+          'Applied automatically when recorded damage takes a hero to their winded value or lower; claim it if a hero was made winded another way.',
+      },
+      {
+        id: 'troubadour-natural-roll',
+        label: 'A creature in your line of effect rolled a natural 19 or 20',
+        amount: 3,
+        limit: 'each',
+        sourcePath: TROUBADOUR_DRAMA,
+        quote:
+          'Whenever a creature within your line of effect rolls a natural 19 or 20, you gain 3 drama.',
+        confirmation:
+          'Line of effect is not tracked; claim it once for each natural 19 or 20 the table confirms.',
+      },
+      {
+        id: 'troubadour-hero-dies',
+        label: 'You or another hero died',
+        amount: 10,
+        limit: 'each',
+        observe: 'any-hero-dies',
+        sourcePath: TROUBADOUR_DRAMA,
+        quote: 'When you or another hero dies, you gain 10 drama.',
+        confirmation:
+          'Applied automatically when recorded damage takes a hero to the death threshold; claim it for a death the app did not record.',
+      },
+    ],
+  },
 ];
 
 /** complication/self-taught.md: the forgo option, keyed by the complication feature's name. */
@@ -815,6 +925,15 @@ export function triggersFor(
   );
 }
 
+/** The hero's turn-start prayer, if their class has one and they have reached its level. */
+export function prayerFor(
+  profile: GenerationProfile,
+  baseline: Pick<DerivedBaseline, 'level'> | null | undefined,
+): GenerationProfile['prayer'] {
+  const prayer = profile.prayer;
+  return prayer && (baseline?.level.value ?? 0) >= (prayer.fromLevel ?? 1) ? prayer : undefined;
+}
+
 /** A trigger's amount and the clause it comes from at the hero's level. */
 export function triggerAmount(
   trigger: ResourceTrigger,
@@ -838,6 +957,7 @@ export function claimWindow(
     case 'turn':
       return at.turnId ? { turnId: at.turnId } : null;
     case 'encounter':
+    case 'each':
       return {};
   }
 }

@@ -9,6 +9,7 @@ import {
   claimWindow,
   generationProfile,
   triggerAmount,
+  prayerFor,
   triggersFor,
 } from '../../shared/resolve/heroicResourceGeneration.ts';
 
@@ -244,4 +245,26 @@ test('the Conduit profile matches its source amounts and binds triggers to domai
     'conduit-creation',
     'conduit-life',
   ]);
+});
+
+// feature/troubadour/level-1/drama.md and level-2/appeal-to-the-muses.md; level-4/melodrama.md adds
+// triggers not modelled, so only levels 1–3 are checked.
+test('the Troubadour profile matches its source amounts', () => {
+  const troubadour = GENERATION_PROFILES.find(p => p.className === 'Troubadour')!;
+  expect(troubadour).toMatchObject({
+    resource: 'drama',
+    verifiedThroughLevel: 3,
+    turnStart: { kind: 'dice', sides: 3 },
+    encounterEnd: { kind: 'lose' },
+    prayer: { kind: 'appeal', fromLevel: 2 },
+    triggers: [
+      { id: 'troubadour-three-heroes', amount: 2, limit: 'encounter' },
+      { id: 'troubadour-hero-winded', amount: 2, limit: 'encounter', observe: 'any-hero-winded' },
+      { id: 'troubadour-natural-roll', amount: 3, limit: 'each' },
+      { id: 'troubadour-hero-dies', amount: 10, limit: 'each', observe: 'any-hero-dies' },
+    ],
+  });
+  const level = (value: number) => ({ level: { value } }) as Parameters<typeof prayerFor>[1];
+  expect(prayerFor(troubadour, level(1))).toBeUndefined();
+  expect(prayerFor(troubadour, level(2))).toMatchObject({ label: 'Appeal to the Muses' });
 });

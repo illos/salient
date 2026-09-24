@@ -371,16 +371,23 @@ export function AbilityPanel({
         <p className="flex flex-wrap items-center gap-2 text-sm">
           <span>
             {sheet.resourcePrayer.prayNext
-              ? 'Praying before the next turn-start roll.'
-              : 'Not praying at the next turn start.'}
+              ? `${sheet.resourcePrayer.label} before the next turn-start roll.`
+              : `${sheet.resourcePrayer.label}: not declared for the next turn start.`}
           </span>
           <Command
             campaignId={campaignId}
             text={`${ref(actor)} /resource pray value=${sheet.resourcePrayer.prayNext ? 'off' : 'on'}`}
-            label={sheet.resourcePrayer.prayNext ? 'Stop praying' : 'Pray'}
+            label={
+              sheet.resourcePrayer.prayNext
+                ? `Cancel: ${sheet.resourcePrayer.label}`
+                : sheet.resourcePrayer.label
+            }
             title={sheet.resourcePrayer.quote}
           />
-          <RuleLink sourcePath={sheet.resourcePrayer.sourcePath} label="Piety prayer" />
+          <RuleLink
+            sourcePath={sheet.resourcePrayer.sourcePath}
+            label={sheet.resourcePrayer.label}
+          />
         </p>
       )}
       {sheet.resourceTriggers.length > 0 && (
@@ -389,8 +396,13 @@ export function AbilityPanel({
             <li key={trigger.id} className="flex flex-wrap items-center gap-2 text-sm">
               <span>
                 {trigger.label}: {trigger.dice ? `+1d${trigger.dice}` : `+${trigger.amount}`}{' '}
-                {trigger.resource}, once{' '}
-                {trigger.limit === 'encounter' ? 'per encounter' : `per ${trigger.limit}`}
+                {trigger.resource}
+                {trigger.limit === 'each' ? ' ' : ', once '}
+                {trigger.limit === 'each'
+                  ? 'each time'
+                  : trigger.limit === 'encounter'
+                    ? 'per encounter'
+                    : `per ${trigger.limit}`}
                 {trigger.observed ? ' (automatic when recorded)' : ''}
               </span>
               <span className="text-muted-foreground">

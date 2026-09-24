@@ -152,7 +152,7 @@ export const TROUBADOUR_ACTIONS: TroubadourAction[] = [
     actionType: 'No action',
     trigger: 'Before you roll to gain drama at the start of your turn.',
     activationCondition:
-      'Before the start-of-turn drama roll: on a 1 gain 1 more drama and the Director gains 1d3 Malice; on a 2 gain 1 Heroic Resource to keep or give to an ally within the distance of your active performance and the Director gains 1 Malice; on a 3 gain 2 Heroic Resource to distribute among yourself and allies within that distance. Resolve resources and Malice manually.',
+      'Before the start-of-turn drama roll: on a 1 gain 1 more drama and the Director gains 1d3 Malice; on a 2 gain 1 Heroic Resource to keep or give to an ally within the distance of your active performance and the Director gains 1 Malice; on a 3 gain 2 Heroic Resource to distribute among yourself and allies within that distance. Levels 2–3: declare it with /resource pray before your turn starts; the app adds the extra drama on a 1 and the Malice for the Director (1d3 on a 1, 1 on a 2), and you distribute the Heroic Resource from a 2 or 3 with /adjust heroic-resource. Level 4+: resolve resources and Malice manually.',
   },
   {
     name: "Allow Me to Introduce Tonight's Players: Introduce",

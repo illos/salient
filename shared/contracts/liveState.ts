@@ -125,6 +125,8 @@ export interface HeroLiveState {
     /** The operation whose turn start wrote the gain (its journal rows carry this id). */
     eventId: string;
   };
+  /** V149: the encounter in which generation is suspended (still dead from an earlier encounter). */
+  generationSuspended?: string;
   /** V147: pray before the next turn-start resource roll (the Conduit's piety prayer). */
   prayNext?: boolean;
 }

@@ -38,7 +38,11 @@ import {
 } from './conditionInstances';
 import type { DieResult } from '../../shared/contracts/history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
-import { SELF_TAUGHT, generationProfile } from '../../shared/resolve/heroicResourceGeneration';
+import {
+  SELF_TAUGHT,
+  generationProfile,
+  prayerFor,
+} from '../../shared/resolve/heroicResourceGeneration';
 import { applyDamage } from '../../shared/resolve/index';
 import { damageTargetFacts, writeDamage } from './resolve';
 
@@ -380,7 +384,13 @@ async function fireHeroicResource(
   let dice: DieResult[] | undefined;
   /** V147: an unreducible psychic damage roll from an angered prayer, applied after the gain. */
   let prayerDamage: { amount: number; die: DieResult } | undefined;
-  const praying = step === 'turn-start-gain' && !!profile.prayer && live.prayNext === true;
+  const prayer =
+    step === 'turn-start-gain' && live.prayNext === true
+      ? prayerFor(profile, baselineOf(hero.derivedBaseline))
+      : undefined;
+  const praying = prayer !== undefined;
+  /** V149: Malice the Director gains from the Troubadour's appeal, applied after the gain. */
+  let appealMalice: { amount: number; die?: DieResult } | undefined;
   if (step === 'combat-start-grant') {
     clause = profile.combatStart;
     after = before + live.victories;
@@ -402,7 +412,33 @@ async function fireHeroicResource(
       const rolled = accepted.dice[0]!.value;
       after = before + rolled;
       detail = `turn-start gain 1d${profile.turnStart.sides} = ${rolled}`;
-      if (praying) {
+      if (prayer?.kind === 'appeal') {
+        // feature/troubadour/level-2/appeal-to-the-muses.md: "If the roll is a 1, you gain 1
+        // additional drama. The Director gains 1d3 Malice … If the roll is a 2, you gain 1 Heroic
+        // Resource, which you can keep or give to an ally within the distance of your active
+        // performance. The Director gains 1 Malice. If the roll is a 3, you gain 2 of a Heroic
+        // Resource, which you can distribute among yourself and any allies …"
+        if (rolled === 1) {
+          after += 1;
+          const maliceRoll = await rollDice(
+            ctx,
+            firing.encounter.campaignId,
+            `hra_${firing.boundaryEventId}_${firing.registration._id}`,
+            [{ id: 'malice', sides: 3 }],
+            null,
+          );
+          appealMalice = { amount: maliceRoll.dice[0]!.value, die: maliceRoll.dice[0]! };
+          dice = [...dice, maliceRoll.dice[0]!];
+          detail += `; appealed: +1, and the Director gains 1d3 (${appealMalice.amount}) Malice`;
+        } else if (rolled === 2) {
+          appealMalice = { amount: 1 };
+          detail +=
+            '; appealed: 1 Heroic Resource to keep or give to an ally within your active performance (resolve it with /adjust heroic-resource), and the Director gains 1 Malice';
+        } else {
+          detail +=
+            '; appealed: 2 Heroic Resource to distribute among yourself and allies within your active performance (resolve it with /adjust heroic-resource)';
+        }
+      } else if (praying) {
         // feature/conduit/level-1/piety.md: "If the roll is a 1, you gain 1 additional piety but
         // anger the gods! You take psychic damage equal to 1d6 + your level, which can't be reduced
         // in any way. If the roll is a 2, you gain 1 additional piety. If the roll is a 3, you gain
@@ -464,6 +500,14 @@ async function fireHeroicResource(
         ...(praying ? { prayNext: false } : {}),
       },
     });
+  if (appealMalice) {
+    const campaign = (await ctx.db.get(firing.encounter.campaignId))!;
+    const maliceBefore = campaign.malice ?? 0;
+    await journalPatch(ctx, firing.scope, 'campaigns', campaign._id, {
+      malice: maliceBefore + appealMalice.amount,
+    });
+    detail += ` (Malice ${maliceBefore} → ${maliceBefore + appealMalice.amount})`;
+  }
   if (prayerDamage) {
     // Q-RES-6 (labelled interpretation): "can't be reduced in any way" removes immunity; temporary
     // Stamina still absorbs it first, because it takes damage rather than reducing it
@@ -501,7 +545,7 @@ async function fireHeroicResource(
       sourcePath: clause.sourcePath,
       quote: clause.quote,
       ...(praying
-        ? { prayer: { sourcePath: profile.prayer!.sourcePath, quote: profile.prayer!.quote } }
+        ? { prayer: { kind: prayer!.kind, sourcePath: prayer!.sourcePath, quote: prayer!.quote } }
         : {}),
       ...(prayerDamage ? { prayerDamage: prayerDamage.amount } : {}),
     },

@@ -1111,3 +1111,28 @@ Alternatives:
 - **(b)** Add 1 to the prayer's roll-of-3 outcome, which activates a domain effect.
 
 Recommendation: keep the current behaviour, the only reading that has an effect on domain piety.
+
+## Q-RES-12: how often do the Troubadour's "first time" drama triggers apply, and do they while dead?
+
+`feature/troubadour/level-1/drama.md`: "The first time three or more heroes use an ability on the
+same turn, you gain 2 drama." It sits in a list of "events … during a combat encounter". It also says:
+"When you are dead, you continue to gain drama during combat as long as your body is intact."
+
+Current behaviour (V149, labelled interpretation):
+- "The first time three or more heroes …" applies once per encounter. It is table-claimed.
+- Automatic triggers and claims still apply while the Troubadour is dead.
+- The turn-start 1d3 applies whenever the dead Troubadour's turn starts.
+- Whether the body is intact, and returning at 30 drama, stay with the table.
+
+- A hero already winded when the encounter starts is not "made winded" until they cross the value
+  again.
+- One hit from above winded straight to dead gives both the +2 (made winded) and the +10 (dies).
+- A Troubadour still dead when a later encounter starts (Stamina at or below the negative of the
+  winded value) gains nothing in it, from the clock, the observers or claims.
+- A correction that makes a hero survive doesn't reverse the Troubadour's +10. A chain of
+  corrections can therefore pay +10 twice for one death; the table adjusts.
+
+Alternatives: once per turn for the three-heroes trigger; no turn-start gain while dead; a
+pre-winded hero counting at encounter start.
+
+Recommendation: keep the current behaviour.

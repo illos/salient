@@ -153,7 +153,12 @@ export const sheet = query({
     /** V147: the hero's turn-start prayer (`resource.pray`), when their class has one. */
     resourcePrayer: v.union(
       v.null(),
-      v.object({ prayNext: v.boolean(), sourcePath: v.string(), quote: v.string() }),
+      v.object({
+        label: v.string(),
+        prayNext: v.boolean(),
+        sourcePath: v.string(),
+        quote: v.string(),
+      }),
     ),
     /** V120: class heroic-resource triggers the table claims with `resource.claim`. */
     resourceTriggers: v.array(
@@ -164,7 +169,12 @@ export const sheet = query({
         dice: v.union(v.number(), v.null()),
         observed: v.boolean(),
         resource: v.string(),
-        limit: v.union(v.literal('round'), v.literal('turn'), v.literal('encounter')),
+        limit: v.union(
+          v.literal('round'),
+          v.literal('turn'),
+          v.literal('encounter'),
+          v.literal('each'),
+        ),
         sourcePath: v.string(),
         quote: v.string(),
         confirmation: v.string(),

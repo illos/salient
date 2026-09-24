@@ -99,6 +99,8 @@ export const heroLiveValidator = v.object({
   ),
   /** V147: the hero prays before their next turn-start resource roll (Conduit). */
   prayNext: v.optional(v.boolean()),
+  /** V149: generation suspended for this encounter (a Troubadour still dead from an earlier one). */
+  generationSuspended: v.optional(v.string()),
   /** V120: table-confirmed class resource triggers claimed in the current encounter. */
   resourceClaims: v.optional(
     v.array(

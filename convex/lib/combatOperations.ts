@@ -485,6 +485,18 @@ const combatCommit: OperationDefinition = {
           const profile = generationProfile(baselineOf(record?.derivedBaseline));
           if (!record?.liveState || !profile) continue;
           const resource = record.liveState.heroicResource.name;
+          // V149: still dead from an earlier encounter (Stamina at or below the negative of the
+          // winded value, rule/health/dying.md): no generation this encounter.
+          const recordBaseline = baselineOf(record.derivedBaseline)!;
+          if (
+            profile.deadStaysSilent &&
+            record.liveState.stamina <= -recordBaseline.windedValue.value
+          ) {
+            await journalPatch(mctx, scope, 'characters', characterId, {
+              liveState: { ...record.liveState, generationSuspended: encounter._id },
+            });
+            continue;
+          }
           const work = (
             step:
               'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss' | 'turn-end-strain',

@@ -16,6 +16,7 @@ import {
   SELF_TAUGHT,
   canForgo,
   generationProfile,
+  prayerFor,
   triggersFor,
   type ResourceTrigger,
 } from '../../shared/resolve/heroicResourceGeneration';
@@ -314,11 +315,13 @@ export function resourceForgoState(character: Doc<'characters'>) {
 /** V147: the hero's turn-start prayer state for `abilities:sheet`, or null without one. */
 export function resourcePrayer(character: Doc<'characters'>) {
   const profile = generationProfile(baselineOf(character.derivedBaseline));
-  if (!profile?.prayer || !character.liveState) return null;
+  const prayer = profile ? prayerFor(profile, baselineOf(character.derivedBaseline)) : undefined;
+  if (!prayer || !character.liveState) return null;
   return {
+    label: prayer.label,
     prayNext: character.liveState.prayNext ?? false,
-    sourcePath: profile.prayer.sourcePath,
-    quote: profile.prayer.quote,
+    sourcePath: prayer.sourcePath,
+    quote: prayer.quote,
   };
 }
 
@@ -347,8 +350,8 @@ const resourcePray: OperationDefinition = {
       throw new ConvexError('That hero is not at this table.');
     const live = requireHeroLive(character);
     const profile = generationProfile(baselineOf(character.derivedBaseline));
-    if (!profile?.prayer)
-      throw new ConvexError(`${character.authored.name} has no turn-start prayer.`);
+    const prayer = profile ? prayerFor(profile, baselineOf(character.derivedBaseline)) : undefined;
+    if (!prayer) throw new ConvexError(`${character.authored.name} has no turn-start prayer.`);
     const value = String(args.value ?? 'on').toLowerCase();
     if (value !== 'on' && value !== 'off') throw new ConvexError('"value" must be on or off.');
     const on = value === 'on';
@@ -364,8 +367,8 @@ const resourcePray: OperationDefinition = {
       data: {
         characterId: character._id,
         prayNext: on,
-        sourcePath: profile.prayer.sourcePath,
-        quote: profile.prayer.quote,
+        sourcePath: prayer.sourcePath,
+        quote: prayer.quote,
       },
       commit: async (mctx, scope) => {
         const current = (await mctx.db.get(character._id))!;
