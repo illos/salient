@@ -277,6 +277,13 @@ export const revisionStatusValidator = v.union(
   v.literal('awaiting-rules-evaluation'),
   evaluationStatusValidator,
 );
+/** One Forge Steel import note (shared/interchange/forge-steel/import.ts ForgeImportDiagnostic). */
+export const forgeImportDiagnosticValidator = v.object({
+  path: v.string(),
+  forgeId: v.optional(v.string()),
+  name: v.optional(v.string()),
+  reason: v.string(),
+});
 export const characterTables = {
   /** Director-private source selection; never embedded in public character revisions or events. */
   characterSecrets: defineTable({
@@ -379,6 +386,25 @@ export const characterTables = {
     /** `evaluation.baseline`: the R02 `DerivedBaseline` when the status is complete, else null. */
     derivedBaseline: v.optional(v.union(v.any(), v.null())),
   }).index('by_character_and_revision', ['characterId', 'revision']),
+  /**
+   * V09 Forge Steel import record: the verbatim file, kept outside rules evaluation, with what the
+   * adapter could not translate (docs/character-wizard-spec.md#required-import). Owner-only; its
+   * ids, folders and flags grant nothing.
+   */
+  characterImports: defineTable({
+    characterId: v.id('characters'),
+    ownerId: v.id('users'),
+    format: v.literal('forge-steel-hero'),
+    payload: v.string(),
+    payloadSha256: v.string(),
+    forgeVendorRevision: v.string(),
+    level: v.number(),
+    diagnostics: v.array(forgeImportDiagnosticValidator),
+    unmapped: v.array(v.string()),
+    importedAt: v.number(),
+  })
+    .index('by_character', ['characterId'])
+    .index('by_owner', ['ownerId']),
   characterReviews: defineTable({
     characterId: v.id('characters'),
     campaignId: v.id('campaigns'),

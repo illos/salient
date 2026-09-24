@@ -70,7 +70,7 @@ async function remove(ctx: MutationCtx, budget: Budget, id: Id<TableNames>): Pro
   return true;
 }
 
-/** The character and its revisions, reviews, secrets and roll facts. */
+/** The character and its revisions, reviews, secrets, roll facts and import records. */
 async function deleteCharacter(
   ctx: MutationCtx,
   budget: Budget,
@@ -95,6 +95,11 @@ async function deleteCharacter(
     () =>
       ctx.db
         .query('heroRollFacts')
+        .withIndex('by_character', q => q.eq('characterId', characterId))
+        .take(PAGE),
+    () =>
+      ctx.db
+        .query('characterImports')
         .withIndex('by_character', q => q.eq('characterId', characterId))
         .take(PAGE),
   ];

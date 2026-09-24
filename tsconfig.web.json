@@ -28,6 +28,7 @@
     "scripts/check-commit.ts",
     "scripts/check-links.ts",
     "scripts/app.ts",
+    "scripts/forge/import.ts",
     "scripts/headless",
     "scripts/verify-character-headless.ts",
     "scripts/v63-headless.ts",

@@ -48,6 +48,7 @@ import {
 } from './lib/characterProgression';
 import { pendingDirectorSetup } from './lib/characterDirectorSetup';
 import { canonicalChoiceOrigins } from './lib/characterChoiceOrigins';
+import { authored, insertCharacterDraft, validatedSelections } from './lib/characterDrafts';
 import { COMPLICATION_ABILITIES } from '../shared/content/supporting-complication-abilities';
 import { isSupportedDefinitionLevel } from '../shared/content/character-support';
 import { getDefinitions } from '../shared/content/character-decisions';
@@ -78,7 +79,7 @@ import { draftSelectionsFrom } from '../shared/evaluate/draft';
 import { previewBuildReconciliation } from '../shared/evaluate/liveReconciliation';
 import { selectionsFrom } from '../shared/evaluate/character';
 import { indexDecisions, poolOf } from '../shared/evaluate/structure';
-import { isJsonValue, type CharacterAuthored, type DraftSelection } from '../shared/characterDraft';
+import { type DraftSelection } from '../shared/characterDraft';
 import {
   activateRevision,
   activateUnattachedRevision,
@@ -111,21 +112,6 @@ async function owned(ctx: ReadCtx, id: Id<'characters'>, userId: Id<'users'>) {
   const character = await ctx.db.get(id);
   if (!character || character.ownerId !== userId) throw new ConvexError('Character unavailable.');
   return character;
-}
-/**
- * `nameOptional` is the wizard's working draft (V96): it is saved continuously from the first
- * choice, before the hero is named, and stays out of the owner's list until they save it. Every
- * other path, including saving that draft into the list, still requires the name.
- */
-function authored(input: CharacterAuthored, nameOptional = false): CharacterAuthored {
-  const name = input.name.trim();
-  if (nameOptional ? name.length > 100 : !name || name.length > 100)
-    throw new ConvexError('Enter a character name of 1–100 characters.');
-  for (const value of [input.appearance, input.biography, input.notes]) {
-    if (value.length > 10000)
-      throw new ConvexError('Each description or notes field supports up to 10,000 characters.');
-  }
-  return { ...input, name };
 }
 const reviewValidator = v.object({
   id: v.id('characterReviews'),
@@ -334,40 +320,6 @@ export const get = query({
     };
   },
 });
-/** Creation and later saves share the same bounds and pinned provenance. */
-function validatedSelections(selections: DraftSelection[], level: number): DraftSelection[] {
-  const definitions = getDefinitions(level);
-  if (
-    selections.length > 100 ||
-    JSON.stringify(selections).length > 64000 ||
-    selections.some(
-      selection =>
-        !selection.decisionId.trim() ||
-        !selection.ownerBranchId.trim() ||
-        selection.sources.length === 0 ||
-        selection.sources.some(
-          source => !source.id.trim() || !source.path.trim() || !source.revision.trim(),
-        ) ||
-        !isJsonValue(selection.value),
-    )
-  )
-    throw new ConvexError(
-      'Selections must contain bounded JSON values and complete decision, branch and source references.',
-    );
-  if (new Set(selections.map(selection => selection.decisionId)).size !== selections.length)
-    throw new ConvexError(
-      'A decision can only be saved once within its owning branch or across branches.',
-    );
-  // Known decisions always persist canonical pinned provenance; client labels cannot forge it.
-  const canonical = new Map(
-    draftSelectionsFrom(selectionsFrom(selections), definitions).map(s => [s.decisionId, s]),
-  );
-  const known = new Set(definitions.steps.flatMap(step => step.decisions.map(d => d.id)));
-  selections = selections.map(selection =>
-    known.has(selection.decisionId) ? canonical.get(selection.decisionId)! : selection,
-  );
-  return selections;
-}
 export const create = mutation({
   args: {
     commandId: v.string(),
@@ -401,35 +353,13 @@ export const create = mutation({
     const level = args.targetLevel ?? 1;
     if (!isSupportedDefinitionLevel(level))
       throw new ConvexError('Unsupported character definition level.');
-    const selections = validatedSelections(args.selections ?? [], level);
-    const choiceOrigins = canonicalChoiceOrigins(selections, level);
-    const evaluation = evaluateSelections(selections, level, choiceOrigins);
-    const id = await ctx.db.insert('characters', {
+    const id = await insertCharacterDraft(ctx, {
       ownerId: user._id,
       authored: fields,
-      revision: 1,
-      draftRevisionId: null,
-      effectiveRevisionId: null,
-      derivedBaseline: null,
-      liveState: null,
-      campaignId: null,
-      combatLocked: false,
-      ...(args.wizardDraft === true ? { wizardDraft: true } : {}),
-    });
-    const revisionId = await ctx.db.insert('characterRevisions', {
-      characterId: id,
-      revision: 1,
-      parentRevisionId: null,
-      selections,
+      selections: args.selections ?? [],
       level,
-      kind: 'full-edit',
-      choiceOrigins,
-      baseEffectiveRevisionId: null,
-      status: evaluation.status,
-      evaluation,
-      derivedBaseline: evaluation.baseline,
+      wizardDraft: args.wizardDraft,
     });
-    await ctx.db.patch(id, { draftRevisionId: revisionId });
     await receipt.save(id);
     return id;
   },

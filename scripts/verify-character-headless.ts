@@ -60,6 +60,7 @@ import { runComplicationChoices, runComplicationTable } from './headless/complic
 import { runStartingRewards } from './headless/starting-rewards.ts';
 import { runStartingItems } from './headless/starting-items.ts';
 import { runWizardDraft } from './headless/wizard-draft.ts';
+import { runForgeImport } from './headless/forge-import.ts';
 
 // Each selected cohort invokes the original scenario, including all assertions and setup.
 const cohorts = {
@@ -115,6 +116,7 @@ const cohorts = {
   'starting-rewards': runStartingRewards,
   'starting-items': runStartingItems,
   'wizard-draft': runWizardDraft,
+  'forge-import': runForgeImport,
 };
 const cohort = process.env.SALIENT_HEADLESS_COHORT ?? 'all';
 

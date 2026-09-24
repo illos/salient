@@ -16,6 +16,7 @@
     "compiled:report": "node scripts/report-live-compiled-abilities.ts",
     "supporting:check": "node scripts/check-supporting-inventory.ts",
     "character:sources": "node scripts/inspect-character-sources.ts",
+    "character:import": "node scripts/forge/import.ts",
     "audit:abilities": "node scripts/audit-ability-grammar.ts",
     "dev": "pnpm rules:ingest && vite --host 0.0.0.0",
     "dev:backend": "convex dev",
