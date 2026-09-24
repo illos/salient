@@ -35,3 +35,4 @@ apply strain twice.
   now keeps the Steel Ward and Force Orbs exception (the engine holds that strain for the player to
   apply) and names only the automated gains (combat start, turn start), leaving the first forced
   movement each round to a claim. The test asserts both and that the referenced record exists.
+- Review re-verification at `f46eaf2`: PASS.
