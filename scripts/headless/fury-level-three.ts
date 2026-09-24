@@ -328,6 +328,16 @@ export async function runFuryLevelThree({
               remainder,
               name,
             );
+          } else if (name === 'Steelbreaker') {
+            // V157: compiled without a power roll. feature/ability/fury/level-3/steelbreaker.md:
+            // "You gain 20 temporary Stamina."; the greater amount is kept
+            // (rule/health/temporary-stamina.md).
+            assert.equal(persisted?.kind, 'ability.use', name);
+            type Gains = { stamina: number; temporaryStamina: number };
+            const was = before.liveState as unknown as Gains;
+            const now = after.liveState as unknown as Gains;
+            assert.equal(now.stamina, was.stamina, `${name} no damage`);
+            assert.equal(now.temporaryStamina, Math.max(was.temporaryStamina, 20), name);
           } else {
             assert.equal(persisted?.kind, 'ability.recorded', name);
             assert.equal(persisted?.payload?.data?.manual, true, name);

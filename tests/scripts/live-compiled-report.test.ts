@@ -173,6 +173,14 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Staggering Blow',
       'Mindpunk',
       'Dizzying Hex',
+      // V157: abilities without a power roll; gains applied, other clauses recorded in order.
+      'Steelbreaker',
+      "Saint's Raiment",
+      'Sermon of Grace',
+      'Now!',
+      'Squad! Forward!',
+      'Shadowstrike',
+      'Blur',
     ].sort(),
   );
   expect(
@@ -181,6 +189,14 @@ test('V72 availability follows current grants and loading, not catalog presence'
       .map(e => e.name)
       .sort(),
   ).toEqual([]);
+});
+
+// V157: exactly the seven effect-only abilities are counted; no foe ability is effect-only.
+test('V157 effect-only abilities are counted in the live report', () => {
+  const report = liveCompiledSupportReport();
+  const effectOnly = report.entries.filter(e => e.live === 'compiled' && e.effectOnly);
+  expect(report.liveCounts.compiledEffectOnly).toBe(7);
+  expect(effectOnly.every(e => e.context.corpus === 'hero-standalone')).toBe(true);
 });
 
 // Pinned Ghoul and Worg source: fixed +2 roll, constant 3/4/5 damage. No Agility damage bonus.

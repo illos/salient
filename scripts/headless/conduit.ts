@@ -205,10 +205,13 @@ export async function runConduit({ actors: { director, peer }, run, runId }: Sce
       // Effect riders compile into occurrences (V109/V113); a manual remainder may appear there.
       const compiledEffects = async (id: string) =>
         (
-          await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
-            'abilities:results',
-            { campaignId, eventIds: [id] },
-          )
+          await director.query<
+            {
+              compiled?: {
+                effects: { effect: { clause?: string; kind?: string; targetId?: string } }[];
+              };
+            }[]
+          >('abilities:results', { campaignId, eventIds: [id] })
         )[0]?.compiled?.effects ?? [];
       const usedNames = new Set<string>();
       try {
@@ -313,6 +316,16 @@ export async function runConduit({ actors: { director, peer }, run, runId }: Sce
                   name,
                 );
               }
+            } else if (name === 'Sermon of Grace') {
+              // V157: compiled without a power roll (feature/ability/conduit/level-1/sermon-of-grace.md).
+              // Its whole Effect section is one ordered table instruction for the target.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              assert.deepEqual(
+                (await compiledEffects(used.eventId)).map(o => [o.effect.kind, o.effect.targetId]),
+                [['rider', targetId]],
+                name,
+              );
+              assert.deepEqual(after.liveState, before.liveState, `${name} changes no state`);
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);

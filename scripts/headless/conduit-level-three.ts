@@ -402,6 +402,17 @@ export async function runConduitLevelThree({
                   assert.equal(held.status, 'resisted', name);
                 }
               }
+            } else if (name === "Saint's Raiment") {
+              // V157: compiled without a power roll. feature/ability/conduit/level-3/saints-raiment.md:
+              // "The target gains 20 temporary Stamina and 3 surges." Temporary Stamina keeps the
+              // greater amount (rule/health/temporary-stamina.md); surges add (rule/resource/surge.md).
+              assert.equal(persisted?.kind, 'ability.use', name);
+              type Gains = { stamina: number; temporaryStamina: number; surges: number };
+              const was = before.liveState as unknown as Gains;
+              const now = after.liveState as unknown as Gains;
+              assert.equal(now.stamina, was.stamina, `${name} no damage`);
+              assert.equal(now.temporaryStamina, Math.max(was.temporaryStamina, 20), name);
+              assert.equal(now.surges, was.surges + 3, name);
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);

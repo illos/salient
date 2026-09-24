@@ -38,7 +38,9 @@ export function liveCompiledSupportReport(inputs: AuditInputs = readInputs()) {
       : !reachable
         ? 'No current standalone grant or public ordinary-foe loading path.'
         : entry.execution === 'supported'
-          ? 'Compiled damage and ordered manual instructions through registered ability operations.'
+          ? entry.effectOnly
+            ? 'Compiled gains and ordered manual instructions without a power roll through registered ability operations.'
+            : 'Compiled damage and ordered manual instructions through registered ability operations.'
           : 'Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.';
     return {
       ...entry,
@@ -61,6 +63,8 @@ export function liveCompiledSupportReport(inputs: AuditInputs = readInputs()) {
       'Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.',
     liveCounts: {
       compiled: entries.filter(e => e.live === 'compiled').length,
+      /** V157: of `compiled`, abilities without a power roll. */
+      compiledEffectOnly: entries.filter(e => e.live === 'compiled' && e.effectOnly).length,
       compatibility: entries.filter(e => e.live === 'legacy-compatibility').length,
       compiledButUnavailable: entries.filter(
         e => e.execution === 'supported' && e.live === 'not-reachable',
@@ -75,7 +79,7 @@ export function renderLiveCompiledSupport(report: ReturnType<typeof liveCompiled
     report.scope +
     '\n\n' +
     `Source: \`${report.sourceRevision}\`; content: \`${report.contentHash}\`.\n\n` +
-    `Currently reachable compiled: ${report.liveCounts.compiled}; unchanged reachable compatibility: ${report.liveCounts.compatibility}; structurally supported but unavailable: ${report.liveCounts.compiledButUnavailable}.\n\n` +
+    `Currently reachable compiled: ${report.liveCounts.compiled} (without a power roll: ${report.liveCounts.compiledEffectOnly}); unchanged reachable compatibility: ${report.liveCounts.compatibility}; structurally supported but unavailable: ${report.liveCounts.compiledButUnavailable}.\n\n` +
     '| Ability | Population | Pure execution | Live boundary | Diagnostics |\n| --- | --- | --- | --- | --- |\n' +
     report.entries
       .map(

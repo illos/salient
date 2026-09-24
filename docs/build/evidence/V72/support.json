@@ -25887,6 +25887,7 @@
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
       "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -25905,7 +25906,7 @@
       ],
       "diagnostics": [],
       "live": "compiled",
-      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Sermon of Grace",
@@ -28428,6 +28429,7 @@
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
       "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -28446,7 +28448,7 @@
       ],
       "diagnostics": [],
       "live": "compiled",
-      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Saint's Raiment",
@@ -37648,6 +37650,7 @@
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
       "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -37665,7 +37668,7 @@
       ],
       "diagnostics": [],
       "live": "compiled",
-      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Steelbreaker",
@@ -40693,6 +40696,7 @@
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
       "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -40711,7 +40715,7 @@
       ],
       "diagnostics": [],
       "live": "compiled",
-      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Blur",
@@ -44824,6 +44828,7 @@
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
       "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -44842,7 +44847,7 @@
       ],
       "diagnostics": [],
       "live": "compiled",
-      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Shadowstrike",
@@ -48977,6 +48982,7 @@
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
       "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -48995,7 +49001,7 @@
       ],
       "diagnostics": [],
       "live": "compiled",
-      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Now!",
@@ -49351,6 +49357,7 @@
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
       "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -49369,7 +49376,7 @@
       ],
       "diagnostics": [],
       "live": "compiled",
-      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Squad! Forward!",
@@ -213592,6 +213599,7 @@
   ],
   "liveCounts": {
     "compiled": 154,
+    "compiledEffectOnly": 7,
     "compatibility": 1467,
     "compiledButUnavailable": 0
   }

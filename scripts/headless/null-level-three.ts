@@ -376,6 +376,23 @@ export async function runNullLevelThree({
                 assert.equal(slowed.status, 'resisted', name);
               }
             }
+          } else if (name === 'Blur') {
+            // V157: compiled without a power roll (feature/ability/null/level-2/blur.md). Its Effect
+            // is one ordered table instruction; the later ability and its edge are the table's.
+            assert.equal(persisted?.kind, 'ability.use', name);
+            assert.deepEqual(
+              await compiledClauses(use.eventId),
+              [
+                "You can use a signature or heroic ability. You gain an edge on that ability's power rolls.",
+              ],
+              name,
+            );
+            // Blur targets Self: only the paid Discipline changes.
+            assert.deepEqual(
+              { ...after.liveState, heroicResource: undefined },
+              { ...before.liveState, heroicResource: undefined },
+              `${name} changes no other state`,
+            );
           } else {
             assert.equal(persisted?.kind, 'ability.recorded', name);
             assert.equal(persisted?.payload?.data?.manual, true, name);

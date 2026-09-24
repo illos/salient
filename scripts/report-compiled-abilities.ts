@@ -49,6 +49,8 @@ export function compiledSupportReport(inputs: AuditInputs = readInputs()) {
         context: compiled.context,
         source: compiled.source,
         execution: compiled.execution,
+        // V157: an ability without a power roll; absent for every other entry.
+        ...(compiled.effectOnly ? { effectOnly: true as const } : {}),
         tiers: compiled.tiers,
         sections: compiled.sections,
         diagnostics: compiled.diagnostics,
