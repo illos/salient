@@ -29,6 +29,10 @@ needs the engine to notice a later trigger (movement, damage dealt, a turn bound
 until the engine can track it. Each admitted sentence is matched whole against its pinned source. There is
 no keyword or ability-name dispatch.
 
+Superseded in part on 2026-09-24: lasting effects that watch for later triggers may compile once the
+engine tracks the trigger, and modifiers may be automated. See
+[the automation rulings](2026-09-24-automation-rulings.md).
+
 ## Delivery
 
 V152–V159 are reserved by ENGINE2 (V151 belongs to WIZARD3). The order follows the blocker survey

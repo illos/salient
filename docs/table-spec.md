@@ -1475,6 +1475,9 @@ See [the current walkthrough](v001-basic-play-walkthrough.md#condition-tracking-
 
 #### v0.01 edge and bane inputs
 
+Superseded for V1 by [the automation rulings](decisions/2026-09-24-automation-rulings.md#1-lasting-effects-and-modifiers-may-be-automated):
+tracked effects may feed edges and banes automatically, and manual inputs remain an override.
+
 Confirmed 2026-09-14: the acting player or Director supplies the applicable edge and bane counts
 for an ordinary attack before its roll resolves. The shared roll operation applies their
 rules-defined effect and records the supplied inputs and outcome. v0.01 does not require automatic

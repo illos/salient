@@ -1201,6 +1201,9 @@ Lead By Example and the Charge special.
 
 ## Q-COND-1: does the save for "prone and can't stand (save ends)" also end prone?
 
+**Answered 2026-09-24: (A).** The save ends the restriction and the creature stays prone until it
+uses Stand Up. See [the automation rulings](decisions/2026-09-24-automation-rulings.md#5-q-cond-1-prone-and-cant-stand).
+
 This wording appears in 13 abilities. Examples: Judgment's Hammer tier 3 (`feature/ability/conduit/level-1/judgments-hammer.md`) and Staggering Blow (`feature/ability/shadow/level-3/staggering-blow.md`).
 
 What the sources say (pinned `en/unified/md`):
