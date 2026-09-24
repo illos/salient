@@ -30,6 +30,12 @@ are not all V1 release gates. Prioritize and report work against this target.
 
 - `vendor/steel-compendium` and `vendor/forge-steel` are pinned submodules. Never modify them or
   advance their pins. Community data is input to validate, not evidence of rules support.
+- Exactly one Steel Compendium copy exists on Presidium: the main checkout's
+  `/srv/presidium/projects/salient/code/vendor/steel-compendium`. It is a read-only reference for
+  every thread and worktree. Never check it out, clone, copy, symlink, extract or vendor it anywhere
+  else: worktrees leave `vendor/steel-compendium` empty and read the canonical path. Never run
+  `git submodule update --checkout`/`--init` on it outside main, change its sparse set, commit into
+  it, or merge it. Local git config sets `update = none` on it to block re-initialization.
 - Rules resolution stays out of UI components. Every table control is a registered shared operation
   usable from the UI, the command palette, slash commands and headless calls. Every UI capability has
   a supported programmatic CLI/API route.

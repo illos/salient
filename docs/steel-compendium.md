@@ -4,6 +4,21 @@ The local rules corpus is [SteelCompendium/data-unified](https://github.com/Stee
 
 Local path: [`vendor/steel-compendium`](../vendor/steel-compendium).
 
+## One copy on Presidium (2026-09-24)
+
+User directive: the only Compendium checkout on Presidium is the main checkout's
+`/srv/presidium/projects/salient/code/vendor/steel-compendium`. Linked worktrees keep their
+`vendor/steel-compendium` directory empty (an uninitialized submodule, which Git reports as clean)
+and read the canonical path. The shared repository config sets
+`submodule.vendor/steel-compendium.update=none` so `git submodule update --init` skips it. The
+remote CT114 runtime is unaffected: it fills the pinned files from its own vendor cache.
+
+On 2026-09-24, 42 per-worktree copies (about 220 MB of files plus 27 MB of Git data each) were
+deleted. Before deletion, every one was verified to be at pin `fb83a789` with no local edits.
+
+Scripts and tests that read `vendor/steel-compendium` relative to a worktree root do not yet find
+the canonical copy. Run them from main until a shared path resolver lands.
+
 ## Pinning
 
 This is a **Git submodule**. The parent repository records an exact dependency commit; `.gitmodules` records its URL and upstream branch. Tracking `main` does not automatically update installed content.
