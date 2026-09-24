@@ -43,3 +43,19 @@ and generic level-up for all eleven classes can be built. Design only: no code.
 - 2026-09-24: optional Respite Ability Changes rule not in V1 (full edit with approval covers it).
 - 2026-09-24: level-up adds only that level's choices; source-permitted swaps are built with the specific
   higher-level option that allows them.
+- 2026-09-24: level-up screen first pass: the character builder in a level-up mode (dedicated wizard if
+  review rejects it).
+
+## Design result
+
+All respite product questions (2, 4, 5, 6, 7, 8) and the level-up questions are settled; see the table
+spec's respite mode and the wizard spec's level-up and current-values sections. Build plan (proposed):
+
+1. Q-CHAR-2 revision in `shared/evaluate/liveReconciliation.ts` (damage and spent Recoveries kept, floor
+   at 1 Stamina / 0 Recoveries).
+2. Pending level-ups and generic level-up for all eleven classes (levels 1→2, 2→3): campaign XP per level
+   setting (default 16), manual Director grant, owner level-up operation through the shared API, one
+   level per flow, encounter lock.
+3. Level-up mode in the character builder (user review before TESTER).
+4. V01 respite loop: open, activities (kit swap), cancel / interrupt / complete, Victory-to-XP and
+   level-up grants on complete, session close blocked while open, unused-option notices.

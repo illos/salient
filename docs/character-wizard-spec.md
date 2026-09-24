@@ -546,6 +546,12 @@ shared headless operation, under existing timing, encounter locks and validation
   pending level-up the respite creates, taken the same way. This covers the rules' "Director Says So"
   advancement (`chapter/making-a-hero.md`, Alternative Advancement). Milestone advancement is not
   implemented in V1.
+- **Level-up screen, first design pass (confirmed 2026-09-24).** A pending level-up shows on the
+  character sheet as a "Level up" notice. It opens the existing character builder in a level-up mode:
+  only the new level's steps (automatic grants listed, choices to make), a before-and-after preview
+  (Stamina and Recoveries under Q-CHAR-2, new features and abilities), save-and-resume, and a confirm
+  that takes the level-up without Director approval, then offers the next pending level-up. If the
+  builder mode does not work well in review, a dedicated level-up wizard is designed instead.
 - **Campaign XP per level (requirement, design later).** The XP needed per level is a campaign setting
   the Director can change long-term; the rules' 16 per level is the default.
 - **Earlier choices (confirmed 2026-09-24).** A level-up only adds that level's choices. Swapping an
