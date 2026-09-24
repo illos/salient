@@ -1,6 +1,7 @@
 # Lasting effects, watchers and reactions: engine design
 
-Status: proposal by ENGINE2, 2026-09-24, for user review. It builds pieces 4–6 of the automation
+Status: proposal by ENGINE2, 2026-09-24, revised after QC1's review
+(`../review-artifacts/2026-09-24-lasting-effects-design-QC1.md`, R1–R5 and the missing decisions). It builds pieces 4–6 of the automation
 plan on the product rulings in
 [the automation rulings](decisions/2026-09-24-automation-rulings.md):
 - automation is the goal;
@@ -86,23 +87,50 @@ Anything the engine can't observe stays a printed instruction on the instance, e
   ended it at the table may use it; the Director can always.
 - Condition operations keep working. `condition off X` ends every condition instance of X, as today.
 
-### Stacking
+### Stacking (printed rule)
 
-The research inventory (`docs/research/table-command-targeting-cases.md`) records non-stacking and
-"most recent use determines duration". Rule: a new instance from the **same ability and owner** on
-the same subject replaces the old one. Different sources stack unless a source rule says otherwise
-(for example the taunted replacement, which already exists). This is labelled as an interpretation
-in the first slice, citing the passages.
+Pinned `en/books/heroes/clean/Draw Steel Heroes.md`, "Stacking Unique Effects", governs this. It is
+printed footing, not an interpretation:
+- **Different abilities combine** when their durations and targets overlap.
+- **The same ability used several times doesn't stack, whoever used it.** The most impactful effect
+  from any use applies, such as the highest bonus, and the most recent use sets the duration. For
+  example, two Nulls' Null Fields reduce a cultist's potency by 1, not 2.
+- **The same condition from different effects is imposed once.** Weakened twice is still one bane.
+  A grabbed creature can't be grabbed again by another enemy. Non-condition effects work the same
+  way: a recovery value halved twice is halved once.
+
+The engine therefore keeps **stored source instances** separate from the **effective aggregate**:
+- Every use stores its own instance, with its own source, owner, payload and duration, and history
+  keeps them all.
+- The aggregate is computed per subject:
+  - group by ability identity, across owners;
+  - within a group, take the most impactful payload and the duration of the most recent instance;
+  - across groups, combine;
+  - a condition or a named non-condition consequence (halved recovery value, and so on) counts once,
+    however many instances impose it.
+- Examples the tests pin down:
+  - two owners' Null Fields give −1;
+  - an old +3 bonus with a newer +1 from the same ability gives +3, lasting as long as the newer
+    use;
+  - weakened from two sources gives one bane.
+- A source rule that says otherwise, such as the taunt replacement or the Mark rules in section 5,
+  is an explicit exception on that source. It is not a general default.
 
 ## 2. Modifier pipeline
 
 A `modifier` payload is `{ target: 'rolls-by' | 'rolls-against' | 'strikes-by' | …, edges?, banes?,
 bonus?, stat?: 'speed' | 'stability' | 'saving-throw' | 'potency-resistance' | …, amount? }`.
 
-- **Rolls.** `ability.use` collects every active modifier affecting the actor's roll or a target's
-  roll against, and adds them to the per-target inputs the resolver already accepts: edges, banes
-  and `bonuses`. The table's manual edge/bane entries are added on top. The result records which
-  instances contributed, so a correction or undo can show and reverse them.
+- **Rolls.** `ability.use` collects the effective aggregate of every active modifier affecting the
+  actor's roll or a target's roll against. The inputs keep two things apart:
+  - `circumstance` edges and banes that the table adds for situations the engine can't see. These
+    are additive, as today's inputs are.
+  - `exclude: [instanceId…]`, the table's override. It rejects an automatic contribution that
+    doesn't apply here, such as a stale effect or one needing line of effect that the table says is
+    blocked. The table never has to invent an opposite bane.
+- **Recording.** The saved roll records every contribution it applied and every exclusion. A
+  correction recomputes from those saved inputs, so a known edge isn't counted twice and an
+  excluded one stays excluded.
 - **Derived values** (speed, stability, saving throw bonus) are computed where the engine uses them:
   forced-movement allowance uses stability, and the save uses the saving throw bonus. They are shown
   on the sheet as "base + effects".
@@ -119,7 +147,8 @@ writes:
 | `strike-made` / `ability-used` | `ability.use` commit |
 | `turn-start` / `turn-end` of a creature | clock boundaries |
 | `made-winded` / `dying` / `killed` | the damage writer (V149) |
-| `forced-movement` | forced-movement instructions (no map: only the instruction, not the path) |
+| `force-move-attempted` | a forced-movement node or ability use that *tries* to move a creature (Lines of Force's "would be force moved") |
+| `force-moved` (actual) | only a **confirmed movement fact** that the table enters: who moved, squares moved and the kind of movement |
 | `saving-throw` | save work |
 
 Responses:
@@ -130,19 +159,40 @@ Responses:
 - or a **reaction offer** (section 4).
 
 Limits ("the first time on a turn", "once per round") reuse V120's per-turn and per-round
-limit records. Movement-based watchers ("whenever the target moves") stay instructions, because
-there is no map.
+limit records.
+
+**Movement.** A forced-movement instruction is only an allowance. It can be declined, blocked or
+resolved as zero squares, and neither the allowance nor a "resolved at table" disposition proves
+that anything moved (QC1 R2; automation rulings section 2). So:
+- watchers on an *attempt* fire from the attempt;
+- watchers on *actual* movement ("for each square you push the target", "whenever the target moves
+  or is force moved") fire only from a movement fact the table confirms, with the fields the source
+  needs, such as the number of squares;
+- without that fact they stay instructions.
 
 ## 4. Triggered actions and reactions
 
 A triggered ability ("Triggered" or "Free triggered" with a Trigger section) compiles when its
 trigger is an observable event and its effect is compiled.
 
-- **Offer.** When the event happens, the engine checks eligibility: the owner can act, hasn't used
-  their triggered action this round, can afford the cost, and the trigger filter matches. It then
-  adds a **response card** to the triggering log entry. The spec already designs this card in
-  `docs/table-spec.md` "Inline interaction cards in the game log", with its window until the next
-  turn start, pass, and early close.
+- **Offer.** When the event happens, the engine checks eligibility and adds a **response card** to
+  the triggering log entry. The spec already designs this card in `docs/table-spec.md` "Inline
+  interaction cards in the game log", with its window until the next turn start, pass, and early
+  close. Eligibility (rule/combat/triggered-action.md):
+  - **Triggered actions:** one per round. The owner must not have used their ordinary triggered
+    action this round.
+  - **Free triggered actions:** don't count against that limit and don't need it. They are subject
+    only to their own source limits, such as "once per round" or the Mark's "one benefit from the
+    same trigger".
+  - Any effect that prevents triggered actions prevents both kinds.
+  - Cost and eligibility are **checked again when the card is accepted**, not only when it's
+    offered.
+- **Order.** When several responses answer one trigger, the players decide the order among their own
+  responses first, then the Director orders theirs (rule/combat/triggered-action.md). Offer arrival
+  order never decides it. Test cases:
+  - an ordinary triggered action already used, then a legal free response;
+  - two competing ordinary offers to the same owner;
+  - a prevention effect that suppresses both kinds.
 - **Distance.** Distance and line of effect aren't known without a map. The card says "within N
   squares: the table confirms", and accepting it is the confirmation.
 - **Who uses it.** The owning player, or the Director for them (ruling 4).
@@ -157,16 +207,58 @@ trigger is an observable event and its effect is compiled.
 
 ## 5. Marks and similar statuses
 
-A mark (Tactician) or judgment (Censor) is an effect instance with kind `mark`, an owner and a
-subject.
-- **Default:** one mark relation per owner and subject.
-- **"Until you use this ability again":** handled by `endsWhen: reused`.
-- **Mark benefits:** watchers on the owner, such as "whenever you or any ally deals damage to a
-  target marked by you…".
-- **Open questions:**
-  - Does a new mark end older ones?
-  - Can objects be marked?
-  - Can players see marks on foes?
+The base Mark's lifecycle is printed in `feature/ability/tactician/level-1/mark.md` and is encoded as
+written:
+- It targets **one creature**, not an object, until the end of the encounter, until you are dying,
+  or until you use Mark again (`endsWhen: owner-dying, reused`).
+- You can end it willingly (no action required).
+- **If another Tactician marks the creature, your mark on it ends.** This is a source exception to
+  stacking.
+- **When a marked creature is reduced to 0 Stamina,** you may use a free triggered action to mark a
+  new target.
+- **Benefits:**
+  - an edge on power rolls against the marked creature, for you and allies, while it is within
+    your line of effect;
+  - on rolled damage to it, spend 1 focus for one benefit as a free triggered action;
+  - "You can't gain more than one benefit from the same trigger."
+- **Other abilities that add marks** (Fog of War, Targets of Opportunity, and so on) are handled per
+  source.
+- Judgment (Censor) is **not** assumed to share these rules; it gets its own reading.
+- **Line of effect has no map.** The automatic mark edge is offered on the roll as an automatic
+  contribution. The table rejects it with `exclude` (section 2) when line of effect is blocked.
+  The per-damage benefit is a free-triggered response card.
+
+Product question: can players see marks on foes? (Recommended: yes.)
+
+## 5a. Consumable "next" effects
+
+Some effects are used up by the next qualifying event rather than lasting for a time. For example:
+- "the next ability roll you make this turn automatically obtains a tier 3 outcome"
+  (`fury/level-1/make-peace-with-your-god.md`);
+- "they have a double edge on the next power roll they make" (`talent/level-1/perfect-clarity.md`);
+- "The next ability roll an ally makes against the target before the start of your next turn gains
+  an edge" (`talent/level-1/remote-assistance.md`);
+- "the target takes a bane on their next power roll" (Wither's tier text).
+
+Each is an instance with a `consumeOn` filter (roll by whom, against whom, of what kind) plus its
+printed expiry. The first roll that matches and applies it consumes it: `status: consumed`, with the
+roll's event id recorded. Undo of that roll restores the instance through the journal. A correction
+that removes the roll's eligibility reports the instance as "would not have been consumed", the same
+way V156 reports a cost change. It never re-consumes silently.
+
+## 5b. Response revision accounting (ruling 3, option B)
+
+- **Links.** Each hit keeps a revision chain: the original application, then each accepted response
+  as a linked revision. Every gain, condition and watcher firing caused by the hit is linked to the
+  revision that caused it, reusing V142's `resource.triggered` consequence links.
+- **Recompute.** Accepting a response recomputes from the **current accepted revision**, not the
+  original. A second response never re-applies damage or gains that the first already adjusted.
+- **Reversal.** A consequence that is no longer true is reversed. If a linked gain was partly or
+  wholly spent before the revision, the spent part stands, as ruled, and the log records how much.
+  The unspent part is reversed.
+- **Attribution.** Which spend used "this" gain is ambiguous when a pool holds gains from several
+  sources. The proposal counts the most recent gains as spent first. This is surfaced for review as
+  an open accounting choice, not a rules claim.
 
 ## 6. Areas and auras
 
@@ -176,7 +268,12 @@ instance with a membership list:
 - `effect.members add/remove` edits it later;
 - effects "for each creature in the area" apply to the members.
 
-This keeps the rules automatic while the table owns geometry.
+Membership changes are **not** events by themselves:
+- Adding a member doesn't invent an "enters the area" trigger. Enter and leave triggers fire only
+  from a confirmed movement fact (section 3) that names the area.
+- First-per-round triggers use the V120 limit records.
+- Every change is journaled with who made it and why, so corrections and undo keep the history.
+- Geometry and line of effect remain table facts.
 
 ## 7. History and corrections
 
@@ -207,13 +304,9 @@ The per-class sweeps afterwards reuse these mechanisms ability by ability.
 
 ## Questions for the user
 
-These are the decisions this design needs from you. Each has a recommendation.
-
-1. **Marks:**
-   - Does a new mark from the same Tactician end their earlier mark? Recommended: follow each
-     ability's text, and where it is silent, a new mark by the same owner ends the old one.
-   - Can players see marks on foes? Recommended: yes, marks are table knowledge.
+1. **Mark visibility:** can players see marks on foes? Recommended: yes, marks are table knowledge.
+   The Mark lifecycle itself is printed, so it isn't a question.
 2. **Area membership:** is it acceptable that the table picks who is in an area and updates the
-   list when creatures move, since the app has no map? Recommended: yes.
+   list as creatures move, since the app has no map? Recommended: yes.
 3. **Active-effects display:** is a simple list per creature (source, duration, end button) enough
    for V1, with polish later? Recommended: yes.
