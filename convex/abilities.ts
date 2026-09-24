@@ -291,8 +291,10 @@ export const results = query({
       abilityName: v.string(),
       compiled: v.optional(v.any()),
       execution: v.optional(v.any()),
-      dice: v.object({ d10a: v.number(), d10b: v.number() }),
-      characteristicValue: v.number(),
+      /** V157: no power roll, so no dice, characteristic or per-target outcome. */
+      effectOnly: v.optional(v.literal(true)),
+      dice: v.optional(v.object({ d10a: v.number(), d10b: v.number() })),
+      characteristicValue: v.optional(v.number()),
       selectedCharacteristic: v.union(v.string(), v.null()),
       targets: v.array(
         v.object({
@@ -383,8 +385,11 @@ export const results = query({
             ),
           }
         : {}),
-      dice: row.dice,
-      characteristicValue: row.characteristicValue,
+      ...(row.effectOnly ? { effectOnly: true as const } : {}),
+      ...(row.dice ? { dice: row.dice } : {}),
+      ...(row.characteristicValue !== undefined
+        ? { characteristicValue: row.characteristicValue }
+        : {}),
       selectedCharacteristic: row.selectedCharacteristic,
       targets: row.targets.map(t => ({
         ...t,

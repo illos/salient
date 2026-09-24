@@ -516,14 +516,16 @@ export function CompiledEffects({
                 ·{' '}
                 {effect.kind === 'unsupported' || effect.kind === 'rider'
                   ? 'Manual effect'
-                  : effect.kind === 'push'
-                    ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
-                        /^./,
-                        letter => letter.toUpperCase(),
-                      )
-                    : effect.kind === 'condition'
-                      ? 'Condition'
-                      : 'Damage'}
+                  : effect.kind === 'gain'
+                    ? 'Gain'
+                    : effect.kind === 'push'
+                      ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
+                          /^./,
+                          letter => letter.toUpperCase(),
+                        )
+                      : effect.kind === 'condition'
+                        ? 'Condition'
+                        : 'Damage'}
               </strong>
               <Badge variant="outline">
                 {effect.kind === 'damage'
@@ -532,21 +534,25 @@ export function CompiledEffects({
                     : 'Damage not applied'
                   : occurrence.disposition
                     ? 'Resolved at table'
-                    : effect.kind === 'condition'
+                    : effect.kind === 'gain'
                       ? effect.status === 'applied'
-                        ? 'Applied condition'
-                        : effect.status === 'resisted'
-                          ? 'Resisted'
-                          : effect.status === 'immune'
-                            ? 'Immune'
-                            : effect.status === 'ineligible'
-                              ? 'Too large to grab'
-                              : effect.status === 'fact-needed'
-                                ? 'Facts needed'
-                                : 'Manual condition'
-                      : effect.kind === 'push'
-                        ? 'Outstanding instruction'
-                        : 'Unresolved'}
+                        ? 'Applied gain'
+                        : 'Manual gain'
+                      : effect.kind === 'condition'
+                        ? effect.status === 'applied'
+                          ? 'Applied condition'
+                          : effect.status === 'resisted'
+                            ? 'Resisted'
+                            : effect.status === 'immune'
+                              ? 'Immune'
+                              : effect.status === 'ineligible'
+                                ? 'Too large to grab'
+                                : effect.status === 'fact-needed'
+                                  ? 'Facts needed'
+                                  : 'Manual condition'
+                        : effect.kind === 'push'
+                          ? 'Outstanding instruction'
+                          : 'Unresolved'}
               </Badge>
             </span>
             <span className="[overflow-wrap:anywhere]">
@@ -641,6 +647,34 @@ export function CompiledEffects({
                 </span>
               </>
             )}
+            {effect.kind === 'gain' && (
+              <>
+                <span>
+                  {[
+                    effect.temporaryStamina !== undefined
+                      ? `${effect.temporaryStamina} temporary Stamina${
+                          effect.application?.temporaryStaminaAfter !== undefined
+                            ? ` (${effect.application.temporaryStaminaBefore} → ${effect.application.temporaryStaminaAfter}; the greater amount is kept)`
+                            : ''
+                        }`
+                      : '',
+                    effect.surges !== undefined
+                      ? `${effect.surges} surge${effect.surges === 1 ? '' : 's'}${
+                          effect.application?.surgesAfter !== undefined
+                            ? ` (${effect.application.surgesBefore} → ${effect.application.surgesAfter})`
+                            : ''
+                        }`
+                      : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' · ')}
+                  .
+                </span>
+                {effect.status === 'manual' && (
+                  <span>Apply this gain at the table; no live state was changed.</span>
+                )}
+              </>
+            )}
             {effect.kind === 'rider' && (
               <span>
                 Resolve the printed effect at the table; this entry applies no additional state
@@ -658,6 +692,7 @@ export function CompiledEffects({
               <span className="text-muted-foreground">{occurrence.disposition.note}</span>
             )}
             {effect.kind !== 'damage' &&
+              (effect.kind !== 'gain' || effect.status === 'manual') &&
               (effect.kind !== 'condition' ||
                 effect.status === 'fact-needed' ||
                 effect.status === 'manual') &&
@@ -703,10 +738,14 @@ export function AbilityCard({
   return (
     <div className="inset-controls mt-2 flex flex-col gap-2 rounded-md bg-muted p-4 text-sm">
       <span className="text-muted-foreground">
-        Dice {result.dice.d10a} + {result.dice.d10b}
-        {result.selectedCharacteristic
-          ? ` + ${result.characteristicValue} (${result.selectedCharacteristic})`
-          : ` + ${result.characteristicValue}`}
+        {/* V157: an ability without a power roll has no dice line. */}
+        {result.dice
+          ? `Dice ${result.dice.d10a} + ${result.dice.d10b}${
+              result.selectedCharacteristic
+                ? ` + ${result.characteristicValue} (${result.selectedCharacteristic})`
+                : ` + ${result.characteristicValue}`
+            }`
+          : 'No power roll'}
         {result.correctionEventIds.length
           ? ` · ${result.correctionEventIds.length} correction${result.correctionEventIds.length === 1 ? '' : 's'} applied`
           : ''}
@@ -728,6 +767,8 @@ export function AbilityCard({
         </div>
       )}
       {result.targets.map(t => {
+        // V157: an effect-only use has no per-target roll; its effects are listed below.
+        if (result.effectOnly) return null;
         const outcome = t.outcome as Outcome;
         const applied = t.applied as Applied;
         const target = t.target;

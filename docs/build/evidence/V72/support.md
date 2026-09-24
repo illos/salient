@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 147; unchanged reachable compatibility: 1474; structurally supported but unavailable: 0.
+Currently reachable compiled: 154; unchanged reachable compatibility: 1467; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -179,7 +179,7 @@ Currently reachable compiled: 147; unchanged reachable compatibility: 1474; stru
 | Lightfall | hero-standalone | supported | compiled |  |
 | Ray of Wrath | hero-standalone | manual | legacy-compatibility | manual-section |
 | Sacrificial Offer | hero-standalone | supported | compiled |  |
-| Sermon of Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Sermon of Grace | hero-standalone | supported | compiled |  |
 | Staggering Curse | hero-standalone | supported | compiled |  |
 | Violence Will Not Aid Thee | hero-standalone | manual | legacy-compatibility | manual-section |
 | Warrior's Prayer | hero-standalone | supported | compiled |  |
@@ -199,7 +199,7 @@ Currently reachable compiled: 147; unchanged reachable compatibility: 1474; stru
 | The Gods Command You Obey | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Wellspring of Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Fear of the Gods | hero-standalone | manual | legacy-compatibility | manual-section |
-| Saint's Raiment | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Saint's Raiment | hero-standalone | supported | compiled |  |
 | Soul Siphon | hero-standalone | supported | compiled |  |
 | Words of Wrath and Grace | hero-standalone | supported | compiled |  |
 | Draconian Pride | hero-standalone | supported | compiled |  |
@@ -263,7 +263,7 @@ Currently reachable compiled: 147; unchanged reachable compatibility: 1474; stru
 | Wrecking Ball | hero-standalone | manual | legacy-compatibility | source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Demon Unleashed | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Face the Storm! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Steelbreaker | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Steelbreaker | hero-standalone | supported | compiled |  |
 | You Are Already Dead | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Aspect of the Wild | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | A Squad Unto Myself | hero-standalone | supported | compiled |  |
@@ -284,7 +284,7 @@ Currently reachable compiled: 147; unchanged reachable compatibility: 1474; stru
 | Psychic Pulse | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Relentless Nemesis | hero-standalone | manual | legacy-compatibility | manual-section |
 | Stunning Blow | hero-standalone | supported | compiled |  |
-| Blur | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Blur | hero-standalone | supported | compiled |  |
 | Entropic Field | hero-standalone | supported | compiled |  |
 | Force Redirected | hero-standalone | supported | compiled |  |
 | Gravitic Strike | hero-standalone | supported | compiled |  |
@@ -311,7 +311,7 @@ Currently reachable compiled: 147; unchanged reachable compatibility: 1474; stru
 | In All This Confusion | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | One Hundred Throats | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Setup | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
-| Shadowstrike | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Shadowstrike | hero-standalone | supported | compiled |  |
 | Teamwork Has Its Place | hero-standalone | manual | legacy-compatibility | manual-section |
 | Two Throats at Once | hero-standalone | supported | compiled |  |
 | You Were Watching the Wrong One | hero-standalone | manual | legacy-compatibility | manual-section |
@@ -344,10 +344,10 @@ Currently reachable compiled: 147; unchanged reachable compatibility: 1474; stru
 | Inspiring Strike | hero-standalone | supported | compiled |  |
 | Mark | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
 | Mind Game | hero-standalone | manual | legacy-compatibility | manual-section |
-| Now! | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Now! | hero-standalone | supported | compiled |  |
 | Overwatch | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Parry | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Squad! Forward! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Squad! Forward! | hero-standalone | supported | compiled |  |
 | "Strike Now!" | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | This Is What We Planned For | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Fog of War | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |

@@ -842,7 +842,7 @@ export function resolveEffectOnly(
     return manual(
       shape.kind === 'self'
         ? 'This ability targets only its user.'
-        : `Give ${limit === undefined ? 'one or more' : `one to ${limit}`} distinct targets${selfAllowed ? '' : ', not the user'}.`,
+        : `Give ${limit === 1 ? 'one target' : limit === undefined ? 'one or more distinct targets' : `one to ${limit} distinct targets`}${selfAllowed ? '' : ', not the user'}.`,
     );
   const affordability = checkAffordability(
     activation.fixedCost,

@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** V72 saved execution, restored by history without recompilation or replay. */
 import type { CompiledAbility } from '../resolve/compileAbility.ts';
-import type { CompiledAbilityInput, CompiledEffectOutcome } from '../resolve/compiledOutcome.ts';
+import type {
+  CompiledAbilityInput,
+  CompiledEffectOutcome,
+  EffectOnlyInput,
+} from '../resolve/compiledOutcome.ts';
 
 export interface EffectOccurrence {
   id: string;
@@ -14,8 +18,11 @@ export interface EffectOccurrence {
 export interface CompiledResult {
   version: 1;
   definition: CompiledAbility;
-  /** Original private facts are persisted, never included wholesale in public reads. */
-  inputs: CompiledAbilityInput;
+  /**
+   * Original private facts are persisted, never included wholesale in public reads. V157: an
+   * effect-only use (`definition.effectOnly`) saves its recipients and payment facts instead.
+   */
+  inputs: CompiledAbilityInput | EffectOnlyInput;
   revision: string;
   effects: EffectOccurrence[];
 }

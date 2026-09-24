@@ -29,8 +29,12 @@ import { ConvexError, v } from 'convex/values';
 import {
   grabEligibility,
   resolveCompiledAbility,
+  resolveEffectOnly,
   smallerSize,
   type CompiledAbilityInput,
+  type CompiledEffectOutcome,
+  type EffectOnlyInput,
+  type EffectOnlyRecipient,
 } from '../../shared/resolve/compiledOutcome';
 import { effectOccurrences, type CompiledResult } from '../../shared/contracts/compiledResult';
 import { movementFacts, conditionFacts, grabbedBy } from './compiledResults';
@@ -1433,6 +1437,143 @@ const abilityUse: OperationDefinition = {
         },
       };
     }
+    // ---- V157 ability without a power roll: pay, apply gains, record the ordered table work.
+    if (ability.compilation?.mode === 'compiled' && ability.compilation.definition.effectOnly) {
+      const definition = ability.compilation.definition;
+      const recipient = (record: TargetRecord): EffectOnlyRecipient => {
+        const id = record.actor.id;
+        if (record.squad) return { id, kind: 'squad' };
+        if (record.character) {
+          const live = record.character.liveState;
+          return live
+            ? { id, kind: 'hero', temporaryStamina: live.temporaryStamina, surges: live.surges }
+            : { id, kind: 'hero' };
+        }
+        return { id, kind: record.foe ? 'foe' : 'object' };
+      };
+      const effectInput: EffectOnlyInput = {
+        actor: recipient(records),
+        targets: targets.map(recipient),
+        inCombat: allowance.inCombat,
+        ...(costPool ? { resourcePool: costPool } : {}),
+      };
+      const outcome = resolveEffectOnly(definition, effectInput);
+      if (outcome.kind === 'blocked')
+        return {
+          kind: 'ability.blocked',
+          description: `Blocked: ${actor!.name} cannot use ${ability.name} — ${outcome.reason}. No cost, no effect, no action used; the pending selection is kept.`,
+          data: { ability: abilityData, targets: targets.map(t => t.actor), source },
+        };
+      if (outcome.kind !== 'resolved') throw new ConvexError(`${ability.name}: ${outcome.reason}`);
+      warnings.push(...outcome.warnings);
+      const nameOf = (id: string) =>
+        id === actor!.id ? actor!.name : (targets.find(t => t.actor.id === id)?.actor.name ?? id);
+      const describeEffect = (effect: CompiledEffectOutcome) => {
+        if (effect.kind === 'gain' && effect.application) {
+          const a = effect.application;
+          const parts = [
+            effect.temporaryStamina !== undefined
+              ? `${effect.temporaryStamina} temporary Stamina (${a.temporaryStaminaBefore} → ${a.temporaryStaminaAfter}, the greater amount is kept)`
+              : '',
+            effect.surges !== undefined
+              ? `${effect.surges} surge${effect.surges === 1 ? '' : 's'} (${a.surgesBefore} → ${a.surgesAfter})`
+              : '',
+          ].filter(Boolean);
+          return `${nameOf(effect.targetId)} gains ${parts.join(' and ')}.`;
+        }
+        return `For the table (${nameOf(effect.targetId)}): "${effect.clause}"`;
+      };
+      const effectsText = outcome.effects.map(describeEffect).join(' ');
+      const payment = outcome.cost
+        ? outcome.cost.waived
+          ? ` Cost ${outcome.cost.amount} ${outcome.cost.resource} waived outside combat.`
+          : ` Spent ${outcome.cost.amount} ${outcome.cost.resource} (${outcome.cost.before} → ${outcome.cost.after}).`
+        : '';
+      const describeUse = (paid: string) =>
+        `${actor!.name} uses ${ability.name} (${definition.activation!.actionType}, no power roll)${ability.targetShape.kind !== 'self' ? ` on ${targetNames}` : ''}.${paid} ${effectsText}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+      const effects = (eventId: string) => effectOccurrences(eventId, eventId, outcome.effects);
+      return {
+        kind: 'ability.use',
+        description: describeUse(payment),
+        data: {
+          ability: abilityData,
+          effectOnly: true,
+          targets: targets.map(t => t.actor),
+          publicDescription: describeUse(
+            outcome.cost?.resource === 'malice' ? ` Spent ${outcome.cost.amount} malice.` : payment,
+          ),
+          ...(outcome.cost ? { cost: outcome.cost } : {}),
+          effects: outcome.effects,
+          allowance: {
+            inCombat: allowance.inCombat,
+            onTurn: allowance.onTurn,
+            turnId: allowance.turnId,
+            usedOpportunity: tracking.opportunity?._id ?? null,
+          },
+          warnings,
+          source,
+        },
+        commit: async (mctx, scope) => {
+          // 1. The fixed cost once, before any effect.
+          if (outcome.cost && !outcome.cost.waived)
+            await debit(mctx, scope, records, context, outcome.cost.after, outcome.cost.resource);
+          // 2. Gains on each hero's live state (temporary Stamina keeps the greater; surges add).
+          for (const write of outcome.writes) {
+            const record =
+              write.id === actor!.id ? records : targets.find(t => t.actor.id === write.id)!;
+            const character = (await mctx.db.get(record.character!._id))!;
+            const live = requireHeroLive(character);
+            await journalPatch(mctx, scope, 'characters', character._id, {
+              liveState: {
+                ...live,
+                temporaryStamina: write.temporaryStamina,
+                surges: write.surges,
+              },
+            });
+          }
+          // 3. The effective record: occurrences and their dispositions; no dice or outcome.
+          await journalInsert(mctx, scope, 'abilityResults', {
+            campaignId: scope.campaignId,
+            eventId: scope.eventId,
+            encounterId: allowance.encounterId,
+            actor: actor!,
+            abilityId: ability.abilityId,
+            ...(execution ? { execution } : {}),
+            effectOnly: true,
+            compiled: {
+              version: 1,
+              definition,
+              inputs: effectInput,
+              revision: scope.eventId,
+              effects: effects(scope.eventId),
+            } satisfies CompiledResult,
+            abilityName: ability.name,
+            selectedCharacteristic: null,
+            targets: targets.map(t => ({
+              target: t.actor,
+              edges: 0,
+              banes: 0,
+              outcome: null,
+              applied: null,
+              dispositions: [],
+            })),
+            manualDispositions: [],
+            correctionEventIds: [],
+          });
+          // 4. Action tracking.
+          await recordUse(
+            mctx,
+            scope,
+            allowance,
+            actor!,
+            definition.activation!.actionType,
+            ability.name,
+            tracking,
+          );
+          await clear(mctx);
+        },
+      };
+    }
     if (ability.kind === 'recorded' || ability.unknownCost || !ability.actionType) {
       const reason = ability.unknownCost
         ? `Cost "${ability.unknownCost}" is not a fixed "N Resource" cost the app can check; the ability is recorded for manual resolution with no roll, no debit and no effect.`
@@ -1880,6 +2021,13 @@ const abilityCorrect: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context, args }) => {
     const { event, result } = await resultByEvent(ctx, context, String(args.event));
+    // V157: an ability without a power roll has no dice, edges or banes to correct.
+    const dice = result.dice;
+    const characteristicValue = result.characteristicValue;
+    if (result.effectOnly || !dice || characteristicValue === undefined)
+      throw new ConvexError(
+        `${result.abilityName} has no power roll: there is no roll to correct. Rewind the use instead.`,
+      );
     // V119: a Grab or Escape Grab correction cannot re-decide its tier-3 grab write safely.
     if (result.abilityId === GRAB_ID || result.abilityId === ESCAPE_GRAB_ID)
       throw new ConvexError(
@@ -1980,8 +2128,8 @@ const abilityCorrect: OperationDefinition = {
       inputs.ability,
       inputs.actor,
       {
-        dice: { d10a: result.dice.d10a as never, d10b: result.dice.d10b as never },
-        characteristicValue: result.characteristicValue,
+        dice: { d10a: dice.d10a as never, d10b: dice.d10b as never },
+        characteristicValue,
         ...(originalResult?.selectedDamageCharacteristic
           ? { selectedDamageCharacteristic: originalResult.selectedDamageCharacteristic }
           : {}),
@@ -2003,7 +2151,9 @@ const abilityCorrect: OperationDefinition = {
         correction.temporaryStaminaReconciliationDelta !== 0)
     )
       await assertCorrectionReconcilable(ctx, event, targetRecord.character._id);
-    const savedCompiled = result.compiled as CompiledResult | undefined;
+    // Only a rolled use reaches here (effect-only uses are refused above).
+    const savedCompiled = result.compiled as
+      (CompiledResult & { inputs: CompiledAbilityInput }) | undefined;
     // V110: other targets keep their current (possibly already corrected) edges and banes.
     const correctedInputs = savedCompiled && {
       ...savedCompiled.inputs,
@@ -2080,10 +2230,10 @@ const abilityCorrect: OperationDefinition = {
       paidBefore !== undefined && dueAfter !== undefined && paidBefore !== dueAfter
         ? ` The ${paid!.resource} cost would now be ${dueAfter} instead of the ${paidBefore} paid; the payment is unchanged (adjust it with /adjust heroic-resource if the table agrees).`
         : '';
-    const publicDescription = `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina.${costNote}`;
+    const publicDescription = `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${dice.d10a} + ${dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina.${costNote}`;
     return {
       kind: 'correction.ability',
-      description: `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina${stamina}.${costNote}`,
+      description: `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${dice.d10a} + ${dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina${stamina}.${costNote}`,
       causeEventId: event._id,
       data: {
         originalEventId: event._id,
@@ -2259,6 +2409,9 @@ const abilityResolved: OperationDefinition = {
         throw new ConvexError(
           'An applied, resisted or immune condition occurrence cannot be resolved manually.',
         );
+      // V157: an applied gain already changed the recipient's live state.
+      if (occurrence.effect.kind === 'gain' && occurrence.effect.status === 'applied')
+        throw new ConvexError('An applied gain cannot be resolved manually.');
       if (clause && plainText(clause) !== plainText(occurrence.effect.clause))
         throw new ConvexError('The clause does not match that occurrence.');
       // Candidates come from the current effects; V110 corrections keep other targets' revisions.

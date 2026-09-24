@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 72,
-      "manual": 299
+      "supported": 79,
+      "manual": 292
     },
     "kit-signature": {
       "total": 25,
@@ -25886,7 +25886,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/sermon-of-grace.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [],
         [],
@@ -25894,31 +25894,18 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace#block:0:0:f7be5f66cfabe729",
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/sermon-of-grace#block:0:0:c5c7eb64df319c0c",
           "locator": "block:0:0",
-          "clause": "Each target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries). Additionally, each target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or to stand up if [prone](scc.v1:mcdm.heroes.v1/condition/prone).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "Each target can spend a Recovery. Additionally, each target can use a free triggered action to end one effect on them that is ended by a saving throw or that ends at the end of their turn, or to stand up if prone.",
+          "kind": "instruction",
+          "shape": "recovery",
+          "after": "",
+          "subject": "target"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Each target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries). Additionally, each target can use a free [triggered action](scc.v1:mcdm.heroes.v1/feature.conduit.level-1/triggered-action) to end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or to stand up if [prone](scc.v1:mcdm.heroes.v1/condition/prone).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Sermon of Grace",
@@ -28440,7 +28427,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-3/saints-raiment.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [],
         [],
@@ -28448,31 +28435,18 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/saints-raiment#block:0:0:c91334bb589d1d51",
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-3/saints-raiment#block:0:0:d74031a2fb01d754",
           "locator": "block:0:0",
-          "clause": "The target gains 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) and 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "The target gains 20 temporary Stamina and 3 surges.",
+          "kind": "gain",
+          "subject": "target",
+          "temporaryStamina": 20,
+          "surges": 3
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "The target gains 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) and 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Saint's Raiment",
@@ -37673,7 +37647,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/steelbreaker.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [],
         [],
@@ -37681,37 +37655,17 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker#block:0:0:8e081eb2a625444b",
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-3/steelbreaker#block:0:0:0a64236592e6706d",
           "locator": "block:0:0",
-          "clause": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You gain 20 temporary Stamina.",
+          "kind": "gain",
+          "subject": "actor",
+          "temporaryStamina": 20
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Steelbreaker",
@@ -40738,7 +40692,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/blur.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [],
         [],
@@ -40746,37 +40700,18 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.null.level-2/blur#block:0:0:1451ddc9ef0a6498",
+          "id": "mcdm.heroes.v1/feature.ability.null.level-2/blur#block:0:0:8abcd80a94e7a840",
           "locator": "block:0:0",
-          "clause": "You can use a signature or [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability). You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability's [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You can use a signature or heroic ability. You gain an edge on that ability's power rolls.",
+          "kind": "instruction",
+          "shape": "ability-use",
+          "after": "",
+          "subject": "actor"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "You can use a signature or [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability). You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability's [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Blur",
@@ -44888,7 +44823,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [],
         [],
@@ -44896,37 +44831,18 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/shadowstrike#block:0:0:fad383b137103c03",
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/shadowstrike#block:0:0:c5caf92df09257bc",
           "locator": "block:0:0",
-          "clause": "You use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) twice.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You use a strike signature ability twice.",
+          "kind": "instruction",
+          "shape": "ability-use",
+          "after": "",
+          "subject": "actor"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "You use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) twice.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Shadowstrike",
@@ -49060,7 +48976,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/now.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [],
         [],
@@ -49068,31 +48984,18 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/now#block:0:0:456641cb9dd8f7de",
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/now#block:0:0:c0b3abf7dcbf2036",
           "locator": "block:0:0",
-          "clause": "Each target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "Each target can make a free strike.",
+          "kind": "instruction",
+          "shape": "free-strike",
+          "after": "",
+          "subject": "target"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Each target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Now!",
@@ -49447,7 +49350,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/squad-forward.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [],
         [],
@@ -49455,37 +49358,18 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/squad-forward#block:0:0:520abc8d716da140",
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/squad-forward#block:0:0:241df80b6dfd4721",
           "locator": "block:0:0",
-          "clause": "Each target can move up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "Each target can move up to their speed.",
+          "kind": "instruction",
+          "shape": "move",
+          "after": "",
+          "subject": "target"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Each target can move up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self and two allies",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Squad! Forward!",
@@ -213707,8 +213591,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 147,
-    "compatibility": 1474,
+    "compiled": 154,
+    "compatibility": 1467,
     "compiledButUnavailable": 0
   }
 }

@@ -112,8 +112,11 @@ export const abilityTables = {
     /** V72 versioned selected definition, original inputs and effective occurrences. */
     compiled: v.optional(v.any()),
     execution: v.optional(v.any()),
-    dice: v.object({ d10a: v.number(), d10b: v.number() }),
-    characteristicValue: v.number(),
+    /** V157: a use of an ability without a power roll; it has no dice or characteristic. */
+    effectOnly: v.optional(v.literal(true)),
+    /** Absent only for an effect-only use (V157). */
+    dice: v.optional(v.object({ d10a: v.number(), d10b: v.number() })),
+    characteristicValue: v.optional(v.number()),
     selectedCharacteristic: v.union(characteristic, v.null()),
     targets: v.array(
       v.object({
