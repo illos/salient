@@ -75,7 +75,11 @@ import {
   resolveHistoricalId,
 } from './history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
-import { observeMaliceAbility, reconcileObservedGains } from './resourceTriggers';
+import {
+  assertCorrectionReconcilable,
+  observeMaliceAbility,
+  reconcileObservedGains,
+} from './resourceTriggers';
 import { rollDice } from './dice';
 import {
   abilitiesFor,
@@ -1959,6 +1963,12 @@ const abilityCorrect: OperationDefinition = {
       edges,
       banes,
     );
+    if (
+      targetRecord.character &&
+      (correction.staminaReconciliationDelta !== 0 ||
+        correction.temporaryStaminaReconciliationDelta !== 0)
+    )
+      await assertCorrectionReconcilable(ctx, event, targetRecord.character._id);
     const savedCompiled = result.compiled as CompiledResult | undefined;
     // V110: other targets keep their current (possibly already corrected) edges and banes.
     const correctedInputs = savedCompiled && {

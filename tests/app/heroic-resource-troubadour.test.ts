@@ -47,6 +47,28 @@ async function position(
   });
 }
 
+/** Moves the campaign dice so the next power roll (two d10s in one roll) shows these faces. */
+async function positionPair(t: Backend, campaignId: Id<'campaigns'>, faces: number[]) {
+  await t.run(async ctx => {
+    const state = (await ctx.db
+      .query('diceStates')
+      .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+      .unique())!;
+    for (let counter = state.counter; counter < state.counter + 100000; counter++) {
+      const roll = generate(
+        fromHex(state.seed),
+        counter,
+        faces.map((_, i) => ({ id: `die${i}`, sides: 10 })),
+      );
+      if (roll.dice.every((die, i) => die.value === faces[i])) {
+        await ctx.db.patch(state._id, { counter });
+        return;
+      }
+    }
+    throw new Error('Fixture dice position not found');
+  });
+}
+
 let sequence = 0;
 test('V149: a Troubadour gains drama from the appeal, heroes winded or dying, and claims', async () => {
   const t = backend();
@@ -119,9 +141,19 @@ test('V149: a Troubadour gains drama from the appeal, heroes winded or dying, an
   await strikeThorn();
   expect((await drama()).current).toBe(4);
 
-  // Thorn dies from recorded damage: + 10 (each death).
+  // Thorn dies from recorded damage: + 10 (each death). goblin-warrior.md Spear Charge: Power Roll
+  // + 2, 12–16: 4 damage, so 5 + 5 + 2 = 12 deals 4 and takes Thorn from −winded + 1 past −winded.
   await command(`@Thorn /adjust stamina value=${-winded + 1}`);
-  await strikeThorn();
+  await positionPair(t, f.campaignId, [5, 5]);
+  const fatal = await command(
+    `@{foe:${goblin}} /ability use ability="Spear Charge" targets=[@Thorn]`,
+  );
+  expect((await drama()).current).toBe(14);
+  // QC1 train-4 R1: correcting the fatal hit could leave or duplicate the +10, so the correction is
+  // refused before anything changes and the table rewinds instead.
+  await expect(
+    command(`/ability correct event="${fatal.eventId}" target=@Thorn edges=0 banes=1`),
+  ).rejects.toThrow(/Rewind/);
   expect((await drama()).current).toBe(14);
 
   // Claims: natural 19/20 each time; three heroes once per encounter.

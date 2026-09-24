@@ -1129,8 +1129,9 @@ Current behaviour (V149, labelled interpretation):
 - One hit from above winded straight to dead gives both the +2 (made winded) and the +10 (dies).
 - A Troubadour still dead when a later encounter starts (Stamina at or below the negative of the
   winded value) gains nothing in it, from the clock, the observers or claims.
-- A correction that makes a hero survive doesn't reverse the Troubadour's +10. A chain of
-  corrections can therefore pay +10 twice for one death; the table adjusts.
+- A correction of a hit that gave another hero drama (a death or the first winded) is refused. The
+  table rewinds to the hit and records it again, so the drama is never left or paid twice (QC1
+  train-4 R1).
 
 Alternatives: once per turn for the three-heroes trigger; no turn-start gain while dead; a
 pre-winded hero counting at encounter start.
@@ -1156,8 +1157,8 @@ separately.
 
 Related V148 limits (labelled):
 - The tally counts damage earlier in the same turn, even before maintenance began.
-- A correction that lowers damage after a break doesn't restore maintenance, and the broken
-  instance's use stays spent. To recover, undo back to the damage and re-record it as corrected, or
-  adjust essence by hand to match. Automatic restoration is a follow-up.
-- A use may be maintained later in the encounter rather than immediately after it. The alternative
-  is only immediately after the use.
+- A correction of damage to an Elementalist in combat is refused, because the turn's tally and any
+  break can't be recomputed. The table rewinds to the hit and records it again (QC1 train-4 R2).
+- Maintenance starts only from a use in the current turn, on the hero's own turn: "start doing so
+  immediately after you first use the ability" (QC1 train-4 R3). A use from an earlier turn can't
+  start it.

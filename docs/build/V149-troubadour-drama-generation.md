@@ -74,3 +74,9 @@ rules review. This includes Appeal to the Muses and the triggers about any hero.
   - The 'each' limit is combined with V142's forgone-occurrence rule.
   - `tsc` (root, convex, web) is clean. The Troubadour, Conduit, forgo, Fury and pure tests pass
     (14/14).
+
+- QC1 train-4 R1 (`../review-artifacts/2026-09-24-resource-train-4-QC1.md`): correcting a hit that
+  gave another hero drama could leave the gain or pay it twice. `assertCorrectionReconcilable`
+  (`convex/lib/resourceTriggers.ts`, called from `ability.correct` before any write) now refuses such
+  a correction and points to rewind. Regression: a tier-2 Spear Charge kills Thorn (+10 drama), and
+  correcting it to tier 1 is refused with drama unchanged.

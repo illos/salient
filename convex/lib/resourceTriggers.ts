@@ -8,6 +8,7 @@
  * Profiles and quotes: shared/resolve/heroicResourceGeneration.ts. Decision:
  * docs/decisions/2026-09-24-heroic-resource-automation.md.
  */
+import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import {
@@ -471,4 +472,43 @@ async function observePersistentBreak(
       ...(broken ? { maintained: [] } : {}),
     },
   });
+}
+
+/**
+ * QC1 train-4 R1/R2: corrections that the resource automation can't reconcile exactly are refused
+ * before anything changes, so the table rewinds instead:
+ * - another hero's gain (the Troubadour's winded or death drama) was observed from this hit on
+ *   this target: a correction could leave or duplicate it;
+ * - the target maintains persistent abilities (the Elementalist): the turn's damage tally and any
+ *   break it caused can't be recomputed from a corrected hit.
+ */
+export async function assertCorrectionReconcilable(
+  ctx: MutationCtx,
+  useEvent: Doc<'events'>,
+  characterId: Id<'characters'>,
+): Promise<void> {
+  const character = await ctx.db.get(characterId);
+  const profile = generationProfile(baselineOf(character?.derivedBaseline));
+  const rewind =
+    'Rewind to the ability use and record it again instead, so the heroic-resource automation stays exact.';
+  if (profile?.persistent && useEvent.encounterId)
+    throw new ConvexError(
+      `${character!.authored.name}'s Persistent Magic tallies this damage for the turn; a correction can't recompute it. ${rewind}`,
+    );
+  if (!useEvent.encounterId) return;
+  const linked = `${useEvent._id}:${characterId}`;
+  const events = ctx.db
+    .query('events')
+    .withIndex('by_encounter_sequence', q => q.eq('encounterId', useEvent.encounterId))
+    .order('desc');
+  for await (const event of events) {
+    if (event.sequence < useEvent.sequence) break;
+    if (event.disposition === 'undone') continue;
+    if (event.kind !== 'resource.triggered' && event.kind !== 'resource.forgone') continue;
+    const data = (event.payload as { data?: { useEventId?: string } } | undefined)?.data;
+    if (data?.useEventId === linked)
+      throw new ConvexError(
+        `This hit on ${character?.authored.name ?? 'the target'} gave another hero heroic resource (${event.description}). ${rewind}`,
+      );
+  }
 }
