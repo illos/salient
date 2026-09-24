@@ -354,3 +354,20 @@ export async function reconcileObservedGains(
       },
     });
 }
+
+/**
+ * V144: after a creature ability's own Malice cost is paid, applies every participating hero's
+ * `malice-ability` triggers (the Null's "the Director uses an ability that costs Malice").
+ */
+export async function observeMaliceAbility(ctx: MutationCtx, scope: JournalScope): Promise<void> {
+  const campaign = await ctx.db.get(scope.campaignId);
+  const encounter = campaign ? await committedEncounter(ctx, campaign) : null;
+  if (!encounter) return;
+  for (const characterId of encounter.heroParticipantIds ?? []) {
+    const character = await ctx.db.get(characterId);
+    const profile = generationProfile(baselineOf(character?.derivedBaseline));
+    if (!character?.liveState || !profile) continue;
+    for (const trigger of profile.triggers.filter(t => t.observe === 'malice-ability'))
+      await applyObserved(ctx, scope, characterId, profile, trigger, encounter, scope.eventId);
+  }
+}

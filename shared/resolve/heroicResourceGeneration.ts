@@ -43,8 +43,9 @@ export interface ResourceTrigger extends SourcedClause {
    * - `damage-taken`: a recorded damage write lowered the hero's Stamina or temporary Stamina.
    * - `winded-or-dying`: a recorded damage write took Stamina from above the winded value to at
    *   or below it (dying is Stamina 0 or lower, always at or below the winded value).
+   * - `malice-ability`: a creature ability's own Malice cost was paid through `ability.use`.
    */
-  observe?: 'damage-taken' | 'winded-or-dying';
+  observe?: 'damage-taken' | 'winded-or-dying' | 'malice-ability';
   /** Why the table confirms it: what the app cannot observe. */
   confirmation: string;
 }
@@ -95,6 +96,8 @@ const TALENT_CLARITY =
   'vendor/steel-compendium/en/unified/md/feature/talent/level-1/clarity-and-strain.md';
 
 const FURY_FEROCITY = 'vendor/steel-compendium/en/unified/md/feature/fury/level-1/ferocity.md';
+
+const NULL_DISCIPLINE = 'vendor/steel-compendium/en/unified/md/feature/null/level-1/discipline.md';
 
 /** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
@@ -478,6 +481,64 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
           'The first time you become winded or are dying in an encounter, you gain 1d3 ferocity.',
         confirmation:
           'Applied automatically the first time recorded damage takes you to your winded value or lower, or to 0 or lower. Once per encounter for either (Q-RES-2); claim it if it happened another way (for example Blood for Blood self-damage entered by hand).',
+      },
+    ],
+  },
+  {
+    className: 'Null',
+    // feature/null/level-7/improved-body.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'discipline',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: NULL_DISCIPLINE,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain discipline equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'fixed',
+      amount: 2,
+      sourcePath: NULL_DISCIPLINE,
+      quote: 'At the start of each of your turns during combat, you gain 2 discipline.',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: NULL_DISCIPLINE,
+      quote: 'You lose any remaining discipline at the end of the encounter.',
+    },
+    triggers: [
+      {
+        id: 'null-field-main-action',
+        label: 'An enemy in your Null Field used a main action',
+        amount: 1,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 2,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/null/level-4/regenerative-field.md',
+            quote:
+              'The first time each combat round that an enemy in the area of your Null Field ability uses a main action, you gain 2 discipline instead of 1.',
+          },
+        ],
+        limit: 'round',
+        sourcePath: NULL_DISCIPLINE,
+        quote:
+          'Additionally, the first time each combat round that an enemy in the area of your Null Field ability (see below) uses a main action, you gain 1 discipline.',
+        confirmation:
+          'Positions and your Null Field area are not tracked; the table confirms an enemy in the field used a main action.',
+      },
+      {
+        id: 'null-director-malice',
+        label: 'The Director used an ability that costs Malice',
+        amount: 1,
+        limit: 'round',
+        observe: 'malice-ability',
+        sourcePath: NULL_DISCIPLINE,
+        quote:
+          'The first time each combat round that the Director uses an ability that costs Malice (see *Draw Steel: Monsters*), you gain 1 discipline.',
+        confirmation:
+          'Applied automatically when a creature ability’s own Malice cost is paid. Claim it for other Malice spending the table counts as an ability (Q-RES-5).',
       },
     ],
   },

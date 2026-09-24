@@ -1046,3 +1046,25 @@ Alternative: any damage instance, even 0, counts.
 
 Recommendation: keep "0 damage is not taking damage". The table can claim the trigger if it rules
 otherwise.
+
+## Q-RES-5: what counts as "the Director uses an ability that costs Malice" for the Null?
+
+`feature/null/level-1/discipline.md`: "The first time each combat round that the Director uses an
+ability that costs Malice (see *Draw Steel: Monsters*), you gain 1 discipline."
+
+The pointer "see *Draw Steel: Monsters*" leads to `rule/monster/malice.md`: "Monsters can spend
+Malice the way heroes spend their Heroic Resource, activating and enhancing their abilities.
+Abilities that make use of Malice have their Malice cost noted in a creature's stat block." Both
+activating and enhancing are named there, so readings A and B are both supported. Reading C (a
+Malice feature that is not a creature ability) is not.
+
+Current behaviour (V144, labelled interpretation):
+- **Automatic** when a creature ability's own printed Malice cost is paid through `ability.use`
+  (reading A).
+- **Claimed by the table**: Malice spent on an ability's optional enhancement (reading B), and a
+  Malice feature that isn't a creature ability (reading C).
+
+Alternatives: (b) count enhancements; (c) count any Malice spend.
+
+Recommendation: keep reading A automatic and B and C as table claims, since only A is unambiguously
+"an ability that costs Malice".

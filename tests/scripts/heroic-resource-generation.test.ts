@@ -186,3 +186,22 @@ test('the Fury profile matches its source amounts', () => {
   });
   expect(triggerAmount(fury.triggers[0]!, 4).amount).toBe(2);
 });
+
+// feature/null/level-1/discipline.md, level-4/regenerative-field.md ("2 discipline instead of 1")
+// and level-7/improved-body.md (turn-start gain 3), so levels 1–6 are checked.
+test('the Null profile matches its source amounts', () => {
+  const nullProfile = GENERATION_PROFILES.find(p => p.className === 'Null')!;
+  expect(nullProfile).toMatchObject({
+    resource: 'discipline',
+    verifiedThroughLevel: 6,
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'fixed', amount: 2 },
+    encounterEnd: { kind: 'lose' },
+    triggers: [
+      { id: 'null-field-main-action', amount: 1, limit: 'round' },
+      { id: 'null-director-malice', amount: 1, limit: 'round', observe: 'malice-ability' },
+    ],
+  });
+  expect(triggerAmount(nullProfile.triggers[0]!, 4).amount).toBe(2);
+  expect(triggerAmount(nullProfile.triggers[1]!, 6).amount).toBe(1);
+});

@@ -75,7 +75,7 @@ import {
   resolveHistoricalId,
 } from './history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
-import { reconcileObservedGains } from './resourceTriggers';
+import { observeMaliceAbility, reconcileObservedGains } from './resourceTriggers';
 import { rollDice } from './dice';
 import {
   abilitiesFor,
@@ -800,6 +800,8 @@ async function debit(
 ) {
   if (records.actor.kind === 'foe') {
     await journalPatch(ctx, scope, 'campaigns', context.campaign._id, { malice: after });
+    // V144: an ability that costs Malice was used (the Null's discipline trigger).
+    if (after < (context.campaign.malice ?? 0)) await observeMaliceAbility(ctx, scope);
     return;
   }
   const character = (await ctx.db.get(records.character!._id))!;
