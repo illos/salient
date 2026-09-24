@@ -9,7 +9,8 @@ The respite visible and usable at the table ([respite mode](../table-spec.md#res
 
 ## Scope
 
-- Director pane, between combats: a "Respite" card with Start respite in the slot beside Encounter
+- Director pane, between combats: a "Respite" card listing the party as resting-hero checkboxes
+  (all ticked; each removable) and Start respite, which sends the ticked heroes, in the slot beside Encounter
   ready. While a respite is open it replaces Encounter ready (combat cannot start) with "Respite in
   progress": each resting hero and their activity, "No activity yet" and a count of unused activities
   (styled like the wizard's unspent-points notice), then Complete respite, Interrupt and Cancel respite.
@@ -29,3 +30,7 @@ The respite visible and usable at the table ([respite mode](../table-spec.md#res
 
 - Built on `slice/V167`, `.worktrees/respite-table`, from main. Author checks: lint, both TypeScript
   projects, respite app tests.
+- Independent review PASS (2026-09-24). Fixed its one medium finding: the Start card now picks the
+  resting heroes, as the spec's participant selection requires, instead of resting every hero.
+  Noted, not changed: the owner's kit picker shows for an incomplete build or an observer-owner; the
+  server refuses both.

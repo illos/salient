@@ -26,19 +26,7 @@ export function RespiteDirectorCard({
   roster: Roster;
 }) {
   const respite = roster.session?.respite ?? null;
-  if (!respite)
-    return (
-      <section className="flex flex-col gap-3 rounded-md bg-muted p-5" aria-label="Respite">
-        <h3 className="m-0">Respite</h3>
-        <p className="m-0 text-sm text-muted-foreground">
-          The party rests. Completing it restores Stamina and Recoveries, turns Victories into XP
-          and grants level-ups.
-        </p>
-        <div className="flex flex-col [&>span]:flex [&_button]:w-full">
-          <CommandButton campaignId={campaignId} text="/respite start" label="Start respite" />
-        </div>
-      </section>
-    );
+  if (!respite) return <RespiteStart campaignId={campaignId} roster={roster} />;
   const name = (id: string) => roster.heroes.find(h => h.id === id)?.name ?? 'A hero';
   const unused = respite.participants.filter(p => !p.activity).length;
   return (
@@ -84,7 +72,65 @@ export function RespiteDirectorCard({
   );
 }
 
-/** A resting hero's own respite activity controls (owner or Director). */
+/**
+ * Start a respite for the heroes the Director picks: the whole party by default, each removable
+ * (docs/table-spec.md, respite participant selection).
+ */
+function RespiteStart({ campaignId, roster }: { campaignId: Id<'campaigns'>; roster: Roster }) {
+  const invoke = useMutation(api.commands.invoke);
+  const command = useCommand();
+  const [left, setLeft] = useState<ReadonlySet<string>>(new Set());
+  const resting = roster.heroes.filter(hero => !left.has(hero.id));
+  const toggle = (id: string) =>
+    setLeft(previous => {
+      const next = new Set(previous);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  const start = () => {
+    const characters = resting.map(hero => ({ refKind: 'character' as const, id: hero.id }));
+    void command.run(
+      commandId =>
+        invoke({ campaignId, commandId, operation: 'respite.start', arguments: { characters } }),
+      JSON.stringify(['respite.start', characters]),
+    );
+  };
+  return (
+    <section className="flex flex-col gap-3 rounded-md bg-muted p-5" aria-label="Respite">
+      <h3 className="m-0">Respite</h3>
+      <p className="m-0 text-sm text-muted-foreground">
+        The party rests. Completing it restores Stamina and Recoveries, turns Victories into XP and
+        grants level-ups.
+      </p>
+      {roster.heroes.length > 0 && (
+        <fieldset className="m-0 flex flex-col gap-1 border-0 p-0">
+          <legend className="mb-1 p-0 text-sm text-muted-foreground">Resting heroes</legend>
+          {roster.heroes.map(hero => (
+            <label key={hero.id} className="flex items-center gap-2 text-base">
+              <input
+                type="checkbox"
+                checked={!left.has(hero.id)}
+                onChange={() => toggle(hero.id)}
+              />
+              {hero.name}
+            </label>
+          ))}
+        </fieldset>
+      )}
+      <Button
+        type="button"
+        className="w-full"
+        disabled={resting.length === 0 || command.pending}
+        onClick={start}
+      >
+        Start respite
+      </Button>
+    </section>
+  );
+}
+
+/** A resting hero's own respite activity controls; the Director uses the palette. */
 export function RespiteActivity({
   campaignId,
   hero,
