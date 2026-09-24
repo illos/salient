@@ -968,3 +968,17 @@ Current behaviour (V150, labelled interpretation):
 Alternative: "until the start of your next turn" also covers the next turn's gain.
 
 Recommendation: keep the current behaviour, since "until" ends the window at that boundary.
+## Q-RES-8: strain when combat ends during the Talent's turn
+
+`feature/talent/level-1/clarity-and-strain.md`: "At the end of each of your turns, you take 1 damage
+for each negative point of clarity."
+
+Current behaviour (V146, labelled interpretation):
+- `combat.end` closes the active turn without a turn-end step, as it does for every other effect.
+- A Talent still strained when the Director ends combat during their turn takes no strain for that
+  turn. `combat.finish` then resets clarity to 0.
+
+Alternative: apply that turn's strain at `combat.end`.
+
+Recommendation: keep the current behaviour. Ending combat ends the encounter before the turn's end.
+The table can apply the damage with `/adjust stamina` if it rules otherwise.

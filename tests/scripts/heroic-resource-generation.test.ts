@@ -20,6 +20,7 @@ test('every profile clause is quoted verbatim from its pinned source', () => {
       profile.combatStart,
       profile.turnStart,
       profile.encounterEnd,
+      ...(profile.turnEndStrain ? [profile.turnEndStrain] : []),
       ...profile.triggers,
       ...profile.triggers.flatMap(trigger => trigger.levelAmounts ?? []),
     ];
@@ -113,4 +114,19 @@ test('the Censor profile matches its source amounts', () => {
   });
   expect(triggerAmount(censor.triggers[0]!, 6).amount).toBe(1);
   expect(triggerAmount(censor.triggers[1]!, 4).amount).toBe(2);
+});
+// feature/talent/level-1/clarity-and-strain.md, level-4/mind-recovery.md ("2 clarity instead of
+// 1") and level-7/lucid-mind.md (turn-start gain 1d3 + 1), so levels 1–6 are checked.
+test('the Talent profile matches its source amounts', () => {
+  const talent = GENERATION_PROFILES.find(p => p.className === 'Talent')!;
+  expect(talent).toMatchObject({
+    resource: 'clarity',
+    verifiedThroughLevel: 6,
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'dice', sides: 3 },
+    encounterEnd: { kind: 'reset' },
+    turnEndStrain: {},
+    triggers: [{ id: 'talent-forced-movement', amount: 1, limit: 'round' }],
+  });
+  expect(triggerAmount(talent.triggers[0]!, 4).amount).toBe(2);
 });

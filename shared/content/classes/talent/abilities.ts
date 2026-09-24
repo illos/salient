@@ -34,7 +34,7 @@ export const TALENT_ACTIONS: TalentAction[] = [
     sourcePath: 'en/unified/md/feature/talent/level-1/clarity-and-strain.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'At end of your own turn, take one damage per negative Clarity point. This is not on each spend. Negative Clarity resets at encounter end; resource generation and lifecycle remain manual. Resolve the stated effects manually.',
+      'At end of your own turn, take one damage per negative Clarity point. This is not on each spend. Levels 1–6: the app applies this damage at the end of each of your turns in combat, adds Victories at combat start and 1d3 at each turn start, and resets Clarity to 0 at encounter end; claim the first forced movement each round with /resource claim trigger=talent-forced-movement. Do not also apply them by hand, except strain for a Talent with Steel Ward or Force Orbs: the log gives the damage due and you apply what your immunity leaves with /adjust stamina. Level 7+ and outside combat: resolve the stated effects manually.',
   },
   {
     name: 'Clarity and Strain: Outside Combat',

@@ -39,6 +39,8 @@ import {
 import type { DieResult } from '../../shared/contracts/history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
 import { SELF_TAUGHT, generationProfile } from '../../shared/resolve/heroicResourceGeneration';
+import { applyDamage } from '../../shared/resolve/index';
+import { damageTargetFacts, writeDamage } from './resolve';
 
 export type Registration = Doc<'clockRegistrations'>;
 
@@ -276,6 +278,74 @@ async function fireHeroicResource(
       description: `${label}: ${hero.authored.name}'s pool is ${pool.name}, not ${profile.resource}; resolve manually.`,
       unsupported: 'pool does not match the generation profile',
     };
+  if (step === 'turn-end-strain') {
+    // V146: "you take 1 damage for each negative point of clarity" — ordinary damage through the
+    // shared damage rules (temporary Stamina first), written in the causing operation's scope.
+    const clause = profile.turnEndStrain!;
+    const amount = Math.max(0, -pool.current);
+    const common = {
+      step,
+      characterId,
+      className: profile.className,
+      resource: pool.name,
+      current: pool.current,
+      sourcePath: clause.sourcePath,
+      quote: clause.quote,
+    };
+    if (amount === 0)
+      return {
+        kind: 'clock.heroic-resource',
+        description: `${hero.authored.name}'s ${pool.name} is ${pool.current}: not strained, no strain damage.`,
+        payload: { ...common, damage: 0 },
+      };
+    // V146 review R1: a ward whose immunity the table tracks can reduce strain; hold it for them.
+    const baseline = baselineOf(hero.derivedBaseline)!;
+    const has = (name: string) =>
+      [...baseline.features.map(f => f.name), ...baseline.abilities.map(a => a.name)].some(
+        owned => owned === name || owned.startsWith(`${name}:`),
+      );
+    const holder = clause.heldBy?.find(entry => has(entry.name));
+    if (holder)
+      return {
+        kind: 'clock.heroic-resource',
+        description: `${hero.authored.name}'s ${pool.name} is ${pool.current}: ${amount} strain damage is due. ${holder.name}'s damage immunity may reduce it, so it is not applied automatically: apply the remainder with /adjust stamina.`,
+        payload: {
+          ...common,
+          damage: amount,
+          held: holder.name,
+          heldSourcePath: holder.sourcePath,
+        },
+      };
+    const noted = clause.notedBy?.filter(entry => has(entry.name)).map(entry => entry.name) ?? [];
+    const record = {
+      actor: { kind: 'character' as const, id: hero._id, name: hero.authored.name },
+      character: hero,
+    };
+    const facts = damageTargetFacts(record);
+    if ('missing' in facts)
+      return {
+        kind: 'clock.unsupported',
+        description: `${label}: ${facts.missing}`,
+        unsupported: 'damage facts unavailable',
+      };
+    const application = applyDamage(facts.facts, {
+      targetId: hero._id,
+      amount,
+      causeLabel: 'negative clarity (strain)',
+    });
+    await writeDamage(ctx, firing.scope, record, application);
+    return {
+      kind: 'clock.heroic-resource',
+      description: `${hero.authored.name}'s ${pool.name} is ${pool.current}: ${amount} strain damage; Stamina ${application.staminaBefore} → ${application.staminaAfter}${
+        application.absorbedByTemporaryStamina
+          ? ` (temporary ${application.temporaryStaminaBefore} → ${application.temporaryStaminaAfter})`
+          : ''
+      }${application.deadThresholdReached ? '; reaches the death threshold' : application.dying ? '; dying' : ''}.${
+        noted.length ? ` This damage can set off ${noted.join(', ')}: resolve it manually.` : ''
+      }`,
+      payload: { ...common, damage: amount, application, ...(noted.length ? { noted } : {}) },
+    };
+  }
   // V150 (complication/self-taught.md): a forgo declared for this turn start suppresses the gain
   // "until the start of your next turn"; an earlier forgo window ends here.
   let windowEnded = false;
