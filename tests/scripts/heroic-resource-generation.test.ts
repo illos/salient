@@ -114,3 +114,18 @@ test('the Censor profile matches its source amounts', () => {
   expect(triggerAmount(censor.triggers[0]!, 6).amount).toBe(1);
   expect(triggerAmount(censor.triggers[1]!, 4).amount).toBe(2);
 });
+// feature/beastheart/level-1/ferocity.md, level-4/unleash-the-beast.md ("3 ferocity instead of 2
+// ferocity") and level-7/feral-heart.md (turn-start gain 1d3 + 1), so levels 1–6 are checked.
+test('the Beastheart profile matches its source amounts', () => {
+  const beastheart = GENERATION_PROFILES.find(p => p.className === 'Beastheart')!;
+  expect(beastheart).toMatchObject({
+    resource: 'ferocity',
+    verifiedThroughLevel: 6,
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'dice', sides: 3 },
+    encounterEnd: { kind: 'lose' },
+    triggers: [{ id: 'beastheart-companion-adjacent-damage', limit: 'round' }],
+  });
+  expect(triggerAmount(beastheart.triggers[0]!, 3).amount).toBe(2);
+  expect(triggerAmount(beastheart.triggers[0]!, 4).amount).toBe(3);
+});

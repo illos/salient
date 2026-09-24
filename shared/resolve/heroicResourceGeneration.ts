@@ -62,6 +62,9 @@ const TACTICIAN_FOCUS = 'vendor/steel-compendium/en/unified/md/feature/tactician
 
 const CENSOR_WRATH = 'vendor/steel-compendium/en/unified/md/feature/censor/level-1/wrath.md';
 
+const BEASTHEART_FEROCITY =
+  'vendor/steel-compendium/en/unified/md/feature/beastheart/level-1/ferocity.md';
+
 /** Enabled classes. Each entry is added by its own class slice (V120 Shadow, V140 Tactician, V145 Censor; the rest in V141–V149). */
 export const GENERATION_PROFILES: readonly GenerationProfile[] = [
   {
@@ -220,6 +223,52 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
           'The first time each combat round that you deal damage to a creature judged by you, you gain 1 wrath.',
         confirmation:
           'Judgment is not tracked; the table confirms the creature you damaged is judged by you.',
+      },
+    ],
+  },
+  {
+    className: 'Beastheart',
+    // feature/beastheart/level-7/feral-heart.md changes the turn-start gain; levels 1–6 are checked.
+    verifiedThroughLevel: 6,
+    resource: 'ferocity',
+    combatStart: {
+      kind: 'victories',
+      sourcePath: BEASTHEART_FEROCITY,
+      quote:
+        'At the start of a combat encounter or some other stressful situation tracked in combat rounds (as determined by the Director), you gain ferocity equal to your Victories.',
+    },
+    turnStart: {
+      kind: 'dice',
+      sides: 3,
+      sourcePath: BEASTHEART_FEROCITY,
+      quote: 'At the start of each of your turns during combat, you gain 1d3 ferocity.',
+    },
+    encounterEnd: {
+      kind: 'lose',
+      sourcePath: BEASTHEART_FEROCITY,
+      quote: 'You lose any remaining ferocity at the end of the encounter.',
+    },
+    triggers: [
+      {
+        id: 'beastheart-companion-adjacent-damage',
+        label: 'A creature adjacent to your companion took damage',
+        amount: 2,
+        levelAmounts: [
+          {
+            fromLevel: 4,
+            amount: 3,
+            sourcePath:
+              'vendor/steel-compendium/en/unified/md/feature/beastheart/level-4/unleash-the-beast.md',
+            quote:
+              'The first time each combat round that a creature adjacent to your companion takes damage, you gain 3 ferocity instead of 2 ferocity.',
+          },
+        ],
+        limit: 'round',
+        sourcePath: BEASTHEART_FEROCITY,
+        quote:
+          'Additionally, the first time each combat round that a creature adjacent to your companion takes damage, you gain 2 ferocity.',
+        confirmation:
+          'Your companion and positions are not tracked; the table confirms a creature adjacent to your companion took damage.',
       },
     ],
   },
