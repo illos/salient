@@ -59,3 +59,6 @@ remains deferred.
   ledger; the fourteen companion advancement decisions have wizard labels; the Burning Lash spend text
   says who wields the second whip is a manual interpretation.
 - Review re-verification at `a813a58`: PASS; all five findings closed, nothing new in the diff.
+- Found while building V138: the Beastheart record replacement dropped every ability granted by a
+  `class.beastheart.*` decision, including the level-2 perk's own action (for example Forgettable
+  Face). Perk grants now stay beside the records; a focused case fails without the fix.

@@ -119,6 +119,14 @@ test('the level-two perk offers exactly the source exploration, interpersonal an
   );
 });
 
+test('a level-two perk that grants an action keeps it beside the manual records', () => {
+  // perk/forgettable-face.md: a sourced perk use (perk-abilities.ts), not a Beastheart record.
+  const { l2 } = cases[0]!;
+  const abilities = evaluate({ ...l2, 'class.beastheart.level-2.perk': 'Forgettable Face' }, 2)
+    .baseline!.abilities;
+  assert.ok(abilities.some(a => a.name === 'Forgettable Face'));
+});
+
 test('nature pools are exclusive; level, nature and companion edits prune dependents', () => {
   const punisher = cases.find(c => c.id === 'v106-3')!;
   const foreign = evaluate(

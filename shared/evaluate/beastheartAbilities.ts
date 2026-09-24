@@ -26,7 +26,12 @@ export function beastheartAbilities(
   existing: GrantedAbility[],
 ): GrantedAbility[] {
   const parents = [...features, ...existing];
-  const result = existing.filter(a => !a.provenance.decisionId.startsWith('class.beastheart.'));
+  // Class grants become named manual records; a class perk's own ability (perkAbilities) stays.
+  const result = existing.filter(
+    a =>
+      !a.provenance.decisionId.startsWith('class.beastheart.') ||
+      a.provenance.decisionId.endsWith('.perk'),
+  );
   for (const a of BEASTHEART_ACTIONS) {
     const parent = parents.find(
       p => p.name === a.parent && p.provenance.decisionId.startsWith('class.beastheart.'),
