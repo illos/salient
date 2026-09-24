@@ -7,8 +7,8 @@
  *
  * Never guesses: a Forge choice without a scoped rule (mappings.ts), or whose value is not one of the
  * decision's Compendium-sourced options, becomes a diagnostic and its decision stays empty. Play
- * state, complications, titles, inventory, projects, ability customizations and sourcebook
- * enablement are reported, not mapped (V09 parts b/c). Imported ids, folders and flags grant nothing.
+ * state, complications, titles, inventory, projects, ability customizations and sourcebooks
+ * outside the Compendium are reported, not mapped (V09 parts b/c). Imported ids, folders and flags grant nothing.
  */
 import { getDefinitions } from '../../content/character-decisions.ts';
 import type { SelectionValue } from '../../contracts/characterEvaluation.ts';
@@ -24,6 +24,27 @@ export { ForgeShapeError } from './shape.ts';
 export const FORGE_STEEL_REVISION = '5a846aadb623a9855a023e9403bb887a956c341f';
 /** Upper bound on an accepted file; the retained exports are 130–165 KB. */
 export const MAX_FORGE_PAYLOAD_BYTES = 512 * 1024;
+/**
+ * Diagnostics copy strings from the file, so they are bounded: each string field, the count, and
+ * the serialized total. A hostile file then cannot push the stored import record toward Convex's
+ * 1 MiB document limit next to its 512 KB payload.
+ */
+export const MAX_DIAGNOSTIC_TEXT = 200;
+export const MAX_DIAGNOSTICS = 200;
+export const MAX_DIAGNOSTIC_BYTES = 64 * 1024;
+/** The authored-field limits of `characters.create` (convex/lib/characterDrafts.ts `authored`). */
+export const MAX_NAME_LENGTH = 100;
+export const MAX_NOTES_LENGTH = 10000;
+/** Used when a Forge hero has no name yet; the owner renames it in Salient. */
+export const PLACEHOLDER_NAME = 'Imported hero';
+/**
+ * Forge sourcebooks whose content at the pin maps to the pinned Compendium: core and the Orden
+ * setting, plus Beastheart and Summoner, which Salient supports (Q-CHAR-14).
+ */
+const knownSourcebooks = new Set(['core', 'orden', 'beastheart', 'summoner']);
+
+const clip = (text: string, length = MAX_DIAGNOSTIC_TEXT) =>
+  text.length > length ? `${text.slice(0, length - 1)}…` : text;
 
 export interface ForgeImportDiagnostic {
   path: string;
@@ -79,21 +100,31 @@ const defaultState: Record<string, number | boolean | string> = {
   defeated: false,
 };
 
-function allowedValues(decision: Decision, definitions: DecisionDefinitions): string[] | null {
+/**
+ * The options a decision offers given the choices mapped so far. A parent-dependent decision offers
+ * only its chosen parent's own entry (the first chosen parent in `dependsOn`, then `dependsOnAny`,
+ * with an entry for its value); with no such parent it offers nothing. Null means the definitions
+ * list no options, so the value is left to the evaluator.
+ */
+function allowedValues(
+  decision: Decision,
+  definitions: DecisionDefinitions,
+  selections: Record<string, SelectionValue>,
+): string[] | null {
   const pools = (ids: string | string[]) =>
     [ids].flat().flatMap(id => definitions.pools[id]?.values ?? []);
   if (decision.options) return decision.options.map(option => option.value);
   if (decision.optionsFrom) return pools(decision.optionsFrom);
-  if (decision.optionsByParent)
-    return [
-      ...new Set([
-        ...Object.values(decision.optionsByParent).flatMap(entry => [
-          ...(entry.values ?? []),
-          ...pools(entry.optionsFrom ?? []),
-        ]),
-        ...(decision.supportedInV001 ?? []),
-      ]),
-    ];
+  if (decision.optionsByParent) {
+    const entries = Object.entries(decision.optionsByParent);
+    for (const parent of [...(decision.dependsOn ?? []), ...(decision.dependsOnAny ?? [])]) {
+      const value = selections[parent];
+      if (typeof value !== 'string') continue;
+      const entry = entries.find(([key, row]) => (row.parentValue ?? key) === value)?.[1];
+      if (entry) return [...(entry.values ?? []), ...pools(entry.optionsFrom ?? [])];
+    }
+    return [];
+  }
   return decision.supportedInV001 ?? null;
 }
 
@@ -111,9 +142,27 @@ export function importForgeHero(
   const selections: Record<string, SelectionValue> = {};
   const diagnostics: ForgeImportDiagnostic[] = [];
   const unmapped = new Set<string>();
+  let diagnosticBytes = 0;
+  let omitted = 0;
   const note = (diagnostic: ForgeImportDiagnostic, isUnmapped = true) => {
-    diagnostics.push(diagnostic);
-    if (isUnmapped) unmapped.add(diagnostic.path);
+    const bounded: ForgeImportDiagnostic = {
+      path: clip(diagnostic.path),
+      ...(diagnostic.forgeId !== undefined ? { forgeId: clip(diagnostic.forgeId) } : {}),
+      ...(diagnostic.name !== undefined ? { name: clip(diagnostic.name) } : {}),
+      reason: clip(diagnostic.reason),
+    };
+    const bytes = JSON.stringify(bounded).length;
+    // Keep one slot for the summary of what was omitted.
+    if (
+      diagnostics.length >= MAX_DIAGNOSTICS - 1 ||
+      diagnosticBytes + bytes > MAX_DIAGNOSTIC_BYTES - 1024
+    )
+      omitted += 1;
+    else {
+      diagnostics.push(bounded);
+      diagnosticBytes += bytes;
+      if (isUnmapped) unmapped.add(bounded.path);
+    }
   };
   const about = (feature: ForgeFeature) => ({ forgeId: feature.id, name: feature.name });
 
@@ -137,7 +186,7 @@ export function importForgeHero(
       note({ path, ...subject, reason: `${decisionId} is already set by another Forge entry.` });
       return;
     }
-    const allowed = allowedValues(decision, definitions);
+    const allowed = allowedValues(decision, definitions, selections);
     const values: string[] = [];
     for (const name of names) {
       const resolved = allowed ? resolveName(name, allowed) : name;
@@ -145,7 +194,7 @@ export function importForgeHero(
         note({
           path,
           ...subject,
-          reason: `"${name}" is not an option of ${decisionId}; the choice is left open.`,
+          reason: `"${clip(name, 60)}" is not an option of ${decisionId}; the choice is left open.`,
         });
         return;
       }
@@ -217,13 +266,14 @@ export function importForgeHero(
         const names: string[] = [];
         for (const id of ids) {
           const ability = pool.find(row => row.id === id);
-          if (!ability) return `Selected ability ${String(id)} is not in the embedded pool.`;
+          if (!ability)
+            return `Selected ability ${clip(String(id), 60)} is not in the embedded pool.`;
           names.push(ability.name);
         }
         return names;
       }
     }
-    return `Forge ${feature.type} selections are not mapped.`;
+    return `Forge ${clip(feature.type, 40)} selections are not mapped.`;
   };
 
   // --- Ancestry (chapter/ancestries.md; ancestry/<name>.md) ---
@@ -339,7 +389,11 @@ export function importForgeHero(
   for (const active of activeFeatures(hero)) {
     const { feature, path, scope } = active;
     if (active.opaque) {
-      note({ ...about(feature), path, reason: `Forge ${feature.type} content is not imported.` });
+      note({
+        ...about(feature),
+        path,
+        reason: `Forge ${clip(feature.type, 40)} content is not imported.`,
+      });
       continue;
     }
     if (active.cultureRole) {
@@ -369,7 +423,7 @@ export function importForgeHero(
         note({
           ...about(feature),
           path,
-          reason: `The Compendium grants ${rule.expected} here (${rule.source}); Forge selected ${names.join(', ')}.`,
+          reason: `The Compendium grants ${rule.expected} here (${rule.source}); Forge selected ${clip(names.join(', '), 60)}.`,
         });
       continue;
     }
@@ -400,13 +454,11 @@ export function importForgeHero(
       else assign(`ancestry.${ancestrySlug}.purchased-traits`, names, path, about(feature));
       continue;
     }
-    // A class kit slot with one kit is the kit decision (chapter/kits.md; the Salient kit.choice
-    // options are its Compendium kit list). Two-kit slots such as Field Arsenal are not mapped.
-    if (feature.type === 'Kit' && scope.startsWith('class:') && data.count === 1) {
-      assign('kit.choice', names, path, about(feature));
-      continue;
-    }
-    note({ ...about(feature), path, reason: `No mapping for this Forge ${feature.type}.` });
+    note({
+      ...about(feature),
+      path,
+      reason: `No mapping for this Forge ${clip(feature.type, 40)}.`,
+    });
   }
 
   function mapCulture(active: ActiveFeature) {
@@ -427,8 +479,29 @@ export function importForgeHero(
   }
 
   // --- Authored details and unmapped data ---
-  const name = hero.name.trim();
+  // The owner's own text; bounded to the create path's limits instead of rejecting the file.
+  let name = hero.name.trim();
+  if (name.length > MAX_NAME_LENGTH) {
+    name = name.slice(0, MAX_NAME_LENGTH).trim();
+    note(
+      { path: 'name', reason: `The name was shortened to ${MAX_NAME_LENGTH} characters.` },
+      false,
+    );
+  }
   if (name) selections['details.name'] = name;
+  else
+    note(
+      { path: 'name', reason: `The hero has no name; it was saved as "${PLACEHOLDER_NAME}".` },
+      false,
+    );
+  let notes = hero.state.notes;
+  if (notes.length > MAX_NOTES_LENGTH) {
+    notes = notes.slice(0, MAX_NOTES_LENGTH);
+    note({
+      path: 'state.notes',
+      reason: `Notes were shortened to ${MAX_NOTES_LENGTH} characters; the full text stays in the stored file.`,
+    });
+  }
   if (hero.complication !== null)
     note({
       path: 'complication',
@@ -448,19 +521,24 @@ export function importForgeHero(
   for (const [field, initial] of Object.entries(defaultState))
     if (field in hero.state && hero.state[field] !== initial)
       note({ path: `state.${field}`, reason: 'Forge play state is not imported.' });
-  const extraBooks = hero.sourcebookIDs.filter(id => id !== 'core');
-  if (extraBooks.length)
-    note({
-      path: 'sourcebookIDs',
-      reason: `Forge sourcebooks ${extraBooks.join(', ')} are not enabled by import; only content that maps to the pinned Compendium is imported.`,
-    });
+  const otherBooks = hero.sourcebookIDs.filter(id => !knownSourcebooks.has(id));
+  if (otherBooks.length)
+    note(
+      {
+        path: 'sourcebookIDs',
+        reason: `Forge sourcebooks ${clip(otherBooks.join(', '), 60)} are not Compendium content; nothing from them is enabled.`,
+      },
+      false,
+    );
   if (hero.picture !== null) note({ path: 'picture', reason: 'Portraits are not imported.' });
   if (hero.folder) note({ path: 'folder', reason: 'Forge folders are not imported.' });
 
+  if (omitted)
+    diagnostics.push({ path: 'hero', reason: `${omitted} further diagnostics were omitted.` });
   return {
     level,
     selections,
-    authored: { name, notes: hero.state.notes },
+    authored: { name: name || PLACEHOLDER_NAME, notes },
     diagnostics,
     unmapped: [...unmapped].sort(),
   };

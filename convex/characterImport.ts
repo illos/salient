@@ -26,9 +26,6 @@ import {
   type ForgeImportResult,
 } from '../shared/interchange/forge-steel/import';
 
-/** Stored diagnostics stay well inside Convex's array and document limits for a hostile file. */
-const MAX_STORED_DIAGNOSTICS = 500;
-
 const result = v.object({
   characterId: v.id('characters'),
   diagnostics: v.array(forgeImportDiagnosticValidator),
@@ -67,17 +64,8 @@ export const importForge = mutation({
       throw new ConvexError(
         `This hero is level ${imported.level}; Salient cannot yet import heroes at that level.`,
       );
-    const diagnostics =
-      imported.diagnostics.length > MAX_STORED_DIAGNOSTICS
-        ? [
-            ...imported.diagnostics.slice(0, MAX_STORED_DIAGNOSTICS - 1),
-            {
-              path: 'hero',
-              reason: `${imported.diagnostics.length - MAX_STORED_DIAGNOSTICS + 1} further diagnostics omitted.`,
-            },
-          ]
-        : imported.diagnostics;
-    const unmapped = imported.unmapped.slice(0, MAX_STORED_DIAGNOSTICS);
+    // The adapter bounds the diagnostics (count, string length, total size) and the authored fields.
+    const { diagnostics, unmapped } = imported;
     const existing = await ctx.db
       .query('characters')
       .withIndex('by_owner', q => q.eq('ownerId', user._id))
@@ -100,6 +88,7 @@ export const importForge = mutation({
       ownerId: user._id,
       format: 'forge-steel-hero',
       payload: args.payload,
+      payloadBytes: bytes.length,
       payloadSha256,
       forgeVendorRevision: FORGE_STEEL_REVISION,
       level: imported.level,

@@ -27,16 +27,24 @@ import type { MutationCtx } from '../_generated/server';
 
 /** Documents removed per mutation before the purge continues in a scheduled step. */
 export const PURGE_BUDGET = 2000;
+/**
+ * Stored Forge payload bytes read per mutation (V09). An import row holds up to 512 KB, so a
+ * document count alone would let 100 of them read about 50 MB in one transaction; imports are
+ * instead deleted one row at a time until this many payload bytes have been read.
+ */
+export const PURGE_IMPORT_BYTES = 2 * 1024 * 1024;
 const PAGE = 200;
 
 class Budget {
   used = 0;
+  bytes = 0;
   constructor(readonly limit: number) {}
   get exhausted() {
-    return this.used >= this.limit;
+    return this.used >= this.limit || this.bytes >= PURGE_IMPORT_BYTES;
   }
-  spend() {
+  spend(bytes = 0) {
     this.used += 1;
+    this.bytes += bytes;
   }
 }
 
@@ -97,13 +105,19 @@ async function deleteCharacter(
         .query('heroRollFacts')
         .withIndex('by_character', q => q.eq('characterId', characterId))
         .take(PAGE),
-    () =>
-      ctx.db
-        .query('characterImports')
-        .withIndex('by_character', q => q.eq('characterId', characterId))
-        .take(PAGE),
   ];
   if (!(await drainAll(ctx, budget, pages))) return false;
+  // Import rows carry their payload, so they are read singly under the byte budget.
+  for (;;) {
+    if (budget.exhausted) return false;
+    const record = await ctx.db
+      .query('characterImports')
+      .withIndex('by_character', q => q.eq('characterId', characterId))
+      .first();
+    if (!record) break;
+    await ctx.db.delete(record._id);
+    budget.spend(record.payloadBytes);
+  }
   return remove(ctx, budget, characterId);
 }
 

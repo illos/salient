@@ -395,7 +395,9 @@ export const characterTables = {
     characterId: v.id('characters'),
     ownerId: v.id('users'),
     format: v.literal('forge-steel-hero'),
+    /** Kept in the row, bounded to 512 KB; account deletion budgets these bytes separately. */
     payload: v.string(),
+    payloadBytes: v.number(),
     payloadSha256: v.string(),
     forgeVendorRevision: v.string(),
     level: v.number(),

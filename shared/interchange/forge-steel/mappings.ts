@@ -94,6 +94,8 @@ export const featureRules: Record<string, FeatureRule> = {
     expected: 'Lift',
     source: 'en/unified/md/feature/fury/level-1/primordial-aspect.md',
   },
+  // Berserker kit slot (feature/fury/level-1/kit.md); options per aspect come from kit.choice.
+  'class:class-fury/fury-sub-1@1#fury-sub-1-1-2': { kind: 'decision', decision: 'kit.choice' },
   // Fury level 2 (feature/fury/level-2/perk.md, feature/fury/level-2/2nd-level-aspect-ability.md)
   'class:class-fury@2#fury-2-1': { kind: 'decision', decision: 'class.fury.level-2.perk' },
   'class:class-fury/fury-sub-1@2#fury-sub-1-2-2': {

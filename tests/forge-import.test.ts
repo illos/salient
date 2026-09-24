@@ -9,9 +9,13 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
   ForgeShapeError,
+  MAX_DIAGNOSTIC_BYTES,
+  MAX_DIAGNOSTIC_TEXT,
+  MAX_DIAGNOSTICS,
   importForgeHero,
   importForgeText,
 } from '../shared/interchange/forge-steel/import.ts';
+import { resolveName } from '../shared/interchange/forge-steel/names.ts';
 
 const directory = 'tests/fixtures/v45-reference/';
 const read = (path: string) => readFileSync(path, 'utf8');
@@ -49,10 +53,14 @@ for (const example of examples)
     assert.deepEqual(comparable(result.selections), comparable(expected));
     assert.equal(result.authored.name, expected['details.name']);
     assert.equal(result.authored.notes, '');
-    // Nothing selection-bearing is left unmapped in these exports; only enablement/state notes.
-    const expectedUnmapped = ['sourcebookIDs', ...(example.level === 2 ? ['state.xp'] : [])];
-    assert.deepEqual(result.unmapped, expectedUnmapped.sort());
-    assert.deepEqual(result.diagnostics.map(d => d.path).sort(), expectedUnmapped.sort());
+    // Nothing selection-bearing is left unmapped; Grug level 2 carries 16 XP of play state. The
+    // enabled books (core, orden, beastheart, summoner) are all Compendium content.
+    const expectedUnmapped = example.level === 2 ? ['state.xp'] : [];
+    assert.deepEqual(result.unmapped, expectedUnmapped);
+    assert.deepEqual(
+      result.diagnostics.map(d => d.path),
+      expectedUnmapped,
+    );
   });
 
 test('V09 malformed input and a wrong shape are rejected', () => {
@@ -141,4 +149,84 @@ test('V09 scoped rules do not fire outside their branch', () => {
   assert.ok(result.diagnostics.some(d => d.forgeId === 'devil-feature-1b'));
   assert.ok(result.diagnostics.some(d => d.forgeId === 'devil-feature-2'));
   assert.ok(result.diagnostics.some(d => d.path === 'ancestry.name'));
+});
+
+test('V09 Forge choices where the Compendium fixes the grant are checked, not copied', () => {
+  const hero = JSON.parse(read(`${directory}Grug-level-1.ds-hero`));
+  // feature/fury/level-1/primordial-aspect.md: Berserker "You have the Lift skill."
+  hero.class.subclasses
+    .find((s: { selected: boolean }) => s.selected)
+    .featuresByLevel[0].features.find(
+      (f: { id: string }) => f.id === 'fury-sub-1-1-1',
+    ).data.selected = ['Swim'];
+  // Draw Steel Heroes.md: "All player characters know Caelian!"
+  hero.features[0].data.selected = ['Anjali'];
+  const result = importForgeHero(hero);
+  assert.match(
+    result.diagnostics.find(d => d.forgeId === 'fury-sub-1-1-1')!.reason,
+    /grants Lift .*primordial-aspect\.md.*Swim/,
+  );
+  assert.match(
+    result.diagnostics.find(d => d.forgeId === 'default-language')!.reason,
+    /grants Caelian .*Anjali/,
+  );
+});
+
+test('V09 a loose name matching two options is not resolved', () => {
+  assert.equal(resolveName('Hit And Run', ['Hit and Run', 'Brutal Slam']), 'Hit and Run');
+  assert.equal(resolveName('hit and run', ['Hit and Run', 'HIT AND RUN']), null);
+  assert.equal(resolveName('Perseverence', ['Perseverance']), 'Perseverance');
+});
+
+test('V09 a parent-dependent choice only accepts the options of its own parent', () => {
+  // Draw Steel Heroes.md, Culture: the Martial upbringing lists its own skills; Swim is not one.
+  const hero = JSON.parse(read(`${directory}Grug-level-1.ds-hero`));
+  hero.culture.upbringing.data.selected = ['Swim'];
+  const result = importForgeHero(hero);
+  assert.equal(result.selections['culture.upbringing'], 'Martial');
+  assert.equal(result.selections['culture.upbringing.skill'], undefined);
+  assert.match(
+    result.diagnostics.find(d => d.path === 'culture.upbringing')!.reason,
+    /"Swim" is not an option of culture\.upbringing\.skill/,
+  );
+});
+
+test('V09 diagnostics copy bounded text in bounded number and size', () => {
+  const hero = JSON.parse(read(`${directory}Grug-level-1.ds-hero`));
+  hero.complication = { id: 'c', name: 'x'.repeat(5000), features: [] };
+  for (let index = 0; index < 1000; index++)
+    hero.features.push({
+      id: `homebrew-${index}-${'y'.repeat(300)}`,
+      name: 'z'.repeat(300),
+      type: 'Skill Choice',
+      data: { selected: [] },
+    });
+  const result = importForgeHero(hero);
+  assert.ok(result.diagnostics.length <= MAX_DIAGNOSTICS);
+  assert.ok(JSON.stringify(result.diagnostics).length <= MAX_DIAGNOSTIC_BYTES);
+  for (const diagnostic of result.diagnostics)
+    for (const text of Object.values(diagnostic))
+      assert.ok(text.length <= MAX_DIAGNOSTIC_TEXT, text.slice(0, 40));
+  assert.match(result.diagnostics.at(-1)!.reason, /^\d+ further diagnostics were omitted\.$/);
+  assert.ok(result.unmapped.length < MAX_DIAGNOSTICS);
+});
+
+test('V09 an unnamed hero gets a placeholder name and long notes are shortened', () => {
+  const hero = JSON.parse(read(`${directory}Grug-level-1.ds-hero`));
+  hero.name = '';
+  hero.state.notes = 'n'.repeat(10001);
+  const result = importForgeHero(hero);
+  assert.equal(result.authored.name, 'Imported hero');
+  assert.equal(result.selections['details.name'], undefined);
+  assert.equal(result.authored.notes.length, 10000);
+  assert.ok(result.diagnostics.some(d => d.path === 'name'));
+  assert.ok(result.diagnostics.some(d => d.path === 'state.notes'));
+});
+
+test('V09 an unknown sourcebook is noted but is not unmapped build data', () => {
+  const hero = JSON.parse(read(`${directory}Grug-level-1.ds-hero`));
+  hero.sourcebookIDs.push('homebrew-book');
+  const result = importForgeHero(hero);
+  assert.match(result.diagnostics.find(d => d.path === 'sourcebookIDs')!.reason, /homebrew-book/);
+  assert.ok(!result.unmapped.includes('sourcebookIDs'));
 });
