@@ -38,8 +38,10 @@ The slice is delivered in three parts, each merged separately.
   `characterImport.importForge` mutation with a `characterImports` table, the CLI route
   `pnpm character:import <file>`, a headless `forge-import` cohort, and tests. Levels 1–2 as the
   retained exports prove them.
-- **Part b:** import UI in the wizard/character list; owner-visible diagnostics (Q-V-5); more scoped
-  mappings (remaining ancestries, careers and classes, level 3) as retained exports prove them.
+- **Part b:** delivered as [V182](V182-forge-import-levels-ui.md) (`slice/V182`, stacked on this
+  branch): import UI on the character list with a preview; owner-visible diagnostics (Q-V-5
+  default); class mappings for levels 1–3 of all eleven classes; the interim level ceiling (Q-V-6);
+  the stored, unapplied play-state seed (Q-V-3). Remaining ancestries and careers stay open.
 - **Part c:** play-state reconciliation (Stamina damage, Recoveries used, surges, XP, Victories,
   conditions; Q-V-3), complications, titles and inventory as V07 allows.
 
