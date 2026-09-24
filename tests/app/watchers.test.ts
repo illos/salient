@@ -67,10 +67,19 @@ async function position(
 /** Positions the campaign's dice stream so the next 2d10 are `faces` (S02's own generator). */
 async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, number]) {
   await t.run(async ctx => {
-    const state = (await ctx.db
+    let state = await ctx.db
       .query('diceStates')
       .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
-      .unique())!;
+      .unique();
+    if (!state) {
+      const seed = crypto.getRandomValues(new Uint8Array(32));
+      const id = await ctx.db.insert('diceStates', {
+        campaignId,
+        seed: [...seed].map(b => b.toString(16).padStart(2, '0')).join(''),
+        counter: 0,
+      });
+      state = (await ctx.db.get(id))!;
+    }
     const seed = fromHex(state.seed);
     const spec = [
       { id: 'd10a', sides: 10 },
@@ -88,6 +97,61 @@ async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, n
 }
 
 let sequence = 0;
+
+/** Stores one watcher through the library with a synthetic source occurrence (see the header). */
+async function storeWatcher(
+  t: Backend,
+  f: Awaited<ReturnType<typeof table>>,
+  input: {
+    owner: { kind: 'character' | 'foe'; id: string; name: string };
+    subject: { kind: 'character' | 'foe'; id: string; name: string };
+    abilityName: string;
+    watcher: Watcher;
+  },
+): Promise<EffectInstance> {
+  return t.run(async ctx => {
+    const session = (await ctx.db.get(f.sessionId!))!;
+    const eventId = await appendEvent(ctx, {
+      campaignId: f.campaignId,
+      sessionId: f.sessionId!,
+      encounterId: session.encounterId ?? null,
+      origin: 'user',
+      actor: (await ctx.db.get(f.director.profile.userId))!,
+      commandId: `watchers-source-${++sequence}`,
+      kind: 'test.effect',
+      description: 'Synthetic source occurrence for a watcher.',
+    });
+    const result = await applyEffectInstance(
+      ctx,
+      { campaignId: f.campaignId, eventId },
+      {
+        id: `fixture-${eventId}`,
+        kind: 'watcher',
+        sourceUseEventId: eventId,
+        sourceActorId: input.owner.id,
+        abilityId: `fixture-${input.abilityName}`,
+        abilityName: input.abilityName,
+        actorLabel: input.owner.name,
+        sourcePath: 'rule/resource/surge.md',
+        clause: `Fixture: ${input.abilityName}.`,
+        owner: input.owner,
+        subject: input.subject,
+        payload: {
+          kind: 'watcher',
+          text: `Fixture: ${input.abilityName}.`,
+          watcher: input.watcher,
+        },
+        printedDuration: { kind: 'encounter' },
+        endsWhen: [],
+        appliedSequence: (await ctx.db.get(eventId))!.sequence,
+      },
+      session.encounterId ?? undefined,
+    );
+    if (!result || !('instance' in result)) throw new Error('Expected a tracked instance.');
+    return result.instance;
+  });
+}
+
 async function setup() {
   // The damage writer is a hot path (tests/app/party-read-limit.test.ts): enforce Convex's limits.
   const t = convexTest({ schema, modules, transactionLimits: true }) as unknown as Backend;
@@ -289,6 +353,27 @@ test('V171: Blessing of Insight fires at the Conduit’s turn ends; Violence Wil
     (await goblinLive()).effectInstances!.find(i => i.id === watcher!.id)!.firings ?? [],
   ).toEqual([]);
 
+  // 5b. Review fix 1: a hit whose watcher was already used up this turn is still watched. The free
+  // strike fires the watcher; the Spear Charge after it (5 + 4 + 2 = 11, tier 1, 3 damage) is
+  // limited. Correcting it with an edge (13, tier 2, 4 damage) would change damage the watcher
+  // watches, and whether its limit was free depends on the use's turn, so it is refused.
+  await command(`${goblinRef} /ability use ability="Free Strike" targets=[@Thorn]`);
+  await atDice(t, f.campaignId, [5, 4]);
+  const limited = await command(
+    `${goblinRef} /ability use ability="Spear Charge" targets=[@Thorn]`,
+  );
+  expect((await heroLive(f.thornId)).stamina).toBe(thornBefore - 1 - 3);
+  expect(
+    (await goblinLive()).effectInstances!.find(i => i.id === watcher!.id)!.firings,
+  ).toHaveLength(1);
+  await expect(
+    command(`/ability correct event="${limited.eventId}" target=@Thorn edges=1`),
+  ).rejects.toThrow(/watches this damage.*Rewind to the use/);
+  expect((await heroLive(f.thornId)).stamina).toBe(thornBefore - 1 - 3);
+  await command('/history undo');
+  await command('/history undo');
+  expect((await heroLive(f.thornId)).stamina).toBe(thornBefore);
+
   // 6. Design section 7: a correction never re-derives a firing. Spear Charge (Power Roll + 2) at
   // 5 + 4 + 2 = 11 is tier 1, 3 damage; an edge makes 13, tier 2, 4 damage. The hit set off the
   // watcher, so the correction is refused and the table rewinds instead.
@@ -395,4 +480,93 @@ test('V171: a damage-taken watcher fires once per round, with persisted readback
   expect((await t.run(ctx => ctx.db.get(listed.eventId)))!.description).toContain(
     'when its subject takes damage (once per round)',
   );
+});
+
+test('V171 review: a nested firing on a third creature refuses the correction; recorded uses and manual Stamina edits leave table notes', async () => {
+  const { t, f, command, goblin, heroLive, events } = await setup();
+  const other = await f.director.client.mutation(api.foes.add, {
+    campaignId: f.campaignId,
+    definitionId: GOBLIN,
+    commandId: `watchers-${++sequence}`,
+  });
+  const goblinRef = `@{foe:${goblin}}`;
+  const otherRef = `@{foe:${other}}`;
+  await command('/combat start');
+  await command('/combat commit');
+  const thorn = { kind: 'character' as const, id: f.thornId, name: 'Thorn' };
+  const second = { kind: 'foe' as const, id: other, name: 'Second Goblin' };
+  // Thorn taking damage deals 2 to the second goblin (its owner), whose own watcher then fires.
+  await storeWatcher(t, f, {
+    owner: second,
+    subject: thorn,
+    abilityName: 'Fixture Relay',
+    watcher: {
+      event: 'damage-taken',
+      whose: 'subject',
+      limit: 'each',
+      responses: [{ kind: 'damage', recipient: 'owner', amount: 2 }],
+    },
+  });
+  await storeWatcher(t, f, {
+    owner: second,
+    subject: second,
+    abilityName: 'Fixture Third',
+    watcher: {
+      event: 'damage-taken',
+      whose: 'subject',
+      limit: 'each',
+      responses: [{ kind: 'instruction', text: 'The table notes the hit.' }],
+    },
+  });
+  await storeWatcher(t, f, {
+    owner: thorn,
+    subject: thorn,
+    abilityName: 'Fixture Use',
+    watcher: {
+      event: 'ability-used',
+      whose: 'subject',
+      limit: 'each',
+      responses: [{ kind: 'gain', recipient: 'subject', surges: 1 }],
+    },
+  });
+  const otherStamina = async () => (await t.run(ctx => ctx.db.get(other)))!.live.stamina;
+
+  // 1. Spear Charge (Power Roll + 2) at 5 + 4 + 2 = 11: tier 1, 3 damage to Thorn. The relay deals
+  // 2 to the second goblin (15 → 13), and its watcher fires in turn, stored on the second goblin.
+  await atDice(t, f.campaignId, [5, 4]);
+  const charge = await command(`${goblinRef} /ability use ability="Spear Charge" targets=[@Thorn]`);
+  expect(await otherStamina()).toBe(13);
+  const third = (await t.run(ctx => ctx.db.get(other)))!.live.effectInstances!.find(
+    i => i.abilityName === 'Fixture Third',
+  )!;
+  expect(third.firings!.map(firing => firing.causeEventId)).toEqual([charge.eventId]);
+  // An edge makes 13, tier 2: the correction would change both firings, so it names both.
+  await expect(
+    command(`/ability correct event="${charge.eventId}" target=@Thorn edges=1`),
+  ).rejects.toThrow(/Fixture Relay.*Fixture Third.*Rewind to the use/);
+
+  // 2. A use recorded for manual resolution (Aid Attack, feature/common/main-actions): Thorn's
+  // use watcher and the target's damage watcher get notes; nothing fires.
+  const surges = (await heroLive(f.thornId)).surges;
+  const aid = await command(`@Thorn /ability use ability="Aid Attack" targets=[${otherRef}]`, true);
+  expect((await t.run(ctx => ctx.db.get(aid.eventId)))!.kind).toBe('ability.recorded');
+  const notes = async (cause: Id<'events'>) =>
+    (await events())
+      .filter(e => e.kind === 'effect.watcher-manual' && e.causeEventId === cause)
+      .map(e => e.description);
+  expect(await notes(aid.eventId)).toEqual([
+    expect.stringContaining('Fixture Use'),
+    expect.stringContaining('Fixture Third'),
+  ]);
+  expect((await heroLive(f.thornId)).surges).toBe(surges);
+  expect(await otherStamina()).toBe(13);
+
+  // 3. A manual Stamina edit lowering Thorn's Stamina: the relay gets a note and does not fire.
+  const stamina = (await heroLive(f.thornId)).stamina;
+  const adjusted = await command(`@Thorn /adjust stamina value=${stamina - 4}`);
+  expect(await notes(adjusted.eventId)).toEqual([expect.stringContaining('Fixture Relay')]);
+  expect(await otherStamina()).toBe(13);
+  // Raising it is not damage: no note.
+  const raised = await command(`@Thorn /adjust stamina value=${stamina}`);
+  expect(await notes(raised.eventId)).toEqual([]);
 });

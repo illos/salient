@@ -103,7 +103,7 @@ import {
 } from './resourceTriggers';
 import { rollDice } from './dice';
 import { commitStrained, planStrained, withStrainedPlan, type StrainedPlan } from './strainedUse';
-import { assertWatchersReconcilable, observeWatchers } from './watchers';
+import { assertWatchersReconcilable, noteManualWatchers, observeWatchers } from './watchers';
 import { describeWatcher } from '../../shared/resolve/watchers';
 import { strainedExtraDamage, strainedState } from '../../shared/resolve/strained';
 import {
@@ -1306,6 +1306,55 @@ async function observeUse(
   ]);
 }
 
+/**
+ * V171 review: a use recorded for manual resolution applies no damage and reaches no observer.
+ * Watchers of the user's use, strike or damage and of each target's damage get a table note.
+ */
+async function noteRecordedUse(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  actor: Actor,
+  keywords: readonly string[],
+  targets: readonly { actor: Actor; squad?: unknown }[],
+) {
+  const holder = (party: Actor) =>
+    party.kind === 'character' || party.kind === 'foe'
+      ? { kind: party.kind, id: party.id }
+      : undefined;
+  const strike = keywords.some(keyword => plainText(keyword).toLowerCase() === 'strike');
+  const user = holder(actor);
+  await noteManualWatchers(
+    ctx,
+    scope,
+    [
+      ...(user
+        ? [
+            {
+              creature: user,
+              events: [
+                'ability-used' as const,
+                'damage-dealt' as const,
+                ...(strike ? ['strike-made' as const] : []),
+              ],
+            },
+          ]
+        : []),
+      ...targets.flatMap(target => {
+        const creature = target.squad ? undefined : holder(target.actor);
+        return creature && !(user && creature.id === user.id)
+          ? [
+              {
+                creature,
+                events: ['damage-taken' as const, 'made-winded' as const, 'dying' as const],
+              },
+            ]
+          : [];
+      }),
+    ],
+    `${actor.name}'s use is recorded for manual resolution`,
+  );
+}
+
 /** V159: a hero's or foe's stored effect instances; squads and objects hold none. */
 function effectsOf(record: { character?: Doc<'characters'>; foe?: Doc<'foes'> }) {
   if (record.character) return record.character.liveState?.effectInstances ?? [];
@@ -1665,7 +1714,8 @@ const abilityUse: OperationDefinition = {
           diagnostics: ability.compilation.diagnostics,
           targets: targets.map(t => t.actor),
         },
-        commit: async mctx => {
+        commit: async (mctx, scope) => {
+          await noteRecordedUse(mctx, scope, actor!, ability.keywords, targets);
           await clear(mctx);
         },
       };
@@ -1848,6 +1898,7 @@ const abilityUse: OperationDefinition = {
             'prone',
             false,
           );
+          await noteRecordedUse(mctx, scope, actor!, ability.keywords, []);
           await recordUse(mctx, scope, allowance, actor!, 'maneuver', ability.name, tracking);
           await clear(mctx);
         },
@@ -2073,6 +2124,7 @@ const abilityUse: OperationDefinition = {
         commit: async (mctx, scope) => {
           if (cost && !cost.waived)
             await debit(mctx, scope, records, context, cost.after, cost.resource);
+          await noteRecordedUse(mctx, scope, actor!, ability.keywords, targets);
           if (ability.actionType)
             await recordUse(mctx, scope, allowance, actor!, type, ability.name, tracking);
           await clear(mctx);
@@ -2876,14 +2928,7 @@ const abilityCorrect: OperationDefinition = {
       correction.staminaReconciliationDelta !== 0 ||
       correction.temporaryStaminaReconciliationDelta !== 0
     )
-      await assertWatchersReconcilable(ctx, context.campaign._id, event, [
-        ...(correctionDealer ? [correctionDealer] : []),
-        ...(targetRecord.character
-          ? [{ kind: 'character' as const, id: targetRecord.character._id }]
-          : targetRecord.foe
-            ? [{ kind: 'foe' as const, id: targetRecord.foe._id }]
-            : []),
-      ]);
+      await assertWatchersReconcilable(ctx, context.campaign._id, event);
     // Only a rolled use reaches here (effect-only uses are refused above).
     const savedCompiled = result.compiled as
       (CompiledResult & { inputs: CompiledAbilityInput }) | undefined;

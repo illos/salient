@@ -15,7 +15,12 @@ import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { DieResult } from '../../shared/contracts/history';
-import type { EffectInstance, OwnedEffect, WatcherFiring } from '../../shared/contracts/liveState';
+import type {
+  EffectInstance,
+  OwnedEffect,
+  WatcherEvent,
+  WatcherFiring,
+} from '../../shared/contracts/liveState';
 import { applyDamage } from '../../shared/resolve/index';
 import {
   damageEvents,
@@ -293,6 +298,7 @@ async function execute(
     dice,
     data: {
       effectInstanceId: instance.id,
+      holder,
       sourceUseEventId: instance.sourceUseEventId,
       event: watcher.event,
       window,
@@ -362,15 +368,19 @@ export async function observeWatchers(
       item => item.id === seen.id && item.status === 'active',
     );
     if (!instance || instance.payload.kind !== 'watcher') continue;
-    const due = watcherDue(instance, at);
-    if (due.status === 'limited') continue;
     const label = `${instance.actorLabel}'s ${instance.abilityName} (${instance.subject.name}; ${describeWatcher(instance.payload.watcher)})`;
+    // Design section 7: a correction never re-derives a firing. Whether this watcher's limit was
+    // free depends on the turn and round of the use, not the current ones, and on firings made
+    // since; so any watcher that watches the changed damage refuses the correction, whatever its
+    // limit state. Only an unresolved manual stacking group, which the engine never fires, doesn't.
     if (options.correction) {
-      if (due.status === 'manual') continue;
+      if (instance.manualStacking) continue;
       throw new ConvexError(
         `${label} watches this damage, and a correction can't recompute a watcher's firing. Rewind to the use and record it again instead.`,
       );
     }
+    const due = watcherDue(instance, at);
+    if (due.status === 'limited') continue;
     const data = { effectInstanceId: instance.id, sourceUseEventId: instance.sourceUseEventId };
     if (due.status === 'manual' || depth >= MAX_DEPTH) {
       await log(
@@ -406,6 +416,16 @@ export async function observeDamage(
     observation.before,
     observation.after,
   );
+  // A correction changes damage in either direction: less damage can undo what a watcher
+  // watched (taken, winded, dying) just as more damage can newly satisfy it.
+  if (options.correction)
+    for (const event of damageEvents(
+      observation.kind,
+      observation.winded,
+      observation.after,
+      observation.before,
+    ))
+      if (!events.includes(event)) events.push(event);
   await observeWatchers(
     ctx,
     scope,
@@ -480,36 +500,79 @@ export async function fireClockWatcher(
 }
 
 /**
- * Design section 7: a correction never silently re-derives a watcher's firing. When any watcher of
- * these creatures fired from the use being corrected, the correction is refused so the table
- * rewinds to the use instead.
+ * Design section 7: a correction never silently re-derives a watcher's firing. Every firing the use
+ * set off, on whichever creature holds the watcher (the dealer, the target, or a creature a
+ * watcher's own damage reached), is logged as an `effect.watcher-fired` entry caused by the use
+ * under its command. Each one still recorded on its instance (not undone) refuses the correction,
+ * so the table rewinds to the use instead.
  */
 export async function assertWatchersReconcilable(
   ctx: MutationCtx,
   campaignId: Id<'campaigns'>,
   useEvent: Doc<'events'>,
-  creatures: readonly EffectHolder[],
 ): Promise<void> {
-  for (const creature of creatures) {
-    const record = await readHolder(ctx, creature);
-    if (!record) continue;
-    const instances = [...record.effectInstances];
-    for (const pointer of record.ownedEffects) {
-      if (!pointer.watches) continue;
-      const holder: EffectHolder = {
-        kind: pointer.holder.kind,
-        id: await resolveHistoricalId(ctx, campaignId, pointer.holder.id),
-      };
-      const held = await readHolder(ctx, holder);
-      const instance = held?.effectInstances.find(item => item.id === pointer.id);
-      if (instance) instances.push(instance);
-    }
-    const fired = instances.find(instance =>
-      instance.firings?.some(firing => firing.causeEventId === useEvent._id),
+  const logged = await ctx.db
+    .query('events')
+    .withIndex('by_campaign_command', q =>
+      q.eq('campaignId', campaignId).eq('commandId', useEvent.commandId),
+    )
+    .take(1000);
+  const changed: string[] = [];
+  for (const entry of logged) {
+    if (entry.kind !== 'effect.watcher-fired' || entry.causeEventId !== useEvent._id) continue;
+    const data = (entry.payload as { data?: { effectInstanceId?: string; holder?: EffectHolder } })
+      ?.data;
+    if (!data?.effectInstanceId || !data.holder) continue;
+    const holder: EffectHolder = {
+      kind: data.holder.kind,
+      id: await resolveHistoricalId(ctx, campaignId, data.holder.id),
+    };
+    const instance = (await readHolder(ctx, holder))?.effectInstances.find(
+      item => item.id === data.effectInstanceId,
     );
-    if (fired)
-      throw new ConvexError(
-        `This use set off ${fired.actorLabel}'s ${fired.abilityName} (${fired.subject.name}), and a correction can't recompute a watcher's firing. Rewind to the use and record it again instead.`,
+    if (instance?.firings?.some(firing => firing.causeEventId === useEvent._id))
+      changed.push(`${instance.actorLabel}'s ${instance.abilityName} (${instance.subject.name})`);
+  }
+  if (changed.length)
+    throw new ConvexError(
+      `This use set off ${[...new Set(changed)].join(', ')}, and a correction can't recompute a watcher's firing. Rewind to the use and record it again instead.`,
+    );
+}
+
+/**
+ * V171 review: uses the engine records without resolving (`ability.recorded`) and manual Stamina
+ * adjustments never reach the observers. When a creature they name holds a watcher of such an
+ * event, a linked note tells the table to resolve it; nothing fires.
+ */
+export async function noteManualWatchers(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  notes: readonly { creature: EffectHolder; events: readonly WatcherEvent[] }[],
+  why: string,
+): Promise<void> {
+  const seen = new Set<string>();
+  for (const { creature, events } of notes) {
+    if (!events.length) continue;
+    const found = await watchersOn(
+      ctx,
+      scope.campaignId,
+      creature,
+      events.map(event => ({ event, creatureId: creature.id })),
+    );
+    for (const { instance } of found) {
+      if (seen.has(instance.id) || instance.payload.kind !== 'watcher') continue;
+      seen.add(instance.id);
+      await log(
+        ctx,
+        scope,
+        'effect.watcher-manual',
+        `${instance.actorLabel}'s ${instance.abilityName} (${instance.subject.name}; ${describeWatcher(instance.payload.watcher)}) may be set off: ${why}, so the engine doesn't fire it. Resolve it at the table.`,
+        {
+          effectInstanceId: instance.id,
+          sourceUseEventId: instance.sourceUseEventId,
+          sourcePath: instance.sourcePath,
+        },
       );
+    }
   }
 }

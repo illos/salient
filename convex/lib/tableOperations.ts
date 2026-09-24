@@ -32,7 +32,15 @@ import type {
   TestRollResult,
   Tier,
 } from '../../shared/contracts/rollResolution';
-import { recoveryValueOf, resolveEdgeBane, testOutcome, tierOf } from '../../shared/resolve/index';
+import {
+  recoveryValueOf,
+  resolveEdgeBane,
+  testOutcome,
+  tierOf,
+  windedValueOf,
+} from '../../shared/resolve/index';
+import { damageEvents } from '../../shared/resolve/watchers';
+import { noteManualWatchers } from './watchers';
 import type { ConditionId } from '../../shared/contracts/liveState';
 import { rollDice } from './dice';
 import {
@@ -45,7 +53,7 @@ import {
 import { consumeRollEffects } from './effectInstances';
 import { excludeList } from './abilityOperations';
 import { requireContent } from '../content';
-import { journalPatch } from './journal';
+import { journalPatch, type JournalScope } from './journal';
 import { run, type OperationDefinition, type Outcome, type TableContext } from './registry';
 import {
   assertNoPendingCasualties,
@@ -523,6 +531,30 @@ function withHeroField(live: HeroLive, verb: string, value: number): HeroLive {
   }
 }
 
+/**
+ * V171 review: a manual Stamina or temporary Stamina edit that lowers the pools reaches no watcher
+ * observer (it has no dealer and isn't damage the engine recorded). Watchers of the creature's
+ * damage taken, winding or dying get a linked table note instead (convex/lib/watchers.ts).
+ */
+async function noteAdjustedDamage(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  creature: { kind: 'character' | 'foe'; id: string },
+  kind: 'hero' | 'foe',
+  winded: number,
+  before: { stamina: number; temporaryStamina: number },
+  after: { stamina: number; temporaryStamina: number },
+) {
+  const events = damageEvents(kind, winded, before, after);
+  if (events.length)
+    await noteManualWatchers(
+      ctx,
+      scope,
+      [{ creature, events }],
+      'a manual adjustment lowered its Stamina and is not recorded as damage',
+    );
+}
+
 function adjustOperation(field: AdjustableField): OperationDefinition {
   const manual = (subject: string, before: number, after: number, creature: unknown): Outcome => ({
     kind: 'manual.adjustment',
@@ -600,6 +632,19 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
             await journalPatch(mctx, scope, 'foes', foe._id, {
               live: { ...foe.live, [key]: value },
             });
+            // V171 review: a manual edit isn't recorded damage; watchers of it get a table note.
+            await noteAdjustedDamage(
+              mctx,
+              scope,
+              { kind: 'foe', id: foe._id },
+              'foe',
+              windedValueOf(foe.maxStamina),
+              { stamina: foe.live.stamina, temporaryStamina: foe.live.temporaryStamina },
+              {
+                stamina: key === 'stamina' ? value : foe.live.stamina,
+                temporaryStamina: key === 'temporaryStamina' ? value : foe.live.temporaryStamina,
+              },
+            );
             // V02: a captain edited to 0 Stamina is lost to its squad (benefit reverts).
             if (key === 'stamina' && value <= 0) {
               const squad = await squadOfCaptain(mctx, foe._id);
@@ -624,9 +669,20 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
       return {
         ...outcome,
         commit: async (mctx, scope) => {
-          await journalPatch(mctx, scope, 'characters', character._id, {
-            liveState: withHeroField(live, field.verb, value),
-          });
+          const next = withHeroField(live, field.verb, value);
+          await journalPatch(mctx, scope, 'characters', character._id, { liveState: next });
+          // V171 review: a manual edit isn't recorded damage; watchers of it get a table note.
+          const baseline = baselineOf(character.derivedBaseline);
+          if (baseline && (field.verb === 'stamina' || field.verb === 'temporary-stamina'))
+            await noteAdjustedDamage(
+              mctx,
+              scope,
+              { kind: 'character', id: character._id },
+              'hero',
+              baseline.windedValue.value,
+              { stamina: live.stamina, temporaryStamina: live.temporaryStamina },
+              { stamina: next.stamina, temporaryStamina: next.temporaryStamina },
+            );
         },
       };
     },

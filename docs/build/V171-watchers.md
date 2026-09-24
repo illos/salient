@@ -168,4 +168,26 @@ Rules question: [Q-WATCH-1](../rules-questions-for-user.md#q-watch-1-who-deals-a
       closeout, table, squads, compiled-effects, compound-conditions, potency-conditions.
     - `tests/character-v100-conduit` and `tests/character-v134-conduit-three`.
     - All passed except the pre-existing `abilities.test.ts` syntax pin above.
-- Committed on `slice/V171` as `a29cb33f`; not pushed. Next: TESTER gate, then independent review.
+- Committed on `slice/V171` as `d834cdee` (rebased onto V170 `38829088`; first committed as
+  `a29cb33f`) and pushed. The independent review passed with notes.
+- Review follow-ups:
+  1. **Correction mode.** Any watcher that watches the changed damage now refuses the correction
+     ("rewind to the use"), whatever its limit state; only a manual stacking group is exempt. Before,
+     a `limited` or `manual` watcher was skipped against the current turn and round, not the use's.
+     The changed damage is read in both directions, so less damage is watched as well as more.
+  2. **Firings by cause.** `assertWatchersReconcilable` finds every `effect.watcher-fired` entry the
+     use caused under its command (`by_campaign_command`) on whichever creature holds the watcher.
+     The fired entry now records its holder. A firing still on its instance (not undone) refuses the
+     correction and is named. Before, only the dealer and the target were read, so a nested firing
+     on a third creature was missed.
+  3. **Manual paths.** Uses recorded for manual resolution (the manual-compilation, Stand Up and
+     recorded paths of `ability.use`) and `/adjust stamina` or `/adjust temporary-stamina` edits
+     that lower a hero's or foe's pools reach no observer. Where the actor or a target holds a
+     watcher of the use or the damage, a linked `effect.watcher-manual` note tells the table to
+     resolve it. Nothing fires.
+  4. This log now cites `d834cdee`.
+- Tests added to `tests/app/watchers.test.ts`:
+  - a limited-watcher correction is refused;
+  - a nested third-creature firing is named in the refusal;
+  - Aid Attack and a manual Stamina edit leave notes;
+  - raising Stamina leaves no note.
