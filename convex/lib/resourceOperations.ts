@@ -381,12 +381,11 @@ const resourcePray: OperationDefinition = {
 };
 
 /**
- * V148 (QC1 train-4 R3): whether the hero's latest gameplay is an unmaintained use of this ability,
- * i.e. the choice to maintain is still "immediately after you first use the ability"
- * (feature/elementalist/level-1/persistent-magic.md). Walking this encounter's standing user
- * commands newest first, each earlier maintain of the ability pairs off with the use before it;
- * the first unpaired command must be a use of this ability by this hero. Anything else in between
- * (another command, a turn change) closes the choice. Engine and clock consequences are ignored.
+ * V148 (QC1 train-4 R3): whether the choice to maintain is still open: "start doing so immediately
+ * after you first use the ability" (feature/elementalist/level-1/persistent-magic.md). The latest
+ * standing user command in the encounter must be this hero's use of this ability; anything after
+ * it (another command, a turn change, or a maintain already made for it) closes the choice. Several
+ * instances are made as use, maintain, use, maintain. Engine and clock consequences are ignored.
  */
 async function maintenanceWindowOpen(
   ctx: ReadCtx,
@@ -394,7 +393,6 @@ async function maintenanceWindowOpen(
   characterId: Id<'characters'>,
   ability: string,
 ): Promise<boolean> {
-  let pending = 0;
   const events = ctx.db
     .query('events')
     .withIndex('by_encounter_sequence', q => q.eq('encounterId', encounterId))
@@ -405,29 +403,15 @@ async function maintenanceWindowOpen(
     const payload = event.payload as
       | {
           envelope?: { boundActor?: { id?: string } | null };
-          data?: { ability?: { name?: string } | string; value?: unknown };
+          data?: { ability?: { name?: string } | string };
         }
       | undefined;
-    const mine = payload?.envelope?.boundActor?.id === characterId;
-    if (
-      mine &&
-      event.kind === 'resource.maintain' &&
-      payload?.data?.ability === ability &&
-      payload.data.value !== 'off'
-    ) {
-      pending++;
-      continue;
-    }
-    const isUse =
-      mine &&
+    return (
+      payload?.envelope?.boundActor?.id === characterId &&
       (event.kind === 'ability.use' || event.kind === 'ability.recorded') &&
-      typeof payload?.data?.ability === 'object' &&
-      payload.data.ability.name === ability;
-    if (isUse && pending > 0) {
-      pending--;
-      continue;
-    }
-    return isUse;
+      typeof payload.data?.ability === 'object' &&
+      payload.data.ability.name === ability
+    );
   }
   return false;
 }

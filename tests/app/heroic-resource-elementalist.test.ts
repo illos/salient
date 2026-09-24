@@ -127,6 +127,13 @@ test('V148: maintaining persistent abilities reduces the turn-start essence and 
   await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/right after using it/);
   await flesh();
   await maintain('The Flesh, a Crucible');
+  // Use, use, maintain, maintain: the second use closed the first use's choice (QC1 R3 residual).
+  await command(`${ref} /resource maintain ability="The Flesh, a Crucible" value=off`, true);
+  await flesh();
+  await flesh();
+  await maintain('The Flesh, a Crucible');
+  await expect(maintain('The Flesh, a Crucible')).rejects.toThrow(/right after using it/);
+  expect((await live()).maintained).toHaveLength(1);
   // A genuine unmaintained use carried across the turn boundary can't start maintenance either.
   await flesh();
   await command(`${ref} /turn end`, true);

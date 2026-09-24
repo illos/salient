@@ -91,3 +91,6 @@ gain.
   hero's latest standing command must be an unpaired use of the ability (`maintenanceWindowOpen`).
   The regression refuses the stale third use after the hits, maintains a fresh use, and refuses a
   genuine unmaintained use carried across a turn.
+- QC1 residual: pairing earlier maintains with uses reopened an older use (use, use, maintain,
+  maintain). The rule is now the latest standing command only. The regression adds that sequence:
+  the second maintain is refused, with one instance kept.
