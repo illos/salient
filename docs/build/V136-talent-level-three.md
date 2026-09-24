@@ -55,3 +55,7 @@ shared API. Guided advancement remains deferred.
   abilities in the cohort, dead compiled-branch code removed, Overwhelm/Synaptic Override/Soul Burn note
   wording, and the Force Orbs range and Strained potency readings recorded as
   [Q-TALENT-2](../rules-questions-for-user.md#q-talent-2--talent-force-orbs-range-and-strained-potency-v136).
+- Test-Deploy isolated `talent-level-three` cohort PASS at `c4bae49`: rc0 in 70 s, six builds, level
+  edits and twenty-four new uses persisted. Artifacts
+  `/srv/presidium/projects/salient/test-artifacts/V136-c4bae49`. The gate there was preempted; it runs at
+  the rebased tip.
