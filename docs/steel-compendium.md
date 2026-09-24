@@ -6,18 +6,20 @@ Local path: [`vendor/steel-compendium`](../vendor/steel-compendium).
 
 ## One copy on Presidium (2026-09-24)
 
-User directive: the only Compendium checkout on Presidium is the main checkout's
-`/srv/presidium/projects/salient/code/vendor/steel-compendium`. Linked worktrees keep their
-`vendor/steel-compendium` directory empty (an uninitialized submodule, which Git reports as clean)
-and read the canonical path. The shared repository config sets
-`submodule.vendor/steel-compendium.update=none` so `git submodule update --init` skips it. The
-remote CT114 runtime is unaffected: it fills the pinned files from its own vendor cache.
+User directive: every external source has exactly one copy on Presidium, the main checkout's.
+This covers `vendor/steel-compendium`, `vendor/forge-steel` and any future reference corpus.
+Linked worktrees keep their `vendor/*` directories empty (uninitialized submodules, which Git
+reports as clean) and read the canonical paths under `/srv/presidium/projects/salient/code/vendor/`.
+The shared repository config sets `submodule.<path>.update=none` on both, so
+`git submodule update --init` skips them. The remote CT114 runtime is unaffected: it fills the
+pinned files from its own vendor cache.
 
-On 2026-09-24, 42 per-worktree copies (about 220 MB of files plus 27 MB of Git data each) were
-deleted. Before deletion, every one was verified to be at pin `fb83a789` with no local edits.
+On 2026-09-24, per-worktree copies in 42 worktrees were deleted: the Compendium (about 220 MB of
+files plus 27 MB of Git data each, pin `fb83a789`) and Forge Steel (pin `5a846aad`). Before
+deletion, every copy was verified to be at its pin with no local edits.
 
-Scripts and tests that read `vendor/steel-compendium` relative to a worktree root do not yet find
-the canonical copy. Run them from main until a shared path resolver lands.
+Scripts and tests that read `vendor/*` relative to a worktree root do not yet find the canonical
+copies. Run them from main until a shared path resolver lands.
 
 ## Pinning
 

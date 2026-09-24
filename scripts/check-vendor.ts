@@ -22,9 +22,7 @@ for (const entry of pinned) {
     head = git(['rev-parse', 'HEAD'], `${root}${path}`);
   } catch {
     failures.push(
-      path === 'vendor/steel-compendium'
-        ? `${path}: not checked out. Never initialize it in a worktree; the only copy is the main checkout's (docs/steel-compendium.md).`
-        : `${path}: submodule is not checked out (run git submodule update --init).`,
+      `${path}: not checked out. Never initialize it in a worktree; the only copy is the main checkout's (docs/steel-compendium.md).`,
     );
     continue;
   }
