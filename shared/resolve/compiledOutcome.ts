@@ -19,6 +19,7 @@ import {
 } from './abilityGrammar.ts';
 import type { RiderNode } from './compileAbility.ts';
 import { tierInstruction } from './effectRiders.ts';
+import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import {
   effectOnlyClause,
   effectOnlyTarget,
@@ -225,6 +226,22 @@ export interface CompiledRiderOutcome extends EffectIdentity {
    * correction of another target keeps it.
    */
   tier?: true;
+  /** V158: the lasting instruction a use stores as an effect instance on commit. */
+  lasting?: LastingSpec;
+}
+
+/** V158: two lasting specs read from the same printed section are the same, field by field. */
+export function sameLasting(a: LastingSpec, b: LastingSpec): boolean {
+  const duration = (d: LastingSpec['duration']) => `${d.kind}:${'anchor' in d ? d.anchor : ''}`;
+  return (
+    a.effect === b.effect &&
+    a.shape === b.shape &&
+    a.subject === b.subject &&
+    a.text === b.text &&
+    duration(a.duration) === duration(b.duration) &&
+    a.endsWhen.length === b.endsWhen.length &&
+    a.endsWhen.every((trigger, index) => b.endsWhen[index] === trigger)
+  );
 }
 
 /**
@@ -477,6 +494,17 @@ export function resolveCompiledAbility(
     (shape.kind === 'area' && !eachAreaTarget(definition.envelope.target)) ||
     definition.sections.some(node => {
       if (node.kind !== 'rider') return true;
+      // V158: a lasting instruction re-reads to the same spec, or the definition was tampered with.
+      if (node.lasting) {
+        const again = lastingInstruction(plain(node.clause));
+        return (
+          !again ||
+          !sameLasting(again, node.lasting) ||
+          again.shape !== node.shape ||
+          node.dependency !== 'independent' ||
+          (shape.kind !== 'single' && again.subject === 'target')
+        );
+      }
       const parsed = effectRider(plain(node.clause));
       return (
         !parsed ||
@@ -704,6 +732,7 @@ export function resolveCompiledAbility(
       after,
       requirements,
       status: requirements.length ? 'fact-needed' : 'manual',
+      ...(node.lasting ? { lasting: node.lasting } : {}),
     });
   }
   // V119, chapter/monster-basics.md, Creatures Who Grab ("only one creature … grabbed at a time

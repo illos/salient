@@ -7,6 +7,7 @@ import type {
   SourceRef,
 } from '../contracts/rollResolution.ts';
 import { tierInstruction } from './effectRiders.ts';
+import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import {
   effectOnlyTarget,
   readEffectOnlySection,
@@ -92,6 +93,11 @@ export interface RiderNode extends NodeSource {
   kind: 'rider';
   shape: import('./effectRiders.ts').EffectRider['shape'];
   dependency: 'independent' | 'after-damage' | 'after-movement' | 'after-effects';
+  /**
+   * V158: a lasting instruction. The section is still table work, and a use also stores an
+   * `instruction` effect instance that the engine tracks and ends (shared/resolve/lastingEffects.ts).
+   */
+  lasting?: LastingSpec;
 }
 /**
  * V154 tier instruction: a whole tier clause that is table work for that target's outcome (a
@@ -281,6 +287,21 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           kind: 'rider',
           shape: rider.shape,
           dependency: rider.dependency,
+        });
+        return;
+      }
+      // V158: a whole section of lasting table work with a duration the engine binds.
+      const lasting =
+        !rider && block.label === 'Effect' && !block.cost && rollIndex >= 0
+          ? lastingInstruction(plain(block.text))
+          : undefined;
+      if (lasting && (grammar.targetShape === 'single' || lasting.subject === 'owner')) {
+        sections.push({
+          ...sourceNode(envelope, locator, 0, block.text),
+          kind: 'rider',
+          shape: lasting.shape,
+          dependency: 'independent',
+          lasting,
         });
         return;
       }

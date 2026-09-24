@@ -83,6 +83,94 @@ export interface ConditionInstance {
   restriction?: 'cant-stand';
 }
 
+/**
+ * V158 printed duration of a lasting effect (docs/lasting-effects-design.md#durations). Relative
+ * anchors ("your", "their") are bound to creatures when the effect is applied (`BoundDuration`).
+ */
+export type EffectDuration =
+  | { kind: 'start-of-next-turn'; anchor: 'owner' }
+  | { kind: 'end-of-next-turn'; anchor: 'owner' | 'subject' }
+  | { kind: 'encounter' }
+  | { kind: 'save-ends' }
+  | { kind: 'eot' }
+  | { kind: 'maintained' }
+  | { kind: 'none' };
+
+/** V158: a duration with its anchor bound to one creature id at application. */
+export type BoundDuration =
+  | { kind: 'start-of-next-turn'; creatureId: string }
+  | { kind: 'end-of-next-turn'; creatureId: string }
+  | { kind: 'encounter' }
+  | { kind: 'save-ends'; creatureId: string }
+  | { kind: 'eot'; creatureId: string }
+  | { kind: 'maintained'; creatureId: string }
+  | { kind: 'none' };
+
+/**
+ * V158 extra printed end conditions: `owner-dying` ("until you are dying", rule/health/dying.md),
+ * `reused` ("until you use this ability again") and `willingly-ended` (no action required).
+ */
+export type EffectEndTrigger = 'owner-dying' | 'reused' | 'willingly-ended';
+
+/** A creature an effect names. Objects and squads carry no live record of their own. */
+export interface EffectParty {
+  kind: 'character' | 'foe' | 'squad' | 'object';
+  id: string;
+  name: string;
+}
+
+/**
+ * V158 effect instance (docs/lasting-effects-design.md#1-effect-instances). Only `instruction`
+ * instances exist in V158: printed table work the engine tracks and ends, never executes. The other
+ * kinds are reserved for later slices; condition instances keep their own V88 shape.
+ */
+export interface EffectInstance {
+  /** The occurrence id of the compiled use that created it. */
+  id: string;
+  kind: 'instruction' | 'modifier' | 'aura' | 'mark' | 'watcher' | 'maintained';
+  sourceUseEventId: string;
+  sourceActorId: string;
+  /** Ability identity for stacking and `reused` (the content id). */
+  abilityId: string;
+  abilityName: string;
+  actorLabel: string;
+  sourcePath: string;
+  /** The printed clause, display markup removed. */
+  clause: string;
+  /** The creature "you" refers to: the user of the ability, bound at use. */
+  owner: EffectParty;
+  /** The creature the effect applies to (the target, or the owner for self effects). */
+  subject: EffectParty;
+  payload: { kind: 'instruction'; text: string };
+  printedDuration: EffectDuration;
+  duration: BoundDuration;
+  endsWhen: EffectEndTrigger[];
+  /** `consumed` is reserved for consumable effects (design section 5a). */
+  status: 'active' | 'ended' | 'consumed';
+  endedReason?: string;
+  /** The log entry of the operation that ended it. */
+  endedEventId?: string;
+  registrationIds: string[];
+  /** Shared end (as V153 saveGroup): one save ends every member. */
+  group?: string;
+  /** Reserved for consumable effects (design section 5a). */
+  consumeOn?: { event: 'power-roll' | 'ability-roll' };
+  /** The source use's log sequence: the most recent use sets the duration when stacking. */
+  appliedSequence: number;
+  /** A save-ends instance keeps its last saving throw, as condition instances do. */
+  lastSave?: ConditionInstance['lastSave'];
+}
+
+/**
+ * V158: where the owner's instances held by other creatures are, so `owner-dying` and `reused`
+ * find them without scanning the campaign. Only active instances are listed.
+ */
+export interface OwnedEffect {
+  id: string;
+  holder: { kind: 'character' | 'foe'; id: string };
+  abilityId: string;
+}
+
 /** Every toggle off: the first-admission state of a hero and the loaded state of a foe. */
 export type NoConditions = Record<ConditionId, false>;
 
@@ -118,6 +206,9 @@ export interface HeroLiveState {
   conditions: ConditionToggles;
   manualConditions?: ConditionToggles;
   conditionInstances?: ConditionInstance[];
+  /** V158: lasting effects held by this hero, and pointers to the ones it owns elsewhere. */
+  effectInstances?: EffectInstance[];
+  ownedEffects?: OwnedEffect[];
   /** V120: table-confirmed class resource triggers claimed this encounter; cleared at encounter end. */
   resourceClaims?: ResourceClaim[];
   /** V148: persistent abilities maintained this encounter (Elementalist Persistent Magic). */
@@ -182,6 +273,8 @@ export interface FoeLiveState {
   conditions: ConditionToggles;
   manualConditions?: ConditionToggles;
   conditionInstances?: ConditionInstance[];
+  effectInstances?: EffectInstance[];
+  ownedEffects?: OwnedEffect[];
 }
 
 /** The loaded-foe values: printed Stamina, no temporary Stamina, every toggle off. */
