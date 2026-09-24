@@ -154,3 +154,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V138 | [Summoner levels two and three](V138-summoner-level-three.md) | Merged (`b0f7c53`); cloud dev published with content reseed; gate and headless PASS at tip |
 | V152 | [Effect rider grammar II](V152-effect-rider-grammar.md) | In progress (ENGINE2) |
 | V153 | [Compound tier conditions](V153-compound-conditions.md) | In progress (ENGINE2) |
+| V154 | [Tier instructions and tiers without damage](V154-tier-instructions.md) | In progress (ENGINE2) |

@@ -16,6 +16,7 @@ import {
   type Characteristic,
 } from './abilityGrammar.ts';
 import type { RiderNode } from './compileAbility.ts';
+import { tierInstruction } from './effectRiders.ts';
 import { plainText, resolveAbilityRoll, withMode, type AbilityRollInput } from './index.ts';
 
 /** Absence is unknown. `none` asserts coverage of this category for forced movement. */
@@ -202,6 +203,11 @@ export interface CompiledRiderOutcome extends EffectIdentity {
   dependency: RiderNode['dependency'];
   after: string[];
   requirements: string[];
+  /**
+   * V154: a tier instruction for this target's own outcome, not a once-per-use section. A
+   * correction of another target keeps it.
+   */
+  tier?: true;
 }
 
 export type CompiledEffectOutcome =
@@ -444,16 +450,32 @@ export function resolveCompiledAbility(
     definition.tiers.some(
       nodes =>
         nodes.some(node => node.kind === 'rider') ||
-        nodes.filter(node => node.kind === 'damage').length !== 1 ||
+        // V154: a tier has one damage node first, or none (Power Chord's "Push 1").
+        nodes.length === 0 ||
+        nodes.filter(node => node.kind === 'damage').length > 1 ||
+        nodes.some((node, index) => node.kind === 'damage' && index !== 0) ||
+        nodes.some(
+          node =>
+            (node.kind === 'push' || node.kind === 'condition' || node.kind === 'instruction') &&
+            node.after !== (nodes[0]?.kind === 'damage' ? nodes[0].id : ''),
+        ) ||
+        nodes.some(
+          node =>
+            node.kind === 'instruction' &&
+            tierInstruction(plain(node.clause))?.shape !== node.shape,
+        ) ||
         nodes.some(
           (node, index) =>
             node.kind === 'condition' &&
-            (index < 1 ||
+            (index < (nodes[0]?.kind === 'damage' ? 1 : 0) ||
               nodes
-                .slice(1, index)
-                .some(prior => prior.kind !== 'push' && prior.kind !== 'condition') ||
-              nodes[0]?.kind !== 'damage' ||
-              nodes[0].id !== node.after ||
+                .slice(nodes[0]?.kind === 'damage' ? 1 : 0, index)
+                .some(
+                  prior =>
+                    prior.kind !== 'push' &&
+                    prior.kind !== 'condition' &&
+                    prior.kind !== 'instruction',
+                ) ||
               !['save-ends', 'eot', 'none'].includes(node.duration) ||
               (node.duration === 'none' &&
                 node.condition !== 'prone' &&
@@ -481,8 +503,7 @@ export function resolveCompiledAbility(
               ![undefined, true].includes(node.vertical) ||
               !Number.isSafeInteger(node.distance) ||
               node.distance < 0 ||
-              node.distance >= Number.MAX_SAFE_INTEGER ||
-              !nodes.some(prior => prior.kind === 'damage' && prior.id === node.after)),
+              node.distance >= Number.MAX_SAFE_INTEGER),
         ),
     )
   )
@@ -500,12 +521,11 @@ export function resolveCompiledAbility(
   )
     throw new Error('Accepted dice and edge/bane counts must be valid integers.');
   const tiers = definition.tiers.map(nodes => {
-    const damage = nodes.find(node => node.kind === 'damage')!;
-    if (damage.kind !== 'damage') throw new Error('Missing compiled damage node.');
+    const damage = nodes[0]?.kind === 'damage' ? nodes[0] : undefined;
     return {
       text: nodes.map(node => node.clause).join('; '),
-      damage: damage.expression,
-      ...(damage.damageType ? { damageType: damage.damageType } : {}),
+      ...(damage ? { damage: damage.expression } : {}),
+      ...(damage?.damageType ? { damageType: damage.damageType } : {}),
       unresolvedClauses: nodes.filter(node => node.kind === 'unsupported').map(node => node.clause),
     };
   }) as [TierDamageText, TierDamageText, TierDamageText];
@@ -516,6 +536,8 @@ export function resolveCompiledAbility(
   for (const target of roll.targets) {
     const nodes = definition.tiers[target.tier - 1]!;
     const application = roll.damageApplications.find(a => a.targetId === target.targetId);
+    // V154: a tier without damage has nothing to wait for.
+    const damageComplete = !!application || nodes[0]?.kind !== 'damage';
     for (const node of nodes) {
       const identity = {
         nodeId: node.id,
@@ -537,9 +559,22 @@ export function resolveCompiledAbility(
           requirements: application ? [] : ['Supported damage and complete target damage facts'],
         });
       } else if (node.kind === 'condition') {
-        remainder.push(conditionOutcome(node, target.targetId, input, !!application));
+        remainder.push(conditionOutcome(node, target.targetId, input, damageComplete));
       } else if (node.kind === 'push') {
-        remainder.push(pushOutcome(node, target.targetId, definition, input, !!application));
+        remainder.push(pushOutcome(node, target.targetId, definition, input, damageComplete));
+      } else if (node.kind === 'instruction') {
+        // Table work for this target's tier outcome, recorded like a section rider.
+        const requirements = damageComplete ? [] : [`damage:${node.after}.completion`];
+        remainder.push({
+          ...identity,
+          kind: 'rider',
+          shape: node.shape,
+          dependency: node.after ? 'after-damage' : 'independent',
+          after: node.after ? [node.after] : [],
+          requirements,
+          status: requirements.length ? 'fact-needed' : 'manual',
+          tier: true,
+        });
       } else if (node.kind === 'unsupported') {
         remainder.push({
           ...identity,

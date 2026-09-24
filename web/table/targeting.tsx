@@ -510,7 +510,10 @@ export function CompiledEffects({
           >
             <span className="flex flex-wrap items-center gap-2">
               <strong>
-                {effect.kind === 'rider' ? 'Ability effect' : (target?.name ?? 'Original target')} ·{' '}
+                {effect.kind === 'rider' && !effect.tier
+                  ? 'Ability effect'
+                  : (target?.name ?? 'Original target')}{' '}
+                ·{' '}
                 {effect.kind === 'unsupported' || effect.kind === 'rider'
                   ? 'Manual effect'
                   : effect.kind === 'push'

@@ -12,18 +12,18 @@
     },
     "foe-ability": {
       "total": 1158,
-      "supported": 58,
-      "manual": 1100
+      "supported": 60,
+      "manual": 1098
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 66,
-      "manual": 305
+      "supported": 70,
+      "manual": 301
     },
     "kit-signature": {
       "total": 25,
-      "supported": 15,
-      "manual": 10
+      "supported": 16,
+      "manual": 9
     },
     "malice": {
       "total": 14,
@@ -5174,12 +5174,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -10345,12 +10339,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "P < 1 the target is levitated (EoT)",
@@ -14467,12 +14455,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "2 + M cold, fire, lightning, or sonic damage",
@@ -15089,12 +15071,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "6 + I fire or lightning damage",
@@ -15658,12 +15634,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -16565,10 +16535,15 @@
             "id": "mcdm.beastheart.v1/feature.ability.beastheart.level-3/death-and-violence#block:2:tier1:0:08d7bf2835c59c07",
             "locator": "block:2:tier1:0",
             "clause": "P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < SYM frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -16649,18 +16624,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:2:tier1:0",
-          "clause": "P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:0:0",
@@ -22770,12 +22733,6 @@
       "sections": [],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "You can move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).",
@@ -22955,12 +22912,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "No effect.",
@@ -23108,12 +23059,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "No effect.",
@@ -23198,10 +23143,9 @@
             "id": "mcdm.heroes.v1/feature.ability.common/knockback#block:0:tier1:0:81fdc35d679c0bb5",
             "locator": "block:0:tier1:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 1,
+            "after": ""
           }
         ],
         [
@@ -23209,10 +23153,9 @@
             "id": "mcdm.heroes.v1/feature.ability.common/knockback#block:0:tier2:0:81fdc05d679c069c",
             "locator": "block:0:tier2:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "after": ""
           }
         ],
         [
@@ -23220,10 +23163,9 @@
             "id": "mcdm.heroes.v1/feature.ability.common/knockback#block:0:tier3:0:81fdc15d679c084f",
             "locator": "block:0:tier3:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "after": ""
           }
         ]
       ],
@@ -23240,30 +23182,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You can usually target only creatures of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. If your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is 2 or higher, you can target any creature with a [size](scc.v1:mcdm.heroes.v1/rule.character/size) equal to or less than your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.",
@@ -23273,7 +23191,7 @@
       "live": "not-reachable",
       "boundary": "No current standalone grant or public ordinary-foe loading path.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.common/melee-weapon-free-strike",
@@ -24345,12 +24263,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier1:0",
@@ -30378,12 +30290,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier1:0",
           "clause": "The target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square from the edge of the hole to the nearest unoccupied space of their choice.",
@@ -33769,12 +33675,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier1:0",
@@ -37422,10 +37322,9 @@
             "id": "mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball#block:1:tier1:0:81fdc35d679c0bb5",
             "locator": "block:1:tier1:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 1,
+            "after": ""
           }
         ],
         [
@@ -37433,10 +37332,9 @@
             "id": "mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball#block:1:tier2:0:81fdc05d679c069c",
             "locator": "block:1:tier2:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "after": ""
           }
         ],
         [
@@ -37444,10 +37342,9 @@
             "id": "mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball#block:1:tier3:0:81fdc15d679c084f",
             "locator": "block:1:tier3:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "after": ""
           }
         ]
       ],
@@ -37481,30 +37378,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "source-block-mismatch",
           "locator": "markdown:block:0",
@@ -37591,7 +37464,7 @@
           "detail": "option Wrecking Ball supportedInV001=true; chain selectable"
         }
       ],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.fury.level-3/demon-unleashed",
@@ -38794,10 +38667,9 @@
             "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force#block:0:tier1:0:81fdc15d679c084f",
             "locator": "block:0:tier1:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "after": ""
           }
         ],
         [
@@ -38805,10 +38677,9 @@
             "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force#block:0:tier2:0:81fdbf5d679c04e9",
             "locator": "block:0:tier2:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "after": ""
           }
         ],
         [
@@ -38816,10 +38687,9 @@
             "id": "mcdm.heroes.v1/feature.ability.null.level-1/impart-force#block:0:tier3:0:81fdbd5d679c0183",
             "locator": "block:0:tier3:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 7,
+            "after": ""
           }
         ]
       ],
@@ -38835,30 +38705,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -38924,7 +38770,7 @@
           "detail": "option Impart Force supportedInV001=true; chain selectable"
         }
       ],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield",
@@ -41560,12 +41406,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "You gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
@@ -43332,12 +43172,6 @@
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -45538,7 +45372,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/in-a-puff-of-ash.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -45557,10 +45391,9 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier1:1:1da5c3c30aca2ef4",
             "locator": "block:0:tier1:1",
             "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target 1 square",
-            "kind": "unsupported",
-            "shape": "you can teleport the target N square",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "teleport",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier1:0:c242b54eeae60b04"
           }
         ],
         [
@@ -45580,10 +45413,9 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier2:1:72225060c1a22bc1",
             "locator": "block:0:tier2:1",
             "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target up to 3 squares",
-            "kind": "unsupported",
-            "shape": "you can teleport the target up to N squares",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "teleport",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier2:0:4d2cc6daeb82879b"
           }
         ],
         [
@@ -45603,36 +45435,16 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier3:1:2a48eebcbb23852b",
             "locator": "block:0:tier3:1",
             "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target up to 5 squares",
-            "kind": "unsupported",
-            "shape": "you can teleport the target up to N squares",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "teleport",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-2/in-a-puff-of-ash#block:0:tier3:0:4f757a98684bb787"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target 1 square",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target up to 3 squares",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "you can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target up to 5 squares",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "In a Puff of Ash",
@@ -45701,10 +45513,10 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound#block:0:tier1:0:6f1145636660cfa5",
             "locator": "block:0:tier1:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "movement": "slide",
+            "after": ""
           }
         ],
         [
@@ -45712,10 +45524,10 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound#block:0:tier2:0:6f1144636660cdf2",
             "locator": "block:0:tier2:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "movement": "slide",
+            "after": ""
           }
         ],
         [
@@ -45723,10 +45535,10 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound#block:0:tier3:0:6f1142636660ca8c",
             "locator": "block:0:tier3:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 7,
+            "movement": "slide",
+            "after": ""
           }
         ]
       ],
@@ -45742,30 +45554,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -45822,7 +45610,7 @@
           "detail": "option Machinations of Sound supportedInV001=true; chain selectable"
         }
       ],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/so-gullible",
@@ -47829,12 +47617,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier1:0",
           "clause": "The creature's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is increased by 2 until the end of the encounter.",
@@ -48182,17 +47964,16 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/battle-cry.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
             "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry#block:0:tier1:0:fc7a11e053b9913d",
             "locator": "block:0:tier1:0",
             "clause": "Each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-            "kind": "unsupported",
-            "shape": "each target gains N surge",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "surges",
+            "after": ""
           }
         ],
         [
@@ -48200,10 +47981,9 @@
             "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry#block:0:tier2:0:3d0d7e0c4c83d167",
             "locator": "block:0:tier2:0",
             "clause": "Each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-            "kind": "unsupported",
-            "shape": "each target gains N surges",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "surges",
+            "after": ""
           }
         ],
         [
@@ -48211,42 +47991,16 @@
             "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry#block:0:tier3:0:f8f3c746d3ccf726",
             "locator": "block:0:tier3:0",
             "clause": "Each target gains 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-            "kind": "unsupported",
-            "shape": "each target gains N surges",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "surges",
+            "after": ""
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "Each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "Each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "Each target gains 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Battle Cry",
@@ -48659,7 +48413,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/inspiring-strike.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -48678,10 +48432,9 @@
             "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier1:1:102163fd0c0f6397",
             "locator": "block:0:tier1:1",
             "clause": "you or one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)",
-            "kind": "unsupported",
-            "shape": "you or one ally within N squares of you can spend a recovery",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "recovery",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier1:0:4eba022a22560d99"
           }
         ],
         [
@@ -48701,10 +48454,9 @@
             "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier2:1:102163fd0c0f6397",
             "locator": "block:0:tier2:1",
             "clause": "you or one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)",
-            "kind": "unsupported",
-            "shape": "you or one ally within N squares of you can spend a recovery",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "recovery",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier2:0:58c74c83147f2d7b"
           }
         ],
         [
@@ -48724,36 +48476,16 @@
             "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier3:1:b610253356ebd0be",
             "locator": "block:0:tier3:1",
             "clause": "you and one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and each of you gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) you make during the encounter",
-            "kind": "unsupported",
-            "shape": "you and one ally within N squares of you can spend a recovery, and each of you gains an edge on the next ability roll you make during the encounter",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "recovery",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier3:0:9fe2d4c3c3673aea"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "you or one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "you or one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "you and one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and each of you gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) you make during the encounter",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Inspiring Strike",
@@ -50380,12 +50112,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:2:tier1:0",
@@ -53287,12 +53013,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 + R",
@@ -55357,12 +55077,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "You target two creatures, one of which can be you.",
@@ -56166,12 +55880,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "The target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved (save ends), or if P < WEAK, the target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).",
@@ -56376,12 +56084,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -58989,12 +58691,6 @@
       "sections": [],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "The target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square and make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
@@ -59594,19 +59290,24 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier1:0:6f1140636660c726",
             "locator": "block:0:tier1:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 1,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier1:1:71c0828acfcc9d00",
             "locator": "block:0:tier1:1",
             "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < SYM dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -59614,19 +59315,24 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier2:0:6f1140636660c726",
             "locator": "block:0:tier2:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 1,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier2:1:2415280207e88ef3",
             "locator": "block:0:tier2:1",
             "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < SYM dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -59634,19 +59340,24 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier3:0:6f113f636660c573",
             "locator": "block:0:tier3:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier3:1:20c8f05ce821f263",
             "locator": "block:0:tier3:1",
             "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < SYM dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -59662,48 +59373,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -59769,7 +59438,7 @@
           "detail": "option Hypnotic Overtones supportedInV001=true; chain selectable"
         }
       ],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator",
@@ -60089,17 +59758,16 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord#block:0:tier1:0:81fdc35d679c0bb5",
             "locator": "block:0:tier1:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 1,
+            "after": ""
           }
         ],
         [
@@ -60107,10 +59775,9 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord#block:0:tier2:0:81fdc05d679c069c",
             "locator": "block:0:tier2:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "after": ""
           }
         ],
         [
@@ -60118,42 +59785,16 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord#block:0:tier3:0:81fdc15d679c084f",
             "locator": "block:0:tier3:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "after": ""
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Power Chord",
@@ -60210,7 +59851,7 @@
           "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
         }
       ],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite",
@@ -60809,12 +60450,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier1:0",
           "clause": "Lightning damage equal to your level",
@@ -61063,19 +60698,27 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier1:0:6c02b7a67fcd0c5c",
             "locator": "block:1:tier1:0",
             "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
-            "kind": "unsupported",
-            "shape": "taunted (eot)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier1:1:6716cc47122267b4",
             "locator": "block:1:tier1:1",
             "clause": "A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-            "kind": "unsupported",
-            "shape": "potency:A < SYM prone",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
           }
         ],
         [
@@ -61083,19 +60726,27 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier2:0:6c02b7a67fcd0c5c",
             "locator": "block:1:tier2:0",
             "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
-            "kind": "unsupported",
-            "shape": "taunted (eot)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier2:1:0002d72827ab5aaf",
             "locator": "block:1:tier2:1",
             "clause": "A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-            "kind": "unsupported",
-            "shape": "potency:A < SYM prone",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
           }
         ],
         [
@@ -61103,10 +60754,13 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier3:0:6c02b7a67fcd0c5c",
             "locator": "block:1:tier3:0",
             "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
-            "kind": "unsupported",
-            "shape": "taunted (eot)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier3:1:8e104b0104ea59ec",
@@ -61131,42 +60785,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:1",
-          "clause": "A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:0",
-          "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:1",
-          "clause": "A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:0",
-          "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier3:1",
@@ -62116,10 +61734,10 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites#block:0:tier1:0:6f113e636660c3c0",
             "locator": "block:0:tier1:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites#block:0:tier1:1:a8595fcca2a2a896",
@@ -62136,10 +61754,10 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites#block:0:tier2:0:6f1144636660cdf2",
             "locator": "block:0:tier2:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites#block:0:tier2:1:4035163dc905a509",
@@ -62156,10 +61774,10 @@
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites#block:0:tier3:0:6f1142636660ca8c",
             "locator": "block:0:tier3:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 7,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites#block:0:tier3:1:ba8464a17cf1d963",
@@ -62185,18 +61803,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:1",
           "clause": "P < WEAK, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
@@ -62204,20 +61810,8 @@
         },
         {
           "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:1",
           "clause": "P < AVERAGE, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -62273,7 +61867,7 @@
           "detail": "option Extensive Rewrites supportedInV001=true; chain selectable"
         }
       ],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/fire-up-the-night",
@@ -63585,7 +63179,7 @@
         "path": "vendor/steel-compendium/en/unified/md/kit/cloak-and-dagger.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -63607,10 +63201,9 @@
             "id": "mcdm.heroes.v1/kit/cloak-and-dagger/fade#block:0:tier1:1:5de77eb2d4f6cea0",
             "locator": "block:0:tier1:1",
             "clause": "you can shift 1 square",
-            "kind": "unsupported",
-            "shape": "you can shift N square",
-            "reason": "shift",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "shift",
+            "after": "mcdm.heroes.v1/kit/cloak-and-dagger/fade#block:0:tier1:0:55bcb5d648c8d1fb"
           }
         ],
         [
@@ -63633,10 +63226,9 @@
             "id": "mcdm.heroes.v1/kit/cloak-and-dagger/fade#block:0:tier2:1:d3d58400b706c2ee",
             "locator": "block:0:tier2:1",
             "clause": "you can shift up to 2 squares",
-            "kind": "unsupported",
-            "shape": "you can shift up to N squares",
-            "reason": "shift",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "shift",
+            "after": "mcdm.heroes.v1/kit/cloak-and-dagger/fade#block:0:tier2:0:ad89226575bda9c0"
           }
         ],
         [
@@ -63659,36 +63251,16 @@
             "id": "mcdm.heroes.v1/kit/cloak-and-dagger/fade#block:0:tier3:1:d51d68e829db646d",
             "locator": "block:0:tier3:1",
             "clause": "you can shift up to 3 squares",
-            "kind": "unsupported",
-            "shape": "you can shift up to N squares",
-            "reason": "shift",
-            "dependency": "unknown"
+            "kind": "instruction",
+            "shape": "shift",
+            "after": "mcdm.heroes.v1/kit/cloak-and-dagger/fade#block:0:tier3:0:4b615870e140dd06"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "you can shift 1 square",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "you can shift up to 2 squares",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "you can shift up to 3 squares",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Fade",
@@ -72882,12 +72454,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "You summon four [signature minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions).",
@@ -73969,12 +73535,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "Three creatures",
@@ -74170,12 +73730,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier1:0",
@@ -75313,12 +74867,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -77077,10 +76625,10 @@
             "id": "salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8#block:0:tier1:0:ee59cb7c4eb26af3",
             "locator": "block:0:tier1:0",
             "clause": "Slide 3",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "movement": "slide",
+            "after": ""
           }
         ],
         [
@@ -77088,10 +76636,10 @@
             "id": "salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8#block:0:tier2:0:ee59d07c4eb27372",
             "locator": "block:0:tier2:0",
             "clause": "Slide 4",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "movement": "slide",
+            "after": ""
           }
         ],
         [
@@ -77099,10 +76647,10 @@
             "id": "salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8#block:0:tier3:0:ee59d17c4eb27525",
             "locator": "block:0:tier3:0",
             "clause": "Slide 5",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "movement": "slide",
+            "after": ""
           }
         ]
       ],
@@ -77119,30 +76667,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "Slide 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "Slide 4",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "Slide 5",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "The ground in the area turns into a morass of spongy flesh before the targets are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement). Until the start of the torlas's next turn, the area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain), and each creature who moves in the area takes 1 damage for each square moved.",
@@ -77152,7 +76676,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:02873e69-a6f3-476f-85eb-9e883df2d543",
@@ -82217,12 +81741,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "4 corruption or fire damage",
@@ -82357,12 +81875,6 @@
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -83022,19 +82534,24 @@
             "id": "salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5#block:0:tier1:0:9d6cf72672458038",
             "locator": "block:0:tier1:0",
             "clause": "Pull 2",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5#block:0:tier1:1:60c172517310c9e5",
             "locator": "block:0:tier1:1",
             "clause": "I < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "frightened",
+            "duration": "eot",
+            "after": ""
           }
         ],
         [
@@ -83042,19 +82559,24 @@
             "id": "salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5#block:0:tier2:0:9d6cfd2672458a6a",
             "locator": "block:0:tier2:0",
             "clause": "Pull 4",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5#block:0:tier2:1:d1d517cdd7512933",
             "locator": "block:0:tier2:1",
             "clause": "I < 3 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -83062,66 +82584,29 @@
             "id": "salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5#block:0:tier3:0:9d6cfb2672458704",
             "locator": "block:0:tier3:0",
             "clause": "Pull 6",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 6,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5#block:0:tier3:1:c615e4f68425b604",
             "locator": "block:0:tier3:1",
             "clause": "I < 4 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "Pull 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "I < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "Pull 4",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "I < 3 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "Pull 6",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "I < 4 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "action-type",
           "locator": "header:usage",
@@ -83138,7 +82623,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:0c871acb-fe6b-4d9a-86c4-df527e90388a",
@@ -88444,12 +87929,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier2-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:0",
           "clause": "10 corruption damage, or if the target has P < 2 they are judged",
@@ -88906,10 +88385,15 @@
             "id": "salient:foe-feature:18fa1630-d1ab-4293-89e4-8edadbd19d07#block:0:tier1:0:f4b4de86958a7d88",
             "locator": "block:0:tier1:0",
             "clause": "I < 0 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -88917,10 +88401,15 @@
             "id": "salient:foe-feature:18fa1630-d1ab-4293-89e4-8edadbd19d07#block:0:tier2:0:036031371e297ebd",
             "locator": "block:0:tier2:0",
             "clause": "I < 1 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -88928,10 +88417,15 @@
             "id": "salient:foe-feature:18fa1630-d1ab-4293-89e4-8edadbd19d07#block:0:tier3:0:f56dff37abd2516e",
             "locator": "block:0:tier3:0",
             "clause": "I < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -88947,30 +88441,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "I < 0 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "I < 1 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "I < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -92917,12 +92387,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "5 damage, 2 psychic damage",
@@ -94882,12 +94346,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "I < 2 the target is charmed",
@@ -95061,10 +94519,10 @@
             "id": "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb#block:0:tier1:0:6f1140636660c726",
             "locator": "block:0:tier1:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 1,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb#block:0:tier1:1:d1ecfa63e1020b9c",
@@ -95081,10 +94539,10 @@
             "id": "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb#block:0:tier2:0:6f113f636660c573",
             "locator": "block:0:tier2:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb#block:0:tier2:1:cf2732724a9b7b23",
@@ -95101,10 +94559,10 @@
             "id": "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb#block:0:tier3:0:6f1145636660cfa5",
             "locator": "block:0:tier3:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb#block:0:tier3:1:1d5ac7ae535baa22",
@@ -95120,18 +94578,6 @@
       "sections": [],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:1",
           "clause": "A < 2 3 damage",
@@ -95139,20 +94585,8 @@
         },
         {
           "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:1",
           "clause": "A < 3 5 damage",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -95165,7 +94599,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:229ccb42-a0df-45ba-b6e8-a2c7cf52711e",
@@ -95218,10 +94652,15 @@
             "id": "salient:foe-feature:229ccb42-a0df-45ba-b6e8-a2c7cf52711e#block:1:tier1:0:3c37d486c6f81768",
             "locator": "block:1:tier1:0",
             "clause": "A < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -95229,10 +94668,15 @@
             "id": "salient:foe-feature:229ccb42-a0df-45ba-b6e8-a2c7cf52711e#block:1:tier2:0:96ae1d21d4870dbd",
             "locator": "block:1:tier2:0",
             "clause": "A < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -95240,10 +94684,13 @@
             "id": "salient:foe-feature:229ccb42-a0df-45ba-b6e8-a2c7cf52711e#block:1:tier3:0:5760215ae7289735",
             "locator": "block:1:tier3:0",
             "clause": "[Slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "slowed (save ends)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:229ccb42-a0df-45ba-b6e8-a2c7cf52711e#block:1:tier3:1:9ded7e459b756c42",
@@ -95277,30 +94724,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "A < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:0",
-          "clause": "A < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:0",
-          "clause": "[Slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier3:1",
@@ -96749,10 +96172,9 @@
             "id": "salient:foe-feature:25b187f0-977f-42d6-918e-a86c7e8698d5#block:0:tier1:0:81fdc05d679c069c",
             "locator": "block:0:tier1:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:25b187f0-977f-42d6-918e-a86c7e8698d5#block:0:tier1:1:f38fa32988da48ca",
@@ -96769,10 +96191,9 @@
             "id": "salient:foe-feature:25b187f0-977f-42d6-918e-a86c7e8698d5#block:0:tier2:0:81fdbe5d679c0336",
             "locator": "block:0:tier2:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:25b187f0-977f-42d6-918e-a86c7e8698d5#block:0:tier2:1:40b96f7148159c21",
@@ -96789,10 +96210,9 @@
             "id": "salient:foe-feature:25b187f0-977f-42d6-918e-a86c7e8698d5#block:0:tier3:0:81fdbc5d679bffd0",
             "locator": "block:0:tier3:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 6,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:25b187f0-977f-42d6-918e-a86c7e8698d5#block:0:tier3:1:6640c864d68ec11c",
@@ -96808,18 +96228,6 @@
       "sections": [],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:1",
           "clause": "M < 0 the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is vertical",
@@ -96827,20 +96235,8 @@
         },
         {
           "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:1",
           "clause": "M < 1 the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is vertical",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -96853,7 +96249,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:25ba9441-770d-46b5-afe8-ea7b698b1022",
@@ -99494,10 +98890,15 @@
             "id": "salient:foe-feature:297e9164-7339-4813-bed1-0d1f1fd630c5#block:0:tier1:0:0a700684ddb4718a",
             "locator": "block:0:tier1:0",
             "clause": "M < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -99505,10 +98906,15 @@
             "id": "salient:foe-feature:297e9164-7339-4813-bed1-0d1f1fd630c5#block:0:tier2:0:4caece4f3c4c7acf",
             "locator": "block:0:tier2:0",
             "clause": "M < 3 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -99516,10 +98922,13 @@
             "id": "salient:foe-feature:297e9164-7339-4813-bed1-0d1f1fd630c5#block:0:tier3:0:5760215ae7289735",
             "locator": "block:0:tier3:0",
             "clause": "[Slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "slowed (save ends)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:297e9164-7339-4813-bed1-0d1f1fd630c5#block:0:tier3:1:f85a3c9fa13b013c",
@@ -99544,30 +98953,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "M < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "M < 3 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier3:1",
@@ -108363,19 +107748,23 @@
             "id": "salient:foe-feature:3964ef10-10fe-4d2b-8d01-7ef4fc05b962#block:0:tier1:0:1f8d6703eed8c85c",
             "locator": "block:0:tier1:0",
             "clause": "Push 3",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:3964ef10-10fe-4d2b-8d01-7ef4fc05b962#block:0:tier1:1:92a2f993000bd96b",
             "locator": "block:0:tier1:1",
             "clause": "I < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -108383,19 +107772,23 @@
             "id": "salient:foe-feature:3964ef10-10fe-4d2b-8d01-7ef4fc05b962#block:0:tier2:0:1f8d6703eed8c85c",
             "locator": "block:0:tier2:0",
             "clause": "Push 3",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:3964ef10-10fe-4d2b-8d01-7ef4fc05b962#block:0:tier2:1:ff14aa4ec8930a40",
             "locator": "block:0:tier2:1",
             "clause": "I < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -108447,36 +107840,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "Push 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "I < 3 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "Push 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "I < 4 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -112693,10 +112056,15 @@
             "id": "salient:foe-feature:4187c584-81ff-4de7-b1dc-1032db6e29f0#block:0:tier1:0:a619f1e1a351d2eb",
             "locator": "block:0:tier1:0",
             "clause": "P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) ([save](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < SYM frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -112704,10 +112072,15 @@
             "id": "salient:foe-feature:4187c584-81ff-4de7-b1dc-1032db6e29f0#block:0:tier2:0:5d20c67cfaf683b2",
             "locator": "block:0:tier2:0",
             "clause": "P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) ([save](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < SYM frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -112729,18 +112102,6 @@
           "locator": "envelope",
           "clause": "",
           "message": "roll-expression-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "P < WEAK [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) ([save](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "P < AVERAGE [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) ([save](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
           "code": "unsafe-tier-remainder",
@@ -112955,12 +112316,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier2-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:0",
@@ -114284,12 +113639,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -116235,12 +115584,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -119983,17 +119326,22 @@
         "path": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-talent.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
             "id": "salient:foe-feature:4ed9aae9-ee92-49a7-b9e2-b4193414595b#block:0:tier1:0:ed59aecb3c4e8eb7",
             "locator": "block:0:tier1:0",
             "clause": "R < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -120001,53 +119349,54 @@
             "id": "salient:foe-feature:4ed9aae9-ee92-49a7-b9e2-b4193414595b#block:0:tier2:0:2285307311d817aa",
             "locator": "block:0:tier2:0",
             "clause": "R < 1 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
           {
-            "id": "salient:foe-feature:4ed9aae9-ee92-49a7-b9e2-b4193414595b#block:0:tier3:0:8d3575e34de721a0",
+            "id": "salient:foe-feature:4ed9aae9-ee92-49a7-b9e2-b4193414595b#block:0:tier3:0:8d3575e34de721a0~dazed",
             "locator": "block:0:tier3:0",
             "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N dazed and slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "",
+            "group": "salient:foe-feature:4ed9aae9-ee92-49a7-b9e2-b4193414595b#block:0:tier3:0:8d3575e34de721a0"
+          },
+          {
+            "id": "salient:foe-feature:4ed9aae9-ee92-49a7-b9e2-b4193414595b#block:0:tier3:0:8d3575e34de721a0~slowed",
+            "locator": "block:0:tier3:0",
+            "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "",
+            "group": "salient:foe-feature:4ed9aae9-ee92-49a7-b9e2-b4193414595b#block:0:tier3:0:8d3575e34de721a0"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "R < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "R < 1 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "R < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -121220,10 +120569,15 @@
             "id": "salient:foe-feature:505cabad-71ae-4af3-8c33-533ea37f3128#block:0:tier1:0:e112ec43e4f50614",
             "locator": "block:0:tier1:0",
             "clause": "I < 0 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -121231,10 +120585,15 @@
             "id": "salient:foe-feature:505cabad-71ae-4af3-8c33-533ea37f3128#block:0:tier2:0:e09e246c221ab91d",
             "locator": "block:0:tier2:0",
             "clause": "I < 1 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -121242,10 +120601,15 @@
             "id": "salient:foe-feature:505cabad-71ae-4af3-8c33-533ea37f3128#block:0:tier3:0:c5896431fbc20e62",
             "locator": "block:0:tier3:0",
             "clause": "I < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -121261,30 +120625,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "I < 0 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "I < 1 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "I < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -125703,19 +125043,24 @@
             "id": "salient:foe-feature:590ca0d9-bf77-4fac-9e07-79e4f803045e#block:0:tier1:0:6f113f636660c573",
             "locator": "block:0:tier1:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:590ca0d9-bf77-4fac-9e07-79e4f803045e#block:0:tier1:1:b3b90f5c8f3a25e0",
             "locator": "block:0:tier1:1",
             "clause": "M < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -125723,19 +125068,24 @@
             "id": "salient:foe-feature:590ca0d9-bf77-4fac-9e07-79e4f803045e#block:0:tier2:0:6f1145636660cfa5",
             "locator": "block:0:tier2:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:590ca0d9-bf77-4fac-9e07-79e4f803045e#block:0:tier2:1:d1388a37cc417acd",
             "locator": "block:0:tier2:1",
             "clause": "M < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -125743,19 +125093,24 @@
             "id": "salient:foe-feature:590ca0d9-bf77-4fac-9e07-79e4f803045e#block:0:tier3:0:6f1143636660cc3f",
             "locator": "block:0:tier3:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 6,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:590ca0d9-bf77-4fac-9e07-79e4f803045e#block:0:tier3:1:608e8bf2acde06ee",
             "locator": "block:0:tier3:1",
             "clause": "M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -125772,48 +125127,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "The gust of wind disperses gas or vapor and extinguishes any flames, including supernatural effects.",
@@ -125823,7 +125136,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:59262568-6676-4c72-9fc3-adc045316fac",
@@ -126383,10 +125696,9 @@
             "id": "salient:foe-feature:5b8f4f7c-c8ba-4c8c-bc00-5e4a6e361d0e#block:2:tier1:0:1f8d6503eed8c4f6",
             "locator": "block:2:tier1:0",
             "clause": "Push 5",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "after": ""
           }
         ],
         [
@@ -126394,10 +125706,9 @@
             "id": "salient:foe-feature:5b8f4f7c-c8ba-4c8c-bc00-5e4a6e361d0e#block:2:tier2:0:1f8d6303eed8c190",
             "locator": "block:2:tier2:0",
             "clause": "Push 7",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 7,
+            "after": ""
           }
         ],
         [
@@ -126434,24 +125745,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:2:tier1:0",
-          "clause": "Push 5",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:2:tier2:0",
-          "clause": "Push 7",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:2:tier3:0",
           "clause": "Push 10, ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
@@ -126473,7 +125766,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:5b9ba0ec-dc03-416b-aa19-c0640fa10dec",
@@ -127059,10 +126352,10 @@
             "id": "salient:foe-feature:5cf679ee-b140-44ca-b58e-60906ad74f43#block:1:tier1:0:6f113f636660c573",
             "locator": "block:1:tier1:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:5cf679ee-b140-44ca-b58e-60906ad74f43#block:1:tier1:1:1e04659ea25e845e",
@@ -127079,10 +126372,10 @@
             "id": "salient:foe-feature:5cf679ee-b140-44ca-b58e-60906ad74f43#block:1:tier2:0:6f113e636660c3c0",
             "locator": "block:1:tier2:0",
             "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-            "kind": "unsupported",
-            "shape": "slide N",
-            "reason": "slide",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "movement": "slide",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:5cf679ee-b140-44ca-b58e-60906ad74f43#block:1:tier2:1:8611ebaeab6a423b",
@@ -127137,27 +126430,9 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier1:1",
           "clause": "R < 1 the slide is vertical",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:0",
-          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -127194,7 +126469,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:5d1e8218-8879-4774-96b4-3ae4d68c215a",
@@ -130349,12 +129624,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "6 damage, 2 corruption damage",
@@ -132413,12 +131682,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -134833,12 +134096,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -140156,10 +139413,15 @@
             "id": "salient:foe-feature:7aa62bc2-1cf0-42db-861b-4c755478bcfb#block:1:tier1:0:090ccab2856135dc",
             "locator": "block:1:tier1:0",
             "clause": "M < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -140167,10 +139429,15 @@
             "id": "salient:foe-feature:7aa62bc2-1cf0-42db-861b-4c755478bcfb#block:1:tier2:0:48eaf6f083910ed1",
             "locator": "block:1:tier2:0",
             "clause": "M < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -140178,10 +139445,13 @@
             "id": "salient:foe-feature:7aa62bc2-1cf0-42db-861b-4c755478bcfb#block:1:tier3:0:5760215ae7289735",
             "locator": "block:1:tier3:0",
             "clause": "[Slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "slowed (save ends)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:7aa62bc2-1cf0-42db-861b-4c755478bcfb#block:1:tier3:1:230e8bfe323d191e",
@@ -140215,30 +139485,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "M < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:0",
-          "clause": "M < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:0",
-          "clause": "[Slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier3:1",
@@ -146243,12 +145489,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "9 cold, fire, or sonic damage",
@@ -148972,12 +148212,6 @@
       "sections": [],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "7 damage, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
@@ -149124,12 +148358,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier2-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:0",
@@ -149780,12 +149008,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -155171,12 +154393,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "No effect.",
@@ -155906,12 +155122,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "The distance is a 2 burst",
@@ -156402,19 +155612,24 @@
             "id": "salient:foe-feature:97349340-a701-4732-8b1c-251b89513be8#block:0:tier1:0:f93121e88ff75a64",
             "locator": "block:0:tier1:0",
             "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:97349340-a701-4732-8b1c-251b89513be8#block:0:tier1:1:582ce3c5d0ed6be2",
             "locator": "block:0:tier1:1",
             "clause": "I < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -156422,19 +155637,24 @@
             "id": "salient:foe-feature:97349340-a701-4732-8b1c-251b89513be8#block:0:tier2:0:f93123e88ff75dca",
             "locator": "block:0:tier2:0",
             "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 7,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:97349340-a701-4732-8b1c-251b89513be8#block:0:tier2:1:6b72b8093a1707af",
             "locator": "block:0:tier2:1",
             "clause": "I < 3 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -156442,66 +155662,29 @@
             "id": "salient:foe-feature:97349340-a701-4732-8b1c-251b89513be8#block:0:tier3:0:65c97a2ca1432678",
             "locator": "block:0:tier3:0",
             "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 10",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 10,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:97349340-a701-4732-8b1c-251b89513be8#block:0:tier3:1:44b807f865c29ba0",
             "locator": "block:0:tier3:1",
             "clause": "I < 4 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "I < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "I < 3 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 10",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "I < 4 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
@@ -156512,7 +155695,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:97b44e74-b1eb-437a-8bb8-5a994b83bdab",
@@ -159773,19 +158956,23 @@
             "id": "salient:foe-feature:9dc82b67-634b-4b61-9ace-f8cd2a19caa0#block:0:tier1:0:81fdc35d679c0bb5",
             "locator": "block:0:tier1:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 1,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:9dc82b67-634b-4b61-9ace-f8cd2a19caa0#block:0:tier1:1:d2eed9d9ccac784d",
             "locator": "block:0:tier1:1",
             "clause": "M < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-            "kind": "unsupported",
-            "shape": "potency:M < N prone",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
           }
         ],
         [
@@ -159793,19 +158980,23 @@
             "id": "salient:foe-feature:9dc82b67-634b-4b61-9ace-f8cd2a19caa0#block:0:tier2:0:81fdc05d679c069c",
             "locator": "block:0:tier2:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:9dc82b67-634b-4b61-9ace-f8cd2a19caa0#block:0:tier2:1:5485b3e04d7ae58a",
             "locator": "block:0:tier2:1",
             "clause": "M < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-            "kind": "unsupported",
-            "shape": "potency:M < N prone",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
           }
         ],
         [
@@ -159813,19 +159004,23 @@
             "id": "salient:foe-feature:9dc82b67-634b-4b61-9ace-f8cd2a19caa0#block:0:tier3:0:81fdbe5d679c0336",
             "locator": "block:0:tier3:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:9dc82b67-634b-4b61-9ace-f8cd2a19caa0#block:0:tier3:1:cdc5fddb478874f3",
             "locator": "block:0:tier3:1",
             "clause": "M < 3 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-            "kind": "unsupported",
-            "shape": "potency:M < N prone",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
           }
         ]
       ],
@@ -159842,48 +159037,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 3 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "The ability takes the Area keyword, loses the Melee keyword, and is a 1 burst that targets each enemy in the area.",
@@ -159893,7 +159046,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:9dce5bf0-f8cb-4447-9706-8ae8b9922340",
@@ -159942,10 +159095,15 @@
             "id": "salient:foe-feature:9dce5bf0-f8cb-4447-9706-8ae8b9922340#block:0:tier1:0:915c9fbe3596f97c",
             "locator": "block:0:tier1:0",
             "clause": "R < 3 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -159953,10 +159111,15 @@
             "id": "salient:foe-feature:9dce5bf0-f8cb-4447-9706-8ae8b9922340#block:0:tier2:0:e55cd48cc4e97217",
             "locator": "block:0:tier2:0",
             "clause": "R < 4 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -159964,10 +159127,15 @@
             "id": "salient:foe-feature:9dce5bf0-f8cb-4447-9706-8ae8b9922340#block:0:tier3:0:59966c0036152272",
             "locator": "block:0:tier3:0",
             "clause": "R < 5 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -159983,30 +159151,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "R < 3 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "R < 4 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "R < 5 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -160500,17 +159644,22 @@
         "path": "en/books/monsters/md/monster/goblin/statblock/war-spider.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
             "id": "salient:foe-feature:9e9b0433-58c7-4442-abb4-7cd6d6e6c961#block:0:tier1:0:3c37d486c6f81768",
             "locator": "block:0:tier1:0",
             "clause": "A < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -160518,10 +159667,15 @@
             "id": "salient:foe-feature:9e9b0433-58c7-4442-abb4-7cd6d6e6c961#block:0:tier2:0:96ae1d21d4870dbd",
             "locator": "block:0:tier2:0",
             "clause": "A < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -160529,10 +159683,15 @@
             "id": "salient:foe-feature:9e9b0433-58c7-4442-abb4-7cd6d6e6c961#block:0:tier3:0:112e2ad107f87316",
             "locator": "block:0:tier3:0",
             "clause": "A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -160546,34 +159705,9 @@
           "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "A < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "A < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -162202,10 +161336,15 @@
             "id": "salient:foe-feature:a15abf38-3918-4a36-b82c-ac108069b612#block:0:tier1:0:4ea55d8ded2bbfbe",
             "locator": "block:0:tier1:0",
             "clause": "R < 3 taunted (EoT)",
-            "kind": "unsupported",
-            "shape": "potency:R < N taunted (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": ""
           }
         ],
         [
@@ -162213,10 +161352,15 @@
             "id": "salient:foe-feature:a15abf38-3918-4a36-b82c-ac108069b612#block:0:tier2:0:979cdddc62e22063",
             "locator": "block:0:tier2:0",
             "clause": "R < 4 taunted (EoT)",
-            "kind": "unsupported",
-            "shape": "potency:R < N taunted (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": ""
           }
         ],
         [
@@ -162224,10 +161368,15 @@
             "id": "salient:foe-feature:a15abf38-3918-4a36-b82c-ac108069b612#block:0:tier3:0:81d3f893049641f0",
             "locator": "block:0:tier3:0",
             "clause": "R < 5 taunted (EoT)",
-            "kind": "unsupported",
-            "shape": "potency:R < N taunted (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "taunted",
+            "duration": "eot",
+            "after": ""
           }
         ]
       ],
@@ -162243,30 +161392,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "R < 3 taunted (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "R < 4 taunted (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "R < 5 taunted (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -162674,12 +161799,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -164470,19 +163589,23 @@
             "id": "salient:foe-feature:a564e089-adb4-45d5-8695-ca71d2cb57eb#block:1:tier1:0:81fdc05d679c069c",
             "locator": "block:1:tier1:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:a564e089-adb4-45d5-8695-ca71d2cb57eb#block:1:tier1:1:f56dff37abd2516e",
             "locator": "block:1:tier1:1",
             "clause": "I < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -164490,19 +163613,23 @@
             "id": "salient:foe-feature:a564e089-adb4-45d5-8695-ca71d2cb57eb#block:1:tier2:0:81fdbe5d679c0336",
             "locator": "block:1:tier2:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:a564e089-adb4-45d5-8695-ca71d2cb57eb#block:1:tier2:1:d1d517cdd7512933",
             "locator": "block:1:tier2:1",
             "clause": "I < 3 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -164510,19 +163637,23 @@
             "id": "salient:foe-feature:a564e089-adb4-45d5-8695-ca71d2cb57eb#block:1:tier3:0:81fdbf5d679c04e9",
             "locator": "block:1:tier3:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:a564e089-adb4-45d5-8695-ca71d2cb57eb#block:1:tier3:1:c615e4f68425b604",
             "locator": "block:1:tier3:1",
             "clause": "I < 4 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -164538,48 +163669,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:1",
-          "clause": "I < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:1",
-          "clause": "I < 3 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:1",
-          "clause": "I < 4 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:0:0",
@@ -164602,7 +163691,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:a5990c9d-76ac-4f83-8363-8081f2f7cef1",
@@ -172386,12 +171475,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "Vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
@@ -177497,12 +176580,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier2-damage-outside-grammar"
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:0",
           "clause": "8 damage, 4 corruption damage",
@@ -178798,12 +177875,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -181232,10 +180303,10 @@
             "id": "salient:foe-feature:c2df5038-0c4e-4fe7-983c-bf0f4a4f8ac6#block:0:tier1:0:9d6cfa2672458551",
             "locator": "block:0:tier1:0",
             "clause": "Pull 1",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 1,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:c2df5038-0c4e-4fe7-983c-bf0f4a4f8ac6#block:0:tier1:1:35f763ccebe62c0d",
@@ -181252,10 +180323,10 @@
             "id": "salient:foe-feature:c2df5038-0c4e-4fe7-983c-bf0f4a4f8ac6#block:0:tier2:0:9d6cf72672458038",
             "locator": "block:0:tier2:0",
             "clause": "Pull 2",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 2,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:c2df5038-0c4e-4fe7-983c-bf0f4a4f8ac6#block:0:tier2:1:45bb4f7886b8c6f4",
@@ -181272,10 +180343,10 @@
             "id": "salient:foe-feature:c2df5038-0c4e-4fe7-983c-bf0f4a4f8ac6#block:0:tier3:0:9d6cf826724581eb",
             "locator": "block:0:tier3:0",
             "clause": "Pull 3",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:c2df5038-0c4e-4fe7-983c-bf0f4a4f8ac6#block:0:tier3:1:45bb457886b8b5f6",
@@ -181301,18 +180372,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "Pull 1",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:1",
           "clause": "the target has a Deathcount of 10",
@@ -181320,20 +180379,8 @@
         },
         {
           "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "Pull 2",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:1",
           "clause": "the target has a Deathcount of 8",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "Pull 3",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -181364,7 +180411,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:c31d2e95-6f32-4b24-8b1a-b08ad032119e",
@@ -182120,10 +181167,15 @@
             "id": "salient:foe-feature:c50355d0-c566-485c-bf6f-e39b18d7cf04#block:0:tier1:0:2a915d168c355fda",
             "locator": "block:0:tier1:0",
             "clause": "A < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -182151,18 +181203,6 @@
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "A < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:0",
@@ -185261,10 +184301,10 @@
             "id": "salient:foe-feature:cb586682-4ef9-4b49-8eae-176f83006b22#block:0:tier1:0:f9311fe88ff756fe",
             "locator": "block:0:tier1:0",
             "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:cb586682-4ef9-4b49-8eae-176f83006b22#block:0:tier1:1:dc47912a268eea0b",
@@ -185281,10 +184321,10 @@
             "id": "salient:foe-feature:cb586682-4ef9-4b49-8eae-176f83006b22#block:0:tier2:0:f93121e88ff75a64",
             "locator": "block:0:tier2:0",
             "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:cb586682-4ef9-4b49-8eae-176f83006b22#block:0:tier2:1:6e3690968d5885a0",
@@ -185301,10 +184341,10 @@
             "id": "salient:foe-feature:cb586682-4ef9-4b49-8eae-176f83006b22#block:0:tier3:0:f93123e88ff75dca",
             "locator": "block:0:tier3:0",
             "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
-            "kind": "unsupported",
-            "shape": "pull N",
-            "reason": "pull",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 7,
+            "movement": "pull",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:cb586682-4ef9-4b49-8eae-176f83006b22#block:0:tier3:1:e9af21190f8a0d2d",
@@ -185330,18 +184370,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:1",
           "clause": "M < 2 5 corruption damage",
@@ -185349,20 +184377,8 @@
         },
         {
           "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:1",
           "clause": "M < 3 5 corruption damage",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -185381,7 +184397,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:cb588e68-abdc-47e3-baaf-286ed3450f5d",
@@ -186935,10 +185951,15 @@
             "id": "salient:foe-feature:cebe3916-443e-4b48-881d-c383b9c950f2#block:1:tier1:0:112e2ad107f87316",
             "locator": "block:1:tier1:0",
             "clause": "A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -186946,10 +185967,15 @@
             "id": "salient:foe-feature:cebe3916-443e-4b48-881d-c383b9c950f2#block:1:tier2:0:0410b44455fa183b",
             "locator": "block:1:tier2:0",
             "clause": "A < 3 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -186957,10 +185983,15 @@
             "id": "salient:foe-feature:cebe3916-443e-4b48-881d-c383b9c950f2#block:1:tier3:0:1ff76da9c4cc5574",
             "locator": "block:1:tier3:0",
             "clause": "A < 4 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N restrained (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -186985,30 +186016,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:0",
-          "clause": "A < 3 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:0",
-          "clause": "A < 4 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:0:0",
@@ -187879,10 +186886,9 @@
             "id": "salient:foe-feature:d0bf4997-10a2-46ca-943b-88cbad99c3bc#block:1:tier1:0:81fdc15d679c084f",
             "locator": "block:1:tier1:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 3,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:d0bf4997-10a2-46ca-943b-88cbad99c3bc#block:1:tier1:1:2d3515635548068e",
@@ -187899,10 +186905,9 @@
             "id": "salient:foe-feature:d0bf4997-10a2-46ca-943b-88cbad99c3bc#block:1:tier2:0:81fdbe5d679c0336",
             "locator": "block:1:tier2:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 4,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:d0bf4997-10a2-46ca-943b-88cbad99c3bc#block:1:tier2:1:14dde6183ad94005",
@@ -187919,10 +186924,9 @@
             "id": "salient:foe-feature:d0bf4997-10a2-46ca-943b-88cbad99c3bc#block:1:tier3:0:81fdbf5d679c04e9",
             "locator": "block:1:tier3:0",
             "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
-            "kind": "unsupported",
-            "shape": "push N (not directly after damage)",
-            "reason": "push-with-extra",
-            "dependency": "unknown"
+            "kind": "push",
+            "distance": 5,
+            "after": ""
           },
           {
             "id": "salient:foe-feature:d0bf4997-10a2-46ca-943b-88cbad99c3bc#block:1:tier3:1:2ab662b7a11babf0",
@@ -187948,18 +186952,6 @@
       ],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier1:1",
           "clause": "A < 0 the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is vertical",
@@ -187967,20 +186959,8 @@
         },
         {
           "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier2:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
           "locator": "block:1:tier2:1",
           "clause": "A < 1 the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is vertical",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:0",
-          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -187999,7 +186979,7 @@
       "live": "legacy-compatibility",
       "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
-      "movementFacts": "No compiled push."
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
       "id": "salient:foe-feature:d105b74f-38d8-42ec-827c-fe114655bb47",
@@ -189226,12 +188206,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -194114,10 +193088,15 @@
             "id": "salient:foe-feature:d9da2d8e-6716-4485-bf16-99785cb4d612#block:0:tier1:0:e112ec43e4f50614",
             "locator": "block:0:tier1:0",
             "clause": "I < 0 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -194125,10 +193104,15 @@
             "id": "salient:foe-feature:d9da2d8e-6716-4485-bf16-99785cb4d612#block:0:tier2:0:e09e246c221ab91d",
             "locator": "block:0:tier2:0",
             "clause": "I < 1 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -194136,10 +193120,15 @@
             "id": "salient:foe-feature:d9da2d8e-6716-4485-bf16-99785cb4d612#block:0:tier3:0:c5896431fbc20e62",
             "locator": "block:0:tier3:0",
             "clause": "I < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N dazed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -194155,30 +193144,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "I < 0 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "I < 1 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "I < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -195215,10 +194180,15 @@
             "id": "salient:foe-feature:dbca9e36-1c22-4c39-8545-f49ea23d131d#block:0:tier1:0:f4b4de86958a7d88",
             "locator": "block:0:tier1:0",
             "clause": "I < 0 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -195226,10 +194196,15 @@
             "id": "salient:foe-feature:dbca9e36-1c22-4c39-8545-f49ea23d131d#block:0:tier2:0:036031371e297ebd",
             "locator": "block:0:tier2:0",
             "clause": "I < 1 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -195237,10 +194212,15 @@
             "id": "salient:foe-feature:dbca9e36-1c22-4c39-8545-f49ea23d131d#block:0:tier3:0:f56dff37abd2516e",
             "locator": "block:0:tier3:0",
             "clause": "I < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -195256,30 +194236,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "I < 0 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "I < 1 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "I < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -195630,12 +194586,6 @@
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -201417,10 +200367,15 @@
             "id": "salient:foe-feature:e9ff2a6b-7f6f-46bf-91b6-8036321af541#block:0:tier1:0:1a02c25dd32fff3c",
             "locator": "block:0:tier1:0",
             "clause": "P < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -201428,10 +200383,15 @@
             "id": "salient:foe-feature:e9ff2a6b-7f6f-46bf-91b6-8036321af541#block:0:tier2:0:f440971356eabc77",
             "locator": "block:0:tier2:0",
             "clause": "P < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -201439,10 +200399,15 @@
             "id": "salient:foe-feature:e9ff2a6b-7f6f-46bf-91b6-8036321af541#block:0:tier3:0:ba4beacc9ef04d2a",
             "locator": "block:0:tier3:0",
             "clause": "P < 3 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < N slowed (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": ""
           }
         ]
       ],
@@ -201458,30 +200423,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "P < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "P < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "P < 3 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -203329,10 +202270,13 @@
             "id": "salient:foe-feature:ed53a706-5794-4c1d-9262-c5c17ead44ec#block:0:tier1:0:46c957a5238d373e",
             "locator": "block:0:tier1:0",
             "clause": "[Frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT)",
-            "kind": "unsupported",
-            "shape": "frightened (eot)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "frightened",
+            "duration": "eot",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:ed53a706-5794-4c1d-9262-c5c17ead44ec#block:0:tier1:1:6c3e03914997d645",
@@ -203349,10 +202293,13 @@
             "id": "salient:foe-feature:ed53a706-5794-4c1d-9262-c5c17ead44ec#block:0:tier2:0:46c957a5238d373e",
             "locator": "block:0:tier2:0",
             "clause": "[Frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT)",
-            "kind": "unsupported",
-            "shape": "frightened (eot)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "frightened",
+            "duration": "eot",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:ed53a706-5794-4c1d-9262-c5c17ead44ec#block:0:tier2:1:5584682d7567da56",
@@ -203369,10 +202316,13 @@
             "id": "salient:foe-feature:ed53a706-5794-4c1d-9262-c5c17ead44ec#block:0:tier3:0:46c957a5238d373e",
             "locator": "block:0:tier3:0",
             "clause": "[Frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT)",
-            "kind": "unsupported",
-            "shape": "frightened (eot)",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "frightened",
+            "duration": "eot",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:ed53a706-5794-4c1d-9262-c5c17ead44ec#block:0:tier3:1:3c30d16119c3a1b7",
@@ -203388,18 +202338,6 @@
       "sections": [],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "[Frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:1",
           "clause": "if the target has I < 2 they are instead [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
@@ -203407,20 +202345,8 @@
         },
         {
           "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "[Frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:1",
           "clause": "if the target has I < 3 they are instead [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (EoT)",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -204934,12 +203860,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
@@ -208524,10 +207444,15 @@
             "id": "salient:foe-feature:f99d076d-de2a-4bf3-8714-2feb7ce4f14e#block:1:tier1:0:3451f0e2629f7c0c",
             "locator": "block:1:tier1:0",
             "clause": "P < 5 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:P < N frightened (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": ""
           }
         ],
         [
@@ -208565,18 +207490,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier1:0",
-          "clause": "P < 5 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "unsafe-tier-remainder",
           "locator": "block:1:tier2:0",
@@ -211031,10 +209944,15 @@
             "id": "salient:foe-feature:fee828d9-0cd9-4111-9bd0-ee16169f7186#block:0:tier1:0:ad88116bc5968268",
             "locator": "block:0:tier1:0",
             "clause": "I < 0 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-            "kind": "unsupported",
-            "shape": "potency:I < N prone",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
           }
         ],
         [
@@ -211053,10 +209971,13 @@
             "id": "salient:foe-feature:fee828d9-0cd9-4111-9bd0-ee16169f7186#block:0:tier3:0:c95368ada5590ae5",
             "locator": "block:0:tier3:0",
             "clause": "[Prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-            "kind": "unsupported",
-            "shape": "prone",
-            "reason": "condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "threshold": {
+              "kind": "always"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
           },
           {
             "id": "salient:foe-feature:fee828d9-0cd9-4111-9bd0-ee16169f7186#block:0:tier3:1:6db6ccdeaa3a9853",
@@ -211072,27 +209993,9 @@
       "sections": [],
       "diagnostics": [
         {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "tier1-damage-outside-grammar"
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:0",
-          "clause": "I < 0 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier2:0",
           "clause": "I < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:0",
-          "clause": "[Prone](scc.v1:mcdm.heroes.v1/condition/prone)",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -214584,8 +213487,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 136,
-    "compatibility": 1485,
+    "compiled": 143,
+    "compatibility": 1478,
     "compiledButUnavailable": 0
   }
 }

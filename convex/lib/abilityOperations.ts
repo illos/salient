@@ -2010,7 +2010,8 @@ const abilityCorrect: OperationDefinition = {
     const correctedOccurrences = (revision: string) =>
       savedCompiled && correctedCompiled?.kind === 'resolved'
         ? correctedCompiled.effects.flatMap(effect => {
-            if (effect.kind !== 'rider' && effect.targetId !== entry.target.id) {
+            // V154: tier instructions belong to their target, like its other tier effects.
+            if ((effect.kind !== 'rider' || effect.tier) && effect.targetId !== entry.target.id) {
               const kept = savedCompiled.effects.find(
                 o => o.effect.nodeId === effect.nodeId && o.effect.targetId === effect.targetId,
               );

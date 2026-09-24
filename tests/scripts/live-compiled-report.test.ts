@@ -160,6 +160,14 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Disorientate',
       'Numb',
       'Poison Fumes',
+      // V154: tiers without damage and whole tier clauses that are table work.
+      'In a Puff of Ash',
+      'Battle Cry',
+      'Inspiring Strike',
+      'Power Chord',
+      'Fade',
+      'Muddle the Mind',
+      'Web',
     ].sort(),
   );
   expect(

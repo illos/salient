@@ -6,6 +6,7 @@ import type {
   DamageExpression,
   SourceRef,
 } from '../contracts/rollResolution.ts';
+import { tierInstruction } from './effectRiders.ts';
 import {
   blocksFromMarkdown,
   classify,
@@ -80,7 +81,18 @@ export interface RiderNode extends NodeSource {
   shape: import('./effectRiders.ts').EffectRider['shape'];
   dependency: 'independent' | 'after-damage' | 'after-movement' | 'after-effects';
 }
-export type CompiledNode = DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode;
+/**
+ * V154 tier instruction: a whole tier clause that is table work for that target's outcome (a
+ * teleport, shift, Recovery or surge instruction). It never changes state.
+ */
+export interface InstructionNode extends NodeSource {
+  kind: 'instruction';
+  shape: import('./effectRiders.ts').EffectRider['shape'];
+  /** The tier's damage node, or '' in a tier without damage. */
+  after: string;
+}
+export type CompiledNode =
+  DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -189,7 +201,12 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       '',
       'Content identity, source path and revision are required.',
     );
-  if (grammar.category === 'NO_MATCH')
+  // V154: a tier that opens without damage is judged clause by clause in the tier loop below,
+  // which diagnoses every clause it can't support; other grammar failures stay fatal here.
+  if (
+    grammar.category === 'NO_MATCH' &&
+    !/^tier[123]-damage-outside-grammar$/.test(grammar.reason ?? '')
+  )
     diagnose('grammar', 'envelope', '', grammar.reason ?? 'No bounded power roll.');
 
   let rollIndex = -1;
@@ -247,6 +264,9 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       const clauses = text.split(';');
       // V153: whether every clause so far was damage then supported push/condition work.
       let intact = true;
+      // V154: a tier whose first clause is supported work rather than damage (Power Chord's
+      // "Push 1", Battle Cry's "Each target gains 1 surge").
+      let damageFree = false;
       clauses.forEach((raw, ordinal) => {
         const clause = raw.trim();
         if (!clause) {
@@ -269,7 +289,9 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         // V113: tier effects follow the damage in printed order (rule/dice/ability-roll.md), so a
         // run of supported push/condition clauses directly after the damage clause is admitted.
         const damage = nodes[0]?.kind === 'damage' ? nodes[0] : undefined;
-        const supportedRun = ordinal >= 1 && damage !== undefined && intact;
+        if (ordinal === 0) damageFree = true;
+        const supportedRun = intact && (damage !== undefined || damageFree);
+        const after = damage?.id ?? '';
         const forced = forcedMovementExpression(clause);
         if (supportedRun && forced) {
           nodes.push({
@@ -278,7 +300,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
             distance: forced.distance,
             ...(forced.movement !== 'push' ? { movement: forced.movement } : {}),
             ...(forced.vertical ? { vertical: true as const } : {}),
-            after: damage.id,
+            after,
           });
           return;
         }
@@ -288,7 +310,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
             ...sourceNode(envelope, tierLocator, ordinal, clause),
             kind: 'condition',
             ...condition,
-            after: damage.id,
+            after,
           });
           return;
         }
@@ -305,7 +327,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
               threshold: compound.threshold,
               condition: name,
               duration: compound.duration,
-              after: damage.id,
+              after,
               group: base.id,
             });
           return;
@@ -318,7 +340,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
             id: `${base.id}~condition`,
             kind: 'condition',
             ...both.condition,
-            after: damage.id,
+            after,
           });
           nodes.push({
             ...base,
@@ -327,7 +349,18 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
             distance: both.movement.distance,
             ...(both.movement.movement !== 'push' ? { movement: both.movement.movement } : {}),
             ...(both.movement.vertical ? { vertical: true as const } : {}),
-            after: damage.id,
+            after,
+          });
+          return;
+        }
+        // V154: tier table work, after the tier's damage when it has any.
+        const instruction = tierInstruction(plain(clause));
+        if (supportedRun && instruction) {
+          nodes.push({
+            ...sourceNode(envelope, tierLocator, ordinal, clause),
+            kind: 'instruction',
+            shape: instruction.shape,
+            after,
           });
           return;
         }
@@ -510,12 +543,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
     diagnose('cost', 'header:cost', envelope.cost, 'Activation cost cannot be safely read.');
   const source = { id: envelope.id, path: envelope.sourcePath, revision: envelope.sourceRevision };
   let metadata: AbilityRollMetadata | undefined;
-  if (
-    action &&
-    grammar.roll &&
-    tiers.every(nodes => nodes[0]?.kind === 'damage') &&
-    rollIndex >= 0
-  ) {
+  if (action && grammar.roll && tiers.every(nodes => nodes.length > 0) && rollIndex >= 0) {
     const block = envelope.blocks[rollIndex] as Extract<Block, { kind: 'roll' }>;
     metadata = {
       abilityId: envelope.id,
@@ -532,11 +560,11 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         ? { fixedCost: { resource: cost[2]!.toLowerCase(), amount: Number(cost[1]) } }
         : {}),
       tiers: tiers.map((nodes, index) => {
-        const damage = nodes[0] as DamageNode;
+        const damage = nodes[0]?.kind === 'damage' ? nodes[0] : undefined;
         return {
           text: block.tiers[index]!,
-          damage: damage.expression,
-          ...(damage.damageType ? { damageType: damage.damageType } : {}),
+          ...(damage ? { damage: damage.expression } : {}),
+          ...(damage?.damageType ? { damageType: damage.damageType } : {}),
           unresolvedClauses: nodes
             .filter(node => node.kind === 'unsupported')
             .map(node => node.clause),
