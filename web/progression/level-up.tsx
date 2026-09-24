@@ -21,7 +21,7 @@ import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import { changeChoice } from '../../shared/evaluate/choiceTransition';
 import { reconciledCurrent } from '../../shared/evaluate/liveReconciliation';
 import { indexDecisions, isAvailable, type Selections } from '../../shared/evaluate/structure';
-import type { Step } from '../../shared/evaluate/definitions';
+import type { Decision, Step } from '../../shared/evaluate/definitions';
 import { DecisionEditor } from '../wizard';
 import { HeroSoFar } from '../wizard/hero-so-far';
 import { StepRail, type RailStep } from '../wizard/rail';
@@ -177,11 +177,38 @@ function LevelUp({
   // One rail row per choice this level asks of this hero (automatic grants appear in the review),
   // then the review step.
   const index = indexDecisions(definitions);
-  const choiceSteps = definitions.steps.flatMap(step =>
+  // A choice that depends on another of this level's choices (a perk's target) joins its parent's
+  // step, directly under it, rather than becoming a later step of its own.
+  const available = definitions.steps.flatMap(step =>
     step.decisions
       .filter(d => newIds.has(d.id) && d.kind === 'choice' && isAvailable(d, merged, index))
-      .map(decision => ({ step, decisions: [decision] })),
+      .map(decision => ({ step, decision })),
   );
+  const availableIds = new Set(available.map(({ decision }) => decision.id));
+  const parentOf = (decision: Decision) =>
+    [
+      decision.availableWhen?.decision,
+      ...(decision.conditions ?? []).map(condition => condition.decision),
+      ...(decision.dependsOn ?? []),
+      ...(decision.dependsOnAny ?? []),
+    ].find(id => id !== undefined && id !== decision.id && availableIds.has(id));
+  const byId = new Map(available.map(entry => [entry.decision.id, entry.decision]));
+  const rootOf = (decision: Decision): string => {
+    const seen = new Set<string>();
+    let current = decision;
+    for (let parent = parentOf(current); parent && !seen.has(parent); parent = parentOf(current)) {
+      seen.add(parent);
+      current = byId.get(parent)!;
+    }
+    return current.id;
+  };
+  const choiceSteps: { step: Step; decisions: Decision[] }[] = [];
+  for (const { step, decision } of available) {
+    const root = rootOf(decision);
+    const group = choiceSteps.find(entry => entry.decisions[0]!.id === root);
+    if (group) group.decisions.push(decision);
+    else choiceSteps.push({ step: step as Step, decisions: [decision] });
+  }
   const problemsFor = (ids: string[]) =>
     ids.reduce(
       (sum, id) =>
