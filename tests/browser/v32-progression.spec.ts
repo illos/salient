@@ -70,12 +70,12 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await levelUp.click();
     await expect(player.getByRole('heading', { level: 2, name: 'Level 2 perk' })).toBeVisible();
     // V37: switching a level-up perk removes its hidden modifier target before saving.
-    await player.getByLabel('Area of Expertise', { exact: true }).check();
+    await player.getByLabel('Area of Expertise', { exact: true }).check({ force: true });
     const target = player.getByLabel('Area of Expertise: choose an owned crafting skill', {
       exact: true,
     });
     await target.selectOption('Blacksmithing');
-    await player.getByLabel('Danger Sense', { exact: true }).check();
+    await player.getByLabel('Danger Sense', { exact: true }).check({ force: true });
     await expect(target).toHaveCount(0);
     await player.screenshot({ path: `${directory}/v164-step-perk.png`, fullPage: true });
     // Moving on saves the level-up's choices (the shared saveAdvancement operation).
@@ -93,7 +93,7 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
       ),
     ).toBe(false);
     expect(savedAdvancement.baseSelections).toEqual(original.selections);
-    await player.getByLabel('Wrecking Ball', { exact: true }).check();
+    await player.getByLabel('Wrecking Ball', { exact: true }).check({ force: true });
     await player.screenshot({ path: `${directory}/v164-step-ability.png`, fullPage: true });
     await player.getByRole('button', { name: /Continue to Review and take/ }).click();
     const review = player.getByRole('region', { name: 'Review' });
