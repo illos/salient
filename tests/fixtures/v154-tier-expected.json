@@ -1,0 +1,331 @@
+{
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "method": "V154 tier instructions and tiers without damage. Builds reuse reviewed source-derived witnesses unchanged (paths in each 'base'). Every roll here adds a characteristic score of 2 (rollScore). The expected tier is derived from the persisted dice alone: natural roll = d10a + d10b (rule/dice/natural-roll.md); a natural 19 or 20 is always tier 3; otherwise total = natural + rollScore, tier 1 at 11 or lower, tier 2 at 12-16, tier 3 at 17 or higher (rule/dice/tier-outcome.md); a double bane lowers the tier by one to a minimum of tier 1 (rule/dice/bane.md) and a double edge raises it by one to a maximum of tier 3 (rule/dice/edge.md). damageByTier is handwritten arithmetic from the pinned ability or kit file: printed tier constants + the named characteristic score + the kit damage bonus of the chosen mode for Melee+Weapon / Ranged+Weapon abilities (chapter/kits.md Damage Bonuses), never on a kit signature, whose damage already includes its kit's bonuses (chapter/kits.md Kit Signature Ability). Instruction clauses are the printed tier clause after the damage with link markup removed; tier effects occur after the damage in printed order (rule/dice/ability-roll.md, Abilities With Damage and Effects). Forced movement, teleport, shift, Recovery and surge clauses are table instructions that change no state in V154 (docs/build/V154-tier-instructions.md). Nothing is derived from the evaluator, compiler or a run of the code under test.",
+  "target": {
+    "id": "v99-creation",
+    "base": "tests/fixtures/v152-riders-expected.json target (tests/fixtures/v99-censor-expected.json v99-creation, unchanged); admitted twice as target A and target B",
+    "note": "Human Censor, no damage immunity or weakness (class/censor.md, ancestry/human.md); Determination and Can't Take Hold are optional player choices, not automatic (feature/trait/human/*.md). Stamina is set to 40 before each damage use (adjust.stamina has no maximum clamp).",
+    "selections": {
+      "culture.name": "wilderness mercenary commune",
+      "culture.language": "Anjali",
+      "culture.environment": "Wilderness",
+      "culture.environment.skill": "Swim",
+      "culture.organization": "Communal",
+      "culture.organization.skill": "Blacksmithing",
+      "culture.upbringing": "Martial",
+      "culture.upbringing.skill": "Intimidate",
+      "career.choice": "Soldier",
+      "career.soldier.skill.exploration": "Endurance",
+      "career.soldier.skill.intrigue": "Alertness",
+      "career.soldier.languages": ["Kalliak", "Vaslorian"],
+      "career.soldier.perk": "Teamwork",
+      "career.soldier.inciting-incident": "Sole Survivor",
+      "ancestry.choice": "Human",
+      "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+      "kit.choice": "Cloak and Dagger",
+      "details.name": "V99 Censor Creation",
+      "class.choice": "Censor",
+      "class.censor.characteristic-array": "2, −1, −1",
+      "class.censor.array-assignment": {
+        "Agility": 2,
+        "Reason": -1,
+        "Intuition": -1
+      },
+      "class.censor.skills": ["History", "Persuade"],
+      "class.censor.order": "Exorcist",
+      "class.censor.deity": "Val",
+      "class.censor.domain": "Creation",
+      "class.censor.domain-skill": "Tailoring",
+      "class.censor.signature-ability": "Back Blasphemer!",
+      "class.censor.ability-3": "Behold a Shield of Faith!",
+      "class.censor.ability-5": "Arrest"
+    },
+    "characteristics": {
+      "M": 2,
+      "A": 2,
+      "R": -1,
+      "I": -1,
+      "P": 2
+    },
+    "stamina": 40
+  },
+  "witnesses": [
+    {
+      "id": "troubadour-virtuoso-sniper",
+      "level": 1,
+      "class": "Troubadour",
+      "kit": "Sniper",
+      "base": "tests/fixtures/v102-troubadour-expected.json v102-3 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V102 Virtuoso Sniper",
+        "class.choice": "Troubadour",
+        "class.troubadour.class-act": "Virtuoso",
+        "class.troubadour.characteristic-array": "1, 0, 0",
+        "class.troubadour.array-assignment": {
+          "Might": 1,
+          "Reason": 0,
+          "Intuition": 0
+        },
+        "class.troubadour.skills.interpersonal": ["Flirt", "Lead"],
+        "class.troubadour.skills.intrigue-lore": ["Rumors"],
+        "class.troubadour.signature-ability": "Instigator",
+        "class.troubadour.ability-3": "Quick Rewrite",
+        "class.troubadour.ability-5": "Flip the Script",
+        "kit.choice": "Sniper"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 2,
+        "R": 0,
+        "I": 0,
+        "P": 2
+      },
+      "actions": [
+        {
+          "name": "Power Chord",
+          "use": "area-push",
+          "cost": 0,
+          "source": "feature/ability/troubadour/level-1/power-chord.md",
+          "rollScore": 2,
+          "pushByTier": [1, 2, 3],
+          "derivation": "Area, Magic maneuver, 2 burst, each enemy in the area; Power Roll + Presence (Troubadour P 2, class/troubadour.md Basics). Tiers print only Push 1 / Push 2 / Push 3: no damage, so no kit bonus applies; an ordinary push (movement/forced-movement.md), one per target by that target's tier. Granted by the Virtuoso class act (feature/troubadour/level-1/1st-level-class-act-features.md); no Drama cost."
+        }
+      ]
+    },
+    {
+      "id": "tactician-insurgent",
+      "level": 1,
+      "class": "Tactician",
+      "kit": "Shining Armor + Sniper",
+      "base": "tests/fixtures/v94-tactician-expected.json v94-tactician-1 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "2, −1, −1",
+        "class.tactician.array-assignment": {
+          "Agility": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Insurgent",
+        "class.tactician.doctrine-skill": "Hide",
+        "class.tactician.ability-3": "Battle Cry",
+        "class.tactician.ability-5": "Hammer and Anvil",
+        "kit.choice": "Shining Armor",
+        "class.tactician.second-kit": "Sniper",
+        "details.name": "V94 Tactician 1"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 2,
+        "I": -1,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "Battle Cry",
+          "use": "ally-surges",
+          "cost": 3,
+          "source": "feature/ability/tactician/level-1/battle-cry.md",
+          "rollScore": 2,
+          "shape": "surges",
+          "clauseByTier": [
+            "Each target gains 1 surge.",
+            "Each target gains 2 surges.",
+            "Each target gains 3 surges."
+          ],
+          "derivation": "Ranged maneuver, Ranged 10, three allies, cost 3 Focus; Power Roll + Reason (Tactician R 2, class/tactician.md Basics). Tiers print only the surge sentence: no damage. Surge gains stay table work (resource/surge.md; executed surge gains are out of V154 scope), so no target's surges change."
+        }
+      ]
+    },
+    {
+      "id": "shadow-black-ash-l2",
+      "level": 2,
+      "class": "Shadow",
+      "kit": "Cloak and Dagger",
+      "base": "tests/fixtures/v97-shadow-two-expected.json v97-shadow-1-1 (unchanged, level 2)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "2, 2, −1, −1",
+        "class.shadow.array-assignment": {
+          "Might": 2,
+          "Reason": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Black Ash",
+        "class.shadow.signature-ability": "Gasping in Pain",
+        "class.shadow.ability-3": "Disorienting Strike",
+        "class.shadow.ability-5": "Coup de Grace",
+        "kit.choice": "Cloak and Dagger",
+        "details.name": "V92 Shadow 1",
+        "class.shadow.level-2.burning-ash-ability": "In a Puff of Ash",
+        "class.shadow.level-2.perk": "Danger Sense"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 2,
+        "I": -1,
+        "P": -1
+      },
+      "actions": [
+        {
+          "name": "In a Puff of Ash",
+          "use": "damage-instruction",
+          "cost": 5,
+          "mode": "melee",
+          "source": "feature/ability/shadow/level-2/in-a-puff-of-ash.md",
+          "rollScore": 2,
+          "damageByTier": [9, 13, 17],
+          "shape": "teleport",
+          "clauseByTier": [
+            "you can teleport the target 1 square",
+            "you can teleport the target up to 3 squares",
+            "you can teleport the target up to 5 squares"
+          ],
+          "derivation": "Magic, Melee, Ranged, Strike, Weapon (5 Insight), used in melee mode (rule/combat/distance.md: one mode's bonus only): 6/10/14 + A 2 + kit/cloak-and-dagger.md melee +1/+1/+1 = 9/13/17 (the ranged bonus is also +1/+1/+1, so either mode gives the same). Shadow Insight is reduced only with an edge (feature/shadow/level-1/insight.md); the use has none."
+        },
+        {
+          "name": "Fade",
+          "use": "damage-instruction",
+          "cost": 0,
+          "mode": "melee",
+          "source": "kit/cloak-and-dagger.md",
+          "rollScore": 2,
+          "damageByTier": [5, 8, 10],
+          "shape": "shift",
+          "clauseByTier": [
+            "you can shift 1 square",
+            "you can shift up to 2 squares",
+            "you can shift up to 3 squares"
+          ],
+          "derivation": "Cloak and Dagger kit signature (Melee, Ranged, Strike, Weapon): 3/6/8 + M or A (both 2 for this build; rule/dice/ability-roll.md Characteristics and Damage) = 5/8/10; no kit bonus added, the signature already includes it (chapter/kits.md Kit Signature Ability). Same arithmetic as tests/fixtures/v102-troubadour-expected.json v102-2 Fade 5/8/10."
+        }
+      ]
+    },
+    {
+      "id": "tactician-vanguard",
+      "level": 1,
+      "class": "Tactician",
+      "kit": "Martial Artist + Mountain",
+      "base": "tests/fixtures/v94-tactician-expected.json v94-tactician-3 (unchanged; Field Arsenal melee damage from Mountain)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "1, 0, 0",
+        "class.tactician.array-assignment": {
+          "Agility": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Vanguard",
+        "class.tactician.doctrine-skill": "Persuade",
+        "class.tactician.ability-3": "Inspiring Strike",
+        "class.tactician.ability-5": "Now!",
+        "kit.choice": "Martial Artist",
+        "class.tactician.second-kit": "Mountain",
+        "details.name": "V94 Tactician 3",
+        "class.tactician.arsenal.stamina": "Mountain",
+        "class.tactician.arsenal.meleeDamage": "Mountain"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 1,
+        "R": 2,
+        "I": 0,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Inspiring Strike",
+          "use": "damage-instruction",
+          "cost": 3,
+          "mode": "melee",
+          "source": "feature/ability/tactician/level-1/inspiring-strike.md",
+          "rollScore": 2,
+          "damageByTier": [5, 7, 14],
+          "shape": "recovery",
+          "clauseByTier": [
+            "you or one ally within 10 squares of you can spend a Recovery",
+            "you or one ally within 10 squares of you can spend a Recovery",
+            "you and one ally within 10 squares of you can spend a Recovery, and each of you gains an edge on the next ability roll you make during the encounter"
+          ],
+          "derivation": "Melee, Ranged, Strike, Weapon (3 Focus), used in melee mode: 3/5/8 + M 2 + the melee damage bonus chosen under Field Arsenal (feature/tactician/level-1/field-arsenal.md: one kit's benefit when both grant it; this build takes kit/mountain.md +0/+0/+4 over kit/martial-artist.md +2/+2/+2, v94-tactician-3 mergedKitBonuses) = 5/7/14."
+        }
+      ]
+    }
+  ]
+}
