@@ -114,7 +114,13 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — train 8 (V155, V156)
+## Current release — V165 respite loop and V166 respite activities
+
+Backend/frontend source `1811a3f030bccb39290d02fcb77095a33f202803` published on 2026-09-24 as
+Worker `d2a08201-500d-4593-8405-21075ed16284`. Backend and schema validation, the hosted build and the upload succeeded. Content
+remains the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
+
+## Previous release — train 8 (V155, V156)
 
 Backend/frontend source `d266437b69f2f2f1c16693e547eda6f004a81c71` published on 2026-09-24 as
 Worker `dd30feb0-bf87-4f0d-b420-03b67b68cced`: can't-stand and the Shadow insight edge discount. Backend and schema validation, the

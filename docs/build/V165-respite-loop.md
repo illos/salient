@@ -54,3 +54,8 @@ start, and end by Cancel, Interrupt or Complete, with completion benefits and le
   `sessions:get`; exact rewind assertion, a hero left out stays untouched, start refused in combat;
   the headless cleanup interrupts an open respite without masking failures.
 - Review re-verification of `23a1269`: PASS (the empty-summary wording is also tidied).
+
+## Publication: 2026-09-24
+
+Merged with V165 and V166 stacked as main `1811a3f` and published as Worker `d2a08201-500d-4593-8405-21075ed16284`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V166-release-1811a3f`.

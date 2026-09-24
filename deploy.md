@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V166 | `1811a3f` | Merged with V165 and V166 stacked; backend/frontend published; gate and headless at tip | complete |
+| V165 | `1811a3f` | Merged with V165 and V166 stacked; backend/frontend published; gate and headless at tip | complete |
 | V156 | `d266437` | Merged in train 8; backend/frontend published; gate and headless at tip | complete |
 | V155 | `d266437` | Merged in train 8; backend/frontend published; gate and headless at tip | complete |
 | V163 | `b724eea` | Merged with V162 and V163 stacked; backend/frontend published; gate and headless at tip | complete |
@@ -696,3 +698,18 @@ discount were cherry-picked onto main `46286e8` and fast-forwarded as `d266437b6
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/train8-release-d266437`.
+
+### V165 respite loop and V166 respite activities publication: 2026-09-24
+
+WIZARD3 stacked V165 (respite start, cancel, interrupt and complete, blocking session close and
+combat start while one is open) and V166 (respite kit change and activities; cancel reverts kit
+changes) on main `945f642`. The test and deploy thread fast-forwarded main to `1811a3f030bccb39290d02fcb77095a33f202803`.
+- Full gate at the tip (260 s, 443 engine and 756 app tests); V165 alone also passed its gate.
+- Journeys at the tip: `respite` (1/1) and `all` (29/29, 195 s).
+- Independent rules reviews passed.
+- Backend publication and schema validation (`sessions.respite`), the hosted build and the frontend
+  upload succeeded. Worker `d2a08201-500d-4593-8405-21075ed16284`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V166-release-1811a3f`.

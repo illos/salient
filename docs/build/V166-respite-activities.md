@@ -48,3 +48,8 @@ at completion, and Cancel reverting respite choices.
   after Cancel; the owner resubmits. Tests: same kit, non-kit decision, peer refused, Director acting,
   Cancel after a later level-up.
 - Review re-verification of `2b3a216`: PASS.
+
+## Publication: 2026-09-24
+
+Merged with V165 and V166 stacked as main `1811a3f` and published as Worker `d2a08201-500d-4593-8405-21075ed16284`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V166-release-1811a3f`.
