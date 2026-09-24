@@ -183,6 +183,8 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Blur',
       // V158: a lasting Effect section that is table work, tracked as an effect instance.
       'Relentless Nemesis',
+      // V159: a stability modifier the engine applies, and 2 surges (effect-only).
+      'Squad! On Me!',
     ].sort(),
   );
   expect(
@@ -193,11 +195,12 @@ test('V72 availability follows current grants and loading, not catalog presence'
   ).toEqual([]);
 });
 
-// V157: exactly the seven effect-only abilities are counted; no foe ability is effect-only.
+// V157: the seven effect-only abilities, and V159's Squad! On Me!, are counted; no foe ability is
+// effect-only.
 test('V157 effect-only abilities are counted in the live report', () => {
   const report = liveCompiledSupportReport();
   const effectOnly = report.entries.filter(e => e.live === 'compiled' && e.effectOnly);
-  expect(report.liveCounts.compiledEffectOnly).toBe(7);
+  expect(report.liveCounts.compiledEffectOnly).toBe(8);
   expect(effectOnly.every(e => e.context.corpus === 'hero-standalone')).toBe(true);
 });
 
