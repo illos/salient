@@ -67,3 +67,6 @@ remains deferred.
   still allowed only level-1 Beastheart sources. The allow-list now matches the V137 admission
   (Beastheart levels 1–3, companion levels 1 and 3). Headless there: conduit, talent and
   beastheart-level-three all PASS (seed 1852).
+- The same gate stopped before `build:web`, whose reference-coverage pins (`scripts/check-web-budget.ts`)
+  still expected 122 Beastheart references. `pnpm rules:ingest` on this stack reads 2614 core and 253
+  supplemental (149 Beastheart, 104 Summoner), 2867 in total; the pins now say so.
