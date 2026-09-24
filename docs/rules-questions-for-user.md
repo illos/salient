@@ -1236,3 +1236,26 @@ Cancel restores participants' live values (damage taken and Recoveries spent) an
 choices; a level-up or an approved edit taken meanwhile is a separate operation and stays. Alternatives:
 revert those builds too, or block level-ups and edits for participants while a respite is open.
 Recommendation: keep the current behaviour; players often take their level-up whenever they get to it.
+
+## Q-EFFECT-1: when does "until the end of your next turn" end if used on your own turn? (V158)
+
+Open. No ability V158 compiles depends on it; the engine's binding is recorded here so a later
+slice that admits such a sentence does not rely on it silently.
+
+Example: Swarm of Spirits (`feature/ability/elementalist/level-3/swarm-of-spirits.md`), "Until the
+end of your next turn, …", used on the elementalist's own turn.
+
+What the sources say (pinned `en/unified/md`):
+- `rule/combat/end-of-turn.md` defines EoT for the target: "until the end of their next turn, or
+  the end of their current turn if the effect was imposed on their current turn".
+- Nothing printed defines "your next turn" for the user of the ability.
+
+Readings:
+- **(A)** Apply the EoT rule to the user as well: used on your turn, it ends at the end of that
+  turn. This is what V158 binds today (`shared/resolve/lastingEffects.ts`, `timingFor`).
+- **(B)** "Next" means the turn after the current one: used on your turn, it lasts through your
+  following turn.
+
+Recommendation: B for effects anchored to the user, since the EoT sentence speaks about the target
+and "next turn" otherwise reads as the following turn. The binding changes before any sentence
+with this anchor compiles.
