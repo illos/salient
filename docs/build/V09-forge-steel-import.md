@@ -87,15 +87,19 @@ Part a:
    at levels 1, 2 and 1.
 2. Malformed JSON, a non-hero object and a wrong field type are rejected; through the mutation they
    write no characters, revisions, imports or command receipts. An oversized file (> 512 KB) is
-   rejected the same way. A valid hero with null class or career imports as a partial draft.
+   rejected the same way. A valid hero with null class or career imports as a partial draft; an
+   unnamed hero is saved as "Imported hero" and over-long notes are shortened, each with a
+   diagnostic. Reusing a command id with a different file is rejected.
 3. The mutation makes the caller the owner of an unattached draft at revision 1 (no campaign, no
    effective build, no live state, no review) evaluated by the same path as `characters.create`,
    and stores the payload verbatim with its SHA-256 and the Forge pin. Another user cannot read it.
 4. Complications, titles, inventory, projects, ability customizations, non-default play state,
-   folders and extra sourcebooks each produce a diagnostic; a Forge choice without a scoped rule,
+   folders and sourcebooks outside core, orden, beastheart and summoner each produce a diagnostic
+   (the last is not listed as unmapped build data); diagnostic text, count and size are bounded; a Forge choice without a scoped rule,
    a value outside the decision's Compendium options, and a Forge choice where the Compendium grants
    a fixed value each produce a diagnostic and leave the decision empty.
-5. Imported hero ids, folders and campaign-looking state grant nothing.
+5. Imported hero ids, folders and campaign-looking state grant nothing. Account deletion removes
+   import rows, reading at most about 2 MiB of stored payload per purge step.
 6. No code path claims export support.
 
 Parts b and c: a Summoner or other unsupported selection is shown as unmapped in the UI; Stamina
@@ -123,7 +127,7 @@ damage and Recoveries used are reconciled per Q-V-3 with the rule cited.
   Salient points decision, borrowed Revenant traits excepted), culture (name, language,
   environment/organization/upbringing and their skills), career (name, inciting incident; Soldier
   and Mage's Apprentice features), class, subclass (via the class profile), characteristic array and
-  assignment (checked against the profile's fixed scores), single-kit slots, Fury levels 1–2 and
+  assignment (checked against the profile's fixed scores), the Berserker kit slot, Fury levels 1–2 and
   Elementalist level 1 skills, abilities, enchantment, ward and perks, details name and notes. Forge
   "free choice" slots the Compendium fixes (Fury Nature, Berserker Lift, Elementalist and
   Mage's Apprentice Magic, Caelian) are checked; Forge's Magic-collision replacement on the career
@@ -138,3 +142,20 @@ damage and Recoveries used are reconciled per Q-V-3 with the rule cited.
   tests/app/forge-import.test.ts` 10/10. Convex push of `git archive 7148cfe` to an anonymous local
   deployment: "Convex functions ready"; codegen matches the committed `_generated/api.d.ts` entries
   for the two new modules. TESTER has not run the suite or the `forge-import` headless cohort.
+- 2026-09-24: independent review FAILed; fixes in `13969f2`.
+  - Account deletion: import rows keep the payload in the row, but the purge now deletes them one
+    at a time under a 2 MiB payload-byte budget (`PURGE_IMPORT_BYTES`, rows store `payloadBytes`)
+    and continues in a scheduled step. File storage was not used: `ctx.storage.store` exists only
+    in actions, so the import would need an action plus an internal mutation, and a failure
+    between the two steps would leave an orphaned file. The byte budget keeps one mutation.
+  - Diagnostics: each string is capped at 200 characters (file text inside reasons at 40–60), with
+    at most 200 entries and 64 KB in total, plus an "omitted" summary entry.
+  - Sourcebooks: only ids outside core, orden, beastheart and summoner are noted, and they are not
+    listed as unmapped.
+  - Incomplete heroes: an empty name becomes "Imported hero" (`details.name` is left open), and names
+    over 100 characters or notes over 10,000 are shortened, each with a diagnostic.
+  - A decision whose options depend on a parent choice offers only that parent's options. The
+    generic kit rule is replaced by the scoped Berserker kit rule.
+  - Checks: both `tsc` configs clean, `pnpm -s lint` clean, `vitest run tests/forge-import.test.ts
+    tests/app/forge-import.test.ts` 19/19, and the Convex push of `13969f2` reported "Convex
+    functions ready" with the two `characterImports` indexes added.
