@@ -164,3 +164,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V166 | [Respite activities](V166-respite-activities.md) | Merged (`1811a3f`); cloud dev published; gate and headless PASS at tip |
 | V168 | [Field Arsenal choices stay locked mid-respite](V168-field-arsenal-lock.md) | Merged (`79fc25f`); cloud dev published; accepted TESTER results reused |
 | V157 | [Abilities without a power roll, and executed gains](V157-effect-only-abilities.md) | In progress (ENGINE2) |
+| V158 | [Effect instances and durations](V158-effect-instances.md) | In progress (ENGINE2) |
