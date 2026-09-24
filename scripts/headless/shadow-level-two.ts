@@ -209,6 +209,16 @@ export async function runShadowLevelTwo({
           actor: { refKind: 'character', id },
           arguments: args,
         });
+      // Tier instructions compile into occurrences (V154); the remainder may appear there.
+      const compiledClauses = async (eventId: string) =>
+        (
+          (
+            await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
+              'abilities:results',
+              { campaignId, eventIds: [eventId] },
+            )
+          )[0]?.compiled?.effects ?? []
+        ).map(o => o.effect.clause ?? '');
       const event = async (eventId: string) =>
         (
           await director.query<{
@@ -279,7 +289,14 @@ export async function runShadowLevelTwo({
           const outcome = roll.targets[0]!;
           const expectedDamage = damageByTier[outcome.tier - 1]!;
           assert.equal(outcome.damage?.rolledDamage ?? 0, expectedDamage);
-          assert.match(JSON.stringify([outcome.unresolvedClauses, roll.manualResolutions]), manual);
+          assert.match(
+            JSON.stringify([
+              outcome.unresolvedClauses,
+              roll.manualResolutions,
+              await compiledClauses(result.eventId),
+            ]),
+            manual,
+          );
           if (name === 'Machinations of Sound')
             assert.match(JSON.stringify(roll.manualResolutions), /Intuition/);
           assert.equal(

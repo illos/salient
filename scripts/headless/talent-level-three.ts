@@ -256,6 +256,17 @@ export async function runTalentLevelThree({
           actor: { refKind: 'character', id },
           arguments: args,
         });
+      // Effect riders, compound conditions and tier instructions compile into occurrences
+      // (V152-V154); the remainder may appear there.
+      const compiledClauses = async (eventId: string) =>
+        (
+          (
+            await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
+              'abilities:results',
+              { campaignId, eventIds: [eventId] },
+            )
+          )[0]?.compiled?.effects ?? []
+        ).map(o => o.effect.clause ?? '');
       const event = async (id: string) =>
         (await director.query<{ events: Log[] }>('events:list', { campaignId })).events.find(
           e => e.id === id,
@@ -332,7 +343,11 @@ export async function runTalentLevelThree({
               // Only tier clauses the resolver leaves manual are checked; Effect paragraphs are text.
               if (remainder)
                 assert.match(
-                  JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
+                  JSON.stringify([
+                    outcome.unresolvedClauses,
+                    result.manualResolutions,
+                    await compiledClauses(use.eventId),
+                  ]),
                   remainder,
                   name,
                 );

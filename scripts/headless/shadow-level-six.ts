@@ -320,6 +320,17 @@ export async function runShadowLevelSix({
           actor: { refKind: 'character', id: actorId },
           arguments: args,
         });
+      // Effect riders, compound conditions and tier instructions compile into occurrences
+      // (V152-V154); the remainder may appear there.
+      const compiledClauses = async (eventId: string) =>
+        (
+          (
+            await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
+              'abilities:results',
+              { campaignId, eventIds: [eventId] },
+            )
+          )[0]?.compiled?.effects ?? []
+        ).map(o => o.effect.clause ?? '');
       const event = async (eventId: string) =>
         (await director.query<{ events: Log[] }>('events:list', { campaignId })).events.find(
           e => e.id === eventId,
@@ -370,7 +381,11 @@ export async function runShadowLevelSix({
               assert.equal(outcome.damage?.rolledDamage ?? 0, damage, a.name);
               assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, a.name);
               assert.match(
-                JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
+                JSON.stringify([
+                  outcome.unresolvedClauses,
+                  result.manualResolutions,
+                  await compiledClauses(used.eventId),
+                ]),
                 new RegExp(a.manual!, 'i'),
                 a.name,
               );
