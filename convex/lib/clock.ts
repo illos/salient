@@ -336,27 +336,29 @@ async function fireHeroicResource(
     detail =
       profile.encounterEnd.kind === 'lose' ? 'encounter-end loss' : 'encounter-end reset to 0';
   }
-  await journalPatch(ctx, firing.scope, 'characters', hero._id, {
-    liveState: {
-      ...live,
-      heroicResource: { ...pool, current: after },
-      ...(step === 'encounter-end-loss'
-        ? { resourceClaims: [], forgoNext: false, forgoing: false, lastTurnGain: undefined }
-        : {}),
-      ...(windowEnded ? { forgoing: false } : {}),
-      ...(step === 'turn-start-gain' && firing.event.turn
-        ? {
-            lastTurnGain: {
-              encounterId: firing.encounter._id,
-              turnId: firing.event.turn.turnId,
-              delta: after - before,
-              after,
-              eventId: firing.scope.eventId,
-            },
-          }
-        : {}),
-    },
-  });
+  // A combat-start grant of 0 (no Victories) changes nothing: skip the write and its extra read.
+  if (!(step === 'combat-start-grant' && after === before))
+    await journalPatch(ctx, firing.scope, 'characters', hero._id, {
+      liveState: {
+        ...live,
+        heroicResource: { ...pool, current: after },
+        ...(step === 'encounter-end-loss'
+          ? { resourceClaims: [], forgoNext: false, forgoing: false, lastTurnGain: undefined }
+          : {}),
+        ...(windowEnded ? { forgoing: false } : {}),
+        ...(step === 'turn-start-gain' && firing.event.turn
+          ? {
+              lastTurnGain: {
+                encounterId: firing.encounter._id,
+                turnId: firing.event.turn.turnId,
+                delta: after - before,
+                after,
+                eventId: firing.scope.eventId,
+              },
+            }
+          : {}),
+      },
+    });
   return {
     kind: 'clock.heroic-resource',
     description: `${hero.authored.name}'s ${pool.name}: ${detail}; ${before} → ${after}.`,

@@ -956,7 +956,7 @@ export const BEASTHEART_ACTIONS: BeastheartAction[] = [
     performer: 'Beastheart',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Victories at combat start; 1d3 at own-turn start; +2 first adjacent-to-companion damage each round. Clear at encounter end. Outside combat track each paid effect until Victory/respite; variable budget equals Victories.',
+      'Beastheart performs this effect. Record and resolve manually using the chosen companion and the printed source; no companion combat actor, damage, healing, conditions, movement, or Rampage is applied. Levels 1–6: the app adds Victories at combat start and 1d3 at each own-turn start, and clears ferocity at encounter end; claim the first adjacent-to-companion damage each round with /resource claim trigger=beastheart-companion-adjacent-damage (+2, +3 from level 4) and do not also adjust by hand. Level 7+: resolve these gains manually. Outside combat track each paid effect until Victory/respite; variable budget equals Victories.',
   },
   {
     name: 'Beastheart: Use treasure for companion',

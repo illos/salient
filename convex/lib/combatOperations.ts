@@ -380,8 +380,12 @@ const combatCommit: OperationDefinition = {
       commit: async (mctx, scope) => {
         // 1. Baseline before any combat-start effect (restoration record, not an editable sheet).
         const state: Record<string, unknown> = { characters: {}, foes: {}, campaign: {} };
+        // Hero documents are large (the evaluated build); read each once here and reuse it below,
+        // so a large party stays under the per-mutation read limit.
+        const heroDocs = new Map<string, Doc<'characters'>>();
         for (const hero of heroes) {
           const doc = await mctx.db.get(hero.actor.id as Id<'characters'>);
+          if (doc) heroDocs.set(doc._id, doc);
           if (doc)
             (state.characters as Record<string, unknown>)[doc._id] = {
               liveState: doc.liveState,
@@ -476,7 +480,8 @@ const combatCommit: OperationDefinition = {
         // grant, a gain at the start of each of its turns, and its encounter-end loss.
         for (const hero of heroes) {
           const characterId = hero.actor.id as Id<'characters'>;
-          const record = await mctx.db.get(characterId);
+          // Read at the snapshot above; the combat lock since then changes nothing read here.
+          const record = heroDocs.get(characterId);
           const profile = generationProfile(baselineOf(record?.derivedBaseline));
           if (!record?.liveState || !profile) continue;
           const resource = record.liveState.heroicResource.name;
