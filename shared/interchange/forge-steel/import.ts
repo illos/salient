@@ -289,7 +289,16 @@ export function importForgeHero(
   }
 
   // --- Culture (Draw Steel Heroes.md, Culture) ---
-  if (hero.culture?.name.trim()) selections['culture.name'] = hero.culture.name.trim();
+  const cultureName = hero.culture?.name.trim() ?? '';
+  if (cultureName.length > MAX_NAME_LENGTH)
+    note(
+      {
+        path: 'culture.name',
+        reason: `The culture name was shortened to ${MAX_NAME_LENGTH} characters.`,
+      },
+      false,
+    );
+  if (cultureName) selections['culture.name'] = cultureName.slice(0, MAX_NAME_LENGTH).trim();
 
   // --- Career (chapter/making-a-hero.md; career/<name>.md) ---
   if (hero.career) {

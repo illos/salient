@@ -159,3 +159,4 @@ damage and Recoveries used are reconciled per Q-V-3 with the rule cited.
   - Checks: both `tsc` configs clean, `pnpm -s lint` clean, `vitest run tests/forge-import.test.ts
     tests/app/forge-import.test.ts` 19/19, and the Convex push of `13969f2` reported "Convex
     functions ready" with the two `characterImports` indexes added.
+- Independent re-review PASS (2026-09-24). Its remaining nit is fixed: a culture name over 100 characters is shortened with a diagnostic, rather than failing the whole file on the selection size cap.

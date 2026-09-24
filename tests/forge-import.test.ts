@@ -211,16 +211,19 @@ test('V09 diagnostics copy bounded text in bounded number and size', () => {
   assert.ok(result.unmapped.length < MAX_DIAGNOSTICS);
 });
 
-test('V09 an unnamed hero gets a placeholder name and long notes are shortened', () => {
+test('V09 an unnamed hero gets a placeholder name; long notes and culture names are shortened', () => {
   const hero = JSON.parse(read(`${directory}Grug-level-1.ds-hero`));
   hero.name = '';
   hero.state.notes = 'n'.repeat(10001);
+  hero.culture.name = 'c'.repeat(5000);
   const result = importForgeHero(hero);
   assert.equal(result.authored.name, 'Imported hero');
   assert.equal(result.selections['details.name'], undefined);
   assert.equal(result.authored.notes.length, 10000);
   assert.ok(result.diagnostics.some(d => d.path === 'name'));
   assert.ok(result.diagnostics.some(d => d.path === 'state.notes'));
+  assert.equal(result.selections['culture.name'], 'c'.repeat(100));
+  assert.ok(result.diagnostics.some(d => d.path === 'culture.name'));
 });
 
 test('V09 an unknown sourcebook is noted but is not unmapped build data', () => {
