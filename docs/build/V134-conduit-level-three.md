@@ -62,3 +62,7 @@ shared API. Guided advancement remains deferred.
   Maker), which keep only their source text. An evaluator probe confirmed every new use has its note.
   The cohort now requires source text for every use and the activation note for every new one.
   Artifacts `/srv/presidium/projects/salient/test-artifacts/V134-32eddf5`.
+- Test-Deploy headless at `471eaa3` failed: Hands of the Maker (a carried level-1 ability) prints a Self
+  target, and the cohort aimed it at another creature. The cohort now derives self-only uses from the
+  printed target on the sheet, and requires activation text only for embedded uses (as V101). An
+  evaluator and route dry run over all twelve builds found no further mismatch.
