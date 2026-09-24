@@ -19,8 +19,19 @@ engine charged the full cost until now. ENGINE2 found the gap on 2026-09-24 whil
 - `shared/contracts/rollResolution.ts`: `ActorRollFacts.edgeCostReduction`.
 - `convex/lib/resolve.ts` `actorRollFacts`: set for heroes whose evaluated class is Shadow. Insight
   is a level-1 class feature.
-- Out of scope, labelled: a later `ability.correct` that adds or removes an edge keeps the original
-  payment. Corrections never re-charge costs.
+- Only abilities with their own power roll get the discount. The pre-roll check applies it only to
+  rolled abilities, and `resolveAbilityRoll` only handles those.
+  - Interpretation (labelled): "a heroic ability that makes use of a power roll" means the ability's
+    own power roll. Shadowstrike ("You use a strike signature ability twice"), So Gullible, Too Slow,
+    Dancer, Clever Trick and Hesitation Is Weakness have no power roll of their own, so they pay their
+    printed cost.
+  - Alternative considered: counting a roll made by an ability they cause to be used, such as the
+    signature strikes of Shadowstrike. Rejected, because those strikes are separate uses with their
+    own (zero) cost.
+- Interpretation (labelled): a later `ability.correct` that changes whether any target had a net edge
+  never re-charges or refunds. When the edge-reduced cost would now differ, the correction's log
+  entry says so and names `/adjust heroic-resource`. Alternatives considered: refunding or charging
+  the difference automatically.
 
 Spec references:
 
@@ -37,7 +48,8 @@ Compendium (pinned `en/unified/md`):
 ## Acceptance checks
 
 1. `tests/scripts/insight-edge.test.ts`: edge, double edge, double edge with one bane, cancelled
-   pairs, bane only, one of several targets, other resources, zero cost, and non-Shadows.
+   pairs, three edges against two banes, bane only, one of several targets, edges against every
+   target (still 1 fewer), other resources, zero cost, and non-Shadows.
 2. A headless Shadow journey uses an insight ability with one edge and reads back the reduced
    payment. The same use without an edge pays full cost.
 3. TESTER: `CI=true pnpm check` and the Shadow cohorts.
@@ -52,3 +64,10 @@ Compendium (pinned `en/unified/md`):
     tests: 32 passed.
   - The script suite passed, except `rules.test.ts`, which needs `pnpm rules:ingest`.
   - `tsc --noEmit` passes.
+- V156-REVIEW on `f15df79`: changes required. Fixed:
+  - The discount now applies only to abilities with their own power roll. It was also reaching
+    no-roll insight abilities through the recorded path, such as Dancer given an edge through the
+    API.
+  - A correction that changes edge eligibility now says the cost would differ.
+  - Added pure test cases.
+

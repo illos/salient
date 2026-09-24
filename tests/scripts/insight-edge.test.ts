@@ -22,6 +22,8 @@ test.each([
   ['a bane only', [target(0, 1)], 5],
   ['no edge', [target(0, 0)], 5],
   ['an edge against only one of several targets', [target(0, 0), target(1, 0)], 4],
+  ['edges against every target (still 1 fewer)', [target(1, 0), target(2, 0)], 4],
+  ['three edges and two banes (capped double edge cancels a double bane)', [target(3, 2)], 5],
 ])('a Shadow with %s pays the right insight', (_label, targets, amount) => {
   expect(effectiveFixedCost(cost, shadow, targets)?.amount).toBe(amount);
 });

@@ -1278,13 +1278,16 @@ const abilityUse: OperationDefinition = {
     const costPool = ability.fixedCost
       ? poolFor(records, context, ability.fixedCost.resource)
       : undefined;
-    // V156: the same edge-reduced cost the roll resolver charges (effectiveFixedCost).
+    // V156: the same edge-reduced cost the roll resolver charges (effectiveFixedCost), only for an
+    // ability that makes use of a power roll (feature/shadow/level-1/insight.md).
     const affordability = checkAffordability(
-      effectiveFixedCost(
-        ability.fixedCost,
-        actorRollFacts(actor!, records),
-        targets.map((_, i) => ({ edges: edges[i]!, banes: banes[i]! })),
-      ),
+      ability.kind === 'rolled' && ability.fixedCost
+        ? effectiveFixedCost(
+            ability.fixedCost,
+            actorRollFacts(actor!, records),
+            targets.map((_, i) => ({ edges: edges[i]!, banes: banes[i]! })),
+          )
+        : ability.fixedCost,
       costPool,
       allowance.inCombat,
     );
@@ -2059,10 +2062,25 @@ const abilityCorrect: OperationDefinition = {
         : 'facts' in facts && applied
           ? `; ${name} Stamina ${facts.facts.stamina} → ${facts.facts.stamina + correction.staminaReconciliationDelta}`
           : '';
-    const publicDescription = `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina.`;
+    // V156 (labelled interpretation): a correction never re-charges or refunds a cost. When the
+    // edge-reduced cost (feature/shadow/level-1/insight.md) would now differ, the table is told.
+    // Alternatives considered: refunding or charging the difference automatically.
+    const costFor = (list: { edges: number; banes: number }[]) =>
+      effectiveFixedCost(inputs.ability.fixedCost, inputs.actor, list)?.amount;
+    const edgesBefore = result.targets.map(t => ({ edges: t.edges, banes: t.banes }));
+    const edgesAfter = result.targets.map((t, i) =>
+      i === index ? { edges, banes } : edgesBefore[i]!,
+    );
+    const paidBefore = costFor(edgesBefore);
+    const dueAfter = costFor(edgesAfter);
+    const costNote =
+      paidBefore !== undefined && dueAfter !== undefined && paidBefore !== dueAfter
+        ? ` The ${inputs.ability.fixedCost!.resource} cost would now be ${dueAfter} instead of the ${paidBefore} paid; the payment is unchanged (adjust it with /adjust heroic-resource if the table agrees).`
+        : '';
+    const publicDescription = `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina.${costNote}`;
     return {
       kind: 'correction.ability',
-      description: `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina${stamina}.`,
+      description: `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina${stamina}.${costNote}`,
       causeEventId: event._id,
       data: {
         originalEventId: event._id,
