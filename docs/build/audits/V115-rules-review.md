@@ -62,3 +62,30 @@ damage replacements, and keep "by hand" for the distance benefits.
    data is disposable.
 
 No tests, builds, services or pnpm were run by the reviewer.
+
+## R1–R2 closure: `fb3ce1f82f23acca18266227384694b3fdd6811e`
+
+Final static verdict: PASS. Reviewed `e797ebf..fb3ce1f`.
+
+- **R1 closed.** The table selector compares `readableRuleText(keyword)`, so linked Compendium
+  keywords render "Use as". The server's `dualMode` uses the same plain-text rule, and the scenario
+  is logged in the browser backlog.
+- **R2 closed.** The sheet says the table applies melee and ranged damage replacements, and keeps
+  "adjust by hand" for the distance benefits (`feature/tactician/level-1/field-arsenal.md`).
+- **Nits fixed.**
+  - Witness index and natural-19 comments.
+  - The Protective Attack no-mode refusal (`kit/shining-armor.md`: Melee, Strike, Weapon).
+  - The doc comment placement.
+  - The "immune" refusal message.
+  - A pre-V115 correction without a mode gets a rewind `ConvexError`.
+- **TESTER fixes are consistent.**
+  - The A05 syntax includes `[mode=…]`.
+  - Cost gating before the mode prompt is harmless: a blocked use rolls and spends nothing.
+  - The Censor journey matches Back Blasphemer!'s compiled push.
+- The audit and the known-limitation note are accurate.
+
+Non-blocking: the correction catch-all message could only be wrong for a corrupted record.
+
+No tests, builds, services or pnpm were run by the reviewer.
+
+Reviewed-By: V115-REVIEW (pass, 2026-09-24)

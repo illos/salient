@@ -205,10 +205,9 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
       const event = async (id: string) => (await log()).events.find(e => e.id === id);
       const compiledEffects = async (id: string) =>
         (
-          await director.query<{ compiled?: { effects: { effect: { kind: string } }[] } }[]>(
-            'abilities:results',
-            { campaignId, eventIds: [id] },
-          )
+          await director.query<
+            { compiled?: { effects: { effect: { kind: string; clause: string } }[] } }[]
+          >('abilities:results', { campaignId, eventIds: [id] })
         )[0]?.compiled?.effects ?? [];
       const usedNames = new Set<string>();
       try {
@@ -296,7 +295,8 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
                 // All remaining Censor rolls retain clauses the bounded compiler does not automate.
                 const remainder: Record<string, string> = {
                   Arrest: 'grab',
-                  // V110 compiles Back Blasphemer!'s push as an instruction occurrence.
+                  // Compiled work is matched by its printed clause: V109 riders (bane, shift,
+                  // Recovery) and V110 push instructions are occurrences, not manual clauses.
                   'Back Blasphemer!': 'push',
                   'Behold a Shield of Faith!': 'bane',
                   'Behold the Face of Justice!': 'frightened',
@@ -311,7 +311,9 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
                   JSON.stringify([
                     outcome.unresolvedClauses,
                     result.manualResolutions,
-                    (await compiledEffects(used.eventId)).map(o => o.effect.kind),
+                    (await compiledEffects(used.eventId)).map(
+                      o => `${o.effect.kind}: ${o.effect.clause}`,
+                    ),
                   ]),
                   new RegExp(remainder[name]!, 'i'),
                   name,

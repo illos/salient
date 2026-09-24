@@ -119,3 +119,9 @@ Spec references:
     - the refusal message now includes "immune";
     - a pre-V115 mode-dependent compiled result now refuses correction with a rewind message
       instead of throwing.
+- Review R1–R2 closed: PASS at `fb3ce1f`. TESTER `test-V115-fb3ce1f-2`:
+  - `pnpm check` exit 0 in 206 s (404 engine, 658 app).
+  - `kit-bonus`, `tier-effects` and `effect-riders` pass.
+  - `censor` still failed on Behold a Shield of Faith!, whose bane is a V109 rider. The journey now
+    matches every compiled occurrence's printed clause, which covers V109 riders and V110 pushes. All
+    ten remainder patterns are confirmed against the V72 report's clauses.
