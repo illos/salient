@@ -41,7 +41,8 @@ Malice's common lifecycle, source-based Director-confirmed Victory awards, manua
 the persistent game log, sequential undo/redo, closeout and Void including while paused. Existing
 G4 deferrals remain; this does not bring every general rule into the milestone.
 
-**Defer unique feature execution:** class-specific resource generation, thresholds and resets;
+**Defer unique feature execution:** (class-specific resource generation is superseded for V1 by
+[the 2026-09-24 decision](decisions/2026-09-24-heroic-resource-automation.md)) class-specific resource generation, thresholds and resets;
 individual ability effects, traits, triggers, movement interactions and stat-block-specific exceptions.
 This supersedes the earlier v0.01 automatic turn-start Ferocity requirement. The proposed first-damage
 Ferocity grant is also deferred, not a pending question. Read the source and resolve these mechanics
