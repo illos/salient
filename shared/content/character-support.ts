@@ -36,7 +36,8 @@ export const CHARACTER_LEVEL_SUPPORT: Readonly<Record<number, readonly SupportRe
   3: [
     {
       decisionId: 'class.choice',
-      value: 'Shadow|Fury|Tactician|Censor|Troubadour|Null|Conduit|Elementalist|Talent|Beastheart|Summoner',
+      value:
+        'Shadow|Fury|Tactician|Censor|Troubadour|Null|Conduit|Elementalist|Talent|Beastheart|Summoner',
       message:
         'Level three currently supports Shadow, Fury, Tactician, Censor, Troubadour, Null, Conduit, Elementalist, Talent, Beastheart and Summoner.',
     },
@@ -44,7 +45,8 @@ export const CHARACTER_LEVEL_SUPPORT: Readonly<Record<number, readonly SupportRe
   2: [
     {
       decisionId: 'class.choice',
-      value: 'Shadow|Fury|Tactician|Censor|Troubadour|Null|Conduit|Elementalist|Talent|Beastheart|Summoner',
+      value:
+        'Shadow|Fury|Tactician|Censor|Troubadour|Null|Conduit|Elementalist|Talent|Beastheart|Summoner',
       message:
         'Level two currently supports Shadow, Fury, Tactician, Censor, Troubadour, Null, Conduit, Elementalist, Talent, Beastheart and Summoner.',
     },
