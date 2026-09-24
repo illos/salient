@@ -206,7 +206,7 @@ export const characterTables = {
     effectiveRevisionId: v.union(v.id('characterRevisions'), v.null()),
     /** The R02 DerivedBaseline of the effective revision; null until first admission. */
     derivedBaseline: v.union(v.null(), v.any()),
-    /** Null until first admission; later activation retains current amounts with confirmed downward caps. */
+    /** Null until first admission; later activation keeps damage taken and Recoveries spent (Q-CHAR-2). */
     liveState: v.union(v.null(), heroLiveValidator),
     /** The campaign the character is attached to: set by admission, one at a time. */
     campaignId: v.union(v.id('campaigns'), v.null()),

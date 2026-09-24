@@ -234,7 +234,7 @@ export interface HeroLiveRecord {
   live: HeroLiveState;
 }
 
-/** Shared preview and recorded result of the confirmed Q-CHAR-2 activation policy. */
+/** Shared preview and recorded result of the Q-CHAR-2 activation policy (revised 2026-09-24). */
 export interface BuildReconciliation {
   changes: {
     field: 'stamina' | 'recoveries';

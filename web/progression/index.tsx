@@ -438,8 +438,8 @@ function BuildHistory({
                       : 'Restoring creates and activates a new recorded build. Later history, present inventory and authored details are retained.'}
                 </p>
                 <p className="m-0 text-base">
-                  Current Stamina and Recoveries are retained up to the restored maxima; this does
-                  not heal or refill resources.
+                  Damage taken and Recoveries spent stay the same against the restored maxima; this
+                  does not heal or refill resources.
                 </p>
                 {snapshot.activationPreview && (
                   <ul className="m-0 list-none p-0 text-base" aria-label="Restore resource preview">

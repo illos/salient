@@ -242,6 +242,9 @@ applies equally to level-ups taken long after the respite that granted them, so 
 full stays full. It supersedes the 2026-09-15 rule (keep the current amount; cap on decrease) and
 restores the original deficit proposal.
 
+A current amount already above its old maximum is not carried above the new one: the result is
+at most the new maximum.
+
 **Floor, confirmed 2026-09-24:** a build change can never drop a hero to 0 Stamina or below. When a
 decrease would push current Stamina to 0 or below, or Recoveries below 0, the change stops at 1 Stamina
 and 0 Recoveries; normal play then takes over. Do not add a zero floor to source-authorized negative values such as Clarity.
@@ -766,8 +769,8 @@ submission is a `characterReviews` row naming the exact revision; `characters.ca
 `effectiveRevisionId` change only on activation (approval, or the owning active Director's logged
 submission). A save after submission marks the review `stale` so a later approval cannot activate
 unseen edits. First activation initializes live state per R03; later activations apply the confirmed
-[current-value policy](#current-values-when-a-build-changes) through a shared preview and atomic
-downward caps. Maximum-only uncertainty markers are retired from current reads and events.
+[current-value policy](#current-values-when-a-build-changes) through a shared preview and an atomic
+update. Maximum-only uncertainty markers are retired from current reads and events.
 Resource-type replacement is refused until explicitly reconciled. Withdraw and decline are not blocked by the
 combat lock (they change no effective build); submit, save and approve are.
 

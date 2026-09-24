@@ -3,8 +3,8 @@
 Date: 2026-09-15. Scope: all 13 questions open when the user requested this review:
 Q-CHAR-2 through Q-CHAR-13, and Q-R-201.
 
-Subsequent user decisions: Q-CHAR-2 now [preserves current amounts with downward caps](../character-wizard-spec.md#current-values-when-a-build-changes),
-superseding the deficit-preservation proposal below. Q-CHAR-3 now [uses admission-level advancement eligibility](../character-wizard-spec.md#level-up),
+Subsequent user decisions: Q-CHAR-2 now [keeps the damage taken and Recoveries spent](../character-wizard-spec.md#current-values-when-a-build-changes)
+(revised 2026-09-24, restoring the deficit proposal below). Q-CHAR-3 now [uses admission-level advancement eligibility](../character-wizard-spec.md#level-up),
 with the campaign awarding XP and the character sheet owning level-up steps. Q-CHAR-4 now
 [appends a new snapshot when restoring a build](../character-wizard-spec.md#5-progression-history),
 with later edits continuing from that newest entry. Q-CHAR-5 now [uses normal edits for languages

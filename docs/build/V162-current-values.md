@@ -30,3 +30,7 @@ generic level-up.
 - Started from main `c7aa637` on `slice/V162`, `.worktrees/current-values`.
 - Author checks: TypeScript, focused admission, character-progression and history-audit (31) plus five
   other activation tests (38) pass.
+- Independent review of `38d4508`: CHANGES REQUIRED, stale wording of the old rule in the restore screen,
+  the approval event description, schema and contract comments and two docs; all updated. The
+  above-the-old-maximum case (never carried above the new maximum) is now stated in the spec and, with
+  the no-previous-maximum, zero and floor cases, covered by `tests/live-reconciliation.test.ts`.

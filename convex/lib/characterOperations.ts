@@ -233,7 +233,7 @@ const approve: OperationDefinition = {
     });
     return {
       kind: activationKind(result.firstAdmission),
-      description: `${character.authored.name} ${result.firstAdmission ? 'admitted' : 'build updated'}: the Director approved revision ${review.revision}.${result.reconciliation.changes.some(change => change.currentAfter !== change.currentBefore) ? ' Current values capped to the new maxima.' : ''}`,
+      description: `${character.authored.name} ${result.firstAdmission ? 'admitted' : 'build updated'}: the Director approved revision ${review.revision}.${result.reconciliation.changes.some(change => change.currentAfter !== change.currentBefore) ? ' Current values keep the damage taken and Recoveries spent.' : ''}`,
       data: {
         characterId: character._id,
         reviewId: review._id,
