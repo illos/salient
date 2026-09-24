@@ -64,6 +64,8 @@ import {
   resolveAbilityRoll,
   resolveCatchBreath,
   resolveCreatureFreeStrike,
+  ignoredImmunityTypes,
+  withoutImmunityTypes,
 } from '../../shared/resolve/index';
 import type { ReadCtx } from './access';
 import { committedEncounter } from './encounters';
@@ -1581,7 +1583,17 @@ const abilityUse: OperationDefinition = {
       context.user._id,
     );
     const [a, b] = accepted.dice;
-    const targetFacts = targets.map(t => ({ record: t, facts: damageTargetFacts(t) }));
+    // Disciple of Fire (shared/resolve ignoredImmunityTypes); corrections reuse these recorded facts.
+    const ignored = ignoredImmunityTypes(
+      records.character ? baselineOf(records.character.derivedBaseline)?.features : undefined,
+    );
+    const targetFacts = targets.map(t => {
+      const facts = damageTargetFacts(t);
+      return {
+        record: t,
+        facts: 'facts' in facts ? { facts: withoutImmunityTypes(facts.facts, ignored) } : facts,
+      };
+    });
     const resolutionInput: CompiledAbilityInput = {
       actor: actorFacts,
       targets: targets.map((t, i) => ({

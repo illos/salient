@@ -365,6 +365,22 @@ function highest(entries: DamageModifierEntry[] | undefined, damageType?: string
   return best;
 }
 
+/**
+ * Damage types whose typed immunity the actor's damage ignores. Source:
+ * feature/elementalist/level-2/disciple-of-fire.md ("fire damage you deal ignores a target's fire
+ * immunity"). Interpretation: an all-damage immunity is not fire immunity and still applies.
+ */
+export function ignoredImmunityTypes(features: readonly { name: string }[] | undefined): string[] {
+  return features?.some(f => f.name === 'Disciple of Fire') ? ['fire'] : [];
+}
+
+/** Target facts with the actor's ignored immunity types removed; other entries are kept. */
+export function withoutImmunityTypes(facts: DamageTargetFacts, types: readonly string[]) {
+  return types.length && facts.immunities
+    ? { ...facts, immunities: facts.immunities.filter(i => !types.includes(i.type)) }
+    : facts;
+}
+
 /** Section 6.3: floor(maxStamina / 2). */
 export function windedValueOf(maxStamina: number): number {
   return Math.floor(maxStamina / 2);

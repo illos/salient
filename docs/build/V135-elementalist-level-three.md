@@ -21,6 +21,10 @@ wizard and shared API. Guided advancement remains deferred.
 - `feature/elementalist/level-3/`: Earth Accepts Me and Remember Growth and Sun and Rain (with their
   abilities), A Conversation With Fire, Distance Is Only Memory; 7-Essence: Erase, Maw of Earth, Swarm of
   Spirits, Wall of Fire (book, 7-Essence Ability).
+- Disciple of Fire's "fire damage you deal ignores a target's fire immunity" is applied: ability uses
+  by an actor with the feature drop typed fire immunity from the target facts before damage (and
+  corrections reuse those facts). Interpretation: an all-damage immunity is not fire immunity and still
+  applies. Shared helpers `ignoredImmunityTypes`/`withoutImmunityTypes` in `shared/resolve/index.ts`.
 - Derived: Disciple of Earth adds +6 Stamina at 2nd level and +3 at each later level (recovery and winded
   recomputed); Disciple of Fire grants fire immunity 5 + level, highest immunity applying.
 - Embedded uses, each a manual record citing its clause: Disciple of Fire's encounter surges, Disciple of
@@ -52,3 +56,8 @@ wizard and shared API. Guided advancement remains deferred.
 - Author checks: both TypeScript projects and ESLint pass; focused V135, V104 and V45 engine files pass;
   V88 audit guard and live compiled report 34/34. Content 1756 entries; `compiled:check`,
   `content:check`, `supporting:check`, links pass.
+- Independent rules/implementation review (subagent, source-only) of `390bcdf`: CHANGES REQUIRED, one
+  blocking finding: automated damage still subtracted fire immunity from a Disciple of Fire's fire
+  damage. Fixed in the shared ability-use path with a pure unit case (14 fire vs fire 10 and
+  all-damage 3 lands 11, not 4). Non-blocking: the specialization swap now proves the Disciple of Earth
+  Stamina leaves with the feature; the cohort names list no longer repeats chosen abilities.

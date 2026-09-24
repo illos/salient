@@ -8,6 +8,11 @@ import { evaluateCharacter } from '../shared/evaluate/character.ts';
 import { changeChoice } from '../shared/evaluate/choiceTransition.ts';
 import { changeLevel } from '../shared/evaluate/levelTransition.ts';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
+import {
+  applyDamage,
+  ignoredImmunityTypes,
+  withoutImmunityTypes,
+} from '../shared/resolve/index.ts';
 type Selections = Record<string, SelectionValue>;
 const evaluate = (selections: Selections, level: number) =>
   evaluateCharacter(
@@ -177,8 +182,41 @@ test('a level-1 5-Essence pick cannot repeat; level and specialization edits pru
   assert.ok(features);
   assert.ok(!features.some(f => f.name === 'Disciple of Earth'));
   assert.ok(features.some(f => f.name === 'There Is No Space Between'));
+  // Disciple of Earth's +6, +3 per level past 2nd (disciple-of-earth.md) leaves with the feature.
+  if (after.baseline)
+    assert.equal(after.baseline.staminaMaximum.value, earth.w.levelThree.staminaMaximum - (6 + 3));
   assert.equal(
     swapped.selections['class.elementalist.level-2.perk'],
     earth.l3['class.elementalist.level-2.perk'],
   );
+});
+
+test('Disciple of Fire damage ignores typed fire immunity but not all-damage immunity', () => {
+  // feature/elementalist/level-2/disciple-of-fire.md: "fire damage you deal ignores a target's fire
+  // immunity". rule/damage/damage-immunity.md: immunity reduces damage of its type.
+  const fire = cases.find(c => c.id === 'v104-1')!;
+  const earth = cases.find(c => c.id === 'v104-2')!;
+  const features = (c: (typeof cases)[number]) => evaluate(c.l2, 2).baseline!.features;
+  const target = {
+    targetId: 't',
+    kind: 'foe' as const,
+    stamina: 30,
+    maxStamina: 30,
+    temporaryStamina: 0,
+    immunities: [
+      { type: 'fire', value: 10 },
+      { type: 'all-damage', value: 3 },
+    ],
+  };
+  const hit = (types: string[]) =>
+    applyDamage(withoutImmunityTypes(target, types), {
+      targetId: 't',
+      amount: 14,
+      damageType: 'fire',
+      causeLabel: 'test',
+    }).afterImmunity;
+  assert.deepEqual(ignoredImmunityTypes(features(fire)), ['fire']);
+  assert.deepEqual(ignoredImmunityTypes(features(earth)), []);
+  assert.equal(hit(ignoredImmunityTypes(features(fire))), 14 - 3);
+  assert.equal(hit(ignoredImmunityTypes(features(earth))), 14 - 10);
 });
