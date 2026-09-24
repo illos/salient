@@ -8,24 +8,24 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:7844e4e767f6c8847ea08f34f28b81b7996583e3b6793e11368ff14026c2f91b`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 285 | 22 | 111 | 13 | 152 |
+| Hero standalone (`ability.json`) | 295 | 22 | 113 | 13 | 160 |
 | Kit signature (`kit.json`) | 25 | 6 | 15 | 1 | 4 |
 | Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 21 | 565 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 2556 (1701 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 2602 (1747 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 21 fully (1.81%), 565 with a typed remainder (48.79%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 157 of 382 (41.10%) compile: 29 fully (7.59%), 128 with a typed remainder (33.51%), of which 14 (3.66%) are within the bounded potency remainder. 225 (58.90%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 159 of 392 (40.56%) compile: 29 fully (7.40%), 130 with a typed remainder (33.16%), of which 14 (3.57%) are within the bounded potency remainder. 233 (59.44%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -34,7 +34,7 @@ compiled entries:
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Hero standalone (`ability.json`) | COMPILES | 16 | 2 | 4 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 84 | 3 | 19 | 4 | 1 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 86 | 3 | 19 | 4 | 1 |
 | Kit signature (`kit.json`) | COMPILES | 4 | 2 | 0 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 13 | 1 | 1 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -92,6 +92,8 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Repent! | COMPILES_WITH_REMAINDER | yes | single | selectable | class.censor.ability-3@1:selectable, class.censor.ability-3@2:selectable, class.censor.ability-3@3:selectable, class.censor.ability-3@4:selectable, class.censor.ability-3@5:selectable, class.censor.ability-3@6:selectable | potency:I < SYM dazed (save ends) |
 | hero-standalone | The Gods Punish and Defend | COMPILES | — | single | selectable | class.censor.ability-3@1:selectable, class.censor.ability-3@2:selectable, class.censor.ability-3@3:selectable, class.censor.ability-3@4:selectable, class.censor.ability-3@5:selectable, class.censor.ability-3@6:selectable | — |
 | hero-standalone | Your Allies Cannot Save You! | COMPILES_WITH_REMAINDER | — | single | selectable | class.censor.signature-ability@1:selectable, class.censor.signature-ability@2:selectable, class.censor.signature-ability@3:selectable, class.censor.signature-ability@4:selectable, class.censor.signature-ability@5:selectable, class.censor.signature-ability@6:selectable | effect-paragraph:effect |
+| hero-standalone | It Is Justice You Fear | COMPILES_WITH_REMAINDER | — | single | selectable | class.censor.level-2.exorcist-ability@2:selectable, class.censor.level-2.exorcist-ability@3:selectable, class.censor.level-2.exorcist-ability@4:selectable, class.censor.level-2.exorcist-ability@5:selectable, class.censor.level-2.exorcist-ability@6:selectable | effect-paragraph:effect; potency:P < SYM frightened (save ends) |
+| hero-standalone | Sentenced | COMPILES_WITH_REMAINDER | — | single | selectable | class.censor.level-2.paragon-ability@2:selectable, class.censor.level-2.paragon-ability@3:selectable, class.censor.level-2.paragon-ability@4:selectable, class.censor.level-2.paragon-ability@5:selectable, class.censor.level-2.paragon-ability@6:selectable | effect-paragraph:effect; potency:P < SYM restrained (save ends) |
 | hero-standalone | Melee Weapon Free Strike [V26: Melee Free Strike] | COMPILES | — | single | selectable | free-strikes.grant@1:selectable, free-strikes.grant@2:selectable, free-strikes.grant@3:selectable, free-strikes.grant@4:selectable, free-strikes.grant@5:selectable, free-strikes.grant@6:selectable | — |
 | hero-standalone | Ranged Weapon Free Strike [V26: Ranged Free Strike] | COMPILES | — | single | selectable | free-strikes.grant@1:selectable, free-strikes.grant@2:selectable, free-strikes.grant@3:selectable, free-strikes.grant@4:selectable, free-strikes.grant@5:selectable, free-strikes.grant@6:selectable | — |
 | hero-standalone | Blessed Light | COMPILES | — | single | selectable | class.conduit.signature-abilities@1:selectable, class.conduit.signature-abilities@2:selectable, class.conduit.signature-abilities@3:selectable, class.conduit.signature-abilities@4:selectable, class.conduit.signature-abilities@5:selectable, class.conduit.signature-abilities@6:selectable | — |
@@ -247,6 +249,14 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Hands of the Maker | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Judgment | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | My Life for Yours | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N wrath |
+| hero-standalone | Blessing of the Faithful | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Prescient Grace | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
+| hero-standalone | Revelator | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | With My Blessing | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Edict of Disruptive Isolation | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Edict of Perfect Order | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Edict of Purifying Pacifism | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Edict of Stillness | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Claw Dirt | tier1-damage-outside-grammar | not-granted | tier:you can move N square into, out of, or through ground you are touching that can be burrowed through, and you are slowed and weakened (eot); tier:you can use your main action this turn to move N square into, out of, or through ground you are touching that can be burrowed through, and you are slowed (eot); tier:you can move N square into, out of, or through ground you are touching that can be burrowed through |
 | hero-standalone | Dragon's Fire | roll-expression-outside-grammar | not-granted | roll:power roll + your highest characteristic score |
 | hero-standalone | Escape Grab | tier1-damage-outside-grammar | not-granted | effect-paragraph:effect; tier:no effect; tier:you can escape the grab, but if you do, a creature who has you grabbed can make a melee free strike against you before you are no longer grabbed; tier:you are no longer grabbed |
@@ -461,9 +471,9 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1190 | 1176 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
-| 2 | no-power-roll | no-power-roll | 683 | 683 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
-| 3 | trigger | trigger | 209 | 209 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1200 | 1186 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 2 | no-power-roll | no-power-roll | 691 | 691 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 3 | trigger | trigger | 210 | 210 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
 | 5 | unknown | unattached-paragraph | 130 | 59 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
 | 6 | slide | slide N | 89 | 34 | `mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep`, `mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse`, `mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way` |
@@ -506,12 +516,12 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1263 | 13 |
-| potency-condition | 1047 | 212 |
-| no-power-roll | 683 | 1 |
+| effect-paragraph | 1273 | 13 |
+| potency-condition | 1053 | 212 |
+| no-power-roll | 691 | 1 |
 | tier-damage | 272 | 102 |
 | unknown | 247 | 57 |
-| trigger | 209 | 1 |
+| trigger | 210 | 1 |
 | malice-spend | 151 | 2 |
 | slide | 120 | 9 |
 | condition | 105 | 14 |
@@ -701,7 +711,7 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 | granted | roll-expression-outside-grammar | 5 |
 | granted | tier1-damage-outside-grammar | 1 |
 | granted | tiers-without-power-roll | 1 |
-| hero-standalone | no-power-roll | 125 |
+| hero-standalone | no-power-roll | 133 |
 | hero-standalone | roll-expression-outside-grammar | 4 |
 | hero-standalone | tier1-damage-outside-grammar | 23 |
 | kit-signature | roll-expression-outside-grammar | 4 |

@@ -36,15 +36,15 @@ export const CHARACTER_LEVEL_SUPPORT: Readonly<Record<number, readonly SupportRe
   3: [
     {
       decisionId: 'class.choice',
-      value: 'Shadow|Fury|Tactician',
-      message: 'Level three currently supports Shadow, Fury and Tactician.',
+      value: 'Shadow|Fury|Tactician|Censor',
+      message: 'Level three currently supports Shadow, Fury, Tactician and Censor.',
     },
   ],
   2: [
     {
       decisionId: 'class.choice',
-      value: 'Shadow|Fury|Tactician',
-      message: 'Level two currently supports Shadow, Fury and Tactician.',
+      value: 'Shadow|Fury|Tactician|Censor',
+      message: 'Level two currently supports Shadow, Fury, Tactician and Censor.',
     },
   ],
 };
@@ -61,7 +61,7 @@ export function characterSupportDiagnostics(
     return [
       {
         decisionId: 'class.level',
-        message: `Level ${level} has no supported character definitions; levels two and three support Shadow, Fury and Tactician; levels four through six support Shadow.`,
+        message: `Level ${level} has no supported character definitions; levels two and three support Shadow, Fury, Tactician and Censor; levels four through six support Shadow.`,
       },
     ];
   return CHARACTER_LEVEL_SUPPORT[level]!.filter(

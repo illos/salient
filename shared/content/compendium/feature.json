@@ -441,6 +441,155 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/2nd-level-order-ability",
+    "kind": "feature",
+    "name": "2nd-Level Order Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/2nd-level-order-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/2nd-level-order-ability.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: 2nd-Level Order Ability\nscc: mcdm.heroes.v1/feature.censor.level-2/2nd-level-order-ability\ntype: feature\n---\n\nYour [censor order](scc.v1:mcdm.heroes.v1/feature.censor.level-1/censor-order) grants your choice of one of two [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability).\n\n##### 2nd-Level Exorcist Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Oracle Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Paragon Ability\n\nChoose one of the following abilities.\n",
+    "structured": {
+      "class": "censor",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/2nd-level-order-features",
+    "kind": "feature",
+    "name": "2nd-Level Order Features",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/2nd-level-order-features.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/2nd-level-order-features.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: 2nd-Level Order Features\nscc: mcdm.heroes.v1/feature.censor.level-2/2nd-level-order-features\ntype: feature\n---\n\nYour [censor order](scc.v1:mcdm.heroes.v1/feature.censor.level-1/censor-order) grants you two features, as shown on the 2nd-Level Order Features table.\n\n###### 2nd-Level Order Features Table\n\n| Order                    | Features                             |\n|--------------------------|--------------------------------------|\n| Exorcist                 | [Saint](scc.v1:mcdm.heroes.v1/rule.world/saint)'s Vigilance, [A Sense for Truth](scc.v1:mcdm.heroes.v1/feature.censor.level-2/a-sense-for-truth) |\n| Oracle                   | [It Was Foretold](scc.v1:mcdm.heroes.v1/feature.censor.level-2/it-was-foretold), [Judge of Character](scc.v1:mcdm.heroes.v1/feature.censor.level-2/judge-of-character)  |\n| Paragon                  | [Lead by Example](scc.v1:mcdm.heroes.v1/feature.censor.level-2/lead-by-example), [Stalwart Icon](scc.v1:mcdm.heroes.v1/feature.censor.level-2/stalwart-icon)       |\n",
+    "structured": {
+      "class": "censor",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/a-sense-for-truth",
+    "kind": "feature",
+    "name": "A Sense for Truth",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/a-sense-for-truth.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/a-sense-for-truth.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: A Sense for Truth\nscc: mcdm.heroes.v1/feature.censor.level-2/a-sense-for-truth\nsubclass: exorcist\ntype: feature\n---\n\nYou are trained in secret techniques from your order that allow you to discern the truth with [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) precision. If a creature is of a lower level than you, you automatically know when they are lying, though you don't necessarily know the actual truth behind their lie. Additionally, you gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to detect lies or hidden motives.\n",
+    "structured": {
+      "class": "censor",
+      "level": "2",
+      "subclass": "exorcist"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/it-was-foretold",
+    "kind": "feature",
+    "name": "It Was Foretold",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/it-was-foretold.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/it-was-foretold.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: It Was Foretold\nscc: mcdm.heroes.v1/feature.censor.level-2/it-was-foretold\nsubclass: oracle\ntype: feature\n---\n\nYour order has trained you to understand fragments of the visions granted to you by your deity, giving you a momentary advantage in challenging situations. At the start of an encounter, you can take one main action before any other creature and before your first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, whenever the Director calls for a [montage test](scc.v1:mcdm.heroes.v1/rule.test/montage-test), you can make one free [test](scc.v1:mcdm.heroes.v1/rule.test/test) before the montage begins, which counts as an earned success or failure as usual.\n",
+    "structured": {
+      "class": "censor",
+      "level": "2",
+      "subclass": "oracle"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/judge-of-character",
+    "kind": "feature",
+    "name": "Judge of Character",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/judge-of-character.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/judge-of-character.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: Judge of Character\nscc: mcdm.heroes.v1/feature.censor.level-2/judge-of-character\nsubclass: oracle\ntype: feature\n---\n\nYour focus on your fragmentary visions grants divine insight into the world and its creatures beyond your usual senses. Whenever you would make an [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) [test](scc.v1:mcdm.heroes.v1/rule.test/test), you can make a [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [test](scc.v1:mcdm.heroes.v1/rule.test/test) instead.\n",
+    "structured": {
+      "class": "censor",
+      "level": "2",
+      "subclass": "oracle"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/lead-by-example",
+    "kind": "feature",
+    "name": "Lead by Example",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/lead-by-example.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/lead-by-example.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: Lead by Example\nscc: mcdm.heroes.v1/feature.censor.level-2/lead-by-example\nsubclass: paragon\ntype: feature\n---\n\nYour devotion to your deity allows you to take command of the battlefield, letting your allies benefit from your wisdom. While you are [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to a creature, your allies gain the benefits of [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) against that creature. Additionally, your allies gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to aid other creatures with their [tests](scc.v1:mcdm.heroes.v1/rule.test/test).\n",
+    "structured": {
+      "class": "censor",
+      "level": "2",
+      "subclass": "paragon"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/perk.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: Perk\nscc: mcdm.heroes.v1/feature.censor.level-2/perk\ntype: feature\n---\n\nYou gain one interpersonal, lore, or [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) perk of your choice. See Chapter 7: [Perks](scc.v1:mcdm.heroes.v1/chapter/perks).\n",
+    "structured": {
+      "class": "censor",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/saints-vigilance",
+    "kind": "feature",
+    "name": "Saint's Vigilance",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/saints-vigilance.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/saints-vigilance.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: Saint's Vigilance\nscc: mcdm.heroes.v1/feature.censor.level-2/saints-vigilance\nsubclass: exorcist\ntype: feature\n---\n\nYou have honed your ability to detect sin and can use it to find those who hide from justice. Any creature judged by you can't use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver. Additionally, you gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) when searching for hidden creatures. If you find a hidden creature, you can use your [Judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) ability against them as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n",
+    "structured": {
+      "class": "censor",
+      "level": "2",
+      "subclass": "exorcist"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-2/stalwart-icon",
+    "kind": "feature",
+    "name": "Stalwart Icon",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-2/stalwart-icon.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-2/stalwart-icon.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"2\"\nname: Stalwart Icon\nscc: mcdm.heroes.v1/feature.censor.level-2/stalwart-icon\nsubclass: paragon\ntype: feature\n---\n\nYou exhibit a small spark of your deity's power, causing creatures to trust or fear you, depending on what you need. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to intimidate or persuade others.\n",
+    "structured": {
+      "class": "censor",
+      "level": "2",
+      "subclass": "paragon"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-3/7-wrath-ability",
+    "kind": "feature",
+    "name": "7-Wrath Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-3/7-wrath-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-3/7-wrath-ability.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"3\"\nname: 7-Wrath Ability\nscc: mcdm.heroes.v1/feature.censor.level-3/7-wrath-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 wrath to use.\n",
+    "structured": {
+      "class": "censor",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.censor.level-3/look-on-my-work-and-despair",
+    "kind": "feature",
+    "name": "Look On My Work and Despair",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/censor/level-3/look-on-my-work-and-despair.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/censor/level-3/look-on-my-work-and-despair.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\nclass: censor\nlevel: \"3\"\nname: Look On My Work and Despair\nscc: mcdm.heroes.v1/feature.censor.level-3/look-on-my-work-and-despair\ntype: feature\n---\n\nYour [judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) has grown in [divine power](scc.v1:mcdm.heroes.v1/feature.conduit.level-10/divine-power), instilling fear in those you condemn. Whenever you use your [Judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) ability, you can spend 1 wrath, and if the target has P < AVERAGE, they are [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends). Additionally, whenever a creature judged by you is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and you use [Judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action), if the new target has P < STRONG, they are [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you (save ends). If the target is already [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you, they instead take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.\n",
+    "structured": {
+      "class": "censor",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.common.main-actions/charge",
     "kind": "feature",
     "name": "Charge",

@@ -1,0 +1,1710 @@
+{
+  "schemaVersion": "v117-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "derivation": {
+    "method": "Authored from the pinned Steel Compendium only (canonical checkout at the main repo vendor/steel-compendium, HEAD fb83a789 verified with git rev-parse). Level-one baselines copied from tests/fixtures/v99-censor-expected.json (reviewed). No evaluator, content, convex or headless code read or run.",
+    "staminaMaximum": "Censor Basics: Starting Stamina 21 + 9 per level after 1st; kit Stamina bonus per echelon (chapter/kits.md Stamina Bonus); levels 1-3 are echelon 1 (rule/general/echelon.md \"1st Echelon (1st to 3rd Level)\"). Kit Stamina: Cloak and Dagger +3, Mountain +9, Sniper none, Swashbuckler +3 (chapter/kits.md kit table) - consistent with v99 level-one values.",
+    "recoveryValue": "floor(Stamina maximum / 3) (rule/health/recoveries.md \"one-third ... rounded down\")",
+    "windedValue": "floor(Stamina maximum / 2) (rule/health/winded.md; rule/general/always-round-down.md)",
+    "recoveriesMaximum": "Censor Basics: 12; unchanged at levels 2-3.",
+    "noNumericSheetChange": "EXPLICIT: no level-2 or level-3 Censor feature (Perk; Saint's Vigilance, A Sense for Truth, It Was Foretold, Judge of Character, Lead by Example, Stalwart Icon; 2nd-Level Order Ability; Look On My Work and Despair; 7-Wrath Ability), no order ability, no 7-wrath ability and none of the selected perks changes any numeric sheet value (recoveries, speed, stability, disengage, characteristics, potency, size). The only numeric changes are Stamina maximum (+9 per level) and the recovery/winded values derived from it. Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2 (level 4).",
+    "abilityCounts": "Advancement table: level 2 adds one 5-wrath order ability (Abilities Signature, 3, 5; Order Abilities 5); level 3 adds one 7-wrath ability (Abilities Signature, 3, 5, 7).",
+    "orderFeatures": "2nd-Level Order Features grants TWO features per order: Exorcist - Saint's Vigilance, A Sense for Truth; Oracle - It Was Foretold, Judge of Character; Paragon - Lead by Example, Stalwart Icon.",
+    "abilityDamage": "\"X + M\" / \"X + P\" add the Might / Presence score (all witnesses M2, P2). Kit damage bonus added only for Melee+Weapon or Ranged+Weapon damage-dealing abilities (chapter/kits.md Damage Bonuses): only Sentenced qualifies. Fixed (non-rolled) damage recorded under fixedDamageByWitness.",
+    "potency": "Censor potency weak P-2 / average P-1 / strong P = 0/1/2 with Presence 2 (class/censor.md; rule/character/potency.md).",
+    "perkChoice": "One distinct eligible perk per witness, none with sub-choices, none already owned (all bases own only Teamwork, an exploration perk)."
+  },
+  "sources": [
+    {
+      "path": "en/unified/md/class/censor.md",
+      "sha256": "66bde8a3ec123dd727e4b71b5ab8fed845f209add2d266dc618ffcd405efe39b"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/perk.md",
+      "sha256": "1b8cebb1dd98acedff7d505a533b114fb1b54c596331f775a4b0bfa7a4772cf4"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/2nd-level-order-features.md",
+      "sha256": "4e7fbaca35f789f31410b4571ba9b1b6e9af9279c5ddc9e12010f63548468918"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/2nd-level-order-ability.md",
+      "sha256": "c5f2018a2e7db6e5abc24d6feaffc22c9bc1c165fef0d6609d9d014ea6045fc5"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/saints-vigilance.md",
+      "sha256": "1344a0be490cd13bc498e1bf92167a4a77b584b3f6c80275261c010a4bbf06ab"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/a-sense-for-truth.md",
+      "sha256": "561943b35d8b589b754c385abf550c63a65420453d439ff4d488e870340fba7d"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/it-was-foretold.md",
+      "sha256": "a6ae1c52c36551ed5890f3edfeeb30a988e544049d761881cd881e34e3cb56de"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/judge-of-character.md",
+      "sha256": "b69faa4b8bc9edf129a8cbd2e41492fc3e2cbeb848f9dc013b388f26963800f6"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/lead-by-example.md",
+      "sha256": "a73bedd59cbf79c87ffb04f9cfba83342a81775c2d9ebc5243a437e0c437de69"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-2/stalwart-icon.md",
+      "sha256": "40596aaeddaf8322476d6e1a48cbd2d4e7f03563ecab110adc20fbf42b21fa98"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-3/look-on-my-work-and-despair.md",
+      "sha256": "0705d5f511b87e78fba1f32abec8db994c2f0b16239594e6ab43dca47885f943"
+    },
+    {
+      "path": "en/unified/md/feature/censor/level-3/7-wrath-ability.md",
+      "sha256": "759e536dbef7c35a2d49494f95a0ccbdbb9f4836cde9359b2e4323ea8e217cd9"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+      "sha256": "c332aed3391154f555939da9c3476a175c3e2be030ca8b1736e17ef527ddf412"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+      "sha256": "da4eb3a86c76445504b1bfd2544a2308126c9085982af2e84f5bf75c7d57357b"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+      "sha256": "4325b57edd88f6a2cbc77e67ade2d136d6ef0c6fae96d6ff861da50da4845416"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+      "sha256": "2715fbad8bbe6ff58cca178e4d8a83d0d56f8ccb8faa228b63dde4d8e879bc28"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+      "sha256": "11fa672f1059749c9d0406012b70f8ad88e1c4e62c6afc08736488efc91a4e3b"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+      "sha256": "46a050f2758ee759e91057d1ca740b4ad6015192d721660c876daaea88c90d8f"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+      "sha256": "c977159695d2461dfc154173793c16fd57e977b70e42485f601acd37d5f7d329"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+      "sha256": "cfbc43e545752ea00eff74219b6990bce1f6148bf460c6b5fb8e2d83fe99dc8d"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+      "sha256": "db3b7dc78e9b8d7a806e38a39f543498b4ad1c8ef647226df81f500462080ba0"
+    },
+    {
+      "path": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+      "sha256": "ce3dc77807534d8eb48dfcf6ed2741e45128ca6ea74c08f6fceb39cdcc278f33"
+    },
+    {
+      "path": "en/unified/md/chapter/kits.md",
+      "sha256": "bc723dd87b9c660c589fb96f984b285b447eda457c468b89029fd11fec0d16ad"
+    },
+    {
+      "path": "en/unified/md/kit/cloak-and-dagger.md",
+      "sha256": "a12702f91b0be983e269d4290497aff944761347d6846b9492f9e978c95dc846"
+    },
+    {
+      "path": "en/unified/md/kit/mountain.md",
+      "sha256": "86bbe933d9511a3ce9b2754464b8056435dd1565431a5ba38166ab4d0f7d4ee6"
+    },
+    {
+      "path": "en/unified/md/kit/sniper.md",
+      "sha256": "d52d966ce3487270b83d062b3596f2a04974be66f57808ffc837807812fe4857"
+    },
+    {
+      "path": "en/unified/md/kit/swashbuckler.md",
+      "sha256": "351feb5e85b6237deb955c6d5d70f4a34d10da690acf627a6a52e55a8fb2a8fd"
+    },
+    {
+      "path": "en/unified/md/rule/general/echelon.md",
+      "sha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3"
+    },
+    {
+      "path": "en/unified/md/rule/health/recoveries.md",
+      "sha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9"
+    },
+    {
+      "path": "en/unified/md/rule/health/winded.md",
+      "sha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee"
+    },
+    {
+      "path": "en/unified/md/rule/general/always-round-down.md",
+      "sha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783"
+    },
+    {
+      "path": "en/unified/md/rule/character/potency.md",
+      "sha256": "8c07c502b4576b369fbc6efba6da0327d84489b8f1343ee9dadf548b99a6c8d6"
+    },
+    {
+      "path": "en/unified/md/perk/charming-liar.md",
+      "sha256": "147f2272e7e20c5a5db6a720d4b3e3e7414818a2472ded8113f020d8bc2c5ed8"
+    },
+    {
+      "path": "en/unified/md/perk/polymath.md",
+      "sha256": "0881867c8e7df430e015843386efcde9bcfe52e64ef1efbd6034cc0a28306a51"
+    },
+    {
+      "path": "en/unified/md/perk/creature-sense.md",
+      "sha256": "629d9c29745e9b27ff98ea6fbb98f8bcde989246d6d3784504845962a45244f7"
+    },
+    {
+      "path": "en/unified/md/perk/lie-detector.md",
+      "sha256": "f0492ab9df9d7105052d7dfb728a53d5c815d42a366202fa8eba3392e8388b6c"
+    },
+    {
+      "path": "en/unified/md/perk/ritualist.md",
+      "sha256": "e6604fbbb3a559f45cc715f8fb8e8c1ecfdc694220126da1a139a4935fda9c73"
+    },
+    {
+      "path": "en/unified/md/perk/but-i-know-who-does.md",
+      "sha256": "773041fb12df7f3b98026bd758b131f4d3e192a4409b5e39cff7039797efc747"
+    },
+    {
+      "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01"
+    },
+    {
+      "path": "tests/fixtures/v99-censor-expected.json",
+      "role": "reviewed level-one baseline"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "order-ability-grouping",
+      "passage": "en/unified/md/feature/censor/level-2/2nd-level-order-ability.md has empty \"2nd-Level Exorcist/Oracle/Paragon Ability\" sections.",
+      "resolution": "Grouping from en/books/heroes/clean/Draw Steel Heroes.md lines 4995-5080: Exorcist: It Is Justice You Fear (4999), Revelator (5015); Oracle: Prescient Grace (5029), With My Blessing (5041); Paragon: Blessing of the Faithful (5055), Sentenced (5065). Unified ability front matter \"subclass\" agrees for all six.",
+      "alternatives": ["none needed; two sources agree"]
+    },
+    {
+      "id": "saints-vigilance-link",
+      "passage": "2nd-Level Order Features Table (unified and book line 4963) links only \"Saint\" to rule.world/saint, not to the feature.",
+      "resolution": "en/unified/md/feature/censor/level-2/saints-vigilance.md (subclass: exorcist) is the feature; book prints it at line 4979.",
+      "alternatives": ["none"]
+    },
+    {
+      "id": "it-is-justice-already-frightened",
+      "passage": "it-is-justice-you-fear.md Effect: \"If the target is already frightened of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your Presence score.\"",
+      "resolution": "INTERPRETATION: \"instead\" replaces only the frightened result; the tier holy damage (10/14/17) is still dealt, plus 4 psychic when the potency check would frighten an already-frightened target.",
+      "alternatives": [
+        "the psychic damage replaces the whole tier result including holy damage",
+        "psychic damage applies whenever the target is already frightened regardless of the potency check"
+      ]
+    },
+    {
+      "id": "look-on-my-work-already-frightened-scope",
+      "passage": "look-on-my-work-and-despair.md: \"...if the new target has P < STRONG, they are frightened of you (save ends). If the target is already frightened of you, they instead take holy damage equal to twice your Presence score.\"",
+      "resolution": "Not resolved; kept manual. Sentence placement suggests it modifies the free-triggered retarget clause only.",
+      "alternatives": [
+        "applies only to the retarget clause (P < STRONG)",
+        "applies to both the 1-wrath Judgment clause and the retarget clause"
+      ]
+    },
+    {
+      "id": "disruptive-isolation-adjacent-enemy",
+      "passage": "edict-of-disruptive-isolation.md: \"A target takes an extra 2d6 holy damage if they are judged by you or if they are adjacent to any enemy.\"",
+      "resolution": "Not resolved; kept manual. \"Enemy\" is ambiguous in perspective.",
+      "alternatives": [
+        "adjacent to any of the target's enemies (i.e. the censor's allies/heroes)",
+        "adjacent to any of the censor's enemies (i.e. the target's allies)"
+      ]
+    },
+    {
+      "id": "stillness-scope",
+      "passage": "edict-of-stillness.md: \"whenever a target moves or is force moved out of the area ... A target judged by you who moves willingly takes an extra 2d6 holy damage.\"",
+      "resolution": "INTERPRETATION: \"out of the area\" qualifies both \"moves\" and \"is force moved\"; the 2d6 extra requires judged + willing movement out of the area.",
+      "alternatives": ["any movement by the target (even within the aura) triggers the base damage"]
+    },
+    {
+      "id": "perfect-order-malice",
+      "passage": "edict-of-perfect-order.md references abilities that cost Malice \"(see Draw Steel: Monsters)\".",
+      "resolution": "Trigger depends on monster data; kept manual. Fixed damage 3 x P = 6 holy (+2d6 if judged).",
+      "alternatives": ["none"]
+    },
+    {
+      "id": "kit-bonus-magic-abilities",
+      "passage": "chapter/kits.md Damage Bonuses require Melee+Weapon or Ranged+Weapon keywords and rolled damage.",
+      "resolution": "Only Sentenced (Melee, Weapon) receives a kit bonus (v99-war Mountain +0/+0/+4). It Is Justice You Fear (no Weapon), Revelator and the four edicts (Area, Magic; fixed damage) receive none; no ranged distance bonus applies to any level-2/3 ability.",
+      "alternatives": ["none; keyword rule is explicit"]
+    },
+    {
+      "id": "prescient-grace-recovery-owner",
+      "passage": "prescient-grace.md: \"You can spend a Recovery to allow the target to regain Stamina equal to your recovery value.\"",
+      "resolution": "Reading: the censor spends the censor's Recovery and the amount is the censor's recovery value (possessive \"your\").",
+      "alternatives": ["target's recovery value (not supported by text)"]
+    },
+    {
+      "id": "companion-perks",
+      "passage": "Unified perk/ contains perks absent from the Heroes book perk chapter (Born Tracker, People Sense, Ride Along, Trained Thief, Voice of the Wild, Wild Rumpus, Wilds Explorer, You Can Pet Them, They're Friendly); unified perk front matter has no group field.",
+      "resolution": "Perk groups taken only from the Heroes book chapter headings; those perks are excluded from eligibleCorePerks.",
+      "alternatives": ["treat them as eligible under some group (no group is printed)"]
+    },
+    {
+      "id": "creature-sense-action",
+      "passage": "perk/creature-sense.md: \"As a maneuver, choose a creature within 10 squares...\" (no ability block).",
+      "resolution": "Listed as a perk only; not counted in addedAbilities for v99-death. An implementation may expose it as an action; that does not change any numeric expected value.",
+      "alternatives": ["expose as a maneuver ability \"Creature Sense\""]
+    }
+  ],
+  "levelTwo": {
+    "sourceAdvancementTable": "en/unified/md/class/censor.md (Censor Advancement Table, row 2nd: Perk, Order Features, Order Ability; Abilities Signature, 3, 5; Order Abilities 5)",
+    "staminaGained": 9,
+    "staminaSource": "en/unified/md/class/censor.md Basics: Stamina Gained at 2nd and Higher Levels: 9",
+    "commonFeatures": [
+      {
+        "name": "Perk",
+        "sourcePath": "en/unified/md/feature/censor/level-2/perk.md",
+        "sourceSha256": "1b8cebb1dd98acedff7d505a533b114fb1b54c596331f775a4b0bfa7a4772cf4",
+        "choice": "one interpersonal, lore, or supernatural perk"
+      },
+      {
+        "name": "2nd-Level Order Features",
+        "sourcePath": "en/unified/md/feature/censor/level-2/2nd-level-order-features.md",
+        "sourceSha256": "4e7fbaca35f789f31410b4571ba9b1b6e9af9279c5ddc9e12010f63548468918",
+        "grants": "two features per order (2nd-Level Order Features Table)"
+      },
+      {
+        "name": "2nd-Level Order Ability",
+        "sourcePath": "en/unified/md/feature/censor/level-2/2nd-level-order-ability.md",
+        "sourceSha256": "c5f2018a2e7db6e5abc24d6feaffc22c9bc1c165fef0d6609d9d014ea6045fc5",
+        "choice": "one of two heroic abilities for your order",
+        "groupingSource": "en/books/heroes/clean/Draw Steel Heroes.md lines 4995-5080 (unified file has empty per-order sections)"
+      }
+    ],
+    "perkGroups": ["interpersonal", "lore", "supernatural"],
+    "perkGroupsSource": "en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Interpersonal Perks 17397, Lore Perks 17469, Supernatural Perks 17511",
+    "eligibleCorePerks": {
+      "interpersonal": [
+        {
+          "name": "Charming Liar",
+          "sourcePath": "en/unified/md/perk/charming-liar.md"
+        },
+        {
+          "name": "Dazzler",
+          "sourcePath": "en/unified/md/perk/dazzler.md"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md"
+        },
+        {
+          "name": "Harmonizer",
+          "sourcePath": "en/unified/md/perk/harmonizer.md"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md"
+        },
+        {
+          "name": "Pardon My Friend",
+          "sourcePath": "en/unified/md/perk/pardon-my-friend.md"
+        },
+        {
+          "name": "Power Player",
+          "sourcePath": "en/unified/md/perk/power-player.md"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md"
+        },
+        {
+          "name": "Spot the Tell",
+          "sourcePath": "en/unified/md/perk/spot-the-tell.md"
+        }
+      ],
+      "lore": [
+        {
+          "name": "But I Know Who Does",
+          "sourcePath": "en/unified/md/perk/but-i-know-who-does.md"
+        },
+        {
+          "name": "Eidetic Memory",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md"
+        },
+        {
+          "name": "Expert Sage",
+          "sourcePath": "en/unified/md/perk/expert-sage.md"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md"
+        },
+        {
+          "name": "Linguist",
+          "sourcePath": "en/unified/md/perk/linguist.md"
+        },
+        {
+          "name": "Polymath",
+          "sourcePath": "en/unified/md/perk/polymath.md"
+        },
+        {
+          "name": "Specialist",
+          "sourcePath": "en/unified/md/perk/specialist.md"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md"
+        }
+      ],
+      "supernatural": [
+        {
+          "name": "Arcane Trick",
+          "sourcePath": "en/unified/md/perk/arcane-trick.md"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md"
+        },
+        {
+          "name": "Familiar",
+          "sourcePath": "en/unified/md/perk/familiar.md"
+        },
+        {
+          "name": "Invisible Force",
+          "sourcePath": "en/unified/md/perk/invisible-force.md"
+        },
+        {
+          "name": "Psychic Whisper",
+          "sourcePath": "en/unified/md/perk/psychic-whisper.md"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md"
+        }
+      ]
+    },
+    "eligibleCorePerkCount": 25,
+    "excludedPerkGroups": "crafting, exploration, intrigue (not permitted by feature/censor/level-2/perk.md). Unified perk/ also has companion perks (Born Tracker, People Sense, Ride Along, Trained Thief, Voice of the Wild, Wild Rumpus, Wilds Explorer, You Can Pet Them, They're Friendly) absent from the Heroes book perk chapter; not core eligible. Teamwork (every base witness's career perk) is exploration and therefore not eligible here.",
+    "perksWithSubChoices": [
+      "Linguist (two languages)",
+      "Specialist (one lore skill)",
+      "Eidetic Memory (lore skill chosen at each respite; not a build-time choice but avoided)"
+    ],
+    "byOrder": {
+      "Exorcist": {
+        "orderFeatures": [
+          {
+            "name": "Saint's Vigilance",
+            "sourcePath": "en/unified/md/feature/censor/level-2/saints-vigilance.md",
+            "sourceSha256": "1344a0be490cd13bc498e1bf92167a4a77b584b3f6c80275261c010a4bbf06ab",
+            "summary": "You have honed your ability to detect sin and can use it to find those who hide from justice. Any creature judged by you can't use the Hide maneuver. Additionally, you gain an edge when searching for hidden creatures. If you find a hidden creature, you can use your Judgment ability against them as a free triggered action.",
+            "numericSheetEffect": null
+          },
+          {
+            "name": "A Sense for Truth",
+            "sourcePath": "en/unified/md/feature/censor/level-2/a-sense-for-truth.md",
+            "sourceSha256": "561943b35d8b589b754c385abf550c63a65420453d439ff4d488e870340fba7d",
+            "summary": "You are trained in secret techniques from your order that allow you to discern the truth with supernatural precision. If a creature is of a lower level than you, you automatically know when they are lying, though you don't necessarily know the actual truth behind their lie. Additionally, you gain an edge on tests made to detect lies or hidden motives.",
+            "numericSheetEffect": null
+          }
+        ],
+        "orderFeatureCount": 2,
+        "orderAbilityOptions": [
+          {
+            "name": "It Is Justice You Fear",
+            "printedCost": "5 Wrath",
+            "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 4999 (2nd-Level Exorcist Ability, lines 4995-5024)"
+          },
+          {
+            "name": "Revelator",
+            "printedCost": "5 Wrath",
+            "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5015 (2nd-Level Exorcist Ability, lines 4995-5024)"
+          }
+        ]
+      },
+      "Oracle": {
+        "orderFeatures": [
+          {
+            "name": "It Was Foretold",
+            "sourcePath": "en/unified/md/feature/censor/level-2/it-was-foretold.md",
+            "sourceSha256": "a6ae1c52c36551ed5890f3edfeeb30a988e544049d761881cd881e34e3cb56de",
+            "summary": "Your order has trained you to understand fragments of the visions granted to you by your deity, giving you a momentary advantage in challenging situations. At the start of an encounter, you can take one main action before any other creature and before your first turn. Additionally, whenever the Director calls for a montage test, you can make one free test before the montage begins, which counts as an earned success or failure as usual.",
+            "numericSheetEffect": null
+          },
+          {
+            "name": "Judge of Character",
+            "sourcePath": "en/unified/md/feature/censor/level-2/judge-of-character.md",
+            "sourceSha256": "b69faa4b8bc9edf129a8cbd2e41492fc3e2cbeb848f9dc013b388f26963800f6",
+            "summary": "Your focus on your fragmentary visions grants divine insight into the world and its creatures beyond your usual senses. Whenever you would make an Intuition test, you can make a Presence test instead.",
+            "numericSheetEffect": null
+          }
+        ],
+        "orderFeatureCount": 2,
+        "orderAbilityOptions": [
+          {
+            "name": "Prescient Grace",
+            "printedCost": "5 Wrath",
+            "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5029 (2nd-Level Oracle Ability, lines 5025-5050)"
+          },
+          {
+            "name": "With My Blessing",
+            "printedCost": "5 Wrath",
+            "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5041 (2nd-Level Oracle Ability, lines 5025-5050)"
+          }
+        ]
+      },
+      "Paragon": {
+        "orderFeatures": [
+          {
+            "name": "Lead by Example",
+            "sourcePath": "en/unified/md/feature/censor/level-2/lead-by-example.md",
+            "sourceSha256": "a73bedd59cbf79c87ffb04f9cfba83342a81775c2d9ebc5243a437e0c437de69",
+            "summary": "Your devotion to your deity allows you to take command of the battlefield, letting your allies benefit from your wisdom. While you are adjacent to a creature, your allies gain the benefits of flanking against that creature. Additionally, your allies gain an edge on tests made to aid other creatures with their tests.",
+            "numericSheetEffect": null
+          },
+          {
+            "name": "Stalwart Icon",
+            "sourcePath": "en/unified/md/feature/censor/level-2/stalwart-icon.md",
+            "sourceSha256": "40596aaeddaf8322476d6e1a48cbd2d4e7f03563ecab110adc20fbf42b21fa98",
+            "summary": "You exhibit a small spark of your deity's power, causing creatures to trust or fear you, depending on what you need. You gain an edge on tests made to intimidate or persuade others.",
+            "numericSheetEffect": null
+          }
+        ],
+        "orderFeatureCount": 2,
+        "orderAbilityOptions": [
+          {
+            "name": "Blessing of the Faithful",
+            "printedCost": "5 Wrath",
+            "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5055 (2nd-Level Paragon Ability, lines 5051-5080)"
+          },
+          {
+            "name": "Sentenced",
+            "printedCost": "5 Wrath",
+            "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5065 (2nd-Level Paragon Ability, lines 5051-5080)"
+          }
+        ]
+      }
+    }
+  },
+  "levelThree": {
+    "sourceAdvancementTable": "en/unified/md/class/censor.md (row 3rd: Look On My Work and Despair, 7-Wrath Ability; Abilities Signature, 3, 5, 7; Order Abilities 5)",
+    "staminaGained": 9,
+    "automaticFeatures": [
+      {
+        "name": "Look On My Work and Despair",
+        "sourcePath": "en/unified/md/feature/censor/level-3/look-on-my-work-and-despair.md",
+        "sourceSha256": "0705d5f511b87e78fba1f32abec8db994c2f0b16239594e6ab43dca47885f943",
+        "summary": "Your judgment has grown in divine power, instilling fear in those you condemn. Whenever you use your Judgment ability, you can spend 1 wrath, and if the target has P < AVERAGE, they are frightened of you (save ends). Additionally, whenever a creature judged by you is reduced to 0 Stamina and you use Judgment as a free triggered action, if the new target has P < STRONG, they are frightened of you (save ends). If the target is already frightened of you, they instead take holy damage equal to twice your Presence score.",
+        "numericSheetEffect": null,
+        "manualClauses": [
+          "Whenever you use Judgment you can spend 1 wrath; if the target has P < AVERAGE (Presence-based potency: average = P-1 = 1 for every witness), they are frightened of you (save ends).",
+          "Whenever a creature judged by you is reduced to 0 Stamina and you use Judgment as a free triggered action, if the new target has P < STRONG (= 2 for every witness), they are frightened of you (save ends).",
+          "If the target is already frightened of you, they instead take holy damage equal to twice your Presence score (2 x 2 = 4 for every witness); scope of this sentence is an uncertainty."
+        ],
+        "embeddedCost": {
+          "resource": "wrath",
+          "amount": 1,
+          "citation": "en/unified/md/feature/censor/level-3/look-on-my-work-and-despair.md"
+        }
+      },
+      {
+        "name": "7-Wrath Ability",
+        "sourcePath": "en/unified/md/feature/censor/level-3/7-wrath-ability.md",
+        "sourceSha256": "759e536dbef7c35a2d49494f95a0ccbdbb9f4836cde9359b2e4323ea8e217cd9",
+        "choice": "one of four 7-wrath heroic abilities",
+        "groupingSource": "en/books/heroes/clean/Draw Steel Heroes.md lines 5089-5132"
+      }
+    ],
+    "ability7Options": [
+      {
+        "name": "Edict of Disruptive Isolation",
+        "printedCost": "7 Wrath",
+        "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5093"
+      },
+      {
+        "name": "Edict of Perfect Order",
+        "printedCost": "7 Wrath",
+        "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5103"
+      },
+      {
+        "name": "Edict of Purifying Pacifism",
+        "printedCost": "7 Wrath",
+        "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5113"
+      },
+      {
+        "name": "Edict of Stillness",
+        "printedCost": "7 Wrath",
+        "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5123"
+      }
+    ],
+    "ability7OptionsAreOrderIndependent": true,
+    "ability7OrderIndependenceBasis": "Unified level-3 ability front matter has no subclass field; book 7-Wrath Ability section (line 5089) lists all four without order headings."
+  },
+  "abilities": {
+    "It Is Justice You Fear": {
+      "name": "It Is Justice You Fear",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+      "sourceSha256": "c332aed3391154f555939da9c3476a175c3e2be030ca8b1736e17ef527ddf412",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 4999",
+      "level": 2,
+      "order": "Exorcist",
+      "feature": "2nd-Level Order Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Ranged", "Strike"],
+      "distance": "Ranged 10",
+      "target": "One creature",
+      "cost": {
+        "resource": "wrath",
+        "amount": 5,
+        "printed": "5 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Might",
+      "tiersVerbatim": {
+        "tier1": "8 + M holy damage; P < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+        "tier2": "12 + M holy damage; P < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+        "tier3": "15 + M holy damage; P < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "8 + M holy damage; P < WEAK, frightened (save ends)",
+        "tier2": "12 + M holy damage; P < AVERAGE, frightened (save ends)",
+        "tier3": "15 + M holy damage; P < STRONG, frightened (save ends)"
+      },
+      "effectsPlain": [
+        "**Effect:** If the target is already frightened of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your Presence score."
+      ],
+      "chosenBy": ["v99-creation"],
+      "dealsDamage": true,
+      "damageType": "holy",
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "Keywords Magic, Ranged, Strike: no Weapon keyword, so no kit ranged damage bonus. chapter/kits.md Damage Bonuses: melee bonus added to rolled damage of damage-dealing abilities with both Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords. Distance Bonus likewise requires Melee+Weapon / Ranged+Weapon.",
+      "kitDistanceBonusApplies": false,
+      "kitDistanceReason": "No Weapon keyword; v99-creation Cloak and Dagger +5 ranged distance does NOT extend it; stays Ranged 10.",
+      "resolvedDistanceByWitness": {
+        "v99-creation": "Ranged 10"
+      },
+      "damageByWitness": [
+        {
+          "witness": "v99-creation",
+          "might": 2,
+          "printedConstants": [8, 12, 15],
+          "kitBonusKind": null,
+          "kitBonusApplied": [0, 0, 0],
+          "tiers": [10, 14, 17],
+          "formula": "[8,12,15] + M2 + kit [0,0,0] (no Weapon keyword) = [10, 14, 17]",
+          "damageType": "holy"
+        }
+      ],
+      "potencyByWitness": {
+        "v99-creation": {
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        }
+      },
+      "manualClauses": [
+        "Frightened (save ends) on P < WEAK/AVERAGE/STRONG per tier; source is you (condition/frightened.md requires a source).",
+        "If the target is already frightened of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your Presence score (2 x P2 = 4 for v99-creation); see uncertainty it-is-justice-already-frightened."
+      ],
+      "fixedDamageByWitness": [
+        {
+          "witness": "v99-creation",
+          "amount": 4,
+          "formula": "2 x P2 = 4",
+          "damageType": "psychic",
+          "condition": "target already frightened and would be frightened again"
+        }
+      ]
+    },
+    "Revelator": {
+      "name": "Revelator",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+      "sourceSha256": "da4eb3a86c76445504b1bfd2544a2308126c9085982af2e84f5bf75c7d57357b",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5015",
+      "level": 2,
+      "order": "Exorcist",
+      "feature": "2nd-Level Order Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Magic"],
+      "distance": "3 burst",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "wrath",
+        "amount": 5,
+        "printed": "5 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Each target takes holy damage equal to twice your Presence score. Additionally, each hidden target is automatically revealed and can't become hidden again until the start of your next turn. You can then use your Judgment ability against one target as a free triggered action."
+      ],
+      "chosenBy": ["v99-knowledge"],
+      "dealsDamage": true,
+      "damageType": "holy",
+      "rolled": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No power roll (fixed damage, not rolled damage) and no Weapon keyword (Area, Magic).",
+      "fixedDamageByWitness": [
+        {
+          "witness": "v99-knowledge",
+          "amount": 4,
+          "formula": "2 x P2 = 4",
+          "damageType": "holy",
+          "targets": "each enemy in the 3 burst"
+        }
+      ],
+      "manualClauses": [
+        "Each hidden target is automatically revealed and can't become hidden again until the start of your next turn.",
+        "You can then use Judgment against one target as a free triggered action."
+      ]
+    },
+    "Prescient Grace": {
+      "name": "Prescient Grace",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+      "sourceSha256": "4325b57edd88f6a2cbc77e67ade2d136d6ef0c6fae96d6ff861da50da4845416",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5029",
+      "level": 2,
+      "order": "Oracle",
+      "feature": "2nd-Level Order Ability",
+      "actionType": "Triggered",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Self or one ally",
+      "cost": {
+        "resource": "wrath",
+        "amount": 5,
+        "printed": "5 Wrath"
+      },
+      "trigger": "An enemy within 10 squares starts their turn.",
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Trigger:** An enemy within 10 squares starts their turn.",
+        "**Effect:** You can spend a Recovery to allow the target to regain Stamina equal to your recovery value. The target can then take their turn immediately before the triggering enemy."
+      ],
+      "chosenBy": ["v99-death"],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage; keywords Magic, Ranged (no Weapon).",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v99-death": "Ranged 10 (Sniper +10 ranged distance does not apply: no Weapon keyword)"
+      },
+      "recoveryValueByWitness": {
+        "v99-death": {
+          "level2": 10,
+          "level3": 13,
+          "basis": "the censor's own recovery value (\"your recovery value\")"
+        }
+      },
+      "manualClauses": [
+        "Trigger: an enemy within 10 squares starts their turn.",
+        "You can spend a Recovery (yours) to allow the target (self or one ally) to regain Stamina equal to YOUR recovery value (v99-death: 10 at level 2, 13 at level 3).",
+        "The target can then take their turn immediately before the triggering enemy."
+      ]
+    },
+    "With My Blessing": {
+      "name": "With My Blessing",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+      "sourceSha256": "2715fbad8bbe6ff58cca178e4d8a83d0d56f8ccb8faa228b63dde4d8e879bc28",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5041",
+      "level": 2,
+      "order": "Oracle",
+      "feature": "2nd-Level Order Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Self or one ally",
+      "cost": {
+        "resource": "wrath",
+        "amount": 5,
+        "printed": "5 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** The target can use a free triggered action to use a strike signature ability or a strike heroic ability, and has a double edge on that ability. If a heroic ability is chosen, reduce its Heroic Resource cost by 3 (to a minimum cost of 0)."
+      ],
+      "chosenBy": ["v99-life"],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage; no Weapon keyword.",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v99-life": "Ranged 10 (Cloak and Dagger +5 does not apply: no Weapon keyword)"
+      },
+      "manualClauses": [
+        "The target (self or one ally) can use a free triggered action to use a strike signature ability or a strike heroic ability, with a double edge on that ability.",
+        "If a heroic ability is chosen, reduce its Heroic Resource cost by 3 (minimum 0)."
+      ]
+    },
+    "Blessing of the Faithful": {
+      "name": "Blessing of the Faithful",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+      "sourceSha256": "11fa672f1059749c9d0406012b70f8ad88e1c4e62c6afc08736488efc91a4e3b",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5055",
+      "level": 2,
+      "order": "Paragon",
+      "feature": "2nd-Level Order Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Magic"],
+      "distance": "3 aura",
+      "target": "Self and each ally in the area",
+      "cost": {
+        "resource": "wrath",
+        "amount": 5,
+        "printed": "5 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, each target gains 1 surge at the end of each of your turns."
+      ],
+      "chosenBy": ["v99-fate"],
+      "dealsDamage": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage; Area, Magic.",
+      "manualClauses": [
+        "Duration: until the end of the encounter or until you are dying.",
+        "Each target (self and each ally in the 3 aura) gains 1 surge at the end of each of your turns."
+      ]
+    },
+    "Sentenced": {
+      "name": "Sentenced",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+      "sourceSha256": "46a050f2758ee759e91057d1ca740b4ad6015192d721660c876daaea88c90d8f",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5065",
+      "level": 2,
+      "order": "Paragon",
+      "feature": "2nd-Level Order Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature",
+      "cost": {
+        "resource": "wrath",
+        "amount": 5,
+        "printed": "5 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "5 + P damage; P < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+        "tier2": "9 + P damage; P < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+        "tier3": "12 + P damage; P < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "5 + P damage; P < WEAK, restrained (save ends)",
+        "tier2": "9 + P damage; P < AVERAGE, restrained (save ends)",
+        "tier3": "12 + P damage; P < STRONG, restrained (save ends)"
+      },
+      "effectsPlain": [
+        "**Effect:** While the target is restrained this way, your abilities that impose forced movement can still move them."
+      ],
+      "chosenBy": ["v99-war"],
+      "dealsDamage": true,
+      "damageType": "untyped (tiers print \"damage\" with no type)",
+      "kitDamageBonusApplies": "melee",
+      "kitDamageBonusReason": "Keywords Magic, Melee, Strike, Weapon and deals rolled damage -> kit melee damage bonus applies. chapter/kits.md Damage Bonuses: melee bonus added to rolled damage of damage-dealing abilities with both Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords. Distance Bonus likewise requires Melee+Weapon / Ranged+Weapon.",
+      "kitDistanceBonusApplies": "melee (moot: Mountain has no melee distance bonus)",
+      "resolvedDistanceByWitness": {
+        "v99-war": "Melee 1"
+      },
+      "damageByWitness": [
+        {
+          "witness": "v99-war",
+          "presence": 2,
+          "printedConstants": [5, 9, 12],
+          "kitBonusKind": "meleeDamage",
+          "kit": "Mountain",
+          "kitBonusApplied": [0, 0, 4],
+          "tiers": [7, 11, 18],
+          "formula": "[5,9,12] + P2 + kit Mountain [0, 0, 4] = [7, 11, 18]"
+        }
+      ],
+      "potencyByWitness": {
+        "v99-war": {
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        }
+      },
+      "manualClauses": [
+        "Restrained (save ends) on P < WEAK/AVERAGE/STRONG per tier.",
+        "While the target is restrained this way, your abilities that impose forced movement can still move them."
+      ]
+    },
+    "Edict of Disruptive Isolation": {
+      "name": "Edict of Disruptive Isolation",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+      "sourceSha256": "c977159695d2461dfc154173793c16fd57e977b70e42485f601acd37d5f7d329",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5093",
+      "level": 3,
+      "order": null,
+      "feature": "7-Wrath Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Magic"],
+      "distance": "2 aura",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "wrath",
+        "amount": 7,
+        "printed": "7 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, each target takes holy damage equal to your Presence score at the end of each of your turns. A target takes an extra 2d6 holy damage if they are judged by you or if they are adjacent to any enemy."
+      ],
+      "chosenBy": ["v99-creation", "v99-fate"],
+      "dealsDamage": true,
+      "damageType": "holy",
+      "rolled": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No power roll and no Weapon keyword (Area, Magic); the 2d6 extra is not an ability-roll tier.",
+      "duration": "until the end of the encounter or until you are dying",
+      "fixedDamageByWitness": [
+        {
+          "witness": "v99-creation",
+          "amount": 2,
+          "formula": "P2 = 2",
+          "damageType": "holy",
+          "when": "at the end of each of your turns, each target in the aura",
+          "extraDice": "2d6 holy",
+          "extraCondition": "extra 2d6 holy if judged by you or adjacent to any enemy"
+        },
+        {
+          "witness": "v99-fate",
+          "amount": 2,
+          "formula": "P2 = 2",
+          "damageType": "holy",
+          "when": "at the end of each of your turns, each target in the aura",
+          "extraDice": "2d6 holy",
+          "extraCondition": "extra 2d6 holy if judged by you or adjacent to any enemy"
+        }
+      ],
+      "manualClauses": [
+        "Aura effect (at the end of each of your turns, each target in the aura): holy damage equal to your Presence score.",
+        "Extra 2d6 holy if judged by you or adjacent to any enemy.",
+        "Aura/area tracking, trigger detection and the 2d6 roll are manual."
+      ]
+    },
+    "Edict of Perfect Order": {
+      "name": "Edict of Perfect Order",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+      "sourceSha256": "cfbc43e545752ea00eff74219b6990bce1f6148bf460c6b5fb8e2d83fe99dc8d",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5103",
+      "level": 3,
+      "order": null,
+      "feature": "7-Wrath Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Magic"],
+      "distance": "2 aura",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "wrath",
+        "amount": 7,
+        "printed": "7 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, whenever a target uses an ability that costs Malice (see *Draw Steel: Monsters*), they take holy damage equal to three times your Presence score. A target judged by you takes an extra 2d6 holy damage."
+      ],
+      "chosenBy": ["v99-knowledge", "v99-war"],
+      "dealsDamage": true,
+      "damageType": "holy",
+      "rolled": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No power roll and no Weapon keyword (Area, Magic); the 2d6 extra is not an ability-roll tier.",
+      "duration": "until the end of the encounter or until you are dying",
+      "fixedDamageByWitness": [
+        {
+          "witness": "v99-knowledge",
+          "amount": 6,
+          "formula": "3 x P2 = 6",
+          "damageType": "holy",
+          "when": "whenever a target uses an ability that costs Malice",
+          "extraDice": "2d6 holy",
+          "extraCondition": "extra 2d6 holy if judged by you"
+        },
+        {
+          "witness": "v99-war",
+          "amount": 6,
+          "formula": "3 x P2 = 6",
+          "damageType": "holy",
+          "when": "whenever a target uses an ability that costs Malice",
+          "extraDice": "2d6 holy",
+          "extraCondition": "extra 2d6 holy if judged by you"
+        }
+      ],
+      "manualClauses": [
+        "Aura effect (whenever a target uses an ability that costs Malice): holy damage 3 x your Presence score.",
+        "Extra 2d6 holy if judged by you.",
+        "Aura/area tracking, trigger detection and the 2d6 roll are manual.",
+        "\"Ability that costs Malice\" refers to Draw Steel: Monsters (outside the pinned Heroes rules text used here); detection is manual."
+      ]
+    },
+    "Edict of Purifying Pacifism": {
+      "name": "Edict of Purifying Pacifism",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+      "sourceSha256": "db3b7dc78e9b8d7a806e38a39f543498b4ad1c8ef647226df81f500462080ba0",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5113",
+      "level": 3,
+      "order": null,
+      "feature": "7-Wrath Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Magic"],
+      "distance": "2 aura",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "wrath",
+        "amount": 7,
+        "printed": "7 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, whenever a target makes a strike, they take holy damage equal to twice your Presence score. A target judged by you takes an extra 2d6 holy damage."
+      ],
+      "chosenBy": ["v99-death"],
+      "dealsDamage": true,
+      "damageType": "holy",
+      "rolled": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No power roll and no Weapon keyword (Area, Magic); the 2d6 extra is not an ability-roll tier.",
+      "duration": "until the end of the encounter or until you are dying",
+      "fixedDamageByWitness": [
+        {
+          "witness": "v99-death",
+          "amount": 4,
+          "formula": "2 x P2 = 4",
+          "damageType": "holy",
+          "when": "whenever a target makes a strike",
+          "extraDice": "2d6 holy",
+          "extraCondition": "extra 2d6 holy if judged by you"
+        }
+      ],
+      "manualClauses": [
+        "Aura effect (whenever a target makes a strike): holy damage 2 x your Presence score.",
+        "Extra 2d6 holy if judged by you.",
+        "Aura/area tracking, trigger detection and the 2d6 roll are manual."
+      ]
+    },
+    "Edict of Stillness": {
+      "name": "Edict of Stillness",
+      "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+      "sourceSha256": "ce3dc77807534d8eb48dfcf6ed2741e45128ca6ea74c08f6fceb39cdcc278f33",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 5123",
+      "level": 3,
+      "order": null,
+      "feature": "7-Wrath Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Magic"],
+      "distance": "2 aura",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "wrath",
+        "amount": 7,
+        "printed": "7 Wrath"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the end of the encounter or until you are dying, whenever a target moves or is force moved out of the area, they take holy damage equal to twice your Presence score. A target judged by you who moves willingly takes an extra 2d6 holy damage."
+      ],
+      "chosenBy": ["v99-life"],
+      "dealsDamage": true,
+      "damageType": "holy",
+      "rolled": false,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No power roll and no Weapon keyword (Area, Magic); the 2d6 extra is not an ability-roll tier.",
+      "duration": "until the end of the encounter or until you are dying",
+      "fixedDamageByWitness": [
+        {
+          "witness": "v99-life",
+          "amount": 4,
+          "formula": "2 x P2 = 4",
+          "damageType": "holy",
+          "when": "whenever a target moves or is force moved out of the area",
+          "extraDice": "2d6 holy",
+          "extraCondition": "extra 2d6 holy if judged by you AND moved willingly"
+        }
+      ],
+      "manualClauses": [
+        "Aura effect (whenever a target moves or is force moved out of the area): holy damage 2 x your Presence score.",
+        "Extra 2d6 holy if judged by you AND moved willingly.",
+        "Aura/area tracking, trigger detection and the 2d6 roll are manual."
+      ]
+    }
+  },
+  "witnesses": {
+    "v99-creation": {
+      "base": "v99-creation",
+      "order": "Exorcist",
+      "domain": "Creation",
+      "kit": "Cloak and Dagger",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Charming Liar",
+          "orderAbility": "It Is Justice You Fear"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Order Features",
+          "Saint's Vigilance",
+          "A Sense for Truth",
+          "2nd-Level Order Ability"
+        ],
+        "addedAbilities": ["It Is Justice You Fear"],
+        "perks": ["Teamwork", "Charming Liar"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit Cloak and Dagger 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Edict of Disruptive Isolation"
+        },
+        "addedFeatures": ["Look On My Work and Despair", "7-Wrath Ability"],
+        "addedAbilities": ["Edict of Disruptive Isolation"],
+        "perks": ["Teamwork", "Charming Liar"],
+        "cumulativeAddedAbilities": ["It Is Justice You Fear", "Edict of Disruptive Isolation"],
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit Cloak and Dagger 3 x echelon 1 = 42",
+          "recoveryValue": "floor(42/3) = 14",
+          "windedValue": "floor(42/2) = 21",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v99-knowledge": {
+      "base": "v99-knowledge",
+      "order": "Exorcist",
+      "domain": "Knowledge",
+      "kit": "Mountain",
+      "levelOneBaseline": {
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Polymath",
+          "orderAbility": "Revelator"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Order Features",
+          "Saint's Vigilance",
+          "A Sense for Truth",
+          "2nd-Level Order Ability"
+        ],
+        "addedAbilities": ["Revelator"],
+        "perks": ["Teamwork", "Polymath"],
+        "perkType": "lore",
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit Mountain 9 x echelon 1 = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Edict of Perfect Order"
+        },
+        "addedFeatures": ["Look On My Work and Despair", "7-Wrath Ability"],
+        "addedAbilities": ["Edict of Perfect Order"],
+        "perks": ["Teamwork", "Polymath"],
+        "cumulativeAddedAbilities": ["Revelator", "Edict of Perfect Order"],
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit Mountain 9 x echelon 1 = 48",
+          "recoveryValue": "floor(48/3) = 16",
+          "windedValue": "floor(48/2) = 24",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v99-death": {
+      "base": "v99-death",
+      "order": "Oracle",
+      "domain": "Death",
+      "kit": "Sniper",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Creature Sense",
+          "orderAbility": "Prescient Grace"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Order Features",
+          "It Was Foretold",
+          "Judge of Character",
+          "2nd-Level Order Ability"
+        ],
+        "addedAbilities": ["Prescient Grace"],
+        "perks": ["Teamwork", "Creature Sense"],
+        "perkType": "supernatural",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit Sniper 0 x echelon 1 = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Edict of Purifying Pacifism"
+        },
+        "addedFeatures": ["Look On My Work and Despair", "7-Wrath Ability"],
+        "addedAbilities": ["Edict of Purifying Pacifism"],
+        "perks": ["Teamwork", "Creature Sense"],
+        "cumulativeAddedAbilities": ["Prescient Grace", "Edict of Purifying Pacifism"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit Sniper 0 x echelon 1 = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v99-life": {
+      "base": "v99-life",
+      "order": "Oracle",
+      "domain": "Life",
+      "kit": "Cloak and Dagger",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Lie Detector",
+          "orderAbility": "With My Blessing"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Order Features",
+          "It Was Foretold",
+          "Judge of Character",
+          "2nd-Level Order Ability"
+        ],
+        "addedAbilities": ["With My Blessing"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit Cloak and Dagger 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Edict of Stillness"
+        },
+        "addedFeatures": ["Look On My Work and Despair", "7-Wrath Ability"],
+        "addedAbilities": ["Edict of Stillness"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "cumulativeAddedAbilities": ["With My Blessing", "Edict of Stillness"],
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit Cloak and Dagger 3 x echelon 1 = 42",
+          "recoveryValue": "floor(42/3) = 14",
+          "windedValue": "floor(42/2) = 21",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v99-fate": {
+      "base": "v99-fate",
+      "order": "Paragon",
+      "domain": "Fate",
+      "kit": "Swashbuckler",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Ritualist",
+          "orderAbility": "Blessing of the Faithful"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Order Features",
+          "Lead by Example",
+          "Stalwart Icon",
+          "2nd-Level Order Ability"
+        ],
+        "addedAbilities": ["Blessing of the Faithful"],
+        "perks": ["Teamwork", "Ritualist"],
+        "perkType": "supernatural",
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit Swashbuckler 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Edict of Disruptive Isolation"
+        },
+        "addedFeatures": ["Look On My Work and Despair", "7-Wrath Ability"],
+        "addedAbilities": ["Edict of Disruptive Isolation"],
+        "perks": ["Teamwork", "Ritualist"],
+        "cumulativeAddedAbilities": ["Blessing of the Faithful", "Edict of Disruptive Isolation"],
+        "staminaMaximum": 42,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 14,
+        "windedValue": 21,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit Swashbuckler 3 x echelon 1 = 42",
+          "recoveryValue": "floor(42/3) = 14",
+          "windedValue": "floor(42/2) = 21",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v99-war": {
+      "base": "v99-war",
+      "order": "Paragon",
+      "domain": "War",
+      "kit": "Mountain",
+      "levelOneBaseline": {
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "But I Know Who Does",
+          "orderAbility": "Sentenced"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Order Features",
+          "Lead by Example",
+          "Stalwart Icon",
+          "2nd-Level Order Ability"
+        ],
+        "addedAbilities": ["Sentenced"],
+        "perks": ["Teamwork", "But I Know Who Does"],
+        "perkType": "lore",
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + kit Mountain 9 x echelon 1 = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Edict of Perfect Order"
+        },
+        "addedFeatures": ["Look On My Work and Despair", "7-Wrath Ability"],
+        "addedAbilities": ["Edict of Perfect Order"],
+        "perks": ["Teamwork", "But I Know Who Does"],
+        "cumulativeAddedAbilities": ["Sentenced", "Edict of Perfect Order"],
+        "staminaMaximum": 48,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 16,
+        "windedValue": 24,
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + kit Mountain 9 x echelon 1 = 48",
+          "recoveryValue": "floor(48/3) = 16",
+          "windedValue": "floor(48/2) = 24",
+          "unchanged": "Recoveries (12), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Censor feature, order ability, 7-wrath ability or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    }
+  }
+}

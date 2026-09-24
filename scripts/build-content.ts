@@ -280,6 +280,16 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V116-tactician-level-three.md#scope: Tactician levels two and three.',
   },
   {
+    id: 'censor-levels-two-three',
+    description:
+      'Censor levels two and three: order features, perk, Look On My Work and Despair and all ten ability alternatives.',
+    paths: [2, 3].flatMap(level => [
+      `feature/censor/level-${level}`,
+      `feature/ability/censor/level-${level}`,
+    ]),
+    basis: 'docs/build/V117-censor-level-three.md#scope: Censor levels two and three.',
+  },
+  {
     id: 'kits',
     description:
       'Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; Q-R-103 confirms Berserker and Reaver use ordinary Chapter 6 kits while Stormwight uses its four aspect kits; the pipeline preserves source fields rather than inferring eligibility.',

@@ -24,6 +24,7 @@ import { runFury } from './headless/fury.ts';
 import { runFuryLevelThree } from './headless/fury-level-three.ts';
 import { runConduit } from './headless/conduit.ts';
 import { runCensor } from './headless/censor.ts';
+import { runCensorLevelThree } from './headless/censor-level-three.ts';
 import { runShadowLevelSix } from './headless/shadow-level-six.ts';
 import { runShadowLevelThree } from './headless/shadow-level-three.ts';
 import { runShadowLevelTwo } from './headless/shadow-level-two.ts';
@@ -52,6 +53,7 @@ const cohorts = {
   beastheart: runBeastheart,
   summoner: runSummoner,
   censor: runCensor,
+  'censor-level-three': runCensorLevelThree,
   conduit: runConduit,
   all: runScenarios,
   tactician: runTactician,

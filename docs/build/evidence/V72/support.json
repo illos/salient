@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b",
+  "contentHash": "sha256:7844e4e767f6c8847ea08f34f28b81b7996583e3b6793e11368ff14026c2f91b",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1107
     },
     "hero-standalone": {
-      "total": 285,
+      "total": 295,
       "supported": 40,
-      "manual": 245
+      "manual": 255
     },
     "kit-signature": {
       "total": 25,
@@ -19459,6 +19459,1102 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Your Allies Cannot Save You! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/blessing-of-the-faithful",
+      "name": "Blessing of the Faithful",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-2/blessing-of-the-faithful",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/blessing-of-the-faithful#block:0:0:682a231d40c9f8c0",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear",
+      "name": "It Is Justice You Fear",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier1:0:42dfe3ac019856ea",
+            "locator": "block:0:tier1:0",
+            "clause": "8 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier1:1:cedb905f12c0054d",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier1:0:42dfe3ac019856ea"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier2:0:bae9458eba2f07af",
+            "locator": "block:0:tier2:0",
+            "clause": "12 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier2:1:773036d596e6d2a0",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier2:0:bae9458eba2f07af"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier3:0:9e4a564b4dd4bdb6",
+            "locator": "block:0:tier3:0",
+            "clause": "15 + M holy damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 15,
+              "characteristic": "M"
+            },
+            "damageType": "holy",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier3:1:7d38e9d796db710e",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "frightened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:0:tier3:0:9e4a564b4dd4bdb6"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear#block:1:0:5414d2e0381aa5db",
+          "locator": "block:1:0",
+          "clause": "If the target is already [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "If the target is already [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/prescient-grace",
+      "name": "Prescient Grace",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-2/prescient-grace",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/prescient-grace#block:0:0:b5808ca4fb61af5e",
+          "locator": "block:0:0",
+          "clause": "An enemy within 10 squares starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/prescient-grace#block:1:0:73105b0ce9690845",
+          "locator": "block:1:0",
+          "clause": "You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow the target to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries). The target can then take their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) immediately before the triggering enemy.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "An enemy within 10 squares starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow the target to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries). The target can then take their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) immediately before the triggering enemy.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self or one ally",
+          "message": "Only one, counted or area target envelopes are eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/revelator",
+      "name": "Revelator",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-2/revelator",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/revelator.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/revelator#block:0:0:68297ce6969fa6cd",
+          "locator": "block:0:0",
+          "clause": "Each target takes holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Additionally, each hidden target is automatically revealed and can't become hidden again until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You can then use your [Judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) ability against one target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target takes holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Additionally, each hidden target is automatically revealed and can't become hidden again until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You can then use your [Judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) ability against one target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced",
+      "name": "Sentenced",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/sentenced.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier1:0:8d9dc7ad3a26135a",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier1:1:c02e1d45d74420b5",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier1:0:8d9dc7ad3a26135a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier2:0:fd25f44b6b33a816",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier2:1:0015026a8790c2c8",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier2:0:fd25f44b6b33a816"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier3:0:9137329d984c2110",
+            "locator": "block:0:tier3:0",
+            "clause": "12 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier3:1:3a020e41ac29a29e",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:0:tier3:0:9137329d984c2110"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:1:0:2c04b233251f96f8",
+          "locator": "block:1:0",
+          "clause": "While the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way, your abilities that impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) can still move them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "While the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way, your abilities that impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) can still move them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/with-my-blessing",
+      "name": "With My Blessing",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-2/with-my-blessing",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/with-my-blessing#block:0:0:71abd86f6cba4cc9",
+          "locator": "block:0:0",
+          "clause": "The target can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), and has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability. If a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) is chosen, reduce its [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost by 3 (to a minimum cost of 0).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), and has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability. If a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) is chosen, reduce its [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost by 3 (to a minimum cost of 0).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self or one ally",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-disruptive-isolation",
+      "name": "Edict of Disruptive Isolation",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-disruptive-isolation",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-disruptive-isolation#block:0:0:4c8ea8c939028853",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target takes holy damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). A target takes an extra 2d6 holy damage if they are judged by you or if they are [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to any enemy.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target takes holy damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). A target takes an extra 2d6 holy damage if they are judged by you or if they are [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to any enemy.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Edict of Disruptive Isolation",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Disruptive Isolation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Disruptive Isolation",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Disruptive Isolation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Disruptive Isolation",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Disruptive Isolation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Disruptive Isolation",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Disruptive Isolation supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-perfect-order",
+      "name": "Edict of Perfect Order",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-perfect-order",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-perfect-order#block:0:0:e7171ca39541d0a3",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target uses an ability that costs Malice (see *Draw Steel: Monsters*), they take holy damage equal to three times your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target uses an ability that costs Malice (see *Draw Steel: Monsters*), they take holy damage equal to three times your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Edict of Perfect Order",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Perfect Order supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Perfect Order",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Perfect Order supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Perfect Order",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Perfect Order supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Perfect Order",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Perfect Order supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-purifying-pacifism",
+      "name": "Edict of Purifying Pacifism",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-purifying-pacifism",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-purifying-pacifism#block:0:0:1c459c6f45e9a6e3",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Edict of Purifying Pacifism",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Purifying Pacifism supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Purifying Pacifism",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Purifying Pacifism supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Purifying Pacifism",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Purifying Pacifism supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Purifying Pacifism",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Purifying Pacifism supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-stillness",
+      "name": "Edict of Stillness",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-stillness",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-stillness#block:0:0:67293f8f54fc285e",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target moves or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) out of the area, they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you who moves willingly takes an extra 2d6 holy damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target moves or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) out of the area, they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you who moves willingly takes an extra 2d6 holy damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Edict of Stillness",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Stillness supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Stillness",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Stillness supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Stillness",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Stillness supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Stillness",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Stillness supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -202174,7 +203270,7 @@
   ],
   "liveCounts": {
     "compiled": 102,
-    "compatibility": 1433,
+    "compatibility": 1443,
     "compiledButUnavailable": 0
   }
 }

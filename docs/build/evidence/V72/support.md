@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:7844e4e767f6c8847ea08f34f28b81b7996583e3b6793e11368ff14026c2f91b`.
 
-Currently reachable compiled: 102; unchanged reachable compatibility: 1433; structurally supported but unavailable: 0.
+Currently reachable compiled: 102; unchanged reachable compatibility: 1443; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -133,6 +133,16 @@ Currently reachable compiled: 102; unchanged reachable compatibility: 1433; stru
 | Repent! | hero-standalone | supported | compiled |  |
 | The Gods Punish and Defend | hero-standalone | supported | compiled |  |
 | Your Allies Cannot Save You! | hero-standalone | manual | legacy-compatibility | manual-section |
+| Blessing of the Faithful | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| It Is Justice You Fear | hero-standalone | manual | legacy-compatibility | manual-section |
+| Prescient Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Revelator | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Sentenced | hero-standalone | manual | legacy-compatibility | manual-section |
+| With My Blessing | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Edict of Disruptive Isolation | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Edict of Perfect Order | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Edict of Purifying Pacifism | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Edict of Stillness | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Claw Dirt | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, target-boundary |
 | Dragon's Fire | hero-standalone | manual | not-reachable | grammar |
 | Escape Grab | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |

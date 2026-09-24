@@ -11,6 +11,10 @@ export interface CensorAction {
   cost?: number;
   trigger?: string;
 }
+const levelFeature = (level: number, slug: string) =>
+  `en/unified/md/feature/censor/level-${level}/${slug}.md`;
+const levelAbility = (level: number, slug: string) =>
+  `en/unified/md/feature/ability/censor/level-${level}/${slug}.md`;
 export const CENSOR_ACTIONS: CensorAction[] = [
   {
     name: 'Judgment: End',
@@ -216,7 +220,91 @@ export const CENSOR_ACTIONS: CensorAction[] = [
     activationCondition:
       'Bless one weapon; its wielder gains +1 rolled damage with abilities using that weapon until your next respite. Resolve the stated effects manually.',
   },
+  {
+    name: "Saint's Vigilance: Judgment",
+    parent: "Saint's Vigilance",
+    sourcePath: levelFeature(2, 'saints-vigilance'),
+    actionType: 'Free triggered action',
+    trigger: 'You find a hidden creature.',
+    activationCondition:
+      'If you find a hidden creature, use Judgment against it as a free triggered action. Creatures judged by you cannot use the Hide maneuver. Resolve manually.',
+  },
+  {
+    name: 'It Was Foretold: Opening Action',
+    parent: 'It Was Foretold',
+    sourcePath: levelFeature(2, 'it-was-foretold'),
+    actionType: 'Main action',
+    trigger: 'An encounter starts.',
+    activationCondition:
+      'At the start of an encounter, take one main action before any other creature and before your first turn. Record the action and resolve its order manually.',
+  },
+  {
+    name: 'It Was Foretold: Montage Test',
+    parent: 'It Was Foretold',
+    sourcePath: levelFeature(2, 'it-was-foretold'),
+    actionType: 'Free test',
+    trigger: 'The Director calls for a montage test.',
+    activationCondition:
+      'Before the montage begins, make one free test; it counts as an earned success or failure as usual. Resolve the test manually.',
+  },
+  {
+    name: 'Look On My Work and Despair: Frighten',
+    parent: 'Look On My Work and Despair',
+    sourcePath: levelFeature(3, 'look-on-my-work-and-despair'),
+    actionType: 'Part of Judgment',
+    cost: 1,
+    activationCondition:
+      'When you use Judgment, spend 1 Wrath: if the target has Presence below your average potency, it is frightened of you (save ends). Compare potency and apply the condition manually.',
+  },
+  {
+    name: 'Look On My Work and Despair: Retarget Frighten',
+    parent: 'Look On My Work and Despair',
+    sourcePath: levelFeature(3, 'look-on-my-work-and-despair'),
+    actionType: 'Part of Judgment: Retarget',
+    activationCondition:
+      'When a creature judged by you is reduced to 0 Stamina and you use Judgment as a free triggered action: if the new target has Presence below your strong potency it is frightened of you (save ends); if it is already frightened of you, it instead takes holy damage equal to twice your Presence. Resolve manually.',
+  },
+  {
+    name: 'Revelator: Judgment',
+    parent: 'Revelator',
+    sourcePath: levelAbility(2, 'revelator'),
+    actionType: 'Free triggered action',
+    activationCondition:
+      'After Revelator, use Judgment against one of its targets as a free triggered action. Resolve manually.',
+  },
+  {
+    name: 'With My Blessing: Target Strike',
+    parent: 'With My Blessing',
+    sourcePath: levelAbility(2, 'with-my-blessing'),
+    actionType: 'Target free triggered action',
+    activationCondition:
+      'Manual proxy for the target: it uses a strike signature or strike heroic ability as a free triggered action with a double edge; a heroic ability costs 3 less of its Heroic Resource (minimum 0). Resolve with the target’s ability manually.',
+  },
 ];
+
+/** Printed clauses of chosen level-2/3 abilities the resolver does not model. */
+export const CENSOR_ACTIVATION: Record<string, string> = {
+  'It Is Justice You Fear':
+    'If the target is already frightened of you or another creature and this ability would frighten it again, it instead takes psychic damage equal to twice your Presence. Compare potency and resolve frightened or the psychic damage manually.',
+  Revelator:
+    'Each target takes holy damage equal to twice your Presence; each hidden target is revealed and cannot become hidden again until the start of your next turn. Then use Revelator: Judgment. Damage and reveal are resolved manually.',
+  'Prescient Grace':
+    'Trigger: an enemy within 10 squares starts its turn. You can spend a Recovery so the target regains Stamina equal to your recovery value; it can then take its turn immediately before the triggering enemy. Resolve manually.',
+  'With My Blessing':
+    'The target can use With My Blessing: Target Strike. Resolve the granted strike manually.',
+  'Blessing of the Faithful':
+    'Until the end of the encounter or until you are dying, you and each ally in the aura gain 1 surge at the end of each of your turns. Adjust surges manually.',
+  Sentenced:
+    'Restrained is manual; while the target is restrained this way, your abilities that impose forced movement can still move it.',
+  'Edict of Disruptive Isolation':
+    'Until the end of the encounter or until you are dying, each enemy in the aura takes holy damage equal to your Presence at the end of each of your turns, plus 2d6 holy if judged by you or adjacent to any enemy. Resolve manually.',
+  'Edict of Perfect Order':
+    'Until the end of the encounter or until you are dying, whenever an enemy in the aura uses an ability that costs Malice, it takes holy damage equal to three times your Presence, plus 2d6 holy if judged by you. Resolve manually.',
+  'Edict of Purifying Pacifism':
+    'Until the end of the encounter or until you are dying, whenever an enemy in the aura makes a strike, it takes holy damage equal to twice your Presence, plus 2d6 holy if judged by you. Resolve manually.',
+  'Edict of Stillness':
+    'Until the end of the encounter or until you are dying, whenever an enemy moves or is force moved out of the aura, it takes holy damage equal to twice your Presence, plus 2d6 holy if judged by you and moving willingly. Resolve manually.',
+};
 export function censorActionText(action: CensorAction): string {
   const entry = [...abilitySources, ...featureSources].find(
     e => e.sourcePath === `vendor/steel-compendium/${action.sourcePath}`,

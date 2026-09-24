@@ -1417,6 +1417,317 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-2/blessing-of-the-faithful",
+    "kind": "ability",
+    "name": "Blessing of the Faithful",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-2/blessing-of-the-faithful.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: 3 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Effect\nflavor: The gods reward your faith.\nkeywords:\n    - Area\n    - Magic\nlevel: \"2\"\nname: Blessing of the Faithful\nscc: mcdm.heroes.v1/feature.ability.censor.level-2/blessing-of-the-faithful\nsubclass: paragon\ntarget: Self and each ally in the area\ntype: ability\n---\n\n\n*The gods reward your faith.*\n\n| **Area, Magic** |                          **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|--------------------------------------:|\n| **📏 3 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**   | **🎯 Self and each ally in the area** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "3 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "The gods reward your faith.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "2",
+      "subclass": "paragon",
+      "target": "Self and each ally in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear",
+    "kind": "ability",
+    "name": "It Is Justice You Fear",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-2/it-is-justice-you-fear.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 8 + M holy damage; P < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier2: 12 + M holy damage; P < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier3: 15 + M holy damage; P < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n    - effect: If the target is already [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.\n      name: Effect\nflavor: I am but a vessel. Your own deeds weigh upon you.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"2\"\nname: It Is Justice You Fear\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear\nsubclass: exorcist\ntarget: One creature\ntier1: 8 + M holy damage; P < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier2: 12 + M holy damage; P < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier3: 15 + M holy damage; P < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntype: ability\n---\n\n\n*I am but a vessel. Your own deeds weigh upon you.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**          | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 8 + M holy damage; P < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **12-16:** 12 + M holy damage; P < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **17+:** 15 + M holy damage; P < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n\n**Effect:** If the target is already [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "8 + M holy damage; P < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier2": "12 + M holy damage; P < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier3": "15 + M holy damage; P < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+        },
+        {
+          "effect": "If the target is already [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "I am but a vessel. Your own deeds weigh upon you.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "subclass": "exorcist",
+      "target": "One creature",
+      "tier1": "8 + M holy damage; P < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier2": "12 + M holy damage; P < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier3": "15 + M holy damage; P < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-2/prescient-grace",
+    "kind": "ability",
+    "name": "Prescient Grace",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-2/prescient-grace.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: censor\ncost: 5 Wrath\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow the target to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries). The target can then take their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) immediately before the triggering enemy.\n      name: Effect\nflavor: Gifted by a prescient vision, you warn an ally of an impending attack.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"2\"\nname: Prescient Grace\nscc: mcdm.heroes.v1/feature.ability.censor.level-2/prescient-grace\nsubclass: oracle\nsubtype: triggered\ntarget: Self or one ally\ntrigger: An enemy within 10 squares starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\ntype: ability\n---\n\n\n*Gifted by a prescient vision, you warn an ally of an impending attack.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |          **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------------|-----------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**  | **🎯 Self or one ally** |\n\n**Trigger:** An enemy within 10 squares starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\n**Effect:** You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow the target to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries). The target can then take their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) immediately before the triggering enemy.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "You can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to allow the target to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries). The target can then take their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) immediately before the triggering enemy.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Gifted by a prescient vision, you warn an ally of an impending attack.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "2",
+      "subclass": "oracle",
+      "subtype": "triggered",
+      "target": "Self or one ally",
+      "trigger": "An enemy within 10 squares starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-2/revelator",
+    "kind": "ability",
+    "name": "Revelator",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/revelator.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-2/revelator.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: 3 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - effect: Each target takes holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Additionally, each hidden target is automatically revealed and can't become hidden again until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You can then use your [Judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) ability against one target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n      name: Effect\nflavor: You channel holy energy to harm unbelievers and reveal those hidden from your [judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment).\nkeywords:\n    - Area\n    - Magic\nlevel: \"2\"\nname: Revelator\nscc: mcdm.heroes.v1/feature.ability.censor.level-2/revelator\nsubclass: exorcist\ntarget: Each enemy in the area\ntype: ability\n---\n\n\n*You channel holy energy to harm unbelievers and reveal those hidden from your [judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment).*\n\n| **Area, Magic** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|------------------------------:|\n| **📏 3 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**  | **🎯 Each enemy in the area** |\n\n**Effect:** Each target takes holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Additionally, each hidden target is automatically revealed and can't become hidden again until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You can then use your [Judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) ability against one target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "3 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "effect": "Each target takes holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Additionally, each hidden target is automatically revealed and can't become hidden again until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You can then use your [Judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment) ability against one target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You channel holy energy to harm unbelievers and reveal those hidden from your [judgment](scc.v1:mcdm.heroes.v1/feature.ability.censor.level-1/judgment).",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "2",
+      "subclass": "exorcist",
+      "target": "Each enemy in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced",
+    "kind": "ability",
+    "name": "Sentenced",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/sentenced.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-2/sentenced.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 5 + P damage; P < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n      tier2: 9 + P damage; P < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n      tier3: 12 + P damage; P < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n    - effect: While the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way, your abilities that impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) can still move them.\n      name: Effect\nflavor: The shock of your condemnation freezes your enemy in their boots.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: Sentenced\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.censor.level-2/sentenced\nsubclass: paragon\ntarget: One creature\ntier1: 5 + P damage; P < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\ntier2: 9 + P damage; P < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\ntier3: 12 + P damage; P < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\ntype: ability\n---\n\n\n*The shock of your condemnation freezes your enemy in their boots.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                   |           **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 5 + P damage; P < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n- **12-16:** 9 + P damage; P < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n- **17+:** 12 + P damage; P < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n\n**Effect:** While the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way, your abilities that impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) can still move them.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "5 + P damage; P < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+          "tier2": "9 + P damage; P < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+          "tier3": "12 + P damage; P < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+        },
+        {
+          "effect": "While the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way, your abilities that impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) can still move them.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "The shock of your condemnation freezes your enemy in their boots.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subclass": "paragon",
+      "target": "One creature",
+      "tier1": "5 + P damage; P < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+      "tier2": "9 + P damage; P < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+      "tier3": "12 + P damage; P < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-2/with-my-blessing",
+    "kind": "ability",
+    "name": "With My Blessing",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-2/with-my-blessing.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 5 Wrath\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), and has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability. If a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) is chosen, reduce its [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost by 3 (to a minimum cost of 0).\n      name: Effect\nflavor: A word in prayer, and the gods show the way.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"2\"\nname: With My Blessing\nscc: mcdm.heroes.v1/feature.ability.censor.level-2/with-my-blessing\nsubclass: oracle\ntarget: Self or one ally\ntype: ability\n---\n\n\n*A word in prayer, and the gods show the way.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |         **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**  | **🎯 Self or one ally** |\n\n**Effect:** The target can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), and has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability. If a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) is chosen, reduce its [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost by 3 (to a minimum cost of 0).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "5 Wrath",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), and has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability. If a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) is chosen, reduce its [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost by 3 (to a minimum cost of 0).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A word in prayer, and the gods show the way.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "2",
+      "subclass": "oracle",
+      "target": "Self or one ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-disruptive-isolation",
+    "kind": "ability",
+    "name": "Edict of Disruptive Isolation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-3/edict-of-disruptive-isolation.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 7 Wrath\ndistance: 2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target takes holy damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). A target takes an extra 2d6 holy damage if they are judged by you or if they are [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to any enemy.\n      name: Effect\nflavor: The evil within your foes detonates with holy fire that burns only the guilty.\nkeywords:\n    - Area\n    - Magic\nlevel: \"3\"\nname: Edict of Disruptive Isolation\nscc: mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-disruptive-isolation\ntarget: Each enemy in the area\ntype: ability\n---\n\n\n*The evil within your foes detonates with holy fire that burns only the guilty.*\n\n| **Area, Magic** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|------------------------------:|\n| **📏 2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**   | **🎯 Each enemy in the area** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target takes holy damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). A target takes an extra 2d6 holy damage if they are judged by you or if they are [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to any enemy.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "7 Wrath",
+      "distance": "2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target takes holy damage equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). A target takes an extra 2d6 holy damage if they are judged by you or if they are [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to any enemy.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "The evil within your foes detonates with holy fire that burns only the guilty.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Each enemy in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-perfect-order",
+    "kind": "ability",
+    "name": "Edict of Perfect Order",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-3/edict-of-perfect-order.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 7 Wrath\ndistance: 2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - effect: 'Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target uses an ability that costs Malice (see *Draw Steel: Monsters*), they take holy damage equal to three times your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.'\n      name: Effect\nflavor: Within the area of your divine presence, your enemies will regret using their fell abilities.\nkeywords:\n    - Area\n    - Magic\nlevel: \"3\"\nname: Edict of Perfect Order\nscc: mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-perfect-order\ntarget: Each enemy in the area\ntype: ability\n---\n\n\n*Within the area of your divine presence, your enemies will regret using their fell abilities.*\n\n| **Area, Magic** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|------------------------------:|\n| **📏 2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**   | **🎯 Each enemy in the area** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target uses an ability that costs Malice (see *Draw Steel: Monsters*), they take holy damage equal to three times your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "7 Wrath",
+      "distance": "2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target uses an ability that costs Malice (see *Draw Steel: Monsters*), they take holy damage equal to three times your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Within the area of your divine presence, your enemies will regret using their fell abilities.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Each enemy in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-purifying-pacifism",
+    "kind": "ability",
+    "name": "Edict of Purifying Pacifism",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-3/edict-of-purifying-pacifism.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 7 Wrath\ndistance: 2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.\n      name: Effect\nflavor: You shed a righteous energy that punishes enemies who would harm you or your allies.\nkeywords:\n    - Area\n    - Magic\nlevel: \"3\"\nname: Edict of Purifying Pacifism\nscc: mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-purifying-pacifism\ntarget: Each enemy in the area\ntype: ability\n---\n\n\n*You shed a righteous energy that punishes enemies who would harm you or your allies.*\n\n| **Area, Magic** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|------------------------------:|\n| **📏 2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**   | **🎯 Each enemy in the area** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "7 Wrath",
+      "distance": "2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target makes a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you takes an extra 2d6 holy damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You shed a righteous energy that punishes enemies who would harm you or your allies.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Each enemy in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-stillness",
+    "kind": "ability",
+    "name": "Edict of Stillness",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/censor/level-3/edict-of-stillness.json",
+    "selection": "censor-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: censor\ncost: 7 Wrath\ndistance: 2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - effect: Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target moves or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) out of the area, they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you who moves willingly takes an extra 2d6 holy damage.\n      name: Effect\nflavor: The holy [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) you project makes it painful for evil-doers to leave your reach.\nkeywords:\n    - Area\n    - Magic\nlevel: \"3\"\nname: Edict of Stillness\nscc: mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-stillness\ntarget: Each enemy in the area\ntype: ability\n---\n\n\n*The holy [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) you project makes it painful for evil-doers to leave your reach.*\n\n| **Area, Magic** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|------------------------------:|\n| **📏 2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**   | **🎯 Each enemy in the area** |\n\n**Effect:** Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target moves or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) out of the area, they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you who moves willingly takes an extra 2d6 holy damage.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "censor",
+      "cost": "7 Wrath",
+      "distance": "2 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target moves or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) out of the area, they take holy damage equal to twice your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. A target judged by you who moves willingly takes an extra 2d6 holy damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "The holy [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) you project makes it painful for evil-doers to leave your reach.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "3",
+      "target": "Each enemy in the area"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.common/claw-dirt",
     "kind": "ability",
     "name": "Claw Dirt",

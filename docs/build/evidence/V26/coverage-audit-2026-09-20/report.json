@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:55fcd9d666967096c1634b6cde96bb7d276da544641a586b98558a6390b21f5b",
+  "contentHash": "sha256:7844e4e767f6c8847ea08f34f28b81b7996583e3b6793e11368ff14026c2f91b",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 22,
-      "COMPILES_WITH_REMAINDER": 111,
-      "NO_MATCH": 152,
-      "total": 285,
+      "COMPILES_WITH_REMAINDER": 113,
+      "NO_MATCH": 160,
+      "total": 295,
       "withinV26Bounded": 13
     },
     "kit-signature": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 2556,
-    "resolvedToStandalone": 1701,
+    "total": 2602,
+    "resolvedToStandalone": 1747,
     "resolvedToKit": 150,
     "ownText": 705,
     "unresolved": []
@@ -4352,6 +4352,833 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Your Allies Cannot Save You! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/blessing-of-the-faithful",
+      "name": "Blessing of the Faithful",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+      "usage": "Maneuver",
+      "target": "Self and each ally in the area",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, each target gains 1 surge at the end of each of your turns.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blessing of the Faithful",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blessing of the Faithful supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear",
+      "name": "It Is Justice You Fear",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 15,
+              "characteristic": "M"
+            },
+            "damageType": "holy"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If the target is already frightened of you or another creature and this ability would frighten them again, they instead take psychic damage equal to twice your Presence score.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM frightened (save ends)",
+            "text": "P < WEAK, frightened (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM frightened (save ends)",
+            "text": "P < AVERAGE, frightened (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM frightened (save ends)",
+            "text": "P < STRONG, frightened (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "It Is Justice You Fear",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/it-is-justice-you-fear.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option It Is Justice You Fear supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/prescient-grace",
+      "name": "Prescient Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+      "usage": "Triggered",
+      "target": "Self or one ally",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "An enemy within 10 squares starts their turn.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can spend a Recovery to allow the target to regain Stamina equal to your recovery value. The target can then take their turn immediately before the triggering enemy.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Prescient Grace",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/prescient-grace.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Prescient Grace supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/revelator",
+      "name": "Revelator",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/revelator.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each target takes holy damage equal to twice your Presence score. Additionally, each hidden target is automatically revealed and can't become hidden again until the start of your next turn. You can then use your Judgment ability against one target as a free triggered action.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Revelator",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/revelator.md",
+          "decisionId": "class.censor.level-2.exorcist-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Revelator supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced",
+      "name": "Sentenced",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/sentenced.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "P"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "While the target is restrained this way, your abilities that impose forced movement can still move them.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM restrained (save ends)",
+            "text": "P < WEAK, restrained (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM restrained (save ends)",
+            "text": "P < AVERAGE, restrained (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM restrained (save ends)",
+            "text": "P < STRONG, restrained (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Sentenced",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/sentenced.md",
+          "decisionId": "class.censor.level-2.paragon-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Sentenced supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-2/with-my-blessing",
+      "name": "With My Blessing",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+      "usage": "Main action",
+      "target": "Self or one ally",
+      "cost": "5 Wrath",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target can use a free triggered action to use a strike signature ability or a strike heroic ability, and has a double edge on that ability. If a heroic ability is chosen, reduce its Heroic Resource cost by 3 (to a minimum cost of 0).",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "With My Blessing",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-2/with-my-blessing.md",
+          "decisionId": "class.censor.level-2.oracle-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option With My Blessing supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-disruptive-isolation",
+      "name": "Edict of Disruptive Isolation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "cost": "7 Wrath",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, each target takes holy damage equal to your Presence score at the end of each of your turns. A target takes an extra 2d6 holy damage if they are judged by you or if they are adjacent to any enemy.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Edict of Disruptive Isolation",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Disruptive Isolation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Disruptive Isolation",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Disruptive Isolation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Disruptive Isolation",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Disruptive Isolation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Disruptive Isolation",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-disruptive-isolation.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Disruptive Isolation supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-perfect-order",
+      "name": "Edict of Perfect Order",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "cost": "7 Wrath",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, whenever a target uses an ability that costs Malice (see *Draw Steel: Monsters*), they take holy damage equal to three times your Presence score. A target judged by you takes an extra 2d6 holy damage.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Edict of Perfect Order",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Perfect Order supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Perfect Order",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Perfect Order supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Perfect Order",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Perfect Order supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Perfect Order",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-perfect-order.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Perfect Order supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-purifying-pacifism",
+      "name": "Edict of Purifying Pacifism",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "cost": "7 Wrath",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, whenever a target makes a strike, they take holy damage equal to twice your Presence score. A target judged by you takes an extra 2d6 holy damage.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Edict of Purifying Pacifism",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Purifying Pacifism supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Purifying Pacifism",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Purifying Pacifism supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Purifying Pacifism",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Purifying Pacifism supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Purifying Pacifism",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-purifying-pacifism.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Purifying Pacifism supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-stillness",
+      "name": "Edict of Stillness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "cost": "7 Wrath",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter or until you are dying, whenever a target moves or is force moved out of the area, they take holy damage equal to twice your Presence score. A target judged by you who moves willingly takes an extra 2d6 holy damage.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Edict of Stillness",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Stillness supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Stillness",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Stillness supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Stillness",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Stillness supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Edict of Stillness",
+          "sourcePath": "en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+          "decisionId": "class.censor.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Edict of Stillness supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -99295,8 +100122,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1190,
-      "abilities": 1176,
+      "count": 1200,
+      "abilities": 1186,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -99306,8 +100133,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 683,
-      "abilities": 683,
+      "count": 691,
+      "abilities": 691,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -99317,8 +100144,8 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 209,
-      "abilities": 209,
+      "count": 210,
+      "abilities": 210,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
         "mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre",
@@ -100261,6 +101088,26 @@
       "examples": [
         "salient:foe-feature:78979227-a99b-408a-8504-e674554f4b8b",
         "salient:foe-feature:db58b6e9-a184-455c-9ab6-8611166318cc"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM frightened (save ends)",
+      "type": "potency-condition",
+      "count": 4,
+      "abilities": 2,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/bring-the-thunder",
+        "mcdm.heroes.v1/feature.ability.censor.level-2/it-is-justice-you-fear"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM restrained (save ends)",
+      "type": "potency-condition",
+      "count": 4,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite"
       ]
     },
     {
@@ -102649,24 +103496,6 @@
       ]
     },
     {
-      "shape": "potency:P < SYM frightened (save ends)",
-      "type": "potency-condition",
-      "count": 1,
-      "abilities": 1,
-      "examples": [
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/bring-the-thunder"
-      ]
-    },
-    {
-      "shape": "potency:P < SYM restrained (save ends)",
-      "type": "potency-condition",
-      "count": 1,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite"
-      ]
-    },
-    {
       "shape": "potency:P < SYM slowed (eot)",
       "type": "potency-condition",
       "count": 1,
@@ -103908,11 +104737,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 382,
+      "total": 392,
       "compiles": 29,
-      "withRemainder": 128,
+      "withRemainder": 130,
       "withinV26Bounded": 14,
-      "noMatch": 225
+      "noMatch": 233
     }
   }
 }

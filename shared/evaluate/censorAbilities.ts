@@ -1,5 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { CENSOR_ACTIONS, censorActionText } from '../content/classes/censor/abilities.ts';
+import {
+  CENSOR_ACTIONS,
+  CENSOR_ACTIVATION,
+  censorActionText,
+} from '../content/classes/censor/abilities.ts';
 import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
 const managed = (ability: Pick<GrantedAbility, 'name' | 'sourcePath' | 'kind'>) =>
   ability.kind === 'class'
@@ -43,12 +47,14 @@ export function censorAbilities(
     });
   }
   return result.map(a =>
-    a.name === 'My Life for Yours' && a.provenance.decisionId.startsWith('class.censor.')
-      ? {
-          ...a,
-          activationCondition:
-            'Only when the target starts their turn or takes damage. Spend your Recovery and resolve the healing manually. The optional Cleanse action pays 1 Wrath separately.',
-        }
-      : a,
+    a.provenance.decisionId.startsWith('class.censor.level-') && CENSOR_ACTIVATION[a.name]
+      ? { ...a, activationCondition: CENSOR_ACTIVATION[a.name]! }
+      : a.name === 'My Life for Yours' && a.provenance.decisionId.startsWith('class.censor.')
+        ? {
+            ...a,
+            activationCondition:
+              'Only when the target starts their turn or takes damage. Spend your Recovery and resolve the healing manually. The optional Cleanse action pays 1 Wrath separately.',
+          }
+        : a,
   );
 }
