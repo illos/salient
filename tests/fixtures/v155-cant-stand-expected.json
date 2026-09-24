@@ -1,0 +1,211 @@
+{
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "method": "V155 prone and can't stand. Builds reuse reviewed source-derived witnesses (paths in each 'base'). damageByTier is handwritten arithmetic from the pinned Compendium ability file: printed tier constants + the named characteristic score + the kit damage bonus only for damage-dealing Melee+Weapon or Ranged+Weapon abilities (chapter/kits.md Damage Bonuses; the Conduit has no kit, and feature/conduit/level-1/prayer-of-soldiers-skill.md adds +1 to weapon abilities only). Potency follows rule/character/potency.md (weak = score - 2, average = score - 1, strong = score) with the class potency characteristic (class/conduit.md Basics: Intuition; class/shadow.md Basics: Agility); a condition applies only if the potency is higher than the target's score. Per the user's 2026-09-24 ruling (docs/decisions/2026-09-24-automation-rulings.md section 5): 'prone and can't stand (save ends)' is a prone with no duration, ended only by Stand Up (condition/prone.md; feature/common/maneuvers/stand-up.md), plus a separate can't-stand restriction carrying the save; Stand Up is refused while the restriction is active, and the creature stays prone when it ends. Saving throws follow rule/general/saving-throw.md: a d10 at the end of each of the affected creature's turns, 6 or higher ends the effect. Tiers follow rule/dice/tier-outcome.md (11 or lower, 12-16, 17+); dice are real, so the journey repeats Staggering Blow without edges until a tier-2/3 (can't stand) result: 2d10 + A 2 >= 12 has probability 64/100 per use (2d10 <= 9 in 36 of 100 outcomes), so maxAttempts 8 fails only with probability 0.36^8, about 0.03%. Edges are deliberately not used: feature/shadow/level-1/insight.md makes an edged heroic ability cost 1 fewer insight, which is not asserted here. Nothing is derived from the evaluator, compiler or a run of the code under test.",
+  "target": {
+    "id": "v155-target",
+    "base": "tests/fixtures/v100-conduit-expected.json v100-sun; array 2, 1, 1, -1 replaced by the listed array 2, 2, -1, -1 assigned Might -1, Agility -1, Reason 2, Presence 2 (class/conduit.md Basics: I 2, any listed array for the other four)",
+    "note": "A -1 is below the Conduit's I-based potencies 0/1/2 and M -1 below the Shadow's A-based potencies 0/1/2 (rule/character/potency.md), so every prone and can't-stand clause of Judgment's Hammer and Staggering Blow applies. Stamina maximum 24 = Conduit 18 + feature/conduit/level-1/prayer-of-steel.md +6 (v100-sun, unchanged by characteristics); it exceeds the largest hit, Staggering Blow tier 3 (19). Saving throw threshold 6 (rule/general/saving-throw.md; v100-sun savingThrowThreshold 6; the Inner Light respite ritual is inactive, as in v100). Human Determination and Can't Take Hold are optional player choices that touch neither prone nor can't stand (feature/trait/human/*.md).",
+    "selections": {
+      "culture.name": "wilderness mercenary commune",
+      "culture.language": "Anjali",
+      "culture.environment": "Wilderness",
+      "culture.environment.skill": "Swim",
+      "culture.organization": "Communal",
+      "culture.organization.skill": "Blacksmithing",
+      "culture.upbringing": "Martial",
+      "culture.upbringing.skill": "Intimidate",
+      "career.choice": "Soldier",
+      "career.soldier.skill.exploration": "Endurance",
+      "career.soldier.skill.intrigue": "Alertness",
+      "career.soldier.languages": ["Kalliak", "Vaslorian"],
+      "career.soldier.perk": "Teamwork",
+      "career.soldier.inciting-incident": "Sole Survivor",
+      "ancestry.choice": "Human",
+      "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+      "details.name": "V155 Cant Stand Target",
+      "class.choice": "Conduit",
+      "class.conduit.characteristic-array": "2, 2, −1, −1",
+      "class.conduit.array-assignment": {
+        "Might": -1,
+        "Agility": -1,
+        "Reason": 2,
+        "Presence": 2
+      },
+      "class.conduit.skills": ["History", "Persuade"],
+      "class.conduit.deity": "Kul",
+      "class.conduit.domains": ["Sun", "Knowledge"],
+      "class.conduit.domain-feature": "Sun",
+      "class.conduit.domain-skill": "Religion",
+      "class.conduit.prayer": "Prayer of Steel",
+      "class.conduit.ward": "Quickness Ward",
+      "class.conduit.triggered-action": "Word of Judgment",
+      "class.conduit.signature-abilities": ["Holy Lash", "Lightfall"],
+      "class.conduit.ability-3": "Font of Wrath",
+      "class.conduit.ability-5": "Curse of Terror"
+    },
+    "characteristics": {
+      "M": -1,
+      "A": -1,
+      "R": 2,
+      "I": 2,
+      "P": 2
+    },
+    "stamina": 24,
+    "savingThrowThreshold": 6
+  },
+  "witnesses": [
+    {
+      "id": "conduit-fate-hammer",
+      "level": 1,
+      "class": "Conduit",
+      "kit": null,
+      "base": "tests/fixtures/v100-conduit-expected.json v100-fate (unchanged; rolledActions Judgment's Hammer 5/8/11)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V100 Conduit Fate",
+        "class.choice": "Conduit",
+        "class.conduit.characteristic-array": "2, 1, 0, 0",
+        "class.conduit.array-assignment": {
+          "Might": 2,
+          "Agility": 1,
+          "Reason": 0,
+          "Presence": 0
+        },
+        "class.conduit.skills": ["History", "Persuade"],
+        "class.conduit.deity": "Cyrvis",
+        "class.conduit.domains": ["Fate", "Death"],
+        "class.conduit.domain-feature": "Fate",
+        "class.conduit.domain-skill": "Religion",
+        "class.conduit.prayer": "Prayer of Soldier's Skill",
+        "class.conduit.ward": "Sanctuary Ward",
+        "class.conduit.triggered-action": "Word of Guidance",
+        "class.conduit.signature-abilities": ["Sacrificial Offer", "Staggering Curse"],
+        "class.conduit.ability-3": "Judgment's Hammer",
+        "class.conduit.ability-5": "Faith Is Our Armor"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 1,
+        "R": 0,
+        "I": 2,
+        "P": 0
+      },
+      "potency": {
+        "characteristic": "I",
+        "weak": 0,
+        "average": 1,
+        "strong": 2
+      },
+      "action": {
+        "name": "Judgment's Hammer",
+        "cost": 3,
+        "source": "feature/ability/conduit/level-1/judgments-hammer.md",
+        "damageByTier": [5, 8, 11],
+        "derivation": "Magic, Ranged, Strike (3 Piety; v100 paidSourceCosts): printed 3/6/9 + I 2 holy; no kit and no Weapon keyword, so no kit or Soldier's Skill bonus = 5/8/11.",
+        "byTier": [
+          { "prone": true, "cantStand": false, "characteristic": "A", "threshold": 0 },
+          { "prone": true, "cantStand": false, "characteristic": "A", "threshold": 1 },
+          { "prone": true, "cantStand": true, "characteristic": "A", "threshold": 2 }
+        ],
+        "effectsDerivation": "Tier 1 'A < WEAK, prone', tier 2 'A < AVERAGE, prone', tier 3 'A < STRONG, prone and can't stand (save ends)'. With Conduit I 2 the thresholds are A < 0/1/2; target A -1 is below each, so prone applies at every tier and can't stand (save ends) at tier 3 only."
+      }
+    },
+    {
+      "id": "shadow-black-ash-l3",
+      "level": 3,
+      "class": "Shadow",
+      "kit": "Cloak and Dagger",
+      "base": "tests/fixtures/v98-shadow-three-expected.json v98-shadow-4 (unchanged; damageByTier 10/14/19)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "2, 2, −1, −1",
+        "class.shadow.array-assignment": {
+          "Might": 2,
+          "Reason": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Black Ash",
+        "class.shadow.signature-ability": "Gasping in Pain",
+        "class.shadow.ability-3": "Disorienting Strike",
+        "class.shadow.ability-5": "Coup de Grace",
+        "kit.choice": "Cloak and Dagger",
+        "details.name": "V92 Shadow 1",
+        "class.shadow.level-2.burning-ash-ability": "Too Slow",
+        "class.shadow.level-2.perk": "Danger Sense",
+        "class.shadow.level-3.ability-7": "Staggering Blow"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 2,
+        "I": -1,
+        "P": -1
+      },
+      "potency": {
+        "characteristic": "A",
+        "weak": 0,
+        "average": 1,
+        "strong": 2
+      },
+      "action": {
+        "name": "Staggering Blow",
+        "cost": 7,
+        "source": "feature/ability/shadow/level-3/staggering-blow.md",
+        "damageByTier": [10, 14, 19],
+        "derivation": "Melee, Ranged, Strike, Weapon (7 Insight): printed 7/11/16 + A 2 + kit/cloak-and-dagger.md +1/+1/+1 (its melee and ranged bonuses are equal, so either distance gives the same) = 10/14/19 (v98-shadow-4 damageByTier).",
+        "byTier": [
+          {
+            "prone": false,
+            "cantStand": false,
+            "slowed": true,
+            "characteristic": "M",
+            "threshold": 0
+          },
+          { "prone": true, "cantStand": true, "characteristic": "M", "threshold": 1 },
+          { "prone": true, "cantStand": true, "characteristic": "M", "threshold": 2 }
+        ],
+        "effectsDerivation": "Tier 1 'M < WEAK, slowed (save ends)', tiers 2/3 'M < AVERAGE/STRONG, prone and can't stand (save ends)'. With Shadow A 2 the thresholds are M < 0/1/2; target M -1 is below each, so tier 1 applies slowed (save ends) and tiers 2/3 apply prone and can't stand (save ends).",
+        "maxAttempts": 8
+      }
+    }
+  ]
+}

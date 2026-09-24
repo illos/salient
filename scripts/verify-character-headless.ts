@@ -1,6 +1,7 @@
 import { runEffectRiders } from './headless/effect-riders.ts';
 import { runRiderGrammar } from './headless/rider-grammar.ts';
 import { runCompoundConditions } from './headless/compound-conditions.ts';
+import { runCantStand } from './headless/cant-stand.ts';
 import { runTierInstructions } from './headless/tier-instructions.ts';
 import { runMultiTarget } from './headless/multi-target.ts';
 import { runTierEffects } from './headless/tier-effects.ts';
@@ -60,6 +61,7 @@ const cohorts = {
   'effect-riders': runEffectRiders,
   'rider-grammar': runRiderGrammar,
   'compound-conditions': runCompoundConditions,
+  'cant-stand': runCantStand,
   'tier-instructions': runTierInstructions,
   'multi-target': runMultiTarget,
   'tier-effects': runTierEffects,
