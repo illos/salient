@@ -1,0 +1,91 @@
+{
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium/en/unified/md",
+  "method": "V156 Insight edge discount, authored from the pinned Compendium only. Builds reuse reviewed witnesses unchanged (paths in each 'base'). The full cost N is the ability file's printed cost. The discount applies when the use has a net edge after edges and banes cancel; the paid amount, the pool after and the block come from that arithmetic alone. Nothing is derived from the evaluator, the resolver or a run of the code under test.",
+  "sources": [
+    {
+      "path": "feature/shadow/level-1/insight.md",
+      "sha256": "8a25d06101e924b373031af7a0dd1af3a3da1a4ddfdf6077ba99f24205296c49",
+      "claim": "Insight in Combat: \"Whenever you use a heroic ability that makes use of a power roll, that ability costs 1 fewer insight if you have an edge or double edge on it.\" Insight Outside of Combat waives the cost, so every use here is inside a committed encounter."
+    },
+    {
+      "path": "rule/dice/power-roll.md",
+      "sha256": "2a687dcc36ea3bad62cdc5703ab9d0b8358b19ba20af34dcf7abae1f9bd0b596",
+      "claim": "Rolling With Edges and Banes: an edge and a bane cancel (no edges or banes); a double edge and one bane leave one edge."
+    },
+    {
+      "path": "feature/ability/shadow/level-1/disorienting-strike.md",
+      "sha256": "59076b70c6c0d131eb81502ce8d037b7b64f1679edbe50fc7d00d2ad0189e979",
+      "claim": "cost: 3 Insight; Power Roll + Agility; target: One creature. A heroic ability (it has an insight cost) that makes use of a power roll."
+    }
+  ],
+  "shadow": {
+    "base": "tests/fixtures/v92-shadow-expected.json",
+    "witness": "v92-shadow-1",
+    "level": 1,
+    "note": "Level-one Black Ash Shadow, unchanged. Its 3-insight choice is Disorienting Strike (class.shadow.ability-3)."
+  },
+  "target": {
+    "base": "tests/fixtures/v154-tier-expected.json",
+    "witness": "v99-creation",
+    "level": 1,
+    "stamina": 40,
+    "note": "The reviewed V154 target: Human Censor, no damage immunity or weakness, no automatic edge or bane. Stamina is set to 40 before each damage use so no hit takes it to dying."
+  },
+  "foe": {
+    "base": "tests/fixtures/v109-riders-expected.json",
+    "note": "Keeps both sides populated so the committed encounter stays in combat, as in V154."
+  },
+  "ability": {
+    "name": "Disorienting Strike",
+    "source": "feature/ability/shadow/level-1/disorienting-strike.md",
+    "resource": "insight",
+    "cost": 3
+  },
+  "steps": [
+    {
+      "id": "edge",
+      "pool": 3,
+      "edges": 1,
+      "banes": 0,
+      "net": 1,
+      "outcome": "used",
+      "amount": 2,
+      "after": 1,
+      "derivation": "One edge, no bane: net edge. 3 - 1 = 2 paid; 3 - 2 = 1 left."
+    },
+    {
+      "id": "no-edge",
+      "pool": 3,
+      "edges": 0,
+      "banes": 0,
+      "net": 0,
+      "outcome": "used",
+      "amount": 3,
+      "after": 0,
+      "derivation": "No edge: full cost 3 paid; 3 - 3 = 0 left."
+    },
+    {
+      "id": "edge-and-bane",
+      "pool": 2,
+      "edges": 1,
+      "banes": 1,
+      "net": 0,
+      "outcome": "blocked",
+      "amount": 3,
+      "after": 2,
+      "derivation": "An edge and a bane cancel: no edge, so the cost stays 3. A pool of 2 cannot pay 3: blocked, no roll, pool unchanged at 2."
+    },
+    {
+      "id": "double-edge-one-bane",
+      "pool": 2,
+      "edges": 2,
+      "banes": 1,
+      "net": 1,
+      "outcome": "used",
+      "amount": 2,
+      "after": 0,
+      "derivation": "A double edge and one bane leave one edge: 3 - 1 = 2 paid; 2 - 2 = 0 left."
+    }
+  ]
+}

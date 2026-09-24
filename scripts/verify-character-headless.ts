@@ -8,6 +8,7 @@ import { runTierEffects } from './headless/tier-effects.ts';
 import { runKitBonus } from './headless/kit-bonus.ts';
 import { runGrab } from './headless/grab.ts';
 import { runHeroicResource } from './headless/heroic-resource.ts';
+import { runInsightEdge } from './headless/insight-edge.ts';
 import { runHeroicResourceTalent } from './headless/heroic-resource-talent.ts';
 import { runHeroicResourceBeastheart } from './headless/heroic-resource-beastheart.ts';
 import { runHeroicResourceSummoner } from './headless/heroic-resource-summoner.ts';
@@ -68,6 +69,7 @@ const cohorts = {
   'kit-bonus': runKitBonus,
   grab: runGrab,
   'heroic-resource': runHeroicResource,
+  'insight-edge': runInsightEdge,
   'heroic-resource-talent': runHeroicResourceTalent,
   'heroic-resource-beastheart': runHeroicResourceBeastheart,
   'heroic-resource-summoner': runHeroicResourceSummoner,
