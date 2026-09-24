@@ -177,3 +177,6 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V186 | [Level-up capture spec leaves the editor by navigation](V186-v32-spec-exit.md) | Merged (`0c5848c`); spec and docs only, no deploy needed |
 | V187 | [Level-up capture spec approves through Manage players](V187-v32-spec-approve.md) | Merged (`ccd9c67`); spec and docs only; v32 capture passes end to end |
 | V188 | [Follow-up ability records show the printed body, not frontmatter](V188-follow-up-ability-content.md) | Merged (`75885cb`); cloud dev published; accepted TESTER results reused |
+| V157 | [Abilities without a power roll, and executed gains](V157-effect-only-abilities.md) | In progress (ENGINE2) |
+| V158 | [Effect instances and durations](V158-effect-instances.md) | In progress (ENGINE2) |
+| V159 | [Modifiers from lasting effects](V159-modifiers.md) | In progress (ENGINE2) |
