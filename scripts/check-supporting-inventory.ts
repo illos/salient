@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
+import { vendorPath } from './lib/vendor.ts';
 
 const ROOT = process.cwd();
 const COMPENDIUM = 'fb83a789da8f0327a389c277a0c790b1648d5810';
@@ -68,7 +69,7 @@ function pinned(repo: string, revision: string, relative: string): string {
   const key = `${repo}:${revision}:${relative}`;
   let text = cache.get(key);
   if (text === undefined) {
-    text = execFileSync('git', ['-C', join(ROOT, repo), 'show', `${revision}:${relative}`], {
+    text = execFileSync('git', ['-C', vendorPath(repo, ROOT), 'show', `${revision}:${relative}`], {
       encoding: 'utf8',
       maxBuffer: 20 * 1024 * 1024,
     });
@@ -99,7 +100,7 @@ function checkSource(source: Source, expectedBody?: string): void {
     );
   if (expectedBody !== undefined)
     assert.equal(body(text), expectedBody, `${source.path}: body changed`);
-  const local = join(ROOT, 'vendor/steel-compendium', source.path);
+  const local = vendorPath(`vendor/steel-compendium/${source.path}`, ROOT);
   if (existsSync(local))
     assert.equal(readFileSync(local, 'utf8'), text, `${source.path}: local differs from pin`);
 }

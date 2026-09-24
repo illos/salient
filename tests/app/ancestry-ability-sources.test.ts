@@ -2,8 +2,10 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { ANCESTRY_ABILITIES } from '../../shared/content/ancestry-abilities.ts';
+import { vendorPath } from '../../scripts/lib/vendor.ts';
 
-const source = (path: string) => readFileSync(`vendor/steel-compendium/${path}`, 'utf8');
+const source = (path: string) =>
+  readFileSync(vendorPath(`vendor/steel-compendium/${path}`), 'utf8');
 const ability = (name: string) => {
   const found = ANCESTRY_ABILITIES.find(entry => entry.name === name);
   if (!found) throw new Error(`Missing trait-granted action: ${name}`);

@@ -15,6 +15,8 @@ import type { Input, Identity } from '../../scripts/foes/import.ts';
 import { compareBlock, compareFoes, validateComparisonReport } from '../../scripts/foes/compare.ts';
 import type { Fields, FoeObject, FoePackage, Json } from '../../shared/contracts/foes.ts';
 import { foeReference, resolveFoe, searchFoes } from '../../shared/foes/catalog.ts';
+import { repoRoot } from '../../scripts/lib/vendor.ts';
+import { readPinnedSource } from '../helpers/pinned-source.ts';
 const pack = JSON.parse(
   readFileSync(new URL('../../shared/content/foes/catalog.json', import.meta.url), 'utf8'),
 ) as FoePackage;
@@ -684,12 +686,9 @@ describe('full-core source formats and dependencies', () => {
         checkedRules.add(link.path);
         const [book, ...segments] = link.path.split('/');
         const source = JSON.parse(
-          readFileSync(
-            new URL(
-              `../../vendor/steel-compendium/en/books/${book}/json/${segments.join('/')}.json`,
-              import.meta.url,
-            ),
-            'utf8',
+          readPinnedSource(
+            repoRoot,
+            `vendor/steel-compendium/en/books/${book}/json/${segments.join('/')}.json`,
           ),
         );
         const sourceIds = source.metadata?.scc ?? source.scc;

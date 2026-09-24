@@ -17,10 +17,11 @@ const catalog = JSON.parse(
   readFileSync(new URL('../../shared/content/foes/catalog.json', import.meta.url), 'utf8'),
 ) as FoePackage;
 import type { SheetAbility } from '../../shared/contracts/characterSheet';
+import { vendorDir } from '../../scripts/lib/vendor';
 const revision = 'fb83a789da8f0327a389c277a0c790b1648d5810';
 function source(path: string) {
   return execFileSync('git', ['show', `${revision}:en/books/${path}`], {
-    cwd: 'vendor/steel-compendium',
+    cwd: vendorDir('steel-compendium'),
     encoding: 'utf8',
   });
 }

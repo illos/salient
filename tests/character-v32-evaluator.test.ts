@@ -13,6 +13,7 @@ import { definitions as levelOneDefinitions } from '../shared/content/level-one-
 import { indexDecisions, isAvailable, pruneUnavailable } from '../shared/evaluate/structure.ts';
 import type { Provenance, SelectionValue } from '../shared/contracts/characterEvaluation.ts';
 import { readPinnedSource } from './helpers/pinned-source.ts';
+import { vendorDir, vendorPath } from '../scripts/lib/vendor.ts';
 
 const fixture = JSON.parse(readFileSync('tests/fixtures/v32-fury-level-two.json', 'utf8'));
 const oldFixture = JSON.parse(readFileSync('tests/fixtures/v25-fury.json', 'utf8'));
@@ -53,7 +54,7 @@ function assertQuote(provenance: Provenance) {
   assert.equal(provenance.source.revision, fixture.compendiumRevision);
   const text = readPinnedSource(
     process.cwd(),
-    join(process.cwd(), 'vendor/steel-compendium', provenance.source.path),
+    join(vendorDir('steel-compendium'), provenance.source.path),
   );
   assert.ok(
     normalize(text).includes(normalize(provenance.source.quote)),
@@ -113,14 +114,15 @@ test('V32 progression adds a sourced Stamina contribution and new grant provenan
     if (entry.provenance.decisionId.startsWith('class.fury.level-2.')) {
       assertQuote(entry.provenance);
       assert.ok(
-        readPinnedSource(
-          process.cwd(),
-          join(process.cwd(), 'vendor/steel-compendium', entry.sourcePath),
-        ).length,
+        readPinnedSource(process.cwd(), join(vendorDir('steel-compendium'), entry.sourcePath))
+          .length,
       );
     }
   }
-  const rawFury = readFileSync('vendor/steel-compendium/en/unified/md/class/fury.md', 'utf8');
+  const rawFury = readFileSync(
+    vendorPath('vendor/steel-compendium/en/unified/md/class/fury.md'),
+    'utf8',
+  );
   const start = Number(/^starting_stamina: (\d+)$/m.exec(rawFury)![1]);
   const perLevel = Number(/^stamina_per_level: (\d+)$/m.exec(rawFury)![1]);
   assert.equal(start + perLevel + 9, fixture.expected.staminaMaximum);
@@ -159,7 +161,7 @@ test('V32 Special Delivery is the alternate legal Berserker choice with exact co
   assert.equal(chosen.sourcePath, 'en/unified/md/feature/ability/fury/level-2/special-delivery.md');
   assert.deepEqual(chosen.cost, { resource: 'ferocity', amount: 5 });
   assert.ok(!result.baseline!.abilities.some(row => row.name === 'Wrecking Ball'));
-  const source = readFileSync('vendor/steel-compendium/' + chosen.sourcePath, 'utf8');
+  const source = readFileSync(vendorPath('vendor/steel-compendium/' + chosen.sourcePath), 'utf8');
   assert.match(source, /action_type: '\[Maneuver\]/);
   assert.match(source, /target: One willing ally/);
   assert.match(source, /ignores the target's \[stability\]/);
@@ -181,7 +183,7 @@ test('V37 supports all 22 source-eligible Fury perks and still refuses ineligibl
   );
   for (const option of perk.options!) {
     assert.ok(
-      readFileSync('vendor/steel-compendium/' + option.source, 'utf8').includes(
+      readFileSync(vendorPath('vendor/steel-compendium/' + option.source), 'utf8').includes(
         'scc: mcdm.heroes.v1/perk/',
       ),
     );

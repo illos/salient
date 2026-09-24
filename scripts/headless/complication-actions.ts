@@ -8,6 +8,7 @@ import type { HeroSheet } from '../../shared/contracts/characterSheet.ts';
 import type { DecisionDefinitions } from '../../shared/evaluate/definitions.ts';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft.ts';
 import { COMPLICATION_ABILITIES } from '../../shared/content/supporting-complication-abilities.ts';
+import { vendorPath } from '../lib/vendor.ts';
 
 type Choices = Record<string, SelectionValue>;
 type Saved = {
@@ -183,10 +184,7 @@ export async function runComplicationChoices({ actors: { player }, run, runId }:
           const matches = sheet.abilities.filter(action => action.name === name);
           assert.equal(matches.length, 1, `${name} is granted once`);
           const ability = matches[0]!;
-          const source = readFileSync(
-            new URL(`../../vendor/steel-compendium/${sourcePath}`, import.meta.url),
-            'utf8',
-          );
+          const source = readFileSync(vendorPath(`vendor/steel-compendium/${sourcePath}`), 'utf8');
           assert.equal(
             ability.content?.sourcePath,
             `vendor/steel-compendium/${sourcePath}`,

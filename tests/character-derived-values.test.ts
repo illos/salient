@@ -11,6 +11,7 @@ import type {
   EvaluationResult,
   Provenance,
 } from '../shared/contracts/characterEvaluation.ts';
+import { vendorPath } from '../scripts/lib/vendor.ts';
 
 // R02 acceptance checks 1, 2 and 4 for shared/content/character-evaluation-examples.json.
 // Expected numbers are read from the pinned Compendium files (class and kit frontmatter, rule
@@ -96,7 +97,9 @@ const decisionIds = new Set(
 );
 
 test('R02 check 1: every provenance quote is verbatim in its cited source and names an R01 decision', () => {
-  const head = execFileSync('git', ['-C', sourceRoot, 'rev-parse', 'HEAD'], { encoding: 'utf8' });
+  const head = execFileSync('git', ['-C', vendorPath(sourceRoot, root), 'rev-parse', 'HEAD'], {
+    encoding: 'utf8',
+  });
   assert.equal(head.trim(), file.compendiumRevision);
   for (const [name, example] of Object.entries(file.examples)) {
     const entries: [string, Provenance][] = [];

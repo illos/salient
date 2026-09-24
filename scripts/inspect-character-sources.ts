@@ -5,10 +5,11 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import ts from 'typescript';
+import { vendorDir } from './lib/vendor.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const forge = join(root, 'vendor/forge-steel');
-const compendium = join(root, 'vendor/steel-compendium');
+const forge = vendorDir('forge-steel', root);
+const compendium = vendorDir('steel-compendium', root);
 const revision = (path: string) =>
   execFileSync('git', ['-C', path, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
 

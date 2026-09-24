@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * Fails when any submodule under vendor/ is not checked out at the commit pinned by this repository,
- * or has local modifications or untracked files. Builds must never depend on an edited or advanced pin.
+ * Fails when the readable copy of any submodule under vendor/ (this checkout's, or the main
+ * checkout's for a worktree; see scripts/lib/vendor.ts) is not at the commit pinned by this
+ * repository, or has local modifications or untracked files. Builds must never depend on an edited or
+ * advanced pin.
  */
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { vendorPath } from './lib/vendor.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const git = (args: string[], cwd = root) =>
@@ -17,20 +20,22 @@ for (const entry of pinned) {
   // ls-tree columns: mode, type, object, path.
   const [, , kind, commit, path] = /^(\d+) (\w+) ([0-9a-f]+)\t(.+)$/.exec(entry) ?? [];
   if (kind !== 'commit') continue;
+  let copy: string;
   let head: string;
   try {
-    head = git(['rev-parse', 'HEAD'], `${root}${path}`);
+    copy = vendorPath(path, root);
+    head = git(['rev-parse', 'HEAD'], copy);
   } catch {
     failures.push(
-      `${path}: not checked out. Never initialize it in a worktree; the only copy is the main checkout's (docs/steel-compendium.md).`,
+      `${path}: no readable copy. Never initialize it in a worktree; the only copy is the main checkout's (docs/steel-compendium.md).`,
     );
     continue;
   }
   if (head !== commit)
     failures.push(
-      `${path}: checked out at ${head.slice(0, 12)} but pinned at ${commit.slice(0, 12)}.`,
+      `${path}: ${copy} is at ${head.slice(0, 12)} but pinned at ${commit.slice(0, 12)}.`,
     );
-  const status = git(['status', '--porcelain', '--untracked-files=all'], `${root}${path}`);
+  const status = git(['status', '--porcelain', '--untracked-files=all'], copy);
   if (status) failures.push(`${path}: working tree differs from the pin:\n${status}`);
 }
 // The superproject also records a changed pin as a modified path.

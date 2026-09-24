@@ -18,6 +18,7 @@ import {
   table,
   type Backend,
 } from './fixtures/table';
+import { vendorPath } from '../../scripts/lib/vendor.ts';
 
 const examples = JSON.parse(
   readFileSync('shared/content/character-evaluation-examples.json', 'utf8'),
@@ -376,7 +377,7 @@ describe('A02 admission', () => {
     for (const ability of owner.abilities) {
       expect(ability.content).not.toBeNull();
       expect(ability.content!.text).toBe(
-        readFileSync(`vendor/steel-compendium/${ability.sourcePath}`, 'utf8'),
+        readFileSync(vendorPath(`vendor/steel-compendium/${ability.sourcePath}`), 'utf8'),
       );
     }
     expect(owner.abilities.map(a => a.group)).toEqual([
@@ -406,7 +407,9 @@ describe('A02 admission', () => {
       'Teamwork',
     ]);
     for (const feature of withText)
-      expect(feature.content!.text).toBe(readFileSync(feature.content!.sourcePath, 'utf8'));
+      expect(feature.content!.text).toBe(
+        readFileSync(vendorPath(feature.content!.sourcePath), 'utf8'),
+      );
     expect(owner.features.find(f => f.name === 'Culture edge')?.content?.id).toBe(
       'mcdm.heroes.v1/chapter/background',
     );

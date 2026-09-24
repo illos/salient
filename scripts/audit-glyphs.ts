@@ -4,9 +4,10 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { splitFrontmatter } from './lib/frontmatter.ts';
+import { vendorDir } from './lib/vendor.ts';
 import { tokenizeGlyphText, describeGlyph } from '../shared/presentation/glyphs.ts';
 const revision = 'fb83a789da8f0327a389c277a0c790b1648d5810';
-const cwd = 'vendor/steel-compendium';
+const cwd = vendorDir('steel-compendium');
 const paths = execFileSync(
   'git',
   ['ls-tree', '-r', '--name-only', revision, '--', 'en/books/heroes/md', 'en/books/monsters/md'],

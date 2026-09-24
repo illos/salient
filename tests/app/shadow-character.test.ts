@@ -10,6 +10,7 @@ import type { HeroSheet } from '../../shared/contracts/characterSheet';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import ledger from '../fixtures/v92-shadow-expected.json';
 import { backend, table, admitHero } from './fixtures/table';
+import { vendorPath } from '../../scripts/lib/vendor.ts';
 
 const witness = ledger.witnesses[0]!;
 const selections = () =>
@@ -52,7 +53,9 @@ test('Shadow saves, reads back the ledger sheet with Insight costs and kit facts
     const grant = ability(name);
     expect(grant, name).toBeDefined();
     expect(grant!.content, name).not.toBeNull();
-    expect(grant!.content!.text, name).toBe(readFileSync(grant!.content!.sourcePath, 'utf8'));
+    expect(grant!.content!.text, name).toBe(
+      readFileSync(vendorPath(grant!.content!.sourcePath), 'utf8'),
+    );
   }
   expect(ability(witness.selections['class.shadow.ability-3'])!.cost).toEqual(insightCost(3));
   expect(ability(witness.selections['class.shadow.ability-5'])!.cost).toEqual(insightCost(5));

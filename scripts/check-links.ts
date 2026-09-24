@@ -7,6 +7,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { extractLinks, headingAnchors, isExternal } from './lib/markdown.ts';
+import { vendorPath } from './lib/vendor.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
@@ -47,16 +48,20 @@ export async function checkFile(path: string, repoRoot = root): Promise<BrokenLi
     const hashIndex = target.indexOf('#');
     const pathPart = decodeURIComponent(hashIndex === -1 ? target : target.slice(0, hashIndex));
     const anchor = hashIndex === -1 ? undefined : decodeURIComponent(target.slice(hashIndex + 1));
-    const resolved = pathPart ? resolve(dirname(path), pathPart) : path;
-    if (relative(repoRoot, resolved).startsWith('..')) {
+    let resolved = pathPart ? resolve(dirname(path), pathPart) : path;
+    const inRepo = relative(repoRoot, resolved);
+    if (inRepo.startsWith('..')) {
       broken.push({ file, line, target, reason: 'points outside the repository' });
       continue;
     }
+    // Links into a pinned source resolve against its one readable copy (scripts/lib/vendor.ts).
+    if (/^vendor[\\/](steel-compendium|forge-steel)([\\/]|$)/.test(inRepo))
+      resolved = vendorPath(inRepo, repoRoot);
     let isDirectory: boolean;
     try {
       isDirectory = (await stat(resolved)).isDirectory();
     } catch {
-      broken.push({ file, line, target, reason: `missing file ${relative(repoRoot, resolved)}` });
+      broken.push({ file, line, target, reason: `missing file ${inRepo}` });
       continue;
     }
     if (anchor === undefined || anchor === '') continue;
@@ -69,7 +74,7 @@ export async function checkFile(path: string, repoRoot = root): Promise<BrokenLi
         file,
         line,
         target,
-        reason: `no heading #${anchor} in ${relative(repoRoot, resolved)}`,
+        reason: `no heading #${anchor} in ${inRepo}`,
       });
     }
   }

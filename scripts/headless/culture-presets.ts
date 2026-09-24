@@ -6,6 +6,7 @@ import type { DraftSelection } from '../../shared/characterDraft.ts';
 import type { DecisionDefinitions } from '../../shared/evaluate/definitions.ts';
 import type { SelectionValue } from '../../shared/contracts/characterEvaluation.ts';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft.ts';
+import { vendorPath } from '../lib/vendor.ts';
 
 type Saved = {
   revision: number;
@@ -20,7 +21,10 @@ const title = (text: string) => text.replace(/\b\w/g, letter => letter.toUpperCa
 
 /** Read expected defaults independently from the pinned book, never the application catalog. */
 function sourcePresets() {
-  const book = readFileSync('vendor/steel-compendium/en/unified/md/chapter/background.md', 'utf8');
+  const book = readFileSync(
+    vendorPath('vendor/steel-compendium/en/unified/md/chapter/background.md'),
+    'utf8',
+  );
   return ['Typical Ancestry Cultures Table', 'Archetypical Cultures Table'].flatMap(
     (heading, index) => {
       const section = book.split(`###### ${heading}\n`)[1]!.split(/\n#{1,6} /)[0]!;

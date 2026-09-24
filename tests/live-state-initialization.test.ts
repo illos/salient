@@ -9,6 +9,7 @@ import type { ContentEntry } from '../shared/contracts/content.ts';
 import type { DerivedBaseline, EvaluationResult } from '../shared/contracts/characterEvaluation.ts';
 import type { FoeEntity, HeroEntity } from '../shared/contracts/entities.ts';
 import type { ConditionId } from '../shared/contracts/liveState.ts';
+import { vendorDir } from '../scripts/lib/vendor.ts';
 
 // R03 acceptance checks 1 to 4 for the two worked projections embedded in
 // docs/live-state-initialization.md. Expected values are read from the pinned Compendium files, the
@@ -18,7 +19,7 @@ const root = process.cwd();
 const doc = readFileSync(join(root, 'docs/live-state-initialization.md'), 'utf8');
 const revision = execFileSync(
   'git',
-  ['-C', join(root, 'vendor/steel-compendium'), 'rev-parse', 'HEAD'],
+  ['-C', vendorDir('steel-compendium', root), 'rev-parse', 'HEAD'],
   {
     encoding: 'utf8',
   },

@@ -18,8 +18,11 @@ On 2026-09-24, per-worktree copies in 42 worktrees were deleted: the Compendium 
 files plus 27 MB of Git data each, pin `fb83a789`) and Forge Steel (pin `5a846aad`). Before
 deletion, every copy was verified to be at its pin with no local edits.
 
-Scripts and tests that read `vendor/*` relative to a worktree root do not yet find the canonical
-copies. Run them from main until a shared path resolver lands.
+Scripts and tests find the one copy through `scripts/lib/vendor.ts` (V118): a checkout's own
+populated `vendor/<name>`, else `$SALIENT_VENDOR_ROOT/<name>` (set this for a copy without Git
+metadata, such as a headless `/tmp` tree), else the main working tree's copy. New code that reads a
+source file calls `vendorPath`/`vendorDir`, or reads Git blobs at the pin
+(`readPinnedTree`, `tests/helpers/pinned-source.ts`) for paths outside main's sparse set.
 
 ## Pinning
 

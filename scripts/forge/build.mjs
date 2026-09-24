@@ -4,9 +4,10 @@ import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
+import { vendorDir } from '../lib/vendor.ts';
 
 const pin = '5a846aadb623a9855a023e9403bb887a956c341f';
-const vendor = resolve('vendor/forge-steel');
+const vendor = vendorDir('forge-steel', resolve('.'));
 const git = (...args) => execFileSync('git', ['-C', vendor, ...args], { encoding: 'utf8' }).trim();
 if (git('rev-parse', 'HEAD') !== pin || git('status', '--porcelain'))
   throw new Error('Forge vendor must be clean at the approved pin');

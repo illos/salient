@@ -32,6 +32,7 @@ import type {
   ManifestSelection,
 } from '../shared/contracts/content.ts';
 import { parseFrontmatter, splitFrontmatter, type FrontmatterValue } from './lib/frontmatter.ts';
+import { vendorDir } from './lib/vendor.ts';
 
 export const GENERATOR_VERSION = '1.0.4';
 export const SCHEMA_VERSION = 's01.1';
@@ -370,7 +371,7 @@ export interface CompendiumInfo {
 
 /** Reads the submodule state and refuses anything but the clean pinned commit. */
 export function inspectCompendium(root = repoRoot): CompendiumInfo {
-  const submodule = join(root, SUBMODULE_PATH);
+  const submodule = vendorDir('steel-compendium', root);
   const pinned = /\bcommit ([0-9a-f]{40})\t/.exec(git(['ls-tree', 'HEAD', SUBMODULE_PATH], root));
   if (!pinned) throw new Error(`${SUBMODULE_PATH} is not a pinned submodule of this repository.`);
   const revision = git(['rev-parse', 'HEAD'], submodule);
@@ -413,7 +414,7 @@ interface Loaded {
 }
 
 function loadFile(root: string, relativePath: string, selection: string): Loaded {
-  const markdownPath = join(root, SUBMODULE_PATH, MARKDOWN_ROOT, relativePath);
+  const markdownPath = join(vendorDir('steel-compendium', root), MARKDOWN_ROOT, relativePath);
   const text = readFileSync(markdownPath, 'utf8');
   const { frontmatter } = splitFrontmatter(text);
   let fields: Record<string, FrontmatterValue>;
@@ -450,7 +451,11 @@ function loadFile(root: string, relativePath: string, selection: string): Loaded
         reason: `Sourcebook ${sourcebook} is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content).`,
       },
     };
-  const jsonPath = join(root, SUBMODULE_PATH, JSON_ROOT, relativePath.replace(/\.md$/, '.json'));
+  const jsonPath = join(
+    vendorDir('steel-compendium', root),
+    JSON_ROOT,
+    relativePath.replace(/\.md$/, '.json'),
+  );
   if (!existsSync(jsonPath)) throw new Error(`${relativePath}: JSON twin is missing.`);
   const twin = JSON.parse(readFileSync(jsonPath, 'utf8')) as Record<string, unknown>;
   for (const [key, value] of Object.entries(fields)) {
@@ -496,7 +501,7 @@ function canonical(value: unknown): string {
 /** Builds independently of generated output; metadata is derived from the pinned source commit. */
 export function buildSnapshot(root = repoRoot): Snapshot {
   const compendium = inspectCompendium(root);
-  const markdownRoot = join(root, SUBMODULE_PATH, MARKDOWN_ROOT);
+  const markdownRoot = join(vendorDir('steel-compendium', root), MARKDOWN_ROOT);
   const entries: ContentEntry[] = [];
   const excluded: ManifestExclusion[] = [];
   const seen = new Map<string, string>();

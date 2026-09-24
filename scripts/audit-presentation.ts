@@ -13,6 +13,7 @@ import { visit } from 'unist-util-visit';
 import { toString } from 'mdast-util-to-string';
 import type { Glyph as GlyphToken, Characteristic } from '../shared/presentation/glyphs.ts';
 import { splitFrontmatter } from './lib/frontmatter.ts';
+import { vendorDir } from './lib/vendor.ts';
 
 /** Unsupported notation remains literal and is visible in the build report, never guessed. */
 export function auditPatternFallbacks(body: string) {
@@ -43,7 +44,7 @@ export function auditPatternFallbacks(body: string) {
 
 export function auditPresentation() {
   const revision = 'fb83a789da8f0327a389c277a0c790b1648d5810';
-  const cwd = 'vendor/steel-compendium';
+  const cwd = vendorDir('steel-compendium');
   const paths = execFileSync(
     'git',
     ['ls-tree', '-r', '--name-only', revision, '--', 'en/books/heroes/md', 'en/books/monsters/md'],

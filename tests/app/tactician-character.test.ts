@@ -10,6 +10,7 @@ import type { HeroSheet } from '../../shared/contracts/characterSheet';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import ledger from '../fixtures/v94-tactician-expected.json';
 import { backend, table, admitHero } from './fixtures/table';
+import { vendorPath } from '../../scripts/lib/vendor.ts';
 
 const witness = ledger.witnesses[0]!;
 const selections = () =>
@@ -54,7 +55,9 @@ test('Tactician saves, reads back the ledger sheet with Focus costs and arsenal 
     const grant = ability(name);
     expect(grant, name).toBeDefined();
     expect(grant!.content, name).not.toBeNull();
-    expect(grant!.content!.text, name).toBe(readFileSync(grant!.content!.sourcePath, 'utf8'));
+    expect(grant!.content!.text, name).toBe(
+      readFileSync(vendorPath(grant!.content!.sourcePath), 'utf8'),
+    );
   }
   expect(ability(witness.selections['class.tactician.ability-3'])!.cost).toEqual(focusCost(3));
   expect(ability(witness.selections['class.tactician.ability-5'])!.cost).toEqual(focusCost(5));

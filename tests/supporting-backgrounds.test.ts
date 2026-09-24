@@ -17,6 +17,7 @@ import {
   pruneUnavailable,
 } from '../shared/evaluate/structure.ts';
 import type { EvaluationInput, SelectionValue } from '../shared/contracts/characterEvaluation.ts';
+import { vendorDir } from '../scripts/lib/vendor.ts';
 
 const defs = () => getDefinitions(1);
 const fixture = JSON.parse(readFileSync('tests/fixtures/v25-fury.json', 'utf8')) as {
@@ -241,7 +242,7 @@ test('V37 every kit numeric citation exists in its actual source, including omit
       if (!reference) continue;
       assert.ok(reference.quote.length > 0, `${kit} ${field}`);
       const source = normalize(
-        readFileSync(join('vendor/steel-compendium', reference.path), 'utf8'),
+        readFileSync(join(vendorDir('steel-compendium'), reference.path), 'utf8'),
       );
       assert.ok(
         source.includes(normalize(reference.quote)),

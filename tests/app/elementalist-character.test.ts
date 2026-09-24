@@ -12,6 +12,7 @@ import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import { pruneUnavailable } from '../../shared/evaluate/structure';
 import reference from '../fixtures/v25-bethell.json';
 import { backend, table, admitHero, storedEvents } from './fixtures/table';
+import { vendorPath } from '../../scripts/lib/vendor.ts';
 
 // The rules researcher authored these selections and expected totals independently.
 const fixture = { ...reference, selections: reference.selections as EvaluationInput['selections'] };
@@ -82,7 +83,9 @@ test('Bethell saves, reloads and supplies complete sourced features, abilities a
   expect(sheet.live?.heroicResource).toEqual({ name: 'essence', current: 0 });
   for (const grant of [...sheet.features, ...sheet.abilities]) {
     expect(grant.content, grant.name).not.toBeNull();
-    expect(grant.content!.text, grant.name).toBe(readFileSync(grant.content!.sourcePath, 'utf8'));
+    expect(grant.content!.text, grant.name).toBe(
+      readFileSync(vendorPath(grant.content!.sourcePath), 'utf8'),
+    );
     expect(grant.grantedBy.quote, grant.name).not.toBe('');
   }
   const fire = sheet.abilities.find(ability => ability.name === 'Bifurcated Incineration')!;

@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { parse } from 'yaml';
 import { splitFrontmatter } from './lib/frontmatter.ts';
+import { readPinnedTree, vendorDir } from './lib/vendor.ts';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validateComparisonReport } from './foes/compare.ts';
@@ -10,32 +11,37 @@ import { importFoes, REVISION } from './foes/import.ts';
 import type { Correction, Identity, Input } from './foes/import.ts';
 import { SELECTION, COMPARISON_REPORT } from './foes/batches.ts';
 const root = fileURLToPath(new URL('..', import.meta.url));
+let pinnedBooks: Map<string, string> | undefined;
+/** The monsters and heroes books at the pin, read from Git so a sparse readable copy suffices. */
+const books = () =>
+  (pinnedBooks ??= readPinnedTree(
+    'steel-compendium',
+    REVISION,
+    ['en/books/monsters', 'en/books/heroes'],
+    path => /^en\/books\/(monsters|heroes)\/(json|md|md-linked)\//.test(path),
+    root,
+  ));
+function pinnedBook(path: string): string {
+  const text = books().get(`en/books/${path}`);
+  if (text === undefined) throw new Error(`Missing pinned source en/books/${path}`);
+  return text;
+}
 export function readInputs(): Input[] {
   const git = (...args: string[]) =>
-    execFileSync('git', ['-C', `${root}/vendor/steel-compendium`, ...args], {
+    execFileSync('git', ['-C', vendorDir('steel-compendium', root), ...args], {
       encoding: 'utf8',
       maxBuffer: 20_000_000,
     });
   if (git('rev-parse', 'HEAD').trim() !== REVISION || git('status', '--porcelain').trim())
     throw new Error('Compendium pin changed or dirty');
   const discovered: string[] = [];
-  for (const book of ['monsters', 'heroes']) {
-    const directory = `${root}/vendor/steel-compendium/en/books/${book}/json`;
-    for (const relative of readdirSync(directory, { recursive: true }) as string[]) {
-      if (!relative.endsWith('.json')) continue;
-      const record = JSON.parse(readFileSync(`${directory}/${relative}`, 'utf8'));
-      if (
-        record.type === 'statblock' ||
-        (record.type === 'featureblock' && record.kind === 'malice')
-      )
-        discovered.push(`${book}/${relative.slice(0, -5)}`);
-    }
+  for (const [path, text] of books()) {
+    const match = /^en\/books\/(monsters|heroes)\/json\/(.+)\.json$/.exec(path);
+    if (!match) continue;
+    const record = JSON.parse(text);
+    if (record.type === 'statblock' || (record.type === 'featureblock' && record.kind === 'malice'))
+      discovered.push(`${match[1]}/${match[2]}`);
   }
-  if (
-    JSON.stringify(discovered.sort()) !==
-    JSON.stringify(SELECTION.map(e => `${e.book}/${e.path}`).sort())
-  )
-    throw new Error('Source selection is incomplete or duplicated');
   return SELECTION.map(({ book, path }) => ({
     book,
     path,
@@ -46,10 +52,7 @@ export function readInputs(): Input[] {
         ['linkedMarkdown', 'md-linked'],
       ].map(([key, format]) => [
         key,
-        readFileSync(
-          `${root}/vendor/steel-compendium/en/books/${book}/${format}/${path}.${format === 'json' ? 'json' : 'md'}`,
-          'utf8',
-        ),
+        pinnedBook(`${book}/${format}/${path}.${format === 'json' ? 'json' : 'md'}`),
       ]),
     ),
   })) as Input[];
@@ -79,10 +82,7 @@ export async function generateFoes() {
           : undefined;
     if (!book || !category || !slug) throw new Error(`Unsupported reference: ${id}`);
     const path = `${category.replaceAll('.', '/')}/${slug}`;
-    const markdown = readFileSync(
-      `${root}/vendor/steel-compendium/en/books/${book}/md/${path}.md`,
-      'utf8',
-    );
+    const markdown = pinnedBook(`${book}/md/${path}.md`);
     const sourceId = parse(splitFrontmatter(markdown).frontmatter).scc;
     if (!(Array.isArray(sourceId) ? sourceId.includes(id) : sourceId === id))
       throw new Error(`Reference identity mismatch: ${id}`);

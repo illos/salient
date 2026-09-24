@@ -127,3 +127,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V113 | [Compiled tier forced movement, EoT and prone conditions](V113-compiled-tier-effects.md) | Merged (`bd6e8e4`); cloud dev published; accepted TESTER results reused |
 | V114 | [Fury levels two and three](V114-fury-level-three.md) | Merged (`3aa24ae`); cloud dev published with content reseed; accepted TESTER results reused |
 | V116 | [Tactician levels two and three](V116-tactician-level-three.md) | Merged (`3175606`); cloud dev published with content reseed; accepted TESTER results reused |
+| V118 | [Vendor path resolver for worktrees](V118-vendor-path-resolver.md) | In progress on `slice/V118` |

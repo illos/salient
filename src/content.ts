@@ -1,13 +1,13 @@
 import { readFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import type { AbilitySource, Entity, Scenario } from './contracts.ts';
 import { plain } from './parser.ts';
+import { vendorDir } from '../scripts/lib/vendor.ts';
 
 export const SOURCE_REVISION = 'fb83a789da8f0327a389c277a0c790b1648d5810';
-const defaultRoot = fileURLToPath(new URL('../vendor/steel-compendium/', import.meta.url));
+const defaultRoot = `${vendorDir('steel-compendium')}/`;
 const git = promisify(execFile);
 async function verifyRevision(root: string): Promise<void> {
   const { stdout } = await git('git', ['-C', root, 'rev-parse', 'HEAD']);

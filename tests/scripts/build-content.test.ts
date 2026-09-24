@@ -15,12 +15,13 @@ import {
 } from '../../scripts/build-content';
 import { parseFrontmatter, splitFrontmatter } from '../../scripts/lib/frontmatter';
 import type { ContentEntry, ContentManifest } from '../../shared/contracts/content';
+import { vendorDir, vendorPath } from '../../scripts/lib/vendor';
 
 // Expected values below are copied from the pinned source files named in each test, never from the
 // generator's output (docs/build/README.md#review-standard).
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
-const vendor = join(root, 'vendor/steel-compendium');
+const vendor = vendorDir('steel-compendium', root);
 const manifest = JSON.parse(
   readFileSync(join(root, OUTPUT_DIR, 'manifest.json'), 'utf8'),
 ) as ContentManifest;
@@ -47,7 +48,7 @@ describe('frontmatter parser', () => {
     const { frontmatter } = splitFrontmatter(
       readPinnedSource(
         root,
-        join(vendor, 'en/unified/md/monster/goblin/statblock/goblin-warrior.md'),
+        'vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md',
       ),
     );
     expect(parseFrontmatter(frontmatter)).toEqual({
@@ -200,7 +201,9 @@ describe('committed snapshot', () => {
     expect(excludedPaths).toContain('chapter/rewards.md');
     for (const row of manifest.excluded) {
       expect(row.scc && INCLUDED_SOURCEBOOKS.has(row.scc.split('/')[0])).toBe(false);
-      expect(readPinnedSource(root, join(vendor, 'en/unified/md', row.path))).toBeTruthy();
+      expect(
+        readPinnedSource(root, `vendor/steel-compendium/en/unified/md/${row.path}`),
+      ).toBeTruthy();
     }
     expect(manifest.gaps.map(gap => gap.topic)).toContain('languages');
   });
@@ -334,8 +337,8 @@ test('all 438 core monster stat blocks retain exact Markdown and JSON features',
   expect(statblocks).toHaveLength(438); // docs/research/foe-catalog-audit-2026-09-15.json
   for (const row of statblocks) {
     expect(['mcdm.monsters.v1', 'mcdm.heroes.v1']).toContain(row.id.split('/')[0]);
-    expect(row.text).toBe(readFileSync(join(root, row.sourcePath), 'utf8'));
-    const twin = JSON.parse(readFileSync(join(root, row.jsonPath!), 'utf8'));
+    expect(row.text).toBe(readFileSync(vendorPath(row.sourcePath, root), 'utf8'));
+    const twin = JSON.parse(readFileSync(vendorPath(row.jsonPath!, root), 'utf8'));
     expect(row.features ?? []).toEqual(twin.features ?? []);
   }
   const lich = entry('mcdm.monsters.v1/monster.lich/lich-malice');

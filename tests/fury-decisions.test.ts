@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { vendorPath } from '../scripts/lib/vendor.ts';
 
 // R01 acceptance checks 1-4 for shared/content/fury-level-one-decisions.json.
 // Expected values (budgets, counts, pools) are read from the JSON, whose quotes are
@@ -277,7 +278,7 @@ test('R01 check 1: every source step appears in source order with an existing pa
     source(step.source);
     if (step.optionalQuote) verbatim(step.source, step.optionalQuote, step.id);
   }
-  const rev = execFileSync('git', ['-C', sourceRoot, 'rev-parse', 'HEAD'], {
+  const rev = execFileSync('git', ['-C', vendorPath(sourceRoot, root), 'rev-parse', 'HEAD'], {
     encoding: 'utf8',
   }).trim();
   assert.equal(data.compendiumRevision, rev, 'pinned Compendium revision');

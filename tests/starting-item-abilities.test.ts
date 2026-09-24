@@ -2,12 +2,16 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
 import { STARTING_ITEM_ABILITIES } from '../shared/content/starting-item-abilities.ts';
+import { vendorPath } from '../scripts/lib/vendor.ts';
 
 // Catches stale/misquoted item excerpts and higher-level weapon powers leaking into level-one
 // manual cards. Uses the pinned book itself, not a second generated application catalog.
 test('starting item cards retain exact source and stop at first-level weapon properties', () => {
   for (const ability of STARTING_ITEM_ABILITIES) {
-    const source = readFileSync(`vendor/steel-compendium/${ability.sourcePath}`, 'utf8');
+    const source = readFileSync(
+      vendorPath(`vendor/steel-compendium/${ability.sourcePath}`),
+      'utf8',
+    );
     expect(source, ability.name).toContain(ability.quote);
     if (ability.sourcePath.includes('/leveled/weapon/')) {
       const firstLevel = source.split('**1st Level:**')[1]!.split('**5th Level:**')[0]!;

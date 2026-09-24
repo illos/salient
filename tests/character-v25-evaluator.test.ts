@@ -8,6 +8,7 @@ import { definitions } from '../shared/content/level-one-decisions.ts';
 import { assignCharacteristic, assignmentContext } from '../shared/evaluate/assignment.ts';
 import { pruneUnavailable } from '../shared/evaluate/structure.ts';
 import type { EvaluationInput, SelectionValue } from '../shared/contracts/characterEvaluation.ts';
+import { vendorPath } from '../scripts/lib/vendor.ts';
 
 const fixture = JSON.parse(readFileSync('tests/fixtures/v25-bethell.json', 'utf8'));
 const selections = fixture.selections as Record<string, SelectionValue>;
@@ -283,7 +284,7 @@ test('V25 every derived provenance sentence is present in the pinned Compendium 
   for (const citation of citations) {
     assert.equal(citation.revision, fixture.compendiumRevision);
     const source = normalizedSource(
-      readFileSync(`vendor/steel-compendium/${citation.path}`, 'utf8'),
+      readFileSync(vendorPath(`vendor/steel-compendium/${citation.path}`), 'utf8'),
     );
     assert.ok(
       source.includes(normalizedSource(citation.quote)),
@@ -299,7 +300,7 @@ test('V25 every derived provenance sentence is present in the pinned Compendium 
     ...baseline.abilities,
   ]) {
     assert.ok(
-      readFileSync(`vendor/steel-compendium/${grant.sourcePath}`, 'utf8').length > 0,
+      readFileSync(vendorPath(`vendor/steel-compendium/${grant.sourcePath}`), 'utf8').length > 0,
       grant.name,
     );
     // Culture's old whole-book provenance is resolved to the background entry by the sheet reader.

@@ -7,6 +7,7 @@ import { evaluateCharacter } from '../shared/evaluate/character.ts';
 import { indexDecisions, poolOf } from '../shared/evaluate/structure.ts';
 import { changeChoice } from '../shared/evaluate/choiceTransition.ts';
 import type { SelectionValue } from '../shared/contracts/characterEvaluation.ts';
+import { vendorPath } from '../scripts/lib/vendor.ts';
 
 const fixture = JSON.parse(readFileSync('tests/fixtures/v25-fury.json', 'utf8'));
 const definitions = getDefinitions(1);
@@ -38,7 +39,10 @@ test('complication prose actions retain source timing, trigger, costs and comple
     const record = COMPLICATION_ABILITIES.find(ability => ability.name === name);
     expect(record, name).toBeDefined();
     expect(record!.actionType).toBe(timing);
-    const source = readFileSync(`vendor/steel-compendium/${record!.sourcePath}`, 'utf8');
+    const source = readFileSync(
+      vendorPath(`vendor/steel-compendium/${record!.sourcePath}`),
+      'utf8',
+    );
     expect(source).toContain(record!.text);
     expect(record!.text).toContain('**Drawback:');
   }

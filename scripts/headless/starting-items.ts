@@ -6,6 +6,7 @@ import type { DecisionDefinitions } from '../../shared/evaluate/definitions.ts';
 import type { HeroSheet } from '../../shared/contracts/characterSheet.ts';
 import type { StartingRewards } from '../../shared/contracts/startingRewards.ts';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft.ts';
+import { vendorPath } from '../lib/vendor.ts';
 const base = JSON.parse(
   readFileSync(new URL('../../tests/fixtures/v25-fury.json', import.meta.url), 'utf8'),
 );
@@ -102,7 +103,7 @@ export async function runStartingItems({
             assert.ok(grant.content?.text, 'Item action has readable source');
             assert.ok(
               readFileSync(
-                new URL(`../../vendor/steel-compendium/${grant.sourcePath}`, import.meta.url),
+                vendorPath(`vendor/steel-compendium/${grant.sourcePath}`),
                 'utf8',
               ).includes(grant.content.text),
             );

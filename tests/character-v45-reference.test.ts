@@ -14,6 +14,7 @@ import {
   type ForgeHero,
 } from './helpers/v45-reference.ts';
 import { readPinnedSource } from './helpers/pinned-source.ts';
+import { vendorDir } from '../scripts/lib/vendor.ts';
 
 const directory = 'tests/fixtures/v45-reference/';
 const readJson = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
@@ -43,7 +44,7 @@ test('V45 recovered reference bytes agree with the original capture manifests an
     for (const entry of fixture.ledger) {
       const content = readPinnedSource(
         process.cwd(),
-        join(process.cwd(), 'vendor/steel-compendium', entry.sourcePath),
+        join(vendorDir('steel-compendium'), entry.sourcePath),
       );
       assert.equal(
         createHash('sha256').update(content).digest('hex'),

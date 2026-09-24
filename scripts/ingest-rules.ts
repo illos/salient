@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** Read-only ingest of pinned Git blobs. Generated public content retains the Draw Steel license. */
-import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync, readdirSync, rmSync } from 'node:fs';
 import { dirname, join, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import { readPinnedTree } from './lib/vendor.ts';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
@@ -156,15 +156,10 @@ export function metadataDetails(meta: Record<string, unknown>): string {
 
 /** One batch reads the source without requiring expansion of the sparse checkout. */
 function readSources(revision: string): Map<string, string> {
-  const cwd = join(ROOT, 'vendor/steel-compendium');
-  const all = execFileSync(
-    'git',
+  return readPinnedTree(
+    'steel-compendium',
+    revision,
     [
-      'ls-tree',
-      '-r',
-      '--name-only',
-      revision,
-      '--',
       'en/books/heroes/md',
       'en/books/heroes/md-linked',
       'en/books/monsters/md',
@@ -172,30 +167,9 @@ function readSources(revision: string): Map<string, string> {
       'en/books/beastheart/md',
       'en/books/summoner/md',
     ],
-    { cwd, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 },
-  )
-    .trim()
-    .split('\n');
-  const paths = all.filter(p =>
-    /^en\/books\/(heroes|monsters|beastheart|summoner)\/(md|md-linked)\/.*\.md$/.test(p),
+    path => /^en\/books\/(heroes|monsters|beastheart|summoner)\/(md|md-linked)\/.*\.md$/.test(path),
+    ROOT,
   );
-  const output = execFileSync('git', ['cat-file', '--batch'], {
-    cwd,
-    input: paths.map(p => `${revision}:${p}\n`).join(''),
-    maxBuffer: 64 * 1024 * 1024,
-  });
-  const result = new Map<string, string>();
-  let offset = 0;
-  for (const path of paths) {
-    const end = output.indexOf(10, offset);
-    const header = output.subarray(offset, end).toString();
-    const size = Number(header.split(' ')[2]);
-    if (!Number.isFinite(size)) throw new Error(`Cannot read pinned source ${path}: ${header}`);
-    offset = end + 1;
-    result.set(path, output.subarray(offset, offset + size).toString());
-    offset += size + 1;
-  }
-  return result;
 }
 
 /** Presentation-only cleanup: retain rules wording, quantities and mathematical notation. */

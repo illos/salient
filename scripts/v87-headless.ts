@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process';
 import { ConvexHttpClient } from 'convex/browser';
 import { makeFunctionReference } from 'convex/server';
 import { createActor, type ActorSession } from './headless/character-client.ts';
+import { vendorPath } from './lib/vendor.ts';
 
 const target = process.env.SALIENT_V87_TARGET;
 assert.equal(target, 'http://127.0.0.1:3260', 'Explicit V87 isolated target required');
@@ -51,8 +52,11 @@ try {
     sourcePath: string;
     jsonPath: string;
   }>('content:get', { id });
-  assert.equal(row.text, readFileSync(row.sourcePath, 'utf8'));
-  assert.deepEqual(row.features, JSON.parse(readFileSync(row.jsonPath, 'utf8')).features);
+  assert.equal(row.text, readFileSync(vendorPath(row.sourcePath), 'utf8'));
+  assert.deepEqual(
+    row.features,
+    JSON.parse(readFileSync(vendorPath(row.jsonPath), 'utf8')).features,
+  );
   assert.ok(row.features.some(feature => feature.name === 'Razor Claws'));
   const campaignId = await actor.mutation<string>('campaigns:create', {
     name: `V87 ${runId}`,

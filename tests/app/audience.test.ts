@@ -6,6 +6,7 @@ import { api, internal } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import type { TestRollResult } from '../../shared/contracts/rollResolution';
 import { account, backend, storedEvents, table } from './fixtures/table';
+import { vendorPath } from '../../scripts/lib/vendor.ts';
 
 /** These fixtures inspect command envelopes; the production event payload remains unknown.
  * Difficulty is optional because audience projection removes it. Keep all absence/value checks
@@ -311,12 +312,17 @@ describe('table audience boundaries', () => {
     const source = stored.payload.data.source;
     expect(source.text).toBe(
       readFileSync(
-        'vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md',
+        vendorPath(
+          'vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md',
+        ),
         'utf8',
       ),
     );
     expect(source.supporting[0].text).toBe(
-      readFileSync('vendor/steel-compendium/en/unified/md/rule/health/recoveries.md', 'utf8'),
+      readFileSync(
+        vendorPath('vendor/steel-compendium/en/unified/md/rule/health/recoveries.md'),
+        'utf8',
+      ),
     );
     expect(source.revision).toMatch(/^[a-f0-9]{40}$/);
     expect(source.sourcePath).toContain('catch-breath.md');
