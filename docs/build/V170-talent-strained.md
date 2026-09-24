@@ -122,3 +122,4 @@ Rules question: [Q-STRAIN-1](../rules-questions-for-user.md#q-strain-1-how-a-str
     `tests/app/talent-strained`, `live-compiled-report`, `audit-ability-grammar`,
     `character-v105-talent`, `character-v136-talent-three`, `character-v160-talent-resource-note`,
     `compiled-ability`, `effect-riders` and `tests/app/modifiers`.
+- Committed on `slice/V170` as `3d75770`; not pushed. Next: TESTER gate, then independent review.
