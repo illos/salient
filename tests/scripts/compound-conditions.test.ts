@@ -152,13 +152,20 @@ test('Kinetic Strike taunts, then slides, in printed order after damage', () => 
 });
 
 test('a tampered compound member is outside the supported envelope', () => {
-  const definition = compiled('Stunning Blow');
-  const member = definition.tiers[0]!.find(n => n.kind === 'condition')!;
-  if (member.kind !== 'condition') throw new Error('Missing member');
-  member.duration = 'none';
-  const result = resolveCompiledAbility(definition, input([6, 6], 0));
-  expect(result).toMatchObject({
-    kind: 'manual',
-    reason: 'Compiled structure is outside the supported envelope.',
-  });
+  const definition = compiled('Death... Death!');
+  expect(resolveCompiledAbility(definition, input([6, 6], 0)).kind).toBe('resolved');
+  // Each tamper passes the older V88/V113 checks and is caught only by the V153 group check.
+  for (const tamper of [
+    (member: { id: string }) => (member.id = `${member.id}x`),
+    (member: { condition: string }) => (member.condition = 'prone'),
+  ]) {
+    const changed = structuredClone(definition);
+    const member = changed.tiers[0]!.find(n => n.kind === 'condition')!;
+    if (member.kind !== 'condition') throw new Error('Missing member');
+    tamper(member as never);
+    expect(resolveCompiledAbility(changed, input([6, 6], 0))).toMatchObject({
+      kind: 'manual',
+      reason: 'Compiled structure is outside the supported envelope.',
+    });
+  }
 });

@@ -672,7 +672,7 @@ async function fire(
         await recordConditionSave(ctx, firing.scope, found.target, found.instance.id, shared);
         return {
           kind: 'clock.saving-throw',
-          description: `${firing.registration.source.label}: shares the saving throw of the same effect, ${shared.roll} (needs ${shared.threshold}+) — ${shared.success ? 'success; effect ends.' : 'failure; effect remains.'}`,
+          description: `${firing.registration.source.label}: shares the saving throw of the same effect, ${shared.roll} (needs ${shared.threshold}+) — ${shared.success ? 'success; effect ends.' : 'failure; effect remains. Hero-token follow-up remains manual.'}`,
           payload: {
             effectInstanceId: found.instance.id,
             creatureId: work.creatureId,

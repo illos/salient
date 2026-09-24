@@ -47,7 +47,12 @@ Spec references:
 Compendium (pinned `en/unified/md`):
 - `rule/general/saving-throw.md`: "If an effect has '(save ends)' at the end of its description, a
   creature suffering the effect makes a saving throw at the end of each of their turns to remove
-  the effect." One description, one save, one effect removed.
+  the effect."
+  - Interpretation (labelled): the conditions of one clause are one effect, so a single save
+    removes them all. If one condition ends another way first (for example teleporting out of
+    restrained, `condition/restrained.md`), the others remain until the save.
+  - Alternative considered: each condition saves on its own. It was rejected because the source
+    prints one "(save ends)" for the whole description.
 - `rule/character/potency.md`: the potency applies to the whole effect.
 - `rule/combat/end-of-turn.md` (EoT); `condition/prone.md`; `condition/grabbed.md`.
 
