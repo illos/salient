@@ -77,3 +77,15 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
 ## Work log
 
 - 2026-09-24: decision recorded. Eleven independent class ledgers were saved to `evidence/V120/`.
+- 2026-09-24: implemented.
+  - Profiles: `shared/resolve/heroicResourceGeneration.ts`, with the Shadow enabled.
+  - Clock work kind `heroic-resource`: `convex/lib/clock.ts`; registered in `combat.commit`.
+  - `resource.claim`: `convex/lib/resourceOperations.ts`.
+  - `abilities:sheet` gains `resourceTriggers`, and the ability panel gets its Claim control.
+  - Tests: `tests/app/heroic-resource.test.ts` and `tests/scripts/heroic-resource-generation.test.ts`.
+  - Journey: `SALIENT_HEADLESS_COHORT=heroic-resource`.
+  - Trigger ids use hyphens, because the slash parser refuses dots in bare values.
+  - Local authoring checks: `tsc` and eslint clean; the focused test files pass (1/1 and 3/3), and
+    so does the Shadow Eviscerate file `potency-conditions` (8/8).
+  - Void keep mode keeps the pool, as it does Malice. Claims are keyed by encounter, so stale ones
+    never block a new combat.

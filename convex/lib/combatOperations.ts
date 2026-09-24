@@ -46,6 +46,8 @@ import { journalDelete, journalInsert, journalPatch } from './journal';
 import { rollDice } from './dice';
 import type { OperationDefinition, Role, TableContext } from './registry';
 import { bindActor } from './actors';
+import { baselineOf } from './characterBuild';
+import { generationProfile } from '../../shared/resolve/heroicResourceGeneration';
 
 const SURPRISED_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/combat/surprised.md';
 const COMBAT_ROUND_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md';
@@ -470,6 +472,50 @@ const combatCommit: OperationDefinition = {
           work: { kind: 'malice', step: 'encounter-end-loss' },
           source: source('Malice: encounter-end loss', MALICE_SOURCE),
         });
+        // V120: each participating hero whose class has a generation profile gets its combat-start
+        // grant, a gain at the start of each of its turns, and its encounter-end loss.
+        for (const hero of heroes) {
+          const characterId = hero.actor.id as Id<'characters'>;
+          const record = await mctx.db.get(characterId);
+          const profile = generationProfile(baselineOf(record?.derivedBaseline)?.class.value);
+          if (!record?.liveState || !profile) continue;
+          const resource = record.liveState.heroicResource.name;
+          const work = (step: 'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss') =>
+            ({ kind: 'heroic-resource', step, characterId }) as const;
+          const affectedIds = [characterId];
+          await registerWork(mctx, scope, encounter._id, {
+            timing: { scope: 'combat', boundary: 'combat-start' },
+            work: work('combat-start-grant'),
+            source: source(
+              `${record.authored.name}'s ${resource}: combat-start grant`,
+              profile.combatStart.sourcePath,
+            ),
+            affectedIds,
+          });
+          await registerWork(mctx, scope, encounter._id, {
+            timing: {
+              scope: 'creature-turn',
+              boundary: 'turn-start',
+              creatureId: characterId,
+              occurrence: 'each',
+            },
+            work: work('turn-start-gain'),
+            source: source(
+              `${record.authored.name}'s ${resource}: turn-start gain`,
+              profile.turnStart.sourcePath,
+            ),
+            affectedIds,
+          });
+          await registerWork(mctx, scope, encounter._id, {
+            timing: { scope: 'combat', boundary: 'combat-end' },
+            work: work('encounter-end-loss'),
+            source: source(
+              `${record.authored.name}'s ${resource}: encounter-end loss`,
+              profile.encounterEnd.sourcePath,
+            ),
+            affectedIds,
+          });
+        }
         if (participants.some(p => p.surprised))
           // "surprised until the end of the first combat round" (rule/combat/surprised.md).
           await registerWork(mctx, scope, encounter._id, {

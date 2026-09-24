@@ -341,6 +341,29 @@ export function AbilityPanel({
           />
         </div>
       )}
+      {sheet.resourceTriggers.length > 0 && (
+        <ul className="m-0 flex list-none flex-col gap-1 p-0" aria-label="Resource triggers">
+          {sheet.resourceTriggers.map(trigger => (
+            <li key={trigger.id} className="flex flex-wrap items-center gap-2 text-sm">
+              <span>
+                {trigger.label}: +{trigger.amount} {trigger.resource}, once{' '}
+                {trigger.limit === 'encounter' ? 'per encounter' : `per ${trigger.limit}`}
+              </span>
+              <span className="text-muted-foreground">
+                {trigger.unavailable ?? trigger.confirmation}
+              </span>
+              <Command
+                campaignId={campaignId}
+                text={`${ref(actor)} /resource claim trigger=${trigger.id}`}
+                label="Claim"
+                disabled={trigger.unavailable !== null}
+                title={trigger.quote}
+              />
+              <RuleLink sourcePath={trigger.sourcePath} label={trigger.label} />
+            </li>
+          ))}
+        </ul>
+      )}
       <ul className="m-0 list-none p-0">
         {sheet.abilities.map(ability => (
           <AbilityRow

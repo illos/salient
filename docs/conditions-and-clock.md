@@ -295,8 +295,18 @@ The only registrations that can exist in v0.01 are:
   cleared manually and the walkthrough says so. The mechanical effects of surprise (no triggered
   actions, edge against) stay manual in v0.01.
 - Any other source-backed operation that A04 or A05 registers with a timing clause quoted from the
-  source. Class-specific turn-start grants (Ferocity) are deferred
-  (`docs/pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope`); nothing registers them.
+  source. Class-specific resource generation was deferred for v0.01
+  (`docs/pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope`).
+- **V120 (2026-09-24), superseding that deferral for V1:** each hero participant whose class has a
+  generation profile (`shared/resolve/heroicResourceGeneration.ts`) gets three `heroic-resource`
+  registrations at OK, after the Malice steps:
+  - `combat-start-grant` (+Victories);
+  - `turn-start-gain` on each of that hero's turns (fixed, or dice logged on the firing);
+  - `encounter-end-loss`, which also clears the hero's claimed triggers.
+
+  Class triggers the app cannot observe are recorded with `resource.claim`, which enforces each
+  trigger's round, turn or encounter limit. Classes are enabled one slice at a time
+  (`docs/decisions/2026-09-24-heroic-resource-automation.md`).
 
 Manual condition toggles register nothing ("Do not infer timers from toggles.", `agent.MD`).
 

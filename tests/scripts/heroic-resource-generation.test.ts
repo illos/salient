@@ -1,0 +1,47 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// V120: every generation-profile clause quotes its pinned source verbatim (link markup removed), so
+// a profile can't drift from the Compendium or cite the wrong file.
+import { readFileSync } from 'node:fs';
+import { expect, test } from 'vitest';
+import { vendorPath } from '../../scripts/lib/vendor.ts';
+import { GENERATION_PROFILES } from '../../shared/resolve/heroicResourceGeneration.ts';
+
+const plain = (markdown: string) =>
+  markdown.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/\s+/g, ' ');
+
+test('every profile clause is quoted verbatim from its pinned source', () => {
+  for (const profile of GENERATION_PROFILES) {
+    const clauses = [
+      profile.combatStart,
+      profile.turnStart,
+      profile.encounterEnd,
+      ...profile.triggers,
+    ];
+    for (const clause of clauses) {
+      expect(clause.sourcePath, profile.className).toMatch(/^vendor\/steel-compendium\/en\//);
+      expect(plain(readFileSync(vendorPath(clause.sourcePath), 'utf8')), clause.quote).toContain(
+        clause.quote,
+      );
+    }
+  }
+});
+
+test('profiles are keyed by class and trigger ids are unique and slash-safe', () => {
+  const classes = GENERATION_PROFILES.map(p => p.className);
+  expect(new Set(classes).size).toBe(classes.length);
+  const ids = GENERATION_PROFILES.flatMap(p => p.triggers.map(t => t.id));
+  expect(new Set(ids).size).toBe(ids.length);
+  for (const id of ids) expect(id).toMatch(/^[a-z]+(-[a-z0-9]+)+$/);
+});
+
+// feature/shadow/level-1/insight.md: 1d3 at each turn start, +1 the first time each combat round
+// for damage incorporating surges, and all remaining insight lost at the end of the encounter.
+test('the Shadow profile matches its source amounts', () => {
+  expect(GENERATION_PROFILES.find(p => p.className === 'Shadow')).toMatchObject({
+    resource: 'insight',
+    combatStart: { kind: 'victories' },
+    turnStart: { kind: 'dice', sides: 3 },
+    encounterEnd: { kind: 'lose' },
+    triggers: [{ id: 'shadow-surge-damage', amount: 1, limit: 'round' }],
+  });
+});

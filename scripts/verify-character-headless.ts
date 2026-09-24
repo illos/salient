@@ -3,6 +3,7 @@ import { runMultiTarget } from './headless/multi-target.ts';
 import { runTierEffects } from './headless/tier-effects.ts';
 import { runKitBonus } from './headless/kit-bonus.ts';
 import { runGrab } from './headless/grab.ts';
+import { runHeroicResource } from './headless/heroic-resource.ts';
 import { runSummoner } from './headless/summoner.ts';
 import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
@@ -45,6 +46,7 @@ const cohorts = {
   'tier-effects': runTierEffects,
   'kit-bonus': runKitBonus,
   grab: runGrab,
+  'heroic-resource': runHeroicResource,
   fury: runFury,
   'fury-level-three': runFuryLevelThree,
   troubadour: runTroubadour,

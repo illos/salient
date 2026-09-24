@@ -84,6 +84,18 @@ export const heroLiveValidator = v.object({
   conditions: conditionsValidator,
   manualConditions: v.optional(conditionsValidator),
   conditionInstances: v.optional(v.array(conditionInstanceValidator)),
+  /** V120: table-confirmed class resource triggers claimed in the current encounter. */
+  resourceClaims: v.optional(
+    v.array(
+      v.object({
+        triggerId: v.string(),
+        encounterId: v.string(),
+        round: v.optional(v.number()),
+        turnId: v.optional(v.string()),
+        eventId: v.string(),
+      }),
+    ),
+  ),
   origin: v.object({
     kind: v.literal('first-admission'),
     buildRevisionId: v.id('characterRevisions'),

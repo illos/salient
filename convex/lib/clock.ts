@@ -38,6 +38,7 @@ import {
 } from './conditionInstances';
 import type { DieResult } from '../../shared/contracts/history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
+import { generationProfile } from '../../shared/resolve/heroicResourceGeneration';
 
 export type Registration = Doc<'clockRegistrations'>;
 
@@ -239,6 +240,100 @@ async function fireMalice(
   };
 }
 
+type HeroicResourceStep = Extract<ScheduledWorkKind, { kind: 'heroic-resource' }>['step'];
+
+/**
+ * V120: one step of a hero's class resource lifecycle, from its generation profile. The profile
+ * clause supplies the amount and the quoted source; the clock supplies when it is due. Writes go
+ * through the causing operation's journal scope, so undoing that operation restores the pool.
+ */
+async function fireHeroicResource(
+  ctx: MutationCtx,
+  firing: FiringContext,
+  step: HeroicResourceStep,
+  characterId: string,
+): Promise<{
+  kind: string;
+  description: string;
+  payload?: unknown;
+  unsupported?: string;
+  dice?: DieResult[];
+}> {
+  const hero = await ctx.db.get(characterId as Id<'characters'>);
+  const live = hero?.liveState;
+  const profile = generationProfile(baselineOf(hero?.derivedBaseline)?.class.value);
+  const label = firing.registration.source.label;
+  if (!hero || !live || !profile || hero.campaignId !== firing.encounter.campaignId)
+    return {
+      kind: 'clock.unsupported',
+      description: `${label}: the hero or its generation profile is unavailable; resolve manually.`,
+      unsupported: 'hero or generation profile unavailable',
+    };
+  const pool = live.heroicResource;
+  if (pool.name.toLowerCase() !== profile.resource)
+    return {
+      kind: 'clock.unsupported',
+      description: `${label}: ${hero.authored.name}'s pool is ${pool.name}, not ${profile.resource}; resolve manually.`,
+      unsupported: 'pool does not match the generation profile',
+    };
+  const before = pool.current;
+  let after: number;
+  let clause: { sourcePath: string; quote: string };
+  let detail: string;
+  let dice: DieResult[] | undefined;
+  if (step === 'combat-start-grant') {
+    clause = profile.combatStart;
+    after = before + live.victories;
+    detail = `combat-start grant equal to Victories (${live.victories})`;
+  } else if (step === 'turn-start-gain') {
+    clause = profile.turnStart;
+    if (profile.turnStart.kind === 'fixed') {
+      after = before + profile.turnStart.amount;
+      detail = `turn-start gain of ${profile.turnStart.amount}`;
+    } else {
+      const accepted = await rollDice(
+        ctx,
+        firing.encounter.campaignId,
+        `hr_${firing.boundaryEventId}_${firing.registration._id}`,
+        [{ id: 'gain', sides: profile.turnStart.sides }],
+        null,
+      );
+      dice = accepted.dice;
+      const rolled = accepted.dice[0]!.value;
+      after = before + rolled;
+      detail = `turn-start gain 1d${profile.turnStart.sides} = ${rolled}`;
+    }
+  } else {
+    clause = profile.encounterEnd;
+    after = 0;
+    detail =
+      profile.encounterEnd.kind === 'lose' ? 'encounter-end loss' : 'encounter-end reset to 0';
+  }
+  await journalPatch(ctx, firing.scope, 'characters', hero._id, {
+    liveState: {
+      ...live,
+      heroicResource: { ...pool, current: after },
+      ...(step === 'encounter-end-loss' ? { resourceClaims: [] } : {}),
+    },
+  });
+  return {
+    kind: 'clock.heroic-resource',
+    description: `${hero.authored.name}'s ${pool.name}: ${detail}; ${before} → ${after}.`,
+    payload: {
+      step,
+      characterId,
+      className: profile.className,
+      resource: pool.name,
+      before,
+      delta: after - before,
+      after,
+      sourcePath: clause.sourcePath,
+      quote: clause.quote,
+    },
+    ...(dice ? { dice } : {}),
+  };
+}
+
 async function fire(
   ctx: MutationCtx,
   firing: FiringContext,
@@ -254,6 +349,8 @@ async function fire(
   switch (work.kind) {
     case 'malice':
       return fireMalice(ctx, firing, work.step);
+    case 'heroic-resource':
+      return fireHeroicResource(ctx, firing, work.step, work.characterId);
     case 'operation': {
       const handler = operationHandlers.get(work.operationId);
       if (!handler)

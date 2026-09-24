@@ -24,6 +24,7 @@ import { allowanceFor, loadActorRecords } from './lib/abilityOperations';
 import { settingsOf } from './lib/audience';
 import { resolveHistoricalId } from './lib/history';
 import { loadReadCorrectionWindows } from './lib/historyRead';
+import { resourceTriggers } from './lib/resourceOperations';
 
 export { abilityOperations } from './lib/abilityOperations';
 
@@ -139,6 +140,20 @@ export const sheet = query({
     ),
     /** Facts a hero needs before rolled abilities resolve; null when present or not a hero. */
     missingFacts: v.union(v.string(), v.null()),
+    /** V120: class heroic-resource triggers the table claims with `resource.claim`. */
+    resourceTriggers: v.array(
+      v.object({
+        id: v.string(),
+        label: v.string(),
+        amount: v.number(),
+        resource: v.string(),
+        limit: v.union(v.literal('round'), v.literal('turn'), v.literal('encounter')),
+        sourcePath: v.string(),
+        quote: v.string(),
+        confirmation: v.string(),
+        unavailable: v.union(v.string(), v.null()),
+      }),
+    ),
   }),
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
@@ -198,6 +213,10 @@ export const sheet = query({
         !records.character?.derivedBaseline
           ? `${args.actor.name} has no recorded characteristics or kit bonuses (no evaluated build); the Director records them with /hero facts.`
           : null,
+      resourceTriggers:
+        mayRead && records.character
+          ? await resourceTriggers(ctx, context.campaign, records.character)
+          : [],
     };
   },
 });

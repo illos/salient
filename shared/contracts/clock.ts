@@ -95,6 +95,15 @@ export type ScheduledWorkKind =
   | { kind: 'saving-throw'; effectInstanceId: string; creatureId: CreatureId }
   /** Common Malice lifecycle grants and loss. Source: rule/monster/malice.md#earning-malice. */
   | { kind: 'malice'; step: 'combat-start-grant' | 'round-start-gain' | 'encounter-end-loss' }
+  /**
+   * V120 class heroic-resource lifecycle for one hero, from its generation profile
+   * (shared/resolve/heroicResourceGeneration.ts).
+   */
+  | {
+      kind: 'heroic-resource';
+      step: 'combat-start-grant' | 'turn-start-gain' | 'encounter-end-loss';
+      characterId: CreatureId;
+    }
   /** Any other source-backed operation registered by A04/A05; must name its registered operation. */
   | { kind: 'operation'; operationId: OperationId };
 

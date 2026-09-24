@@ -78,9 +78,9 @@ export type NoConditions = Record<ConditionId, false>;
 
 /**
  * A hero's heroic resource pool. `name` comes from the derived baseline
- * (`DerivedBaseline.heroicResource.name`, R02); `current` is the live counter. In v0.01 the counter
- * changes only through fixed-cost payment and Manual adjustment; class-specific generation, thresholds
- * and resets are manual (docs/pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope).
+ * (`DerivedBaseline.heroicResource.name`, R02); `current` is the live counter. It changes through
+ * fixed-cost payment, Manual adjustment and, for classes with a V120 generation profile
+ * (shared/resolve/heroicResourceGeneration.ts), the combat clock and table-confirmed claims.
  */
 export interface HeroicResourcePool {
   name: string;
@@ -108,6 +108,18 @@ export interface HeroLiveState {
   conditions: ConditionToggles;
   manualConditions?: ConditionToggles;
   conditionInstances?: ConditionInstance[];
+  /** V120: table-confirmed class resource triggers claimed this encounter; cleared at encounter end. */
+  resourceClaims?: ResourceClaim[];
+}
+
+/** One claimed class resource trigger and the window (round or turn) its limit applies to. */
+export interface ResourceClaim {
+  triggerId: string;
+  encounterId: string;
+  round?: number;
+  turnId?: string;
+  /** The `resource.claim` log entry. */
+  eventId: string;
 }
 
 /**
