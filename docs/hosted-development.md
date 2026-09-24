@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V114 Fury levels two and three
+## Current release — V116 Tactician levels two and three
+
+Backend/content/frontend source `3175606b82eb0f8505c480a08a997e96b7e35d02` published on 2026-09-24 as
+Worker `d603e11b-f449-4f84-88fa-daf498a8ddd6`. Backend and schema validation, the content reseed (1687 entries at
+`fb83a789`), the hosted build and the upload succeeded. Accepted TESTER results were reused, with
+no smoke test or rerun. See [V116](build/V116-tactician-level-three.md) and the
+[ledger](../deploy.md).
+
+## Previous release — V114 Fury levels two and three
 
 Backend/content/frontend source `3aa24aed75ec7b33db94dabf8ab0690a678f9298` published on 2026-09-24 as
 Worker `283ae7db-6658-40c3-9007-d02a79ad9978`. Backend and schema validation, the content reseed (1669 entries at

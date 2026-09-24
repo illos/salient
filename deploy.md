@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V116 | `3175606` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V114 | `3aa24ae` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V113 | `bd6e8e4` | Merged; backend/frontend published; accepted gates reused | complete |
 | V110 | `2921a57` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -386,3 +387,18 @@ The test and deploy thread published this release at the V114 thread's handoff. 
   helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V114-release-3aa24ae`.
+
+### V116 Tactician levels two and three publication: 2026-09-24
+
+The test and deploy thread published this release at the V116 thread's handoff. Reviewed tip
+`3175606b82eb0f8505c480a08a997e96b7e35d02` was fast-forwarded into main. Its code is identical to the tested `cb9f4c7`.
+- Accepted evidence reused:
+  - full gate at `cb9f4c7` (235 s)
+  - isolated `tactician-level-three` journey at `cb9f4c7`
+- Backend publication and schema validation succeeded.
+- The content reseed read back 1687 entries at `fb83a789`.
+- The hosted build and the frontend upload succeeded. Worker `d603e11b-f449-4f84-88fa-daf498a8ddd6`.
+- No smoke tests or test reruns. Temporary credentials were removed and the private hosted
+  helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V116-release-3175606`.
