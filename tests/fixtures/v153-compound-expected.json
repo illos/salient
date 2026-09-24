@@ -1,0 +1,261 @@
+{
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "method": "V153 compound tier conditions. Builds reuse reviewed source-derived witnesses (paths in each 'base'). damageByTier is handwritten arithmetic from the pinned Compendium ability file: printed tier constants + the named characteristic score + feature/null/level-1/force-augmentation.md +1 rolled damage (Force witnesses only) + the kit melee damage bonus only for damage-dealing Melee+Weapon abilities (chapter/kits.md Damage Bonuses; the Null has no kit). Potency values follow rule/character/potency.md (weak = score - 2, average = score - 1, strong = score) with the class potency characteristic (class/null.md Basics: Intuition; class/fury.md Basics: Might); an effect applies only if the potency is higher than the target's score. Saving throws follow rule/general/saving-throw.md: a d10 at the end of each of the affected creature's turns, 6 or higher ends the effect. Nothing is derived from the evaluator, compiler or a run of the code under test.",
+  "target": {
+    "id": "v153-target",
+    "base": "tests/fixtures/v101-fury-expected.json v101-mountain; array 2, -1, -1 reassigned to Reason 2, Intuition -1, Presence -1 (class/fury.md Basics: M 2 and A 2, any listed array for the other three)",
+    "note": "I -1 is below the Null's I-based potencies 0/1/2 and P -1 below the Fury's M-based potencies 0/1/2 (rule/character/potency.md), so both compound effects apply at every tier. Human Determination (end frightened/slowed with a maneuver) and Can't Take Hold (may reduce psionic forced movement by 1) are optional player choices, not automatic (feature/trait/human/*.md). Stamina maximum 30 = Fury 21 + Mountain kit +9 (v101-mountain, unchanged by characteristics); saving throw threshold 6 (rule/general/saving-throw.md; v101 savingThrowThreshold 6).",
+    "selections": {
+      "culture.name": "wilderness mercenary commune",
+      "culture.language": "Anjali",
+      "culture.environment": "Wilderness",
+      "culture.environment.skill": "Swim",
+      "culture.organization": "Communal",
+      "culture.organization.skill": "Blacksmithing",
+      "culture.upbringing": "Martial",
+      "culture.upbringing.skill": "Intimidate",
+      "career.choice": "Soldier",
+      "career.soldier.skill.exploration": "Endurance",
+      "career.soldier.skill.intrigue": "Alertness",
+      "career.soldier.languages": ["Kalliak", "Vaslorian"],
+      "career.soldier.perk": "Teamwork",
+      "career.soldier.inciting-incident": "Sole Survivor",
+      "ancestry.choice": "Human",
+      "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+      "details.name": "V153 Compound Target",
+      "class.choice": "Fury",
+      "class.fury.characteristic-array": "2, −1, −1",
+      "class.fury.array-assignment": {
+        "Reason": 2,
+        "Intuition": -1,
+        "Presence": -1
+      },
+      "class.fury.skills": ["Jump", "Climb"],
+      "class.fury.aspect": "Berserker",
+      "class.fury.signature-ability": "Brutal Slam",
+      "class.fury.ability-3": "Out of the Way!",
+      "class.fury.ability-5": "Thunder Roar",
+      "kit.choice": "Mountain"
+    },
+    "characteristics": {
+      "M": 2,
+      "A": 2,
+      "R": 2,
+      "I": -1,
+      "P": -1
+    },
+    "stamina": 30,
+    "savingThrowThreshold": 6
+  },
+  "witnesses": [
+    {
+      "id": "null-force-stunning",
+      "level": 1,
+      "class": "Null",
+      "kit": null,
+      "base": "tests/fixtures/v103-null-expected.json v103-4 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V103 Chronokinetic Force",
+        "class.choice": "Null",
+        "class.null.tradition": "Chronokinetic",
+        "class.null.augmentation": "Force Augmentation",
+        "class.null.characteristic-array": "2, −1, −1",
+        "class.null.array-assignment": {
+          "Might": -1,
+          "Reason": -1,
+          "Presence": 2
+        },
+        "class.null.skills": ["Read Person", "Timescape"],
+        "class.null.tradition-skill.chronokinetic": ["Monsters"],
+        "class.null.signature-abilities": ["Phase Inversion Strike", "Pressure Points"],
+        "class.null.ability-3": "Stunning Blow",
+        "class.null.ability-5": "Phase Strike"
+      },
+      "characteristics": {
+        "M": -1,
+        "A": 2,
+        "R": -1,
+        "I": 2,
+        "P": 2
+      },
+      "potency": {
+        "characteristic": "I",
+        "weak": 0,
+        "average": 1,
+        "strong": 2
+      },
+      "actions": [
+        {
+          "name": "Stunning Blow",
+          "cost": 3,
+          "source": "feature/ability/null/level-1/stunning-blow.md",
+          "damageByTier": [7, 8, 10],
+          "derivation": "Melee, Psionic, Strike, Weapon: printed 4/5/7 + A 2 + Force Augmentation +1; no kit = 7/8/10. Cost 3 Discipline (v103 paidSourceCosts).",
+          "compound": {
+            "conditions": ["dazed", "slowed"],
+            "duration": "save-ends",
+            "characteristic": "I",
+            "threshold": [0, 1, 2],
+            "targetScore": -1,
+            "status": "applied"
+          },
+          "potencyDerivation": "I < WEAK/AVERAGE/STRONG with Null I 2 = I < 0/1/2; target I -1 is below each, so dazed and slowed (save ends) apply at every tier."
+        }
+      ]
+    },
+    {
+      "id": "null-speed-kinetic",
+      "level": 1,
+      "class": "Null",
+      "kit": null,
+      "base": "tests/fixtures/v103-null-expected.json v103-3 (unchanged)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V103 Metakinetic Speed",
+        "class.choice": "Null",
+        "class.null.tradition": "Metakinetic",
+        "class.null.augmentation": "Speed Augmentation",
+        "class.null.characteristic-array": "1, 0, 0",
+        "class.null.array-assignment": {
+          "Might": 1,
+          "Reason": 0,
+          "Presence": 0
+        },
+        "class.null.skills": ["Read Person", "Timescape"],
+        "class.null.tradition-skill.metakinetic": ["Navigate"],
+        "class.null.signature-abilities": ["Kinetic Strike", "Magnetic Strike"],
+        "class.null.ability-3": "Relentless Nemesis",
+        "class.null.ability-5": "Impart Force"
+      },
+      "characteristics": {
+        "M": 1,
+        "A": 2,
+        "R": 0,
+        "I": 2,
+        "P": 0
+      },
+      "actions": [
+        {
+          "name": "Kinetic Strike",
+          "cost": 0,
+          "source": "feature/ability/null/level-1/kinetic-strike.md",
+          "damageByTier": [6, 7, 8],
+          "derivation": "Melee, Psionic, Strike, Weapon: printed 4/5/6 + A 2; Speed Augmentation adds no damage; no kit = 6/7/8 (v103-3 rolledActions).",
+          "taunt": {
+            "condition": "taunted",
+            "duration": "eot",
+            "status": "applied"
+          },
+          "tierMovement": {
+            "movement": "slide",
+            "byTier": [null, 1, 2]
+          },
+          "effectsDerivation": "Every tier: taunted (EoT), no potency; tiers 2/3 then slide 1/2, in printed order after the damage."
+        }
+      ]
+    },
+    {
+      "id": "fury-reaver-panther-l2",
+      "level": 2,
+      "class": "Fury",
+      "kit": "Panther",
+      "base": "tests/fixtures/v114-fury-three-expected.json v101-panther levelTwo (perk Lucky Dog, Reaver level-2 ability Death... Death!)",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V101 Reaver Panther",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 1, −1",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": -1,
+          "Presence": 1
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Reaver",
+        "class.fury.signature-ability": "Hit and Run",
+        "class.fury.ability-3": "Back!",
+        "class.fury.ability-5": "Blood for Blood!",
+        "kit.choice": "Panther",
+        "class.fury.level-2.perk": "Lucky Dog",
+        "class.fury.level-2.reaver-ability": "Death... Death!"
+      },
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 1,
+        "I": -1,
+        "P": 1
+      },
+      "potency": {
+        "characteristic": "M",
+        "weak": 0,
+        "average": 1,
+        "strong": 2
+      },
+      "actions": [
+        {
+          "name": "Death... Death!",
+          "cost": 5,
+          "source": "feature/ability/fury/level-2/death-death.md",
+          "damageByTier": [5, 7, 14],
+          "derivation": "Melee, Strike, Weapon: printed 3/5/8 + M 2 + kit/panther.md melee +0/+0/+4 = 5/7/14 (v114 damageByTierWithKit Panther). Cost 5 Ferocity.",
+          "compound": {
+            "conditions": ["dazed", "frightened"],
+            "duration": "save-ends",
+            "characteristic": "P",
+            "threshold": [0, 1, 2],
+            "targetScore": -1,
+            "status": "applied"
+          },
+          "potencyDerivation": "P < WEAK/AVERAGE/STRONG with Fury M 2 = P < 0/1/2; target P -1 is below each, so dazed and frightened (save ends) apply at every tier."
+        }
+      ]
+    }
+  ]
+}

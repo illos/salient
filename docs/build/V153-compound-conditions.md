@@ -30,9 +30,11 @@ applied together and removed by one saving throw.
   - `ConditionInstance.saveGroup` is the first occurrence of the compound effect for that target.
   - Each member keeps its own save registration, so ending one member early (for example with
     condition off) never strands the other.
-  - At a boundary the first member to fire rolls. Any later member reuses that roll: the event
-    payload has `shared: true` and no dice.
-  - A success ends every active member.
+  - At a boundary the first member to fire rolls.
+  - A failure leaves the others active, and each reuses that roll: the event payload has
+    `shared: true` and no dice.
+  - A success ends every active member at once, which retires their registrations before they
+    fire.
 - Regenerated V72 report. The live inventory test names the 10 additions: 3 hero abilities and
   7 foe abilities.
 
