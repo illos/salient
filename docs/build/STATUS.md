@@ -161,3 +161,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V155 | [Prone and can't stand](V155-cant-stand.md) | Merged (`d266437`, train 8); cloud dev published; gate and headless PASS at tip |
 | V156 | [Shadow insight costs 1 less with an edge](V156-insight-edge-cost.md) | Merged (`d266437`, train 8); cloud dev published; gate and headless PASS at tip |
 | V165 | [Respite loop](V165-respite-loop.md) | In progress |
+| V166 | [Respite activities](V166-respite-activities.md) | In progress |

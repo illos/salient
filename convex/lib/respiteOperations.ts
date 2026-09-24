@@ -24,7 +24,13 @@ import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { OperationDefinition, Role, TableContext } from './registry';
 import { journalPatch } from './journal';
-import { baselineOf } from './characterBuild';
+import { activateRevision, baselineOf, evaluateSelections, pendingReview } from './characterBuild';
+import { canonicalChoiceOrigins } from './characterChoiceOrigins';
+import { getDefinitions } from '../../shared/content/character-decisions';
+import { changeChoice } from '../../shared/evaluate/choiceTransition';
+import { draftSelectionsFrom } from '../../shared/evaluate/draft';
+import { selectionsFrom } from '../../shared/evaluate/character';
+import type { SelectionValue } from '../../shared/contracts/characterEvaluation';
 import { revisionLevel } from './characterProgression';
 import { sessionEncounter } from './combatOperations';
 import { reconciledCurrent } from '../../shared/evaluate/liveReconciliation';
@@ -154,36 +160,72 @@ const cancel: OperationDefinition = {
   execute: async (ctx, { context }) => {
     const respite = openRespite(context);
     const { present, left } = await participants(ctx, respite, context.campaign._id);
-    const restored = present.map(({ hero, snapshot }) => {
-      const baseline = baselineOf(hero.derivedBaseline);
-      const stamina = baseline?.staminaMaximum.value ?? snapshot.staminaMaximum;
-      const recoveries = baseline?.recoveriesMaximum.value ?? snapshot.recoveriesMaximum;
-      return {
-        hero,
-        liveState: {
-          ...snapshot.liveState,
-          stamina: reconciledCurrent(
-            'stamina',
-            snapshot.liveState.stamina,
-            snapshot.staminaMaximum,
-            stamina,
-          ),
-          recoveries: reconciledCurrent(
-            'recoveries',
-            snapshot.liveState.recoveries,
-            snapshot.recoveriesMaximum,
-            recoveries,
-          ),
-        },
-      };
-    });
+    // A respite kit change is reverted by recording the earlier build again (V166); any later
+    // build change (a level-up or edit) is kept (Q-RESPITE-1).
+    const restored = await Promise.all(
+      present.map(async ({ hero, snapshot }) => {
+        const revert =
+          snapshot.kitChange && hero.effectiveRevisionId === snapshot.kitChange.to
+            ? await ctx.db.get(snapshot.kitChange.from)
+            : null;
+        const baseline = baselineOf(revert ? revert.derivedBaseline : hero.derivedBaseline);
+        const stamina = baseline?.staminaMaximum.value ?? snapshot.staminaMaximum;
+        const recoveries = baseline?.recoveriesMaximum.value ?? snapshot.recoveriesMaximum;
+        return {
+          hero,
+          revert,
+          liveState: {
+            ...snapshot.liveState,
+            stamina: reconciledCurrent(
+              'stamina',
+              snapshot.liveState.stamina,
+              snapshot.staminaMaximum,
+              stamina,
+            ),
+            recoveries: reconciledCurrent(
+              'recoveries',
+              snapshot.liveState.recoveries,
+              snapshot.recoveriesMaximum,
+              recoveries,
+            ),
+          },
+        };
+      }),
+    );
     return {
       kind: 'respite.canceled',
       description: `Respite canceled: every participant is back to their state before it.${leftNote(left)}`,
-      data: { characters: restored.map(({ hero }) => hero._id), left },
+      data: {
+        characters: restored.map(({ hero }) => hero._id),
+        kitsReverted: restored.filter(r => r.revert).map(({ hero }) => hero._id),
+        left,
+      },
       commit: async (mctx, scope) => {
-        for (const { hero, liveState } of restored)
-          await journalPatch(mctx, scope, 'characters', hero._id, { liveState }, hero);
+        for (const { hero, revert, liveState } of restored) {
+          if (revert) {
+            const fresh = (await mctx.db.get(hero._id))!;
+            await activateNewBuild(mctx, fresh, context.campaign._id, {
+              parentRevisionId: fresh.effectiveRevisionId,
+              level: revisionLevel(revert),
+              kind: 'restore',
+              baseEffectiveRevisionId: fresh.effectiveRevisionId,
+              restoredFromRevisionId: revert._id,
+              selections: revert.selections,
+              ...(revert.choiceOrigins ? { choiceOrigins: revert.choiceOrigins } : {}),
+              status: revert.status,
+              evaluation: revert.evaluation,
+              derivedBaseline: revert.derivedBaseline,
+            });
+          }
+          await journalPatch(
+            mctx,
+            scope,
+            'characters',
+            hero._id,
+            { liveState },
+            revert ? undefined : hero,
+          );
+        }
         await journalPatch(mctx, scope, 'sessions', context.session!._id, { respite: null });
       },
     };
@@ -269,12 +311,17 @@ const complete: OperationDefinition = {
           `${r.hero.authored.name}: restored, XP ${r.before.xp} → ${r.liveState.xp}${r.earned ? `, ${r.earned} level-up${r.earned > 1 ? 's' : ''} granted` : ''}`,
       )
       .join('; ');
+    // docs/table-spec.md (completing with unused options): unused activities lapse but are named.
+    const unused = present
+      .filter(({ snapshot }) => !snapshot.activity)
+      .map(({ hero }) => hero.authored.name);
+    const unusedNote = unused.length ? ` No respite activity used: ${unused.join(', ')}.` : '';
     const deadNote = dead.length
       ? ` Dead, unchanged (resolve manually): ${dead.map(({ hero }) => hero.authored.name).join(', ')}.`
       : '';
     return {
       kind: 'respite.completed',
-      description: `Respite complete.${summary ? ` ${summary}.` : ''}${deadNote}${leftNote(left)}`,
+      description: `Respite complete.${summary ? ` ${summary}.` : ''}${unusedNote}${deadNote}${leftNote(left)}`,
       data: {
         characters: results.map(r => ({
           characterId: r.hero._id,
@@ -287,6 +334,7 @@ const complete: OperationDefinition = {
           levelUpsGranted: r.earned,
         })),
         dead: dead.map(({ hero }) => hero._id),
+        unusedActivities: unused,
         left,
       },
       commit: async (mctx, scope) => {
@@ -305,5 +353,169 @@ const complete: OperationDefinition = {
   },
 };
 
-export const respiteOperations: OperationDefinition[] = [start, cancel, interrupt, complete];
+// ---------------------------------------------------------------------------------------------
+// V166 respite activities: rule/resource/respite.md "You can also undertake one respite activity,
+// such as making a project roll … or changing your kit"; chapter/kits.md, Changing Your Kit.
+
+function participantIndex(respite: OpenRespite, characterId: Id<'characters'>) {
+  const index = respite.participants.findIndex(p => p.characterId === characterId);
+  if (index < 0) throw new ConvexError('This hero is not resting in the open respite.');
+  if (respite.participants[index]!.activity)
+    throw new ConvexError(
+      `This hero already undertook a respite activity (${respite.participants[index]!.activity}).`,
+    );
+  return index;
+}
+
+async function requireActingOwner(
+  ctx: MutationCtx,
+  context: TableContext,
+  characterId: Id<'characters'>,
+): Promise<Doc<'characters'>> {
+  const hero = await ctx.db.get(characterId);
+  if (!hero || hero.campaignId !== context.campaign._id || !hero.liveState)
+    throw new ConvexError('Character unavailable.');
+  // The owner takes their own activity; the Director may act for any hero.
+  if (context.role !== 'director' && hero.ownerId !== context.user._id)
+    throw new ConvexError('Only the character owner or the Director can do this.');
+  return hero;
+}
+
+/** Record a new complete build and activate it without review (the respite kit change), atomically. */
+async function activateNewBuild(
+  ctx: MutationCtx,
+  hero: Doc<'characters'>,
+  campaignId: Id<'campaigns'>,
+  fields: Omit<Doc<'characterRevisions'>, '_id' | '_creationTime' | 'characterId' | 'revision'>,
+) {
+  const revision = hero.revision + 1;
+  const id = await ctx.db.insert('characterRevisions', {
+    ...fields,
+    characterId: hero._id,
+    revision,
+  });
+  const saved = (await ctx.db.get(id))!;
+  const { reconciliation } = await activateRevision(ctx, hero, saved, campaignId, Date.now());
+  const base = hero.effectiveRevisionId;
+  await ctx.db.patch(hero._id, {
+    revision,
+    staleFullEditRevisionId: hero.draftRevisionId !== base ? hero.draftRevisionId : null,
+    ...(hero.draftRevisionId === base ? { draftRevisionId: id } : {}),
+  });
+  const pending = await pendingReview(ctx, hero._id);
+  if (pending) await ctx.db.patch(pending._id, { status: 'stale' });
+  return { id, reconciliation };
+}
+
+const changeKit: OperationDefinition = {
+  id: 'respite.change-kit',
+  family: 'respite',
+  verb: 'change-kit',
+  title: 'Change kit (respite activity)',
+  description:
+    'During an open respite, a resting hero changes their kit as their one respite activity. The new build takes effect without Director review; Cancel reverts it.',
+  args: { selections: v.array(v.object({ decisionId: v.string(), value: v.any() })) },
+  argDescriptions: {
+    selections:
+      'The kit decisions to change, e.g. [{"decisionId":"kit.choice","value":"Mountain"}]; a Tactician also chooses the second kit and arsenal values.',
+  },
+  roles: ['director', 'player'],
+  session: 'running',
+  actor: 'required',
+  execute: async (ctx, { context, actor, args }) => {
+    const respite = openRespite(context);
+    const hero = await requireActingOwner(ctx, context, actor!.id as Id<'characters'>);
+    const index = participantIndex(respite, hero._id);
+    const base = hero.effectiveRevisionId ? await ctx.db.get(hero.effectiveRevisionId) : null;
+    if (!base || base.status !== 'complete')
+      throw new ConvexError('The effective build is not complete.');
+    const level = revisionLevel(base);
+    const definitions = getDefinitions(level, base.choiceOrigins);
+    const kitIds = new Set(
+      definitions.steps.find(step => step.id === 'step.kit')?.decisions.map(d => d.id) ?? [],
+    );
+    const changes = args.selections as { decisionId: string; value: SelectionValue }[];
+    if (!changes.length || changes.some(c => !kitIds.has(c.decisionId)))
+      throw new ConvexError('A kit change accepts only kit decisions.');
+    let working = selectionsFrom(base.selections);
+    for (const change of changes)
+      working = changeChoice(working, definitions, change.decisionId, change.value).selections;
+    const selections = draftSelectionsFrom(working, definitions);
+    const choiceOrigins = canonicalChoiceOrigins(selections, level, base);
+    const evaluation = evaluateSelections(selections, level, choiceOrigins);
+    if (evaluation.status !== 'complete')
+      throw new ConvexError(
+        `The new kit leaves the build ${evaluation.status}; choose every kit decision it needs.`,
+      );
+    const kit = String(working['kit.choice'] ?? '');
+    return {
+      kind: 'respite.kit-changed',
+      description: `${hero.authored.name} changed kit to ${kit} as their respite activity.`,
+      data: { characterId: hero._id, kit },
+      commit: async (mctx, scope) => {
+        const fresh = (await mctx.db.get(hero._id))!;
+        const { id } = await activateNewBuild(mctx, fresh, context.campaign._id, {
+          parentRevisionId: base._id,
+          level,
+          kind: 'respite-kit',
+          choiceOrigins,
+          baseEffectiveRevisionId: base._id,
+          selections,
+          evaluation,
+          status: evaluation.status,
+          derivedBaseline: evaluation.baseline,
+        });
+        const participants = respite.participants.map((p, i) =>
+          i === index ? { ...p, activity: 'Change kit', kitChange: { from: base._id, to: id } } : p,
+        );
+        await journalPatch(mctx, scope, 'sessions', context.session!._id, {
+          respite: { ...respite, participants },
+        });
+      },
+    };
+  },
+};
+
+const activity: OperationDefinition = {
+  id: 'respite.activity',
+  family: 'respite',
+  verb: 'activity',
+  title: 'Record a respite activity',
+  description:
+    'During an open respite, record the one respite activity a resting hero undertakes (for example a project roll or a class feature that changes as a respite activity). Its effects are resolved manually.',
+  args: { name: v.string() },
+  argDescriptions: { name: 'The activity, e.g. "Project roll".' },
+  roles: ['director', 'player'],
+  session: 'running',
+  actor: 'required',
+  execute: async (ctx, { context, actor, args }) => {
+    const respite = openRespite(context);
+    const hero = await requireActingOwner(ctx, context, actor!.id as Id<'characters'>);
+    const index = participantIndex(respite, hero._id);
+    const name = String(args.name).trim().slice(0, 80);
+    if (!name) throw new ConvexError('Name the respite activity.');
+    return {
+      kind: 'respite.activity',
+      description: `${hero.authored.name}'s respite activity: ${name}. Resolve it manually.`,
+      data: { characterId: hero._id, name },
+      commit: async (mctx, scope) => {
+        const participants = respite.participants.map((p, i) =>
+          i === index ? { ...p, activity: name } : p,
+        );
+        await journalPatch(mctx, scope, 'sessions', context.session!._id, {
+          respite: { ...respite, participants },
+        });
+      },
+    };
+  },
+};
+
+export const respiteOperations: OperationDefinition[] = [
+  start,
+  cancel,
+  interrupt,
+  complete,
+  changeKit,
+  activity,
+];
 export type RespiteParticipant = { characterId: Id<'characters'> };

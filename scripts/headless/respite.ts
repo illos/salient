@@ -14,6 +14,7 @@ import { levelThreeBuilds } from '../../tests/fixtures/level-three-builds.ts';
 type Saved = {
   pendingLevelUps?: number;
   derivedBaseline: {
+    kit: { name: { value: string } } | null;
     staminaMaximum: { value: number };
     recoveriesMaximum: { value: number };
   } | null;
@@ -65,11 +66,24 @@ export async function runRespite({ actors: { director }, run, runId }: ScenarioC
       await adjust('recoveries', 2);
       await adjust('victories', 16);
 
-      // Cancel: the state before the respite returns.
+      // Cancel: the state before the respite returns, including a respite kit change (V166).
       const before = (await get()).liveState;
+      const kitBefore = (await get()).derivedBaseline!.kit?.name.value;
+      const kitAfter = kitBefore === 'Panther' ? 'Mountain' : 'Panther';
       await invoke('respite.start');
       await adjust('stamina', 5);
+      await invoke(
+        'respite.change-kit',
+        { selections: [{ decisionId: 'kit.choice', value: kitAfter }] },
+        true,
+      );
+      assert.equal((await get()).derivedBaseline!.kit?.name.value, kitAfter);
+      const open = await director.query<{
+        respite: { activities: { characterId: string; activity: string | null }[] } | null;
+      }>('sessions:get', { sessionId });
+      assert.deepEqual(open.respite?.activities, [{ characterId, activity: 'Change kit' }]);
       await invoke('respite.cancel');
+      assert.equal((await get()).derivedBaseline!.kit?.name.value, kitBefore);
       assert.deepEqual((await get()).liveState, before);
 
       // Interrupt: what happened stands, no benefits.

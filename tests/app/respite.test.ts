@@ -151,3 +151,60 @@ test('a respite cannot start during combat', async () => {
   await f.say('/combat start');
   await expect(f.say('/respite start')).rejects.toThrow('Finish or void combat');
 });
+
+// V166: rule/resource/respite.md "You can also undertake one respite activity … changing your kit";
+// chapter/kits.md, Changing Your Kit. Cancel reverts respite choices (docs/table-spec.md#respite-mode).
+test('a resting hero changes kit once without review; cancel reverts it', async () => {
+  const f = await setup();
+  const kitOf = async () =>
+    ((await f.hero()).derivedBaseline as { kit: { name: { value: string } } | null } | null)?.kit
+      ?.name.value;
+  expect(await kitOf()).toBe('Mountain');
+  const change = (commandId: string, kit: string) =>
+    f.player.client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId,
+      operation: 'respite.change-kit',
+      actor: { refKind: 'character', id: f.thornId },
+      arguments: { selections: [{ decisionId: 'kit.choice', value: kit }] },
+    });
+  await expect(change('kit-outside', 'Panther')).rejects.toThrow('No respite is open');
+  await f.say('/respite start');
+  await change('kit-panther', 'Panther');
+  expect(await kitOf()).toBe('Panther');
+  const hero = await f.hero();
+  const revision = (await f.t.run(ctx => ctx.db.get(hero.effectiveRevisionId!)))!;
+  expect(revision.kind).toBe('respite-kit');
+  // One respite activity per respite.
+  await expect(change('kit-again', 'Mountain')).rejects.toThrow('already undertook');
+  const readback = await f.director.client.query(api.sessions.get, {
+    sessionId: f.sessionId as Id<'sessions'>,
+  });
+  expect(readback.respite?.activities).toEqual([
+    { characterId: f.thornId, activity: 'Change kit' },
+  ]);
+  await f.say('/respite cancel');
+  expect(await kitOf()).toBe('Mountain');
+  const current = (await f.hero()).effectiveRevisionId!;
+  const reverted = (await f.t.run(ctx => ctx.db.get(current)))!;
+  expect(reverted.kind).toBe('restore');
+});
+
+test('complete keeps a kit change and names heroes who used no activity', async () => {
+  const f = await setup();
+  const wren = await admitHero(f.t, f.player, f.director, f.campaignId, 'Wren');
+  await f.say('/respite start');
+  await f.player.client.mutation(api.commands.invoke, {
+    campaignId: f.campaignId,
+    commandId: 'wren-project',
+    operation: 'respite.activity',
+    actor: { refKind: 'character', id: wren },
+    arguments: { name: 'Project roll' },
+  });
+  const result = await f.say('/respite complete');
+  const event = (await storedEvents(f.t, f.campaignId)).find(e => e._id === result.eventId)!;
+  expect(event.description).toContain('No respite activity used: Thorn.');
+  expect((event.payload as { data: { unusedActivities: string[] } }).data.unusedActivities).toEqual(
+    ['Thorn'],
+  );
+});

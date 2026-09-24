@@ -25,7 +25,14 @@ const sessionValue = v.object({
   number: v.number(),
   /** V165: the open respite, if any: when it started and who is resting. */
   respite: v.union(
-    v.object({ startedAt: v.number(), participants: v.array(v.id('characters')) }),
+    v.object({
+      startedAt: v.number(),
+      participants: v.array(v.id('characters')),
+      /** V166: each resting hero's respite activity, or null while unused (shown before Complete). */
+      activities: v.array(
+        v.object({ characterId: v.id('characters'), activity: v.union(v.string(), v.null()) }),
+      ),
+    }),
     v.null(),
   ),
 });
@@ -59,6 +66,10 @@ async function project(ctx: ReadCtx, s: Doc<'sessions'>, ordered?: Doc<'sessions
       ? {
           startedAt: s.respite.startedAt,
           participants: s.respite.participants.map(p => p.characterId),
+          activities: s.respite.participants.map(p => ({
+            characterId: p.characterId,
+            activity: p.activity ?? null,
+          })),
         }
       : null,
   };

@@ -268,6 +268,8 @@ export const characterTables = {
         v.literal('full-edit'),
         v.literal('level-up'),
         v.literal('restore'),
+        /** V166 kit change as a respite activity (chapter/kits.md, Changing Your Kit). */
+        v.literal('respite-kit'),
       ),
     ),
     baseEffectiveRevisionId: v.optional(v.union(v.id('characterRevisions'), v.null())),
