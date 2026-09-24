@@ -181,6 +181,8 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Squad! Forward!',
       'Shadowstrike',
       'Blur',
+      // V158: a lasting Effect section that is table work, tracked as an effect instance.
+      'Relentless Nemesis',
     ].sort(),
   );
   expect(
