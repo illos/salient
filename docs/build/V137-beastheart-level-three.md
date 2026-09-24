@@ -63,3 +63,7 @@ remains deferred.
   `class.beastheart.*` decision, including the level-2 perk's own action (for example Forgettable
   Face). Perk grants now stay beside the records; a focused case fails without the fix.
 - Review re-verification of the perk fix at `0b9e739`: PASS.
+- Train 2 gate at `f6c18bb` (V134+V136+V137) failed one test: `tests/scripts/build-content.test.ts`
+  still allowed only level-1 Beastheart sources. The allow-list now matches the V137 admission
+  (Beastheart levels 1–3, companion levels 1 and 3). Headless there: conduit, talent and
+  beastheart-level-three all PASS (seed 1852).

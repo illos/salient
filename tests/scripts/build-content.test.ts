@@ -181,11 +181,11 @@ describe('committed snapshot', () => {
     expect(manifest.entryCount).toBe(manifest.entries.length);
     expect(manifest.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
   });
-  test('core content and explicit supplemental level one are included; other supplements remain excluded', () => {
+  test('core content and explicit supplemental levels are included; other supplements remain excluded', () => {
     for (const row of manifest.entries) {
       if (row.id.startsWith('mcdm.beastheart.v1/')) {
         expect(row.sourcePath).toMatch(
-          /(?:class\/beastheart\.md|monster\/companion\/beastheart\/statblock\/[^/]+\.md|feature\/(?:ability\/)?(?:beastheart\/level-1|companion\/beastheart\/[^/]+\/level-1)\/[^/]+\.md)$/,
+          /(?:class\/beastheart\.md|monster\/companion\/beastheart\/statblock\/[^/]+\.md|feature\/(?:ability\/)?(?:beastheart\/level-[123]|companion\/beastheart\/[^/]+\/level-[13])\/[^/]+\.md)$/,
         );
       } else if (row.id.startsWith('mcdm.summoner.v1/')) {
         expect(row.sourcePath).toMatch(
