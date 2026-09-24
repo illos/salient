@@ -96,6 +96,17 @@ export type EffectOnlyClause =
       kind: 'watcher';
       subject: 'actor' | 'target';
       spec: WatcherSpec;
+    }
+  | {
+      /**
+       * V173: damage to the target sized by the damage that set off the triggered action
+       * (shared/resolve/triggers.ts). Only an offer accepted from that damage knows the amount;
+       * a use by hand leaves it to the table.
+       */
+      kind: 'triggered-damage';
+      subject: 'target';
+      damageType: string;
+      share: 'half';
     };
 
 interface Pattern {
@@ -106,6 +117,11 @@ interface Pattern {
    * exactly one target. "Each target" suits any count.
    */
   singleTarget?: true;
+  /**
+   * V173: the sentence speaks of "the triggering damage" or "the triggering strike", so it is
+   * admitted only in a triggered ability whose Trigger section names that event.
+   */
+  trigger?: 'damage' | 'melee-strike';
 }
 
 const amount = (text: string | undefined) => {
@@ -182,6 +198,26 @@ const PATTERNS: readonly Pattern[] = [
         : undefined;
     },
   })),
+  // ---- V173 responses to the triggering event (shared/resolve/triggers.ts).
+  // feature/ability/talent/level-1/feedback-loop.md: "The target takes psychic damage equal to half
+  // the triggering damage." rule/general/always-round-down.md: an odd number halved rounds down.
+  {
+    pattern:
+      /^The target takes (acid|cold|corruption|fire|holy|lightning|poison|psychic|sonic) damage equal to half the triggering damage\./,
+    read: m => ({ kind: 'triggered-damage', subject: 'target', damageType: m[1]!, share: 'half' }),
+    singleTarget: true,
+    trigger: 'damage',
+  },
+  // feature/ability/troubadour/level-1/riposte.md: "The target makes a free strike against the
+  // creature who made the triggering strike." The target's free strike is its own use
+  // (feature/common/main-actions/free-strike), recorded by the table through the ability operation.
+  {
+    pattern:
+      /^The target makes a free strike against the creature who made the triggering strike\./,
+    read: instruction('target', 'free-strike'),
+    singleTarget: true,
+    trigger: 'melee-strike',
+  },
   // ---- Table work, recorded as ordered manual occurrences (V109, V152).
   // feature/ability/conduit/level-1/sermon-of-grace.md, the whole section. Each target spends
   // through their own Recovery; the free triggered action ends an effect (rule/general/saving-throw.md,
@@ -224,6 +260,8 @@ export interface EffectOnlySentence {
   text: string;
   clause: EffectOnlyClause;
   singleTarget: boolean;
+  /** V173: the Trigger section the sentence needs (Pattern.trigger). */
+  trigger?: 'damage' | 'melee-strike';
 }
 
 /** Reads one Effect section whole, or `undefined` when any part is outside the patterns. */
@@ -233,13 +271,18 @@ export function readEffectOnlySection(text: string): EffectOnlySentence[] | unde
   const out: EffectOnlySentence[] = [];
   while (rest) {
     let matched: EffectOnlySentence | undefined;
-    for (const { pattern, read, singleTarget } of PATTERNS) {
+    for (const { pattern, read, singleTarget, trigger } of PATTERNS) {
       const match = pattern.exec(rest);
       // Whole sentences only: the match ends the section or is followed by the next sentence.
       if (!match || (rest.length > match[0].length && rest[match[0].length] !== ' ')) continue;
       const clause = read(match);
       if (!clause) continue;
-      matched = { text: match[0], clause, singleTarget: singleTarget === true };
+      matched = {
+        text: match[0],
+        clause,
+        singleTarget: singleTarget === true,
+        ...(trigger ? { trigger } : {}),
+      };
       break;
     }
     if (!matched) return undefined;

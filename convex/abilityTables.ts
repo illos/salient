@@ -104,6 +104,26 @@ export const abilityTables = {
   })
     .index('by_turn', ['turnId'])
     .index('by_encounter_actor', ['encounterId', 'actor.id']),
+  /**
+   * V173 (docs/lasting-effects-design.md#4-triggered-actions-and-reactions): a participating hero's
+   * compiled triggered ability, written when combat is committed from the documents it already
+   * read, so an observed damage write finds who may respond with one indexed read instead of
+   * reading every hero. Journaled with the commit; undo of the commit removes them.
+   */
+  triggerHolders: defineTable({
+    campaignId: v.id('campaigns'),
+    encounterId: v.id('encounters'),
+    owner: actorRef,
+    abilityId: v.string(),
+    abilityName: v.string(),
+    actionType: v.union(v.literal('triggered action'), v.literal('free triggered action')),
+    /** shared/resolve/triggers.ts TriggerSpec, as compiled. */
+    trigger: v.any(),
+    /** The printed Target and Distance entries. */
+    target: v.string(),
+    distance: v.string(),
+    sourcePath: v.string(),
+  }).index('by_encounter', ['encounterId']),
   /** A critical hit's additional main action: offered to the acting user, never executed by the app. */
   actionOpportunities: defineTable({
     campaignId: v.id('campaigns'),

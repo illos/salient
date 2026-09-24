@@ -190,6 +190,11 @@ async function deleteEncounter(
         .query('actionOpportunities')
         .withIndex('by_encounter_actor', q => q.eq('encounterId', encounterId))
         .take(PAGE),
+    () =>
+      ctx.db
+        .query('triggerHolders')
+        .withIndex('by_encounter', q => q.eq('encounterId', encounterId))
+        .take(PAGE),
   ];
   if (!(await drainAll(ctx, budget, pages))) return false;
   return remove(ctx, budget, encounterId);

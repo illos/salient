@@ -318,9 +318,11 @@ test('tampering with a saved definition is refused', () => {
 
 test('triggered actions and abilities with Spend or Strained sections stay manual', () => {
   // conduit/level-1/healing-grace.md: Effect "The target can spend a Recovery." and a Spend section.
-  // troubadour/level-1/riposte.md and censor/level-2/prescient-grace.md: triggered actions.
+  // censor/level-2/prescient-grace.md: a triggered action whose trigger ("An enemy within 10
+  // squares starts their turn") V173 doesn't observe. (troubadour/level-1/riposte.md compiles from
+  // V173: tests/scripts/triggered-actions.test.ts.)
   // talent/level-1/iron.md: a Strained section. shadow/level-1/coat-the-blade.md: a Spend section.
-  for (const name of ['Healing Grace', 'Riposte', 'Iron', 'Coat the Blade', 'Prescient Grace']) {
+  for (const name of ['Healing Grace', 'Iron', 'Coat the Blade', 'Prescient Grace']) {
     const definition = compiled(name);
     expect(definition.effectOnly, name).toBeUndefined();
     expect(definition.execution, name).toBe('manual');

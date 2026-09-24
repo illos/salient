@@ -59,6 +59,7 @@ import type {
 } from '../../shared/contracts/rollResolution';
 import { manifest } from '../../shared/content/compendium/index';
 import { parseTierText, plainText, windedValueOf } from '../../shared/resolve/index';
+import { triggeredActionType } from '../../shared/resolve/triggers';
 import { findContent, requireContent } from '../content';
 import { endOwnerDyingEffects, type EffectHolder } from './effectInstances';
 import { observeDamage, type DamageObservation, type Preloaded } from './watchers';
@@ -252,7 +253,11 @@ function build(
     kitBonusesIncluded: boolean;
   },
 ): AbilityDefinition {
-  const actionType = actionTypeOf(base.usage);
+  // V173: a hero's "Triggered" or "Free triggered" usage is tracked as that action type
+  // (rule/combat/triggered-action.md). Only a printed full action type makes a rolled record
+  // executable here; a hero triggered ability with a power roll stays recorded for manual play.
+  const printed = actionTypeOf(base.usage);
+  const actionType = printed ?? triggeredActionType(base.usage) ?? null;
   const { permitted, fixedRollBonus } = rollEntry(base.roll);
   const { fixedCost, unknownCost } = parseCost(base.cost);
   const rolled = base.tiers !== undefined && (permitted.length > 0 || fixedRollBonus !== undefined);
@@ -265,12 +270,12 @@ function build(
     ...(unknownCost ? { unknownCost } : {}),
     ...(fixedCost ? { fixedCost } : {}),
   };
-  if (rolled && actionType)
+  if (rolled && printed)
     definition.metadata = {
       abilityId: base.abilityId,
       name: base.name,
       source: base.source,
-      actionType,
+      actionType: printed,
       keywords: base.keywords.map(plainText),
       permittedCharacteristics: permitted,
       ...(fixedRollBonus !== undefined ? { fixedRollBonus } : {}),
@@ -1046,10 +1051,12 @@ export async function writeDamage(
    * the firing that dealt it is logged first.
    */
   options: {
-    dealer?: EffectHolder;
+    dealer?: EffectHolder & { name?: string };
     /** The dealer's stored effects as the caller read them, so a hit reads no extra documents. */
     dealerEffects?: Preloaded;
     defer?: DamageObservation[];
+    /** V173: the damage came from a melee strike (Riposte's trigger), when the use says. */
+    meleeStrike?: boolean;
   } = {},
 ): Promise<void> {
   // V02: squad members take damage through their squad's pool (convex/lib/squads.ts commits it).
@@ -1091,8 +1098,14 @@ export async function writeDamage(
         temporaryStamina: application.temporaryStaminaAfter,
       },
       ...(dealer
-        ? { dealer, ...(options.dealerEffects ? { dealerEffects: options.dealerEffects } : {}) }
+        ? {
+            dealer: { kind: dealer.kind, id: dealer.id },
+            ...(dealer.name ? { dealerName: dealer.name } : {}),
+            ...(options.dealerEffects ? { dealerEffects: options.dealerEffects } : {}),
+          }
         : {}),
+      targetName: current.name,
+      ...(options.meleeStrike !== undefined ? { meleeStrike: options.meleeStrike } : {}),
       preloaded: {
         effectInstances: current.live.effectInstances ?? [],
         ownedEffects: current.live.ownedEffects ?? [],
@@ -1136,8 +1149,14 @@ export async function writeDamage(
         temporaryStamina: application.temporaryStaminaAfter,
       },
       ...(dealer
-        ? { dealer, ...(options.dealerEffects ? { dealerEffects: options.dealerEffects } : {}) }
+        ? {
+            dealer: { kind: dealer.kind, id: dealer.id },
+            ...(dealer.name ? { dealerName: dealer.name } : {}),
+            ...(options.dealerEffects ? { dealerEffects: options.dealerEffects } : {}),
+          }
         : {}),
+      targetName: character.authored.name,
+      ...(options.meleeStrike !== undefined ? { meleeStrike: options.meleeStrike } : {}),
       preloaded: {
         effectInstances: live.effectInstances ?? [],
         ownedEffects: live.ownedEffects ?? [],

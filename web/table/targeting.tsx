@@ -534,7 +534,9 @@ export function CompiledEffects({
                               )
                             : effect.kind === 'condition'
                               ? 'Condition'
-                              : 'Damage'}
+                              : effect.kind === 'triggered-damage'
+                                ? 'Triggered damage'
+                                : 'Damage'}
               </strong>
               <Badge variant="outline">
                 {effect.kind === 'damage'
@@ -575,7 +577,11 @@ export function CompiledEffects({
                                         : 'Manual condition'
                               : effect.kind === 'push'
                                 ? 'Outstanding instruction'
-                                : 'Unresolved'}
+                                : effect.kind === 'triggered-damage'
+                                  ? effect.application
+                                    ? 'Applied damage'
+                                    : 'Manual damage'
+                                  : 'Unresolved'}
               </Badge>
             </span>
             <span className="[overflow-wrap:anywhere]">
@@ -584,6 +590,13 @@ export function CompiledEffects({
             <span className="text-muted-foreground [overflow-wrap:anywhere]">
               Source: {compiled.definition.source.path} · {effect.locator}
             </span>
+            {effect.kind === 'triggered-damage' && (
+              <span>
+                {effect.application
+                  ? `${effect.amount} ${effect.damageType} damage, half the triggering ${effect.triggeringDamage}; ${effect.application.afterImmunity} applied.`
+                  : `Apply it at the table: ${effect.requirements.join('; ')}.`}
+              </span>
+            )}
             {effect.kind === 'damage' && (
               <>
                 {effect.breakdown && (
@@ -755,6 +768,7 @@ export function CompiledEffects({
               (effect.kind !== 'modifier' || effect.status === 'manual') &&
               (effect.kind !== 'watcher' || effect.status === 'manual') &&
               (effect.kind !== 'strained' || effect.status === 'manual') &&
+              (effect.kind !== 'triggered-damage' || effect.status === 'manual') &&
               (effect.kind !== 'condition' ||
                 effect.status === 'fact-needed' ||
                 effect.status === 'manual') &&

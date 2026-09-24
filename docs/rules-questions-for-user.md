@@ -1408,3 +1408,30 @@ Current behaviour:
    Alternative: treat each out-of-turn damage as its own window.
 
 Recommendation: keep all three; nothing compiled yet depends on 1 beyond Violence Will Not Aid Thee.
+
+## Q-TRIG-1: the triggering damage, "an ally", and offers outside combat (V173)
+
+Open; V173 binds labelled interpretations so Feedback Loop and Riposte can be offered. Pinned
+`en/unified/md`:
+- `feature/ability/talent/level-1/feedback-loop.md`: Trigger "The target deals damage to an ally.";
+  Effect "The target takes psychic damage equal to half the triggering damage."
+- `rule/damage/damage-immunity.md`: immunity "should be the last thing applied when calculating
+  damage … if your hero has fire immunity 5 and takes 8 fire damage, they take 3 damage."
+- `rule/combat/target.md`: "You aren't an eligible target for your own abilities that target allies
+  unless those abilities also have 'self' as a target".
+- `rule/combat/triggered-action.md`: one triggered action per round; `rule/combat/turn.md`: turns
+  and rounds exist only in combat.
+
+Current behaviour:
+1. **Triggering damage.** It is the damage the damaged creature took: the Stamina and temporary
+   Stamina it lost, after immunity and weakness (a hero at 5 damage with nothing to reduce it gives
+   Feedback Loop 2). Alternative: the amount before immunity and weakness.
+2. **"An ally".** An ally is another creature on your side, never yourself, so a goblin damaging the
+   Talent herself doesn't set off her Feedback Loop. The app places heroes on the players' side and
+   foes on the Director's (`rule/combat/side.md`). Alternative: "an ally" includes yourself.
+3. **Outside combat.** Offers are made only while combat turns are running, where the per-round limit
+   and the next-turn window exist. Outside combat the ability is used by hand
+   (`/ability use`), and damage sized by the triggering damage is left to the table. Alternative:
+   offer outside combat too, with no limit and no window.
+
+Recommendation: keep all three.

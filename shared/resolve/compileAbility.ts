@@ -12,6 +12,12 @@ import { sectionModifier, type ModifierSpec } from './modifiers.ts';
 import { strainedSection, type StrainedSpec } from './strained.ts';
 import { sectionWatcher, type WatcherSpec } from './watchers.ts';
 import {
+  triggeredActionType,
+  triggerSection,
+  triggerTarget,
+  type TriggerSpec,
+} from './triggers.ts';
+import {
   effectOnlyTarget,
   readEffectOnlySection,
   type EffectOnlySentence,
@@ -154,6 +160,16 @@ export interface GainNode extends NodeSource {
   temporaryStamina?: number;
   surges?: number;
 }
+/**
+ * V173: damage to the target of a triggered ability sized by the triggering damage
+ * (feature/ability/talent/level-1/feedback-loop.md; rule/general/always-round-down.md).
+ */
+export interface TriggeredDamageNode extends NodeSource {
+  kind: 'triggered-damage';
+  subject: 'target';
+  damageType: string;
+  share: 'half';
+}
 export type CompiledNode =
   DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
 /** Effect-section nodes: V109 riders, V157 effect-only gains and instructions, or manual work. */
@@ -164,7 +180,8 @@ export type SectionNode =
   | InstructionNode
   | ModifierNode
   | StrainedNode
-  | WatcherNode;
+  | WatcherNode
+  | TriggeredDamageNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -182,6 +199,11 @@ export interface CompiledAbility {
   metadata?: AbilityRollMetadata;
   /** V157: an ability without a power roll; its work is `sections` and it has no `metadata`. */
   effectOnly?: true;
+  /**
+   * V173: the observed Trigger section of a triggered ability without a power roll. The engine
+   * offers the ability when the event happens (convex/lib/triggeredActions.ts).
+   */
+  trigger?: TriggerSpec;
   /** V157, effect-only only: what a use needs in place of roll metadata. */
   activation?: {
     actionType: ActionType;
@@ -210,6 +232,13 @@ const ACTIONS: ActionType[] = [
   'free maneuver',
 ];
 const normalized = (text: string) => plain(text).replace(/\.$/, '').replace(/\s+/g, ' ').trim();
+/**
+ * The printed action type. V173: hero abilities print "Triggered" and "Free triggered"
+ * (rule/combat/triggered-action.md), foe stat blocks the full "Triggered action".
+ */
+export function actionTypeOfUsage(usage: string): ActionType | undefined {
+  return ACTIONS.find(value => value === plain(usage).toLowerCase()) ?? triggeredActionType(usage);
+}
 
 /** Non-security FNV-1a/64 over UTF-16 code units. Structure, not hash alone, distinguishes copies. */
 function clauseHash(text: string): string {
@@ -295,11 +324,13 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
   let rollIndex = -1;
   envelope.blocks.forEach((block, index) => {
     const locator = `block:${index}`;
+    // V173: the observed Trigger section is the definition's `trigger`, not work of the use.
+    if (block.kind === 'section' && effectOnly && block.label === 'Trigger') return;
     if (block.kind === 'section' && effectOnly) {
       effectOnly.sections[index]!.forEach(({ text, clause }, ordinal) => {
         const node = sourceNode(envelope, locator, ordinal, text);
         sections.push(
-          clause.kind === 'gain'
+          clause.kind === 'gain' || clause.kind === 'triggered-damage'
             ? { ...node, ...clause }
             : clause.kind === 'modifier'
               ? { ...node, kind: 'modifier', spec: clause.spec }
@@ -386,6 +417,25 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           dependency: 'independent',
           lasting,
         });
+        return;
+      }
+      // V173: a Trigger section the engine doesn't observe, or one on an ability that doesn't
+      // compile otherwise, stays manual; the ability is used by hand as a triggered action.
+      if (block.label === 'Trigger' && !block.cost) {
+        const trigger = triggerSection(block.text);
+        const reason =
+          'unobserved' in trigger
+            ? `The engine does not observe this trigger: ${trigger.unobserved}. Use the ability by hand as a triggered action.`
+            : rollIndex >= 0 || envelope.blocks.some(b => b.kind === 'roll')
+              ? 'The engine observes this trigger, but V173 offers only triggered abilities without a power roll; use it by hand as a triggered action.'
+              : 'The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.';
+        sections.push(unsupported(locator, 0, block.text, 'trigger', reason));
+        diagnose(
+          'unobserved' in trigger ? 'trigger-unobserved' : 'trigger-manual',
+          locator,
+          block.text,
+          reason,
+        );
         return;
       }
       const diagnostic = typeSection(block, index);
@@ -742,7 +792,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       'This source population retains its existing compatibility path; compilation grants no new execution.',
     );
 
-  const action = ACTIONS.find(value => value === plain(envelope.usage).toLowerCase());
+  const action = actionTypeOfUsage(envelope.usage);
   if (!action) diagnose('action-type', 'header:usage', envelope.usage, 'Unrecognized action type.');
   const cost = envelope.cost ? /^(\d+)\s+([A-Za-z]+)$/.exec(plain(envelope.cost)) : null;
   if (envelope.cost && (!cost || !Number.isSafeInteger(Number(cost[1]))))
@@ -788,6 +838,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
     ...(metadata ? { metadata } : {}),
     ...(effectOnly && action
       ? {
+          ...(effectOnly.trigger ? { trigger: effectOnly.trigger } : {}),
           effectOnly: true as const,
           activation: {
             actionType: action,
@@ -832,26 +883,46 @@ export function strainedAdmitted(
   );
 }
 
-/** V157 actions a use without a power roll may take; triggered actions stay manual (piece 5). */
+/** V157 actions a use without a power roll may take. V173 adds triggered actions with a trigger. */
 const EFFECT_ONLY_ACTIONS: ActionType[] = ['main action', 'maneuver', 'free maneuver'];
 
 /**
  * V157: the whole envelope read as an ability without a power roll, or `undefined`. Every block is
- * a cost-free Effect section (no roll, tiers, Trigger, Spend, Strained, Persistent or unattached
- * Paragraph) read whole by `readEffectOnlySection`, the action is a main action, maneuver or free
- * maneuver, and the effect-only target reader accepts the target. "The target" sentences need a
- * one-target envelope (V110) and "You" sentences a Self one, so that once-per-use work is
- * addressed to a creature the use names.
+ * a cost-free Effect section (no roll, tiers, Spend, Strained, Persistent or unattached Paragraph)
+ * read whole by `readEffectOnlySection`, the action is a main action, maneuver or free maneuver,
+ * and the effect-only target reader accepts the target. "The target" sentences need a one-target
+ * envelope (V110) and "You" sentences a Self one, so that once-per-use work is addressed to a
+ * creature the use names.
+ *
+ * V173: a triggered or free triggered action is read the same way when it has exactly one Trigger
+ * section the engine observes (shared/resolve/triggers.ts) and a target the offer can name. A
+ * sentence about "the triggering damage" or "the triggering strike" needs a trigger of that event.
  */
-function readEffectOnly(
-  envelope: Envelope,
-): { target: EffectOnlyTarget; sections: Record<number, EffectOnlySentence[]> } | undefined {
+function readEffectOnly(envelope: Envelope):
+  | {
+      target: EffectOnlyTarget;
+      sections: Record<number, EffectOnlySentence[]>;
+      trigger?: TriggerSpec;
+    }
+  | undefined {
   if (!envelope.blocks.length) return undefined;
-  const action = EFFECT_ONLY_ACTIONS.find(value => value === plain(envelope.usage).toLowerCase());
+  const usage = actionTypeOfUsage(envelope.usage);
+  const triggered = usage === 'triggered action' || usage === 'free triggered action';
+  const action = triggered ? usage : EFFECT_ONLY_ACTIONS.find(value => value === usage);
   const target = effectOnlyTarget(envelope.target, envelope.keywords);
   if (!action || !target) return undefined;
+  const triggers = envelope.blocks.filter(b => b.kind === 'section' && b.label === 'Trigger');
+  if (triggers.length !== (triggered ? 1 : 0)) return undefined;
+  let trigger: TriggerSpec | undefined;
+  if (triggered) {
+    const block = triggers[0] as Extract<Block, { kind: 'section' }>;
+    const read = block.cost ? undefined : triggerSection(block.text);
+    if (!read || 'unobserved' in read || !triggerTarget(envelope.target)) return undefined;
+    trigger = read;
+  }
   const sections: Record<number, EffectOnlySentence[]> = {};
   for (const [index, block] of envelope.blocks.entries()) {
+    if (block.kind === 'section' && block.label === 'Trigger' && trigger) continue;
     if (block.kind !== 'section' || block.label !== 'Effect' || block.cost) return undefined;
     const read = readEffectOnlySection(block.text);
     if (
@@ -863,11 +934,15 @@ function readEffectOnly(
           // V171: an area's (or an aura's, rule/combat/aura.md: it "moves with you for the
           // duration") membership changes over a watcher's life; area membership is design
           // section 6, so such a watcher stays manual (Blessing of the Faithful).
-          (sentence.clause.kind === 'watcher' && target.kind === 'area'),
+          (sentence.clause.kind === 'watcher' && target.kind === 'area') ||
+          // V173: "the triggering damage" needs a damage trigger, "the triggering strike" a
+          // melee-strike one.
+          (sentence.trigger === 'damage' && !trigger) ||
+          (sentence.trigger === 'melee-strike' && trigger?.from !== 'melee-strike'),
       )
     )
       return undefined;
     sections[index] = read;
   }
-  return { target, sections };
+  return { target, sections, ...(trigger ? { trigger } : {}) };
 }

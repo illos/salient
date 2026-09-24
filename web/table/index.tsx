@@ -19,6 +19,7 @@ import { Loading, errorMessage } from '../ui';
 import { useToast } from '../toast';
 import { CombatSetupCard } from './setup-card';
 import { CloseoutCard } from './closeout-card';
+import { TriggerOffers } from './trigger-offers';
 import { CommandLine } from './command-line';
 import { DirectorPane } from './director-pane';
 import { HeroesPane } from './heroes-pane';
@@ -89,6 +90,7 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
           >
             {encounter && <CombatSetupCard campaignId={campaignId} encounter={encounter} />}
             {encounter?.phase === 'closeout' && <CloseoutCard campaignId={campaignId} />}
+            {encounter?.phase === 'turns' && <TriggerOffers campaignId={campaignId} />}
           </LogPane>
         }
         centerFooter={

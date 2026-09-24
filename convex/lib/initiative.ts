@@ -29,6 +29,7 @@ import { dispatchBoundary } from './clock';
 import { committedEncounter } from './encounters';
 import { journalDelete, journalInsert, journalPatch, type JournalScope } from './journal';
 import { squadInBattle, squadParticipantIds } from './squads';
+import { expireOffersAtTurnStart } from './triggeredActions';
 
 export type Actor = Doc<'turnEntries'>['actor'];
 export type Group = Doc<'initiativeGroups'>;
@@ -235,6 +236,10 @@ export async function startTurn(
     activeSide: encounter.activeGroupId ? encounter.activeSide : side,
   });
   const turn = (await ctx.db.get(turnId))!;
+  // V173: a new individual turn is the outer window of every open triggered-action offer
+  // (docs/table-spec.md, "Standing action-card/prompt window"), closed before the turn's own
+  // start-of-turn work runs.
+  await expireOffersAtTurnStart(ctx, scope, encounterId);
   // V02: a fresh shared turn starts with every living member participating.
   if (entry.actor.kind === 'squad')
     await journalPatch(ctx, scope, 'squads', entry.actor.id as Id<'squads'>, {

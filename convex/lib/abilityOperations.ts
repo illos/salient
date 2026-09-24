@@ -87,6 +87,7 @@ import {
   resolveCreatureFreeStrike,
   ignoredImmunityTypes,
   withoutImmunityTypes,
+  applyDamage,
 } from '../../shared/resolve/index';
 import type { ReadCtx } from './access';
 import { committedEncounter } from './encounters';
@@ -105,6 +106,13 @@ import { rollDice } from './dice';
 import { commitStrained, planStrained, withStrainedPlan, type StrainedPlan } from './strainedUse';
 import { assertWatchersReconcilable, noteManualWatchers, observeWatchers } from './watchers';
 import { describeWatcher } from '../../shared/resolve/watchers';
+import {
+  acceptanceOrder,
+  closeOffersOnPlay,
+  offerOf,
+  recheckOffer,
+  resolveOffer,
+} from './triggeredActions';
 import { strainedExtraDamage, strainedState } from '../../shared/resolve/strained';
 import {
   abilitiesFor,
@@ -648,6 +656,11 @@ export interface Allowance {
   onTurn: boolean;
   mainUsed: number;
   maneuverUsed: number;
+  /**
+   * V173: ordinary triggered actions used this round, on or off turn (rule/combat/triggered-action.md:
+   * one per round; free triggered actions don't count).
+   */
+  triggeredUsed: number;
   /** Offered critical-hit additional main actions not yet used. */
   extraMainOffered: Doc<'actionOpportunities'>[];
 }
@@ -666,6 +679,7 @@ export async function allowanceFor(
     onTurn: false,
     mainUsed: 0,
     maneuverUsed: 0,
+    triggeredUsed: 0,
     extraMainOffered: [],
   };
   if (!encounter) return none;
@@ -689,6 +703,14 @@ export async function allowanceFor(
           .take(200)
       ).filter(u => sameActor(u.actor, actor))
     : [];
+  const roundUses = (
+    await ctx.db
+      .query('actionUses')
+      .withIndex('by_encounter_actor', q =>
+        q.eq('encounterId', encounter._id).eq('actor.id', actor.id),
+      )
+      .take(200)
+  ).filter(u => sameActor(u.actor, actor) && u.round === (encounter.round ?? 0));
   const opportunities = (
     await ctx.db
       .query('actionOpportunities')
@@ -705,6 +727,7 @@ export async function allowanceFor(
     onTurn,
     mainUsed: uses.filter(u => u.actionType === 'main action' && u.opportunityId === null).length,
     maneuverUsed: uses.filter(u => u.actionType === 'maneuver').length,
+    triggeredUsed: roundUses.filter(u => u.actionType === 'triggered action').length,
     extraMainOffered: opportunities,
   };
 }
@@ -741,7 +764,11 @@ export function planTracking(
       warnings.push(
         `Rule warning: ${actor.name} already used a maneuver this turn; a main action may be spent on a second maneuver (rule/combat/turn.md).`,
       );
-  } else if (!allowance.onTurn && ['move action', 'free maneuver'].includes(actionType))
+  } else if (actionType === 'triggered action' && allowance.triggeredUsed >= 1)
+    warnings.push(
+      `Rule warning: ${actor.name} already used a triggered action this round (rule/combat/triggered-action.md: one per round; free triggered actions don't count).`,
+    );
+  else if (!allowance.onTurn && ['move action', 'free maneuver'].includes(actionType))
     warnings.push(`Rule warning: it is not ${actor.name}'s turn (rule/combat/turn.md).`);
   return { warnings, opportunity };
 }
@@ -754,9 +781,12 @@ export async function recordUse(
   actionType: string,
   label: string,
   plan: TrackingPlan,
-  options: { shared?: boolean } = {},
+  options: { shared?: boolean; keepTriggeringEventId?: string } = {},
 ) {
   if (!allowance.inCombat || !allowance.encounterId) return;
+  // V173: committing another ability passes this creature's earlier unused triggered-action
+  // offers (docs/table-spec.md, "Confirmed early-close refinement").
+  await closeOffersOnPlay(ctx, scope, actor, options.keepTriggeringEventId);
   const opportunityId = plan.opportunity?._id ?? null;
   await journalInsert(ctx, scope, 'actionUses', {
     campaignId: scope.campaignId,
@@ -1595,7 +1625,7 @@ const abilityUse: OperationDefinition = {
   roles: PLAYERS,
   session: 'running',
   actor: 'required',
-  execute: async (ctx, { context, envelope, actor, args }) => {
+  execute: async (ctx, { context, envelope, actor, args, respondsTo }) => {
     const records = await loadActorRecords(ctx, context, actor!);
     const abilities = await abilitiesFor(ctx, actor!, records);
     const ability = findAbility(abilities, String(args.ability));
@@ -1661,6 +1691,29 @@ const abilityUse: OperationDefinition = {
     const allowance = await allowanceFor(ctx, context, actor!);
     const tracking = planTracking(allowance, actor!, ability.actionType);
     warnings.push(...tracking.warnings);
+    // V173: condition/dazed.md prevents both kinds of triggered action (advisory for a use by hand;
+    // an offered card is re-checked and refused below).
+    const triggeredUse =
+      ability.actionType === 'triggered action' || ability.actionType === 'free triggered action';
+    if (triggeredUse && allowance.inCombat && conditionsOf(records)?.dazed)
+      warnings.push(
+        `Rule warning: ${actor!.name} is dazed and can't use triggered actions or free triggered actions (condition/dazed.md).`,
+      );
+    // V173: a response to a triggered-action card (convex/lib/triggeredActions.ts).
+    const answered = respondsTo ? await offerOf(ctx, respondsTo.interactionId) : null;
+    if (answered)
+      await recheckOffer(ctx, context, answered.offer, {
+        abilityId: ability.abilityId,
+        actorId: actor!.id,
+        targetIds: targets.map(t => t.actor.id),
+      });
+    if (
+      answered &&
+      !(ability.compilation?.mode === 'compiled' && ability.compilation.definition.trigger)
+    )
+      throw new ConvexError(
+        `${ability.name} is no longer a triggered ability the engine resolves.`,
+      );
     const source = sourceFor(ability);
     const clear = async (mctx: MutationCtx) => {
       // Firing clears the invoking user's draft (confirmed), whichever path fired it.
@@ -1716,6 +1769,17 @@ const abilityUse: OperationDefinition = {
         },
         commit: async (mctx, scope) => {
           await noteRecordedUse(mctx, scope, actor!, ability.keywords, targets);
+          // V173: a triggered action used by hand still counts against the round's allowance.
+          if (triggeredUse)
+            await recordUse(
+              mctx,
+              scope,
+              allowance,
+              actor!,
+              ability.actionType!,
+              ability.name,
+              tracking,
+            );
           await clear(mctx);
         },
       };
@@ -1926,8 +1990,14 @@ const abilityUse: OperationDefinition = {
         targets: targets.map(recipient),
         inCombat: allowance.inCombat,
         ...(costPool ? { resourcePool: costPool } : {}),
+        ...(answered ? { trigger: { damage: answered.offer.damage } } : {}),
       };
       const outcome = resolveEffectOnly(definition, effectInput);
+      // V173: an accepted card re-checks cost; an unaffordable one stays open, unchanged.
+      if (outcome.kind === 'blocked' && answered)
+        throw new ConvexError(
+          `${actor!.name} cannot use ${ability.name} — ${outcome.reason}. The card stays open.`,
+        );
       if (outcome.kind === 'blocked')
         return {
           kind: 'ability.blocked',
@@ -1936,9 +2006,38 @@ const abilityUse: OperationDefinition = {
         };
       if (outcome.kind !== 'resolved') throw new ConvexError(`${ability.name}: ${outcome.reason}`);
       warnings.push(...outcome.warnings);
+      // V173: damage sized by the triggering damage, through the target's immunities and
+      // weaknesses (rule/damage/damage-immunity.md, damage-weakness.md) and the damage writer.
+      const triggeredDamage: { record: TargetRecord; application: DamageApplication }[] = [];
+      for (const effect of outcome.effects) {
+        if (effect.kind !== 'triggered-damage' || effect.status !== 'calculated') continue;
+        const record = targets.find(t => t.actor.id === effect.targetId)!;
+        const facts = record.squad
+          ? { missing: `${record.actor.name} is a squad, whose pool the table adjusts` }
+          : damageTargetFacts(record);
+        if ('missing' in facts) {
+          Object.assign(effect, { status: 'manual', requirements: [facts.missing] });
+          continue;
+        }
+        const application = applyDamage(facts.facts, {
+          targetId: facts.facts.targetId,
+          amount: effect.amount!,
+          damageType: effect.damageType,
+          causeLabel: `${actor!.name}'s ${ability.name}`,
+        });
+        effect.application = application;
+        triggeredDamage.push({ record, application });
+      }
+      const order = answered
+        ? await acceptanceOrder(ctx, context.campaign._id, answered.offer)
+        : undefined;
       const nameOf = (id: string) =>
         id === actor!.id ? actor!.name : (targets.find(t => t.actor.id === id)?.actor.name ?? id);
       const describeEffect = (effect: CompiledEffectOutcome) => {
+        if (effect.kind === 'triggered-damage')
+          return effect.status === 'calculated' && effect.application
+            ? `${nameOf(effect.targetId)} takes ${effect.amount} ${effect.damageType} damage (half the triggering ${effect.triggeringDamage}, rounded down)${effect.application.afterImmunity !== effect.amount ? `, ${effect.application.afterImmunity} after immunity and weakness` : ''}; Stamina ${effect.application.staminaBefore} → ${effect.application.staminaAfter}.`
+            : `For the table (${nameOf(effect.targetId)}): "${effect.clause}"${effect.requirements.length ? ` (${effect.requirements.join('; ')})` : ''}`;
         if (effect.kind === 'watcher')
           return effect.status === 'applied' && effect.payload
             ? `${nameOf(effect.targetId)}: ${describeWatcher(effect.payload)}, ${describeDuration(effect.spec.duration, effect.spec.endsWhen)} (tracked; the linked effect entry records whether the engine fires it).`
@@ -1967,8 +2066,11 @@ const abilityUse: OperationDefinition = {
           ? ` Cost ${outcome.cost.amount} ${outcome.cost.resource} waived outside combat.`
           : ` Spent ${outcome.cost.amount} ${outcome.cost.resource} (${outcome.cost.before} → ${outcome.cost.after}).`
         : '';
+      const responding = answered
+        ? ` Accepted from the card (response ${order} to this trigger; the table confirmed distance: ${answered.offer.distance}).`
+        : '';
       const describeUse = (paid: string) =>
-        `${actor!.name} uses ${ability.name} (${definition.activation!.actionType}, no power roll)${ability.targetShape.kind !== 'self' ? ` on ${targetNames}` : ''}.${paid} ${effectsText}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+        `${actor!.name} uses ${ability.name} (${definition.activation!.actionType}, no power roll)${ability.targetShape.kind !== 'self' ? ` on ${targetNames}` : ''}.${responding}${paid} ${effectsText}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
       const effects = (eventId: string) => effectOccurrences(eventId, eventId, outcome.effects);
       return {
         kind: 'ability.use',
@@ -1982,6 +2084,20 @@ const abilityUse: OperationDefinition = {
           ),
           ...(outcome.cost ? { cost: outcome.cost } : {}),
           effects: outcome.effects,
+          ...(answered
+            ? {
+                trigger: {
+                  interactionId: answered.card._id,
+                  triggeringEventId: answered.offer.triggeringEventId,
+                  damage: answered.offer.damage,
+                  text: answered.offer.trigger.text,
+                  distance: answered.offer.distance,
+                  // rule/combat/triggered-action.md: players order their own responses by
+                  // accepting them; the engine never resolves one by arrival.
+                  acceptanceOrder: order,
+                },
+              }
+            : {}),
           allowance: {
             inCombat: allowance.inCombat,
             onTurn: allowance.onTurn,
@@ -1992,6 +2108,8 @@ const abilityUse: OperationDefinition = {
           source,
         },
         commit: async (mctx, scope) => {
+          // V173: the answered card resolves in this use's journal, so undo reopens it.
+          if (answered) await resolveOffer(mctx, scope, answered.card, respondsTo!.answer);
           // 1. The fixed cost once, before any effect.
           if (outcome.cost && !outcome.cost.waived)
             await debit(mctx, scope, records, context, outcome.cost.after, outcome.cost.resource);
@@ -2028,6 +2146,13 @@ const abilityUse: OperationDefinition = {
             },
             allowance.encounterId,
           );
+          // V173: damage sized by the triggering damage; the user deals it.
+          for (const { record, application } of triggeredDamage)
+            await writeDamage(mctx, scope, record, application, undefined, {
+              ...(actor!.kind === 'character' || actor!.kind === 'foe'
+                ? { dealer: { kind: actor!.kind, id: actor!.id, name: actor!.name } }
+                : {}),
+            });
           // V171: watchers become watcher effect instances on each subject.
           const watcherIds = await commitWatchers(
             mctx,
@@ -2081,6 +2206,7 @@ const abilityUse: OperationDefinition = {
             definition.activation!.actionType,
             ability.name,
             tracking,
+            answered ? { keepTriggeringEventId: answered.offer.triggeringEventId } : {},
           );
           await clear(mctx);
         },
@@ -2204,7 +2330,15 @@ const abilityUse: OperationDefinition = {
               application,
               undefined,
               actor!.kind === 'character' || actor!.kind === 'foe'
-                ? { dealer: { kind: actor!.kind, id: actor!.id } }
+                ? {
+                    dealer: { kind: actor!.kind, id: actor!.id, name: actor!.name },
+                    // V173: a hero's Melee Weapon Free Strike is a melee strike; a creature's free
+                    // strike doesn't say whether it was melee.
+                    ...(ability.keywords.some(k => /^melee$/i.test(plainText(k))) &&
+                    ability.keywords.some(k => /^strike$/i.test(plainText(k)))
+                      ? { meleeStrike: true }
+                      : {}),
+                  }
                 : {},
             );
           await commitSquadPlans(mctx, scope, strikePlans);
@@ -2510,11 +2644,19 @@ const abilityUse: OperationDefinition = {
                 ownedEffects: records.foe.live.ownedEffects ?? [],
               }
             : undefined;
+        // V173: a melee strike (rule/combat/strike.md, rule/combat/melee.md) for Riposte's trigger:
+        // the Strike and Melee keywords, and the melee mode when the ability is also Ranged.
+        const printed = ability.keywords.map(k => plainText(k).toLowerCase());
+        const meleeStrike =
+          printed.includes('strike') &&
+          printed.includes('melee') &&
+          (!printed.includes('ranged') || mode === 'melee');
         const dealer =
           actor!.kind === 'character' || actor!.kind === 'foe'
             ? {
-                dealer: { kind: actor!.kind, id: actor!.id },
+                dealer: { kind: actor!.kind, id: actor!.id, name: actor!.name },
                 ...(actorEffects ? { dealerEffects: actorEffects } : {}),
+                meleeStrike,
               }
             : {};
         for (const p of perTarget) {
@@ -3219,6 +3361,11 @@ const abilityResolved: OperationDefinition = {
           'An applied watcher is tracked by the engine, which fires it; end it with /effect end.',
         );
       // V170: an applied Strained section already dealt its damage; an inapplicable one did nothing.
+      // V173: damage sized by the triggering damage was applied by the engine.
+      if (occurrence.effect.kind === 'triggered-damage' && occurrence.effect.status !== 'manual')
+        throw new ConvexError(
+          'This triggered damage was applied by the engine; rewind the use instead.',
+        );
       if (occurrence.effect.kind === 'strained' && occurrence.effect.status !== 'manual')
         throw new ConvexError(
           occurrence.effect.status === 'applied'

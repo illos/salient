@@ -35,6 +35,8 @@ const projection = v.object({
   answer: v.any(),
   /** Whether the viewer may answer or close this card; visibility alone grants nothing. */
   mayAnswer: v.boolean(),
+  /** V173 `triggered-offer` cards: the offered ability, target, trigger and card text. */
+  offer: v.union(v.any(), v.null()),
   createdAt: v.number(),
   resolvedAt: v.union(v.number(), v.null()),
 });
@@ -64,6 +66,7 @@ async function project(
     resolvedEventId: interaction.resolvedEventId,
     answer: interaction.answer,
     mayAnswer: mayAnswer(interaction, context),
+    offer: interaction.offer ?? null,
     createdAt: interaction.createdAt,
     resolvedAt: interaction.resolvedAt,
   };

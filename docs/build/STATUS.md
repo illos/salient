@@ -183,3 +183,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V170 | [Talent Strained sections](V170-talent-strained.md) | Committed on branch |
 | V171 | [Watchers and limits](V171-watchers.md) | Committed on branch |
 | V172 | [Owner-anchored end of your next turn](V172-next-turn-duration.md) | Committed on branch |
+| V173 | [Triggered actions: offers on observable triggers](V173-triggered-actions.md) | Committed on branch |

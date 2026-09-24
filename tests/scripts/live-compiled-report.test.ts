@@ -191,6 +191,9 @@ test('V72 availability follows current grants and loading, not catalog presence'
       // V171: watchers the engine fires (a turn end, and damage the target deals).
       'Blessing of Insight',
       'Violence Will Not Aid Thee',
+      // V173: triggered actions offered on observed damage (effect-only).
+      'Feedback Loop',
+      'Riposte',
     ].sort(),
   );
   expect(
@@ -201,12 +204,12 @@ test('V72 availability follows current grants and loading, not catalog presence'
   ).toEqual([]);
 });
 
-// V157: the seven effect-only abilities, V159's Squad! On Me! and V171's Blessing of Insight are
-// counted; no foe ability is effect-only.
+// V157: the seven effect-only abilities, V159's Squad! On Me!, V171's Blessing of Insight and V173's
+// Feedback Loop and Riposte are counted; no foe ability is effect-only.
 test('V157 effect-only abilities are counted in the live report', () => {
   const report = liveCompiledSupportReport();
   const effectOnly = report.entries.filter(e => e.live === 'compiled' && e.effectOnly);
-  expect(report.liveCounts.compiledEffectOnly).toBe(9);
+  expect(report.liveCounts.compiledEffectOnly).toBe(11);
   expect(effectOnly.every(e => e.context.corpus === 'hero-standalone')).toBe(true);
 });
 

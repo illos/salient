@@ -102,13 +102,16 @@ export async function respondToInteraction(
     openedEventId: interaction.openedEventId,
     answer,
   });
-  await ctx.db.patch(interaction._id, {
-    status: 'resolved',
-    revision: interaction.revision + 1,
-    resolvedEventId: result.eventId,
-    answer,
-    resolvedAt: Date.now(),
-  });
+  // V173: a continuation that resolves its own card in its journal (a triggered-action offer, so
+  // undo reopens it) has already written the resolution.
+  if ((await ctx.db.get(interaction._id))?.status === 'awaiting-input')
+    await ctx.db.patch(interaction._id, {
+      status: 'resolved',
+      revision: interaction.revision + 1,
+      resolvedEventId: result.eventId,
+      answer,
+      resolvedAt: Date.now(),
+    });
   return result;
 }
 

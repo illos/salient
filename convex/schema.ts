@@ -174,6 +174,11 @@ export default defineSchema({
     answer: v.any(),
     createdAt: v.number(),
     resolvedAt: v.union(v.number(), v.null()),
+    /**
+     * V173 `triggered-offer` cards: the triggered ability offered, the triggering event and the
+     * facts accepting it needs (convex/lib/triggeredActions.ts TriggerOffer).
+     */
+    offer: v.optional(v.any()),
   }).index('by_campaign_status', ['campaignId', 'status']),
   commands: defineTable({
     userId: v.id('users'),

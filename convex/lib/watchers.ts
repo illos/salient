@@ -37,6 +37,7 @@ import { resolveHistoricalId } from './history';
 import { journalPatch, type JournalScope } from './journal';
 import { patchEffectInstance, readHolder, type EffectHolder } from './effectInstances';
 import { damageTargetFacts, writeDamage, type TargetRecord } from './resolve';
+import { assertNoTriggerOnCorrection, offerForDamage } from './triggeredActions';
 
 /**
  * Watchers set off by a watcher's own responses fire too, to this depth; deeper chains are left
@@ -318,6 +319,10 @@ export interface DamageObservation {
   dealer?: EffectHolder;
   dealerEffects?: Preloaded;
   preloaded?: Preloaded;
+  /** V173: names for a triggered-action card, and whether a melee strike dealt the damage. */
+  targetName?: string;
+  dealerName?: string;
+  meleeStrike?: boolean;
 }
 
 /** Logs a firing, or a watcher left to the table, as a consequence of the causing operation. */
@@ -453,6 +458,33 @@ export async function observeDamage(
       options,
       observation.dealerEffects,
     );
+  // V173: the same damage offers triggered actions (convex/lib/triggeredActions.ts). A
+  // watcher's own damage (depth > 0) has no dealer and offers only damage-taken triggers.
+  const lost =
+    observation.before.stamina +
+    observation.before.temporaryStamina -
+    observation.after.stamina -
+    observation.after.temporaryStamina;
+  const damage = {
+    damaged: {
+      kind: observation.target.kind,
+      id: observation.target.id,
+      name: observation.targetName ?? 'the damaged creature',
+    },
+    ...(observation.dealer
+      ? {
+          dealer: {
+            kind: observation.dealer.kind,
+            id: observation.dealer.id,
+            name: observation.dealerName ?? 'the dealer',
+          },
+        }
+      : {}),
+    amount: lost,
+    ...(observation.meleeStrike !== undefined ? { meleeStrike: observation.meleeStrike } : {}),
+  };
+  if (options.correction) await assertNoTriggerOnCorrection(ctx, scope, damage);
+  else await offerForDamage(ctx, scope, damage);
 }
 
 /**

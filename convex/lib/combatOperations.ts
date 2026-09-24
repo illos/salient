@@ -48,6 +48,7 @@ import type { OperationDefinition, Role, TableContext } from './registry';
 import { bindActor } from './actors';
 import { baselineOf } from './characterBuild';
 import { generationProfile } from '../../shared/resolve/heroicResourceGeneration';
+import { registerTriggerHolders } from './triggeredActions';
 
 const SURPRISED_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/combat/surprised.md';
 const COMBAT_ROUND_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md';
@@ -566,6 +567,17 @@ const combatCommit: OperationDefinition = {
             affectedIds,
           });
         }
+        // V173: the participating heroes' compiled triggered abilities, from the documents read
+        // above, so a damage write finds who may respond with one indexed read.
+        await registerTriggerHolders(
+          mctx,
+          scope,
+          encounter._id,
+          heroes.flatMap(hero => {
+            const doc = heroDocs.get(hero.actor.id);
+            return doc ? [doc] : [];
+          }),
+        );
         if (participants.some(p => p.surprised))
           // "surprised until the end of the first combat round" (rule/combat/surprised.md).
           await registerWork(mctx, scope, encounter._id, {

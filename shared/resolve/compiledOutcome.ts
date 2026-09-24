@@ -43,7 +43,8 @@ import {
   type StrainedSpec,
   type StrainedState,
 } from './strained.ts';
-import { strainedAdmitted } from './compileAbility.ts';
+import { actionTypeOfUsage, strainedAdmitted } from './compileAbility.ts';
+import { sameTriggerSpec, triggerSection } from './triggers.ts';
 import {
   effectOnlyClause,
   effectOnlyTarget,
@@ -351,7 +352,24 @@ export interface CompiledWatcherOutcome extends EffectIdentity {
   requirements: string[];
 }
 
+/**
+ * V173: a triggered ability's damage sized by the triggering damage, for its one target.
+ * `calculated`: an accepted offer supplied the triggering damage; the amount is half of it rounded
+ * down (rule/general/always-round-down.md) and the use applies it through the damage writer, which
+ * records `application`. `manual`: a use by hand, which doesn't know the triggering damage.
+ */
+export interface CompiledTriggeredDamageOutcome extends EffectIdentity {
+  kind: 'triggered-damage';
+  status: 'calculated' | 'manual';
+  damageType: string;
+  triggeringDamage?: number;
+  amount?: number;
+  application?: DamageApplication;
+  requirements: string[];
+}
+
 export type CompiledEffectOutcome =
+  | CompiledTriggeredDamageOutcome
   | CompiledWatcherOutcome
   | CompiledStrainedOutcome
   | CompiledDamageOutcome
@@ -1006,6 +1024,11 @@ export interface EffectOnlyInput {
   targets: EffectOnlyRecipient[];
   inCombat: boolean;
   resourcePool?: ResourcePoolFacts;
+  /**
+   * V173: the event an accepted offer answers. `damage` is the triggering damage (Stamina and
+   * temporary Stamina the damaged creature lost, after immunity and weakness).
+   */
+  trigger?: { damage: number };
 }
 export type EffectOnlyOutcome =
   | { kind: 'manual'; definition: CompiledAbility; reason: string; effects: [] }
@@ -1048,18 +1071,38 @@ export function resolveEffectOnly(
     return manual('Compiled envelope is not an executable ability without a power roll.');
   const activation = definition.activation;
   const shape = effectOnlyTarget(definition.envelope.target, definition.envelope.keywords);
-  const usage = plain(definition.envelope.usage).toLowerCase();
+  const usage = actionTypeOfUsage(definition.envelope.usage);
   const cost = definition.envelope.cost
     ? /^(\d+)\s+([A-Za-z]+)$/.exec(plain(definition.envelope.cost))
     : null;
   const expectedCost = cost
     ? { resource: cost[2]!.toLowerCase(), amount: Number(cost[1]) }
     : undefined;
+  // V173: the one Trigger section re-reads to the saved trigger; it has no nodes of its own.
+  const triggerBlocks = definition.envelope.blocks.filter(
+    block => block.kind === 'section' && block.label === 'Trigger',
+  );
+  const triggerAgain =
+    triggerBlocks.length === 1 && triggerBlocks[0]!.kind === 'section' && !triggerBlocks[0]!.cost
+      ? triggerSection(triggerBlocks[0]!.text)
+      : undefined;
+  const triggered = usage === 'triggered action' || usage === 'free triggered action';
+  if (
+    triggered !== (definition.trigger !== undefined) ||
+    triggerBlocks.length !== (triggered ? 1 : 0) ||
+    (definition.trigger &&
+      (!triggerAgain ||
+        'unobserved' in triggerAgain ||
+        !sameTriggerSpec(triggerAgain, definition.trigger)))
+  )
+    return manual('Compiled structure is outside the supported envelope.');
   // Every Effect section, read whole again, must give exactly the saved nodes in order.
   const reread = definition.envelope.blocks.flatMap((block, index) =>
-    block.kind === 'section' && block.label === 'Effect' && !block.cost
-      ? (readEffectOnlySection(block.text) ?? [undefined]).map(sentence => ({ index, sentence }))
-      : [{ index, sentence: undefined }],
+    block.kind === 'section' && block.label === 'Trigger' && triggered
+      ? []
+      : block.kind === 'section' && block.label === 'Effect' && !block.cost
+        ? (readEffectOnlySection(block.text) ?? [undefined]).map(sentence => ({ index, sentence }))
+        : [{ index, sentence: undefined }],
   );
   if (
     definition.format !== 'salient.compiled-ability' ||
@@ -1080,7 +1123,8 @@ export function resolveEffectOnly(
         node.kind !== 'gain' &&
         node.kind !== 'instruction' &&
         node.kind !== 'modifier' &&
-        node.kind !== 'watcher'
+        node.kind !== 'watcher' &&
+        node.kind !== 'triggered-damage'
       )
         return true;
       const parsed = effectOnlyClause(node.clause);
@@ -1088,9 +1132,18 @@ export function resolveEffectOnly(
       const clause = parsed.clause;
       if (
         (parsed.singleTarget && shape.kind !== 'one' && shape.kind !== 'self') ||
-        (clause.subject === 'actor' && shape.kind !== 'self')
+        (clause.subject === 'actor' && shape.kind !== 'self') ||
+        (parsed.trigger === 'damage' && !definition.trigger) ||
+        (parsed.trigger === 'melee-strike' && definition.trigger?.from !== 'melee-strike')
       )
         return true;
+      if (node.kind === 'triggered-damage')
+        return (
+          clause.kind !== 'triggered-damage' ||
+          node.subject !== clause.subject ||
+          node.damageType !== clause.damageType ||
+          node.share !== clause.share
+        );
       if (node.kind === 'watcher') {
         const again = effectOnlyWatcher(node.clause);
         return (
@@ -1178,6 +1231,38 @@ export function resolveEffectOnly(
     id === input.actor.id ? input.actor : input.targets.find(target => target.id === id)!;
   const effects: CompiledEffectOutcome[] = [];
   for (const node of definition.sections) {
+    if (node.kind === 'triggered-damage') {
+      for (const target of input.targets) {
+        const identity = {
+          nodeId: node.id,
+          targetId: target.id,
+          locator: node.locator,
+          clause: node.clause,
+        };
+        const triggering = input.trigger?.damage;
+        effects.push(
+          triggering !== undefined && Number.isSafeInteger(triggering) && triggering >= 0
+            ? {
+                ...identity,
+                kind: 'triggered-damage',
+                status: 'calculated',
+                damageType: node.damageType,
+                triggeringDamage: triggering,
+                // rule/general/always-round-down.md: an odd number halved rounds down.
+                amount: Math.floor(triggering / 2),
+                requirements: [],
+              }
+            : {
+                ...identity,
+                kind: 'triggered-damage',
+                status: 'manual',
+                damageType: node.damageType,
+                requirements: ['trigger.damage (used by hand: the table applies it)'],
+              },
+        );
+      }
+      continue;
+    }
     if (
       node.kind !== 'gain' &&
       node.kind !== 'instruction' &&
