@@ -168,3 +168,4 @@ Rules question: [Q-WATCH-1](../rules-questions-for-user.md#q-watch-1-who-deals-a
       closeout, table, squads, compiled-effects, compound-conditions, potency-conditions.
     - `tests/character-v100-conduit` and `tests/character-v134-conduit-three`.
     - All passed except the pre-existing `abilities.test.ts` syntax pin above.
+- Committed on `slice/V171` as `a29cb33f`; not pushed. Next: TESTER gate, then independent review.
