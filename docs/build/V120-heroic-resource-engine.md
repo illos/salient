@@ -108,3 +108,10 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
   Tests were added: the level amount, the level ceiling, the turn window and the keep-void note. The
   focused files pass (2/2 and 4/4); `tsc` and eslint are clean.
 - Review closure: PASS at `7564aa8`.
+- TESTER `test-V120-eb32e21-1`:
+  - Gate PASS: rc 0 in 284 s; engine 413/413, app 667/667.
+  - Headless: `heroic-resource` and `shadow-level-six` pass.
+  - `shadow-level-two` and `shadow-level-three` failed on stale journey code that predates V120:
+    - level 4 has been supported since V108, so the unsupported probe now uses level 7;
+    - V115 made the Melee-or-Ranged mode required, so Misdirecting Strike passes `mode: 'melee'`,
+      the Swashbuckler witness's melee kit bonus.

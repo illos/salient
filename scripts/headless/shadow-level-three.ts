@@ -283,6 +283,9 @@ export async function runShadowLevelThree({
           const used = await invoke(id, 'ability.use', {
             ability: witness.newAbility,
             targets: [target],
+            // Misdirecting Strike is "Melee 1 or ranged 5" (V115 requires the choice); the
+            // Swashbuckler witness's damageByTier uses its melee kit bonus.
+            ...(witness.newAbility === 'Misdirecting Strike' ? { mode: 'melee' } : {}),
           });
           const persisted = await event(used.eventId);
           const afterTarget = await director.query<Saved>('characters:get', {

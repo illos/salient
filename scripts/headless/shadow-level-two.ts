@@ -135,8 +135,9 @@ export async function runShadowLevelTwo({
       await assert.rejects(
         director.query('characterWizard:transitionLevel', {
           characterId,
+          // Shadow levels 4–6 are supported since V108; level 7 is not.
           fromLevel: 2,
-          targetLevel: 4,
+          targetLevel: 7,
           selections: saved.selections,
         }),
         /Unsupported/,
