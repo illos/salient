@@ -26,7 +26,7 @@ export function ConditionSources({
           {instance.duration === 'eot'
             ? 'EoT'
             : instance.duration === 'none'
-              ? 'until removed'
+              ? 'until Stand Up'
               : 'save ends'}
         </span>
       ))}

@@ -152,3 +152,24 @@ choices, compounds, or prose Effects.
   - engine and web `tsc` clean, eslint clean on changed files, and `compiled:check` fresh.
 
   The full suite and headless journeys are TESTER's.
+- TESTER (thread b3e18797) job `test-V113-285813f-1`:
+  - `pnpm check` exit 0 in 216 s (402 engine, 651 app).
+  - `multi-target` and `effect-riders` exit 0.
+  - `tier-effects` failed at the legal-build assertion. The fixture paired the stormwight-only Vuken
+    kit with a Berserker (Q-R-103; `feature/fury/level-1/beast-shape.md`). Fixed at `d748e47` with
+    the Stormwight witness.
+- Independent review ([audit](audits/V113-rules-review.md)): changes required, R1–R3.
+  - R1: EoT on a creature in a shared squad turn (an attached captain) never came due. The
+    `end-of-next-turn` clause now also matches turn participants, like `creature-turn`
+    (`rule/monster/captain.md`).
+  - R2: the Vuken fixture, fixed at `d748e47`.
+  - R3: correcting a use whose taunt replaced another source's taunt left the old taunt ended. The
+    replaced instance now records `replacedBy`, and the correction is refused with "rewind the use
+    instead". Rewinding restores it through the journal.
+  - Non-blocking fixes:
+    - The movement label follows its kind.
+    - Prone shows "until Stand Up".
+    - The README recipe `cd` is explicit.
+    - The STATUS row order is fixed.
+  - Remaining observations (manual/unknown-source taunts, objects receiving movement instructions,
+    the unused `imposedDuringTurnId`) are recorded in the audit.

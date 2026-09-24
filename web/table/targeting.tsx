@@ -475,7 +475,9 @@ export function CompiledEffects({
             {effect.kind === 'push' && (
               <>
                 <span>
-                  Printed push {effect.printed} + size bonus {effect.sizeBonus ?? 'unknown'}
+                  Printed {effect.vertical ? 'vertical ' : ''}
+                  {effect.movement ?? 'push'} {effect.printed} + size bonus{' '}
+                  {effect.sizeBonus ?? 'unknown'}
                   {effect.allowance !== undefined
                     ? ` · Allowance ${effect.allowance} before optional stability reduction.`
                     : effect.subtotal !== undefined

@@ -69,6 +69,8 @@ export interface ConditionInstance {
     thresholdSource: SavingThrowSource;
   };
   endedReason?: string;
+  /** V113: the occurrence whose taunt replaced this one (condition/taunted.md). */
+  replacedBy?: string;
 }
 
 /** Every toggle off: the first-admission state of a hero and the loaded state of a foe. */

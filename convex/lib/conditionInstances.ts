@@ -58,6 +58,18 @@ function toggles(manual: ConditionToggles, instances: ConditionInstance[]): Cond
   return result;
 }
 
+/** V113: whether one of this use's occurrences replaced another source's taunt on the target. */
+export async function replacedByUse(
+  ctx: Pick<QueryCtx, 'db'>,
+  target: ConditionTarget,
+  occurrenceIds: ReadonlySet<string>,
+) {
+  const { live } = await read(ctx, target);
+  return (live.conditionInstances ?? []).some(
+    instance => instance.replacedBy !== undefined && occurrenceIds.has(instance.replacedBy),
+  );
+}
+
 export async function hasRolledConditionSave(
   ctx: Pick<QueryCtx, 'db'>,
   target: ConditionTarget,
@@ -95,7 +107,14 @@ export async function applyConditionInstance(
         instance.sourceActorId !== undefined &&
         instance.sourceActorId !== input.sourceActorId
       )
-        await endConditionInstance(ctx, scope, target, instance.id, 'replaced by a new taunt');
+        await endConditionInstance(
+          ctx,
+          scope,
+          target,
+          instance.id,
+          'replaced by a new taunt',
+          input.id,
+        );
     ({ live } = await read(ctx, target));
   }
   const instances = [...(live.conditionInstances ?? [])];
@@ -155,6 +174,7 @@ export async function endConditionInstance(
   target: ConditionTarget,
   id: string,
   reason: string,
+  replacedBy?: string,
 ) {
   const { live } = await read(ctx, target);
   const instances = [...(live.conditionInstances ?? [])];
@@ -163,7 +183,12 @@ export async function endConditionInstance(
   const instance = instances[index]!;
   if (instance.registrationId)
     await retireWork(ctx, scope, instance.registrationId as Id<'clockRegistrations'>);
-  instances[index] = { ...instance, status: 'ended', endedReason: reason };
+  instances[index] = {
+    ...instance,
+    status: 'ended',
+    endedReason: reason,
+    ...(replacedBy ? { replacedBy } : {}),
+  };
   const manual = live.manualConditions ?? noConditions();
   await write(ctx, scope, target, {
     conditionInstances: instances,

@@ -36,6 +36,7 @@ import {
   applyConditionInstance,
   endConditionInstance,
   hasRolledConditionSave,
+  replacedByUse,
 } from './conditionInstances';
 import { appendEvent } from './events';
 import type { Doc, Id } from '../_generated/dataModel';
@@ -1548,6 +1549,24 @@ const abilityCorrect: OperationDefinition = {
         if (await hasRolledConditionSave(ctx, { kind: target.target.kind, id }, event._id))
           throw new ConvexError(
             'A saving throw has already been rolled for this ability condition; rewind the save before correcting the ability. Recorded saves are never replayed.',
+          );
+        // condition/taunted.md: this use's taunt replaced another source's taunt. A correction
+        // cannot restore that taunt's schedule, so the table rewinds the use instead.
+        if (
+          await replacedByUse(
+            ctx,
+            { kind: target.target.kind, id },
+            new Set(
+              (result.compiled as CompiledResult).effects
+                .filter(
+                  o => o.effect.kind === 'condition' && o.effect.targetId === target.target.id,
+                )
+                .map(o => o.id),
+            ),
+          )
+        )
+          throw new ConvexError(
+            "This use's taunt replaced another creature's taunt; rewind the use instead of correcting it.",
           );
       }
     }

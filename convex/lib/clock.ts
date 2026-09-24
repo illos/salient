@@ -99,7 +99,13 @@ export function isDue(timing: TimingClause, event: BoundaryEvent): boolean {
       // rule/combat/end-of-turn.md: the end of the affected creature's current turn if imposed during
       // it, else the end of its next turn. Either way the first `turn-end` of that creature after
       // registration is the one; the clause is retired once fired.
-      return event.kind === 'turn-end' && event.turn?.creatureId === timing.creatureId;
+      // A captain or squad member shares the squad's turn (rule/monster/captain.md), so match any
+      // participant like `creature-turn` does.
+      return (
+        event.kind === 'turn-end' &&
+        (event.turn?.creatureId === timing.creatureId ||
+          event.turn?.participantIds.includes(timing.creatureId) === true)
+      );
     case 'round':
       return (
         event.kind === timing.boundary &&

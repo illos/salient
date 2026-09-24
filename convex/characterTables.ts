@@ -66,6 +66,7 @@ export const conditionInstanceValidator = v.object({
     }),
   ),
   endedReason: v.optional(v.string()),
+  replacedBy: v.optional(v.string()),
 });
 /**
  * A hero's live play values (shared/contracts/liveState.ts HeroLiveState plus LiveStateOrigin).

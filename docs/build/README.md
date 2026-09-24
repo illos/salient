@@ -109,7 +109,8 @@ directory. Worktree recipe on Presidium (GitHub is unreachable there):
 
 ```
 git worktree add .worktrees/<name> -b slice/<id> main
-(cd .worktrees/<name> && CI=true pnpm install --offline --frozen-lockfile)
+cd .worktrees/<name>
+CI=true pnpm install --offline --frozen-lockfile
 git -c protocol.file.allow=always \
   -c submodule.vendor/steel-compendium.url=<main checkout>/.git/modules/vendor/steel-compendium \
   submodule update --init vendor/steel-compendium

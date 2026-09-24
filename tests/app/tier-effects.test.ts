@@ -9,6 +9,8 @@ import type { PublicCompiledResult } from '../../shared/contracts/compiledResult
 import { generate } from '../../convex/lib/dice';
 import { fromHex } from '../../convex/lib/sha256';
 import { backend, table, type Backend } from './fixtures/table';
+import { isDue } from '../../convex/lib/clock';
+import type { BoundaryEvent } from '../../shared/contracts/clock';
 
 let sequence = 0;
 async function position(t: Backend, campaignId: Id<'campaigns'>, faces: number[]) {
@@ -112,6 +114,9 @@ test('V113: taunt replacement, EoT expiry at the target turn end, prone persists
   const replaced = (await live()).conditionInstances!.find(i => i.id === taunted.id)!;
   expect(replaced).toMatchObject({ status: 'ended', endedReason: 'replaced by a new taunt' });
   const current = (await read(retaunt.eventId)).effects.find(o => o.effect.kind === 'condition')!;
+  await expect(
+    command(`/ability correct event="${retaunt.eventId}" target=@Thorn edges=0 banes=2`),
+  ).rejects.toThrow(/replaced another creature's taunt; rewind the use/);
   expect(await active()).toMatchObject([{ id: current.id, sourceActorId: second }]);
 
   await position(t, f.campaignId, [6, 6]);
@@ -147,4 +152,19 @@ test('V113: taunt replacement, EoT expiry at the target turn end, prone persists
   expect((await live()).conditionInstances!.find(i => i.id === prone.id)).toMatchObject({
     status: 'ended',
   });
+});
+
+// rule/combat/end-of-turn.md with rule/monster/captain.md: a captain shares the squad's turn, so
+// an EoT effect on the captain ends when that shared turn ends.
+test('V113: EoT is due at the end of a shared squad turn that includes the creature', () => {
+  const event = {
+    kind: 'turn-end',
+    round: 1,
+    turn: { creatureId: 'squad', participantIds: ['squad', 'minion', 'captain'] },
+  } as unknown as BoundaryEvent;
+  expect(isDue({ scope: 'end-of-next-turn', creatureId: 'captain' }, event)).toBe(true);
+  expect(isDue({ scope: 'end-of-next-turn', creatureId: 'other' }, event)).toBe(false);
+  expect(
+    isDue({ scope: 'end-of-next-turn', creatureId: 'captain' }, { ...event, kind: 'turn-start' }),
+  ).toBe(false);
 });
