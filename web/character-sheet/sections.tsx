@@ -123,7 +123,7 @@ function withEffects(
   stat: 'speed' | 'stability',
 ): string {
   if (base === undefined) return 'pending';
-  const { value, contributions } = derivedValue(base, holderId ?? '', effects ?? [], stat);
+  const { value, contributions } = derivedValue(base, effects ?? [], stat);
   if (!holderId || !contributions.length) return String(base);
   return `${value} (${base} ${contributions
     .map(
@@ -146,7 +146,7 @@ export function StatsList({
   holderId?: string;
   effects?: readonly EffectInstance[];
 }) {
-  const saves = statModifiers(holderId ?? '', effects ?? [], 'saving-throw');
+  const saves = statModifiers(effects ?? [], 'saving-throw');
   const rows: [string, React.ReactNode][] = [
     ['Size', pending(partial?.size?.value)],
     ['Speed', withEffects(partial?.speed?.value, holderId, effects, 'speed')],

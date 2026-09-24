@@ -220,19 +220,27 @@ export interface RollContribution {
   excluded?: true;
 }
 
+/**
+ * Whether a stored instance is about the creature holding it. An instance is held by its subject
+ * when the subject is a hero or foe (convex/lib/effectInstances.ts holderOf); an object's or
+ * squad's effect is held by its owner and never modifies the owner. The subject kind is checked
+ * rather than its id, which a history restoration may have re-aliased.
+ */
+const aboutHolder = (instance: EffectInstance) =>
+  instance.subject.kind === 'character' || instance.subject.kind === 'foe';
+
 type RollInstance = EffectInstance & {
   payload: { kind: 'modifier'; text: string; modifier: RollModifier };
 };
 
 function rollModifiersOf(
-  holderId: string,
   instances: readonly EffectInstance[],
   side: 'actor' | 'target',
   roll: RollFacts,
 ): RollInstance[] {
   return instances.filter((instance): instance is RollInstance => {
     if (instance.status !== 'active' || instance.kind !== 'modifier') return false;
-    if (instance.subject.id !== holderId || instance.payload.kind !== 'modifier') return false;
+    if (!aboutHolder(instance) || instance.payload.kind !== 'modifier') return false;
     const modifier = instance.payload.modifier;
     if (modifier.kind !== 'roll') return false;
     if (modifier.target !== (side === 'actor' ? 'rolls-by' : 'rolls-against')) return false;
@@ -294,7 +302,7 @@ export function rollContributions(input: {
     instances: readonly EffectInstance[],
     which: 'actor' | 'target',
   ) => {
-    const matching = rollModifiersOf(subjectId, instances, which, input.roll);
+    const matching = rollModifiersOf(instances, which, input.roll);
     return [
       ...aggregate(
         matching.filter(instance => !exclude.has(instance.id)),
@@ -395,7 +403,6 @@ export interface StatContribution {
  * amount of each; groups add). Base values are the caller's; the total is base plus this.
  */
 export function statModifiers(
-  holderId: string,
   instances: readonly EffectInstance[],
   stat: StatModifier['stat'],
 ): { total: number; contributions: StatContribution[] } {
@@ -406,7 +413,7 @@ export function statModifiers(
     (instance): instance is StatInstance =>
       instance.status === 'active' &&
       instance.kind === 'modifier' &&
-      instance.subject.id === holderId &&
+      aboutHolder(instance) &&
       instance.payload.kind === 'modifier' &&
       instance.payload.modifier.kind === 'stat' &&
       instance.payload.modifier.stat === stat,
@@ -435,11 +442,10 @@ export function statModifiers(
  */
 export function derivedValue(
   base: number,
-  holderId: string,
   instances: readonly EffectInstance[],
   stat: 'speed' | 'stability',
 ): { value: number; contributions: StatContribution[] } {
-  const { total, contributions } = statModifiers(holderId, instances, stat);
+  const { total, contributions } = statModifiers(instances, stat);
   const value = base + total;
   return { value: stat === 'stability' ? Math.max(0, value) : value, contributions };
 }

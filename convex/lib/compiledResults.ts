@@ -14,7 +14,6 @@ export function movementFacts(record: TargetRecord): MovementFacts {
   const base = baseline?.stability.value ?? snapshot?.stability;
   // V159: active stability effects feed the forced-movement stability (rule/character/stability.md;
   // docs/lasting-effects-design.md#2-modifier-pipeline, derived values).
-  const holderId = record.character?._id ?? record.foe?._id;
   const numeric =
     typeof base === 'number'
       ? base
@@ -22,10 +21,9 @@ export function movementFacts(record: TargetRecord): MovementFacts {
         ? Number(base)
         : undefined;
   const effects =
-    numeric !== undefined && holderId
+    numeric !== undefined
       ? derivedValue(
           numeric,
-          holderId,
           (record.character
             ? record.character.liveState?.effectInstances
             : record.foe?.live.effectInstances) ?? [],

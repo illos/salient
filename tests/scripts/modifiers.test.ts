@@ -254,15 +254,15 @@ test('aggregation follows the printed stacking', () => {
   // Stat: an old +3 with a newer +1 from the same ability gives +3; another ability adds.
   const old = instance('hero', 'squad', { kind: 'stat', stat: 'stability', amount: 3 });
   const newer = instance('hero', 'squad', { kind: 'stat', stat: 'stability', amount: 1 });
-  expect(statModifiers('hero', [old, newer], 'stability').total).toBe(3);
+  expect(statModifiers([old, newer], 'stability').total).toBe(3);
   const iron = instance('hero', 'iron', { kind: 'stat', stat: 'stability', amount: 2 });
-  expect(statModifiers('hero', [old, newer, iron], 'stability').total).toBe(5);
+  expect(statModifiers([old, newer, iron], 'stability').total).toBe(5);
   // rule/character/stability.md: never below 0, even with a penalty.
   const penalty = instance('hero', 'phase', { kind: 'stat', stat: 'stability', amount: -2 });
-  expect(derivedValue(1, 'hero', [penalty], 'stability').value).toBe(0);
-  expect(derivedValue(1, 'hero', [old, penalty], 'stability').value).toBe(2);
+  expect(derivedValue(1, [penalty], 'stability').value).toBe(0);
+  expect(derivedValue(1, [old, penalty], 'stability').value).toBe(2);
   // Ended and consumed instances no longer count.
-  expect(statModifiers('hero', [{ ...old, status: 'ended' }], 'stability').total).toBe(0);
+  expect(statModifiers([{ ...old, status: 'ended' }], 'stability').total).toBe(0);
 });
 
 test('scope matching: by versus against, strikes versus every power roll', () => {
@@ -311,14 +311,30 @@ test('scope matching: by versus against, strikes versus every power roll', () =>
     bonuses: [{ label: "Owner's d", amount: 2 }],
   });
   expect(resolveEdgeBane(inputs.edges, inputs.banes).net).toBe(0);
-  // A modifier held for another creature never applies to this one.
+  // An object's effect is held by its owner and never modifies the owner's own rolls.
+  const onObject = { ...by, subject: { kind: 'object' as const, id: 'door', name: 'Door' } };
   expect(
     rollContributions({
-      actor: { id: 'goblin', instances: [by] },
-      targets: [{ id: 'hero', instances: [] }],
+      actor: { id: 'hero', instances: [onObject] },
+      targets: [{ id: 'goblin', instances: [] }],
       roll: { strike: true },
     })[0]!.contributions,
   ).toEqual([]);
+  expect(
+    statModifiers(
+      [
+        {
+          ...onObject,
+          payload: {
+            kind: 'modifier',
+            text: '',
+            modifier: { kind: 'stat', stat: 'speed', amount: 2 },
+          },
+        },
+      ],
+      'speed',
+    ).total,
+  ).toBe(0);
 });
 
 test('consumption: the next power roll uses a consumable up even when banes cancel it', () => {
@@ -398,5 +414,5 @@ test('saving throws: a bonus adds to the d10 before the 6-or-higher threshold', 
   expect(saveSucceeds(5, 1, 6)).toBe(true);
   expect(saveSucceeds(6, 0, 6)).toBe(true);
   const plusOne = instance('hero', 'swarm', { kind: 'stat', stat: 'saving-throw', amount: 1 });
-  expect(statModifiers('hero', [plusOne], 'saving-throw').total).toBe(1);
+  expect(statModifiers([plusOne], 'saving-throw').total).toBe(1);
 });

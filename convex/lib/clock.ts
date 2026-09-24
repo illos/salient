@@ -640,7 +640,7 @@ async function saveBonus(
       : creature.kind === 'foe'
         ? (await ctx.db.get(creature.id as Id<'foes'>))?.live.effectInstances
         : undefined;
-  const { total, contributions } = statModifiers(creature.id, instances ?? [], 'saving-throw');
+  const { total, contributions } = statModifiers(instances ?? [], 'saving-throw');
   return { bonus: total, sources: contributions };
 }
 
