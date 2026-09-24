@@ -299,7 +299,7 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
     sourcePath: 'en/unified/md/feature/summoner/level-1/essence.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Victories at combat start; +2 start of turn; first unwilling minion death in range each round +1; clear at end. Track outside-combat reuse until Victory/respite.',
+      'Record and resolve manually using the printed source. Summoned creatures, squads, damage, healing, conditions, movement and turn timing are not applied. Essence payment is automatic unless waived outside combat; track paid-effect reuse until a Victory or respite manually. Levels 1–6: the app adds Victories at combat start and +2 at each own-turn start, and clears essence at encounter end; claim the first unwilling minion death in range each round with /resource claim trigger=summoner-minion-death (+1, +2 from level 4) and do not also adjust by hand. Level 7+: resolve these gains manually. Track outside-combat reuse until Victory/respite.',
   },
   {
     name: 'Summoner: Minions',
