@@ -117,7 +117,7 @@ export interface HeroLiveState {
   forgoNext?: boolean;
   forgoing?: boolean;
   /** V150: the latest automatic turn-start gain, so a forgo at that turn start can reverse it. */
-  lastTurnGain?: { encounterId: string; turnId: string; delta: number };
+  lastTurnGain?: { encounterId: string; turnId: string; delta: number; after: number };
 }
 
 /** One claimed class resource trigger and the window (round or turn) its limit applies to. */

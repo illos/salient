@@ -350,6 +350,7 @@ async function fireHeroicResource(
               encounterId: firing.encounter._id,
               turnId: firing.event.turn.turnId,
               delta: after - before,
+              after,
             },
           }
         : {}),

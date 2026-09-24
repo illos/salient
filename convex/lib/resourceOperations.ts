@@ -252,6 +252,12 @@ const resourceForgo: OperationDefinition = {
         );
       if (live.forgoing)
         throw new ConvexError(`${character.authored.name} is already forgoing this turn.`);
+      // The choice belongs to the turn start: once the pool moved (a claim or a spend), the gain
+      // can no longer be cleanly forgone.
+      if (live.heroicResource.current !== last.after)
+        throw new ConvexError(
+          `${character.authored.name}'s ${live.heroicResource.name} changed after the turn-start gain (a claim or a spend); forgo at the turn start, before using it.`,
+        );
       const floor = heroicResourceFloor(baseline, live.heroicResource.name);
       const before = live.heroicResource.current;
       const after = Math.max(floor, before - last.delta);

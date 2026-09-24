@@ -151,3 +151,56 @@ V150 defect.
 - `npx eslint` on the nine changed source and test files: exit 0.
 - `npx vitest run tests/app/heroic-resource-forgo.test.ts`: 1 file, 1 test passed (5.49 s), run once.
 - No other suites, journeys or services were run.
+
+## Re-review at `15a7d328`
+
+Reviewed `git diff ee590c5f 15a7d328` in the same worktree.
+
+Verdict at `15a7d32`: CHANGES REQUIRED. R1 and R3 are closed. R2 is closed except for R4, a
+narrow residual gap in the new `value=now` path.
+
+- **R1: closed.** The keep branch of `voidEncounter` (`convex/lib/closeoutOperations.ts:271-279`)
+  clears `forgoing`, `forgoNext` and `lastTurnGain` through `journalPatch` for each hero
+  participant. The encounter-end step also clears `lastTurnGain` (`convex/lib/clock.ts:344`). The
+  test reads both flags back as false after `/combat void mode=keep`.
+- **R2: closed, except R4.**
+  - `resource.forgo value=now` (`convex/lib/resourceOperations.ts:238-281`) removes the gain the
+    clock recorded as `lastTurnGain` for the active turn (`convex/lib/clock.ts:347-355`), sets
+    `forgoing` and clears `forgoNext`. All of this is journaled.
+  - It is refused outside that turn, or when the hero is already forgoing.
+  - The Self-Taught row and a "Forgo this turn" button point to it. The out-of-scope `/adjust`
+    fallback is gone.
+  - The test covers the removal, the refused claim, and the refused second `now`.
+- **R3: closed.** The Shade is built with `'complication.choice': 'Self-Taught'`, and the test
+  asserts the evaluated `{ name: 'Self-Taught', kind: 'complication' }` feature. The patch is
+  removed. The test also covers a claim refused on Thorn's turn.
+
+### R4 (required). `value=now` after a claim or spend in the same turn leaves a gain in the forgone window
+
+- **Where.** `convex/lib/resourceOperations.ts:238-281`. The only checks are the active turn and
+  `lastTurnGain.turnId`. It then applies `after = Math.max(floor, before - last.delta)`.
+- **Evidence.**
+  - The source fixes the decision "at the start of each of your turns". Once the hero has claimed a
+    trigger, or spent from the pool, since the turn-start gain, that point has passed.
+  - `value=now` still accepts in that case. It removes only the turn-start delta, so a claim made
+    earlier in the same turn survives inside a window that is now forgone.
+  - A spend followed by the floor clamp keeps the gain that was spent.
+  - QC1 asked for "all interval gains accounted for".
+- **Failure scenario.**
+  - A Self-Taught Shadow takes their turn and gains 2 insight, for 2 in total. They deal surge
+    damage and claim +1, for 3. Then they press "Forgo this turn": the pool becomes 3 − 2 = 1 and
+    `forgoing` is set. The +1 was gained inside the forgone window, and the hero also takes the
+    strike damage bonus.
+  - Spend variant: the Shadow has 0, gains 2, spends 2 on an ability, then presses "Forgo this
+    turn". The pool is floored at 0, so the spent gain was free.
+- **Fix.** Record the post-gain pool in `lastTurnGain`, for example `after`. Refuse `value=now`
+  unless `heroicResource.current === lastTurnGain.after`, with the message "only at the start of
+  your turn, before claiming or spending". Alternatively, refuse it once any `resourceClaims` entry
+  exists for this encounter with an `eventId` after the turn start. Add a test assertion: claim,
+  then `value=now` is refused.
+
+Checks run by the reviewer at `15a7d32`:
+- `npx tsc --noEmit` and `npx tsc --noEmit -p convex/tsconfig.json`: both exit 0.
+- `npx vitest run tests/app/heroic-resource-forgo.test.ts`: 1 file, 1 test passed (10.84 s), run
+  once.
+- No other suites, journeys or services were run.

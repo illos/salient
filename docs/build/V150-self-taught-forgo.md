@@ -49,3 +49,5 @@ App test `tests/app/heroic-resource-forgo.test.ts`, on a Self-Taught Shadow:
     evaluated feature.
   - QC1's notes are also covered: claim refusal on another creature's turn, and recovery at the
     next turn.
+  - R4: `value=now` is refused once the pool has moved after the turn-start gain (a claim or a spend).
+    `lastTurnGain.after` records the value; a test claims first and expects the refusal.
