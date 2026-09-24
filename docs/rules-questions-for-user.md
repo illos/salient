@@ -1198,3 +1198,27 @@ effects manual.
 
 Recommendation: keep the current readings except the strike distance, where keeping Melee 1 matches
 Lead By Example and the Charge special.
+
+## Q-COND-1: does the save for "prone and can't stand (save ends)" also end prone?
+
+This wording appears in 13 abilities. Examples: Judgment's Hammer tier 3 (`feature/ability/conduit/level-1/judgments-hammer.md`) and Staggering Blow (`feature/ability/shadow/level-3/staggering-blow.md`).
+
+What the sources say (pinned `en/unified/md`):
+- `condition/prone.md`: a prone creature can use Stand Up "unless the ability or effect that
+  imposed the prone condition says otherwise".
+- `rule/general/saving-throw.md`: a "(save ends)" effect is removed by a successful save.
+- `rule/character/potency.md` explains Judgment's Hammer as "knocked flat and left struggling to
+  stand". It never describes what a successful save does.
+- Other stat blocks print prone and a can't-stand restriction separately, or give can't stand its
+  own duration ("until the end of their next turn").
+
+Both readings agree the creature is prone and can't use Stand Up until the save succeeds. They
+differ on what the successful save removes:
+- **(A)** Only the can't-stand restriction. The creature stays prone until it uses Stand Up.
+- **(B)** The whole effect. Prone ends as well.
+
+QC1 (2026-09-24, `../review-artifacts/2026-09-24-Q-COND-1-QC1.md`) finds A plausible but not
+settled. Until you rule, the save result stays with the table.
+
+Recommendation: A. The separately printed examples read that way, and a creature knocked prone
+normally has to stand up itself.
