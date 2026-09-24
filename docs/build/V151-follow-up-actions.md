@@ -42,3 +42,10 @@ prose inside the parent's activation text.
   ENGINE2 and QC1 informed. Five source-only audit agents (one per class) found the actions above.
 - Author checks: both TypeScript projects and ESLint pass; focused V151, V134–V137 and V101–V106 engine
   tests 37/37; content, compiled and supporting checks pass.
+- Independent review (source-only) of `d57e830`: CHANGES REQUIRED, one blocking finding: "Additional
+  Portal" claimed "no action", which the source does not print; it is now "Start of turn", the timing
+  only. Non-blocking, fixed: the cohort matches the exact "has no ability" refusal, records each
+  follow-up against its actor and compares the whole live state (resource included); the test matches
+  the quote in the source file alone and checks source path, trigger and performer from the fixture.
+  Kept: Burning Lash's spend record stays "Part of parent ability", since the second whip is part of
+  that paid option (V137).

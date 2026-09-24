@@ -89,9 +89,17 @@ test('each source-granted follow-up action is its own sheet entry beside its par
     assert.equal(record.cost, undefined, `${action.name} costs nothing extra`);
     const source = sourceOf[action.class]!(record);
     assert.equal(source?.actionType, action.actionType, action.name);
-    // The record carries its source file, which prints the clause (link markup removed).
+    assert.equal(record.sourcePath, `en/unified/md/${action.source}`, action.name);
+    assert.equal(source.trigger, 'trigger' in action ? action.trigger : undefined, action.name);
+    if ('performer' in action)
+      assert.equal((source as { performer?: string }).performer, action.performer, action.name);
+    // The record text is its condition then its source file; the source prints the clause.
+    assert.ok(source.text.startsWith(`${record.activationCondition}\n\n`), action.name);
     assert.ok(
-      source.text.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').includes(action.quote),
+      source.text
+        .slice(record.activationCondition!.length)
+        .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+        .includes(action.quote),
       `${action.name} quotes ${action.source}`,
     );
   }

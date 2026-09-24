@@ -323,7 +323,7 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
     name: 'There Is No Space Between: Additional Portal',
     parent: 'There Is No Space Between',
     sourcePath: 'en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md',
-    actionType: 'Start of turn (no action)',
+    actionType: 'Start of turn',
     activationCondition:
       'Only while your portals are active: open a new portal connected to the others. Resolve placement manually.',
     trigger: 'The start of your turn while the portals are active.',

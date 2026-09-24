@@ -18,10 +18,11 @@
     {
       "parent": "There Is No Space Between",
       "name": "There Is No Space Between: Additional Portal",
-      "actionType": "Start of turn (no action)",
+      "actionType": "Start of turn",
       "source": "feature/ability/elementalist/level-2/there-is-no-space-between.md",
       "quote": "At the start of each of your turns while the portals are active, you can open a new portal connected to the others.",
-      "class": "Elementalist"
+      "class": "Elementalist",
+      "trigger": "The start of your turn while the portals are active."
     },
     {
       "parent": "There Is No Space Between",
@@ -53,7 +54,8 @@
       "actionType": "Free maneuver",
       "source": "feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
       "quote": "Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.",
-      "class": "Elementalist"
+      "class": "Elementalist",
+      "trigger": "The start of your turn while the area exists."
     },
     {
       "parent": "O Flower Aid, O Earth Defend",
@@ -85,7 +87,8 @@
       "actionType": "Free maneuver",
       "source": "feature/ability/beastheart/level-2/omnomnom.md",
       "quote": "Your companion can also regurgitate a swallowed creature as a free maneuver.",
-      "class": "Beastheart"
+      "class": "Beastheart",
+      "performer": "Companion"
     },
     {
       "parent": "Jaws of Death",
@@ -93,7 +96,9 @@
       "actionType": "Free triggered action",
       "source": "feature/ability/beastheart/level-3/jaws-of-death.md",
       "quote": "you can pull the target up to a number of squares equal to your Intuition score as a free triggered action.",
-      "class": "Beastheart"
+      "class": "Beastheart",
+      "trigger": "A target more than 3 squares away from you fails the saving throw while weakened by Jaws of Death.",
+      "performer": "Beastheart"
     }
   ]
 }

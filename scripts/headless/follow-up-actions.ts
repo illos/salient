@@ -103,11 +103,6 @@ function buildFor(action: (typeof followUps.actions)[number]): Selections {
   }
   throw new Error(`No level-3 witness build grants ${action.name}`);
 }
-const withoutResource = (state: Saved['liveState']) => {
-  if (!state) return state;
-  const { heroicResource: _resource, ...rest } = state;
-  return rest;
-};
 
 export async function runFollowUpActions({ actors: { director }, run, runId }: ScenarioContext) {
   await run(
@@ -207,7 +202,7 @@ export async function runFollowUpActions({ actors: { director }, run, runId }: S
             ability: jump.name,
             targets: [{ refKind: 'character', id: targetId }],
           }),
-          /ability|available|known|not found/i,
+          new RegExp(`has no ability "${jump.name}"`),
         );
         for (const [key, build] of builds) {
           const id = ids.get(key)!;
@@ -216,30 +211,18 @@ export async function runFollowUpActions({ actors: { director }, run, runId }: S
             const listed = sheet.abilities.find(a => a.name === name);
             assert.ok(listed?.content?.text, `${name} listed with its source`);
             assert.ok(listed.activationCondition, `${name} listed with its condition`);
-            const printedTarget = (listed.metadata.target ?? '').replace(
-              /\[([^\]]*)\]\([^)]*\)/g,
-              '$1',
-            );
-            const affectedId = printedTarget.trim().toLowerCase() === 'self' ? id : targetId;
-            const target = { refKind: 'character', id: affectedId };
-            const before = await get(affectedId);
+            // Class records carry no creature target; each follow-up is recorded against its actor.
+            const target = { refKind: 'character', id };
             const actorBefore = await get(id);
+            const others = await get(targetId);
             const use = await invoke(id, 'ability.use', { ability: name, targets: [target] });
             const persisted = await event(use.eventId);
             assert.equal(persisted?.kind, 'ability.recorded', name);
             assert.equal(persisted?.payload?.data?.manual, true, name);
             assert.equal(persisted?.payload?.data?.ability?.name, name);
-            if (affectedId !== id)
-              assert.deepEqual(
-                (await get(affectedId)).liveState,
-                before.liveState,
-                `${name} target`,
-              );
-            assert.deepEqual(
-              withoutResource((await get(id)).liveState),
-              withoutResource(actorBefore.liveState),
-              `${name} actor`,
-            );
+            // No cost and no automated effect: the whole live state, resource included, is unchanged.
+            assert.deepEqual((await get(id)).liveState, actorBefore.liveState, `${name} actor`);
+            assert.deepEqual((await get(targetId)).liveState, others.liveState, `${name} others`);
             used.add(name);
           }
         }
