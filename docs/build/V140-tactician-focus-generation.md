@@ -22,6 +22,12 @@ The Tactician profile in `shared/resolve/heroicResourceGeneration.ts`, with sour
 - Claim `tactician-ally-heroic`: +1 "The first time in a combat round that any ally within 10
   squares of you uses a heroic ability". It is a table claim because distance is not tracked. The
   two triggers have separate round limits.
+  - **Labelled interpretation: the Tactician does not count.** The first trigger says "you or any
+    ally" and this one says only "any ally". The alternative, that the Tactician's own heroic
+    abilities count, was rejected on that contrast.
+  - A heroic ability is one that "you can't use … at all without spending" its Heroic Resource
+    (`rule/general/heroic-ability.md`), so an optional spend doesn't count.
+  - The claim's confirmation text says both.
 - Lose all remaining focus at encounter end.
 - Verified through level 6. `feature/tactician/level-7/heightened-focus.md` changes the turn-start
   gain to 3, so a Tactician of level 7 or higher stays manual.
@@ -50,3 +56,9 @@ The Tactician profile in `shared/resolve/heroicResourceGeneration.ts`, with sour
 - 2026-09-24: implemented on top of V120 (`eb32e21`). The focused files pass (1/1 and 5/5);
   `tsc` and eslint are clean. The existing Tactician tests and journeys set focus with absolute
   adjustments and take no turn afterwards, so the automatic gains do not change them.
+- Independent review ([audit](audits/V140-rules-review.md)): PASS with two advisories, both fixed.
+  - R1: the ally-heroic confirmation now names who counts and what a heroic ability is, and the
+    reading is labelled above.
+  - R2: the reviewer checked every Tactician feature through level 10, which confirms the levels 4–6
+    range the V120 ledger (levels 1–3) did not cover. The only focus changes up to level 6 are
+    `level-1/focus.md` and `level-4/focus-on-their-weaknesses.md`.

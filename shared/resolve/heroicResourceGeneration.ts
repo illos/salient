@@ -159,7 +159,8 @@ export const GENERATION_PROFILES: readonly GenerationProfile[] = [
         sourcePath: TACTICIAN_FOCUS,
         quote:
           'The first time in a combat round that any ally within 10 squares of you uses a heroic ability, you gain 1 focus.',
-        confirmation: 'Distance is not tracked; the table confirms the ally was within 10 squares.',
+        confirmation:
+          'Distance is not tracked; the table confirms an ally (not you) within 10 squares used a heroic ability: one that cannot be used at all without spending its Heroic Resource, not an optional spend.',
       },
     ],
   },

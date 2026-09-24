@@ -137,3 +137,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V150 | [Self-Taught forgo for automatic heroic resources](V150-self-taught-forgo.md) | Merged (`fad564f`); cloud dev published; accepted TESTER results reused |
 | V135 | [Elementalist levels two and three](V135-elementalist-level-three.md) | Ready for integration; full gate, isolated headless and independent review PASS |
 | V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | In progress (ENGINE2); depends on V120 |
+| V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Ready for testing after V120; independent review PASS |
