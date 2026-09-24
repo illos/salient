@@ -65,6 +65,9 @@ const recordsOf = (w: Witness): Records => ({
   ...withoutPerk(w.actionsAddedAtLevel3),
   "Summoner: Summoner Strike: Summoner's Kit": 0,
   ...(w.ward.name === 'Howling Ward' ? { 'Summoner: Howling Ward': 0 } : {}),
+  ...(w.sevenEssenceAbility.name === 'Essence Funnel'
+    ? { 'Summoner: Essence Funnel: Sacrifice minions': 0 }
+    : {}),
 });
 const featuresOf = (w: Witness) => [
   "Summoner's Dominion",
@@ -334,8 +337,8 @@ export async function runSummonerLevelThree({
         }
         assert.equal(
           used.size,
-          ledger.abilities.filter(a => !a.name.startsWith('Perk: ')).length + 2,
-          "every printed level-2/3 action plus the Summoner's Kit and Howling Ward notes",
+          ledger.abilities.filter(a => !a.name.startsWith('Perk: ')).length + 3,
+          "every printed level-2/3 action plus the Summoner's Kit, Howling Ward and Essence Funnel notes",
         );
       } finally {
         const session = await director.query<{ revision: number }>('sessions:get', { sessionId });

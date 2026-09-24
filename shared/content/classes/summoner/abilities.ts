@@ -1338,6 +1338,15 @@ const LEVEL_TWO_THREE_ACTIONS: SummonerAction[] = [
     activationCondition: MANUAL,
     cost: 7,
   })),
+  {
+    name: 'Summoner: Essence Funnel: Sacrifice minions',
+    parent: 'Essence Funnel',
+    sourcePath: ability('essence-funnel'),
+    actionType: 'Part of parent ability',
+    activationCondition:
+      MANUAL +
+      "Use only with Essence Funnel: kill any number of your minions within your Summoner's Range that haven't used a main action or maneuver this turn. Each target takes an additional 1 damage, plus 1 damage for each minion killed this way; those minions activate no death effects and you gain no essence from their deaths.",
+  },
 ];
 export const SUMMONER_ACTIONS: SummonerAction[] = [
   ...LEVEL_ONE_ACTIONS,

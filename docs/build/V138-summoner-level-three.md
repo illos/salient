@@ -60,3 +60,6 @@ shared API. Guided advancement remains deferred.
 - Author checks: both TypeScript projects and ESLint pass; focused V138 (3) and V107 engine tests,
   V88 audit guard and live compiled report pass; content, supporting, foes, compiled and link checks
   pass. An evaluator dry run of every cohort record over all twelve builds is clean.
+- Follow-up action audit (QC1 V135 R1, source-only): no separate Summoner level 2–3 action is missing.
+  Essence Funnel's minion sacrifice gets its own "Part of parent ability" rider record, matching the
+  level-1 Focus Fire! rider.

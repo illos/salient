@@ -24,9 +24,11 @@ const src = (relative: string) => `en/unified/md/${relative}`;
  * change (feature/summoner/level-3/summoners-kit.md) and Howling Ward's aura
  * (feature/summoner/level-3/howling-ward.md), which the ledger lists as passive.
  */
-const notes = (ward: string) => ({
+const notes = (ward: string, ability7: string) => ({
   "Summoner: Summoner Strike: Summoner's Kit": 0,
   ...(ward === 'Howling Ward' ? { 'Summoner: Howling Ward': 0 } : {}),
+  // essence-funnel.md Special: the minion sacrifice rider (V151 follow-up actions).
+  ...(ability7 === 'Essence Funnel' ? { 'Summoner: Essence Funnel: Sacrifice minions': 0 } : {}),
 });
 const cases = ledger.witnesses.map(w => {
   const circle = w.circle.toLowerCase();
@@ -128,7 +130,7 @@ test('Summoner levels two and three match the independent ledger for every circl
     assert.deepEqual(added(two, base), withoutPerk(w.actionsAddedAtLevel2), `${w.id} L2 records`);
     assert.deepEqual(
       added(records(l3, 3), two),
-      { ...withoutPerk(w.actionsAddedAtLevel3), ...notes(w.ward.name) },
+      { ...withoutPerk(w.actionsAddedAtLevel3), ...notes(w.ward.name, w.sevenEssenceAbility.name) },
       `${w.id} L3 records`,
     );
   }
