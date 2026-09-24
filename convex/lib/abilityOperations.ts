@@ -1691,10 +1691,18 @@ const abilityCorrect: OperationDefinition = {
         return current ? { ...t, edges: current.edges, banes: current.banes } : t;
       }),
     };
-    const correctedCompiled =
-      savedCompiled && correctedInputs
-        ? resolveCompiledAbility(savedCompiled.definition, correctedInputs)
-        : undefined;
+    let correctedCompiled: ReturnType<typeof resolveCompiledAbility> | undefined;
+    try {
+      correctedCompiled =
+        savedCompiled && correctedInputs
+          ? resolveCompiledAbility(savedCompiled.definition, correctedInputs)
+          : undefined;
+    } catch {
+      // A result saved before V115 has no melee/ranged mode for a mode-dependent ability.
+      throw new ConvexError(
+        'This use was recorded without a melee or ranged mode; rewind it and use the ability again with a mode.',
+      );
+    }
     if (correctedCompiled && correctedCompiled.kind !== 'resolved')
       throw new ConvexError('The saved compiled result cannot be corrected safely.');
     if (correctedCompiled?.kind === 'resolved') {
@@ -1883,7 +1891,7 @@ const abilityResolved: OperationDefinition = {
         occurrence.effect.status !== 'manual'
       )
         throw new ConvexError(
-          'An applied or resisted condition occurrence cannot be resolved manually.',
+          'An applied, resisted or immune condition occurrence cannot be resolved manually.',
         );
       if (clause && plainText(clause) !== plainText(occurrence.effect.clause))
         throw new ConvexError('The clause does not match that occurrence.');

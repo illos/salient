@@ -42,6 +42,12 @@ trait automation are out of scope.
     `fact-needed`, never assumed. Example: `monster/elemental/statblock/crux-of-fire.md` Fickle and
     Free.
   - Positional auras such as the Ghost's Phantom Flow stay manual.
+- Known limitation (manual):
+  - Temporary condition prevention on heroes, such as level-2 Applied Chronometrics ("can't be made
+    dazed") and Kinetic Shield ("can't be made bleeding"), is not an evaluated immunity.
+  - Positional auras such as the Ghost's Phantom Flow are not evaluated either.
+  - An automated condition can still land in these cases, and the table removes it with
+    `condition off`.
 - Existing proofs updated: the V94 Concussive Strike app test and the Censor headless journey now
   state the melee mode their source ledgers assume.
 
@@ -91,3 +97,25 @@ Spec references:
   - engine and web `tsc` clean, eslint clean.
 
   The full suite and headless journeys are TESTER's.
+- TESTER `test-V115-2ad979a-1` FAIL:
+  - `pnpm check` exit 1: the A05 syntax assertion expected the old `ability.use` arguments. It is
+    updated for `[mode=…]`.
+  - `kit-bonus` failed. The unfunded Shadow's use was recorded as blocked for its Insight cost
+    before the mode check. The journey now funds the Insight first. Correct behaviour: cost blocking
+    precedes the mode prompt.
+  - `censor` failed and has been stale since V110. Back Blasphemer!'s push is now a compiled
+    instruction, so the journey reads the compiled effects.
+  - `tier-effects` and `effect-riders` passed.
+  - An ENGINE2 debug file briefly appeared in the submitted worktree during the run. It was not
+    part of the run, and it will not happen again.
+- Independent review ([audit](audits/V115-rules-review.md)): changes required.
+  - R1: the table's "Use as" selector compared raw link keywords, so it never showed. It now
+    compares the readable text, and the scenario is logged in the browser backlog.
+  - R2: the sheet told Field Arsenal users to adjust damage by hand. It now says the table applies
+    the damage replacement; distance benefits stay manual.
+  - Nits fixed:
+    - test comments and a meaningless refusal check (now Protective Attack, which is Melee only);
+    - the misplaced actor-facts doc comment;
+    - the refusal message now includes "immune";
+    - a pre-V115 mode-dependent compiled result now refuses correction with a rewind message
+      instead of throwing.

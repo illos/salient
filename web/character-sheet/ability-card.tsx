@@ -94,7 +94,10 @@ export function AbilityCard({ ability, compact }: { ability: SheetAbility; compa
         <p key={replacement.benefit} className="text-sm">
           Field Arsenal: the printed {readableBenefit(replacement.benefit)} bonus{' '}
           {tuple(replacement.subtract)} from {replacement.fromKit} is replaced by{' '}
-          {tuple(replacement.add)} from {replacement.toKit}; adjust this ability by hand.{' '}
+          {tuple(replacement.add)} from {replacement.toKit};{' '}
+          {replacement.benefit === 'meleeDamage' || replacement.benefit === 'rangedDamage'
+            ? 'the table applies this to rolled damage.'
+            : 'adjust this ability by hand.'}{' '}
           <RuleLink sourcePath={replacement.sourcePath} label="Field Arsenal" />
         </p>
       ))}

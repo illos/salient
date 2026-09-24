@@ -299,7 +299,9 @@ export function AbilityPanel({
             </label>
           )}
           {['melee', 'ranged'].every(mode =>
-            pending.keywords.some(keyword => keyword.toLowerCase() === mode),
+            pending.keywords.some(
+              keyword => readableRuleText(keyword).trim().toLowerCase() === mode,
+            ),
           ) && (
             <label className="flex items-center gap-1">
               <span className="text-sm text-muted-foreground">Use as</span>

@@ -828,7 +828,6 @@ export async function heroFacts(ctx: ReadCtx, characterId: Id<'characters'>) {
     .unique();
 }
 
-/** Section 1.1 / 4.2 inputs. A hero needs Director-supplied facts until an evaluated baseline exists. */
 type Tuple = [number, number, number];
 const tuple = (value: number | Tuple): Tuple =>
   typeof value === 'number' ? [value, value, value] : value;
@@ -865,6 +864,7 @@ export function kitSignatureAdjustments(
   return out;
 }
 
+/** Section 1.1 / 4.2 inputs. A hero needs Director-supplied facts until an evaluated baseline exists. */
 export function actorRollFacts(
   actor: BoundActor,
   records: {

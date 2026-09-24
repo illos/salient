@@ -130,7 +130,9 @@ export async function runKitBonus({ actors: { director }, run, runId }: Scenario
       await invoke('combat.start');
       await invoke('combat.commit');
 
-      // Mode: refused without a choice; ranged ignores Panther's melee bonus.
+      // Mode: refused without a choice (with the Insight cost funded, so the refusal is the mode's,
+      // not an unaffordable-cost record); ranged ignores Panther's melee bonus.
+      await invoke('adjust.heroic-resource', { value: 3 }, shadow);
       await assert.rejects(
         invoke('ability.use', { ability: 'Two Throats at Once', targets: [ref(control)] }, shadow),
         /give mode=melee or mode=ranged/,

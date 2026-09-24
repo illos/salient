@@ -125,11 +125,11 @@ test('V115: Field Arsenal replaces a kit signature’s printed bonus in live dam
   }
 });
 
-// rule/combat/distance.md, Melee or Ranged. Tactician witness 1: Shining Armor + Sniper (melee
+// rule/combat/distance.md, Melee or Ranged. Tactician ledger witness 1 (index 0): Shining Armor + Sniper (melee
 // +2/+2/+2 from Shining Armor, ranged +0/+0/+4 from Sniper). Concussive Strike
 // (feature/ability/tactician/level-1/concussive-strike.md) is a Melee-or-ranged weapon strike.
-// Natural 19 is tier 3: ranged adds 4, melee would add 2. A double bane correction to tier 2 keeps
-// the ranged mode, so its kit bonus becomes 0.
+// Natural 19 is tier 3: ranged adds 4, melee would add 2. A double bane correction cannot lower a
+// natural 19 (rule/dice/power-roll.md), so the kept ranged mode still adds 4, not melee's 2.
 test('V115: a Melee-and-Ranged use needs a mode, persists it and corrections keep it', async () => {
   const context = await setup('modecheck');
   const { f, command, read, payload } = context;
@@ -148,8 +148,12 @@ test('V115: a Melee-and-Ranged use needs a mode, persists it and corrections kee
     command(`${ref} /ability use ability="Concussive Strike" targets=[@{foe:${goblin}}]`, true),
   ).rejects.toThrow(/give mode=melee or mode=ranged/);
   await expect(
-    command(`${ref} /ability use ability="Two Shot" targets=[@{foe:${goblin}}] mode=melee`, true),
-  ).rejects.toThrow(/no mode|has no ability/);
+    // kit/shining-armor.md Protective Attack is Melee only, so it takes no mode.
+    command(
+      `${ref} /ability use ability="Protective Attack" targets=[@{foe:${goblin}}] mode=ranged`,
+      true,
+    ),
+  ).rejects.toThrow(/not a Melee-and-Ranged ability; it has no mode/);
   await position(context.t, f.campaignId, [10, 9]);
   const used = await command(
     `${ref} /ability use ability="Concussive Strike" targets=[@{foe:${goblin}}] mode=ranged`,

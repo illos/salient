@@ -203,6 +203,13 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
         });
       const log = () => director.query<{ events: Log[] }>('events:list', { campaignId });
       const event = async (id: string) => (await log()).events.find(e => e.id === id);
+      const compiledEffects = async (id: string) =>
+        (
+          await director.query<{ compiled?: { effects: { effect: { kind: string } }[] } }[]>(
+            'abilities:results',
+            { campaignId, eventIds: [id] },
+          )
+        )[0]?.compiled?.effects ?? [];
       const usedNames = new Set<string>();
       try {
         for (const operation of ['combat.start', 'combat.commit'])
@@ -289,6 +296,7 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
                 // All remaining Censor rolls retain clauses the bounded compiler does not automate.
                 const remainder: Record<string, string> = {
                   Arrest: 'grab',
+                  // V110 compiles Back Blasphemer!'s push as an instruction occurrence.
                   'Back Blasphemer!': 'push',
                   'Behold a Shield of Faith!': 'bane',
                   'Behold the Face of Justice!': 'frightened',
@@ -300,7 +308,11 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
                   'Your Allies Cannot Save You!': 'push',
                 };
                 assert.match(
-                  JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
+                  JSON.stringify([
+                    outcome.unresolvedClauses,
+                    result.manualResolutions,
+                    (await compiledEffects(used.eventId)).map(o => o.effect.kind),
+                  ]),
                   new RegExp(remainder[name]!, 'i'),
                   name,
                 );

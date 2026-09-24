@@ -152,3 +152,11 @@ session notification; retain no credentials, cookies, tokens or response bodies.
 returning tabs: foreground sign-in-to-home 1.84–2.35 s; no 20 s stall reproduced. A background-tab
 auto-navigation expectation timed out. See [V112](V112-signin-latency.md) for evidence and limits.
 The outstanding scenario is the affected user's Firefox profile/network path.
+
+## V115 — Melee-or-ranged "Use as" selector
+
+On a Melee-and-Ranged weapon ability whose kit bonuses differ between modes (a Panther Shadow's Two
+Throats at Once), the pending-ability controls show "Use as" with melee and ranged. Choosing ranged
+and firing records `selectedMode: ranged` and ranged damage. Firing with no choice shows the
+server's "give mode=melee or mode=ranged" refusal. The selector must appear for Compendium keywords
+stored as links. Headless coverage is the `kit-bonus` cohort.
