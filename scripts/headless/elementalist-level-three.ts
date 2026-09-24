@@ -308,17 +308,26 @@ export async function runElementalistLevelThree({
           for (const name of names) {
             if (used.has(name)) continue;
             used.add(name);
-            assert.ok(
-              sheets[index]!.abilities.find(a => a.name === name)?.activationCondition,
-              `${b.id} ${name} listed with its condition`,
-            );
+            // Every use is listed with its source; embedded uses ("Parent: Use") carry activation text.
+            const listed = sheets[index]!.abilities.find(a => a.name === name);
+            assert.ok(listed?.content?.text, `${b.id} ${name} listed with its source`);
+            if (name.includes(':'))
+              assert.ok(listed.activationCondition, `${b.id} ${name} listed with its condition`);
             const cost =
               name === b.second
                 ? 5
                 : name === b.seventh
                   ? 7
                   : (sheets[index]!.abilities.find(a => a.name === name)?.cost?.amount ?? 0);
-            const affectedId = selfTargets.includes(name) ? id : targetId;
+            // A printed target of exactly "Self" is self-only on the table (targetShapeOf).
+            const printedTarget = (listed.metadata.target ?? '').replace(
+              /\[([^\]]*)\]\([^)]*\)/g,
+              '$1',
+            );
+            const affectedId =
+              selfTargets.includes(name) || printedTarget.trim().toLowerCase() === 'self'
+                ? id
+                : targetId;
             const target = { refKind: 'character', id: affectedId };
             await invoke(id, 'adjust.heroic-resource', { value: cost });
             await invoke(affectedId, 'adjust.stamina', { value: 30 });

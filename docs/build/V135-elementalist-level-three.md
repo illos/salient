@@ -64,3 +64,8 @@ wizard and shared API. Guided advancement remains deferred.
 - Test-support gate at `201b255` failed one engine test: the V32 support sentinel used an Elementalist
   at level 2 as its unsupported class. Moved the sentinel to level 4, where only Shadow is supported, so
   later class slices do not break it. Log `/srv/presidium/projects/salient/test-artifacts/V135-201b255`.
+- Test-Deploy headless at `a5aa9c8` failed at "Volcano's Embrace listed with its condition": the cohort
+  required an activation note on every new ability, but the compiled Volcano's Embrace needs none. The
+  cohort now requires source text for every use, activation text for embedded uses (as V101), and aims
+  printed-Self abilities at the actor. An evaluator and route dry run over all five builds is clean.
+  Artifacts `/srv/presidium/projects/salient/test-artifacts/V135-a5aa9c8`.
