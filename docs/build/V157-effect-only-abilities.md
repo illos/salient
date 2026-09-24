@@ -153,3 +153,8 @@ Both reports are regenerated.
 - Open for the content owner: `shared/evaluate/furyAbilities.ts` still tells the table to apply
   Steelbreaker's temporary Stamina manually. The "Sermon of Grace: Cleanse" and "Blur: Use Ability"
   manual records remain, as Choke's did in V152.
+
+## Publication: 2026-09-24
+
+Merged with V157 and V158 stacked as main `6632e95` and published as Worker `c594c5db-1402-41a2-b460-d3efe7352912`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V158-release-6632e95`.

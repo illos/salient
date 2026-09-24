@@ -114,7 +114,13 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V168 Field Arsenal kit lock during respite
+## Current release — V157 abilities without a power roll and V158 effect instances
+
+Backend/frontend source `6632e95def1e4797c504e3ab79a51fb9bc3d29b2` published on 2026-09-24 as
+Worker `c594c5db-1402-41a2-b460-d3efe7352912`. Backend and schema validation, the hosted build and the upload succeeded. Content
+remains the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
+
+## Previous release — V168 Field Arsenal kit lock during respite
 
 Backend/frontend source `79fc25f401ec2c9a1e467396cd772a660fec2138` published on 2026-09-24 as
 Worker `d48f300d-6adb-45aa-8841-74446a53ffa9`. Backend and schema validation, the hosted build and the upload succeeded.

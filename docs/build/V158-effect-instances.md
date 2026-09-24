@@ -189,3 +189,7 @@ are later slices (design section 8, items 2–5).
   - The test reaches the old boundary and proves that nothing ends, and that a later repeat joins
     the manual group.
 
+## Publication: 2026-09-24
+
+Merged with V157 and V158 stacked as main `6632e95` and published as Worker `c594c5db-1402-41a2-b460-d3efe7352912`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V158-release-6632e95`.

@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V158 | `6632e95` | Merged with V157 and V158 stacked; backend/frontend published; gate and headless at tip | complete |
+| V157 | `6632e95` | Merged with V157 and V158 stacked; backend/frontend published; gate and headless at tip | complete |
 | V168 | `79fc25f` | Merged; backend/frontend published; accepted gates reused | complete |
 | V166 | `1811a3f` | Merged with V165 and V166 stacked; backend/frontend published; gate and headless at tip | complete |
 | V165 | `1811a3f` | Merged with V165 and V166 stacked; backend/frontend published; gate and headless at tip | complete |
@@ -727,3 +729,20 @@ The test and deploy thread fast-forwarded reviewed tip `79fc25f401ec2c9a1e467396
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V168-release-79fc25f`.
+
+### V157 abilities without a power roll and V158 effect instances publication: 2026-09-24
+
+ENGINE2 stacked V157 (abilities without a power roll compile and apply their gains) and V158 (effect
+instances with durations and end conditions, `effect.list` and `effect.end`, sheet lists; 155
+compiled abilities) on main `02ff1fd`. The test and deploy thread fast-forwarded main to `6632e95def1e4797c504e3ab79a51fb9bc3d29b2`.
+- Full gate at the tip (253 s, 443 engine and 780 app tests).
+- 17 journeys at the tip: effect-only, effect-instances, compound-conditions, cant-stand, respite,
+  all, the Shadow level-two, level-three and level-six journeys, the Conduit, Fury, Null and
+  Tactician level-three journeys, and conduit, null, fury and tactician.
+- Independent reviews and QC1 final clearance passed (including QC1 R1/R1b on repeat stacking).
+- Backend publication and schema validation (optional `abilityResults.dice`), the hosted build and
+  the frontend upload succeeded. Worker `c594c5db-1402-41a2-b460-d3efe7352912`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V158-release-6632e95`.
