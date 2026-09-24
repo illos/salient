@@ -2490,7 +2490,9 @@ const abilityCorrect: OperationDefinition = {
       for (const [i, after] of contributions.entries()) {
         const before = savedContributions[i]!;
         if (!!before.excluded === !!after.excluded) continue;
-        if (before.excluded && before.consumes.length)
+        // Only a consumable excluded when the roll was made was never used up by it; one this roll
+        // used up (a later correction excluded it) is included again without a new consumption.
+        if (before.excluded && before.consumes.length && !before.usedUp)
           throw new ConvexError(
             `${describeContribution({ ...before, excluded: undefined } as RollContribution)} was excluded when the roll was made, so the roll did not use it up; a correction never consumes it later. Rewind the use to apply it.`,
           );
@@ -2510,6 +2512,10 @@ const abilityCorrect: OperationDefinition = {
           );
         // Design 5a: a correction that removes a roll's eligibility reports the consumable as
         // "would not have been consumed"; it never restores or re-consumes it silently.
+        if (before.excluded && before.usedUp)
+          exclusionNotes.push(
+            `${after.abilityName} applies again as this roll first used it; it was used up once and is not used up again.`,
+          );
         if (!before.excluded && before.consumes.length)
           exclusionNotes.push(
             `${after.abilityName} would not have been used up by this roll; it stays used up (end or re-apply it at the table if the table agrees).`,

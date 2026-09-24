@@ -479,3 +479,80 @@ test("V159: a second hero's Raider's Awe on the same goblin is a manual group, n
     ),
   ).toBe(true);
 });
+
+test("V159 QC1 R1: a Raider's Awe bane the roll used up can be excluded and included again by corrections, used up once throughout", async () => {
+  const { t, f, command, results, goblin } = await setup();
+  await admitHero(
+    t,
+    f.player,
+    f.director,
+    f.campaignId,
+    'Korva',
+    heroFixtureSelections({ 'kit.choice': 'Raider', 'details.name': 'Korva' }),
+  );
+  const goblinRef = `@{foe:${goblin}}`;
+  const bane = async () => (await t.run(ctx => ctx.db.get(goblin)))!.live.effectInstances![0]!;
+  await command(`@Korva /ability use ability="Raider's Awe" targets=[${goblinRef}]`, true);
+  const baneId = (await bane()).id;
+
+  // Spear Charge at 5 + 5 with one circumstance edge: the bane cancels it, 10 + 2 = 12, tier 2.
+  await atDice(t, f.campaignId, [5, 5]);
+  const roll = await command(
+    `${goblinRef} /ability use ability="Spear Charge" targets=[@Thorn] edges=1`,
+  );
+  expect((await results(roll.eventId)).targets[0]!.outcome.total).toBe(12);
+  expect(await bane()).toMatchObject({ status: 'consumed', endedEventId: roll.eventId });
+
+  // Excluding it: the edge stands alone, 12 + 2 = 14, still tier 2. It stays used up.
+  await command(
+    `/ability correct event="${roll.eventId}" target=@Thorn exclude=${JSON.stringify([baneId])}`,
+  );
+  let entry = (await results(roll.eventId)).targets[0]!;
+  expect(entry.contributions![0]).toMatchObject({ excluded: true, usedUp: true });
+  expect(entry.outcome.total).toBe(14);
+  expect(await bane()).toMatchObject({ status: 'consumed', endedEventId: roll.eventId });
+
+  // Including it again restores the original accounting (12) without a second consumption.
+  await command(`/ability correct event="${roll.eventId}" target=@Thorn exclude=[]`);
+  entry = (await results(roll.eventId)).targets[0]!;
+  expect(entry.contributions![0]!.excluded).toBeUndefined();
+  expect(entry.outcome.total).toBe(12);
+  expect(await bane()).toMatchObject({ status: 'consumed', endedEventId: roll.eventId });
+  const consumedEntries = (
+    await t.run(ctx =>
+      ctx.db
+        .query('events')
+        .withIndex('by_campaign_sequence', q => q.eq('campaignId', f.campaignId))
+        .collect(),
+    )
+  ).filter(e => e.kind === 'effect.consumed');
+  expect(consumedEntries).toHaveLength(1);
+});
+
+test('V159 QC1 R1: a consumable excluded when the roll was made is never included by a correction', async () => {
+  const { t, f, command, results, goblin } = await setup();
+  await admitHero(
+    t,
+    f.player,
+    f.director,
+    f.campaignId,
+    'Korva',
+    heroFixtureSelections({ 'kit.choice': 'Raider', 'details.name': 'Korva' }),
+  );
+  const goblinRef = `@{foe:${goblin}}`;
+  await command(`@Korva /ability use ability="Raider's Awe" targets=[${goblinRef}]`, true);
+  const bane = async () => (await t.run(ctx => ctx.db.get(goblin)))!.live.effectInstances![0]!;
+  const baneId = (await bane()).id;
+  await atDice(t, f.campaignId, [5, 5]);
+  const roll = await command(
+    `${goblinRef} /ability use ability="Spear Charge" targets=[@Thorn] exclude=${JSON.stringify([baneId])}`,
+  );
+  const entry = (await results(roll.eventId)).targets[0]!;
+  expect(entry.contributions![0]).toMatchObject({ excluded: true });
+  expect(entry.contributions![0]!.usedUp).toBeUndefined();
+  expect((await bane()).status).toBe('active');
+  await expect(
+    command(`/ability correct event="${roll.eventId}" target=@Thorn exclude=[]`),
+  ).rejects.toThrow(/did not use it up/);
+  expect((await bane()).status).toBe('active');
+});

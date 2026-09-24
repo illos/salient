@@ -220,6 +220,11 @@ export interface RollContribution {
   bonus: number;
   /** The table's override: not applied to this roll (design section 2, `exclude`). */
   excluded?: true;
+  /**
+   * Set once, when the roll is made: this roll used up the consumables in `consumes` (design 5a).
+   * A later correction's exclusion never clears it, so re-including it is not a new consumption.
+   */
+  usedUp?: true;
 }
 
 /**
@@ -265,6 +270,7 @@ function aggregate(
 ): RollContribution[] {
   // "Stacking Unique Effects": one group per ability, whoever used it; the most impactful applies.
   const { groups } = effectiveAggregate(instances, { impact: payload => impact(payload.modifier) });
+  const consumable = new Set(instances.filter(i => i.consumeOn).map(i => i.id));
   return groups.map(group => {
     const applies = instances.find(instance => instance.id === group.applies.id)!;
     const modifier = applies.payload.modifier;
@@ -285,6 +291,9 @@ function aggregate(
       banes: modifier.banes ?? 0,
       bonus: modifier.bonus ?? 0,
       ...(excluded ? { excluded: true as const } : {}),
+      ...(!excluded && group.sources.some(id => consumable.has(id))
+        ? { usedUp: true as const }
+        : {}),
     };
   });
 }

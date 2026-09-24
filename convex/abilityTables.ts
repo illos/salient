@@ -33,6 +33,7 @@ export const rollContributionValidator = v.object({
   banes: v.number(),
   bonus: v.number(),
   excluded: v.optional(v.literal(true)),
+  usedUp: v.optional(v.literal(true)),
 });
 
 const characteristic = v.union(

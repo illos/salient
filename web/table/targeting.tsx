@@ -834,14 +834,17 @@ export function AbilityCard({
                   <span className="[overflow-wrap:anywhere]" title={contribution.sourcePath}>
                     {describeContribution(contribution)}
                   </span>
-                  {mayCorrect && (!contribution.excluded || !contribution.consumes.length) && (
-                    <Command
-                      campaignId={campaignId}
-                      text={`/ability correct event="${eventId}" target=${ref(target)} exclude=${JSON.stringify(next)}`}
-                      label={contribution.excluded ? 'Include' : 'Exclude'}
-                      variant="ghost"
-                    />
-                  )}
+                  {mayCorrect &&
+                    (!contribution.excluded ||
+                      !contribution.consumes.length ||
+                      contribution.usedUp) && (
+                      <Command
+                        campaignId={campaignId}
+                        text={`/ability correct event="${eventId}" target=${ref(target)} exclude=${JSON.stringify(next)}`}
+                        label={contribution.excluded ? 'Include' : 'Exclude'}
+                        variant="ghost"
+                      />
+                    )}
                 </span>
               );
             })}

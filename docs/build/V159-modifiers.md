@@ -193,6 +193,10 @@ the first slice where lasting effects change numbers
     tester's own `rolls-by` power-roll modifiers, takes an `exclude` override, adds their edges,
     banes and bonuses, records the contributions and uses up consumables in its own journal (undo
     restores them). A test has no target, so `rolls-against` modifiers don't arise.
+  - QC1 R1: each contribution records `usedUp` once, when the roll is made. A correction's
+    exclusion keeps it, so a bane the roll used up can be excluded and included again (the Include
+    control shows) without a second consumption. A consumable excluded at the original roll still
+    needs a rewind.
   - V158's lifecycle (R1/R1b) stores a same-owner identical repeat as a supersede; any other
     same-ability overlap on one subject becomes a manual group (`manualStacking`), unscheduled.
     - `rollModifiersOf` and the stat filter skip manual-group instances.
