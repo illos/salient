@@ -1,6 +1,7 @@
 import { runEffectRiders } from './headless/effect-riders.ts';
 import { runMultiTarget } from './headless/multi-target.ts';
 import { runTierEffects } from './headless/tier-effects.ts';
+import { runKitBonus } from './headless/kit-bonus.ts';
 import { runSummoner } from './headless/summoner.ts';
 import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
@@ -39,6 +40,7 @@ const cohorts = {
   'effect-riders': runEffectRiders,
   'multi-target': runMultiTarget,
   'tier-effects': runTierEffects,
+  'kit-bonus': runKitBonus,
   fury: runFury,
   'fury-level-three': runFuryLevelThree,
   troubadour: runTroubadour,

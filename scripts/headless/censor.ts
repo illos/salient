@@ -47,6 +47,8 @@ type Log = {
   };
 };
 const cid = () => crypto.randomUUID();
+
+const MELEE_OR_RANGED = new Set(['Behold the Face of Justice!', 'Purifying Fire']);
 export async function runCensor({ actors: { director, peer }, run, runId }: ScenarioContext) {
   await run(
     'Censor: twelve domains, deity transitions and every granted action persist',
@@ -231,7 +233,14 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
             await invoke(id, 'adjust.heroic-resource', { value: cost });
             await invoke(targetId, 'adjust.stamina', { value: name === 'Grave Speech' ? 0 : 18 });
             const before = await get(targetId);
-            const used = await invoke(id, 'ability.use', { ability: name, targets: [target] });
+            // V115 (rule/combat/distance.md): these Melee-and-Ranged strikes are used in melee, the
+            // mode the source ledger's damage assumes; their kits' melee and ranged bonuses differ.
+            const mode = MELEE_OR_RANGED.has(name) ? { mode: 'melee' } : {};
+            const used = await invoke(id, 'ability.use', {
+              ability: name,
+              targets: [target],
+              ...mode,
+            });
             const persisted = await event(used.eventId);
             const after = await get(targetId);
             assert.equal((await get(id)).liveState?.heroicResource.current, 0, `${name} Wrath`);
@@ -259,6 +268,7 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
                 const resisted = await invoke(id, 'ability.use', {
                   ability: name,
                   targets: [{ refKind: 'character', id: highId }],
+                  ...mode,
                 });
                 const highEvent = await event(resisted.eventId);
                 const highRoll = highEvent?.payload?.data?.result;
@@ -306,7 +316,11 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
               );
             }
             if (cost) {
-              const blocked = await invoke(id, 'ability.use', { ability: name, targets: [target] });
+              const blocked = await invoke(id, 'ability.use', {
+                ability: name,
+                targets: [target],
+                ...mode,
+              });
               assert.equal((await event(blocked.eventId))?.kind, 'ability.blocked', name);
             }
           }

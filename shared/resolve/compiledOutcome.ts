@@ -16,7 +16,7 @@ import {
   type Characteristic,
 } from './abilityGrammar.ts';
 import type { RiderNode } from './compileAbility.ts';
-import { plainText, resolveAbilityRoll, type AbilityRollInput } from './index.ts';
+import { plainText, resolveAbilityRoll, withMode, type AbilityRollInput } from './index.ts';
 
 /** Absence is unknown. `none` asserts coverage of this category for forced movement. */
 export type MovementCoverage = { kind: 'none' } | { kind: 'unhandled'; labels: string[] };
@@ -37,6 +37,10 @@ export interface CompiledAbilityInput extends Omit<AbilityRollInput, 'ability'> 
       targetId: string;
       kind: 'hero' | 'foe' | 'object' | 'squad';
       characteristics?: Partial<Record<Characteristic, number>>;
+      /** V115: evaluated immunities (for example Nonstop, feature/trait/orc/nonstop.md). */
+      conditionImmunities?: ConditionNode['condition'][];
+      /** V115: printed prevention text the app has not evaluated; never assumed susceptible. */
+      conditionPreventionUnevaluated?: ConditionNode['condition'][];
     }[];
     potency?: { characteristic: Characteristic; weak: number; average: number; strong: number };
   };
@@ -85,7 +89,8 @@ export interface CompiledPushOutcome extends EffectIdentity {
 
 export interface CompiledConditionOutcome extends EffectIdentity {
   kind: 'condition';
-  status: 'applied' | 'resisted' | 'fact-needed' | 'manual';
+  /** `immune`: an evaluated immunity prevents the condition; damage is unaffected (V115). */
+  status: 'applied' | 'resisted' | 'immune' | 'fact-needed' | 'manual';
   after: string;
   /** Absent for a V113 unconditional condition, which has no potency to resist. */
   characteristic?: Characteristic;
@@ -121,6 +126,10 @@ function conditionOutcome(
     duration: node.duration,
   };
   const threshold = node.threshold;
+  if (eligible && target.conditionImmunities?.includes(node.condition))
+    return { ...identity, requirements: [], status: 'immune' };
+  if (eligible && target.conditionPreventionUnevaluated?.includes(node.condition))
+    requirements.push(`target:${targetId}.conditionPrevention.${node.condition}`);
   if (threshold.kind === 'always' || !node.characteristic) {
     // V113: no potency to resist; an eligible creature is affected once damage is complete.
     if (!eligible) requirements.push(`target:${targetId}.evaluatedCreatureCharacteristics`);
@@ -228,10 +237,14 @@ function pushOutcome(
   const manualReasons: string[] = [];
   const actor = input.movement?.actor;
   const target = input.movement?.targets.find(f => f.targetId === targetId);
-  const keywords = definition.metadata!.keywords.map(k => plainText(k).toLowerCase());
+  // V115: a Melee-and-Ranged ability counts as melee only when used in melee (rule/combat/distance.md).
+  const keywords = withMode(definition.metadata!, input.selectedMode).keywords.map(k =>
+    plainText(k).toLowerCase(),
+  );
   const qualifies = keywords.includes('melee') && keywords.includes('weapon');
   let sizeBonus: number | undefined;
-  if (!qualifies) sizeBonus = 0;
+  if (qualifies && keywords.includes('ranged')) requirements.push('actor.mode');
+  else if (!qualifies) sizeBonus = 0;
   else {
     if (!actor?.kind) requirements.push('actor.kind');
     if (!target?.kind) requirements.push(`target:${targetId}.kind`);

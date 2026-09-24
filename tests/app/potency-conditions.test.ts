@@ -760,6 +760,7 @@ test('Eviscerate from a Shadow: kit-inclusive damage, potency tiers, Insight deb
 // weapon strike. Ledger witness 1 (Might 2, Reason potency 0/1/2, Field Arsenal Shining Armor +
 // Sniper: melee damage +2/+2/+2 from Shining Armor alone) with the 3-Focus choice swapped to
 // Concussive Strike. Targets: Dwarf Warden Might 2, Goblin Warrior Might −2 (their stat blocks).
+// V115: used in melee (rule/combat/distance.md, Melee or Ranged), so the melee bonus applies.
 test('Concussive Strike from a Tactician: arsenal melee bonus, Might potency tiers and Focus debit', async () => {
   const t = backend();
   const f = await table(t);
@@ -822,7 +823,7 @@ test('Concussive Strike from a Tactician: arsenal melee bonus, Might potency tie
   const use = async (faces: number[], foe: Id<'foes'>) => {
     await position(t, f.campaignId, faces);
     return command(
-      `${heroRef} /ability use ability="Concussive Strike" targets=[@{foe:${foe}}]`,
+      `${heroRef} /ability use ability="Concussive Strike" targets=[@{foe:${foe}}] mode=melee`,
       true,
     );
   };

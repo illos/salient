@@ -829,6 +829,42 @@ export async function heroFacts(ctx: ReadCtx, characterId: Id<'characters'>) {
 }
 
 /** Section 1.1 / 4.2 inputs. A hero needs Director-supplied facts until an evaluated baseline exists. */
+type Tuple = [number, number, number];
+const tuple = (value: number | Tuple): Tuple =>
+  typeof value === 'number' ? [value, value, value] : value;
+
+/**
+ * V115 (feature/tactician/level-1/field-arsenal.md): a two-kit hero's signature loses its printed
+ * kit damage bonus and gains the chosen kit's. The evaluator records each replacement; this is the
+ * per-tier delta the live roll adds to the printed damage.
+ */
+export function kitSignatureAdjustments(
+  abilities: readonly {
+    name: string;
+    kind: string;
+    sourcePath: string;
+    kitBonusReplacements?: {
+      benefit: string;
+      subtract: number | Tuple;
+      add: number | Tuple;
+    }[];
+  }[],
+): NonNullable<ActorRollFacts['kitSignatureAdjustments']> {
+  const out: NonNullable<ActorRollFacts['kitSignatureAdjustments']> = [];
+  for (const ability of abilities) {
+    if (ability.kind !== 'kit-signature' || !ability.kitBonusReplacements?.length) continue;
+    const entry: (typeof out)[number] = { ability: ability.name, sourcePath: ability.sourcePath };
+    for (const replacement of ability.kitBonusReplacements) {
+      if (replacement.benefit !== 'meleeDamage' && replacement.benefit !== 'rangedDamage') continue;
+      const add = tuple(replacement.add);
+      const subtract = tuple(replacement.subtract);
+      entry[replacement.benefit] = [0, 1, 2].map(i => add[i]! - subtract[i]!) as Tuple;
+    }
+    if (entry.meleeDamage || entry.rangedDamage) out.push(entry);
+  }
+  return out;
+}
+
 export function actorRollFacts(
   actor: BoundActor,
   records: {
@@ -858,6 +894,9 @@ export function actorRollFacts(
           kitMeleeDamageBonus: baseline.kit.meleeDamageBonus.value,
           kitRangedDamageBonus: baseline.kit.rangedDamageBonus.value,
         }
+      : {}),
+    ...(kitSignatureAdjustments(baseline.abilities ?? []).length
+      ? { kitSignatureAdjustments: kitSignatureAdjustments(baseline.abilities ?? []) }
       : {}),
     ...(baseline.abilityModifiers?.length
       ? {

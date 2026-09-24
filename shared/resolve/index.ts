@@ -12,6 +12,7 @@
  * recompute). Pinned source: vendor/steel-compendium @ fb83a789da8f0327a389c277a0c790b1648d5810.
  */
 import type {
+  AbilityMode,
   AbilityRollMetadata,
   AbilityRollRequest,
   AbilityRollResponse,
@@ -177,23 +178,71 @@ function hasKeywords(keywords: string[], ...wanted: string[]): boolean {
   return wanted.every(w => plain.includes(w));
 }
 
+/**
+ * V115 (rule/combat/distance.md, Melee or Ranged): an ability with both keywords is used as one or
+ * the other, never both, so the unchosen mode keyword is dropped before any keyword-based rule.
+ */
+export function withMode<T extends { keywords: string[] }>(ability: T, mode?: AbilityMode): T {
+  if (!mode || !hasKeywords(ability.keywords, 'melee', 'ranged')) return ability;
+  const drop = mode === 'melee' ? 'ranged' : 'melee';
+  return {
+    ...ability,
+    keywords: ability.keywords.filter(k => plainText(k).toLowerCase() !== drop),
+  };
+}
+
 /** Section 4.2: the kit bonus for the tier, or 0 when the rule does not apply. */
 export function kitBonusFor(
   ability: Pick<
     AbilityRollMetadata,
     'keywords' | 'kitBonusesIncluded' | 'permittedCharacteristics' | 'fixedRollBonus'
-  >,
+  > &
+    Partial<Pick<AbilityRollMetadata, 'name' | 'source'>>,
   actor: ActorRollFacts,
   tier: Tier,
 ): number {
   const rolled =
     ability.permittedCharacteristics.length > 0 || ability.fixedRollBonus !== undefined;
-  if (!rolled || ability.kitBonusesIncluded || actor.improvisedWeapon) return 0;
-  if (hasKeywords(ability.keywords, 'melee', 'weapon') && actor.kitMeleeDamageBonus)
-    return actor.kitMeleeDamageBonus[tier - 1];
-  if (hasKeywords(ability.keywords, 'ranged', 'weapon') && actor.kitRangedDamageBonus)
-    return actor.kitRangedDamageBonus[tier - 1];
+  if (!rolled || actor.improvisedWeapon) return 0;
+  const melee = hasKeywords(ability.keywords, 'melee', 'weapon');
+  const ranged = hasKeywords(ability.keywords, 'ranged', 'weapon');
+  if (ability.kitBonusesIncluded) {
+    // Printed signature damage already includes its kit's bonus (chapter/kits.md); only a Field
+    // Arsenal replacement changes it.
+    const adjustment = actor.kitSignatureAdjustments?.find(
+      a =>
+        a.ability === ability.name &&
+        !!ability.source?.path &&
+        (ability.source.path.endsWith(a.sourcePath) || a.sourcePath.endsWith(ability.source.path)),
+    );
+    if (melee && adjustment?.meleeDamage) return adjustment.meleeDamage[tier - 1];
+    if (ranged && adjustment?.rangedDamage) return adjustment.rangedDamage[tier - 1];
+    return 0;
+  }
+  if (melee && actor.kitMeleeDamageBonus) return actor.kitMeleeDamageBonus[tier - 1];
+  if (ranged && actor.kitRangedDamageBonus) return actor.kitRangedDamageBonus[tier - 1];
   return 0;
+}
+
+/**
+ * V115: whether an unchosen mode would change this actor's damage: the kit bonus or a permanent
+ * keyword modifier differs between melee and ranged use (push size bonuses stay per-target facts).
+ */
+export function modeMatters(ability: AbilityRollMetadata, actor: ActorRollFacts): boolean {
+  if (!hasKeywords(ability.keywords, 'melee', 'ranged')) return false;
+  const melee = withMode(ability, 'melee');
+  const ranged = withMode(ability, 'ranged');
+  for (const tier of [1, 2, 3] as const) {
+    if (kitBonusFor(melee, actor, tier) !== kitBonusFor(ranged, actor, tier)) return true;
+    const damageType = ability.tiers[tier - 1]?.damageType;
+    for (const modifier of actor.abilityDamageModifiers ?? [])
+      if (
+        matchesAbilityModifier(modifier, melee, damageType) !==
+        matchesAbilityModifier(modifier, ranged, damageType)
+      )
+        return true;
+  }
+  return false;
 }
 
 /**
@@ -459,7 +508,15 @@ export interface AbilityRollInput extends AbilityRollRequest {
  * evaluated per target, critical recognition, and damage application in target order.
  */
 export function resolveAbilityRoll(input: AbilityRollInput): AbilityRollResponse {
-  const { ability, actor } = input;
+  const { actor } = input;
+  if (input.selectedMode && !hasKeywords(input.ability.keywords, 'melee', 'ranged'))
+    throw new Error('A melee or ranged mode applies only to a Melee-and-Ranged ability.');
+  // Callers ask for the mode first (ability.use refuses without it); never guess melee.
+  if (!input.selectedMode && modeMatters(input.ability, actor))
+    throw new Error(
+      'Choose melee or ranged: this Melee-and-Ranged ability deals different damage in each mode (rule/combat/distance.md).',
+    );
+  const ability = withMode(input.ability, input.selectedMode);
   const affordability = checkAffordability(ability.fixedCost, input.resourcePool, input.inCombat);
   if (affordability.kind === 'blocked')
     return {
@@ -545,6 +602,7 @@ export function resolveAbilityRoll(input: AbilityRollInput): AbilityRollResponse
     ...(input.selectedDamageCharacteristic
       ? { selectedDamageCharacteristic: input.selectedDamageCharacteristic }
       : {}),
+    ...(input.selectedMode ? { selectedMode: input.selectedMode } : {}),
     characteristicValue: value,
     criticalHit,
     additionalMainActionOffered: criticalHit,
@@ -572,7 +630,11 @@ export function correctTarget(
   actor: ActorRollFacts,
   original: Pick<
     AbilityRollResult,
-    'dice' | 'characteristicValue' | 'selectedCharacteristic' | 'selectedDamageCharacteristic'
+    | 'dice'
+    | 'characteristicValue'
+    | 'selectedCharacteristic'
+    | 'selectedDamageCharacteristic'
+    | 'selectedMode'
   >,
   originalEventId: string,
   before: TargetRollOutcome,
@@ -584,7 +646,7 @@ export function correctTarget(
   if (edges < 0 || banes < 0) throw new Error('Edge and bane counts cannot be negative.');
   const naturalRoll = naturalRollOf(original.dice);
   const after = resolveTarget(
-    ability,
+    withMode(ability, original.selectedMode),
     actor,
     naturalRoll,
     original.characteristicValue,

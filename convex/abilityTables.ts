@@ -47,6 +47,8 @@ export const abilityTables = {
     /** Explicit pre-fire roll characteristic override, when chosen. */
     characteristic: v.union(characteristic, v.null()),
     damageCharacteristic: v.optional(v.union(characteristic, v.null())),
+    /** V115: melee or ranged use of a Melee-and-Ranged ability (rule/combat/distance.md). */
+    mode: v.optional(v.union(v.literal('melee'), v.literal('ranged'), v.null())),
     updatedAt: v.number(),
   }).index('by_campaign_user', ['campaignId', 'userId']),
   /**

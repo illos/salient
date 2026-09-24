@@ -4,6 +4,7 @@ import type { MovementFacts } from '../../shared/resolve/compiledOutcome';
 import type { CompiledResult, PublicCompiledResult } from '../../shared/contracts/compiledResult';
 import { baselineOf, requireHeroLive } from './characterBuild';
 import { foeSnapshot, type TargetRecord } from './resolve';
+import type { ConditionId } from '../../shared/contracts/liveState';
 
 export function movementFacts(record: TargetRecord): MovementFacts {
   const baseline = record.character ? baselineOf(record.character.derivedBaseline) : null;
@@ -80,6 +81,46 @@ export function publicCompiledResult(
   } as PublicCompiledResult;
 }
 
+const CONDITIONS = [
+  'bleeding',
+  'dazed',
+  'frightened',
+  'grabbed',
+  'prone',
+  'restrained',
+  'slowed',
+  'taunted',
+  'weakened',
+] as const;
+
+/**
+ * Conditions a stat block's own text says the creature "can't be" given, for example
+ * monster/elemental/statblock/crux-of-fire.md Fickle and Free ("can't be restrained, slowed, or
+ * knocked prone"). Detection only withholds automation; it never grants an immunity.
+ */
+export function printedPrevention(text: string): ConditionId[] {
+  const found = new Set<ConditionId>();
+  for (const sentence of text.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').split(/(?<=[.!?])\s+|\n+/))
+    if (/can['’]t be\b/i.test(sentence))
+      for (const condition of CONDITIONS)
+        if (new RegExp(`\\b${condition}\\b`, 'i').test(sentence)) found.add(condition);
+  return [...found];
+}
+
+/** A stat block's trait text only: ability text describes its targets, not the creature. */
+function traitText(snapshot: { text: string; features?: unknown[] }): string {
+  if (!Array.isArray(snapshot.features)) return snapshot.text;
+  return snapshot.features
+    .filter(
+      (feature): feature is { feature_type: string } =>
+        !!feature &&
+        typeof feature === 'object' &&
+        (feature as { feature_type?: unknown }).feature_type === 'trait',
+    )
+    .map(feature => JSON.stringify(feature))
+    .join('\n');
+}
+
 /** Original potency facts: absence is unknown, never a zero/default characteristic. */
 export function conditionFacts(
   actor: TargetRecord,
@@ -119,6 +160,12 @@ export function conditionFacts(
           return score !== undefined && Number.isSafeInteger(score) ? [[letter, score]] : [];
         }),
       );
+      // V115: evaluated hero immunities are facts; printed foe prevention text is not evaluated,
+      // so a condition it names stays fact-needed instead of assumed (monster traits are manual).
+      const immunities = (targetBaseline?.conditionImmunities ?? [])
+        .map(entry => entry.condition)
+        .filter((id): id is ConditionId => (CONDITIONS as readonly string[]).includes(id));
+      const prevention = record.foe ? printedPrevention(traitText(foeSnapshot(record.foe))) : [];
       return {
         targetId: record.actor.id,
         kind: record.character
@@ -127,6 +174,8 @@ export function conditionFacts(
             ? ('foe' as const)
             : ('object' as const),
         characteristics,
+        ...(immunities.length ? { conditionImmunities: immunities } : {}),
+        ...(prevention.length ? { conditionPreventionUnevaluated: prevention } : {}),
       };
     }),
   };

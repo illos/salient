@@ -298,6 +298,30 @@ export function AbilityPanel({
               </select>
             </label>
           )}
+          {['melee', 'ranged'].every(mode =>
+            pending.keywords.some(keyword => keyword.toLowerCase() === mode),
+          ) && (
+            <label className="flex items-center gap-1">
+              <span className="text-sm text-muted-foreground">Use as</span>
+              <select
+                className="native-select"
+                aria-label="Melee or ranged"
+                value={draft!.mode ?? ''}
+                disabled={command.pending}
+                onChange={e => {
+                  const text = `${ref(actor)} /ability select ability="${pending.id}" mode=${e.target.value || 'default'}`;
+                  void command.run(
+                    commandId => submit({ campaignId, text, commandId }),
+                    JSON.stringify(['mode', campaignId, text]),
+                  );
+                }}
+              >
+                <option value="">choose</option>
+                <option value="melee">melee</option>
+                <option value="ranged">ranged</option>
+              </select>
+            </label>
+          )}
           {pending.targetShape.kind !== 'single' && pending.targetShape.kind !== 'self' && (
             <Command
               campaignId={campaignId}
@@ -403,9 +427,11 @@ export function CompiledEffects({
                         ? 'Applied condition'
                         : effect.status === 'resisted'
                           ? 'Resisted'
-                          : effect.status === 'fact-needed'
-                            ? 'Facts needed'
-                            : 'Manual condition'
+                          : effect.status === 'immune'
+                            ? 'Immune'
+                            : effect.status === 'fact-needed'
+                              ? 'Facts needed'
+                              : 'Manual condition'
                       : effect.kind === 'push'
                         ? 'Outstanding instruction'
                         : 'Unresolved'}

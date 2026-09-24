@@ -110,6 +110,7 @@ const draftView = v.union(
     modifiers: v.record(v.string(), v.object({ edges: v.number(), banes: v.number() })),
     characteristic: v.union(v.string(), v.null()),
     damageCharacteristic: v.union(v.string(), v.null()),
+    mode: v.union(v.literal('melee'), v.literal('ranged'), v.null()),
   }),
 );
 
@@ -186,6 +187,7 @@ export const sheet = query({
               modifiers: mine.modifiers,
               characteristic: mine.characteristic,
               damageCharacteristic: mine.damageCharacteristic ?? null,
+              mode: mine.mode ?? null,
             }
           : null,
       otherDrafts: others,

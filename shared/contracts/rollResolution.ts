@@ -115,7 +115,21 @@ export interface ActorRollFacts {
   }[];
   /** Supplied fact; the app cannot observe the weapon. Default false. */
   improvisedWeapon?: boolean;
+  /**
+   * V115 (feature/tactician/level-1/field-arsenal.md): a kit signature's printed kit bonus replaced
+   * by the other kit's chosen bonus. Per-tier deltas (added − printed) keyed by signature name and
+   * kit source path.
+   */
+  kitSignatureAdjustments?: {
+    ability: string;
+    sourcePath: string;
+    meleeDamage?: [number, number, number];
+    rangedDamage?: [number, number, number];
+  }[];
 }
+
+/** V115 (rule/combat/distance.md, Melee or Ranged): how a Melee-and-Ranged ability is used. */
+export type AbilityMode = 'melee' | 'ranged';
 
 /** Input to the shared ability-roll operation (sections 1 to 4, 9). */
 export interface AbilityRollRequest {
@@ -125,6 +139,8 @@ export interface AbilityRollRequest {
   selectedCharacteristic?: Characteristic;
   /** Explicit damage choice, independent of the roll; absent defaults to highest permitted. */
   selectedDamageCharacteristic?: Characteristic;
+  /** V115: required when a Melee-and-Ranged ability's outcome depends on the mode. */
+  selectedMode?: AbilityMode;
   targets: TargetRollInputs[];
   dice: PowerRollDice;
   inCombat: boolean;
@@ -195,6 +211,8 @@ export interface AbilityRollResult {
   selectedCharacteristic?: Characteristic;
   /** Explicit damage choice, independent of the roll; absent defaults to highest permitted. */
   selectedDamageCharacteristic?: Characteristic;
+  /** V115: the chosen mode of a Melee-and-Ranged ability, reused by corrections. */
+  selectedMode?: AbilityMode;
   characteristicValue: number;
   criticalHit: boolean;
   /** Offered to the acting user; never executed by the app (section 2). */

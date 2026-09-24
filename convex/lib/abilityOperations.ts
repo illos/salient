@@ -43,6 +43,7 @@ import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { BoundActor, CommandEnvelope, Reference } from '../../shared/commands/envelope';
 import type {
+  AbilityMode,
   AbilityRollBlocked,
   AbilityRollResult,
   Characteristic,
@@ -56,6 +57,7 @@ import {
   plainText,
   checkAffordability,
   correctTarget,
+  modeMatters,
   resolveAbilityRoll,
   resolveCatchBreath,
   resolveCreatureFreeStrike,
@@ -201,6 +203,7 @@ function emptyDraft(context: TableContext, actor: Actor | null): DraftFields {
     modifiers: {},
     characteristic: null,
     damageCharacteristic: null,
+    mode: null,
     updatedAt: Date.now(),
   };
 }
@@ -271,6 +274,7 @@ function fireEnvelope(
       ...(draft.damageCharacteristic
         ? { 'damage-characteristic': draft.damageCharacteristic }
         : {}),
+      ...(draft.mode ? { mode: draft.mode } : {}),
       fromDraft: true,
     },
   };
@@ -318,6 +322,26 @@ function prompt(ability: AbilityDefinition, targets: Actor[]): string {
   }
 }
 
+/** V115 (rule/combat/distance.md, Melee or Ranged): a mode only for a Melee-and-Ranged ability. */
+function parseMode(
+  value: unknown,
+  ability: AbilityDefinition,
+  allowDefault = false,
+): AbilityMode | null {
+  const text = String(value).trim().toLowerCase();
+  if (allowDefault && text === 'default') return null;
+  if (text !== 'melee' && text !== 'ranged')
+    throw new ConvexError('"mode" must be melee or ranged.');
+  if (!dualMode(ability))
+    throw new ConvexError(`${ability.name} is not a Melee-and-Ranged ability; it has no mode.`);
+  return text;
+}
+
+function dualMode(ability: Pick<AbilityDefinition, 'keywords'>): boolean {
+  const words = ability.keywords.map(k => plainText(k).toLowerCase());
+  return words.includes('melee') && words.includes('ranged');
+}
+
 function damageChoices(ability: AbilityDefinition): Characteristic[] {
   const choices = (ability.metadata?.tiers ?? []).flatMap(t =>
     t.damage?.kind === 'plusChoice' ? t.damage.choices : [],
@@ -350,6 +374,7 @@ const abilitySelect: OperationDefinition = {
     ability: v.string(),
     characteristic: v.optional(v.string()),
     'damage-characteristic': v.optional(v.string()),
+    mode: v.optional(v.string()),
   },
   argDescriptions: {
     ability: 'The ability by printed name or content id.',
@@ -357,6 +382,7 @@ const abilitySelect: OperationDefinition = {
       'Optional roll characteristic override (M, A, R, I or P); default resets the choice.',
     'damage-characteristic':
       'Independent damage characteristic override among the printed choices; default resets it.',
+    mode: 'melee or ranged for a Melee-and-Ranged ability; default resets the choice.',
   },
   roles: PLAYERS,
   session: 'running',
@@ -374,7 +400,8 @@ const abilitySelect: OperationDefinition = {
     if (
       draft.abilityId === ability.abilityId &&
       args.characteristic === undefined &&
-      args['damage-characteristic'] === undefined
+      args['damage-characteristic'] === undefined &&
+      args.mode === undefined
     )
       // Clicking the pending ability again cancels the un-fired selection (confirmed).
       return {
@@ -388,6 +415,7 @@ const abilitySelect: OperationDefinition = {
     if (draft.abilityId !== ability.abilityId) {
       draft.characteristic = null;
       draft.damageCharacteristic = null;
+      draft.mode = null;
     }
     draft.abilityId = ability.abilityId;
     if (args.characteristic !== undefined)
@@ -402,6 +430,7 @@ const abilitySelect: OperationDefinition = {
         'damageCharacteristic',
         damageChoices(ability),
       );
+    if (args.mode !== undefined) draft.mode = parseMode(args.mode, ability, true);
     // A single-target ability keeps at most the last selected target.
     if (ability.targetShape.kind === 'single' && draft.targets.length > 1)
       draft.targets = draft.targets.slice(-1);
@@ -915,6 +944,7 @@ const abilityUse: OperationDefinition = {
     banes: v.optional(v.union(v.number(), v.array(v.number()))),
     characteristic: v.optional(v.string()),
     'damage-characteristic': v.optional(v.string()),
+    mode: v.optional(v.string()),
     fromDraft: v.optional(v.boolean()),
   },
   argDescriptions: {
@@ -925,6 +955,7 @@ const abilityUse: OperationDefinition = {
     characteristic: 'Roll characteristic override (M, A, R, I or P) among the permitted ones.',
     'damage-characteristic':
       'Independent choice among the printed damage characteristics; otherwise highest permitted.',
+    mode: 'melee or ranged, required when a Melee-and-Ranged ability deals different damage in each mode.',
     fromDraft: 'Set by the selection controls when they fire the invoking user’s draft.',
   },
   roles: PLAYERS,
@@ -1264,6 +1295,11 @@ const abilityUse: OperationDefinition = {
             'damageCharacteristic',
             damageChoices(ability),
           );
+    const mode = args.mode === undefined ? undefined : (parseMode(args.mode, ability) ?? undefined);
+    if (!mode && modeMatters(metadata, actorFacts))
+      throw new ConvexError(
+        `${ability.name} can be used in melee or at range, and its damage differs (rule/combat/distance.md): give mode=melee or mode=ranged.`,
+      );
     const pool = metadata.fixedCost
       ? poolFor(records, context, metadata.fixedCost.resource)
       : undefined;
@@ -1282,6 +1318,7 @@ const abilityUse: OperationDefinition = {
       ...(pool ? { resourcePool: pool } : {}),
       ...(characteristic ? { selectedCharacteristic: characteristic } : {}),
       ...(damageCharacteristic ? { selectedDamageCharacteristic: damageCharacteristic } : {}),
+      ...(mode ? { selectedMode: mode } : {}),
     });
     if (probe.kind === 'blocked') {
       const blocked: AbilityRollBlocked = probe;
@@ -1316,6 +1353,7 @@ const abilityUse: OperationDefinition = {
       ...(pool ? { resourcePool: pool } : {}),
       ...(characteristic ? { selectedCharacteristic: characteristic } : {}),
       ...(damageCharacteristic ? { selectedDamageCharacteristic: damageCharacteristic } : {}),
+      ...(mode ? { selectedMode: mode } : {}),
       ...(!compiledDefinition && ability.effects ? { effectClauses: ability.effects } : {}),
       ...(compiledDefinition
         ? {
@@ -1631,6 +1669,7 @@ const abilityCorrect: OperationDefinition = {
         ...(originalResult?.selectedDamageCharacteristic
           ? { selectedDamageCharacteristic: originalResult.selectedDamageCharacteristic }
           : {}),
+        ...(originalResult?.selectedMode ? { selectedMode: originalResult.selectedMode } : {}),
         ...(result.selectedCharacteristic
           ? { selectedCharacteristic: result.selectedCharacteristic }
           : {}),
