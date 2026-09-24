@@ -64,3 +64,9 @@ wizard and shared API. Guided advancement stays the V32 Berserker 1→2 transiti
   roll and damage; You Are Already Dead's 3 surges belong to the ability, not its free strike; the
   foreign-pool and V45 assertions check exact diagnostics; the duplicate-perk question is
   [Q-FURY-2](../rules-questions-for-user.md#q-fury-2--may-a-class-perk-duplicate-a-perk-the-hero-already-has).
+- Testing thread PASS at `ff6f9c7` (rebased on main `bd6e8e4`): `CI=true pnpm check` rc0 in 238 s,
+  engine 404/404 and app 652/652; isolated `fury-level-three` cohort rc0 in 33 s with eight builds,
+  level edits and fifteen new uses persisted, seed 1669 entries at `fb83a789`. The logged
+  `transitionLevel` owner error is the cohort's deliberate peer refusal. Artifacts
+  `/srv/presidium/projects/salient/test-artifacts/V114-ff6f9c7`.
+- Ready for integration and cloud dev publication, reusing these results.
