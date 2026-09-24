@@ -1732,7 +1732,8 @@ stays immutable without a special respite context.
 Director approval; no respite ability-swap activity or campaign setting.
 
 **Implementation note, V165:** `/respite start|cancel|interrupt|complete` are registered Director
-operations; see the [V165 slice](build/V165-respite-loop.md). Respite activities and the table's respite
+operations; see the [V165 slice](build/V165-respite-loop.md). Cancel keeps a level-up or edit taken meanwhile
+(implementation interpretation, Q-RESPITE-1). Respite activities and the table's respite
 display follow in V166.
 
 **Complete is final, confirmed 2026-09-24:** a completed respite cannot be undone or rewound. The

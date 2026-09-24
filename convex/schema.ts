@@ -94,6 +94,9 @@ export default defineSchema({
             v.object({
               characterId: v.id('characters'),
               liveState: heroLiveValidator,
+              /** Maxima at the start, so Cancel restores damage taken against later maxima. */
+              staminaMaximum: v.number(),
+              recoveriesMaximum: v.number(),
             }),
           ),
         }),

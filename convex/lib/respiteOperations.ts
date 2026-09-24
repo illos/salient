@@ -4,8 +4,10 @@
  * respite for chosen heroes (the attached party by default) and ends it one of three ways.
  *
  * - `/respite start`: record each participant's state; the session cannot close while it is open.
- * - `/respite cancel`: every participant's live values return to their state at the start. Build
- *   changes (a level-up or approved edit) are separate operations and are not reverted.
+ * - `/respite cancel`: every participant's live values return to their state at the start; Stamina
+ *   and Recoveries return to the damage taken and Recoveries spent then (Q-CHAR-2 against the current
+ *   maxima). Implementation interpretation (Q-RESPITE-1): build changes made meanwhile (a level-up, an
+ *   approved edit) are separate operations and are not reverted; V166's respite kit swaps will be.
  * - `/respite interrupt`: it ends early without its completion benefits; what happened stands
  *   (rule/resource/respite.md: "the respite ends early and you don't gain the benefits").
  * - `/respite complete`: each participant regains all Stamina and Recoveries and converts Victories
@@ -25,6 +27,7 @@ import { journalPatch } from './journal';
 import { baselineOf } from './characterBuild';
 import { revisionLevel } from './characterProgression';
 import { sessionEncounter } from './combatOperations';
+import { reconciledCurrent } from '../../shared/evaluate/liveReconciliation';
 
 const XP_PER_LEVEL = 16;
 const MAX_LEVEL = 10;
@@ -42,15 +45,22 @@ function openRespite(context: TableContext): OpenRespite {
   return respite;
 }
 
-async function participants(ctx: MutationCtx, respite: OpenRespite) {
-  return Promise.all(
-    respite.participants.map(async p => {
-      const hero = await ctx.db.get(p.characterId);
-      if (!hero) throw new ConvexError('A respite participant is unavailable.');
-      return { hero, snapshot: p };
-    }),
+/** Participants still admitted in this campaign, and the names of any that have left since. */
+async function participants(ctx: MutationCtx, respite: OpenRespite, campaignId: Id<'campaigns'>) {
+  const rows = await Promise.all(
+    respite.participants.map(async p => ({ hero: await ctx.db.get(p.characterId), snapshot: p })),
   );
+  const present = rows.filter(
+    (row): row is { hero: Doc<'characters'>; snapshot: (typeof respite.participants)[number] } =>
+      !!row.hero && row.hero.campaignId === campaignId && !!row.hero.liveState,
+  );
+  const left = rows
+    .filter(row => !present.includes(row as never))
+    .map(row => row.hero?.authored.name ?? 'A removed hero');
+  return { present, left };
 }
+const leftNote = (left: string[]) =>
+  left.length ? ` No longer in the campaign, unchanged: ${left.join(', ')}.` : '';
 
 /** Level-ups granted by an XP gain: thresholds crossed, capped at level 10 (V165). */
 export function levelUpsEarned(
@@ -114,10 +124,15 @@ const start: OperationDefinition = {
         await journalPatch(mctx, scope, 'sessions', session._id, {
           respite: {
             startedAt: Date.now(),
-            participants: heroes.map(hero => ({
-              characterId: hero._id,
-              liveState: hero.liveState!,
-            })),
+            participants: heroes.map(hero => {
+              const baseline = baselineOf(hero.derivedBaseline);
+              return {
+                characterId: hero._id,
+                liveState: hero.liveState!,
+                staminaMaximum: baseline?.staminaMaximum.value ?? hero.liveState!.stamina,
+                recoveriesMaximum: baseline?.recoveriesMaximum.value ?? hero.liveState!.recoveries,
+              };
+            }),
           },
         });
       },
@@ -138,21 +153,37 @@ const cancel: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context }) => {
     const respite = openRespite(context);
-    const rows = await participants(ctx, respite);
+    const { present, left } = await participants(ctx, respite, context.campaign._id);
+    const restored = present.map(({ hero, snapshot }) => {
+      const baseline = baselineOf(hero.derivedBaseline);
+      const stamina = baseline?.staminaMaximum.value ?? snapshot.staminaMaximum;
+      const recoveries = baseline?.recoveriesMaximum.value ?? snapshot.recoveriesMaximum;
+      return {
+        hero,
+        liveState: {
+          ...snapshot.liveState,
+          stamina: reconciledCurrent(
+            'stamina',
+            snapshot.liveState.stamina,
+            snapshot.staminaMaximum,
+            stamina,
+          ),
+          recoveries: reconciledCurrent(
+            'recoveries',
+            snapshot.liveState.recoveries,
+            snapshot.recoveriesMaximum,
+            recoveries,
+          ),
+        },
+      };
+    });
     return {
       kind: 'respite.canceled',
-      description: 'Respite canceled: every participant is back to their state before it.',
-      data: { characters: rows.map(({ hero }) => hero._id) },
+      description: `Respite canceled: every participant is back to their state before it.${leftNote(left)}`,
+      data: { characters: restored.map(({ hero }) => hero._id), left },
       commit: async (mctx, scope) => {
-        for (const { hero, snapshot } of rows)
-          await journalPatch(
-            mctx,
-            scope,
-            'characters',
-            hero._id,
-            { liveState: snapshot.liveState },
-            hero,
-          );
+        for (const { hero, liveState } of restored)
+          await journalPatch(mctx, scope, 'characters', hero._id, { liveState }, hero);
         await journalPatch(mctx, scope, 'sessions', context.session!._id, { respite: null });
       },
     };
@@ -196,7 +227,14 @@ const complete: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context }) => {
     const respite = openRespite(context);
-    const rows = await participants(ctx, respite);
+    const { present, left } = await participants(ctx, respite, context.campaign._id);
+    // rule/health/dying.md: a dead hero (Stamina at or below the negative of their winded value)
+    // "can't be brought back to life" by resting; leave them unchanged for the table.
+    const dead = present.filter(({ hero }) => {
+      const baseline = baselineOf(hero.derivedBaseline);
+      return !!baseline && hero.liveState!.stamina <= -baseline.windedValue.value;
+    });
+    const rows = present.filter(row => !dead.includes(row));
     const results = await Promise.all(
       rows.map(async ({ hero }) => {
         const live = hero.liveState;
@@ -231,9 +269,12 @@ const complete: OperationDefinition = {
           `${r.hero.authored.name}: restored, XP ${r.before.xp} → ${r.liveState.xp}${r.earned ? `, ${r.earned} level-up${r.earned > 1 ? 's' : ''} granted` : ''}`,
       )
       .join('; ');
+    const deadNote = dead.length
+      ? ` Dead, unchanged (resolve manually): ${dead.map(({ hero }) => hero.authored.name).join(', ')}.`
+      : '';
     return {
       kind: 'respite.completed',
-      description: `Respite complete. ${summary}.`,
+      description: `Respite complete. ${summary}.${deadNote}${leftNote(left)}`,
       data: {
         characters: results.map(r => ({
           characterId: r.hero._id,
@@ -245,6 +286,8 @@ const complete: OperationDefinition = {
           xpAfter: r.liveState.xp,
           levelUpsGranted: r.earned,
         })),
+        dead: dead.map(({ hero }) => hero._id),
+        left,
       },
       commit: async (mctx, scope) => {
         for (const r of results)

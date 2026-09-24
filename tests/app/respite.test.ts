@@ -8,7 +8,7 @@
 import { expect, test } from 'vitest';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import { backend, table, storedEvents } from './fixtures/table';
+import { backend, table, storedEvents, admitHero } from './fixtures/table';
 import { levelUpsEarned } from '../../convex/lib/respiteOperations';
 
 async function setup() {
@@ -64,7 +64,7 @@ test('complete restores Stamina and Recoveries, converts Victories to XP and gra
   const event = (await storedEvents(f.t, f.campaignId)).find(e => e._id === result.eventId)!;
   expect(event.kind).toBe('respite.completed');
   // Complete is final: nothing rewinds across it.
-  await expect(f.say('/history rewind')).rejects.toThrow();
+  await expect(f.say('/history rewind')).rejects.toThrow(/the respite/);
   expect((await f.hero()).liveState).toMatchObject({ stamina: 30, xp: 17 });
 });
 
@@ -100,4 +100,54 @@ test('level-ups earned count thresholds crossed, from the entry offset, never pa
   expect(levelUpsEarned(0, 16, 32, 3)).toBe(1);
   expect(levelUpsEarned(0, 48, 0, 9)).toBe(1);
   expect(levelUpsEarned(0, 48, 0, 10)).toBe(0);
+});
+
+test('cancel keeps the damage taken against a build changed during the respite', async () => {
+  const f = await setup();
+  await f.say('/respite start');
+  // A 36-Stamina build activates meanwhile (as a level-up would); 10 damage taken stays.
+  await f.t.run(async ctx => {
+    const hero = (await ctx.db.get(f.thornId))!;
+    const baseline = structuredClone(hero.derivedBaseline) as {
+      staminaMaximum: { value: number };
+      recoveriesMaximum: { value: number };
+    };
+    baseline.staminaMaximum.value = 36;
+    baseline.recoveriesMaximum.value = 12;
+    await ctx.db.patch(f.thornId, {
+      derivedBaseline: baseline,
+      liveState: { ...hero.liveState!, stamina: 26, recoveries: 6 },
+    });
+  });
+  await f.say('@Thorn /adjust stamina value=5');
+  await f.say('/respite cancel');
+  // Q-CHAR-2 against the current maxima: 20/30 (10 damage) → 26/36; 4/10 (6 spent) → 6/12.
+  expect((await f.hero()).liveState).toMatchObject({ stamina: 26, recoveries: 6 });
+});
+
+test('complete leaves a dead hero and heroes outside the respite unchanged', async () => {
+  const f = await setup();
+  // rule/health/dying.md: death at the negative of the winded value (Thorn: 30 Stamina, winded 15).
+  await f.say('@Thorn /adjust stamina value=-15');
+  await f.say('/respite start');
+  await f.say('/respite complete');
+  expect((await f.hero()).liveState).toMatchObject({ stamina: -15, victories: 17, xp: 0 });
+  // A hero left out of the respite is untouched.
+  const other = await admitHero(f.t, f.player, f.director, f.campaignId, 'Wren');
+  await f.say(`@Wren /adjust victories value=3`);
+  const wrenBefore = (await f.t.run(ctx => ctx.db.get(other)))!.liveState;
+  await f.director.client.mutation(api.commands.invoke, {
+    campaignId: f.campaignId,
+    commandId: 'rest-thorn-only',
+    operation: 'respite.start',
+    arguments: { characters: [{ refKind: 'character', id: f.thornId }] },
+  });
+  await f.say('/respite complete');
+  expect((await f.t.run(ctx => ctx.db.get(other)))!.liveState).toEqual(wrenBefore);
+});
+
+test('a respite cannot start during combat', async () => {
+  const f = await setup();
+  await f.say('/combat start');
+  await expect(f.say('/respite start')).rejects.toThrow('Finish or void combat');
 });

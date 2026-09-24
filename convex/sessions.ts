@@ -23,6 +23,11 @@ const sessionValue = v.object({
   title: v.union(v.string(), v.null()),
   /** Position from the campaign's oldest session, so the header and history read `Session n`. */
   number: v.number(),
+  /** V165: the open respite, if any: when it started and who is resting. */
+  respite: v.union(
+    v.object({ startedAt: v.number(), participants: v.array(v.id('characters')) }),
+    v.null(),
+  ),
 });
 const MAX_TITLE = 100;
 /** Oldest first, bounded like `list`; the position of `s` among them is its number. */
@@ -50,6 +55,12 @@ async function project(ctx: ReadCtx, s: Doc<'sessions'>, ordered?: Doc<'sessions
     closedAt: s.closedAt,
     title: s.title ?? null,
     number: await sessionNumber(ctx, s, ordered),
+    respite: s.respite
+      ? {
+          startedAt: s.respite.startedAt,
+          participants: s.respite.participants.map(p => p.characterId),
+        }
+      : null,
   };
 }
 function normalizeTitle(title: string | undefined): string | undefined {

@@ -74,7 +74,11 @@ export async function runRespite({ actors: { director }, run, runId }: ScenarioC
 
       // Interrupt: what happened stands, no benefits.
       await invoke('respite.start');
-      const session = await director.query<{ revision: number }>('sessions:get', { sessionId });
+      const session = await director.query<{
+        revision: number;
+        respite: { participants: string[] } | null;
+      }>('sessions:get', { sessionId });
+      assert.deepEqual(session.respite?.participants, [characterId]);
       await assert.rejects(
         director.mutation('sessions:transition', {
           sessionId,
@@ -102,14 +106,24 @@ export async function runRespite({ actors: { director }, run, runId }: ScenarioC
       assert.equal(done.liveState!.victories, 0);
       assert.equal(done.pendingLevelUps, 1);
     } finally {
-      const session = await director.query<{ revision: number }>('sessions:get', { sessionId });
-      await director.mutation('sessions:transition', {
-        sessionId,
-        expectedRevision: session.revision,
-        action: 'close',
-        voidMode: 'keep',
-        commandId: cid(),
-      });
+      // Close cleanly without masking a failure: end any open respite first, ignore cleanup errors.
+      try {
+        const session = await director.query<{ revision: number; respite: unknown }>(
+          'sessions:get',
+          { sessionId },
+        );
+        if (session.respite) await invoke('respite.interrupt');
+        const latest = await director.query<{ revision: number }>('sessions:get', { sessionId });
+        await director.mutation('sessions:transition', {
+          sessionId,
+          expectedRevision: latest.revision,
+          action: 'close',
+          voidMode: 'keep',
+          commandId: cid(),
+        });
+      } catch {
+        // The scenario's own assertion (if any) is the failure worth reporting.
+      }
     }
   });
 }

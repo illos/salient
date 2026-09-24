@@ -1227,3 +1227,12 @@ settled. Until you rule, the save result stays with the table.
 
 Recommendation: A. The separately printed examples read that way, and a creature knocked prone
 normally has to stand up itself.
+
+## Q-RESPITE-1 — does Cancel revert a level-up or edit taken during the respite? (V165)
+
+The ruling (docs/table-spec.md, "Ending a respite") says Cancel reverts "every change made during the
+respite … (activities, kit swaps and other respite choices), as if it never started." Current behaviour:
+Cancel restores participants' live values (damage taken and Recoveries spent) and reverts respite
+choices; a level-up or an approved edit taken meanwhile is a separate operation and stays. Alternatives:
+revert those builds too, or block level-ups and edits for participants while a respite is open.
+Recommendation: keep the current behaviour; players often take their level-up whenever they get to it.
