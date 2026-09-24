@@ -183,3 +183,9 @@ choices, compounds, or prose Effects.
   - `tier-effects` passed every movement and prone check, then failed at `combat.roll`. The
     heroes-only campaign takes the adjudication path, where the Director picks the first side with
     no roll due, so the call was removed.
+- TESTER `test-V113-1fe1091-4` PASS: `tier-effects` exit 0 in 12 s. The run covered movement
+  instructions, prone with no registration, Net and Stab EoT expiring at the target's own turn
+  end, and ending prone with `condition off`. The `38a43f7` full gate (212 s, 402 engine and 652
+  app tests) and the `multi-target` and `effect-riders` passes carry over (docs and journey-only
+  delta). Artifacts: `/srv/presidium/projects/salient/test-artifacts/V113-1fe1091`. Ready for
+  integration.
