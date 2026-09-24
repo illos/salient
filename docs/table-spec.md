@@ -1727,6 +1727,10 @@ stays immutable without a special respite context.
    combat setup. It is not a combat void or rewind.
 3. **Complete:** the respite's benefits apply, as below.
 
+**Complete is final, confirmed 2026-09-24:** a completed respite cannot be undone or rewound. The
+Director corrects mistakes with the existing adjustments (XP, Victories, Stamina, Recoveries). Cancel
+exists only while the respite is open.
+
 **Completing with unused options, confirmed 2026-09-24:** Complete never waits for players and has no
 mechanical "everyone ready" state; players confirm verbally before the Director completes. Unused
 optional respite activities and choices lapse. They must be clearly visible before and while
