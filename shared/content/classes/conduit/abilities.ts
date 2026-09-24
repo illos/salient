@@ -340,7 +340,8 @@ export const CONDUIT_ACTIVATION: Record<string, string> = {
     'Until the end of the encounter or until you are dying, you and each ally within 10 squares gain 1 surge at the end of each of your turns. Adjust surges manually.',
   'Fear of the Gods':
     'Frightened (save ends) against Intuition potency is manual; each target is frightened of you or a creature you choose within distance.',
-  "Saint's Raiment": 'The ally gains 20 temporary Stamina and 3 surges. Apply both manually.',
+  "Saint's Raiment":
+    'The ally gains 20 temporary Stamina and 3 surges; the app applies both (V157). Do not add them again by hand.',
   'Soul Siphon':
     'Afterward one ally within distance can spend any number of Recoveries. Resolve manually.',
   'Words of Wrath and Grace': 'Each ally in the area can spend a Recovery. Resolve manually.',

@@ -72,7 +72,7 @@ const FURY_ACTIVATION: Record<string, string> = {
     'Until the end of the encounter or until you are dying, each enemy who starts its turn adjacent to you with Presence below your strong potency is frightened until the end of its turn. Adjacency, duration and the condition are manual.',
   'Face the Storm!':
     'Until the end of the encounter or until you are dying, each creature you make a melee strike against with Presence below your average potency is taunted until the end of its next turn. Rolled damage against an enemy you taunted gains twice your Might and +1 potency. Resolve manually.',
-  Steelbreaker: 'Gain 20 temporary Stamina. Apply the temporary Stamina manually.',
+  Steelbreaker: 'Gain 20 temporary Stamina; the app applies it (V157), keeping the greater amount.',
   'You Are Already Dead':
     'A target that is not a leader or solo creature is reduced to 0 Stamina at the end of its next turn; resolve that manually. Against a leader or solo creature you gain 3 surges (adjust manually) and can also use You Are Already Dead: Free Strike.',
 };
