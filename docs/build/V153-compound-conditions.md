@@ -99,3 +99,8 @@ Compendium (pinned `en/unified/md`):
   - `vitest run tests/app/compound-conditions.test.ts`: 2 passed.
   - `vitest run tests/scripts/compound-conditions.test.ts`: 5 passed.
   - `tsc --noEmit` and `tsc -p tsconfig.web.json --noEmit`: exit 0.
+
+## Publication: 2026-09-24
+
+Merged in train 7 (V152, V153, V154, V160) as main `4b87799` and published as Worker `bde8df86-9a57-4299-87f1-b6b564085f9f`.
+Release logs: `/srv/presidium/projects/salient/test-artifacts/train7-release`.

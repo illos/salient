@@ -119,3 +119,7 @@ Table notes:
   - Notes adopted: the decision doc now states when a lasting effect counts as table work, and
     the Wing Buffet test lookup is by kit corpus.
 
+## Publication: 2026-09-24
+
+Merged in train 7 (V152, V153, V154, V160) as main `4b87799` and published as Worker `bde8df86-9a57-4299-87f1-b6b564085f9f`.
+Release logs: `/srv/presidium/projects/salient/test-artifacts/train7-release`.

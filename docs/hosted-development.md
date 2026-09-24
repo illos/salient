@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V151 follow-up actions and V138 Summoner levels two and three
+## Current release — train 7 (V152, V153, V154, V160)
+
+Backend/frontend source `4b8779941ac57ad766f78b956d513faa6e9553ec` published on 2026-09-24 as
+Worker `bde8df86-9a57-4299-87f1-b6b564085f9f`: table-work effect riders, compound tier conditions and tier instructions (143 compiled
+abilities), and the Talent resource note. Backend and schema validation, the hosted build and the
+upload succeeded. Content remains the 1881-entry snapshot, so no reseed was needed. See the
+[ledger](../deploy.md).
+
+## Previous release — V151 follow-up actions and V138 Summoner levels two and three
 
 Backend/content/frontend source `b0f7c53f52b48b64b3442d90672d725d891da330` published on 2026-09-24 as
 Worker `5aee5766-b59e-4552-a208-839d72d73dbb`. Backend and schema validation, the content reseed (1881 entries at `fb83a789`), the

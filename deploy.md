@@ -42,6 +42,10 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V160 | `4b87799` | Merged in train 7; backend/frontend published; gate and headless at tip | complete |
+| V154 | `4b87799` | Merged in train 7; backend/frontend published; gate and headless at tip | complete |
+| V153 | `4b87799` | Merged in train 7; backend/frontend published; gate and headless at tip | complete |
+| V152 | `4b87799` | Merged in train 7; backend/frontend published; gate and headless at tip | complete |
 | V138 | `b0f7c53` | Merged in WIZARD3 stack; backend/content/frontend published; gate and headless at tip | complete |
 | V151 | `b0f7c53` | Merged in WIZARD3 stack; backend/content/frontend published; gate and headless at tip | complete |
 | party read-limit fix | `9240044` | Merged; backend/frontend published (priority fix) | complete |
@@ -638,3 +642,21 @@ on main `5ee2d8b`. The test and deploy thread fast-forwarded main to `b0f7c53f52
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/wtrain-release-b0f7c53`.
+
+### Train 7 (V152, V153, V154, V160) publication: 2026-09-24
+
+ENGINE2's stack V152 table-work effect riders, V153 compound tier conditions and V154 tier
+instructions (143 compiled abilities, up from 108), plus WIZARD3's V160 Talent resource note, were
+fast-forwarded into main as `4b8779941ac57ad766f78b956d513faa6e9553ec`.
+- Full gate at `2ca63c9` (248 s, 439 engine and 728 app tests) and 19 journeys there: rider-grammar,
+  compound-conditions, tier-instructions, the Shadow level-two, level-three and level-six journeys,
+  every touched class's level-three journey, and the touched base class journeys.
+- V160 changes one Talent note: its gate passed on `0f0919c` (440 engine and 692 app tests), and at
+  the tip its focused test, the type check and `talent-level-three` passed.
+- Independent reviews and QC1 clearance passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `bde8df86-9a57-4299-87f1-b6b564085f9f`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/train7-release`.

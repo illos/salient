@@ -78,3 +78,8 @@ Compendium (pinned `en/unified/md`): `rule/dice/ability-roll.md` (tier effects, 
 - The V72 report moves exactly 7 to compiled: 136 → 143 reachable. Lion's Toss stays manual.
 - Authoring: `vitest run` on the tier-instructions, live report, compiled-ability, compound,
   tier-effects and effect-riders script tests passed. Both typechecks pass.
+
+## Publication: 2026-09-24
+
+Merged in train 7 (V152, V153, V154, V160) as main `4b87799` and published as Worker `bde8df86-9a57-4299-87f1-b6b564085f9f`.
+Release logs: `/srv/presidium/projects/salient/test-artifacts/train7-release`.
