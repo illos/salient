@@ -305,10 +305,13 @@ export async function runConduitLevelThree({
           for (const name of names) {
             if (used.has(name)) continue;
             used.add(name);
-            assert.ok(
-              sheets[index]!.abilities.find(a => a.name === name)?.activationCondition,
-              `${b.id} ${name} listed with its condition`,
-            );
+            // Every new use carries its activation text; carried-over level-1 abilities keep their source text.
+            const listed = sheets[index]!.abilities.find(a => a.name === name);
+            assert.ok(listed?.content?.text, `${b.id} ${name} listed with its source`);
+            if (!(
+              b.w.levelTwo.addedActionsByV100NamingConvention.includes(name) && !name.includes(':')
+            ))
+              assert.ok(listed.activationCondition, `${b.id} ${name} listed with its condition`);
             const cost =
               name === b.second
                 ? 5

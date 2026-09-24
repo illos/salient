@@ -57,3 +57,8 @@ shared API. Guided advancement remains deferred.
   non-blocking findings, all closed: The Gods Command You Obey's note names the Presence potency gate;
   Statue of Power and Blessing of Fate and Destiny notes follow the printed text; the cohort reads the
   second domain feature and skill back from the persisted sheet; catch-all remainder patterns removed.
+- Test-Deploy headless at `32eddf5` failed at "v100-fate Grave Speech listed with its condition": the
+  cohort required an activation note on carried-over level-1 domain abilities (Grave Speech, Hands of the
+  Maker), which keep only their source text. An evaluator probe confirmed every new use has its note.
+  The cohort now requires source text for every use and the activation note for every new one.
+  Artifacts `/srv/presidium/projects/salient/test-artifacts/V134-32eddf5`.
