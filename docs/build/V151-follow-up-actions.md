@@ -49,3 +49,4 @@ prose inside the parent's activation text.
   the quote in the source file alone and checks source path, trigger and performer from the fixture.
   Kept: Burning Lash's spend record stays "Part of parent ability", since the second whip is part of
   that paid option (V137).
+- Review re-verification at `143674b`: PASS.
