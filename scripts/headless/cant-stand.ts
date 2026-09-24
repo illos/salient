@@ -303,7 +303,7 @@ export async function runCantStand({ actors: { director }, run, runId }: Scenari
         }
         assert.ok(
           hold,
-          `Staggering Blow reached no tier 2/3 in ${blow!.action.maxAttempts} real rolls (p ~ 0.36^n)`,
+          `Staggering Blow reached no tier 2/3 in ${blow!.action.maxAttempts} real rolls`,
         );
 
         // The target's own turn: Stand Up is refused while can't stand is active; its end fires the
