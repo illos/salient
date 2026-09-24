@@ -61,7 +61,7 @@ export function talentAbilities(
               ? 'Choose ally benefit (temporary Stamina three times Presence and end one effect) OR enemy roll. Entire branched effect is manual; never automatically attack an ally.'
               : a.name === 'Smolder'
                 ? 'Choose acid, corruption or fire for both damage and weakness; apply damage before weakness. Entire typed effect remains manual.'
-                : 'This ability’s Strained effects are manual and apply when already below zero Clarity or this use crosses zero; outside-combat one-minute and voluntary strain rules also apply. At levels 1–6 in combat the app adds Clarity at combat start and each turn start, applies end-of-turn strain damage and resets Clarity at encounter end: do not also apply them by hand. Claim the first forced movement each round, and with Steel Ward or Force Orbs apply the strain the log reports yourself (see Clarity and Strain: Turn-End Damage).'),
+                : 'Strained effects apply when already below zero Clarity or this use crosses zero; outside-combat one-minute and voluntary strain rules also apply. When the use’s log shows a Strained effect, the engine applied it (outside combat add strained=yes to incur it, and the engine deals the 1d6); otherwise resolve this ability’s Strained effects manually. At levels 1–6 in combat the app adds Clarity at combat start and each turn start, applies end-of-turn strain damage and resets Clarity at encounter end: do not also apply them by hand. Claim the first forced movement each round, and with Steel Ward or Force Orbs apply the strain the log reports yourself (see Clarity and Strain: Turn-End Damage).'),
         }
       : a,
   );

@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 81,
-      "manual": 290
+      "supported": 83,
+      "manual": 288
     },
     "kit-signature": {
       "total": 25,
@@ -51665,51 +51665,9 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt#markdown:block:1:0:bd6d85894c71a388",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.\nStrained: You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the power roll.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt#markdown:item:8:0:7b43292dd700fe05",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the power roll.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You advance an enemy's age for a moment.*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                         | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 2 + P corruption damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 3 + P corruption damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **17+:** 5 + P corruption damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n\n**Effect:** The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.\n\n**Strained:** You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.\nStrained: You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the power roll.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the power roll.",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -51720,18 +51678,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.\nStrained: You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the power roll.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the power roll.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -51955,24 +51901,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/flashback#markdown:block:0:0:a573ae40c582b534",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The target uses an ability with a base Heroic Resource cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.\nStrained: You take 1d6 damage and are slowed (save ends).",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/flashback#markdown:item:4:0:aaaacda4b0232574",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: You take 1d6 damage and are slowed (save ends).",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -51981,30 +51909,6 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
-        },
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*The target is thrown several seconds back through time and gets to do it all again.*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 Self or one ally** |\n\n**Effect:** The target uses an ability with a base [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.\n\n**Strained:** You take 1d6 damage and are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:0",
-          "clause": "Effect: The target uses an ability with a base Heroic Resource cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.\nStrained: You take 1d6 damage and are slowed (save ends).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: You take 1d6 damage and are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:4",
-          "clause": "Strained: You take 1d6 damage and are slowed (save ends).",
-          "message": "Printed mechanics cannot be ignored."
         },
         {
           "code": "manual-section",
@@ -52016,18 +51920,6 @@
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You take 1d6 damage and are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The target uses an ability with a base Heroic Resource cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.\nStrained: You take 1d6 damage and are slowed (save ends).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: You take 1d6 damage and are slowed (save ends).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
@@ -52208,46 +52100,13 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost#markdown:item:7:0:8c957500f48babca",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: You are slowed until the end of your next turn. Additionally, a target slowed by this ability is restrained instead.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You blast a foe with a pulse of cold energy.*\n\n| **Cryokinesis, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                             | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 + R cold damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n- **12-16:** 4 + R cold damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n- **17+:** 6 + R cold damage; M < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n\n**Strained:** You are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, a target [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) by this ability is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) instead.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: You are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, a target [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) by this ability is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) instead.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:7",
-          "clause": "Strained: You are slowed until the end of your next turn. Additionally, a target slowed by this ability is restrained instead.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, a target [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) by this ability is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) instead.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: You are slowed until the end of your next turn. Additionally, a target slowed by this ability is restrained instead.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -52386,51 +52245,9 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/incinerate#markdown:block:1:0:794240b832e8aedf",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: A column of fire remains in the area until the start of your next turn. Each enemy who enters the area for the first time in a combat round or starts their turn there takes 2 fire damage.\nStrained: The size of the cube increases by 2, but the fire disappears at the end of your turn.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/incinerate#markdown:item:8:0:2061bf6242887d0e",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The size of the cube increases by 2, but the fire disappears at the end of your turn.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*The air erupts into a column of smokeless flame.*\n\n| **Area, Fire, Psionic, Pyrokinesis, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------------|------------------------------:|\n| **📏 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10**                      | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 fire damage\n- **12-16:** 4 fire damage\n- **17+:** 6 fire damage\n\n**Effect:** A column of fire remains in the area until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes 2 fire damage.\n\n**Strained:** The size of the [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) increases by 2, but the fire disappears at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: A column of fire remains in the area until the start of your next turn. Each enemy who enters the area for the first time in a combat round or starts their turn there takes 2 fire damage.\nStrained: The size of the cube increases by 2, but the fire disappears at the end of your turn.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: The size of the [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) increases by 2, but the fire disappears at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: The size of the cube increases by 2, but the fire disappears at the end of your turn.",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -52441,18 +52258,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "The size of the [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) increases by 2, but the fire disappears at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: A column of fire remains in the area until the start of your next turn. Each enemy who enters the area for the first time in a combat round or starts their turn there takes 2 fire damage.\nStrained: The size of the cube increases by 2, but the fire disappears at the end of your turn.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The size of the cube increases by 2, but the fire disappears at the end of your turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -52552,24 +52357,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/inertia-soak#markdown:block:0:0:d6e2fb892437a6b6",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The target ignores difficult terrain and takes no damage from forced movement until the start of your next turn. Whenever the target enters a square while under this effect, they can push one adjacent creature up to a number of squares equal to your Reason score. When pushing an ally, the target can ignore that ally's stability. A creature can only be force moved this way once a turn.\nStrained: You are weakened (save ends). While you are weakened this way, whenever you are force moved, the forced movement distance gains a +5 bonus.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/inertia-soak#markdown:item:4:0:5ceca40dc613f5d8",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: You are weakened (save ends). While you are weakened this way, whenever you are force moved, the forced movement distance gains a +5 bonus.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -52578,30 +52365,6 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
-        },
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*Your psionic energy surrounds the target and pushes everything else away from them.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Telekinesis** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 Self or one ally** |\n\n**Effect:** The target ignores [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and takes no damage from [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever the target enters a square while under this effect, they can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. When [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) an ally, the target can ignore that ally's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). A creature can only be force moved this way once a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\n**Strained:** You are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends). While you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, whenever you are force moved, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:0",
-          "clause": "Effect: The target ignores difficult terrain and takes no damage from forced movement until the start of your next turn. Whenever the target enters a square while under this effect, they can push one adjacent creature up to a number of squares equal to your Reason score. When pushing an ally, the target can ignore that ally's stability. A creature can only be force moved this way once a turn.\nStrained: You are weakened (save ends). While you are weakened this way, whenever you are force moved, the forced movement distance gains a +5 bonus.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: You are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends). While you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, whenever you are force moved, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:4",
-          "clause": "Strained: You are weakened (save ends). While you are weakened this way, whenever you are force moved, the forced movement distance gains a +5 bonus.",
-          "message": "Printed mechanics cannot be ignored."
         },
         {
           "code": "manual-section",
@@ -52613,18 +52376,6 @@
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends). While you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, whenever you are force moved, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The target ignores difficult terrain and takes no damage from forced movement until the start of your next turn. Whenever the target enters a square while under this effect, they can push one adjacent creature up to a number of squares equal to your Reason score. When pushing an ally, the target can ignore that ally's stability. A creature can only be force moved this way once a turn.\nStrained: You are weakened (save ends). While you are weakened this way, whenever you are force moved, the forced movement distance gains a +5 bonus.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: You are weakened (save ends). While you are weakened this way, whenever you are force moved, the forced movement distance gains a +5 bonus.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
@@ -52730,24 +52481,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/iron#markdown:block:0:0:abd3e6b2a65fd5fa",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The target's stability increases by an amount equal to your Reason score, and they gain 10 temporary Stamina and 2 surges. This stability increase lasts until the target no longer has temporary Stamina from this ability.\nStrained: You can't use maneuvers (save ends).",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/iron#markdown:item:4:0:da118221c4956612",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: You can't use maneuvers (save ends).",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -52756,30 +52489,6 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
-        },
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*The target's skin turns to hard, dark metal, impenetrable and dense.*\n\n| **Metamorphosis, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                   | **🎯 Self or one ally** |\n\n**Effect:** The target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increases by an amount equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score, and they gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) and 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). This [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increase lasts until the target no longer has [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) from this ability.\n\n**Strained:** You can't use maneuvers (save ends).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:0",
-          "clause": "Effect: The target's stability increases by an amount equal to your Reason score, and they gain 10 temporary Stamina and 2 surges. This stability increase lasts until the target no longer has temporary Stamina from this ability.\nStrained: You can't use maneuvers (save ends).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: You can't use maneuvers (save ends).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:4",
-          "clause": "Strained: You can't use maneuvers (save ends).",
-          "message": "Printed mechanics cannot be ignored."
         },
         {
           "code": "manual-section",
@@ -52791,18 +52500,6 @@
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You can't use maneuvers (save ends).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The target's stability increases by an amount equal to your Reason score, and they gain 10 temporary Stamina and 2 surges. This stability increase lasts until the target no longer has temporary Stamina from this ability.\nStrained: You can't use maneuvers (save ends).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: You can't use maneuvers (save ends).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
@@ -52938,15 +52635,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip#markdown:item:7:0:2c7289bb3099d8b4",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: You must vertical push the target instead of sliding them.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -52975,33 +52663,9 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You lift and hurl your foe away from you.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Telekinesis** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 + R\n- **12-16:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4 + R\n- **17+:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6 + R; [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n\n**Strained:** You must vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: You must vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:7",
-          "clause": "Strained: You must vertical push the target instead of sliding them.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You must vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: You must vertical push the target instead of sliding them.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -53147,46 +52811,13 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-pulse#markdown:item:7:0:f9c41b53978481f6",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: The size of the burst increases by 2, and you are bleeding until the start of your next turn.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*The force of your mind hurls enemies backward.*\n\n| **Area, Psionic, Telepathy** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------|------------------------------:|\n| **📏 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**               | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 psychic damage\n- **12-16:** 5 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **17+:** 7 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n\n**Strained:** The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 2, and you are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 2, and you are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:7",
-          "clause": "Strained: The size of the burst increases by 2, and you are bleeding until the start of your next turn.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 2, and you are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: The size of the burst increases by 2, and you are bleeding until the start of your next turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -53325,51 +52956,9 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/materialize#markdown:block:1:0:0438e2caf84749ca",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: A worthless size 1M object drops onto the target to deal the damage, then rolls into an adjacent unoccupied space of your choice. The object is made of wood, stone, or metal (your choice).\nStrained: The object explodes after the damage is dealt, and each creature adjacent to the target takes damage equal to your Reason score. You also take damage equal to your Reason score that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/materialize#markdown:item:8:0:2d7e0d361fc5078d",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The object explodes after the damage is dealt, and each creature adjacent to the target takes damage equal to your Reason score. You also take damage equal to your Reason score that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You picture an object in your mind and give it form—directly above your opponent's head.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Resopathy, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                       | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 3 + R damage\n- **12-16:** 5 + R damage\n- **17+:** 8 + R damage\n\n**Effect:** A worthless [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1M object drops onto the target to deal the damage, then rolls into an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) unoccupied space of your choice. The object is made of wood, stone, or metal (your choice).\n\n**Strained:** The object explodes after the damage is dealt, and each creature [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target takes damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. You also take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: A worthless size 1M object drops onto the target to deal the damage, then rolls into an adjacent unoccupied space of your choice. The object is made of wood, stone, or metal (your choice).\nStrained: The object explodes after the damage is dealt, and each creature adjacent to the target takes damage equal to your Reason score. You also take damage equal to your Reason score that can't be reduced in any way.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: The object explodes after the damage is dealt, and each creature [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target takes damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. You also take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: The object explodes after the damage is dealt, and each creature adjacent to the target takes damage equal to your Reason score. You also take damage equal to your Reason score that can't be reduced in any way.",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -53380,18 +52969,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "The object explodes after the damage is dealt, and each creature [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target takes damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. You also take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: A worthless size 1M object drops onto the target to deal the damage, then rolls into an adjacent unoccupied space of your choice. The object is made of wood, stone, or metal (your choice).\nStrained: The object explodes after the damage is dealt, and each creature adjacent to the target takes damage equal to your Reason score. You also take damage equal to your Reason score that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The object explodes after the damage is dealt, and each creature adjacent to the target takes damage equal to your Reason score. You also take damage equal to your Reason score that can't be reduced in any way.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -53467,7 +53044,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/mind-spike.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -53520,55 +53097,23 @@
           "id": "mcdm.heroes.v1/feature.ability.talent.level-1/mind-spike#block:1:0:174f16a421fcd21c",
           "locator": "block:1:0",
           "clause": "The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:strained",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/mind-spike#markdown:item:7:0:2d81d457bbbedc8e",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
+          "kind": "strained",
+          "spec": {
+            "targetExtraDamage": {
+              "amount": 2,
+              "damageType": "psychic"
+            },
+            "selfDamage": {
+              "amount": 2,
+              "damageType": "psychic",
+              "unreducible": true
+            }
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*A telepathic bolt instantly zaps a creature's brain.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike, Telepathy** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                           | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 + R psychic damage\n- **12-16:** 4 + R psychic damage\n- **17+:** 6 + R psychic damage\n\n**Strained:** The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:7",
-          "clause": "Strained: The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Mind Spike",
@@ -53883,51 +53428,9 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/optic-blast#markdown:block:1:0:c6f6e6aa8cd1f151",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.\nStrained: You gain 1 surge that you can use immediately, and you take damage equal to your Reason score that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/optic-blast#markdown:item:8:0:f5e0ca8cfe4ac582",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: You gain 1 surge that you can use immediately, and you take damage equal to your Reason score that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*Your eyes emit rays of powerful enervating force.*\n\n| **Metamorphosis, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                               | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **12-16:** 4 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **17+:** 6 + R damage; M < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n\n**Effect:** When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.\n\n**Strained:** You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately, and you take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.\nStrained: You gain 1 surge that you can use immediately, and you take damage equal to your Reason score that can't be reduced in any way.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately, and you take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: You gain 1 surge that you can use immediately, and you take damage equal to your Reason score that can't be reduced in any way.",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -53938,18 +53441,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately, and you take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.\nStrained: You gain 1 surge that you can use immediately, and you take damage equal to your Reason score that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: You gain 1 surge that you can use immediately, and you take damage equal to your Reason score that can't be reduced in any way.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -54049,24 +53540,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/perfect-clarity#markdown:block:0:0:3db9a0836628bc3f",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: Until the start of your next turn, the target gains a +3 bonus to speed, and they have a double edge on the next power roll they make. If the target obtains a tier 3 outcome on that roll, you gain 1 clarity.\nStrained: You take 1d6 damage, and you can't use triggered actions (save ends).",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/perfect-clarity#markdown:item:4:0:c517e72d17a8c805",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: You take 1d6 damage, and you can't use triggered actions (save ends).",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -54075,30 +53548,6 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
-        },
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You clear the mind of nothing but the goal.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Telepathy** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**               | **🎯 Self or one ally** |\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the target gains a +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), and they have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) they make. If the target obtains a tier 3 outcome on that roll, you gain 1 clarity.\n\n**Strained:** You take 1d6 damage, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) (save ends).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:0",
-          "clause": "Effect: Until the start of your next turn, the target gains a +3 bonus to speed, and they have a double edge on the next power roll they make. If the target obtains a tier 3 outcome on that roll, you gain 1 clarity.\nStrained: You take 1d6 damage, and you can't use triggered actions (save ends).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: You take 1d6 damage, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) (save ends).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:4",
-          "clause": "Strained: You take 1d6 damage, and you can't use triggered actions (save ends).",
-          "message": "Printed mechanics cannot be ignored."
         },
         {
           "code": "manual-section",
@@ -54110,18 +53559,6 @@
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You take 1d6 damage, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) (save ends).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: Until the start of your next turn, the target gains a +3 bonus to speed, and they have a double edge on the next power roll they make. If the target obtains a tier 3 outcome on that roll, you gain 1 clarity.\nStrained: You take 1d6 damage, and you can't use triggered actions (save ends).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: You take 1d6 damage, and you can't use triggered actions (save ends).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
@@ -54741,7 +54178,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/spirit-sword.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -54799,76 +54236,21 @@
           "id": "mcdm.heroes.v1/feature.ability.talent.level-1/spirit-sword#block:2:0:5adf21379a785a8c",
           "locator": "block:2:0",
           "clause": "The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:strained",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/spirit-sword#markdown:block:1:0:bb415008dfbf4c16",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: You gain 1 surge.\nStrained: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-1/spirit-sword#markdown:item:8:0:ff2dbb0b8fefdb56",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
+          "kind": "strained",
+          "spec": {
+            "targetExtraDamage": {
+              "amount": 3
+            },
+            "selfDamage": {
+              "amount": 3,
+              "unreducible": true
+            }
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You form a blade of mind energy and stab your target, invigorating yourself.*\n\n| **Animapathy, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2**                         | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 3 + P damage\n- **12-16:** 6 + P damage\n- **17+:** 9 + P damage\n\n**Effect:** You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n\n**Strained:** The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: You gain 1 surge.\nStrained: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: You gain 1 surge.\nStrained: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Spirit Sword",
@@ -54993,24 +54375,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#markdown:block:1:0:e9ab9327f1613908",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: Until the start of your next turn, each target gains a +5 bonus to speed, they can't be made dazed, and they can use an additional maneuver on their turn. If a target is already dazed, that condition ends for them.\nStrained: Your speed is halved until the end of the encounter.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#markdown:item:8:0:71d45e1ae8ff9642",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: Your speed is halved until the end of the encounter.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -55033,30 +54397,6 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*Time slows down around you. Your heartbeat is the only gauge of the extra moments you've gained.*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |   **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|---------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 Special** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** You target two creatures, one of which can be you.\n- **12-16:** You target three creatures, one of which can be you.\n- **17+:** You target four creatures, one of which can be you.\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), they can't be made [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), and they can use an additional maneuver on their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If a target is already [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), that [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) ends for them.\n\n**Strained:** Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved until the end of the encounter.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: Until the start of your next turn, each target gains a +5 bonus to speed, they can't be made dazed, and they can use an additional maneuver on their turn. If a target is already dazed, that condition ends for them.\nStrained: Your speed is halved until the end of the encounter.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved until the end of the encounter.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: Your speed is halved until the end of the encounter.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), they can't be made [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), and they can use an additional maneuver on their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If a target is already [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), that [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) ends for them.",
@@ -55066,18 +54406,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved until the end of the encounter.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: Until the start of your next turn, each target gains a +5 bonus to speed, they can't be made dazed, and they can use an additional maneuver on their turn. If a target is already dazed, that condition ends for them.\nStrained: Your speed is halved until the end of the encounter.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: Your speed is halved until the end of the encounter.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
@@ -55228,46 +54556,13 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#markdown:item:7:0:4e1405e974067095",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: The size of the burst increases by 1, and you are weakened until the end of your turn.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*Everyone get away from me!*\n\n| **Area, Psionic, Telekinesis** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|------------------------------:|\n| **📏 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**                 | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 3 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **12-16:** 6 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n- **17+:** 9 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n\n**Strained:** The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:7",
-          "clause": "Strained: The size of the burst increases by 1, and you are weakened until the end of your turn.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: The size of the burst increases by 1, and you are weakened until the end of your turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -55445,46 +54740,13 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#markdown:item:7:0:61284eb6907a48c8",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: You take half the damage the target takes.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You raise the target slightly into the air, then smother them against the ground.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Telekinesis** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                         | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 6 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **12-16:** 10 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **17+:** 14 + R damage; M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)\n\n**Strained:** You take half the damage the target takes.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: You take half the damage the target takes.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:7",
-          "clause": "Strained: You take half the damage the target takes.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You take half the damage the target takes.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: You take half the damage the target takes.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -55650,46 +54912,13 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#markdown:item:7:0:2c72358ad06ea93d",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You overload their senses, turning all their subconscious thoughts into conscious ones.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Telepathy** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                       | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 6 + R psychic damage; I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 10 + R psychic damage; I < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 14 + R psychic damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n\n**Strained:** You start crying, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) or make [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: You start crying, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) or make [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:7",
-          "clause": "Strained: You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You start crying, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) or make [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:7:0",
-          "clause": "Strained: You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -55810,24 +55039,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#markdown:block:1:0:ddda4a2e3e05ec2f",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: A target can't use triggered actions while their speed is reduced this way.\nStrained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#markdown:item:8:0:f6da16248f45fccb",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -55850,30 +55061,6 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*Perhaps they wonder why everyone else is moving so quickly?*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |                      **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|----------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 Three creatures or objects** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** The target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved (save ends), or if P < WEAK, the target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).\n- **12-16:** The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < AVERAGE, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).\n- **17+:** The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < STRONG, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).\n\n**Effect:** A target can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) while their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced this way.\n\n**Strained:** The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1 and you take 1d6 damage. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: A target can't use triggered actions while their speed is reduced this way.\nStrained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1 and you take 1d6 damage. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "A target can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) while their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced this way.",
@@ -55883,18 +55070,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1 and you take 1d6 damage. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: A target can't use triggered actions while their speed is reduced this way.\nStrained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -56015,24 +55190,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#markdown:block:1:0:e2ed75f26f7e6212",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect. However, you can move them to provoke opportunity attacks.\nStrained: You take 1d6 damage and are weakened until the end of your turn.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#markdown:item:8:0:84a90383971833e9",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: You take 1d6 damage and are weakened until the end of your turn.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -56055,30 +55212,6 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You control an enemy's nervous system. How pleasant for them.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Telepathy** |  **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|-----------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**               | **🎯 One enemy** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** The target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against one enemy of your choice.\n- **12-16:** The target shifts up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.\n- **17+:** The target moves up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.\n\n**Effect:** You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect. However, you can move them to provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack).\n\n**Strained:** You take 1d6 damage and are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect. However, you can move them to provoke opportunity attacks.\nStrained: You take 1d6 damage and are weakened until the end of your turn.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: You take 1d6 damage and are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: You take 1d6 damage and are weakened until the end of your turn.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect. However, you can move them to provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack).",
@@ -56088,18 +55221,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "You take 1d6 damage and are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect. However, you can move them to provoke opportunity attacks.\nStrained: You take 1d6 damage and are weakened until the end of your turn.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: You take 1d6 damage and are weakened until the end of your turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -56264,24 +55385,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#markdown:block:1:0:8e4020cddd630cd0",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space.\nStrained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#markdown:item:8:0:51783e96f51446b3",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -56298,30 +55401,6 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You hurl the target through the annals of time, forcing them to witness every moment of their existence all at once.*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 3 + P corruption damage; P < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **12-16:** 5 + P corruption damage; the target is flung through time, and if P < AVERAGE, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 8 + P corruption damage; the target is flung through time, and if P < STRONG, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n\n**Effect:** A target who is flung through time is removed from the encounter map until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), reappearing in their original space or the nearest unoccupied space.\n\n**Strained:** You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a [human](scc.v1:mcdm.heroes.v1/ancestry/human)). If you obtain a tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you gain 2 clarity.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space.\nStrained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a [human](scc.v1:mcdm.heroes.v1/ancestry/human)). If you obtain a tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you gain 2 clarity.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "A target who is flung through time is removed from the encounter map until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), reappearing in their original space or the nearest unoccupied space.",
@@ -56331,18 +55410,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a [human](scc.v1:mcdm.heroes.v1/ancestry/human)). If you obtain a tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you gain 2 clarity.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space.\nStrained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -56478,24 +55545,9 @@
           "shape": "unaccounted-paragraph",
           "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#markdown:item:9:0:bc3bc83fe8cf5d46",
-          "locator": "markdown:item:9:0",
-          "clause": "Strained: You create five orbs, and you are weakened while you have any orbs active.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*Spheres of solid psionic energy float around you.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Telekinesis** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------|----------------:|\n| **📏 Self; see below**                   |     **🎯 Self** |\n\n**Effect:** You create three [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1T orbs that orbit your body. Each orb gives you a cumulative [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 1. Each time you take damage, you lose 1 orb.\n\nOnce on each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can use a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) to fire an orb at a creature or object within 5 squares as a [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), losing the orb after the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 damage\n- **12-16:** 3 damage\n- **17+:** 5 damage\n\n**Strained:** You create five orbs, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) while you have any orbs active.\n",
-          "message": "Structured and printed block counts differ."
-        },
         {
           "code": "source-block-mismatch",
           "locator": "markdown:block:0",
@@ -56503,21 +55555,9 @@
           "message": "Roll, tier, section content or order differs between the envelope and full source."
         },
         {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: You create five orbs, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) while you have any orbs active.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
           "code": "unaccounted-paragraph",
           "locator": "markdown:item:4",
           "clause": "Once on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:9",
-          "clause": "Strained: You create five orbs, and you are weakened while you have any orbs active.",
           "message": "Printed mechanics cannot be ignored."
         },
         {
@@ -56542,12 +55582,6 @@
           "code": "manual-section",
           "locator": "markdown:item:4:0",
           "clause": "Once on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:9:0",
-          "clause": "Strained: You create five orbs, and you are weakened while you have any orbs active.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
@@ -56635,24 +55669,6 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field#markdown:block:0:0:54e025a18aaccedd",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The aura lasts until the start of your next turn. Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.\nStrained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field#markdown:item:4:0:b924ee9085a1b570",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
@@ -56661,30 +55677,6 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
-        },
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*A protective field reverses the momentum of incoming attacks.*\n\n| **Area, Psionic, Telepathy** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------|----------------:|\n| **📏 3 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**                |  **🎯 Special** |\n\n**Effect:** The [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever an enemy targets an ally in the area with a [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.\n\n**Strained:** The size of the [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) increases by 1. Whenever your [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:0",
-          "clause": "Effect: The aura lasts until the start of your next turn. Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.\nStrained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Strained: The size of the [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) increases by 1. Whenever your [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:4",
-          "clause": "Strained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
-          "message": "Printed mechanics cannot be ignored."
         },
         {
           "code": "manual-section",
@@ -56696,18 +55688,6 @@
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "The size of the [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) increases by 1. Whenever your [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The aura lasts until the start of your next turn. Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.\nStrained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:4:0",
-          "clause": "Strained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
@@ -56876,51 +55856,9 @@
           "shape": "effect-paragraph:strained",
           "reason": "effect-paragraph",
           "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#markdown:block:1:0:d3a7bfd23e40ce80",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: The target takes a bane on Presence tests until the end of the encounter.\nStrained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#markdown:item:8:0:a2861e24e6de47e8",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
         }
       ],
       "diagnostics": [
-        {
-          "code": "source-block-count",
-          "locator": "markdown",
-          "clause": "\n\n*You blast their soul out of their body, leaving it to helplessly float back to a weakened husk.*\n\n| **Animapathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 6 + P damage; P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **12-16:** 10 + P damage; P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **17+:** 14 + P damage; P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n\n**Effect:** The target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) until the end of the encounter.\n\n**Strained:** The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1. You take 2d6 damage and gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately.\n",
-          "message": "Structured and printed block counts differ."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:1",
-          "clause": "Effect: The target takes a bane on Presence tests until the end of the encounter.\nStrained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:2",
-          "clause": "Strained: The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1. You take 2d6 damage and gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "Strained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
-          "message": "Printed mechanics cannot be ignored."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -56931,18 +55869,6 @@
           "code": "manual-section",
           "locator": "block:2:0",
           "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1. You take 2d6 damage and gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:1:0",
-          "clause": "Effect: The target takes a bane on Presence tests until the end of the encounter.\nStrained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "Strained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
@@ -213622,9 +212548,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 156,
+    "compiled": 158,
     "compiledEffectOnly": 8,
-    "compatibility": 1465,
+    "compatibility": 1463,
     "compiledButUnavailable": 0
   }
 }

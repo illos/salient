@@ -129,7 +129,7 @@ const TIER_LABELS = ['≤11', '12-16', '17+'];
 
 /** Labels the source uses for named sections; anything else with a colon is a paragraph. */
 const SECTION_LABEL =
-  /^((?:\d+\+? )?Malice|Spend \d+\+? [A-Za-z]+|Effect|Trigger|Special|Persistent \d+|Head|Legs|Torso|Villain Action \d?|Before|After)\s*:\s*(.*)$/;
+  /^((?:\d+\+? )?Malice|Spend \d+\+? [A-Za-z]+|Effect|Trigger|Special|Strained|Persistent \d+|Head|Legs|Torso|Villain Action \d?|Before|After)\s*:\s*(.*)$/;
 
 export function readMarkdownItems(body: string, name: string): MarkdownItem[] {
   const items: MarkdownItem[] = [];

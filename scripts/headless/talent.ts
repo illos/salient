@@ -24,6 +24,7 @@ type Saved = {
   liveState: {
     heroicResource: { current: number };
     stamina: number;
+    temporaryStamina: number;
     conditions?: Record<string, boolean>;
     conditionInstances?: {
       status: string;
@@ -188,12 +189,11 @@ export async function runTalent({ actors: { director, peer }, run, runId }: Scen
       const compiledClauses = async (id: string) =>
         (
           (
-            await director.query<{ compiled?: { effects: { effect: { clause?: string } }[] } }[]>(
-              'abilities:results',
-              { campaignId, eventIds: [id] },
-            )
+            await director.query<
+              { compiled?: { effects: { effect: { kind?: string; clause?: string } }[] } }[]
+            >('abilities:results', { campaignId, eventIds: [id] })
           )[0]?.compiled?.effects ?? []
-        ).map(o => o.effect.clause ?? '');
+        ).map(o => `${o.effect.kind ?? ''}: ${o.effect.clause ?? ''}`);
       const log = () => director.query<{ events: Log[] }>('events:list', { campaignId });
       const event = async (id: string) => (await log()).events.find(e => e.id === id);
       const usedNames = new Set<string>();
@@ -311,8 +311,11 @@ export async function runTalent({ actors: { director, peer }, run, runId }: Scen
         });
         assert.equal((await event(five.eventId))?.kind, 'ability.recorded');
         assert.equal((await get(ids[0]!)).liveState?.heroicResource.current, -3);
-        // Free signature while strained preserves base roll; explicit strain record carries both effects.
+        // V170: a free signature while strained (clarity −3) applies its Strained section
+        // (feature/ability/talent/level-1/mind-spike.md): the target takes an extra 2 psychic and
+        // the caster 2 psychic that can't be reduced. The explicit strain record still changes nothing.
         await invoke(targetId, 'adjust.stamina', { value: 24 });
+        const spikeCaster = (await get(ids[0]!)).liveState!;
         const spike = await invoke(ids[0]!, 'ability.use', {
           ability: 'Mind Spike',
           targets: [{ refKind: 'character', id: targetId }],
@@ -320,9 +323,15 @@ export async function runTalent({ actors: { director, peer }, run, runId }: Scen
         const rolledSpike = (await event(spike.eventId))!.payload!.data!.result!;
         assert.equal(
           (await get(targetId)).liveState!.stamina,
-          24 - [5, 7, 9][rolledSpike.targets[0]!.tier - 1]!,
+          24 - ([5, 7, 9][rolledSpike.targets[0]!.tier - 1]! + 2),
         );
-        assert.equal((await get(ids[0]!)).liveState?.heroicResource.current, -3);
+        const spikeCasterAfter = (await get(ids[0]!)).liveState!;
+        assert.equal(
+          spikeCasterAfter.stamina + spikeCasterAfter.temporaryStamina,
+          spikeCaster.stamina + spikeCaster.temporaryStamina - 2,
+          'Mind Spike strained self-damage',
+        );
+        assert.equal(spikeCasterAfter.heroicResource.current, -3);
         const beforeStrain = await get(targetId),
           casterBefore = await get(ids[0]!);
         const strain = await invoke(ids[0]!, 'ability.use', {

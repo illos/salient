@@ -198,7 +198,7 @@ export const TALENT_ACTIONS: TalentAction[] = [
     sourcePath: 'en/unified/md/feature/ability/talent/level-1/mind-spike.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. Target takes extra 2 psychic damage; caster takes 2 psychic damage that cannot be reduced. Resolve the stated effects manually.',
+      'The engine applies this with Mind Spike when you are strained: already below zero Clarity, or taken below zero by the use. Outside combat, add strained=yes to the use to incur it by the one-minute or voluntary rule (the engine also deals the 1d6); strained=no overrides. Target takes extra 2 psychic damage; caster takes 2 psychic damage that cannot be reduced. Effects may persist after Clarity recovers. Record it here only for a use the engine did not resolve, and then resolve the stated effects manually.',
   },
   {
     name: 'Entropic Bolt: Strain',
@@ -262,7 +262,7 @@ export const TALENT_ACTIONS: TalentAction[] = [
     sourcePath: 'en/unified/md/feature/ability/talent/level-1/spirit-sword.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. Target takes extra 3 damage; caster takes 3 damage that cannot be reduced. Resolve the stated effects manually.',
+      'The engine applies this with Spirit Sword when you are strained: already below zero Clarity, or taken below zero by the use. Outside combat, add strained=yes to the use to incur it by the one-minute or voluntary rule (the engine also deals the 1d6); strained=no overrides. Target takes extra 3 damage; caster takes 3 damage that cannot be reduced. Effects may persist after Clarity recovers. Record it here only for a use the engine did not resolve, and then resolve the stated effects manually.',
   },
   {
     name: 'Flashback: Strain',

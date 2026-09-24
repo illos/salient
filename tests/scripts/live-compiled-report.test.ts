@@ -185,6 +185,9 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Relentless Nemesis',
       // V159: a stability modifier the engine applies, and 2 surges (effect-only).
       'Squad! On Me!',
+      // V170: a Strained section the engine applies when the Talent is strained.
+      'Mind Spike',
+      'Spirit Sword',
     ].sort(),
   );
   expect(

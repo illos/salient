@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 156 (without a power roll: 8); unchanged reachable compatibility: 1465; structurally supported but unavailable: 0.
+Currently reachable compiled: 158 (without a power roll: 8); unchanged reachable compatibility: 1463; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -364,35 +364,35 @@ Currently reachable compiled: 156 (without a power roll: 8); unchanged reachable
 | Again | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Awe | hero-standalone | manual | legacy-compatibility | manual-section |
 | Choke | hero-standalone | supported | compiled |  |
-| Entropic Bolt | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Entropic Bolt | hero-standalone | manual | legacy-compatibility | manual-section |
 | Feedback Loop | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
-| Flashback | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| Hoarfrost | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Incinerate | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Inertia Soak | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| Iron | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| Kinetic Grip | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Kinetic Pulse | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Materialize | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Mind Spike | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Flashback | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Hoarfrost | hero-standalone | manual | legacy-compatibility | manual-section |
+| Incinerate | hero-standalone | manual | legacy-compatibility | manual-section |
+| Inertia Soak | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Iron | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Kinetic Grip | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Kinetic Pulse | hero-standalone | manual | legacy-compatibility | manual-section |
+| Materialize | hero-standalone | manual | legacy-compatibility | manual-section |
+| Mind Spike | hero-standalone | supported | compiled |  |
 | Minor Telekinesis | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Optic Blast | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Perfect Clarity | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Optic Blast | hero-standalone | manual | legacy-compatibility | manual-section |
+| Perfect Clarity | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Precognition | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Remote Assistance | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Repel | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Smolder | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| Spirit Sword | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Applied Chronometrics | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| Gravitic Burst | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Levity and Gravity | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Overwhelm | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Slow | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Synaptic Override | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Fling Through Time | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Force Orbs | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| Reflector Field | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| Soul Burn | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Spirit Sword | hero-standalone | supported | compiled |  |
+| Applied Chronometrics | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
+| Gravitic Burst | hero-standalone | manual | legacy-compatibility | manual-section |
+| Levity and Gravity | hero-standalone | manual | legacy-compatibility | manual-section |
+| Overwhelm | hero-standalone | manual | legacy-compatibility | manual-section |
+| Slow | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Synaptic Override | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Fling Through Time | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Force Orbs | hero-standalone | manual | legacy-compatibility | source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Reflector Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Soul Burn | hero-standalone | manual | legacy-compatibility | manual-section |
 | Concussive Slam | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, empty-clause |
 | Minor Acceleration | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Psionic Bolt | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder |

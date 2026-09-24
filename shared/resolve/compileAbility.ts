@@ -9,6 +9,7 @@ import type {
 import { tierInstruction } from './effectRiders.ts';
 import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import { sectionModifier, type ModifierSpec } from './modifiers.ts';
+import { strainedSection, type StrainedSpec } from './strained.ts';
 import {
   effectOnlyTarget,
   readEffectOnlySection,
@@ -125,6 +126,15 @@ export interface ModifierNode extends NodeSource {
   spec: ModifierSpec;
 }
 /**
+ * V170: a whole Strained section of a rolled ability (shared/resolve/strained.ts). It applies only
+ * when the use is strained (feature/talent/level-1/clarity-and-strain.md), which the use decides
+ * from the clarity pool or the table's declaration.
+ */
+export interface StrainedNode extends NodeSource {
+  kind: 'strained';
+  spec: StrainedSpec;
+}
+/**
  * V157 executed gain of an effect-only section: temporary Stamina (the greater of the current and
  * granted amounts, rule/health/temporary-stamina.md) and/or surges (added, rule/resource/surge.md).
  */
@@ -137,7 +147,8 @@ export interface GainNode extends NodeSource {
 export type CompiledNode =
   DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
 /** Effect-section nodes: V109 riders, V157 effect-only gains and instructions, or manual work. */
-export type SectionNode = UnsupportedNode | RiderNode | GainNode | InstructionNode | ModifierNode;
+export type SectionNode =
+  UnsupportedNode | RiderNode | GainNode | InstructionNode | ModifierNode | StrainedNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -288,6 +299,20 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       return;
     }
     if (block.kind === 'section') {
+      // V170: a whole Strained section after the roll. "The target" work needs one target (V110),
+      // and its extra damage must be the type of every tier's damage (strainedExtraDamage).
+      const strained =
+        block.label === 'Strained' && !block.cost && rollIndex >= 0
+          ? strainedSection(plain(block.text))
+          : undefined;
+      if (strained && strainedAdmitted(strained, tiers, grammar.targetShape)) {
+        sections.push({
+          ...sourceNode(envelope, locator, 0, block.text),
+          kind: 'strained',
+          spec: strained,
+        });
+        return;
+      }
       // V159: a whole Effect section that is one modifier sentence the engine applies. It is read
       // before V109 riders, so a sentence the engine now applies is no longer table work.
       const modifier =
@@ -754,6 +779,25 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       scope: 'pure-only',
     },
   };
+}
+
+/**
+ * V170: a Strained spec the compiler admits and the resolver re-checks. "The target takes an extra
+ * N damage" adds to this use's damage to one target, so it needs a one-target envelope (V110) and
+ * the type of every tier's damage; any other combination stays manual.
+ */
+export function strainedAdmitted(
+  spec: StrainedSpec,
+  tiers: readonly CompiledNode[][],
+  targetShape: string,
+): boolean {
+  if (!spec.targetExtraDamage) return true;
+  const type = spec.targetExtraDamage.damageType;
+  return (
+    targetShape === 'single' &&
+    tiers.length === 3 &&
+    tiers.every(nodes => nodes[0]?.kind === 'damage' && nodes[0].damageType === type)
+  );
 }
 
 /** V157 actions a use without a power roll may take; triggered actions stay manual (piece 5). */

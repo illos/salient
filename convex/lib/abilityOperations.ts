@@ -102,6 +102,8 @@ import {
   reconcileObservedGains,
 } from './resourceTriggers';
 import { rollDice } from './dice';
+import { commitStrained, planStrained, withStrainedPlan, type StrainedPlan } from './strainedUse';
+import { strainedExtraDamage, strainedState } from '../../shared/resolve/strained';
 import {
   abilitiesFor,
   actorRollFacts,
@@ -1406,6 +1408,7 @@ const abilityUse: OperationDefinition = {
     'damage-characteristic': v.optional(v.string()),
     mode: v.optional(v.string()),
     exclude: v.optional(v.union(v.string(), v.array(v.string()))),
+    strained: v.optional(v.string()),
     fromDraft: v.optional(v.boolean()),
   },
   argDescriptions: {
@@ -1419,6 +1422,8 @@ const abilityUse: OperationDefinition = {
     mode: 'melee or ranged, required when a Melee-and-Ranged ability deals different damage in each mode.',
     exclude:
       'Effect instance ids whose automatic edge, bane or bonus does not apply to this roll (the table’s override). Edges and banes given here are circumstance, added to the automatic ones.',
+    strained:
+      'yes or no, for an ability with a Strained effect the engine applies. By default the engine decides from Clarity (below 0 before the use, or taken below 0 by its cost). Outside combat, yes incurs the effect for 1d6 damage (the one-minute or voluntary rule); in combat a value against the automatic one is the table’s override.',
     fromDraft: 'Set by the selection controls when they fire the invoking user’s draft.',
   },
   roles: PLAYERS,
@@ -1514,6 +1519,22 @@ const abilityUse: OperationDefinition = {
       ...(ability.tiers ? { tiers: ability.tiers } : {}),
       ...(ability.effects ? { effects: ability.effects } : {}),
     };
+
+    // V170: a Strained section the engine applies, and the table's declaration for it.
+    const strainedNode =
+      ability.compilation?.mode === 'compiled'
+        ? ability.compilation.definition.sections.find(node => node.kind === 'strained')
+        : undefined;
+    let declaredStrained: 'yes' | 'no' | undefined;
+    if (args.strained !== undefined) {
+      const value = String(args.strained).toLowerCase();
+      if (value !== 'yes' && value !== 'no') throw new ConvexError('"strained" must be yes or no.');
+      if (!strainedNode)
+        throw new ConvexError(
+          `${ability.name} has no Strained effect the engine applies; resolve any strain effect at the table.`,
+        );
+      declaredStrained = value;
+    }
 
     if (ability.compilation?.mode === 'manual') {
       return {
@@ -2075,7 +2096,22 @@ const abilityUse: OperationDefinition = {
         facts: 'facts' in facts ? { facts: withoutImmunityTypes(facts.facts, ignored) } : facts,
       };
     });
+    // V170 (feature/talent/level-1/clarity-and-strain.md): strained before the use, or by paying
+    // this use's cost (the probe's payment is the use's, decided before any dice); the table's
+    // declaration covers what the engine can't observe outside combat.
+    const strained =
+      strainedNode && compiledDefinition
+        ? strainedState({
+            inCombat: allowance.inCombat,
+            ...(poolFor(records, context, 'clarity')
+              ? { clarity: poolFor(records, context, 'clarity')!.current }
+              : {}),
+            ...(probe.cost ? { cost: probe.cost } : {}),
+            ...(declaredStrained ? { declared: declaredStrained } : {}),
+          })
+        : undefined;
     const resolutionInput: CompiledAbilityInput = {
+      ...(strained ? { strained } : {}),
       actor: actorFacts,
       targets: totals,
       targetFacts: targetFacts.flatMap(t => ('facts' in t.facts ? [t.facts.facts] : [])),
@@ -2117,6 +2153,27 @@ const abilityUse: OperationDefinition = {
       throw new ConvexError('Affordability changed during resolution.');
     const result: AbilityRollResult = response;
     warnings.push(...result.warnings);
+    // V170: the user's own damage from a strained use, planned now so the log states it.
+    let strainedPlan: StrainedPlan | undefined;
+    if (strainedNode && strained && compiledOutcome?.kind === 'resolved') {
+      const asTarget = result.damageApplications.find(
+        d => d.targetId === actor!.id && targets.some(t => sameActor(t.actor, actor!)),
+      );
+      strainedPlan = await planStrained(ctx, {
+        campaignId: context.campaign._id,
+        commandId: envelope.commandId,
+        issuer: context.user._id,
+        actor: records,
+        actorLabel: actor!.name,
+        node: strainedNode,
+        state: strained,
+        ...(asTarget ? { asTarget } : {}),
+      });
+      const plan = strainedPlan;
+      compiledOutcome.effects = compiledOutcome.effects.map(effect =>
+        effect.kind === 'strained' ? withStrainedPlan(effect, plan) : effect,
+      );
+    }
     for (const t of targetFacts) if ('missing' in t.facts) warnings.push(t.facts.missing);
     const perTarget = targets.map((t, i) => {
       const outcome = result.targets[i]!;
@@ -2170,7 +2227,7 @@ const abilityUse: OperationDefinition = {
     const grabTier = perTarget[0]?.outcome.tier ?? 1;
     const grabText = grabPlan ? grabPlan.note(grabTier) : '';
     const describeUse = (payment: string) =>
-      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment}${automaticText ? ` Automatic effects (${automaticText}).` : ''} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${grabText}${squadText}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment}${automaticText ? ` Automatic effects (${automaticText}).` : ''} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${grabText}${squadText}${critText}${strainedPlan?.text ?? ''}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
     return {
       kind: 'ability.use',
       description: describeUse(costText),
@@ -2189,6 +2246,22 @@ const abilityUse: OperationDefinition = {
           ...(p.contributions ? { contributions: p.contributions } : {}),
         })),
         ...(consumed.length ? { consumed: consumed.map(c => c.instanceId) } : {}),
+        ...(strainedPlan
+          ? {
+              strained: {
+                ...strainedPlan.state,
+                ...(strainedPlan.incur
+                  ? {
+                      incurDie: strainedPlan.incur.die,
+                      ...(strainedPlan.incur.heldBy
+                        ? { incurHeldBy: strainedPlan.incur.heldBy }
+                        : {}),
+                    }
+                  : {}),
+                ...(strainedPlan.self ? { selfApplication: strainedPlan.self } : {}),
+              },
+            }
+          : {}),
         damage: perTarget.map(p => ({
           target: p.target,
           application: p.applied,
@@ -2281,6 +2354,8 @@ const abilityUse: OperationDefinition = {
             },
             allowance.encounterId,
           );
+        // V170: the user's own damage from a strained use, after the use's other effects.
+        if (strainedPlan) await commitStrained(mctx, scope, records, strainedPlan);
         // 3. The effective record for corrections and dispositions.
         await journalInsert(mctx, scope, 'abilityResults', {
           campaignId: scope.campaignId,
@@ -2546,6 +2621,8 @@ const abilityCorrect: OperationDefinition = {
       throw new ConvexError(
         'This older ability use has no recorded resolution inputs; use a new current-state adjustment rather than recomputing it from changed facts.',
       );
+    const savedStrained = result.compiled as
+      (CompiledResult & { inputs: CompiledAbilityInput }) | undefined;
     const currentFacts = damageTargetFacts(targetRecord);
     const originalFacts = inputs.targetFacts.find(f => f.targetId === entry.target.id);
     const facts: { facts: DamageTargetFacts } | { missing: string } =
@@ -2582,6 +2659,13 @@ const abilityCorrect: OperationDefinition = {
       corrected.edges,
       corrected.banes,
       corrected.bonuses,
+      // V170: a strained use's extra damage, from the saved decision (never re-decided).
+      savedStrained
+        ? strainedExtraDamage(
+            savedStrained.definition.sections.find(node => node.kind === 'strained')?.spec,
+            savedStrained.inputs.strained,
+          )
+        : undefined,
     );
     if (
       targetRecord.character &&
@@ -2631,7 +2715,9 @@ const abilityCorrect: OperationDefinition = {
             if (
               ((effect.kind !== 'rider' || effect.tier) && effect.targetId !== entry.target.id) ||
               (effect.kind === 'rider' && effect.lasting) ||
-              effect.kind === 'modifier'
+              effect.kind === 'modifier' ||
+              // V170: the Strained outcome is once per use and records the user's damage as applied.
+              effect.kind === 'strained'
             ) {
               const kept = savedCompiled.effects.find(
                 o => o.effect.nodeId === effect.nodeId && o.effect.targetId === effect.targetId,
@@ -2867,6 +2953,13 @@ const abilityResolved: OperationDefinition = {
       if (occurrence.effect.kind === 'modifier' && occurrence.effect.status === 'applied')
         throw new ConvexError(
           'An applied modifier is tracked by the engine; exclude it on a roll or end it with /effect end.',
+        );
+      // V170: an applied Strained section already dealt its damage; an inapplicable one did nothing.
+      if (occurrence.effect.kind === 'strained' && occurrence.effect.status !== 'manual')
+        throw new ConvexError(
+          occurrence.effect.status === 'applied'
+            ? 'This Strained effect was applied by the engine; correct or rewind the use instead.'
+            : 'This use was not strained, so its Strained effect does not apply; rewind the use to declare strained=yes.',
         );
       if (clause && plainText(clause) !== plainText(occurrence.effect.clause))
         throw new ConvexError('The clause does not match that occurrence.');

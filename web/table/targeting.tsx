@@ -518,18 +518,20 @@ export function CompiledEffects({
                 ·{' '}
                 {effect.kind === 'unsupported' || effect.kind === 'rider'
                   ? 'Manual effect'
-                  : effect.kind === 'modifier'
-                    ? 'Modifier'
-                    : effect.kind === 'gain'
-                      ? 'Gain'
-                      : effect.kind === 'push'
-                        ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
-                            /^./,
-                            letter => letter.toUpperCase(),
-                          )
-                        : effect.kind === 'condition'
-                          ? 'Condition'
-                          : 'Damage'}
+                  : effect.kind === 'strained'
+                    ? 'Strained effect'
+                    : effect.kind === 'modifier'
+                      ? 'Modifier'
+                      : effect.kind === 'gain'
+                        ? 'Gain'
+                        : effect.kind === 'push'
+                          ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
+                              /^./,
+                              letter => letter.toUpperCase(),
+                            )
+                          : effect.kind === 'condition'
+                            ? 'Condition'
+                            : 'Damage'}
               </strong>
               <Badge variant="outline">
                 {effect.kind === 'damage'
@@ -538,29 +540,35 @@ export function CompiledEffects({
                     : 'Damage not applied'
                   : occurrence.disposition
                     ? 'Resolved at table'
-                    : effect.kind === 'modifier'
+                    : effect.kind === 'strained'
                       ? effect.status === 'applied'
-                        ? 'Tracked effect'
-                        : 'Manual modifier'
-                      : effect.kind === 'gain'
+                        ? 'Applied'
+                        : effect.status === 'not-strained'
+                          ? 'Not strained'
+                          : 'Manual'
+                      : effect.kind === 'modifier'
                         ? effect.status === 'applied'
-                          ? 'Applied gain'
-                          : 'Manual gain'
-                        : effect.kind === 'condition'
+                          ? 'Tracked effect'
+                          : 'Manual modifier'
+                        : effect.kind === 'gain'
                           ? effect.status === 'applied'
-                            ? 'Applied condition'
-                            : effect.status === 'resisted'
-                              ? 'Resisted'
-                              : effect.status === 'immune'
-                                ? 'Immune'
-                                : effect.status === 'ineligible'
-                                  ? 'Too large to grab'
-                                  : effect.status === 'fact-needed'
-                                    ? 'Facts needed'
-                                    : 'Manual condition'
-                          : effect.kind === 'push'
-                            ? 'Outstanding instruction'
-                            : 'Unresolved'}
+                            ? 'Applied gain'
+                            : 'Manual gain'
+                          : effect.kind === 'condition'
+                            ? effect.status === 'applied'
+                              ? 'Applied condition'
+                              : effect.status === 'resisted'
+                                ? 'Resisted'
+                                : effect.status === 'immune'
+                                  ? 'Immune'
+                                  : effect.status === 'ineligible'
+                                    ? 'Too large to grab'
+                                    : effect.status === 'fact-needed'
+                                      ? 'Facts needed'
+                                      : 'Manual condition'
+                            : effect.kind === 'push'
+                              ? 'Outstanding instruction'
+                              : 'Unresolved'}
               </Badge>
             </span>
             <span className="[overflow-wrap:anywhere]">
@@ -701,6 +709,15 @@ export function CompiledEffects({
                   : `Apply it at the table: ${effect.requirements.join('; ')}.`}
               </span>
             )}
+            {effect.kind === 'strained' && (
+              <span>
+                {effect.status === 'not-strained'
+                  ? 'The user was not strained for this use, so this does not apply.'
+                  : effect.status === 'applied'
+                    ? `Applied${effect.spec.targetExtraDamage ? `: the target's damage includes the extra ${effect.spec.targetExtraDamage.amount}` : ''}${effect.selfApplication ? `; the user took ${effect.selfApplication.afterImmunity} damage that can't be reduced` : ''}.`
+                    : `Resolve at the table: ${effect.requirements.join('; ')}.`}
+              </span>
+            )}
             {effect.kind === 'rider' && (
               <span>
                 Resolve the printed effect at the table; this entry applies no additional state
@@ -720,6 +737,7 @@ export function CompiledEffects({
             {effect.kind !== 'damage' &&
               (effect.kind !== 'gain' || effect.status === 'manual') &&
               (effect.kind !== 'modifier' || effect.status === 'manual') &&
+              (effect.kind !== 'strained' || effect.status === 'manual') &&
               (effect.kind !== 'condition' ||
                 effect.status === 'fact-needed' ||
                 effect.status === 'manual') &&

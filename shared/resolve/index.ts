@@ -682,6 +682,8 @@ export function correctTarget(
   banes: number,
   /** V159: the automatic bonuses and penalties saved with the roll, kept by the correction. */
   bonuses?: TargetRollInputs['bonuses'],
+  /** V170: flat damage the saved use added to this target (a strained use's extra damage). */
+  extraDamage?: TargetRollInputs['extraDamage'],
 ): PostRollCorrectionResult {
   if (edges < 0 || banes < 0) throw new Error('Edge and bane counts cannot be negative.');
   const naturalRoll = naturalRollOf(original.dice);
@@ -691,7 +693,13 @@ export function correctTarget(
     naturalRoll,
     original.characteristicValue,
     original.selectedCharacteristic,
-    { targetId: before.targetId, edges, banes, ...(bonuses?.length ? { bonuses } : {}) },
+    {
+      targetId: before.targetId,
+      edges,
+      banes,
+      ...(bonuses?.length ? { bonuses } : {}),
+      ...(extraDamage?.length ? { extraDamage } : {}),
+    },
     original.selectedDamageCharacteristic,
   );
   const result: PostRollCorrectionResult = {

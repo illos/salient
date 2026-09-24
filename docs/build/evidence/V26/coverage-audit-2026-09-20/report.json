@@ -30366,12 +30366,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
             "text": "The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.",
@@ -30576,12 +30570,6 @@
             "locator": "envelope"
           },
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
             "text": "The target uses an ability with a base Heroic Resource cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.",
@@ -30696,12 +30684,6 @@
           }
         ],
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
@@ -30830,12 +30812,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
             "text": "A column of fire remains in the area until the start of your next turn. Each enemy who enters the area for the first time in a combat round or starts their turn there takes 2 fire damage.",
@@ -30926,12 +30902,6 @@
             "shape": "no-power-roll",
             "text": "",
             "locator": "envelope"
-          },
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
           },
           {
             "type": "effect-paragraph",
@@ -31026,12 +30996,6 @@
             "locator": "envelope"
           },
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
             "text": "The target's stability increases by an amount equal to your Reason score, and they gain 10 temporary Stamina and 2 surges. This stability increase lasts until the target no longer has temporary Stamina from this ability.",
@@ -31121,12 +31085,6 @@
           ]
         },
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
@@ -31260,12 +31218,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
             "text": "The size of the burst increases by 2, and you are bleeding until the start of your next turn.",
@@ -31371,12 +31323,6 @@
           }
         ],
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
@@ -31492,12 +31438,6 @@
           }
         ],
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
@@ -31702,12 +31642,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
             "text": "When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.",
@@ -31819,12 +31753,6 @@
             "shape": "no-power-roll",
             "text": "",
             "locator": "envelope"
-          },
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
           },
           {
             "type": "effect-paragraph",
@@ -32335,12 +32263,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
             "text": "The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
@@ -32425,12 +32347,6 @@
           ]
         },
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
@@ -32551,12 +32467,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
             "text": "The size of the burst increases by 1, and you are weakened until the end of your turn.",
@@ -32672,12 +32582,6 @@
           }
         ],
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
@@ -32801,12 +32705,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:strained",
             "text": "You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
@@ -32903,12 +32801,6 @@
           ]
         },
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
@@ -33009,12 +32901,6 @@
           ]
         },
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
@@ -33141,12 +33027,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
             "text": "A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space.",
@@ -33258,12 +33138,6 @@
         ],
         "diagnostics": [
           {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
-          {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
             "text": "You create three size 1T orbs that orbit your body. Each orb gives you a cumulative damage immunity 1. Each time you take damage, you lose 1 orb.",
@@ -33336,12 +33210,6 @@
             "shape": "no-power-roll",
             "text": "",
             "locator": "envelope"
-          },
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
           },
           {
             "type": "effect-paragraph",
@@ -33438,12 +33306,6 @@
           }
         ],
         "diagnostics": [
-          {
-            "type": "unknown",
-            "shape": "envelope:structured-markdown-mismatch",
-            "text": "markdown has 1 sections, structured has 2",
-            "locator": "markdown"
-          },
           {
             "type": "effect-paragraph",
             "shape": "effect-paragraph:effect",
@@ -107559,17 +107421,6 @@
       ]
     },
     {
-      "shape": "envelope:structured-markdown-mismatch",
-      "type": "unknown",
-      "count": 38,
-      "abilities": 38,
-      "examples": [
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-2/fetch"
-      ]
-    },
-    {
       "shape": "resource-spend:spend N ferocity",
       "type": "resource-spend",
       "count": 31,
@@ -107765,6 +107616,17 @@
         "salient:foe-feature:2d425f83-e132-4fe4-8732-5d4a414c914c",
         "salient:foe-feature:69149685-5481-4f4d-9f9f-47422ffa8a73",
         "salient:foe-feature:86f8a31b-28f4-45a7-94e6-3b131231a609"
+      ]
+    },
+    {
+      "shape": "envelope:structured-markdown-mismatch",
+      "type": "unknown",
+      "count": 15,
+      "abilities": 15,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-2/fetch"
       ]
     },
     {

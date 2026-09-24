@@ -30,6 +30,14 @@ import {
 } from './modifiers.ts';
 import type { ModifierPayload } from '../contracts/liveState.ts';
 import {
+  sameStrainedSpec,
+  strainedExtraDamage,
+  strainedSection,
+  type StrainedSpec,
+  type StrainedState,
+} from './strained.ts';
+import { strainedAdmitted } from './compileAbility.ts';
+import {
   effectOnlyClause,
   effectOnlyTarget,
   effectOnlyTargetLimit,
@@ -84,6 +92,12 @@ export interface CompiledAbilityInput extends Omit<AbilityRollInput, 'ability'> 
     actor: MovementFacts;
     targets: (MovementFacts & { targetId: string })[];
   };
+  /**
+   * V170: whether this use is strained, decided by the use from the clarity pool before and after
+   * its payment, or declared by the table (shared/resolve/strained.ts). Saved with the inputs, so a
+   * correction recomputes with the same decision. Absent: a Strained section stays manual.
+   */
+  strained?: StrainedState;
 }
 
 interface EffectIdentity {
@@ -295,7 +309,27 @@ export interface CompiledModifierOutcome extends EffectIdentity {
   requirements: string[];
 }
 
+/**
+ * V170: a Strained section's outcome for one use, addressed through the first target like other
+ * once-per-use sections.
+ * - `applied`: the use is strained. The target's extra damage is already in its damage outcome
+ *   (breakdown `extraDamage`); the user's own damage is applied by the use, which records it here.
+ * - `not-strained`: the section does not apply to this use.
+ * - `manual`: the use gave no strained decision, or the user's damage could not be applied; the
+ *   table resolves what `requirements` names.
+ */
+export interface CompiledStrainedOutcome extends EffectIdentity {
+  kind: 'strained';
+  status: 'applied' | 'not-strained' | 'manual';
+  spec: StrainedSpec;
+  state?: StrainedState;
+  /** The user's damage as applied at the use, when the spec has any and it applied. */
+  selfApplication?: DamageApplication;
+  requirements: string[];
+}
+
 export type CompiledEffectOutcome =
+  | CompiledStrainedOutcome
   | CompiledDamageOutcome
   | CompiledPushOutcome
   | CompiledConditionOutcome
@@ -557,6 +591,16 @@ export function resolveCompiledAbility(
     !['single', 'multi', 'area'].includes(shape.kind) ||
     (shape.kind === 'area' && !eachAreaTarget(definition.envelope.target)) ||
     definition.sections.some(node => {
+      // V170: a Strained section re-reads to the same spec and is still admitted for these tiers.
+      if (node.kind === 'strained') {
+        const again = strainedSection(plain(node.clause));
+        return (
+          !again ||
+          !sameStrainedSpec(again, node.spec) ||
+          !strainedAdmitted(again, definition.tiers, shape.kind) ||
+          definition.sections.filter(other => other.kind === 'strained').length !== 1
+        );
+      }
       // V159: a modifier re-reads to the same spec, or the definition was tampered with.
       if (node.kind === 'modifier') {
         const again = sectionModifier(plain(node.clause));
@@ -687,7 +731,21 @@ export function resolveCompiledAbility(
       unresolvedClauses: nodes.filter(node => node.kind === 'unsupported').map(node => node.clause),
     };
   }) as [TierDamageText, TierDamageText, TierDamageText];
-  const roll = resolveAbilityRoll({ ...input, ability: { ...definition.metadata, tiers } });
+  // V170: a strained use adds the section's extra damage to each target's damage for this use.
+  const strainedNode = definition.sections.find(node => node.kind === 'strained');
+  const extra = strainedExtraDamage(strainedNode?.spec, input.strained);
+  const roll = resolveAbilityRoll({
+    ...input,
+    ...(extra.length
+      ? {
+          targets: input.targets.map(target => ({
+            ...target,
+            extraDamage: [...(target.extraDamage ?? []), ...extra],
+          })),
+        }
+      : {}),
+    ability: { ...definition.metadata, tiers },
+  });
   if (roll.kind === 'blocked') return { kind: 'blocked', definition, roll, effects: [] };
   const effects: CompiledEffectOutcome[] = [];
   const remainder: CompiledEffectOutcome[] = [];
@@ -770,6 +828,22 @@ export function resolveCompiledAbility(
     (effect): effect is CompiledConditionOutcome => effect.kind === 'condition',
   );
   for (const node of definition.sections) {
+    // V170: the Strained section, once per use. The user's damage is applied by the use.
+    if (node.kind === 'strained') {
+      const state = input.strained;
+      remainder.push({
+        kind: 'strained',
+        nodeId: node.id,
+        targetId: roll.targets[0]!.targetId,
+        locator: node.locator,
+        clause: node.clause,
+        status: !state ? 'manual' : state.applies ? 'applied' : 'not-strained',
+        spec: node.spec,
+        ...(state ? { state } : {}),
+        requirements: state ? [] : ['actor.strained'],
+      });
+      continue;
+    }
     // V159: a modifier section is once per use and independent of the roll; it applies to the
     // single target (V110), which holds its instance.
     if (node.kind === 'modifier') {

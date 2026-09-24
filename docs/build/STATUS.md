@@ -180,3 +180,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V157 | [Abilities without a power roll, and executed gains](V157-effect-only-abilities.md) | In progress (ENGINE2) |
 | V158 | [Effect instances and durations](V158-effect-instances.md) | In progress (ENGINE2) |
 | V159 | [Modifiers from lasting effects](V159-modifiers.md) | In progress (ENGINE2) |
+| V170 | [Talent Strained sections](V170-talent-strained.md) | Committed on branch |

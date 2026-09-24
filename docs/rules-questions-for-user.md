@@ -1332,3 +1332,28 @@ with this anchor compiles.
 - **Recommendation:** A until more levels exist; B risks presenting a build the player never had.
 - **Blocked until answered:** nothing; part a applies A.
 - **Answer:**
+
+## Q-STRAIN-1: how a strained Mind Spike or Spirit Sword deals its damage (V170)
+
+Open; V170 binds labelled interpretations so the two abilities can compile. Pinned `en/unified/md`:
+- `feature/ability/talent/level-1/mind-spike.md`: "Strained: The target takes an extra 2 psychic
+  damage. You also take 2 psychic damage that can't be reduced in any way." Spirit Sword
+  (`spirit-sword.md`) prints the same with an untyped 3.
+- `rule/damage/damage-immunity.md`: "Damage immunity should be the last thing applied when
+  calculating damage."
+- `feature/talent/level-1/clarity-and-strain.md`, Clarity Outside of Combat: "you take 1d6 damage and
+  incur any strain effect"; "you can take 1d6 damage and incur the effect".
+
+Current behaviour:
+1. **Extra damage.** The target's extra damage is added to this use's damage to that target (the same
+   type as every tier's damage), so immunity and weakness apply once to the total. Alternative: a
+   second damage instance, so immunity reduces each part separately.
+2. **"Can't be reduced in any way"** follows Q-RES-6: immunity does not apply; temporary Stamina still
+   absorbs it first; a weakness still adds, since it does not reduce. Alternatives: bypass temporary
+   Stamina too; or ignore weakness as well.
+3. **Outside combat.** When the table declares `strained=yes` and the engine would not have found the
+   hero strained, the engine rolls the 1d6 and applies it as ordinary damage before the Strained
+   effect. For a Talent with Steel Ward or Force Orbs it is logged as due and left to the table, as
+   the V146 turn-end strain is. Alternative: always leave the 1d6 to the table.
+
+Recommendation: keep all three.

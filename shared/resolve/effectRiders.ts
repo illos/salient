@@ -63,7 +63,7 @@ const independent: readonly [EffectRider['shape'], RegExp, EffectRider['dependen
     'temporary-stamina',
     /^You or one ally within distance gains temporary Stamina equal to your (?:Might|Agility|Reason|Intuition|Presence) score\.$/,
   ],
-  // feature/ability/talent/level-1/spirit-sword.md (Strained section still blocks execution).
+  // feature/ability/talent/level-1/spirit-sword.md (its Strained section compiles since V170).
   // feature/ability/shadow/level-1/gasping-in-pain.md.
   ['surges', /^You gain \d+ surges?\.$/],
   ['surges', /^One ally within \d+ squares of the target gains \d+ surges?\.$/],
