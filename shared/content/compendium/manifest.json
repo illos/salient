@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:7844e4e767f6c8847ea08f34f28b81b7996583e3b6793e11368ff14026c2f91b",
-  "entryCount": 1708,
+  "contentHash": "sha256:68605198ebbeb08ab877f8aa3a6c2a8a06f0e9a41a8cecdb67fa93b9ef7ca5c3",
+  "entryCount": 1732,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -323,6 +323,17 @@
         "feature/ability/censor/level-3"
       ],
       "basis": "docs/build/V117-censor-level-three.md#scope: Censor levels two and three."
+    },
+    {
+      "id": "troubadour-levels-two-three",
+      "description": "Troubadour levels two and three: Appeal to the Muses, invocations, perk, class act features, Second Album performances and all ten ability alternatives.",
+      "paths": [
+        "feature/troubadour/level-2",
+        "feature/ability/troubadour/level-2",
+        "feature/troubadour/level-3",
+        "feature/ability/troubadour/level-3"
+      ],
+      "basis": "docs/build/V132-troubadour-level-three.md#scope: Troubadour levels two and three."
     },
     {
       "id": "kits",
@@ -2750,6 +2761,102 @@
       "name": "Witty Banter",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
       "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/classic-chandelier-stunt",
+      "kind": "ability",
+      "name": "Classic Chandelier Stunt",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/en-garde",
+      "kind": "ability",
+      "name": "En Garde!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/encore",
+      "kind": "ability",
+      "name": "Encore",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/encore.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star",
+      "kind": "ability",
+      "name": "Guest Star",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/tough-crowd",
+      "kind": "ability",
+      "name": "Tough Crowd",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/twist-at-the-end",
+      "kind": "ability",
+      "name": "Twist at the End",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites",
+      "kind": "ability",
+      "name": "Extensive Rewrites",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/fire-up-the-night",
+      "kind": "ability",
+      "name": "\"Fire Up the Night\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/infernal-gavotte",
+      "kind": "ability",
+      "name": "Infernal Gavotte",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/never-ending-hero",
+      "kind": "ability",
+      "name": "\"Never-Ending Hero\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/star-solo",
+      "kind": "ability",
+      "name": "Star Solo",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/we-meet-at-last",
+      "kind": "ability",
+      "name": "We Meet at Last",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+      "selection": "troubadour-levels-two-three",
       "file": "ability.json"
     },
     {
@@ -6654,6 +6761,102 @@
       "name": "Virtuoso Performances",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/virtuoso-performances.md",
       "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-2/2nd-level-class-act-ability",
+      "kind": "feature",
+      "name": "2nd-Level Class Act Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/2nd-level-class-act-ability.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-2/allow-me-to-introduce-tonights-players",
+      "kind": "feature",
+      "name": "Allow Me to Introduce Tonight's Players",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/allow-me-to-introduce-tonights-players.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-2/appeal-to-the-muses",
+      "kind": "feature",
+      "name": "Appeal to the Muses",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/appeal-to-the-muses.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-2/formal-introductions",
+      "kind": "feature",
+      "name": "Formal Introductions",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/formal-introductions.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-2/invocation",
+      "kind": "feature",
+      "name": "Invocation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/invocation.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-2/my-reputation-precedes-me",
+      "kind": "feature",
+      "name": "My Reputation Precedes Me",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/my-reputation-precedes-me.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/perk.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-3/3rd-level-class-act-feature",
+      "kind": "feature",
+      "name": "3rd-Level Class Act Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/3rd-level-class-act-feature.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-3/7-drama-ability",
+      "kind": "feature",
+      "name": "7-Drama Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/7-drama-ability.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-3/foil",
+      "kind": "feature",
+      "name": "Foil",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/foil.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-3/missed-cue",
+      "kind": "feature",
+      "name": "Missed Cue",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/missed-cue.md",
+      "selection": "troubadour-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-3/second-album",
+      "kind": "feature",
+      "name": "Second Album",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/second-album.md",
+      "selection": "troubadour-levels-two-three",
       "file": "feature.json"
     },
     {

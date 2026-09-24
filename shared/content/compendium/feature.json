@@ -4266,5 +4266,164 @@
       "level": "1",
       "subclass": "virtuoso"
     }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-2/2nd-level-class-act-ability",
+    "kind": "feature",
+    "name": "2nd-Level Class Act Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/2nd-level-class-act-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-2/2nd-level-class-act-ability.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"2\"\nname: 2nd-Level Class Act Ability\nscc: mcdm.heroes.v1/feature.troubadour.level-2/2nd-level-class-act-ability\ntype: feature\n---\n\nYour [troubadour class act](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act) grants your choice of one of two [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability).\n\n##### 2nd-Level Auteur Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Duelist Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Virtuoso Ability\n\nChoose one of the following abilities.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-2/allow-me-to-introduce-tonights-players",
+    "kind": "feature",
+    "name": "Allow Me to Introduce Tonight's Players",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/allow-me-to-introduce-tonights-players.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-2/allow-me-to-introduce-tonights-players.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"2\"\nname: Allow Me to Introduce Tonight's Players\nscc: mcdm.heroes.v1/feature.troubadour.level-2/allow-me-to-introduce-tonights-players\ntype: feature\n---\n\nWhenever you take the first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in a combat encounter, you can use a main action to introduce yourself and your allies to your opponents. Each ally can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), and [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against them have a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) until the end of the [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round). Additionally, any [surprised](scc.v1:mcdm.heroes.v1/rule.combat/surprised) enemy is no longer [surprised](scc.v1:mcdm.heroes.v1/rule.combat/surprised).\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-2/appeal-to-the-muses",
+    "kind": "feature",
+    "name": "Appeal to the Muses",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/appeal-to-the-muses.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-2/appeal-to-the-muses.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"2\"\nname: Appeal to the Muses\nscc: mcdm.heroes.v1/feature.troubadour.level-2/appeal-to-the-muses\ntype: feature\n---\n\nYou can give a rousing speech, invoke your inspirations, or lift your fellows' spirits, appealing to the muses to heighten a battle's drama. However, irony is eager to hand your fortune to the villain to achieve the same end.\n\nBefore you roll to gain drama at the start of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can make your appeal (no action required). If you do, your roll gains the following additional effects:\n\n- If the roll is a 1, you gain 1 additional drama. The Director gains 1d3 Malice (see *Draw Steel: Monsters*).\n- If the roll is a 2, you gain 1 [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource), which you can keep or give to an ally within the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of your active performance. The Director gains 1 Malice.\n- If the roll is a 3, you gain 2 of a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource), which you can distribute among yourself and any allies within the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of your active performance.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-2/formal-introductions",
+    "kind": "feature",
+    "name": "Formal Introductions",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/formal-introductions.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-2/formal-introductions.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"2\"\nname: Formal Introductions\nscc: mcdm.heroes.v1/feature.troubadour.level-2/formal-introductions\ntype: feature\n---\n\nAs a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity, you can scribe a notice of your arrival (such as a calling card or a formal letter) addressed to an enemy. You can deliver the notice to the target personally if you are in the same general area, send it by courier, or leave it in a covert location for the target to find. You can have only one notice active at a time.\n\nThe Director determines when the target receives your notice. When the target receives the notice, they become alarmed and take desperate measures to stop you. The Director gains 1 additional Malice per [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) during encounters involving the target. The heroes start each such encounter with 2 additional [hero tokens](scc.v1:mcdm.heroes.v1/rule.resource/hero-token) (Chapter 1: [The Basics](scc.v1:mcdm.heroes.v1/chapter/the-basics)). These [hero tokens](scc.v1:mcdm.heroes.v1/rule.resource/hero-token) disappear at the end of the encounter.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-2/invocation",
+    "kind": "feature",
+    "name": "Invocation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/invocation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-2/invocation.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"2\"\nname: Invocation\nscc: mcdm.heroes.v1/feature.troubadour.level-2/invocation\ntype: feature\n---\n\nYou have a specific manner that helps define your presence on the battlefield. Choose one of the following features.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-2/my-reputation-precedes-me",
+    "kind": "feature",
+    "name": "My Reputation Precedes Me",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/my-reputation-precedes-me.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-2/my-reputation-precedes-me.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"2\"\nname: My Reputation Precedes Me\nscc: mcdm.heroes.v1/feature.troubadour.level-2/my-reputation-precedes-me\ntype: feature\n---\n\nYou can invoke your reputation at the start of a social interaction with one or more [NPCs](scc.v1:mcdm.heroes.v1/rule.general/npc) who haven't met you before, automatically creating a bond with one of those [NPCs](scc.v1:mcdm.heroes.v1/rule.general/npc) from that group as if using your [Scene Partner](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/scene-partner) feature (above). This bond counts against the limit on active bonds from your [Scene Partner](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/scene-partner) feature. While the bond is active, all heroes present treat their [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) as 2 higher than usual for the purpose of entering into a negotiation with the bonded [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc).\n\nThe Director can award the heroes 1 [hero token](scc.v1:mcdm.heroes.v1/rule.resource/hero-token) to make you infamous among the group of creatures instead, and preventing you from forming this bond. Until you take action to improve your reputation, all heroes present take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to interact with creatures in the group using skills from the [interpersonal skill group](scc.v1:mcdm.heroes.v1/skill.group/interpersonal). You can still use your [Scene Partner](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/scene-partner) feature to find allies within the group.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-2/perk.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"2\"\nname: Perk\nscc: mcdm.heroes.v1/feature.troubadour.level-2/perk\ntype: feature\n---\n\nYou gain one interpersonal, lore, or [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) perk of your choice. See Chapter 7: [Perks](scc.v1:mcdm.heroes.v1/chapter/perks).\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-3/3rd-level-class-act-feature",
+    "kind": "feature",
+    "name": "3rd-Level Class Act Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/3rd-level-class-act-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-3/3rd-level-class-act-feature.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"3\"\nname: 3rd-Level Class Act Feature\nscc: mcdm.heroes.v1/feature.troubadour.level-3/3rd-level-class-act-feature\ntype: feature\n---\n\nYour [troubadour class act](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act) grants you a feature, as shown on the 3rd-Level Class Act Features table.\n\n###### 3rd-Level Class Act Features Table\n\n| Class Act  | Features     |\n|------------|--------------|\n| Auteur     | [Missed Cue](scc.v1:mcdm.heroes.v1/feature.troubadour.level-3/missed-cue)   |\n| Duelist    | Foil         |\n| Virtuoso   | [Second Album](scc.v1:mcdm.heroes.v1/feature.troubadour.level-3/second-album) |\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-3/7-drama-ability",
+    "kind": "feature",
+    "name": "7-Drama Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/7-drama-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-3/7-drama-ability.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"3\"\nname: 7-Drama Ability\nscc: mcdm.heroes.v1/feature.troubadour.level-3/7-drama-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 drama to use.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-3/foil",
+    "kind": "feature",
+    "name": "Foil",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/foil.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-3/foil.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"3\"\nname: Foil\nscc: mcdm.heroes.v1/feature.troubadour.level-3/foil\nsubclass: duelist\ntype: feature\n---\n\nAt the start of an encounter, choose one creature within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect). You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against or in competition with that creature. The chosen creature also has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) made against or in competition with you. If the chosen creature is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can choose a new foil at the start of the next [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round).\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "3",
+      "subclass": "duelist"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-3/missed-cue",
+    "kind": "feature",
+    "name": "Missed Cue",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/missed-cue.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-3/missed-cue.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"3\"\nname: Missed Cue\nscc: mcdm.heroes.v1/feature.troubadour.level-3/missed-cue\nsubclass: auteur\ntype: feature\n---\n\nIf you aren't [surprised](scc.v1:mcdm.heroes.v1/rule.combat/surprised) at the start of an encounter, you can choose one enemy within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) who is not a leader or solo creature. The Director temporarily removes the chosen creature from the encounter. The chosen creature enters the encounter at the start of the second [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round). You must earn 3 [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories) before you can use this feature again.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "3",
+      "subclass": "auteur"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-3/second-album",
+    "kind": "feature",
+    "name": "Second Album",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/second-album.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-3/second-album.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\nclass: troubadour\nlevel: \"3\"\nname: Second Album\nscc: mcdm.heroes.v1/feature.troubadour.level-3/second-album\nsubclass: virtuoso\ntype: feature\n---\n\nYou have the following performance abilities, which are usable with your [Routines](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/routines) feature.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "3",
+      "subclass": "virtuoso"
+    }
   }
 ]

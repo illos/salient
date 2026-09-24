@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:7844e4e767f6c8847ea08f34f28b81b7996583e3b6793e11368ff14026c2f91b`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:68605198ebbeb08ab877f8aa3a6c2a8a06f0e9a41a8cecdb67fa93b9ef7ca5c3`.
 
-Currently reachable compiled: 102; unchanged reachable compatibility: 1443; structurally supported but unavailable: 0.
+Currently reachable compiled: 102; unchanged reachable compatibility: 1455; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -360,6 +360,18 @@ Currently reachable compiled: 102; unchanged reachable compatibility: 1443; stru
 | Turnabout Is Fair Play | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Upstage | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Witty Banter | hero-standalone | manual | legacy-compatibility | manual-section |
+| Classic Chandelier Stunt | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| En Garde! | hero-standalone | manual | legacy-compatibility | manual-section |
+| Encore | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Guest Star | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Tough Crowd | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
+| Twist at the End | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Extensive Rewrites | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
+| "Fire Up the Night" | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Infernal Gavotte | hero-standalone | manual | legacy-compatibility | manual-section |
+| "Never-Ending Hero" | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Star Solo | hero-standalone | manual | legacy-compatibility | manual-section |
+| We Meet at Last | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
 | The Wode Defends | hero-standalone | supported | compiled |  |
 | Exploding Arrow | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
 | Unmooring | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |

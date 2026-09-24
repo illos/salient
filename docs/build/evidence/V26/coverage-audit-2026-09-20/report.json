@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:7844e4e767f6c8847ea08f34f28b81b7996583e3b6793e11368ff14026c2f91b",
+  "contentHash": "sha256:68605198ebbeb08ab877f8aa3a6c2a8a06f0e9a41a8cecdb67fa93b9ef7ca5c3",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 22,
-      "COMPILES_WITH_REMAINDER": 113,
-      "NO_MATCH": 160,
-      "total": 295,
+      "COMPILES_WITH_REMAINDER": 117,
+      "NO_MATCH": 168,
+      "total": 307,
       "withinV26Bounded": 13
     },
     "kit-signature": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 2602,
-    "resolvedToStandalone": 1747,
+    "total": 2656,
+    "resolvedToStandalone": 1801,
     "resolvedToKit": 150,
     "ownText": 705,
     "unresolved": []
@@ -30137,6 +30137,1040 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Witty Banter supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/classic-chandelier-stunt",
+      "name": "Classic Chandelier Stunt",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+      "usage": "Main action",
+      "target": "Self and one willing ally",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each target can shift up to 5 squares, including vertically, but must end this movement adjacent to the other target and on solid ground. Each target can then make a melee free strike that deals extra damage equal to twice their highest characteristic score.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Classic Chandelier Stunt",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Classic Chandelier Stunt supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Classic Chandelier Stunt",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Classic Chandelier Stunt supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Classic Chandelier Stunt",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Classic Chandelier Stunt supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Classic Chandelier Stunt",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Classic Chandelier Stunt supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Classic Chandelier Stunt",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Classic Chandelier Stunt supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/en-garde",
+      "name": "En Garde!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "A"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target can make a melee free strike against you. If they do, you can make a melee free strike against the target.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "En Garde!",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option En Garde! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "En Garde!",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option En Garde! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "En Garde!",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option En Garde! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "En Garde!",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option En Garde! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "En Garde!",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+          "decisionId": "class.troubadour.level-2.duelist-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option En Garde! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/encore",
+      "name": "Encore",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/encore.md",
+      "usage": "Main action",
+      "target": "Special",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You use an ability that you have observed being used this combat round. The ability must have the Strike keyword, cost 5 or fewer of a Heroic Resource, and cost no Malice. When you make the strike, you use your Presence score for any power rolls, and any damage you deal is sonic damage.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Encore",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/encore.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Encore supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Encore",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/encore.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Encore supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Encore",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/encore.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Encore supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Encore",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/encore.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Encore supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Encore",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/encore.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Encore supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star",
+      "name": "Guest Star",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+      "usage": "Main action",
+      "target": "Special",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "A guest star appears to help you during the encounter: either a bystander within distance uplifted by your magic, or a mysterious new hero who appears in an unoccupied space within distance. This guest star is controlled by you, has their own turn, and shares your characteristics. Their Stamina maximum is half yours. They have no abilities other than your melee and ranged free strikes. At the end of the encounter, or when the guest star is reduced to 0 Stamina, they retreat or revert to a bystander. The same bystander can't be uplifted this way more than once during an encounter.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Guest Star",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Guest Star supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Guest Star",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Guest Star supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Guest Star",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Guest Star supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Guest Star",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Guest Star supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Guest Star",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Guest Star supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/tough-crowd",
+      "name": "Tough Crowd",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+      "usage": "Main action",
+      "target": "Special",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 12
+            },
+            "damageType": "corruption"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The area is haunted by a swirling horde of phantoms until the end of the encounter. Allies can enter any square of the area without spending movement. At the end of each of your turns, you can make one power roll that targets each enemy in the area.",
+            "locator": "section:0"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM pull N toward the center of the area",
+            "text": "M < WEAK, pull 1 toward the center of the area",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM pull N toward the center of the area",
+            "text": "M < AVERAGE, pull 2 toward the center of the area",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM pull N toward the center of the area",
+            "text": "M < STRONG, pull 3 toward the center of the area",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Tough Crowd",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Tough Crowd supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Tough Crowd",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Tough Crowd supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Tough Crowd",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Tough Crowd supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Tough Crowd",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Tough Crowd supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Tough Crowd",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+          "decisionId": "class.troubadour.level-2.virtuoso-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Tough Crowd supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/twist-at-the-end",
+      "name": "Twist at the End",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+      "usage": "Main action",
+      "target": "One dead enemy",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "A target who is not a leader or solo creature comes back to life with half their Stamina and becomes an ally under the Director's control. The players can work with the Director to determine when the target takes their turn each combat round. At the end of the encounter, the target turns to dust and is blown away.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Twist at the End",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Twist at the End supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Twist at the End",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Twist at the End supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Twist at the End",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Twist at the End supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Twist at the End",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Twist at the End supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Twist at the End",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+          "decisionId": "class.troubadour.level-2.auteur-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Twist at the End supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites",
+      "name": "Extensive Rewrites",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "cost": "7 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Instead of sliding a target, you can swap their location with another target as long as each can fit into the other's space. You can't slide targets into other creatures or objects using this ability.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM this slide ignores the target's stability",
+            "text": "P < WEAK, this slide ignores the target's stability",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 3",
+            "locator": "tier1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM this slide ignores the target's stability",
+            "text": "P < AVERAGE, this slide ignores the target's stability",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 5",
+            "locator": "tier2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM this slide ignores the target's stability",
+            "text": "P < STRONG, this slide ignores the target's stability",
+            "locator": "tier3",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 7",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Extensive Rewrites",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Extensive Rewrites supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Extensive Rewrites",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Extensive Rewrites supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Extensive Rewrites",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Extensive Rewrites supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Extensive Rewrites",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Extensive Rewrites supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/fire-up-the-night",
+      "name": "\"Fire Up the Night\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+      "usage": "No action",
+      "target": "Self and each ally in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "While this performance is active, each target who starts their turn in the area doesn't take a bane on strikes against creatures with concealment. Once during their turn, they can search for hidden creatures as a free maneuver (see Hide and Sneak in Chapter 9: Tests).",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "\"Fire Up the Night\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+          "decisionId": "class.troubadour.level-3.second-album",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "\"Fire Up the Night\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+          "decisionId": "class.troubadour.level-3.second-album",
+          "level": 4,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "\"Fire Up the Night\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+          "decisionId": "class.troubadour.level-3.second-album",
+          "level": 5,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "\"Fire Up the Night\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+          "decisionId": "class.troubadour.level-3.second-album",
+          "level": 6,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/infernal-gavotte",
+      "name": "Infernal Gavotte",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "7 Drama",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "fire"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "damageType": "fire"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 10
+            },
+            "damageType": "fire"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each ally in the area can shift up to 2 squares.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM weakened (save ends)",
+            "text": "A < WEAK, weakened (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM weakened (save ends)",
+            "text": "A < AVERAGE, weakened (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM weakened (save ends)",
+            "text": "A < STRONG, weakened (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Infernal Gavotte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Infernal Gavotte supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Infernal Gavotte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Infernal Gavotte supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Infernal Gavotte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Infernal Gavotte supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Infernal Gavotte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Infernal Gavotte supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/never-ending-hero",
+      "name": "\"Never-Ending Hero\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+      "usage": "No action",
+      "target": "Self and each ally in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "While this performance is active, each target who starts their turn dying while in the area gains an edge on power rolls and ignores the effects of bleeding until the end of their turn.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "\"Never-Ending Hero\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+          "decisionId": "class.troubadour.level-3.second-album",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "\"Never-Ending Hero\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+          "decisionId": "class.troubadour.level-3.second-album",
+          "level": 4,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "\"Never-Ending Hero\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+          "decisionId": "class.troubadour.level-3.second-album",
+          "level": 5,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "\"Never-Ending Hero\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+          "decisionId": "class.troubadour.level-3.second-album",
+          "level": 6,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/star-solo",
+      "name": "Star Solo",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "7 Drama",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "P"
+            },
+            "push": 3
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "P"
+            },
+            "push": 5
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can choose to have this ability deal sonic damage. Additionally, you can use this ability against the same target for the next 2 combat rounds without spending drama.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Star Solo",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Star Solo supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Star Solo",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Star Solo supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Star Solo",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Star Solo supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Star Solo",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Star Solo supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/we-meet-at-last",
+      "name": "We Meet at Last",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+      "usage": "Maneuver",
+      "target": "One creature",
+      "cost": "7 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter, both you and the target can target each other with abilities even if you are beyond distance, with the distance of this ability replacing those abilities' distances. The target can't be force moved by an ability used beyond distance this way.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "We Meet at Last",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option We Meet at Last supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "We Meet at Last",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option We Meet at Last supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "We Meet at Last",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option We Meet at Last supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "We Meet at Last",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+          "decisionId": "class.troubadour.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option We Meet at Last supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -100122,8 +101156,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1200,
-      "abilities": 1186,
+      "count": 1212,
+      "abilities": 1198,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -100133,8 +101167,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 691,
-      "abilities": 691,
+      "count": 698,
+      "abilities": 698,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -100428,6 +101462,17 @@
       ]
     },
     {
+      "shape": "tier:slide N",
+      "type": "tier-damage",
+      "count": 20,
+      "abilities": 7,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites"
+      ]
+    },
+    {
       "shape": "potency:M < N restrained (save ends)",
       "type": "potency-condition",
       "count": 19,
@@ -100458,17 +101503,6 @@
         "salient:foe-feature:218787cf-84fa-476f-9f2e-ad038c7bcda3",
         "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb",
         "salient:foe-feature:6fd3cfb0-af4e-4a2e-9269-9d07c8f43b7c"
-      ]
-    },
-    {
-      "shape": "tier:slide N",
-      "type": "tier-damage",
-      "count": 17,
-      "abilities": 6,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound",
-        "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones",
-        "salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8"
       ]
     },
     {
@@ -100820,6 +101854,16 @@
       "examples": [
         "salient:foe-feature:1100d658-0c0a-4ddd-8422-319542a12ac9",
         "salient:foe-feature:bcd562cb-aa41-4d86-a418-811f80851230"
+      ]
+    },
+    {
+      "shape": "potency:A < SYM weakened (save ends)",
+      "type": "potency-condition",
+      "count": 6,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-3/infernal-gavotte"
       ]
     },
     {
@@ -101437,15 +102481,6 @@
       ]
     },
     {
-      "shape": "potency:A < SYM weakened (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.null.level-1/pressure-points"
-      ]
-    },
-    {
       "shape": "potency:I < N prone",
       "type": "potency-condition",
       "count": 3,
@@ -101617,6 +102652,15 @@
       ]
     },
     {
+      "shape": "potency:M < SYM pull N toward the center of the area",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-2/tough-crowd"
+      ]
+    },
+    {
       "shape": "potency:M < SYM slowed (eot)",
       "type": "potency-condition",
       "count": 3,
@@ -101740,6 +102784,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.conduit.level-1/wither"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM this slide ignores the target's stability",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites"
       ]
     },
     {
@@ -104737,11 +105790,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 392,
+      "total": 404,
       "compiles": 29,
-      "withRemainder": 130,
+      "withRemainder": 134,
       "withinV26Bounded": 14,
-      "noMatch": 233
+      "noMatch": 241
     }
   }
 }

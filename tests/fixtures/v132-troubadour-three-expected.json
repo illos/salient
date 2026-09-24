@@ -1,0 +1,1899 @@
+{
+  "schemaVersion": "v121-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "derivation": {
+    "method": "Authored from the pinned Steel Compendium only (canonical checkout at the main repo vendor/steel-compendium, HEAD fb83a789 verified with git rev-parse). Level-one baselines copied from tests/fixtures/v102-troubadour-expected.json (reviewed) and cross-checked by recomputation. No evaluator, content, convex or headless code read or run.",
+    "staminaMaximum": "Troubadour Basics: Starting Stamina 18 + 6 per level after 1st; kit Stamina bonus per echelon (chapter/kits.md); levels 1-3 are echelon 1 (rule/general/echelon.md \"1st Echelon (1st to 3rd Level)\"). Kit Stamina: Swashbuckler +3, Cloak and Dagger +3, Sniper none, Panther +6 - consistent with v102 level-one values 21/21/18/24.",
+    "recoveryValue": "floor(Stamina maximum / 3) (rule/health/recoveries.md \"one-third ... rounded down\")",
+    "windedValue": "floor(Stamina maximum / 2) (rule/health/winded.md; rule/general/always-round-down.md)",
+    "recoveriesMaximum": "Troubadour Basics: 8; unchanged at levels 2-3.",
+    "noNumericSheetChange": "EXPLICIT: no level-2 or level-3 Troubadour feature (Appeal to the Muses; Invocation and its options Allow Me to Introduce Tonight's Players, Formal Introductions, My Reputation Precedes Me; Perk; 2nd-Level Class Act Ability; 3rd-Level Class Act Feature and Missed Cue, Foil, Second Album; 7-Drama Ability), no class act ability, no 7-drama ability, no Second Album performance and none of the selected perks changes any numeric sheet value (recoveries, speed, stability, disengage, characteristics, potency, size). The only numeric changes are Stamina maximum (+6 per level) and the recovery/winded values derived from it. My Reputation Precedes Me's +2 Renown is situational (negotiation entry with the bonded NPC only), not a sheet value. Characteristic Increase first appears at 4th level; kit Stamina scales only at echelon 2 (level 4).",
+    "abilityCounts": "Advancement table: level 2 adds one 5-drama class act ability (Class Act Abilities 5); level 3 adds one 7-drama ability (Abilities Signature, 3, 5, 7). Virtuoso additionally gains two Second Album performances at level 3.",
+    "abilityDamage": "\"X + A\" / \"X + P\" add the Agility / Presence score (all witnesses A2, P2). Kit damage bonus added only for damage-dealing abilities with Melee+Weapon (melee bonus) or Ranged+Weapon (ranged bonus), once (chapter/kits.md Damage Bonuses); an ability with both Melee and Ranged gets only the bonus of the chosen mode (rule/combat/distance.md Melee or Ranged). Star Solo primary mode: melee.",
+    "potency": "Troubadour potency weak P-2 / average P-1 / strong P = 0/1/2 with Presence 2 (class/troubadour.md Basics).",
+    "perkChoice": "One distinct eligible perk per witness, covering all three permitted groups; none with sub-choices, none granting an ability, none already owned (all bases own only Teamwork, an exploration perk)."
+  },
+  "sources": [
+    {
+      "path": "en/unified/md/class/troubadour.md",
+      "sha256": "c67b884b5ff83dd60f4d6518b529ec91e5c8c968f40b878cbf605a2e70e5ba10"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-2/appeal-to-the-muses.md",
+      "sha256": "104e6a11a3ff254dbd6881822f3cb85f3c24289ebd122494fa4cbe2cc05c2dff"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-2/invocation.md",
+      "sha256": "5f34a8f82188eabf971c336165914f6c4dd787acd4750ee2f1e1bd81ef55dfd3"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-2/allow-me-to-introduce-tonights-players.md",
+      "sha256": "5be6495a0075ead36b68a38b84d3a84c5a769b83c29b8e221d8ba5b4d34c6652"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-2/formal-introductions.md",
+      "sha256": "a5194d7441ae8669b8376fb8a4e8613fa915070d7845361155035c1f2ea6165b"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-2/my-reputation-precedes-me.md",
+      "sha256": "12e4fd16e05c313ee60f861b2c6334b9e8aa573deb066a3aa3e441d1ab0a996e"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-2/perk.md",
+      "sha256": "a7642f8d94b1a43450f066b561dc2f665510eb042524c7b5ea7f9940b835ad76"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-2/2nd-level-class-act-ability.md",
+      "sha256": "5c7ed5651fe13d265bf70eeb647f810ee32c1f51a69379630cd30a3bb47e1575"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-3/3rd-level-class-act-feature.md",
+      "sha256": "aae707f6d46559ab97e44ee515b6c6f3e3a7b727147291b774ea14214a54fd4a"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-3/missed-cue.md",
+      "sha256": "89e17e77abe8a16efc81bf561acdf9904dad5f4b58f92802b7259b235a56a8e2"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-3/foil.md",
+      "sha256": "790c5e6f23d3ac962c0300ca403a47c56b6a1f069651b8e83caf5ec73adfa6e0"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-3/second-album.md",
+      "sha256": "b96f0739ce716cc0df6212b0556b36e029a53e8e955293e0a6e39c3c2111f778"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-3/7-drama-ability.md",
+      "sha256": "105fdcfd23e2f6dd6e691b104d50ed94f6bb4bea949316bee9763f740340f6f0"
+    },
+    {
+      "path": "en/unified/md/feature/troubadour/level-1/routines.md",
+      "sha256": "e3b0d335e898281512387ba1bbb224eceeed123ee60db5e8ea7b77b41da1e580"
+    },
+    {
+      "path": "en/unified/md/chapter/kits.md",
+      "sha256": "bc723dd87b9c660c589fb96f984b285b447eda457c468b89029fd11fec0d16ad"
+    },
+    {
+      "path": "en/unified/md/kit/swashbuckler.md",
+      "sha256": "351feb5e85b6237deb955c6d5d70f4a34d10da690acf627a6a52e55a8fb2a8fd"
+    },
+    {
+      "path": "en/unified/md/kit/cloak-and-dagger.md",
+      "sha256": "a12702f91b0be983e269d4290497aff944761347d6846b9492f9e978c95dc846"
+    },
+    {
+      "path": "en/unified/md/kit/sniper.md",
+      "sha256": "d52d966ce3487270b83d062b3596f2a04974be66f57808ffc837807812fe4857"
+    },
+    {
+      "path": "en/unified/md/kit/panther.md",
+      "sha256": "699d0a4f154daba08e4ebc0b70fce663668853b753e27b5e7b5d1431a3c76f90"
+    },
+    {
+      "path": "en/unified/md/rule/combat/distance.md",
+      "sha256": "5992a7b80ecd7781c5819c63313a0c6c8f6f19748eb208c0f37dc2dad729c56f"
+    },
+    {
+      "path": "en/unified/md/rule/health/stamina.md",
+      "sha256": "d7eea9fb59d98e1efcc0527230cc862d911a621cc042d58b923565ac4c55b04b"
+    },
+    {
+      "path": "en/unified/md/rule/health/recoveries.md",
+      "sha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9"
+    },
+    {
+      "path": "en/unified/md/rule/health/winded.md",
+      "sha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee"
+    },
+    {
+      "path": "en/unified/md/rule/general/echelon.md",
+      "sha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3"
+    },
+    {
+      "path": "en/unified/md/rule/general/always-round-down.md",
+      "sha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783"
+    },
+    {
+      "path": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+      "sha256": "f167bd66881e0452fd019e3b267bb9ab12cdb625fc82ca8765adb737bd3b9c93"
+    },
+    {
+      "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+      "sha256": "245a3d54a86385a74501fe03d1188b99b7b9a295c693855c05fff784650ccbe9"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+      "sha256": "5e85810f12057b465036f2d4a50289c68df8c7e48c4c2384eb660bd6bcf20ea9"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+      "sha256": "25e3d93dc989fa3942edf615953dbc2de38cd99e7eb495291b0fd187bc4f8fe9"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+      "sha256": "d3b672a72b1ab077d9aa7f02af1be03333043fbda18d305afe4716065e705483"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-2/encore.md",
+      "sha256": "c054ee38fee26da772765b2f0ea1980e3f731bb26f9db47710c4e72e65733394"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+      "sha256": "5b19776e3d34e1d653431e70f697e5750f62976a7654d212de8585ac308f3778"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+      "sha256": "d750739244f74369aa2f3c5ac005355392b6fb81403eef52d83559986249f535"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+      "sha256": "e801d88818c135e7359dd58534f7f4a2abc88a1943ebccf06823f9e2aa04743a"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+      "sha256": "5d635ae76f9bc964c7a91102c3530b2b665e11a13884b58ab76cd7bd85af893e"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+      "sha256": "d35c0e8721790145320d3f5a0ff4a5bdcf8c6b0f465c563a4ab1052df2757428"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+      "sha256": "040a21ea837e0e08307836ca3ac7dea05eafb6894b4b0508c41e9135e4bb69bc"
+    },
+    {
+      "path": "en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+      "sha256": "d33d883ccebc9a6caa050e5c3ac32120b87524c09de96919ea314224fa70963f"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "class-act-ability-grouping",
+      "passage": "en/unified/md/feature/troubadour/level-2/2nd-level-class-act-ability.md has empty \"2nd-Level Auteur/Duelist/Virtuoso Ability\" sections.",
+      "resolution": "Grouping from en/books/heroes/clean/Draw Steel Heroes.md: Auteur 15611 (Guest Star 15615, Twist at the End 15625); Duelist 15635 (Classic Chandelier Stunt 15639, En Garde! 15649); Virtuoso 15665 (Encore 15669, Tough Crowd 15679). Unified ability front-matter subclass agrees.",
+      "alternatives": ["none needed; two sources agree"]
+    },
+    {
+      "id": "foil-unlinked",
+      "passage": "3rd-Level Class Act Features Table lists Duelist \"Foil\" without a link (unified and book line 15708).",
+      "resolution": "en/unified/md/feature/troubadour/level-3/foil.md (subclass: duelist) is the feature; book prints it at line 15711.",
+      "alternatives": ["none"]
+    },
+    {
+      "id": "we-meet-at-last-frontmatter",
+      "passage": "we-meet-at-last.md front-matter effects list has only the first paragraph; the markdown body and book line 15805 add \"Additionally, once on each of your turns, you can use a free maneuver ... granting them 2 surges or forcing them to take a bane on the next ability roll ...\"",
+      "resolution": "Both paragraphs are the ability text (book is authoritative print); an importer reading only front-matter effects would drop the free-maneuver clause.",
+      "alternatives": ["front-matter only (would lose the free maneuver - rejected)"]
+    },
+    {
+      "id": "star-solo-kit-bonus-mode",
+      "passage": "star-solo.md keywords Magic, Melee, Ranged, Strike, Weapon; distance \"Melee 1 or ranged 10\". rule/combat/distance.md Melee or Ranged: \"you choose whether to use it as a melee or a ranged ability ... only one bonus at a time applies to an ability with both the Melee and Ranged keywords.\"",
+      "resolution": "Melee mode applies only the kit melee damage bonus (primary expected value); ranged mode only the ranged bonus and ranged distance bonus. Both modes recorded.",
+      "alternatives": ["stack melee and ranged bonuses (explicitly forbidden by distance.md)"]
+    },
+    {
+      "id": "infernal-gavotte-area-kit-bonus",
+      "passage": "infernal-gavotte.md keywords Area, Magic, Melee, Weapon; chapter/kits.md: melee damage bonus \"is added to the rolled damage of any damage-dealing ability with both the Melee and Weapon keywords.\"",
+      "resolution": "INTERPRETATION (keyword-literal): the kit melee damage bonus applies to this area ability (Cloak and Dagger +1/+1/+1 -> [6, 8, 11]); Sniper has no melee bonus -> [5, 7, 10]. The kit distance bonus does not enlarge the 3 burst (chapter/kits.md Distance Bonus).",
+      "alternatives": [
+        "kit damage bonuses apply only to strikes/non-area weapon abilities (would give [5, 7, 10] for v102-2-alt) - not supported by the text"
+      ]
+    },
+    {
+      "id": "chandelier-free-strike-extra",
+      "passage": "classic-chandelier-stunt.md: \"Each target can then make a melee free strike that deals extra damage equal to twice their highest characteristic score.\"",
+      "resolution": "INTERPRETATION: the extra damage (2 x 2 = 4 for v102-2-alt) is added once to every tier of the melee weapon free strike, which also keeps its kit melee bonus: [2,5,7] + A2 + 1 + 4 = [9, 12, 14]. The ally's free strike uses the ally's own characteristics (manual).",
+      "alternatives": [
+        "extra damage excluded from kit bonus interplay (same numbers; bonus is additive)",
+        "free strike is a separate ability and the Chandelier row should record only the +4 rider"
+      ]
+    },
+    {
+      "id": "encore-copied-ability",
+      "passage": "encore.md: \"You use an ability that you have observed being used this combat round ... you use your Presence score for any power rolls, and any damage you deal is sonic damage.\"",
+      "resolution": "Not resolved; kept manual. No damageByWitness for Encore. Unclear whether the copied ability's characteristic bonus in tier text (e.g. \"+ M\") becomes Presence, and whether the troubadour's kit damage bonus applies to a copied Weapon ability.",
+      "alternatives": [
+        "Presence replaces the power-roll characteristic and every characteristic reference in the damage expression",
+        "Presence replaces only the roll bonus; tier-text characteristic stays as printed but uses the troubadour's own score",
+        "kit bonus applies per the copied ability's Melee/Ranged+Weapon keywords",
+        "kit bonus never applies (Encore has no Weapon keyword)"
+      ]
+    },
+    {
+      "id": "tough-crowd-roll-timing",
+      "passage": "tough-crowd.md: \"At the end of each of your turns, you can make one power roll that targets each enemy in the area.\"",
+      "resolution": "INTERPRETATION: using the ability (main action) creates the haunted area; the printed power roll is made at the end of each of your turns (including the turn you used it), not as part of the main action itself. Damage [5, 9, 12] corruption, no kit bonus.",
+      "alternatives": [
+        "the roll is also made immediately when the ability is used",
+        "the first roll waits until the end of your next turn"
+      ]
+    },
+    {
+      "id": "guest-star-stamina-rounding",
+      "passage": "guest-star.md: \"Their Stamina maximum is half yours.\"",
+      "resolution": "Half your Stamina maximum rounded down (rule/general/always-round-down.md): v102-1 13 at level 2, 16 at level 3.",
+      "alternatives": ["half your current Stamina (the text says Stamina maximum; rejected)"]
+    },
+    {
+      "id": "performance-name-quotes",
+      "passage": "Second Album performances printed with quotation marks: book lines 15723 and 15733; unified front-matter name '\"Fire Up the Night\"' and '\"Never-Ending Hero\"'.",
+      "resolution": "Names recorded including the double quotation marks, matching the v102 convention for \"Ballad of the Beast\" / \"Thunder Mother\".",
+      "alternatives": ["unquoted names Fire Up the Night / Never-Ending Hero"]
+    },
+    {
+      "id": "second-album-feature-name",
+      "passage": "3rd-Level Class Act Feature grants one feature; Second Album itself grants two abilities.",
+      "resolution": "Virtuoso level-3 addedFeatures lists both \"3rd-Level Class Act Feature\" and \"Second Album\" (same pattern for Missed Cue / Foil), mirroring v117 which lists both the container feature and the granted feature.",
+      "alternatives": ["list only the granted feature name"]
+    }
+  ],
+  "levelTwo": {
+    "sourceAdvancementTable": "en/unified/md/class/troubadour.md (Troubadour Advancement Table row 2nd: Appeal to the Muses, Invocation, Perk, Class Act Ability; Abilities Signature, 3, 5; Class Act Abilities 5); en/books/heroes/clean/Draw Steel Heroes.md line 15098",
+    "staminaGained": 6,
+    "staminaSource": "en/unified/md/class/troubadour.md Basics: Stamina Gained at 2nd and Higher Levels: 6",
+    "commonFeatures": [
+      {
+        "name": "Appeal to the Muses",
+        "sourcePath": "en/unified/md/feature/troubadour/level-2/appeal-to-the-muses.md",
+        "sourceSha256": "104e6a11a3ff254dbd6881822f3cb85f3c24289ebd122494fa4cbe2cc05c2dff",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15573",
+        "numericSheetEffect": null,
+        "grantsAction": "No action required; made before the start-of-turn drama roll",
+        "manualClauses": [
+          "Roll 1: gain 1 additional drama; Director gains 1d3 Malice.",
+          "Roll 2: gain 1 Heroic Resource to keep or give to an ally within the distance of your active performance; Director gains 1 Malice.",
+          "Roll 3: gain 2 of a Heroic Resource distributed among yourself and allies within the distance of your active performance."
+        ]
+      },
+      {
+        "name": "Invocation",
+        "sourcePath": "en/unified/md/feature/troubadour/level-2/invocation.md",
+        "sourceSha256": "5f34a8f82188eabf971c336165914f6c4dd787acd4750ee2f1e1bd81ef55dfd3",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15583",
+        "choice": "one of three features (Allow Me to Introduce Tonight's Players, Formal Introductions, My Reputation Precedes Me)",
+        "numericSheetEffect": null
+      },
+      {
+        "name": "Perk",
+        "sourcePath": "en/unified/md/feature/troubadour/level-2/perk.md",
+        "sourceSha256": "a7642f8d94b1a43450f066b561dc2f665510eb042524c7b5ea7f9940b835ad76",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15603",
+        "choice": "one interpersonal, lore, or supernatural perk",
+        "numericSheetEffect": null
+      },
+      {
+        "name": "2nd-Level Class Act Ability",
+        "sourcePath": "en/unified/md/feature/troubadour/level-2/2nd-level-class-act-ability.md",
+        "sourceSha256": "5c7ed5651fe13d265bf70eeb647f810ee32c1f51a69379630cd30a3bb47e1575",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15607",
+        "choice": "one of two 5-drama heroic abilities for your class act",
+        "groupingSource": "Unified file has empty per-act sections; grouping from en/books/heroes/clean/Draw Steel Heroes.md lines 15611 (Auteur), 15635 (Duelist), 15665 (Virtuoso); unified ability front-matter 'subclass' agrees for all six.",
+        "numericSheetEffect": null
+      }
+    ],
+    "invocationOptions": [
+      {
+        "name": "Allow Me to Introduce Tonight's Players",
+        "sourcePath": "en/unified/md/feature/troubadour/level-2/allow-me-to-introduce-tonights-players.md",
+        "sourceSha256": "5be6495a0075ead36b68a38b84d3a84c5a769b83c29b8e221d8ba5b4d34c6652",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15587",
+        "grantsAction": "Main action, available only when you take the first turn in a combat encounter",
+        "numericSheetEffect": null,
+        "manualClauses": [
+          "Each ally can shift up to their speed.",
+          "Ability rolls made against allies have a double bane until the end of the combat round.",
+          "Any surprised enemy is no longer surprised."
+        ]
+      },
+      {
+        "name": "Formal Introductions",
+        "sourcePath": "en/unified/md/feature/troubadour/level-2/formal-introductions.md",
+        "sourceSha256": "a5194d7441ae8669b8376fb8a4e8613fa915070d7845361155035c1f2ea6165b",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15591",
+        "grantsAction": "Respite activity (scribe a notice); one notice active at a time",
+        "numericSheetEffect": null,
+        "manualClauses": [
+          "Director determines when the target receives the notice.",
+          "Director gains 1 additional Malice per combat round in encounters involving the target.",
+          "Heroes start each such encounter with 2 additional hero tokens that disappear at the end of the encounter."
+        ]
+      },
+      {
+        "name": "My Reputation Precedes Me",
+        "sourcePath": "en/unified/md/feature/troubadour/level-2/my-reputation-precedes-me.md",
+        "sourceSha256": "12e4fd16e05c313ee60f861b2c6334b9e8aa573deb066a3aa3e441d1ab0a996e",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15597",
+        "grantsAction": "Invoke at the start of a social interaction with NPCs who haven't met you (no action type printed)",
+        "numericSheetEffect": null,
+        "manualClauses": [
+          "Automatically creates a Scene Partner bond with one NPC of the group; counts against the Scene Partner active-bond limit.",
+          "While the bond is active all heroes present treat their Renown as 2 higher for entering a negotiation with the bonded NPC (situational, not a sheet value).",
+          "Director can award 1 hero token to make you infamous instead: no bond, and heroes present take a bane on interpersonal tests with that group until you improve your reputation."
+        ]
+      }
+    ],
+    "classActAbilityPairs": {
+      "Auteur": [
+        {
+          "name": "Guest Star",
+          "printedCost": "5 Drama",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15615"
+        },
+        {
+          "name": "Twist at the End",
+          "printedCost": "5 Drama",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15625"
+        }
+      ],
+      "Duelist": [
+        {
+          "name": "Classic Chandelier Stunt",
+          "printedCost": "5 Drama",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15639"
+        },
+        {
+          "name": "En Garde!",
+          "printedCost": "5 Drama",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15649"
+        }
+      ],
+      "Virtuoso": [
+        {
+          "name": "Encore",
+          "printedCost": "5 Drama",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/encore.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15669"
+        },
+        {
+          "name": "Tough Crowd",
+          "printedCost": "5 Drama",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15679"
+        }
+      ]
+    },
+    "perkGroups": ["interpersonal", "lore", "supernatural"],
+    "perkGroupsSource": "en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Interpersonal Perks 17397, Lore Perks 17469, Supernatural Perks 17511",
+    "eligibleCorePerks": {
+      "interpersonal": [
+        {
+          "name": "Charming Liar",
+          "sourcePath": "en/unified/md/perk/charming-liar.md"
+        },
+        {
+          "name": "Dazzler",
+          "sourcePath": "en/unified/md/perk/dazzler.md"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md"
+        },
+        {
+          "name": "Harmonizer",
+          "sourcePath": "en/unified/md/perk/harmonizer.md"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md"
+        },
+        {
+          "name": "Pardon My Friend",
+          "sourcePath": "en/unified/md/perk/pardon-my-friend.md"
+        },
+        {
+          "name": "Power Player",
+          "sourcePath": "en/unified/md/perk/power-player.md"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md"
+        },
+        {
+          "name": "Spot the Tell",
+          "sourcePath": "en/unified/md/perk/spot-the-tell.md"
+        }
+      ],
+      "lore": [
+        {
+          "name": "But I Know Who Does",
+          "sourcePath": "en/unified/md/perk/but-i-know-who-does.md"
+        },
+        {
+          "name": "Eidetic Memory",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md"
+        },
+        {
+          "name": "Expert Sage",
+          "sourcePath": "en/unified/md/perk/expert-sage.md"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md"
+        },
+        {
+          "name": "Linguist",
+          "sourcePath": "en/unified/md/perk/linguist.md"
+        },
+        {
+          "name": "Polymath",
+          "sourcePath": "en/unified/md/perk/polymath.md"
+        },
+        {
+          "name": "Specialist",
+          "sourcePath": "en/unified/md/perk/specialist.md"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md"
+        }
+      ],
+      "supernatural": [
+        {
+          "name": "Arcane Trick",
+          "sourcePath": "en/unified/md/perk/arcane-trick.md"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md"
+        },
+        {
+          "name": "Familiar",
+          "sourcePath": "en/unified/md/perk/familiar.md"
+        },
+        {
+          "name": "Invisible Force",
+          "sourcePath": "en/unified/md/perk/invisible-force.md"
+        },
+        {
+          "name": "Psychic Whisper",
+          "sourcePath": "en/unified/md/perk/psychic-whisper.md"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md"
+        }
+      ]
+    },
+    "eligibleCorePerkCount": 25,
+    "excludedPerkGroups": "crafting, exploration, intrigue (not permitted by feature/troubadour/level-2/perk.md). Teamwork (every base's career perk) is exploration.",
+    "perksWithSubChoices": [
+      "Linguist (languages)",
+      "Specialist (one lore skill)",
+      "Eidetic Memory (lore skill chosen at each respite)"
+    ],
+    "perksGrantingAbilities": [
+      "Arcane Trick",
+      "Invisible Force",
+      "Psychic Whisper",
+      "Familiar (familiar stat block)"
+    ]
+  },
+  "levelThree": {
+    "sourceAdvancementTable": "en/unified/md/class/troubadour.md (row 3rd: Class Act Feature, 7-Drama Ability; Abilities Signature, 3, 5, 7; Class Act Abilities 5); en/books/heroes/clean/Draw Steel Heroes.md line 15099",
+    "staminaGained": 6,
+    "commonFeatures": [
+      {
+        "name": "3rd-Level Class Act Feature",
+        "sourcePath": "en/unified/md/feature/troubadour/level-3/3rd-level-class-act-feature.md",
+        "sourceSha256": "aae707f6d46559ab97e44ee515b6c6f3e3a7b727147291b774ea14214a54fd4a",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15699",
+        "grants": "one feature per class act (3rd-Level Class Act Features Table)",
+        "numericSheetEffect": null
+      },
+      {
+        "name": "7-Drama Ability",
+        "sourcePath": "en/unified/md/feature/troubadour/level-3/7-drama-ability.md",
+        "sourceSha256": "105fdcfd23e2f6dd6e691b104d50ed94f6bb4bea949316bee9763f740340f6f0",
+        "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15743",
+        "choice": "one of four 7-drama heroic abilities",
+        "numericSheetEffect": null
+      }
+    ],
+    "byClassAct": {
+      "Auteur": {
+        "feature": {
+          "name": "Missed Cue",
+          "sourcePath": "en/unified/md/feature/troubadour/level-3/missed-cue.md",
+          "sourceSha256": "89e17e77abe8a16efc81bf561acdf9904dad5f4b58f92802b7259b235a56a8e2",
+          "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15715",
+          "numericSheetEffect": null,
+          "grantsAction": "Start-of-encounter choice if you aren't surprised (no action type printed)",
+          "manualClauses": [
+            "Choose one enemy within line of effect who is not a leader or solo creature; the Director removes it until the start of the second combat round.",
+            "Must earn 3 Victories before using it again."
+          ]
+        },
+        "addedAbilities": []
+      },
+      "Duelist": {
+        "feature": {
+          "name": "Foil",
+          "sourcePath": "en/unified/md/feature/troubadour/level-3/foil.md",
+          "sourceSha256": "790c5e6f23d3ac962c0300ca403a47c56b6a1f069651b8e83caf5ec73adfa6e0",
+          "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15711",
+          "numericSheetEffect": null,
+          "grantsAction": "Start-of-encounter choice (no action type printed)",
+          "manualClauses": [
+            "Choose one creature within line of effect: you have a double edge on power rolls against or in competition with it, and it has a double edge on power rolls against or in competition with you.",
+            "If the foil is reduced to 0 Stamina you can choose a new foil at the start of the next combat round."
+          ]
+        },
+        "addedAbilities": []
+      },
+      "Virtuoso": {
+        "feature": {
+          "name": "Second Album",
+          "sourcePath": "en/unified/md/feature/troubadour/level-3/second-album.md",
+          "sourceSha256": "b96f0739ce716cc0df6212b0556b36e029a53e8e955293e0a6e39c3c2111f778",
+          "bookLine": "en/books/heroes/clean/Draw Steel Heroes.md line 15719",
+          "numericSheetEffect": null,
+          "grants": "two performance abilities usable with Routines"
+        },
+        "secondAlbumPerformances": ["\"Fire Up the Night\"", "\"Never-Ending Hero\""],
+        "performanceNamesSource": "en/books/heroes/clean/Draw Steel Heroes.md line 15723 and line 15733; unified front-matter name fields print the same names including the double quotation marks",
+        "addedAbilities": ["\"Fire Up the Night\"", "\"Never-Ending Hero\""]
+      }
+    },
+    "ability7Options": [
+      {
+        "name": "Extensive Rewrites",
+        "printedCost": "7 Drama",
+        "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15747"
+      },
+      {
+        "name": "Infernal Gavotte",
+        "printedCost": "7 Drama",
+        "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15763"
+      },
+      {
+        "name": "Star Solo",
+        "printedCost": "7 Drama",
+        "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15779"
+      },
+      {
+        "name": "We Meet at Last",
+        "printedCost": "7 Drama",
+        "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15795"
+      }
+    ],
+    "nonOptionsInLevel3AbilityFolder": "feature/ability/troubadour/level-3 also holds the two Second Album performances (no cost, subclass virtuoso); they are not 7-drama options (book lists only the four abilities under 7-Drama Ability, lines 15743-15805)."
+  },
+  "abilities": {
+    "Guest Star": {
+      "name": "Guest Star",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+      "sourceSha256": "245a3d54a86385a74501fe03d1188b99b7b9a295c693855c05fff784650ccbe9",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15615",
+      "level": 2,
+      "classAct": "Auteur",
+      "feature": "2nd-Level Class Act Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Special",
+      "cost": {
+        "resource": "drama",
+        "amount": 5,
+        "printed": "5 Drama"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Effect: A guest star appears to help you during the encounter: either a bystander within distance uplifted by your magic, or a mysterious new hero who appears in an unoccupied space within distance. This guest star is controlled by you, has their own turn, and shares your characteristics. Their Stamina maximum is half yours. They have no abilities other than your melee and ranged free strikes. At the end of the encounter, or when the guest star is reduced to 0 Stamina, they retreat or revert to a bystander. The same bystander can't be uplifted this way more than once during an encounter."
+      ],
+      "chosenBy": ["v102-1"],
+      "dealsDamage": false,
+      "damageType": null,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No power roll and no Weapon keyword (Magic, Ranged).",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v102-1": "Ranged 10"
+      },
+      "damageByWitness": [],
+      "guestStarStaminaMaximumByWitness": [
+        {
+          "witness": "v102-1",
+          "level": 2,
+          "value": 13,
+          "formula": "floor(27 / 2) = 13 (\"Their Stamina maximum is half yours\"; rule/general/always-round-down.md)"
+        },
+        {
+          "witness": "v102-1",
+          "level": 3,
+          "value": 16,
+          "formula": "floor(33 / 2) = 16"
+        }
+      ],
+      "manualClauses": [
+        "Guest star appears (uplifted bystander within distance, or new hero in an unoccupied space within distance); controlled by you with its own turn; shares your characteristics.",
+        "Guest star has no abilities other than your melee and ranged free strikes.",
+        "Guest star retreats or reverts at the end of the encounter or at 0 Stamina; the same bystander can't be uplifted more than once per encounter."
+      ]
+    },
+    "Twist at the End": {
+      "name": "Twist at the End",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+      "sourceSha256": "5e85810f12057b465036f2d4a50289c68df8c7e48c4c2384eb660bd6bcf20ea9",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15625",
+      "level": 2,
+      "classAct": "Auteur",
+      "feature": "2nd-Level Class Act Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "One dead enemy",
+      "cost": {
+        "resource": "drama",
+        "amount": 5,
+        "printed": "5 Drama"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Effect: A target who is not a leader or solo creature comes back to life with half their Stamina and becomes an ally under the Director's control. The players can work with the Director to determine when the target takes their turn each combat round. At the end of the encounter, the target turns to dust and is blown away."
+      ],
+      "chosenBy": ["v102-1-alt"],
+      "dealsDamage": false,
+      "damageType": null,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No power roll and no Weapon keyword (Magic, Ranged).",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v102-1-alt": "Ranged 10"
+      },
+      "damageByWitness": [],
+      "manualClauses": [
+        "Target (one dead enemy, not a leader or solo creature) returns to life with half its Stamina and becomes an ally under the Director's control.",
+        "Players and Director determine when it takes its turn each combat round; it turns to dust at the end of the encounter."
+      ]
+    },
+    "Classic Chandelier Stunt": {
+      "name": "Classic Chandelier Stunt",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+      "sourceSha256": "25e3d93dc989fa3942edf615953dbc2de38cd99e7eb495291b0fd187bc4f8fe9",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15639",
+      "level": 2,
+      "classAct": "Duelist",
+      "feature": "2nd-Level Class Act Ability",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "Self and one willing ally",
+      "cost": {
+        "resource": "drama",
+        "amount": 5,
+        "printed": "5 Drama"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Effect: Each target can shift up to 5 squares, including vertically, but must end this movement adjacent to the other target and on solid ground. Each target can then make a melee free strike that deals extra damage equal to twice their highest characteristic score."
+      ],
+      "chosenBy": ["v102-2-alt"],
+      "dealsDamage": true,
+      "damageType": "untyped (melee free strike)",
+      "hasPowerRoll": false,
+      "kitDamageBonusApplies": true,
+      "kitDamageBonusReason": "The ability itself has no power roll. Each target's melee free strike is Melee Weapon Free Strike (Charge, Melee, Strike, Weapon; feature/ability/common/melee-weapon-free-strike.md: 2/5/7 + M or A), so the troubadour's own free strike gets the Cloak and Dagger melee +1/+1/+1 (chapter/kits.md Damage Bonuses: melee bonus is added to rolled damage of damage-dealing abilities with both the Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords.)",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v102-2-alt": "Melee 1"
+      },
+      "damageByWitness": [
+        {
+          "witness": "v102-2-alt",
+          "mode": "melee",
+          "subject": "troubadour's own melee free strike granted by the Effect",
+          "tiers": [9, 12, 14],
+          "formula": "Melee Weapon Free Strike [2,5,7] + A2 (max of M1/A2) + kit Cloak and Dagger melee [1,1,1] + extra 2 x highest characteristic (A2/P2 -> 2) = 4 each tier = [9, 12, 14]",
+          "extraDamage": 4,
+          "damageType": "untyped"
+        }
+      ],
+      "manualClauses": [
+        "Each target (self and one willing ally) can shift up to 5 squares, including vertically, ending adjacent to the other target and on solid ground.",
+        "Each target can then make a melee free strike dealing extra damage equal to twice their highest characteristic score (ally uses its own characteristics)."
+      ]
+    },
+    "En Garde!": {
+      "name": "En Garde!",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+      "sourceSha256": "d3b672a72b1ab077d9aa7f02af1be03333043fbda18d305afe4716065e705483",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15649",
+      "level": 2,
+      "classAct": "Duelist",
+      "feature": "2nd-Level Class Act Ability",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Strike", "Weapon"],
+      "distance": "Melee 1",
+      "target": "One creature",
+      "cost": {
+        "resource": "drama",
+        "amount": 5,
+        "printed": "5 Drama"
+      },
+      "rollCharacteristic": "Agility",
+      "tiersVerbatim": {
+        "tier1": "7 + **A** damage",
+        "tier2": "11 + **A** damage",
+        "tier3": "16 + **A** damage"
+      },
+      "tiersPlain": {
+        "tier1": "7 + A damage",
+        "tier2": "11 + A damage",
+        "tier3": "16 + A damage"
+      },
+      "effectsPlain": [
+        "Effect: The target can make a melee free strike against you. If they do, you can make a melee free strike against the target."
+      ],
+      "chosenBy": ["v102-2"],
+      "dealsDamage": true,
+      "damageType": "untyped",
+      "kitDamageBonusApplies": true,
+      "kitDamageBonusReason": "Keywords Melee, Strike, Weapon. chapter/kits.md Damage Bonuses: melee bonus is added to rolled damage of damage-dealing abilities with both the Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords.",
+      "kitDistanceBonusApplies": false,
+      "kitDistanceReason": "Cloak and Dagger has no melee distance bonus.",
+      "resolvedDistanceByWitness": {
+        "v102-2": "Melee 1"
+      },
+      "damageByWitness": [
+        {
+          "witness": "v102-2",
+          "mode": "melee",
+          "agility": 2,
+          "printedConstants": [7, 11, 16],
+          "kitBonusKind": "melee",
+          "kitBonusApplied": [1, 1, 1],
+          "tiers": [10, 14, 19],
+          "formula": "[7,11,16] + A2 + kit Cloak and Dagger melee [1,1,1] = [10, 14, 19]",
+          "damageType": "untyped"
+        }
+      ],
+      "manualClauses": [
+        "The target can make a melee free strike against you; if they do, you can make a melee free strike against the target (troubadour's free strike: [2,5,7] + A2 + kit melee [1,1,1] = [5, 8, 10] for v102-2)."
+      ]
+    },
+    "Encore": {
+      "name": "Encore",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/encore.md",
+      "sourceSha256": "c054ee38fee26da772765b2f0ea1980e3f731bb26f9db47710c4e72e65733394",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15669",
+      "level": 2,
+      "classAct": "Virtuoso",
+      "feature": "2nd-Level Class Act Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Strike"],
+      "distance": "Special",
+      "target": "Special",
+      "cost": {
+        "resource": "drama",
+        "amount": 5,
+        "printed": "5 Drama"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Effect: You use an ability that you have observed being used this combat round. The ability must have the Strike keyword, cost 5 or fewer of a Heroic Resource, and cost no Malice. When you make the strike, you use your Presence score for any power rolls, and any damage you deal is sonic damage."
+      ],
+      "chosenBy": ["v102-3"],
+      "dealsDamage": "depends on the copied ability",
+      "damageType": "sonic (any damage dealt)",
+      "kitDamageBonusApplies": null,
+      "kitDamageBonusReason": "Encore itself (Magic, Strike) has no Weapon keyword and no power roll of its own; whether a copied Weapon ability receives the kit bonus is unresolved (see uncertainty encore-copied-ability).",
+      "kitDistanceBonusApplies": null,
+      "resolvedDistanceByWitness": {
+        "v102-3": "Special"
+      },
+      "damageByWitness": [],
+      "manualClauses": [
+        "Use an ability you observed being used this combat round; it must have the Strike keyword, cost 5 or fewer of a Heroic Resource and cost no Malice.",
+        "Use your Presence score (P2 for v102-3) for any power rolls of the copied strike.",
+        "Any damage dealt is sonic damage."
+      ]
+    },
+    "Tough Crowd": {
+      "name": "Tough Crowd",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+      "sourceSha256": "5b19776e3d34e1d653431e70f697e5750f62976a7654d212de8585ac308f3778",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15679",
+      "level": 2,
+      "classAct": "Virtuoso",
+      "feature": "2nd-Level Class Act Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic", "Ranged"],
+      "distance": "3 cube within 10",
+      "target": "Special",
+      "cost": {
+        "resource": "drama",
+        "amount": 5,
+        "printed": "5 Drama"
+      },
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "5 corruption damage; M < WEAK, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1 toward the center of the area",
+        "tier2": "9 corruption damage; M < AVERAGE, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 toward the center of the area",
+        "tier3": "12 corruption damage; M < STRONG, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3 toward the center of the area"
+      },
+      "tiersPlain": {
+        "tier1": "5 corruption damage; M < WEAK, pull 1 toward the center of the area",
+        "tier2": "9 corruption damage; M < AVERAGE, pull 2 toward the center of the area",
+        "tier3": "12 corruption damage; M < STRONG, pull 3 toward the center of the area"
+      },
+      "effectsPlain": [
+        "Effect: The area is haunted by a swirling horde of phantoms until the end of the encounter. Allies can enter any square of the area without spending movement. At the end of each of your turns, you can make one power roll that targets each enemy in the area."
+      ],
+      "chosenBy": ["v102-4"],
+      "dealsDamage": true,
+      "damageType": "corruption",
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "Keywords Area, Magic, Ranged: no Weapon keyword. chapter/kits.md Damage Bonuses: melee bonus is added to rolled damage of damage-dealing abilities with both the Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords.",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v102-4": "3 cube within 10"
+      },
+      "damageByWitness": [
+        {
+          "witness": "v102-4",
+          "mode": "ranged",
+          "printedConstants": [5, 9, 12],
+          "kitBonusKind": null,
+          "kitBonusApplied": [0, 0, 0],
+          "tiers": [5, 9, 12],
+          "formula": "[5,9,12] (no characteristic in tier text) + kit [0,0,0] (no Weapon keyword) = [5, 9, 12]",
+          "damageType": "corruption"
+        }
+      ],
+      "potencyByWitness": {
+        "v102-4": {
+          "tier1": "M < 0",
+          "tier2": "M < 1",
+          "tier3": "M < 2"
+        }
+      },
+      "manualClauses": [
+        "The area is haunted until the end of the encounter; allies can enter any square of the area without spending movement.",
+        "The power roll is made at the end of each of your turns (optional), targeting each enemy in the area; using the ability itself creates the area (see uncertainty tough-crowd-roll-timing).",
+        "Pull 1/2/3 toward the center of the area on M < WEAK/AVERAGE/STRONG."
+      ]
+    },
+    "Extensive Rewrites": {
+      "name": "Extensive Rewrites",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+      "sourceSha256": "d750739244f74369aa2f3c5ac005355392b6fb81403eef52d83559986249f535",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15747",
+      "level": 3,
+      "classAct": null,
+      "feature": "7-Drama Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Magic"],
+      "distance": "4 burst",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "drama",
+        "amount": 7,
+        "printed": "7 Drama"
+      },
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; P < WEAK, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
+        "tier2": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; P < AVERAGE, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
+        "tier3": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7; P < STRONG, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)"
+      },
+      "tiersPlain": {
+        "tier1": "Slide 3; P < WEAK, this slide ignores the target's stability",
+        "tier2": "Slide 5; P < AVERAGE, this slide ignores the target's stability",
+        "tier3": "Slide 7; P < STRONG, this slide ignores the target's stability"
+      },
+      "effectsPlain": [
+        "Effect: Instead of sliding a target, you can swap their location with another target as long as each can fit into the other's space. You can't slide targets into other creatures or objects using this ability."
+      ],
+      "chosenBy": ["v102-1"],
+      "dealsDamage": false,
+      "damageType": null,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage; keywords Area, Magic.",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v102-1": "4 burst"
+      },
+      "damageByWitness": [],
+      "potencyByWitness": {
+        "v102-1": {
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        }
+      },
+      "manualClauses": [
+        "Slide 3/5/7; on P < WEAK/AVERAGE/STRONG the slide ignores the target's stability.",
+        "Instead of sliding a target you can swap its location with another target if each fits into the other's space.",
+        "You can't slide targets into other creatures or objects using this ability."
+      ]
+    },
+    "Infernal Gavotte": {
+      "name": "Infernal Gavotte",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+      "sourceSha256": "e801d88818c135e7359dd58534f7f4a2abc88a1943ebccf06823f9e2aa04743a",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15763",
+      "level": 3,
+      "classAct": null,
+      "feature": "7-Drama Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Magic", "Melee", "Weapon"],
+      "distance": "3 burst",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "drama",
+        "amount": 7,
+        "printed": "7 Drama"
+      },
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "5 fire damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+        "tier2": "7 fire damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+        "tier3": "10 fire damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "5 fire damage; A < WEAK, weakened (save ends)",
+        "tier2": "7 fire damage; A < AVERAGE, weakened (save ends)",
+        "tier3": "10 fire damage; A < STRONG, weakened (save ends)"
+      },
+      "effectsPlain": ["Effect: Each ally in the area can shift up to 2 squares."],
+      "chosenBy": ["v102-2-alt", "v102-3"],
+      "dealsDamage": true,
+      "damageType": "fire",
+      "kitDamageBonusApplies": true,
+      "kitDamageBonusReason": "Keywords Area, Magic, Melee, Weapon: has both Melee and Weapon, so the kit melee damage bonus applies to its rolled damage. chapter/kits.md Damage Bonuses: melee bonus is added to rolled damage of damage-dealing abilities with both the Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords. See uncertainty infernal-gavotte-area-kit-bonus.",
+      "kitDistanceBonusApplies": false,
+      "kitDistanceReason": "chapter/kits.md: a distance bonus doesn't increase the size of any area of effect; stays 3 burst.",
+      "resolvedDistanceByWitness": {
+        "v102-2-alt": "3 burst",
+        "v102-3": "3 burst"
+      },
+      "damageByWitness": [
+        {
+          "witness": "v102-2-alt",
+          "mode": "melee",
+          "printedConstants": [5, 7, 10],
+          "kitBonusKind": "melee",
+          "kitBonusApplied": [1, 1, 1],
+          "tiers": [6, 8, 11],
+          "formula": "[5,7,10] (no characteristic in tier text) + kit Cloak and Dagger melee [1,1,1] = [6, 8, 11]",
+          "damageType": "fire"
+        },
+        {
+          "witness": "v102-3",
+          "mode": "melee",
+          "printedConstants": [5, 7, 10],
+          "kitBonusKind": null,
+          "kitBonusApplied": [0, 0, 0],
+          "tiers": [5, 7, 10],
+          "formula": "[5,7,10] + kit Sniper (ranged-only bonus +0/+0/+4, no melee bonus) [0,0,0] = [5, 7, 10]",
+          "damageType": "fire"
+        }
+      ],
+      "potencyByWitness": {
+        "v102-2-alt": {
+          "tier1": "A < 0",
+          "tier2": "A < 1",
+          "tier3": "A < 2"
+        },
+        "v102-3": {
+          "tier1": "A < 0",
+          "tier2": "A < 1",
+          "tier3": "A < 2"
+        }
+      },
+      "manualClauses": [
+        "Weakened (save ends) on A < WEAK/AVERAGE/STRONG per tier.",
+        "Each ally in the area can shift up to 2 squares."
+      ]
+    },
+    "Star Solo": {
+      "name": "Star Solo",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+      "sourceSha256": "5d635ae76f9bc964c7a91102c3530b2b665e11a13884b58ab76cd7bd85af893e",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15779",
+      "level": 3,
+      "classAct": null,
+      "feature": "7-Drama Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Melee", "Ranged", "Strike", "Weapon"],
+      "distance": "Melee 1 or ranged 10",
+      "target": "One creature or object",
+      "cost": {
+        "resource": "drama",
+        "amount": 7,
+        "printed": "7 Drama"
+      },
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "5 + P damage",
+        "tier2": "8 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+        "tier3": "11 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+      },
+      "tiersPlain": {
+        "tier1": "5 + P damage",
+        "tier2": "8 + P damage; push 3",
+        "tier3": "11 + P damage; push 5"
+      },
+      "effectsPlain": [
+        "Effect: You can choose to have this ability deal sonic damage. Additionally, you can use this ability against the same target for the next 2 combat rounds without spending drama."
+      ],
+      "chosenBy": ["v102-2", "v102-4"],
+      "dealsDamage": true,
+      "damageType": "untyped by default; you can choose sonic",
+      "kitDamageBonusApplies": true,
+      "kitDamageBonusReason": "Keywords Magic, Melee, Ranged, Strike, Weapon with distance \"Melee 1 or ranged 10\". rule/combat/distance.md \"Melee or Ranged\": you choose melee or ranged when using it, and only one kit bonus at a time applies to an ability with both keywords (Cloak and Dagger named as the example). Melee mode uses the melee bonus; ranged mode the ranged bonus. chapter/kits.md Damage Bonuses: melee bonus is added to rolled damage of damage-dealing abilities with both the Melee and Weapon keywords; ranged bonus to those with both Ranged and Weapon keywords.",
+      "kitDistanceBonusApplies": "ranged mode only",
+      "resolvedDistanceByWitness": {
+        "v102-2": {
+          "melee": "Melee 1",
+          "ranged": "Ranged 15 (10 + Cloak and Dagger ranged distance +5)"
+        },
+        "v102-4": {
+          "melee": "Melee 1",
+          "ranged": "Ranged 10 (Panther has no distance bonus)"
+        }
+      },
+      "damageByWitness": [
+        {
+          "witness": "v102-2",
+          "mode": "melee",
+          "presence": 2,
+          "printedConstants": [5, 8, 11],
+          "kitBonusKind": "melee",
+          "kitBonusApplied": [1, 1, 1],
+          "tiers": [8, 11, 14],
+          "formula": "[5,8,11] + P2 + kit Cloak and Dagger melee [1,1,1] = [8, 11, 14]",
+          "damageType": "untyped or sonic (your choice)"
+        },
+        {
+          "witness": "v102-2",
+          "mode": "ranged",
+          "presence": 2,
+          "printedConstants": [5, 8, 11],
+          "kitBonusKind": "ranged",
+          "kitBonusApplied": [1, 1, 1],
+          "tiers": [8, 11, 14],
+          "formula": "[5,8,11] + P2 + kit Cloak and Dagger ranged [1,1,1] = [8, 11, 14]",
+          "damageType": "untyped or sonic (your choice)"
+        },
+        {
+          "witness": "v102-4",
+          "mode": "melee",
+          "presence": 2,
+          "printedConstants": [5, 8, 11],
+          "kitBonusKind": "melee",
+          "kitBonusApplied": [0, 0, 4],
+          "tiers": [7, 10, 17],
+          "formula": "[5,8,11] + P2 + kit Panther melee [0,0,4] = [7, 10, 17]",
+          "damageType": "untyped or sonic (your choice)"
+        },
+        {
+          "witness": "v102-4",
+          "mode": "ranged",
+          "presence": 2,
+          "printedConstants": [5, 8, 11],
+          "kitBonusKind": null,
+          "kitBonusApplied": [0, 0, 0],
+          "tiers": [7, 10, 13],
+          "formula": "[5,8,11] + P2 + kit Panther (no ranged bonus) [0,0,0] = [7, 10, 13]",
+          "damageType": "untyped or sonic (your choice)"
+        }
+      ],
+      "manualClauses": [
+        "Tier 2 push 3; tier 3 push 5.",
+        "You can choose to have this ability deal sonic damage.",
+        "You can use this ability against the same target for the next 2 combat rounds without spending drama."
+      ]
+    },
+    "We Meet at Last": {
+      "name": "We Meet at Last",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+      "sourceSha256": "d35c0e8721790145320d3f5a0ff4a5bdcf8c6b0f465c563a4ab1052df2757428",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15795",
+      "level": 3,
+      "classAct": null,
+      "feature": "7-Drama Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Magic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "One creature",
+      "cost": {
+        "resource": "drama",
+        "amount": 7,
+        "printed": "7 Drama"
+      },
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Effect: Until the end of the encounter, both you and the target can target each other with abilities even if you are beyond distance, with the distance of this ability replacing those abilities' distances. The target can't be force moved by an ability used beyond distance this way.",
+        "Additionally, once on each of your turns, you can use a free maneuver to communicate a motivating or dispiriting message to the target, either granting them 2 surges or forcing them to take a bane on the next ability roll they make before the start of your next turn."
+      ],
+      "chosenBy": ["v102-1-alt"],
+      "dealsDamage": false,
+      "damageType": null,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage; keywords Magic, Ranged (no Weapon).",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v102-1-alt": "Ranged 10"
+      },
+      "damageByWitness": [],
+      "manualClauses": [
+        "Until the end of the encounter you and the target can target each other with abilities beyond distance, this ability's distance replacing theirs; the target can't be force moved by an ability used beyond distance this way.",
+        "Once on each of your turns, a free maneuver: grant the target 2 surges or make it take a bane on its next ability roll before the start of your next turn (second paragraph; present in the unified body and book line 15805 but absent from the unified front-matter effects list - see uncertainty we-meet-at-last-frontmatter)."
+      ]
+    },
+    "\"Fire Up the Night\"": {
+      "name": "\"Fire Up the Night\"",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+      "sourceSha256": "040a21ea837e0e08307836ca3ac7dea05eafb6894b4b0508c41e9135e4bb69bc",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15723",
+      "level": 3,
+      "classAct": "Virtuoso",
+      "feature": "Second Album",
+      "actionType": "No action",
+      "keywords": ["Area", "Magic", "Performance"],
+      "distance": "5 aura",
+      "target": "Self and each ally in the area",
+      "cost": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Effect: While this performance is active, each target who starts their turn in the area doesn't take a bane on strikes against creatures with concealment. Once during their turn, they can search for hidden creatures as a free maneuver (see Hide and Sneak in Chapter 9: Tests)."
+      ],
+      "chosenBy": ["v102-3", "v102-4"],
+      "grantedBy": "Second Album (automatic for Virtuoso at 3rd level)",
+      "dealsDamage": false,
+      "damageType": null,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage; keywords Area, Magic, Performance.",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v102-3": "5 aura",
+        "v102-4": "5 aura"
+      },
+      "damageByWitness": [],
+      "usage": "Performance usable with Routines (feature/troubadour/level-1/routines.md): chosen or maintained at the start of each combat round, no action required, unless dazed, dead or surprised; lasts until you can't maintain it or the encounter ends.",
+      "manualClauses": [
+        "While active, each target who starts its turn in the area doesn't take a bane on strikes against creatures with concealment.",
+        "Once during their turn, they can search for hidden creatures as a free maneuver."
+      ]
+    },
+    "\"Never-Ending Hero\"": {
+      "name": "\"Never-Ending Hero\"",
+      "sourcePath": "en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+      "sourceSha256": "d33d883ccebc9a6caa050e5c3ac32120b87524c09de96919ea314224fa70963f",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 15733",
+      "level": 3,
+      "classAct": "Virtuoso",
+      "feature": "Second Album",
+      "actionType": "No action",
+      "keywords": ["Area", "Magic", "Performance"],
+      "distance": "5 aura",
+      "target": "Self and each ally in the area",
+      "cost": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Effect: While this performance is active, each target who starts their turn dying while in the area gains an edge on power rolls and ignores the effects of bleeding until the end of their turn."
+      ],
+      "chosenBy": ["v102-3", "v102-4"],
+      "grantedBy": "Second Album (automatic for Virtuoso at 3rd level)",
+      "dealsDamage": false,
+      "damageType": null,
+      "kitDamageBonusApplies": false,
+      "kitDamageBonusReason": "No damage; keywords Area, Magic, Performance.",
+      "kitDistanceBonusApplies": false,
+      "resolvedDistanceByWitness": {
+        "v102-3": "5 aura",
+        "v102-4": "5 aura"
+      },
+      "damageByWitness": [],
+      "usage": "Performance usable with Routines (feature/troubadour/level-1/routines.md): chosen or maintained at the start of each combat round, no action required, unless dazed, dead or surprised; lasts until you can't maintain it or the encounter ends.",
+      "manualClauses": [
+        "While active, each target who starts its turn dying in the area gains an edge on power rolls and ignores the effects of bleeding until the end of its turn."
+      ]
+    }
+  },
+  "witnesses": {
+    "v102-1": {
+      "base": "v102-1",
+      "classAct": "Auteur",
+      "kit": "Swashbuckler",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Charming Liar",
+          "invocation": "Allow Me to Introduce Tonight's Players",
+          "classActAbility": "Guest Star"
+        },
+        "addedFeatures": [
+          "Appeal to the Muses",
+          "Invocation",
+          "Allow Me to Introduce Tonight's Players",
+          "Perk",
+          "2nd-Level Class Act Ability"
+        ],
+        "addedAbilities": ["Guest Star"],
+        "perks": ["Teamwork", "Charming Liar"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + kit Swashbuckler 3 x echelon 1 = 27",
+          "recoveryValue": "floor(27/3) = 9",
+          "windedValue": "floor(27/2) = 13",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Extensive Rewrites"
+        },
+        "addedFeatures": ["3rd-Level Class Act Feature", "Missed Cue", "7-Drama Ability"],
+        "addedAbilities": ["Extensive Rewrites"],
+        "perks": ["Teamwork", "Charming Liar"],
+        "cumulativeAddedAbilities": ["Guest Star", "Extensive Rewrites"],
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + kit Swashbuckler 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v102-1-alt": {
+      "base": "v102-1",
+      "classAct": "Auteur",
+      "kit": "Swashbuckler",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Expert Sage",
+          "invocation": "Formal Introductions",
+          "classActAbility": "Twist at the End"
+        },
+        "addedFeatures": [
+          "Appeal to the Muses",
+          "Invocation",
+          "Formal Introductions",
+          "Perk",
+          "2nd-Level Class Act Ability"
+        ],
+        "addedAbilities": ["Twist at the End"],
+        "perks": ["Teamwork", "Expert Sage"],
+        "perkType": "lore",
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + kit Swashbuckler 3 x echelon 1 = 27",
+          "recoveryValue": "floor(27/3) = 9",
+          "windedValue": "floor(27/2) = 13",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "We Meet at Last"
+        },
+        "addedFeatures": ["3rd-Level Class Act Feature", "Missed Cue", "7-Drama Ability"],
+        "addedAbilities": ["We Meet at Last"],
+        "perks": ["Teamwork", "Expert Sage"],
+        "cumulativeAddedAbilities": ["Twist at the End", "We Meet at Last"],
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + kit Swashbuckler 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v102-2": {
+      "base": "v102-2",
+      "classAct": "Duelist",
+      "kit": "Cloak and Dagger",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Lie Detector",
+          "invocation": "My Reputation Precedes Me",
+          "classActAbility": "En Garde!"
+        },
+        "addedFeatures": [
+          "Appeal to the Muses",
+          "Invocation",
+          "My Reputation Precedes Me",
+          "Perk",
+          "2nd-Level Class Act Ability"
+        ],
+        "addedAbilities": ["En Garde!"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + kit Cloak and Dagger 3 x echelon 1 = 27",
+          "recoveryValue": "floor(27/3) = 9",
+          "windedValue": "floor(27/2) = 13",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Star Solo"
+        },
+        "addedFeatures": ["3rd-Level Class Act Feature", "Foil", "7-Drama Ability"],
+        "addedAbilities": ["Star Solo"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "cumulativeAddedAbilities": ["En Garde!", "Star Solo"],
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + kit Cloak and Dagger 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v102-2-alt": {
+      "base": "v102-2",
+      "classAct": "Duelist",
+      "kit": "Cloak and Dagger",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Traveling Sage",
+          "invocation": "Allow Me to Introduce Tonight's Players",
+          "classActAbility": "Classic Chandelier Stunt"
+        },
+        "addedFeatures": [
+          "Appeal to the Muses",
+          "Invocation",
+          "Allow Me to Introduce Tonight's Players",
+          "Perk",
+          "2nd-Level Class Act Ability"
+        ],
+        "addedAbilities": ["Classic Chandelier Stunt"],
+        "perks": ["Teamwork", "Traveling Sage"],
+        "perkType": "lore",
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + kit Cloak and Dagger 3 x echelon 1 = 27",
+          "recoveryValue": "floor(27/3) = 9",
+          "windedValue": "floor(27/2) = 13",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Infernal Gavotte"
+        },
+        "addedFeatures": ["3rd-Level Class Act Feature", "Foil", "7-Drama Ability"],
+        "addedAbilities": ["Infernal Gavotte"],
+        "perks": ["Teamwork", "Traveling Sage"],
+        "cumulativeAddedAbilities": ["Classic Chandelier Stunt", "Infernal Gavotte"],
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + kit Cloak and Dagger 3 x echelon 1 = 33",
+          "recoveryValue": "floor(33/3) = 11",
+          "windedValue": "floor(33/2) = 16",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v102-3": {
+      "base": "v102-3",
+      "classAct": "Virtuoso",
+      "kit": "Sniper",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Ritualist",
+          "invocation": "Formal Introductions",
+          "classActAbility": "Encore"
+        },
+        "addedFeatures": [
+          "Appeal to the Muses",
+          "Invocation",
+          "Formal Introductions",
+          "Perk",
+          "2nd-Level Class Act Ability"
+        ],
+        "addedAbilities": ["Encore"],
+        "perks": ["Teamwork", "Ritualist"],
+        "perkType": "supernatural",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + kit Sniper 0 x echelon 1 = 24",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Infernal Gavotte"
+        },
+        "addedFeatures": ["3rd-Level Class Act Feature", "Second Album", "7-Drama Ability"],
+        "addedAbilities": ["Infernal Gavotte", "\"Fire Up the Night\"", "\"Never-Ending Hero\""],
+        "perks": ["Teamwork", "Ritualist"],
+        "cumulativeAddedAbilities": [
+          "Encore",
+          "Infernal Gavotte",
+          "\"Fire Up the Night\"",
+          "\"Never-Ending Hero\""
+        ],
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + kit Sniper 0 x echelon 1 = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    },
+    "v102-4": {
+      "base": "v102-4",
+      "classAct": "Virtuoso",
+      "kit": "Panther",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Thingspeaker",
+          "invocation": "My Reputation Precedes Me",
+          "classActAbility": "Tough Crowd"
+        },
+        "addedFeatures": [
+          "Appeal to the Muses",
+          "Invocation",
+          "My Reputation Precedes Me",
+          "Perk",
+          "2nd-Level Class Act Ability"
+        ],
+        "addedAbilities": ["Tough Crowd"],
+        "perks": ["Teamwork", "Thingspeaker"],
+        "perkType": "supernatural",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + kit Panther 6 x echelon 1 = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Star Solo"
+        },
+        "addedFeatures": ["3rd-Level Class Act Feature", "Second Album", "7-Drama Ability"],
+        "addedAbilities": ["Star Solo", "\"Fire Up the Night\"", "\"Never-Ending Hero\""],
+        "perks": ["Teamwork", "Thingspeaker"],
+        "cumulativeAddedAbilities": [
+          "Tough Crowd",
+          "Star Solo",
+          "\"Fire Up the Night\"",
+          "\"Never-Ending Hero\""
+        ],
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 6,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + kit Panther 6 x echelon 1 = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v102 level-one values: no level-2/3 Troubadour feature, invocation, class act ability, class act feature, 7-drama ability, Second Album performance or selected perk changes them; levels 1-3 are echelon 1 so kit Stamina is unchanged."
+        }
+      }
+    }
+  }
+}

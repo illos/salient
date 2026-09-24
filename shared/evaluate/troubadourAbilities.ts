@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import {
   TROUBADOUR_ACTIONS,
+  TROUBADOUR_ACTIVATION,
   troubadourActionText,
 } from '../content/classes/troubadour/abilities.ts';
 import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
@@ -49,6 +50,10 @@ export function troubadourAbilities(
   }
   return result.map(a => {
     if (!a.provenance.decisionId.startsWith('class.troubadour.')) return a;
+    const later = a.provenance.decisionId.startsWith('class.troubadour.level-')
+      ? TROUBADOUR_ACTIVATION[a.name]
+      : undefined;
+    if (later) return { ...a, activationCondition: later };
     const cost = a.name === 'Star Power' ? 1 : a.name === 'Harmonize' ? 3 : undefined;
     const performance = [
       'Choreography',

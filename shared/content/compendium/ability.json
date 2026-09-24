@@ -10222,6 +10222,408 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/classic-chandelier-stunt",
+    "kind": "ability",
+    "name": "Classic Chandelier Stunt",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/classic-chandelier-stunt.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-2/classic-chandelier-stunt.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 5 Drama\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - effect: Each target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 5 squares, including vertically, but must end this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the other target and on solid ground. Each target can then make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that deals extra damage equal to twice their highest [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) score.\n      name: Effect\nflavor: Audiences love this bit.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: Classic Chandelier Stunt\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-2/classic-chandelier-stunt\nsubclass: duelist\ntarget: Self and one willing ally\ntype: ability\n---\n\n\n*Audiences love this bit.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |                  **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|---------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 Self and one willing ally** |\n\n**Effect:** Each target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 5 squares, including vertically, but must end this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the other target and on solid ground. Each target can then make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that deals extra damage equal to twice their highest [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) score.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "5 Drama",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "effect": "Each target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 5 squares, including vertically, but must end this movement [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the other target and on solid ground. Each target can then make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that deals extra damage equal to twice their highest [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Audiences love this bit.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "subclass": "duelist",
+      "target": "Self and one willing ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/en-garde",
+    "kind": "ability",
+    "name": "En Garde!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/en-garde.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-2/en-garde.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 5 Drama\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 7 + **A** damage\n      tier2: 11 + **A** damage\n      tier3: 16 + **A** damage\n    - effect: The target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you. If they do, you can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target.\n      name: Effect\nflavor: Wait, it's... Guard! [Turn](scc.v1:mcdm.heroes.v1/rule.combat/turn)! Parry! Dodge! Spin! Thrust! Ha!\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: En Garde!\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-2/en-garde\nsubclass: duelist\ntarget: One creature\ntier1: 7 + **A** damage\ntier2: 11 + **A** damage\ntier3: 16 + **A** damage\ntype: ability\n---\n\n\n*Wait, it's... Guard! [Turn](scc.v1:mcdm.heroes.v1/rule.combat/turn)! Parry! Dodge! Spin! Thrust! Ha!*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 7 + **A** damage\n- **12-16:** 11 + **A** damage\n- **17+:** 16 + **A** damage\n\n**Effect:** The target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you. If they do, you can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "5 Drama",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "7 + **A** damage",
+          "tier2": "11 + **A** damage",
+          "tier3": "16 + **A** damage"
+        },
+        {
+          "effect": "The target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you. If they do, you can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Wait, it's... Guard! [Turn](scc.v1:mcdm.heroes.v1/rule.combat/turn)! Parry! Dodge! Spin! Thrust! Ha!",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subclass": "duelist",
+      "target": "One creature",
+      "tier1": "7 + **A** damage",
+      "tier2": "11 + **A** damage",
+      "tier3": "16 + **A** damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/encore",
+    "kind": "ability",
+    "name": "Encore",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/encore.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-2/encore.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 5 Drama\ndistance: Special\neffects:\n    - effect: You use an ability that you have observed being used this [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round). The ability must have the [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) keyword, cost 5 or fewer of a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource), and cost no Malice. When you make the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), you use your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score for any [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), and any damage you deal is sonic damage.\n      name: Effect\nflavor: Again! Again!\nkeywords:\n    - Magic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"2\"\nname: Encore\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-2/encore\nsubclass: virtuoso\ntarget: Special\ntype: ability\n---\n\n\n*Again! Again!*\n\n| **Magic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|----------------:|\n| **📏 Special**    |  **🎯 Special** |\n\n**Effect:** You use an ability that you have observed being used this [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round). The ability must have the [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) keyword, cost 5 or fewer of a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource), and cost no Malice. When you make the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), you use your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score for any [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), and any damage you deal is sonic damage.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "5 Drama",
+      "distance": "Special",
+      "effects": [
+        {
+          "effect": "You use an ability that you have observed being used this [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round). The ability must have the [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) keyword, cost 5 or fewer of a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource), and cost no Malice. When you make the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), you use your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score for any [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), and any damage you deal is sonic damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Again! Again!",
+      "keywords": [
+        "Magic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "2",
+      "subclass": "virtuoso",
+      "target": "Special"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star",
+    "kind": "ability",
+    "name": "Guest Star",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/guest-star.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-2/guest-star.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 5 Drama\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: 'A [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) appears to help you during the encounter: either a bystander within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) uplifted by your magic, or a mysterious new hero who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). This [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) is controlled by you, has their own [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and shares your [characteristics](scc.v1:mcdm.heroes.v1/rule.character/characteristic). Their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) maximum is half yours. They have no abilities other than your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) and [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). At the end of the encounter, or when the [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they retreat or revert to a bystander. The same bystander can''t be uplifted this way more than once during an encounter.'\n      name: Effect\nflavor: We offered them a percentage of the gross. So they're working for free!\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"2\"\nname: Guest Star\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star\nsubclass: auteur\ntarget: Special\ntype: ability\n---\n\n\n*We offered them a percentage of the gross. So they're working for free!*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|----------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**  |  **🎯 Special** |\n\n**Effect:** A [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) appears to help you during the encounter: either a bystander within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) uplifted by your magic, or a mysterious new hero who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). This [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) is controlled by you, has their own [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and shares your [characteristics](scc.v1:mcdm.heroes.v1/rule.character/characteristic). Their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) maximum is half yours. They have no abilities other than your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) and [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). At the end of the encounter, or when the [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they retreat or revert to a bystander. The same bystander can't be uplifted this way more than once during an encounter.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "5 Drama",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "A [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) appears to help you during the encounter: either a bystander within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) uplifted by your magic, or a mysterious new hero who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). This [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) is controlled by you, has their own [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and shares your [characteristics](scc.v1:mcdm.heroes.v1/rule.character/characteristic). Their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) maximum is half yours. They have no abilities other than your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) and [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). At the end of the encounter, or when the [guest star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star) is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), they retreat or revert to a bystander. The same bystander can't be uplifted this way more than once during an encounter.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "We offered them a percentage of the gross. So they're working for free!",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "2",
+      "subclass": "auteur",
+      "target": "Special"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/tough-crowd",
+    "kind": "ability",
+    "name": "Tough Crowd",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/tough-crowd.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-2/tough-crowd.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 5 Drama\ndistance: 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10\neffects:\n    - effect: The area is haunted by a swirling horde of phantoms until the end of the encounter. Allies can enter any square of the area without spending movement. At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy in the area.\n      name: Effect\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 5 corruption damage; M < WEAK, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1 toward the center of the area\n      tier2: 9 corruption damage; M < AVERAGE, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 toward the center of the area\n      tier3: 12 corruption damage; M < STRONG, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3 toward the center of the area\nflavor: Your fans don't seem to like the opening act...\nkeywords:\n    - Area\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"2\"\nname: Tough Crowd\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-2/tough-crowd\nsubclass: virtuoso\ntarget: Special\ntier1: 5 corruption damage; M < WEAK, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1 toward the center of the area\ntier2: 9 corruption damage; M < AVERAGE, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 toward the center of the area\ntier3: 12 corruption damage; M < STRONG, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3 toward the center of the area\ntype: ability\n---\n\n\n*Your fans don't seem to like the opening act...*\n\n| **Area, Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------|----------------:|\n| **📏 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10** |  **🎯 Special** |\n\n**Effect:** The area is haunted by a swirling horde of phantoms until the end of the encounter. Allies can enter any square of the area without spending movement. At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy in the area.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 5 corruption damage; M < WEAK, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1 toward the center of the area\n- **12-16:** 9 corruption damage; M < AVERAGE, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 toward the center of the area\n- **17+:** 12 corruption damage; M < STRONG, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3 toward the center of the area\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "5 Drama",
+      "distance": "3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10",
+      "effects": [
+        {
+          "effect": "The area is haunted by a swirling horde of phantoms until the end of the encounter. Allies can enter any square of the area without spending movement. At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy in the area.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "5 corruption damage; M < WEAK, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1 toward the center of the area",
+          "tier2": "9 corruption damage; M < AVERAGE, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 toward the center of the area",
+          "tier3": "12 corruption damage; M < STRONG, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3 toward the center of the area"
+        }
+      ],
+      "flavor": "Your fans don't seem to like the opening act...",
+      "keywords": [
+        "Area",
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subclass": "virtuoso",
+      "target": "Special",
+      "tier1": "5 corruption damage; M < WEAK, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1 toward the center of the area",
+      "tier2": "9 corruption damage; M < AVERAGE, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 toward the center of the area",
+      "tier3": "12 corruption damage; M < STRONG, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3 toward the center of the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-2/twist-at-the-end",
+    "kind": "ability",
+    "name": "Twist at the End",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-2/twist-at-the-end.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-2/twist-at-the-end.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 5 Drama\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: A target who is not a leader or solo creature comes back to life with half their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and becomes an ally under the Director's control. The players can work with the Director to determine when the target takes their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round). At the end of the encounter, the target turns to dust and is blown away.\n      name: Effect\nflavor: You didn't see that coming, did you?!\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"2\"\nname: Twist at the End\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-2/twist-at-the-end\nsubclass: auteur\ntarget: One dead enemy\ntype: ability\n---\n\n\n*You didn't see that coming, did you?!*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |       **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|----------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**  | **🎯 One dead enemy** |\n\n**Effect:** A target who is not a leader or solo creature comes back to life with half their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and becomes an ally under the Director's control. The players can work with the Director to determine when the target takes their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round). At the end of the encounter, the target turns to dust and is blown away.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "5 Drama",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "A target who is not a leader or solo creature comes back to life with half their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and becomes an ally under the Director's control. The players can work with the Director to determine when the target takes their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round). At the end of the encounter, the target turns to dust and is blown away.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You didn't see that coming, did you?!",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "2",
+      "subclass": "auteur",
+      "target": "One dead enemy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites",
+    "kind": "ability",
+    "name": "Extensive Rewrites",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-3/extensive-rewrites.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 7 Drama\ndistance: 4 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; P < WEAK, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target''s [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)'\n      tier2: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; P < AVERAGE, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target''s [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)'\n      tier3: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7; P < STRONG, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target''s [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)'\n    - effect: Instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) a target, you can swap their location with another target as long as each can fit into the other's space. You can't [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) targets into other creatures or objects using this ability.\n      name: Effect\nflavor: No, this isn't right. That foe was over there!\nkeywords:\n    - Area\n    - Magic\nlevel: \"3\"\nname: Extensive Rewrites\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites\ntarget: Each enemy in the area\ntier1: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; P < WEAK, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target''s [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)'\ntier2: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; P < AVERAGE, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target''s [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)'\ntier3: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7; P < STRONG, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target''s [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)'\ntype: ability\n---\n\n\n*No, this isn't right. That foe was over there!*\n\n| **Area, Magic** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------|------------------------------:|\n| **📏 4 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**  | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; P < WEAK, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)\n- **12-16:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; P < AVERAGE, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)\n- **17+:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7; P < STRONG, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)\n\n**Effect:** Instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) a target, you can swap their location with another target as long as each can fit into the other's space. You can't [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) targets into other creatures or objects using this ability.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "7 Drama",
+      "distance": "4 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; P < WEAK, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
+          "tier2": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; P < AVERAGE, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
+          "tier3": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7; P < STRONG, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)"
+        },
+        {
+          "effect": "Instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) a target, you can swap their location with another target as long as each can fit into the other's space. You can't [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) targets into other creatures or objects using this ability.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "No, this isn't right. That foe was over there!",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "target": "Each enemy in the area",
+      "tier1": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; P < WEAK, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
+      "tier2": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; P < AVERAGE, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)",
+      "tier3": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7; P < STRONG, this [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/fire-up-the-night",
+    "kind": "ability",
+    "name": "\"Fire Up the Night\"",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-3/fire-up-the-night.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[No action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ndistance: 5 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - effect: 'While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area doesn''t take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) against creatures with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment). Once during their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they can search for hidden creatures as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) (see Hide and Sneak in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)).'\n      name: Effect\nflavor: Maybe you and I ♪ We can still bring the light!♪\nkeywords:\n    - Area\n    - Magic\n    - Performance\nlevel: \"3\"\nname: '\"Fire Up the Night\"'\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-3/fire-up-the-night\nsubclass: virtuoso\ntarget: Self and each ally in the area\ntype: ability\n---\n\n\n*Maybe you and I ♪ We can still bring the light!♪*\n\n| **Area, Magic, Performance** |                         **[No action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------|--------------------------------------:|\n| **📏 5 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**                | **🎯 Self and each ally in the area** |\n\n**Effect:** While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area doesn't take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) against creatures with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment). Once during their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they can search for hidden creatures as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) (see Hide and Sneak in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)).\n",
+    "structured": {
+      "action_type": "[No action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "distance": "5 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "effect": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area doesn't take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) against creatures with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment). Once during their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they can search for hidden creatures as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) (see Hide and Sneak in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Maybe you and I ♪ We can still bring the light!♪",
+      "keywords": [
+        "Area",
+        "Magic",
+        "Performance"
+      ],
+      "level": "3",
+      "subclass": "virtuoso",
+      "target": "Self and each ally in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/infernal-gavotte",
+    "kind": "ability",
+    "name": "Infernal Gavotte",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/infernal-gavotte.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-3/infernal-gavotte.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 7 Drama\ndistance: 3 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 5 fire damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier2: 7 fire damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier3: 10 fire damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n    - effect: Each ally in the area can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares.\n      name: Effect\nflavor: A spicy performance lights a fire under your allies' feet.\nkeywords:\n    - Area\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"3\"\nname: Infernal Gavotte\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-3/infernal-gavotte\ntarget: Each enemy in the area\ntier1: 5 fire damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier2: 7 fire damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier3: 10 fire damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntype: ability\n---\n\n\n*A spicy performance lights a fire under your allies' feet.*\n\n| **Area, Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|------------------------------:|\n| **📏 3 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**                 | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 5 fire damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **12-16:** 7 fire damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 10 fire damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n\n**Effect:** Each ally in the area can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "7 Drama",
+      "distance": "3 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "5 fire damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier2": "7 fire damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier3": "10 fire damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+        },
+        {
+          "effect": "Each ally in the area can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A spicy performance lights a fire under your allies' feet.",
+      "keywords": [
+        "Area",
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "target": "Each enemy in the area",
+      "tier1": "5 fire damage; A < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier2": "7 fire damage; A < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier3": "10 fire damage; A < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/never-ending-hero",
+    "kind": "ability",
+    "name": "\"Never-Ending Hero\"",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/never-ending-hero.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-3/never-ending-hero.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[No action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ndistance: 5 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - effect: While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) while in the area gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and ignores the effects of [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Effect\nflavor: And toniiight we can truly say ♪ They will alllways find a way!♪\nkeywords:\n    - Area\n    - Magic\n    - Performance\nlevel: \"3\"\nname: '\"Never-Ending Hero\"'\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-3/never-ending-hero\nsubclass: virtuoso\ntarget: Self and each ally in the area\ntype: ability\n---\n\n\n*And toniiight we can truly say ♪ They will alllways find a way!♪*\n\n| **Area, Magic, Performance** |                         **[No action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------|--------------------------------------:|\n| **📏 5 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**                | **🎯 Self and each ally in the area** |\n\n**Effect:** While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) while in the area gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and ignores the effects of [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[No action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "distance": "5 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "effect": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) while in the area gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and ignores the effects of [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "And toniiight we can truly say ♪ They will alllways find a way!♪",
+      "keywords": [
+        "Area",
+        "Magic",
+        "Performance"
+      ],
+      "level": "3",
+      "subclass": "virtuoso",
+      "target": "Self and each ally in the area"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/star-solo",
+    "kind": "ability",
+    "name": "Star Solo",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/star-solo.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-3/star-solo.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 7 Drama\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 5 + P damage\n      tier2: 8 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n      tier3: 11 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n    - effect: You can choose to have this ability deal sonic damage. Additionally, you can use this ability against the same target for the next 2 [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) without spending drama.\n      name: Effect\nflavor: Your performance travels and doesn't stop moving until your audience is completely rocked.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"3\"\nname: Star Solo\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-3/star-solo\ntarget: One creature or object\ntier1: 5 + P damage\ntier2: 8 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntier3: 11 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\ntype: ability\n---\n\n\n*Your performance travels and doesn't stop moving until your audience is completely rocked.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**              | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 5 + P damage\n- **12-16:** 8 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n- **17+:** 11 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n\n**Effect:** You can choose to have this ability deal sonic damage. Additionally, you can use this ability against the same target for the next 2 [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) without spending drama.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "7 Drama",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "5 + P damage",
+          "tier2": "8 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "tier3": "11 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+        },
+        {
+          "effect": "You can choose to have this ability deal sonic damage. Additionally, you can use this ability against the same target for the next 2 [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) without spending drama.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your performance travels and doesn't stop moving until your audience is completely rocked.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "target": "One creature or object",
+      "tier1": "5 + P damage",
+      "tier2": "8 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+      "tier3": "11 + P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/we-meet-at-last",
+    "kind": "ability",
+    "name": "We Meet at Last",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/we-meet-at-last.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/troubadour/level-3/we-meet-at-last.json",
+    "selection": "troubadour-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: troubadour\ncost: 7 Drama\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: Until the end of the encounter, both you and the target can target each other with abilities even if you are beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), with the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of this ability replacing those abilities' [distances](scc.v1:mcdm.heroes.v1/rule.combat/distance). The target can't be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by an ability used beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) this way.\n      name: Effect\nflavor: You magically intertwine your fate with another creature—for better or worse.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"3\"\nname: We Meet at Last\nscc: mcdm.heroes.v1/feature.ability.troubadour.level-3/we-meet-at-last\ntarget: One creature\ntype: ability\n---\n\n\n*You magically intertwine your fate with another creature—for better or worse.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |        **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**  | **🎯 One creature** |\n\n**Effect:** Until the end of the encounter, both you and the target can target each other with abilities even if you are beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), with the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of this ability replacing those abilities' [distances](scc.v1:mcdm.heroes.v1/rule.combat/distance). The target can't be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by an ability used beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) this way.\n\nAdditionally, once on each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can use a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) to communicate a motivating or dispiriting message to the target, either granting them 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) or forcing them to take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on the next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) they make before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "troubadour",
+      "cost": "7 Drama",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter, both you and the target can target each other with abilities even if you are beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), with the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of this ability replacing those abilities' [distances](scc.v1:mcdm.heroes.v1/rule.combat/distance). The target can't be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by an ability used beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) this way.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You magically intertwine your fate with another creature—for better or worse.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "3",
+      "target": "One creature"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
     "kind": "ability",
     "name": "The Wode Defends",

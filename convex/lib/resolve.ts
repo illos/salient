@@ -311,6 +311,8 @@ export function abilityFromEntry(
     '/feature/ability/troubadour/level-1/upstage.md',
     // Performance activation is not its optional end-round attack.
     '/feature/ability/troubadour/level-1/thunder-mother.md',
+    // Its roll happens at the end of each of your turns against enemies in the area, not on use.
+    '/feature/ability/troubadour/level-2/tough-crowd.md',
     // Separate rolls per eligible creature above each hole; generic shared dice cannot represent this.
     '/feature/ability/elementalist/level-1/instantaneous-excavation.md',
     // A damage type is mandatory; source-typed grants below own its actual roll.

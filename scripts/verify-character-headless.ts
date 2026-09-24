@@ -9,6 +9,7 @@ import { runElementalist } from './headless/elementalist.ts';
 import { runTalent } from './headless/talent.ts';
 import { runNull } from './headless/null.ts';
 import { runTroubadour } from './headless/troubadour.ts';
+import { runTroubadourLevelThree } from './headless/troubadour-level-three.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** Live character acceptance against an explicitly selected development target and cohort. */
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -47,6 +48,7 @@ const cohorts = {
   fury: runFury,
   'fury-level-three': runFuryLevelThree,
   troubadour: runTroubadour,
+  'troubadour-level-three': runTroubadourLevelThree,
   null: runNull,
   elementalist: runElementalist,
   talent: runTalent,
