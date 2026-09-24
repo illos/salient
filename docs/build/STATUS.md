@@ -155,3 +155,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V152 | [Effect rider grammar II](V152-effect-rider-grammar.md) | In progress (ENGINE2) |
 | V153 | [Compound tier conditions](V153-compound-conditions.md) | In progress (ENGINE2) |
 | V154 | [Tier instructions and tiers without damage](V154-tier-instructions.md) | In progress (ENGINE2) |
+| V160 | [Talent ability cards defer resource bookkeeping to the engine](V160-talent-resource-note.md) | In progress |
