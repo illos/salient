@@ -74,3 +74,10 @@ wizard and shared API. Guided advancement remains deferred.
   `elementalist-level-three` cohort rc0 in 73 s: five builds, level edits and twenty-one new uses
   persisted, seed 1775. Artifacts `/srv/presidium/projects/salient/test-artifacts/V135-b1aa80b`.
 - Ready for integration and cloud dev publication, reusing these results.
+
+## Publication: 2026-09-24
+
+Merged in Test-Deploy merge train 1 (V135, V140, V145) as main `7646954`. The combined tree
+passed the full gate (420 engine and 672 app tests) and the train's headless journeys before merge.
+The backend, content (1775 entries) and frontend were published as Worker `5224599e-bc2e-40c5-9330-546ea0feae12`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/train1-release-34a2dd6`.

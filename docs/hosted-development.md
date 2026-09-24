@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V150 Self-Taught forgo
+## Current release — merge train 1 (V135, V140, V145)
+
+Backend/content/frontend source `764695471245f02c56ae579adb42dd12fe1375d9` published on 2026-09-24 as
+Worker `5224599e-bc2e-40c5-9330-546ea0feae12`: V135 Elementalist levels two and three, V140 Tactician focus generation and V145
+Censor wrath generation. Backend and schema validation, the content reseed (1775 entries at
+`fb83a789`), the hosted build and the upload succeeded. The combined tree passed the full gate and
+headless journeys before merge, with no smoke test. See the [ledger](../deploy.md).
+
+## Previous release — V150 Self-Taught forgo
 
 Backend/frontend source `fad564fc6cd877031b501ef08b9771af2456f878` published on 2026-09-24 as
 Worker `e6b75c20-07d3-4d41-bc8c-d75576303b1d`. Backend and schema validation, the hosted build and the upload succeeded.

@@ -42,6 +42,9 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V145 | `7646954` | Merged in train 1; backend/content/frontend published; combined gates at tip | complete |
+| V140 | `7646954` | Merged in train 1; backend/content/frontend published; combined gates at tip | complete |
+| V135 | `7646954` | Merged in train 1; backend/content/frontend published; combined gates at tip | complete |
 | V150 | `fad564f` | Merged; backend/frontend published; accepted gates reused | complete |
 | V133 | `b99b951` | Merged; backend/content/frontend published; combined gates at tip | complete |
 | V120 | `f3acd97` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -520,3 +523,20 @@ The test and deploy thread fast-forwarded reviewed tip `fad564fc6cd877031b501ef0
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V150-release-fad564f`.
+
+### Merge train 1 (V135, V140, V145) publication: 2026-09-24
+
+The test and deploy thread stacked V135 Elementalist levels two and three, V140 Tactician focus
+generation and V145 Censor wrath generation on main `8c8aedf`, in that order, as one merge train.
+It resolved the shared profile list, the profile test and the STATUS rows by keeping both sides, then
+fast-forwarded main to `764695471245f02c56ae579adb42dd12fe1375d9`.
+- Combined tree tested before merge (commit `34a2dd6`, the same tree): full gate (269 s, 420 engine
+  and 672 app tests, Test-support) and the `heroic-resource`, `heroic-resource-censor`,
+  `elementalist-level-three` and `tactician-level-three` journeys.
+- Independent reviews and QC1 clearance passed for each slice; the tip carries V145's QC1 review.
+- Backend publication and schema validation succeeded.
+- The content reseed read back 1775 entries at `fb83a789`.
+- The hosted build and the frontend upload succeeded. Worker `5224599e-bc2e-40c5-9330-546ea0feae12`.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/train1-release-34a2dd6`.

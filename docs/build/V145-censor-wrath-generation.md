@@ -61,3 +61,10 @@ new one in the same round; the app refuses the second claim, which matches the p
   alternative. The Self-Taught limitation is recorded as engine-wide.
 - TESTER PASS at `a44f6b7` and QC1 final PASS (after V150). Rebased onto main `8c8aedf`. Ready for
   integration.
+
+## Publication: 2026-09-24
+
+Merged in Test-Deploy merge train 1 (V135, V140, V145) as main `7646954`. The combined tree
+passed the full gate (420 engine and 672 app tests) and the train's headless journeys before merge.
+The backend, content (1775 entries) and frontend were published as Worker `5224599e-bc2e-40c5-9330-546ea0feae12`. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/train1-release-34a2dd6`.

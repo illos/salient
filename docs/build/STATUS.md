@@ -135,6 +135,6 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V120 | [Shared heroic-resource generation engine (Shadow first)](V120-heroic-resource-engine.md) | Merged (`f3acd97`); cloud dev published; accepted TESTER results reused |
 | V133 | [Null levels two and three](V133-null-level-three.md) | Merged (`b99b951`); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V150 | [Self-Taught forgo for automatic heroic resources](V150-self-taught-forgo.md) | Merged (`fad564f`); cloud dev published; accepted TESTER results reused |
-| V135 | [Elementalist levels two and three](V135-elementalist-level-three.md) | Ready for integration; full gate, isolated headless and independent review PASS |
-| V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Ready for integration; TESTER PASS at bae43ad, independent review and QC1 PASS |
-| V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | Ready for integration; TESTER PASS at a44f6b7, independent review and QC1 PASS |
+| V135 | [Elementalist levels two and three](V135-elementalist-level-three.md) | Merged (`7646954`, train 1); cloud dev published with content reseed; combined gate and headless PASS at tip |
+| V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Merged (`7646954`, train 1); cloud dev published with content reseed; combined gate and headless PASS at tip |
+| V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | Merged (`7646954`, train 1); cloud dev published with content reseed; combined gate and headless PASS at tip |
