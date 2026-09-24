@@ -1,0 +1,2047 @@
+{
+  "schemaVersion": "v135-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "derivation": {
+    "method": "Authored from the pinned Steel Compendium only (canonical checkout at the main repo vendor/steel-compendium, HEAD fb83a789 verified with git rev-parse). Level-one baselines from tests/fixtures/v104-elementalist-expected.json (reviewed). No evaluator, content, convex or headless code read or run.",
+    "staminaMaximum": "Elementalist Basics: Starting Stamina 18 + 6 per level after 1st; plus Enchantment of Permanence +6 (steps at 4th/7th/10th only) and, for Earth, Disciple of Earth +6 at 2nd and +3 per level past 2nd (+9 at 3rd). Enchantment of Battle light-armor +3 stays conditional/excluded (as v104). Elementalists have no kit Stamina.",
+    "recoveryValue": "floor(Stamina maximum / 3) (rule/health/recoveries.md; rule/general/always-round-down.md)",
+    "windedValue": "floor(Stamina maximum / 2) (rule/health/winded.md)",
+    "recoveriesMaximum": "Elementalist Basics: 8; unchanged at levels 2-3.",
+    "numericSheetChanges": "EXPLICIT: the only level-2/3 features that change numeric sheet values are (1) Disciple of Earth (Earth: v104-2, v104-5): Stamina +6 at level 2, +9 at level 3, with derived recovery/winded values; (2) Disciple of Fire (Fire: v104-1): fire immunity 7 at level 2 and 8 at level 3. Plus the class Stamina +6 per level for everyone. Disciple of the Green, There Is No Space Between, all 3rd-level specialization features, every 5/7-essence ability and every selected perk change no numeric sheet value (recoveries, speed, stability, disengage, characteristics, potency, immunities). Acolyte of Earth stability (+1 per Earth+Magic ability use until start of next turn) and Acolyte of the Green temporary Stamina are transient, not sheet values.",
+    "abilityCounts": "Advancement table: level 2 adds a second 5-essence ability (Two signature, 3, 5, 5); level 3 adds one 7-essence ability (Two signature, 3, 5, 5, 7). Void also gains There Is No Space Between at 2nd; Earth gains Earth Accepts Me and Green gains Remember Growth and Sun and Rain at 3rd (no-cost specialization abilities).",
+    "abilityDamage": "'X + R' adds Reason (all witnesses R2). Enchantment of Destruction +1 rolled damage with magic abilities (Magic keyword) and Acolyte of Fire +1 rolled damage for Fire+Magic abilities apply only to v104-1 and only to power-rolled damage. Enchantment of Battle's +1 needs a weapon ability and wielded light weapon (never here). Fixed (non-rolled) damage recorded under fixedDamageByWitness.",
+    "potency": "Weak R-2 / Average R-1 / Strong R = 0/1/2 with Reason 2 (class/elementalist.md Basics).",
+    "perkChoice": "One distinct eligible perk per witness from crafting/lore/supernatural (feature/elementalist/level-2/perk.md), none with sub-choices, none already owned (all bases own only Teamwork, an exploration perk). Perks grant no numeric change.",
+    "fiveEssenceChoice": "v104-1..v104-4 take one of the four new level-2 options; v104-5 takes Conflagration through the 'didn't select at 1st level' alternative (it picked No More Than a Breeze at 1st)."
+  },
+  "sources": [
+    {
+      "path": "en/unified/md/class/elementalist.md",
+      "sha256": "5b0651654895ce080b45d3a9e13339905faae4566343e8e9245cc1f205a1a1b1"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-2/perk.md",
+      "sha256": "f9e82d0f5a665addf10f94bac95340a73c670f7c7e5715b65bd300dd2dde08dc"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-2/2nd-level-specialization-feature.md",
+      "sha256": "cb4a3afaf89a12c5742cf38e75138268fe6139d40c9001f217eb5b5f25a8d310"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-2/disciple-of-earth.md",
+      "sha256": "4c5de4e8af09f6a22aa5d152e5e7d3925a5147ffe5a6061c07a46d236b6f6f34"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-2/disciple-of-fire.md",
+      "sha256": "ac0558233a6ae58c4478d1eeb177abb4180c6239c1146040c5f0ab4303d45c85"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md",
+      "sha256": "2b82c37d8482ddc0348e3b97165bffb912962c41270ab70a75bbe9e5c058b8b3"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-2/there-is-no-space-between.md",
+      "sha256": "65180b0e9f3794f47d933e2a935101b37d8f42ea2e5cb2f5492bea8e76c9917f"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-2/new-5-essence-ability.md",
+      "sha256": "9b4300c9fb86ab785548751f7d54a363ddf280af0a6ba002bc48d87d0cc0b666"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-3/3rd-level-specialization-feature.md",
+      "sha256": "c3627e1f13c703e0222d861a3da6fc80ebf3685c83955859c810a93d4b8364a8"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-3/7-essence-ability.md",
+      "sha256": "8565acc8f1c1c49210faf31e050bfce584fe407ceec9d330f48bd0488a0da7da"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-3/a-conversation-with-fire.md",
+      "sha256": "1deebe0169ea577b1b3c981c795ec76f318946612c028a6261998b5255878ea5"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-3/distance-is-only-memory.md",
+      "sha256": "8203cfa874539f05ac14b2bc214666d634423c4992500af09644b365ecda492f"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-3/earth-accepts-me.md",
+      "sha256": "db1f7ae60c7cbd70af1160b40fbf399be600cad477f8816c9af39b23cfe78928"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+      "sha256": "5e5fbdce84ac6e8a621b5a659b4df3c112e7e2b83a3099f79d36dd358675d91d"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+      "sha256": "8c57b6ac99b430c90e47954244ddefc6b5f70046f35bbcd0fe6af73e44ee796e"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+      "sha256": "1b81de5b0a0589cc66988b1ac31a000e65fe12662359695268e9efc6aa231c8f"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+      "sha256": "f8b38b0db43da3cb8ed01d62e9e6b53f5da192e8846d58d941cdbf5dd3a56596"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+      "sha256": "4df1faf37a401cfe77a986e6fe0ecb3709d72f4ed4fd82ca5cf5f4c682167c07"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+      "sha256": "e5a57df1e3e6039f4888fdd1be010904e62a0074ac0c063d4e36e4124219480b"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-3/erase.md",
+      "sha256": "1e40adea50f4c4880d89f5e78512b1017a969428fc5d32cb8cc786305d7359df"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+      "sha256": "c937a5c046498106f304d143d874504eda29d0e371e56897436a8f8f33c0e4de"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+      "sha256": "716f436d1f11179b5a2d249c6bcae14a1e6cf9c5727d060f501fab63b5423b00"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+      "sha256": "8728970da3694d964c862fd717d1ee9e08fb0626c669e95089a4d5168b0afcd3"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+      "sha256": "5b005c71c1d6cd00f6c78a2b494ec2a9996caafd01e52548918f92e74a105dbe"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+      "sha256": "a5d746dbf886d7aaffacbfe1d3fa705359df81c49394d9ca9585459e3cda760a"
+    },
+    {
+      "path": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+      "sha256": "4cf4272c314ad5d8a877692498d0f46aae6c258b46887489c635eebd48ff695d"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+      "sha256": "bdeecdc4c74df02314d8ef5ecf88db0d89a634a71f06d94b38a0d62ef26ed703"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/persistent-magic.md",
+      "sha256": "0bf695cdfa32190d54f0eaa2766ed7ff235ca77a53b542b53e34fde002f2fa72"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/enchantment-of-battle.md",
+      "sha256": "c5444cb218781120c968fabdad8937bd2bc2f5426952ee4a06e83ee8c55bee29"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/enchantment-of-celerity.md",
+      "sha256": "23811998a5ddc3197066c7493889f4a3adbb24329fce432f66c7c7032a213da9"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/enchantment-of-destruction.md",
+      "sha256": "89b90dccecd57158258b89cc68fd5e412f56f0c4a27a9b8fbabcddf5df2dfa54"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/enchantment-of-distance.md",
+      "sha256": "3ba045ebfb2945b48a0f15d2a4884475da8c37679ca389e371a183ed659a26d4"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/enchantment-of-permanence.md",
+      "sha256": "ca69e8f6fa6087629d067763766c221bfe7ffabec9ea20421af4b0c09b72890c"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/earth-acolyte-of-earth.md",
+      "sha256": "0dacf39b0cec22298740a5c5ba62f25c66cab74726fc6388b6172bbb482447ae"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/fire-acolyte-of-fire.md",
+      "sha256": "273c17e8d3fbbf158cfb120ef5681138694c88168902900240b0fe39fadeb9fb"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/green-acolyte-of-the-green.md",
+      "sha256": "8f5fbb6814c7041cf288dc94aa4f6bfc44e2b427d7c118f2dab2f630399fa1b3"
+    },
+    {
+      "path": "en/unified/md/feature/elementalist/level-1/void-acolyte-of-the-mystery.md",
+      "sha256": "ffa0b603017d6dd7c79a36d375c2cb419b1af716f3f420f3a5a38cd1ac83a4e3"
+    },
+    {
+      "path": "en/unified/md/rule/damage/damage-immunity.md",
+      "sha256": "769a26ee3ed6da58ad4fdeafe4b49c8a3f5e73e0de20dba0eb44f49be7a6c1bf"
+    },
+    {
+      "path": "en/unified/md/rule/damage/rolled-damage.md",
+      "sha256": "982ca1b159dcfab515801b27781f1f19b041d9c398e6b2371e769a7aafcd7e14"
+    },
+    {
+      "path": "en/unified/md/rule/health/recoveries.md",
+      "sha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9"
+    },
+    {
+      "path": "en/unified/md/rule/health/winded.md",
+      "sha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee"
+    },
+    {
+      "path": "en/unified/md/rule/health/temporary-stamina.md",
+      "sha256": "d5a239b9e0b180fc467c75fa8f0b79cc18c46c0d719f39e4fc245b7f34818e3d"
+    },
+    {
+      "path": "en/unified/md/rule/general/echelon.md",
+      "sha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3"
+    },
+    {
+      "path": "en/unified/md/rule/general/always-round-down.md",
+      "sha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783"
+    },
+    {
+      "path": "en/unified/md/rule/character/potency.md",
+      "sha256": "8c07c502b4576b369fbc6efba6da0327d84489b8f1343ee9dadf548b99a6c8d6"
+    },
+    {
+      "path": "en/unified/md/rule/dice/bonuses-and-penalties.md",
+      "sha256": "f38747c337bb36ff4fe3a45e12e6f1b51dacbeecf551cb8ad177b4722b2ed612"
+    },
+    {
+      "path": "en/unified/md/perk/handy.md",
+      "sha256": "066998fed4b8d9d68a19c4d28bcbd372b5119e3b08feb95477721006bbf3783d"
+    },
+    {
+      "path": "en/unified/md/perk/polymath.md",
+      "sha256": "0881867c8e7df430e015843386efcde9bcfe52e64ef1efbd6034cc0a28306a51"
+    },
+    {
+      "path": "en/unified/md/perk/ritualist.md",
+      "sha256": "e6604fbbb3a559f45cc715f8fb8e8c1ecfdc694220126da1a139a4935fda9c73"
+    },
+    {
+      "path": "en/unified/md/perk/expert-sage.md",
+      "sha256": "a5901ec4c7b8c1e19dc7666bb0f7dd90410fb390057523900c71e7eb28b98941"
+    },
+    {
+      "path": "en/unified/md/perk/expert-artisan.md",
+      "sha256": "4039cf73d49f0fb402f196447831eba74d39bb078eb48082c61c2b29e9178cd9"
+    },
+    {
+      "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01"
+    },
+    {
+      "path": "tests/fixtures/v104-elementalist-expected.json",
+      "role": "reviewed level-one baseline"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "distance-bonus-stacking",
+      "passage": "en/unified/md/feature/elementalist/level-1/enchantment-of-distance.md \"+2 bonus to the distance of your ranged magic abilities\" and void-acolyte-of-the-mystery.md \"distance of all your abilities that have the Magic, Ranged, and Void keywords increases by 2 squares\".",
+      "resolution": "INTERPRETATION: the two are separate features and both apply, so v104-4's Translated Through Flame, Erase and There Is No Space Between are Ranged 14. rule/dice/bonuses-and-penalties.md says bonuses always add together (stated for power rolls); no passage forbids stacking distance bonuses.",
+      "alternatives": ["only the larger single +2 applies (Ranged 12)"]
+    },
+    {
+      "id": "disciple-of-earth-stacks-with-permanence",
+      "passage": "en/unified/md/feature/elementalist/level-2/disciple-of-earth.md \"+6 bonus to Stamina ... additional +3 ... whenever you gain a level past 2nd\"; enchantment-of-permanence.md \"+6 bonus to Stamina\".",
+      "resolution": "INTERPRETATION: both Stamina bonuses apply to v104-2 (36 at level 2, 45 at level 3). The +3 per level past 2nd gives +9 total at 3rd.",
+      "alternatives": [
+        "bonuses from different features do not stack (v104-2 would be 30 / 39) - no supporting passage found"
+      ]
+    },
+    {
+      "id": "battle-light-armor-stamina",
+      "passage": "en/unified/md/feature/elementalist/level-1/enchantment-of-battle.md \"While you wear light armor, you gain a +3 bonus to Stamina\".",
+      "resolution": "Kept conditional and excluded, matching the reviewed v104 baseline (v104-5 level 1 Stamina 18). v104-5 levels 2/3: 30 / 39.",
+      "alternatives": ["light armor worn: +3 -> 33 / 42 (recovery 11 / 14, winded 16 / 21)"]
+    },
+    {
+      "id": "green-acolyte-persistent-reroll",
+      "passage": "en/unified/md/feature/elementalist/level-1/green-acolyte-of-the-green.md \"an ability that has the Green and Magic keywords and that costs essence to use\"; swarm-of-spirits.md Persistent 1 \"You make the power roll again ... without spending essence\".",
+      "resolution": "Not resolved; kept manual. The initial use (7 essence) triggers temporary Stamina 2; the persistent re-roll is ambiguous because the ability still has a cost but no essence is spent.",
+      "alternatives": [
+        "re-roll triggers the acolyte (ability 'costs essence to use' is a property of the ability)",
+        "re-roll does not trigger (no essence spent)"
+      ]
+    },
+    {
+      "id": "untyped-rolled-damage",
+      "passage": "maw-of-earth.md tiers \"5 damage / 9 damage / 12 damage\"; swarm-of-spirits.md \"3 damage / 6 damage / 9 damage\"; o-flower-aid-o-earth-defend.md \"damage equal to your Reason score\".",
+      "resolution": "Recorded as untyped damage (damageType null) and without a characteristic added, exactly as printed in both unified and book (lines 8228-8300).",
+      "alternatives": ["none; printed text is explicit"]
+    },
+    {
+      "id": "fixed-damage-no-rolled-bonus",
+      "passage": "en/unified/md/rule/damage/rolled-damage.md \"If an ability or effect deals damage without requiring a power roll, that is not rolled damage\".",
+      "resolution": "Wall of Fire (v104-1) deals 2 fire per square with no Destruction/Acolyte of Fire bonus; O Flower Aid (v104-2) deals 2 untyped.",
+      "alternatives": ["none; rule is explicit"]
+    },
+    {
+      "id": "new-5-essence-options-list",
+      "passage": "en/unified/md/feature/elementalist/level-2/new-5-essence-ability.md and level-3/7-essence-ability.md say 'from the following options' but list none.",
+      "resolution": "Options from en/books/heroes/clean/Draw Steel Heroes.md lines 8109-8173 (O Flower Aid, O Earth Defend; Subvert the Green Within; Translated Through Flame; Volcano's Embrace) and 8228-8300 (Erase; Maw of Earth; Swarm of Spirits; Wall of Fire); unified level-2/level-3 ability folders agree (There Is No Space Between, Earth Accepts Me and Remember Growth are specialization-feature abilities with no cost).",
+      "alternatives": ["none needed; two sources agree"]
+    },
+    {
+      "id": "disciple-of-green-front-matter",
+      "passage": "en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md has no 'subclass' front-matter field (the other three 2nd-level specialization features do).",
+      "resolution": "Assigned to Green from the 2nd-Level Elemental Specialization Features Table (unified and book line 8045).",
+      "alternatives": ["none"]
+    },
+    {
+      "id": "translated-through-flame-teleport-distance",
+      "passage": "translated-through-flame.md \"The target is teleported to another space within distance.\"",
+      "resolution": "INTERPRETATION: 'within distance' uses the ability's resolved distance, so v104-4 can teleport the target within 14 squares (see distance-bonus-stacking).",
+      "alternatives": ["teleport limited to the printed Ranged 10"]
+    },
+    {
+      "id": "companion-perks",
+      "passage": "Unified perk/ contains perks absent from the Heroes book perk chapter; unified perk front matter has no group field.",
+      "resolution": "Perk groups taken only from the Heroes book chapter headings (crafting 17319, lore 17469, supernatural 17511).",
+      "alternatives": ["treat them as eligible under some group (no group is printed)"]
+    }
+  ],
+  "levelTwo": {
+    "sourceAdvancementTable": "en/unified/md/class/elementalist.md (Elementalist Advancement Table, row 2nd: Perk, Specialization Feature, New 5-Essence Ability; Abilities: Two signature, 3, 5, 5)",
+    "staminaGained": 6,
+    "staminaSource": "en/unified/md/class/elementalist.md Basics: Stamina Gained at 2nd and Higher Levels: 6",
+    "abilitySlotsAfter": {
+      "signature": 2,
+      "3-essence": 1,
+      "5-essence": 2
+    },
+    "commonFeatures": [
+      {
+        "name": "Perk",
+        "sourcePath": "en/unified/md/feature/elementalist/level-2/perk.md",
+        "sourceSha256": "f9e82d0f5a665addf10f94bac95340a73c670f7c7e5715b65bd300dd2dde08dc",
+        "choice": "one crafting, lore, or supernatural perk"
+      },
+      {
+        "name": "2nd-Level Specialization Feature",
+        "sourcePath": "en/unified/md/feature/elementalist/level-2/2nd-level-specialization-feature.md",
+        "sourceSha256": "cb4a3afaf89a12c5742cf38e75138268fe6139d40c9001f217eb5b5f25a8d310",
+        "grants": "one feature per specialization (2nd-Level Elemental Specialization Features Table)"
+      },
+      {
+        "name": "New 5-Essence Ability",
+        "sourcePath": "en/unified/md/feature/elementalist/level-2/new-5-essence-ability.md",
+        "sourceSha256": "9b4300c9fb86ab785548751f7d54a363ddf280af0a6ba002bc48d87d0cc0b666",
+        "choice": "one of four new 5-essence heroic abilities, OR one of the 1st-level 5-essence abilities not selected at 1st level",
+        "optionsSource": "en/books/heroes/clean/Draw Steel Heroes.md lines 8109-8173 (unified file says 'following options' but lists none)"
+      }
+    ],
+    "bySpecialization": {
+      "Earth": {
+        "name": "Disciple of Earth",
+        "sourcePath": "en/unified/md/feature/elementalist/level-2/disciple-of-earth.md",
+        "sourceSha256": "4c5de4e8af09f6a22aa5d152e5e7d3925a5147ffe5a6061c07a46d236b6f6f34",
+        "text": "You have a +6 bonus to Stamina, and you gain an additional +3 bonus to Stamina whenever you gain a level past 2nd.",
+        "numericSheetEffect": {
+          "staminaMaximum": {
+            "level2": 6,
+            "level3": 9
+          }
+        },
+        "grantsAbility": null
+      },
+      "Fire": {
+        "name": "Disciple of Fire",
+        "sourcePath": "en/unified/md/feature/elementalist/level-2/disciple-of-fire.md",
+        "sourceSha256": "ac0558233a6ae58c4478d1eeb177abb4180c6239c1146040c5f0ab4303d45c85",
+        "text": "You have fire immunity equal to 5 plus your level. Additionally, fire damage you deal ignores a target's fire immunity. At the start of a combat encounter, you gain a number of surges equal to your Victories. Whenever you spend a surge to deal extra damage, you can make that damage fire damage.",
+        "numericSheetEffect": {
+          "damageImmunities": {
+            "level2": [
+              {
+                "damageType": "fire",
+                "value": 7
+              }
+            ],
+            "level3": [
+              {
+                "damageType": "fire",
+                "value": 8
+              }
+            ]
+          }
+        },
+        "manualClauses": [
+          "Your fire damage ignores targets' fire immunity.",
+          "Start of combat: gain surges equal to Victories.",
+          "Surge extra damage may be made fire damage."
+        ],
+        "grantsAbility": null
+      },
+      "Green": {
+        "name": "Disciple of the Green",
+        "sourcePath": "en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md",
+        "sourceSha256": "2b82c37d8482ddc0348e3b97165bffb912962c41270ab70a75bbe9e5c058b8b3",
+        "text": "Maneuver: shapeshift into a creature type on the Green Animal Forms table whose prerequisite level you have attained; revert as a maneuver; revert when dying.",
+        "numericSheetEffect": null,
+        "numericSheetEffectNote": "Animal-form speed/size/stability/temporary Stamina/melee damage apply only while in form; true-form sheet values are unchanged.",
+        "animalFormsAvailable": {
+          "level2": [
+            {
+              "type": "Canine",
+              "level": 2,
+              "temporaryStamina": 5,
+              "speed": "7",
+              "size": "1M",
+              "stabilityBonus": 0,
+              "meleeDamageBonus": [1, 1, 1]
+            },
+            {
+              "type": "Fish",
+              "level": 2,
+              "temporaryStamina": 0,
+              "speed": "5 (swim only)",
+              "size": "1T",
+              "stabilityBonus": 0,
+              "meleeDamageBonus": [0, 0, 0]
+            },
+            {
+              "type": "Rodent",
+              "level": 2,
+              "temporaryStamina": 0,
+              "speed": "5 (climb)",
+              "size": "1T",
+              "stabilityBonus": 0,
+              "meleeDamageBonus": [0, 0, 0]
+            }
+          ],
+          "level3Adds": [
+            {
+              "type": "Bird",
+              "level": 3,
+              "temporaryStamina": 0,
+              "speed": "5 (fly)",
+              "size": "1T",
+              "stabilityBonus": 0,
+              "meleeDamageBonus": [0, 0, 0]
+            },
+            {
+              "type": "Great cat",
+              "level": 3,
+              "temporaryStamina": 5,
+              "speed": "6 (climb)",
+              "size": "2",
+              "stabilityBonus": 0,
+              "meleeDamageBonus": [1, 1, 1]
+            }
+          ]
+        },
+        "grantsAbility": "Disciple of the Green: shapeshift (maneuver) and revert (maneuver)"
+      },
+      "Void": {
+        "name": "There Is No Space Between",
+        "sourcePath": "en/unified/md/feature/elementalist/level-2/there-is-no-space-between.md",
+        "sourceSha256": "65180b0e9f3794f47d933e2a935101b37d8f42ea2e5cb2f5492bea8e76c9917f",
+        "text": "You have the following ability.",
+        "numericSheetEffect": null,
+        "grantsAbility": "There Is No Space Between"
+      }
+    },
+    "newFiveEssenceOptions": [
+      {
+        "name": "O Flower Aid, O Earth Defend",
+        "printedCost": "5 Essence",
+        "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8113"
+      },
+      {
+        "name": "Subvert the Green Within",
+        "printedCost": "5 Essence",
+        "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8129"
+      },
+      {
+        "name": "Translated Through Flame",
+        "printedCost": "5 Essence",
+        "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8145"
+      },
+      {
+        "name": "Volcano's Embrace",
+        "printedCost": "5 Essence",
+        "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8161"
+      }
+    ],
+    "newFiveEssenceOptionsAreSpecializationIndependent": true,
+    "levelOneAlternatives": {
+      "rule": "\"Alternatively, you can choose one of the 5-essence abilities you didn't select at 1st level (see 1st-Level Features).\" - en/unified/md/feature/elementalist/level-2/new-5-essence-ability.md",
+      "levelOneFiveEssenceOptions": [
+        {
+          "name": "Conflagration",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 7965"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 7981"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 7999"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8011"
+        }
+      ],
+      "levelOneOptionsSource": "en/books/heroes/clean/Draw Steel Heroes.md lines 7961-8025 (5-Essence Ability); en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+      "allowedByWitness": {
+        "v104-1": ["Instantaneous Excavation", "No More Than a Breeze", "Test of Rain"],
+        "v104-2": ["Conflagration", "No More Than a Breeze", "Test of Rain"],
+        "v104-3": ["Conflagration", "Instantaneous Excavation", "No More Than a Breeze"],
+        "v104-4": ["Conflagration", "Instantaneous Excavation", "Test of Rain"],
+        "v104-5": ["Conflagration", "Instantaneous Excavation", "Test of Rain"]
+      },
+      "forbiddenByWitness": {
+        "v104-1": ["Conflagration"],
+        "v104-2": ["Instantaneous Excavation"],
+        "v104-3": ["Test of Rain"],
+        "v104-4": ["No More Than a Breeze"],
+        "v104-5": ["No More Than a Breeze"]
+      }
+    },
+    "perkGroups": ["crafting", "lore", "supernatural"],
+    "perkGroupsSource": "en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Crafting Perks 17319, Lore Perks 17469, Supernatural Perks 17511",
+    "eligibleCorePerks": {
+      "crafting": [
+        {
+          "name": "Area of Expertise",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md"
+        },
+        {
+          "name": "Expert Artisan",
+          "sourcePath": "en/unified/md/perk/expert-artisan.md"
+        },
+        {
+          "name": "Handy",
+          "sourcePath": "en/unified/md/perk/handy.md"
+        },
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md"
+        },
+        {
+          "name": "Inspired Artisan",
+          "sourcePath": "en/unified/md/perk/inspired-artisan.md"
+        },
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md"
+        }
+      ],
+      "lore": [
+        {
+          "name": "But I Know Who Does",
+          "sourcePath": "en/unified/md/perk/but-i-know-who-does.md"
+        },
+        {
+          "name": "Eidetic Memory",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md"
+        },
+        {
+          "name": "Expert Sage",
+          "sourcePath": "en/unified/md/perk/expert-sage.md"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md"
+        },
+        {
+          "name": "Linguist",
+          "sourcePath": "en/unified/md/perk/linguist.md"
+        },
+        {
+          "name": "Polymath",
+          "sourcePath": "en/unified/md/perk/polymath.md"
+        },
+        {
+          "name": "Specialist",
+          "sourcePath": "en/unified/md/perk/specialist.md"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md"
+        }
+      ],
+      "supernatural": [
+        {
+          "name": "Arcane Trick",
+          "sourcePath": "en/unified/md/perk/arcane-trick.md"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md"
+        },
+        {
+          "name": "Familiar",
+          "sourcePath": "en/unified/md/perk/familiar.md"
+        },
+        {
+          "name": "Invisible Force",
+          "sourcePath": "en/unified/md/perk/invisible-force.md"
+        },
+        {
+          "name": "Psychic Whisper",
+          "sourcePath": "en/unified/md/perk/psychic-whisper.md"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md"
+        }
+      ]
+    },
+    "eligibleCorePerkCount": 21,
+    "excludedPerkGroups": "exploration, interpersonal, intrigue (not permitted by feature/elementalist/level-2/perk.md). Teamwork (every base witness's Soldier career perk) is exploration and not eligible. Unified perk/ companion perks absent from the Heroes book perk chapter are excluded (same basis as v117).",
+    "perksWithSubChoices": [
+      "Area of Expertise (one crafting skill you already have)",
+      "Linguist (two languages)",
+      "Specialist (one lore skill you have)",
+      "Eidetic Memory (lore skill chosen at each respite; not build-time but avoided)"
+    ]
+  },
+  "levelThree": {
+    "sourceAdvancementTable": "en/unified/md/class/elementalist.md (row 3rd: Specialization Feature, 7-Essence Ability; Abilities: Two signature, 3, 5, 5, 7)",
+    "staminaGained": 6,
+    "abilitySlotsAfter": {
+      "signature": 2,
+      "3-essence": 1,
+      "5-essence": 2,
+      "7-essence": 1
+    },
+    "commonFeatures": [
+      {
+        "name": "3rd-Level Specialization Feature",
+        "sourcePath": "en/unified/md/feature/elementalist/level-3/3rd-level-specialization-feature.md",
+        "sourceSha256": "c3627e1f13c703e0222d861a3da6fc80ebf3685c83955859c810a93d4b8364a8",
+        "grants": "one feature per specialization"
+      },
+      {
+        "name": "7-Essence Ability",
+        "sourcePath": "en/unified/md/feature/elementalist/level-3/7-essence-ability.md",
+        "sourceSha256": "8565acc8f1c1c49210faf31e050bfce584fe407ceec9d330f48bd0488a0da7da",
+        "choice": "one of four 7-essence heroic abilities",
+        "optionsSource": "en/books/heroes/clean/Draw Steel Heroes.md lines 8228-8300 (unified file lists none)"
+      }
+    ],
+    "bySpecialization": {
+      "Earth": {
+        "name": "Earth Accepts Me",
+        "sourcePath": "en/unified/md/feature/elementalist/level-3/earth-accepts-me.md",
+        "sourceSha256": "db1f7ae60c7cbd70af1160b40fbf399be600cad477f8816c9af39b23cfe78928",
+        "numericSheetEffect": null,
+        "grantsAbility": "Earth Accepts Me"
+      },
+      "Fire": {
+        "name": "A Conversation With Fire",
+        "sourcePath": "en/unified/md/feature/elementalist/level-3/a-conversation-with-fire.md",
+        "sourceSha256": "1deebe0169ea577b1b3c981c795ec76f318946612c028a6261998b5255878ea5",
+        "numericSheetEffect": null,
+        "grantsAbility": null,
+        "manualClauses": [
+          "After 1 uninterrupted minute before a fire, speak a creature's name; if willing, two-way image conversation; either ends it as a maneuver."
+        ]
+      },
+      "Green": {
+        "name": "Remember Growth and Sun and Rain",
+        "sourcePath": "en/unified/md/feature/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+        "sourceSha256": "5e5fbdce84ac6e8a621b5a659b4df3c112e7e2b83a3099f79d36dd358675d91d",
+        "numericSheetEffect": null,
+        "grantsAbility": "Remember Growth and Sun and Rain"
+      },
+      "Void": {
+        "name": "Distance Is Only Memory",
+        "sourcePath": "en/unified/md/feature/elementalist/level-3/distance-is-only-memory.md",
+        "sourceSha256": "8203cfa874539f05ac14b2bc214666d634423c4992500af09644b365ecda492f",
+        "numericSheetEffect": null,
+        "grantsAbility": null,
+        "manualClauses": [
+          "After each respite, open a two-way portal to any place previously visited; lasts 1 hour or until dismissed as a main action."
+        ]
+      }
+    },
+    "ability7Options": [
+      {
+        "name": "Erase",
+        "printedCost": "7 Essence",
+        "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/erase.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8232"
+      },
+      {
+        "name": "Maw of Earth",
+        "printedCost": "7 Essence",
+        "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8250"
+      },
+      {
+        "name": "Swarm of Spirits",
+        "printedCost": "7 Essence",
+        "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8266"
+      },
+      {
+        "name": "Wall of Fire",
+        "printedCost": "7 Essence",
+        "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8284"
+      }
+    ],
+    "ability7OptionsAreSpecializationIndependent": true,
+    "ability7IndependenceBasis": "Unified level-3 7-essence ability front matter has no subclass field; book 7-Essence Ability section lists all four without specialization headings."
+  },
+  "abilities": {
+    "O Flower Aid, O Earth Defend": {
+      "name": "O Flower Aid, O Earth Defend",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+      "sourceSha256": "8c57b6ac99b430c90e47954244ddefc6b5f70046f35bbcd0fe6af73e44ee796e",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8113",
+      "level": 2,
+      "subclass": null,
+      "feature": "New 5-Essence Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Earth", "Green", "Magic", "Ranged"],
+      "distance": "3 cube within 10",
+      "target": "Special",
+      "cost": {
+        "resource": "essence",
+        "amount": 5,
+        "printed": "5 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** Until the start of your next turn, the area gains the following effects:",
+        "**Persistent 1:** The area remains until the start of your next turn. As a maneuver, you can move the area up to 5 squares. This ability ends if the area is ever not within your line of effect."
+      ],
+      "chosenBy": ["v104-2"],
+      "dealsDamage": true,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "fixedDamageByWitness": [
+        {
+          "witness": "v104-2",
+          "amount": 2,
+          "formula": "Reason score R2 = 2",
+          "damageType": null,
+          "condition": "each enemy who enters the area for the first time in a combat round or starts their turn there"
+        }
+      ],
+      "rolledDamageBonusesApply": false,
+      "rolledDamageBonusesReason": "No power roll: rule/damage/rolled-damage.md - damage without a power roll is not rolled damage.",
+      "resolvedDistanceByWitness": {
+        "v104-2": "3 cube within 10"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "persistent": {
+        "value": 1,
+        "text": "The area remains until the start of your next turn. As a maneuver, you can move the area up to 5 squares. This ability ends if the area is ever not within your line of effect."
+      },
+      "manualClauses": [
+        "Once as a free maneuver at the start of your turn, you and each ally in the area may spend any number of Recoveries.",
+        "The area is difficult terrain for enemies.",
+        "Each enemy entering the area for the first time in a combat round or starting their turn there takes 2 damage (R2, untyped, fixed).",
+        "Persistent 1: maintain; move the area up to 5 squares as a maneuver; ends if the area leaves your line of effect.",
+        "v104-2 Acolyte of Earth: using this ability (Earth and Magic keywords) raises stability by 1 until the start of your next turn (cumulative) - temporary, not a sheet value."
+      ]
+    },
+    "Subvert the Green Within": {
+      "name": "Subvert the Green Within",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+      "sourceSha256": "1b81de5b0a0589cc66988b1ac31a000e65fe12662359695268e9efc6aa231c8f",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8129",
+      "level": 2,
+      "subclass": null,
+      "feature": "New 5-Essence Ability",
+      "actionType": "Main action",
+      "keywords": ["Green", "Magic", "Ranged", "Strike", "Void"],
+      "distance": "Ranged 10",
+      "target": "One creature",
+      "cost": {
+        "resource": "essence",
+        "amount": 5,
+        "printed": "5 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "5 + R poison damage",
+        "tier2": "9 + R poison damage",
+        "tier3": "12 + R poison damage"
+      },
+      "tiersPlain": {
+        "tier1": "5 + R poison damage",
+        "tier2": "9 + R poison damage",
+        "tier3": "12 + R poison damage"
+      },
+      "effectsPlain": [
+        "**Effect:** The target uses their signature ability against a creature of your choice. This signature ability can target the creature even if it usually wouldn't. You then make a power roll against the target of this ability."
+      ],
+      "chosenBy": ["v104-3"],
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "poison",
+      "damageByWitness": [
+        {
+          "witness": "v104-3",
+          "printedConstants": [5, 9, 12],
+          "reasonAdded": 2,
+          "rolledDamageBonuses": [],
+          "tiers": [7, 11, 14],
+          "formula": "[5, 9, 12] + R2 = [7, 11, 14]",
+          "damageType": "poison"
+        }
+      ],
+      "resolvedDistanceByWitness": {
+        "v104-3": "Ranged 10 (Void keyword present but v104-3 has no Acolyte of the Mystery; Celerity grants no distance)"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "The target uses their signature ability against a creature of your choice (may target it even if it usually couldn't); monster data - manual.",
+        "Then make the power roll against the target.",
+        "v104-3 Acolyte of the Green: Green + Magic + costs essence + deals damage -> you or one creature within 10 squares gains temporary Stamina equal to Reason (2)."
+      ],
+      "acolyteTriggers": {
+        "v104-3": {
+          "temporaryStamina": 2,
+          "citation": "en/unified/md/feature/elementalist/level-1/green-acolyte-of-the-green.md"
+        }
+      },
+      "damageNotApplied": {
+        "v104-3": ["Enchantment of Celerity grants no damage bonus."]
+      },
+      "fixedDamageByWitness": []
+    },
+    "Translated Through Flame": {
+      "name": "Translated Through Flame",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+      "sourceSha256": "f8b38b0db43da3cb8ed01d62e9e6b53f5da192e8846d58d941cdbf5dd3a56596",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8145",
+      "level": 2,
+      "subclass": null,
+      "feature": "New 5-Essence Ability",
+      "actionType": "Main action",
+      "keywords": ["Fire", "Magic", "Ranged", "Void"],
+      "distance": "Ranged 10",
+      "target": "Self or one ally",
+      "cost": {
+        "resource": "essence",
+        "amount": 5,
+        "printed": "5 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "3 fire damage",
+        "tier2": "5 fire damage",
+        "tier3": "8 fire damage"
+      },
+      "tiersPlain": {
+        "tier1": "3 fire damage",
+        "tier2": "5 fire damage",
+        "tier3": "8 fire damage"
+      },
+      "effectsPlain": [
+        "**Effect:** The target is teleported to another space within distance. Make a power roll that affects each enemy adjacent to the target's new space."
+      ],
+      "chosenBy": ["v104-4"],
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "fire",
+      "damageByWitness": [
+        {
+          "witness": "v104-4",
+          "printedConstants": [3, 5, 8],
+          "reasonAdded": 0,
+          "rolledDamageBonuses": [],
+          "tiers": [3, 5, 8],
+          "formula": "[3, 5, 8] (no characteristic added in printed tiers) = [3, 5, 8]",
+          "damageType": "fire"
+        }
+      ],
+      "resolvedDistanceByWitness": {
+        "v104-4": "Ranged 14 = 10 + Enchantment of Distance 2 (ranged magic ability) + Acolyte of the Mystery 2 (Magic, Ranged, Void) - see uncertainty distance-bonus-stacking"
+      },
+      "forcedMovement": {
+        "kind": "teleport",
+        "who": "the target (self or one ally)",
+        "distance": "to another space within distance (14 for v104-4)"
+      },
+      "potencyByWitness": null,
+      "manualClauses": [
+        "The target (self or one ally) is teleported to another space within distance.",
+        "The power roll affects each enemy adjacent to the target's new space (area-like selection; manual)."
+      ],
+      "damageNotApplied": {
+        "v104-4": [
+          "Enchantment of Distance grants no damage bonus.",
+          "Acolyte of Fire not held (specialization is Void)."
+        ]
+      },
+      "fixedDamageByWitness": []
+    },
+    "Volcano's Embrace": {
+      "name": "Volcano's Embrace",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+      "sourceSha256": "4df1faf37a401cfe77a986e6fe0ecb3709d72f4ed4fd82ca5cf5f4c682167c07",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8161",
+      "level": 2,
+      "subclass": null,
+      "feature": "New 5-Essence Ability",
+      "actionType": "Main action",
+      "keywords": ["Earth", "Fire", "Magic", "Ranged", "Strike"],
+      "distance": "Ranged 10",
+      "target": "One creature",
+      "cost": {
+        "resource": "essence",
+        "amount": 5,
+        "printed": "5 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "5 + R fire damage; A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+        "tier2": "9 + R fire damage; A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+        "tier3": "12 + R fire damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "5 + R fire damage; A < WEAK, restrained (save ends)",
+        "tier2": "9 + R fire damage; A < AVERAGE, restrained (save ends)",
+        "tier3": "12 + R fire damage; A < STRONG, restrained (save ends)"
+      },
+      "effectsPlain": [],
+      "chosenBy": ["v104-1"],
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "fire",
+      "damageByWitness": [
+        {
+          "witness": "v104-1",
+          "printedConstants": [5, 9, 12],
+          "reasonAdded": 2,
+          "rolledDamageBonuses": [
+            {
+              "source": "Enchantment of Destruction",
+              "amount": 1,
+              "citation": "en/unified/md/feature/elementalist/level-1/enchantment-of-destruction.md (+1 rolled damage with magic abilities)"
+            },
+            {
+              "source": "Fire: Acolyte of Fire",
+              "amount": 1,
+              "citation": "en/unified/md/feature/elementalist/level-1/fire-acolyte-of-fire.md (+1 rolled damage for Fire and Magic abilities)"
+            }
+          ],
+          "tiers": [9, 13, 16],
+          "formula": "[5, 9, 12] + R2 + Destruction 1 + Acolyte of Fire 1 = [9, 13, 16]",
+          "damageType": "fire"
+        }
+      ],
+      "resolvedDistanceByWitness": {
+        "v104-1": "Ranged 10 (Destruction/Fire grant no distance bonus)"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": {
+        "v104-1": {
+          "tier1": "A < 0 restrained (save ends)",
+          "tier2": "A < 1 restrained (save ends)",
+          "tier3": "A < 2 restrained (save ends)"
+        }
+      },
+      "manualClauses": [
+        "Restrained (save ends) on A < WEAK/AVERAGE/STRONG per tier.",
+        "v104-1 (Disciple of Fire): the fire damage ignores the target's fire immunity."
+      ],
+      "acolyteTriggers": {
+        "v104-1": "Acolyte of Fire +1 rolled damage (Fire and Magic keywords). Earth keyword present but v104-1 has no Acolyte of Earth."
+      },
+      "damageNotApplied": {
+        "v104-1": []
+      },
+      "fixedDamageByWitness": []
+    },
+    "There Is No Space Between": {
+      "name": "There Is No Space Between",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+      "sourceSha256": "e5a57df1e3e6039f4888fdd1be010904e62a0074ac0c063d4e36e4124219480b",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8097",
+      "level": 2,
+      "subclass": "void",
+      "feature": "There Is No Space Between (2nd-Level Void Specialization Feature)",
+      "actionType": "Maneuver",
+      "keywords": ["Magic", "Ranged", "Void"],
+      "distance": "Ranged 10",
+      "target": "Special",
+      "cost": null,
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** You open two size 1 portals in unoccupied spaces within distance, which last until you move beyond distance from any portal, end the effect as a maneuver, or are dying. Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly teleported to an unoccupied space of their choice adjacent to the other portal. If an enemy is force moved into a portal, their forced movement ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them."
+      ],
+      "chosenBy": ["v104-4"],
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "resolvedDistanceByWitness": {
+        "v104-4": "Ranged 14 = 10 + Enchantment of Distance 2 + Acolyte of the Mystery 2 - see uncertainty distance-bonus-stacking"
+      },
+      "forcedMovement": {
+        "kind": "teleport",
+        "who": "you or any ally who touches a portal",
+        "distance": "unoccupied space adjacent to the other portal"
+      },
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Open two size 1 portals in unoccupied spaces within distance, no more than 1 square above the ground; they last until you move beyond distance from any portal, end the effect as a maneuver, or are dying.",
+        "You or an ally touching a portal can teleport to an unoccupied space adjacent to the other portal.",
+        "An enemy force moved into a portal ends that forced movement and emerges from the other portal in a space chosen by the creature who force moved them.",
+        "At the start of each of your turns while portals are active, you can open a new connected portal; with three or more, entrants/force movers choose the destination portal."
+      ],
+      "fixedDamageByWitness": []
+    },
+    "Erase": {
+      "name": "Erase",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/erase.md",
+      "sourceSha256": "1e40adea50f4c4880d89f5e78512b1017a969428fc5d32cb8cc786305d7359df",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8232",
+      "level": 3,
+      "subclass": null,
+      "feature": "7-Essence Ability",
+      "actionType": "Main action",
+      "keywords": ["Magic", "Ranged", "Strike", "Void"],
+      "distance": "Ranged 10",
+      "target": "Special",
+      "cost": {
+        "resource": "essence",
+        "amount": 7,
+        "printed": "7 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "One creature",
+        "tier2": "Two creatures",
+        "tier3": "Three creatures"
+      },
+      "tiersPlain": {
+        "tier1": "One creature",
+        "tier2": "Two creatures",
+        "tier3": "Three creatures"
+      },
+      "effectsPlain": [
+        "**Special:** The number of creatures you target with this ability is determined by your power roll.",
+        "**Effect:** Each target begins to fade from existence (save ends). On their first turn while fading from existence, a target takes a bane on power rolls. At the end of their first turn, they have a double bane on power rolls. At the end of their second turn, they fade from existence for 1 hour, after which they reappear in their original space or the nearest unoccupied space."
+      ],
+      "chosenBy": ["v104-4"],
+      "dealsDamage": false,
+      "rolled": true,
+      "damageType": null,
+      "damageByWitness": [],
+      "targetsByTier": [1, 2, 3],
+      "resolvedDistanceByWitness": {
+        "v104-4": "Ranged 14 = 10 + Enchantment of Distance 2 + Acolyte of the Mystery 2 - see uncertainty distance-bonus-stacking"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Number of targets from the power roll: 1 / 2 / 3 creatures.",
+        "Each target fades from existence (save ends): bane on power rolls on their first turn; double bane from the end of their first turn; at the end of their second turn they fade from existence for 1 hour, then reappear in their original space or the nearest unoccupied space."
+      ],
+      "fixedDamageByWitness": []
+    },
+    "Maw of Earth": {
+      "name": "Maw of Earth",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+      "sourceSha256": "c937a5c046498106f304d143d874504eda29d0e371e56897436a8f8f33c0e4de",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8250",
+      "level": 3,
+      "subclass": null,
+      "feature": "7-Essence Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Earth", "Magic", "Ranged"],
+      "distance": "3 cube within 10",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "essence",
+        "amount": 7,
+        "printed": "7 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "5 damage",
+        "tier2": "9 damage",
+        "tier3": "12 damage"
+      },
+      "tiersPlain": {
+        "tier1": "5 damage",
+        "tier2": "9 damage",
+        "tier3": "12 damage"
+      },
+      "effectsPlain": ["**Effect:** The ground in or directly beneath the area drops 3 squares."],
+      "chosenBy": ["v104-2", "v104-5"],
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": null,
+      "damageByWitness": [
+        {
+          "witness": "v104-2",
+          "printedConstants": [5, 9, 12],
+          "reasonAdded": 0,
+          "rolledDamageBonuses": [],
+          "tiers": [5, 9, 12],
+          "formula": "[5, 9, 12] (no characteristic added in printed tiers) = [5, 9, 12]",
+          "damageType": null
+        },
+        {
+          "witness": "v104-5",
+          "printedConstants": [5, 9, 12],
+          "reasonAdded": 0,
+          "rolledDamageBonuses": [],
+          "tiers": [5, 9, 12],
+          "formula": "[5, 9, 12] (no characteristic added in printed tiers) = [5, 9, 12]",
+          "damageType": null
+        }
+      ],
+      "resolvedDistanceByWitness": {
+        "v104-2": "3 cube within 10",
+        "v104-5": "3 cube within 10"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "The ground in or directly beneath the area drops 3 squares (terrain; falling per rule/health/falling.md is manual).",
+        "Acolyte of Earth (v104-2, v104-5): Earth and Magic keywords -> stability +1 until the start of your next turn (cumulative); temporary, not a sheet value."
+      ],
+      "damageNotApplied": {
+        "v104-2": ["Enchantment of Permanence grants no damage bonus."],
+        "v104-5": [
+          "Enchantment of Battle +1 damage applies only to weapon abilities while wielding a light weapon; no Weapon keyword here."
+        ]
+      },
+      "fixedDamageByWitness": []
+    },
+    "Swarm of Spirits": {
+      "name": "Swarm of Spirits",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+      "sourceSha256": "716f436d1f11179b5a2d249c6bcae14a1e6cf9c5727d060f501fab63b5423b00",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8266",
+      "level": 3,
+      "subclass": null,
+      "feature": "7-Essence Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Green", "Magic"],
+      "distance": "3 aura",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "essence",
+        "amount": 7,
+        "printed": "7 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "3 damage",
+        "tier2": "6 damage",
+        "tier3": "9 damage"
+      },
+      "tiersPlain": {
+        "tier1": "3 damage",
+        "tier2": "6 damage",
+        "tier3": "9 damage"
+      },
+      "effectsPlain": [
+        "**Effect:** Until the end of your next turn, each ally in the area has each of their characteristic scores treated as 1 higher for the purpose of resisting potencies, and has a +1 bonus to saving throws.",
+        "**Persistent 1:** You make the power roll again to target each enemy in the area without spending essence, and the effect lasts until the start of your next turn."
+      ],
+      "chosenBy": ["v104-3"],
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": null,
+      "damageByWitness": [
+        {
+          "witness": "v104-3",
+          "printedConstants": [3, 6, 9],
+          "reasonAdded": 0,
+          "rolledDamageBonuses": [],
+          "tiers": [3, 6, 9],
+          "formula": "[3, 6, 9] (no characteristic added in printed tiers) = [3, 6, 9]",
+          "damageType": null
+        }
+      ],
+      "resolvedDistanceByWitness": {
+        "v104-3": "3 aura"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "persistent": {
+        "value": 1,
+        "text": "You make the power roll again to target each enemy in the area without spending essence, and the effect lasts until the start of your next turn."
+      },
+      "manualClauses": [
+        "Until the end of your next turn each ally in the area has each characteristic treated as 1 higher for resisting potencies and +1 to saving throws.",
+        "Persistent 1: re-roll against each enemy in the area without spending essence; the effect lasts until the start of your next turn.",
+        "v104-3 Acolyte of the Green on the initial use: temporary Stamina 2 (R) to you or one creature within 10 squares; whether the persistent re-roll also triggers it is an uncertainty (green-acolyte-persistent-reroll)."
+      ],
+      "acolyteTriggers": {
+        "v104-3": {
+          "temporaryStamina": 2,
+          "citation": "en/unified/md/feature/elementalist/level-1/green-acolyte-of-the-green.md"
+        }
+      },
+      "damageNotApplied": {
+        "v104-3": ["Enchantment of Celerity grants no damage bonus."]
+      },
+      "fixedDamageByWitness": []
+    },
+    "Wall of Fire": {
+      "name": "Wall of Fire",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+      "sourceSha256": "8728970da3694d964c862fd717d1ee9e08fb0626c669e95089a4d5168b0afcd3",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8284",
+      "level": 3,
+      "subclass": null,
+      "feature": "7-Essence Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Area", "Fire", "Magic", "Ranged"],
+      "distance": "10 wall within 10",
+      "target": "Special",
+      "cost": {
+        "resource": "essence",
+        "amount": 7,
+        "printed": "7 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** The wall lasts until the start of your next turn, and can be placed in occupied squares. Creatures can enter and pass through the wall. Each enemy who enters the area for the first time in a combat round or starts their turn there takes fire damage equal to your Reason score for each square of the area they start their turn in or enter.",
+        "**Persistent 1:** The wall lasts until the start of your next turn, and you can add a number of squares to the wall equal to your Reason score."
+      ],
+      "chosenBy": ["v104-1"],
+      "dealsDamage": true,
+      "rolled": false,
+      "damageType": "fire",
+      "damageByWitness": [],
+      "fixedDamageByWitness": [
+        {
+          "witness": "v104-1",
+          "amount": 2,
+          "formula": "Reason score R2 = 2 fire per square",
+          "damageType": "fire",
+          "condition": "each enemy who enters the area for the first time in a combat round or starts their turn there, for each square of the area they start their turn in or enter"
+        }
+      ],
+      "rolledDamageBonusesApply": false,
+      "rolledDamageBonusesReason": "No power roll, so Enchantment of Destruction and Acolyte of Fire (both 'rolled damage') do not apply (rule/damage/rolled-damage.md).",
+      "resolvedDistanceByWitness": {
+        "v104-1": "10 wall within 10"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "persistent": {
+        "value": 1,
+        "text": "The wall lasts until the start of your next turn, and you can add a number of squares to the wall equal to your Reason score."
+      },
+      "manualClauses": [
+        "Wall lasts until the start of your next turn; can be placed in occupied squares; creatures can pass through.",
+        "2 fire damage (R2) per square entered/started in, for each enemy entering for the first time in a round or starting their turn there.",
+        "Persistent 1: wall lasts until the start of your next turn and gains 2 squares (R2).",
+        "v104-1 Disciple of Fire: this fire damage ignores the target's fire immunity."
+      ]
+    },
+    "Earth Accepts Me": {
+      "name": "Earth Accepts Me",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+      "sourceSha256": "5b005c71c1d6cd00f6c78a2b494ec2a9996caafd01e52548918f92e74a105dbe",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8204",
+      "level": 3,
+      "subclass": "earth",
+      "feature": "Earth Accepts Me (3rd-Level Earth Specialization Feature)",
+      "actionType": "Main action",
+      "keywords": ["Earth", "Magic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": null,
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** You step into a mundane dirt, metal, or stone object (including a wall) that is as large as you or larger. You can remain inside the object for as long as you like. While inside the object, you can observe events and speak to creatures outside it, but you don't have line of effect to anything outside the object and vice versa. You can travel through the object freely until you exit it. If the object you meld with is destroyed, you take 10 damage and exit the object."
+      ],
+      "chosenBy": ["v104-2", "v104-5"],
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "selfDamage": {
+        "amount": 10,
+        "condition": "the object you meld with is destroyed",
+        "damageType": null
+      },
+      "resolvedDistanceByWitness": {
+        "v104-2": "Self",
+        "v104-5": "Self"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Step into a mundane dirt, metal or stone object at least as large as you; stay as long as you like; no line of effect in or out; travel through the object freely.",
+        "If the object is destroyed you take 10 damage and exit.",
+        "Acolyte of Earth: Earth and Magic keywords -> stability +1 until the start of your next turn (cumulative)."
+      ],
+      "fixedDamageByWitness": []
+    },
+    "Remember Growth and Sun and Rain": {
+      "name": "Remember Growth and Sun and Rain",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+      "sourceSha256": "a5d746dbf886d7aaffacbfe1d3fa705359df81c49394d9ca9585459e3cda760a",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 8218",
+      "level": 3,
+      "subclass": "green",
+      "feature": "Remember Growth and Sun and Rain (3rd-Level Green Specialization Feature)",
+      "actionType": "Main action",
+      "keywords": ["Green", "Magic", "Melee"],
+      "distance": "Melee 1",
+      "target": "One mundane wooden object",
+      "cost": null,
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "**Effect:** You see and hear any events that have occurred within 10 squares of the object within the last 12 hours, perceiving those events from the object's location as if you were there."
+      ],
+      "chosenBy": ["v104-3"],
+      "dealsDamage": false,
+      "rolled": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "resolvedDistanceByWitness": {
+        "v104-3": "Melee 1"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "See and hear events within 10 squares of the wooden object in the last 12 hours."
+      ],
+      "fixedDamageByWitness": []
+    },
+    "Conflagration": {
+      "name": "Conflagration",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+      "sourceSha256": "4cf4272c314ad5d8a877692498d0f46aae6c258b46887489c635eebd48ff695d",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 7965",
+      "level": 1,
+      "subclass": null,
+      "feature": "5-Essence Ability (1st level) - chosen at 2nd level through the New 5-Essence Ability alternative",
+      "actionType": "Main action",
+      "keywords": ["Area", "Fire", "Magic", "Ranged"],
+      "distance": "3 cube within 10",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "essence",
+        "amount": 5,
+        "printed": "5 Essence"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "4 fire damage",
+        "tier2": "6 fire damage",
+        "tier3": "10 fire damage"
+      },
+      "tiersPlain": {
+        "tier1": "4 fire damage",
+        "tier2": "6 fire damage",
+        "tier3": "10 fire damage"
+      },
+      "effectsPlain": [
+        "**Persistent 2:** At the start of your turn, you can use a maneuver to use this ability again without spending essence."
+      ],
+      "chosenBy": ["v104-5"],
+      "dealsDamage": true,
+      "rolled": true,
+      "damageType": "fire",
+      "damageByWitness": [
+        {
+          "witness": "v104-5",
+          "printedConstants": [4, 6, 10],
+          "reasonAdded": 0,
+          "rolledDamageBonuses": [],
+          "tiers": [4, 6, 10],
+          "formula": "[4, 6, 10] (no characteristic added in printed tiers) = [4, 6, 10]",
+          "damageType": "fire"
+        }
+      ],
+      "damageNotApplied": {
+        "v104-5": [
+          "Enchantment of Battle +1 damage applies only to weapon abilities while wielding a light weapon; no Weapon keyword here.",
+          "Acolyte of Fire not held (specialization is Earth)."
+        ]
+      },
+      "referenceLevelOneValue": {
+        "witness": "v104-1",
+        "tiers": [6, 8, 12],
+        "source": "tests/fixtures/v104-elementalist-expected.json (Conflagration picked at 1st level; recomputed here: [4,6,10] + Destruction 1 + Acolyte of Fire 1 = [6,8,12])"
+      },
+      "resolvedDistanceByWitness": {
+        "v104-5": "3 cube within 10"
+      },
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "persistent": {
+        "value": 2,
+        "text": "At the start of your turn, you can use a maneuver to use this ability again without spending essence."
+      },
+      "manualClauses": [
+        "Persistent 2: at the start of your turn, use a maneuver to use it again without spending essence.",
+        "v104-5 is Earth: Conflagration has Fire and Magic but not Earth, so Acolyte of Earth stability does not trigger."
+      ],
+      "chosenAt": "level 2 via the New 5-Essence Ability alternative (v104-5 picked No More Than a Breeze at 1st level)",
+      "fixedDamageByWitness": []
+    }
+  },
+  "witnesses": {
+    "v104-1": {
+      "base": "v104-1",
+      "specialization": "Fire",
+      "enchantment": "Enchantment of Destruction",
+      "ward": "Ward of Delightful Consequences",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "levelOneFiveEssence": "Conflagration",
+        "levelOneThreeEssence": "The Flesh, a Crucible",
+        "signatureAbilities": ["Bifurcated Incineration", "Viscous Fire"]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Handy",
+          "ability5": "Volcano's Embrace"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Specialization Feature",
+          "Disciple of Fire",
+          "New 5-Essence Ability"
+        ],
+        "addedAbilities": ["Volcano's Embrace"],
+        "perks": ["Teamwork", "Handy"],
+        "perkType": "crafting",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [
+          {
+            "damageType": "fire",
+            "value": 7
+          }
+        ],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) = 24",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "damageImmunities": "Disciple of Fire: fire immunity 5 + level 2 = 7",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Wall of Fire"
+        },
+        "addedFeatures": [
+          "3rd-Level Specialization Feature",
+          "A Conversation With Fire",
+          "7-Essence Ability"
+        ],
+        "addedAbilities": ["Wall of Fire"],
+        "perks": ["Teamwork", "Handy"],
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [
+          {
+            "damageType": "fire",
+            "value": 8
+          }
+        ],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "damageImmunities": "Disciple of Fire: fire immunity 5 + level 3 = 8",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        },
+        "cumulativeAddedAbilities": ["Volcano's Embrace", "Wall of Fire"]
+      }
+    },
+    "v104-2": {
+      "base": "v104-2",
+      "specialization": "Earth",
+      "enchantment": "Enchantment of Permanence",
+      "ward": "Ward of Excellent Protection",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "levelOneFiveEssence": "Instantaneous Excavation",
+        "levelOneThreeEssence": "Ripples in the Earth",
+        "signatureAbilities": ["Meteoric Introduction", "Unquiet Ground"]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Polymath",
+          "ability5": "O Flower Aid, O Earth Defend"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Specialization Feature",
+          "Disciple of Earth",
+          "New 5-Essence Ability"
+        ],
+        "addedAbilities": ["O Flower Aid, O Earth Defend"],
+        "perks": ["Teamwork", "Polymath"],
+        "perkType": "lore",
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + Enchantment of Permanence +6 (increases only at 4th/7th/10th) + Disciple of Earth +6 = +6 = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "damageImmunities": "none: no feature grants immunity",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Maw of Earth"
+        },
+        "addedFeatures": [
+          "3rd-Level Specialization Feature",
+          "Earth Accepts Me",
+          "7-Essence Ability"
+        ],
+        "addedAbilities": ["Maw of Earth", "Earth Accepts Me"],
+        "perks": ["Teamwork", "Polymath"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + Enchantment of Permanence +6 (increases only at 4th/7th/10th) + Disciple of Earth +6 + 3 x 1 levels past 2nd = +9 = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "damageImmunities": "none: no feature grants immunity",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        },
+        "cumulativeAddedAbilities": [
+          "O Flower Aid, O Earth Defend",
+          "Maw of Earth",
+          "Earth Accepts Me"
+        ]
+      }
+    },
+    "v104-3": {
+      "base": "v104-3",
+      "specialization": "Green",
+      "enchantment": "Enchantment of Celerity",
+      "ward": "Ward of Nature's Affection",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "levelOneFiveEssence": "Test of Rain",
+        "levelOneThreeEssence": "Invigorating Growth",
+        "signatureAbilities": ["Afflict a Bountiful Decay", "The Green Within, the Green Without"]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Ritualist",
+          "ability5": "Subvert the Green Within"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Specialization Feature",
+          "Disciple of the Green",
+          "New 5-Essence Ability"
+        ],
+        "addedAbilities": ["Subvert the Green Within"],
+        "perks": ["Teamwork", "Ritualist"],
+        "perkType": "supernatural",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) = 24",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "damageImmunities": "none: no feature grants immunity",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Swarm of Spirits"
+        },
+        "addedFeatures": [
+          "3rd-Level Specialization Feature",
+          "Remember Growth and Sun and Rain",
+          "7-Essence Ability"
+        ],
+        "addedAbilities": ["Swarm of Spirits", "Remember Growth and Sun and Rain"],
+        "perks": ["Teamwork", "Ritualist"],
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "damageImmunities": "none: no feature grants immunity",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        },
+        "cumulativeAddedAbilities": [
+          "Subvert the Green Within",
+          "Swarm of Spirits",
+          "Remember Growth and Sun and Rain"
+        ]
+      }
+    },
+    "v104-4": {
+      "base": "v104-4",
+      "specialization": "Void",
+      "enchantment": "Enchantment of Distance",
+      "ward": "Ward of Surprising Reactivity",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "levelOneFiveEssence": "No More Than a Breeze",
+        "levelOneThreeEssence": "Behold the Mystery",
+        "signatureAbilities": ["Grasp of Beyond", "Ray of Agonizing Self-Reflection"]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Expert Sage",
+          "ability5": "Translated Through Flame"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Specialization Feature",
+          "There Is No Space Between",
+          "New 5-Essence Ability"
+        ],
+        "addedAbilities": ["Translated Through Flame", "There Is No Space Between"],
+        "perks": ["Teamwork", "Expert Sage"],
+        "perkType": "lore",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) = 24",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "damageImmunities": "none: no feature grants immunity",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Erase"
+        },
+        "addedFeatures": [
+          "3rd-Level Specialization Feature",
+          "Distance Is Only Memory",
+          "7-Essence Ability"
+        ],
+        "addedAbilities": ["Erase"],
+        "perks": ["Teamwork", "Expert Sage"],
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "damageImmunities": "none: no feature grants immunity",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        },
+        "cumulativeAddedAbilities": [
+          "Translated Through Flame",
+          "There Is No Space Between",
+          "Erase"
+        ]
+      }
+    },
+    "v104-5": {
+      "base": "v104-5",
+      "specialization": "Earth",
+      "enchantment": "Enchantment of Battle",
+      "ward": "Ward of Delightful Consequences",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "levelOneFiveEssence": "No More Than a Breeze",
+        "levelOneThreeEssence": "Behold the Mystery",
+        "signatureAbilities": ["Grasp of Beyond", "Unquiet Ground"]
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Expert Artisan",
+          "ability5": "Conflagration"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Specialization Feature",
+          "Disciple of Earth",
+          "New 5-Essence Ability"
+        ],
+        "addedAbilities": ["Conflagration"],
+        "perks": ["Teamwork", "Expert Artisan"],
+        "perkType": "crafting",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + Disciple of Earth +6 = +6 + Enchantment of Battle light-armor +3 excluded (conditional on worn light armor; v104 kept Battle equipment manual) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "damageImmunities": "none: no feature grants immunity",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Maw of Earth"
+        },
+        "addedFeatures": [
+          "3rd-Level Specialization Feature",
+          "Earth Accepts Me",
+          "7-Essence Ability"
+        ],
+        "addedAbilities": ["Maw of Earth", "Earth Accepts Me"],
+        "perks": ["Teamwork", "Expert Artisan"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + Disciple of Earth +6 + 3 x 1 levels past 2nd = +9 + Enchantment of Battle light-armor +3 excluded (conditional on worn light armor; v104 kept Battle equipment manual) = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "damageImmunities": "none: no feature grants immunity",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed v104 level-one values: no level-2/3 Elementalist feature, selected ability or selected perk changes them (Characteristic Increase first at 4th level; Permanence/Battle Stamina steps first at 4th level). Levels 1-3 are echelon 1 (rule/general/echelon.md)."
+        },
+        "cumulativeAddedAbilities": ["Conflagration", "Maw of Earth", "Earth Accepts Me"]
+      }
+    }
+  },
+  "invalidExamples": [
+    {
+      "id": "v104-1-conflagration-at-2",
+      "witness": "v104-1",
+      "level": 2,
+      "selection": {
+        "ability5": "Conflagration"
+      },
+      "valid": false,
+      "reason": "v104-1 selected Conflagration as its 1st-level 5-essence ability (class.elementalist.ability-5 = Conflagration). The level-1 alternative only allows 'one of the 5-essence abilities you didn't select at 1st level'.",
+      "citation": "en/unified/md/feature/elementalist/level-2/new-5-essence-ability.md; en/books/heroes/clean/Draw Steel Heroes.md line 8111",
+      "validLevelOneAlternativesForWitness": [
+        "Instantaneous Excavation",
+        "No More Than a Breeze",
+        "Test of Rain"
+      ]
+    }
+  ]
+}

@@ -135,3 +135,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V120 | [Shared heroic-resource generation engine (Shadow first)](V120-heroic-resource-engine.md) | Merged (`f3acd97`); cloud dev published; accepted TESTER results reused |
 | V133 | [Null levels two and three](V133-null-level-three.md) | Merged (`b99b951`); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V150 | [Self-Taught forgo for automatic heroic resources](V150-self-taught-forgo.md) | Merged (`fad564f`); cloud dev published; accepted TESTER results reused |
+| V135 | [Elementalist levels two and three](V135-elementalist-level-three.md) | In progress |

@@ -8,24 +8,24 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:25195fa07a59cf80701693ff3bcf37442084cb76b4e1f2604a7963f0de28719b`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:80fa2ba89b15028c06cc6941f6d4a8385c6a703b72865154908ff5cdafd23764`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 317 | 22 | 120 | 14 | 175 |
+| Hero standalone (`ability.json`) | 328 | 22 | 125 | 15 | 181 |
 | Kit signature (`kit.json`) | 25 | 6 | 15 | 1 | 4 |
 | Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 21 | 565 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 2702 (1847 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 2771 (1916 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 21 fully (1.81%), 565 with a typed remainder (48.79%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 166 of 414 (40.10%) compile: 29 fully (7.00%), 137 with a typed remainder (33.09%), of which 15 (3.62%) are within the bounded potency remainder. 248 (59.90%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 171 of 425 (40.24%) compile: 29 fully (6.82%), 142 with a typed remainder (33.41%), of which 16 (3.76%) are within the bounded potency remainder. 254 (59.76%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -34,7 +34,7 @@ compiled entries:
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Hero standalone (`ability.json`) | COMPILES | 16 | 2 | 4 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 90 | 3 | 22 | 4 | 1 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 92 | 3 | 24 | 4 | 2 |
 | Kit signature (`kit.json`) | COMPILES | 4 | 2 | 0 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 13 | 1 | 1 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -115,18 +115,23 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Afflict a Bountiful Decay | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | effect-paragraph:effect |
 | hero-standalone | Behold the Mystery | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable, class.elementalist.ability-3@4:selectable, class.elementalist.ability-3@5:selectable, class.elementalist.ability-3@6:selectable | effect-paragraph:persistent N |
 | hero-standalone | Bifurcated Incineration | COMPILES | — | multi | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | — |
-| hero-standalone | Conflagration | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-5@1:selectable, class.elementalist.ability-5@2:selectable, class.elementalist.ability-5@3:selectable, class.elementalist.ability-5@4:selectable, class.elementalist.ability-5@5:selectable, class.elementalist.ability-5@6:selectable | effect-paragraph:persistent N |
+| hero-standalone | Conflagration | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-5@1:selectable, class.elementalist.ability-5@2:selectable, class.elementalist.level-2.ability-5@2:selectable, class.elementalist.ability-5@3:selectable, class.elementalist.level-2.ability-5@3:selectable, class.elementalist.ability-5@4:selectable, class.elementalist.level-2.ability-5@4:selectable, class.elementalist.ability-5@5:selectable, class.elementalist.level-2.ability-5@5:selectable, class.elementalist.ability-5@6:selectable, class.elementalist.level-2.ability-5@6:selectable | effect-paragraph:persistent N |
 | hero-standalone | Grasp of Beyond | COMPILES | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | — |
 | hero-standalone | Hurl Element | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.features@1:selectable, class.elementalist.features@2:selectable, class.elementalist.features@3:selectable, class.elementalist.features@4:selectable, class.elementalist.features@5:selectable, class.elementalist.features@6:selectable | effect-paragraph:effect |
 | hero-standalone | Invigorating Growth | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable, class.elementalist.ability-3@4:selectable, class.elementalist.ability-3@5:selectable, class.elementalist.ability-3@6:selectable | effect-paragraph:effect |
 | hero-standalone | Meteoric Introduction [V26: Meteoric Introduction (compile-only)] | COMPILES | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | — |
 | hero-standalone | Ray of Agonizing Self-Reflection [V26: Ray of Agonizing Self-Reflection (compile-only)] | COMPILES_WITH_REMAINDER | yes | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | potency:R < SYM slowed (save ends) |
 | hero-standalone | Ripples in the Earth | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable, class.elementalist.ability-3@4:selectable, class.elementalist.ability-3@5:selectable, class.elementalist.ability-3@6:selectable | effect-paragraph:effect; potency:M < SYM prone |
-| hero-standalone | Test of Rain | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-5@1:selectable, class.elementalist.ability-5@2:selectable, class.elementalist.ability-5@3:selectable, class.elementalist.ability-5@4:selectable, class.elementalist.ability-5@5:selectable, class.elementalist.ability-5@6:selectable | effect-paragraph:effect |
+| hero-standalone | Test of Rain | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-5@1:selectable, class.elementalist.ability-5@2:selectable, class.elementalist.level-2.ability-5@2:selectable, class.elementalist.ability-5@3:selectable, class.elementalist.level-2.ability-5@3:selectable, class.elementalist.ability-5@4:selectable, class.elementalist.level-2.ability-5@4:selectable, class.elementalist.ability-5@5:selectable, class.elementalist.level-2.ability-5@5:selectable, class.elementalist.ability-5@6:selectable, class.elementalist.level-2.ability-5@6:selectable | effect-paragraph:effect |
 | hero-standalone | The Flesh, a Crucible | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable, class.elementalist.ability-3@4:selectable, class.elementalist.ability-3@5:selectable, class.elementalist.ability-3@6:selectable | effect-paragraph:persistent N |
 | hero-standalone | The Green Within, the Green Without | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | effect-paragraph:effect |
 | hero-standalone | Unquiet Ground | COMPILES | — | area | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | — |
 | hero-standalone | Viscous Fire [V26: Viscous Fire] | COMPILES | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable, class.elementalist.signature-abilities@4:selectable, class.elementalist.signature-abilities@5:selectable, class.elementalist.signature-abilities@6:selectable | — |
+| hero-standalone | Subvert the Green Within | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.level-2.ability-5@2:selectable, class.elementalist.level-2.ability-5@3:selectable, class.elementalist.level-2.ability-5@4:selectable, class.elementalist.level-2.ability-5@5:selectable, class.elementalist.level-2.ability-5@6:selectable | effect-paragraph:effect |
+| hero-standalone | Translated Through Flame | COMPILES_WITH_REMAINDER | — | unknown | selectable | class.elementalist.level-2.ability-5@2:selectable, class.elementalist.level-2.ability-5@3:selectable, class.elementalist.level-2.ability-5@4:selectable, class.elementalist.level-2.ability-5@5:selectable, class.elementalist.level-2.ability-5@6:selectable | effect-paragraph:effect |
+| hero-standalone | Volcano's Embrace | COMPILES_WITH_REMAINDER | yes | single | selectable | class.elementalist.level-2.ability-5@2:selectable, class.elementalist.level-2.ability-5@3:selectable, class.elementalist.level-2.ability-5@4:selectable, class.elementalist.level-2.ability-5@5:selectable, class.elementalist.level-2.ability-5@6:selectable | potency:A < SYM restrained (save ends) |
+| hero-standalone | Maw of Earth | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.level-3.ability-7@3:selectable, class.elementalist.level-3.ability-7@4:selectable, class.elementalist.level-3.ability-7@5:selectable, class.elementalist.level-3.ability-7@6:selectable | effect-paragraph:effect |
+| hero-standalone | Swarm of Spirits | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.level-3.ability-7@3:selectable, class.elementalist.level-3.ability-7@4:selectable, class.elementalist.level-3.ability-7@5:selectable, class.elementalist.level-3.ability-7@6:selectable | effect-paragraph:effect; effect-paragraph:persistent N |
 | hero-standalone | Back! | COMPILES | — | area | selectable | class.fury.ability-3@1:selectable, class.fury.ability-3@2:selectable, class.fury.ability-3@3:selectable, class.fury.ability-3@4:selectable, class.fury.ability-3@5:selectable, class.fury.ability-3@6:selectable | — |
 | hero-standalone | Blood for Blood! | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.ability-5@1:selectable, class.fury.ability-5@2:selectable, class.fury.ability-5@3:selectable, class.fury.ability-5@4:selectable, class.fury.ability-5@5:selectable, class.fury.ability-5@6:selectable | effect-paragraph:effect; potency:M < SYM bleeding and weakened (save ends) |
 | hero-standalone | Brutal Slam [V26: Brutal Slam] | COMPILES | — | single | selectable | class.fury.signature-ability@1:selectable, class.fury.signature-ability@2:selectable, class.fury.signature-ability@3:selectable, class.fury.signature-ability@4:selectable, class.fury.signature-ability@5:selectable, class.fury.signature-ability@6:selectable | — |
@@ -302,6 +307,12 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Shared Void Sense | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Skin Like Castle Walls | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N essence |
 | hero-standalone | Subtle Relocation | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N essence |
+| hero-standalone | O Flower Aid, O Earth Defend | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; effect-paragraph:persistent N |
+| hero-standalone | There Is No Space Between | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Earth Accepts Me | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Erase | tier1-damage-outside-grammar | selectable | effect-paragraph:special; effect-paragraph:effect; tier:one creature; tier:two creatures; tier:three creatures |
+| hero-standalone | Remember Growth and Sun and Rain | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Wall of Fire | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; effect-paragraph:persistent N |
 | hero-standalone | Furious Change | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
 | hero-standalone | Lines of Force | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
 | hero-standalone | Make Peace With Your God! | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
@@ -493,8 +504,8 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1219 | 1205 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
-| 2 | no-power-roll | no-power-roll | 704 | 704 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1229 | 1215 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 2 | no-power-roll | no-power-roll | 709 | 709 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
 | 3 | trigger | trigger | 210 | 210 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
 | 5 | unknown | unattached-paragraph | 130 | 59 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
@@ -503,7 +514,7 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | 8 | pull | pull N | 64 | 24 | `salient:foe-feature:065066fe-d557-4f82-94c4-01a38505d9b7`, `salient:foe-feature:17912a2b-0ae3-447f-9e8a-d1aed6e34054`, `salient:foe-feature:1df6ce7d-a081-43af-892d-7120279ea7e7` |
 | 9 | extra-table | extra-table:tiers without a power roll | 55 | 55 | `complication:Advanced Studies/advanced-studies-study-notebook`, `salient:foe-feature:08b75627-ded0-4e55-a034-6a2f6c7d35ea`, `salient:foe-feature:0ee6dd1c-8d53-4033-a8c3-879ac28b430e` |
 | 10 | potency-condition | potency:M < N weakened (save ends) | 48 | 19 | `foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b`, `salient:foe-feature:00b57167-6032-448b-be46-c8436eef6426`, `salient:foe-feature:1f176e1b-a097-47a0-83ce-60655695bd3a` |
-| 11 | effect-paragraph | effect-paragraph:special | 45 | 45 | `complication:Gnoll-Mauled/gnoll-mauled-retaliate`, `complication:Stripped of Rank/issue-order`, `mcdm.summoner.v1/feature.ability.summoner.level-1/explosive-parade` |
+| 11 | effect-paragraph | effect-paragraph:special | 46 | 46 | `complication:Gnoll-Mauled/gnoll-mauled-retaliate`, `complication:Stripped of Rank/issue-order`, `mcdm.heroes.v1/feature.ability.elementalist.level-3/erase` |
 | 12 | potency-condition | potency:A < N bleeding (save ends) | 44 | 25 | `salient:foe-feature:01bf9520-d963-4137-87da-6b525b0b1c4c`, `salient:foe-feature:065066fe-d557-4f82-94c4-01a38505d9b7`, `salient:foe-feature:082d8e1f-2ce5-4623-9d85-a7258d81c60d` |
 | 13 | potency-condition | potency:M < N slowed (save ends) | 44 | 19 | `foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58`, `salient:foe-feature:08b43e09-f0f7-400b-a30d-65fd67b6a7be`, `salient:foe-feature:1d5aa30a-cb4e-4c75-b633-3a9143531fb2` |
 | 14 | condition | prone | 41 | 29 | `mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip`, `salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce`, `salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29` |
@@ -538,10 +549,10 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1292 | 13 |
-| potency-condition | 1065 | 214 |
-| no-power-roll | 704 | 1 |
-| tier-damage | 278 | 103 |
+| effect-paragraph | 1306 | 13 |
+| potency-condition | 1068 | 214 |
+| no-power-roll | 709 | 1 |
+| tier-damage | 281 | 105 |
 | unknown | 247 | 57 |
 | trigger | 210 | 1 |
 | malice-spend | 151 | 2 |
@@ -733,9 +744,9 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 | granted | roll-expression-outside-grammar | 5 |
 | granted | tier1-damage-outside-grammar | 1 |
 | granted | tiers-without-power-roll | 1 |
-| hero-standalone | no-power-roll | 146 |
+| hero-standalone | no-power-roll | 151 |
 | hero-standalone | roll-expression-outside-grammar | 4 |
-| hero-standalone | tier1-damage-outside-grammar | 25 |
+| hero-standalone | tier1-damage-outside-grammar | 26 |
 | kit-signature | roll-expression-outside-grammar | 4 |
 | malice | tier1-damage-outside-grammar | 1 |
 

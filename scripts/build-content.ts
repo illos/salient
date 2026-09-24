@@ -310,6 +310,16 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V133-null-level-three.md#scope: Null levels two and three.',
   },
   {
+    id: 'elementalist-levels-two-three',
+    description:
+      'Elementalist levels two and three: specialization features, perk, new 5-Essence and 7-Essence alternatives.',
+    paths: [2, 3].flatMap(level => [
+      `feature/elementalist/level-${level}`,
+      `feature/ability/elementalist/level-${level}`,
+    ]),
+    basis: 'docs/build/V135-elementalist-level-three.md#scope: Elementalist levels two and three.',
+  },
+  {
     id: 'kits',
     description:
       'Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; Q-R-103 confirms Berserker and Reaver use ordinary Chapter 6 kits while Stormwight uses its four aspect kits; the pipeline preserves source fields rather than inferring eligibility.',

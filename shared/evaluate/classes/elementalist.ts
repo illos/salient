@@ -86,6 +86,57 @@ export function applyElementalistModifiers(ctx: DerivationContext, out: PartialB
           1,
         ),
       );
+  // feature/elementalist/level-2/disciple-of-earth.md: +6 Stamina, +3 more per level past 2nd.
+  if (ctx.available.has('class.elementalist.level-2.disciple-of-earth') && out.staminaMaximum) {
+    const amount = 6 + 3 * Math.max(0, ctx.level - 2);
+    add(
+      'staminaMaximum',
+      amount,
+      sourced(
+        'class.elementalist.level-2.disciple-of-earth',
+        'en/unified/md/feature/elementalist/level-2/disciple-of-earth.md',
+        'You have a +6 bonus to Stamina, and you gain an additional +3 bonus to Stamina whenever you gain a level past 2nd.',
+        { operation: 'add', amount, note: `level ${ctx.level}` },
+      ),
+    );
+    const stamina = out.staminaMaximum!.value;
+    for (const [field, divisor, sentence] of [
+      ['recoveryValue', 3, SENTENCES.recoveryValue],
+      ['windedValue', 2, SENTENCES.winded],
+    ] as const)
+      out[field] = {
+        value: Math.floor(stamina / divisor),
+        provenance: [
+          ...out.staminaMaximum!.provenance,
+          {
+            decisionId: 'class.elementalist.level-2.disciple-of-earth',
+            source: ctx.sentence(sentence),
+            operation: 'floor-divide',
+            amount: divisor,
+          },
+        ],
+      };
+  }
+  // feature/elementalist/level-2/disciple-of-fire.md; rule/damage/damage-immunity.md: when several
+  // immunities apply, only the highest value applies.
+  if (ctx.available.has('class.elementalist.level-2.disciple-of-fire')) {
+    const amount = 5 + ctx.level;
+    const provenance: Provenance = sourced(
+      'class.elementalist.level-2.disciple-of-fire',
+      'en/unified/md/feature/elementalist/level-2/disciple-of-fire.md',
+      'You have fire immunity equal to 5 plus your level.',
+      { operation: 'set', amount, note: `5 + level ${ctx.level}` },
+    );
+    const prior = (out.damageImmunities ??= []).find(i => i.damageType === 'fire');
+    if (prior) {
+      prior.value.value = Math.max(prior.value.value, amount);
+      prior.value.provenance.push(provenance);
+    } else
+      out.damageImmunities.push({
+        damageType: 'fire',
+        value: { value: amount, provenance: [provenance] },
+      });
+  }
   const modifiers: NonNullable<DerivedBaseline['abilityModifiers']> = [];
   if (ctx.single('class.elementalist.enchantment') === 'Enchantment of Destruction')
     modifiers.push({

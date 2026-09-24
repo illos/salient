@@ -1744,6 +1744,182 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-2/2nd-level-specialization-feature",
+    "kind": "feature",
+    "name": "2nd-Level Specialization Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/2nd-level-specialization-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-2/2nd-level-specialization-feature.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"2\"\nname: 2nd-Level Specialization Feature\nscc: mcdm.heroes.v1/feature.elementalist.level-2/2nd-level-specialization-feature\ntype: feature\n---\n\nYour [elemental specialization](scc.v1:mcdm.heroes.v1/feature.elementalist.level-1/elemental-specialization) grants you a feature, as shown on the 2nd-Level [Elemental Specialization](scc.v1:mcdm.heroes.v1/feature.elementalist.level-1/elemental-specialization) Features table.\n\n###### 2nd-Level Elemental Specialization Features Table\n\n| Specialization | Feature                   |\n|----------------|---------------------------|\n| Earth          | [Disciple of Earth](scc.v1:mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-earth)         |\n| Fire           | [Disciple of Fire](scc.v1:mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-fire)          |\n| Green          | [Disciple of the Green](scc.v1:mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-the-green)     |\n| Void           | [There Is No Space Between](scc.v1:mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between) |\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-earth",
+    "kind": "feature",
+    "name": "Disciple of Earth",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/disciple-of-earth.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-2/disciple-of-earth.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"2\"\nname: Disciple of Earth\nscc: mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-earth\nsubclass: earth\ntype: feature\n---\n\nYour body is strengthened by your mind's connection to the element of permanence. You have a +6 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), and you gain an additional +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) whenever you gain a level past 2nd.\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "2",
+      "subclass": "earth"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-fire",
+    "kind": "feature",
+    "name": "Disciple of Fire",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/disciple-of-fire.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-2/disciple-of-fire.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"2\"\nname: Disciple of Fire\nscc: mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-fire\nsubclass: fire\ntype: feature\n---\n\nYour connection to fire allows you to protect yourself from it, even as you rip away the protections of others. You have fire immunity equal to 5 plus your level. Additionally, fire damage you deal ignores a target's fire immunity.\n\nAt the start of a combat encounter, you gain a number of [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories). Whenever you spend a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) to deal extra damage, you can make that damage fire damage.\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "2",
+      "subclass": "fire"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-the-green",
+    "kind": "feature",
+    "name": "Disciple of the Green",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-2/disciple-of-the-green.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"2\"\nname: Disciple of the Green\nscc: mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-the-green\ntype: feature\n---\n\nYou can use a maneuver to shapeshift into a type of creature on the Green Animal Forms table. While in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), you can speak, and you use your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score to make [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). Your statistics stay the same except as noted on the table.\n\nEach form has a prerequisite level that you must attain before you can adopt it. Some animal forms grant you [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). You lose this [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) when you revert back to your true form.\n\nYou choose a specific animal and appearance while in [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form). For example, if you become a rodent, you might become a mouse, a rat, a shrew, or any other [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1T animal who fits the rodent type. When you take on an [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), your equipment either melds into your new form or falls undamaged to the ground (your choice). When you return to your true form, any melded gear reappears on your person.\n\nYou can revert back to your true form as a maneuver. You can't enter an [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) unless you are in your true form. When you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), you revert to your true form and can't [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) back into an animal until you are no longer [dying](scc.v1:mcdm.heroes.v1/rule.health/dying).\n\n###### Green Animal Forms Table\n\n| Animal Type         | Level | [Temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) | [Speed](scc.v1:mcdm.heroes.v1/rule.character/speed)         | [Size](scc.v1:mcdm.heroes.v1/rule.character/size) | [Stability](scc.v1:mcdm.heroes.v1/rule.character/stability) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) | [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) Damage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) | Special                                                                                                                                                                                                                                                                         |\n|---------------------|-------|-------------------|---------------|------|-----------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Canine              | 2nd   | 5                 | 7             | 1M   | +0              | +1/+1/+1           | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) that involve smell.                                                                                                                                                                                                                                   |\n| Fish                | 2nd   | 0                 | 5 (swim only) | 1T   | +0              | +0/+0/+0           | You can breathe in water but can't breathe outside of it.                                                                                                                                                                                                                       |\n| Rodent              | 2nd   | 0                 | 5 (climb)     | 1T   | +0              | +0/+0/+0           | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) that involve smell.                                                                                                                                                                                                                                   |\n| Bird                | 3rd   | 0                 | 5 ([fly](scc.v1:mcdm.heroes.v1/movement/fly))       | 1T   | +0              | +0/+0/+0           | -                                                                                                                                                                                                                                                                               |\n| Great cat           | 3rd   | 5                 | 6 (climb)     | 2    | +0              | +1/+1/+1           | As a maneuver, you can jump up to 3 squares in any direction. If you land on an enemy of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller, that enemy is [knocked prone](scc.v1:mcdm.heroes.v1/condition/prone), and you can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them (no action required).                                                       |\n| Giant frog          | 4th   | 5                 | 5 (swim)      | 2    | +0              | +0/+0/+0           | Your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) has a [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 3. When you take the Advance move action, you can high jump or long jump up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). This jump can allow you to move more squares than your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).                                                              |\n| Horse               | 4th   | 5                 | 8             | 2    | +1              | +0/+0/+0           | You can use the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action as a maneuver. You can't use two Charge main actions on the same [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).                                                                                                                                                                    |\n| Mohler              | 4th   | 0                 | 7 ([burrow](scc.v1:mcdm.heroes.v1/movement/burrow))    | 1S   | +1              | +0/+0/+0           | Your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).                                                                                                                                                                                                                                           |\n| Bear                | 5th   | 10                | 5 (climb)     | 2    | +1              | +2/+2/+2           | Your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).                                                                                                                                                                                                                                           |\n| Giant bird          | 5th   | 0                 | 7 ([fly](scc.v1:mcdm.heroes.v1/movement/fly))       | 2    | +0              | +1/+1/+1           | After making a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike), you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 3 squares as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).                                                                                                                                                                                  |\n| Giant salamander | 6th   | 5                 | 5             | 1L   | +3              | +2/+2/+2           | Your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) deals fire damage. Additionally, you have fire immunity 3.                                                                                                                                                                                            |\n| Giant spider        | 6th   | 0                 | 5 (climb)     | 2    | +0              | +0/+1/+2           | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against creatures you are hidden from.                                                                                                                                                                                          |\n| Giant snake         | 7th   | 5                 | 5             | 3    | +0              | +0/+1/+2           | Whenever you obtain a tier 2 or tier 3 outcome on a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike), you can automatically grab the target. While [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) this way, the target takes 2 damage at the start of each of their [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).                                                                      |\n| Kangaroo            | 7th   | 0                 | 7             | 1L   | +1              | +0/+0/+4           | When you score a [critical hit](scc.v1:mcdm.heroes.v1/rule.combat/critical-hit) with a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike), the target is [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends). When you take the [Advance](scc.v1:mcdm.heroes.v1/feature.common.move-actions/advance) move action, you can high jump or long jump up to half your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). This jump can allow you to move more squares than your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).                    |\n| Spiny armadillo     | 7th   | 10                | 5             | 1M   | +2              | +0/+0/+0           | Whenever you take damage from an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature's [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) ability, that creature takes 3 damage.                                                                                                                                                                            |\n| Ostrich             | 8th   | 0                 | 10            | 2    | +0              | +1/+1/+1           | Your movement does not provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack).                                                                                                                                                                                                                             |\n| Shark               | 8th   | 0                 | 8 (swim only) | 2    | +0              | +2/+2/+2           | You can breathe in water but can't breathe outside of it. Additionally, you gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) against targets who are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) or [winded](scc.v1:mcdm.heroes.v1/rule.health/winded).                                                                                                                              |\n| Giant octopus       | 9th   | 5                 | 5 (swim)      | 3    | +2              | +0/+0/+0           | You can breathe in water. Additionally, you can target two creatures or objects with your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). Whenever you obtain a tier 2 or tier 3 outcome on a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike), you can automatically grab the target. You can have up to eight creatures [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed). |\n| Rhinoceros          | 9th   | 10                | 8             | 2    | +5              | +2/+2/+2           | Whenever you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) as part of the Charge action, that strike gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).                                                                                                                                                                               |\n| King terror lizard  | 10th  | 20                | 5             | 4    | +3              | +2/+2/+2           | Your [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) is a 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) with the Area and Strike keywords.                                                                                                                                                                                                          |\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-2/new-5-essence-ability",
+    "kind": "feature",
+    "name": "New 5-Essence Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/new-5-essence-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-2/new-5-essence-ability.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"2\"\nname: New 5-Essence Ability\nscc: mcdm.heroes.v1/feature.elementalist.level-2/new-5-essence-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 5 essence to use. Alternatively, you can choose one of the 5-essence abilities you didn't select at 1st level (see 1st-Level Features).\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-2/perk.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"2\"\nname: Perk\nscc: mcdm.heroes.v1/feature.elementalist.level-2/perk\ntype: feature\n---\n\nYou gain one crafting, lore, or [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) perk of your choice. See Chapter 7: [Perks](scc.v1:mcdm.heroes.v1/chapter/perks).\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-2/there-is-no-space-between",
+    "kind": "feature",
+    "name": "There Is No Space Between",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/there-is-no-space-between.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-2/there-is-no-space-between.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"2\"\nname: There Is No Space Between\nscc: mcdm.heroes.v1/feature.elementalist.level-2/there-is-no-space-between\nsubclass: void\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "2",
+      "subclass": "void"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-3/3rd-level-specialization-feature",
+    "kind": "feature",
+    "name": "3rd-Level Specialization Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/3rd-level-specialization-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-3/3rd-level-specialization-feature.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"3\"\nname: 3rd-Level Specialization Feature\nscc: mcdm.heroes.v1/feature.elementalist.level-3/3rd-level-specialization-feature\ntype: feature\n---\n\nYour [elemental specialization](scc.v1:mcdm.heroes.v1/feature.elementalist.level-1/elemental-specialization) grants you a feature, as shown on the 3rd-Level [Elemental Specialization](scc.v1:mcdm.heroes.v1/feature.elementalist.level-1/elemental-specialization) Features table.\n\n###### 3rd-Level Elemental Specialization Features Table\n\n| Specialization | Feature                          |\n|----------------|----------------------------------|\n| Earth          | [Earth Accepts Me](scc.v1:mcdm.heroes.v1/feature.ability.elementalist.level-3/earth-accepts-me)                 |\n| Fire           | [A Conversation With Fire](scc.v1:mcdm.heroes.v1/feature.elementalist.level-3/a-conversation-with-fire)         |\n| Green          | [Remember Growth and Sun and Rain](scc.v1:mcdm.heroes.v1/feature.ability.elementalist.level-3/remember-growth-and-sun-and-rain) |\n| Void           | [Distance Is Only Memory](scc.v1:mcdm.heroes.v1/feature.elementalist.level-3/distance-is-only-memory)          |\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-3/7-essence-ability",
+    "kind": "feature",
+    "name": "7-Essence Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/7-essence-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-3/7-essence-ability.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"3\"\nname: 7-Essence Ability\nscc: mcdm.heroes.v1/feature.elementalist.level-3/7-essence-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 essence to use.\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-3/a-conversation-with-fire",
+    "kind": "feature",
+    "name": "A Conversation With Fire",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/a-conversation-with-fire.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-3/a-conversation-with-fire.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"3\"\nname: A Conversation With Fire\nscc: mcdm.heroes.v1/feature.elementalist.level-3/a-conversation-with-fire\nsubclass: fire\ntype: feature\n---\n\nWhen you spend 1 uninterrupted minute in front of a fire, you can speak the name of another creature. If that creature is willing to speak to you, their image appears in the fire, and they can see you before them in a shimmering ball of light. The two of you can speak to each other through these images as if you were together in person. As a maneuver, you or the creature can end the conversation.\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "3",
+      "subclass": "fire"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-3/distance-is-only-memory",
+    "kind": "feature",
+    "name": "Distance Is Only Memory",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/distance-is-only-memory.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-3/distance-is-only-memory.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"3\"\nname: Distance Is Only Memory\nscc: mcdm.heroes.v1/feature.elementalist.level-3/distance-is-only-memory\nsubclass: void\ntype: feature\n---\n\nEach time you finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite), you can open a two-way portal that leads to any place you have previously been. You and your allies can pass through the portal, which remains open for 1 hour or until you dismiss it as a main action.\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "3",
+      "subclass": "void"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-3/earth-accepts-me",
+    "kind": "feature",
+    "name": "Earth Accepts Me",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/earth-accepts-me.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-3/earth-accepts-me.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"3\"\nname: Earth Accepts Me\nscc: mcdm.heroes.v1/feature.elementalist.level-3/earth-accepts-me\nsubclass: earth\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "3",
+      "subclass": "earth"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.elementalist.level-3/remember-growth-and-sun-and-rain",
+    "kind": "feature",
+    "name": "Remember Growth and Sun and Rain",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/elementalist/level-3/remember-growth-and-sun-and-rain.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\nclass: elementalist\nlevel: \"3\"\nname: Remember Growth and Sun and Rain\nscc: mcdm.heroes.v1/feature.elementalist.level-3/remember-growth-and-sun-and-rain\nsubclass: green\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "elementalist",
+      "level": "3",
+      "subclass": "green"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.fury.boren/animal-form-bear",
     "kind": "feature",
     "name": "Animal Form: Bear",

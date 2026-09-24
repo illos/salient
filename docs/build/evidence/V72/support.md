@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:25195fa07a59cf80701693ff3bcf37442084cb76b4e1f2604a7963f0de28719b`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:80fa2ba89b15028c06cc6941f6d4a8385c6a703b72865154908ff5cdafd23764`.
 
-Currently reachable compiled: 105; unchanged reachable compatibility: 1462; structurally supported but unavailable: 0.
+Currently reachable compiled: 106; unchanged reachable compatibility: 1472; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -200,6 +200,17 @@ Currently reachable compiled: 105; unchanged reachable compatibility: 1462; stru
 | The Green Within, the Green Without | hero-standalone | manual | legacy-compatibility | manual-section |
 | Unquiet Ground | hero-standalone | supported | compiled |  |
 | Viscous Fire | hero-standalone | supported | compiled |  |
+| O Flower Aid, O Earth Defend | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Subvert the Green Within | hero-standalone | manual | legacy-compatibility | manual-section |
+| There Is No Space Between | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Translated Through Flame | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Volcano's Embrace | hero-standalone | supported | compiled |  |
+| Earth Accepts Me | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Erase | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Maw of Earth | hero-standalone | manual | legacy-compatibility | manual-section |
+| Remember Growth and Sun and Rain | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Swarm of Spirits | hero-standalone | manual | legacy-compatibility | manual-section |
+| Wall of Fire | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Back! | hero-standalone | supported | compiled |  |
 | Blood for Blood! | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Brutal Slam | hero-standalone | supported | compiled |  |

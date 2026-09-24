@@ -1670,7 +1670,8 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
           </label>
           {(targetLevel === 2 || targetLevel === 3) && (
             <p className="mb-4 text-sm text-muted-foreground">
-              Level {targetLevel} supports Shadow, Fury, Tactician, Censor, Troubadour and Null.
+              Level {targetLevel} supports Shadow, Fury, Tactician, Censor, Troubadour, Null and
+              Elementalist.
             </p>
           )}
           {targetLevel >= 4 && targetLevel <= 6 && (

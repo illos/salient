@@ -317,6 +317,12 @@ export function abilityFromEntry(
     '/feature/ability/elementalist/level-1/instantaneous-excavation.md',
     // A damage type is mandatory; source-typed grants below own its actual roll.
     '/feature/ability/elementalist/level-1/hurl-element.md',
+    // Subvert the Green Within: the target uses its signature ability before your roll.
+    '/feature/ability/elementalist/level-2/subvert-the-green-within.md',
+    // Translated Through Flame: the roll affects enemies adjacent to the teleported self or ally.
+    '/feature/ability/elementalist/level-2/translated-through-flame.md',
+    // Erase: the power roll decides how many creatures are targeted.
+    '/feature/ability/elementalist/level-3/erase.md',
     // Ally/enemy branching and mandatory damage type require explicit manual resolution.
     '/feature/ability/talent/level-1/awe.md',
     '/feature/ability/talent/level-1/smolder.md',

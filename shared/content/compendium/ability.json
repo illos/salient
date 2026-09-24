@@ -4201,6 +4201,406 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend",
+    "kind": "ability",
+    "name": "O Flower Aid, O Earth Defend",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ncost: 5 Essence\ndistance: 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10\neffects:\n    - effect: 'Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the area gains the following effects:'\n      name: Effect\n    - effect: The area remains until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). As a maneuver, you can move the area up to 5 squares. This ability ends if the area is ever not within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect).\n      name: Persistent 1\nflavor: Revitalizing plants and jagged stones grow, helping allies and hindering foes.\nkeywords:\n    - Area\n    - Earth\n    - Green\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"2\"\nname: O Flower Aid, O Earth Defend\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend\ntarget: Special\ntype: ability\n---\n\n\n*Revitalizing plants and jagged stones grow, helping allies and hindering foes.*\n\n| **Area, Earth, Green, Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |   **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------------------|---------------:|\n| **📏 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10**               | **🎯 Special** |\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the area gains the following effects:\n\n- Once as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) at the start of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you allow yourself and each ally in the area to spend any number of [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n- The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.\n- Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n\n**Persistent 1:** The area remains until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). As a maneuver, you can move the area up to 5 squares. This ability ends if the area is ever not within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "cost": "5 Essence",
+      "distance": "3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10",
+      "effects": [
+        {
+          "effect": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the area gains the following effects:",
+          "name": "Effect"
+        },
+        {
+          "effect": "The area remains until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). As a maneuver, you can move the area up to 5 squares. This ability ends if the area is ever not within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect).",
+          "name": "Persistent 1"
+        }
+      ],
+      "flavor": "Revitalizing plants and jagged stones grow, helping allies and hindering foes.",
+      "keywords": [
+        "Area",
+        "Earth",
+        "Green",
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "2",
+      "target": "Special"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within",
+    "kind": "ability",
+    "name": "Subvert the Green Within",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-2/subvert-the-green-within.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ncost: 5 Essence\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against a creature of your choice. This [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can target the creature even if it usually wouldn't. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target of this ability.\n      name: Effect\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 5 + R poison damage\n      tier2: 9 + R poison damage\n      tier3: 12 + R poison damage\nflavor: Fungal spores sprout inside your enemy's brain, allowing you to control their actions.\nkeywords:\n    - Green\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Void\nlevel: \"2\"\nname: Subvert the Green Within\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within\ntarget: One creature\ntier1: 5 + R poison damage\ntier2: 9 + R poison damage\ntier3: 12 + R poison damage\ntype: ability\n---\n\n\n*Fungal spores sprout inside your enemy's brain, allowing you to control their actions.*\n\n| **Green, Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Void** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                       | **🎯 One creature** |\n\n**Effect:** The target uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against a creature of your choice. This [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can target the creature even if it usually wouldn't. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target of this ability.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 5 + R poison damage\n- **12-16:** 9 + R poison damage\n- **17+:** 12 + R poison damage\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "cost": "5 Essence",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against a creature of your choice. This [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can target the creature even if it usually wouldn't. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target of this ability.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "5 + R poison damage",
+          "tier2": "9 + R poison damage",
+          "tier3": "12 + R poison damage"
+        }
+      ],
+      "flavor": "Fungal spores sprout inside your enemy's brain, allowing you to control their actions.",
+      "keywords": [
+        "Green",
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Void"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "One creature",
+      "tier1": "5 + R poison damage",
+      "tier2": "9 + R poison damage",
+      "tier3": "12 + R poison damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between",
+    "kind": "ability",
+    "name": "There Is No Space Between",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-2/there-is-no-space-between.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: You open two [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 portals in unoccupied spaces within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), which last until you move beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) from any portal, end the effect as a maneuver, or are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying). Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to an unoccupied space of their choice [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the other portal. If an enemy is force moved into a portal, their [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them.\n      name: Effect\nflavor: Knowledge of the mystery reveals that two spaces are the same space.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Void\nlevel: \"2\"\nname: There Is No Space Between\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between\nsubclass: void\ntarget: Special\ntype: ability\n---\n\n\n*Knowledge of the mystery reveals that two spaces are the same space.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Void** |   **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------|---------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**        | **🎯 Special** |\n\n**Effect:** You open two [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 portals in unoccupied spaces within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), which last until you move beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) from any portal, end the effect as a maneuver, or are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying). Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to an unoccupied space of their choice [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the other portal. If an enemy is force moved into a portal, their [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them.\n\nAt the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) while the portals are active, you can open a new portal connected to the others. If three or more portals are present, you and your allies choose which portal to emerge from when entering a portal, and a creature who [force move](scc.v1:mcdm.heroes.v1/movement/forced-movement)s an enemy into a portal chooses that enemy's destination portal.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "You open two [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 portals in unoccupied spaces within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), which last until you move beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) from any portal, end the effect as a maneuver, or are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying). Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to an unoccupied space of their choice [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the other portal. If an enemy is force moved into a portal, their [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Knowledge of the mystery reveals that two spaces are the same space.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Void"
+      ],
+      "level": "2",
+      "subclass": "void",
+      "target": "Special"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame",
+    "kind": "ability",
+    "name": "Translated Through Flame",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-2/translated-through-flame.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ncost: 5 Essence\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target is [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to another space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). Make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that affects each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target's new space.\n      name: Effect\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 3 fire damage\n      tier2: 5 fire damage\n      tier3: 8 fire damage\nflavor: Your ally disappears, then reappears in a burst of fire.\nkeywords:\n    - Fire\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Void\nlevel: \"2\"\nname: Translated Through Flame\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame\ntarget: Self or one ally\ntier1: 3 fire damage\ntier2: 5 fire damage\ntier3: 8 fire damage\ntype: ability\n---\n\n\n*Your ally disappears, then reappears in a burst of fire.*\n\n| **Fire, Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Void** |         **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**              | **🎯 Self or one ally** |\n\n**Effect:** The target is [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to another space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). Make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that affects each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target's new space.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 3 fire damage\n- **12-16:** 5 fire damage\n- **17+:** 8 fire damage\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "cost": "5 Essence",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target is [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to another space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). Make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that affects each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target's new space.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "3 fire damage",
+          "tier2": "5 fire damage",
+          "tier3": "8 fire damage"
+        }
+      ],
+      "flavor": "Your ally disappears, then reappears in a burst of fire.",
+      "keywords": [
+        "Fire",
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Void"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "Self or one ally",
+      "tier1": "3 fire damage",
+      "tier2": "5 fire damage",
+      "tier3": "8 fire damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace",
+    "kind": "ability",
+    "name": "Volcano's Embrace",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-2/volcanos-embrace.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ncost: 5 Essence\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 5 + R fire damage; A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n      tier2: 9 + R fire damage; A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n      tier3: 12 + R fire damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\nflavor: Wrap them up in fire and melting stone.\nkeywords:\n    - Earth\n    - Fire\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"2\"\nname: Volcano's Embrace\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace\ntarget: One creature\ntier1: 5 + R fire damage; A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\ntier2: 9 + R fire damage; A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\ntier3: 12 + R fire damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\ntype: ability\n---\n\n\n*Wrap them up in fire and melting stone.*\n\n| **Earth, Fire, Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                       | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 5 + R fire damage; A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n- **12-16:** 9 + R fire damage; A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n- **17+:** 12 + R fire damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "cost": "5 Essence",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "5 + R fire damage; A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+          "tier2": "9 + R fire damage; A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+          "tier3": "12 + R fire damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+        }
+      ],
+      "flavor": "Wrap them up in fire and melting stone.",
+      "keywords": [
+        "Earth",
+        "Fire",
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "One creature",
+      "tier1": "5 + R fire damage; A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+      "tier2": "9 + R fire damage; A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+      "tier3": "12 + R fire damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/earth-accepts-me",
+    "kind": "ability",
+    "name": "Earth Accepts Me",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-3/earth-accepts-me.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ndistance: Self\neffects:\n    - effect: You step into a mundane dirt, metal, or stone object (including a wall) that is as large as you or larger. You can remain inside the object for as long as you like. While inside the object, you can observe events and speak to creatures outside it, but you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to anything outside the object and vice versa. You can travel through the object freely until you exit it. If the object you meld with is destroyed, you take 10 damage and exit the object.\n      name: Effect\nflavor: You can slip into the stone.\nkeywords:\n    - Earth\n    - Magic\nlevel: \"3\"\nname: Earth Accepts Me\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-3/earth-accepts-me\nsubclass: earth\ntarget: Self\ntype: ability\n---\n\n\n*You can slip into the stone.*\n\n| **Earth, Magic** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------|----------------:|\n| **📏 Self**      |     **🎯 Self** |\n\n**Effect:** You step into a mundane dirt, metal, or stone object (including a wall) that is as large as you or larger. You can remain inside the object for as long as you like. While inside the object, you can observe events and speak to creatures outside it, but you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to anything outside the object and vice versa. You can travel through the object freely until you exit it. If the object you meld with is destroyed, you take 10 damage and exit the object.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You step into a mundane dirt, metal, or stone object (including a wall) that is as large as you or larger. You can remain inside the object for as long as you like. While inside the object, you can observe events and speak to creatures outside it, but you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to anything outside the object and vice versa. You can travel through the object freely until you exit it. If the object you meld with is destroyed, you take 10 damage and exit the object.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You can slip into the stone.",
+      "keywords": [
+        "Earth",
+        "Magic"
+      ],
+      "level": "3",
+      "subclass": "earth",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase",
+    "kind": "ability",
+    "name": "Erase",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/erase.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-3/erase.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ncost: 7 Essence\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The number of creatures you target with this ability is determined by your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n      name: Special\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: One creature\n      tier2: Two creatures\n      tier3: Three creatures\n    - effect: Each target begins to fade from existence (save ends). On their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) while fading from existence, a target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they have a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their second [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they fade from existence for 1 hour, after which they reappear in their original space or the nearest unoccupied space.\n      name: Effect\nflavor: With a flick of the wrist, you phase creatures out of existence.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Void\nlevel: \"3\"\nname: Erase\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-3/erase\ntarget: Special\ntier1: One creature\ntier2: Two creatures\ntier3: Three creatures\ntype: ability\n---\n\n\n*With a flick of the wrist, you phase creatures out of existence.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Void** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------------|----------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                |  **🎯 Special** |\n\n**Special:** The number of creatures you target with this ability is determined by your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** One creature\n- **12-16:** Two creatures\n- **17+:** Three creatures\n\n**Effect:** Each target begins to fade from existence (save ends). On their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) while fading from existence, a target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they have a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their second [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they fade from existence for 1 hour, after which they reappear in their original space or the nearest unoccupied space.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "cost": "7 Essence",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The number of creatures you target with this ability is determined by your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "name": "Special"
+        },
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "One creature",
+          "tier2": "Two creatures",
+          "tier3": "Three creatures"
+        },
+        {
+          "effect": "Each target begins to fade from existence (save ends). On their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) while fading from existence, a target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they have a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their second [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they fade from existence for 1 hour, after which they reappear in their original space or the nearest unoccupied space.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "With a flick of the wrist, you phase creatures out of existence.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Void"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "Special",
+      "tier1": "One creature",
+      "tier2": "Two creatures",
+      "tier3": "Three creatures"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth",
+    "kind": "ability",
+    "name": "Maw of Earth",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-3/maw-of-earth.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ncost: 7 Essence\ndistance: 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 5 damage\n      tier2: 9 damage\n      tier3: 12 damage\n    - effect: The ground in or directly beneath the area drops 3 squares.\n      name: Effect\nflavor: You open up the ground, spewing out shrapnel of stone and debris.\nkeywords:\n    - Area\n    - Earth\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"3\"\nname: Maw of Earth\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth\ntarget: Each enemy in the area\ntier1: 5 damage\ntier2: 9 damage\ntier3: 12 damage\ntype: ability\n---\n\n\n*You open up the ground, spewing out shrapnel of stone and debris.*\n\n| **Area, Earth, Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |                **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|-------------------------------:|\n| **📏 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10**        |  **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 5 damage\n- **12-16:** 9 damage\n- **17+:** 12 damage\n\n**Effect:** The ground in or directly beneath the area drops 3 squares.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "cost": "7 Essence",
+      "distance": "3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "5 damage",
+          "tier2": "9 damage",
+          "tier3": "12 damage"
+        },
+        {
+          "effect": "The ground in or directly beneath the area drops 3 squares.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You open up the ground, spewing out shrapnel of stone and debris.",
+      "keywords": [
+        "Area",
+        "Earth",
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "Each enemy in the area",
+      "tier1": "5 damage",
+      "tier2": "9 damage",
+      "tier3": "12 damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/remember-growth-and-sun-and-rain",
+    "kind": "ability",
+    "name": "Remember Growth and Sun and Rain",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - effect: You see and hear any events that have occurred within 10 squares of the object within the last 12 hours, perceiving those events from the object's location as if you were there.\n      name: Effect\nflavor: You stir any wood's memory and learn what it has seen.\nkeywords:\n    - Green\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\nlevel: \"3\"\nname: Remember Growth and Sun and Rain\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-3/remember-growth-and-sun-and-rain\nsubclass: green\ntarget: One mundane wooden object\ntype: ability\n---\n\n\n*You stir any wood's memory and learn what it has seen.*\n\n| **Green, Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)** |                  **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------|---------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**          | **🎯 One mundane wooden object** |\n\n**Effect:** You see and hear any events that have occurred within 10 squares of the object within the last 12 hours, perceiving those events from the object's location as if you were there.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "effect": "You see and hear any events that have occurred within 10 squares of the object within the last 12 hours, perceiving those events from the object's location as if you were there.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You stir any wood's memory and learn what it has seen.",
+      "keywords": [
+        "Green",
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)"
+      ],
+      "level": "3",
+      "subclass": "green",
+      "target": "One mundane wooden object"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits",
+    "kind": "ability",
+    "name": "Swarm of Spirits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-3/swarm-of-spirits.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ncost: 7 Essence\ndistance: 3 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 3 damage\n      tier2: 6 damage\n      tier3: 9 damage\n    - effect: Until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each ally in the area has each of their [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) scores treated as 1 higher for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency), and has a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw).\n      name: Effect\n    - effect: You make the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) again to target each enemy in the area without spending essence, and the effect lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Persistent 1\nflavor: Guardian animal spirits surround you to harry your foes and bolster your allies.\nkeywords:\n    - Area\n    - Green\n    - Magic\nlevel: \"3\"\nname: Swarm of Spirits\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits\ntarget: Each enemy in the area\ntier1: 3 damage\ntier2: 6 damage\ntier3: 9 damage\ntype: ability\n---\n\n\n*Guardian animal spirits surround you to harry your foes and bolster your allies.*\n\n| **Area, Green, Magic** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------|------------------------------:|\n| **📏 3 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**          | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 3 damage\n- **12-16:** 6 damage\n- **17+:** 9 damage\n\n**Effect:** Until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each ally in the area has each of their [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) scores treated as 1 higher for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency), and has a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw).\n\n**Persistent 1:** You make the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) again to target each enemy in the area without spending essence, and the effect lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "cost": "7 Essence",
+      "distance": "3 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "3 damage",
+          "tier2": "6 damage",
+          "tier3": "9 damage"
+        },
+        {
+          "effect": "Until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each ally in the area has each of their [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) scores treated as 1 higher for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency), and has a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw).",
+          "name": "Effect"
+        },
+        {
+          "effect": "You make the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) again to target each enemy in the area without spending essence, and the effect lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Persistent 1"
+        }
+      ],
+      "flavor": "Guardian animal spirits surround you to harry your foes and bolster your allies.",
+      "keywords": [
+        "Area",
+        "Green",
+        "Magic"
+      ],
+      "level": "3",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "Each enemy in the area",
+      "tier1": "3 damage",
+      "tier2": "6 damage",
+      "tier3": "9 damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/wall-of-fire",
+    "kind": "ability",
+    "name": "Wall of Fire",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/elementalist/level-3/wall-of-fire.json",
+    "selection": "elementalist-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: elementalist\ncost: 7 Essence\ndistance: 10 wall within 10\neffects:\n    - effect: The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and can be placed in occupied squares. Creatures can enter and pass through the wall. Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes fire damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score for each square of the area they start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in or enter.\n      name: Effect\n    - effect: The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and you can add a number of squares to the wall equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n      name: Persistent 1\nflavor: A blazing, beautifully organized inferno erupts at your command.\nkeywords:\n    - Area\n    - Fire\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"3\"\nname: Wall of Fire\nscc: mcdm.heroes.v1/feature.ability.elementalist.level-3/wall-of-fire\ntarget: Special\ntype: ability\n---\n\n\n*A blazing, beautifully organized inferno erupts at your command.*\n\n| **Area, Fire, Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |   **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------------|---------------:|\n| **📏 10 wall within 10**      | **🎯 Special** |\n\n**Effect:** The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and can be placed in occupied squares. Creatures can enter and pass through the wall. Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes fire damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score for each square of the area they start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in or enter.\n\n**Persistent 1:** The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and you can add a number of squares to the wall equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "elementalist",
+      "cost": "7 Essence",
+      "distance": "10 wall within 10",
+      "effects": [
+        {
+          "effect": "The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and can be placed in occupied squares. Creatures can enter and pass through the wall. Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes fire damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score for each square of the area they start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in or enter.",
+          "name": "Effect"
+        },
+        {
+          "effect": "The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and you can add a number of squares to the wall equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.",
+          "name": "Persistent 1"
+        }
+      ],
+      "flavor": "A blazing, beautifully organized inferno erupts at your command.",
+      "keywords": [
+        "Area",
+        "Fire",
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "3",
+      "target": "Special"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.fury.level-1/back",
     "kind": "ability",
     "name": "Back!",

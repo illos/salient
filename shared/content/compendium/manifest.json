@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:25195fa07a59cf80701693ff3bcf37442084cb76b4e1f2604a7963f0de28719b",
-  "entryCount": 1751,
+  "contentHash": "sha256:80fa2ba89b15028c06cc6941f6d4a8385c6a703b72865154908ff5cdafd23764",
+  "entryCount": 1775,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -345,6 +345,17 @@
         "feature/ability/null/level-3"
       ],
       "basis": "docs/build/V133-null-level-three.md#scope: Null levels two and three."
+    },
+    {
+      "id": "elementalist-levels-two-three",
+      "description": "Elementalist levels two and three: specialization features, perk, new 5-Essence and 7-Essence alternatives.",
+      "paths": [
+        "feature/elementalist/level-2",
+        "feature/ability/elementalist/level-2",
+        "feature/elementalist/level-3",
+        "feature/ability/elementalist/level-3"
+      ],
+      "basis": "docs/build/V135-elementalist-level-three.md#scope: Elementalist levels two and three."
     },
     {
       "id": "kits",
@@ -1380,6 +1391,94 @@
       "name": "Viscous Fire",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/viscous-fire.md",
       "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend",
+      "kind": "ability",
+      "name": "O Flower Aid, O Earth Defend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within",
+      "kind": "ability",
+      "name": "Subvert the Green Within",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between",
+      "kind": "ability",
+      "name": "There Is No Space Between",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame",
+      "kind": "ability",
+      "name": "Translated Through Flame",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace",
+      "kind": "ability",
+      "name": "Volcano's Embrace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/earth-accepts-me",
+      "kind": "ability",
+      "name": "Earth Accepts Me",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase",
+      "kind": "ability",
+      "name": "Erase",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/erase.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth",
+      "kind": "ability",
+      "name": "Maw of Earth",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/remember-growth-and-sun-and-rain",
+      "kind": "ability",
+      "name": "Remember Growth and Sun and Rain",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits",
+      "kind": "ability",
+      "name": "Swarm of Spirits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/wall-of-fire",
+      "kind": "ability",
+      "name": "Wall of Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+      "selection": "elementalist-levels-two-three",
       "file": "ability.json"
     },
     {
@@ -5340,6 +5439,110 @@
       "name": "Ward of Surprising Reactivity",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-surprising-reactivity.md",
       "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-2/2nd-level-specialization-feature",
+      "kind": "feature",
+      "name": "2nd-Level Specialization Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/2nd-level-specialization-feature.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-earth",
+      "kind": "feature",
+      "name": "Disciple of Earth",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/disciple-of-earth.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-fire",
+      "kind": "feature",
+      "name": "Disciple of Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/disciple-of-fire.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-2/disciple-of-the-green",
+      "kind": "feature",
+      "name": "Disciple of the Green",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-2/new-5-essence-ability",
+      "kind": "feature",
+      "name": "New 5-Essence Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/new-5-essence-ability.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/perk.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-2/there-is-no-space-between",
+      "kind": "feature",
+      "name": "There Is No Space Between",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-2/there-is-no-space-between.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-3/3rd-level-specialization-feature",
+      "kind": "feature",
+      "name": "3rd-Level Specialization Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/3rd-level-specialization-feature.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-3/7-essence-ability",
+      "kind": "feature",
+      "name": "7-Essence Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/7-essence-ability.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-3/a-conversation-with-fire",
+      "kind": "feature",
+      "name": "A Conversation With Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/a-conversation-with-fire.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-3/distance-is-only-memory",
+      "kind": "feature",
+      "name": "Distance Is Only Memory",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/distance-is-only-memory.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-3/earth-accepts-me",
+      "kind": "feature",
+      "name": "Earth Accepts Me",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/earth-accepts-me.md",
+      "selection": "elementalist-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-3/remember-growth-and-sun-and-rain",
+      "kind": "feature",
+      "name": "Remember Growth and Sun and Rain",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+      "selection": "elementalist-levels-two-three",
       "file": "feature.json"
     },
     {

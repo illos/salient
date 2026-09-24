@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:25195fa07a59cf80701693ff3bcf37442084cb76b4e1f2604a7963f0de28719b",
+  "contentHash": "sha256:80fa2ba89b15028c06cc6941f6d4a8385c6a703b72865154908ff5cdafd23764",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1107
     },
     "hero-standalone": {
-      "total": 317,
-      "supported": 43,
-      "manual": 274
+      "total": 328,
+      "supported": 44,
+      "manual": 284
     },
     "kit-signature": {
       "total": 25,
@@ -25650,7 +25650,25 @@
         {
           "name": "Conflagration",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Conflagration supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Conflagration",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
           "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Conflagration supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Conflagration",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
           "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
@@ -25668,6 +25686,15 @@
         {
           "name": "Conflagration",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Conflagration supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Conflagration",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
           "decisionId": "class.elementalist.ability-5",
           "level": 5,
           "grantKind": "heroic",
@@ -25677,7 +25704,25 @@
         {
           "name": "Conflagration",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Conflagration supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Conflagration",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
           "decisionId": "class.elementalist.ability-5",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Conflagration supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Conflagration",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
           "level": 6,
           "grantKind": "heroic",
           "selectable": "selectable",
@@ -26234,7 +26279,25 @@
         {
           "name": "Instantaneous Excavation",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
           "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
           "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
@@ -26252,6 +26315,15 @@
         {
           "name": "Instantaneous Excavation",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
           "decisionId": "class.elementalist.ability-5",
           "level": 5,
           "grantKind": "heroic",
@@ -26261,7 +26333,25 @@
         {
           "name": "Instantaneous Excavation",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
           "decisionId": "class.elementalist.ability-5",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
           "level": 6,
           "grantKind": "heroic",
           "selectable": "selectable",
@@ -26791,7 +26881,25 @@
         {
           "name": "No More Than a Breeze",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
           "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
           "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
@@ -26809,6 +26917,15 @@
         {
           "name": "No More Than a Breeze",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
           "decisionId": "class.elementalist.ability-5",
           "level": 5,
           "grantKind": "heroic",
@@ -26818,7 +26935,25 @@
         {
           "name": "No More Than a Breeze",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
           "decisionId": "class.elementalist.ability-5",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
           "level": 6,
           "grantKind": "heroic",
           "selectable": "selectable",
@@ -27939,7 +28074,25 @@
         {
           "name": "Test of Rain",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
           "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
           "level": 3,
           "grantKind": "heroic",
           "selectable": "selectable",
@@ -27957,6 +28110,15 @@
         {
           "name": "Test of Rain",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
           "decisionId": "class.elementalist.ability-5",
           "level": 5,
           "grantKind": "heroic",
@@ -27966,7 +28128,25 @@
         {
           "name": "Test of Rain",
           "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
           "decisionId": "class.elementalist.ability-5",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
           "level": 6,
           "grantKind": "heroic",
           "selectable": "selectable",
@@ -28520,6 +28700,1452 @@
         }
       ],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend",
+      "name": "O Flower Aid, O Earth Defend",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend#block:0:0:7ba570fc7300da52",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the area gains the following effects:",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend#block:1:0:2dd2a23f380b1cc5",
+          "locator": "block:1:0",
+          "clause": "The area remains until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). As a maneuver, you can move the area up to 5 squares. This ability ends if the area is ever not within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:persistent N",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend#markdown:block:0:0:2ae7dd7eceba2e35",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Until the start of your next turn, the area gains the following effects:\n- Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.\n- The area is difficult terrain for enemies.\n- Each enemy who enters the area for the first time in a combat round or starts their turn there takes damage equal to your Reason score.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend#markdown:item:4:0:7ae198586b9b91dc",
+          "locator": "markdown:item:4:0",
+          "clause": "- Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend#markdown:item:5:0:0dd76eb41e5a501a",
+          "locator": "markdown:item:5:0",
+          "clause": "- The area is difficult terrain for enemies.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/o-flower-aid-o-earth-defend#markdown:item:6:0:b96368b56afe7a27",
+          "locator": "markdown:item:6:0",
+          "clause": "- Each enemy who enters the area for the first time in a combat round or starts their turn there takes damage equal to your Reason score.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: Until the start of your next turn, the area gains the following effects:\n- Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.\n- The area is difficult terrain for enemies.\n- Each enemy who enters the area for the first time in a combat round or starts their turn there takes damage equal to your Reason score.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "- Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:5",
+          "clause": "- The area is difficult terrain for enemies.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:6",
+          "clause": "- Each enemy who enters the area for the first time in a combat round or starts their turn there takes damage equal to your Reason score.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the area gains the following effects:",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The area remains until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). As a maneuver, you can move the area up to 5 squares. This ability ends if the area is ever not within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Until the start of your next turn, the area gains the following effects:\n- Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.\n- The area is difficult terrain for enemies.\n- Each enemy who enters the area for the first time in a combat round or starts their turn there takes damage equal to your Reason score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "- Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:5:0",
+          "clause": "- The area is difficult terrain for enemies.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:6:0",
+          "clause": "- Each enemy who enters the area for the first time in a combat round or starts their turn there takes damage equal to your Reason score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "O Flower Aid, O Earth Defend",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option O Flower Aid, O Earth Defend supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "O Flower Aid, O Earth Defend",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option O Flower Aid, O Earth Defend supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "O Flower Aid, O Earth Defend",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option O Flower Aid, O Earth Defend supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "O Flower Aid, O Earth Defend",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option O Flower Aid, O Earth Defend supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "O Flower Aid, O Earth Defend",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option O Flower Aid, O Earth Defend supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within",
+      "name": "Subvert the Green Within",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within#block:1:tier1:0:d256c8d61b667986",
+            "locator": "block:1:tier1:0",
+            "clause": "5 + R poison damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "R"
+            },
+            "damageType": "poison",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within#block:1:tier2:0:e1b5723e1d93bad2",
+            "locator": "block:1:tier2:0",
+            "clause": "9 + R poison damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "R"
+            },
+            "damageType": "poison",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within#block:1:tier3:0:9396729963d7a28c",
+            "locator": "block:1:tier3:0",
+            "clause": "12 + R poison damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "R"
+            },
+            "damageType": "poison",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/subvert-the-green-within#block:0:0:7a6fd44d713ed80f",
+          "locator": "block:0:0",
+          "clause": "The target uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against a creature of your choice. This [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can target the creature even if it usually wouldn't. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target of this ability.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against a creature of your choice. This [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can target the creature even if it usually wouldn't. You then make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target of this ability.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Subvert the Green Within",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Subvert the Green Within supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Subvert the Green Within",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Subvert the Green Within supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Subvert the Green Within",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Subvert the Green Within supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Subvert the Green Within",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Subvert the Green Within supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Subvert the Green Within",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/subvert-the-green-within.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Subvert the Green Within supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between",
+      "name": "There Is No Space Between",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between#block:0:0:4ed8606a060e4d60",
+          "locator": "block:0:0",
+          "clause": "You open two [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 portals in unoccupied spaces within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), which last until you move beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) from any portal, end the effect as a maneuver, or are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying). Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to an unoccupied space of their choice [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the other portal. If an enemy is force moved into a portal, their [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between#markdown:block:0:0:fb23b1925eff1dee",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You open two size 1 portals in unoccupied spaces within distance, which last until you move beyond distance from any portal, end the effect as a maneuver, or are dying. Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly teleported to an unoccupied space of their choice adjacent to the other portal. If an enemy is force moved into a portal, their forced movement ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them.\nAt the start of each of your turns while the portals are active, you can open a new portal connected to the others. If three or more portals are present, you and your allies choose which portal to emerge from when entering a portal, and a creature who force moves an enemy into a portal chooses that enemy's destination portal.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/there-is-no-space-between#markdown:item:4:0:be4f22460685ce48",
+          "locator": "markdown:item:4:0",
+          "clause": "At the start of each of your turns while the portals are active, you can open a new portal connected to the others. If three or more portals are present, you and your allies choose which portal to emerge from when entering a portal, and a creature who force moves an enemy into a portal chooses that enemy's destination portal.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: You open two size 1 portals in unoccupied spaces within distance, which last until you move beyond distance from any portal, end the effect as a maneuver, or are dying. Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly teleported to an unoccupied space of their choice adjacent to the other portal. If an enemy is force moved into a portal, their forced movement ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them.\nAt the start of each of your turns while the portals are active, you can open a new portal connected to the others. If three or more portals are present, you and your allies choose which portal to emerge from when entering a portal, and a creature who force moves an enemy into a portal chooses that enemy's destination portal.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "At the start of each of your turns while the portals are active, you can open a new portal connected to the others. If three or more portals are present, you and your allies choose which portal to emerge from when entering a portal, and a creature who force moves an enemy into a portal chooses that enemy's destination portal.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You open two [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 portals in unoccupied spaces within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), which last until you move beyond [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) from any portal, end the effect as a maneuver, or are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying). Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to an unoccupied space of their choice [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the other portal. If an enemy is force moved into a portal, their [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You open two size 1 portals in unoccupied spaces within distance, which last until you move beyond distance from any portal, end the effect as a maneuver, or are dying. Each portal must be placed at a height of no more than 1 square above the ground. When you or any ally touch a portal, that creature can choose to be instantly teleported to an unoccupied space of their choice adjacent to the other portal. If an enemy is force moved into a portal, their forced movement ends and they emerge from the other portal in an unoccupied space chosen by the creature who force moved them.\nAt the start of each of your turns while the portals are active, you can open a new portal connected to the others. If three or more portals are present, you and your allies choose which portal to emerge from when entering a portal, and a creature who force moves an enemy into a portal chooses that enemy's destination portal.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "At the start of each of your turns while the portals are active, you can open a new portal connected to the others. If three or more portals are present, you and your allies choose which portal to emerge from when entering a portal, and a creature who force moves an enemy into a portal chooses that enemy's destination portal.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "There Is No Space Between",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+          "decisionId": "class.elementalist.level-2.there-is-no-space-between",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "There Is No Space Between",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+          "decisionId": "class.elementalist.level-2.there-is-no-space-between",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "There Is No Space Between",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+          "decisionId": "class.elementalist.level-2.there-is-no-space-between",
+          "level": 4,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "There Is No Space Between",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+          "decisionId": "class.elementalist.level-2.there-is-no-space-between",
+          "level": 5,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "There Is No Space Between",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/there-is-no-space-between.md",
+          "decisionId": "class.elementalist.level-2.there-is-no-space-between",
+          "level": 6,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame",
+      "name": "Translated Through Flame",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame#block:1:tier1:0:1d258a906d60575b",
+            "locator": "block:1:tier1:0",
+            "clause": "3 fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame#block:1:tier2:0:208e21c5042618bd",
+            "locator": "block:1:tier2:0",
+            "clause": "5 fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame#block:1:tier3:0:80d17355189017fa",
+            "locator": "block:1:tier3:0",
+            "clause": "8 fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 8
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/translated-through-flame#block:0:0:8433b77cb801f9e6",
+          "locator": "block:0:0",
+          "clause": "The target is [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to another space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). Make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that affects each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target's new space.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target is [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed to another space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). Make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that affects each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target's new space.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self or one ally",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Translated Through Flame",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Translated Through Flame supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Translated Through Flame",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Translated Through Flame supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Translated Through Flame",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Translated Through Flame supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Translated Through Flame",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Translated Through Flame supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Translated Through Flame",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/translated-through-flame.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Translated Through Flame supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace",
+      "name": "Volcano's Embrace",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier1:0:eb11706b53a08986",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + R fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "R"
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier1:1:b992fa2f916f5614",
+            "locator": "block:0:tier1:1",
+            "clause": "A < WEAK, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier1:0:eb11706b53a08986"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier2:0:2cd9d5d167f0161a",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + R fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "R"
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier2:1:9b7cb0a7df6cee23",
+            "locator": "block:0:tier2:1",
+            "clause": "A < AVERAGE, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier2:0:2cd9d5d167f0161a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier3:0:4f15aad930367574",
+            "locator": "block:0:tier3:0",
+            "clause": "12 + R fire damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "R"
+            },
+            "damageType": "fire",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier3:1:1a0f7872e1e70883",
+            "locator": "block:0:tier3:1",
+            "clause": "A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.elementalist.level-2/volcanos-embrace#block:0:tier3:0:4f15aad930367574"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Volcano's Embrace",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Volcano's Embrace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Volcano's Embrace",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Volcano's Embrace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Volcano's Embrace",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Volcano's Embrace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Volcano's Embrace",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Volcano's Embrace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Volcano's Embrace",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-2/volcanos-embrace.md",
+          "decisionId": "class.elementalist.level-2.ability-5",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Volcano's Embrace supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/earth-accepts-me",
+      "name": "Earth Accepts Me",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/earth-accepts-me",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/earth-accepts-me#block:0:0:c5345de46b1b7f9e",
+          "locator": "block:0:0",
+          "clause": "You step into a mundane dirt, metal, or stone object (including a wall) that is as large as you or larger. You can remain inside the object for as long as you like. While inside the object, you can observe events and speak to creatures outside it, but you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to anything outside the object and vice versa. You can travel through the object freely until you exit it. If the object you meld with is destroyed, you take 10 damage and exit the object.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You step into a mundane dirt, metal, or stone object (including a wall) that is as large as you or larger. You can remain inside the object for as long as you like. While inside the object, you can observe events and speak to creatures outside it, but you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to anything outside the object and vice versa. You can travel through the object freely until you exit it. If the object you meld with is destroyed, you take 10 damage and exit the object.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Earth Accepts Me",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+          "decisionId": "class.elementalist.level-3.earth-accepts-me",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Earth Accepts Me",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+          "decisionId": "class.elementalist.level-3.earth-accepts-me",
+          "level": 4,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Earth Accepts Me",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+          "decisionId": "class.elementalist.level-3.earth-accepts-me",
+          "level": 5,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Earth Accepts Me",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/earth-accepts-me.md",
+          "decisionId": "class.elementalist.level-3.earth-accepts-me",
+          "level": 6,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase",
+      "name": "Erase",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/erase.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase#block:1:tier1:0:91f96beb5c13a3b0",
+            "locator": "block:1:tier1:0",
+            "clause": "One creature",
+            "kind": "unsupported",
+            "shape": "one creature",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase#block:1:tier2:0:d8ff8a6aaed71e0b",
+            "locator": "block:1:tier2:0",
+            "clause": "Two creatures",
+            "kind": "unsupported",
+            "shape": "two creatures",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase#block:1:tier3:0:0383c675b66b7c5d",
+            "locator": "block:1:tier3:0",
+            "clause": "Three creatures",
+            "kind": "unsupported",
+            "shape": "three creatures",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase#block:0:0:8f65b19df78bf8c2",
+          "locator": "block:0:0",
+          "clause": "The number of creatures you target with this ability is determined by your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:special",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/erase#block:2:0:56c3419f6e98eba3",
+          "locator": "block:2:0",
+          "clause": "Each target begins to fade from existence (save ends). On their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) while fading from existence, a target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they have a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their second [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they fade from existence for 1 hour, after which they reappear in their original space or the nearest unoccupied space.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier1:0",
+          "clause": "One creature",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier2:0",
+          "clause": "Two creatures",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier3:0",
+          "clause": "Three creatures",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The number of creatures you target with this ability is determined by your [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "Each target begins to fade from existence (save ends). On their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) while fading from existence, a target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they have a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll). At the end of their second [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they fade from existence for 1 hour, after which they reappear in their original space or the nearest unoccupied space.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Erase",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/erase.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Erase supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Erase",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/erase.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Erase supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Erase",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/erase.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Erase supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Erase",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/erase.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Erase supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth",
+      "name": "Maw of Earth",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth#block:0:tier1:0:4148a008d7858141",
+            "locator": "block:0:tier1:0",
+            "clause": "5 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth#block:0:tier2:0:abbf0071bed5821d",
+            "locator": "block:0:tier2:0",
+            "clause": "9 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth#block:0:tier3:0:cfa92550e9d3470b",
+            "locator": "block:0:tier3:0",
+            "clause": "12 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 12
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/maw-of-earth#block:1:0:cbf92456b64973c7",
+          "locator": "block:1:0",
+          "clause": "The ground in or directly beneath the area drops 3 squares.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The ground in or directly beneath the area drops 3 squares.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Maw of Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Maw of Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Maw of Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Maw of Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Maw of Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Maw of Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Maw of Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/maw-of-earth.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Maw of Earth supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/remember-growth-and-sun-and-rain",
+      "name": "Remember Growth and Sun and Rain",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/remember-growth-and-sun-and-rain",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/remember-growth-and-sun-and-rain#block:0:0:dd22cafaf27010fc",
+          "locator": "block:0:0",
+          "clause": "You see and hear any events that have occurred within 10 squares of the object within the last 12 hours, perceiving those events from the object's location as if you were there.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You see and hear any events that have occurred within 10 squares of the object within the last 12 hours, perceiving those events from the object's location as if you were there.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "One mundane wooden object",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Remember Growth and Sun and Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+          "decisionId": "class.elementalist.level-3.remember-growth-and-sun-and-rain",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Remember Growth and Sun and Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+          "decisionId": "class.elementalist.level-3.remember-growth-and-sun-and-rain",
+          "level": 4,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Remember Growth and Sun and Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+          "decisionId": "class.elementalist.level-3.remember-growth-and-sun-and-rain",
+          "level": 5,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Remember Growth and Sun and Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/remember-growth-and-sun-and-rain.md",
+          "decisionId": "class.elementalist.level-3.remember-growth-and-sun-and-rain",
+          "level": 6,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits",
+      "name": "Swarm of Spirits",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits#block:0:tier1:0:c31afe8fa82fb263",
+            "locator": "block:0:tier1:0",
+            "clause": "3 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits#block:0:tier2:0:65723ebe74a7200a",
+            "locator": "block:0:tier2:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits#block:0:tier3:0:abbf0071bed5821d",
+            "locator": "block:0:tier3:0",
+            "clause": "9 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits#block:1:0:d7c2322423d235d0",
+          "locator": "block:1:0",
+          "clause": "Until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each ally in the area has each of their [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) scores treated as 1 higher for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency), and has a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/swarm-of-spirits#block:2:0:f8cbabf5605409df",
+          "locator": "block:2:0",
+          "clause": "You make the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) again to target each enemy in the area without spending essence, and the effect lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:persistent N",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each ally in the area has each of their [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) scores treated as 1 higher for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency), and has a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [saving throws](scc.v1:mcdm.heroes.v1/rule.general/saving-throw).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "You make the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) again to target each enemy in the area without spending essence, and the effect lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Swarm of Spirits",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Swarm of Spirits supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Swarm of Spirits",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Swarm of Spirits supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Swarm of Spirits",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Swarm of Spirits supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Swarm of Spirits",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Swarm of Spirits supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/wall-of-fire",
+      "name": "Wall of Fire",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/wall-of-fire",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/wall-of-fire#block:0:0:28fbd48666d94b02",
+          "locator": "block:0:0",
+          "clause": "The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and can be placed in occupied squares. Creatures can enter and pass through the wall. Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes fire damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score for each square of the area they start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in or enter.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-3/wall-of-fire#block:1:0:1d5a25f797238130",
+          "locator": "block:1:0",
+          "clause": "The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and you can add a number of squares to the wall equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:persistent N",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and can be placed in occupied squares. Creatures can enter and pass through the wall. Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes fire damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score for each square of the area they start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in or enter.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and you can add a number of squares to the wall equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Wall of Fire",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Wall of Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Wall of Fire",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Wall of Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Wall of Fire",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Wall of Fire supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Wall of Fire",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+          "decisionId": "class.elementalist.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Wall of Fire supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
     },
     {
       "id": "mcdm.heroes.v1/feature.ability.fury.level-1/back",
@@ -205911,8 +207537,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 105,
-    "compatibility": 1462,
+    "compiled": 106,
+    "compatibility": 1472,
     "compiledButUnavailable": 0
   }
 }

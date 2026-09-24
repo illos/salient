@@ -127,6 +127,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Tentacle',
       'Killer Claws',
       'Rotten Smash',
+      "Volcano's Embrace",
     ].sort(),
   );
   expect(

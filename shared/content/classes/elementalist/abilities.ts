@@ -242,6 +242,70 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
     activationCondition:
       'While maintaining Persistent 1, effect lasts until start of next turn. This records the maintenance effect; any repeat rolls and damage are resolved manually. Resolve the stated effects manually.',
   },
+  {
+    name: 'Disciple of Fire: Encounter Surges',
+    parent: 'Disciple of Fire',
+    sourcePath: 'en/unified/md/feature/elementalist/level-2/disciple-of-fire.md',
+    actionType: 'Start of a combat encounter',
+    activationCondition:
+      'At the start of a combat encounter, gain surges equal to your Victories. Whenever you spend a surge to deal extra damage, you can make that damage fire damage, and your fire damage ignores fire immunity. Adjust surges and damage manually.',
+  },
+  {
+    name: 'Disciple of the Green: Animal Form',
+    parent: 'Disciple of the Green',
+    sourcePath: 'en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md',
+    actionType: 'Maneuver',
+    activationCondition:
+      'Only in your true form and not dying: shapeshift into a Green Animal Forms type whose prerequisite level you have (canine, fish or rodent at 2nd; bird or great cat at 3rd). Apply the form’s temporary Stamina, speed, size, stability and melee damage bonus and its special rule manually; melee free strikes use Reason.',
+  },
+  {
+    name: 'Disciple of the Green: Revert',
+    parent: 'Disciple of the Green',
+    sourcePath: 'en/unified/md/feature/elementalist/level-2/disciple-of-the-green.md',
+    actionType: 'Maneuver',
+    activationCondition:
+      'Return to your true form, losing the form’s temporary Stamina; you revert automatically when dying. Restore statistics manually.',
+  },
+  {
+    name: 'A Conversation With Fire: Speak',
+    parent: 'A Conversation With Fire',
+    sourcePath: 'en/unified/md/feature/elementalist/level-3/a-conversation-with-fire.md',
+    actionType: '1 uninterrupted minute before a fire',
+    activationCondition:
+      'Speak another creature’s name; if it is willing, you speak through images in the fire as if together. Either of you ends it as a maneuver. Resolve manually.',
+  },
+  {
+    name: 'Distance Is Only Memory: Open Portal',
+    parent: 'Distance Is Only Memory',
+    sourcePath: 'en/unified/md/feature/elementalist/level-3/distance-is-only-memory.md',
+    actionType: 'After a respite',
+    activationCondition:
+      'Each time you finish a respite, open a two-way portal to any place you have previously been; you and allies can pass through. It lasts 1 hour or until you dismiss it as a main action. Resolve manually.',
+  },
+  {
+    name: 'O Flower Aid, O Earth Defend: Persistent Effect',
+    parent: 'O Flower Aid, O Earth Defend',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-2/o-flower-aid-o-earth-defend.md',
+    actionType: 'Maneuver',
+    activationCondition:
+      'While maintaining Persistent 1, the area remains until the start of your next turn and you can move it up to 5 squares as a maneuver; it ends if the area leaves your line of effect. Resolve the area manually.',
+  },
+  {
+    name: 'Swarm of Spirits: Persistent Effect',
+    parent: 'Swarm of Spirits',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md',
+    actionType: 'No action',
+    activationCondition:
+      'While maintaining Persistent 1, make the power roll again against each enemy in the area without spending essence; the ally effect lasts until the start of your next turn. This records the maintenance; resolve the repeat roll manually.',
+  },
+  {
+    name: 'Wall of Fire: Persistent Effect',
+    parent: 'Wall of Fire',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md',
+    actionType: 'No action',
+    activationCondition:
+      'While maintaining Persistent 1, the wall lasts until the start of your next turn and you can add squares equal to your Reason. Resolve the wall and its damage manually.',
+  },
 ];
 export function elementalistSourceText(action: ElementalistAction): string {
   const entry = [...abilitySources, ...featureSources].find(
@@ -254,3 +318,26 @@ export function elementalistSourceText(action: ElementalistAction): string {
 export function elementalistActionText(action: ElementalistAction): string {
   return `${action.activationCondition}\n\n${elementalistSourceText(action)}`;
 }
+
+/** Level-2/3 ability notes: what the table resolves automatically and which clauses stay manual. */
+export const ELEMENTALIST_ACTIVATION: Record<string, string> = {
+  'There Is No Space Between':
+    'Open two size 1 portals within 10 squares, no higher than 1 square; you and allies touching one can emerge from another. Open another at the start of each of your turns. Portals end if you move beyond distance, end them as a maneuver or are dying. Resolve manually.',
+  'O Flower Aid, O Earth Defend':
+    'Until the start of your next turn: once as a free maneuver at the start of your turn you and allies in the area can spend any number of Recoveries; it is difficult terrain for enemies; enemies entering it first each round or starting there take damage equal to your Reason. Resolve manually.',
+  'Subvert the Green Within':
+    'The target first uses its signature ability against a creature of your choice, then you make the power roll against it; the target action, roll and poison damage are resolved manually.',
+  'Translated Through Flame':
+    'Teleport yourself or an ally within 10 squares, then the power roll affects each enemy adjacent to the new space, never the teleported creature; the roll and fire damage are resolved manually.',
+  'Earth Accepts Me':
+    'Step into a mundane dirt, metal or stone object at least your size and stay as long as you like, observing and speaking but without line of effect outside. Resolve manually.',
+  'Remember Growth and Sun and Rain':
+    'See and hear events within 10 squares of a mundane wooden object from the last 12 hours, from its location. Resolve manually.',
+  Erase:
+    'The power roll sets how many creatures are targeted (one, two or three), so the roll and fading effects (bane, double bane, gone for 1 hour) are resolved manually.',
+  'Maw of Earth': 'The ground in or beneath the area drops 3 squares; resolve the fall manually.',
+  'Swarm of Spirits':
+    'Until the end of your next turn, allies in the area treat each characteristic as 1 higher to resist potencies and have +1 to saving throws. Apply manually; use Swarm of Spirits: Persistent Effect to maintain.',
+  'Wall of Fire':
+    'The wall lasts until the start of your next turn; enemies entering it first each round or starting there take fire damage equal to your Reason for each square they enter. Resolve manually.',
+};

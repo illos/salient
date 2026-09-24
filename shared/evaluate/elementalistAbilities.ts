@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import {
   ELEMENTALIST_ACTIONS,
+  ELEMENTALIST_ACTIVATION,
   elementalistActionText,
   elementalistSourceText,
 } from '../content/classes/elementalist/abilities.ts';
@@ -53,13 +54,16 @@ export function elementalistAbilities(
       a.activationCondition =
         'Choose a typed Hurl Element action to roll and apply damage. This base entry records the choice manually.';
   return result.map(a =>
-    a.name === 'Instantaneous Excavation' &&
-    a.provenance.decisionId.startsWith('class.elementalist.')
-      ? {
-          ...a,
-          activationCondition:
-            'Open the source holes, then roll separately for each eligible creature above them. No critical hit: this is a maneuver. Geometry, separate rolls, falling and persistent upkeep remain manual.',
-        }
-      : a,
+    a.provenance.decisionId.startsWith('class.elementalist.level-') &&
+    ELEMENTALIST_ACTIVATION[a.name]
+      ? { ...a, activationCondition: ELEMENTALIST_ACTIVATION[a.name]! }
+      : a.name === 'Instantaneous Excavation' &&
+          a.provenance.decisionId.startsWith('class.elementalist.')
+        ? {
+            ...a,
+            activationCondition:
+              'Open the source holes, then roll separately for each eligible creature above them. No critical hit: this is a maneuver. Geometry, separate rolls, falling and persistent upkeep remain manual.',
+          }
+        : a,
   );
 }

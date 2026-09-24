@@ -7,6 +7,7 @@ import { runHeroicResource } from './headless/heroic-resource.ts';
 import { runSummoner } from './headless/summoner.ts';
 import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
+import { runElementalistLevelThree } from './headless/elementalist-level-three.ts';
 import { runTalent } from './headless/talent.ts';
 import { runNull } from './headless/null.ts';
 import { runNullLevelThree } from './headless/null-level-three.ts';
@@ -55,6 +56,7 @@ const cohorts = {
   null: runNull,
   'null-level-three': runNullLevelThree,
   elementalist: runElementalist,
+  'elementalist-level-three': runElementalistLevelThree,
   talent: runTalent,
   beastheart: runBeastheart,
   summoner: runSummoner,
