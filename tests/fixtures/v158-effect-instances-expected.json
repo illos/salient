@@ -1,0 +1,65 @@
+{
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "method": "V158 effect instances. The build reuses the reviewed v103-3 witness (tests/fixtures/v103-null-expected.json) unchanged; its selections are copied here. Every expected value below is read from the pinned files named in 'source', never from the compiler, the engine or a run of the code under test: the ability's frontmatter cost and its Effect section with link markup removed, split into its printed duration and its table work. The duration binds to the user ('your next turn'), so the effect ends when the user's next turn starts (docs/lasting-effects-design.md, Durations). The foe's Stamina comes from its stat block.",
+  "witness": {
+    "id": "v103-3",
+    "level": 1,
+    "base": "tests/fixtures/v103-null-expected.json",
+    "selections": {
+      "culture.name": "wilderness mercenary commune",
+      "culture.language": "Anjali",
+      "culture.environment": "Wilderness",
+      "culture.environment.skill": "Swim",
+      "culture.organization": "Communal",
+      "culture.organization.skill": "Blacksmithing",
+      "culture.upbringing": "Martial",
+      "culture.upbringing.skill": "Intimidate",
+      "career.choice": "Soldier",
+      "career.soldier.skill.exploration": "Endurance",
+      "career.soldier.skill.intrigue": "Alertness",
+      "career.soldier.languages": ["Kalliak", "Vaslorian"],
+      "career.soldier.perk": "Teamwork",
+      "career.soldier.inciting-incident": "Sole Survivor",
+      "ancestry.choice": "Human",
+      "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+      "details.name": "V103 Metakinetic Speed",
+      "class.choice": "Null",
+      "class.null.tradition": "Metakinetic",
+      "class.null.augmentation": "Speed Augmentation",
+      "class.null.characteristic-array": "1, 0, 0",
+      "class.null.array-assignment": {
+        "Might": 1,
+        "Reason": 0,
+        "Presence": 0
+      },
+      "class.null.skills": ["Read Person", "Timescape"],
+      "class.null.tradition-skill.metakinetic": ["Navigate"],
+      "class.null.signature-abilities": ["Kinetic Strike", "Magnetic Strike"],
+      "class.null.ability-3": "Relentless Nemesis",
+      "class.null.ability-5": "Impart Force"
+    }
+  },
+  "ability": {
+    "name": "Relentless Nemesis",
+    "id": "mcdm.heroes.v1/feature.ability.null.level-1/relentless-nemesis",
+    "source": "feature/ability/null/level-1/relentless-nemesis.md",
+    "cost": {
+      "resource": "discipline",
+      "amount": 3
+    },
+    "target": "One creature or object",
+    "effect": "Until the start of your next turn, whenever the target finishes moving or being force moved, you can use a free triggered action to shift up to your speed. You must end this shift adjacent to the target.",
+    "duration": {
+      "kind": "start-of-next-turn",
+      "anchor": "owner"
+    },
+    "endsWhen": [],
+    "instruction": "whenever the target finishes moving or being force moved, you can use a free triggered action to shift up to your speed. You must end this shift adjacent to the target."
+  },
+  "foe": {
+    "definition": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
+    "name": "Goblin Warrior",
+    "source": "monster/goblin/statblock/goblin-warrior.md",
+    "stamina": 15
+  }
+}

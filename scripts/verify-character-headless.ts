@@ -4,6 +4,7 @@ import { runCompoundConditions } from './headless/compound-conditions.ts';
 import { runCantStand } from './headless/cant-stand.ts';
 import { runTierInstructions } from './headless/tier-instructions.ts';
 import { runEffectOnly } from './headless/effect-only.ts';
+import { runEffectInstances } from './headless/effect-instances.ts';
 import { runMultiTarget } from './headless/multi-target.ts';
 import { runTierEffects } from './headless/tier-effects.ts';
 import { runKitBonus } from './headless/kit-bonus.ts';
@@ -67,6 +68,7 @@ const cohorts = {
   'cant-stand': runCantStand,
   'tier-instructions': runTierInstructions,
   'effect-only': runEffectOnly,
+  'effect-instances': runEffectInstances,
   'multi-target': runMultiTarget,
   'tier-effects': runTierEffects,
   'kit-bonus': runKitBonus,
