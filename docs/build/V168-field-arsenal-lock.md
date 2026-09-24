@@ -34,3 +34,4 @@ kept it.
 - Independent review of `c6ab563`: CHANGES REQUIRED: swapping the two kits between slots passed the
   guard. The pair is now compared unordered, with a swap regression; the kit-change interpretation is
   labelled.
+- Review re-verification of `153a370`: PASS; the swap regression now sends a complete change.

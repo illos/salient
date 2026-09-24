@@ -340,6 +340,7 @@ test('a Tactician cannot switch a Field Arsenal choice mid-respite while keeping
           { decisionId: 'kit.choice', value: 'Mountain' },
           { decisionId: 'class.tactician.second-kit', value: 'Martial Artist' },
           { decisionId: 'class.tactician.arsenal.meleeDamage', value: 'Martial Artist' },
+          { decisionId: 'class.tactician.arsenal.stamina', value: 'Mountain' },
         ],
       },
     }),
