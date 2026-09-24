@@ -8,24 +8,24 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:68605198ebbeb08ab877f8aa3a6c2a8a06f0e9a41a8cecdb67fa93b9ef7ca5c3`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:25195fa07a59cf80701693ff3bcf37442084cb76b4e1f2604a7963f0de28719b`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 307 | 22 | 117 | 13 | 168 |
+| Hero standalone (`ability.json`) | 317 | 22 | 120 | 14 | 175 |
 | Kit signature (`kit.json`) | 25 | 6 | 15 | 1 | 4 |
 | Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 21 | 565 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 2656 (1801 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 2702 (1847 resolve to a standalone entry, 150 to a kit signature, 705 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 21 fully (1.81%), 565 with a typed remainder (48.79%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 163 of 404 (40.35%) compile: 29 fully (7.18%), 134 with a typed remainder (33.17%), of which 14 (3.47%) are within the bounded potency remainder. 241 (59.65%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 166 of 414 (40.10%) compile: 29 fully (7.00%), 137 with a typed remainder (33.09%), of which 15 (3.62%) are within the bounded potency remainder. 248 (59.90%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -34,7 +34,7 @@ compiled entries:
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Hero standalone (`ability.json`) | COMPILES | 16 | 2 | 4 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 88 | 3 | 21 | 4 | 1 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 90 | 3 | 22 | 4 | 1 |
 | Kit signature (`kit.json`) | COMPILES | 4 | 2 | 0 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 13 | 1 | 1 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -156,6 +156,9 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Pressure Points | COMPILES_WITH_REMAINDER | yes | single | selectable | class.null.signature-abilities@1:selectable, class.null.signature-abilities@2:selectable, class.null.signature-abilities@3:selectable, class.null.signature-abilities@4:selectable, class.null.signature-abilities@5:selectable, class.null.signature-abilities@6:selectable | potency:A < SYM weakened (save ends) |
 | hero-standalone | Relentless Nemesis | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.ability-3@1:selectable, class.null.ability-3@2:selectable, class.null.ability-3@3:selectable, class.null.ability-3@4:selectable, class.null.ability-3@5:selectable, class.null.ability-3@6:selectable | effect-paragraph:effect |
 | hero-standalone | Stunning Blow | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.ability-3@1:selectable, class.null.ability-3@2:selectable, class.null.ability-3@3:selectable, class.null.ability-3@4:selectable, class.null.ability-3@5:selectable, class.null.ability-3@6:selectable | potency:I < SYM dazed and slowed (save ends) |
+| hero-standalone | Entropic Field | COMPILES_WITH_REMAINDER | yes | area | selectable | class.null.level-2.cryokinetic-ability@2:selectable, class.null.level-2.cryokinetic-ability@3:selectable, class.null.level-2.cryokinetic-ability@4:selectable, class.null.level-2.cryokinetic-ability@5:selectable, class.null.level-2.cryokinetic-ability@6:selectable | potency:A < SYM slowed (save ends) |
+| hero-standalone | Force Redirected | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.level-2.chronokinetic-ability@2:selectable, class.null.level-2.chronokinetic-ability@3:selectable, class.null.level-2.chronokinetic-ability@4:selectable, class.null.level-2.chronokinetic-ability@5:selectable, class.null.level-2.chronokinetic-ability@6:selectable | slide N |
+| hero-standalone | Gravitic Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.level-2.metakinetic-ability@2:selectable, class.null.level-2.metakinetic-ability@3:selectable, class.null.level-2.metakinetic-ability@4:selectable, class.null.level-2.metakinetic-ability@5:selectable, class.null.level-2.metakinetic-ability@6:selectable | vertical pull N |
 | hero-standalone | Disorienting Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable, class.shadow.ability-3@3:selectable, class.shadow.ability-3@4:selectable, class.shadow.ability-3@5:selectable, class.shadow.ability-3@6:selectable | effect-paragraph:effect; slide N |
 | hero-standalone | Eviscerate | COMPILES_WITH_REMAINDER | yes | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable, class.shadow.ability-3@3:selectable, class.shadow.ability-3@4:selectable, class.shadow.ability-3@5:selectable, class.shadow.ability-3@6:selectable | potency:A < SYM bleeding (save ends) |
 | hero-standalone | Gasping in Pain | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable, class.shadow.signature-ability@3:selectable, class.shadow.signature-ability@4:selectable, class.shadow.signature-ability@5:selectable, class.shadow.signature-ability@6:selectable | potency:I < SYM prone |
@@ -314,6 +317,13 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Inertial Shield | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N discipline |
 | hero-standalone | Null Field | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Psychic Pulse | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Blur | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Heat Sink | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Kinetic Shield | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:you gain N temporary stamina |
+| hero-standalone | Absorption Field | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Molecular Rearrangement Field | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Stabilizing Field | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Synapse Field | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Shadowmeld | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Detonate Sigil | roll-expression-outside-grammar | selectable | roll:power roll + reason, intuition, or presence; effect-paragraph:effect; slide N; tier:N + r, i, or p damage |
 | hero-standalone | Black Ash Teleport | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N+ insight |
@@ -483,12 +493,12 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1212 | 1198 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
-| 2 | no-power-roll | no-power-roll | 698 | 698 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1219 | 1205 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 2 | no-power-roll | no-power-roll | 704 | 704 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
 | 3 | trigger | trigger | 210 | 210 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
 | 5 | unknown | unattached-paragraph | 130 | 59 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
-| 6 | slide | slide N | 89 | 34 | `mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep`, `mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse`, `mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way` |
+| 6 | slide | slide N | 92 | 35 | `mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep`, `mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse`, `mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way` |
 | 7 | potency-condition | potency:M < N bleeding (save ends) | 64 | 30 | `foe-feature:77cbca92-0a9e-40e8-b402-97d0b11eca24`, `foe-feature:a0cf5ff7-f923-4ce3-8e1a-07adc576dd2c`, `salient:foe-feature:1c921045-6bd1-4a1b-a794-c6f8dc63fb52` |
 | 8 | pull | pull N | 64 | 24 | `salient:foe-feature:065066fe-d557-4f82-94c4-01a38505d9b7`, `salient:foe-feature:17912a2b-0ae3-447f-9e8a-d1aed6e34054`, `salient:foe-feature:1df6ce7d-a081-43af-892d-7120279ea7e7` |
 | 9 | extra-table | extra-table:tiers without a power roll | 55 | 55 | `complication:Advanced Studies/advanced-studies-study-notebook`, `salient:foe-feature:08b75627-ded0-4e55-a034-6a2f6c7d35ea`, `salient:foe-feature:0ee6dd1c-8d53-4033-a8c3-879ac28b430e` |
@@ -528,16 +538,16 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1285 | 13 |
-| potency-condition | 1062 | 214 |
-| no-power-roll | 698 | 1 |
-| tier-damage | 275 | 102 |
+| effect-paragraph | 1292 | 13 |
+| potency-condition | 1065 | 214 |
+| no-power-roll | 704 | 1 |
+| tier-damage | 278 | 103 |
 | unknown | 247 | 57 |
 | trigger | 210 | 1 |
 | malice-spend | 151 | 2 |
-| slide | 120 | 9 |
+| slide | 123 | 9 |
 | condition | 105 | 14 |
-| pull | 76 | 3 |
+| pull | 79 | 3 |
 | resource-spend | 61 | 15 |
 | extra-table | 56 | 2 |
 | shift | 42 | 26 |
@@ -723,9 +733,9 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 | granted | roll-expression-outside-grammar | 5 |
 | granted | tier1-damage-outside-grammar | 1 |
 | granted | tiers-without-power-roll | 1 |
-| hero-standalone | no-power-roll | 140 |
+| hero-standalone | no-power-roll | 146 |
 | hero-standalone | roll-expression-outside-grammar | 4 |
-| hero-standalone | tier1-damage-outside-grammar | 24 |
+| hero-standalone | tier1-damage-outside-grammar | 25 |
 | kit-signature | roll-expression-outside-grammar | 4 |
 | malice | tier1-damage-outside-grammar | 1 |
 

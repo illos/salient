@@ -184,6 +184,56 @@ export const NULL_ACTIONS: NullAction[] = [
     activationCondition:
       'Before or after parent use, optionally take Disengage as a free maneuver. Resolve movement manually.',
   },
+  {
+    name: 'Rapid Processing: Read',
+    parent: 'Rapid Processing',
+    sourcePath: 'en/unified/md/feature/null/level-2/rapid-processing.md',
+    actionType: 'Maneuver',
+    activationCondition:
+      'Read an entire book or process a similar amount of information. Resolve what is learned manually.',
+  },
+  {
+    name: 'Rapid Processing: Extra Respite Activity',
+    parent: 'Rapid Processing',
+    sourcePath: 'en/unified/md/feature/null/level-2/rapid-processing.md',
+    actionType: 'Respite activity',
+    activationCondition:
+      'During any respite, take one additional respite activity. Record and resolve it manually.',
+  },
+  {
+    name: 'Reorder: End Effect',
+    parent: 'Reorder',
+    sourcePath: 'en/unified/md/feature/null/level-3/reorder.md',
+    actionType: 'Free triggered action',
+    trigger: 'The start of your turn.',
+    activationCondition:
+      'At the start of each of your turns, end one effect on you that is ended by a saving throw or ends at the end of your turn; alternatively grant this to one creature in your Null Field area. Remove the effect manually.',
+  },
+  {
+    name: 'Blur: Use Ability',
+    parent: 'Blur',
+    sourcePath: 'en/unified/md/feature/ability/null/level-2/blur.md',
+    actionType: 'Part of Blur',
+    activationCondition:
+      'Use a signature or heroic ability with an edge on its power rolls. Pay any cost and apply the edge manually.',
+  },
+  {
+    name: 'Heat Sink: End-of-Turn Cold',
+    parent: 'Heat Sink',
+    sourcePath: 'en/unified/md/feature/ability/null/level-2/heat-sink.md',
+    actionType: 'End of your turn',
+    activationCondition:
+      'At the end of the turn you used Heat Sink, each enemy in your enlarged Null Field takes cold damage equal to your Intuition score. Apply the damage manually.',
+  },
+  {
+    name: 'Stabilizing Field: End Effect',
+    parent: 'Stabilizing Field',
+    sourcePath: 'en/unified/md/feature/ability/null/level-3/stabilizing-field.md',
+    actionType: 'Free triggered action',
+    trigger: 'The start of your turn while the field is enlarged.',
+    activationCondition:
+      'While Stabilizing Field enlarges your Null Field, at the start of each of your turns end one effect on you that is ended by a saving throw or ends at the end of your turn; each ally in the area also gains this. Remove effects manually.',
+  },
 ];
 export function nullActionText(action: NullAction): string {
   const entry = [...abilitySources, ...featureSources].find(
@@ -192,3 +242,20 @@ export function nullActionText(action: NullAction): string {
   if (!entry) throw new Error(`Missing Null source ${action.sourcePath}`);
   return `${action.activationCondition}\n\n${entry.text}`;
 }
+
+/** Printed clauses of chosen level-2/3 abilities the resolver does not model. */
+export const NULL_ACTIVATION: Record<string, string> = {
+  Blur: 'Use Blur: Use Ability for the granted ability with an edge.',
+  'Heat Sink':
+    'Until the start of your next turn your Null Field grows by 1 and you and allies in it have concealment; use Heat Sink: End-of-Turn Cold at the end of this turn. Resolve manually.',
+  'Kinetic Shield':
+    'The tier sets the temporary Stamina you gain (10/15/20); apply it manually. While you have it you cannot be made bleeding, even while dying.',
+  'Absorption Field':
+    'Until the end of the encounter your Null Field grows by 1; while enlarged each enemy in it takes a bane on ability rolls. Resolve manually.',
+  'Molecular Rearrangement Field':
+    'Until the end of the encounter your Null Field grows by 1; while enlarged, enemies with Intuition below your average potency that enter it first each round or start their turn there are bleeding (save ends), and allies doing so gain temporary Stamina equal to your Intuition. Resolve manually.',
+  'Stabilizing Field':
+    'Until the end of the encounter your Null Field grows by 1; while enlarged you and allies in it ignore difficult terrain and reduce the potency of enemy effects targeting you by 1; use Stabilizing Field: End Effect each turn. Resolve manually.',
+  'Synapse Field':
+    'Until the end of the encounter your Null Field grows by 1; while enlarged, whenever an enemy in it takes rolled damage it takes extra psychic damage equal to twice your Intuition. Resolve manually.',
+};

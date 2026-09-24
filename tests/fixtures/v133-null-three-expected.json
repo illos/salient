@@ -1,0 +1,1708 @@
+{
+  "schemaVersion": "v133-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "derivation": {
+    "method": "Authored from the pinned Steel Compendium only (canonical checkout at the main repo vendor/steel-compendium, HEAD fb83a789 verified with git rev-parse). Level-one baselines copied from tests/fixtures/v103-null-expected.json (reviewed). No evaluator, content, convex or headless code read or run.",
+    "staminaMaximum": "Null Basics: Starting Stamina 21 + 9 per level after 1st (class/null.md). Density Augmentation +6 Stamina at levels 1-3 (bonus increases by 6 only at 4th, 7th, 10th). Null has no kit. v103 level-one values (21 / 27 Density) reproduce this.",
+    "recoveryValue": "floor(Stamina maximum / 3) (rule/health/recoveries.md \"one-third ... rounded down\")",
+    "windedValue": "floor(Stamina maximum / 2) (rule/health/winded.md; rule/general/always-round-down.md)",
+    "recoveriesMaximum": "Null Basics: 8; unchanged at levels 2-3.",
+    "echelon": "Levels 1-3 are echelon 1 (rule/general/echelon.md \"1st Echelon (1st to 3rd Level)\").",
+    "numericSheetChanges": "EXPLICIT: at levels 2-3 the only numeric sheet changes are (a) Stamina maximum +9 per level with recovery/winded values derived from it; (b) Entropic Adaptability (Cryokinetic, level 2): cold immunity equal to twice Intuition = 4 for both Cryokinetic witnesses (I 2); (c) Psionic Leap (level 3): long/high jump distance 2 x Agility = 4 without a test (a jump value, not speed). Inertial Sink (Metakinetic) changes effective size only for interaction purposes (not recorded size or stability). Rapid Processing, Reorder, Perk, every tradition ability and every 7-discipline ability, and all selected perks change no recorded numeric value (recoveries, speed, stability, disengage, characteristics, potency, immunities). Kinetic Shield and Molecular Rearrangement Field grant temporary Stamina, which is not Stamina maximum. Stabilizing Field reduces enemy potency against you, not your potency values. Discipline Mastery tables have no entries gated at levels 2-3 (first gated rows are 4th level).",
+    "abilityCounts": "Advancement table: level 2 adds one 5-discipline tradition ability (Tradition Abilities column \"5\"); level 3 adds one 7-discipline ability (Abilities \"Two signature, 3, 5, 7\").",
+    "abilityDamage": "\"X + A\" adds the Agility score (all witnesses A 2). Force Augmentation adds +1 to rolled damage of damage-dealing Psionic abilities (feature/null/level-1/force-augmentation.md); applied only for Force witnesses (v103-1, v103-4) and only to power-roll damage. Of the chosen level-2/3 abilities only v103-4 Force Redirected is both rolled damage and Force. Fixed/extra damage (Heat Sink, Synapse Field) is not rolled damage (rule/damage/rolled-damage.md) and is recorded separately. Null has no kit, so the Weapon keyword adds no kit damage bonus.",
+    "potency": "Null potency weak I-2 / average I-1 / strong I = 0/1/2 with Intuition 2 (class/null.md Basics).",
+    "perkChoice": "Null 2nd-level Perk: \"one exploration, interpersonal, or intrigue perk\" (feature/null/level-2/perk.md). One distinct eligible perk per witness, none with sub-choices, none already owned (all bases own only Teamwork, exploration)."
+  },
+  "sources": [
+    {
+      "path": "en/unified/md/class/null.md",
+      "sha256": "417ce2e70361b94c6b2c56cfe48477a84a28742bb495f4c44dd0ba0eace8afea"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-2/perk.md",
+      "sha256": "5ff71d8ea46200ae2f9753ddcfd71b13926a8857151660538f10c9825051234a"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-2/2nd-level-tradition-feature.md",
+      "sha256": "c232205fd91839a81c2cce1a7e5c12f3596ecdfa3dc33b4a37537ce0c68b300b"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-2/rapid-processing.md",
+      "sha256": "cb0439ed1e6bd1a52aa939f33094ae73bf8f971b5c2140fa940a0f8c87ed9b1e"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-2/entropic-adaptability.md",
+      "sha256": "ef78281e41b1a64eec3ef63d37d624b2befe04b8907fb37a5ffddb0cf8cd88a4"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-2/inertial-sink.md",
+      "sha256": "1de9b4ae509e7b339d91babbf82e9e7fda6a425b666e2b8315d7a3217e4eb9ad"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-2/2nd-level-tradition-ability.md",
+      "sha256": "7959c3098047ca275b3ad7efa841e6e8a7032d879fe44e42f7e3ae966a957251"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-3/psionic-leap.md",
+      "sha256": "33d08e65d67b54dc5b065fb30d72425ec6dd726af4f0edf04dc9d59aac97b114"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-3/reorder.md",
+      "sha256": "ad3c7ec12f9bfbc28f5293255f68b5aefd30af60f97157db6ca71905b18d717d"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-3/7-discipline-ability.md",
+      "sha256": "645b390e6db8d517ff20b68a26038c6151a38c813ecb67ed61bc87493d672b63"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-1/density-augmentation.md",
+      "sha256": "f154a4a6b4ad72d9953a60c28fc078a798025b842e580753e4ad1c82eca51b3b"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-1/force-augmentation.md",
+      "sha256": "7f9f7977bc77d59a6ef0307e84aaa079346922dfb4cbcb25ea1c0774a1fd7295"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-1/speed-augmentation.md",
+      "sha256": "3c32bfe9966d31eec17176c37e46acd0070512e2dde209a2a8084f97eba3df59"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-1/null-speed.md",
+      "sha256": "b209e1e03841a09c4fca709855c406d09a9052889f6a65def15b74924b37acdd"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-1/discipline-mastery.md",
+      "sha256": "807fa82f8a5ab18de4854c681fdc5a717a96b68601250a2d7d10dcc2cc1e83ec"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-1/chronokinetic-mastery.md",
+      "sha256": "1e4e462ed3d256cddb91a25432541b2b729d81df6baf08a403548e65aeabadb7"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-1/cryokinetic-mastery.md",
+      "sha256": "7d5170c162439e662ef13e9510f24aa55394f80f8110139dcbda2c4e1941d057"
+    },
+    {
+      "path": "en/unified/md/feature/null/level-1/metakinetic-mastery.md",
+      "sha256": "76b7576af07526d75944d982bd1979193fbf2d9f199a15d6440f1d2eab6340e3"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-1/null-field.md",
+      "sha256": "bd3a6ba871195f27d907e59c2b70c4b9b109d225c22248d2e574acc4ead45d67"
+    },
+    {
+      "path": "en/unified/md/rule/damage/damage-immunity.md",
+      "sha256": "769a26ee3ed6da58ad4fdeafe4b49c8a3f5e73e0de20dba0eb44f49be7a6c1bf"
+    },
+    {
+      "path": "en/unified/md/rule/damage/rolled-damage.md",
+      "sha256": "982ca1b159dcfab515801b27781f1f19b041d9c398e6b2371e769a7aafcd7e14"
+    },
+    {
+      "path": "en/unified/md/rule/health/recoveries.md",
+      "sha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9"
+    },
+    {
+      "path": "en/unified/md/rule/health/winded.md",
+      "sha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee"
+    },
+    {
+      "path": "en/unified/md/rule/health/temporary-stamina.md",
+      "sha256": "d5a239b9e0b180fc467c75fa8f0b79cc18c46c0d719f39e4fc245b7f34818e3d"
+    },
+    {
+      "path": "en/unified/md/rule/general/echelon.md",
+      "sha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3"
+    },
+    {
+      "path": "en/unified/md/rule/general/always-round-down.md",
+      "sha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783"
+    },
+    {
+      "path": "en/unified/md/movement/jump.md",
+      "sha256": "04f33e7a2a789737175b90b37c733c49c0f7d8808e39c6000a00e8188caf59de"
+    },
+    {
+      "path": "en/unified/md/rule/character/size.md",
+      "sha256": "ee241ed0c3b18377be06e89fd48a44a75c9ddc4de643a099b971e563b04e93bf"
+    },
+    {
+      "path": "en/unified/md/rule/character/stability.md",
+      "sha256": "9cf7e5279c42e3b092a3397f6b9f534077d4263c73a609e5be18d53d7a55ade3"
+    },
+    {
+      "path": "en/unified/md/feature/trait/human/cant-take-hold.md",
+      "sha256": "38329e075c92df1feb5838aeb0410fe339edbb569ef2ec9a42713d12fddc4e90"
+    },
+    {
+      "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-2/blur.md",
+      "sha256": "36e01ea08ac3bce68baa85af2de0e8ecc66e3b1e95cdb4018be0a9f9557a127b"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-2/force-redirected.md",
+      "sha256": "ea88c696ecd49b76994b39b40d583428008ba5f8b729dea495f6b30e929ffbd6"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-2/entropic-field.md",
+      "sha256": "9c972545085f291f84bfb81898143c5ff5f7a8241e41a0cb10d38cc7fc23eb0d"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-2/heat-sink.md",
+      "sha256": "950b08509cf81a55c0af024f275840b121d0bdd1f954e31abb5aa3d783da9863"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+      "sha256": "d5872c7c5c2577479969ed44a157ad2e952e292bebeb161ee5652d72050afaf7"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+      "sha256": "596bfa6e8b50e294db6a15168f22c3d6c566712fcbf7cc36dd3d22a2574085ef"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-3/absorption-field.md",
+      "sha256": "e2744c0cbad49bfab46b120a77b6da9673b9e66f9e3c22eab6a8db9515938e10"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+      "sha256": "3a29b58d5c64fea7aa8693f600849ef6afb05827127477331229aae5d440f796"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+      "sha256": "98d794acf03e9ccd6d804ef1664fc2cb0d0fc879c5d3ef384d362a8f57b00989"
+    },
+    {
+      "path": "en/unified/md/feature/ability/null/level-3/synapse-field.md",
+      "sha256": "51505b6eab685369bada5b3e12adeff9575e2ea2abbe1eea322237f4f1397f43"
+    },
+    {
+      "path": "en/unified/md/perk/brawny.md",
+      "sha256": "ad7555bd6e311798df2897c8cde543cdf0018995e6e5250a35577111d05e05b1"
+    },
+    {
+      "path": "en/unified/md/perk/charming-liar.md",
+      "sha256": "147f2272e7e20c5a5db6a720d4b3e3e7414818a2472ded8113f020d8bc2c5ed8"
+    },
+    {
+      "path": "en/unified/md/perk/criminal-contacts.md",
+      "sha256": "47ef9787d5cc9893009b69f1383af09745c4533fbe338229e61bde2d9a1d2fae"
+    },
+    {
+      "path": "en/unified/md/perk/danger-sense.md",
+      "sha256": "73e8273150af9533b0fa08c622f74e562b5cdac4e8948d925e437c50671e78ba"
+    },
+    {
+      "path": "en/unified/md/perk/lie-detector.md",
+      "sha256": "f0492ab9df9d7105052d7dfb728a53d5c815d42a366202fa8eba3392e8388b6c"
+    },
+    {
+      "path": "en/unified/md/perk/slipped-lead.md",
+      "sha256": "cb3d2da33169620d452717f33ab127813c90ca7f6b1273b28e857b606959845c"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "tradition-ability-grouping",
+      "passage": "en/unified/md/feature/null/level-2/2nd-level-tradition-ability.md has empty \"2nd-Level Chronokinetic/Cryokinetic/Metakinetic Ability\" sections.",
+      "resolution": "Grouping from en/books/heroes/clean/Draw Steel Heroes.md: 2nd-Level Chronokinetic Ability (line 10773): Blur 10777, Force Redirected 10787; 2nd-Level Cryokinetic Ability (10801): Entropic Field 10805, Heat Sink 10819; 2nd-Level Metakinetic Ability (10829): Gravitic Strike 10833, Kinetic Shield 10847. Agrees with each unified ability file's front-matter subclass field.",
+      "alternatives": [
+        "Offer all six to every tradition (rejected: book headings and subclass field restrict each pair to its tradition)."
+      ]
+    },
+    {
+      "id": "seven-discipline-tradition-independent",
+      "passage": "en/unified/md/feature/null/level-3/7-discipline-ability.md \"Choose one heroic ability from the following options\" and book line 10875.",
+      "resolution": "Unified level-3 ability files have no subclass field and the book lists all four under one heading, so all four are offered to every tradition.",
+      "alternatives": ["Tradition-specific 7-discipline options (no source support)."]
+    },
+    {
+      "id": "density-stamina-in-derived-values",
+      "passage": "en/unified/md/feature/null/level-1/density-augmentation.md \"+6 bonus to Stamina ... increases by 6 at 4th, 7th, and 10th levels\".",
+      "resolution": "Treated as a Stamina maximum bonus feeding recovery and winded values; stays +6 at levels 2-3. Matches reviewed v103-2 level-one values (27/9/13).",
+      "alternatives": ["Bonus excluded from recovery/winded (contradicts reviewed baseline)."]
+    },
+    {
+      "id": "entropic-adaptability-immunity",
+      "passage": "en/unified/md/feature/null/level-2/entropic-adaptability.md \"cold immunity equal to twice your Intuition score\"; rule/damage/damage-immunity.md \"only the immunity with the highest value applies\".",
+      "resolution": "cold immunity 4 (I 2). It tracks Intuition (would rise with a 4th-level Characteristic Increase). No other immunity in these builds, so highest-value selection is moot but should be honoured when stacking.",
+      "alternatives": [
+        "Snapshotting value at level-up (rejected: text says \"equal to twice your Intuition score\", a live reference)."
+      ]
+    },
+    {
+      "id": "inertial-sink-effective-size",
+      "passage": "en/unified/md/feature/null/level-2/inertial-sink.md \"add your Intuition score to your effective size for the purpose of interacting with creatures and objects ... whether you are affected by forced movement ... no effect on whether you can be grabbed\".",
+      "resolution": "INTERPRETATION: recorded size and stability are unchanged; effective size (1M + 2 for Human I 2) is a situational rule applied manually/in forced-movement resolution. Fall height reduction 5 squares and forced-movement damage reduction equal to level (2 at L2, 3 at L3) are situational.",
+      "alternatives": [
+        "Display an \"effective size\" field (size 1M + I) on the sheet.",
+        "Treat as a stability bonus (rejected: text names size, stability is a separate statistic, rule/character/stability.md)."
+      ],
+      "openQuestion": "How to express \"1M + 2\" effective size is unresolved: rule/character/size.md orders 1T<1S<1M<1L<2, so +2 from 1M could mean 2 steps (to size 2) or numeric size 3. Keep manual."
+    },
+    {
+      "id": "force-augmentation-scope",
+      "passage": "en/unified/md/feature/null/level-1/force-augmentation.md \"Your damage-dealing psionic abilities gain a +1 bonus to rolled damage\"; rule/damage/rolled-damage.md.",
+      "resolution": "Applied to Force Redirected for v103-4 (Psionic, power-roll damage): [11,15,19]. Not applicable to Heat Sink cold damage or Synapse Field extra damage (no power roll = not rolled damage). v103-1 chooses Blur and Absorption Field, which deal no damage.",
+      "alternatives": ["Add +1 to Synapse Field extra damage (rejected: not rolled damage)."]
+    },
+    {
+      "id": "psionic-leap-distance-cap",
+      "passage": "en/unified/md/feature/null/level-3/psionic-leap.md \"long jump and high jump a distance equal to twice your Agility score without needing to make a test\"; movement/jump.md \"You can't jump farther or higher than the distance of the effect that allows you to move.\"",
+      "resolution": "Recorded jump distance 4 (A 2). Whether the movement-distance cap from movement/jump.md still applies is not resolved by the text; keep jump resolution manual.",
+      "alternatives": [
+        "Psionic Leap overrides the movement cap.",
+        "Cap still applies (jump.md general rule)."
+      ]
+    },
+    {
+      "id": "null-field-enlargement-stacking",
+      "passage": "Heat Sink, Absorption Field, Molecular Rearrangement Field, Stabilizing Field, Synapse Field each \"the size of your Null Field ability increases by 1\"; Null Field is \"1 aura\".",
+      "resolution": "Each enlarges the 1 aura to 2 aura. No witness takes two enlarging abilities except v103-2-alt (Heat Sink + Synapse Field); whether two simultaneous +1 increases stack (3 aura) is not stated. Keep manual.",
+      "alternatives": ["Stack (+2).", "Do not stack (single +1)."]
+    },
+    {
+      "id": "feature-naming",
+      "passage": "en/unified/md/class/null.md advancement table names \"Tradition Feature\"/\"Tradition Ability\"; feature files are \"2nd-Level Tradition Feature\"/\"2nd-Level Tradition Ability\".",
+      "resolution": "Ledger uses the feature file names.",
+      "alternatives": ["Table labels \"Tradition Feature\", \"Tradition Ability\"."]
+    },
+    {
+      "id": "perk-group-assignment",
+      "passage": "Unified perk front matter has no group field; groups taken from en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Exploration 17353, Interpersonal 17397, Intrigue 17441.",
+      "resolution": "Unified-only companion perks (Born Tracker, People Sense, Ride Along, Trained Thief, Voice of the Wild, Wild Rumpus, Wilds Explorer, You Can Pet Them, They're Friendly) are absent from the Heroes chapter and excluded as core-ineligible.",
+      "alternatives": ["Include companion perks if their own source assigns a group."]
+    }
+  ],
+  "levelTwo": {
+    "sourceAdvancementTable": "en/unified/md/class/null.md (Null Advancement Table, row 2nd: Perk, Tradition Feature, Tradition Ability; Abilities Two signature, 3, 5; Tradition Abilities 5)",
+    "staminaGained": 9,
+    "staminaSource": "en/unified/md/class/null.md Basics: Stamina Gained at 2nd and Higher Levels: 9",
+    "commonFeatures": [
+      {
+        "name": "Perk",
+        "sourcePath": "en/unified/md/feature/null/level-2/perk.md",
+        "sourceSha256": "5ff71d8ea46200ae2f9753ddcfd71b13926a8857151660538f10c9825051234a",
+        "choice": "one exploration, interpersonal, or intrigue perk",
+        "numericSheetEffect": null
+      },
+      {
+        "name": "2nd-Level Tradition Feature",
+        "sourcePath": "en/unified/md/feature/null/level-2/2nd-level-tradition-feature.md",
+        "sourceSha256": "c232205fd91839a81c2cce1a7e5c12f3596ecdfa3dc33b4a37537ce0c68b300b"
+      },
+      {
+        "name": "2nd-Level Tradition Ability",
+        "sourcePath": "en/unified/md/feature/null/level-2/2nd-level-tradition-ability.md",
+        "sourceSha256": "7959c3098047ca275b3ad7efa841e6e8a7032d879fe44e42f7e3ae966a957251",
+        "choice": "one of two 5-discipline abilities of your tradition"
+      }
+    ],
+    "perkGroups": ["exploration", "interpersonal", "intrigue"],
+    "perksGroupsSource": "en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Exploration Perks 17353, Interpersonal Perks 17397, Intrigue Perks 17441",
+    "eligibleCorePerks": {
+      "exploration": [
+        {
+          "name": "Brawny",
+          "sourcePath": "en/unified/md/perk/brawny.md"
+        },
+        {
+          "name": "Camouflage Hunter",
+          "sourcePath": "en/unified/md/perk/camouflage-hunter.md"
+        },
+        {
+          "name": "Danger Sense",
+          "sourcePath": "en/unified/md/perk/danger-sense.md"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md"
+        },
+        {
+          "name": "Monster Whisperer",
+          "sourcePath": "en/unified/md/perk/monster-whisperer.md"
+        },
+        {
+          "name": "Put Your Back Into It!",
+          "sourcePath": "en/unified/md/perk/put-your-back-into-it.md"
+        },
+        {
+          "name": "Team Leader",
+          "sourcePath": "en/unified/md/perk/team-leader.md"
+        },
+        {
+          "name": "Wood Wise",
+          "sourcePath": "en/unified/md/perk/wood-wise.md"
+        }
+      ],
+      "interpersonal": [
+        {
+          "name": "Charming Liar",
+          "sourcePath": "en/unified/md/perk/charming-liar.md"
+        },
+        {
+          "name": "Dazzler",
+          "sourcePath": "en/unified/md/perk/dazzler.md"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md"
+        },
+        {
+          "name": "Harmonizer",
+          "sourcePath": "en/unified/md/perk/harmonizer.md"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md"
+        },
+        {
+          "name": "Pardon My Friend",
+          "sourcePath": "en/unified/md/perk/pardon-my-friend.md"
+        },
+        {
+          "name": "Power Player",
+          "sourcePath": "en/unified/md/perk/power-player.md"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md"
+        },
+        {
+          "name": "Spot the Tell",
+          "sourcePath": "en/unified/md/perk/spot-the-tell.md"
+        }
+      ],
+      "intrigue": [
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md"
+        },
+        {
+          "name": "Lucky Dog",
+          "sourcePath": "en/unified/md/perk/lucky-dog.md"
+        },
+        {
+          "name": "Master of Disguise",
+          "sourcePath": "en/unified/md/perk/master-of-disguise.md"
+        },
+        {
+          "name": "Slipped Lead",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md"
+        }
+      ]
+    },
+    "eligibleCorePerkCount": 25,
+    "excludedPerks": "Teamwork (exploration) is already owned by every base witness (Soldier career perk) and excluded. Crafting, lore and supernatural groups are not permitted by feature/null/level-2/perk.md.",
+    "perksWithSubChoices": [],
+    "perksWithSubChoicesNote": "No perk in the exploration, interpersonal or intrigue groups asks for a build-time sub-choice.",
+    "byTradition": {
+      "Chronokinetic": {
+        "traditionFeature": {
+          "name": "Rapid Processing",
+          "sourcePath": "en/unified/md/feature/null/level-2/rapid-processing.md",
+          "sourceSha256": "cb0439ed1e6bd1a52aa939f33094ae73bf8f971b5c2140fa940a0f8c87ed9b1e",
+          "summary": "As a maneuver, you can read an entire book or process a similar amount of information. Additionally, during any respite, you can take an additional respite activity.",
+          "numericSheetEffect": null,
+          "tableSource": "en/unified/md/feature/null/level-2/2nd-level-tradition-feature.md (2nd-Level Tradition Features Table)"
+        },
+        "traditionAbilityOptions": [
+          {
+            "name": "Blur",
+            "printedCost": "5 Discipline",
+            "sourcePath": "en/unified/md/feature/ability/null/level-2/blur.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10777"
+          },
+          {
+            "name": "Force Redirected",
+            "printedCost": "5 Discipline",
+            "sourcePath": "en/unified/md/feature/ability/null/level-2/force-redirected.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10787"
+          }
+        ]
+      },
+      "Cryokinetic": {
+        "traditionFeature": {
+          "name": "Entropic Adaptability",
+          "sourcePath": "en/unified/md/feature/null/level-2/entropic-adaptability.md",
+          "sourceSha256": "ef78281e41b1a64eec3ef63d37d624b2befe04b8907fb37a5ffddb0cf8cd88a4",
+          "summary": "You have cold immunity equal to twice your Intuition score. Additionally, you ignore difficult terrain related to cold and ice, and you can automatically climb at full speed while moving.",
+          "numericSheetEffect": "cold immunity = 2 x Intuition (4 with I 2)",
+          "tableSource": "en/unified/md/feature/null/level-2/2nd-level-tradition-feature.md (2nd-Level Tradition Features Table)"
+        },
+        "traditionAbilityOptions": [
+          {
+            "name": "Entropic Field",
+            "printedCost": "5 Discipline",
+            "sourcePath": "en/unified/md/feature/ability/null/level-2/entropic-field.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10805"
+          },
+          {
+            "name": "Heat Sink",
+            "printedCost": "5 Discipline",
+            "sourcePath": "en/unified/md/feature/ability/null/level-2/heat-sink.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10819"
+          }
+        ]
+      },
+      "Metakinetic": {
+        "traditionFeature": {
+          "name": "Inertial Sink",
+          "sourcePath": "en/unified/md/feature/null/level-2/inertial-sink.md",
+          "sourceSha256": "1de9b4ae509e7b339d91babbf82e9e7fda6a425b666e2b8315d7a3217e4eb9ad",
+          "summary": "You add your Intuition score to your effective size for the purpose of interacting with creatures and objects, such as for determining whether you can lift an object, whether you are affected by forced movement, and so forth. This has no effect on whether you can be grabbed.\n\nAdditionally, when you fall, you reduce the effective height of the fall by 5 squares in addition to any other reductions. Whenever you take damage from being force moved, you reduce that damage by an amount equal to your level.",
+          "numericSheetEffect": "effective size + Intuition for interactions only; recorded size/stability unchanged (interpretation)",
+          "tableSource": "en/unified/md/feature/null/level-2/2nd-level-tradition-feature.md (2nd-Level Tradition Features Table)"
+        },
+        "traditionAbilityOptions": [
+          {
+            "name": "Gravitic Strike",
+            "printedCost": "5 Discipline",
+            "sourcePath": "en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10833"
+          },
+          {
+            "name": "Kinetic Shield",
+            "printedCost": "5 Discipline",
+            "sourcePath": "en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10847"
+          }
+        ]
+      }
+    }
+  },
+  "levelThree": {
+    "sourceAdvancementTable": "en/unified/md/class/null.md (row 3rd: Psionic Leap, Reorder, 7-Discipline Ability; Abilities Two signature, 3, 5, 7; Tradition Abilities 5)",
+    "staminaGained": 9,
+    "automaticFeatures": [
+      {
+        "name": "Psionic Leap",
+        "sourcePath": "en/unified/md/feature/null/level-3/psionic-leap.md",
+        "sourceSha256": "33d08e65d67b54dc5b065fb30d72425ec6dd726af4f0edf04dc9d59aac97b114",
+        "summary": "You can long jump and high jump a distance equal to twice your Agility score without needing to make a test.",
+        "numericSheetEffect": "long/high jump distance = 2 x Agility (4 for every witness, A 2) without a test",
+        "manualClauses": [
+          "Jump cap interplay with movement/jump.md unresolved (see uncertainty psionic-leap-distance-cap)."
+        ]
+      },
+      {
+        "name": "Reorder",
+        "sourcePath": "en/unified/md/feature/null/level-3/reorder.md",
+        "sourceSha256": "ad3c7ec12f9bfbc28f5293255f68b5aefd30af60f97157db6ca71905b18d717d",
+        "summary": "At the start of each of your turns, you can use a free triggered action to end one effect on you that is ended by a saving throw or that ends at the end of your turn. Alternatively, you can grant this benefit to one creature in the area of your Null Field ability.",
+        "numericSheetEffect": null,
+        "manualClauses": [
+          "Free triggered action at start of each of your turns: end one save-ends or end-of-your-turn effect on you, or grant this to one creature in your Null Field area."
+        ]
+      }
+    ],
+    "ability7Options": [
+      {
+        "name": "Absorption Field",
+        "printedCost": "7 Discipline",
+        "sourcePath": "en/unified/md/feature/ability/null/level-3/absorption-field.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10879"
+      },
+      {
+        "name": "Molecular Rearrangement Field",
+        "printedCost": "7 Discipline",
+        "sourcePath": "en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10889"
+      },
+      {
+        "name": "Stabilizing Field",
+        "printedCost": "7 Discipline",
+        "sourcePath": "en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10899"
+      },
+      {
+        "name": "Synapse Field",
+        "printedCost": "7 Discipline",
+        "sourcePath": "en/unified/md/feature/ability/null/level-3/synapse-field.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10909"
+      }
+    ],
+    "ability7OptionsAreTraditionIndependent": true
+  },
+  "abilities": {
+    "Blur": {
+      "name": "Blur",
+      "sourcePath": "en/unified/md/feature/ability/null/level-2/blur.md",
+      "sourceSha256": "36e01ea08ac3bce68baa85af2de0e8ecc66e3b1e95cdb4018be0a9f9557a127b",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10777",
+      "level": 2,
+      "tradition": "Chronokinetic",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Psionic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "discipline",
+        "amount": 5,
+        "printed": "5 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "You can use a signature or heroic ability. You gain an edge on that ability's power rolls."
+      ],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-1"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementByTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Use a signature or heroic ability as part of this maneuver, with an edge on that ability's power rolls (manual: choose ability; its own cost is still paid)."
+      ]
+    },
+    "Force Redirected": {
+      "name": "Force Redirected",
+      "sourcePath": "en/unified/md/feature/ability/null/level-2/force-redirected.md",
+      "sourceSha256": "ea88c696ecd49b76994b39b40d583428008ba5f8b729dea495f6b30e929ffbd6",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10787",
+      "level": 2,
+      "tradition": "Chronokinetic",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Psionic", "Strike", "Weapon"],
+      "distance": "Melee 3",
+      "target": "One creature",
+      "cost": {
+        "resource": "discipline",
+        "amount": 5,
+        "printed": "5 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Agility",
+      "tiersVerbatim": {
+        "tier1": "8 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+        "tier2": "12 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+        "tier3": "16 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+      },
+      "tiersPlain": {
+        "tier1": "8 + A damage; slide 1",
+        "tier2": "12 + A damage; slide 3",
+        "tier3": "16 + A damage; slide 5"
+      },
+      "effectsPlain": [],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-4"],
+      "dealsDamage": true,
+      "damageType": "untyped (tiers print \"damage\" with no type)",
+      "damageByWitness": [
+        {
+          "witness": "v103-4",
+          "augmentation": "Force Augmentation",
+          "characteristic": {
+            "A": 2
+          },
+          "printedConstants": [8, 12, 16],
+          "forceAugmentationBonus": 1,
+          "tiers": [11, 15, 19],
+          "formula": "[8, 12, 16] + A2 + Force Augmentation 1 = [11, 15, 19]"
+        }
+      ],
+      "damageNote": "Force Augmentation (+1 rolled damage to damage-dealing psionic abilities) applies: Psionic keyword + power-roll damage. Null has no kit, so the Weapon keyword adds no kit bonus.",
+      "forcedMovementByTier": ["slide 1", "slide 3", "slide 5"],
+      "manualClauses": [
+        "Forced movement per tier: slide 1, slide 3, slide 5 (slide; direction chosen by the user)"
+      ],
+      "potencyByWitness": null
+    },
+    "Entropic Field": {
+      "name": "Entropic Field",
+      "sourcePath": "en/unified/md/feature/ability/null/level-2/entropic-field.md",
+      "sourceSha256": "9c972545085f291f84bfb81898143c5ff5f7a8241e41a0cb10d38cc7fc23eb0d",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10805",
+      "level": 2,
+      "tradition": "Cryokinetic",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Psionic", "Weapon"],
+      "distance": "3 cube within 1",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "discipline",
+        "amount": 5,
+        "printed": "5 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Agility",
+      "tiersVerbatim": {
+        "tier1": "6 cold damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+        "tier2": "9 cold damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+        "tier3": "13 cold damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "6 cold damage; A < WEAK, slowed (save ends)",
+        "tier2": "9 cold damage; A < AVERAGE, slowed (save ends)",
+        "tier3": "13 cold damage; A < STRONG, slowed (save ends)"
+      },
+      "effectsPlain": [],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-2"],
+      "dealsDamage": true,
+      "damageType": "cold",
+      "damageByWitness": [
+        {
+          "witness": "v103-2",
+          "augmentation": "Density Augmentation",
+          "characteristic": null,
+          "printedConstants": [6, 9, 13],
+          "forceAugmentationBonus": 0,
+          "tiers": [6, 9, 13],
+          "formula": "[6, 9, 13] (no characteristic term) + 0 (Density Augmentation; no rolled-damage bonus) = [6, 9, 13]"
+        }
+      ],
+      "damageNote": "Printed tiers carry no characteristic term. Chosen only by v103-2 (Density Augmentation), so no Force bonus. Null has no kit; Weapon keyword adds nothing.",
+      "forcedMovementByTier": [null, null, null],
+      "potencyByWitness": {
+        "v103-2": {
+          "tier1": "A < 0",
+          "tier2": "A < 1",
+          "tier3": "A < 2"
+        }
+      },
+      "potencyConditions": {
+        "tier1": "A < WEAK, slowed (save ends)",
+        "tier2": "A < AVERAGE, slowed (save ends)",
+        "tier3": "A < STRONG, slowed (save ends)"
+      },
+      "manualClauses": [
+        "Slowed (save ends) on A < WEAK/AVERAGE/STRONG per tier (Null potency from Intuition: 0/1/2).",
+        "Area: 3 cube within 1, each enemy in the area."
+      ]
+    },
+    "Heat Sink": {
+      "name": "Heat Sink",
+      "sourcePath": "en/unified/md/feature/ability/null/level-2/heat-sink.md",
+      "sourceSha256": "950b08509cf81a55c0af024f275840b121d0bdd1f954e31abb5aa3d783da9863",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10819",
+      "level": 2,
+      "tradition": "Cryokinetic",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Psionic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "discipline",
+        "amount": 5,
+        "printed": "5 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Until the start of your next turn, the size of your Null Field ability increases by 1, and you and any ally benefit from concealment while in the area. At the end of this turn, each enemy in the area takes cold damage equal to your Intuition score."
+      ],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-2-alt"],
+      "dealsDamage": true,
+      "damageType": "cold",
+      "damageByWitness": [],
+      "forcedMovementByTier": null,
+      "potencyByWitness": null,
+      "rolledDamage": false,
+      "fixedDamageByWitness": [
+        {
+          "witness": "v103-2-alt",
+          "intuition": 2,
+          "amount": 2,
+          "formula": "cold damage = Intuition 2 (not rolled damage: no power roll, rule/damage/rolled-damage.md; Force bonus would not apply)"
+        }
+      ],
+      "manualClauses": [
+        "Until start of your next turn: Null Field size +1 (1 aura -> 2 aura).",
+        "You and any ally in the area benefit from concealment.",
+        "At end of this turn each enemy in the area takes cold damage equal to Intuition."
+      ]
+    },
+    "Gravitic Strike": {
+      "name": "Gravitic Strike",
+      "sourcePath": "en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+      "sourceSha256": "d5872c7c5c2577479969ed44a157ad2e952e292bebeb161ee5652d72050afaf7",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10833",
+      "level": 2,
+      "tradition": "Metakinetic",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Main action",
+      "keywords": ["Melee", "Psionic", "Strike", "Weapon"],
+      "distance": "Melee 3",
+      "target": "One creature",
+      "cost": {
+        "resource": "discipline",
+        "amount": 5,
+        "printed": "5 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Agility",
+      "tiersVerbatim": {
+        "tier1": "8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+        "tier2": "12 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+        "tier3": "16 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7"
+      },
+      "tiersPlain": {
+        "tier1": "8 + A psychic damage; vertical pull 3",
+        "tier2": "12 + A psychic damage; vertical pull 5",
+        "tier3": "16 + A psychic damage; vertical pull 7"
+      },
+      "effectsPlain": [],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-3"],
+      "dealsDamage": true,
+      "damageType": "psychic",
+      "damageByWitness": [
+        {
+          "witness": "v103-3",
+          "augmentation": "Speed Augmentation",
+          "characteristic": {
+            "A": 2
+          },
+          "printedConstants": [8, 12, 16],
+          "forceAugmentationBonus": 0,
+          "tiers": [10, 14, 18],
+          "formula": "[8, 12, 16] + A2 + 0 (Speed Augmentation; no rolled-damage bonus) = [10, 14, 18]"
+        }
+      ],
+      "damageNote": "Chosen only by v103-3 (Speed Augmentation): no rolled-damage bonus. Null has no kit.",
+      "forcedMovementByTier": ["vertical pull 3", "vertical pull 5", "vertical pull 7"],
+      "manualClauses": [
+        "Forced movement per tier: vertical pull 3, vertical pull 5, vertical pull 7 (vertical pull)"
+      ],
+      "potencyByWitness": null
+    },
+    "Kinetic Shield": {
+      "name": "Kinetic Shield",
+      "sourcePath": "en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+      "sourceSha256": "596bfa6e8b50e294db6a15168f22c3d6c566712fcbf7cc36dd3d22a2574085ef",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10847",
+      "level": 2,
+      "tradition": "Metakinetic",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Psionic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "discipline",
+        "amount": 5,
+        "printed": "5 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Intuition",
+      "tiersVerbatim": {
+        "tier1": "You gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+        "tier2": "You gain 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+        "tier3": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina)."
+      },
+      "tiersPlain": {
+        "tier1": "You gain 10 temporary Stamina.",
+        "tier2": "You gain 15 temporary Stamina.",
+        "tier3": "You gain 20 temporary Stamina."
+      },
+      "effectsPlain": [
+        "While you have temporary Stamina from this ability, you can't be made bleeding even while dying."
+      ],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-3-alt"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementByTier": null,
+      "potencyByWitness": null,
+      "temporaryStaminaByTier": [10, 15, 20],
+      "manualClauses": [
+        "Gain 10/15/20 temporary Stamina by tier (does not change Stamina maximum).",
+        "While you have temporary Stamina from this ability you can't be made bleeding, even while dying."
+      ]
+    },
+    "Absorption Field": {
+      "name": "Absorption Field",
+      "sourcePath": "en/unified/md/feature/ability/null/level-3/absorption-field.md",
+      "sourceSha256": "e2744c0cbad49bfab46b120a77b6da9673b9e66f9e3c22eab6a8db9515938e10",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10879",
+      "level": 3,
+      "tradition": null,
+      "feature": "7-Discipline Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Psionic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "discipline",
+        "amount": 7,
+        "printed": "7 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Until the end of the encounter, the size of your Null Field ability increases by 1. While the area of that ability is enlarged this way, each enemy in the area takes a bane on ability rolls."
+      ],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-1", "v103-3"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementByTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Until end of encounter Null Field size +1 (1 aura -> 2 aura).",
+        "While enlarged, each enemy in the area takes a bane on ability rolls."
+      ]
+    },
+    "Molecular Rearrangement Field": {
+      "name": "Molecular Rearrangement Field",
+      "sourcePath": "en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+      "sourceSha256": "3a29b58d5c64fea7aa8693f600849ef6afb05827127477331229aae5d440f796",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10889",
+      "level": 3,
+      "tradition": null,
+      "feature": "7-Discipline Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Psionic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "discipline",
+        "amount": 7,
+        "printed": "7 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Until the end of the encounter, the size of your Null Field ability increases by 1. While the area of that ability is enlarged this way, each enemy who has I < AVERAGE and enters the area for the first time in a combat round or starts their turn there is bleeding (save ends). Each ally who enters the area for the first time in a combat round or starts their turn there gains temporary Stamina equal to your Intuition score."
+      ],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-4"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementByTier": null,
+      "potencyByWitness": {
+        "v103-4": {
+          "enemyEntersOrStarts": "I < 1"
+        }
+      },
+      "allyTemporaryStaminaByWitness": [
+        {
+          "witness": "v103-4",
+          "amount": 2,
+          "formula": "Intuition 2"
+        }
+      ],
+      "manualClauses": [
+        "Until end of encounter Null Field size +1 (1 aura -> 2 aura).",
+        "Enemy with I < AVERAGE who enters the area for the first time in a round or starts their turn there is bleeding (save ends).",
+        "Ally who enters the area for the first time in a round or starts their turn there gains temporary Stamina equal to your Intuition."
+      ]
+    },
+    "Stabilizing Field": {
+      "name": "Stabilizing Field",
+      "sourcePath": "en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+      "sourceSha256": "98d794acf03e9ccd6d804ef1664fc2cb0d0fc879c5d3ef384d362a8f57b00989",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10899",
+      "level": 3,
+      "tradition": null,
+      "feature": "7-Discipline Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Psionic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "discipline",
+        "amount": 7,
+        "printed": "7 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Until the end of the encounter, the size of your Null Field ability increases by 1. While the area of that ability is enlarged this way, you ignore difficult terrain and reduce the potency of enemy effects targeting you by 1 for you. You can also use a free triggered action at the start of each of your turns to end one effect on you that is ended by a saving throw or that ends at the end of your turn. Each ally in the area also gains these benefits."
+      ],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-2", "v103-3-alt"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovementByTier": null,
+      "potencyByWitness": null,
+      "manualClauses": [
+        "Until end of encounter Null Field size +1 (1 aura -> 2 aura).",
+        "While enlarged: you ignore difficult terrain; potency of enemy effects targeting you is reduced by 1 for you (not a change to your own potency values).",
+        "Free triggered action at the start of each of your turns to end one save-ends or end-of-turn effect on you.",
+        "Each ally in the area also gains these benefits."
+      ]
+    },
+    "Synapse Field": {
+      "name": "Synapse Field",
+      "sourcePath": "en/unified/md/feature/ability/null/level-3/synapse-field.md",
+      "sourceSha256": "51505b6eab685369bada5b3e12adeff9575e2ea2abbe1eea322237f4f1397f43",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 10909",
+      "level": 3,
+      "tradition": null,
+      "feature": "7-Discipline Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Psionic"],
+      "distance": "Self",
+      "target": "Self",
+      "cost": {
+        "resource": "discipline",
+        "amount": 7,
+        "printed": "7 Discipline"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsPlain": [
+        "Until the end of the encounter, the size of your Null Field ability increases by 1. While the area of that ability is enlarged this way, whenever an enemy in the area takes rolled damage, they take extra psychic damage equal to twice your Intuition score."
+      ],
+      "embeddedDisciplineCosts": [],
+      "chosenBy": ["v103-2-alt"],
+      "dealsDamage": true,
+      "damageType": "psychic",
+      "damageByWitness": [],
+      "forcedMovementByTier": null,
+      "potencyByWitness": null,
+      "rolledDamage": false,
+      "extraDamageByWitness": [
+        {
+          "witness": "v103-2-alt",
+          "intuition": 2,
+          "amount": 4,
+          "formula": "extra psychic damage = 2 x Intuition 2 = 4, whenever an enemy in the enlarged area takes rolled damage"
+        }
+      ],
+      "manualClauses": [
+        "Until end of encounter Null Field size +1 (1 aura -> 2 aura).",
+        "While enlarged, whenever an enemy in the area takes rolled damage they take extra psychic damage equal to twice your Intuition."
+      ]
+    }
+  },
+  "witnesses": {
+    "v103-1": {
+      "base": "v103-1",
+      "tradition": "Chronokinetic",
+      "augmentation": "Force Augmentation",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 3,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": []
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Brawny",
+          "traditionAbility": "Blur"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Rapid Processing",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Blur"],
+        "perks": ["Teamwork", "Brawny"],
+        "perkType": "exploration",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 3,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "damageImmunities": "No immunity source: tradition feature is Rapid Processing; Human traits Determination and Can't Take Hold grant none.",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Absorption Field"
+        },
+        "addedFeatures": ["Psionic Leap", "Reorder", "7-Discipline Ability"],
+        "addedAbilities": ["Absorption Field"],
+        "perks": ["Teamwork", "Brawny"],
+        "cumulativeAddedAbilities": ["Blur", "Absorption Field"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 3,
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "psionicLeapJumpDistance": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "damageImmunities": "No immunity source: tradition feature is Rapid Processing; Human traits Determination and Can't Take Hold grant none.",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level.",
+          "psionicLeapJumpDistance": "Psionic Leap: long and high jump 2 x Agility 2 = 4 squares without a test"
+        }
+      }
+    },
+    "v103-4": {
+      "base": "v103-4",
+      "tradition": "Chronokinetic",
+      "augmentation": "Force Augmentation",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 3,
+        "characteristics": {
+          "M": -1,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": []
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Charming Liar",
+          "traditionAbility": "Force Redirected"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Rapid Processing",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Force Redirected"],
+        "perks": ["Teamwork", "Charming Liar"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 3,
+        "characteristics": {
+          "M": -1,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "damageImmunities": "No immunity source: tradition feature is Rapid Processing; Human traits Determination and Can't Take Hold grant none.",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Molecular Rearrangement Field"
+        },
+        "addedFeatures": ["Psionic Leap", "Reorder", "7-Discipline Ability"],
+        "addedAbilities": ["Molecular Rearrangement Field"],
+        "perks": ["Teamwork", "Charming Liar"],
+        "cumulativeAddedAbilities": ["Force Redirected", "Molecular Rearrangement Field"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 7,
+        "stability": 0,
+        "disengage": 3,
+        "characteristics": {
+          "M": -1,
+          "A": 2,
+          "R": -1,
+          "I": 2,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "psionicLeapJumpDistance": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "damageImmunities": "No immunity source: tradition feature is Rapid Processing; Human traits Determination and Can't Take Hold grant none.",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level.",
+          "psionicLeapJumpDistance": "Psionic Leap: long and high jump 2 x Agility 2 = 4 squares without a test"
+        }
+      }
+    },
+    "v103-2": {
+      "base": "v103-2",
+      "tradition": "Cryokinetic",
+      "augmentation": "Density Augmentation",
+      "levelOneBaseline": {
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 3,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": []
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Criminal Contacts",
+          "traditionAbility": "Entropic Field"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Entropic Adaptability",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Entropic Field"],
+        "perks": ["Teamwork", "Criminal Contacts"],
+        "perkType": "intrigue",
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 3,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [
+          {
+            "damageType": "cold",
+            "value": 4
+          }
+        ],
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + Density Augmentation 6 (increases only at 4th, 7th, 10th) = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "damageImmunities": "Entropic Adaptability: cold immunity = 2 x Intuition 2 = 4; no other immunity source (Human traits Determination, Can't Take Hold grant none)",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Stabilizing Field"
+        },
+        "addedFeatures": ["Psionic Leap", "Reorder", "7-Discipline Ability"],
+        "addedAbilities": ["Stabilizing Field"],
+        "perks": ["Teamwork", "Criminal Contacts"],
+        "cumulativeAddedAbilities": ["Entropic Field", "Stabilizing Field"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 3,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [
+          {
+            "damageType": "cold",
+            "value": 4
+          }
+        ],
+        "psionicLeapJumpDistance": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + Density Augmentation 6 (increases only at 4th, 7th, 10th) = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "damageImmunities": "Entropic Adaptability: cold immunity = 2 x Intuition 2 = 4; no other immunity source (Human traits Determination, Can't Take Hold grant none)",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level.",
+          "psionicLeapJumpDistance": "Psionic Leap: long and high jump 2 x Agility 2 = 4 squares without a test"
+        }
+      }
+    },
+    "v103-2-alt": {
+      "base": "v103-2",
+      "tradition": "Cryokinetic",
+      "augmentation": "Density Augmentation",
+      "levelOneBaseline": {
+        "staminaMaximum": 27,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 9,
+        "windedValue": 13,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 3,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": []
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Danger Sense",
+          "traditionAbility": "Heat Sink"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Entropic Adaptability",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Heat Sink"],
+        "perks": ["Teamwork", "Danger Sense"],
+        "perkType": "exploration",
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 3,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [
+          {
+            "damageType": "cold",
+            "value": 4
+          }
+        ],
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) + Density Augmentation 6 (increases only at 4th, 7th, 10th) = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "damageImmunities": "Entropic Adaptability: cold immunity = 2 x Intuition 2 = 4; no other immunity source (Human traits Determination, Can't Take Hold grant none)",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Synapse Field"
+        },
+        "addedFeatures": ["Psionic Leap", "Reorder", "7-Discipline Ability"],
+        "addedAbilities": ["Synapse Field"],
+        "perks": ["Teamwork", "Danger Sense"],
+        "cumulativeAddedAbilities": ["Heat Sink", "Synapse Field"],
+        "staminaMaximum": 45,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 15,
+        "windedValue": 22,
+        "speed": 7,
+        "stability": 1,
+        "disengage": 3,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": 2,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [
+          {
+            "damageType": "cold",
+            "value": 4
+          }
+        ],
+        "psionicLeapJumpDistance": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) + Density Augmentation 6 (increases only at 4th, 7th, 10th) = 45",
+          "recoveryValue": "floor(45/3) = 15",
+          "windedValue": "floor(45/2) = 22",
+          "damageImmunities": "Entropic Adaptability: cold immunity = 2 x Intuition 2 = 4; no other immunity source (Human traits Determination, Can't Take Hold grant none)",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level.",
+          "psionicLeapJumpDistance": "Psionic Leap: long and high jump 2 x Agility 2 = 4 squares without a test"
+        }
+      },
+      "note": "Same level-one selections as v103-2; differs only in level-2 perk, tradition ability and 7-discipline ability."
+    },
+    "v103-3": {
+      "base": "v103-3",
+      "tradition": "Metakinetic",
+      "augmentation": "Speed Augmentation",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 4,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": []
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Lie Detector",
+          "traditionAbility": "Gravitic Strike"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Inertial Sink",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Gravitic Strike"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 4,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "damageImmunities": "No immunity source: tradition feature is Inertial Sink; Human traits Determination and Can't Take Hold grant none.",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level.",
+          "inertialSink": "Inertial Sink adds Intuition 2 to effective size for interactions (lifting, whether affected by forced movement); NOT a change to recorded size or stability (see uncertainty inertial-sink-effective-size)."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Absorption Field"
+        },
+        "addedFeatures": ["Psionic Leap", "Reorder", "7-Discipline Ability"],
+        "addedAbilities": ["Absorption Field"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "cumulativeAddedAbilities": ["Gravitic Strike", "Absorption Field"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 4,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "psionicLeapJumpDistance": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "damageImmunities": "No immunity source: tradition feature is Inertial Sink; Human traits Determination and Can't Take Hold grant none.",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level.",
+          "inertialSink": "Inertial Sink adds Intuition 2 to effective size for interactions (lifting, whether affected by forced movement); NOT a change to recorded size or stability (see uncertainty inertial-sink-effective-size).",
+          "psionicLeapJumpDistance": "Psionic Leap: long and high jump 2 x Agility 2 = 4 squares without a test"
+        }
+      }
+    },
+    "v103-3-alt": {
+      "base": "v103-3",
+      "tradition": "Metakinetic",
+      "augmentation": "Speed Augmentation",
+      "levelOneBaseline": {
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 4,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": []
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Slipped Lead",
+          "traditionAbility": "Kinetic Shield"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Inertial Sink",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Kinetic Shield"],
+        "perks": ["Teamwork", "Slipped Lead"],
+        "perkType": "intrigue",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 4,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (2 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "damageImmunities": "No immunity source: tradition feature is Inertial Sink; Human traits Determination and Can't Take Hold grant none.",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level.",
+          "inertialSink": "Inertial Sink adds Intuition 2 to effective size for interactions (lifting, whether affected by forced movement); NOT a change to recorded size or stability (see uncertainty inertial-sink-effective-size)."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Stabilizing Field"
+        },
+        "addedFeatures": ["Psionic Leap", "Reorder", "7-Discipline Ability"],
+        "addedAbilities": ["Stabilizing Field"],
+        "perks": ["Teamwork", "Slipped Lead"],
+        "cumulativeAddedAbilities": ["Kinetic Shield", "Stabilizing Field"],
+        "staminaMaximum": 39,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 13,
+        "windedValue": 19,
+        "speed": 8,
+        "stability": 0,
+        "disengage": 4,
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 0,
+          "I": 2,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "damageImmunities": [],
+        "psionicLeapJumpDistance": 4,
+        "derivation": {
+          "staminaMaximum": "21 + 9 x (3 - 1) = 39",
+          "recoveryValue": "floor(39/3) = 13",
+          "windedValue": "floor(39/2) = 19",
+          "damageImmunities": "No immunity source: tradition feature is Inertial Sink; Human traits Determination and Can't Take Hold grant none.",
+          "unchanged": "Recoveries 8, speed, stability, disengage, characteristics and potency equal the reviewed v103 level-one values: no level-2/3 Null feature, tradition ability, 7-discipline ability or selected perk changes them; Characteristic Increase first appears at 4th level.",
+          "inertialSink": "Inertial Sink adds Intuition 2 to effective size for interactions (lifting, whether affected by forced movement); NOT a change to recorded size or stability (see uncertainty inertial-sink-effective-size).",
+          "psionicLeapJumpDistance": "Psionic Leap: long and high jump 2 x Agility 2 = 4 squares without a test"
+        }
+      },
+      "note": "Same level-one selections as v103-3; differs only in level-2 perk, tradition ability and 7-discipline ability."
+    }
+  }
+}

@@ -5762,6 +5762,318 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-2/blur",
+    "kind": "ability",
+    "name": "Blur",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/blur.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-2/blur.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: Self\neffects:\n    - effect: You can use a signature or [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability). You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability's [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n      name: Effect\nflavor: You release stored time, allowing you to act twice.\nkeywords:\n    - Psionic\nlevel: \"2\"\nname: Blur\nscc: mcdm.heroes.v1/feature.ability.null.level-2/blur\nsubclass: chronokinetic\ntarget: Self\ntype: ability\n---\n\n\n*You release stored time, allowing you to act twice.*\n\n| **Psionic** | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** You can use a signature or [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability). You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability's [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You can use a signature or [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability). You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on that ability's [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You release stored time, allowing you to act twice.",
+      "keywords": [
+        "Psionic"
+      ],
+      "level": "2",
+      "subclass": "chronokinetic",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-2/entropic-field",
+    "kind": "ability",
+    "name": "Entropic Field",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/entropic-field.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-2/entropic-field.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 6 cold damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier2: 9 cold damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier3: 13 cold damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\nflavor: You drastically increase the local entropy.\nkeywords:\n    - Area\n    - Psionic\n    - Weapon\nlevel: \"2\"\nname: Entropic Field\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-2/entropic-field\nsubclass: cryokinetic\ntarget: Each enemy in the area\ntier1: 6 cold damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier2: 9 cold damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier3: 13 cold damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntype: ability\n---\n\n\n*You drastically increase the local entropy.*\n\n| **Area, Psionic, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1**    | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 6 cold damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 9 cold damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **17+:** 13 cold damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "6 cold damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier2": "9 cold damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier3": "13 cold damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+        }
+      ],
+      "flavor": "You drastically increase the local entropy.",
+      "keywords": [
+        "Area",
+        "Psionic",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subclass": "cryokinetic",
+      "target": "Each enemy in the area",
+      "tier1": "6 cold damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier2": "9 cold damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier3": "13 cold damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-2/force-redirected",
+    "kind": "ability",
+    "name": "Force Redirected",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/force-redirected.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-2/force-redirected.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 3'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 8 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 12 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n      tier3: 16 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\nflavor: The force of your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) moves your target in a surprising direction.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: Force Redirected\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-2/force-redirected\nsubclass: chronokinetic\ntarget: One creature\ntier1: 8 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 12 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntier3: 16 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\ntype: ability\n---\n\n\n*The force of your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) moves your target in a surprising direction.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 3**                     | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 8 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 12 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n- **17+:** 16 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 3",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "8 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "12 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "tier3": "16 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+        }
+      ],
+      "flavor": "The force of your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) moves your target in a surprising direction.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subclass": "chronokinetic",
+      "target": "One creature",
+      "tier1": "8 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "12 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+      "tier3": "16 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-2/gravitic-strike",
+    "kind": "ability",
+    "name": "Gravitic Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-2/gravitic-strike.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 3'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n      tier2: 12 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n      tier3: 16 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7\nflavor: Your fist emanates gravitic force that pulls a distant enemy closer.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"2\"\nname: Gravitic Strike\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.null.level-2/gravitic-strike\nsubclass: metakinetic\ntarget: One creature\ntier1: 8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntier2: 12 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\ntier3: 16 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7\ntype: ability\n---\n\n\n*Your fist emanates gravitic force that pulls a distant enemy closer.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 3**                     | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n- **12-16:** 12 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n- **17+:** 16 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 3",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "tier2": "12 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+          "tier3": "16 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7"
+        }
+      ],
+      "flavor": "Your fist emanates gravitic force that pulls a distant enemy closer.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subclass": "metakinetic",
+      "target": "One creature",
+      "tier1": "8 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+      "tier2": "12 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+      "tier3": "16 + A psychic damage; vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 7"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-2/heat-sink",
+    "kind": "ability",
+    "name": "Heat Sink",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/heat-sink.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-2/heat-sink.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: Self\neffects:\n    - effect: Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1, and you and any ally benefit from [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) while in the area. At the end of this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area takes cold damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n      name: Effect\nflavor: You absorb ambient heat, coating the ground in frost and precipitating snow from the air.\nkeywords:\n    - Psionic\nlevel: \"2\"\nname: Heat Sink\nscc: mcdm.heroes.v1/feature.ability.null.level-2/heat-sink\nsubclass: cryokinetic\ntarget: Self\ntype: ability\n---\n\n\n*You absorb ambient heat, coating the ground in frost and precipitating snow from the air.*\n\n| **Psionic** | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1, and you and any ally benefit from [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) while in the area. At the end of this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area takes cold damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1, and you and any ally benefit from [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) while in the area. At the end of this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area takes cold damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You absorb ambient heat, coating the ground in frost and precipitating snow from the air.",
+      "keywords": [
+        "Psionic"
+      ],
+      "level": "2",
+      "subclass": "cryokinetic",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-2/kinetic-shield",
+    "kind": "ability",
+    "name": "Kinetic Shield",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-2/kinetic-shield.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 5 Discipline\ndistance: Self\neffects:\n    - roll: Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)\n      tier1: You gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n      tier2: You gain 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n      tier3: You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n    - effect: While you have [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) from this ability, you can't be made [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) even while [dying](scc.v1:mcdm.heroes.v1/rule.health/dying).\n      name: Effect\nflavor: You manifest a force barrier that absorbs incoming kinetic energy.\nkeywords:\n    - Psionic\nlevel: \"2\"\nname: Kinetic Shield\npower_roll_characteristic: '[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)'\nscc: mcdm.heroes.v1/feature.ability.null.level-2/kinetic-shield\nsubclass: metakinetic\ntarget: Self\ntier1: You gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\ntier2: You gain 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\ntier3: You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\ntype: ability\n---\n\n\n*You manifest a force barrier that absorbs incoming kinetic energy.*\n\n| **Psionic** | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition):**\n\n- **≤11:** You gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n- **12-16:** You gain 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n- **17+:** You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n\n**Effect:** While you have [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) from this ability, you can't be made [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) even while [dying](scc.v1:mcdm.heroes.v1/rule.health/dying).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "5 Discipline",
+      "distance": "Self",
+      "effects": [
+        {
+          "roll": "Power Roll + [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+          "tier1": "You gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "tier2": "You gain 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+          "tier3": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina)."
+        },
+        {
+          "effect": "While you have [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) from this ability, you can't be made [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) even while [dying](scc.v1:mcdm.heroes.v1/rule.health/dying).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You manifest a force barrier that absorbs incoming kinetic energy.",
+      "keywords": [
+        "Psionic"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition)",
+      "subclass": "metakinetic",
+      "target": "Self",
+      "tier1": "You gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+      "tier2": "You gain 15 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).",
+      "tier3": "You gain 20 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-3/absorption-field",
+    "kind": "ability",
+    "name": "Absorption Field",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/absorption-field.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-3/absorption-field.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 7 Discipline\ndistance: Self\neffects:\n    - effect: Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy in the area takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).\n      name: Effect\nflavor: Your [null field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) absorbs kinetic energy.\nkeywords:\n    - Psionic\nlevel: \"3\"\nname: Absorption Field\nscc: mcdm.heroes.v1/feature.ability.null.level-3/absorption-field\ntarget: Self\ntype: ability\n---\n\n\n*Your [null field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) absorbs kinetic energy.*\n\n| **Psionic** | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy in the area takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "7 Discipline",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy in the area takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your [null field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) absorbs kinetic energy.",
+      "keywords": [
+        "Psionic"
+      ],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-3/molecular-rearrangement-field",
+    "kind": "ability",
+    "name": "Molecular Rearrangement Field",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-3/molecular-rearrangement-field.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 7 Discipline\ndistance: Self\neffects:\n    - effect: Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy who has I < AVERAGE and enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there is [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends). Each ally who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n      name: Effect\nflavor: Your enemies' wounds open, your allies' wounds close.\nkeywords:\n    - Psionic\nlevel: \"3\"\nname: Molecular Rearrangement Field\nscc: mcdm.heroes.v1/feature.ability.null.level-3/molecular-rearrangement-field\ntarget: Self\ntype: ability\n---\n\n\n*Your enemies' wounds open, your allies' wounds close.*\n\n| **Psionic** | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy who has I < AVERAGE and enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there is [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends). Each ally who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "7 Discipline",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy who has I < AVERAGE and enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there is [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends). Each ally who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your enemies' wounds open, your allies' wounds close.",
+      "keywords": [
+        "Psionic"
+      ],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-3/stabilizing-field",
+    "kind": "ability",
+    "name": "Stabilizing Field",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-3/stabilizing-field.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 7 Discipline\ndistance: Self\neffects:\n    - effect: Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and reduce the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of enemy effects targeting you by 1 for you. You can also use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) at the start of each of your turns to end one effect on you that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally in the area also gains these benefits.\n      name: Effect\nflavor: You project order, making it harder for your enemies to interfere with you and your allies.\nkeywords:\n    - Psionic\nlevel: \"3\"\nname: Stabilizing Field\nscc: mcdm.heroes.v1/feature.ability.null.level-3/stabilizing-field\ntarget: Self\ntype: ability\n---\n\n\n*You project order, making it harder for your enemies to interfere with you and your allies.*\n\n| **Psionic** | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and reduce the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of enemy effects targeting you by 1 for you. You can also use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) at the start of each of your turns to end one effect on you that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally in the area also gains these benefits.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "7 Discipline",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and reduce the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of enemy effects targeting you by 1 for you. You can also use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) at the start of each of your turns to end one effect on you that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally in the area also gains these benefits.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You project order, making it harder for your enemies to interfere with you and your allies.",
+      "keywords": [
+        "Psionic"
+      ],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.null.level-3/synapse-field",
+    "kind": "ability",
+    "name": "Synapse Field",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/synapse-field.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/null/level-3/synapse-field.json",
+    "selection": "null-levels-two-three",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: \"null\"\ncost: 7 Discipline\ndistance: Self\neffects:\n    - effect: Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, whenever an enemy in the area takes [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage), they take extra psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n      name: Effect\nflavor: Attacks made by allies in your [null field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) disrupt your enemies' thoughts, causing psychic pain.\nkeywords:\n    - Psionic\nlevel: \"3\"\nname: Synapse Field\nscc: mcdm.heroes.v1/feature.ability.null.level-3/synapse-field\ntarget: Self\ntype: ability\n---\n\n\n*Attacks made by allies in your [null field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) disrupt your enemies' thoughts, causing psychic pain.*\n\n| **Psionic** | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, whenever an enemy in the area takes [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage), they take extra psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "null",
+      "cost": "7 Discipline",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, whenever an enemy in the area takes [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage), they take extra psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Attacks made by allies in your [null field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) disrupt your enemies' thoughts, causing psychic pain.",
+      "keywords": [
+        "Psionic"
+      ],
+      "level": "3",
+      "target": "Self"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.polder/shadowmeld",
     "kind": "ability",
     "name": "Shadowmeld",

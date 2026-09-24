@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:68605198ebbeb08ab877f8aa3a6c2a8a06f0e9a41a8cecdb67fa93b9ef7ca5c3",
-  "entryCount": 1732,
+  "contentHash": "sha256:25195fa07a59cf80701693ff3bcf37442084cb76b4e1f2604a7963f0de28719b",
+  "entryCount": 1751,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -334,6 +334,17 @@
         "feature/ability/troubadour/level-3"
       ],
       "basis": "docs/build/V132-troubadour-level-three.md#scope: Troubadour levels two and three."
+    },
+    {
+      "id": "null-levels-two-three",
+      "description": "Null levels two and three: tradition features, perk, Psionic Leap, Reorder and all ten ability alternatives.",
+      "paths": [
+        "feature/null/level-2",
+        "feature/ability/null/level-2",
+        "feature/null/level-3",
+        "feature/ability/null/level-3"
+      ],
+      "basis": "docs/build/V133-null-level-three.md#scope: Null levels two and three."
     },
     {
       "id": "kits",
@@ -1721,6 +1732,86 @@
       "name": "Stunning Blow",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/stunning-blow.md",
       "selection": "null-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/blur",
+      "kind": "ability",
+      "name": "Blur",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/blur.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/entropic-field",
+      "kind": "ability",
+      "name": "Entropic Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/entropic-field.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/force-redirected",
+      "kind": "ability",
+      "name": "Force Redirected",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/force-redirected.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/gravitic-strike",
+      "kind": "ability",
+      "name": "Gravitic Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/heat-sink",
+      "kind": "ability",
+      "name": "Heat Sink",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/heat-sink.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/kinetic-shield",
+      "kind": "ability",
+      "name": "Kinetic Shield",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-3/absorption-field",
+      "kind": "ability",
+      "name": "Absorption Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/absorption-field.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-3/molecular-rearrangement-field",
+      "kind": "ability",
+      "name": "Molecular Rearrangement Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-3/stabilizing-field",
+      "kind": "ability",
+      "name": "Stabilizing Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+      "selection": "null-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.null.level-3/synapse-field",
+      "kind": "ability",
+      "name": "Synapse Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/synapse-field.md",
+      "selection": "null-levels-two-three",
       "file": "ability.json"
     },
     {
@@ -5801,6 +5892,78 @@
       "name": "Speed Augmentation",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-1/speed-augmentation.md",
       "selection": "null-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-2/2nd-level-tradition-ability",
+      "kind": "feature",
+      "name": "2nd-Level Tradition Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-2/2nd-level-tradition-ability.md",
+      "selection": "null-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-2/2nd-level-tradition-feature",
+      "kind": "feature",
+      "name": "2nd-Level Tradition Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-2/2nd-level-tradition-feature.md",
+      "selection": "null-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-2/entropic-adaptability",
+      "kind": "feature",
+      "name": "Entropic Adaptability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-2/entropic-adaptability.md",
+      "selection": "null-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-2/inertial-sink",
+      "kind": "feature",
+      "name": "Inertial Sink",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-2/inertial-sink.md",
+      "selection": "null-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-2/perk.md",
+      "selection": "null-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-2/rapid-processing",
+      "kind": "feature",
+      "name": "Rapid Processing",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-2/rapid-processing.md",
+      "selection": "null-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-3/7-discipline-ability",
+      "kind": "feature",
+      "name": "7-Discipline Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-3/7-discipline-ability.md",
+      "selection": "null-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-3/psionic-leap",
+      "kind": "feature",
+      "name": "Psionic Leap",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-3/psionic-leap.md",
+      "selection": "null-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.null.level-3/reorder",
+      "kind": "feature",
+      "name": "Reorder",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/null/level-3/reorder.md",
+      "selection": "null-levels-two-three",
       "file": "feature.json"
     },
     {

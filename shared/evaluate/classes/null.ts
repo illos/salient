@@ -98,4 +98,29 @@ export function applyNullModifiers(ctx: DerivationContext, out: PartialBaseline)
         agility,
         source('features', 'null-speed', 'equal to your Agility score.', agility),
       );
+  // feature/null/level-2/entropic-adaptability.md; rule/damage/damage-immunity.md: when several
+  // immunities apply, only the highest value applies, so a prior cold immunity keeps the maximum.
+  const intuition = out.characteristics?.I?.value;
+  if (ctx.available.has('class.null.level-2.entropic-adaptability') && intuition !== undefined) {
+    const amount = 2 * intuition;
+    const provenance: Provenance = {
+      decisionId: 'class.null.level-2.entropic-adaptability',
+      source: ctx.sentence({
+        path: 'en/unified/md/feature/null/level-2/entropic-adaptability.md',
+        quote: 'You have cold immunity equal to twice your Intuition score.',
+      }),
+      operation: 'set',
+      amount,
+      note: `2 × Intuition ${intuition}`,
+    };
+    const prior = (out.damageImmunities ??= []).find(i => i.damageType === 'cold');
+    if (prior) {
+      prior.value.value = Math.max(prior.value.value, amount);
+      prior.value.provenance.push(provenance);
+    } else
+      out.damageImmunities.push({
+        damageType: 'cold',
+        value: { value: amount, provenance: [provenance] },
+      });
+  }
 }

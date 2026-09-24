@@ -22,6 +22,10 @@ import {
   levelThreeDecisions as troubadourLevelThree,
   levelTwoDecisions as troubadourLevelTwo,
 } from './classes/troubadour/level-two-three.ts';
+import {
+  levelThreeDecisions as nullLevelThree,
+  levelTwoDecisions as nullLevelTwo,
+} from './classes/null/level-two-three.ts';
 import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
 import { levelThreeDecisions as shadowLevelThree } from './classes/shadow/level-three.ts';
 import { shadowLaterDecisions } from './classes/shadow/level-four-to-six.ts';
@@ -42,6 +46,7 @@ classStep.decisions.push(
     ...tacticianLevelTwo,
     ...censorLevelTwo,
     ...troubadourLevelTwo,
+    ...nullLevelTwo,
   ]),
 );
 
@@ -58,6 +63,7 @@ thirdClassStep.decisions.push(
     ...tacticianLevelThree,
     ...censorLevelThree,
     ...troubadourLevelThree,
+    ...nullLevelThree,
   ]),
 );
 

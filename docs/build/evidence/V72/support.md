@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:68605198ebbeb08ab877f8aa3a6c2a8a06f0e9a41a8cecdb67fa93b9ef7ca5c3`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:25195fa07a59cf80701693ff3bcf37442084cb76b4e1f2604a7963f0de28719b`.
 
-Currently reachable compiled: 102; unchanged reachable compatibility: 1455; structurally supported but unavailable: 0.
+Currently reachable compiled: 105; unchanged reachable compatibility: 1462; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -244,6 +244,16 @@ Currently reachable compiled: 102; unchanged reachable compatibility: 1455; stru
 | Psychic Pulse | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Relentless Nemesis | hero-standalone | manual | legacy-compatibility | manual-section |
 | Stunning Blow | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Blur | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Entropic Field | hero-standalone | supported | compiled |  |
+| Force Redirected | hero-standalone | supported | compiled |  |
+| Gravitic Strike | hero-standalone | supported | compiled |  |
+| Heat Sink | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Kinetic Shield | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Absorption Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Molecular Rearrangement Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Stabilizing Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Synapse Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Shadowmeld | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Detonate Sigil | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Black Ash Teleport | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |

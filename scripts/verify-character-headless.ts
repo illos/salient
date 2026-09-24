@@ -9,6 +9,7 @@ import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
 import { runTalent } from './headless/talent.ts';
 import { runNull } from './headless/null.ts';
+import { runNullLevelThree } from './headless/null-level-three.ts';
 import { runTroubadour } from './headless/troubadour.ts';
 import { runTroubadourLevelThree } from './headless/troubadour-level-three.ts';
 // SPDX-License-Identifier: GPL-3.0-only
@@ -52,6 +53,7 @@ const cohorts = {
   troubadour: runTroubadour,
   'troubadour-level-three': runTroubadourLevelThree,
   null: runNull,
+  'null-level-three': runNullLevelThree,
   elementalist: runElementalist,
   talent: runTalent,
   beastheart: runBeastheart,

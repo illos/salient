@@ -1,15 +1,15 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:68605198ebbeb08ab877f8aa3a6c2a8a06f0e9a41a8cecdb67fa93b9ef7ca5c3",
+  "contentHash": "sha256:25195fa07a59cf80701693ff3bcf37442084cb76b4e1f2604a7963f0de28719b",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 22,
-      "COMPILES_WITH_REMAINDER": 117,
-      "NO_MATCH": 168,
-      "total": 307,
-      "withinV26Bounded": 13
+      "COMPILES_WITH_REMAINDER": 120,
+      "NO_MATCH": 175,
+      "total": 317,
+      "withinV26Bounded": 14
     },
     "kit-signature": {
       "COMPILES": 6,
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 2656,
-    "resolvedToStandalone": 1801,
+    "total": 2702,
+    "resolvedToStandalone": 1847,
     "resolvedToKit": 150,
     "ownText": 705,
     "unresolved": []
@@ -16774,6 +16774,862 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option Stunning Blow supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/blur",
+      "name": "Blur",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/blur.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "5 Discipline",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can use a signature or heroic ability. You gain an edge on that ability's power rolls.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Blur",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/blur.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blur",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/blur.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blur",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/blur.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blur",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/blur.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blur",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/blur.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Blur supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/entropic-field",
+      "name": "Entropic Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/entropic-field.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "5 Discipline",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "damageType": "cold"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "damageType": "cold"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 13
+            },
+            "damageType": "cold"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM slowed (save ends)",
+            "text": "A < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM slowed (save ends)",
+            "text": "A < AVERAGE, slowed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM slowed (save ends)",
+            "text": "A < STRONG, slowed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": true,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Entropic Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/entropic-field.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Entropic Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Entropic Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/entropic-field.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Entropic Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Entropic Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/entropic-field.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Entropic Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Entropic Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/entropic-field.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Entropic Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Entropic Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/entropic-field.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Entropic Field supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/force-redirected",
+      "name": "Force Redirected",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/force-redirected.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Discipline",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "A"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 1",
+            "locator": "tier1"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 3",
+            "locator": "tier2"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 5",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Force Redirected",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/force-redirected.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Redirected supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Redirected",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/force-redirected.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Redirected supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Redirected",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/force-redirected.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Redirected supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Redirected",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/force-redirected.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Redirected supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Redirected",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/force-redirected.md",
+          "decisionId": "class.null.level-2.chronokinetic-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Redirected supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/gravitic-strike",
+      "name": "Gravitic Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Discipline",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "A"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 16,
+              "characteristic": "A"
+            },
+            "damageType": "psychic"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "pull",
+            "shape": "vertical pull N",
+            "text": "vertical pull 3",
+            "locator": "tier1"
+          },
+          {
+            "type": "pull",
+            "shape": "vertical pull N",
+            "text": "vertical pull 5",
+            "locator": "tier2"
+          },
+          {
+            "type": "pull",
+            "shape": "vertical pull N",
+            "text": "vertical pull 7",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Gravitic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Strike",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/gravitic-strike.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/heat-sink",
+      "name": "Heat Sink",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/heat-sink.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "5 Discipline",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the start of your next turn, the size of your Null Field ability increases by 1, and you and any ally benefit from concealment while in the area. At the end of this turn, each enemy in the area takes cold damage equal to your Intuition score.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Heat Sink",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/heat-sink.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Heat Sink supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Heat Sink",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/heat-sink.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Heat Sink supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Heat Sink",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/heat-sink.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Heat Sink supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Heat Sink",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/heat-sink.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Heat Sink supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Heat Sink",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/heat-sink.md",
+          "decisionId": "class.null.level-2.cryokinetic-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Heat Sink supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-2/kinetic-shield",
+      "name": "Kinetic Shield",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "5 Discipline",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "I"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "While you have temporary Stamina from this ability, you can't be made bleeding even while dying.",
+            "locator": "section:1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you gain N temporary stamina",
+            "text": "You gain 10 temporary Stamina",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you gain N temporary stamina",
+            "text": "You gain 15 temporary Stamina",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you gain N temporary stamina",
+            "text": "You gain 20 temporary Stamina",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Kinetic Shield",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Kinetic Shield supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Shield",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Kinetic Shield supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Shield",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Kinetic Shield supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Shield",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Kinetic Shield supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Shield",
+          "sourcePath": "en/unified/md/feature/ability/null/level-2/kinetic-shield.md",
+          "decisionId": "class.null.level-2.metakinetic-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Kinetic Shield supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-3/absorption-field",
+      "name": "Absorption Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/absorption-field.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Discipline",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter, the size of your Null Field ability increases by 1. While the area of that ability is enlarged this way, each enemy in the area takes a bane on ability rolls.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Absorption Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/absorption-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Absorption Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Absorption Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/absorption-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Absorption Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Absorption Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/absorption-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Absorption Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Absorption Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/absorption-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Absorption Field supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-3/molecular-rearrangement-field",
+      "name": "Molecular Rearrangement Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Discipline",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter, the size of your Null Field ability increases by 1. While the area of that ability is enlarged this way, each enemy who has I < AVERAGE and enters the area for the first time in a combat round or starts their turn there is bleeding (save ends). Each ally who enters the area for the first time in a combat round or starts their turn there gains temporary Stamina equal to your Intuition score.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Molecular Rearrangement Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Molecular Rearrangement Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Molecular Rearrangement Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Molecular Rearrangement Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Molecular Rearrangement Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Molecular Rearrangement Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Molecular Rearrangement Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/molecular-rearrangement-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Molecular Rearrangement Field supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-3/stabilizing-field",
+      "name": "Stabilizing Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Discipline",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter, the size of your Null Field ability increases by 1. While the area of that ability is enlarged this way, you ignore difficult terrain and reduce the potency of enemy effects targeting you by 1 for you. You can also use a free triggered action at the start of each of your turns to end one effect on you that is ended by a saving throw or that ends at the end of your turn. Each ally in the area also gains these benefits.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Stabilizing Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stabilizing Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stabilizing Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stabilizing Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stabilizing Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stabilizing Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Stabilizing Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/stabilizing-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Stabilizing Field supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.null.level-3/synapse-field",
+      "name": "Synapse Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-3/synapse-field.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "7 Discipline",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the end of the encounter, the size of your Null Field ability increases by 1. While the area of that ability is enlarged this way, whenever an enemy in the area takes rolled damage, they take extra psychic damage equal to twice your Intuition score.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Synapse Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/synapse-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synapse Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synapse Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/synapse-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synapse Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synapse Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/synapse-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synapse Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synapse Field",
+          "sourcePath": "en/unified/md/feature/ability/null/level-3/synapse-field.md",
+          "decisionId": "class.null.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synapse Field supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -101156,8 +102012,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1212,
-      "abilities": 1198,
+      "count": 1219,
+      "abilities": 1205,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -101167,8 +102023,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 698,
-      "abilities": 698,
+      "count": 704,
+      "abilities": 704,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -101211,8 +102067,8 @@
     {
       "shape": "slide N",
       "type": "slide",
-      "count": 89,
-      "abilities": 34,
+      "count": 92,
+      "abilities": 35,
       "examples": [
         "mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep",
         "mcdm.heroes.v1/feature.ability.conduit.level-1/staggering-curse",
@@ -101594,6 +102450,17 @@
       ]
     },
     {
+      "shape": "vertical pull N",
+      "type": "pull",
+      "count": 12,
+      "abilities": 4,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash",
+        "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike",
+        "mcdm.heroes.v1/feature.ability.null.level-2/gravitic-strike"
+      ]
+    },
+    {
       "shape": "malice-spend:N+ malice",
       "type": "malice-spend",
       "count": 11,
@@ -101671,6 +102538,17 @@
       ]
     },
     {
+      "shape": "potency:A < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 9,
+      "abilities": 4,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.fury.level-1/hit-and-run",
+        "mcdm.heroes.v1/feature.ability.null.level-2/entropic-field",
+        "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends"
+      ]
+    },
+    {
       "shape": "potency:R < N slowed (save ends)",
       "type": "potency-condition",
       "count": 9,
@@ -101701,17 +102579,6 @@
         "mcdm.beastheart.v1/feature.ability.beastheart.level-1/you-let-me-get-too-close",
         "mcdm.heroes.v1/feature.ability.fury.level-1/impaled",
         "mcdm.heroes.v1/kit/boren/bear-claws"
-      ]
-    },
-    {
-      "shape": "vertical pull N",
-      "type": "pull",
-      "count": 9,
-      "abilities": 3,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.conduit.level-1/holy-lash",
-        "mcdm.heroes.v1/feature.ability.null.level-1/magnetic-strike",
-        "mcdm.heroes.v1/kit/whirlwind/extension-of-my-arm"
       ]
     },
     {
@@ -101811,17 +102678,6 @@
         "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
         "salient:foe-feature:63692344-f9b6-4528-a660-43bd25d254eb",
         "salient:foe-feature:8a0771db-4bd6-4032-a8b5-341764403917"
-      ]
-    },
-    {
-      "shape": "potency:A < SYM slowed (save ends)",
-      "type": "potency-condition",
-      "count": 6,
-      "abilities": 3,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.fury.level-1/hit-and-run",
-        "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
-        "mcdm.heroes.v1/kit/ranger/hamstring-shot"
       ]
     },
     {
@@ -103108,6 +103964,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:67903115-71ac-44a5-82bb-c0cf353ea844"
+      ]
+    },
+    {
+      "shape": "tier:you gain N temporary stamina",
+      "type": "tier-damage",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.null.level-2/kinetic-shield"
       ]
     },
     {
@@ -105790,11 +106655,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 404,
+      "total": 414,
       "compiles": 29,
-      "withRemainder": 134,
-      "withinV26Bounded": 14,
-      "noMatch": 241
+      "withRemainder": 137,
+      "withinV26Bounded": 15,
+      "noMatch": 248
     }
   }
 }

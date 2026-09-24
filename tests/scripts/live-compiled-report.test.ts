@@ -72,6 +72,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Bloodletting Claws',
       'Corrosive Claws',
       'Flurry of Bites',
+      'Force Redirected',
       'Gatling Bolt Gun',
       'Gore',
       'Ice Lob',
@@ -93,6 +94,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
       // V113: tier forced movement, EoT and prone conditions and effect runs after damage.
       'Blade Rake',
       'Elemental Charge',
+      'Entropic Field',
       'Explosion',
       'Extension of My Arm',
       'Flamelash',
@@ -121,6 +123,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
       // V119: a bare grab (condition/grabbed.md) after damage.
       'Joint Lock',
       'Bear Claws',
+      'Gravitic Strike',
       'Tentacle',
       'Killer Claws',
       'Rotten Smash',

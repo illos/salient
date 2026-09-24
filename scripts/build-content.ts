@@ -300,6 +300,16 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V132-troubadour-level-three.md#scope: Troubadour levels two and three.',
   },
   {
+    id: 'null-levels-two-three',
+    description:
+      'Null levels two and three: tradition features, perk, Psionic Leap, Reorder and all ten ability alternatives.',
+    paths: [2, 3].flatMap(level => [
+      `feature/null/level-${level}`,
+      `feature/ability/null/level-${level}`,
+    ]),
+    basis: 'docs/build/V133-null-level-three.md#scope: Null levels two and three.',
+  },
+  {
     id: 'kits',
     description:
       'Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; Q-R-103 confirms Berserker and Reaver use ordinary Chapter 6 kits while Stormwight uses its four aspect kits; the pipeline preserves source fields rather than inferring eligibility.',
