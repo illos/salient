@@ -57,3 +57,8 @@ shared API. Guided advancement remains deferred.
   V99's Inspired Deception); the Look On My Work and Despair reading is labelled as an interpretation;
   Revelator's Judgment is optional ("can"); the test takes the 1-Wrath cost from the ledger.
   Eighteen new uses in total.
+- Test-support gate PASS at `e4fe41e`: `CI=true pnpm check` rc0 in 266 s, engine 410/410, app+scripts
+  658/658, content 1708 entries at the pin. Test-Deploy isolated `censor-level-three` cohort rc0 in
+  47 s: six builds, level edits and eighteen new uses persisted, seed 1708; the only backend error was
+  the deliberate peer owner refusal. Artifacts `/srv/presidium/projects/salient/test-artifacts/V117-e4fe41e`.
+- Ready for integration and cloud dev publication, reusing these results.
