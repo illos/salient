@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Execute on CT114. Bundle the unmodified pinned Forge rules, never its browser UI.
+// Bundle the unmodified pinned Forge rules, never its browser UI. Forge sources are read from the
+// pin's Git objects (pinned-source.mjs), so the sparse Presidium copy works as well as CT114's.
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { vendorDir } from '../lib/vendor.ts';
+import { pinnedForgeSource } from './pinned-source.mjs';
 
 const pin = '5a846aadb623a9855a023e9403bb887a956c341f';
 const vendor = vendorDir('forge-steel', resolve('.'));
@@ -17,7 +19,7 @@ const { build } = convexRequire('esbuild');
 const output = process.env.SALIENT_FORGE_OUTPUT;
 if (!output) throw new Error('Set SALIENT_FORGE_OUTPUT to a retained artifact directory');
 const family = process.env.SALIENT_FORGE_FAMILY ?? 'ancestry';
-if (!['ancestry', 'shadow', 'tactician'].includes(family))
+if (!['ancestry', 'shadow', 'tactician', 'import'].includes(family))
   throw new Error('Unknown Forge witness family');
 mkdirSync(output, { recursive: true });
 const blocked = new Set(['dompurify', 'modern-screenshot', 'html2canvas', 'jspdf', 'marked']);
@@ -29,8 +31,8 @@ const result = await build({
   format: 'esm',
   target: 'node24',
   metafile: true,
-  alias: { '@': resolve(vendor, 'src') },
   plugins: [
+    pinnedForgeSource({ vendor, pin, resolveDir: resolve('.') }),
     {
       name: 'presentation-boundary',
       setup(builder) {

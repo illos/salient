@@ -14,9 +14,14 @@ import { getDefinitions } from '../../content/character-decisions.ts';
 import type { SelectionValue } from '../../contracts/characterEvaluation.ts';
 import type { Decision, DecisionDefinitions } from '../../evaluate/definitions.ts';
 import { featureRules, ruleKey } from './mappings.ts';
-import { decisionSlug, resolveName } from './names.ts';
+import { decisionSlug, looseName, resolveName } from './names.ts';
 import { assertForgeHero, parseForgeHero, type ForgeFeature, type ForgeHero } from './shape.ts';
 import { activeFeatures, type ActiveFeature } from './walker.ts';
+import { forgePlayState, type ForgePlayState } from './state.ts';
+import {
+  isSupportedDefinitionLevel,
+  supportedLevelCeiling,
+} from '../../content/character-support.ts';
 
 export { ForgeShapeError } from './shape.ts';
 
@@ -59,6 +64,8 @@ export interface ForgeImportResult {
   diagnostics: ForgeImportDiagnostic[];
   /** Payload paths holding data this import did not translate (preserved in the stored payload). */
   unmapped: string[];
+  /** Forge damage, Recoveries used, temporary Stamina and surges (state.ts), when well formed. */
+  playState: ForgePlayState | null;
 }
 
 /** Feature types that record a player choice; each needs a mapping rule or a diagnostic. */
@@ -241,6 +248,7 @@ export function importForgeHero(
       case 'Choice':
       case 'Perk':
       case 'Kit':
+      case 'Summon Choice':
         return selected.every(row => typeof (row as { name?: unknown })?.name === 'string')
           ? selected.map(row => (row as { name: string }).name)
           : 'Selections are not named entries.';
@@ -397,6 +405,19 @@ export function importForgeHero(
   // --- Active features: scoped rules, structural rules, or a diagnostic ---
   for (const active of activeFeatures(hero)) {
     const { feature, path, scope } = active;
+    if (active.opaque && feature.type === 'Domain') {
+      // class/censor.md and class/conduit.md: domains are chosen from your deity's domains. Forge
+      // records domains but no deity, so neither is imported.
+      const domains = Array.isArray(feature.data?.selected)
+        ? (feature.data.selected as { name?: unknown }[]).map(row => String(row?.name ?? ''))
+        : [];
+      note({
+        ...about(feature),
+        path,
+        reason: `Forge records the domain${domains.length === 1 ? '' : 's'} ${clip(domains.join(', ') || 'none', 60)} but no deity; choose the deity and domains in Salient.`,
+      });
+      continue;
+    }
     if (active.opaque) {
       note({
         ...about(feature),
@@ -409,6 +430,12 @@ export function importForgeHero(
       mapCulture(active);
       continue;
     }
+    const rule = featureRules[ruleKey(scope, feature.id)];
+    if (rule?.kind === 'unrecorded') {
+      // A perk whose target Forge does not store: Salient asks for it (perk/<name>.md).
+      if (decisions.has(rule.decision)) note({ ...about(feature), path, reason: rule.reason });
+      continue;
+    }
     if (!choiceTypes.has(feature.type)) continue; // Passive grant: Salient derives it from content.
     const data = feature.data ?? {};
     if (data.selectAt === 'play') {
@@ -417,14 +444,21 @@ export function importForgeHero(
         note({ ...about(feature), path, reason: 'Play-time choice state is not imported.' });
       continue;
     }
-    const rule = featureRules[ruleKey(scope, feature.id)];
+    if (rule?.kind === 'unmapped') {
+      note({ ...about(feature), path, reason: rule.reason });
+      continue;
+    }
     const names = selectedNames(active);
     if (typeof names === 'string') {
       note({ ...about(feature), path, reason: names });
       continue;
     }
     if (rule?.kind === 'fixed') {
-      if (names.length === 0 || (names.length === 1 && names[0] === rule.expected)) continue;
+      const expected = [rule.expected].flat();
+      const same = (a: string[], b: string[]) =>
+        a.length === b.length &&
+        a.map(looseName).sort().join('\n') === b.map(looseName).sort().join('\n');
+      if (names.length === 0 || same(names, expected)) continue;
       const replacement =
         names.length === 1 && hero.class ? rule.duplicateReplacement?.[hero.class.id] : undefined;
       if (replacement) assign(replacement, names, path, about(feature));
@@ -432,12 +466,36 @@ export function importForgeHero(
         note({
           ...about(feature),
           path,
-          reason: `The Compendium grants ${rule.expected} here (${rule.source}); Forge selected ${clip(names.join(', '), 60)}.`,
+          reason: `The Compendium grants ${expected.join(' and ')} here (${rule.source}); Forge selected ${clip(names.join(', '), 60)}.`,
         });
       continue;
     }
     if (rule?.kind === 'decision') {
-      assign(rule.decision, names, path, about(feature));
+      if (rule.ids) {
+        const rows = Array.isArray(data.selected) ? (data.selected as ForgeFeature[]) : [];
+        const values = rows.map(row => rule.ids![row.id]);
+        if (values.some(value => value === undefined))
+          note({
+            ...about(feature),
+            path,
+            reason: `A selected Forge option has no mapping to ${rule.decision}; the choice is left open.`,
+          });
+        else assign(rule.decision, values as string[], path, about(feature));
+      } else assign(rule.decision, names, path, about(feature));
+      continue;
+    }
+    if (rule?.kind === 'split') {
+      // Each slot is a single choice; more Forge entries than slots is a diagnostic.
+      if (names.length > rule.decisions.length)
+        note({
+          ...about(feature),
+          path,
+          reason: `Forge has ${names.length} entries for ${rule.decisions.length} slots.`,
+        });
+      else
+        names.forEach((name, index) =>
+          assign(rule.decisions[index]!, [name], path, about(feature)),
+        );
       continue;
     }
     // Ancestry purchased traits: the ancestry's point-budget Choice (chapter/ancestries.md).
@@ -527,9 +585,16 @@ export function importForgeHero(
       path: 'state.tutorialMode',
       reason: 'Forge tutorial mode hides perk grants; they were not read.',
     });
+  const playState = forgePlayState(hero.state);
   for (const [field, initial] of Object.entries(defaultState))
     if (field in hero.state && hero.state[field] !== initial)
-      note({ path: `state.${field}`, reason: 'Forge play state is not imported.' });
+      note({
+        path: `state.${field}`,
+        reason:
+          playState && field in playState
+            ? 'Recorded as a reconciled starting value on the import; not applied to play (Q-V-3).'
+            : 'Forge play state is not imported.',
+      });
   const otherBooks = hero.sourcebookIDs.filter(id => !knownSourcebooks.has(id));
   if (otherBooks.length)
     note(
@@ -550,7 +615,27 @@ export function importForgeHero(
     authored: { name: name || PLACEHOLDER_NAME, notes },
     diagnostics,
     unmapped: [...unmapped].sort(),
+    playState,
   };
+}
+
+/**
+ * Level ceiling (Q-V-6). INTERIM DEFAULT pending the user's answer: a hero above the level Salient
+ * supports for its class is refused outright, before anything is written, and the message names
+ * the class's supported ceiling (shared/content/character-support.ts). This is Q-V-6 option A per
+ * class; options B (import at the highest supported level) and C (store as a pending import) wait
+ * for the answer (docs/rules-questions-for-user.md#q-v-6).
+ */
+export function forgeImportRefusal(result: ForgeImportResult): string | null {
+  const className = result.selections['class.choice'];
+  if (typeof className === 'string') {
+    const ceiling = supportedLevelCeiling(className);
+    if (ceiling !== null && result.level > ceiling)
+      return `This hero is level ${result.level}; Salient currently supports ${className} heroes up to level ${ceiling}, so the file was not imported.`;
+  }
+  if (!isSupportedDefinitionLevel(result.level))
+    return `This hero is level ${result.level}; Salient cannot yet import heroes at that level.`;
+  return null;
 }
 
 /** Parses file text and imports it; malformed JSON or shape throws `ForgeShapeError`. */

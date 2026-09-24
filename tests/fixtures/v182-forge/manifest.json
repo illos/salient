@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "v182-forge-built-1",
+  "kind": "Forge-built from pinned definitions (not Forge UI exports)",
+  "forgeVendorRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
+  "generator": "SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs; node \"$SALIENT_FORGE_OUTPUT/forge-run.mjs\"",
+  "template": "tests/fixtures/v45-reference/Grug-level-2.ds-hero (ancestry, culture, career)",
+  "selections": "tests/fixtures/level-three-builds.ts",
+  "heroes": [
+    {
+      "id": "shadow-level-2",
+      "path": "tests/fixtures/v182-forge/shadow-level-2.ds-hero.gz",
+      "sha256": "280ec3912e6ec967e125dd200b23dc8e024851422148d4ac5268c070072b1c16",
+      "bytes": 169350,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "shadow-level-3",
+      "path": "tests/fixtures/v182-forge/shadow-level-3.ds-hero.gz",
+      "sha256": "519289e78c25452b0fed52fde08373a573e0b58ae949309ffa50828e1dbe8ff3",
+      "bytes": 169401,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "fury-level-2",
+      "path": "tests/fixtures/v182-forge/fury-level-2.ds-hero.gz",
+      "sha256": "f4f1f097e785dbd484cb921b53bce696a222f996ab34d1cb8663ab6de076a5c5",
+      "bytes": 175927,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "fury-level-3",
+      "path": "tests/fixtures/v182-forge/fury-level-3.ds-hero.gz",
+      "sha256": "01ac28186f0a501b6eaea7c9f37a748e4ff25c327dee0ced2fc07f1ff7408f4e",
+      "bytes": 175976,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "tactician-level-2",
+      "path": "tests/fixtures/v182-forge/tactician-level-2.ds-hero.gz",
+      "sha256": "348085a44961358011d963475bf5b9226bdfd0983c5e3d9e4ead05860b1aa739",
+      "bytes": 159186,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "tactician-level-3",
+      "path": "tests/fixtures/v182-forge/tactician-level-3.ds-hero.gz",
+      "sha256": "3e6ca8eae7a04c6b5ce2849c86d91b86715cd488d449aa7fa2270fe08282682b",
+      "bytes": 159239,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "censor-level-2",
+      "path": "tests/fixtures/v182-forge/censor-level-2.ds-hero.gz",
+      "sha256": "d9c98f65d55df5febf9c8784fc55e48ebd492db59c6fd9f3c3d9e10dde937ed4",
+      "bytes": 166316,
+      "forgeOutstanding": [
+        "censor-1-7 (Domain Feature)",
+        "career-soldier-feature-3 (Language Choice)"
+      ]
+    },
+    {
+      "id": "censor-level-3",
+      "path": "tests/fixtures/v182-forge/censor-level-3.ds-hero.gz",
+      "sha256": "51565e72ca1c3857ca0a9b96211282aa32a3d5c16598e90b9f48aeac9e9369e3",
+      "bytes": 166367,
+      "forgeOutstanding": [
+        "censor-1-7 (Domain Feature)",
+        "career-soldier-feature-3 (Language Choice)"
+      ]
+    },
+    {
+      "id": "troubadour-level-2",
+      "path": "tests/fixtures/v182-forge/troubadour-level-2.ds-hero.gz",
+      "sha256": "8de7874a3efc38e2438b14265e172e740bf69d6c5d034e1394015d4ad80bd88d",
+      "bytes": 196713,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "troubadour-level-3",
+      "path": "tests/fixtures/v182-forge/troubadour-level-3.ds-hero.gz",
+      "sha256": "8c626c7d1fcf84729f417c9202a390f6549d535deb91109de83ea42268d34174",
+      "bytes": 196760,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "null-level-2",
+      "path": "tests/fixtures/v182-forge/null-level-2.ds-hero.gz",
+      "sha256": "1d02a1a183be540c444ccb9d7800d14d6af25590b84f2eaff37d4de264086d68",
+      "bytes": 182070,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "null-level-3",
+      "path": "tests/fixtures/v182-forge/null-level-3.ds-hero.gz",
+      "sha256": "32bf41cf48a3267393be2e353f268b5b8cab73b1799755ffe1df4cac0a0b3abc",
+      "bytes": 182119,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "conduit-level-2",
+      "path": "tests/fixtures/v182-forge/conduit-level-2.ds-hero.gz",
+      "sha256": "9c42bdee2d033948e36b408935127f0ddb28e01f1e8c4b80aa80bccd2fa94fec",
+      "bytes": 136153,
+      "forgeOutstanding": [
+        "conduit-1-4 (Domain Feature)",
+        "conduit-2-4 (Domain Feature)",
+        "conduit-2-3 (Domain Feature)",
+        "career-soldier-feature-3 (Language Choice)"
+      ]
+    },
+    {
+      "id": "conduit-level-3",
+      "path": "tests/fixtures/v182-forge/conduit-level-3.ds-hero.gz",
+      "sha256": "9f8a0ca059aeee4f9c98e1cca053f5613d365413bd4213dba1887358ee0d10a5",
+      "bytes": 136205,
+      "forgeOutstanding": [
+        "conduit-1-4 (Domain Feature)",
+        "conduit-2-4 (Domain Feature)",
+        "conduit-2-3 (Domain Feature)",
+        "career-soldier-feature-3 (Language Choice)"
+      ]
+    },
+    {
+      "id": "elementalist-level-2",
+      "path": "tests/fixtures/v182-forge/elementalist-level-2.ds-hero.gz",
+      "sha256": "2404ad76dee554bb1ac0c2b4b69f5c07384fbf3ec563c04166ed3087858ecc41",
+      "bytes": 194549,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "elementalist-level-3",
+      "path": "tests/fixtures/v182-forge/elementalist-level-3.ds-hero.gz",
+      "sha256": "2ce5e67ff862d2c10781c0ac36fc78aa984d90af7698660660f1cf674093f574",
+      "bytes": 194606,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "talent-level-2",
+      "path": "tests/fixtures/v182-forge/talent-level-2.ds-hero.gz",
+      "sha256": "3bb0d8730d7833b5c3dd3bd78f842b3a34b7a8ae386287567813575bfb0eb6d9",
+      "bytes": 201999,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "talent-level-3",
+      "path": "tests/fixtures/v182-forge/talent-level-3.ds-hero.gz",
+      "sha256": "6b1009b9405726da4bf4f45c5ec63555fb19758965edea5dcc3b2464dab9b62f",
+      "bytes": 202050,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "beastheart-level-2",
+      "path": "tests/fixtures/v182-forge/beastheart-level-2.ds-hero.gz",
+      "sha256": "f2a68a2f46199c1eeb3f5e505c5d523fc81acdb17dca897d1336f1ad45b9310f",
+      "bytes": 377617,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "beastheart-level-3",
+      "path": "tests/fixtures/v182-forge/beastheart-level-3.ds-hero.gz",
+      "sha256": "1c98ed21fe93ae702cd2688d6f89d2d1b11fc38c301d652bceaaa8a5e6aa9d0e",
+      "bytes": 377672,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "summoner-level-2",
+      "path": "tests/fixtures/v182-forge/summoner-level-2.ds-hero.gz",
+      "sha256": "084c4176d106db1c7ffd20ef5a263c9f2b507df885484c4a120e61a617e5dd31",
+      "bytes": 551176,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    },
+    {
+      "id": "summoner-level-3",
+      "path": "tests/fixtures/v182-forge/summoner-level-3.ds-hero.gz",
+      "sha256": "5dc3a5f766da55758b2a7fa0bb620f2d588c042e07f9e3e72a6fbb22616d2bd6",
+      "bytes": 551887,
+      "forgeOutstanding": ["career-soldier-feature-3 (Language Choice)"]
+    }
+  ]
+}

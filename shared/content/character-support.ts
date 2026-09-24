@@ -91,3 +91,17 @@ export function levelUpTarget(
       : null,
   };
 }
+
+/**
+ * The highest level at which `className` is supported without a gap from level one (V182), or
+ * null when level one does not support it. Levels above it have no verified definitions for the
+ * class, so nothing may be built or imported there.
+ */
+export function supportedLevelCeiling(className: string): number | null {
+  let ceiling: number | null = null;
+  for (let level = 1; isSupportedDefinitionLevel(level); level += 1) {
+    if (characterSupportDiagnostics(level, { 'class.choice': className }).length) break;
+    ceiling = level;
+  }
+  return ceiling;
+}
