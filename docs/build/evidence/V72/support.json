@@ -12,13 +12,13 @@
     },
     "foe-ability": {
       "total": 1158,
-      "supported": 60,
-      "manual": 1098
+      "supported": 62,
+      "manual": 1096
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 70,
-      "manual": 301
+      "supported": 72,
+      "manual": 299
     },
     "kit-signature": {
       "total": 25,
@@ -25312,7 +25312,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/judgments-hammer.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -25387,27 +25387,40 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier3:1:0b3af19d7d73f5db",
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier3:1:0b3af19d7d73f5db~prone",
             "locator": "block:0:tier3:1",
             "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < SYM prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier3:0:9c03fc9b6cf41c51"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier3:1:0b3af19d7d73f5db~cant-stand",
+            "locator": "block:0:tier3:1",
+            "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer#block:0:tier3:0:9c03fc9b6cf41c51"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Judgment's Hammer",
@@ -46552,7 +46565,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/staggering-blow.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -46596,13 +46609,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier2:1:0618430d25852b1f",
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier2:1:0618430d25852b1f~prone",
             "locator": "block:0:tier2:1",
             "clause": "M < AVERAGE, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier2:0:c690d0c54d874446"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier2:1:0618430d25852b1f~cant-stand",
+            "locator": "block:0:tier2:1",
+            "clause": "M < AVERAGE, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier2:0:c690d0c54d874446"
           }
         ],
         [
@@ -46619,33 +46652,40 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier3:1:e9e23f5bf7b0b747",
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier3:1:e9e23f5bf7b0b747~prone",
             "locator": "block:0:tier3:1",
             "clause": "M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier3:0:35a771bff6aa1a79"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier3:1:e9e23f5bf7b0b747~cant-stand",
+            "locator": "block:0:tier3:1",
+            "clause": "M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow#block:0:tier3:0:35a771bff6aa1a79"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < AVERAGE, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Staggering Blow",
@@ -55468,13 +55508,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier3:1:e9e23f5bf7b0b747",
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier3:1:e9e23f5bf7b0b747~prone",
             "locator": "block:0:tier3:1",
             "clause": "M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier3:0:0132ad69f5e8865c"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier3:1:e9e23f5bf7b0b747~cant-stand",
+            "locator": "block:0:tier3:1",
+            "clause": "M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier3:0:0132ad69f5e8865c"
           }
         ]
       ],
@@ -55499,12 +55559,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "source-block-count",
           "locator": "markdown",
@@ -60763,13 +60817,33 @@
             "after": ""
           },
           {
-            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier3:1:8e104b0104ea59ec",
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier3:1:8e104b0104ea59ec~prone",
             "locator": "block:1:tier3:1",
             "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
-            "kind": "unsupported",
-            "shape": "potency:A < SYM prone and can't stand (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier3:1:8e104b0104ea59ec~cant-stand",
+            "locator": "block:1:tier3:1",
+            "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "prone",
+            "duration": "eot",
+            "restriction": "cant-stand",
+            "after": ""
           }
         ]
       ],
@@ -60785,12 +60859,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:1:tier3:1",
-          "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:0:0",
@@ -75176,13 +75244,19 @@
             "after": "salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29#block:0:tier3:0:abbf0071bed5821d"
           },
           {
-            "id": "salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29#block:0:tier3:2:9e2d0313be303106",
+            "id": "salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29#block:0:tier3:2:9e2d0313be303106~cant-stand",
             "locator": "block:0:tier3:2",
             "clause": "M < 5 can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29#block:0:tier3:0:abbf0071bed5821d"
           }
         ]
       ],
@@ -75198,12 +75272,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "M < 5 can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -84325,7 +84393,7 @@
         "path": "en/books/monsters/md/monster/time-raider/statblock/time-raider-mind-punk.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -84377,13 +84445,33 @@
             "after": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier2:0:3a074d34ffb2a84b"
           },
           {
-            "id": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier2:2:a8bd7b0e28c5c9be",
+            "id": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier2:2:a8bd7b0e28c5c9be~prone",
             "locator": "block:0:tier2:2",
             "clause": "R < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier2:0:3a074d34ffb2a84b"
+          },
+          {
+            "id": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier2:2:a8bd7b0e28c5c9be~cant-stand",
+            "locator": "block:0:tier2:2",
+            "clause": "R < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier2:0:3a074d34ffb2a84b"
           }
         ],
         [
@@ -84408,33 +84496,40 @@
             "after": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier3:0:31e43a23fb26de4c"
           },
           {
-            "id": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier3:2:ba87565e4f18172d",
+            "id": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier3:2:ba87565e4f18172d~prone",
             "locator": "block:0:tier3:2",
             "clause": "R < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier3:0:31e43a23fb26de4c"
+          },
+          {
+            "id": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier3:2:ba87565e4f18172d~cant-stand",
+            "locator": "block:0:tier3:2",
+            "clause": "R < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:10b2170f-1e36-4b84-9e73-5f06e4562c2d#block:0:tier3:0:31e43a23fb26de4c"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:2",
-          "clause": "R < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "R < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -111654,13 +111749,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier1:1:070f46c7dd8efd00",
+            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier1:1:070f46c7dd8efd00~prone",
             "locator": "block:0:tier1:1",
             "clause": "A < 0 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier1:0:65723ebe74a7200a"
+          },
+          {
+            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier1:1:070f46c7dd8efd00~cant-stand",
+            "locator": "block:0:tier1:1",
+            "clause": "A < 0 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 0
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier1:0:65723ebe74a7200a"
           }
         ],
         [
@@ -111676,13 +111791,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier2:1:8b5ec4e7d898a4bd",
+            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier2:1:8b5ec4e7d898a4bd~prone",
             "locator": "block:0:tier2:1",
             "clause": "A < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier2:0:abbf0071bed5821d"
+          },
+          {
+            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier2:1:8b5ec4e7d898a4bd~cant-stand",
+            "locator": "block:0:tier2:1",
+            "clause": "A < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier2:0:abbf0071bed5821d"
           }
         ],
         [
@@ -111698,13 +111833,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier3:1:c033bb12ee5ed78e",
+            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier3:1:c033bb12ee5ed78e~prone",
             "locator": "block:0:tier3:1",
             "clause": "A < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:A < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier3:0:cfa92550e9d3470b"
+          },
+          {
+            "id": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier3:1:c033bb12ee5ed78e~cant-stand",
+            "locator": "block:0:tier3:1",
+            "clause": "A < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:40a84969-c9c9-49f1-87e1-efd541efedb1#block:0:tier3:0:cfa92550e9d3470b"
           }
         ]
       ],
@@ -111720,24 +111875,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "A < 0 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "A < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -129273,13 +129410,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier2:1:a8bd7b0e28c5c9be",
+            "id": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier2:1:a8bd7b0e28c5c9be~prone",
             "locator": "block:0:tier2:1",
             "clause": "R < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier2:0:2ea56bbac3101626"
+          },
+          {
+            "id": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier2:1:a8bd7b0e28c5c9be~cant-stand",
+            "locator": "block:0:tier2:1",
+            "clause": "R < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier2:0:2ea56bbac3101626"
           }
         ],
         [
@@ -129295,13 +129452,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier3:1:ba87565e4f18172d",
+            "id": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier3:1:ba87565e4f18172d~prone",
             "locator": "block:0:tier3:1",
             "clause": "R < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier3:0:133a4e1c729a9477"
+          },
+          {
+            "id": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier3:1:ba87565e4f18172d~cant-stand",
+            "locator": "block:0:tier3:1",
+            "clause": "R < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:6317b077-8641-4d70-8527-2d82a980f4e4#block:0:tier3:0:133a4e1c729a9477"
           }
         ]
       ],
@@ -129317,18 +129494,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "R < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -129774,13 +129939,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier2:1:363e6452c942da72",
+            "id": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier2:1:363e6452c942da72~prone",
             "locator": "block:0:tier2:1",
             "clause": "M < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier2:0:9761dc8e4c2e4090"
+          },
+          {
+            "id": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier2:1:363e6452c942da72~cant-stand",
+            "locator": "block:0:tier2:1",
+            "clause": "M < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier2:0:9761dc8e4c2e4090"
           }
         ],
         [
@@ -129796,13 +129981,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier3:1:fac461854b015627",
+            "id": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier3:1:fac461854b015627~prone",
             "locator": "block:0:tier3:1",
             "clause": "M < 3 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N prone and can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier3:0:ab4051da6c231d29"
+          },
+          {
+            "id": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier3:1:fac461854b015627~cant-stand",
+            "locator": "block:0:tier3:1",
+            "clause": "M < 3 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:64459c9a-7758-45a7-881e-592e2cab876f#block:0:tier3:0:ab4051da6c231d29"
           }
         ]
       ],
@@ -129818,18 +130023,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 3 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -165631,13 +165824,33 @@
             "kitBonusesIncluded": false
           },
           {
-            "id": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier2:1:cbc463c0d27fbf47",
+            "id": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier2:1:cbc463c0d27fbf47~prone",
             "locator": "block:0:tier2:1",
             "clause": "A < 4 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)",
-            "kind": "unsupported",
-            "shape": "potency:A < N prone and can't stand (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier2:0:73a99fde4b79fa35"
+          },
+          {
+            "id": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier2:1:cbc463c0d27fbf47~cant-stand",
+            "locator": "block:0:tier2:1",
+            "clause": "A < 4 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "prone",
+            "duration": "eot",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier2:0:73a99fde4b79fa35"
           }
         ],
         [
@@ -165665,13 +165878,19 @@
             "after": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier3:0:2cd14f2d7b8cfe11"
           },
           {
-            "id": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier3:2:800a8706ab20d3b9",
+            "id": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier3:2:800a8706ab20d3b9~cant-stand",
             "locator": "block:0:tier3:2",
             "clause": "A < 5 can't stand (EoT)",
-            "kind": "unsupported",
-            "shape": "potency:A < N can't stand (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "printed",
+              "value": 5
+            },
+            "condition": "prone",
+            "duration": "eot",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:a9382361-e8b0-4538-8f8b-553aba9245e8#block:0:tier3:0:2cd14f2d7b8cfe11"
           }
         ]
       ],
@@ -165687,18 +165906,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "A < 4 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "A < 5 can't stand (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -205459,13 +205666,19 @@
             "after": "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98#block:0:tier2:0:4b300aa389139d18"
           },
           {
-            "id": "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98#block:0:tier2:2:24fc98d10f2d2924",
+            "id": "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98#block:0:tier2:2:24fc98d10f2d2924~cant-stand",
             "locator": "block:0:tier2:2",
             "clause": "M < 3 can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98#block:0:tier2:0:4b300aa389139d18"
           }
         ],
         [
@@ -205493,13 +205706,19 @@
             "after": "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98#block:0:tier3:0:2cd14f2d7b8cfe11"
           },
           {
-            "id": "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98#block:0:tier3:2:b9d4a39dc6824e51",
+            "id": "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98#block:0:tier3:2:b9d4a39dc6824e51~cant-stand",
             "locator": "block:0:tier3:2",
             "clause": "M < 4 can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 4
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98#block:0:tier3:0:2cd14f2d7b8cfe11"
           }
         ]
       ],
@@ -205515,18 +205734,6 @@
         }
       ],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:2",
-          "clause": "M < 3 can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "M < 4 can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "manual-section",
           "locator": "block:1:0",
@@ -209937,7 +210144,7 @@
         "path": "en/books/monsters/md/monster/goblin/statblock/goblin-cursespitter.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -209957,13 +210164,33 @@
         ],
         [
           {
-            "id": "salient:foe-feature:fee828d9-0cd9-4111-9bd0-ee16169f7186#block:0:tier2:0:a5ecc53def30c872",
+            "id": "salient:foe-feature:fee828d9-0cd9-4111-9bd0-ee16169f7186#block:0:tier2:0:a5ecc53def30c872~prone",
             "locator": "block:0:tier2:0",
             "clause": "I < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)",
-            "kind": "unsupported",
-            "shape": "potency:I < N prone and can't stand (eot)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": ""
+          },
+          {
+            "id": "salient:foe-feature:fee828d9-0cd9-4111-9bd0-ee16169f7186#block:0:tier2:0:a5ecc53def30c872~cant-stand",
+            "locator": "block:0:tier2:0",
+            "clause": "I < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "condition": "prone",
+            "duration": "eot",
+            "restriction": "cant-stand",
+            "after": ""
           }
         ],
         [
@@ -209980,33 +210207,26 @@
             "after": ""
           },
           {
-            "id": "salient:foe-feature:fee828d9-0cd9-4111-9bd0-ee16169f7186#block:0:tier3:1:6db6ccdeaa3a9853",
+            "id": "salient:foe-feature:fee828d9-0cd9-4111-9bd0-ee16169f7186#block:0:tier3:1:6db6ccdeaa3a9853~cant-stand",
             "locator": "block:0:tier3:1",
             "clause": "I < 2 can't stand (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:I < N can't stand (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "condition": "prone",
+            "duration": "save-ends",
+            "restriction": "cant-stand",
+            "after": ""
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:0",
-          "clause": "I < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "I < 2 can't stand (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -213487,8 +213707,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 143,
-    "compatibility": 1478,
+    "compiled": 147,
+    "compatibility": 1474,
     "compiledButUnavailable": 0
   }
 }

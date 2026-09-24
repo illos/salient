@@ -542,6 +542,39 @@ export function tierCompoundConditionExpression(clause: string):
 }
 
 /**
+ * V155 "prone and can't stand (save ends)" and the split form "M < 3 can't stand (save ends)" after a
+ * printed prone. Ruled 2026-09-24 (docs/decisions/2026-09-24-automation-rulings.md, section 5):
+ * the duration ends only the restriction on standing (condition/prone.md: Stand Up ends prone
+ * "unless the ability or effect that imposed the prone condition says otherwise"); the creature
+ * stays prone until it uses Stand Up.
+ */
+export function tierCantStandExpression(clause: string):
+  | {
+      characteristic?: Characteristic;
+      threshold: ConditionThreshold | { kind: 'always' };
+      withProne: boolean;
+      duration: 'save-ends' | 'eot';
+    }
+  | undefined {
+  const text = plain(clause).replace(/\.$/, '').replace(/[‘’]/g, "'").replace(/\s+/g, ' ').trim();
+  const match =
+    /^(?:([MARIP]) < (-?\d+|WEAK|AVERAGE|STRONG),? )?(prone and )?can't stand \((save ends|EoT)\)$/.exec(
+      text,
+    );
+  if (!match) return undefined;
+  const probe = tierConditionExpression(
+    `${match[1] ? `${match[1]} < ${match[2]}, ` : ''}prone (${match[4]})`,
+  );
+  if (!probe) return undefined;
+  return {
+    ...(probe.characteristic ? { characteristic: probe.characteristic } : {}),
+    threshold: probe.threshold,
+    withProne: match[3] !== undefined,
+    duration: match[4] === 'EoT' ? 'eot' : 'save-ends',
+  };
+}
+
+/**
  * V153 unconditional condition then forced movement in one clause ("taunted (EoT), slide 1"),
  * applied in printed order. A potency before the condition is refused: whether it also gates the
  * movement is not stated.

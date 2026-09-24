@@ -577,7 +577,7 @@ export function CompiledEffects({
             {effect.kind === 'condition' && (
               <>
                 <span>
-                  {effect.condition} (
+                  {effect.restriction ? "can't stand" : effect.condition} (
                   {effect.duration === 'eot'
                     ? 'EoT'
                     : effect.duration === 'none'

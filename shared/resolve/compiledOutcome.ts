@@ -114,6 +114,8 @@ export interface CompiledConditionOutcome extends EffectIdentity {
   duration: ConditionNode['duration'];
   /** V153: shared by the conditions of one compound clause; they take one saving throw. */
   group?: string;
+  /** V155: the timed restriction on standing that holds a prone creature down. */
+  restriction?: 'cant-stand';
   requirements: string[];
 }
 
@@ -139,6 +141,7 @@ function conditionOutcome(
     condition: node.condition,
     duration: node.duration,
     ...(node.group !== undefined ? { group: node.group } : {}),
+    ...(node.restriction !== undefined ? { restriction: node.restriction } : {}),
   };
   const threshold = node.threshold;
   if (eligible && target.conditionImmunities?.includes(node.condition))
@@ -492,7 +495,21 @@ export function resolveCompiledAbility(
                 (node.duration === 'none' ||
                   node.condition === 'grabbed' ||
                   node.condition === 'prone' ||
-                  node.id !== `${node.group}~${node.condition}`))),
+                  node.id !== `${node.group}~${node.condition}`)) ||
+              // V155: a restriction holds down a prone printed before it in the same tier.
+              (node.restriction !== undefined &&
+                (node.restriction !== 'cant-stand' ||
+                  node.condition !== 'prone' ||
+                  (node.duration !== 'save-ends' && node.duration !== 'eot') ||
+                  !node.id.endsWith('~cant-stand') ||
+                  !nodes
+                    .slice(0, index)
+                    .some(
+                      prior =>
+                        prior.kind === 'condition' &&
+                        prior.condition === 'prone' &&
+                        prior.restriction === undefined,
+                    )))),
         ) ||
         nodes.some(node => node.kind === 'unsupported' && node.dependency !== 'after-damage') ||
         nodes.some(
@@ -588,6 +605,25 @@ export function resolveCompiledAbility(
           dependency: node.dependency,
         });
       }
+    }
+  }
+  // V155: can't stand holds down only a creature this tier made prone. If that prone was resisted,
+  // prevented or is still unknown, the restriction takes the prone's status instead of its own.
+  for (const [index, effect] of remainder.entries()) {
+    if (effect.kind !== 'condition' || effect.restriction !== 'cant-stand') continue;
+    const prone = remainder
+      .slice(0, index)
+      .reverse()
+      .find(
+        (prior): prior is CompiledConditionOutcome =>
+          prior.kind === 'condition' &&
+          prior.targetId === effect.targetId &&
+          prior.condition === 'prone' &&
+          prior.restriction === undefined,
+      );
+    if (prone && prone.status !== 'applied' && effect.status === 'applied') {
+      effect.status = prone.status;
+      effect.requirements = [...effect.requirements, ...prone.requirements];
     }
   }
   // Sections occur once per use, after tier effects in printed order; never one award per target.

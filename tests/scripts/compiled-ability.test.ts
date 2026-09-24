@@ -635,7 +635,8 @@ describe('V88 bounded potency conditions', () => {
   it.each([
     'A < 2 grabbed (EoT)',
     'M < 1 slowed',
-    "A < STRONG, prone and can't stand (save ends)",
+    // V155 admits "prone and can't stand" (tests/scripts/cant-stand.test.ts).
+    "A < STRONG, prone and can't stand until the end of their next turn",
     'M < 1 bleeding (save ends) then shift 1',
     'M < 1 slowed (save ends), slide 1',
     'M < 1 vertical push 3',

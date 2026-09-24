@@ -11,6 +11,7 @@ import {
   blocksFromMarkdown,
   classify,
   forcedMovementExpression,
+  tierCantStandExpression,
   tierCompoundConditionExpression,
   tierConditionExpression,
   tierConditionMovementExpression,
@@ -61,6 +62,11 @@ export interface ConditionNode extends NodeSource {
    * ends)"). They resolve against one potency and are removed by one saving throw.
    */
   group?: string;
+  /**
+   * V155: a restriction on standing up that holds a prone creature down for `duration`. It is
+   * recorded as a prone instance, so ending it leaves any other prone instance in place.
+   */
+  restriction?: 'cant-stand';
 }
 /** Forced movement. V26 push nodes have no `movement`; V113 adds pull, slide and vertical. */
 export interface PushNode extends NodeSource {
@@ -330,6 +336,43 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
               after,
               group: base.id,
             });
+          return;
+        }
+        // V155: prone (no duration, ended by Stand Up) plus the timed restriction on standing.
+        const cantStand = tierCantStandExpression(clause);
+        const printedProne = nodes.some(
+          node =>
+            node.kind === 'condition' &&
+            node.condition === 'prone' &&
+            node.restriction === undefined &&
+            node.threshold.kind === 'always',
+        );
+        if (supportedRun && cantStand && (cantStand.withProne || printedProne)) {
+          const base = sourceNode(envelope, tierLocator, ordinal, clause);
+          const potency = {
+            ...(cantStand.characteristic ? { characteristic: cantStand.characteristic } : {}),
+            threshold: cantStand.threshold,
+          };
+          if (cantStand.withProne)
+            nodes.push({
+              ...base,
+              id: `${base.id}~prone`,
+              kind: 'condition',
+              ...potency,
+              condition: 'prone',
+              duration: 'none',
+              after,
+            });
+          nodes.push({
+            ...base,
+            id: `${base.id}~cant-stand`,
+            kind: 'condition',
+            ...potency,
+            condition: 'prone',
+            duration: cantStand.duration,
+            restriction: 'cant-stand',
+            after,
+          });
           return;
         }
         const both = tierConditionMovementExpression(clause);

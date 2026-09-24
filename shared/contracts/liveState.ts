@@ -76,6 +76,11 @@ export interface ConditionInstance {
    * throw removes the whole effect (rule/general/saving-throw.md), so members share each roll.
    */
   saveGroup?: string;
+  /**
+   * V155: a timed restriction on standing (condition `prone`). While it is active the creature
+   * can't use Stand Up; ending it leaves the creature prone (automation rulings, section 5).
+   */
+  restriction?: 'cant-stand';
 }
 
 /** Every toggle off: the first-admission state of a hero and the loaded state of a foe. */

@@ -89,7 +89,7 @@ export async function applyConditionInstance(
     ConditionInstance,
     'id' | 'condition' | 'sourceUseEventId' | 'abilityName' | 'actorLabel' | 'sourcePath'
   > &
-    Partial<Pick<ConditionInstance, 'duration' | 'sourceActorId' | 'saveGroup'>>,
+    Partial<Pick<ConditionInstance, 'duration' | 'sourceActorId' | 'saveGroup' | 'restriction'>>,
   encounterId?: Id<'encounters'>,
 ): Promise<ConditionInstance> {
   const initial = await read(ctx, target);

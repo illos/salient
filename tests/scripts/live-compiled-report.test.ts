@@ -168,6 +168,11 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Fade',
       'Muddle the Mind',
       'Web',
+      // V155: prone and a timed restriction on standing (automation rulings, section 5).
+      "Judgment's Hammer",
+      'Staggering Blow',
+      'Mindpunk',
+      'Dizzying Hex',
     ].sort(),
   );
   expect(

@@ -912,6 +912,7 @@ async function commitConditions(
           condition: effect.condition,
           duration: effect.duration,
           ...(saveGroup !== undefined ? { saveGroup } : {}),
+          ...(effect.restriction ? { restriction: effect.restriction } : {}),
           sourceActorId: source.actorId,
           sourceUseEventId: source.eventId,
           abilityName: source.abilityName,
@@ -932,6 +933,9 @@ async function commitConditions(
             : instance.registrationId
               ? ' Save scheduled at each target turn end.'
               : ' Save is unscheduled outside a committed encounter; resolve it manually.';
+      if (effect.restriction)
+        schedule +=
+          ' While it lasts, Stand Up is refused; when it ends the creature stays prone until it uses Stand Up.';
     }
     // Never publish the target score through event descriptions/payloads, even for hero targets.
     await appendEvent(ctx, {
@@ -942,7 +946,7 @@ async function commitConditions(
       commandId: cause.commandId,
       causeEventId: scope.eventId,
       kind: 'condition.potency',
-      description: `${source.actorLabel}'s ${source.abilityName}: ${target.actor.name}, ${plainText(effect.clause)} — ${effect.status}.${schedule} Condition consequences remain manual.`,
+      description: `${source.actorLabel}'s ${source.abilityName}: ${target.actor.name}, ${effect.restriction ? "can't stand" : effect.condition} (${plainText(effect.clause)}) — ${effect.status}.${schedule} Condition consequences remain manual.`,
       payload: {
         sourceUseEventId: source.eventId,
         occurrence: occurrence.id,
@@ -1375,6 +1379,14 @@ const abilityUse: OperationDefinition = {
       const target = targets[0]!;
       if (!conditionsOf(target)?.prone)
         throw new ConvexError(`${target.actor.name} is not prone; Stand Up has nothing to end.`);
+      // V155 (automation rulings, section 5): an active "can't stand" restriction holds them down.
+      const holding = instancesOf(target).find(
+        i => i.status === 'active' && i.restriction === 'cant-stand',
+      );
+      if (holding)
+        throw new ConvexError(
+          `${target.actor.name} can't stand (${holding.actorLabel}'s ${holding.abilityName}, ${holding.duration === 'eot' ? 'until the end of their turn' : 'save ends'}); Stand Up is unavailable until that ends.`,
+        );
       if (target.squad || (target.actor.kind !== 'character' && target.actor.kind !== 'foe'))
         throw new ConvexError('Stand Up ends prone on a hero or foe; resolve squads manually.');
       const other = !sameActor(target.actor, actor!);
