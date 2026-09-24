@@ -302,7 +302,7 @@ export async function runElementalistLevelThree({
             ...new Set([
               ...b.w.levelTwo.addedAbilities,
               ...b.w.levelThree.addedAbilities,
-              ...[...parents, b.second, b.seventh].flatMap(parent => embedded[parent] ?? []),
+              ...parents.flatMap(parent => embedded[parent] ?? []),
             ]),
           ];
           for (const name of names) {

@@ -183,8 +183,8 @@ test('a level-1 5-Essence pick cannot repeat; level and specialization edits pru
   assert.ok(!features.some(f => f.name === 'Disciple of Earth'));
   assert.ok(features.some(f => f.name === 'There Is No Space Between'));
   // Disciple of Earth's +6, +3 per level past 2nd (disciple-of-earth.md) leaves with the feature.
-  if (after.baseline)
-    assert.equal(after.baseline.staminaMaximum.value, earth.w.levelThree.staminaMaximum - (6 + 3));
+  assert.ok(after.baseline);
+  assert.equal(after.baseline.staminaMaximum.value, earth.w.levelThree.staminaMaximum - (6 + 3));
   assert.equal(
     swapped.selections['class.elementalist.level-2.perk'],
     earth.l3['class.elementalist.level-2.perk'],
