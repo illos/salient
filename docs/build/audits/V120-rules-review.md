@@ -184,3 +184,46 @@ Verdict at `282827c`: CHANGES REQUIRED (R1 and R3 required; R2, R4 and R5 adviso
 CHANGES REQUIRED: R1 (the level-4+ trigger amount and the double count with the manual Surge of
 Insight row) and R3 (the Void/session-close reading of encounter end is unlabelled). R2, R4 and R5
 are advisory.
+
+## R1–R5 closure: `7564aa8`
+
+Verdict: PASS. All five findings are closed. Nothing new at blocking or required severity.
+
+- **R1: closed.**
+  - The trigger now has `levelAmounts` with `fromLevel: 4, amount: 2`, citing
+    `feature/shadow/level-4/surge-of-insight.md`. Its quote is checked verbatim by the pure test,
+    which now includes `levelAmounts`.
+  - `triggerAmount` chooses the clause by `baseline.level`. The sheet and `resource.claim` both use
+    it, and both the log payload and the UI cite the level-4 source.
+  - The manual Surge of Insight row now points to the claim and says not to also adjust by hand. No
+    fixture or test pins the old row text (`v108-shadow-six-expected.json` pins only names, cost and
+    mode).
+  - The app test proves a level-4 claim gives +2.
+- **R2: closed.**
+  - `verifiedThroughLevel: 6` is cited to `keen-insight.md`.
+  - `generationProfile(baseline)` returns undefined outside levels 1 to that ceiling. The same call
+    gates registration at commit, firing, the sheet and the claim.
+  - The app test proves a level-7 Shadow gets no registrations, no triggers and a refused claim.
+  - Level 9 (Gloom Squad) and level 10 (Death Pool) fall under the same ceiling.
+- **R3: closed.**
+  - Q-RES-1 is in `docs/rules-questions-for-user.md`. It cites the insight passage and names
+    alternatives (a) and (b) alongside the current behaviour. The slice doc labels it.
+  - `voidEncounter` in keep mode appends one `combat.resource-kept` entry, using the void's scope,
+    for each participating hero whose level is within a profile and whose pool is nonzero. This
+    covers both `combat.void` and closing the session (`convex/sessions.ts:183`).
+  - The app test proves the note appears for the level-4 hero only.
+- **R4: closed.** `claimWindow('turn', …)` returns null when no turn is active, and `claimState`
+  reports "No turn is active." to the sheet and the operation. The pure test asserts this.
+- **R5: closed.** `blocked` now refuses when `heroicResource.name` does not match
+  `profile.resource`, in both the sheet and `resource.claim`.
+
+Advisory note (no change needed): the level-4 and level-7 app test patches `derivedBaseline.level`
+directly instead of building those levels. That is acceptable because the engine reads only
+`baseline.level`, and V108 covers building those levels.
+
+Checks run by the reviewer at `7564aa8`:
+- `npx tsc --noEmit` on the root, `-p convex` and `-p tsconfig.web.json`: all exit 0.
+- `npx eslint` on the changed files: exit 0.
+- `npx vitest run tests/app/heroic-resource.test.ts tests/scripts/heroic-resource-generation.test.ts`:
+  2 files, 6 tests passed.
+- No other suites, journeys or services were run.

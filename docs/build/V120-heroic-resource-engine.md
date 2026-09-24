@@ -107,3 +107,4 @@ independent rules review. This slice enables the Shadow; V140–V149 enable the 
 
   Tests were added: the level amount, the level ceiling, the turn window and the keep-void note. The
   focused files pass (2/2 and 4/4); `tsc` and eslint are clean.
+- Review closure: PASS at `7564aa8`.
