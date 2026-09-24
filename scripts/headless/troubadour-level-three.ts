@@ -49,6 +49,8 @@ const embedded: Record<string, string[]> = {
   'Tough Crowd': ['Tough Crowd: End-of-Turn Roll'],
   'Star Solo': ['Star Solo: Repeat Use'],
   'We Meet at Last': ['We Meet at Last: Message'],
+  'Classic Chandelier Stunt': ['Classic Chandelier Stunt: Free Strike'],
+  '"Fire Up the Night"': ['"Fire Up the Night": Search'],
 };
 const features = [
   'Appeal to the Muses',
@@ -61,7 +63,6 @@ const features = [
 ];
 /** Printed Self / self-and-ally targets record against the Troubadour, never a separate target. */
 const selfTargets = ['Classic Chandelier Stunt', '"Fire Up the Night"', '"Never-Ending Hero"'];
-const paid: Record<string, number> = {};
 /** Abilities the table rolls; damage comes from the ledger, other clauses stay manual. */
 const rolledRemainder: Record<string, RegExp> = {
   'En Garde!': /./,
@@ -78,7 +79,7 @@ export async function runTroubadourLevelThree({
   runId,
 }: ScenarioContext) {
   await run(
-    'Troubadour levels 2–3: six builds, level edits and twenty-two new uses persist',
+    'Troubadour levels 2–3: six builds, level edits and twenty-four new uses persist',
     async () => {
       const { definitions } = await director.query<{ definitions: DecisionDefinitions }>(
         'characterWizard:discover',
@@ -286,7 +287,14 @@ export async function runTroubadourLevelThree({
             b.second,
             b.seventh,
           ];
-          const names = [b.second, b.seventh, ...parents.flatMap(parent => embedded[parent] ?? [])];
+          // Second Album performances are grants, not choices (feature/troubadour/level-3/second-album.md).
+          const performances = b.w.levelThree.addedAbilities.filter(a => a !== b.seventh);
+          const names = [
+            b.second,
+            b.seventh,
+            ...performances,
+            ...[...parents, ...performances].flatMap(parent => embedded[parent] ?? []),
+          ];
           for (const name of names) {
             if (used.has(name)) continue;
             used.add(name);
@@ -294,7 +302,7 @@ export async function runTroubadourLevelThree({
               sheets[index]!.abilities.find(a => a.name === name)?.activationCondition,
               `${b.id} ${name} listed with its condition`,
             );
-            const cost = name === b.second ? 5 : name === b.seventh ? 7 : (paid[name] ?? 0);
+            const cost = name === b.second ? 5 : name === b.seventh ? 7 : 0;
             const affectedId = selfTargets.includes(name) ? id : targetId;
             const target = { refKind: 'character', id: affectedId };
             await invoke(id, 'adjust.heroic-resource', { value: cost });
@@ -349,8 +357,8 @@ export async function runTroubadourLevelThree({
         }
         assert.equal(
           used.size,
-          22,
-          'six level-2 and four level-3 abilities, two performances and ten embedded uses',
+          24,
+          'six level-2 and four level-3 abilities, two performances and twelve embedded uses',
         );
       } finally {
         const session = await director.query<{ revision: number }>('sessions:get', { sessionId });

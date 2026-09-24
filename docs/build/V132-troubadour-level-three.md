@@ -24,7 +24,8 @@ and shared API. Guided advancement remains deferred.
   Night" and "Never-Ending Hero" (book, Second Album). `7-drama-ability.md`: Extensive Rewrites,
   Infernal Gavotte, Star Solo, We Meet at Last.
 - Embedded uses, each a manual record citing its clause: Appeal to the Muses, each invocation's use,
-  Missed Cue, Foil, En Garde!'s free-strike exchange, Tough Crowd's end-of-turn roll, Star Solo's free
+  Missed Cue, Foil, En Garde!'s free-strike exchange, Classic Chandelier Stunt's free strike, "Fire Up
+  the Night"'s free search, Tough Crowd's end-of-turn roll, Star Solo's free
   repeat and We Meet at Last's message.
 - Table routes: En Garde! (7/11/16 + A, melee weapon kit bonus), Star Solo (5/8/11 + P, melee or
   ranged mode per V115), Infernal Gavotte (area, 5/7/10 fire, melee weapon kit bonus) and Extensive
@@ -35,7 +36,7 @@ and shared API. Guided advancement remains deferred.
 
 ## Acceptance checks
 
-1. Independent source ledger `tests/fixtures/v121-troubadour-three-expected.json` extends the four
+1. Independent source ledger `tests/fixtures/v132-troubadour-three-expected.json` extends the four
    V102 witnesses plus two alternates so every invocation, class act feature and level-2/3 ability is
    chosen. Focused engine test checks vitals, features, perk pool, costs, embedded uses,
    foreign-pool rejection and level/class-act pruning.
@@ -56,3 +57,13 @@ and shared API. Guided advancement remains deferred.
 - Author checks: both TypeScript projects and ESLint pass; focused V132, V102 and sibling class
   engine files pass; V88 audit guard and live compiled report 34/34. Content 1711 entries;
   `compiled:check`, `content:check`, `supporting:check`, links pass.
+- Independent rules/implementation review (subagent, source-only) of `a310238`: CHANGES REQUIRED, one
+  blocking finding: the cohort never used the two Second Album performances. Fixed: they are now used
+  (recorded, no cost), and the count is 24 (ten abilities, two performances, twelve embedded uses).
+  Non-blocking findings closed: the performances carry the Routines selection rule; new manual uses
+  for Classic Chandelier Stunt's free strike and "Fire Up the Night"'s free search; Appeal to the Muses,
+  Tough Crowd (optional roll, pull 1/2/3), Formal Introductions and My Reputation Precedes Me wording
+  follow the source; ledger path corrected; unused cost map removed.
+- Follow-up (engine, not in this slice): Star Solo's free repeat for two rounds is a full use with its
+  roll at no Drama. It is recorded as manual here; a cost-waived `ability.use` against the same target
+  would automate it.

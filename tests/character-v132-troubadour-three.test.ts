@@ -42,6 +42,8 @@ const embedded: Record<string, string[]> = {
   'Tough Crowd': ['Tough Crowd: End-of-Turn Roll'],
   'Star Solo': ['Star Solo: Repeat Use'],
   'We Meet at Last': ['We Meet at Last: Message'],
+  'Classic Chandelier Stunt': ['Classic Chandelier Stunt: Free Strike'],
+  '"Fire Up the Night"': ['"Fire Up the Night": Search'],
 };
 const cases = Object.entries(ledger.witnesses).map(([id, w]) => {
   const base = levelOne.witnesses.find(b => b.id === w.base)!;

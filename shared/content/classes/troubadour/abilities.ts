@@ -152,7 +152,7 @@ export const TROUBADOUR_ACTIONS: TroubadourAction[] = [
     actionType: 'No action',
     trigger: 'Before you roll to gain drama at the start of your turn.',
     activationCondition:
-      'Before the start-of-turn drama roll: on a 1 gain 1 more drama and the Director gains 1d3 Malice; on a 2 gain 1 Heroic Resource for you or an ally within your active performance and the Director gains 1 Malice; on a 3 gain 2 Heroic Resource to distribute. Resolve resources and Malice manually.',
+      'Before the start-of-turn drama roll: on a 1 gain 1 more drama and the Director gains 1d3 Malice; on a 2 gain 1 Heroic Resource to keep or give to an ally within the distance of your active performance and the Director gains 1 Malice; on a 3 gain 2 Heroic Resource to distribute among yourself and allies within that distance. Resolve resources and Malice manually.',
   },
   {
     name: "Allow Me to Introduce Tonight's Players: Introduce",
@@ -169,7 +169,7 @@ export const TROUBADOUR_ACTIONS: TroubadourAction[] = [
     sourcePath: lf(2, 'formal-introductions'),
     actionType: 'Respite activity',
     activationCondition:
-      'Address one notice to an enemy; only one is active. Once the target receives it, the Director gains 1 extra Malice per round in encounters involving it and the heroes start each with 2 extra hero tokens that vanish at its end. Resolve manually.',
+      'Address one notice to an enemy; only one is active. Once the target receives it, the Director gains 1 extra Malice per round in encounters involving it and the heroes start each such encounter with 2 additional hero tokens that disappear at its end. Resolve manually.',
   },
   {
     name: 'My Reputation Precedes Me: Invoke',
@@ -177,7 +177,7 @@ export const TROUBADOUR_ACTIONS: TroubadourAction[] = [
     sourcePath: lf(2, 'my-reputation-precedes-me'),
     actionType: 'Start of a social interaction',
     activationCondition:
-      'With NPCs who have not met you: bond one as with Scene Partner (counts against its limit); heroes treat Renown as 2 higher to start a negotiation with them. The Director can instead award 1 hero token to make you infamous. Resolve manually.',
+      'With NPCs who have not met you: bond one as with Scene Partner (counts against its limit); heroes treat Renown as 2 higher to start a negotiation with them. The Director can instead award 1 hero token to make you infamous: no bond, and heroes take a bane on interpersonal tests with the group until you improve your reputation. Resolve manually.',
   },
   {
     name: 'Missed Cue: Remove Enemy',
@@ -209,7 +209,7 @@ export const TROUBADOUR_ACTIONS: TroubadourAction[] = [
     sourcePath: la(2, 'tough-crowd'),
     actionType: 'End of your turn',
     activationCondition:
-      'Until the end of the encounter, at the end of each of your turns, make one power roll + Presence against each enemy in the area: 5/9/12 corruption damage and a Might-potency pull toward its center. Resolve the roll, damage and pulls manually.',
+      'Until the end of the encounter, at the end of each of your turns, you can make one power roll + Presence against each enemy in the area: 5/9/12 corruption damage and, against Might below weak/average/strong potency, pull 1/2/3 toward its center. Resolve the roll, damage and pulls manually.',
   },
   {
     name: 'Star Solo: Repeat Use',
@@ -226,6 +226,22 @@ export const TROUBADOUR_ACTIONS: TroubadourAction[] = [
     actionType: 'Free maneuver',
     activationCondition:
       'Once on each of your turns while We Meet at Last lasts: grant the target 2 surges, or give it a bane on its next ability roll before the start of your next turn. Resolve manually.',
+  },
+  {
+    name: 'Classic Chandelier Stunt: Free Strike',
+    parent: 'Classic Chandelier Stunt',
+    sourcePath: la(2, 'classic-chandelier-stunt'),
+    actionType: 'Part of Classic Chandelier Stunt',
+    activationCondition:
+      'After the shifts, you (and the willing ally) can make a melee free strike dealing extra damage equal to twice your highest characteristic score. Resolve the free strikes manually.',
+  },
+  {
+    name: '"Fire Up the Night": Search',
+    parent: '"Fire Up the Night"',
+    sourcePath: la(3, 'fire-up-the-night'),
+    actionType: 'Free maneuver',
+    activationCondition:
+      'While the performance is active and you started your turn in its aura: once during your turn, search for hidden creatures as a free maneuver (Hide and Sneak, Chapter 9). Resolve the search manually.',
   },
 ];
 export function troubadourActionText(action: TroubadourAction): string {
@@ -259,7 +275,7 @@ export const TROUBADOUR_ACTIVATION: Record<string, string> = {
   'We Meet at Last':
     'Until the end of the encounter you and the target can target each other beyond distance, using this ability’s distance; the target cannot be force moved by such a use. Use We Meet at Last: Message each turn. Resolve manually.',
   '"Fire Up the Night"':
-    'While active, each target who starts its turn in the aura takes no bane on strikes against creatures with concealment and once during its turn can search for hidden creatures as a free maneuver. Lifecycle and effects are manual.',
+    'At the start of a combat round choose this as your one performance only while not dazed, dead or surprised (Routines). While active, each target who starts its turn in the aura takes no bane on strikes against creatures with concealment and once during its turn can search for hidden creatures as a free maneuver. Lifecycle and effects are manual.',
   '"Never-Ending Hero"':
-    'While active, each target who starts its turn dying in the aura gains an edge on power rolls and ignores bleeding until the end of its turn. Lifecycle and effects are manual.',
+    'At the start of a combat round choose this as your one performance only while not dazed, dead or surprised (Routines). While active, each target who starts its turn dying in the aura gains an edge on power rolls and ignores bleeding until the end of its turn. Lifecycle and effects are manual.',
 };
