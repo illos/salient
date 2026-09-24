@@ -19,26 +19,10 @@
     "staminaLevel3": "15 + 12 = 27 (30 with Conjured Ward)",
     "summonersRange": 7,
     "fiveEssenceMinionsByFamily": {
-      "Demon": [
-        "Gushing Spewler",
-        "Hulking Chimor",
-        "Violent"
-      ],
-      "Undead": [
-        "Accursed Mummy",
-        "Ceaseless Mournling",
-        "Phase Ghoul"
-      ],
-      "Fey": [
-        "Nixie Hemloche",
-        "Pixie Rosenthall",
-        "Sprite Foxglow"
-      ],
-      "Elemental": [
-        "Dancing Silk",
-        "Principle of the Swamp",
-        "Quiet of Snow"
-      ]
+      "Demon": ["Gushing Spewler", "Hulking Chimor", "Violent"],
+      "Undead": ["Accursed Mummy", "Ceaseless Mournling", "Phase Ghoul"],
+      "Fey": ["Nixie Hemloche", "Pixie Rosenthall", "Sprite Foxglow"],
+      "Elemental": ["Dancing Silk", "Principle of the Swamp", "Quiet of Snow"]
     },
     "fiveEssenceSelectionNote": "Selected by 'cost: 5 essence for three minions'. Iron Reaver matches 'essence for three minions' but costs 7 and is excluded."
   },
@@ -81,23 +65,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Blight 1",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Blight",
         "class.summoner.formation": "Horde",
         "class.summoner.quick-command": "Focus Fire!",
@@ -109,21 +84,13 @@
           "Intuition": -1,
           "Presence": -1
         },
-        "class.summoner.portfolio.blight.1": [
-          "Ensnarer",
-          "Rasquine"
-        ],
-        "class.summoner.portfolio.blight.3": [
-          "Archer Spittlich",
-          "Fanged Musilex"
-        ]
+        "class.summoner.portfolio.blight.1": ["Ensnarer", "Rasquine"],
+        "class.summoner.portfolio.blight.3": ["Archer Spittlich", "Fanged Musilex"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Forgettable Face",
         "class.summoner.level-2.perk.group": "intrigue",
-        "class.summoner.portfolio.blight.5": [
-          "Gushing Spewler"
-        ]
+        "class.summoner.portfolio.blight.5": ["Gushing Spewler"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Conjured Ward",
@@ -157,19 +124,10 @@
           "P": 3
         },
         "immunitiesPrinted": [],
-        "weaknesses": [
-          "Holy 1"
-        ],
-        "traits": [
-          "Gushing Strike",
-          "Spew Slide",
-          "Soulsight"
-        ],
+        "weaknesses": ["Holy 1"],
+        "traits": ["Gushing Strike", "Spew Slide", "Soulsight"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Abyssal",
-          "Demon"
-        ],
+        "keywords": ["Abyssal", "Demon"],
         "role": "Minion Controller",
         "effective": {
           "stamina": 4,
@@ -182,9 +140,7 @@
       "sevenEssenceAbility": {
         "name": "Blitz Tactics",
         "sourcePath": "feature/ability/summoner/level-3/blitz-tactics.md",
-        "keywords": [
-          "Magic"
-        ],
+        "keywords": ["Magic"],
         "actionType": "Free maneuver",
         "distance": "Self",
         "target": "Special",
@@ -242,10 +198,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/demon/featureblock/the-boil.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Hunger Thrush",
-            "Oh, It Pops"
-          ],
+          "baseTraits": ["Hunger Thrush", "Oh, It Pops"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Soul Rancor",
@@ -291,16 +244,8 @@
             "choice": "Gushing Spewler"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -342,10 +287,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/demon/featureblock/the-boil.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Hunger Thrush",
-            "Oh, It Pops"
-          ],
+          "baseTraits": ["Hunger Thrush", "Oh, It Pops"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Soul Rancor",
@@ -387,17 +329,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/blitz-tactics.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -440,23 +373,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Blight 2",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Blight",
         "class.summoner.formation": "Platoon",
         "class.summoner.quick-command": "Halt!",
@@ -468,21 +392,13 @@
           "Intuition": 1,
           "Presence": -1
         },
-        "class.summoner.portfolio.blight.1": [
-          "Rasquine",
-          "Razor"
-        ],
-        "class.summoner.portfolio.blight.3": [
-          "Fanged Musilex",
-          "Twisted Bengrul"
-        ]
+        "class.summoner.portfolio.blight.1": ["Rasquine", "Razor"],
+        "class.summoner.portfolio.blight.3": ["Fanged Musilex", "Twisted Bengrul"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Eidetic Memory",
         "class.summoner.level-2.perk.group": "lore",
-        "class.summoner.portfolio.blight.5": [
-          "Hulking Chimor"
-        ]
+        "class.summoner.portfolio.blight.5": ["Hulking Chimor"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Emergency Ward",
@@ -516,19 +432,10 @@
           "P": 1
         },
         "immunitiesPrinted": [],
-        "weaknesses": [
-          "Holy 1"
-        ],
-        "traits": [
-          "Mercurial Strike",
-          "Evershifting",
-          "Soulsight"
-        ],
+        "weaknesses": ["Holy 1"],
+        "traits": ["Mercurial Strike", "Evershifting", "Soulsight"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Abyssal",
-          "Demon"
-        ],
+        "keywords": ["Abyssal", "Demon"],
         "role": "Minion Defender",
         "effective": {
           "stamina": 7,
@@ -541,9 +448,7 @@
       "sevenEssenceAbility": {
         "name": "Cavalry Call",
         "sourcePath": "feature/ability/summoner/level-3/cavalry-call.md",
-        "keywords": [
-          "Magic"
-        ],
+        "keywords": ["Magic"],
         "actionType": "Main action",
         "distance": "Summoner's Range",
         "distanceValue": 7,
@@ -601,10 +506,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/demon/featureblock/the-boil.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Hunger Thrush",
-            "Oh, It Pops"
-          ],
+          "baseTraits": ["Hunger Thrush", "Oh, It Pops"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Soul Rancor",
@@ -650,16 +552,8 @@
             "choice": "Hulking Chimor"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -701,10 +595,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/demon/featureblock/the-boil.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Hunger Thrush",
-            "Oh, It Pops"
-          ],
+          "baseTraits": ["Hunger Thrush", "Oh, It Pops"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Soul Rancor",
@@ -746,17 +637,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/cavalry-call.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -800,23 +682,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Blight 3",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Blight",
         "class.summoner.formation": "Elite",
         "class.summoner.quick-command": "Not Yet!",
@@ -828,21 +701,13 @@
           "Intuition": 0,
           "Presence": 0
         },
-        "class.summoner.portfolio.blight.1": [
-          "Ensnarer",
-          "Razor"
-        ],
-        "class.summoner.portfolio.blight.3": [
-          "Archer Spittlich",
-          "Twisted Bengrul"
-        ]
+        "class.summoner.portfolio.blight.1": ["Ensnarer", "Razor"],
+        "class.summoner.portfolio.blight.3": ["Archer Spittlich", "Twisted Bengrul"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Creature Sense",
         "class.summoner.level-2.perk.group": "supernatural",
-        "class.summoner.portfolio.blight.5": [
-          "Violent"
-        ]
+        "class.summoner.portfolio.blight.5": ["Violent"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Howling Ward",
@@ -876,19 +741,10 @@
           "P": -1
         },
         "immunitiesPrinted": [],
-        "weaknesses": [
-          "Holy 1"
-        ],
-        "traits": [
-          "Transforming Strike",
-          "Mimicry",
-          "Soulsight"
-        ],
+        "weaknesses": ["Holy 1"],
+        "traits": ["Transforming Strike", "Mimicry", "Soulsight"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Abyssal",
-          "Demon"
-        ],
+        "keywords": ["Abyssal", "Demon"],
         "role": "Minion Ambusher",
         "effective": {
           "stamina": 8,
@@ -901,10 +757,7 @@
       "sevenEssenceAbility": {
         "name": "Essence Funnel",
         "sourcePath": "feature/ability/summoner/level-3/essence-funnel.md",
-        "keywords": [
-          "Area",
-          "Magic"
-        ],
+        "keywords": ["Area", "Magic"],
         "actionType": "Main action",
         "distance": "10 × 1 line within 1",
         "target": "Each enemy and object in the area",
@@ -965,10 +818,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/demon/featureblock/the-boil.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Hunger Thrush",
-            "Oh, It Pops"
-          ],
+          "baseTraits": ["Hunger Thrush", "Oh, It Pops"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Soul Rancor",
@@ -1014,16 +864,8 @@
             "choice": "Violent"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -1065,10 +907,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/demon/featureblock/the-boil.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Hunger Thrush",
-            "Oh, It Pops"
-          ],
+          "baseTraits": ["Hunger Thrush", "Oh, It Pops"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Soul Rancor",
@@ -1110,17 +949,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/essence-funnel.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -1164,23 +994,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Graves 1",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Graves",
         "class.summoner.formation": "Leader",
         "class.summoner.quick-command": "Shield!",
@@ -1192,25 +1013,17 @@
           "Intuition": 1,
           "Presence": 0
         },
-        "class.summoner.portfolio.graves.1": [
-          "Husk",
-          "Shrieker"
-        ],
-        "class.summoner.portfolio.graves.3": [
-          "Grave Knight",
-          "Stalker Shade"
-        ]
+        "class.summoner.portfolio.graves.1": ["Husk", "Shrieker"],
+        "class.summoner.portfolio.graves.3": ["Grave Knight", "Stalker Shade"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Forgettable Face",
         "class.summoner.level-2.perk.group": "intrigue",
-        "class.summoner.portfolio.graves.5": [
-          "Accursed Mummy"
-        ]
+        "class.summoner.portfolio.graves.5": ["Accursed Mummy"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Snare Ward",
-        "class.summoner.level-3.ability-7": "Lead by Example"
+        "class.summoner.level-3.ability-7": "Lead By Example"
       },
       "selectionRules": {
         "perk": "i=4, i%3=1 -> Forgettable Face (intrigue); group verified in ../../books/heroes/clean/Draw Steel Heroes.md (Draw Steel Heroes.md '### Intrigue Perks' section (heading line 17441; '#### Forgettable Face' line 17449))",
@@ -1239,43 +1052,24 @@
           "I": 3,
           "P": -1
         },
-        "immunitiesPrinted": [
-          "Corruption R",
-          "Poison R"
-        ],
-        "weaknesses": [
-          "Fire 1"
-        ],
-        "traits": [
-          "Fetid Bindings 2d10 + R (Signature Ability)",
-          "Mummy Dust"
-        ],
+        "immunitiesPrinted": ["Corruption R", "Poison R"],
+        "weaknesses": ["Fire 1"],
+        "traits": ["Fetid Bindings 2d10 + R (Signature Ability)", "Mummy Dust"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Mummy",
-          "Undead"
-        ],
+        "keywords": ["Mummy", "Undead"],
         "role": "Minion Hexer",
         "effective": {
           "stamina": 4,
           "stability": 2,
-          "immunities": [
-            "Corruption 2",
-            "Poison 2"
-          ],
+          "immunities": ["Corruption 2", "Poison 2"],
           "derivation": "Stamina 4 (printed '4 | 4 | 4', one value per minion summoned); stability 2; immunities ['Corruption R', 'Poison R'] with R = 2; sources: monster/minion/summoner/undead/statblock/accursed-mummy.md, feature/summoner/level-1/minions.md. No Minion Improvement before 4th level (class/summoner.md advancement table)."
         },
         "freeStrikeDistance": "Melee 1 or Ranged 5 (feature/summoner/level-1/minions.md 'Free Strikes')"
       },
       "sevenEssenceAbility": {
-        "name": "Lead by Example",
+        "name": "Lead By Example",
         "sourcePath": "feature/ability/summoner/level-3/lead-by-example.md",
-        "keywords": [
-          "Magic",
-          "Melee",
-          "Ranged",
-          "Strike"
-        ],
+        "keywords": ["Magic", "Melee", "Ranged", "Strike"],
         "actionType": "Main action",
         "distance": "Melee 1 or Summoner's Range",
         "distanceValue": {
@@ -1343,10 +1137,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/undead/featureblock/barrow-gates.md stats)",
           "size": "2",
-          "baseTraits": [
-            "The Bell Tolls",
-            "Undead Dominion"
-          ],
+          "baseTraits": ["The Bell Tolls", "Undead Dominion"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Memento Mori",
@@ -1391,16 +1182,8 @@
             "choice": "Accursed Mummy"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -1442,10 +1225,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/undead/featureblock/barrow-gates.md stats)",
           "size": "2",
-          "baseTraits": [
-            "The Bell Tolls",
-            "Undead Dominion"
-          ],
+          "baseTraits": ["The Bell Tolls", "Undead Dominion"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Memento Mori",
@@ -1482,21 +1262,12 @@
           {
             "name": "7-Essence Ability",
             "sourcePath": "feature/summoner/level-3/7-essence-ability.md",
-            "choice": "Lead by Example",
+            "choice": "Lead By Example",
             "choiceSourcePath": "feature/ability/summoner/level-3/lead-by-example.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -1509,7 +1280,7 @@
         "Fixture Barrow Gates: Undead Dominion": 0
       },
       "actionsAddedAtLevel3": {
-        "Summoner: Lead by Example": 7,
+        "Summoner: Lead By Example": 7,
         "Summoner: Snare Ward": 0
       }
     },
@@ -1539,23 +1310,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Graves 2",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Graves",
         "class.summoner.formation": "Horde",
         "class.summoner.quick-command": "Focus Fire!",
@@ -1567,21 +1329,13 @@
           "Intuition": -1,
           "Presence": -1
         },
-        "class.summoner.portfolio.graves.1": [
-          "Shrieker",
-          "Skeleton"
-        ],
-        "class.summoner.portfolio.graves.3": [
-          "Stalker Shade",
-          "Zombie Lumberer"
-        ]
+        "class.summoner.portfolio.graves.1": ["Shrieker", "Skeleton"],
+        "class.summoner.portfolio.graves.3": ["Stalker Shade", "Zombie Lumberer"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Eidetic Memory",
         "class.summoner.level-2.perk.group": "lore",
-        "class.summoner.portfolio.graves.5": [
-          "Ceaseless Mournling"
-        ]
+        "class.summoner.portfolio.graves.5": ["Ceaseless Mournling"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Conjured Ward",
@@ -1614,28 +1368,16 @@
           "I": 1,
           "P": -2
         },
-        "immunitiesPrinted": [
-          "Corruption R",
-          "Poison R"
-        ],
+        "immunitiesPrinted": ["Corruption R", "Poison R"],
         "weaknesses": [],
-        "traits": [
-          "Always Crying",
-          "Immutable Form",
-          "Rupture"
-        ],
+        "traits": ["Always Crying", "Immutable Form", "Rupture"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Undead"
-        ],
+        "keywords": ["Undead"],
         "role": "Minion Controller",
         "effective": {
           "stamina": 4,
           "stability": 2,
-          "immunities": [
-            "Corruption 2",
-            "Poison 2"
-          ],
+          "immunities": ["Corruption 2", "Poison 2"],
           "derivation": "Stamina 4 (printed '4 | 4 | 4', one value per minion summoned); stability R -> your Reason 2 (minions.md 'Characteristics': you use your own characteristics where a stat block refers to an R); immunities ['Corruption R', 'Poison R'] with R = 2; sources: monster/minion/summoner/undead/statblock/ceaseless-mournling.md, feature/summoner/level-1/minions.md. No Minion Improvement before 4th level (class/summoner.md advancement table)."
         },
         "freeStrikeDistance": "Melee 1 or Ranged 5 (feature/summoner/level-1/minions.md 'Free Strikes')"
@@ -1643,9 +1385,7 @@
       "sevenEssenceAbility": {
         "name": "Blitz Tactics",
         "sourcePath": "feature/ability/summoner/level-3/blitz-tactics.md",
-        "keywords": [
-          "Magic"
-        ],
+        "keywords": ["Magic"],
         "actionType": "Free maneuver",
         "distance": "Self",
         "target": "Special",
@@ -1703,10 +1443,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/undead/featureblock/barrow-gates.md stats)",
           "size": "2",
-          "baseTraits": [
-            "The Bell Tolls",
-            "Undead Dominion"
-          ],
+          "baseTraits": ["The Bell Tolls", "Undead Dominion"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Memento Mori",
@@ -1751,16 +1488,8 @@
             "choice": "Ceaseless Mournling"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -1802,10 +1531,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/undead/featureblock/barrow-gates.md stats)",
           "size": "2",
-          "baseTraits": [
-            "The Bell Tolls",
-            "Undead Dominion"
-          ],
+          "baseTraits": ["The Bell Tolls", "Undead Dominion"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Memento Mori",
@@ -1846,17 +1572,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/blitz-tactics.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -1899,23 +1616,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Graves 3",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Graves",
         "class.summoner.formation": "Platoon",
         "class.summoner.quick-command": "Halt!",
@@ -1927,21 +1635,13 @@
           "Intuition": 1,
           "Presence": -1
         },
-        "class.summoner.portfolio.graves.1": [
-          "Husk",
-          "Skeleton"
-        ],
-        "class.summoner.portfolio.graves.3": [
-          "Grave Knight",
-          "Zombie Lumberer"
-        ]
+        "class.summoner.portfolio.graves.1": ["Husk", "Skeleton"],
+        "class.summoner.portfolio.graves.3": ["Grave Knight", "Zombie Lumberer"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Creature Sense",
         "class.summoner.level-2.perk.group": "supernatural",
-        "class.summoner.portfolio.graves.5": [
-          "Phase Ghoul"
-        ]
+        "class.summoner.portfolio.graves.5": ["Phase Ghoul"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Emergency Ward",
@@ -1974,27 +1674,16 @@
           "I": 0,
           "P": 1
         },
-        "immunitiesPrinted": [
-          "Corruption R",
-          "Poison R"
-        ],
+        "immunitiesPrinted": ["Corruption R", "Poison R"],
         "weaknesses": [],
-        "traits": [
-          "Leaping Strike",
-          "Nerveless"
-        ],
+        "traits": ["Leaping Strike", "Nerveless"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Undead"
-        ],
+        "keywords": ["Undead"],
         "role": "Minion Harrier",
         "effective": {
           "stamina": 5,
           "stability": 0,
-          "immunities": [
-            "Corruption 2",
-            "Poison 2"
-          ],
+          "immunities": ["Corruption 2", "Poison 2"],
           "derivation": "Stamina 5 (printed '5 | 5 | 5', one value per minion summoned); stability 0; immunities ['Corruption R', 'Poison R'] with R = 2; sources: monster/minion/summoner/undead/statblock/phase-ghoul.md, feature/summoner/level-1/minions.md. No Minion Improvement before 4th level (class/summoner.md advancement table)."
         },
         "freeStrikeDistance": "Melee 1 or Ranged 5 (feature/summoner/level-1/minions.md 'Free Strikes')"
@@ -2002,9 +1691,7 @@
       "sevenEssenceAbility": {
         "name": "Cavalry Call",
         "sourcePath": "feature/ability/summoner/level-3/cavalry-call.md",
-        "keywords": [
-          "Magic"
-        ],
+        "keywords": ["Magic"],
         "actionType": "Main action",
         "distance": "Summoner's Range",
         "distanceValue": 7,
@@ -2062,10 +1749,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/undead/featureblock/barrow-gates.md stats)",
           "size": "2",
-          "baseTraits": [
-            "The Bell Tolls",
-            "Undead Dominion"
-          ],
+          "baseTraits": ["The Bell Tolls", "Undead Dominion"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Memento Mori",
@@ -2110,16 +1794,8 @@
             "choice": "Phase Ghoul"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -2161,10 +1837,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/undead/featureblock/barrow-gates.md stats)",
           "size": "2",
-          "baseTraits": [
-            "The Bell Tolls",
-            "Undead Dominion"
-          ],
+          "baseTraits": ["The Bell Tolls", "Undead Dominion"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Memento Mori",
@@ -2205,17 +1878,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/cavalry-call.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -2259,23 +1923,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Spring 1",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Spring",
         "class.summoner.formation": "Elite",
         "class.summoner.quick-command": "Not Yet!",
@@ -2287,21 +1942,13 @@
           "Intuition": 0,
           "Presence": 0
         },
-        "class.summoner.portfolio.spring.1": [
-          "Nixie Soakreed",
-          "Pixie Bellringer"
-        ],
-        "class.summoner.portfolio.spring.3": [
-          "Pixie Hydrain",
-          "Pixie Loftlilly"
-        ]
+        "class.summoner.portfolio.spring.1": ["Nixie Soakreed", "Pixie Bellringer"],
+        "class.summoner.portfolio.spring.3": ["Pixie Hydrain", "Pixie Loftlilly"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Forgettable Face",
         "class.summoner.level-2.perk.group": "intrigue",
-        "class.summoner.portfolio.spring.5": [
-          "Nixie Hemloche"
-        ]
+        "class.summoner.portfolio.spring.5": ["Nixie Hemloche"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Howling Ward",
@@ -2336,15 +1983,9 @@
         },
         "immunitiesPrinted": [],
         "weaknesses": [],
-        "traits": [
-          "Water Weird",
-          "Whirling Waves",
-          "Minuscule"
-        ],
+        "traits": ["Water Weird", "Whirling Waves", "Minuscule"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Fey"
-        ],
+        "keywords": ["Fey"],
         "role": "Minion Hexer",
         "effective": {
           "stamina": 7,
@@ -2357,10 +1998,7 @@
       "sevenEssenceAbility": {
         "name": "Essence Funnel",
         "sourcePath": "feature/ability/summoner/level-3/essence-funnel.md",
-        "keywords": [
-          "Area",
-          "Magic"
-        ],
+        "keywords": ["Area", "Magic"],
         "actionType": "Main action",
         "distance": "10 × 1 line within 1",
         "target": "Each enemy and object in the area",
@@ -2421,10 +2059,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/fey/featureblock/glade-pond.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Bubbling Boost",
-            "Overgrowth"
-          ],
+          "baseTraits": ["Bubbling Boost", "Overgrowth"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Garden of Jest",
@@ -2467,16 +2102,8 @@
             "choice": "Nixie Hemloche"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -2518,10 +2145,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/fey/featureblock/glade-pond.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Bubbling Boost",
-            "Overgrowth"
-          ],
+          "baseTraits": ["Bubbling Boost", "Overgrowth"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Garden of Jest",
@@ -2560,17 +2184,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/essence-funnel.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -2613,23 +2228,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Spring 2",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Spring",
         "class.summoner.formation": "Leader",
         "class.summoner.quick-command": "Shield!",
@@ -2641,25 +2247,17 @@
           "Intuition": 1,
           "Presence": 0
         },
-        "class.summoner.portfolio.spring.1": [
-          "Pixie Bellringer",
-          "Sprite Dandeknight"
-        ],
-        "class.summoner.portfolio.spring.3": [
-          "Pixie Loftlilly",
-          "Sprite Orchiguard"
-        ]
+        "class.summoner.portfolio.spring.1": ["Pixie Bellringer", "Sprite Dandeknight"],
+        "class.summoner.portfolio.spring.3": ["Pixie Loftlilly", "Sprite Orchiguard"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Eidetic Memory",
         "class.summoner.level-2.perk.group": "lore",
-        "class.summoner.portfolio.spring.5": [
-          "Pixie Rosenthall"
-        ]
+        "class.summoner.portfolio.spring.5": ["Pixie Rosenthall"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Snare Ward",
-        "class.summoner.level-3.ability-7": "Lead by Example"
+        "class.summoner.level-3.ability-7": "Lead By Example"
       },
       "selectionRules": {
         "perk": "i=8, i%3=2 -> Eidetic Memory (lore); group verified in ../../books/heroes/clean/Draw Steel Heroes.md (Draw Steel Heroes.md '### Lore Perks' section (heading line 17469; '#### Eidetic Memory' line 17477))",
@@ -2690,15 +2288,9 @@
         },
         "immunitiesPrinted": [],
         "weaknesses": [],
-        "traits": [
-          "Stickerbush Symphony 2d10 + R (Signature Ability)",
-          "Swarm"
-        ],
+        "traits": ["Stickerbush Symphony 2d10 + R (Signature Ability)", "Swarm"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Fey",
-          "Swarm"
-        ],
+        "keywords": ["Fey", "Swarm"],
         "role": "Minion Harrier",
         "effective": {
           "stamina": 5,
@@ -2709,14 +2301,9 @@
         "freeStrikeDistance": "Melee 1 or Ranged 5 (feature/summoner/level-1/minions.md 'Free Strikes')"
       },
       "sevenEssenceAbility": {
-        "name": "Lead by Example",
+        "name": "Lead By Example",
         "sourcePath": "feature/ability/summoner/level-3/lead-by-example.md",
-        "keywords": [
-          "Magic",
-          "Melee",
-          "Ranged",
-          "Strike"
-        ],
+        "keywords": ["Magic", "Melee", "Ranged", "Strike"],
         "actionType": "Main action",
         "distance": "Melee 1 or Summoner's Range",
         "distanceValue": {
@@ -2784,10 +2371,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/fey/featureblock/glade-pond.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Bubbling Boost",
-            "Overgrowth"
-          ],
+          "baseTraits": ["Bubbling Boost", "Overgrowth"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Garden of Jest",
@@ -2830,16 +2414,8 @@
             "choice": "Pixie Rosenthall"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -2881,10 +2457,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/fey/featureblock/glade-pond.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Bubbling Boost",
-            "Overgrowth"
-          ],
+          "baseTraits": ["Bubbling Boost", "Overgrowth"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Garden of Jest",
@@ -2919,21 +2492,12 @@
           {
             "name": "7-Essence Ability",
             "sourcePath": "feature/summoner/level-3/7-essence-ability.md",
-            "choice": "Lead by Example",
+            "choice": "Lead By Example",
             "choiceSourcePath": "feature/ability/summoner/level-3/lead-by-example.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -2946,7 +2510,7 @@
         "Fixture Glade Pond: Overgrowth": 0
       },
       "actionsAddedAtLevel3": {
-        "Summoner: Lead by Example": 7,
+        "Summoner: Lead By Example": 7,
         "Summoner: Snare Ward": 0
       }
     },
@@ -2976,23 +2540,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Spring 3",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Spring",
         "class.summoner.formation": "Horde",
         "class.summoner.quick-command": "Focus Fire!",
@@ -3004,21 +2559,13 @@
           "Intuition": -1,
           "Presence": -1
         },
-        "class.summoner.portfolio.spring.1": [
-          "Nixie Soakreed",
-          "Sprite Dandeknight"
-        ],
-        "class.summoner.portfolio.spring.3": [
-          "Pixie Hydrain",
-          "Sprite Orchiguard"
-        ]
+        "class.summoner.portfolio.spring.1": ["Nixie Soakreed", "Sprite Dandeknight"],
+        "class.summoner.portfolio.spring.3": ["Pixie Hydrain", "Sprite Orchiguard"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Creature Sense",
         "class.summoner.level-2.perk.group": "supernatural",
-        "class.summoner.portfolio.spring.5": [
-          "Sprite Foxglow"
-        ]
+        "class.summoner.portfolio.spring.5": ["Sprite Foxglow"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Conjured Ward",
@@ -3051,26 +2598,16 @@
           "I": 1,
           "P": 2
         },
-        "immunitiesPrinted": [
-          "Fire R"
-        ],
+        "immunitiesPrinted": ["Fire R"],
         "weaknesses": [],
-        "traits": [
-          "Flash Strike",
-          "Quiet Flight",
-          "Minuscule"
-        ],
+        "traits": ["Flash Strike", "Quiet Flight", "Minuscule"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Fey"
-        ],
+        "keywords": ["Fey"],
         "role": "Minion Ambusher",
         "effective": {
           "stamina": 5,
           "stability": 0,
-          "immunities": [
-            "Fire 2"
-          ],
+          "immunities": ["Fire 2"],
           "derivation": "Stamina 5 (printed '5 | 5 | 5', one value per minion summoned); stability 0; immunities ['Fire R'] with R = 2; sources: monster/minion/summoner/fey/statblock/sprite-foxglow.md, feature/summoner/level-1/minions.md. No Minion Improvement before 4th level (class/summoner.md advancement table)."
         },
         "freeStrikeDistance": "Melee 1 or Ranged 5 (feature/summoner/level-1/minions.md 'Free Strikes')"
@@ -3078,9 +2615,7 @@
       "sevenEssenceAbility": {
         "name": "Blitz Tactics",
         "sourcePath": "feature/ability/summoner/level-3/blitz-tactics.md",
-        "keywords": [
-          "Magic"
-        ],
+        "keywords": ["Magic"],
         "actionType": "Free maneuver",
         "distance": "Self",
         "target": "Special",
@@ -3138,10 +2673,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/fey/featureblock/glade-pond.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Bubbling Boost",
-            "Overgrowth"
-          ],
+          "baseTraits": ["Bubbling Boost", "Overgrowth"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Garden of Jest",
@@ -3184,16 +2716,8 @@
             "choice": "Sprite Foxglow"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -3235,10 +2759,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/fey/featureblock/glade-pond.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Bubbling Boost",
-            "Overgrowth"
-          ],
+          "baseTraits": ["Bubbling Boost", "Overgrowth"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Garden of Jest",
@@ -3277,17 +2798,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/blitz-tactics.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -3331,23 +2843,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Storms 1",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Storms",
         "class.summoner.formation": "Platoon",
         "class.summoner.quick-command": "Halt!",
@@ -3359,21 +2862,13 @@
           "Intuition": 1,
           "Presence": -1
         },
-        "class.summoner.portfolio.storms.1": [
-          "Brisk Gale",
-          "Elemental Mote"
-        ],
-        "class.summoner.portfolio.storms.3": [
-          "Crux of Ash",
-          "Desolation of Sand"
-        ]
+        "class.summoner.portfolio.storms.1": ["Brisk Gale", "Elemental Mote"],
+        "class.summoner.portfolio.storms.3": ["Crux of Ash", "Desolation of Sand"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Forgettable Face",
         "class.summoner.level-2.perk.group": "intrigue",
-        "class.summoner.portfolio.storms.5": [
-          "Dancing Silk"
-        ]
+        "class.summoner.portfolio.storms.5": ["Dancing Silk"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Emergency Ward",
@@ -3406,32 +2901,21 @@
           "I": 0,
           "P": -1
         },
-        "immunitiesPrinted": [
-          "Poison R"
-        ],
+        "immunitiesPrinted": ["Poison R"],
         "weaknesses": [],
-        "traits": [
-          "Entangling Strike",
-          "Web (1 Essence)"
-        ],
+        "traits": ["Entangling Strike", "Web (1 Essence)"],
         "traitsWithEssenceCost": [
           {
             "trait": "Web",
             "essence": 1
           }
         ],
-        "keywords": [
-          "Elemental (Earth)",
-          "Elemental (Air)",
-          "Elemental (Green)"
-        ],
+        "keywords": ["Elemental (Earth)", "Elemental (Air)", "Elemental (Green)"],
         "role": "Minion Controller",
         "effective": {
           "stamina": 4,
           "stability": 0,
-          "immunities": [
-            "Poison 2"
-          ],
+          "immunities": ["Poison 2"],
           "derivation": "Stamina 4 (printed '4 | 4 | 4', one value per minion summoned); stability 0; immunities ['Poison R'] with R = 2; sources: monster/minion/summoner/elemental/statblock/dancing-silk.md, feature/summoner/level-1/minions.md. No Minion Improvement before 4th level (class/summoner.md advancement table)."
         },
         "freeStrikeDistance": "Melee 1 or Ranged 5 (feature/summoner/level-1/minions.md 'Free Strikes')"
@@ -3439,9 +2923,7 @@
       "sevenEssenceAbility": {
         "name": "Cavalry Call",
         "sourcePath": "feature/ability/summoner/level-3/cavalry-call.md",
-        "keywords": [
-          "Magic"
-        ],
+        "keywords": ["Magic"],
         "actionType": "Main action",
         "distance": "Summoner's Range",
         "distanceValue": 7,
@@ -3499,10 +2981,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/elemental/featureblock/primordial-crystal.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Magnetic Pull",
-            "Elemental Boost"
-          ],
+          "baseTraits": ["Magnetic Pull", "Elemental Boost"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Terra Resonance",
@@ -3545,16 +3024,8 @@
             "choice": "Dancing Silk"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -3596,10 +3067,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/elemental/featureblock/primordial-crystal.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Magnetic Pull",
-            "Elemental Boost"
-          ],
+          "baseTraits": ["Magnetic Pull", "Elemental Boost"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Terra Resonance",
@@ -3638,17 +3106,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/cavalry-call.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -3691,23 +3150,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Storms 2",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Storms",
         "class.summoner.formation": "Elite",
         "class.summoner.quick-command": "Not Yet!",
@@ -3719,21 +3169,13 @@
           "Intuition": 0,
           "Presence": 0
         },
-        "class.summoner.portfolio.storms.1": [
-          "Fire Plume",
-          "Walking Boulder"
-        ],
-        "class.summoner.portfolio.storms.3": [
-          "Desolation of Sand",
-          "Flow of Magma"
-        ]
+        "class.summoner.portfolio.storms.1": ["Fire Plume", "Walking Boulder"],
+        "class.summoner.portfolio.storms.3": ["Desolation of Sand", "Flow of Magma"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Eidetic Memory",
         "class.summoner.level-2.perk.group": "lore",
-        "class.summoner.portfolio.storms.5": [
-          "Principle of the Swamp"
-        ]
+        "class.summoner.portfolio.storms.5": ["Principle of the Swamp"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Howling Ward",
@@ -3766,34 +3208,21 @@
           "I": 2,
           "P": -2
         },
-        "immunitiesPrinted": [
-          "Corruption R",
-          "Poison R"
-        ],
+        "immunitiesPrinted": ["Corruption R", "Poison R"],
         "weaknesses": [],
-        "traits": [
-          "Encroaching Strike",
-          "Sludgefoot (1 Essence)"
-        ],
+        "traits": ["Encroaching Strike", "Sludgefoot (1 Essence)"],
         "traitsWithEssenceCost": [
           {
             "trait": "Sludgefoot",
             "essence": 1
           }
         ],
-        "keywords": [
-          "Elemental (Green)",
-          "Elemental (Water)",
-          "Elemental (Rot)"
-        ],
+        "keywords": ["Elemental (Green)", "Elemental (Water)", "Elemental (Rot)"],
         "role": "Minion Brute",
         "effective": {
           "stamina": 8,
           "stability": 3,
-          "immunities": [
-            "Corruption 2",
-            "Poison 2"
-          ],
+          "immunities": ["Corruption 2", "Poison 2"],
           "derivation": "Stamina 5 (printed '5 | 5 | 5', one value per minion summoned) + 3 Elite Formation = 8; stability R -> your Reason 2 (minions.md 'Characteristics': you use your own characteristics where a stat block refers to an R) + 1 Elite Formation = 3; immunities ['Corruption R', 'Poison R'] with R = 2; sources: monster/minion/summoner/elemental/statblock/principle-of-the-swamp.md, feature/summoner/level-1/elite-formation.md, feature/summoner/level-1/minions.md. No Minion Improvement before 4th level (class/summoner.md advancement table)."
         },
         "freeStrikeDistance": "Melee 2 or Ranged 5 (Encroaching Strike: melee free strikes have a distance of R = 2)"
@@ -3801,10 +3230,7 @@
       "sevenEssenceAbility": {
         "name": "Essence Funnel",
         "sourcePath": "feature/ability/summoner/level-3/essence-funnel.md",
-        "keywords": [
-          "Area",
-          "Magic"
-        ],
+        "keywords": ["Area", "Magic"],
         "actionType": "Main action",
         "distance": "10 × 1 line within 1",
         "target": "Each enemy and object in the area",
@@ -3865,10 +3291,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/elemental/featureblock/primordial-crystal.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Magnetic Pull",
-            "Elemental Boost"
-          ],
+          "baseTraits": ["Magnetic Pull", "Elemental Boost"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Terra Resonance",
@@ -3911,16 +3334,8 @@
             "choice": "Principle of the Swamp"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -3962,10 +3377,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/elemental/featureblock/primordial-crystal.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Magnetic Pull",
-            "Elemental Boost"
-          ],
+          "baseTraits": ["Magnetic Pull", "Elemental Boost"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Terra Resonance",
@@ -4004,17 +3416,8 @@
             "choiceSourcePath": "feature/ability/summoner/level-3/essence-funnel.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -4056,23 +3459,14 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Climb",
         "career.soldier.skill.intrigue": "Pick Lock",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "details.name": "V107 Storms 3",
         "class.choice": "Summoner",
-        "class.summoner.skills": [
-          "Eavesdrop",
-          "Monsters"
-        ],
+        "class.summoner.skills": ["Eavesdrop", "Monsters"],
         "class.summoner.circle": "Storms",
         "class.summoner.formation": "Leader",
         "class.summoner.quick-command": "Shield!",
@@ -4084,25 +3478,17 @@
           "Intuition": 1,
           "Presence": 0
         },
-        "class.summoner.portfolio.storms.1": [
-          "Brisk Gale",
-          "Fire Plume"
-        ],
-        "class.summoner.portfolio.storms.3": [
-          "Crux of Ash",
-          "Flow of Magma"
-        ]
+        "class.summoner.portfolio.storms.1": ["Brisk Gale", "Fire Plume"],
+        "class.summoner.portfolio.storms.3": ["Crux of Ash", "Flow of Magma"]
       },
       "level2Selections": {
         "class.summoner.level-2.perk": "Creature Sense",
         "class.summoner.level-2.perk.group": "supernatural",
-        "class.summoner.portfolio.storms.5": [
-          "Quiet of Snow"
-        ]
+        "class.summoner.portfolio.storms.5": ["Quiet of Snow"]
       },
       "level3Selections": {
         "class.summoner.level-3.ward": "Snare Ward",
-        "class.summoner.level-3.ability-7": "Lead by Example"
+        "class.summoner.level-3.ability-7": "Lead By Example"
       },
       "selectionRules": {
         "perk": "i=12, i%3=0 -> Creature Sense (supernatural); group verified in ../../books/heroes/clean/Draw Steel Heroes.md (Draw Steel Heroes.md '### Supernatural Perks' section (heading line 17511; '#### Creature Sense' line 17537))",
@@ -4131,42 +3517,24 @@
           "I": 0,
           "P": 3
         },
-        "immunitiesPrinted": [
-          "Sonic R",
-          "Cold R"
-        ],
+        "immunitiesPrinted": ["Sonic R", "Cold R"],
         "weaknesses": [],
-        "traits": [
-          "Freezing Howl 2d10 + R (Signature Ability)",
-          "Cold Surge"
-        ],
+        "traits": ["Freezing Howl 2d10 + R (Signature Ability)", "Cold Surge"],
         "traitsWithEssenceCost": [],
-        "keywords": [
-          "Elemental (Air)",
-          "Elemental (Rot)",
-          "Elemental (Water)"
-        ],
+        "keywords": ["Elemental (Air)", "Elemental (Rot)", "Elemental (Water)"],
         "role": "Minion Artillery",
         "effective": {
           "stamina": 4,
           "stability": 1,
-          "immunities": [
-            "Sonic 2",
-            "Cold 2"
-          ],
+          "immunities": ["Sonic 2", "Cold 2"],
           "derivation": "Stamina 4 (printed '4 | 4 | 4', one value per minion summoned); stability 1; immunities ['Sonic R', 'Cold R'] with R = 2; sources: monster/minion/summoner/elemental/statblock/quiet-of-snow.md, feature/summoner/level-1/minions.md. No Minion Improvement before 4th level (class/summoner.md advancement table)."
         },
         "freeStrikeDistance": "Melee 1 or Ranged 5 (feature/summoner/level-1/minions.md 'Free Strikes')"
       },
       "sevenEssenceAbility": {
-        "name": "Lead by Example",
+        "name": "Lead By Example",
         "sourcePath": "feature/ability/summoner/level-3/lead-by-example.md",
-        "keywords": [
-          "Magic",
-          "Melee",
-          "Ranged",
-          "Strike"
-        ],
+        "keywords": ["Magic", "Melee", "Ranged", "Strike"],
         "actionType": "Main action",
         "distance": "Melee 1 or Summoner's Range",
         "distanceValue": {
@@ -4234,10 +3602,7 @@
           "stamina": 22,
           "staminaDerivation": "20 + 2 = 22 (monster/fixture/elemental/featureblock/primordial-crystal.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Magnetic Pull",
-            "Elemental Boost"
-          ],
+          "baseTraits": ["Magnetic Pull", "Elemental Boost"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Terra Resonance",
@@ -4280,16 +3645,8 @@
             "choice": "Quiet of Snow"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5]
       },
       "level3": {
         "level": 3,
@@ -4331,10 +3688,7 @@
           "stamina": 23,
           "staminaDerivation": "20 + 3 = 23 (monster/fixture/elemental/featureblock/primordial-crystal.md stats)",
           "size": "2",
-          "baseTraits": [
-            "Magnetic Pull",
-            "Elemental Boost"
-          ],
+          "baseTraits": ["Magnetic Pull", "Elemental Boost"],
           "inactiveAdvancementFeatures": [
             {
               "name": "Terra Resonance",
@@ -4369,21 +3723,12 @@
           {
             "name": "7-Essence Ability",
             "sourcePath": "feature/summoner/level-3/7-essence-ability.md",
-            "choice": "Lead by Example",
+            "choice": "Lead By Example",
             "choiceSourcePath": "feature/ability/summoner/level-3/lead-by-example.md"
           }
         ],
-        "portfolioCostsAvailable": [
-          1,
-          1,
-          3,
-          3,
-          5
-        ],
-        "heroicAbilityCostsAvailable": [
-          5,
-          7
-        ]
+        "portfolioCostsAvailable": [1, 1, 3, 3, 5],
+        "heroicAbilityCostsAvailable": [5, 7]
       },
       "actionsAddedAtLevel2": {
         "Summoner: Summoner's Dominion": 0,
@@ -4397,7 +3742,7 @@
         "Perk: Creature Sense": 0
       },
       "actionsAddedAtLevel3": {
-        "Summoner: Lead by Example": 7,
+        "Summoner: Lead By Example": 7,
         "Summoner: Snare Ward": 0
       }
     }
@@ -4853,22 +4198,14 @@
       "target": "One creature or object per minion",
       "distance": "Melee R",
       "level": 2,
-      "keywords": [
-        "Melee",
-        "Strike",
-        "Weapon"
-      ],
+      "keywords": ["Melee", "Strike", "Weapon"],
       "powerRoll": "2d10 + R",
       "tiers": [
         "3 poison damage; pull R",
         "4 poison damage; pull R + 1",
         "6 poison damage; pull R + 2"
       ],
-      "resolvedTiers": [
-        "3 poison; pull 2",
-        "4 poison; pull 3",
-        "6 poison; pull 4"
-      ],
+      "resolvedTiers": ["3 poison; pull 2", "4 poison; pull 3", "6 poison; pull 4"],
       "effect": "A target pulled adjacent is M < STRONG (2) weakened (EoT)",
       "distanceValue": 2
     },
@@ -4974,22 +4311,14 @@
       "target": "One creature or object per minion",
       "distance": "Melee 2",
       "level": 2,
-      "keywords": [
-        "Melee",
-        "Strike",
-        "Weapon"
-      ],
+      "keywords": ["Melee", "Strike", "Weapon"],
       "powerRoll": "2d10 + R",
       "tiers": [
         "3 damage; pull 2; A < WEAK bleeding (EoT)",
         "6 damage; pull 3; A < AVERAGE bleeding (EoT)",
         "8 damage; pull 4; A < STRONG bleeding (EoT)"
       ],
-      "resolvedPotencies": [
-        0,
-        1,
-        2
-      ],
+      "resolvedPotencies": [0, 1, 2],
       "effect": "A target can't shift while bleeding from this ability"
     },
     {
@@ -5086,22 +4415,14 @@
       "target": "One creature or object per minion",
       "distance": "Ranged 5",
       "level": 2,
-      "keywords": [
-        "Magic",
-        "Ranged",
-        "Strike"
-      ],
+      "keywords": ["Magic", "Ranged", "Strike"],
       "powerRoll": "2d10 + R",
       "tiers": [
         "4 cold damage; M < WEAK slowed (EoT)",
         "6 cold damage; M < AVERAGE slowed (EoT)",
         "8 cold damage; M < STRONG speed is 0 (EoT)"
       ],
-      "resolvedPotencies": [
-        0,
-        1,
-        2
-      ]
+      "resolvedPotencies": [0, 1, 2]
     },
     {
       "name": "Minion Quiet of Snow: Cold Surge",
@@ -5247,7 +4568,7 @@
       }
     },
     {
-      "name": "Summoner: Lead by Example",
+      "name": "Summoner: Lead By Example",
       "sourcePath": "feature/ability/summoner/level-3/lead-by-example.md",
       "actionType": "Main action",
       "essenceCost": 7,
@@ -5423,5 +4744,8 @@
       "question": "Glade Pond's level-5 Garden of Jest says an ally with line of effect 'to the boil'.",
       "ledgerPosition": "Probably a copy error for 'pond'. It only matters from 5th level, so it is outside this ledger."
     }
+  ],
+  "corrections": [
+    "2026-09-24 implementer: 'Lead by Example' renamed to the printed frontmatter name 'Lead By Example' (feature/ability/summoner/level-3/lead-by-example.md, name:)."
   ]
 }

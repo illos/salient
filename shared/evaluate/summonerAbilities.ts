@@ -27,9 +27,11 @@ export function summonerAbilities(
 ): GrantedAbility[] {
   const parents = [...features, ...existing];
   const isSummoner = features.some(f => f.provenance.decisionId.startsWith('class.summoner.'));
+  // Class grants become named manual records; a class perk's own ability (perkAbilities) stays.
   const result = existing.filter(
     a =>
-      !a.provenance.decisionId.startsWith('class.summoner.') &&
+      (!a.provenance.decisionId.startsWith('class.summoner.') ||
+        a.provenance.decisionId.endsWith('.perk')) &&
       !(isSummoner && a.kind === 'free-strike'),
   );
   for (const a of SUMMONER_ACTIONS) {

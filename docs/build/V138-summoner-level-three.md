@@ -51,3 +51,12 @@ shared API. Guided advancement remains deferred.
 - Started from main `fad564f` on `slice/V138`, `.worktrees/summoner-three`, with empty `vendor/*`.
   ENGINE2 informed. Content 1751 → 1780 entries (+9 features, +4 abilities, +12 minions, +4 fixtures).
   The four 7-essence abilities join the V88 allowance; none reaches the compiled route.
+- Ledger written by an isolated subagent from the canonical Compendium only: 12 witnesses, 71 printed
+  actions, 19 recorded uncertainties (fixture link, one 5-essence minion, Conjured Ward on the maximum,
+  kit strike distance and potency, whether the fixture is a minion). The implementer renamed its "Lead
+  by Example" to the printed "Lead By Example" (recorded in the ledger's `corrections`).
+- The ledger caught that the record replacement dropped the level-2 perk's own action (Forgettable
+  Face, Creature Sense); perk grants now stay. The same fix landed in V137.
+- Author checks: both TypeScript projects and ESLint pass; focused V138 (3) and V107 engine tests,
+  V88 audit guard and live compiled report pass; content, supporting, foes, compiled and link checks
+  pass. An evaluator dry run of every cohort record over all twelve builds is clean.
