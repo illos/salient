@@ -34,6 +34,10 @@ import {
   levelThreeDecisions as conduitLevelThree,
   levelTwoDecisions as conduitLevelTwo,
 } from './classes/conduit/level-two-three.ts';
+import {
+  levelThreeDecisions as talentLevelThree,
+  levelTwoDecisions as talentLevelTwo,
+} from './classes/talent/level-two-three.ts';
 import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
 import { levelThreeDecisions as shadowLevelThree } from './classes/shadow/level-three.ts';
 import { shadowLaterDecisions } from './classes/shadow/level-four-to-six.ts';
@@ -57,6 +61,7 @@ classStep.decisions.push(
     ...nullLevelTwo,
     ...elementalistLevelTwo,
     ...conduitLevelTwo,
+    ...talentLevelTwo,
   ]),
 );
 
@@ -76,6 +81,7 @@ thirdClassStep.decisions.push(
     ...nullLevelThree,
     ...elementalistLevelThree,
     ...conduitLevelThree,
+    ...talentLevelThree,
   ]),
 );
 

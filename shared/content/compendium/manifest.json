@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:27680f9ecc4531448301c820b7d8e722e0753da12217a43e8b03f5a13c48f421",
-  "entryCount": 1797,
+  "contentHash": "sha256:2b96f587f742ffa0c2eabd9786cbf022685e3b61524a79711712c11e7fcb6f1d",
+  "entryCount": 1815,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -367,6 +367,17 @@
         "feature/ability/conduit/level-3"
       ],
       "basis": "docs/build/V134-conduit-level-three.md#scope: Conduit levels two and three."
+    },
+    {
+      "id": "talent-levels-two-three",
+      "description": "Talent levels two and three: tradition features, perk, Scan and all ten ability alternatives.",
+      "paths": [
+        "feature/talent/level-2",
+        "feature/ability/talent/level-2",
+        "feature/talent/level-3",
+        "feature/ability/talent/level-3"
+      ],
+      "basis": "docs/build/V136-talent-level-three.md#scope: Talent levels two and three."
     },
     {
       "id": "kits",
@@ -2874,6 +2885,86 @@
       "name": "Spirit Sword",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/spirit-sword.md",
       "selection": "talent-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics",
+      "kind": "ability",
+      "name": "Applied Chronometrics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst",
+      "kind": "ability",
+      "name": "Gravitic Burst",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity",
+      "kind": "ability",
+      "name": "Levity and Gravity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm",
+      "kind": "ability",
+      "name": "Overwhelm",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow",
+      "kind": "ability",
+      "name": "Slow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/slow.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override",
+      "kind": "ability",
+      "name": "Synaptic Override",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time",
+      "kind": "ability",
+      "name": "Fling Through Time",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs",
+      "kind": "ability",
+      "name": "Force Orbs",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field",
+      "kind": "ability",
+      "name": "Reflector Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+      "selection": "talent-levels-two-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn",
+      "kind": "ability",
+      "name": "Soul Burn",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+      "selection": "talent-levels-two-three",
       "file": "ability.json"
     },
     {
@@ -7194,6 +7285,70 @@
       "name": "Vanishing Ward",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/vanishing-ward.md",
       "selection": "talent-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.talent.level-2/2nd-level-tradition-ability",
+      "kind": "feature",
+      "name": "2nd-Level Tradition Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/2nd-level-tradition-ability.md",
+      "selection": "talent-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.talent.level-2/2nd-level-tradition-feature",
+      "kind": "feature",
+      "name": "2nd-Level Tradition Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/2nd-level-tradition-feature.md",
+      "selection": "talent-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.talent.level-2/ease-the-hours",
+      "kind": "feature",
+      "name": "Ease the Hours",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/ease-the-hours.md",
+      "selection": "talent-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.talent.level-2/ease-the-mind",
+      "kind": "feature",
+      "name": "Ease the Mind",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/ease-the-mind.md",
+      "selection": "talent-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.talent.level-2/ease-their-fall",
+      "kind": "feature",
+      "name": "Ease Their Fall",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/ease-their-fall.md",
+      "selection": "talent-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.talent.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/perk.md",
+      "selection": "talent-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.talent.level-3/7-clarity-ability",
+      "kind": "feature",
+      "name": "7-Clarity Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-3/7-clarity-ability.md",
+      "selection": "talent-levels-two-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.talent.level-3/scan",
+      "kind": "feature",
+      "name": "Scan",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-3/scan.md",
+      "selection": "talent-levels-two-three",
       "file": "feature.json"
     },
     {

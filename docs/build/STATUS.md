@@ -139,3 +139,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V140 | [Tactician focus generation](V140-tactician-focus-generation.md) | Merged (`7646954`, train 1); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V145 | [Censor wrath generation](V145-censor-wrath-generation.md) | Merged (`7646954`, train 1); cloud dev published with content reseed; combined gate and headless PASS at tip |
 | V134 | [Conduit levels two and three](V134-conduit-level-three.md) | In progress |
+| V136 | [Talent levels two and three](V136-talent-level-three.md) | In progress |

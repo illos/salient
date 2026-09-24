@@ -1,0 +1,1858 @@
+{
+  "schemaVersion": "v136-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "derivation": {
+    "method": "Authored from the pinned Steel Compendium only (canonical checkout at the main repo vendor/steel-compendium, HEAD fb83a789 verified with git rev-parse). Level-one baselines copied from tests/fixtures/v105-talent-expected.json (reviewed). No evaluator, content, convex or headless code read or run.",
+    "staminaMaximum": "Talent Basics: Starting Stamina 18 + 6 per level after 1st; Density Augmentation +6 at levels 1-3 (increases by 6 at 4th, 7th, 10th). Battle Augmentation +3 only while wearing light armor (v105-5 baseline wears none). Levels 1-3 are echelon 1 (rule/general/echelon.md).",
+    "recoveryValue": "floor(Stamina maximum / 3) (rule/health/recoveries.md 'one-third ... rounded down')",
+    "windedValue": "floor(Stamina maximum / 2) (rule/health/winded.md; rule/general/always-round-down.md)",
+    "recoveriesMaximum": "Talent Basics: 8; unchanged at levels 2-3.",
+    "noNumericSheetChange": "EXPLICIT: at levels 2 and 3 the only numeric sheet changes are Stamina maximum (+6 per level, class/talent.md Basics) and the recovery and winded values derived from it. No level-2 or level-3 Talent feature (Perk; Ease the Hours, Ease Their Fall, Ease the Mind; 2nd-Level Tradition Ability; Scan; 7-Clarity Ability), none of the ten abilities and none of the selected perks changes recoveries (8), speed, stability, disengage, characteristics, potency or size. Density Augmentation stays +6 Stamina and Battle Augmentation +3 (armor) until 4th level; Characteristic Increase first appears at 4th level. Situational values that are NOT sheet statistics: Ease Their Fall reduction 2 + R = 4 (Telekinesis witnesses); Applied Chronometrics +5 speed to targets and strained speed halving; Force Orbs cumulative damage immunity 1 per orb; Distance Augmentation extends Slow to Ranged 12 for v105-4.",
+    "abilityCounts": "Advancement table: level 2 adds one 5-clarity tradition ability (Tradition Abilities 5); level 3 adds one 7-clarity ability (Abilities Two signature, 3, 5, 7).",
+    "traditionFeatures": "2nd-Level Tradition Feature grants ONE feature per tradition: Chronopathy - Ease the Hours; Telekinesis - Ease Their Fall; Telepathy - Ease the Mind.",
+    "abilityDamage": "'X + R' / 'X + P' add the Reason / Presence score (all witnesses R2, P2). Force Augmentation +1 to rolled damage of damage-dealing psionic abilities (v105-1 only). Density, Speed and Distance add no damage; Battle's +1 needs a light weapon and weapon ability (none of the ten has Weapon). No kit (Talent).",
+    "potency": "Talent potency weak R-2 / average R-1 / strong R = 0/1/2 with Reason 2 (class/talent.md Basics; rule/character/potency.md).",
+    "clarityFloor": "Unchanged: negative clarity limit 1 + R = 3 (feature/talent/level-1/clarity-and-strain.md); v105 resourceFloor -3.",
+    "perkChoice": "One distinct eligible perk per witness, none with sub-choices, none granting an action, none already owned (all bases own only Teamwork, an exploration perk)."
+  },
+  "sources": [
+    {
+      "path": "en/unified/md/class/talent.md",
+      "sha256": "1205256251abd64dce29737570c539149eb8981d360f5b7a37114590bcafea8a"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-2/perk.md",
+      "sha256": "fa2761ac40cd5b665f08eb8b0399e5ddf764cc1cacb7c86ddfa56ab31244047d"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-2/2nd-level-tradition-feature.md",
+      "sha256": "82258a91db2b86b189b0282ba02275752c8a728be6c2001e9d45e71e2362a0b7"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-2/2nd-level-tradition-ability.md",
+      "sha256": "6d7a8a6b4d5a2aafaa22f6331fc3470dc6ec39e4455177c900a13f2c76936192"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-2/ease-the-hours.md",
+      "sha256": "ec8cb09382e86388ab6b7f48851ac392eba90b1f657aea6fd91e216175356b68"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-2/ease-their-fall.md",
+      "sha256": "91c5dcce1012263c4f9d5c9ff55c6af50774d016414b085b83b525201c781570"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-2/ease-the-mind.md",
+      "sha256": "089bf810100531dcffff03128d1bfc3a93b3eef55f8e94b6846ee4ef7a842172"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-3/scan.md",
+      "sha256": "8922f39f282ee4363fea6660512724613535acc0c95ee36e3fe61135f39e4f3b"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-3/7-clarity-ability.md",
+      "sha256": "1535a3c81a8cab00ea30cc0a6d7c40e86778c1d5a068d28a9e014049ec8b1d3f"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/force-augmentation.md",
+      "sha256": "c7709ca790c66c84cd320844190241844cfa17e2bff4eeefe3904337dba4927e"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/density-augmentation.md",
+      "sha256": "66da3e3a75edc5bd02f67f61ec1bdfb3beaa40194059bd269577b381584cc9ac"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/distance-augmentation.md",
+      "sha256": "a7f80ec92df0a1452cdee7e34591a2935f6e58310843ab8869e0d4d08eb894d1"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/battle-augmentation.md",
+      "sha256": "a97eaff567240bc9ea32b15ae8f74fcdd63bd4e79115058bd29f32b25ee20fdd"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/speed-augmentation.md",
+      "sha256": "8f890f4e2522301be9da847c069d44b8f665136ba74fd6f8ab94f9010ee374af"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/clarity-and-strain.md",
+      "sha256": "55b5f15324cd062e527d5bfcafcf09d225e1c02ae62edfcd5a36fdce78fff548"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/steel-ward.md",
+      "sha256": "c47b2fafe8adba956f19057d9b81a703bb5cac2d88db451268574333b270619d"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/repulsive-ward.md",
+      "sha256": "222d629506bba14a0ef70541232e85d15590284ac07375f2dd2e2b5fe54c45d8"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/entropy-ward.md",
+      "sha256": "4c3f619d8ff42ceb8a27bda6d32446a869d5e87e5cb1b0ab23364b116821eb1a"
+    },
+    {
+      "path": "en/unified/md/feature/talent/level-1/vanishing-ward.md",
+      "sha256": "9bf46779df62dda6fd08788647fbf901e447e29dab4b7461f903ffc2ddd945f3"
+    },
+    {
+      "path": "en/unified/md/rule/health/stamina.md",
+      "sha256": "d7eea9fb59d98e1efcc0527230cc862d911a621cc042d58b923565ac4c55b04b"
+    },
+    {
+      "path": "en/unified/md/rule/health/recoveries.md",
+      "sha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9"
+    },
+    {
+      "path": "en/unified/md/rule/health/winded.md",
+      "sha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee"
+    },
+    {
+      "path": "en/unified/md/rule/general/always-round-down.md",
+      "sha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783"
+    },
+    {
+      "path": "en/unified/md/rule/general/echelon.md",
+      "sha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3"
+    },
+    {
+      "path": "en/unified/md/rule/character/potency.md",
+      "sha256": "8c07c502b4576b369fbc6efba6da0327d84489b8f1343ee9dadf548b99a6c8d6"
+    },
+    {
+      "path": "en/unified/md/rule/damage/rolled-damage.md",
+      "sha256": "982ca1b159dcfab515801b27781f1f19b041d9c398e6b2371e769a7aafcd7e14"
+    },
+    {
+      "path": "en/unified/md/rule/health/falling.md",
+      "sha256": "9c68d8d79d56a80bff9bd151d8b04d63023842b1df28fff6ac78d311e7c0b391"
+    },
+    {
+      "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+      "sha256": "d0bcd8cdc20eeac0f03ed71a713a7ef9de5af4b94ed5ad3a00e814954c1f5932"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-2/slow.md",
+      "sha256": "daa9cb3e7264a133b6fdcf2cfc6e945f16aca272ad209b604ce9c7d109605523"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+      "sha256": "6b43a8db95309d27f0fe0a242ec623b9268a4e84f624a85b50e6fd35ba099102"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+      "sha256": "f48f21349881d2a283faf614916313b1af788e495db812db694c9f1160805bcf"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+      "sha256": "561ccd0ba0f1bc65d567af7c2668204412c56b8f5e40e3151870f1e32f397ce1"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+      "sha256": "943840096a132e8c2f5ef300acd468633b8c495fb92f24dd3fb8688844402153"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+      "sha256": "e5ba8060aac0e6d5083f54532ad5e49200cd6d37dbbb9ecafbc495bdf6fd1b3e"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+      "sha256": "f22f50d5fb72eac58e7abbbba8736a07abc893f7f45f4436de8565b84c48ba2a"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+      "sha256": "21bad0048b35441de776a50f4252fa851445d6670a429ca0e744edb38a881712"
+    },
+    {
+      "path": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+      "sha256": "d10fb0a16412582813e6fa6c2e8a020588e8f07f89567a09cc88d8cb55ad16ec"
+    }
+  ],
+  "uncertainties": [
+    {
+      "id": "tradition-ability-grouping",
+      "passage": "en/unified/md/feature/talent/level-2/2nd-level-tradition-ability.md has empty '2nd-Level Chronopathy/Telekinesis/Telepathy Ability' sections.",
+      "resolution": "en/books/heroes/clean/Draw Steel Heroes.md lines 14231-14340: Chronopathy: Applied Chronometrics (14235), Slow (14253); Telekinesis: Gravitic Burst (14275), Levity and Gravity (14291); Telepathy: Overwhelm (14311), Synaptic Override (14327). Unified ability front matter 'subclass' agrees for all six.",
+      "alternatives": ["none needed; two sources agree"]
+    },
+    {
+      "id": "force-orbs-distance",
+      "passage": "en/unified/md/feature/ability/talent/level-3/force-orbs.md: distance 'Self; see below'; orb fired 'at a creature or object within 5 squares as a ranged strike'; keywords Psionic, Ranged, Strike, Telekinesis.",
+      "resolution": "Unresolved for v105-4 (Distance Augmentation, 'Your ranged psionic abilities gain a +2 bonus to distance'). Keep the orb range explicit/manual; ledger records printed 5 squares.",
+      "alternatives": [
+        "orb strike range 7 (Distance Augmentation extends the 'within 5 squares' strike because the ability has Ranged and Psionic keywords)",
+        "orb strike range 5 (the ability's distance is 'Self', which has no numeric ranged distance to increase)"
+      ]
+    },
+    {
+      "id": "strained-potency-increase",
+      "passage": "Slow and Soul Burn Strained: 'The potency of this ability increases by 1'. rule/character/potency.md 'Adjusting Potencies' gives no formula for a flat potency increase.",
+      "resolution": "Interpretation: each tier's potency value +1 (weak 0->1, average 1->2, strong 2->3 for every witness). Recorded as strainedPotencyByWitness; application is manual because Strained state is a table condition.",
+      "alternatives": [
+        "only the potency of the tier achieved is raised (numerically identical per outcome)",
+        "raise by one potency step (weak->average) instead of by 1 point (numerically identical here since steps are 1 apart)"
+      ]
+    },
+    {
+      "id": "force-augmentation-scope",
+      "passage": "en/unified/md/feature/talent/level-1/force-augmentation.md: 'Your damage-dealing psionic abilities gain a +1 bonus to rolled damage.'",
+      "resolution": "Applies to Fling Through Time for v105-1 (Psionic keyword, deals rolled damage): [3,5,8] + P2 + 1 = [6,8,11]. Matches the v105 method ('Force adds 1 to rolled Psionic damage only'). No other Force witness chose a damaging level-2/3 ability.",
+      "alternatives": ["none within this ledger"]
+    },
+    {
+      "id": "flat-tier-damage-no-characteristic",
+      "passage": "Gravitic Burst tiers '3 damage / 6 damage / 9 damage' and Force Orbs '2 / 3 / 5 damage' print no characteristic term.",
+      "resolution": "Printed values used as-is; no characteristic is added (the roll characteristic modifies the power roll only). They are still rolled damage (rule/damage/rolled-damage.md) so Force Augmentation would add +1 had a Force witness chosen them.",
+      "alternatives": ["none; the text prints no '+ R'"]
+    },
+    {
+      "id": "battle-augmentation-armor",
+      "passage": "en/unified/md/feature/talent/level-1/battle-augmentation.md: '+3 bonus to Stamina' only 'While you wear light armor'; bonus increases at 4th, 7th, 10th.",
+      "resolution": "v105-5 reviewed level-one Stamina is 18 (no armor worn). Ledger keeps no armor: 24 at L2, 30 at L3. With light armor worn it would be 27 / 33 (recovery 9 / 11, winded 13 / 16).",
+      "alternatives": ["light armor worn: +3 Stamina at levels 1-3"]
+    },
+    {
+      "id": "soul-burn-animapathy-keyword",
+      "passage": "en/unified/md/feature/ability/talent/level-3/soul-burn.md keywords include Animapathy, a tradition not offered by Talent Tradition in this build.",
+      "resolution": "The 7-Clarity Ability feature lists Soul Burn among options for every talent; the keyword does not gate selection. No tradition-keyword interaction exists at levels 1-3 for these witnesses.",
+      "alternatives": ["none"]
+    },
+    {
+      "id": "scan-distance-with-distance-augmentation",
+      "passage": "en/unified/md/feature/talent/level-3/scan.md: line of effect persists within 'distance of your Mind Spike ability'.",
+      "resolution": "Mind Spike is Psionic + Ranged 10, so for v105-4 (Distance Augmentation) the Scan distance is Ranged 12; others Ranged 10.",
+      "alternatives": ["Scan uses printed Mind Spike distance 10 regardless of augmentation"]
+    },
+    {
+      "id": "strain-damage-values",
+      "passage": "Strained clauses of Slow, Synaptic Override (1d6), Fling Through Time, Reflector Field, Soul Burn (2d6), Levity and Gravity (half the target's damage).",
+      "resolution": "Self-damage on strain is variable/manual; not part of damageByWitness.",
+      "alternatives": ["none"]
+    }
+  ],
+  "levelTwo": {
+    "sourceAdvancementTable": "en/unified/md/class/talent.md (Talent Advancement Table, row 2nd: Perk, Tradition Feature, Tradition Ability; Abilities Two signature, 3, 5; Tradition Abilities 5)",
+    "staminaGained": 6,
+    "staminaSource": "en/unified/md/class/talent.md Basics: Stamina Gained at 2nd and Higher Levels: 6",
+    "commonFeatures": [
+      {
+        "name": "Perk",
+        "sourcePath": "en/unified/md/feature/talent/level-2/perk.md",
+        "sourceSha256": "fa2761ac40cd5b665f08eb8b0399e5ddf764cc1cacb7c86ddfa56ab31244047d",
+        "choice": "one interpersonal, lore, or supernatural perk"
+      },
+      {
+        "name": "2nd-Level Tradition Feature",
+        "sourcePath": "en/unified/md/feature/talent/level-2/2nd-level-tradition-feature.md",
+        "sourceSha256": "82258a91db2b86b189b0282ba02275752c8a728be6c2001e9d45e71e2362a0b7",
+        "grants": "one feature per tradition (2nd-Level Tradition Features Table): Chronopathy Ease the Hours, Telekinesis Ease Their Fall, Telepathy Ease the Mind"
+      },
+      {
+        "name": "2nd-Level Tradition Ability",
+        "sourcePath": "en/unified/md/feature/talent/level-2/2nd-level-tradition-ability.md",
+        "sourceSha256": "6d7a8a6b4d5a2aafaa22f6331fc3470dc6ec39e4455177c900a13f2c76936192",
+        "choice": "one of two 5-clarity heroic abilities for your tradition",
+        "groupingSource": "en/books/heroes/clean/Draw Steel Heroes.md lines 14227-14340 (2nd-Level Chronopathy Ability 14231, Telekinesis 14271, Telepathy 14307); unified file has empty per-tradition sections. Unified ability front matter 'subclass' agrees for all six."
+      }
+    ],
+    "perkGroups": ["interpersonal", "lore", "supernatural"],
+    "perkGroupsSource": "en/books/heroes/clean/Draw Steel Heroes.md # Perks (line 17295): Interpersonal Perks 17397, Lore Perks 17469, Supernatural Perks 17511",
+    "eligibleCorePerks": {
+      "interpersonal": [
+        {
+          "name": "Charming Liar",
+          "sourcePath": "en/unified/md/perk/charming-liar.md"
+        },
+        {
+          "name": "Dazzler",
+          "sourcePath": "en/unified/md/perk/dazzler.md"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md"
+        },
+        {
+          "name": "Harmonizer",
+          "sourcePath": "en/unified/md/perk/harmonizer.md"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md"
+        },
+        {
+          "name": "Pardon My Friend",
+          "sourcePath": "en/unified/md/perk/pardon-my-friend.md"
+        },
+        {
+          "name": "Power Player",
+          "sourcePath": "en/unified/md/perk/power-player.md"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md"
+        },
+        {
+          "name": "Spot the Tell",
+          "sourcePath": "en/unified/md/perk/spot-the-tell.md"
+        }
+      ],
+      "lore": [
+        {
+          "name": "But I Know Who Does",
+          "sourcePath": "en/unified/md/perk/but-i-know-who-does.md"
+        },
+        {
+          "name": "Eidetic Memory",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md"
+        },
+        {
+          "name": "Expert Sage",
+          "sourcePath": "en/unified/md/perk/expert-sage.md"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md"
+        },
+        {
+          "name": "Linguist",
+          "sourcePath": "en/unified/md/perk/linguist.md"
+        },
+        {
+          "name": "Polymath",
+          "sourcePath": "en/unified/md/perk/polymath.md"
+        },
+        {
+          "name": "Specialist",
+          "sourcePath": "en/unified/md/perk/specialist.md"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md"
+        }
+      ],
+      "supernatural": [
+        {
+          "name": "Arcane Trick",
+          "sourcePath": "en/unified/md/perk/arcane-trick.md"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md"
+        },
+        {
+          "name": "Familiar",
+          "sourcePath": "en/unified/md/perk/familiar.md"
+        },
+        {
+          "name": "Invisible Force",
+          "sourcePath": "en/unified/md/perk/invisible-force.md"
+        },
+        {
+          "name": "Psychic Whisper",
+          "sourcePath": "en/unified/md/perk/psychic-whisper.md"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md"
+        }
+      ]
+    },
+    "eligibleCorePerkCount": 25,
+    "excludedPerkGroups": "crafting, exploration, intrigue (not permitted by feature/talent/level-2/perk.md). Unified perk/ also holds companion perks absent from the Heroes book perk chapter; not treated as core eligible. Teamwork (every base witness's Soldier career perk) is exploration and therefore neither eligible nor re-selectable.",
+    "perksWithSubChoices": [
+      "Linguist (two languages)",
+      "Specialist (one lore skill)",
+      "Eidetic Memory (lore skill chosen at each respite; avoided)"
+    ],
+    "perksAvoidedBecauseTheyGrantActions": [
+      "Psychic Whisper (grants an ability)",
+      "Creature Sense (maneuver)",
+      "Arcane Trick",
+      "Familiar",
+      "Invisible Force",
+      "Ritualist"
+    ],
+    "byTradition": {
+      "Chronopathy": {
+        "traditionFeature": {
+          "name": "Ease the Hours",
+          "sourcePath": "en/unified/md/feature/talent/level-2/ease-the-hours.md",
+          "sourceSha256": "ec8cb09382e86388ab6b7f48851ac392eba90b1f657aea6fd91e216175356b68",
+          "summary": "You can increase the number of rounds in a montage test by 1 if the test would end before the heroes hit the success limit.",
+          "numericSheetEffect": null,
+          "manualClauses": [
+            "Can increase the number of rounds in a montage test by 1 if the test would end before the heroes hit the success limit."
+          ]
+        },
+        "traditionAbilityOptions": [
+          {
+            "name": "Applied Chronometrics",
+            "printedCost": "5 Clarity",
+            "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14235 (2nd-Level Chronopathy Ability)"
+          },
+          {
+            "name": "Slow",
+            "printedCost": "5 Clarity",
+            "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14253 (2nd-Level Chronopathy Ability)"
+          }
+        ]
+      },
+      "Telekinesis": {
+        "traditionFeature": {
+          "name": "Ease Their Fall",
+          "sourcePath": "en/unified/md/feature/talent/level-2/ease-their-fall.md",
+          "sourceSha256": "91c5dcce1012263c4f9d5c9ff55c6af50774d016414b085b83b525201c781570",
+          "summary": "Whenever you land after a fall, or if any falling creature lands within 2 squares of you, you can use a free triggered action to reduce the falling damage by an amount equal to 2 + your Reason score.",
+          "numericSheetEffect": null,
+          "manualClauses": [
+            "Free triggered action when you land after a fall or a falling creature lands within 2 squares of you: reduce the falling damage by 2 + Reason = 4 for every witness (R2). This is a derived action value, not a sheet statistic."
+          ]
+        },
+        "traditionAbilityOptions": [
+          {
+            "name": "Gravitic Burst",
+            "printedCost": "5 Clarity",
+            "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14275 (2nd-Level Telekinesis Ability)"
+          },
+          {
+            "name": "Levity and Gravity",
+            "printedCost": "5 Clarity",
+            "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14291 (2nd-Level Telekinesis Ability)"
+          }
+        ]
+      },
+      "Telepathy": {
+        "traditionFeature": {
+          "name": "Ease the Mind",
+          "sourcePath": "en/unified/md/feature/talent/level-2/ease-the-mind.md",
+          "sourceSha256": "089bf810100531dcffff03128d1bfc3a93b3eef55f8e94b6846ee4ef7a842172",
+          "summary": "You gain an edge on tests made to stop combat and start a negotiation. Additionally, if you are present during a negotiation, any NPC who has a hostile or suspicious starting attitude has their patience increased by 1 (to a maximum of 5).",
+          "numericSheetEffect": null,
+          "manualClauses": [
+            "Edge on tests made to stop combat and start a negotiation.",
+            "While present in a negotiation, NPCs with hostile or suspicious starting attitude have patience +1 (maximum 5)."
+          ]
+        },
+        "traditionAbilityOptions": [
+          {
+            "name": "Overwhelm",
+            "printedCost": "5 Clarity",
+            "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14311 (2nd-Level Telepathy Ability)"
+          },
+          {
+            "name": "Synaptic Override",
+            "printedCost": "5 Clarity",
+            "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+            "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14327 (2nd-Level Telepathy Ability)"
+          }
+        ]
+      }
+    }
+  },
+  "levelThree": {
+    "sourceAdvancementTable": "en/unified/md/class/talent.md (row 3rd: Scan, 7-Clarity Ability; Abilities Two signature, 3, 5, 7; Tradition Abilities 5)",
+    "staminaGained": 6,
+    "automaticFeatures": [
+      {
+        "name": "Scan",
+        "sourcePath": "en/unified/md/feature/talent/level-3/scan.md",
+        "sourceSha256": "8922f39f282ee4363fea6660512724613535acc0c95ee36e3fe61135f39e4f3b",
+        "summary": "You can extend your psionic senses beyond their usual range. Once on each of your turns, you can search for hidden creatures as a free maneuver (see Hide and Sneak in Chapter 9: Tests). Additionally, once you establish line of effect to a thinking creature within distance of your Mind Spike ability, you always have line of effect to that creature until they move beyond that distance.",
+        "numericSheetEffect": null,
+        "manualClauses": [
+          "Once on each of your turns, search for hidden creatures as a free maneuver.",
+          "Once you establish line of effect to a thinking creature within the distance of your Mind Spike, you keep line of effect to it until it moves beyond that distance. Mind Spike is Ranged 10 (Psionic, Ranged, Strike, Telepathy); for v105-4 (Distance Augmentation) that distance is Ranged 12, all others Ranged 10."
+        ]
+      }
+    ],
+    "ability7Feature": {
+      "name": "7-Clarity Ability",
+      "sourcePath": "en/unified/md/feature/talent/level-3/7-clarity-ability.md",
+      "sourceSha256": "1535a3c81a8cab00ea30cc0a6d7c40e86778c1d5a068d28a9e014049ec8b1d3f",
+      "choice": "one heroic ability costing 7 clarity"
+    },
+    "ability7Options": [
+      {
+        "name": "Fling Through Time",
+        "printedCost": "7 Clarity",
+        "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14357 (7-Clarity Ability, no tradition headings)"
+      },
+      {
+        "name": "Force Orbs",
+        "printedCost": "7 Clarity",
+        "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14375 (7-Clarity Ability, no tradition headings)"
+      },
+      {
+        "name": "Reflector Field",
+        "printedCost": "7 Clarity",
+        "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14395 (7-Clarity Ability, no tradition headings)"
+      },
+      {
+        "name": "Soul Burn",
+        "printedCost": "7 Clarity",
+        "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+        "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14407 (7-Clarity Ability, no tradition headings)"
+      }
+    ],
+    "ability7OptionsAreTraditionIndependent": true,
+    "ability7IndependenceBasis": "Unified level-3 ability front matter has no subclass field; the book 7-Clarity Ability section (line 14353) lists all four without tradition headings. Their tradition keywords (Chronopathy, Telekinesis, Telepathy, Animapathy) do not restrict selection."
+  },
+  "abilities": {
+    "Applied Chronometrics": {
+      "name": "Applied Chronometrics",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+      "sourceSha256": "d0bcd8cdc20eeac0f03ed71a713a7ef9de5af4b94ed5ad3a00e814954c1f5932",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14235 (2nd-Level Chronopathy Ability)",
+      "level": 2,
+      "tradition": "Chronopathy",
+      "unifiedSubclassField": "chronopathy",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Chronopathy", "Psionic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Special",
+      "cost": {
+        "resource": "clarity",
+        "amount": 5,
+        "printed": "5 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "You target two creatures, one of which can be you.",
+        "tier2": "You target three creatures, one of which can be you.",
+        "tier3": "You target four creatures, one of which can be you."
+      },
+      "tiersPlain": {
+        "tier1": "You target two creatures, one of which can be you.",
+        "tier2": "You target three creatures, one of which can be you.",
+        "tier3": "You target four creatures, one of which can be you."
+      },
+      "effectsVerbatim": [
+        "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), they can't be made [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), and they can use an additional maneuver on their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If a target is already [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), that [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) ends for them."
+      ],
+      "effectsPlain": [
+        "Until the start of your next turn, each target gains a +5 bonus to speed, they can't be made dazed, and they can use an additional maneuver on their turn. If a target is already dazed, that condition ends for them."
+      ],
+      "strainedVerbatim": "Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved until the end of the encounter.",
+      "strainedPlain": "Your speed is halved until the end of the encounter.",
+      "chosenBy": ["v105-1"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "resolvedDistanceByWitness": {
+        "v105-1": "Ranged 10"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "Target count by tier: 2 / 3 / 4 creatures, one of which can be you (target Special).",
+        "Each target: +5 speed until the start of your next turn, can't be made dazed, can use an additional maneuver on their turn; an already-dazed target's dazed ends.",
+        "Strained: your speed is halved until the end of the encounter."
+      ]
+    },
+    "Slow": {
+      "name": "Slow",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+      "sourceSha256": "daa9cb3e7264a133b6fdcf2cfc6e945f16aca272ad209b604ce9c7d109605523",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14253 (2nd-Level Chronopathy Ability)",
+      "level": 2,
+      "tradition": "Chronopathy",
+      "unifiedSubclassField": "chronopathy",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Maneuver",
+      "keywords": ["Chronopathy", "Psionic", "Ranged"],
+      "distance": "Ranged 10",
+      "target": "Three creatures or objects",
+      "cost": {
+        "resource": "clarity",
+        "amount": 5,
+        "printed": "5 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "The target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved (save ends), or if P < WEAK, the target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).",
+        "tier2": "The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < AVERAGE, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).",
+        "tier3": "The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < STRONG, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends)."
+      },
+      "tiersPlain": {
+        "tier1": "The target's speed is halved (save ends), or if P < WEAK, the target is slowed (save ends).",
+        "tier2": "The target is slowed (save ends), or if P < AVERAGE, the target's speed is 0 (save ends).",
+        "tier3": "The target is slowed (save ends), or if P < STRONG, the target's speed is 0 (save ends)."
+      },
+      "effectsVerbatim": [
+        "A target can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) while their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced this way."
+      ],
+      "effectsPlain": [
+        "A target can't use triggered actions while their speed is reduced this way."
+      ],
+      "strainedVerbatim": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1 and you take 1d6 damage. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+      "strainedPlain": "The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+      "chosenBy": ["v105-4"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovement": null,
+      "potencyByWitness": {
+        "v105-4": {
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        }
+      },
+      "strainedPotencyByWitness": {
+        "v105-4": {
+          "tier1": "P < 1",
+          "tier2": "P < 2",
+          "tier3": "P < 3"
+        }
+      },
+      "strainedPotencyNote": "Interpretation: 'The potency of this ability increases by 1' read as +1 to each of weak/average/strong (see uncertainty strained-potency-increase).",
+      "resolvedDistanceByWitness": {
+        "v105-4": "Ranged 12"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "Tier 1: target's speed halved (save ends), or if P < WEAK slowed (save ends).",
+        "Tier 2/3: target slowed (save ends), or if P < AVERAGE/STRONG speed 0 (save ends).",
+        "A target can't use triggered actions while their speed is reduced this way.",
+        "Strained: potency +1; you take 1d6 damage, and 1d6 damage at the start of each combat round while any target is affected; you can end the effect on all targets at any time (no action)."
+      ]
+    },
+    "Gravitic Burst": {
+      "name": "Gravitic Burst",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+      "sourceSha256": "6b43a8db95309d27f0fe0a242ec623b9268a4e84f624a85b50e6fd35ba099102",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14275 (2nd-Level Telekinesis Ability)",
+      "level": 2,
+      "tradition": "Telekinesis",
+      "unifiedSubclassField": "telekinesis",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Psionic", "Telekinesis"],
+      "distance": "1 burst",
+      "target": "Each enemy in the area",
+      "cost": {
+        "resource": "clarity",
+        "amount": 5,
+        "printed": "5 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "3 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+        "tier2": "6 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+        "tier3": "9 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6"
+      },
+      "tiersPlain": {
+        "tier1": "3 damage; vertical push 2",
+        "tier2": "6 damage; vertical push 4",
+        "tier3": "9 damage; vertical push 6"
+      },
+      "effectsVerbatim": [],
+      "effectsPlain": [],
+      "strainedVerbatim": "The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+      "strainedPlain": "The size of the burst increases by 1, and you are weakened until the end of your turn.",
+      "chosenBy": ["v105-2"],
+      "dealsDamage": true,
+      "damageType": "untyped (tiers print \"damage\" with no type)",
+      "rolledDamage": true,
+      "rolledDamageBasis": "Damage is a power-roll tier result, so it is rolled damage (rule/damage/rolled-damage.md).",
+      "damageByWitness": [
+        {
+          "witness": "v105-2",
+          "augmentation": "Density Augmentation",
+          "printedConstants": [3, 6, 9],
+          "characteristicTerm": null,
+          "characteristicValue": null,
+          "augmentationBonus": 0,
+          "tiers": [3, 6, 9],
+          "formula": "[3, 6, 9] (no characteristic term printed) + Density Augmentation 0 (Stamina/stability only; no damage bonus) = [3, 6, 9]"
+        }
+      ],
+      "forcedMovement": {
+        "kind": "vertical push",
+        "distanceByTier": [2, 4, 6],
+        "note": "Forced movement can trigger Clarity and Strain: first time each combat round a creature is force moved, gain 1 clarity (feature/talent/level-1/clarity-and-strain.md, Clarity in Combat)."
+      },
+      "potencyByWitness": null,
+      "resolvedDistanceByWitness": {
+        "v105-2": "1 burst"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "Vertical push 2 / 4 / 6 by tier to each enemy in the area.",
+        "Strained: burst size +1 (1 burst -> 2 burst) and you are weakened until the end of your turn."
+      ]
+    },
+    "Levity and Gravity": {
+      "name": "Levity and Gravity",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+      "sourceSha256": "f48f21349881d2a283faf614916313b1af788e495db812db694c9f1160805bcf",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14291 (2nd-Level Telekinesis Ability)",
+      "level": 2,
+      "tradition": "Telekinesis",
+      "unifiedSubclassField": "telekinesis",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Main action",
+      "keywords": ["Psionic", "Ranged", "Strike", "Telekinesis"],
+      "distance": "Ranged 10",
+      "target": "One creature or object",
+      "cost": {
+        "resource": "clarity",
+        "amount": 5,
+        "printed": "5 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "6 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+        "tier2": "10 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+        "tier3": "14 + R damage; M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "6 + R damage; M < WEAK, prone",
+        "tier2": "10 + R damage; M < AVERAGE, prone",
+        "tier3": "14 + R damage; M < STRONG, prone and can't stand (save ends)"
+      },
+      "effectsVerbatim": [],
+      "effectsPlain": [],
+      "strainedVerbatim": "You take half the damage the target takes.",
+      "strainedPlain": "You take half the damage the target takes.",
+      "chosenBy": ["v105-2-alt"],
+      "dealsDamage": true,
+      "damageType": "untyped (tiers print \"damage\" with no type)",
+      "rolledDamage": true,
+      "rolledDamageBasis": "Damage is a power-roll tier result, so it is rolled damage (rule/damage/rolled-damage.md).",
+      "damageByWitness": [
+        {
+          "witness": "v105-2-alt",
+          "augmentation": "Density Augmentation",
+          "printedConstants": [6, 10, 14],
+          "characteristicTerm": "R",
+          "characteristicValue": 2,
+          "augmentationBonus": 0,
+          "tiers": [8, 12, 16],
+          "formula": "[6, 10, 14] + R2 + Density Augmentation 0 (Stamina/stability only; no damage bonus) = [8, 12, 16]"
+        }
+      ],
+      "forcedMovement": null,
+      "potencyByWitness": {
+        "v105-2-alt": {
+          "tier1": "M < 0",
+          "tier2": "M < 1",
+          "tier3": "M < 2"
+        }
+      },
+      "resolvedDistanceByWitness": {
+        "v105-2-alt": "Ranged 10"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "M < WEAK / AVERAGE: prone; tier 3 M < STRONG: prone and can't stand (save ends).",
+        "Strained: you take half the damage the target takes (round down per rule/general/always-round-down.md)."
+      ]
+    },
+    "Overwhelm": {
+      "name": "Overwhelm",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+      "sourceSha256": "561ccd0ba0f1bc65d567af7c2668204412c56b8f5e40e3151870f1e32f397ce1",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14311 (2nd-Level Telepathy Ability)",
+      "level": 2,
+      "tradition": "Telepathy",
+      "unifiedSubclassField": "telepathy",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Main action",
+      "keywords": ["Psionic", "Ranged", "Strike", "Telepathy"],
+      "distance": "Ranged 10",
+      "target": "One creature",
+      "cost": {
+        "resource": "clarity",
+        "amount": 5,
+        "printed": "5 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "6 + R psychic damage; I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+        "tier2": "10 + R psychic damage; I < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+        "tier3": "14 + R psychic damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "6 + R psychic damage; I < WEAK, slowed (save ends)",
+        "tier2": "10 + R psychic damage; I < AVERAGE, weakened (save ends)",
+        "tier3": "14 + R psychic damage; I < STRONG, dazed (save ends)"
+      },
+      "effectsVerbatim": [],
+      "effectsPlain": [],
+      "strainedVerbatim": "You start crying, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) or make [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+      "strainedPlain": "You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
+      "chosenBy": ["v105-3"],
+      "dealsDamage": true,
+      "damageType": "psychic",
+      "rolledDamage": true,
+      "rolledDamageBasis": "Damage is a power-roll tier result, so it is rolled damage (rule/damage/rolled-damage.md).",
+      "damageByWitness": [
+        {
+          "witness": "v105-3",
+          "augmentation": "Speed Augmentation",
+          "printedConstants": [6, 10, 14],
+          "characteristicTerm": "R",
+          "characteristicValue": 2,
+          "augmentationBonus": 0,
+          "tiers": [8, 12, 16],
+          "formula": "[6, 10, 14] + R2 + Speed Augmentation 0 (speed/disengage only) = [8, 12, 16]"
+        }
+      ],
+      "forcedMovement": null,
+      "potencyByWitness": {
+        "v105-3": {
+          "tier1": "I < 0",
+          "tier2": "I < 1",
+          "tier3": "I < 2"
+        }
+      },
+      "resolvedDistanceByWitness": {
+        "v105-3": "Ranged 10"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "I < WEAK slowed (save ends); I < AVERAGE weakened (save ends); I < STRONG dazed (save ends).",
+        "Strained: you start crying and can't use triggered actions or make free strikes until the end of the target's next turn."
+      ]
+    },
+    "Synaptic Override": {
+      "name": "Synaptic Override",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+      "sourceSha256": "943840096a132e8c2f5ef300acd468633b8c495fb92f24dd3fb8688844402153",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14327 (2nd-Level Telepathy Ability)",
+      "level": 2,
+      "tradition": "Telepathy",
+      "unifiedSubclassField": "telepathy",
+      "feature": "2nd-Level Tradition Ability",
+      "actionType": "Main action",
+      "keywords": ["Psionic", "Ranged", "Telepathy"],
+      "distance": "Ranged 10",
+      "target": "One enemy",
+      "cost": {
+        "resource": "clarity",
+        "amount": 5,
+        "printed": "5 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "The target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against one enemy of your choice.",
+        "tier2": "The target shifts up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.",
+        "tier3": "The target moves up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice."
+      },
+      "tiersPlain": {
+        "tier1": "The target makes a free strike against one enemy of your choice.",
+        "tier2": "The target shifts up to their speed and uses their signature ability against any enemies of your choice.",
+        "tier3": "The target moves up to their speed and uses their signature ability against any enemies of your choice."
+      },
+      "effectsVerbatim": [
+        "You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect. However, you can move them to provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack)."
+      ],
+      "effectsPlain": [
+        "You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect. However, you can move them to provoke opportunity attacks."
+      ],
+      "strainedVerbatim": "You take 1d6 damage and are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+      "strainedPlain": "You take 1d6 damage and are weakened until the end of your turn.",
+      "chosenBy": ["v105-5"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "resolvedDistanceByWitness": {
+        "v105-5": "Ranged 10"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "Tier 1: the target makes a free strike against one enemy of your choice.",
+        "Tier 2: the target shifts up to their speed and uses their signature ability against any enemies of your choice. Tier 3: moves (not shifts) up to their speed and uses their signature ability.",
+        "You control the target's movement; it can't be moved in a way that would harm them, leave them dying, or impose a condition/negative effect, but can be moved to provoke opportunity attacks.",
+        "Strained: you take 1d6 damage and are weakened until the end of your turn."
+      ]
+    },
+    "Fling Through Time": {
+      "name": "Fling Through Time",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+      "sourceSha256": "e5ba8060aac0e6d5083f54532ad5e49200cd6d37dbbb9ecafbc495bdf6fd1b3e",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14357 (7-Clarity Ability, no tradition headings)",
+      "level": 3,
+      "tradition": null,
+      "unifiedSubclassField": null,
+      "feature": "7-Clarity Ability",
+      "actionType": "Main action",
+      "keywords": ["Chronopathy", "Psionic", "Ranged", "Strike"],
+      "distance": "Ranged 10",
+      "target": "One creature or object",
+      "cost": {
+        "resource": "clarity",
+        "amount": 7,
+        "printed": "7 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "3 + P corruption damage; P < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+        "tier2": "5 + P corruption damage; the target is flung through time, and if P < AVERAGE, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+        "tier3": "8 + P corruption damage; the target is flung through time, and if P < STRONG, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "3 + P corruption damage; P < WEAK, weakened (save ends)",
+        "tier2": "5 + P corruption damage; the target is flung through time, and if P < AVERAGE, they are weakened (save ends)",
+        "tier3": "8 + P corruption damage; the target is flung through time, and if P < STRONG, they are weakened (save ends)"
+      },
+      "effectsVerbatim": [
+        "A target who is flung through time is removed from the encounter map until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), reappearing in their original space or the nearest unoccupied space."
+      ],
+      "effectsPlain": [
+        "A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space."
+      ],
+      "strainedVerbatim": "You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a [human](scc.v1:mcdm.heroes.v1/ancestry/human)). If you obtain a tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you gain 2 clarity.",
+      "strainedPlain": "You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
+      "chosenBy": ["v105-1", "v105-5"],
+      "dealsDamage": true,
+      "damageType": "corruption",
+      "rolledDamage": true,
+      "rolledDamageBasis": "Damage is a power-roll tier result, so it is rolled damage (rule/damage/rolled-damage.md).",
+      "damageByWitness": [
+        {
+          "witness": "v105-1",
+          "augmentation": "Force Augmentation",
+          "printedConstants": [3, 5, 8],
+          "characteristicTerm": "P",
+          "characteristicValue": 2,
+          "augmentationBonus": 1,
+          "tiers": [6, 8, 11],
+          "formula": "[3, 5, 8] + P2 + Force Augmentation 1 (damage-dealing Psionic ability, rolled damage) = [6, 8, 11]"
+        },
+        {
+          "witness": "v105-5",
+          "augmentation": "Battle Augmentation",
+          "printedConstants": [3, 5, 8],
+          "characteristicTerm": "P",
+          "characteristicValue": 2,
+          "augmentationBonus": 0,
+          "tiers": [5, 7, 10],
+          "formula": "[3, 5, 8] + P2 + Battle Augmentation 0 (weapon abilities with a light weapon only; this ability has no Weapon keyword) = [5, 7, 10]"
+        }
+      ],
+      "forcedMovement": null,
+      "potencyByWitness": {
+        "v105-1": {
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        },
+        "v105-5": {
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        }
+      },
+      "resolvedDistanceByWitness": {
+        "v105-1": "Ranged 10",
+        "v105-5": "Ranged 10"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "Tier 1: P < WEAK weakened (save ends). Tier 2/3: target is flung through time, and if P < AVERAGE/STRONG weakened (save ends).",
+        "Flung through time: removed from the encounter map until the end of their next turn, reappearing in their original space or nearest unoccupied space.",
+        "Strained: you take 2d6 damage and permanently age (10 human years); on a tier 3 outcome you gain 2 clarity."
+      ]
+    },
+    "Force Orbs": {
+      "name": "Force Orbs",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+      "sourceSha256": "f22f50d5fb72eac58e7abbbba8736a07abc893f7f45f4436de8565b84c48ba2a",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14375 (7-Clarity Ability, no tradition headings)",
+      "level": 3,
+      "tradition": null,
+      "unifiedSubclassField": null,
+      "feature": "7-Clarity Ability",
+      "actionType": "Main action",
+      "keywords": ["Psionic", "Ranged", "Strike", "Telekinesis"],
+      "distance": "Self; see below",
+      "target": "Self",
+      "cost": {
+        "resource": "clarity",
+        "amount": 7,
+        "printed": "7 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Reason",
+      "tiersVerbatim": {
+        "tier1": "2 damage",
+        "tier2": "3 damage",
+        "tier3": "5 damage"
+      },
+      "tiersPlain": {
+        "tier1": "2 damage",
+        "tier2": "3 damage",
+        "tier3": "5 damage"
+      },
+      "effectsVerbatim": [
+        "You create three [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1T orbs that orbit your body. Each orb gives you a cumulative [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 1. Each time you take damage, you lose 1 orb."
+      ],
+      "effectsPlain": [
+        "You create three size 1T orbs that orbit your body. Each orb gives you a cumulative damage immunity 1. Each time you take damage, you lose 1 orb."
+      ],
+      "strainedVerbatim": "You create five orbs, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) while you have any orbs active.",
+      "strainedPlain": "You create five orbs, and you are weakened while you have any orbs active.",
+      "chosenBy": ["v105-4"],
+      "dealsDamage": true,
+      "damageType": "untyped (tiers print \"damage\" with no type)",
+      "rolledDamage": true,
+      "rolledDamageBasis": "Damage is a power-roll tier result, so it is rolled damage (rule/damage/rolled-damage.md).",
+      "damageByWitness": [
+        {
+          "witness": "v105-4",
+          "augmentation": "Distance Augmentation",
+          "printedConstants": [2, 3, 5],
+          "characteristicTerm": null,
+          "characteristicValue": null,
+          "augmentationBonus": 0,
+          "tiers": [2, 3, 5],
+          "formula": "[2, 3, 5] (no characteristic term printed) + Distance Augmentation 0 (distance only) = [2, 3, 5]"
+        }
+      ],
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "resolvedDistanceByWitness": {
+        "v105-4": "Self; see below (orb strike within 5 squares; Distance Augmentation applicability unresolved, see uncertainty force-orbs-distance)"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "Create three size 1T orbs; each orb gives cumulative damage immunity 1; lose 1 orb each time you take damage.",
+        "Once on each of your turns, free maneuver: fire an orb at a creature or object within 5 squares as a ranged strike (power roll + Reason, 2 / 3 / 5 damage), losing the orb.",
+        "The power roll is made per fired orb, not when the ability is used.",
+        "Strained: create five orbs, and you are weakened while you have any orbs active."
+      ]
+    },
+    "Reflector Field": {
+      "name": "Reflector Field",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+      "sourceSha256": "21bad0048b35441de776a50f4252fa851445d6670a429ca0e744edb38a881712",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14395 (7-Clarity Ability, no tradition headings)",
+      "level": 3,
+      "tradition": null,
+      "unifiedSubclassField": null,
+      "feature": "7-Clarity Ability",
+      "actionType": "Main action",
+      "keywords": ["Area", "Psionic", "Telepathy"],
+      "distance": "3 aura",
+      "target": "Special",
+      "cost": {
+        "resource": "clarity",
+        "amount": 7,
+        "printed": "7 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": null,
+      "tiersVerbatim": null,
+      "tiersPlain": null,
+      "effectsVerbatim": [
+        "The [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever an enemy targets an ally in the area with a [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects."
+      ],
+      "effectsPlain": [
+        "The aura lasts until the start of your next turn. Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects."
+      ],
+      "strainedVerbatim": "The size of the [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) increases by 1. Whenever your [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+      "strainedPlain": "The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+      "chosenBy": ["v105-2"],
+      "dealsDamage": false,
+      "damageType": null,
+      "damageByWitness": [],
+      "forcedMovement": null,
+      "potencyByWitness": null,
+      "resolvedDistanceByWitness": {
+        "v105-2": "3 aura"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "3 aura lasting until the start of your next turn.",
+        "Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy, dealing half the damage it would have dealt to the ally (round down) and losing any additional effects.",
+        "Strained: aura size +1 (4 aura); whenever the aura reflects an ability, you take 2d6 damage and forget a memory (you and the Director)."
+      ]
+    },
+    "Soul Burn": {
+      "name": "Soul Burn",
+      "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+      "sourceSha256": "d10fb0a16412582813e6fa6c2e8a020588e8f07f89567a09cc88d8cb55ad16ec",
+      "bookGrouping": "en/books/heroes/clean/Draw Steel Heroes.md line 14407 (7-Clarity Ability, no tradition headings)",
+      "level": 3,
+      "tradition": null,
+      "unifiedSubclassField": null,
+      "feature": "7-Clarity Ability",
+      "actionType": "Main action",
+      "keywords": ["Animapathy", "Psionic", "Ranged", "Strike"],
+      "distance": "Ranged 10",
+      "target": "One creature",
+      "cost": {
+        "resource": "clarity",
+        "amount": 7,
+        "printed": "7 Clarity"
+      },
+      "trigger": null,
+      "rollCharacteristic": "Presence",
+      "tiersVerbatim": {
+        "tier1": "6 + P damage; P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+        "tier2": "10 + P damage; P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+        "tier3": "14 + P damage; P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+      },
+      "tiersPlain": {
+        "tier1": "6 + P damage; P < WEAK, dazed (save ends)",
+        "tier2": "10 + P damage; P < AVERAGE, dazed (save ends)",
+        "tier3": "14 + P damage; P < STRONG, dazed (save ends)"
+      },
+      "effectsVerbatim": [
+        "The target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) until the end of the encounter."
+      ],
+      "effectsPlain": ["The target takes a bane on Presence tests until the end of the encounter."],
+      "strainedVerbatim": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1. You take 2d6 damage and gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately.",
+      "strainedPlain": "The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
+      "chosenBy": ["v105-2-alt", "v105-3"],
+      "dealsDamage": true,
+      "damageType": "untyped (tiers print \"damage\" with no type)",
+      "rolledDamage": true,
+      "rolledDamageBasis": "Damage is a power-roll tier result, so it is rolled damage (rule/damage/rolled-damage.md).",
+      "damageByWitness": [
+        {
+          "witness": "v105-2-alt",
+          "augmentation": "Density Augmentation",
+          "printedConstants": [6, 10, 14],
+          "characteristicTerm": "P",
+          "characteristicValue": 2,
+          "augmentationBonus": 0,
+          "tiers": [8, 12, 16],
+          "formula": "[6, 10, 14] + P2 + Density Augmentation 0 (Stamina/stability only; no damage bonus) = [8, 12, 16]"
+        },
+        {
+          "witness": "v105-3",
+          "augmentation": "Speed Augmentation",
+          "printedConstants": [6, 10, 14],
+          "characteristicTerm": "P",
+          "characteristicValue": 2,
+          "augmentationBonus": 0,
+          "tiers": [8, 12, 16],
+          "formula": "[6, 10, 14] + P2 + Speed Augmentation 0 (speed/disengage only) = [8, 12, 16]"
+        }
+      ],
+      "forcedMovement": null,
+      "potencyByWitness": {
+        "v105-2-alt": {
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        },
+        "v105-3": {
+          "tier1": "P < 0",
+          "tier2": "P < 1",
+          "tier3": "P < 2"
+        }
+      },
+      "strainedPotencyByWitness": {
+        "v105-2-alt": {
+          "tier1": "P < 1",
+          "tier2": "P < 2",
+          "tier3": "P < 3"
+        },
+        "v105-3": {
+          "tier1": "P < 1",
+          "tier2": "P < 2",
+          "tier3": "P < 3"
+        }
+      },
+      "strainedPotencyNote": "Interpretation: 'The potency of this ability increases by 1' read as +1 to each of weak/average/strong (see uncertainty strained-potency-increase).",
+      "resolvedDistanceByWitness": {
+        "v105-2-alt": "Ranged 10",
+        "v105-3": "Ranged 10"
+      },
+      "distanceAugmentationBasis": "Distance Augmentation: 'Your ranged psionic abilities gain a +2 bonus to distance' (feature/talent/level-1/distance-augmentation.md). Applies only to v105-4 and only to abilities with both Ranged and Psionic keywords.",
+      "manualClauses": [
+        "P < WEAK / AVERAGE / STRONG: dazed (save ends).",
+        "Effect: the target takes a bane on Presence tests until the end of the encounter.",
+        "Strained: potency +1; you take 2d6 damage and gain 3 surges usable immediately."
+      ]
+    }
+  },
+  "witnesses": {
+    "v105-1": {
+      "base": "v105-1",
+      "tradition": "Chronopathy",
+      "augmentation": "Force Augmentation",
+      "ward": "Entropy Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": -1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Lie Detector",
+          "traditionAbility": "Applied Chronometrics"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Ease the Hours",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Applied Chronometrics"],
+        "addedStrainVariantsV105Naming": ["Applied Chronometrics: Strain"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": -1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) = 24",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Fling Through Time"
+        },
+        "addedFeatures": ["Scan", "7-Clarity Ability"],
+        "addedAbilities": ["Fling Through Time"],
+        "addedStrainVariantsV105Naming": ["Fling Through Time: Strain"],
+        "cumulativeAddedAbilities": ["Applied Chronometrics", "Fling Through Time"],
+        "perks": ["Teamwork", "Lie Detector"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": -1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      }
+    },
+    "v105-4": {
+      "base": "v105-4",
+      "tradition": "Chronopathy",
+      "augmentation": "Distance Augmentation",
+      "ward": "Vanishing Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": -1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Spot the Tell",
+          "traditionAbility": "Slow"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Ease the Hours",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Slow"],
+        "addedStrainVariantsV105Naming": ["Slow: Strain"],
+        "perks": ["Teamwork", "Spot the Tell"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": -1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) = 24",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Force Orbs"
+        },
+        "addedFeatures": ["Scan", "7-Clarity Ability"],
+        "addedAbilities": ["Force Orbs"],
+        "addedStrainVariantsV105Naming": ["Force Orbs: Strain"],
+        "cumulativeAddedAbilities": ["Slow", "Force Orbs"],
+        "perks": ["Teamwork", "Spot the Tell"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 2,
+          "A": -1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      }
+    },
+    "v105-2": {
+      "base": "v105-2",
+      "tradition": "Telekinesis",
+      "augmentation": "Density Augmentation",
+      "ward": "Repulsive Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Expert Sage",
+          "traditionAbility": "Gravitic Burst"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Ease Their Fall",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Gravitic Burst"],
+        "addedStrainVariantsV105Naming": ["Gravitic Burst: Strain"],
+        "perks": ["Teamwork", "Expert Sage"],
+        "perkType": "lore",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "easeTheirFallReduction": 4,
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + Density Augmentation 6 (levels 1-3; increases at 4th) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Reflector Field"
+        },
+        "addedFeatures": ["Scan", "7-Clarity Ability"],
+        "addedAbilities": ["Reflector Field"],
+        "addedStrainVariantsV105Naming": ["Reflector Field: Strain"],
+        "cumulativeAddedAbilities": ["Gravitic Burst", "Reflector Field"],
+        "perks": ["Teamwork", "Expert Sage"],
+        "perkType": "lore",
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "easeTheirFallReduction": 4,
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + Density Augmentation 6 (levels 1-3; increases at 4th) = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      }
+    },
+    "v105-2-alt": {
+      "base": "v105-2",
+      "tradition": "Telekinesis",
+      "augmentation": "Density Augmentation",
+      "ward": "Repulsive Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Charming Liar",
+          "traditionAbility": "Levity and Gravity"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Ease Their Fall",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Levity and Gravity"],
+        "addedStrainVariantsV105Naming": ["Levity and Gravity: Strain"],
+        "perks": ["Teamwork", "Charming Liar"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "easeTheirFallReduction": 4,
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) + Density Augmentation 6 (levels 1-3; increases at 4th) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Soul Burn"
+        },
+        "addedFeatures": ["Scan", "7-Clarity Ability"],
+        "addedAbilities": ["Soul Burn"],
+        "addedStrainVariantsV105Naming": ["Soul Burn: Strain"],
+        "cumulativeAddedAbilities": ["Levity and Gravity", "Soul Burn"],
+        "perks": ["Teamwork", "Charming Liar"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 36,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 12,
+        "windedValue": 18,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "easeTheirFallReduction": 4,
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) + Density Augmentation 6 (levels 1-3; increases at 4th) = 36",
+          "recoveryValue": "floor(36/3) = 12",
+          "windedValue": "floor(36/2) = 18",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "note": "Same level-one selections as v105-2 (tests/fixtures/v105-talent-expected.json); diverges at level 2 to cover the other Telekinesis ability and a damaging 7-clarity ability."
+    },
+    "v105-3": {
+      "base": "v105-3",
+      "tradition": "Telepathy",
+      "augmentation": "Speed Augmentation",
+      "ward": "Steel Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 0,
+          "R": 2,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Harmonizer",
+          "traditionAbility": "Overwhelm"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Ease the Mind",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Overwhelm"],
+        "addedStrainVariantsV105Naming": ["Overwhelm: Strain"],
+        "perks": ["Teamwork", "Harmonizer"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 0,
+          "R": 2,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) = 24",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Soul Burn"
+        },
+        "addedFeatures": ["Scan", "7-Clarity Ability"],
+        "addedAbilities": ["Soul Burn"],
+        "addedStrainVariantsV105Naming": ["Soul Burn: Strain"],
+        "cumulativeAddedAbilities": ["Overwhelm", "Soul Burn"],
+        "perks": ["Teamwork", "Harmonizer"],
+        "perkType": "interpersonal",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "characteristics": {
+          "M": 1,
+          "A": 0,
+          "R": 2,
+          "I": 0,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) = 30",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      }
+    },
+    "v105-5": {
+      "base": "v105-5",
+      "tradition": "Telepathy",
+      "augmentation": "Battle Augmentation",
+      "ward": "Entropy Ward",
+      "levelOneBaseline": {
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        }
+      },
+      "levelTwo": {
+        "level": 2,
+        "echelon": 1,
+        "addedSelections": {
+          "perk": "Thingspeaker",
+          "traditionAbility": "Synaptic Override"
+        },
+        "addedFeatures": [
+          "Perk",
+          "2nd-Level Tradition Feature",
+          "Ease the Mind",
+          "2nd-Level Tradition Ability"
+        ],
+        "addedAbilities": ["Synaptic Override"],
+        "addedStrainVariantsV105Naming": ["Synaptic Override: Strain"],
+        "perks": ["Teamwork", "Thingspeaker"],
+        "perkType": "supernatural",
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (2 - 1) = 24 (no light armor worn, matching reviewed v105-5 level-one Stamina 18; worn light armor would add +3)",
+          "recoveryValue": "floor(24/3) = 8",
+          "windedValue": "floor(24/2) = 12",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      },
+      "levelThree": {
+        "level": 3,
+        "echelon": 1,
+        "addedSelections": {
+          "ability7": "Fling Through Time"
+        },
+        "addedFeatures": ["Scan", "7-Clarity Ability"],
+        "addedAbilities": ["Fling Through Time"],
+        "addedStrainVariantsV105Naming": ["Fling Through Time: Strain"],
+        "cumulativeAddedAbilities": ["Synaptic Override", "Fling Through Time"],
+        "perks": ["Teamwork", "Thingspeaker"],
+        "perkType": "supernatural",
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": -1,
+          "P": 2
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "derivation": {
+          "staminaMaximum": "18 + 6 x (3 - 1) = 30 (no light armor worn, matching reviewed v105-5 level-one Stamina 18; worn light armor would add +3)",
+          "recoveryValue": "floor(30/3) = 10",
+          "windedValue": "floor(30/2) = 15",
+          "unchanged": "Recoveries (8), speed, stability, disengage, characteristics and potency equal the reviewed level-one values: no level-2/3 Talent feature, tradition ability, 7-clarity ability or selected perk changes them; levels 1-3 are echelon 1; Density/Battle Stamina bonuses step only at 4th level; Characteristic Increase first appears at 4th level."
+        }
+      }
+    }
+  }
+}

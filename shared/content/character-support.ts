@@ -36,17 +36,17 @@ export const CHARACTER_LEVEL_SUPPORT: Readonly<Record<number, readonly SupportRe
   3: [
     {
       decisionId: 'class.choice',
-      value: 'Shadow|Fury|Tactician|Censor|Troubadour|Null|Conduit|Elementalist',
+      value: 'Shadow|Fury|Tactician|Censor|Troubadour|Null|Conduit|Elementalist|Talent',
       message:
-        'Level three currently supports Shadow, Fury, Tactician, Censor, Troubadour, Null, Conduit and Elementalist.',
+        'Level three currently supports Shadow, Fury, Tactician, Censor, Troubadour, Null, Conduit, Elementalist and Talent.',
     },
   ],
   2: [
     {
       decisionId: 'class.choice',
-      value: 'Shadow|Fury|Tactician|Censor|Troubadour|Null|Conduit|Elementalist',
+      value: 'Shadow|Fury|Tactician|Censor|Troubadour|Null|Conduit|Elementalist|Talent',
       message:
-        'Level two currently supports Shadow, Fury, Tactician, Censor, Troubadour, Null, Conduit and Elementalist.',
+        'Level two currently supports Shadow, Fury, Tactician, Censor, Troubadour, Null, Conduit, Elementalist and Talent.',
     },
   ],
 };
@@ -63,7 +63,7 @@ export function characterSupportDiagnostics(
     return [
       {
         decisionId: 'class.level',
-        message: `Level ${level} has no supported character definitions; levels two and three support Shadow, Fury, Tactician, Censor, Troubadour, Null, Conduit and Elementalist; levels four through six support Shadow.`,
+        message: `Level ${level} has no supported character definitions; levels two and three support Shadow, Fury, Tactician, Censor, Troubadour, Null, Conduit, Elementalist and Talent; levels four through six support Shadow.`,
       },
     ];
   return CHARACTER_LEVEL_SUPPORT[level]!.filter(

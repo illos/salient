@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:27680f9ecc4531448301c820b7d8e722e0753da12217a43e8b03f5a13c48f421",
+  "contentHash": "sha256:2b96f587f742ffa0c2eabd9786cbf022685e3b61524a79711712c11e7fcb6f1d",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1107
     },
     "hero-standalone": {
-      "total": 344,
+      "total": 354,
       "supported": 46,
-      "manual": 298
+      "manual": 308
     },
     "kit-signature": {
       "total": 25,
@@ -53065,6 +53065,2071 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Spirit Sword supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics",
+      "name": "Applied Chronometrics",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#block:0:tier1:0:70874ce82e6dba4f",
+            "locator": "block:0:tier1:0",
+            "clause": "You target two creatures, one of which can be you.",
+            "kind": "unsupported",
+            "shape": "you target two creatures, one of which can be you",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#block:0:tier2:0:7514b231fbe58619",
+            "locator": "block:0:tier2:0",
+            "clause": "You target three creatures, one of which can be you.",
+            "kind": "unsupported",
+            "shape": "you target three creatures, one of which can be you",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#block:0:tier3:0:e78511ff3362b033",
+            "locator": "block:0:tier3:0",
+            "clause": "You target four creatures, one of which can be you.",
+            "kind": "unsupported",
+            "shape": "you target four creatures, one of which can be you",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#block:1:0:59c2437f9d36f638",
+          "locator": "block:1:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), they can't be made [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), and they can use an additional maneuver on their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If a target is already [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), that [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) ends for them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#block:2:0:551f5df51cc6e02b",
+          "locator": "block:2:0",
+          "clause": "Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved until the end of the encounter.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#markdown:block:1:0:e9ab9327f1613908",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: Until the start of your next turn, each target gains a +5 bonus to speed, they can't be made dazed, and they can use an additional maneuver on their turn. If a target is already dazed, that condition ends for them.\nStrained: Your speed is halved until the end of the encounter.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics#markdown:item:8:0:71d45e1ae8ff9642",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: Your speed is halved until the end of the encounter.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "You target two creatures, one of which can be you.",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "You target three creatures, one of which can be you.",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "You target four creatures, one of which can be you.",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*Time slows down around you. Your heartbeat is the only gauge of the extra moments you've gained.*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |   **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|---------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 Special** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** You target two creatures, one of which can be you.\n- **12-16:** You target three creatures, one of which can be you.\n- **17+:** You target four creatures, one of which can be you.\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), they can't be made [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), and they can use an additional maneuver on their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If a target is already [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), that [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) ends for them.\n\n**Strained:** Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved until the end of the encounter.\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Effect: Until the start of your next turn, each target gains a +5 bonus to speed, they can't be made dazed, and they can use an additional maneuver on their turn. If a target is already dazed, that condition ends for them.\nStrained: Your speed is halved until the end of the encounter.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:2",
+          "clause": "Strained: Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved until the end of the encounter.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "Strained: Your speed is halved until the end of the encounter.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each target gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), they can't be made [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), and they can use an additional maneuver on their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If a target is already [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), that [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) ends for them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved until the end of the encounter.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: Until the start of your next turn, each target gains a +5 bonus to speed, they can't be made dazed, and they can use an additional maneuver on their turn. If a target is already dazed, that condition ends for them.\nStrained: Your speed is halved until the end of the encounter.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: Your speed is halved until the end of the encounter.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst",
+      "name": "Gravitic Burst",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier1:0:c31afe8fa82fb263",
+            "locator": "block:0:tier1:0",
+            "clause": "3 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier1:1:9127ba74318f5c18",
+            "locator": "block:0:tier1:1",
+            "clause": "vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "push",
+            "distance": 2,
+            "vertical": true,
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier1:0:c31afe8fa82fb263"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier2:0:65723ebe74a7200a",
+            "locator": "block:0:tier2:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier2:1:9127c074318f664a",
+            "locator": "block:0:tier2:1",
+            "clause": "vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+            "kind": "push",
+            "distance": 4,
+            "vertical": true,
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier2:0:65723ebe74a7200a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier3:0:abbf0071bed5821d",
+            "locator": "block:0:tier3:0",
+            "clause": "9 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier3:1:9127be74318f62e4",
+            "locator": "block:0:tier3:1",
+            "clause": "vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6",
+            "kind": "push",
+            "distance": 6,
+            "vertical": true,
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:0:tier3:0:abbf0071bed5821d"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#block:1:0:200b214d48d12bb2",
+          "locator": "block:1:0",
+          "clause": "The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst#markdown:item:7:0:4e1405e974067095",
+          "locator": "markdown:item:7:0",
+          "clause": "Strained: The size of the burst increases by 1, and you are weakened until the end of your turn.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*Everyone get away from me!*\n\n| **Area, Psionic, Telekinesis** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|------------------------------:|\n| **📏 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**                 | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 3 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **12-16:** 6 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n- **17+:** 9 damage; vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n\n**Strained:** The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Strained: The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:7",
+          "clause": "Strained: The size of the burst increases by 1, and you are weakened until the end of your turn.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:7:0",
+          "clause": "Strained: The size of the burst increases by 1, and you are weakened until the end of your turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity",
+      "name": "Levity and Gravity",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier1:0:bd4b41702349d88f",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier1:1:bc03ef634aeb8368",
+            "locator": "block:0:tier1:1",
+            "clause": "M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier1:0:bd4b41702349d88f"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier2:0:d2a46beccef41550",
+            "locator": "block:0:tier2:0",
+            "clause": "10 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier2:1:6aa179339b40324b",
+            "locator": "block:0:tier2:1",
+            "clause": "M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "prone",
+            "duration": "none",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier2:0:d2a46beccef41550"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier3:0:0132ad69f5e8865c",
+            "locator": "block:0:tier3:0",
+            "clause": "14 + R damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "R"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:0:tier3:1:e9e23f5bf7b0b747",
+            "locator": "block:0:tier3:1",
+            "clause": "M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:M < SYM prone and can't stand (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#block:1:0:6aa35698478604c6",
+          "locator": "block:1:0",
+          "clause": "You take half the damage the target takes.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity#markdown:item:7:0:61284eb6907a48c8",
+          "locator": "markdown:item:7:0",
+          "clause": "Strained: You take half the damage the target takes.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*You raise the target slightly into the air, then smother them against the ground.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Telekinesis** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                         | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 6 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **12-16:** 10 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **17+:** 14 + R damage; M < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand (save ends)\n\n**Strained:** You take half the damage the target takes.\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Strained: You take half the damage the target takes.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:7",
+          "clause": "Strained: You take half the damage the target takes.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You take half the damage the target takes.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:7:0",
+          "clause": "Strained: You take half the damage the target takes.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm",
+      "name": "Overwhelm",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier1:0:691cc7f822506872",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + R psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "R"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier1:1:569f2b6cdfcbf460",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier1:0:691cc7f822506872"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier2:0:9222adbaf6b81c3d",
+            "locator": "block:0:tier2:0",
+            "clause": "10 + R psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "R"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier2:1:97abdd60421c9f8f",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier2:0:9222adbaf6b81c3d"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier3:0:1b3366f2b3855dc9",
+            "locator": "block:0:tier3:0",
+            "clause": "14 + R psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "R"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier3:1:20c8f05ce821f263",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "I",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:0:tier3:0:1b3366f2b3855dc9"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#block:1:0:39bc3c351f3c331a",
+          "locator": "block:1:0",
+          "clause": "You start crying, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) or make [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm#markdown:item:7:0:2c72358ad06ea93d",
+          "locator": "markdown:item:7:0",
+          "clause": "Strained: You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*You overload their senses, turning all their subconscious thoughts into conscious ones.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Telepathy** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                       | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 6 + R psychic damage; I < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 10 + R psychic damage; I < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 14 + R psychic damage; I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n\n**Strained:** You start crying, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) or make [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Strained: You start crying, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) or make [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:7",
+          "clause": "Strained: You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You start crying, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) or make [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:7:0",
+          "clause": "Strained: You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow",
+      "name": "Slow",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/slow.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#block:0:tier1:0:ecdf06e53734cfa3",
+            "locator": "block:0:tier1:0",
+            "clause": "The target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved (save ends), or if P < WEAK, the target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).",
+            "kind": "unsupported",
+            "shape": "the target's speed is halved (save ends), or if p < SYM, the target is slowed (save ends)",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#block:0:tier2:0:9953226a469a1c10",
+            "locator": "block:0:tier2:0",
+            "clause": "The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < AVERAGE, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).",
+            "kind": "unsupported",
+            "shape": "the target is slowed (save ends), or if p < SYM, the target's speed is N (save ends)",
+            "reason": "condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#block:0:tier3:0:4b19feb1fd1c430a",
+            "locator": "block:0:tier3:0",
+            "clause": "The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < STRONG, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).",
+            "kind": "unsupported",
+            "shape": "the target is slowed (save ends), or if p < SYM, the target's speed is N (save ends)",
+            "reason": "condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#block:1:0:3fdd23c75a0167e6",
+          "locator": "block:1:0",
+          "clause": "A target can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) while their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced this way.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#block:2:0:73f3e278041fb6e7",
+          "locator": "block:2:0",
+          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1 and you take 1d6 damage. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#markdown:block:1:0:ddda4a2e3e05ec2f",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: A target can't use triggered actions while their speed is reduced this way.\nStrained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow#markdown:item:8:0:f6da16248f45fccb",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "The target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved (save ends), or if P < WEAK, the target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < AVERAGE, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < STRONG, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*Perhaps they wonder why everyone else is moving so quickly?*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |                      **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|----------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 Three creatures or objects** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** The target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is halved (save ends), or if P < WEAK, the target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).\n- **12-16:** The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < AVERAGE, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).\n- **17+:** The target is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends), or if P < STRONG, the target's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 0 (save ends).\n\n**Effect:** A target can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) while their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced this way.\n\n**Strained:** The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1 and you take 1d6 damage. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Effect: A target can't use triggered actions while their speed is reduced this way.\nStrained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:2",
+          "clause": "Strained: The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1 and you take 1d6 damage. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "Strained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "A target can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) while their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced this way.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1 and you take 1d6 damage. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: A target can't use triggered actions while their speed is reduced this way.\nStrained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override",
+      "name": "Synaptic Override",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#block:0:tier1:0:d06853813ea8aff3",
+            "locator": "block:0:tier1:0",
+            "clause": "The target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against one enemy of your choice.",
+            "kind": "unsupported",
+            "shape": "the target makes a free strike against one enemy of your choice",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#block:0:tier2:0:3b59f71f20c7a9df",
+            "locator": "block:0:tier2:0",
+            "clause": "The target shifts up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.",
+            "kind": "unsupported",
+            "shape": "the target shifts up to their speed and uses their signature ability against any enemies of your choice",
+            "reason": "shift",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#block:0:tier3:0:4e35f93a0e606d86",
+            "locator": "block:0:tier3:0",
+            "clause": "The target moves up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.",
+            "kind": "unsupported",
+            "shape": "the target moves up to their speed and uses their signature ability against any enemies of your choice",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#block:1:0:a43b51379cb2fb1e",
+          "locator": "block:1:0",
+          "clause": "You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect. However, you can move them to provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#block:2:0:2fc31a3a13f6c8b3",
+          "locator": "block:2:0",
+          "clause": "You take 1d6 damage and are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#markdown:block:1:0:e2ed75f26f7e6212",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect. However, you can move them to provoke opportunity attacks.\nStrained: You take 1d6 damage and are weakened until the end of your turn.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override#markdown:item:8:0:84a90383971833e9",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: You take 1d6 damage and are weakened until the end of your turn.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "The target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against one enemy of your choice.",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "The target shifts up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "The target moves up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*You control an enemy's nervous system. How pleasant for them.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Telepathy** |  **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|-----------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**               | **🎯 One enemy** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** The target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against one enemy of your choice.\n- **12-16:** The target shifts up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.\n- **17+:** The target moves up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and uses their [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against any enemies of your choice.\n\n**Effect:** You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect. However, you can move them to provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack).\n\n**Strained:** You take 1d6 damage and are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Effect: You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect. However, you can move them to provoke opportunity attacks.\nStrained: You take 1d6 damage and are weakened until the end of your turn.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:2",
+          "clause": "Strained: You take 1d6 damage and are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "Strained: You take 1d6 damage and are weakened until the end of your turn.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect. However, you can move them to provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "You take 1d6 damage and are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect. However, you can move them to provoke opportunity attacks.\nStrained: You take 1d6 damage and are weakened until the end of your turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: You take 1d6 damage and are weakened until the end of your turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time",
+      "name": "Fling Through Time",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:0:tier1:0:6730ad94b07528fd",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + P corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "P"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:0:tier1:1:984c2fd4a9675529",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:0:tier1:0:6730ad94b07528fd"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:0:tier2:0:adfee00368ad2fcb",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + P corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:0:tier2:1:9de2fe80b2cefd46",
+            "locator": "block:0:tier2:1",
+            "clause": "the target is flung through time, and if P < AVERAGE, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "unsupported",
+            "shape": "the target is flung through time, and if p < SYM, they are weakened (save ends)",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:0:tier3:0:32f125f3ebcb7314",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + P corruption damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "P"
+            },
+            "damageType": "corruption",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:0:tier3:1:184f7198e96dd710",
+            "locator": "block:0:tier3:1",
+            "clause": "the target is flung through time, and if P < STRONG, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "unsupported",
+            "shape": "the target is flung through time, and if p < SYM, they are weakened (save ends)",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:1:0:59abaaa960bfd787",
+          "locator": "block:1:0",
+          "clause": "A target who is flung through time is removed from the encounter map until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), reappearing in their original space or the nearest unoccupied space.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#block:2:0:9426dca6f943a02f",
+          "locator": "block:2:0",
+          "clause": "You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a [human](scc.v1:mcdm.heroes.v1/ancestry/human)). If you obtain a tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you gain 2 clarity.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#markdown:block:1:0:8e4020cddd630cd0",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space.\nStrained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time#markdown:item:8:0:51783e96f51446b3",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "the target is flung through time, and if P < AVERAGE, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "the target is flung through time, and if P < STRONG, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*You hurl the target through the annals of time, forcing them to witness every moment of their existence all at once.*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 3 + P corruption damage; P < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **12-16:** 5 + P corruption damage; the target is flung through time, and if P < AVERAGE, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 8 + P corruption damage; the target is flung through time, and if P < STRONG, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n\n**Effect:** A target who is flung through time is removed from the encounter map until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), reappearing in their original space or the nearest unoccupied space.\n\n**Strained:** You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a [human](scc.v1:mcdm.heroes.v1/ancestry/human)). If you obtain a tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you gain 2 clarity.\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Effect: A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space.\nStrained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:2",
+          "clause": "Strained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a [human](scc.v1:mcdm.heroes.v1/ancestry/human)). If you obtain a tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you gain 2 clarity.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "Strained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "A target who is flung through time is removed from the encounter map until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), reappearing in their original space or the nearest unoccupied space.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a [human](scc.v1:mcdm.heroes.v1/ancestry/human)). If you obtain a tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you gain 2 clarity.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space.\nStrained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Fling Through Time",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fling Through Time supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fling Through Time",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fling Through Time supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fling Through Time",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fling Through Time supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fling Through Time",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fling Through Time supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs",
+      "name": "Force Orbs",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#block:1:tier1:0:1adb725bfe833afe",
+            "locator": "block:1:tier1:0",
+            "clause": "2 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#block:1:tier2:0:c31afe8fa82fb263",
+            "locator": "block:1:tier2:0",
+            "clause": "3 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#block:1:tier3:0:4148a008d7858141",
+            "locator": "block:1:tier3:0",
+            "clause": "5 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#block:0:0:a824def8a0db28b5",
+          "locator": "block:0:0",
+          "clause": "You create three [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1T orbs that orbit your body. Each orb gives you a cumulative [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 1. Each time you take damage, you lose 1 orb.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#block:2:0:5df9c6b43cb36002",
+          "locator": "block:2:0",
+          "clause": "You create five orbs, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) while you have any orbs active.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#markdown:block:0:0:789f3e7d4cc7b81b",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You create three size 1T orbs that orbit your body. Each orb gives you a cumulative damage immunity 1. Each time you take damage, you lose 1 orb.\nOnce on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#markdown:item:4:0:a3fba247c5ce8d63",
+          "locator": "markdown:item:4:0",
+          "clause": "Once on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs#markdown:item:9:0:bc3bc83fe8cf5d46",
+          "locator": "markdown:item:9:0",
+          "clause": "Strained: You create five orbs, and you are weakened while you have any orbs active.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*Spheres of solid psionic energy float around you.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Telekinesis** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------|----------------:|\n| **📏 Self; see below**                   |     **🎯 Self** |\n\n**Effect:** You create three [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1T orbs that orbit your body. Each orb gives you a cumulative [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 1. Each time you take damage, you lose 1 orb.\n\nOnce on each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can use a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) to fire an orb at a creature or object within 5 squares as a [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), losing the orb after the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 damage\n- **12-16:** 3 damage\n- **17+:** 5 damage\n\n**Strained:** You create five orbs, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) while you have any orbs active.\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: You create three size 1T orbs that orbit your body. Each orb gives you a cumulative damage immunity 1. Each time you take damage, you lose 1 orb.\nOnce on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:2",
+          "clause": "Strained: You create five orbs, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) while you have any orbs active.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "Once on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:9",
+          "clause": "Strained: You create five orbs, and you are weakened while you have any orbs active.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You create three [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1T orbs that orbit your body. Each orb gives you a cumulative [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 1. Each time you take damage, you lose 1 orb.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "You create five orbs, and you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) while you have any orbs active.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You create three size 1T orbs that orbit your body. Each orb gives you a cumulative damage immunity 1. Each time you take damage, you lose 1 orb.\nOnce on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "Once on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:9:0",
+          "clause": "Strained: You create five orbs, and you are weakened while you have any orbs active.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Force Orbs",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Orbs supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Orbs",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Orbs supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Orbs",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Orbs supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Orbs",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Orbs supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field",
+      "name": "Reflector Field",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field#block:0:0:aff0ad1670f389b7",
+          "locator": "block:0:0",
+          "clause": "The [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever an enemy targets an ally in the area with a [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field#block:1:0:2acdd14f20c75802",
+          "locator": "block:1:0",
+          "clause": "The size of the [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) increases by 1. Whenever your [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field#markdown:block:0:0:54e025a18aaccedd",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: The aura lasts until the start of your next turn. Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.\nStrained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field#markdown:item:4:0:b924ee9085a1b570",
+          "locator": "markdown:item:4:0",
+          "clause": "Strained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*A protective field reverses the momentum of incoming attacks.*\n\n| **Area, Psionic, Telepathy** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------|----------------:|\n| **📏 3 [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura)**                |  **🎯 Special** |\n\n**Effect:** The [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever an enemy targets an ally in the area with a [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.\n\n**Strained:** The size of the [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) increases by 1. Whenever your [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: The aura lasts until the start of your next turn. Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.\nStrained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Strained: The size of the [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) increases by 1. Whenever your [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "Strained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever an enemy targets an ally in the area with a [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The size of the [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) increases by 1. Whenever your [aura](scc.v1:mcdm.heroes.v1/rule.combat/aura) reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: The aura lasts until the start of your next turn. Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.\nStrained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "Strained: The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only one, counted or area target envelopes are eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Reflector Field",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Reflector Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Reflector Field",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Reflector Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Reflector Field",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Reflector Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Reflector Field",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Reflector Field supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn",
+      "name": "Soul Burn",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier1:0:213d863e4115b9e1",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier1:1:0b091f550363c4ad",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier1:0:213d863e4115b9e1"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier2:0:ad4060dabfa48de6",
+            "locator": "block:0:tier2:0",
+            "clause": "10 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier2:1:185f70db9dfeddac",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier2:0:ad4060dabfa48de6"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier3:0:c285a09d0dc6ab32",
+            "locator": "block:0:tier3:0",
+            "clause": "14 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier3:1:5caafbf1212c4082",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:0:tier3:0:c285a09d0dc6ab32"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:1:0:f9feb8728f8051da",
+          "locator": "block:1:0",
+          "clause": "The target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) until the end of the encounter.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#block:2:0:1fe42f2beaa3604d",
+          "locator": "block:2:0",
+          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1. You take 2d6 damage and gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:strained",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#markdown:block:1:0:d3a7bfd23e40ce80",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: The target takes a bane on Presence tests until the end of the encounter.\nStrained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn#markdown:item:8:0:a2861e24e6de47e8",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "source-block-count",
+          "locator": "markdown",
+          "clause": "\n\n*You blast their soul out of their body, leaving it to helplessly float back to a weakened husk.*\n\n| **Animapathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 6 + P damage; P < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **12-16:** 10 + P damage; P < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n- **17+:** 14 + P damage; P < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n\n**Effect:** The target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) until the end of the encounter.\n\n**Strained:** The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1. You take 2d6 damage and gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately.\n",
+          "message": "Structured and printed block counts differ."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:1",
+          "clause": "Effect: The target takes a bane on Presence tests until the end of the encounter.\nStrained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:2",
+          "clause": "Strained: The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1. You take 2d6 damage and gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "Strained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The target takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) until the end of the encounter.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of this ability increases by 1. You take 2d6 damage and gain 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:1:0",
+          "clause": "Effect: The target takes a bane on Presence tests until the end of the encounter.\nStrained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "Strained: The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Soul Burn",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Burn supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Burn",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Burn supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Burn",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Burn supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Burn",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Burn supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -209583,7 +211648,7 @@
   ],
   "liveCounts": {
     "compiled": 108,
-    "compatibility": 1486,
+    "compatibility": 1496,
     "compiledButUnavailable": 0
   }
 }

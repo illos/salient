@@ -328,6 +328,10 @@ export function abilityFromEntry(
     // Ally/enemy branching and mandatory damage type require explicit manual resolution.
     '/feature/ability/talent/level-1/awe.md',
     '/feature/ability/talent/level-1/smolder.md',
+    // Applied Chronometrics: the power roll decides how many creatures are targeted.
+    '/feature/ability/talent/level-2/applied-chronometrics.md',
+    // Force Orbs: the printed roll is each later orb strike, not this Self use.
+    '/feature/ability/talent/level-3/force-orbs.md',
   ].some(path => entry.sourcePath.endsWith(path));
   return build({
     compilation: compileLiveEntry(entry, entry.kind),

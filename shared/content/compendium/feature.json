@@ -4441,6 +4441,113 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.talent.level-2/2nd-level-tradition-ability",
+    "kind": "feature",
+    "name": "2nd-Level Tradition Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/2nd-level-tradition-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-2/2nd-level-tradition-ability.json",
+    "selection": "talent-levels-two-three",
+    "text": "---\nclass: talent\nlevel: \"2\"\nname: 2nd-Level Tradition Ability\nscc: mcdm.heroes.v1/feature.talent.level-2/2nd-level-tradition-ability\ntype: feature\n---\n\nYour [talent tradition](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-tradition) grants your choice of one of two [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability).\n\n##### 2nd-Level Chronopathy Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Telekinesis Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Telepathy Ability\n\nChoose one of the following abilities.\n",
+    "structured": {
+      "class": "talent",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-2/2nd-level-tradition-feature",
+    "kind": "feature",
+    "name": "2nd-Level Tradition Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/2nd-level-tradition-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-2/2nd-level-tradition-feature.json",
+    "selection": "talent-levels-two-three",
+    "text": "---\nclass: talent\nlevel: \"2\"\nname: 2nd-Level Tradition Feature\nscc: mcdm.heroes.v1/feature.talent.level-2/2nd-level-tradition-feature\ntype: feature\n---\n\nYour [talent tradition](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-tradition) grants you a feature, as shown on the 2nd-Level Tradition Features table.\n\n###### 2nd-Level Tradition Features Table\n\n| Tradition                    | Features        |\n|------------------------------|-----------------|\n| Chronopathy                  | [Ease the Hours](scc.v1:mcdm.heroes.v1/feature.talent.level-2/ease-the-hours)  |\n| Telekinesis                  | [Ease Their Fall](scc.v1:mcdm.heroes.v1/feature.talent.level-2/ease-their-fall) |\n| Telepathy                    | [Ease the Mind](scc.v1:mcdm.heroes.v1/feature.talent.level-2/ease-the-mind)   |\n",
+    "structured": {
+      "class": "talent",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-2/ease-the-hours",
+    "kind": "feature",
+    "name": "Ease the Hours",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/ease-the-hours.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-2/ease-the-hours.json",
+    "selection": "talent-levels-two-three",
+    "text": "---\nclass: talent\nlevel: \"2\"\nname: Ease the Hours\nscc: mcdm.heroes.v1/feature.talent.level-2/ease-the-hours\nsubclass: chronopathy\ntype: feature\n---\n\nYou can increase the number of rounds in a [montage test](scc.v1:mcdm.heroes.v1/rule.test/montage-test) by 1 if the [test](scc.v1:mcdm.heroes.v1/rule.test/test) would end before the heroes hit the success limit.\n",
+    "structured": {
+      "class": "talent",
+      "level": "2",
+      "subclass": "chronopathy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-2/ease-the-mind",
+    "kind": "feature",
+    "name": "Ease the Mind",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/ease-the-mind.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-2/ease-the-mind.json",
+    "selection": "talent-levels-two-three",
+    "text": "---\nclass: talent\nlevel: \"2\"\nname: Ease the Mind\nscc: mcdm.heroes.v1/feature.talent.level-2/ease-the-mind\nsubclass: telepathy\ntype: feature\n---\n\nYou gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to stop combat and start a negotiation. Additionally, if you are present during a negotiation, any [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc) who has a hostile or suspicious starting attitude has their patience increased by 1 (to a maximum of 5).\n",
+    "structured": {
+      "class": "talent",
+      "level": "2",
+      "subclass": "telepathy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-2/ease-their-fall",
+    "kind": "feature",
+    "name": "Ease Their Fall",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/ease-their-fall.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-2/ease-their-fall.json",
+    "selection": "talent-levels-two-three",
+    "text": "---\nclass: talent\nlevel: \"2\"\nname: Ease Their Fall\nscc: mcdm.heroes.v1/feature.talent.level-2/ease-their-fall\nsubclass: telekinesis\ntype: feature\n---\n\nWhenever you land after a fall, or if any falling creature lands within 2 squares of you, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to reduce the falling damage by an amount equal to 2 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n",
+    "structured": {
+      "class": "talent",
+      "level": "2",
+      "subclass": "telekinesis"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-2/perk.json",
+    "selection": "talent-levels-two-three",
+    "text": "---\nclass: talent\nlevel: \"2\"\nname: Perk\nscc: mcdm.heroes.v1/feature.talent.level-2/perk\ntype: feature\n---\n\nYou gain one interpersonal, lore, or [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) perk of your choice. See Chapter 7: [Perks](scc.v1:mcdm.heroes.v1/chapter/perks).\n",
+    "structured": {
+      "class": "talent",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-3/7-clarity-ability",
+    "kind": "feature",
+    "name": "7-Clarity Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-3/7-clarity-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-3/7-clarity-ability.json",
+    "selection": "talent-levels-two-three",
+    "text": "---\nclass: talent\nlevel: \"3\"\nname: 7-Clarity Ability\nscc: mcdm.heroes.v1/feature.talent.level-3/7-clarity-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 7 clarity to use.\n",
+    "structured": {
+      "class": "talent",
+      "level": "3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-3/scan",
+    "kind": "feature",
+    "name": "Scan",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-3/scan.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-3/scan.json",
+    "selection": "talent-levels-two-three",
+    "text": "---\nclass: talent\nlevel: \"3\"\nname: Scan\nscc: mcdm.heroes.v1/feature.talent.level-3/scan\ntype: feature\n---\n\nYou can extend your psionic senses beyond their usual range. Once on each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you can search for hidden creatures as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) (see Hide and Sneak in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)). Additionally, once you establish [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to a thinking creature within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of your [Mind Spike](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/mind-spike) ability, you always have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to that creature until they move beyond that [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).\n",
+    "structured": {
+      "class": "talent",
+      "level": "3"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.troubadour.level-1/1st-level-class-act-features",
     "kind": "feature",
     "name": "1st-Level Class Act Features",

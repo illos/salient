@@ -10,6 +10,7 @@ import { runBeastheart } from './headless/beastheart.ts';
 import { runElementalist } from './headless/elementalist.ts';
 import { runElementalistLevelThree } from './headless/elementalist-level-three.ts';
 import { runTalent } from './headless/talent.ts';
+import { runTalentLevelThree } from './headless/talent-level-three.ts';
 import { runNull } from './headless/null.ts';
 import { runNullLevelThree } from './headless/null-level-three.ts';
 import { runTroubadour } from './headless/troubadour.ts';
@@ -61,6 +62,7 @@ const cohorts = {
   elementalist: runElementalist,
   'elementalist-level-three': runElementalistLevelThree,
   talent: runTalent,
+  'talent-level-three': runTalentLevelThree,
   beastheart: runBeastheart,
   summoner: runSummoner,
   censor: runCensor,

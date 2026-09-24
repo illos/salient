@@ -1,5 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { TALENT_ACTIONS, talentActionText } from '../content/classes/talent/abilities.ts';
+import {
+  TALENT_ACTIONS,
+  talentActionText,
+  TALENT_ACTIVATION,
+} from '../content/classes/talent/abilities.ts';
 import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
 const managed = (ability: Pick<GrantedAbility, 'name' | 'sourcePath' | 'kind'>) =>
   ability.kind === 'class'
@@ -47,6 +51,9 @@ export function talentAbilities(
       ? {
           ...a,
           activationCondition:
+            (a.provenance.decisionId.startsWith('class.talent.level-')
+              ? TALENT_ACTIVATION[a.name]
+              : undefined) ??
             a.activationCondition ??
             (a.name === 'Awe'
               ? 'Choose ally benefit (temporary Stamina three times Presence and end one effect) OR enemy roll. Entire branched effect is manual; never automatically attack an ally.'

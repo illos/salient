@@ -295,6 +295,119 @@ export const TALENT_ACTIONS: TalentAction[] = [
     activationCondition:
       'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. Caster takes 1d6 damage and cannot use triggered actions (save ends). Resolve the stated effects manually.',
   },
+  {
+    name: 'Ease the Hours: Extend Montage',
+    parent: 'Ease the Hours',
+    sourcePath: 'en/unified/md/feature/talent/level-2/ease-the-hours.md',
+    actionType: 'During a montage test',
+    activationCondition:
+      'If a montage test would end before the heroes hit the success limit, increase its number of rounds by 1. Resolve manually.',
+  },
+  {
+    name: 'Ease Their Fall: Reduce Falling Damage',
+    parent: 'Ease Their Fall',
+    sourcePath: 'en/unified/md/feature/talent/level-2/ease-their-fall.md',
+    actionType: 'Free triggered action',
+    trigger: 'You land after a fall, or a falling creature lands within 2 squares of you.',
+    activationCondition:
+      'Reduce the falling damage by 2 + your Reason score. Apply the reduction manually.',
+  },
+  {
+    name: 'Scan: Search',
+    parent: 'Scan',
+    sourcePath: 'en/unified/md/feature/talent/level-3/scan.md',
+    actionType: 'Free maneuver',
+    activationCondition:
+      'Once on each of your turns, search for hidden creatures (Hide and Sneak). Once you establish line of effect to a thinking creature within your Mind Spike distance, you keep line of effect to it until it moves beyond that distance. Resolve manually.',
+  },
+  {
+    name: 'Force Orbs: Fire Orb',
+    parent: 'Force Orbs',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-3/force-orbs.md',
+    actionType: 'Free maneuver',
+    activationCondition:
+      'Once on each of your turns, fire an orb at a creature or object within 5 squares as a ranged strike (power roll + Reason: 2/3/5 damage), losing the orb. Resolve the roll and damage manually.',
+  },
+  {
+    name: 'Applied Chronometrics: Strain',
+    parent: 'Applied Chronometrics',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. Your speed is halved until the end of the encounter. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Slow: Strain',
+    parent: 'Slow',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-2/slow.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. The potency increases by 1 and you take 1d6 damage; at the start of each combat round while any target is affected you take 1d6 damage, and you can end the effect on all targets at any time. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Gravitic Burst: Strain',
+    parent: 'Gravitic Burst',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-2/gravitic-burst.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. The burst increases by 1 and you are weakened until the end of your turn. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Levity and Gravity: Strain',
+    parent: 'Levity and Gravity',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. You take half the damage the target takes. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Overwhelm: Strain',
+    parent: 'Overwhelm',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-2/overwhelm.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. You cannot use triggered actions or make free strikes until the end of the target’s next turn. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Synaptic Override: Strain',
+    parent: 'Synaptic Override',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-2/synaptic-override.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. You take 1d6 damage and are weakened until the end of your turn. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Fling Through Time: Strain',
+    parent: 'Fling Through Time',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-3/fling-through-time.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. You take 2d6 damage and permanently age about 10 years; on a tier 3 outcome you gain 2 clarity. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Force Orbs: Strain',
+    parent: 'Force Orbs',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-3/force-orbs.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. You create five orbs and are weakened while you have any orbs active. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Reflector Field: Strain',
+    parent: 'Reflector Field',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-3/reflector-field.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. The aura increases by 1; whenever it reflects an ability you take 2d6 damage and forget a memory determined with the Director. Resolve the stated effects manually.',
+  },
+  {
+    name: 'Soul Burn: Strain',
+    parent: 'Soul Burn',
+    sourcePath: 'en/unified/md/feature/ability/talent/level-3/soul-burn.md',
+    actionType: 'Part of parent ability',
+    activationCondition:
+      'Apply when already below zero Clarity OR the parent use takes Clarity below zero, and when the outside-combat rules incur strain. Effects may persist after Clarity recovers. The potency increases by 1; you take 2d6 damage and gain 3 surges you can use immediately. Resolve the stated effects manually.',
+  },
 ];
 export function talentActionText(action: TalentAction): string {
   const entry = [...abilitySources, ...featureSources].find(
@@ -303,3 +416,19 @@ export function talentActionText(action: TalentAction): string {
   if (!entry) throw new Error(`Missing Talent source ${action.sourcePath}`);
   return `${action.activationCondition}\n\n${entry.text}`;
 }
+
+/** Level-2/3 ability notes: what the table resolves automatically and which clauses stay manual. */
+export const TALENT_ACTIVATION: Record<string, string> = {
+  'Applied Chronometrics':
+    'The power roll sets how many creatures are targeted (two, three or four, one of which can be you); until the start of your next turn each gains +5 speed, cannot be made dazed (ending dazed) and gains an extra maneuver. The roll and effects are resolved manually.',
+  Slow: 'Speed halved, slowed or speed 0 by tier and Presence potency (save ends), and a target so reduced cannot use triggered actions. Resolve manually.',
+  'Synaptic Override':
+    'You control the target: a free strike, or a shift or move and its signature ability against enemies you choose; it cannot be moved into harm, dying or a condition, but can provoke opportunity attacks. Resolve manually.',
+  'Fling Through Time':
+    'A flung target leaves the map until the end of its next turn, reappearing in its space or the nearest unoccupied one; weakened by Presence potency. Resolve manually.',
+  'Force Orbs':
+    'Three size 1T orbs each give cumulative damage immunity 1; you lose one each time you take damage. Use Force Orbs: Fire Orb for the orb strikes. Resolve manually.',
+  'Reflector Field':
+    'Until the start of your next turn, a ranged ability an enemy uses against an ally in the aura is negated and reflected back at half damage without its other effects. Resolve manually.',
+  'Soul Burn': 'The target also takes a bane on Presence tests until the end of the encounter.',
+};

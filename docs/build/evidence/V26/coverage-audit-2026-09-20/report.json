@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:27680f9ecc4531448301c820b7d8e722e0753da12217a43e8b03f5a13c48f421",
+  "contentHash": "sha256:2b96f587f742ffa0c2eabd9786cbf022685e3b61524a79711712c11e7fcb6f1d",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 22,
-      "COMPILES_WITH_REMAINDER": 132,
-      "NO_MATCH": 190,
-      "total": 344,
+      "COMPILES_WITH_REMAINDER": 138,
+      "NO_MATCH": 194,
+      "total": 354,
       "withinV26Bounded": 16
     },
     "kit-signature": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 2862,
-    "resolvedToStandalone": 2007,
+    "total": 2908,
+    "resolvedToStandalone": 2053,
     "resolvedToKit": 150,
     "ownText": 705,
     "unresolved": []
@@ -30782,6 +30782,1119 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option Spirit Sword supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics",
+      "name": "Applied Chronometrics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+      "usage": "Maneuver",
+      "target": "Special",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the start of your next turn, each target gains a +5 bonus to speed, they can't be made dazed, and they can use an additional maneuver on their turn. If a target is already dazed, that condition ends for them.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "Your speed is halved until the end of the encounter.",
+            "locator": "section:2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you target two creatures, one of which can be you",
+            "text": "You target two creatures, one of which can be you",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you target three creatures, one of which can be you",
+            "text": "You target three creatures, one of which can be you",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:you target four creatures, one of which can be you",
+            "text": "You target four creatures, one of which can be you",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Applied Chronometrics",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/applied-chronometrics.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Applied Chronometrics supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst",
+      "name": "Gravitic Burst",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 3
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 6
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 9
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The size of the burst increases by 1, and you are weakened until the end of your turn.",
+            "locator": "section:1"
+          },
+          {
+            "type": "push-with-extra",
+            "shape": "vertical push N",
+            "text": "vertical push 2",
+            "locator": "tier1"
+          },
+          {
+            "type": "push-with-extra",
+            "shape": "vertical push N",
+            "text": "vertical push 4",
+            "locator": "tier2"
+          },
+          {
+            "type": "push-with-extra",
+            "shape": "vertical push N",
+            "text": "vertical push 6",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gravitic Burst",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/gravitic-burst.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Gravitic Burst supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity",
+      "name": "Levity and Gravity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You take half the damage the target takes.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone",
+            "text": "M < WEAK, prone",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone",
+            "text": "M < AVERAGE, prone",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone and can't stand (save ends)",
+            "text": "M < STRONG, prone and can't stand (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Levity and Gravity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/levity-and-gravity.md",
+          "decisionId": "class.talent.level-2.telekinesis-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Levity and Gravity supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm",
+      "name": "Overwhelm",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "R"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "R"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "R"
+            },
+            "damageType": "psychic"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You start crying, and you can't use triggered actions or make free strikes until the end of the target's next turn.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM slowed (save ends)",
+            "text": "I < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM weakened (save ends)",
+            "text": "I < AVERAGE, weakened (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "text": "I < STRONG, dazed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwhelm",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/overwhelm.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Overwhelm supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/slow",
+      "name": "Slow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/slow.md",
+      "usage": "Maneuver",
+      "target": "Three creatures or objects",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "A target can't use triggered actions while their speed is reduced this way.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The potency of this ability increases by 1 and you take 1d6 damage. At the start of each combat round while any target is affected by this ability, you take 1d6 damage. You can end the effect on all affected targets at any time (no action required).",
+            "locator": "section:2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target's speed is halved (save ends), or if p < SYM, the target is slowed (save ends)",
+            "text": "The target's speed is halved (save ends), or if P < WEAK, the target is slowed (save ends)",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target is slowed (save ends), or if p < SYM, the target's speed is N (save ends)",
+            "text": "The target is slowed (save ends), or if P < AVERAGE, the target's speed is 0 (save ends)",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target is slowed (save ends), or if p < SYM, the target's speed is N (save ends)",
+            "text": "The target is slowed (save ends), or if P < STRONG, the target's speed is 0 (save ends)",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "multi"
+      },
+      "grants": [
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slow",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/slow.md",
+          "decisionId": "class.talent.level-2.chronopathy-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Slow supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override",
+      "name": "Synaptic Override",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+      "usage": "Main action",
+      "target": "One enemy",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You control the target's movement. The target can't be moved in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect. However, you can move them to provoke opportunity attacks.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You take 1d6 damage and are weakened until the end of your turn.",
+            "locator": "section:2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target makes a free strike against one enemy of your choice",
+            "text": "The target makes a free strike against one enemy of your choice",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target shifts up to their speed and uses their signature ability against any enemies of your choice",
+            "text": "The target shifts up to their speed and uses their signature ability against any enemies of your choice",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target moves up to their speed and uses their signature ability against any enemies of your choice",
+            "text": "The target moves up to their speed and uses their signature ability against any enemies of your choice",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Synaptic Override",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-2/synaptic-override.md",
+          "decisionId": "class.talent.level-2.telepathy-ability",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Synaptic Override supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time",
+      "name": "Fling Through Time",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "7 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "P"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "P"
+            },
+            "damageType": "corruption"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "A target who is flung through time is removed from the encounter map until the end of their next turn, reappearing in their original space or the nearest unoccupied space.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You take 2d6 damage and permanently grow visibly older (the equivalent of 10 years for a human). If you obtain a tier 3 outcome on the power roll, you gain 2 clarity.",
+            "locator": "section:2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM weakened (save ends)",
+            "text": "P < WEAK, weakened (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "unknown",
+            "shape": "the target is flung through time, and if p < SYM, they are weakened (save ends)",
+            "text": "the target is flung through time, and if P < AVERAGE, they are weakened (save ends)",
+            "locator": "tier2"
+          },
+          {
+            "type": "unknown",
+            "shape": "the target is flung through time, and if p < SYM, they are weakened (save ends)",
+            "text": "the target is flung through time, and if P < STRONG, they are weakened (save ends)",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Fling Through Time",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fling Through Time supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fling Through Time",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fling Through Time supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fling Through Time",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fling Through Time supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fling Through Time",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fling Through Time supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/force-orbs",
+      "name": "Force Orbs",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+      "usage": "Main action",
+      "target": "Self",
+      "cost": "7 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 3
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You create three size 1T orbs that orbit your body. Each orb gives you a cumulative damage immunity 1. Each time you take damage, you lose 1 orb.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You create five orbs, and you are weakened while you have any orbs active.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Force Orbs",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Orbs supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Orbs",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Orbs supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Orbs",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Orbs supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Force Orbs",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/force-orbs.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Force Orbs supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/reflector-field",
+      "name": "Reflector Field",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+      "usage": "Main action",
+      "target": "Special",
+      "cost": "7 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The aura lasts until the start of your next turn. Whenever an enemy targets an ally in the area with a ranged ability, the ability is negated on the ally and reflected back at the enemy. The ability deals half the damage to the enemy that it would have dealt to the ally and loses any additional effects.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The size of the aura increases by 1. Whenever your aura reflects an ability, you take 2d6 damage and forget a memory, as determined by you and the Director.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Reflector Field",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Reflector Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Reflector Field",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Reflector Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Reflector Field",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Reflector Field supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Reflector Field",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/reflector-field.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Reflector Field supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn",
+      "name": "Soul Burn",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "7 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "P"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes a bane on Presence tests until the end of the encounter.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The potency of this ability increases by 1. You take 2d6 damage and gain 3 surges that you can use immediately.",
+            "locator": "section:2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM dazed (save ends)",
+            "text": "P < WEAK, dazed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM dazed (save ends)",
+            "text": "P < AVERAGE, dazed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM dazed (save ends)",
+            "text": "P < STRONG, dazed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Soul Burn",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Burn supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Burn",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 4,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Burn supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Burn",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 5,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Burn supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Soul Burn",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-3/soul-burn.md",
+          "decisionId": "class.talent.level-3.ability-7",
+          "level": 6,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Soul Burn supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -104687,8 +105800,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1242,
-      "abilities": 1228,
+      "count": 1249,
+      "abilities": 1235,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -104698,8 +105811,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 718,
-      "abilities": 718,
+      "count": 719,
+      "abilities": 719,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -104850,6 +105963,17 @@
       ]
     },
     {
+      "shape": "envelope:structured-markdown-mismatch",
+      "type": "unknown",
+      "count": 36,
+      "abilities": 36,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
+        "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath"
+      ]
+    },
+    {
       "shape": "potency:A < N slowed (save ends)",
       "type": "potency-condition",
       "count": 31,
@@ -104905,17 +106029,6 @@
       ]
     },
     {
-      "shape": "envelope:structured-markdown-mismatch",
-      "type": "unknown",
-      "count": 26,
-      "abilities": 26,
-      "examples": [
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/heart-of-the-beast",
-        "mcdm.beastheart.v1/feature.ability.companion.beastheart.drake.level-1/drake-breath"
-      ]
-    },
-    {
       "shape": "potency:A < N grabbed",
       "type": "potency-condition",
       "count": 25,
@@ -104935,6 +106048,17 @@
         "salient:foe-feature:003d77fe-6a8e-4074-8c91-96a50c77c5fb",
         "salient:foe-feature:38b42d43-df0b-4a76-b424-ebb8dcda3e9d",
         "salient:foe-feature:47396d85-c934-4cf0-805b-1330420e73b5"
+      ]
+    },
+    {
+      "shape": "effect-paragraph:strained",
+      "type": "effect-paragraph",
+      "count": 23,
+      "abilities": 23,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/flashback",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost"
       ]
     },
     {
@@ -105056,17 +106180,6 @@
         "mcdm.heroes.v1/feature.ability.null.level-1/kinetic-strike",
         "mcdm.heroes.v1/feature.ability.tactician.level-2/ive-got-your-back",
         "salient:foe-feature:20e69c78-4894-473d-b84c-3ccf17f2ef2d"
-      ]
-    },
-    {
-      "shape": "effect-paragraph:strained",
-      "type": "effect-paragraph",
-      "count": 13,
-      "abilities": 13,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
-        "mcdm.heroes.v1/feature.ability.talent.level-1/flashback",
-        "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost"
       ]
     },
     {
@@ -105213,6 +106326,17 @@
       ]
     },
     {
+      "shape": "potency:M < SYM prone",
+      "type": "potency-condition",
+      "count": 9,
+      "abilities": 6,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.elementalist.level-1/ripples-in-the-earth",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/optic-blast",
+        "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity"
+      ]
+    },
+    {
       "shape": "potency:A < N prone",
       "type": "potency-condition",
       "count": 9,
@@ -105345,17 +106469,6 @@
       ]
     },
     {
-      "shape": "potency:M < SYM prone",
-      "type": "potency-condition",
-      "count": 7,
-      "abilities": 5,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/ripples-in-the-earth",
-        "mcdm.heroes.v1/feature.ability.talent.level-1/optic-blast",
-        "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam"
-      ]
-    },
-    {
       "shape": "bleeding (save ends)",
       "type": "condition",
       "count": 7,
@@ -105378,6 +106491,17 @@
       ]
     },
     {
+      "shape": "potency:I < SYM dazed (save ends)",
+      "type": "potency-condition",
+      "count": 7,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/repent",
+        "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones"
+      ]
+    },
+    {
       "shape": "push N (not directly after damage)",
       "type": "push-with-extra",
       "count": 7,
@@ -105386,6 +106510,17 @@
         "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
         "salient:foe-feature:63692344-f9b6-4528-a660-43bd25d254eb",
         "salient:foe-feature:8a0771db-4bd6-4032-a8b5-341764403917"
+      ]
+    },
+    {
+      "shape": "vertical push N",
+      "type": "push-with-extra",
+      "count": 7,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-6/black-ash-eruption",
+        "mcdm.heroes.v1/feature.ability.talent.level-2/gravitic-burst",
+        "salient:foe-feature:abfee816-ada0-4f47-a4d4-9dd91cc7d947"
       ]
     },
     {
@@ -105431,16 +106566,6 @@
       ]
     },
     {
-      "shape": "potency:I < SYM dazed (save ends)",
-      "type": "potency-condition",
-      "count": 6,
-      "abilities": 2,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.censor.level-1/repent",
-        "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones"
-      ]
-    },
-    {
       "shape": "potency:M < N N corruption damage",
       "type": "potency-condition",
       "count": 6,
@@ -105458,6 +106583,16 @@
       "examples": [
         "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar",
         "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM dazed (save ends)",
+      "type": "potency-condition",
+      "count": 6,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-5/you-talk-too-much",
+        "mcdm.heroes.v1/feature.ability.talent.level-3/soul-burn"
       ]
     },
     {
@@ -105648,6 +106783,26 @@
       ]
     },
     {
+      "shape": "potency:I < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 4,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator",
+        "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm"
+      ]
+    },
+    {
+      "shape": "potency:I < SYM weakened (save ends)",
+      "type": "potency-condition",
+      "count": 4,
+      "abilities": 2,
+      "examples": [
+        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep",
+        "mcdm.heroes.v1/feature.ability.talent.level-2/overwhelm"
+      ]
+    },
+    {
       "shape": "potency:M < N bleeding (eot)",
       "type": "potency-condition",
       "count": 4,
@@ -105688,6 +106843,16 @@
       ]
     },
     {
+      "shape": "potency:P < SYM weakened (save ends)",
+      "type": "potency-condition",
+      "count": 4,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting"
+      ]
+    },
+    {
       "shape": "potency:R < N prone and can't stand (save ends)",
       "type": "potency-condition",
       "count": 4,
@@ -105715,16 +106880,6 @@
       "examples": [
         "salient:foe-feature:297e9164-7339-4813-bed1-0d1f1fd630c5",
         "salient:foe-feature:7aa62bc2-1cf0-42db-861b-4c755478bcfb"
-      ]
-    },
-    {
-      "shape": "vertical push N",
-      "type": "push-with-extra",
-      "count": 4,
-      "abilities": 2,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.shadow.level-6/black-ash-eruption",
-        "salient:foe-feature:abfee816-ada0-4f47-a4d4-9dd91cc7d947"
       ]
     },
     {
@@ -105844,6 +106999,16 @@
       "examples": [
         "salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29",
         "salient:foe-feature:f447425e-c1d0-4db1-89cc-dfc59669bd98"
+      ]
+    },
+    {
+      "shape": "potency:M < SYM prone and can't stand (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow",
+        "mcdm.heroes.v1/feature.ability.talent.level-2/levity-and-gravity"
       ]
     },
     {
@@ -106059,30 +107224,12 @@
       ]
     },
     {
-      "shape": "potency:I < SYM slowed (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.fury.level-2/apex-predator"
-      ]
-    },
-    {
       "shape": "potency:I < SYM the target goes out of phase (save ends)",
       "type": "potency-condition",
       "count": 3,
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.null.level-1/phase-strike"
-      ]
-    },
-    {
-      "shape": "potency:I < SYM weakened (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.beastheart.v1/feature.ability.beastheart.level-1/herd-the-sheep"
       ]
     },
     {
@@ -106293,15 +107440,6 @@
       ]
     },
     {
-      "shape": "potency:P < SYM dazed (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.shadow.level-5/you-talk-too-much"
-      ]
-    },
-    {
       "shape": "potency:P < SYM dazed and frightened (save ends)",
       "type": "potency-condition",
       "count": 3,
@@ -106326,15 +107464,6 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites"
-      ]
-    },
-    {
-      "shape": "potency:P < SYM weakened (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting"
       ]
     },
     {
@@ -107021,15 +108150,6 @@
       ]
     },
     {
-      "shape": "potency:M < SYM prone and can't stand (save ends)",
-      "type": "potency-condition",
-      "count": 2,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow"
-      ]
-    },
-    {
       "shape": "potency:P < N the target is shapechanged (save ends)",
       "type": "potency-condition",
       "count": 2,
@@ -107273,6 +108393,15 @@
       ]
     },
     {
+      "shape": "the target is flung through time, and if p < SYM, they are weakened (save ends)",
+      "type": "unknown",
+      "count": 2,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time"
+      ]
+    },
+    {
       "shape": "tier:a < N pull N toward the center of the area",
       "type": "tier-damage",
       "count": 2,
@@ -107342,6 +108471,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:9dce5bf0-f8cb-4447-9706-8ae8b9922340"
+      ]
+    },
+    {
+      "shape": "tier:the target is slowed (save ends), or if p < SYM, the target's speed is N (save ends)",
+      "type": "tier-damage",
+      "count": 2,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-2/slow"
       ]
     },
     {
@@ -109019,12 +110157,48 @@
       ]
     },
     {
+      "shape": "tier:the target makes a free strike against one enemy of your choice",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override"
+      ]
+    },
+    {
+      "shape": "tier:the target moves up to their speed and uses their signature ability against any enemies of your choice",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override"
+      ]
+    },
+    {
       "shape": "tier:the target regains N stamina and the director gains N malice",
       "type": "tier-damage",
       "count": 1,
       "abilities": 1,
       "examples": [
         "salient:foe-feature:f17e87ad-d701-4f52-bbc5-2d8c07f17e44"
+      ]
+    },
+    {
+      "shape": "tier:the target shifts up to their speed and uses their signature ability against any enemies of your choice",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-2/synaptic-override"
+      ]
+    },
+    {
+      "shape": "tier:the target's speed is halved (save ends), or if p < SYM, the target is slowed (save ends)",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-2/slow"
       ]
     },
     {
@@ -109169,6 +110343,33 @@
       "abilities": 1,
       "examples": [
         "complication:Medium/contact-spirits"
+      ]
+    },
+    {
+      "shape": "tier:you target four creatures, one of which can be you",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics"
+      ]
+    },
+    {
+      "shape": "tier:you target three creatures, one of which can be you",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics"
+      ]
+    },
+    {
+      "shape": "tier:you target two creatures, one of which can be you",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-2/applied-chronometrics"
       ]
     },
     {
@@ -109378,11 +110579,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 441,
+      "total": 451,
       "compiles": 29,
-      "withRemainder": 149,
+      "withRemainder": 155,
       "withinV26Bounded": 17,
-      "noMatch": 263
+      "noMatch": 267
     }
   }
 }
