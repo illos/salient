@@ -324,6 +324,15 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
                   24 - rolled.damageByTier[second.tier - 1]!,
                 );
               }
+            } else if (name === 'Skin Like Castle Walls') {
+              // V174: a compiled damage-changing response persists as ability.use. Used by hand there is
+              // no triggering hit to revise, so its effect is left to the table and the target is unchanged.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              assert.deepEqual(
+                withoutResource(after.liveState),
+                withoutResource(before.liveState),
+                `${name} target unchanged without a trigger`,
+              );
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);
