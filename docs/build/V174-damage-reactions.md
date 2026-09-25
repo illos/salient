@@ -199,3 +199,7 @@ Rules question: [Q-REACT-1](../rules-questions-for-user.md#q-react-1-halving-ord
     then an any-effect reduction that ends slowed and leaves prone. An accepted Mark benefit refuses
     a revision to 0 damage. An accepted extra-damage benefit refuses any revision of the hit it was
     sized on (rewind to the hit).
+
+## Publication: 2026-09-25
+
+Merged in train 17 as main `0401350` and published as Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.

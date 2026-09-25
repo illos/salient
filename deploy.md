@@ -42,6 +42,13 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V175 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
+| V174 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
+| V173 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
+| V172 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
+| V171 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
+| V170 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
+| V159 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
 | V188 | `75885cb` | Merged; backend/frontend published; accepted gates reused | complete |
 | V185 | `f2160c3` | Merged; backend/frontend published; accepted gates reused | complete |
 | V184 | `887f448` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -853,3 +860,22 @@ The test and deploy thread fast-forwarded reviewed tip `75885cb35d4300f872dc8f88
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V188-release-75885cb`.
+
+### Train 17 (V159 fix, V170–V175) publication: 2026-09-25
+
+ENGINE2's chain was rebuilt on main `0159fd8` and fast-forwarded as `04013505e72e990a9a75fe3e3fb703b2f8bc22f0`: the V159 QC1 fix, V170
+Talent Strained sections, V171 watchers, V172 next-turn duration, V173 triggered actions, V174
+damage reactions and V175 Marks, with QC1's train-13 and train-16 fixes and the journey updates for
+the newly automated abilities.
+- Full gate at the tip (313 s, 458 engine and 884 app tests).
+- 20 journeys at the tip: modifiers, effect-instances, effect-only, kit-bonus, tactician and its
+  level-three journey, the Conduit, Null, Elementalist and Fury level-three journeys, the Shadow
+  level-two and level-three journeys, follow-up-actions, null, elementalist, fury, all, talent,
+  troubadour and conduit.
+- Independent reviews and QC1 final clearance passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.

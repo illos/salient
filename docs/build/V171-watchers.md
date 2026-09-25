@@ -244,3 +244,7 @@ Rules question: [Q-WATCH-1](../rules-questions-for-user.md#q-watch-1-who-deals-a
       - Without the follow-up code, the edit test and the modifier test fail.
     - Still read-only: speed and stability shown through `derivedValue` in queries can't end an
       instance there. Every Stamina writer that makes a hero dying now ends them first.
+
+## Publication: 2026-09-25
+
+Merged in train 17 as main `0401350` and published as Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.

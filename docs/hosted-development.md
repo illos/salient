@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V188 follow-up ability text
+## Current release — train 17 (V159 fix, V170–V175)
+
+Backend/frontend source `04013505e72e990a9a75fe3e3fb703b2f8bc22f0` published on 2026-09-25 as
+Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`: Talent Strained, watchers, next-turn durations, triggered actions, damage reactions
+and Marks. Backend and schema validation, the hosted build and the upload succeeded. Content remains
+the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
+
+## Previous release — V188 follow-up ability text
 
 Backend/frontend source `75885cb35d4300f872dc8f8818fb273e0c0e4180` published on 2026-09-25 as
 Worker `dbb5720a-6982-489d-8d59-56d2e465769a`. Backend and schema validation, the hosted build and the upload succeeded.

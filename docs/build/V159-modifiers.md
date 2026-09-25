@@ -212,3 +212,7 @@ the first slice where lasting effects change numbers
     Otherwise a squad's roll against a subject would miss it.
   - Wither needs a potency-gated tier modifier node. A correction that changes its tier must end,
     or refuse to replace, an instance a later roll already used up.
+
+## Publication: 2026-09-25
+
+Merged in train 17 as main `0401350` and published as Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.

@@ -177,10 +177,10 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V188 | [Follow-up ability records show the printed body, not frontmatter](V188-follow-up-ability-content.md) | Merged (`75885cb`); cloud dev published; accepted TESTER results reused |
 | V157 | [Abilities without a power roll, and executed gains](V157-effect-only-abilities.md) | In progress (ENGINE2) |
 | V158 | [Effect instances and durations](V158-effect-instances.md) | In progress (ENGINE2) |
-| V159 | [Modifiers from lasting effects](V159-modifiers.md) | In progress (ENGINE2) |
-| V170 | [Talent Strained sections](V170-talent-strained.md) | Committed on branch |
-| V171 | [Watchers and limits](V171-watchers.md) | Committed on branch |
-| V172 | [Owner-anchored end of your next turn](V172-next-turn-duration.md) | Committed on branch |
-| V173 | [Triggered actions: offers on observable triggers](V173-triggered-actions.md) | Committed on branch |
-| V174 | [Damage-changing reactions (option B revision)](V174-damage-reactions.md) | Committed on branch |
-| V175 | [Marks (Tactician Mark lifecycle and benefits)](V175-marks.md) | Committed on branch |
+| V159 | [Modifiers from lasting effects](V159-modifiers.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
+| V170 | [Talent Strained sections](V170-talent-strained.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
+| V171 | [Watchers and limits](V171-watchers.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
+| V172 | [Owner-anchored end of your next turn](V172-next-turn-duration.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
+| V173 | [Triggered actions: offers on observable triggers](V173-triggered-actions.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
+| V174 | [Damage-changing reactions (option B revision)](V174-damage-reactions.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
+| V175 | [Marks (Tactician Mark lifecycle and benefits)](V175-marks.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |

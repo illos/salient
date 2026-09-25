@@ -205,3 +205,7 @@ Rules question: [Q-TRIG-1](../rules-questions-for-user.md#q-trig-1-the-triggerin
   - Test: `tests/app/triggered-actions.test.ts`. The goblin's Spear Charge (a Melee Strike) on the
     Talent offers only Riposte, and a bane correction is refused, naming Riposte. The test fails
     without the fix, because the correction went through.
+
+## Publication: 2026-09-25
+
+Merged in train 17 as main `0401350` and published as Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.

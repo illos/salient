@@ -229,3 +229,7 @@ Rules questions: [Q-MARK-1](../rules-questions-for-user.md#q-mark-1-marks-from-a
   accepted extra-damage benefit (mark.md: "The ability deals extra damage equal to twice your Reason
   score") also refuses any later revision of that hit, since the extra damage was sized on the hit
   as it was.
+
+## Publication: 2026-09-25
+
+Merged in train 17 as main `0401350` and published as Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.

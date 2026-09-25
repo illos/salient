@@ -162,3 +162,7 @@ Rules question: [Q-STRAIN-1](../rules-questions-for-user.md#q-strain-1-how-a-str
     clarity −1 goes 20 → 13 → 11. The test checks the saved `selfApplication`, the linked entry,
     undo and redo with the firing record, and a temporary Stamina 8 case (7 then 2: temporary 0,
     Stamina 19). The test fails without the fix: the Talent ends at 18.
+
+## Publication: 2026-09-25
+
+Merged in train 17 as main `0401350` and published as Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.

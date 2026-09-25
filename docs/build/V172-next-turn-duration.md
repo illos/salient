@@ -86,3 +86,7 @@ Rules question: [Q-EFFECT-1](../rules-questions-for-user.md#q-effect-1-when-does
     check removed from `isDue`.
   - `node scripts/report-live-compiled-abilities.ts --check`: matches.
   - `node scripts/audit-ability-grammar.ts`: regenerated, no diff.
+
+## Publication: 2026-09-25
+
+Merged in train 17 as main `0401350` and published as Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.
