@@ -567,8 +567,11 @@ test.each(seededPotencyCases)(
     expect(await registrations(strong)).toEqual([]);
     expect((await t.run(ctx => ctx.db.get(f.campaignId)))!.malice).toBe(5);
     if (spec.name === 'Eye Flash') {
-      // Printed nonempty immunity cells still need manual damage facts, even for another type.
-      // Preserve the original Redglare boundary instead of treating known P3 as sufficient.
+      // V178 (docs/roll-and-damage-resolution.md 6.2): a printed immunity cell of another type no
+      // longer makes the damage manual. monster/hobgoblin/statblock/hobgoblin-redglare.md prints
+      // "Fire 6" immunity and no weakness, so Eye Flash's corruption damage applies in full:
+      // 8 + 8 + 3 = 19, tier 3 ("17+"), 17 corruption damage; "P < 3 restrained" against the
+      // Redglare's Presence 3 is resisted (rule/character/potency.md).
       const manualTarget = await add(spec.actor);
       const manualBefore = await live(manualTarget);
       await position(t, f.campaignId, [8, 8]);
@@ -577,13 +580,8 @@ test.each(seededPotencyCases)(
       );
       const manual = conditions((await read(manualUse.eventId)).compiled as PublicCompiledResult);
       expect(manual).toHaveLength(1);
-      expect(manual[0]!.effect).toMatchObject({
-        status: 'fact-needed',
-        threshold: 3,
-        targetScore: 3,
-        requirements: [expect.stringMatching(/^damage:.*\.completion$/)],
-      });
-      expect((await live(manualTarget)).stamina).toBe(manualBefore.stamina);
+      expect(manual[0]!.effect).toMatchObject({ status: 'resisted', threshold: 3 });
+      expect((await live(manualTarget)).stamina).toBe(manualBefore.stamina - 17);
       expect(await active(manualTarget)).toEqual([]);
       expect(await registrations(manualTarget)).toEqual([]);
     }
