@@ -18,8 +18,8 @@
  *   value applies." Untyped damage takes the untyped weakness (Q-IW-1 point 1).
  * - en/books/heroes/clean/Draw Steel Heroes.md, "Stacking Unique Effects": the same ability used
  *   again doesn't stack; the most recent use sets the duration.
- * - tests/fixtures/v104-elementalist-expected.json v104-1: Hurl Element fire 6 / 8 / 10. Dice 7 + 6
- *   + Reason 2 = 15 is tier 2; one edge makes 17, tier 3 (rule/dice/power-roll.md).
+ * - tests/fixtures/v104-elementalist-expected.json v104-1: Hurl Element fire 6 / 8 / 10. Dice 5 + 4
+ *   + Reason 2 = 11 is tier 1; one edge makes 13, tier 2 (rule/dice/power-roll.md).
  * - rule/dice/power-roll.md: a double edge raises the tier by one.
  * - monster/draconian/statblock/myxovidan-the-sintaker.md: Expunging Exhalation, Power Roll + 3,
  *   "12-16: 12 corruption damage; M < 2 the target has corruption weakness 3 (save ends)"; Free

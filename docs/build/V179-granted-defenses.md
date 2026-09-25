@@ -128,7 +128,7 @@ Spec references:
   - **Corrections and V174 revisions:** see the Scope section.
   - **Stacking:** the same user's repeat supersedes, and two users' uses form a manual group.
   - **The hit itself:** a weakness is stored after the use's damage, so the hit that imposes it
-    doesn't take it.
+    doesn't take it (an interpretation: Q-IW-2 point 7).
 - **Tests and journeys touched:**
   - `tests/scripts/live-compiled-report.test.ts` (compiled list);
   - `scripts/headless/conduit.ts` (a Corruption's Curse branch replaces the manual-remainder

@@ -1808,6 +1808,13 @@ readings:
 6. **Squad minions and objects hold no granted weakness.** A squad minion's weakness stays table
    work, as squad potency conditions do. An object is immune to an ability's other effects
    (`rule/combat/target.md`).
+7. **The hit that imposes a weakness doesn't take it.** Setup and Corruption's Curse print the
+   damage before the weakness in each tier (for example "the target has damage weakness 5 (save
+   ends)" after the damage), but no general rule states the order. The only explicit statement is
+   Smolder's own Effect (`feature/ability/talent/level-1/smolder.md`): "The target takes damage
+   before this ability imposes any weakness." V179 reads the printed tier order the same way for
+   every ability: the weakness applies from the next damage. Alternative: the imposing hit takes
+   the new weakness too, since Smolder's sentence could be read as an exception.
 
 What stays manual, and why:
 
@@ -1836,4 +1843,4 @@ What stays manual, and why:
   depends only on Stamina. It is a candidate for a later slice. It isn't a stored instance, so it
   is left alone here.
 
-Recommendation: keep 1 to 6 as implemented.
+Recommendation: keep 1 to 7 as implemented.
