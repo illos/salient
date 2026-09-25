@@ -222,4 +222,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V230 | [Ravenous Horde spawn ruling](V230-ravenous-horde-ruling.md) | Merged (`3f45f32b`); documentation only, Test and QC PASS |
 | V231 | [Shared Ferocity first-use ruling](V231-shared-ferocity-ruling.md) | Merged (`160d2808`); documentation only, Test and QC PASS |
 | V232 | [Thorn Dragon Domain deferral](V232-thorn-domain-deferral.md) | Merged (`4fd2c92d`); documentation only, Test and QC PASS |
-| V233 | [Overwhelm duration and spatial deferral](V233-overwhelm-ruling.md) | Committed on branch; QC pending |
+| V233 | [Overwhelm duration and spatial deferral](V233-overwhelm-ruling.md) | Merged (`df9a9ecc`); documentation only, Test and QC PASS |

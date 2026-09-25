@@ -31,3 +31,5 @@ Source: pinned `monster/human/statblock/human-knave.md`, Overwhelm;
   Chords start note named the preceding main tip before creation; actual parent includes closeout).
   User approved duration, then rejected the adjacency-input proposal as messy and requested
   text-only handling and tracking spatial-dependent effects. Recorded that correction before QC.
+- 2026-09-25: Test's diff and documentation link checks passed (588 Markdown files); QC gave
+  final PASS at `df9a9ecc`. Fast-forward merged into `main`. Documentation only; no runtime deployment.
