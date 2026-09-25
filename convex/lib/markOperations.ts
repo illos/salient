@@ -24,7 +24,8 @@ import {
 import { resolveHistoricalId } from './history';
 import { journalPatch, type JournalScope } from './journal';
 import type { OperationDefinition, Outcome, TableContext } from './registry';
-import { abilitiesFor, damageTargetFacts, writeDamage, type TargetRecord } from './resolve';
+import { abilitiesFor, damageTargetFacts, writePlannedDamage, type TargetRecord } from './resolve';
+import { appendEvent } from './events';
 import { allowanceFor, bindTarget, planTracking, recordUse } from './abilityOperations';
 import { MARK_OFFER_KIND, eligibilityFacts, roundOf } from './triggeredActions';
 import { applyMark, type MarkOffer } from './marks';
@@ -135,9 +136,22 @@ const markBenefit: OperationDefinition = {
       id: await resolveHistoricalId(ctx, context.campaign._id, offer.mark.holder.id),
     };
     const record = await readHolder(ctx, holder);
-    const instance = record?.effectInstances.find(
-      item => item.id === offer.mark.instanceId && item.status === 'active',
-    );
+    const found = record?.effectInstances.find(item => item.id === offer.mark.instanceId);
+    // The trigger happened while the creature was marked, so the order in which the owner answers
+    // this trigger's cards doesn't matter: a mark ended afterwards by the same trigger's retarget
+    // (mark.retarget answering a card of this triggering event) still gives its benefit.
+    const endedByRetarget =
+      found?.status === 'ended' && found.endedEventId
+        ? await (async () => {
+            const ender = await ctx.db.get(found.endedEventId as Id<'events'>);
+            const data = (ender?.payload as { data?: { triggeringEventId?: string } } | undefined)
+              ?.data;
+            return (
+              ender?.kind === 'mark.retarget' && data?.triggeringEventId === offer.triggeringEventId
+            );
+          })()
+        : false;
+    const instance = found?.status === 'active' || endedByRetarget ? found : undefined;
     if (!instance)
       throw new ConvexError(
         `${offer.owner.name}'s mark on ${offer.mark.subject.name} has ended; its benefit can no longer be gained.`,
@@ -211,7 +225,10 @@ const markBenefit: OperationDefinition = {
         causeLabel: `${offer.owner.name}'s Mark`,
       });
       damage = { record: subjectRecord!, application };
-      applied = `${offer.mark.subject.name} takes ${plan.amount} extra damage (twice ${offer.owner.name}'s Reason ${ownerBaseline.characteristics.R.value}); Stamina ${application.staminaBefore} → ${application.staminaAfter}${application.absorbedByTemporaryStamina ? ` (${application.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}.`;
+      // Interpretation (Q-MARK-1 point 7): only the marked creature whose damage set off the
+      // trigger takes it; the alternative is every creature the ability damaged. The Stamina
+      // figures are logged from the write itself (the linked entry below).
+      applied = `${offer.mark.subject.name} takes ${plan.amount} extra damage (twice ${offer.owner.name}'s Reason ${ownerBaseline.characteristics.R.value}); the linked entry records the Stamina change.`;
     }
     if (
       plan.status === 'apply' &&
@@ -250,7 +267,6 @@ const markBenefit: OperationDefinition = {
         triggeringEventId: offer.triggeringEventId,
         interactionId: card._id,
         cost: { resource: 'focus', amount: 1, before: pool.current, after: pool.current - 1 },
-        ...(damage ? { application: damage.application } : {}),
         ...(recovery
           ? { recovery: { characterId: recovery.character._id, healed: recovery.healed } }
           : {}),
@@ -283,8 +299,8 @@ const markBenefit: OperationDefinition = {
         }
         // The extra damage is part of the ability's damage (mark.md, "The ability deals extra
         // damage"): it changes Stamina, winded and 0 Stamina, but is not a second damage event.
-        if (damage)
-          await writeDamage(mctx, scope, damage.record, damage.application, undefined, {
+        if (damage) {
+          const written = await writePlannedDamage(mctx, scope, damage.record, damage.application, {
             dealer: {
               kind: dealerRef.kind as 'character' | 'foe',
               id: dealerRef.id,
@@ -292,6 +308,19 @@ const markBenefit: OperationDefinition = {
             },
             partOfHit: true,
           });
+          const cause = (await mctx.db.get(scope.eventId))!;
+          await appendEvent(mctx, {
+            campaignId: scope.campaignId,
+            sessionId: cause.sessionId,
+            encounterId: cause.encounterId,
+            origin: 'engine',
+            commandId: cause.commandId,
+            causeEventId: scope.eventId,
+            kind: 'mark.extra-damage',
+            description: `${offer.mark.subject.name} takes ${written.afterImmunity} extra damage from ${offer.owner.name}'s Mark; Stamina ${written.staminaBefore} → ${written.staminaAfter}${written.absorbedByTemporaryStamina ? ` (${written.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}.`,
+            payload: { data: { application: written, sourcePath: instance.sourcePath } },
+          });
+        }
         await recordFreeTriggered(
           mctx,
           scope,

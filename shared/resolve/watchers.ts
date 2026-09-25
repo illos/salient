@@ -145,8 +145,9 @@ export const EFFECT_ONLY_WATCHERS: readonly {
   // V175, feature/ability/tactician/level-3/hit-em-hard.md: "Until the end of the encounter or until
   // you are dying, whenever you or any ally deals damage to a target marked by you, that creature
   // gains 2 surges, which they can use immediately." The damage and the damaged creature's marks are
-  // observed at the damage writer (V175 marks, feature/ability/tactician/level-1/mark.md); "that
-  // creature" is the one who dealt the damage; surges are rule/resource/surge.md, and gained surges
+  // observed at the damage writer (V175 marks, feature/ability/tactician/level-1/mark.md). "That
+  // creature" is read as the one who dealt the damage (interpretation, Q-MARK-1 point 6; the
+  // alternatives are the marked target or the Tactician); surges are rule/resource/surge.md, and gained surges
   // are usable at once, as the sentence says. "You or any ally": the owner's side (rule/combat/side.md).
   {
     pattern:

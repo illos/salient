@@ -126,9 +126,13 @@ const effectEnd: OperationDefinition = {
         `${instance.abilityName} on ${instance.subject.name} has already ended (${instance.endedReason ?? instance.status}).`,
       );
     if (context.role !== 'director') {
-      // Anyone controlling the owner or the subject may end it (design, Operations).
+      // Anyone controlling the owner or the subject may end it (design, Operations). V175: a mark is
+      // ended willingly by its owner ("You can willingly end your mark", mark.md), so only the
+      // owner's player (or the Director) may end it.
       let controls = false;
-      for (const party of [instance.owner, instance.subject]) {
+      for (const party of instance.kind === 'mark'
+        ? [instance.owner]
+        : [instance.owner, instance.subject]) {
         if (party.kind !== 'character') continue;
         const heroId = ctx.db.normalizeId(
           'characters',
@@ -140,7 +144,9 @@ const effectEnd: OperationDefinition = {
       }
       if (!controls)
         throw new ConvexError(
-          `You do not control ${instance.owner.name} or ${instance.subject.name}; the Director ends this effect.`,
+          instance.kind === 'mark'
+            ? `Only ${instance.owner.name}'s player or the Director can end ${instance.owner.name}'s mark (mark.md: "You can willingly end your mark").`
+            : `You do not control ${instance.owner.name} or ${instance.subject.name}; the Director ends this effect.`,
         );
     }
     const reason = `ended by ${context.user.displayName}${note ? `: ${note}` : ''}`;

@@ -84,8 +84,10 @@ Judgment keeps its manual path, because the design does not assume it shares the
   - Stay Strong and Focus! leaves the dealer's Recovery to the table.
   - V174 revisions treat those firings as undone damage and refuse.
 - **Visibility**: `MARKS_VISIBLE_TO_PLAYERS` (`shared/resolve/marks.ts`) is the one place deciding
-  whether players see marks. The roster's foe projection and `effect.list` follow it. It is set to
-  the design's recommendation (yes), pending the user's answer (Q-MARK-2).
+  whether players see marks. It gates exactly the roster's foe projection and `effect.list`. It
+  does not gate the game log text of the Mark use and its linked entries, the Mark cards and their
+  `trigger.offered` lines, or hero sheets (shown only to the hero's player and the Director). It is
+  set to the design's recommendation (yes), pending the user's answer (Q-MARK-2).
 - **UI (minimal)**:
   - The foe and hero active-effects lists show a "Mark: …" line.
   - `web/table/trigger-offers.tsx` shows mark cards with one button per benefit or per candidate.
@@ -133,7 +135,8 @@ Rules questions: [Q-MARK-1](../rules-questions-for-user.md#q-mark-1-marks-from-a
 ## Work log
 
 - 2026-09-25: `slice/V175` in `.worktrees/marks`, stacked on `slice/V174` `52246cfe`.
-  Implementation commit: `8836ace3` (committed on the branch, not pushed).
+  Implementation commit: `8836ace3`, rebased by the coordinator onto V174 `aa2b1584` (QC1 train
+  13) as `56c43e49` (implementation) and `2219197f` (docs), pushed.
 - Flipped to fully compiled (all without a power roll):
   - **Mark** (`feature/ability/tactician/level-1/mark.md`).
   - **Hit 'Em Hard!** (`feature/ability/tactician/level-3/hit-em-hard.md`).
@@ -188,3 +191,27 @@ Rules questions: [Q-MARK-1](../rules-questions-for-user.md#q-mark-1-marks-from-a
     - `tests/app`: marks, triggered-actions, damage-reactions, watchers, modifiers,
       effect-instances, party-read-limit, abilities, tactician-character, heroic-resource-tactician,
       effect-only.
+- Review (changes required, 2026-09-25), fixed on top of `2219197f`:
+  1. **Order of a trigger's cards.** When the retarget card was accepted first, it ended the old
+     mark, and the same trigger's benefit card was then refused. The trigger happened while the
+     creature was marked, so `mark.benefit` now also accepts a mark ended by a `mark.retarget` that
+     answered a card of the same triggering event.
+  2. **Dying owner** (QC1 train 13 `endedAtApplication`). A Mark used by a Tactician who is already
+     dying is stored ended as it is applied. It ends no other Tactician's mark (Q-MARK-1 point 5).
+     Its `effect.applied` entry says it ends as it is applied, worded as the modifier and watcher
+     paths word it.
+  3. Q-MARK-1 labels two more interpretations: Hit 'Em Hard!'s "that creature" is the dealer
+     (point 6), and the extra damage goes only to the marked creature (point 7).
+  4. **Visibility scope.** The constant's comment, this document and Q-MARK-2 now say exactly what
+     `MARKS_VISIBLE_TO_PLAYERS` gates: the foe roster and `effect.list`. The log, the cards and hero
+     sheets are not gated.
+  5. `effect.end` on a mark: only the owner's player or the Director ("You can willingly end your
+     mark"). The marked hero's player is refused.
+  6. The extra damage is written through `writePlannedDamage`. A linked `mark.extra-damage` entry
+     takes its Stamina figures from what the write returns.
+  - Tests added to `tests/app/marks.test.ts`:
+    - retarget first, then the benefit;
+    - a dying Tactician's Mark;
+    - who may end a mark;
+    - the extra-damage entry's figures.
+

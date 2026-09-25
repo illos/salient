@@ -1516,14 +1516,30 @@ Questions and current behaviour:
    Recovery": the Tactician picks the benefit, and accepting it is the table's confirmation that the
    dealer spends one (`rule/health/recoveries.md`: they regain their recovery value). Alternative:
    a second card for the dealer to accept or decline.
+5. **A dying Tactician's Mark** (interpretation). A Mark used while its user is already dying ends
+   as it is applied ("until you are dying"). It never marks the creature, so another Tactician's
+   mark on it doesn't end. Alternative: the marking still ends the other Tactician's mark, leaving
+   the creature unmarked.
+6. **Hit 'Em Hard!'s "that creature"** (interpretation).
+   `feature/ability/tactician/level-3/hit-em-hard.md`: "whenever you or any ally deals damage to a
+   target marked by you, that creature gains 2 surges, which they can use immediately." "That
+   creature" is read as the one who dealt the damage (you or the ally), since surges help the
+   creature that uses them. Alternatives: the marked target gains them; or the Tactician does.
+7. **The Mark's extra damage with several targets** (interpretation). "The ability deals extra
+   damage equal to twice your Reason score" is added only to the marked creature whose damage set
+   off the trigger, since the trigger is rolled damage "to a creature marked by you". Alternative:
+   every target the ability damaged takes the extra damage.
 
-Recommendation: 1 as above; keep 2, 3 and 4.
+Recommendation: 1 as above; keep 2 to 7.
 
 ## Q-MARK-2: can players see marks on foes? (V175, product)
 
 Open (`docs/lasting-effects-design.md`, "Questions for the user", 1). V175 implements the
 recommendation: marks are table knowledge, so players and observers see a foe's marks on the
 roster and in `effect.list`. The decision is one constant, `MARKS_VISIBLE_TO_PLAYERS` in
-`shared/resolve/marks.ts`; flipping it hides marks from players in both places (the Director always
-sees them). Recommendation: yes. Alternative: only the Director and the marking Tactician's player
-see them.
+`shared/resolve/marks.ts`. It gates the foe roster projection and `effect.list` only; the Director
+always sees marks. It does not gate the game log (the Mark use and its linked entries are a
+player's own use, whose log text every member sees), the Mark cards and their `trigger.offered`
+lines, or hero sheets (a hero's sheet is shown only to its player and the Director). A "no" answer
+would also need a per-audience log description for those entries. Recommendation: yes.
+Alternative: only the Director and the marking Tactician's player see them.

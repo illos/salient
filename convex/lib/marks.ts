@@ -38,6 +38,7 @@ import { distanceNote, triggerEligibility } from '../../shared/resolve/triggers'
 import {
   applyEffectInstance,
   endEffectInstance,
+  ownerStateEnding,
   readHolder,
   type EffectHolder,
 } from './effectInstances';
@@ -139,7 +140,16 @@ export async function applyMark(
 ): Promise<{ instance?: EffectInstance; replaced: EffectInstance[] }> {
   const replaced: EffectInstance[] = [];
   const holds = input.subject.kind === 'character' || input.subject.kind === 'foe';
-  if (holds) {
+  // QC1 train 13 R2: an owner already dying ("until you are dying") makes a mark that ends as it is
+  // applied. Interpretation (Q-MARK-1 point 5): such a mark never marks the creature, so "if another
+  // tactician marks a creature" doesn't happen and no other Tactician's mark ends. The alternative
+  // is that the marking itself ends the other mark even though the new one ends at once.
+  const dying = await ownerStateEnding(ctx, {
+    owner: input.owner,
+    endsWhen: input.spec.endsWhen,
+    actorLabel: input.owner.name,
+  });
+  if (holds && !dying) {
     const holder = { kind: input.subject.kind, id: input.subject.id } as EffectHolder;
     const record = await readHolder(ctx, holder);
     for (const other of activeMarks(record?.effectInstances ?? []))
@@ -195,20 +205,25 @@ export async function applyMark(
         encounterId,
       )
     : undefined;
-  const stored = result && 'instance' in result && !result.manualGroup ? result : undefined;
+  const tracked = result && 'instance' in result && !result.manualGroup ? result : undefined;
+  const endedAtApplication = tracked?.endedAtApplication;
+  const stored = endedAtApplication ? undefined : tracked;
   const lasts = describeDuration(input.spec.duration, input.spec.endsWhen);
   await log(
     ctx,
     scope,
-    stored ? 'effect.applied' : 'effect.untracked',
-    stored
-      ? `${input.owner.name} marks ${input.subject.name}, ${lasts} (or until ${input.owner.name} ends it). ${input.owner.name} and allies gain an edge on power rolls against ${input.subject.name} while it and the roller are within ${input.owner.name}'s line of effect; rolled damage to it offers ${input.owner.name} a Mark benefit.${stored.instance.registrationIds.length ? '' : ' Outside a committed encounter nothing is scheduled: end it with /effect end.'}`
-      : `${input.owner.name} marks ${input.subject.name}: a ${input.subject.kind === 'squad' || input.subject.kind === 'object' ? input.subject.kind : 'squad member'} holds no mark the engine tracks; track it at the table.`,
+    tracked ? 'effect.applied' : 'effect.untracked',
+    endedAtApplication
+      ? `${input.owner.name}'s ${input.abilityName} on ${input.subject.name}, ${lasts}: "${MARK_CLAUSE}" It ends as it is applied (${endedAtApplication}): ${input.subject.name} is not marked by ${input.owner.name}, and no other Tactician's mark on it ends (Q-MARK-1).`
+      : stored
+        ? `${input.owner.name} marks ${input.subject.name}, ${lasts} (or until ${input.owner.name} ends it). ${input.owner.name} and allies gain an edge on power rolls against ${input.subject.name} while it and the roller are within ${input.owner.name}'s line of effect; rolled damage to it offers ${input.owner.name} a Mark benefit.${stored.instance.registrationIds.length ? '' : ' Outside a committed encounter nothing is scheduled: end it with /effect end.'}`
+        : `${input.owner.name} marks ${input.subject.name}: a ${input.subject.kind === 'squad' || input.subject.kind === 'object' ? input.subject.kind : 'squad member'} holds no mark the engine tracks; track it at the table.`,
     {
       sourceUseEventId: input.sourceUseEventId,
       occurrence: input.id,
-      effectInstanceId: stored?.instance.id ?? null,
+      effectInstanceId: tracked?.instance.id ?? null,
       holder: result?.holder ?? null,
+      ...(endedAtApplication ? { endedAtApplication } : {}),
       replaced: replaced.map(r => r.id),
       sourcePath: input.sourcePath,
     },

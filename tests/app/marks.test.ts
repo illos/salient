@@ -81,7 +81,7 @@ async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, n
 }
 
 let sequence = 0;
-async function setup() {
+async function setup(options: { warden?: boolean } = {}) {
   // The damage writer is a hot path (tests/app/party-read-limit.test.ts): enforce Convex's limits.
   const t = convexTest({ schema, modules, transactionLimits: true }) as unknown as Backend;
   betterAuthTest.register(t);
@@ -134,6 +134,23 @@ async function setup() {
       levelOneDefinitions,
     ),
   );
+  // A Tactician the Director owns (v94-tactician-3), for who may end a mark.
+  const warden = options.warden
+    ? await admitHero(
+        t,
+        f.director,
+        f.director,
+        f.campaignId,
+        'Warden',
+        draftSelectionsFrom(
+          {
+            ...(levelOne.witnesses[2]!.selections as unknown as EvaluationInput['selections']),
+            'details.name': 'Warden',
+          },
+          levelOneDefinitions,
+        ),
+      )
+    : undefined;
   const goblin = await f.director.client.mutation(api.foes.add, {
     campaignId: f.campaignId,
     definitionId: GOBLIN,
@@ -196,6 +213,7 @@ async function setup() {
     f,
     planner,
     rival,
+    warden,
     goblin,
     goblin2,
     command,
@@ -303,6 +321,12 @@ test('V175: Mark is stored and visible; an ally gets the edge and exclude drops 
   const benefitEvent = (await s.t.run(ctx => ctx.db.get(benefit.eventId)))!;
   expect(benefitEvent).toMatchObject({ kind: 'mark.benefit', causeEventId: hitB.eventId });
   expect((await s.foe(s.goblin)).live.stamina).toBe(6);
+  const extra = await s.t.run(async ctx =>
+    (await ctx.db.query('events').take(4000)).find(
+      e => e.kind === 'mark.extra-damage' && e.causeEventId === benefit.eventId,
+    ),
+  );
+  expect(extra!.description).toMatch(/takes 4 extra damage.*Stamina 10 → 6/);
   expect((await s.hero(s.planner)).liveState!.heroicResource.current).toBe(1);
   expect(await s.card(cardB._id)).toMatchObject({
     status: 'resolved',
@@ -514,4 +538,83 @@ test("V175: Hit 'Em Hard! gives the dealer 2 surges for damage to a marked creat
     /taunted by Planner/,
   );
   expect((await s.hero(s.planner)).liveState!.heroicResource.current).toBe(0);
+});
+
+test('V175 review: the benefit of a trigger still applies after that trigger’s retarget was accepted first', async () => {
+  const s = await setup();
+  await s.command(`${s.plannerRef} /ability use ability=Mark targets=[${s.goblinRef}]`, 'player');
+  const [first] = await s.marksOn(s.goblin);
+  await s.setFoeStamina(s.goblin, 3);
+  await atDice(s.t, s.f.campaignId, [3, 6]);
+  const kill = await s.command(
+    `@Thorn /ability use ability="Brutal Slam" targets=[${s.goblinRef}]`,
+    'player',
+  );
+  const cards = (await s.markCards()).filter(c => c.openedEventId === kill.eventId);
+  const retarget = cards.find(c => c.operation === 'mark.retarget')!;
+  const benefit = cards.find(c => c.operation === 'mark.benefit')!;
+  // The retarget first: the old mark ends (Q-MARK-1 point 2) …
+  await s.respond(retarget._id, { targets: [{ refKind: 'foe', id: s.goblin2 }] }, 'player');
+  expect((await s.marksOn(s.goblin)).find(m => m.id === first!.id)).toMatchObject({
+    status: 'ended',
+  });
+  // … but the trigger happened while the goblin was marked, so its benefit is still gained.
+  const gained = await s.respond(benefit._id, { benefit: 'shift' }, 'player');
+  expect((await s.hero(s.planner)).liveState!.heroicResource.current).toBe(1);
+  expect((await s.marksOn(s.goblin)).find(m => m.id === first!.id)!.markBenefits).toEqual([
+    { triggeringEventId: kill.eventId, benefit: 'shift', eventId: gained.eventId },
+  ]);
+});
+
+test('V175 review: a dying Tactician’s Mark ends as it is applied and ends no other mark', async () => {
+  const s = await setup();
+  await s.command(`${s.rivalRef} /ability use ability=Mark targets=[${s.goblin2Ref}]`, 'player');
+  const rivalMark = (await s.marksOn(s.goblin2)).find(m => m.owner.id === s.rival)!;
+  // rule/health/dying.md: "When your Stamina is 0 or lower, you are dying."
+  const planner = await s.hero(s.planner);
+  await s.t.run(ctx =>
+    ctx.db.patch(s.planner, { liveState: { ...planner.liveState!, stamina: 0 } }),
+  );
+  const use = await s.command(
+    `${s.plannerRef} /ability use ability=Mark targets=[${s.goblin2Ref}]`,
+    'player',
+  );
+  const marks = await s.marksOn(s.goblin2);
+  expect(marks.find(m => m.id === rivalMark.id)).toMatchObject({ status: 'active' });
+  expect(marks.find(m => m.owner.id === s.planner)).toMatchObject({
+    status: 'ended',
+    endedReason: 'Planner is dying (Stamina 0), so it ends as it is applied',
+  });
+  const linked = await s.t.run(async ctx =>
+    (await ctx.db.query('events').take(4000)).filter(e => e.causeEventId === use.eventId),
+  );
+  const logged = linked.find(e => e.kind === 'effect.applied')!;
+  expect(logged.description).toMatch(
+    /It ends as it is applied \(Planner is dying.*not marked by Planner, and no other Tactician's mark on it ends/,
+  );
+  expect(logged.payload).toMatchObject({ endedAtApplication: expect.stringContaining('dying') });
+  expect(linked.filter(e => e.kind === 'effect.ended')).toEqual([]);
+});
+
+test('V175 review: only the owner’s player or the Director ends a mark', async () => {
+  const s = await setup({ warden: true });
+  const warden = s.warden!;
+  // The Director's Tactician marks Thorn, the player's hero.
+  await s.command(`@{character:${warden}} /ability use ability=Mark targets=[@Thorn]`);
+  const mark = (await s.hero(s.f.thornId)).liveState!.effectInstances!.find(
+    i => i.kind === 'mark',
+  )!;
+  const end = (who: 'director' | 'player') =>
+    s.f[who].client.mutation(api.commands.invoke, {
+      campaignId: s.f.campaignId,
+      commandId: `marks-end-${++sequence}`,
+      operation: 'effect.end',
+      arguments: { instance: mark.id },
+    });
+  // The player controls the marked hero, not the mark's owner: "You can willingly end your mark".
+  await expect(end('player')).rejects.toThrow(/Only Warden's player or the Director/);
+  await end('director');
+  expect(
+    (await s.hero(s.f.thornId)).liveState!.effectInstances!.find(i => i.id === mark.id),
+  ).toMatchObject({ status: 'ended' });
 });

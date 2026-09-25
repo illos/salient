@@ -320,9 +320,12 @@ export function markManualReason(text: string): string | undefined {
 
 /**
  * Whether players see marks on creatures (foes included). Pending the user's answer to the product
- * question in docs/lasting-effects-design.md ("can players see marks on foes? Recommended: yes"),
- * marks are table knowledge. This is the one place the decision lives: flip it here, and the roster
- * projection and effect.list follow.
+ * question in docs/lasting-effects-design.md ("can players see marks on foes? Recommended: yes";
+ * Q-MARK-2), marks are table knowledge. This is the one place the decision lives, and it gates
+ * exactly two projections: the roster's foe effects (convex/table.ts) and effect.list. It does not
+ * gate the game log text of the Mark use and its linked entries, the Mark cards and their
+ * `trigger.offered` lines, or hero sheets (shown only to the hero's player and the Director);
+ * a "no" would need per-audience log text for those.
  */
 export const MARKS_VISIBLE_TO_PLAYERS = true;
 
