@@ -240,7 +240,8 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await player.getByRole('button', { name: /^Class/ }).click();
     await expect(player.getByLabel('Wrecking Ball', { exact: true })).toBeChecked();
     await expect(player.getByLabel('Danger Sense', { exact: true })).toBeChecked();
-    await player.getByRole('button', { name: 'Exit', exact: true }).click();
+    // The builder has no Exit control; nothing was changed, so return to the sheet directly.
+    await player.goto(`/characters/${characterId}`);
     // V185: the History page previews the full recorded sheet, read-only, with a comparison.
     // Restoring the lower maximum applies only on exact revision approval.
     await adjust('stamina', 39);

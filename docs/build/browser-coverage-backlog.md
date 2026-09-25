@@ -160,3 +160,5 @@ Throats at Once), the pending-ability controls show "Use as" with melee and rang
 and firing records `selectedMode: ranged` and ranged damage. Firing with no choice shows the
 server's "give mode=melee or mode=ranged" refusal. The selector must appear for Compendium keywords
 stored as links. Headless coverage is the `kit-bonus` cohort.
+
+- **Stale wizard Exit (found in V186, 2026-09-25):** eight wizard browser specs click or expect the Exit button that V96 removed. See `V186-v32-spec-exit.md`. Refresh them to use site navigation; `v40-unsaved-wizard` needs its unsaved-changes scenario redesigned.
