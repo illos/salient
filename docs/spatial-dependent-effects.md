@@ -21,3 +21,9 @@ Source paths below are relative to the canonical pinned Compendium's `en/unified
 For each future entry record the named clause, source, current manual behavior, missing spatial
 facts, owning slice and any separate unresolved rule. Close an entry with its implementation
 commit and accepted persisted proof; retain the history so completeness can be audited.
+
+## Triage candidates
+
+The [V234 audit](research/spatial-effect-triage.md) lists additional hero/monster clauses for user
+triage, with source and current handling. Those candidates are not new approved deferrals; move
+an entry into this register only when its disposition has been decided.
