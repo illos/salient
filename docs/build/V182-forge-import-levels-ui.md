@@ -1,7 +1,6 @@
 # V182: Forge Steel import at levels 2–3, level ceiling, play-state seed and import UI
 
-Rules review: required. Depends on: V09 part a (`slice/V09`, not yet merged; this branch is stacked
-on it), V163. This is V09 part b ([V09](V09-forge-steel-import.md#parts)).
+Rules review: required. Depends on: V09 part a (merged to main, train 12), V163. This is V09 part b ([V09](V09-forge-steel-import.md#parts)).
 
 ## Goal
 
@@ -39,14 +38,23 @@ not applied), and give owners an import control with a preview and a diagnostics
   while Q-V-3 is open.
 - **API and CLI:** `characterImport.previewForge` (query; no writes), `characterImport.importDiagnostics`
   (owner only; null for anyone else), `characterImport.importForge` now refuses above the ceiling and
-  stores `liveSeed`. `pnpm character:import <file> --dry-run` calls the preview.
+  stores `liveSeed`. `pnpm character:import <file> --dry-run` calls the preview;
+  `pnpm character:import --diagnostics <characterId>` reads the stored diagnostics.
 - **UI:** "Import from Forge Steel" card on the characters list (`web/forge-import.tsx`): choose a
   `.ds-hero`/`.drawsteel-hero` file, see name, level, class and diagnostics (or the refusal), then
   Import opens the new draft. The character page shows the owner a collapsed "Imported from Forge
   Steel" panel with the diagnostics and the recorded (unapplied) Stamina and Recoveries.
 - **Forge witness tooling:** `scripts/forge/pinned-source.mjs` bundles Forge sources from the pin's
   Git objects, so `scripts/forge/build.mjs` now works with the sparse Presidium copy (no files are
-  extracted). New family `import`: `scripts/forge/import-witnesses.ts` and `run-import.ts`.
+  extracted). One-copy rule: `build.mjs` writes the bundle (a derived copy of Forge sources) into a
+  fresh `mkdtemp` directory, runs it from there in one command, and removes the directory in a
+  `finally` block; only reports reach `SALIENT_FORGE_OUTPUT`, and the `import` runner writes no raw
+  heroes there. New family `import`: `scripts/forge/import-witnesses.ts` and `run-import.ts`.
+- **Choices Forge cannot supply** (`forgeAbsentDecisions` in `mappings.ts`): the Beastheart companion
+  melee bonus, the drake attunement, and each Tactician `class.tactician.arsenal.*` benefit choice
+  are reported as diagnostics whenever the evaluator's availability rule says the build needs them
+  (for Field Arsenal, only benefits both kits print with different values). A Recoveries seed
+  clamped to 0 is also reported.
 
 ## Proof status
 
@@ -89,8 +97,14 @@ lists the level-two abilities, and Forge's Summoner "Summoner's Cradle" has no C
    diagnostics and liveSeed to the owner, null to another user, and the draft has no live state.
 3. `tests/browser/v182-forge-import.spec.ts` (non-table, authored only): refusal preview, preview,
    import, diagnostics panel, CLI readback.
-4. Forge runner: `SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs` then
-   `node "$SALIENT_FORGE_OUTPUT/forge-run.mjs"` reports the table above.
+4. Forge runner: `SALIENT_FORGE_OUTPUT=<dir> SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs`
+   reports the table above and leaves no bundle behind.
+5. Pure: every V182 name alias resolves to the `name:` of its cited Compendium file (subclass
+   aliases to the Salient option the Compendium subclass names); a synthetic Tactician with Shining
+   Armor and Mountain reports exactly the stamina, stability and melee damage arsenal choices; the
+   Beastheart heroes report the companion melee bonus; a clamped Recoveries seed is reported.
+6. App: an oversized preview is refused with no parse; an over-maximum Recoveries import stores 0
+   with a diagnostic.
 
 ## Work log
 
