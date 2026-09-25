@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V201 | `9d8f7bc` | Merged in train 21; backend/frontend published; gate and headless at tip | complete |
+| V200 | `9d8f7bc` | Merged in train 21; backend/frontend published; gate and headless at tip | complete |
 | V191 | `35abd9f` | Merged; backend/frontend published; accepted gates reused | complete |
 | V179 | `392d236` | Merged; backend/frontend published; accepted gates reused | complete |
 | V178 | `eeaa992` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -968,3 +970,20 @@ The test and deploy thread fast-forwarded reviewed tip `35abd9f30ce0e85e629a693d
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V191-release-35abd9f`.
+
+### Train 21 (V200 areas and auras, V201 damage fixes) publication: 2026-09-25
+
+ENGINE2's V200 (areas and auras; 188 compiled) with QC1's performance-warning fix, and V201 (stacked
+correction fix and the ogres' while-winded immunity), were cherry-picked onto main `37ceda4` and
+fast-forwarded as `9d8f7bc53f193c193b766197ce0b6d6acf0cbfb0`.
+- Full gate at the tip (323 s, 458 engine and 967 app tests).
+- Journeys at the tip: areas, troubadour-level-three, all, troubadour and talent; the censor,
+  conduit, tactician and talent level-three journeys, shadow-level-two and censor passed one fix
+  commit earlier at `6e9beb0`.
+- Independent reviews and QC1 clearance passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `758b9359-5be8-4113-a393-6d7c117c2fa4`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/train21-release-9d8f7bc`.

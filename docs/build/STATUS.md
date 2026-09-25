@@ -191,5 +191,5 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V178 | [Damage immunity and weakness](V178-immunity-weakness.md) | Merged (`eeaa992`); cloud dev published; accepted TESTER results reused |
 | V179 | [Immunity and weakness granted in play](V179-granted-defenses.md) | Merged (`392d236`); cloud dev published; accepted TESTER results reused |
 | V191 | [XP bank](V191-xp-bank.md) | Merged (`35abd9f`); cloud dev published; accepted TESTER results reused |
-| V200 | [Areas and auras with table-kept membership](V200-areas-and-auras.md) | In progress (ENGINE2) |
-| V201 | [Small damage fixes](V201-small-damage-fixes.md) | In progress (awaiting TESTER and review) |
+| V200 | [Areas and auras with table-kept membership](V200-areas-and-auras.md) | Merged (`9d8f7bc`, train 21); cloud dev published; gate and headless PASS at tip |
+| V201 | [Small damage fixes](V201-small-damage-fixes.md) | Merged (`9d8f7bc`, train 21); cloud dev published; gate and headless PASS at tip |

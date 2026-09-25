@@ -289,3 +289,6 @@ performance or maintain your current performance (no action required)."
     warned;
   - surprised in round 1: warned.
 
+## Publication: 2026-09-25
+
+Merged in train 21 as main `9d8f7bc` and published as Worker `758b9359-5be8-4113-a393-6d7c117c2fa4`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train21-release-9d8f7bc`.

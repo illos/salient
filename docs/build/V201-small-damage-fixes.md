@@ -73,3 +73,7 @@ Out of scope: the other ogres' squad-counted Anger traits (Royal, Excessive), wh
 - Stale-expectation sweep: no test or headless script names the ogres or the old refusal text
   except `tests/app/granted-defenses.test.ts`, whose `/rewind the use instead/` still matches.
 - Remaining: the TESTER gate and review.
+
+## Publication: 2026-09-25
+
+Merged in train 21 as main `9d8f7bc` and published as Worker `758b9359-5be8-4113-a393-6d7c117c2fa4`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train21-release-9d8f7bc`.

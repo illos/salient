@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V191 XP bank
+## Current release — train 21 (V200, V201)
+
+Backend/frontend source `9d8f7bc53f193c193b766197ce0b6d6acf0cbfb0` published on 2026-09-25 as
+Worker `758b9359-5be8-4113-a393-6d7c117c2fa4`: areas and auras, and the V201 damage fixes. Backend and schema validation, the hosted
+build and the upload succeeded. Content remains the 1881-entry snapshot, so no reseed was needed. See
+the [ledger](../deploy.md).
+
+## Previous release — V191 XP bank
 
 Backend/frontend source `35abd9f30ce0e85e629a693d97db42c88ac2d902` published on 2026-09-25 as
 Worker `2f249d43-1535-4890-b463-d8b22495c205`. Backend and schema validation, the hosted build and the upload succeeded.
