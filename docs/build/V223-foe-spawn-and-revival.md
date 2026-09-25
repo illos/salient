@@ -1,6 +1,6 @@
 # V223: Foe reinforcements, revival and delayed death
 
-Rules review: required. Depends on: V214, V215, V218. Q-FOE-2 affects Ravenous Horde only.
+Rules review: required. Depends on: V214, V215, V218. Accepted Q-FOE-2 applies to Ravenous Horde only.
 
 ## Goal
 
@@ -14,7 +14,8 @@ death provenance, initiative, source limits and later cleanup.
 - Dread March temporarily defers defeat until sequence completion; death-trigger traits emit
   once with actual selected casualty identities for V224's residual terrain.
 - Ordinary minions cannot heal or be winded. Revival is its own printed effect; Ravenous Horde's
-  source conflict stays explicit pending Q-FOE-2. Rebuild squad pools without reviving unselected bodies.
+  accepted Q-FOE-2 exception creates separate squads with 2 Stamina per living zombie and a
+  2-point casualty step. Rebuild squad pools without reviving unselected bodies.
 - Keep summoned/spawned foe identities and prepared groups distinct; minion squads remain at most eight.
 
 Spec: `docs/table-spec.md#foes-roster`;
@@ -35,12 +36,17 @@ Minion; `rule/monster/squad.md`; `rule/health/winded.md`; `rule/health/stamina.m
 4. Cultist revives three selected eligible dead minions for 3 Malice, with source-defined full
    Stamina contribution and no unrelated pool/casualty reset. Revive the same selected minion again
    legally; cultist death and encounter end each defeat only its still-linked revivals once.
-5. Ravenous Horde checks adjacency at round end, not activation. Before Q-FOE-2, winded/pool
-   result remains manual; after answer, encode its exact full/remaining/step numbers and survivors
-   in independent expectations. Consecutive-round attempt is identified even with a different undead actor.
+5. Ravenous Horde checks adjacency at round end, not activation. Under accepted Q-FOE-2, two
+   qualifying heroes create four living zombies with pool 8 and casualty step 2. Post-defense
+   damage 3 leaves pool 5 and three survivors; another 1 leaves pool 4 and two survivors.
+   Ordinary rotting zombies retain Stamina/step 5; existing squads are not changed or combined
+   with the special spawn. This grants no weakened condition. Consecutive-round attempt is
+   identified even with a different undead actor.
 6. Dread March participant reaching 0 remains until that march finishes; completion emits defeat
    once. Test gate plus `foe-lifecycle`; read roster, pools, casualties, turns, delay registrations and log.
 
 ## Work log
 
 - 2026-09-25: registered by V211; no implementation or test results.
+- 2026-09-25: V230 records accepted Q-FOE-2, removing the Ravenous Horde value blocker.
+  Numeric acceptance examples follow the user-approved exception; implementation is still pending.

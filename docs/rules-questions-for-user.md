@@ -2086,13 +2086,21 @@ source-specific semantics stay explicit/manual; no mandatory use/pass barrier is
 
 ## Q-FOE-2: Ravenous Horde's winded minions
 
-Open, queued by V211 on 2026-09-25; other reinforcement/revival work can proceed.
+Answered by the user on 2026-09-25; recorded by V230. Runtime implementation remains V223.
 
 **Question:** How should Ravenous Horde's newly created “winded” rotting zombies be represented?
 
-**Recommendation:** a source-specific weakened spawn with 2 Stamina per living zombie and a
-matching 2-point casualty step, in a separately created squad, while ordinary minions keep their
-normal no-winded rule. This is a proposed application ruling, not the printed formula.
+**Accepted ruling:** spawn Ravenous Horde rotting zombies with 2 Stamina each and a matching
+2-point casualty step, in separately created squads. Ordinary minions retain their normal
+no-winded rule. This is a source-specific application ruling, not a printed formula or the
+weakened condition. The user accepted the example below and confirmed: “The zombies get
+summoned in with 2 stamina.”
+
+**Accepted example:** two qualifying heroes create four living zombies in a fresh squad with
+8 pooled Stamina. After 3 damage actually reduces the pool, one dies: three survivors, pool 5.
+After 1 further damage, another dies: two survivors, pool 4. These are post-defense damage
+amounts; normal damage/area rules still apply. Do not create a normal 20-point pool and subtract
+12 damage, which would incorrectly remove newly created zombies.
 
 Sources read:
 
@@ -2107,7 +2115,9 @@ Sources read:
 The specific wording conflicts with the ordinary minion model and supplies neither an exact value
 nor an altered pool/casualty rule. Halving an ordinary pool at creation would kill some of the very
 zombies being created. Alternatives: spawn full-strength minions and retain “winded” as a manual
-source note, or let the Director choose an explicit spawn value. Keep this effect manual until answered.
+source note, or let the Director choose an explicit spawn value. Those alternatives were not
+selected. This exception applies only to Ravenous Horde; it does not change ordinary rotting
+zombies' 5 Stamina or establish a general winded-minion rule.
 
 ## Q-FOE-3: Shared Ferocity's first-use scope
 

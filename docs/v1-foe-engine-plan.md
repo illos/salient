@@ -139,7 +139,7 @@ not permission to work in another slice's checkout. V211 is this audit and plan.
 | [V220](build/V220-foe-pre-resolution-reactions.md) | Redirection, pre-resolution responses and roll-tier revision | V219; Q-FOE-1 |
 | [V221](build/V221-foe-target-tests.md) | Each target's characteristic test and its own outcome | V214, V216 |
 | [V222](build/V222-foe-traits-and-lasting-effects.md) | Traits, marks, next-roll effects and source-linked restrictions | V216, V217, V219; Q-FOE-5 for Overwhelm |
-| [V223](build/V223-foe-spawn-and-revival.md) | Reinforcements, revival and delayed death | V214, V215, V218; Q-FOE-2 for winded spawn values |
+| [V223](build/V223-foe-spawn-and-revival.md) | Reinforcements, revival and delayed death | V214, V215, V218; accepted Q-FOE-2 spawn exception |
 | [V224](build/V224-foe-areas-and-terrain.md) | Persistent zones, auras, movement-trigger facts and terrain lifecycle | V217, V219, V221, V222 |
 | [V225](build/V225-werewolf-rage.md) | Accursed Rage and compulsory strike sequence | V213, V218, V221, V222 |
 | [V226](build/V226-werewolf-form-and-curse.md) | Full Wolf, lycanthropy, Moonfall and Shared Ferocity | V214, V225; Q-FOE-3 for Shared Ferocity |
@@ -174,8 +174,8 @@ Queued in [the questions file](rules-questions-for-user.md):
   consistently across heroes and monsters. Unconfirmed source-specific consequences remain
   queued under Q-FOE-1; ordinary damage reactions can proceed.
 - **Q-FOE-2:** Ravenous Horde says newly created minions are winded without giving exact Stamina.
-  The general minion rule also forbids winded minions. Q-FOE-2 proposes a specific exception;
-  do not silently halve an ordinary pool and kill half the new minions.
+  Answered: 2 Stamina per zombie, separate squads and a 2-point casualty step. This is a
+  user-approved Ravenous Horde exception; ordinary minions retain their existing rules.
 - **Q-FOE-3:** Shared Ferocity's "first time a creature" omits a reset interval. Recommend once
   per qualifying creature per encounter, labelled as an interpretation until answered.
 - **Q-FOE-4:** Thorn Dragon's Domain does not print expiry for its speed reduction or linked
