@@ -29,3 +29,6 @@ Source: pinned `monster/group/dragon.md`, Thorn Dragon's Domain;
 - 2026-09-25: created `slice/V232` in `.worktrees/thorn-domain-deferral` from `e192af43`.
   User requested shelving the effect for later research, keeping source text when used. Recorded
   future activation and confirmed speed duration/other-monster scope; no runtime changes.
+- Test accepted `4fd2c92d`: diff check passed and 586 Markdown files had no broken relative links
+  or anchors. QC gave final PASS on that exact tip. Fast-forward merged into main; no runtime
+  component changed.
