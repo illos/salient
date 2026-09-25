@@ -29,6 +29,7 @@ import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { DamageApplication } from '../../shared/contracts/rollResolution';
+import type { EffectInstance } from '../../shared/contracts/liveState';
 import type { CompiledResult } from '../../shared/contracts/compiledResult';
 import type { CompiledConditionOutcome } from '../../shared/resolve/compiledOutcome';
 import { describeModifier } from '../../shared/resolve/modifiers';
@@ -262,6 +263,71 @@ export async function assertNotRevised(
     throw new ConvexError(
       'An accepted response revised this hit; undo that response or rewind to the hit instead of correcting it.',
     );
+}
+
+/** Journal entries read to look for later damage; more than this is refused as unchecked. */
+const LATER_DAMAGE_WINDOW = 500;
+
+/** Every saved damage application in an event payload (DamageApplication-shaped objects). */
+function applicationsIn(value: unknown, depth = 0): DamageApplication[] {
+  if (!value || typeof value !== 'object' || depth > 8) return [];
+  if (Array.isArray(value)) return value.flatMap(item => applicationsIn(item, depth + 1));
+  const record = value as Record<string, unknown>;
+  const own =
+    typeof record.targetId === 'string' &&
+    typeof record.staminaAfter === 'number' &&
+    'weaknessApplied' in record &&
+    'immunityApplied' in record
+      ? [record as unknown as DamageApplication]
+      : [];
+  return [...own, ...Object.values(record).flatMap(item => applicationsIn(item, depth + 1))];
+}
+
+/**
+ * QC1 V179 R1: whether damage the holder took after a granted immunity or weakness was stored, and
+ * while it was active, may have used it. Conservatively, any later application to the holder that
+ * applied a weakness (for a weakness) or an immunity (for an immunity) counts, whatever its type:
+ * the saved value is not taken as proof the grant did not contribute. The hit that stored the grant
+ * is skipped (its own damage came first), and so are undone entries. More entries than the window
+ * are treated as a match.
+ */
+async function laterDamageUsing(
+  ctx: MutationCtx,
+  campaignId: Id<'campaigns'>,
+  holderId: string,
+  instance: EffectInstance,
+  hitEvent: Doc<'events'>,
+): Promise<boolean> {
+  if (instance.payload.kind !== 'modifier') return false;
+  const modifier = instance.payload.modifier;
+  if (modifier.kind !== 'damage-modifier') return false;
+  const endedAt = instance.endedEventId
+    ? (await ctx.db.get(instance.endedEventId as Id<'events'>))?.sequence
+    : undefined;
+  const later = await ctx.db
+    .query('events')
+    .withIndex('by_campaign_sequence', q =>
+      endedAt !== undefined
+        ? q
+            .eq('campaignId', campaignId)
+            .gt('sequence', instance.appliedSequence)
+            .lt('sequence', endedAt)
+        : q.eq('campaignId', campaignId).gt('sequence', instance.appliedSequence),
+    )
+    .take(LATER_DAMAGE_WINDOW + 1);
+  if (later.length > LATER_DAMAGE_WINDOW) return true;
+  return later.some(
+    event =>
+      event.disposition !== 'undone' &&
+      event.commandId !== hitEvent.commandId &&
+      applicationsIn(event.payload).some(
+        application =>
+          application.targetId === holderId &&
+          (modifier.defense === 'weakness'
+            ? application.weaknessApplied > 0
+            : application.immunityApplied !== 0),
+      ),
+  );
 }
 
 /** The hit's potency conditions on the damaged creature (V88 compiled occurrences). */
@@ -565,6 +631,16 @@ export async function planRevision(
           if (found?.instance.lastSave)
             refuse(
               `a saving throw was already rolled for the hit's ${effect.condition} on ${name}; recorded saves are never replayed. Rewind the save first.`,
+            );
+          // QC1 V179 R1 (Q-IW-2 point 4): later damage may already have taken this weakness. The
+          // revision would say it was never imposed, so that damage would stand on a weakness
+          // that doesn't exist. Rather than reconcile it, the revision is refused.
+          if (
+            found &&
+            (await laterDamageUsing(ctx, campaignId, damaged._id, found.instance, hitEvent))
+          )
+            refuse(
+              `later damage to ${name} was taken while the hit's ${effect.condition} applied, and ending it now would leave that damage standing on a weakness never imposed; rewind to the hit instead.`,
             );
           continue;
         }

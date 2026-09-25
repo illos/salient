@@ -45,6 +45,7 @@ import shadowLedger from '../fixtures/v92-shadow-expected.json' with { type: 'js
 import elementalistLedger from '../fixtures/v104-elementalist-expected.json' with { type: 'json' };
 import tacticianLedger from '../fixtures/v94-tactician-expected.json' with { type: 'json' };
 import talentLedger from '../fixtures/v105-talent-expected.json' with { type: 'json' };
+import nullLedger from '../fixtures/v103-null-expected.json' with { type: 'json' };
 import { admitHero, table, type Backend } from './fixtures/table';
 
 const modules = import.meta.glob('../../convex/**/*.ts');
@@ -375,4 +376,83 @@ test('V179: a foe’s tier weakness on a hero; Parry’s potency decrease ends i
     weaknessApplied: 0,
     afterImmunity: 7,
   });
+});
+
+// QC1 V179 R1 (Q-IW-2 point 4). The Null v103-1 has Stamina 21 and Might 2
+// (tests/app/damage-reactions.test.ts). Expunging Exhalation, Power Roll + 3: a natural 20 is tier 3
+// (rule/dice/power-roll.md), "15 corruption damage; M < 3 the target has corruption weakness 3
+// (save ends)"; 2 + 2 + 3 = 7 is tier 1, "7 corruption damage; M < 1 …", resisted by Might 2. A
+// critical hit gives an additional main action (rule/combat/critical-hit.md). Parry halves 15 to 7
+// (rule/general/always-round-down.md) and decreases the potency 3 → 2, which Might 2 resists.
+test('V179 QC1 R1: Parry can’t end a weakness a later hit already took; undoing that hit allows it', async () => {
+  const s = await setup({
+    Vane: [tacticianLedger, 'v94-tactician-3'],
+    Nul: [nullLedger, 'v103-1'],
+  });
+  const myxovidan = await s.addFoe(MYXOVIDAN);
+  const myx = `@{foe:${myxovidan}}`;
+  await s.command('/combat start');
+  await s.command('/combat commit');
+  await s.command('/combat roll', 'player');
+  await s.command('/combat first side=foes');
+  await s.command(`${myx} /turn take`);
+  const exhale = () =>
+    s.command(`${myx} /ability use ability="Expunging Exhalation" targets=[${s.ref('Nul')}]`);
+
+  await atDice(s.t, s.f.campaignId, [10, 10]);
+  const first = await exhale();
+  expect((await s.hero('Nul')).stamina).toBe(21 - 15);
+  const weakness = (await s.hero('Nul')).effectInstances!.find(
+    i => i.sourceUseEventId === first.eventId,
+  )!;
+  expect(weakness).toMatchObject({ status: 'active' });
+
+  // The additional main action: 7 corruption + weakness 3 from the first hit's instance.
+  await atDice(s.t, s.f.campaignId, [2, 2]);
+  const second = await exhale();
+  expect(await s.applied(second.eventId)).toMatchObject({ incoming: 7, weaknessApplied: 3 });
+  expect((await s.hero('Nul')).stamina).toBe(6 - 10);
+
+  const parry = async () =>
+    (await s.t.run(ctx => ctx.db.query('interactions').take(100))).find(
+      c =>
+        c.kind === 'triggered-offer' &&
+        (c.offer as { abilityName?: string; triggeringEventId?: string }).abilityName === 'Parry' &&
+        (c.offer as { triggeringEventId?: string }).triggeringEventId === first.eventId,
+    )!;
+  const card = await parry();
+  expect(card.status).toBe('awaiting-input');
+  const respond = () =>
+    s.f.player.client.mutation(api.interactions.respond, {
+      interactionId: card._id,
+      answer: {},
+      commandId: `granted-${++sequence}`,
+    });
+  // Vane's triggered actions this round, as the allowance counts them (actionUses).
+  const triggeredUsed = async () =>
+    (await s.t.run(ctx => ctx.db.query('actionUses').take(200))).filter(
+      u => u.actor.id === s.ids.Vane && u.actionType === 'triggered action',
+    ).length;
+  expect(await triggeredUsed()).toBe(0);
+
+  // Refused before any write: Stamina, the weakness, the card and Vane's allowance are unchanged.
+  await expect(respond()).rejects.toThrow(/rewind to the hit/);
+  expect((await s.hero('Nul')).stamina).toBe(-4);
+  expect((await s.hero('Nul')).effectInstances!.find(i => i.id === weakness.id)).toMatchObject({
+    status: 'active',
+  });
+  expect((await s.t.run(ctx => ctx.db.get(card._id)))!.status).toBe('awaiting-input');
+  expect(await triggeredUsed()).toBe(0);
+
+  // Undo the later hit: the reaction goes through, 21 − 7 = 14, and the weakness ends.
+  await s.command('/history undo');
+  expect((await s.hero('Nul')).stamina).toBe(6);
+  expect((await s.t.run(ctx => ctx.db.get(card._id)))!.status).toBe('awaiting-input');
+  await respond();
+  expect((await s.hero('Nul')).stamina).toBe(14);
+  expect((await s.hero('Nul')).effectInstances!.find(i => i.id === weakness.id)).toMatchObject({
+    status: 'ended',
+    endedReason: expect.stringContaining('potency reduced by 1'),
+  });
+  expect(await triggeredUsed()).toBe(1);
 });

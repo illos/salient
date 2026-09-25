@@ -151,3 +151,22 @@ Spec references:
     this worktree has no generated `public/rules-data` (`pnpm rules:ingest` not run). No rules data
     changed.
 - Journeys were not run (TESTER). Open question: Q-IW-2 in `docs/rules-questions-for-user.md`.
+- 2026-09-25, QC1 R1 (High, `review-artifacts/2026-09-25-V179-QC1.md`):
+  - **Finding:** a potency-reducing reaction ended a granted weakness after a later hit had already
+    taken it, leaving that hit's +3 standing.
+  - **Fix, refuse chosen over reconcile (Q-IW-2 point 4):** `planRevision`
+    (`convex/lib/damageRevisions.ts` `laterDamageUsing`) refuses before any write when the
+    revision would end a stored weakness or immunity. It does so if any later damage application
+    to the holder, not undone and outside the imposing hit's command, applied a weakness (or an
+    immunity) while the instance was active. A saved value is never taken as authority to keep the
+    damage. The card stays open, and the table rewinds to the hit.
+  - **Test:** `tests/app/granted-defenses.test.ts`, "V179 QC1 R1", follows QC1's ordering with
+    real dice:
+    - Myxovidan's natural 20 deals 15 plus the weakness (21 → 6).
+    - The additional main action's tier 1 deals 7 + 3 (6 → −4).
+    - Parry is refused. Stamina is −4, the weakness is active, the card is open and Vane has no
+      triggered action used.
+    - Undoing the later hit lets Parry through: 21 − 7 = 14, and the weakness ends.
+    - The immediate-Parry control is kept.
+    - Without the fix, the new case fails (the response resolves).
+

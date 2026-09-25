@@ -1800,6 +1800,15 @@ readings:
    (`parry.md`) and the potency Spend sections re-check a stored weakness the way they re-check a
    tier condition. A weakness no longer applied ends. A saving throw already rolled for it refuses
    the revision, as for conditions.
+   Later damage may already have taken the weakness, for example a crit's additional main action
+   hitting before the first hit's Parry is answered (QC1 V179 R1). The revision would then leave
+   that damage standing on a weakness it says was never imposed, so it is **refused**; the table
+   rewinds to the hit, and the card stays open. The check is conservative. Any later, not undone
+   damage to the creature that applied a weakness while the instance was active refuses it,
+   whatever the type or the source of that weakness. A later hit's saved weakness value is not
+   taken as proof the grant didn't contribute. The check reads up to 500 later log entries, and
+   more than that also refuses. Alternative (not built): reconcile, recomputing each later hit
+   without the weakness and reversing its consequences as design 5b does for the hit itself.
 5. **An unresolved stacking group makes damage manual.** Two users' Setup on one creature is left
    to the table as a V158 manual stacking group. While the group stands, the engine doesn't know
    which weakness applies, so all damage to that creature is manual. Alternative: apply the
