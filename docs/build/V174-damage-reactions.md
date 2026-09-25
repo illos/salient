@@ -108,6 +108,7 @@ Rules question: [Q-REACT-1](../rules-questions-for-user.md#q-react-1-halving-ord
 ## Work log
 
 - 2026-09-25: `slice/V174` in `.worktrees/reactions`, stacked on `slice/V173` `7ad54313`.
+  Implementation commit: `d4cd9676` (committed on the branch, not pushed).
 - Flipped to fully compiled (all without a power roll, each with its Spend section):
   - **Inertial Shield** (`feature/ability/null/level-1/inertial-shield.md`).
   - **Skin Like Castle Walls** (`feature/ability/elementalist/level-1/skin-like-castle-walls.md`).
