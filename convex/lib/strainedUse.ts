@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * V170: the user's own damage from a strained use (shared/resolve/strained.ts). Planned before the
- * use commits, so the log states it, and written after the use's other effects in printed order.
+ * use commits, so the log states it, and written after the use's other effects in printed order,
+ * against the user's pools at that point (commitStrained).
  *
  * - "You also take N damage that can't be reduced in any way": immunity does not apply (Q-RES-6,
  *   labelled interpretation shared with feature/conduit/level-1/piety.md); temporary Stamina still
@@ -25,7 +26,7 @@ import { describeStrainedBasis, type StrainedState } from '../../shared/resolve/
 import { baselineOf } from './characterBuild';
 import { rollDice } from './dice';
 import type { JournalScope } from './journal';
-import { damageTargetFacts, writeDamage, type TargetRecord } from './resolve';
+import { damageTargetFacts, writePlannedDamage, type TargetRecord } from './resolve';
 
 export interface StrainedPlan {
   state: StrainedState;
@@ -178,15 +179,25 @@ export function withStrainedPlan(
   };
 }
 
-/** Writes the user's damage in order: the 1d6 to incur the effect, then the section's own. */
+/**
+ * Writes the user's damage in order: the 1d6 to incur the effect, then the section's own. Each is
+ * planned before the use commits but taken from the user's pools as they are when it is written
+ * (QC1 train 13 R1): the use's damage to its targets can set off a watcher that damages the user
+ * first (Violence Will Not Aid Thee), and that damage stands. The amount after immunity is the
+ * planned one, so "can't be reduced" still skips immunity only (Q-STRAIN-1) and temporary Stamina
+ * still absorbs first (rule/health/temporary-stamina.md). Returns what was applied.
+ */
 export async function commitStrained(
   ctx: MutationCtx,
   scope: JournalScope,
   actor: TargetRecord,
   plan: StrainedPlan,
-): Promise<void> {
-  for (const application of [plan.incur?.application, plan.self])
-    if (application) await writeDamage(ctx, scope, actor, application);
+): Promise<{ incur?: DamageApplication; self?: DamageApplication }> {
+  const incur = plan.incur?.application
+    ? await writePlannedDamage(ctx, scope, actor, plan.incur.application)
+    : undefined;
+  const self = plan.self ? await writePlannedDamage(ctx, scope, actor, plan.self) : undefined;
+  return { ...(incur ? { incur } : {}), ...(self ? { self } : {}) };
 }
 
 function stamina(application: DamageApplication): string {

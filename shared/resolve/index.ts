@@ -447,6 +447,39 @@ export function applyDamage(
   return application;
 }
 
+/**
+ * The same damage taken from the pools as they are now. The amount after weakness and immunity is
+ * kept, since the pools don't change it. Only the pools are recomputed: temporary Stamina decreases
+ * first, then Stamina (rule/health/temporary-stamina.md). Used when damage planned before an
+ * operation's commit is written after something else in that commit changed the pools, such as a
+ * watcher's damage.
+ */
+export function reapplyDamage(
+  planned: DamageApplication,
+  pools: { stamina: number; temporaryStamina: number },
+): DamageApplication {
+  const absorbed = Math.min(pools.temporaryStamina, planned.afterImmunity);
+  const staminaDelta = planned.afterImmunity - absorbed;
+  const staminaAfter = pools.stamina - staminaDelta;
+  const application: DamageApplication = {
+    ...planned,
+    absorbedByTemporaryStamina: absorbed,
+    temporaryStaminaBefore: pools.temporaryStamina,
+    temporaryStaminaAfter: pools.temporaryStamina - absorbed,
+    staminaDelta,
+    staminaBefore: pools.stamina,
+    staminaAfter,
+    windedBefore: pools.stamina <= planned.windedValue,
+    windedAfter: staminaAfter <= planned.windedValue,
+  };
+  if (planned.slain !== undefined) application.slain = staminaAfter <= 0;
+  if (planned.dying !== undefined) {
+    application.dying = staminaAfter <= 0;
+    application.deadThresholdReached = staminaAfter <= -planned.windedValue;
+  }
+  return application;
+}
+
 /** Section 4.4: a Director-controlled creature's free strike never rolls. */
 export function resolveCreatureFreeStrike(
   request: CreatureFreeStrikeRequest,

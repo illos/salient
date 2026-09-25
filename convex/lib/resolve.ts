@@ -58,7 +58,7 @@ import type {
   SourceRef,
 } from '../../shared/contracts/rollResolution';
 import { manifest } from '../../shared/content/compendium/index';
-import { parseTierText, plainText, windedValueOf } from '../../shared/resolve/index';
+import { parseTierText, plainText, reapplyDamage, windedValueOf } from '../../shared/resolve/index';
 import { triggeredActionType } from '../../shared/resolve/triggers';
 import { findContent, requireContent } from '../content';
 import { endOwnerDyingEffects, type EffectHolder } from './effectInstances';
@@ -1042,7 +1042,7 @@ export async function writeDamage(
   ctx: MutationCtx,
   scope: JournalScope,
   target: TargetRecord,
-  application: Pick<DamageApplication, 'staminaAfter' | 'temporaryStaminaAfter'>,
+  written: Pick<DamageApplication, 'staminaAfter' | 'temporaryStaminaAfter'>,
   /** The ability use this damage belongs to, when it is a correction of that use (V142). */
   useEventId?: string,
   /**
@@ -1057,10 +1057,19 @@ export async function writeDamage(
     defer?: DamageObservation[];
     /** V173: the damage came from a melee strike (Riposte's trigger), when the use says. */
     meleeStrike?: boolean;
+    /**
+     * QC1 train 13 R1: the pools to write are computed from the creature's current pools, not the
+     * caller's absolute values (writePlannedDamage).
+     */
+    rebase?: (pools: {
+      stamina: number;
+      temporaryStamina: number;
+    }) => Pick<DamageApplication, 'staminaAfter' | 'temporaryStaminaAfter'>;
   } = {},
 ): Promise<void> {
   // V02: squad members take damage through their squad's pool (convex/lib/squads.ts commits it).
   if (target.squad) return;
+  let application = written;
   const observe = async (observation: DamageObservation) => {
     if (options.defer) options.defer.push(observation);
     else
@@ -1074,6 +1083,11 @@ export async function writeDamage(
       : undefined;
   if (target.foe) {
     const current = (await ctx.db.get(target.foe._id))!;
+    if (options.rebase)
+      application = options.rebase({
+        stamina: current.live.stamina,
+        temporaryStamina: current.live.temporaryStamina,
+      });
     await journalPatch(ctx, scope, 'foes', current._id, {
       live: {
         ...current.live,
@@ -1115,6 +1129,11 @@ export async function writeDamage(
   }
   const character = (await ctx.db.get(target.character!._id))!;
   const live: HeroLive = requireHeroLive(character);
+  if (options.rebase)
+    application = options.rebase({
+      stamina: live.stamina,
+      temporaryStamina: live.temporaryStamina,
+    });
   await journalPatch(ctx, scope, 'characters', character._id, {
     liveState: {
       ...live,
@@ -1162,6 +1181,28 @@ export async function writeDamage(
         ownedEffects: live.ownedEffects ?? [],
       },
     });
+}
+
+/**
+ * QC1 train 13 R1: writes damage planned before an operation's commit against the creature's pools
+ * as they are when it is written. The planned amount after weakness and immunity stands (it doesn't
+ * depend on the pools); temporary Stamina absorbs first (rule/health/temporary-stamina.md). Earlier
+ * writes in the same commit, such as a watcher's damage set off by an earlier target, are kept
+ * rather than overwritten. Returns what was applied; a squad member's damage goes through its pool.
+ */
+export async function writePlannedDamage(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  target: TargetRecord,
+  planned: DamageApplication,
+  options: Omit<NonNullable<Parameters<typeof writeDamage>[5]>, 'rebase'> = {},
+): Promise<DamageApplication> {
+  let applied = planned;
+  await writeDamage(ctx, scope, target, planned, undefined, {
+    ...options,
+    rebase: pools => (applied = reapplyDamage(planned, pools)),
+  });
+  return applied;
 }
 
 /** Verbatim source record for the game log (the shape web/table/index.tsx EventSource reads). */

@@ -25,9 +25,11 @@ import { parseCaptainBenefit, parsePrintedEv, proportionalEv } from '../../share
 import {
   allowanceFor,
   bindTarget,
+  changedPools,
   describeRoll,
   describeTarget,
   loadActorRecords,
+  logReappliedDamage,
   planTracking,
   recordUse,
 } from './abilityOperations';
@@ -54,6 +56,7 @@ import {
   foeSnapshot,
   supportingSource,
   writeDamage,
+  writePlannedDamage,
   type AbilityDefinition,
   type TargetRecord,
 } from './resolve';
@@ -954,8 +957,23 @@ const squadAct: OperationDefinition = {
       },
       ...(interaction ? { interaction } : {}),
       commit: async (mctx, scope) => {
-        for (const p of perTarget)
-          if (p.applied) await writeDamage(mctx, scope, p.assignment.target, p.applied);
+        // QC1 train 13 R1: each target's planned damage is taken from its current pools, so a
+        // watcher an earlier target's damage set off keeps its damage.
+        const appliedTo = new Map<string, DamageApplication>();
+        const reapplied = [];
+        for (const p of perTarget) {
+          if (!p.applied) continue;
+          const applied = await writePlannedDamage(mctx, scope, p.assignment.target, p.applied);
+          appliedTo.set(p.assignment.target.actor.id, applied);
+          if (changedPools(p.applied, applied))
+            reapplied.push({
+              name: p.assignment.target.actor.name,
+              cause: 'damage',
+              planned: p.applied,
+              applied,
+            });
+        }
+        await logReappliedDamage(mctx, scope, `${squad.name}'s ${ability.name}`, reapplied);
         await commitSquadPlans(mctx, scope, squadPlans);
         await journalInsert(mctx, scope, 'abilityResults', {
           campaignId: scope.campaignId,
@@ -977,7 +995,7 @@ const squadAct: OperationDefinition = {
             edges: p.assignment.edges,
             banes: p.assignment.banes,
             outcome: p.outcome,
-            applied: p.applied,
+            applied: appliedTo.get(p.assignment.target.actor.id) ?? p.applied,
             dispositions: [],
           })),
           manualDispositions: [],

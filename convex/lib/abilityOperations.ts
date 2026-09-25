@@ -33,6 +33,7 @@ import {
   smallerSize,
   type CompiledAbilityInput,
   type CompiledEffectOutcome,
+  type CompiledGainOutcome,
   type EffectOnlyInput,
   type EffectOnlyRecipient,
 } from '../../shared/resolve/compiledOutcome';
@@ -124,6 +125,7 @@ import {
   CREATURE_FREE_STRIKE_RULE_ID,
   supportingSource,
   writeDamage,
+  writePlannedDamage,
   ESCAPE_GRAB_ID,
   GRAB_ID,
   KNOCKBACK_ID,
@@ -870,6 +872,56 @@ async function debit(
       resource === 'recovery'
         ? { ...live, recoveries: after }
         : { ...live, heroicResource: { ...live.heroicResource, current: after } },
+  });
+}
+
+/** Whether damage written against the current pools differs from the planned write. */
+export function changedPools(planned: DamageApplication, applied: DamageApplication): boolean {
+  return (
+    planned.staminaAfter !== applied.staminaAfter ||
+    planned.temporaryStaminaAfter !== applied.temporaryStaminaAfter
+  );
+}
+
+/**
+ * QC1 train 13 R1: damage a use planned before its commit and wrote against pools an earlier write
+ * of the same commit had changed (a watcher's damage or gain). The use's entry states the planned
+ * values; this linked entry states what was applied. Nothing is logged when nothing changed.
+ */
+export async function logReappliedDamage(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  label: string,
+  reapplied: readonly {
+    name: string;
+    cause: string;
+    planned: DamageApplication;
+    applied: DamageApplication;
+  }[],
+): Promise<void> {
+  if (!reapplied.length) return;
+  const cause = (await ctx.db.get(scope.eventId))!;
+  const one = reapplied.length === 1;
+  await appendEvent(ctx, {
+    campaignId: scope.campaignId,
+    sessionId: cause.sessionId,
+    encounterId: cause.encounterId,
+    origin: 'engine',
+    commandId: cause.commandId,
+    causeEventId: scope.eventId,
+    kind: 'ability.damage-reapplied',
+    description: `${label}: an earlier effect of this use changed ${one ? 'a pool' : 'pools'} before this damage was written, so it was taken from the current pools: ${reapplied.map(r => `${r.name}, ${r.cause}: ${r.applied.afterImmunity}${r.applied.absorbedByTemporaryStamina ? ` (${r.applied.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}, Stamina ${r.applied.staminaBefore} → ${r.applied.staminaAfter} (planned ${r.planned.staminaBefore} → ${r.planned.staminaAfter})`).join('; ')}.`,
+    payload: {
+      data: {
+        useEventId: scope.eventId,
+        applications: reapplied.map(r => ({
+          name: r.name,
+          cause: r.cause,
+          planned: r.planned,
+          applied: r.applied,
+        })),
+      },
+    },
   });
 }
 
@@ -2130,16 +2182,28 @@ const abilityUse: OperationDefinition = {
           // V171: the user's watchers of their own ability use.
           await observeUse(mctx, scope, actor!, ability.keywords);
           // 2. Gains on each hero's live state (temporary Stamina keeps the greater; surges add).
+          // QC1 train 13 R1: applied to the current values, since a watcher of the use (above)
+          // may have changed them: surges add, temporary Stamina keeps the greater amount
+          // (rule/resource/surge.md, rule/health/temporary-stamina.md).
           for (const write of outcome.writes) {
             const record =
               write.id === actor!.id ? records : targets.find(t => t.actor.id === write.id)!;
             const character = (await mctx.db.get(record.character!._id))!;
             const live = requireHeroLive(character);
+            const gains = outcome.effects.filter(
+              effect =>
+                effect.kind === 'gain' &&
+                effect.status === 'applied' &&
+                effect.targetId === write.id,
+            ) as CompiledGainOutcome[];
+            const granted = gains.flatMap(g =>
+              g.temporaryStamina === undefined ? [] : [g.temporaryStamina],
+            );
             await journalPatch(mctx, scope, 'characters', character._id, {
               liveState: {
                 ...live,
-                temporaryStamina: write.temporaryStamina,
-                surges: write.surges,
+                temporaryStamina: Math.max(live.temporaryStamina, ...granted),
+                surges: live.surges + gains.reduce((sum, g) => sum + (g.surges ?? 0), 0),
               },
             });
           }
@@ -2159,12 +2223,23 @@ const abilityUse: OperationDefinition = {
             allowance.encounterId,
           );
           // V173: damage sized by the triggering damage; the user deals it.
-          for (const { record, application } of triggeredDamage)
-            await writeDamage(mctx, scope, record, application, undefined, {
+          // QC1 train 13 R1: taken from the target's current pools.
+          const reapplied = [];
+          for (const { record, application } of triggeredDamage) {
+            const applied = await writePlannedDamage(mctx, scope, record, application, {
               ...(actor!.kind === 'character' || actor!.kind === 'foe'
                 ? { dealer: { kind: actor!.kind, id: actor!.id, name: actor!.name } }
                 : {}),
             });
+            if (changedPools(application, applied))
+              reapplied.push({
+                name: record.actor.name,
+                cause: 'damage',
+                planned: application,
+                applied,
+              });
+          }
+          await logReappliedDamage(mctx, scope, `${actor!.name}'s ${ability.name}`, reapplied);
           // V171: watchers become watcher effect instances on each subject.
           const watcherIds = await commitWatchers(
             mctx,
@@ -2334,25 +2409,30 @@ const abilityUse: OperationDefinition = {
         commit: async (mctx, scope) => {
           // V171: the user's watchers of their own ability use and strike.
           await observeUse(mctx, scope, actor!, ability.keywords);
-          if (application)
-            await writeDamage(
-              mctx,
-              scope,
-              target,
-              application,
-              undefined,
-              actor!.kind === 'character' || actor!.kind === 'foe'
-                ? {
-                    dealer: { kind: actor!.kind, id: actor!.id, name: actor!.name },
-                    // V173: a hero's Melee Weapon Free Strike is a melee strike; a creature's free
-                    // strike doesn't say whether it was melee.
-                    ...(ability.keywords.some(k => /^melee$/i.test(plainText(k))) &&
-                    ability.keywords.some(k => /^strike$/i.test(plainText(k)))
-                      ? { meleeStrike: true }
-                      : {}),
-                  }
-                : {},
-            );
+          // QC1 train 13 R1: a watcher of the use (above) may have changed the target's pools.
+          const applied = application
+            ? await writePlannedDamage(
+                mctx,
+                scope,
+                target,
+                application,
+                actor!.kind === 'character' || actor!.kind === 'foe'
+                  ? {
+                      dealer: { kind: actor!.kind, id: actor!.id, name: actor!.name },
+                      // V173: a hero's Melee Weapon Free Strike is a melee strike; a creature's free
+                      // strike doesn't say whether it was melee.
+                      ...(ability.keywords.some(k => /^melee$/i.test(plainText(k))) &&
+                      ability.keywords.some(k => /^strike$/i.test(plainText(k)))
+                        ? { meleeStrike: true }
+                        : {}),
+                    }
+                  : {},
+              )
+            : undefined;
+          if (application && applied && changedPools(application, applied))
+            await logReappliedDamage(mctx, scope, `${actor!.name}'s ${ability.name}`, [
+              { name: target.actor.name, cause: 'damage', planned: application, applied },
+            ]);
           await commitSquadPlans(mctx, scope, strikePlans);
           await recordUse(mctx, scope, allowance, actor!, 'main action', ability.name, tracking);
           await clear(mctx);
@@ -2671,9 +2751,16 @@ const abilityUse: OperationDefinition = {
                 meleeStrike,
               }
             : {};
+        // QC1 train 13 R1: each target's planned damage is taken from its pools as they are when
+        // it is written, so a watcher an earlier write set off keeps its damage.
+        const appliedTo = new Map<string, DamageApplication>();
         for (const p of perTarget) {
           const record = targets.find(t => sameActor(t.actor, p.target))!;
-          if (p.applied) await writeDamage(mctx, scope, record, p.applied, undefined, dealer);
+          if (p.applied)
+            appliedTo.set(
+              p.target.id,
+              await writePlannedDamage(mctx, scope, record, p.applied, dealer),
+            );
         }
         await commitSquadPlans(mctx, scope, squadPlans);
         if (grabPlan)
@@ -2751,7 +2838,53 @@ const abilityUse: OperationDefinition = {
             allowance.encounterId,
           );
         // V170: the user's own damage from a strained use, after the use's other effects.
-        if (strainedPlan) await commitStrained(mctx, scope, records, strainedPlan);
+        const strainedApplied = strainedPlan
+          ? await commitStrained(mctx, scope, records, strainedPlan)
+          : undefined;
+        // QC1 train 13 R1: when an earlier write changed a pool this use planned to damage, the
+        // use's entry states the planned values; a linked entry states what was applied, and the
+        // saved result below keeps the applied values.
+        const reapplied = [
+          ...perTarget.flatMap(p => {
+            const applied = appliedTo.get(p.target.id);
+            return p.applied && applied && changedPools(p.applied, applied)
+              ? [{ name: p.target.name, cause: 'damage', planned: p.applied, applied }]
+              : [];
+          }),
+          ...(strainedPlan?.incur?.application &&
+          strainedApplied?.incur &&
+          changedPools(strainedPlan.incur.application, strainedApplied.incur)
+            ? [
+                {
+                  name: actor!.name,
+                  cause: 'damage to incur the strain',
+                  planned: strainedPlan.incur.application,
+                  applied: strainedApplied.incur,
+                },
+              ]
+            : []),
+          ...(strainedPlan?.self &&
+          strainedApplied?.self &&
+          changedPools(strainedPlan.self, strainedApplied.self)
+            ? [
+                {
+                  name: actor!.name,
+                  cause: "Strained damage that can't be reduced",
+                  planned: strainedPlan.self,
+                  applied: strainedApplied.self,
+                },
+              ]
+            : []),
+        ];
+        await logReappliedDamage(mctx, scope, `${actor!.name}'s ${ability.name}`, reapplied);
+        const appliedEffects = (effects: CompiledEffectOutcome[]): CompiledEffectOutcome[] =>
+          effects.map(effect =>
+            effect.kind === 'damage' && effect.application && appliedTo.has(effect.targetId)
+              ? { ...effect, application: appliedTo.get(effect.targetId)! }
+              : effect.kind === 'strained' && effect.selfApplication && strainedApplied?.self
+                ? { ...effect, selfApplication: strainedApplied.self }
+                : effect,
+          );
         // 3. The effective record for corrections and dispositions.
         await journalInsert(mctx, scope, 'abilityResults', {
           campaignId: scope.campaignId,
@@ -2768,7 +2901,11 @@ const abilityUse: OperationDefinition = {
                   inputs: resolutionInput,
                   revision: scope.eventId,
                   effects: markManual(
-                    effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+                    effectOccurrences(
+                      scope.eventId,
+                      scope.eventId,
+                      appliedEffects(compiledOutcome.effects),
+                    ),
                     new Set([...manualIds, ...watcherIds]),
                   ),
                 } satisfies CompiledResult,
@@ -2789,7 +2926,7 @@ const abilityUse: OperationDefinition = {
             banes: p.banes,
             ...(p.contributions ? { contributions: p.contributions } : {}),
             outcome: p.outcome,
-            applied: p.applied,
+            applied: (p.applied && appliedTo.get(p.target.id)) ?? p.applied,
             dispositions: [],
           })),
           manualDispositions: [],

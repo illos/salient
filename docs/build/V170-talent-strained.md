@@ -123,3 +123,42 @@ Rules question: [Q-STRAIN-1](../rules-questions-for-user.md#q-strain-1-how-a-str
     `character-v105-talent`, `character-v136-talent-three`, `character-v160-talent-resource-note`,
     `compiled-ability`, `effect-riders` and `tests/app/modifiers`.
 - Committed on `slice/V170` as `3d75770`; not pushed. Next: TESTER gate, then independent review.
+- 2026-09-25: QC1 train 13 **R1** (High) fixed: Strained self-damage overwrote watcher damage.
+  - Cause: `ability.use` planned the user's Strained damage from its record before the use, and
+    `commitStrained` wrote those absolute pools after the target damage. That damage can fire a
+    `damage-dealt` watcher on the user first (Violence Will Not Aid Thee), whose damage was then
+    erased while its firing record stayed.
+  - Fix: `writePlannedDamage` (`convex/lib/resolve.ts`) with `reapplyDamage`
+    (`shared/resolve/index.ts`). Planned damage is written against the creature's pools as they are at
+    the write. The amount after weakness and immunity is the planned one, so Q-STRAIN-1 ("can't be
+    reduced" skips immunity only) and weakness are unchanged. Temporary Stamina absorbs first
+    (`rule/health/temporary-stamina.md`). `commitStrained` uses it for the 1d6 to incur and the
+    section's own damage, and returns what was applied.
+  - Record: the saved result holds the applied values: `targets[].applied`, compiled `damage`
+    applications and the Strained `selfApplication`. The use's own log entry was written before the
+    commit and keeps the planned values. When a write differs from the plan, a linked
+    `ability.damage-reapplied` entry states the applied and planned Stamina. Everything is written
+    in the use's journal scope, so undo restores the pools and the watcher's firing record together.
+  - Other preplanned pool writes in the chain, inspected:
+    - `ability.use` target damage: could be changed by an earlier target's watcher or an
+      `ability-used` watcher. Fixed the same way.
+    - The free-strike path of `ability.use`: `observeUse` runs before its damage. Fixed the same
+      way.
+    - The effect-only path: its temporary Stamina and surge gains were absolute values written after
+      `observeUse`. They are now applied to the current values (surges add, the greater temporary
+      Stamina is kept). Feedback Loop's triggered damage uses `writePlannedDamage`.
+    - `squad.act` targets (`squadOperations.ts`): one target's `damage-taken` watcher can damage
+      another. Fixed the same way.
+    - Safe, with reasons:
+      - The fixed-cost debit is the commit's first write, and it re-reads the record.
+      - The squad free strike is a single write with nothing before it in its commit.
+      - Squad pools: a watcher never writes one, because `recordOf` refuses squad members.
+      - The clock's strain and prayer damage (`clock.ts`) and a watcher's own damage are computed
+        from a fresh read just before the write.
+      - A correction's write is computed at execution from current pools, and a use that set off a
+        firing refuses corrections.
+  - Test: `tests/app/watcher-interactions.test.ts` runs a Talent and a Conduit through registered
+    operations with dice fixed. Violence Will Not Aid Thee is on the Talent, whose Mind Spike at
+    clarity −1 goes 20 → 13 → 11. The test checks the saved `selfApplication`, the linked entry,
+    undo and redo with the firing record, and a temporary Stamina 8 case (7 then 2: temporary 0,
+    Stamina 19). The test fails without the fix: the Talent ends at 18.
