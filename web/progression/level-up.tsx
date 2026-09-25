@@ -239,7 +239,8 @@ function LevelUp({
         items: [],
         index: position,
         children: [],
-        done: problems === 0 && decided > 0,
+        // Not done until the current choices are evaluated (no credit from a kept result).
+        done: !!fresh && problems === 0 && decided > 0,
         passed: stepIndex > position,
       };
     }),
@@ -380,7 +381,10 @@ function LevelUp({
           )}
           {message && <Notice role="status">{message}</Notice>}
           {!onReview && current && (
-            <section className="flex flex-col gap-5 rounded-lg bg-card p-6">
+            <section
+              className="flex flex-col gap-5 rounded-lg bg-card p-6"
+              aria-label="Level-up step"
+            >
               <h2 className="m-0">{rail[stepIndex]!.name}</h2>
               <fieldset disabled={blocked} className="m-0 min-w-0 space-y-5 border-0 p-0">
                 <legend className="sr-only">Level {targetLevel} choices</legend>
@@ -504,7 +508,8 @@ function LevelUp({
                 {command.pending ? 'Saving…' : 'Save choices'}
               </Button>
             }
-            evaluation={evaluation}
+            // While loading, show the kept build without its outdated outstanding choices.
+            evaluation={fresh ?? (latest ? { ...latest, diagnostics: {} } : undefined)}
             heroName={heroName}
             sourceReference={REFERENCE}
           />
