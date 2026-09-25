@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V181 | `bd4f0cc` | Merged; backend/frontend published; accepted gates reused | complete |
 | V09 | `1118489` | Merged in train 12; backend/frontend published; gate and headless at tip | complete |
 | V180 | `1118489` | Merged in train 12; backend/frontend published; gate and headless at tip | complete |
 | V164 | `6686fbe` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -797,3 +798,16 @@ but held back: its level-up preview shows the hero as pending.
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/train12-release-1118489`.
+
+### V181 level-up dependent choices publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `bd4f0cca6fe13ebec0970d0a63f347af7c4dc5a9` into main.
+- Full gate at the tip (261 s, 456 engine and 788 app tests).
+- `level-up` and `lifecycle` journeys at the tip; the level-up browser capture reached all five screens, with the hero panel showing the Devil Fury (Berserker) at level 2 (test-artifacts/V181-bd4f0cc/capture).
+- Independent rules review passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `6371fbe2-18a0-4c93-8e05-e69de06273a9`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V181-release-bd4f0cc`.

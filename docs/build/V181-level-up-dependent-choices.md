@@ -26,3 +26,9 @@ choices now appears on its parent's step, directly under it, as the wizard shows
   ESLint, Prettier.
 - Independent review PASS (2026-09-24): no independent level 2–3 choices merge (the only same-level link, Conduit domain abilities, is automatic).
 - Test-Deploy capture (train 12): all five screens, but the perk screenshot caught the hero panel "Pending" while the new evaluation loaded; the level-up screen now keeps the last result meanwhile, and the spec waits for the evaluated panel. The spec's live-state check still expected Stamina 20; it now carries damage and Recoveries spent (Q-CHAR-2 revised: 29/39).
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `bd4f0cc` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `6371fbe2-18a0-4c93-8e05-e69de06273a9`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V181-release-bd4f0cc`.

@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — train 12 (V180, V09 part a)
+## Current release — V181 level-up dependent choices
+
+Backend/frontend source `bd4f0cca6fe13ebec0970d0a63f347af7c4dc5a9` published on 2026-09-25 as
+Worker `6371fbe2-18a0-4c93-8e05-e69de06273a9`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V181](build/V181-level-up-dependent-choices.md) and
+the [ledger](../deploy.md).
+
+## Previous release — train 12 (V180, V09 part a)
 
 Backend/frontend source `111848900476d623577b8d3552c7ef8d4d2f3d17` published on 2026-09-25 as
 Worker `74d47264-33a5-44ce-a544-73c36de159c4`: the headless journey split and the Forge character import. Backend and schema
@@ -123,52 +130,52 @@ reseed was needed. See the [ledger](../deploy.md).
 
 ## Previous release — V164 level-up screen
 
-Backend/frontend source `6686fbee51df636ba590546088e457288678fe4f` published on 2026-09-24 as
+Backend/frontend source `6686fbee51df636ba590546088e457288678fe4f` published on 2026-09-25 as
 Worker `0b1c92f9-495a-4ad9-bcfc-9d43a57191f8`. Backend and schema validation, the hosted build and the upload succeeded.
 Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V164](build/V164-level-up-screen.md) and
 the [ledger](../deploy.md).
 
 ## Previous release — V167 respite table controls and V169 Rapid Processing
 
-Backend/frontend source `59b890c21fd7b8e1d53ce7d70478873502b82b7f` published on 2026-09-24 as
+Backend/frontend source `59b890c21fd7b8e1d53ce7d70478873502b82b7f` published on 2026-09-25 as
 Worker `089b650b-6979-4377-9527-34bf19876d72`. Backend and schema validation, the hosted build and the upload succeeded. Content
 remains the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
 
 ## Previous release — V157 abilities without a power roll and V158 effect instances
 
-Backend/frontend source `6632e95def1e4797c504e3ab79a51fb9bc3d29b2` published on 2026-09-24 as
+Backend/frontend source `6632e95def1e4797c504e3ab79a51fb9bc3d29b2` published on 2026-09-25 as
 Worker `c594c5db-1402-41a2-b460-d3efe7352912`. Backend and schema validation, the hosted build and the upload succeeded. Content
 remains the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
 
 ## Previous release — V168 Field Arsenal kit lock during respite
 
-Backend/frontend source `79fc25f401ec2c9a1e467396cd772a660fec2138` published on 2026-09-24 as
+Backend/frontend source `79fc25f401ec2c9a1e467396cd772a660fec2138` published on 2026-09-25 as
 Worker `d48f300d-6adb-45aa-8841-74446a53ffa9`. Backend and schema validation, the hosted build and the upload succeeded.
 Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V168](build/V168-field-arsenal-lock.md) and
 the [ledger](../deploy.md).
 
 ## Previous release — V165 respite loop and V166 respite activities
 
-Backend/frontend source `1811a3f030bccb39290d02fcb77095a33f202803` published on 2026-09-24 as
+Backend/frontend source `1811a3f030bccb39290d02fcb77095a33f202803` published on 2026-09-25 as
 Worker `d2a08201-500d-4593-8405-21075ed16284`. Backend and schema validation, the hosted build and the upload succeeded. Content
 remains the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
 
 ## Previous release — train 8 (V155, V156)
 
-Backend/frontend source `d266437b69f2f2f1c16693e547eda6f004a81c71` published on 2026-09-24 as
+Backend/frontend source `d266437b69f2f2f1c16693e547eda6f004a81c71` published on 2026-09-25 as
 Worker `dd30feb0-bf87-4f0d-b420-03b67b68cced`: can't-stand and the Shadow insight edge discount. Backend and schema validation, the
 hosted build and the upload succeeded. Content remains the 1881-entry snapshot, so no reseed was
 needed. See the [ledger](../deploy.md).
 
 ## Previous release — V162 current values and V163 level-up
 
-Backend/frontend source `b724eea9fc51a9c613aaa96b4b424aa1c8908456` published on 2026-09-24 as
+Backend/frontend source `b724eea9fc51a9c613aaa96b4b424aa1c8908456` published on 2026-09-25 as
 Worker `ea49dd4d-0946-43ce-8e65-25bb1c7f270d`. Backend and schema validation, the hosted build and the upload succeeded. Content
 remains the 1881-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
 
 ## Previous release — train 7 (V152, V153, V154, V160)
 
-Backend/frontend source `4b8779941ac57ad766f78b956d513faa6e9553ec` published on 2026-09-24 as
+Backend/frontend source `4b8779941ac57ad766f78b956d513faa6e9553ec` published on 2026-09-25 as
 Worker `bde8df86-9a57-4299-87f1-b6b564085f9f`: table-work effect riders, compound tier conditions and tier instructions (143 compiled
 abilities), and the Talent resource note. Backend and schema validation, the hosted build and the
 upload succeeded. Content remains the 1881-entry snapshot, so no reseed was needed. See the
@@ -176,21 +183,21 @@ upload succeeded. Content remains the 1881-entry snapshot, so no reseed was need
 
 ## Previous release — V151 follow-up actions and V138 Summoner levels two and three
 
-Backend/content/frontend source `b0f7c53f52b48b64b3442d90672d725d891da330` published on 2026-09-24 as
+Backend/content/frontend source `b0f7c53f52b48b64b3442d90672d725d891da330` published on 2026-09-25 as
 Worker `5aee5766-b59e-4552-a208-839d72d73dbb`. Backend and schema validation, the content reseed (1881 entries at `fb83a789`), the
 hosted build and the upload succeeded. The tip passed the full gate and headless journeys before
 merge, with no smoke test. See the [ledger](../deploy.md).
 
 ## Previous release — party read-limit fix
 
-Backend/frontend source `9240044e4be4516ac13cf798670b3c6e6f901bb1` published on 2026-09-24 as
+Backend/frontend source `9240044e4be4516ac13cf798670b3c6e6f901bb1` published on 2026-09-25 as
 Worker `509f7b29-b09f-46ce-838a-0e7de40c2865`: combat commit and finish read each hero once, keeping large parties under Convex's
 per-function read limit. Backend and schema validation, the hosted build and the upload succeeded.
 Content remains the 1852-entry snapshot, so no reseed was needed. See the [ledger](../deploy.md).
 
 ## Previous release — resource train 4 (V144, V147, V149, V148)
 
-Backend/frontend source `71a3fa5053e753ef98f380f90f9faae52d0a0023` published on 2026-09-24 as
+Backend/frontend source `71a3fa5053e753ef98f380f90f9faae52d0a0023` published on 2026-09-25 as
 Worker `e7cd0093-3a28-400a-8853-df89561e8a77`: automatic Null, Conduit, Troubadour and Elementalist heroic resources, completing all
 eleven classes. Backend and schema validation, the hosted build and the upload succeeded. Content
 remains the 1852-entry snapshot, so no reseed was needed. The tip passed the full gate and headless
@@ -198,7 +205,7 @@ journeys before merge, with no smoke test. See the [ledger](../deploy.md).
 
 ## Previous release — resource train 3 (V141, V143, V146, V142)
 
-Backend/frontend source `7e9f7317088f6db0c8b93750d4a790eeb4607aa0` published on 2026-09-24 as
+Backend/frontend source `7e9f7317088f6db0c8b93750d4a790eeb4607aa0` published on 2026-09-25 as
 Worker `35639817-fb01-4132-9428-728b6512c8ec`: automatic Summoner, Beastheart, Talent and Fury heroic resources. Backend and schema
 validation, the hosted build and the upload succeeded. Content remains the 1852-entry snapshot, so no
 reseed was needed. The tip passed the full gate and headless journeys before merge, with no smoke
@@ -206,7 +213,7 @@ test. See the [ledger](../deploy.md).
 
 ## Previous release — merge train 2 (V134, V136, V137)
 
-Backend/content/frontend source `ca5f562bb0eee8e7e84984c976d76d483b53d959` published on 2026-09-24 as
+Backend/content/frontend source `ca5f562bb0eee8e7e84984c976d76d483b53d959` published on 2026-09-25 as
 Worker `d097d610-cf1f-4dcd-8ce5-9096cfd765b2`: Conduit, Talent and Beastheart levels two and three. Backend and schema validation,
 the content reseed (1852 entries at `fb83a789`), the hosted build and the upload succeeded. The tip
 passed the full gate and headless journeys before merge, with no smoke test. See the
@@ -214,7 +221,7 @@ passed the full gate and headless journeys before merge, with no smoke test. See
 
 ## Previous release — merge train 1 (V135, V140, V145)
 
-Backend/content/frontend source `764695471245f02c56ae579adb42dd12fe1375d9` published on 2026-09-24 as
+Backend/content/frontend source `764695471245f02c56ae579adb42dd12fe1375d9` published on 2026-09-25 as
 Worker `5224599e-bc2e-40c5-9330-546ea0feae12`: V135 Elementalist levels two and three, V140 Tactician focus generation and V145
 Censor wrath generation. Backend and schema validation, the content reseed (1775 entries at
 `fb83a789`), the hosted build and the upload succeeded. The combined tree passed the full gate and
@@ -222,14 +229,14 @@ headless journeys before merge, with no smoke test. See the [ledger](../deploy.m
 
 ## Previous release — V150 Self-Taught forgo
 
-Backend/frontend source `fad564fc6cd877031b501ef08b9771af2456f878` published on 2026-09-24 as
+Backend/frontend source `fad564fc6cd877031b501ef08b9771af2456f878` published on 2026-09-25 as
 Worker `e6b75c20-07d3-4d41-bc8c-d75576303b1d`. Backend and schema validation, the hosted build and the upload succeeded.
 Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V150](build/V150-self-taught-forgo.md) and
 the [ledger](../deploy.md).
 
 ## Previous release — V133 Null levels two and three
 
-Backend/content/frontend source `b99b951784bd235b16174f507a8144929e89d262` published on 2026-09-24 as
+Backend/content/frontend source `b99b951784bd235b16174f507a8144929e89d262` published on 2026-09-25 as
 Worker `99cbb3c1-fad8-4f35-8715-1c94905601b6`. Backend and schema validation, the content reseed (1751 entries at
 `fb83a789`), the hosted build and the upload succeeded. The combined V133 and V120 tip passed the
 full gate and headless journeys before merge, with no smoke test. See
@@ -237,7 +244,7 @@ full gate and headless journeys before merge, with no smoke test. See
 
 ## Previous release — V120 heroic resource generation engine
 
-Backend/frontend source `f3acd97ce5a58c8a68df3d52e04a9852673ce4a1` published on 2026-09-24 as
+Backend/frontend source `f3acd97ce5a58c8a68df3d52e04a9852673ce4a1` published on 2026-09-25 as
 Worker `3d6cb3e2-2c3c-4cec-8d5c-83ec1a5c4a73`. Backend and schema validation, the hosted build and the upload succeeded. Content
 remains the 1732-entry snapshot, so no reseed was needed. Accepted TESTER results were reused, with
 no smoke test or rerun. See [V120](build/V120-heroic-resource-engine.md) and the
@@ -245,7 +252,7 @@ no smoke test or rerun. See [V120](build/V120-heroic-resource-engine.md) and the
 
 ## Previous release — V132 Troubadour levels two and three
 
-Backend/content/frontend source `c3f9e353432a274ce7c7f22b5db734ef6e18bfc7` published on 2026-09-24 as
+Backend/content/frontend source `c3f9e353432a274ce7c7f22b5db734ef6e18bfc7` published on 2026-09-25 as
 Worker `1d9acb09-8147-4839-911e-bbb6664df299`. Backend and schema validation, the content reseed (1732 entries at
 `fb83a789`), the hosted build and the upload succeeded. Accepted TESTER results were reused, with
 no smoke test or rerun. See [V132](build/V132-troubadour-level-three.md) and the
@@ -253,7 +260,7 @@ no smoke test or rerun. See [V132](build/V132-troubadour-level-three.md) and the
 
 ## Previous release — V117 Censor levels two and three
 
-Backend/content/frontend source `2dcbf978bbf763825c71e5a4a598963f1cbab52f` published on 2026-09-24 as
+Backend/content/frontend source `2dcbf978bbf763825c71e5a4a598963f1cbab52f` published on 2026-09-25 as
 Worker `18bbb949-22f5-4349-8083-305f3b96defa`. Backend and schema validation, the content reseed (1708 entries at
 `fb83a789`), the hosted build and the upload succeeded. The combined V117 and V119 tip passed the
 full gate and headless journeys before merge, with no smoke test. See
@@ -261,14 +268,14 @@ full gate and headless journeys before merge, with no smoke test. See
 
 ## Previous release — V119 grabs, Escape Grab and Stand Up
 
-Backend/frontend source `3c02939f3b71bec8a4a80427ddd971e72a972087` published on 2026-09-24 as
+Backend/frontend source `3c02939f3b71bec8a4a80427ddd971e72a972087` published on 2026-09-25 as
 Worker `28a58465-a6d3-4879-93d6-72dcc190d2ca`. Backend and schema validation, the hosted build and the upload succeeded. Content
 remains the 1687-entry snapshot, so no reseed was needed. Accepted TESTER results were reused, with
 no smoke test or rerun. See [V119](build/V119-grab-lifecycle.md) and the [ledger](../deploy.md).
 
 ## Previous release — V115 kit bonus correctness and known condition immunity
 
-Backend/frontend source `4cc7f3175b0d4557783b47f3ce7189cd21126694` published on 2026-09-24 as
+Backend/frontend source `4cc7f3175b0d4557783b47f3ce7189cd21126694` published on 2026-09-25 as
 Worker `690a35fd-e0b8-4b32-86f8-049f6dddb099`. Backend and schema validation, the hosted build and the upload succeeded. Content
 remains the 1687-entry snapshot, so no reseed was needed. Accepted TESTER results were reused, with
 no smoke test or rerun. See [V115](build/V115-kit-bonus-correctness.md) and the
@@ -276,7 +283,7 @@ no smoke test or rerun. See [V115](build/V115-kit-bonus-correctness.md) and the
 
 ## Previous release — V116 Tactician levels two and three
 
-Backend/content/frontend source `3175606b82eb0f8505c480a08a997e96b7e35d02` published on 2026-09-24 as
+Backend/content/frontend source `3175606b82eb0f8505c480a08a997e96b7e35d02` published on 2026-09-25 as
 Worker `d603e11b-f449-4f84-88fa-daf498a8ddd6`. Backend and schema validation, the content reseed (1687 entries at
 `fb83a789`), the hosted build and the upload succeeded. Accepted TESTER results were reused, with
 no smoke test or rerun. See [V116](build/V116-tactician-level-three.md) and the
@@ -284,14 +291,14 @@ no smoke test or rerun. See [V116](build/V116-tactician-level-three.md) and the
 
 ## Previous release — V114 Fury levels two and three
 
-Backend/content/frontend source `3aa24aed75ec7b33db94dabf8ab0690a678f9298` published on 2026-09-24 as
+Backend/content/frontend source `3aa24aed75ec7b33db94dabf8ab0690a678f9298` published on 2026-09-25 as
 Worker `283ae7db-6658-40c3-9007-d02a79ad9978`. Backend and schema validation, the content reseed (1669 entries at
 `fb83a789`), the hosted build and the upload succeeded. Accepted TESTER results were reused, with
 no smoke test or rerun. See [V114](build/V114-fury-level-three.md) and the [ledger](../deploy.md).
 
 ## Previous release — V113 compiled tier forced movement, EoT and prone conditions
 
-Backend/frontend source `bd6e8e4d85a00072a0f1f318b26b14269969ca07` published on 2026-09-24 as
+Backend/frontend source `bd6e8e4d85a00072a0f1f318b26b14269969ca07` published on 2026-09-25 as
 Worker `5d0f8637-0103-430d-b260-6b29072da6c2`. Backend and schema validation, the hosted build and
 the upload succeeded. Content remains the 1654-entry snapshot, so no reseed was needed. Accepted
 TESTER results were reused, with no smoke test or rerun. See
@@ -299,7 +306,7 @@ TESTER results were reused, with no smoke test or rerun. See
 
 ## Previous release — V110 compiled multi-target and area abilities
 
-Backend/frontend source `2921a57f994f6ce2b3da2713123967b69a33c6ae` published on 2026-09-24 as
+Backend/frontend source `2921a57f994f6ce2b3da2713123967b69a33c6ae` published on 2026-09-25 as
 Worker `ed93b686-8a97-4cd9-9eed-7e38d6fc4012`. Backend and schema validation, the hosted build and
 the upload succeeded. Content remains the 1654-entry snapshot, so no reseed was needed. Accepted
 TESTER results were reused, with no smoke test or rerun. See
