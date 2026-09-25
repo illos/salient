@@ -353,6 +353,17 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
               assert.equal(outcome.damage?.damageType, 'fire', name);
               assert.equal(outcome.damage?.rolledDamage, damage, name);
               assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
+            } else if (name === 'Breath of Dawn Remembered') {
+              // V202: a compiled turn-start and damage response persists as ability.use. "The
+              // target can spend a Recovery" is table work
+              // (feature/ability/elementalist/level-1/breath-of-dawn-remembered.md).
+              assert.equal(persisted?.kind, 'ability.use', name);
+              assert.equal(persisted?.payload?.data?.ability?.name, name);
+              assert.deepEqual(
+                withoutResource(after.liveState),
+                withoutResource(before.liveState),
+                `${name} target unchanged`,
+              );
             } else if (name === 'Skin Like Castle Walls') {
               // V174: a compiled damage-changing response persists as ability.use. Used by hand there is
               // no triggering hit to revise, so its effect is left to the table and the target is unchanged.

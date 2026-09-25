@@ -227,6 +227,10 @@ test('V72 availability follows current grants and loading, not catalog presence'
       '"Ballad of the Beast"',
       'Revitalizing Limerick',
       '"Fire Up the Night"',
+      // V202: triggered actions offered at the clock's turn start and turn end (effect-only).
+      'My Life for Yours',
+      'Breath of Dawn Remembered',
+      'Hesitation Is Weakness',
     ].sort(),
   );
   expect(
@@ -239,12 +243,12 @@ test('V72 availability follows current grants and loading, not catalog presence'
 
 // V157: the seven effect-only abilities, V159's Squad! On Me!, V171's Blessing of Insight and V173's
 // Feedback Loop and Riposte, V174's six damage-changing responses, V175's Mark, Hit 'Em Hard!
-// and Stay Strong and Focus!, and V200's two auras and three performances are counted; no foe
-// ability is effect-only.
+// and Stay Strong and Focus!, V200's two auras and three performances, and V202's three
+// turn-boundary responses are counted; no foe ability is effect-only.
 test('V157 effect-only abilities are counted in the live report', () => {
   const report = liveCompiledSupportReport();
   const effectOnly = report.entries.filter(e => e.live === 'compiled' && e.effectOnly);
-  expect(report.liveCounts.compiledEffectOnly).toBe(25);
+  expect(report.liveCounts.compiledEffectOnly).toBe(28);
   expect(effectOnly.every(e => e.context.corpus === 'hero-standalone')).toBe(true);
 });
 

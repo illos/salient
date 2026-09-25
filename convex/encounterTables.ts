@@ -108,6 +108,25 @@ export const encounterTables = {
     ),
     /** Monotonic enqueue counter for clock registrations. */
     registrationSeq: v.optional(v.number()),
+    /**
+     * V202: an accepted response let `actorId` take their turn after the hero whose turn
+     * `afterTurnId` ended (Hesitation Is Weakness). The next individual turn start consumes it:
+     * that creature's turn records it as `startedBy`; anyone else's turn start clears it.
+     */
+    turnAfter: v.optional(
+      v.union(
+        v.null(),
+        v.object({
+          actorId: v.string(),
+          actorName: v.string(),
+          afterTurnId: v.id('turns'),
+          afterName: v.string(),
+          useEventId: v.id('events'),
+          sourcePath: v.string(),
+          abilityName: v.string(),
+        }),
+      ),
+    ),
   })
     .index('by_campaign', ['campaignId'])
     .index('by_session', ['sessionId']),

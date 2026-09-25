@@ -319,6 +319,13 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
                   name,
                 );
               }
+            } else if (name === 'My Life for Yours') {
+              // V202: a compiled turn-start and damage response persists as ability.use. Its
+              // Recovery and healing are table work (feature/ability/censor/level-1/
+              // my-life-for-yours.md), so the target is unchanged.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              assert.equal(persisted?.payload?.data?.ability?.name, name);
+              assert.deepEqual(after.liveState, before.liveState, `${name} target unchanged`);
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);

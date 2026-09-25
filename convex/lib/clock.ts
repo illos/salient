@@ -58,6 +58,7 @@ import { applyDamage, saveSucceeds } from '../../shared/resolve/index';
 import { statModifiers, type StatContribution } from '../../shared/resolve/modifiers';
 import { damageTargetFacts, writeDamage } from './resolve';
 import { fireClockWatcher } from './watchers';
+import { offerForBoundary } from './triggeredActions';
 import { maintainPerformance } from './areas';
 
 export type Registration = Doc<'clockRegistrations'>;
@@ -1088,6 +1089,11 @@ export async function dispatchBoundary(
     .filter(row => (row.work as ScheduledWorkKind).kind === 'saving-throw')
     .filter(row => isDue(row.timing as TimingClause, event));
   for (const registration of saves) await fireOne(registration, 'saves');
+  // V202: triggered actions whose Trigger is this turn boundary are offered on the boundary's entry
+  // after its ordinary and save work, so a holder or target that work changed is judged as it now
+  // stands (docs/build/V202-turn-trigger-offers.md).
+  if (event.kind === 'turn-start' || event.kind === 'turn-end')
+    await offerForBoundary(ctx, scope, encounterId, event, boundaryEventId);
   if (event.kind === 'combat-end') {
     // Unscheduling below writes heroes' condition instances directly.
     knownHeroes?.clear();

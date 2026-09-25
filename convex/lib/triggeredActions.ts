@@ -27,10 +27,12 @@ import {
   triggerEligibility,
   triggerTarget,
   triggerTargetFor,
+  triggerTargetForTurn,
   type TriggerCreature,
   type TriggerEligibilityInput,
   type TriggerSpec,
 } from '../../shared/resolve/triggers';
+import type { BoundaryEvent } from '../../shared/contracts/clock';
 import { baselineOf } from './characterBuild';
 import { committedEncounter } from './encounters';
 import { appendEvent } from './events';
@@ -51,10 +53,19 @@ export interface TriggerOffer {
   actionType: 'triggered action' | 'free triggered action';
   trigger: TriggerSpec;
   target: BoundActor;
-  /** The log entry whose damage set the trigger off. */
+  /** The log entry whose damage set the trigger off (V202: the clock's boundary entry). */
   triggeringEventId: Id<'events'>;
-  /** The triggering damage: Stamina and temporary Stamina lost, after immunity and weakness. */
+  /**
+   * The triggering damage: Stamina and temporary Stamina lost, after immunity and weakness. 0 for
+   * a V202 turn boundary, which has no damage.
+   */
   damage: number;
+  /** V202: the turn boundary that set the trigger off, and whose turn it was. */
+  boundary?: { kind: 'turn-start' | 'turn-end'; turnId: Id<'turns'>; creature: BoundActor };
+  /** V202: the response has its user take their turn after the triggering hero. */
+  takesTurn?: boolean;
+  /** V202: the optional Spend section of a response that doesn't revise damage. */
+  spend?: NonNullable<OfferRevision['spend']>;
   /** V174: the creature that took the triggering damage (the target of a damage-taken response). */
   damaged?: BoundActor;
   /**
@@ -105,6 +116,27 @@ function offerRevision(definition: CompiledAbility): OfferRevision | undefined {
   };
 }
 
+/**
+ * V202: the optional Spend section of a response whose effect is table work (no revision), for the
+ * card's "Accept and spend".
+ */
+function offerSpend(definition: CompiledAbility): TriggerOffer['spend'] | undefined {
+  if (definition.sections.some(node => node.kind === 'damage-revision')) return undefined;
+  const spend = definition.sections.find(node => node.kind === 'response-spend');
+  if (!spend || spend.effect.kind !== 'instruction') return undefined;
+  return {
+    cost: spend.cost,
+    resource: spend.resource,
+    amount: spend.amount,
+    variable: spend.variable,
+    effect: 'instruction',
+  };
+}
+
+/** V202: the response's effect has its user take their turn after the triggering hero. */
+const takesTurn = (definition: CompiledAbility) =>
+  definition.sections.some(node => node.kind === 'instruction' && node.shape === 'turn-order');
+
 const side = (kind: string): TriggerCreature['side'] =>
   kind === 'character' ? 'heroes' : 'director';
 
@@ -142,6 +174,8 @@ export async function registerTriggerHolders(
         distance: definition.envelope.distance,
         sourcePath: ability.source.path,
         ...(offerRevision(definition) ? { revision: offerRevision(definition) } : {}),
+        ...(offerSpend(definition) ? { spend: offerSpend(definition) } : {}),
+        ...(takesTurn(definition) ? { takesTurn: true } : {}),
       });
     }
   }
@@ -165,6 +199,8 @@ export async function eligibilityFacts(
   encounter: Doc<'encounters'>,
   owner: { id: string },
   actionType: TriggerEligibilityInput['actionType'],
+  /** V202: the response has its user take their turn, so it needs a turn left this round. */
+  needsTurn = false,
 ): Promise<TriggerEligibilityInput> {
   const round = encounter.round ?? 0;
   const uses = await ctx.db
@@ -190,7 +226,18 @@ export async function eligibilityFacts(
     .take(200);
   if (entries.some(entry => entry.actor.id === owner.id && entry.surprised))
     preventions.push('surprised');
-  return { actionType, ordinaryUsedThisRound, preventions };
+  return {
+    actionType,
+    ordinaryUsedThisRound,
+    preventions,
+    ...(needsTurn
+      ? {
+          turnLeft: entries.some(
+            entry => entry.actor.id === owner.id && entry.spentRound !== round,
+          ),
+        }
+      : {}),
+  };
 }
 
 export interface ObservedDamage {
@@ -249,7 +296,12 @@ export async function offerForDamage(
     const revises = revision
       ? ` Accepting revises the hit: ${targetActor.name} takes half the damage.${revision.confirm && targetActor.id !== owner.id ? ` Accept only if ${owner.name} ends the shift adjacent to ${targetActor.name}: the table confirms.` : ''}${revision.spend ? ` Optional: ${revision.spend.cost} (answer spend=${revision.spend.amount}${revision.spend.variable ? ' or more' : ''}).` : ''}`
       : '';
-    const text = `${owner.name} may use ${holder.abilityName} (${holder.actionType}) on ${targetActor.name}: "${spec.text}" Distance ${distance}.${revises} Other preventions (unconscious, an effect that forbids triggered actions) are the table's check. Accept or pass.`;
+    // V202: the Spend section of a response whose effect is table work (My Life for Yours).
+    const spend = holder.spend as TriggerOffer['spend'] | undefined;
+    const optional = spend
+      ? ` Optional: ${spend.cost} (answer spend=${spend.amount}${spend.variable ? ' or more' : ''}).`
+      : '';
+    const text = `${owner.name} may use ${holder.abilityName} (${holder.actionType}) on ${targetActor.name}: "${spec.text}" Distance ${distance}.${revises}${optional} Other preventions (unconscious, an effect that forbids triggered actions) are the table's check. Accept or pass.`;
     const offer: TriggerOffer = {
       encounterId: encounter._id,
       round: encounter.round ?? 0,
@@ -263,6 +315,7 @@ export async function offerForDamage(
       damage: damage.amount,
       damaged: damage.damaged,
       ...(revision ? { revision } : {}),
+      ...(spend ? { spend } : {}),
       distance,
       text,
     };
@@ -301,6 +354,125 @@ export async function offerForDamage(
       origin: 'engine',
       commandId: cause.commandId,
       causeEventId: scope.eventId,
+      kind: 'trigger.offered',
+      description: `Offer: ${text}`,
+      payload: { data: { ...offer, sourcePath: holder.sourcePath } },
+    });
+  }
+}
+
+/**
+ * V202: offers every eligible holder's triggered ability for one turn boundary, as cards on the
+ * clock's boundary entry (`boundaryEventId`), after the boundary's own work has fired (so a holder
+ * that work left dead or dazed is not offered). Journaled with the operation that caused the
+ * boundary (Take turn, End turn), so undo of it withdraws the cards. One indexed holder read per
+ * boundary; a hero is read only for a matching holder.
+ */
+export async function offerForBoundary(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  encounterId: Id<'encounters'>,
+  event: BoundaryEvent,
+  boundaryEventId: Id<'events'>,
+): Promise<void> {
+  if ((event.kind !== 'turn-start' && event.kind !== 'turn-end') || !event.turn) return;
+  const boundary = event.kind;
+  const encounter = await roundOf(ctx, scope.campaignId);
+  if (!encounter || encounter._id !== encounterId) return;
+  const holders = await ctx.db
+    .query('triggerHolders')
+    .withIndex('by_encounter', q => q.eq('encounterId', encounterId))
+    .take(200);
+  const relevant = holders.filter(holder => (holder.trigger as TriggerSpec).event === boundary);
+  if (!relevant.length) return;
+  const turn = await ctx.db.get(event.turn.turnId as Id<'turns'>);
+  if (!turn) return;
+  const creature = turn.actor as BoundActor;
+  const cause = (await ctx.db.get(boundaryEventId))!;
+  for (const holder of relevant) {
+    const target = triggerTarget(holder.target);
+    if (!target) continue;
+    const spec = holder.trigger as TriggerSpec;
+    const targetId = triggerTargetForTurn(
+      { owner: { id: holder.owner.id, side: side(holder.owner.kind) }, spec, target },
+      {
+        boundary,
+        creature: { id: creature.id, side: turn.side },
+        hero: creature.kind === 'character',
+        startedByThis: turn.startedBy?.sourcePath === holder.sourcePath,
+      },
+    );
+    if (!targetId) continue;
+    const eligibility = triggerEligibility(
+      await eligibilityFacts(
+        ctx,
+        encounter,
+        holder.owner,
+        holder.actionType,
+        holder.takesTurn === true,
+      ),
+    );
+    if (!eligibility.eligible) continue;
+    const owner = holder.owner as BoundActor;
+    const hero = await ctx.db.get(owner.id as Id<'characters'>);
+    if (!hero) continue;
+    const targetActor = targetId === creature.id ? creature : owner;
+    const distance = distanceNote(holder.distance);
+    const spend = holder.spend as TriggerOffer['spend'] | undefined;
+    const when = `${creature.name}'s turn ${boundary === 'turn-start' ? 'start' : 'end'}`;
+    const text = `${owner.name} may use ${holder.abilityName} (${holder.actionType})${targetActor.id === owner.id && target.others === 'none' ? '' : ` on ${targetActor.name}`} at ${when}: "${spec.text}"${spec.within ? ` ${creature.name} within ${spec.within} squares: the table confirms.` : ''} Distance ${distance}.${spend ? ` Optional: ${spend.cost} (answer spend=${spend.amount}${spend.variable ? ' or more' : ''}).` : ''}${holder.takesTurn ? ` Accepting lets ${owner.name} take their turn next, after ${creature.name}.` : ''} Other preventions (unconscious, an effect that forbids triggered actions) are the table's check. Accept or pass.`;
+    const offer: TriggerOffer = {
+      encounterId,
+      round: encounter.round ?? 0,
+      owner,
+      abilityId: holder.abilityId,
+      abilityName: holder.abilityName,
+      actionType: holder.actionType,
+      trigger: spec,
+      target: targetActor,
+      triggeringEventId: boundaryEventId,
+      damage: 0,
+      boundary: { kind: boundary, turnId: turn._id, creature },
+      ...(holder.takesTurn ? { takesTurn: true } : {}),
+      ...(spend ? { spend } : {}),
+      distance,
+      text,
+    };
+    await journalInsert(ctx, scope, 'interactions', {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      status: 'awaiting-input',
+      kind: OFFER_KIND,
+      operation: 'ability.use',
+      actorLabel: owner.name,
+      boundActor: owner,
+      requesterId: hero.ownerId,
+      requiredInputs: [],
+      continuation: {
+        schemaVersion: 1,
+        campaignId: scope.campaignId,
+        operation: 'ability.use',
+        actor: { refKind: 'character', id: owner.id },
+        arguments: {
+          ability: holder.abilityId,
+          targets: [{ refKind: targetActor.kind, id: targetActor.id }],
+        },
+      },
+      revision: 0,
+      openedEventId: boundaryEventId,
+      resolvedEventId: null,
+      answer: null,
+      createdAt: Date.now(),
+      resolvedAt: null,
+      offer,
+    });
+    await appendEvent(ctx, {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      encounterId,
+      origin: 'engine',
+      commandId: cause.commandId,
+      causeEventId: boundaryEventId,
       kind: 'trigger.offered',
       description: `Offer: ${text}`,
       payload: { data: { ...offer, sourcePath: holder.sourcePath } },
@@ -404,7 +576,17 @@ export async function closeOffersOnPlay(
 ): Promise<void> {
   for (const card of await openOffers(ctx, scope.campaignId)) {
     const offer = card.offer as TriggerOffer | undefined;
-    if (offer?.owner.id !== actor.id || offer.triggeringEventId === keepTriggeringEventId) continue;
+    // V202: a response to a creature's turn start also closes when that creature commits play on
+    // it (docs/table-spec.md, "Clarified existing precedent": the cutoff follows the triggering
+    // event and subsequent play by the affected character).
+    const affected =
+      offer?.boundary?.kind === 'turn-start' && offer.boundary.creature.id === actor.id;
+    if (
+      !offer ||
+      (offer.owner.id !== actor.id && !affected) ||
+      offer.triggeringEventId === keepTriggeringEventId
+    )
+      continue;
     // V175: a card this very use opened (the Tactician's own hit on a creature they marked) is not
     // an earlier offer.
     if (offer.triggeringEventId === scope.eventId) continue;
@@ -449,7 +631,7 @@ export async function recheckOffer(
       `This card offers ${offer.abilityName} on ${offer.target.name}; answer it without changing the ability or target.`,
     );
   const eligibility = triggerEligibility(
-    await eligibilityFacts(ctx, encounter, offer.owner, offer.actionType),
+    await eligibilityFacts(ctx, encounter, offer.owner, offer.actionType, offer.takesTurn === true),
   );
   if (!eligibility.eligible)
     throw new ConvexError(

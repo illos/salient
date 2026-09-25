@@ -128,6 +128,13 @@ export const abilityTables = {
      * adjacency confirmation and optional Spend section, for the card (TriggerOffer.revision).
      */
     revision: v.optional(v.any()),
+    /**
+     * V202: the response's effect has its user take their turn after the triggering hero
+     * (a `turn-order` instruction), so it is offered only while the user has a turn left this round.
+     */
+    takesTurn: v.optional(v.boolean()),
+    /** V202: the optional Spend section of a response that doesn't revise damage, for the card. */
+    spend: v.optional(v.any()),
   }).index('by_encounter', ['encounterId']),
   /** A critical hit's additional main action: offered to the acting user, never executed by the app. */
   actionOpportunities: defineTable({

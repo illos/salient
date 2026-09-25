@@ -123,7 +123,10 @@ export const EFFECT_ONLY_REVISIONS: readonly {
   },
 ];
 
-/** Printed Spend sections of these responses, read whole with their cost label. */
+/**
+ * Printed Spend sections of these responses, read whole with their cost label. V202 adds the Spend
+ * sections of two turn-start responses; their effects are table work, so they need no revision.
+ */
 const SPENDS: readonly {
   text: string;
   subject: ResponseSpendClause['subject'];
@@ -167,6 +170,23 @@ const SPENDS: readonly {
     text: "This ability's distance becomes Melee 1 + your Reason score, and you can shift up to a number of squares equal to your Reason score instead of 1 square.",
     subject: 'actor',
     effect: { kind: 'instruction', shape: 'shift' },
+  },
+  // V202 feature/ability/censor/level-1/my-life-for-yours.md (Spend 1 Wrath). Ending an effect
+  // (rule/general/saving-throw.md, rule/combat/end-of-turn.md) or standing up (condition/prone.md)
+  // is table work on the target.
+  {
+    text: 'You can end one effect on the target that is ended by a saving throw or that ends at the end of their turn, or a prone target can stand up.',
+    subject: 'target',
+    effect: { kind: 'instruction', shape: 'end-effect' },
+  },
+  // V202 feature/ability/elementalist/level-1/breath-of-dawn-remembered.md (Spend 1+ Essence). The
+  // target spends each Recovery itself (rule/health/recoveries.md), as V157's "can spend a
+  // Recovery" sentences are table work.
+  {
+    text: 'The target can spend an additional Recovery for each essence spent.',
+    subject: 'target',
+    effect: { kind: 'instruction', shape: 'recovery' },
+    variable: true,
   },
 ];
 

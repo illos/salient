@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 188 (without a power roll: 25); unchanged reachable compatibility: 1433; structurally supported but unavailable: 0.
+Currently reachable compiled: 191 (without a power roll: 28); unchanged reachable compatibility: 1430; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -141,14 +141,14 @@ Currently reachable compiled: 188 (without a power roll: 25); unchanged reachabl
 | Halt Miscreant! | hero-standalone | supported | compiled |  |
 | Hands of the Maker | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Judgment | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
-| My Life for Yours | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| My Life for Yours | hero-standalone | supported | compiled |  |
 | Purifying Fire | hero-standalone | manual | legacy-compatibility | manual-section, defense-manual |
 | Repent! | hero-standalone | supported | compiled |  |
 | The Gods Punish and Defend | hero-standalone | supported | compiled |  |
 | Your Allies Cannot Save You! | hero-standalone | supported | compiled |  |
 | Blessing of the Faithful | hero-standalone | supported | compiled |  |
 | It Is Justice You Fear | hero-standalone | manual | legacy-compatibility | manual-section |
-| Prescient Grace | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Prescient Grace | hero-standalone | manual | legacy-compatibility | grammar, trigger-manual, manual-section, target-boundary |
 | Revelator | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Sentenced | hero-standalone | supported | compiled |  |
 | With My Blessing | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
@@ -207,7 +207,7 @@ Currently reachable compiled: 188 (without a power roll: 25); unchanged reachabl
 | Afflict a Bountiful Decay | hero-standalone | supported | compiled |  |
 | Behold the Mystery | hero-standalone | manual | legacy-compatibility | manual-section |
 | Bifurcated Incineration | hero-standalone | supported | compiled |  |
-| Breath of Dawn Remembered | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Breath of Dawn Remembered | hero-standalone | supported | compiled |  |
 | Conflagration | hero-standalone | manual | legacy-compatibility | manual-section |
 | Explosive Assistance | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Grasp of Beyond | hero-standalone | supported | compiled |  |
@@ -305,7 +305,7 @@ Currently reachable compiled: 188 (without a power roll: 25); unchanged reachabl
 | Eviscerate | hero-standalone | supported | compiled |  |
 | Gasping in Pain | hero-standalone | supported | compiled |  |
 | Get In Get Out | hero-standalone | supported | compiled |  |
-| Hesitation Is Weakness | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Hesitation Is Weakness | hero-standalone | supported | compiled |  |
 | I Work Better Alone | hero-standalone | manual | legacy-compatibility | manual-section |
 | I'm No Threat | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | In All This Confusion | hero-standalone | supported | compiled |  |

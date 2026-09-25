@@ -558,7 +558,8 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
             ? `The engine does not observe this trigger: ${trigger.unobserved}. Use the ability by hand as a triggered action.`
             : rollIndex >= 0 || envelope.blocks.some(b => b.kind === 'roll')
               ? 'The engine observes this trigger, but V173 offers only triggered abilities without a power roll; use it by hand as a triggered action.'
-              : 'The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.';
+              : (turnResponseManual(trigger, envelope) ??
+                'The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.');
         sections.push(unsupported(locator, 0, block.text, 'trigger', reason));
         diagnose(
           'unobserved' in trigger ? 'trigger-unobserved' : 'trigger-manual',
@@ -1097,6 +1098,72 @@ export function revisionFits(
   return trigger.whose === (clause.subject === 'actor' ? 'owner' : 'target');
 }
 /** V174: "for you" reduces the user's potency: a Self response; "for the target" its target's. */
+/**
+ * V173/V202: the Trigger section a sentence needs (EffectOnlySentence.trigger). "The triggering
+ * damage" needs a damage event (a turn boundary has none, even one that also answers damage),
+ * "the triggering strike" a melee-strike one, a revision the damaged creature's `damage-taken`, and
+ * "the triggering hero" another hero's turn end.
+ */
+export function sentenceTriggerFits(
+  sentence: Pick<EffectOnlySentence, 'trigger' | 'clause'>,
+  trigger: TriggerSpec | undefined,
+): boolean {
+  switch (sentence.trigger) {
+    case undefined:
+      return true;
+    case 'damage':
+      return trigger?.event === 'damage-taken' || trigger?.event === 'damage-dealt';
+    case 'melee-strike':
+      return trigger?.from === 'melee-strike';
+    case 'damage-taken':
+      return revisionFits(sentence.clause, trigger);
+    case 'hero-turn-end':
+      return trigger?.event === 'turn-end' && trigger.whose === 'other-hero';
+  }
+}
+
+/**
+ * V202: a turn-boundary trigger about the target ("The target starts their turn") names it; one
+ * about another creature names only the user, so the ability must target only its user.
+ */
+export function triggerNamesTarget(trigger: TriggerSpec, target: string): boolean {
+  if (trigger.event !== 'turn-start' && trigger.event !== 'turn-end') return true;
+  if (trigger.whose === 'target') return true;
+  const shape = triggerTarget(target);
+  return shape?.self === true && shape.others === 'none';
+}
+
+/**
+ * V202: effect sentences of turn-boundary responses the engine keeps manual, with the missing fact.
+ * feature/ability/censor/level-2/prescient-grace.md: "The target can then take their turn
+ * immediately before the triggering enemy."
+ */
+const TURN_RESPONSE_MANUAL: readonly { pattern: RegExp; reason: string }[] = [
+  {
+    pattern: /\btake their turn immediately before the triggering enemy\b/,
+    reason:
+      'its effect has a creature take their turn before the triggering enemy, whose turn the clock has already started (the app keeps one turn in progress, convex/lib/initiative.ts)',
+  },
+];
+
+/** V202: why an observed turn-boundary trigger's ability stays manual, when the grammar knows. */
+function turnResponseManual(trigger: TriggerSpec, envelope: Envelope): string | undefined {
+  if (trigger.event !== 'turn-start' && trigger.event !== 'turn-end') return undefined;
+  const reasons: string[] = [];
+  if (!triggerNamesTarget(trigger, envelope.target))
+    reasons.push(
+      `the trigger is another creature's turn and the target is "${plain(envelope.target).trim()}", which the card can't name for the user`,
+    );
+  const effects = envelope.blocks
+    .filter(b => b.kind === 'section' && b.label !== 'Trigger')
+    .map(b => plain((b as Extract<Block, { kind: 'section' }>).text).replace(/\s+/g, ' '));
+  for (const { pattern, reason } of TURN_RESPONSE_MANUAL)
+    if (effects.some(text => pattern.test(text))) reasons.push(reason);
+  return reasons.length
+    ? `The engine observes this turn boundary, but ${reasons.join('; and ')}. Use the ability by hand as a triggered action.`
+    : undefined;
+}
+
 export function spendSubjectFits(spend: ResponseSpendClause, target: EffectOnlyTarget): boolean {
   return spend.subject === 'target' || target.kind === 'self';
 }
@@ -1148,6 +1215,10 @@ function readEffectOnly(envelope: Envelope):
     const block = triggers[0] as Extract<Block, { kind: 'section' }>;
     const read = block.cost ? undefined : triggerSection(block.text);
     if (!read || 'unobserved' in read || !triggerTarget(envelope.target)) return undefined;
+    // V202: a turn boundary of another creature (an enemy, another hero) names no target for the
+    // offer unless the ability targets only its user (shared/resolve/triggers.ts
+    // triggerTargetForTurn).
+    if (!triggerNamesTarget(read, envelope.target)) return undefined;
     trigger = read;
   }
   const sections: Record<number, EffectOnlySentence[]> = {};
@@ -1199,21 +1270,25 @@ function readEffectOnly(envelope: Envelope):
           (sentence.clause.kind === 'watcher' && target.kind === 'area') ||
           // V173: "the triggering damage" needs a damage trigger, "the triggering strike" a
           // melee-strike one.
-          (sentence.trigger === 'damage' && !trigger) ||
-          (sentence.trigger === 'melee-strike' && trigger?.from !== 'melee-strike') ||
-          (sentence.trigger === 'damage-taken' && !revisionFits(sentence.clause, trigger)),
+          !sentenceTriggerFits(sentence, trigger),
       )
     )
       return undefined;
     sections[index] = read;
   }
-  // V174: a Spend section speaks of "the damage" the response revises, so it needs one.
+  // V174: a Spend section that reduces "the damage"'s potency needs the one revision of that
+  // damage. V202: a Spend section of table work needs only the trigger (admitted above).
   const clauses = Object.values(sections)
     .flat()
     .map(sentence => sentence.clause);
+  const revisions = clauses.filter(clause => clause.kind === 'damage-revision').length;
   if (
-    clauses.some(clause => clause.kind === 'response-spend') &&
-    clauses.filter(clause => clause.kind === 'damage-revision').length !== 1
+    clauses.some(
+      clause =>
+        clause.kind === 'response-spend' &&
+        (clause.effect.kind === 'potency' || revisions > 0) &&
+        revisions !== 1,
+    )
   )
     return undefined;
   return { target, sections, ...(trigger ? { trigger } : {}) };
