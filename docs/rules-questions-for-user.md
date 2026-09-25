@@ -1684,6 +1684,10 @@ interpretation with its alternatives.
    once. Only the difference is written: for example Hill Giant Clobberer, 8 − 3 = 5, then
    8 + 4 − 3 = 9, so 4 more. Alternatives: a separate damage instance, where immunity reduces the
    extra again (1 more in that example); or leave it to the table, as V175 did.
+   When a response has already halved the hit (V174), the extra is added to the halved amount and
+   is not itself halved. For example, 8 halved to 4, plus 4, is 8 before immunity. This reads the
+   halving as done before the benefit was taken. Alternative: the extra joins the ability's damage
+   before the halving, so it is halved too: (8 + 4) / 2 = 6 before immunity.
 4. **Cells left manual.** These keep the damage manual, with the cell named:
    - Summoner minions' "R" values, for example "Corruption R, Poison R"
      (`monster/minion/summoner/undead/statblock/skeleton.md`). `minions.md`: "You use your own
@@ -1697,4 +1701,52 @@ interpretation with its alternatives.
      (`monster/orc/statblock/orc-eye-of-grole.md`, Elemental Affinity: "The chosen type determines
      the eye's damage immunity"). No value is printed.
 
-Recommendation: keep 1 to 3 as implemented.
+   - Stat blocks whose own features change their immunity or weakness outside the cells
+     (`FOE_MODIFIER_TRAITS` in `shared/resolve/damageModifiers.ts`, which quotes each feature). A
+     silently wrong number is worse than manual, so their damage stays manual and the diagnostic
+     names the feature. They fall into these groups:
+     - **Standing or conditional traits:** Count Rhodar's Grave Ward ("Rhodar has damage immunity
+       5. If he takes holy damage, he loses this immunity until the end of the round."), the Devil
+       Legate's Hellish Bailiff, the 13 shadow elves' Of the Umbra, the ogres' Anger traits, and
+       Xorannox's six eyes' Psionic Barrier.
+     - **True Name**, which removes immunities: the devil Adjudicator, Clerk, High Judge, Jurist,
+       Legate, Magistrate, Notary and Scrivener, and the Devil Defector retainer. No "Detective" stat
+       block is among the ingested ones.
+     - **Abilities that change the user's own immunity or weakness:**
+       - Locratix's Absorbing Scales and Phrrygalax's Armor of the Ancients (the swap);
+       - the Crucible Dragon's Subdermal Shielding, and Break Armor on the Force of Earth and the
+         Marble Stone Giant;
+       - the Crux of Fire and the Essences of Storms and Tides (Convocation, "Self or one
+         elemental");
+       - the Lich's Necrotic Form, Lord Syuul's and the Evolutionist's Adaptability;
+       - the Minotaurs' Bays, the Bonecage's Ribcage Chomp, and the Bandit Chief's Form Up!;
+       - the Kobold Centurion's Testudo! and Are You Not Entertained?!;
+       - the war dogs: Doomthief, Tetrarch, Iron Priest (Iron Banner), Castellan Hoplon, Soulbinder
+         Psyche and Strategos Alkestis.
+     - **Heroes:** the Corrupted Mentor complication (`complication/corrupted-mentor.md`: "Each
+       time you use Corrupt Spirit, your holy weakness increases by 1, to a maximum equal to your
+       recovery value."). The current value isn't tracked, so damage to such a hero stays manual.
+
+     `tests/scripts/immunity-weakness.test.ts` scans every stat block whose cells are read. It
+     fails when a stat block's feature text mentions immunity or weakness and isn't on that list
+     or on `FOE_MODIFIER_MENTIONS_REVIEWED`, which gives a reason for each harmless mention (it
+     affects a target, an object or the dealer's damage).
+5. **Readings in that classification, and what it doesn't cover.**
+   - "Self or one elemental" (the Convocations) and Iron Banner's "Each war dog in the area" (a 4
+     aura) are read as able to reach the user, so those stat blocks are manual. Alternative: treat
+     them as affecting others only and read their cells.
+   - Not covered: features that give another creature an immunity. Examples are the Giant
+     Shambler Zombie's Meat Shield ("Each ally adjacent to the shambler has damage immunity 3"),
+     Castellan Hoplon's Hold the Line, the War Dog Neuronite's The Voice and the Wodenelg's rider.
+     Damage to those other creatures uses their own cells, as it did before V178 for creatures
+     whose cells print "-".
+   - Also not covered:
+     - A dealer's "ignores damage immunity" (Optacus, the Kobold Adeptus, the Jurist's
+       Hellfire).
+     - Effects that give a hero a weakness (for example the Bale Eye's Wilting Visions).
+     - Malice feature blocks, which aren't part of a stat block's text.
+
+     Each of these is table work today. Recommendation: an effect-instance slice that tracks
+     granted immunity and weakness.
+
+Recommendation: keep 1 to 3 and 5 as implemented, and answer the trolls' value in 4.

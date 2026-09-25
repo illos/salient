@@ -21,7 +21,11 @@ import { describe, expect, test } from 'vitest';
 import statblocks from '../../shared/content/compendium/statblock.json' with { type: 'json' };
 import {
   extraDamageAfterModifiers,
+  FOE_MODIFIER_MENTIONS_REVIEWED,
+  FOE_MODIFIER_TRAITS,
+  foeModifierTraitReason,
   heroModifierEntries,
+  heroModifierTraitReason,
   parseModifierCell,
   statBlockModifiers,
 } from '../../shared/resolve/damageModifiers.ts';
@@ -286,5 +290,98 @@ describe('application', () => {
       extraDamageAfterModifiers(hit(target([{ type: 'fire', value: 'all' }]), 7, 'fire'), 4),
     ).toBe(0);
     expect(extraDamageAfterModifiers(hit(mummy, 0, 'fire'), 4)).toBeUndefined();
+  });
+});
+
+describe('features that change immunity or weakness outside the cells (V178 review)', () => {
+  const blocks = statblocks as { id: string; name: string; text: string }[];
+  const plain = (text: string) =>
+    text
+      .replace(/\[([^\]]+)\]\([^\n)]*\)/g, '$1')
+      .replace(/\*\*/g, '')
+      .replace(/^>\s?/gm, '');
+  /** The stat block's feature text: no frontmatter, no stat table rows. */
+  const featureText = (text: string) =>
+    text
+      .replace(/^---\n[\s\S]*?\n---\n/, '')
+      .split('\n')
+      .filter(line => !line.includes('<br>'))
+      .join('\n');
+  const MENTION = /damage (immunity|weakness)|immunit|immune|weakness/i;
+  const read = blocks.filter(
+    e =>
+      !statBlockModifiers(e.text, 'Immunity').unparsed &&
+      !statBlockModifiers(e.text, 'Weakness').unparsed,
+  );
+
+  test('every read stat block whose features mention immunity or weakness is classified', () => {
+    const unclassified = read
+      .filter(e => MENTION.test(featureText(e.text)))
+      .map(e => e.id)
+      .filter(id => !FOE_MODIFIER_TRAITS[id] && !FOE_MODIFIER_MENTIONS_REVIEWED[id]);
+    // A new stat block that mentions either must be listed as manual or reviewed with a reason.
+    expect(unclassified).toEqual([]);
+  });
+
+  test('the lists are disjoint, current, and quote the stat blocks exactly', () => {
+    for (const id of Object.keys(FOE_MODIFIER_TRAITS))
+      expect(FOE_MODIFIER_MENTIONS_REVIEWED[id], id).toBeUndefined();
+    for (const [id, reason] of Object.entries(FOE_MODIFIER_MENTIONS_REVIEWED)) {
+      const entry = read.find(e => e.id === id);
+      expect(entry && MENTION.test(featureText(entry.text)), id).toBe(true);
+      expect(reason.length, id).toBeGreaterThan(20);
+    }
+    for (const [id, traits] of Object.entries(FOE_MODIFIER_TRAITS)) {
+      const entry = read.find(e => e.id === id);
+      expect(entry, id).toBeDefined();
+      const text = plain(entry!.text);
+      for (const trait of traits) {
+        expect(text, `${id} ${trait.feature}`).toContain(trait.text);
+        expect(text, `${id} ${trait.feature}`).toContain(trait.feature);
+      }
+    }
+  });
+
+  test('the reviewer’s cases are manual and name the feature', () => {
+    const id = (slug: string) => blocks.find(e => e.id.endsWith(slug))!.id;
+    // monster/count-rhodar-von-glauer: Grave Ward, "Rhodar has damage immunity 5. If he takes holy
+    // damage, he loses this immunity until the end of the round." His cell is "Corruption 10,
+    // poison 10".
+    expect(foeModifierTraitReason(id('/count-rhodar-von-glauer'))).toMatch(
+      /^Grave Ward and Sanguine Mist change its damage immunity or weakness during play \(“Rhodar has damage immunity 5\./,
+    );
+    for (const slug of [
+      '/devil-clerk',
+      '/devil-notary',
+      '/devil-scrivener',
+      '/devil-jurist',
+      '/devil-legate',
+      '/phrrygalax-the-subduer',
+      '/locratix-the-morningstar',
+    ])
+      expect(foeModifierTraitReason(id(slug)), slug).toBeDefined();
+    expect(foeModifierTraitReason(id('/devil-legate'))).toMatch(/Hellish Bailiff and True Name/);
+    // A stat block with no such feature is read from its cells.
+    expect(foeModifierTraitReason(id('/mummy'))).toBeUndefined();
+  });
+
+  test('a Corrupted Mentor hero’s growing holy weakness is manual', () => {
+    // complication/corrupted-mentor.md, Drawback.
+    const weakness = [
+      {
+        damageType: 'holy',
+        value: {
+          value: 1,
+          provenance: [{ decisionId: 'complication.choice', selection: 'Corrupted Mentor' }],
+        },
+      },
+    ];
+    expect(heroModifierTraitReason([undefined, weakness])).toMatch(/^Corrupted Mentor/);
+    expect(
+      heroModifierTraitReason([
+        undefined,
+        [{ damageType: 'fire', value: { value: 5, provenance: [{ selection: 'Revenant' }] } }],
+      ]),
+    ).toBeUndefined();
   });
 });

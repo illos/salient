@@ -37,6 +37,11 @@ manual, and the diagnostic names the cell.
   table. V174 already refuses any revision after an accepted extra-damage benefit.
 - `docs/roll-and-damage-resolution.md` section 6.2: the parsing contract.
 
+- Stat blocks whose own features change their immunity or weakness (`FOE_MODIFIER_TRAITS`), and
+  heroes with the Corrupted Mentor complication, stay manual and name the feature (Q-IW-1 points 4
+  and 5). A scan test holds every read stat block that mentions immunity or weakness to the list
+  or to a reviewed reason.
+
 Out of scope, kept manual (Q-IW-1 point 4): summoner minions' "R" values, the trolls' valueless
 fire weakness, and the Orc Eye of Grole's choice of types. Effects that grant a weakness during
 play (Corruption's Curse, Setup) stay manual, as in V177.
@@ -132,3 +137,22 @@ Spec references:
       remaining-ancestries, foes, foe-operations, heroic-resource-talent, heroic-resource-conduit
       and complication-actions.
 - Journeys were not run (TESTER). Open question: Q-IW-1 in `docs/rules-questions-for-user.md`.
+- 2026-09-25, review round 1 (changes required): the branch was rebased onto the signed V177
+  (`7a3d1a8e` on `5610832b`). Blocking finding: Count Rhodar's Grave Ward ("Rhodar has damage
+  immunity 5. If he takes holy damage, he loses this immunity until the end of the round.") sits
+  outside his cell, so V178 dealt him 5 too much on every non-holy hit.
+  - **Fix:** `FOE_MODIFIER_TRAITS` in `shared/resolve/damageModifiers.ts` lists every stat block
+    whose own features change its immunity or weakness outside the cells (56, each with the quoted
+    feature). `damageTargetFacts` returns them as manual and names the feature.
+  - **Heroes:** `HERO_MODIFIER_TRAITS` does the same for the Corrupted Mentor complication, whose
+    holy weakness grows.
+  - **Reviewed mentions:** `FOE_MODIFIER_MENTIONS_REVIEWED` gives a reason for each of the 29 other
+    mentions (a target, an object, the dealer's damage, another creature, a feature name).
+  - **Scan test:** `tests/scripts/immunity-weakness.test.ts` covers every read stat block's feature
+    text with `/damage (immunity|weakness)|immunit|immune|weakness/i`, and fails on any
+    unclassified mention. It also checks that the lists are disjoint and current, and that every
+    quote is found in the stat block.
+  - **App test:** Count Rhodar and a Corrupted Mentor Revenant stay manual, with their Stamina
+    unchanged.
+  - **Q-IW-1:** point 3 now covers the Mark extra after a halving, point 4 the trait list, and the
+    new point 5 the readings and what isn't covered.

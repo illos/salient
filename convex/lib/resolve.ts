@@ -59,7 +59,12 @@ import type {
 import { manifest } from '../../shared/content/compendium/index';
 import { parseTierText, plainText, reapplyDamage, windedValueOf } from '../../shared/resolve/index';
 import { triggeredActionType } from '../../shared/resolve/triggers';
-import { heroModifierEntries, statBlockModifiers } from '../../shared/resolve/damageModifiers';
+import {
+  foeModifierTraitReason,
+  heroModifierEntries,
+  heroModifierTraitReason,
+  statBlockModifiers,
+} from '../../shared/resolve/damageModifiers';
 import { findContent, requireContent } from '../content';
 import { endOwnerDyingEffects, type EffectHolder } from './effectInstances';
 import { observeDamage, type DamageObservation, type Preloaded } from './watchers';
@@ -965,6 +970,12 @@ export function damageTargetFacts(
     const snapshot = foeSnapshot(record.foe);
     // V178 (shared/resolve/damageModifiers.ts): the printed cells as typed entries; a cell the app
     // can't read exactly leaves the damage to the table.
+    // V178 review: a stat block whose own features change its immunity or weakness stays manual.
+    const trait = foeModifierTraitReason(snapshot.id);
+    if (trait)
+      return {
+        missing: `${record.foe.name}'s ${trait}, which the app doesn't track; damage is left for manual application.`,
+      };
     const immunity = statBlockModifiers(snapshot.text ?? '', 'Immunity');
     const weakness = statBlockModifiers(snapshot.text ?? '', 'Weakness');
     if (immunity.unparsed || weakness.unparsed)
@@ -1003,6 +1014,11 @@ export function damageTargetFacts(
   if (!record.character || !live || !baseline)
     return {
       missing: `${record.actor.name} has no evaluated build or live record; admission to the campaign supplies them before damage can apply.`,
+    };
+  const heroTrait = heroModifierTraitReason([baseline.damageImmunities, baseline.damageWeaknesses]);
+  if (heroTrait)
+    return {
+      missing: `${record.actor.name}'s ${heroTrait}, which the app doesn't track; damage is left for manual application.`,
     };
   return {
     facts: {

@@ -75,7 +75,7 @@ async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, n
 }
 
 /** A level 1 Revenant (the remaining-ancestries fixture's Fury with the ancestry replaced). */
-function revenant() {
+function revenant(extra: Record<string, SelectionValue> = {}) {
   const fixture = JSON.parse(readFileSync('tests/fixtures/v25-fury.json', 'utf8')) as {
     selections: Record<string, SelectionValue>;
   };
@@ -88,6 +88,7 @@ function revenant() {
       'ancestry.choice': 'Revenant',
       'ancestry.revenant.former-life': 'Memonek',
       'ancestry.revenant.memonek.purchased-traits': ['Keeper of Order'],
+      ...extra,
     },
     getDefinitions(1),
   );
@@ -273,4 +274,38 @@ test('V178: a strained Mind Spike’s unreducible 2 psychic takes the Rogue Tale
     status: 'applied',
     selfApplication: { incoming: 2, weaknessApplied: 5, immunityApplied: 0, afterImmunity: 7 },
   });
+});
+
+test('V178 review: features that change immunity or weakness during play keep damage manual', async () => {
+  const s = await setup();
+  // monster/count-rhodar-von-glauer: Grave Ward, "Rhodar has damage immunity 5. If he takes holy
+  // damage, he loses this immunity until the end of the round."
+  const rhodar = await s.addFoe(
+    'mcdm.monsters.v1/monster.count-rhodar-von-glauer.statblock/count-rhodar-von-glauer',
+  );
+  const before = (await s.t.run(ctx => ctx.db.get(rhodar)))!.live.stamina;
+  await atDice(s.t, s.f.campaignId, [7, 6]);
+  const hit = await s.hurl('fire', `@{foe:${rhodar}}`);
+  const description = (await s.t.run(ctx => ctx.db.get(hit.eventId)))!.description;
+  expect(description).toContain('Grave Ward and Sanguine Mist change its damage immunity');
+  expect(description).toContain('damage is left for manual application');
+  expect((await s.t.run(ctx => ctx.db.get(rhodar)))!.live.stamina).toBe(before);
+
+  // complication/corrupted-mentor.md: "Each time you use Corrupt Spirit, your holy weakness
+  // increases by 1".
+  const mentor = (await admitHero(
+    s.t,
+    s.f.player,
+    s.f.director,
+    s.f.campaignId,
+    'Ghost',
+    revenant({ 'complication.choice': 'Corrupted Mentor' }),
+  )) as Id<'characters'>;
+  await s.command('@Ghost /adjust stamina value=20');
+  await atDice(s.t, s.f.campaignId, [7, 6]);
+  const fire = await s.hurl('fire', '@Ghost');
+  expect((await s.t.run(ctx => ctx.db.get(fire.eventId)))!.description).toContain(
+    'Corrupted Mentor changes their damage weakness during play',
+  );
+  expect((await s.t.run(ctx => ctx.db.get(mentor)))!.liveState!.stamina).toBe(20);
 });
