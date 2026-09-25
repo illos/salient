@@ -5,7 +5,10 @@
 // - "The first time each combat round that the Director uses an ability that costs Malice …, you
 //   gain 1 discipline." (automatic when a creature ability's own Malice cost is paid, Q-RES-5);
 // - "You lose any remaining discipline at the end of the encounter."
-// monster/goblin/statblock/goblin-warrior.md: "Bury the Point (2 Malice)".
+// monster/goblin/statblock/goblin-warrior.md: "Bury the Point (2 Malice)", "Power Roll + 2", tier 1
+// "≤11". The first use is pinned to 3 + 3: 8, and 10 with the corrected edge (+2, rule/dice/edge.md),
+// both tier 1. The correction then changes no damage, so the Null's Inertial Shield offer (V174)
+// can't refuse it, whatever the random dice would have been.
 import { expect, test } from 'vitest';
 import { api, internal } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
@@ -13,7 +16,41 @@ import type { EvaluationInput } from '../../shared/contracts/characterEvaluation
 import { definitions } from '../../shared/content/level-one-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import nullLedger from '../fixtures/v103-null-expected.json' with { type: 'json' };
-import { admitHero, backend, table } from './fixtures/table';
+import { generate } from '../../convex/lib/dice';
+import { fromHex } from '../../convex/lib/sha256';
+import { admitHero, backend, table, type Backend } from './fixtures/table';
+
+/** Positions the campaign's dice stream so the next 2d10 are `faces` (S02's own generator). */
+async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, number]) {
+  await t.run(async ctx => {
+    let state = await ctx.db
+      .query('diceStates')
+      .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+      .unique();
+    if (!state) {
+      const seed = crypto.getRandomValues(new Uint8Array(32));
+      const id = await ctx.db.insert('diceStates', {
+        campaignId,
+        seed: [...seed].map(b => b.toString(16).padStart(2, '0')).join(''),
+        counter: 0,
+      });
+      state = (await ctx.db.get(id))!;
+    }
+    const seed = fromHex(state.seed);
+    const spec = [
+      { id: 'd10a', sides: 10 },
+      { id: 'd10b', sides: 10 },
+    ];
+    for (let counter = state.counter; counter < state.counter + 100000; counter++) {
+      const out = generate(seed, counter, spec);
+      if (out.dice[0]!.value === faces[0] && out.dice[1]!.value === faces[1]) {
+        await ctx.db.patch(state._id, { counter });
+        return;
+      }
+    }
+    throw new Error('No matching dice position found.');
+  });
+}
 
 let sequence = 0;
 test('V144: a Null gains discipline each turn and once per round when a Malice ability is used', async () => {
@@ -66,7 +103,16 @@ test('V144: a Null gains discipline each turn and once per round when a Malice a
 
   await command('/adjust malice value=6');
   // The first Malice ability hits the Null, so its correction reconciles the Null's own gains.
+  await atDice(t, f.campaignId, [3, 3]);
   const first = await bury(ref);
+  expect(
+    (
+      await f.director.client.query(api.abilities.results, {
+        campaignId: f.campaignId,
+        eventIds: [first.eventId],
+      })
+    )[0]!.targets[0]!.outcome,
+  ).toMatchObject({ total: 8, tier: 1 });
   expect(await triggered(first.eventId)).toMatchObject([
     { payload: { data: { triggerId: 'null-director-malice', delta: 1 } } },
   ]);
