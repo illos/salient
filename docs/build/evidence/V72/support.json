@@ -20934,7 +20934,7 @@
           "locator": "block:1:0",
           "clause": "You spend a Recovery and the target regains Stamina equal to your recovery value.",
           "kind": "instruction",
-          "shape": "recovery",
+          "shape": "recovery-transfer",
           "after": "",
           "subject": "target"
         },

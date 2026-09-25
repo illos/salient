@@ -106,7 +106,7 @@ export const CENSOR_ACTIONS: CensorAction[] = [
     sourcePath: 'en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md',
     actionType: 'Part of My Life for Yours',
     activationCondition:
-      'Only while using My Life for Yours: end one save-ends/end-of-turn effect, or let a prone target stand. Resolve the base Recovery payment and healing manually. Resolve the stated effects manually.',
+      'Only while using My Life for Yours, and only when its card’s Spend (spend=1) was not paid: end one save-ends/end-of-turn effect, or let a prone target stand. My Life for Yours applies the Recovery and healing itself. Resolve the stated effects manually.',
     cost: 1,
   },
   {

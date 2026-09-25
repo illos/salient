@@ -70,7 +70,7 @@ test('My Life for Yours, Breath of Dawn Remembered and Hesitation Is Weakness co
     text: 'The target starts their turn or takes damage.',
   });
   expect(life.sections).toMatchObject([
-    { kind: 'instruction', subject: 'target', shape: 'recovery' },
+    { kind: 'instruction', subject: 'target', shape: 'recovery-transfer' },
     {
       kind: 'response-spend',
       resource: 'wrath',

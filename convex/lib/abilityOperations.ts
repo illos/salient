@@ -120,7 +120,9 @@ import { describeArea } from '../../shared/resolve/areas';
 import { applyArea, endChosenPerformance, performanceActivationWarnings } from './areas';
 import {
   acceptanceOrder,
+  assertTurnFree,
   closeOffersOnPlay,
+  closeOtherTurnTakers,
   offerOf,
   recheckOffer,
   resolveOffer,
@@ -784,6 +786,48 @@ export function planTracking(
   else if (!allowance.onTurn && ['move action', 'free maneuver'].includes(actionType))
     warnings.push(`Rule warning: it is not ${actor.name}'s turn (rule/combat/turn.md).`);
   return { warnings, opportunity };
+}
+
+const sourceKey = (path: string) => path.replace(/^.*?(feature\/)/, '$1');
+
+/**
+ * V202: the rule warning for a hand-paid part of an ability whose compiled Spend section was already
+ * paid on a use this round (the card's `spend`), so the same Spend is not paid twice.
+ */
+async function spendPaidOnCard(
+  ctx: ReadCtx,
+  abilities: readonly AbilityDefinition[],
+  ability: AbilityDefinition,
+  actor: Actor,
+  allowance: Allowance,
+): Promise<string[]> {
+  if (!allowance.inCombat || !allowance.encounterId || ability.compilation?.mode === 'compiled')
+    return [];
+  const parent = abilities.find(
+    other =>
+      other !== ability &&
+      sourceKey(other.source.path) === sourceKey(ability.source.path) &&
+      other.compilation?.mode === 'compiled' &&
+      other.compilation.definition.sections.some(node => node.kind === 'response-spend'),
+  );
+  if (!parent) return [];
+  const uses = (
+    await ctx.db
+      .query('actionUses')
+      .withIndex('by_encounter_actor', q =>
+        q.eq('encounterId', allowance.encounterId!).eq('actor.id', actor.id),
+      )
+      .take(200)
+  ).filter(use => use.round === allowance.round && use.label === parent.name);
+  for (const use of uses) {
+    const event = await ctx.db.get(use.eventId);
+    const data = (event?.payload as { data?: { cost?: unknown } } | undefined)?.data;
+    if (data?.cost)
+      return [
+        `Rule warning: ${actor.name}'s ${parent.name} this round already paid its Spend on its card; ${ability.name} pays the same Spend again.`,
+      ];
+  }
+  return [];
 }
 
 export async function recordUse(
@@ -1902,6 +1946,10 @@ const abilityUse: OperationDefinition = {
     const allowance = await allowanceFor(ctx, context, actor!);
     const tracking = planTracking(allowance, actor!, ability.actionType);
     warnings.push(...tracking.warnings);
+    // V202: a part-ability that pays a Spend section by hand (My Life for Yours: Cleanse, Breath of
+    // Dawn Remembered: Additional Recovery) shares its source file with a compiled triggered ability
+    // whose card already takes that Spend. Warn when that ability's use this round paid it.
+    warnings.push(...(await spendPaidOnCard(ctx, abilities, ability, actor!, allowance)));
     // V173: condition/dazed.md prevents both kinds of triggered action (advisory for a use by hand;
     // an offered card is re-checked and refused below).
     const triggeredUse =
@@ -1941,6 +1989,8 @@ const abilityUse: OperationDefinition = {
         actorId: actor!.id,
         targetIds: targets.map(t => t.actor.id),
       });
+    // V202: one creature takes the next turn after the triggering hero.
+    if (answered) await assertTurnFree(ctx, answered.offer, actor!.id);
     if (
       answered &&
       !(ability.compilation?.mode === 'compiled' && ability.compilation.definition.trigger)
@@ -2330,6 +2380,53 @@ const abilityUse: OperationDefinition = {
         };
       if (outcome.kind !== 'resolved') throw new ConvexError(`${ability.name}: ${outcome.reason}`);
       warnings.push(...outcome.warnings);
+      // V202: "You spend a Recovery and the target regains Stamina equal to your recovery value."
+      // (feature/ability/censor/level-1/my-life-for-yours.md). Mandatory: refused without a
+      // Recovery (an offered card stays open), else the user's Recoveries drop by 1 and the target
+      // regains the user's recovery value up to its Stamina maximum (rule/health/recoveries.md), as
+      // V175's Mark Recovery benefit applies it (convex/lib/markOperations.ts).
+      const transfers: { spenderId: string; targetId: string; value: number; maximum: number }[] =
+        [];
+      for (const effect of outcome.effects) {
+        if (effect.kind !== 'rider' || effect.shape !== 'recovery-transfer') continue;
+        const spender = records.character;
+        const spenderLive = spender?.liveState;
+        const spenderBaseline = baselineOf(spender?.derivedBaseline);
+        const record = targets.find(t => t.actor.id === effect.targetId);
+        const receiver = record?.character;
+        const receiverLive = receiver?._id === spender?._id ? spenderLive : receiver?.liveState;
+        const receiverBaseline = baselineOf(receiver?.derivedBaseline);
+        if (!spenderLive || !spenderBaseline || !receiverLive || !receiverBaseline) {
+          effect.requirements = [
+            'the user and the target must be heroes with live Stamina and Recoveries; resolve the Recovery and healing at the table',
+          ];
+          continue;
+        }
+        if (spenderLive.recoveries < 1)
+          throw new ConvexError(
+            `${actor!.name} has no Recoveries left to spend, and ${ability.name} requires one ("You spend a Recovery").${answered ? ' The card stays open.' : ''}`,
+          );
+        const stamina = Math.min(
+          receiverBaseline.staminaMaximum.value,
+          receiverLive.stamina + spenderBaseline.recoveryValue.value,
+        );
+        Object.assign(effect, {
+          status: 'applied',
+          recovery: {
+            spenderId: spender!._id,
+            recoveriesBefore: spenderLive.recoveries,
+            recoveriesAfter: spenderLive.recoveries - 1,
+            staminaBefore: receiverLive.stamina,
+            staminaAfter: stamina,
+          },
+        });
+        transfers.push({
+          spenderId: spender!._id,
+          targetId: receiver!._id,
+          value: spenderBaseline.recoveryValue.value,
+          maximum: receiverBaseline.staminaMaximum.value,
+        });
+      }
       // V174: what the revision reverses or leaves standing, with the revised hit (design 5b).
       for (const effect of outcome.effects)
         if (effect.kind === 'damage-revision' && effect.status === 'calculated' && revisionPlan)
@@ -2422,6 +2519,10 @@ const abilityUse: OperationDefinition = {
           ].filter(Boolean);
           return `${nameOf(effect.targetId)} gains ${parts.join(' and ')}.`;
         }
+        if (effect.kind === 'rider' && effect.status === 'applied' && effect.recovery) {
+          const r = effect.recovery;
+          return `${actor!.name} spends a Recovery (${r.recoveriesBefore} → ${r.recoveriesAfter}) and ${nameOf(effect.targetId)} regains ${r.staminaAfter - r.staminaBefore} Stamina (${r.staminaBefore} → ${r.staminaAfter}).`;
+        }
         return `For the table (${nameOf(effect.targetId)}): "${effect.clause}"`;
       };
       const effectsText = outcome.effects.map(describeEffect).filter(Boolean).join(' ');
@@ -2478,6 +2579,8 @@ const abilityUse: OperationDefinition = {
           // next individual turn start consumes the allowance (convex/lib/initiative.ts startTurn).
           const boundary = answered?.offer.boundary;
           if (boundary?.kind === 'turn-end' && answered!.offer.takesTurn)
+            await closeOtherTurnTakers(mctx, scope, answered!.card, answered!.offer);
+          if (boundary?.kind === 'turn-end' && answered!.offer.takesTurn)
             await journalPatch(mctx, scope, 'encounters', answered!.offer.encounterId, {
               turnAfter: {
                 actorId: actor!.id,
@@ -2500,6 +2603,22 @@ const abilityUse: OperationDefinition = {
           await endReusedEffects(mctx, scope, actor!, ability.abilityId);
           // V200: choosing a performance ends the user's current one (Routines).
           await endChosenPerformance(mctx, scope, actor!, ability.keywords, ability.name);
+          // V202: the Recovery spent and the Stamina regained, on the current documents.
+          for (const transfer of transfers) {
+            const spender = (await mctx.db.get(transfer.spenderId as Id<'characters'>))!;
+            const spenderLive = requireHeroLive(spender);
+            await journalPatch(mctx, scope, 'characters', spender._id, {
+              liveState: { ...spenderLive, recoveries: spenderLive.recoveries - 1 },
+            });
+            const receiver = (await mctx.db.get(transfer.targetId as Id<'characters'>))!;
+            const receiverLive = requireHeroLive(receiver);
+            await journalPatch(mctx, scope, 'characters', receiver._id, {
+              liveState: {
+                ...receiverLive,
+                stamina: Math.min(transfer.maximum, receiverLive.stamina + transfer.value),
+              },
+            });
+          }
           // V171: the user's watchers of their own ability use.
           await observeUse(mctx, scope, actor!, ability.keywords);
           // 2. Gains on each hero's live state (temporary Stamina keeps the greater; surges add).
@@ -3856,9 +3975,17 @@ const abilityCorrect: OperationDefinition = {
             },
             event._id,
             // V175: a corrected roll's damage is still rolled damage (rule/damage/rolled-damage.md).
-            correctionDealer
-              ? { dealer: correctionDealer, meleeStrike: correctionMeleeStrike, rolled: true }
-              : { rolled: true },
+            {
+              ...(correctionDealer
+                ? { dealer: correctionDealer, meleeStrike: correctionMeleeStrike }
+                : {}),
+              rolled: true,
+              // V202: whether this creature took damage from the hit before and after.
+              correctionTaken: {
+                before: applied ? damageTaken(applied) : 0,
+                after: correction.damageAfter ? damageTaken(correction.damageAfter) : 0,
+              },
+            },
           );
         if (savedCompiled && correctedCompiled?.kind === 'resolved') {
           for (const occurrence of savedCompiled.effects) {

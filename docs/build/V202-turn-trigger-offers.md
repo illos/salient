@@ -192,3 +192,42 @@ abilities, used by hand.
   - Mutation check: with `startedByThis` forced false and the affected-creature close removed, two
     of the new app tests fail.
   - Journeys were not run (TESTER).
+- Review follow-ups (changes required, 2026-09-25):
+  1. **Corrections.** The damage half made every damage correction to a Censor or an ally refused,
+     which broke `scripts/headless/multi-target.ts` and `effect-riders.ts` and normal play. The
+     correction now passes the damage the hit dealt that creature before and after
+     (`correctionTaken`, `convex/lib/abilityOperations.ts` → `resolve.ts` `writeDamage` →
+     `watchers.ts` → `assertNoTriggerOnCorrection`). A turn-boundary holder with the damage half and
+     no revision refuses only when that changes between none and some (Q-TURNTRIG-1 point 8). Test:
+     Spear Charge 4 → 5 on a Censor passes through `/ability correct`; 4 → 6 passes and 4 → 0 is
+     refused through the function.
+  2. **My Life for Yours applies its Recovery.** The sentence is now a `recovery-transfer`, and the
+     use applies it as V175's Mark Recovery benefit does. It is refused at 0 Recoveries (the card
+     stays open); otherwise the Censor's Recoveries drop by 1 and the target regains the recovery
+     value up to its maximum. The rider outcome is `applied`, with a `recovery` record, and the
+     table's "Applied" badge. Breath of Dawn Remembered stays table work (Q-TURNTRIG-1 point 6,
+     with V175's reading as the alternative). `scripts/headless/censor.ts` now expects the Recovery
+     spent and the healing (the ledger's recovery value). Test: refused at 0, then 2 → 1 Recoveries
+     and Thorn 5 → 13.
+  3. **Double payment.** The texts are reworded: `shared/evaluate/censorAbilities.ts` (My Life for
+     Yours), and the part-abilities "My Life for Yours: Cleanse"
+     (`shared/content/classes/censor/abilities.ts`) and "Breath of Dawn Remembered: Additional
+     Recovery" (`shared/content/classes/elementalist/abilities.ts`). The card's Spend is the payment,
+     and the part is only for a use whose card Spend wasn't paid. A part-ability used in combat now
+     gets a rule warning when a compiled ability from the same source file paid its Spend this round
+     (`spendPaidOnCard`).
+  4. **Two Shadows.** Accepting a turn-taking card closes the other open turn-taking cards of the same
+     turn end (journaled), and an accept against a turn another creature holds is refused
+     (`assertTurnFree`). Test: Shade's acceptance closes Umbra's card, and Umbra's accept is refused
+     with Insight unchanged.
+  5. Q-TURNTRIG-1 points 4, 6 and 7 are labelled as interpretations; point 7 has an alternative;
+     points 8 and 9 are added.
+  6. Checks after the follow-ups: `pnpm -s lint`, `pnpm -s tsc --noEmit` and
+     `pnpm -s tsc -p tsconfig.web.json` pass. The report regenerates (191, 28; only My Life for
+     Yours's shape changes in `support.json`) and `--check` matches. The audit regenerates with no
+     diff. `vitest run --maxWorkers=2` over 42 files (the V202 engine and app files, every
+     `tests/app` file with a correction, marks, watchers, combat, history, heroic-resource-censor,
+     shadow and elementalist characters, interactions, closeout): 299 tests pass. Mutation check:
+     with the damaged-or-not test removed, the correction test fails. Journeys were not run
+     (TESTER): `multi-target.ts`, `effect-riders.ts`, `kit-bonus.ts` (corrections on Censor or
+     Elementalist targets) and `censor.ts` are the ones to run.

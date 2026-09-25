@@ -305,7 +305,18 @@ export interface CompiledManualOutcome extends EffectIdentity {
  */
 export interface CompiledRiderOutcome extends EffectIdentity {
   kind: 'rider';
-  status: 'manual' | 'fact-needed';
+  /**
+   * V202 `applied`: a `recovery-transfer` the use applied (convex/lib/abilityOperations.ts), with
+   * `recovery` recording the Recovery spent and the Stamina regained.
+   */
+  status: 'manual' | 'fact-needed' | 'applied';
+  recovery?: {
+    spenderId: string;
+    recoveriesBefore: number;
+    recoveriesAfter: number;
+    staminaBefore: number;
+    staminaAfter: number;
+  };
   shape: RiderNode['shape'];
   dependency: RiderNode['dependency'];
   after: string[];

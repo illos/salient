@@ -1110,6 +1110,8 @@ export async function writeDamage(
     rolled?: boolean;
     meleeAbility?: boolean;
     partOfHit?: boolean;
+    /** V202: a correction's damage taken by this creature before and after (ObserveOptions). */
+    correctionTaken?: { before: number; after: number };
   } = {},
 ): Promise<void> {
   // V02: squad members take damage through their squad's pool (convex/lib/squads.ts commits it).
@@ -1120,6 +1122,9 @@ export async function writeDamage(
     else
       await observeDamage(ctx, scope, observation, {
         ...(useEventId !== undefined ? { correction: true } : {}),
+        ...(useEventId !== undefined && options.correctionTaken
+          ? { correctionTaken: options.correctionTaken }
+          : {}),
       });
   };
   const dealer =

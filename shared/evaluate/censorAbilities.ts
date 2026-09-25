@@ -53,7 +53,7 @@ export function censorAbilities(
         ? {
             ...a,
             activationCondition:
-              'Only when the target starts their turn or takes damage. Spend your Recovery and resolve the healing manually. The optional Cleanse action pays 1 Wrath separately.',
+              'Offered as a card when the target starts their turn or takes damage. Accepting spends your Recovery and heals the target by your recovery value. Pay the optional 1 Wrath Spend on the card (spend=1); then don’t also use My Life for Yours: Cleanse.',
           }
         : a,
   );

@@ -488,6 +488,8 @@ export async function assertNoTriggerOnCorrection(
   ctx: MutationCtx,
   scope: JournalScope,
   damage: ObservedDamage,
+  /** V202: the damage this creature took from the hit before and after the correction. */
+  taken?: { before: number; after: number },
 ): Promise<void> {
   if (damage.amount === 0) return;
   const encounter = await roundOf(ctx, scope.campaignId);
@@ -505,6 +507,12 @@ export async function assertNoTriggerOnCorrection(
   };
   for (const holder of holders) {
     const target = triggerTarget(holder.target);
+    const spec = holder.trigger as TriggerSpec;
+    // V202: the damage half of a turn-boundary response ("or takes damage") answers only whether
+    // the target took damage; its effect doesn't read the amount. A correction that keeps the
+    // target damaged (or undamaged) doesn't change whether it occurred (Q-TURNTRIG-1 point 8).
+    if (spec.orDamageTaken && !holder.revision && taken && taken.before > 0 === taken.after > 0)
+      continue;
     if (
       target &&
       triggerTargetFor(
@@ -591,6 +599,47 @@ export async function closeOffersOnPlay(
     // an earlier offer.
     if (offer.triggeringEventId === scope.eventId) continue;
     await closeOffer(ctx, scope, card);
+  }
+}
+
+/**
+ * V202: only one creature can take the next turn after the triggering hero. A card that lets its
+ * user take their turn is refused once another accepted card of the same turn end holds the
+ * allowance (`encounters.turnAfter`).
+ */
+export async function assertTurnFree(
+  ctx: MutationCtx,
+  offer: TriggerOffer,
+  actorId: string,
+): Promise<void> {
+  if (!offer.takesTurn || offer.boundary?.kind !== 'turn-end') return;
+  const encounter = await ctx.db.get(offer.encounterId);
+  const held = encounter?.turnAfter;
+  if (held && held.afterTurnId === offer.boundary.turnId && held.actorId !== actorId)
+    throw new ConvexError(
+      `${held.actorName} already takes the next turn after ${held.afterName} (${held.abilityName}); ${offer.abilityName} can't also take it.`,
+    );
+}
+
+/**
+ * V202: accepting a card that takes the next turn closes the other open cards of the same turn end
+ * that would take it too, in the accepting use's journal (undo reopens them).
+ */
+export async function closeOtherTurnTakers(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  card: Doc<'interactions'>,
+  offer: TriggerOffer,
+): Promise<void> {
+  for (const other of await openOffers(ctx, scope.campaignId)) {
+    const theirs = other.offer as TriggerOffer | undefined;
+    if (
+      other._id !== card._id &&
+      other.kind === OFFER_KIND &&
+      theirs?.takesTurn &&
+      theirs.triggeringEventId === offer.triggeringEventId
+    )
+      await closeOffer(ctx, scope, other);
   }
 }
 
