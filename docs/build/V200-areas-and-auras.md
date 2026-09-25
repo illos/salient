@@ -239,3 +239,4 @@ Compendium read (`en/unified/md`):
       next-turn-duration, registry, abilities, combat, history, closeout, table, squads,
       party-read-limit, compiled-effects, condition-instances, effect-riders, multi-target,
       supporting-actions, elementalist-character.
+- Committed on `slice/V200` as `43cea7d5` (not pushed). Handoff to TESTER and review is the lead's.
