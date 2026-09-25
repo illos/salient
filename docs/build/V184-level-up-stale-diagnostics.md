@@ -21,3 +21,9 @@ diagnostics describe the earlier choices.
 
 1. Test-Deploy capture: v164-step-perk.png shows no "Needs a selection" and a completed perk step.
 2. Gate.
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `887f448` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `5a9f67c6-9c3e-4270-8f6d-e739420dc105`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V184-release-887f448`.

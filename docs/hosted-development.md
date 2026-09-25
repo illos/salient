@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V181 level-up dependent choices
+## Current release — V184 level-up diagnostics
+
+Backend/frontend source `887f44892a06be30c759d5e2f610595a2ac7a013` published on 2026-09-25 as
+Worker `5a9f67c6-9c3e-4270-8f6d-e739420dc105`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V184](build/V184-level-up-stale-diagnostics.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V181 level-up dependent choices
 
 Backend/frontend source `bd4f0cca6fe13ebec0970d0a63f347af7c4dc5a9` published on 2026-09-25 as
 Worker `6371fbe2-18a0-4c93-8e05-e69de06273a9`. Backend and schema validation, the hosted build and the upload succeeded.
