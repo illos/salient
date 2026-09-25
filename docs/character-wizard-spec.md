@@ -788,7 +788,9 @@ All other characters use this review contract.
 5. Confirmed: the character owner may withdraw a submitted review before the Director decides. Declining or
    withdrawing a full-edit proposal leaves the effective build intact. Proposed consistency invalidates that
    submission so a stale approval cannot activate it. The relevant review UI surfaces requests and their
-   state; v1 has no notification system. Feedback presentation remains a UI decision. All notifications,
+   state. The Director's campaign page shows the count of pending admission and full-edit reviews next to
+   Join requests; the count opens the review section in Manage players. V1 has no notification system.
+   Feedback presentation remains a UI decision. All notifications,
    including email/push review alerts, are deferred beyond v1.
 6. A valid scoped level-up advances the effective build without review and records the transition. If a
    pending full edit was based on an earlier build, mark it stale and require reconciliation/resubmission

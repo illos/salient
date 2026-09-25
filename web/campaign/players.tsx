@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The "Players" section of the campaign home (docs/design-mockups/v2/campaign-home-simplified.png;
- * V68): hard-rule heading with `n members · n characters`, the Director's `JOIN REQUESTS n` and
- * MANAGE PLAYERS at the right, then one card per member: disc, name, the OWNER and DIRECTOR badges
+ * V68): hard-rule heading with `n members · n characters`, the Director's join-request and
+ * build-review counts and MANAGE PLAYERS at the right, then one card per member: disc, name, the OWNER and DIRECTOR badges
  * (docs/accounts-and-access-spec.md#campaigns: every other member is a player and carries no tag;
  * Observer is a session-level state), a presence dot, and one row per admitted hero with `LV n`.
  * The viewer's own card is tinted. A member who is not the Director sees the state of their own
@@ -63,7 +63,8 @@ export function PlayersSection({
 }) {
   const heroes = members.reduce((n, m) => n + m.heroes.length, 0);
   const reviews = useQuery(api.characters.reviews, { campaignId });
-  const ownPending = director ? [] : (reviews ?? []).filter(r => r.status === 'pending');
+  const pendingReviews = reviews?.filter(r => r.status === 'pending') ?? [];
+  const ownPending = director ? [] : pendingReviews;
   const ordered = [...members].sort((a, b) =>
     a.userId === ownerId
       ? -1
@@ -87,6 +88,17 @@ export function PlayersSection({
                 Join requests
                 <span className={cn('ml-1', joinRequests > 0 ? 'text-primary' : '')}>
                   {joinRequests}
+                </span>
+              </Button>
+              <Button
+                variant="link"
+                className="text-sm text-muted-foreground"
+                onClick={() => onManage('admissions')}
+                data-testid="build-review-count"
+              >
+                Build reviews
+                <span className={cn('ml-1', pendingReviews.length > 0 ? 'text-primary' : '')}>
+                  {pendingReviews.length}
                 </span>
               </Button>
               <Button
