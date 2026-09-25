@@ -127,3 +127,12 @@ lists the level-two abilities, and Forge's Summoner "Summoner's Cradle" has no C
   `git archive 04410e6c` to an anonymous local deployment: "Convex functions ready"; the codegen
   differs from the committed `_generated/api.d.ts` only by five `lib/*` entries also missing on
   main, none from this slice. The browser spec is authored only; TESTER has run nothing.
+- 2026-09-25: review fixes. Rebased onto origin/main `2778db59` (V09 part a merged as cherry-picks;
+  STATUS rows from both sides kept). Fixes in `a66e35eb`: build.mjs bundles into a removed mkdtemp
+  directory; alias test against the cited Compendium names; diagnostics for Forge-absent Beastheart
+  and Field Arsenal choices (synthetic Shining Armor + Mountain Tactician); clamped-Recoveries
+  diagnostic; payload SHA-256 command key; `--diagnostics` CLI; `liveSeed` no longer optional;
+  oversized-preview test. Checks: both `tsc` configs exit 0, `pnpm -s lint` exit 0, focused vitest
+  (4 files) 51/51, Convex push of `git archive 6199c40b` in a removed mkdtemp copy: "Convex
+  functions ready!". A one-step `import` runner run into a removed temp output reproduced the
+  table above and left no `salient-forge-*` directory.
