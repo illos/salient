@@ -1,10 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Bundle the unmodified pinned Forge rules, never its browser UI. Forge sources are read from the
-// pin's Git objects (pinned-source.mjs), so the sparse Presidium copy works as well as CT114's.
+// Bundle the unmodified pinned Forge rules, never its browser UI, and run the family's runner.
+// Forge sources are read from the pin's Git objects (pinned-source.mjs), so the sparse Presidium
+// copy works as well as CT114's. One-copy rule (AGENTS.md): the bundle is a derived copy of Forge
+// sources, so it is built into a fresh mkdtemp directory, executed from there, and removed in a
+// finally block; only the runner's reports (and bundle-inputs.json) reach SALIENT_FORGE_OUTPUT.
+// Usage: SALIENT_FORGE_OUTPUT=<dir> [SALIENT_FORGE_FAMILY=<family>] node scripts/forge/build.mjs
 import { createRequire } from 'node:module';
-import { resolve } from 'node:path';
+import { join, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { vendorDir } from '../lib/vendor.ts';
 import { pinnedForgeSource } from './pinned-source.mjs';
 
@@ -23,46 +28,59 @@ if (!['ancestry', 'shadow', 'tactician', 'import'].includes(family))
   throw new Error('Unknown Forge witness family');
 mkdirSync(output, { recursive: true });
 const blocked = new Set(['dompurify', 'modern-screenshot', 'html2canvas', 'jspdf', 'marked']);
-const result = await build({
-  entryPoints: [family === 'ancestry' ? 'scripts/forge/run.ts' : `scripts/forge/run-${family}.ts`],
-  outfile: resolve(output, 'forge-run.mjs'),
-  bundle: true,
-  platform: 'node',
-  format: 'esm',
-  target: 'node24',
-  metafile: true,
-  plugins: [
-    pinnedForgeSource({ vendor, pin, resolveDir: resolve('.') }),
-    {
-      name: 'presentation-boundary',
-      setup(builder) {
-        builder.onResolve(
-          { filter: /^(dompurify|modern-screenshot|html2canvas|jspdf|marked|uuid)$/ },
-          args => ({ path: args.path, namespace: 'boundary' }),
-        );
-        builder.onLoad({ filter: /.*/, namespace: 'boundary' }, args => {
-          if (args.path === 'uuid')
-            return { contents: "export { randomUUID as v4 } from 'node:crypto';", loader: 'js' };
-          if (!blocked.has(args.path)) throw new Error('Unexpected boundary import');
-          return {
-            contents: `const fail = () => { throw new Error('Forbidden Forge presentation dependency: ${args.path}'); }; export default new Proxy(fail, { get: fail, apply: fail, construct: fail }); export const domToImage = fail; export const marked = new Proxy(fail, { get: fail, apply: fail });`,
-            loader: 'js',
-          };
-        });
+const work = mkdtempSync(join(tmpdir(), 'salient-forge-'));
+try {
+  const bundle = join(work, 'forge-run.mjs');
+  const result = await build({
+    entryPoints: [
+      family === 'ancestry' ? 'scripts/forge/run.ts' : `scripts/forge/run-${family}.ts`,
+    ],
+    outfile: bundle,
+    bundle: true,
+    platform: 'node',
+    format: 'esm',
+    target: 'node24',
+    metafile: true,
+    plugins: [
+      pinnedForgeSource({ vendor, pin, resolveDir: resolve('.') }),
+      {
+        name: 'presentation-boundary',
+        setup(builder) {
+          builder.onResolve(
+            { filter: /^(dompurify|modern-screenshot|html2canvas|jspdf|marked|uuid)$/ },
+            args => ({ path: args.path, namespace: 'boundary' }),
+          );
+          builder.onLoad({ filter: /.*/, namespace: 'boundary' }, args => {
+            if (args.path === 'uuid')
+              return { contents: "export { randomUUID as v4 } from 'node:crypto';", loader: 'js' };
+            if (!blocked.has(args.path)) throw new Error('Unexpected boundary import');
+            return {
+              contents: `const fail = () => { throw new Error('Forbidden Forge presentation dependency: ${args.path}'); }; export default new Proxy(fail, { get: fail, apply: fail, construct: fail }); export const domToImage = fail; export const marked = new Proxy(fail, { get: fail, apply: fail });`,
+              loader: 'js',
+            };
+          });
+        },
       },
-    },
-  ],
-});
-writeFileSync(
-  resolve(output, 'bundle-inputs.json'),
-  JSON.stringify(
-    {
-      pin,
-      inputs: Object.keys(result.metafile.inputs),
-      presentationOnly: [...blocked],
-      uuid: 'node:crypto.randomUUID',
-    },
-    null,
-    2,
-  ) + '\n',
-);
+    ],
+  });
+  writeFileSync(
+    resolve(output, 'bundle-inputs.json'),
+    JSON.stringify(
+      {
+        pin,
+        inputs: Object.keys(result.metafile.inputs),
+        presentationOnly: [...blocked],
+        uuid: 'node:crypto.randomUUID',
+      },
+      null,
+      2,
+    ) + '\n',
+  );
+  try {
+    execFileSync(process.execPath, [bundle], { stdio: 'inherit', env: process.env });
+  } catch (error) {
+    process.exitCode = typeof error.status === 'number' ? error.status : 1;
+  }
+} finally {
+  rmSync(work, { recursive: true, force: true });
+}

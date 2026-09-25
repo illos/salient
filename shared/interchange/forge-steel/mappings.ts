@@ -508,4 +508,33 @@ export const featureRules: Record<string, FeatureRule> = {
   'hero#default-language': fixed('Caelian', 'en/books/heroes/clean/Draw Steel Heroes.md'),
 };
 
+/**
+ * Salient decisions no pinned Forge hero field records (V182). The importer reports each one that
+ * applies to the imported build, with this reason; the decision stays open for the owner.
+ */
+export const forgeAbsentDecisions: Record<string, string> = {
+  // feature/beastheart/level-1/kit.md: the companion chooses the kit's melee damage bonus or +0/+0/+4.
+  'class.beastheart.companion-melee-bonus':
+    'Forge does not record the companion melee damage bonus choice.',
+  // feature/companion/beastheart/drake/level-1/elementally-attuned.md
+  'class.beastheart.drake-attunement': "Forge does not record the drake's attuned damage type.",
+  // feature/tactician/level-1/field-arsenal.md: "If both kits grant you the same benefit, you take
+  // one or the other"; the choice exists only while the two kits print different values.
+  ...Object.fromEntries(
+    [
+      'stamina',
+      'speed',
+      'stability',
+      'disengage',
+      'meleeDamage',
+      'rangedDamage',
+      'meleeDistance',
+      'rangedDistance',
+    ].map(benefit => [
+      `class.tactician.arsenal.${benefit}`,
+      `Forge does not record which kit's ${benefit} bonus Field Arsenal takes.`,
+    ]),
+  ),
+};
+
 export const ruleKey = (scope: string, featureId: string) => `${scope}#${featureId}`;

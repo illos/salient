@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * V182 runner: writes the Forge-built level-two and level-three heroes of every class as
- * `.ds-hero` files, asks the pinned Forge logic whether each active choice is made, and imports each
- * file with Salient's adapter, comparing the imported class and kit decisions with the ledger
- * selections the hero was built from. Build: SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs,
- * then run `node "$SALIENT_FORGE_OUTPUT/forge-run.mjs"` from the repository root. With
- * SALIENT_FORGE_FIXTURE_DIR set it also writes each file gzipped, with a manifest, as the retained
+ * V182 runner: builds the Forge level-two and level-three heroes of every class, asks the pinned
+ * Forge logic whether each active choice is made, and imports each file with Salient's adapter,
+ * comparing the imported class and kit decisions with the ledger selections the hero was built
+ * from. Run from the repository root through the bundler, which executes and then deletes the
+ * bundle: `SALIENT_FORGE_OUTPUT=<dir> SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs`.
+ * Only summary.json is written to SALIENT_FORGE_OUTPUT; the heroes are not. With
+ * SALIENT_FORGE_FIXTURE_DIR set, each hero is written gzipped, with a manifest, as the retained
  * fixtures of tests/forge-import-levels.test.ts (tests/fixtures/v182-forge/).
  */
 import { createHash } from 'node:crypto';
@@ -23,8 +24,6 @@ import { createImportWitnesses, sourcebooks } from './import-witnesses.ts';
 
 const output = process.env.SALIENT_FORGE_OUTPUT;
 if (!output) throw new Error('Missing artifact directory');
-const files = join(output, 'heroes');
-mkdirSync(files, { recursive: true });
 const fixtures = process.env.SALIENT_FORGE_FIXTURE_DIR;
 if (fixtures) mkdirSync(fixtures, { recursive: true });
 console.error = () => {
@@ -44,7 +43,6 @@ const sameValue = (a: unknown, b: unknown) =>
 const results = createImportWitnesses().map(witness => {
   const text = JSON.stringify(witness.hero, null, 2) + '\n';
   const file = `${witness.id}.ds-hero`;
-  writeFileSync(join(files, file), text);
   if (fixtures) writeFileSync(join(fixtures, `${file}.gz`), gzipSync(text, { level: 9 }));
   const outstanding = HeroLogic.getFeatures(witness.hero)
     .map(entry => entry.feature)
@@ -156,7 +154,7 @@ if (fixtures)
         kind: 'Forge-built from pinned definitions (not Forge UI exports)',
         forgeVendorRevision: summary.forgeRevision,
         generator:
-          'SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs; node "$SALIENT_FORGE_OUTPUT/forge-run.mjs"',
+          'SALIENT_FORGE_FIXTURE_DIR=tests/fixtures/v182-forge SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs',
         template: 'tests/fixtures/v45-reference/Grug-level-2.ds-hero (ancestry, culture, career)',
         selections: 'tests/fixtures/level-three-builds.ts',
         heroes: results.map(({ id, file, sha256, bytes, forgeOutstanding }) => ({

@@ -420,9 +420,9 @@ export const characterTables = {
     unmapped: v.array(v.string()),
     /**
      * Stored only; not applied to live state while Q-V-3 is open. Null when the build has no
-     * maxima yet or the Forge fields are malformed. Optional for rows written before V182.
+     * maxima yet or the Forge fields are malformed.
      */
-    liveSeed: v.optional(v.union(v.null(), forgeLiveSeedValidator)),
+    liveSeed: v.union(v.null(), forgeLiveSeedValidator),
     importedAt: v.number(),
   })
     .index('by_character', ['characterId'])

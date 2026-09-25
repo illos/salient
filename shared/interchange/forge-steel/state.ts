@@ -71,3 +71,19 @@ export function forgeLiveSeed(
     forge: play,
   };
 }
+
+/**
+ * Notes on how the seed departs from the Forge values: Forge recorded more Recoveries used than
+ * Salient's maximum, so the seed holds none rather than a negative count (rule/health/recoveries.md).
+ */
+export function liveSeedDiagnostics(
+  seed: ForgeLiveSeed | null,
+): { path: string; reason: string }[] {
+  if (!seed || seed.forge.recoveriesUsed <= seed.recoveriesMaximum) return [];
+  return [
+    {
+      path: 'state.recoveriesUsed',
+      reason: `Forge records ${seed.forge.recoveriesUsed} Recoveries used, more than Salient's maximum of ${seed.recoveriesMaximum}; the recorded Recoveries are 0.`,
+    },
+  ];
+}

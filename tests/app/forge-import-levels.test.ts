@@ -28,10 +28,9 @@ async function counts(t: ReturnType<typeof backend>) {
   }));
 }
 
-test('preview reports level, class, name and diagnostics and writes nothing', async () => {
+test('preview reports level, class, name and diagnostics, and refuses bad files', async () => {
   const t = backend();
   const alice = await account(t, 'Alice');
-  const before = await counts(t);
   const preview = await alice.client.query(api.characterImport.previewForge, {
     payload: forgeBuilt('tactician-level-3'),
   });
@@ -46,7 +45,17 @@ test('preview reports level, class, name and diagnostics and writes nothing', as
   });
   expect(malformed.error).toBeTruthy();
   expect(malformed.level).toBeNull();
-  expect(await counts(t)).toEqual(before);
+  // Over the 512 KB bound: refused before parsing, as the import would be.
+  const oversized = await alice.client.query(api.characterImport.previewForge, {
+    payload: ' '.repeat(512 * 1024 + 1),
+  });
+  expect(oversized).toEqual({
+    error: 'Forge Steel hero files up to 512 KB are supported.',
+    name: null,
+    level: null,
+    className: null,
+    diagnostics: [],
+  });
 });
 
 test('a hero above its class ceiling is refused and writes nothing', async () => {
@@ -113,4 +122,16 @@ test('import diagnostics and the reconciled play state are readable by the owner
   const saved = await alice.client.query(api.characters.get, { characterId });
   expect(saved.liveState).toBeNull();
   expect(await bob.client.query(api.characterImport.importDiagnostics, { characterId })).toBeNull();
+
+  // More Recoveries used than Salient's maximum (10) is recorded as none, with a diagnostic.
+  hero.state.recoveriesUsed = 12;
+  const spent = await alice.client.mutation(api.characterImport.importForge, {
+    commandId: 'forge-import-grug-spent',
+    payload: JSON.stringify(hero),
+  });
+  const spentRead = await alice.client.query(api.characterImport.importDiagnostics, {
+    characterId: spent.characterId,
+  });
+  expect(spentRead?.liveSeed?.recoveries).toBe(0);
+  expect(spentRead?.diagnostics.some(d => /12 Recoveries used/.test(d.reason))).toBe(true);
 });

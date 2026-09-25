@@ -30,6 +30,11 @@ interface Preview {
   diagnostics: Diagnostic[];
 }
 
+async function sha256Hex(text: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
 /** Mirrors MAX_FORGE_PAYLOAD_BYTES; the server enforces the limit, this only avoids an upload. */
 const MAX_FILE_BYTES = 512 * 1024;
 
@@ -60,7 +65,7 @@ export function ForgeImportCard() {
   const importForge = useMutation(api.characterImport.importForge);
   const command = useCommand();
   const input = useRef<HTMLInputElement>(null);
-  const [file, setFile] = useState<{ name: string; payload: string } | null>(null);
+  const [file, setFile] = useState<{ name: string; payload: string; digest: string } | null>(null);
   const [preview, setPreview] = useState<Preview | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reading, setReading] = useState(false);
@@ -81,7 +86,7 @@ export function ForgeImportCard() {
     try {
       const payload = await chosen.text();
       const result = await convex.query(api.characterImport.previewForge, { payload });
-      setFile({ name: chosen.name, payload });
+      setFile({ name: chosen.name, payload, digest: await sha256Hex(payload) });
       setPreview(result);
     } catch (e) {
       setError(errorMessage(e));
@@ -97,7 +102,8 @@ export function ForgeImportCard() {
       async commandId => {
         created.id = (await importForge({ commandId, payload: file.payload })).characterId;
       },
-      JSON.stringify(['character.importForge', file.name, file.payload.length]),
+      // The command identity follows the file's content, so a different file is a new command.
+      JSON.stringify(['character.importForge', file.digest]),
     );
     if (done && created.id)
       void navigate({ to: '/characters/$characterId', params: { characterId: created.id } });

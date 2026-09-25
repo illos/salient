@@ -30,7 +30,7 @@ import {
   importForgeText,
   type ForgeImportResult,
 } from '../shared/interchange/forge-steel/import';
-import { forgeLiveSeed } from '../shared/interchange/forge-steel/state';
+import { forgeLiveSeed, liveSeedDiagnostics } from '../shared/interchange/forge-steel/state';
 
 const result = v.object({
   characterId: v.id('characters'),
@@ -108,7 +108,7 @@ export const importForge = mutation({
     const refusal = forgeImportRefusal(imported);
     if (refusal) throw new ConvexError(refusal);
     // The adapter bounds the diagnostics (count, string length, total size) and the authored fields.
-    const { diagnostics, unmapped } = imported;
+    const { unmapped } = imported;
     const existing = await ctx.db
       .query('characters')
       .withIndex('by_owner', q => q.eq('ownerId', user._id))
@@ -140,6 +140,7 @@ export const importForge = mutation({
       staminaMaximum: maximum(baseline?.staminaMaximum?.value),
       recoveriesMaximum: maximum(baseline?.recoveriesMaximum?.value),
     });
+    const diagnostics = [...imported.diagnostics, ...liveSeedDiagnostics(liveSeed)];
     await ctx.db.insert('characterImports', {
       characterId,
       ownerId: user._id,
@@ -186,7 +187,7 @@ export const importDiagnostics = query({
       level: record.level,
       forgeVendorRevision: record.forgeVendorRevision,
       diagnostics: record.diagnostics,
-      liveSeed: record.liveSeed ?? null,
+      liveSeed: record.liveSeed,
     };
   },
 });

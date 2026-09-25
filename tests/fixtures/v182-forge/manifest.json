@@ -2,7 +2,7 @@
   "schemaVersion": "v182-forge-built-1",
   "kind": "Forge-built from pinned definitions (not Forge UI exports)",
   "forgeVendorRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
-  "generator": "SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs; node \"$SALIENT_FORGE_OUTPUT/forge-run.mjs\"",
+  "generator": "SALIENT_FORGE_FIXTURE_DIR=tests/fixtures/v182-forge SALIENT_FORGE_FAMILY=import node scripts/forge/build.mjs",
   "template": "tests/fixtures/v45-reference/Grug-level-2.ds-hero (ancestry, culture, career)",
   "selections": "tests/fixtures/level-three-builds.ts",
   "heroes": [

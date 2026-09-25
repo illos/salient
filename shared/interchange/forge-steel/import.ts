@@ -13,7 +13,8 @@
 import { getDefinitions } from '../../content/character-decisions.ts';
 import type { SelectionValue } from '../../contracts/characterEvaluation.ts';
 import type { Decision, DecisionDefinitions } from '../../evaluate/definitions.ts';
-import { featureRules, ruleKey } from './mappings.ts';
+import { featureRules, forgeAbsentDecisions, ruleKey } from './mappings.ts';
+import { isAvailable } from '../../evaluate/structure.ts';
 import { decisionSlug, looseName, resolveName } from './names.ts';
 import { assertForgeHero, parseForgeHero, type ForgeFeature, type ForgeHero } from './shape.ts';
 import { activeFeatures, type ActiveFeature } from './walker.ts';
@@ -543,6 +544,16 @@ export function importForgeHero(
     assign(`culture.${role}`, [feature.name], path, about(feature));
     if (`culture.${role}` in selections)
       assign(`culture.${role}.skill`, names, path, about(feature));
+  }
+
+  // --- Salient choices the Forge file has no field for ---
+  // Reported only when the choice applies to this build (the evaluator's own availability rule),
+  // so the owner is told to make it in Salient instead of seeing an unexplained incomplete draft.
+  for (const [decisionId, reason] of Object.entries(forgeAbsentDecisions)) {
+    const decision = decisions.get(decisionId);
+    if (!decision || decisionId in selections) continue;
+    if (!isAvailable(decision, selections, decisions)) continue;
+    note({ path: 'class', reason: `${reason} Choose it in Salient (${decisionId}).` }, false);
   }
 
   // --- Authored details and unmapped data ---

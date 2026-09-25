@@ -15,7 +15,14 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { forgeImportRefusal, importForgeText } from '../shared/interchange/forge-steel/import.ts';
-import { forgeLiveSeed, forgePlayState } from '../shared/interchange/forge-steel/state.ts';
+import {
+  forgeLiveSeed,
+  forgePlayState,
+  liveSeedDiagnostics,
+} from '../shared/interchange/forge-steel/state.ts';
+import { forgeNameAliases, resolveName } from '../shared/interchange/forge-steel/names.ts';
+import { getDefinitions } from '../shared/content/character-decisions.ts';
+import { vendorPath } from '../scripts/lib/vendor.ts';
 import { levelThreeBuilds } from './fixtures/level-three-builds.ts';
 
 const directory = 'tests/fixtures/v182-forge';
@@ -76,7 +83,50 @@ for (const build of levelThreeBuilds())
           result.diagnostics.some(d => /but no deity/.test(d.reason)),
           'the missing deity is reported',
         );
+      // feature/beastheart/level-1/kit.md: the companion's melee bonus choice has no Forge field.
+      if (build.className === 'Beastheart')
+        assert.ok(
+          result.diagnostics.some(d => d.reason.includes('class.beastheart.companion-melee-bonus')),
+          'the missing companion melee bonus is reported',
+        );
     });
+
+test('V182 Field Arsenal benefit choices Forge cannot record are reported for conflicting kits', () => {
+  // SYNTHETIC: the Forge-built Tactician level-3 hero with its Field Arsenal kits replaced by the
+  // unchanged pinned Shining Armor (from the same file) and Mountain (from the Forge-built Fury).
+  // kit/shining-armor.md: Stamina +12 per echelon, Stability +1, melee damage +2/+2/+2;
+  // kit/mountain.md: Stamina +9 per echelon, Stability +2, melee damage +0/+0/+4. Both kits
+  // print Stamina, Stability and melee damage with different values, so Field Arsenal
+  // (feature/tactician/level-1/field-arsenal.md) asks which one to take for those three only.
+  type Feature = { id: string; data: { selected: { name: string }[] } };
+  const kitFeature = (
+    hero: { class: { featuresByLevel: { features: Feature[] }[] } },
+    id: string,
+  ) => hero.class.featuresByLevel.flatMap(row => row.features).find(feature => feature.id === id)!;
+  const tactician = JSON.parse(heroText('tactician-level-3'));
+  const fury = JSON.parse(heroText('fury-level-3'));
+  const furyKit = fury.class.subclasses
+    .flatMap((s: { featuresByLevel: { features: Feature[] }[] }) =>
+      s.featuresByLevel.flatMap(row => row.features),
+    )
+    .find((f: Feature) => f.id === 'fury-sub-1-1-2') as Feature;
+  const arsenal = kitFeature(tactician, 'tactician-1-4');
+  const shining = arsenal.data.selected.find(kit => kit.name === 'Shining Armor')!;
+  const mountain = furyKit.data.selected.find(kit => kit.name === 'Mountain')!;
+  arsenal.data.selected = [shining, mountain];
+  const result = importForgeText(JSON.stringify(tactician));
+  assert.equal(result.selections['kit.choice'], 'Shining Armor');
+  assert.equal(result.selections['class.tactician.second-kit'], 'Mountain');
+  const reported = result.diagnostics
+    .map(d => /\((class\.tactician\.arsenal\.[A-Za-z]+)\)/.exec(d.reason)?.[1])
+    .filter(Boolean)
+    .sort();
+  assert.deepEqual(reported, [
+    'class.tactician.arsenal.meleeDamage',
+    'class.tactician.arsenal.stability',
+    'class.tactician.arsenal.stamina',
+  ]);
+});
 
 test('V182 a level-three import leaves no level-three choice diagnosed for fully mapped classes', () => {
   for (const id of ['fury', 'shadow', 'tactician', 'troubadour', 'null', 'talent', 'summoner']) {
@@ -137,8 +187,84 @@ test('V182 liveSeed reconciles Forge damage and Recoveries used against Salient 
   // More Recoveries used than Salient's maximum leaves none, never a negative count.
   const spent = forgeLiveSeed({ ...result.playState!, recoveriesUsed: 12 }, maxima);
   assert.equal(spent?.recoveries, 0);
+  // ... and says so: 12 used against a maximum of 10.
+  assert.deepEqual(
+    liveSeedDiagnostics(spent).map(d => d.path),
+    ['state.recoveriesUsed'],
+  );
+  assert.match(liveSeedDiagnostics(spent)[0]!.reason, /12 Recoveries used.*maximum of 10/);
+  assert.deepEqual(liveSeedDiagnostics(forgeLiveSeed(result.playState, maxima)), []);
   // Without Salient maxima (an incomplete build) or with malformed Forge fields, nothing is seeded.
   assert.equal(forgeLiveSeed(result.playState, { ...maxima, staminaMaximum: null }), null);
   assert.equal(forgePlayState({ ...grug.state, staminaDamage: -1 }), null);
   assert.equal(forgePlayState({ ...grug.state, surges: '2' }), null);
+});
+
+/** Compendium `name:` frontmatter of a file under en/unified/md. */
+const compendiumName = (path: string) =>
+  /^name: (.+)$/m
+    .exec(readFileSync(vendorPath(`vendor/steel-compendium/en/unified/md/${path}`), 'utf8'))![1]!
+    .trim();
+/** V182 aliases: Forge spelling → the Compendium file whose name is the target. */
+const aliasSources: Record<string, string> = {
+  'Rapid Fire': 'kit/rapid-fire.md',
+  'Back, Blasphemer!': 'feature/ability/censor/level-1/back-blasphemer.md',
+  'Every Step ... Death!': 'feature/ability/censor/level-1/every-step-death.md',
+  'Halt, Miscreant!': 'feature/ability/censor/level-1/halt-miscreant.md',
+  'Behold, a Shield of Faith!': 'feature/ability/censor/level-1/behold-a-shield-of-faith.md',
+  'A Meteoric Introduction': 'feature/ability/elementalist/level-1/meteoric-introduction.md',
+  'Ray of Agonizing Self Reflection':
+    'feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md',
+  'Death ... Deeaaath!': 'feature/ability/fury/level-2/death-death.md',
+  'Rally Cry': 'feature/ability/summoner/level-1/rallying-cry.md',
+  'Force Orb': 'feature/ability/talent/level-3/force-orbs.md',
+  'Assursed Mummy': 'monster/minion/summoner/undead/statblock/accursed-mummy.md',
+};
+/** Subclass aliases: the Compendium file names the subclass; Salient's option drops the prefix. */
+const subclassSources: Record<string, [file: string, decision: string]> = {
+  'College of Black Ash': ['feature/shadow/level-1/shadow-college.md', 'class.shadow.college'],
+  'College of Caustic Alchemy': [
+    'feature/shadow/level-1/shadow-college.md',
+    'class.shadow.college',
+  ],
+  'College of the Harlequin Mask': [
+    'feature/shadow/level-1/shadow-college.md',
+    'class.shadow.college',
+  ],
+  'Circle of Blight': ['feature/summoner/level-1/summoner-circle.md', 'class.summoner.circle'],
+  'Circle of Graves': ['feature/summoner/level-1/summoner-circle.md', 'class.summoner.circle'],
+  'Circle of Spring': ['feature/summoner/level-1/summoner-circle.md', 'class.summoner.circle'],
+  'Circle of Storms': ['feature/summoner/level-1/summoner-circle.md', 'class.summoner.circle'],
+};
+
+test('V182 every new Forge name alias resolves to its Compendium name', () => {
+  const partA = [
+    'Elf (high)',
+    'Elf (wode)',
+    'Draconic Pride',
+    'Remember your Oath',
+    'Perseverence',
+    'All Is A Feather',
+  ];
+  assert.deepEqual(
+    Object.keys(forgeNameAliases)
+      .filter(name => !partA.includes(name))
+      .sort(),
+    [...Object.keys(aliasSources), ...Object.keys(subclassSources)].sort(),
+    'every V182 alias is covered here',
+  );
+  for (const [forge, file] of Object.entries(aliasSources)) {
+    const target = compendiumName(file);
+    // Resolves among decoys, so the alias, not a loose match, picks the Compendium name.
+    assert.equal(resolveName(forge, ['Decoy', target]), target, forge);
+  }
+  const decisions = getDefinitions(1).steps.flatMap(step => step.decisions);
+  for (const [forge, [file, decisionId]] of Object.entries(subclassSources)) {
+    const text = readFileSync(vendorPath(`vendor/steel-compendium/en/unified/md/${file}`), 'utf8');
+    assert.ok(text.includes(forge), `${file} names ${forge}`);
+    const options = decisions.find(d => d.id === decisionId)!.options!.map(o => o.value);
+    const target = forge.replace(/^(College of (the )?|Circle of )/, '');
+    assert.ok(options.includes(target), `${decisionId} offers ${target}`);
+    assert.equal(resolveName(forge, options), target, forge);
+  }
 });

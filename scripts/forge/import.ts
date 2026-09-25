@@ -4,7 +4,9 @@
  * Calls the same `characterImport:importForge` mutation as the app, as the signed-in user, then
  * reads the persisted character back through `characters:get`. Prints one JSON object.
  * `--dry-run` (V182) calls the app's `characterImport:previewForge` query instead: the level, class,
- * name, diagnostics and any refusal, with nothing written.
+ * name, diagnostics and any refusal, with nothing written. `--diagnostics <characterId>` reads an
+ * imported character's stored diagnostics and play-state seed through
+ * `characterImport:importDiagnostics` (owner only; null for anyone else).
  * Authentication follows scripts/app.ts (SALIENT_EMAIL/SALIENT_PASSWORD or SALIENT_AUTH_TOKEN).
  */
 import { readFileSync } from 'node:fs';
@@ -14,9 +16,12 @@ import { loadLocalEnvironment, openAppSession, type AppSession } from '../lib/ap
 const usage =
   'Usage: pnpm character:import <file.ds-hero|file.drawsteel-hero> [--command-id <id>] [--dry-run]\n' +
   'With --dry-run the file is only previewed (level, class, name, diagnostics); nothing is written.\n' +
+  "pnpm character:import --diagnostics <characterId> reads an import's stored diagnostics.\n" +
   'Authenticate with SALIENT_EMAIL and SALIENT_PASSWORD, or SALIENT_AUTH_TOKEN. Pass --command-id\n' +
   'to retry an earlier import exactly.';
 const argv = process.argv.slice(2);
+const diagnosticsIndex = argv.indexOf('--diagnostics');
+const diagnosticsFor = diagnosticsIndex === -1 ? null : (argv.splice(diagnosticsIndex, 2)[1] ?? '');
 const dryRunIndex = argv.indexOf('--dry-run');
 const dryRun = dryRunIndex !== -1;
 if (dryRun) argv.splice(dryRunIndex, 1);
@@ -24,7 +29,11 @@ const commandIndex = argv.indexOf('--command-id');
 const commandId =
   commandIndex === -1 ? crypto.randomUUID() : (argv.splice(commandIndex, 2)[1] ?? '');
 const [file] = argv;
-if (!file || argv.length !== 1 || !commandId || !/\.(ds-hero|drawsteel-hero)$/.test(file)) {
+if (
+  diagnosticsFor !== null
+    ? !diagnosticsFor || argv.length !== 0 || dryRun || commandIndex !== -1
+    : !file || argv.length !== 1 || !commandId || !/\.(ds-hero|drawsteel-hero)$/.test(file)
+) {
   console.error(usage);
   process.exit(1);
 }
@@ -55,9 +64,18 @@ interface Character {
 
 let session: AppSession | undefined;
 try {
-  const payload = readFileSync(file, 'utf8');
+  const payload = diagnosticsFor === null ? readFileSync(file!, 'utf8') : '';
   session = await openAppSession();
-  if (dryRun) {
+  if (diagnosticsFor !== null) {
+    const record = await session.client.query(
+      makeFunctionReference<'query', { characterId: string }, unknown>(
+        'characterImport:importDiagnostics',
+      ),
+      { characterId: diagnosticsFor },
+    );
+    console.log(JSON.stringify({ characterId: diagnosticsFor, import: record }, null, 2));
+    if (record === null) process.exitCode = 1;
+  } else if (dryRun) {
     const preview = await session.client.query(
       makeFunctionReference<'query', { payload: string }, Preview>('characterImport:previewForge'),
       { payload },
