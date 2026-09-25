@@ -138,7 +138,7 @@ not permission to work in another slice's checkout. V211 is this audit and plan.
 | [V219](build/V219-foe-damage-reactions.md) | Foe reaction holders, damage responses and retaliations | V213, V217, V218 |
 | [V220](build/V220-foe-pre-resolution-reactions.md) | Redirection, pre-resolution responses and roll-tier revision | V219; Q-FOE-1 |
 | [V221](build/V221-foe-target-tests.md) | Each target's characteristic test and its own outcome | V214, V216 |
-| [V222](build/V222-foe-traits-and-lasting-effects.md) | Traits, marks, next-roll effects and source-linked restrictions | V216, V217, V219; accepted Q-FOE-5 current-turn duration |
+| [V222](build/V222-foe-traits-and-lasting-effects.md) | Traits, marks, next-roll effects and source-linked restrictions | V216, V217, V219; Q-FOE-5: Overwhelm text-only |
 | [V223](build/V223-foe-spawn-and-revival.md) | Reinforcements, revival and delayed death | V214, V215, V218; accepted Q-FOE-2 spawn exception |
 | [V224](build/V224-foe-areas-and-terrain.md) | Persistent zones, auras, movement-trigger facts and terrain lifecycle | V217, V219, V221, V222 |
 | [V225](build/V225-werewolf-rage.md) | Accursed Rage and compulsory strike sequence | V213, V218, V221, V222 |
@@ -159,6 +159,10 @@ V212's roster report must list each inventory row as automatic, fact-assisted, e
 or awaiting a decision, plus the last accepted persisted proof. Count source records and
 source clauses separately. Report unused/unreachable actions independently. No numerical automation
 target justifies skipping a clause or widening the accepted grammar without evidence.
+
+Keep every identified spatial-dependent manual fallback in the [spatial-dependency register](spatial-dependent-effects.md),
+with source, missing facts, owner slice and criteria for replacing it. Future map/spatial work
+must review all entries; register entries are not claims of implementation.
 
 V228 reports the exact residual work: free movement/terrain placement the table must enact,
 unknown spatial facts, ongoing story/downtime consequences, and any unanswered decisions. An
@@ -184,9 +188,9 @@ Queued in [the questions file](rules-questions-for-user.md):
   duration are recorded; other monsters are affected. Flight and bleeding lifetime remain open.
   Domain-dependent Malign Thicket poison stays manual; independent dragon effects proceed.
 
-- **Q-FOE-5:** answered: Overwhelm prevents shifting for the affected creature's current turn.
-  V222 needs supplied turn-start adjacency facts; the proposed inline spatial-input design is
-  recorded separately from the accepted duration. No automatic position tracking is assumed.
+- **Q-FOE-5:** duration answered (current turn), but the user shelves Overwhelm as text-only
+  rather than adding spatial questions. Track it in the [spatial-dependency register](spatial-dependent-effects.md)
+  for future map/spatial support. Existing fact-assisted mechanics remain in their own scope.
 
 There is no blocker to the audit or shared first wave. Source typos (`rag`, `lycanthpy`, Bonetrops'
 `the take`/`effect end`) are retained in citations; editorial normalization must not invent a

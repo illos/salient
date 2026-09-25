@@ -2203,21 +2203,18 @@ adjacent to the knave cannot shift. The turn rules and `movement/shifting.md` do
 trait's lifetime. The earlier alternatives (while adjacent, until next turn start, or a
 Director-selected duration) were not selected.
 
-**Proposed implementation, not an approved UI design or existing capability:** use the established
-mapless spatial-input and clock contracts. At the active creature's turn start, collect only the
-missing fact: whether it started adjacent to an eligible enemy knave, identifying the source(s).
-Combine multiple candidate knaves in one inline card with an explicit none choice. The controlling
-player or Director would supply the fact via the shared operation; final authority follows the
-owning interaction contract. Reuse a supplied fact only when it is valid for this exact boundary;
-never infer continued adjacency from an old turn, targeting history or roster order.
+**Implementation disposition:** the user rejected the proposed turn-start adjacency question as
+messy and requested text-only handling. Keep Overwhelm's source text visible when used; mark it
+as a spatial-dependent effect. Do not build adjacency prompts, membership tracking or automatic
+cannot-shift application/expiry for this trait now. The accepted duration remains recorded for
+manual play and future implementation; it does not imply automated support.
 
-A confirmed match creates a source-linked cannot-shift restriction anchored to the subject's
-current turn. Enforce it in shared shift resolution and expire it through the clock at End turn.
-Physical movement remains table-controlled. Unknown adjacency is explicitly unresolved, not a
-negative answer: dependent shifting needs that fact before automated resolution, while independent
-work follows the existing minimum-input contract. No modal approval for every creature or full
-movement report is proposed. Corrected inputs and undo/redo must preserve coherent fact/effect history.
+Track this and subsequently identified spatial-dependent manual effects in
+[the spatial-dependency register](spatial-dependent-effects.md), so future map/spatial support can
+replace the manual handling after proving the rule. That future work must revisit every entry;
+a map alone does not settle missing rules or authorize deleting game effects. This ruling does
+not disable existing fact-assisted abilities outside Overwhelm.
 
-Example: a hero starts adjacent, confirms the knave, and gains cannot-shift until their turn ends.
-Walking away does not end it. On a later turn, confirming no adjacent knave gives no new restriction.
-Moving next to a knave halfway through a turn that began elsewhere does not create Overwhelm.
+Example for manual play: a hero starts adjacent and cannot shift through that turn, even after
+walking away. Starting a later turn away from the knave gives no new restriction. Moving next
+to a knave halfway through a turn that began elsewhere does not create Overwhelm.

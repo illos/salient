@@ -259,7 +259,7 @@ inputs, not extra named features. V212 accounts for them; V215 proves all ten mi
 - **Morningstar and Javelin:** V216/V222; taunt EoT and tier-3 M < 2 next-roll double bane.
 - **I'm Your Enemy:** V218/V219/V222; adjacency + source taunt + damage to another creature offers
   knave free strike; do not consume an ordinary triggered action for a trait that does not name one.
-- **Overwhelm:** V222; supplied qualifying adjacent turn-start fact prevents shifting through that turn; accepted Q-FOE-5. Moving away does not remove it; later adjacency does not trigger it.
+- **Overwhelm:** V222; text-only/manual by user direction Q-FOE-5; spatial dependency tracked in `docs/spatial-dependent-effects.md`. Accepted duration is the triggering turn; no adjacency prompt or automatic restriction.
 - **Supernatural Insight:** V222.
 
 **Human Storm Mage** — `monster/human/statblock/human-storm-mage.md`.
