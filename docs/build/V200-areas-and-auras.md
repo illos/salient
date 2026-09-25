@@ -264,3 +264,28 @@ The coordinator's review of `0b4a2ec8` required changes; fixed on top:
 4. The "Routines: Maintain Performance" note says what the engine tracks. The `areas` cohort now
    performs the refused second add its header describes. The Medley conflict is noted in Q-AREA-2
    point 8.
+
+### QC1 train 21 R1 (2026-09-25)
+
+QC1 held train 21 on R1 (`../../../review-artifacts/2026-09-25-train21-QC1.md` in the project
+folder): choosing a performance while its user is dazed, dead or surprised was silent at activation;
+only the next round start checked maintenance. `feature/troubadour/level-1/routines.md`: "At the start
+of each combat round, as long as you are not dazed, dead, or surprised, you can either choose a new
+performance or maintain your current performance (no action required)."
+
+- `performanceActivationWarnings` (`convex/lib/areas.ts`) adds one rule warning to any use of a
+  Performance ability, compiled or by hand, when its user is dazed (condition toggles), dead (Stamina
+  below 0 and at or below the negative of the winded value, `rule/health/dying.md`) or surprised (the
+  encounter's recorded surprise on the user's turn entry, cleared at the end of round 1,
+  `rule/combat/surprised.md`). It quotes Routines word for word.
+- Warning-through override (`docs/rules-adaptation-principles.md`): the use is never refused. The
+  warning is in the use's log entry (`payload.data.warnings`) and its description, on every
+  `ability.use` path, since `ability.use` builds one warning list before choosing a path.
+- Tests (`tests/app/areas.test.ts`, persisted readback):
+  - the v102-3 Bard, still dazed after round 3 begins, re-uses Ballad of the Beast: warned, and the
+    area is stored;
+  - no longer dazed: no warning (the eligible control);
+  - dead (Stamina −9, winded value 9): the compiled Ballad and Choreography, used by hand, are both
+    warned;
+  - surprised in round 1: warned.
+
