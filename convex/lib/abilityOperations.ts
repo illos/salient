@@ -50,8 +50,11 @@ import { appendEvent } from './events';
 import {
   applyEffectInstance,
   consumeRollEffects,
+  endLapsedEffects,
   endReusedEffects,
+  lapsedEffects,
   type EffectHolder,
+  type LapsedEffect,
 } from './effectInstances';
 import { describeDuration } from '../../shared/resolve/lastingEffects';
 import {
@@ -1447,6 +1450,15 @@ async function noteRecordedUse(
 }
 
 /** V159: a hero's or foe's stored effect instances; squads and objects hold none. */
+function holderOfRecord(record: {
+  character?: Doc<'characters'>;
+  foe?: Doc<'foes'>;
+}): EffectHolder | undefined {
+  if (record.character) return { kind: 'character', id: record.character._id };
+  if (record.foe) return { kind: 'foe', id: record.foe._id };
+  return undefined;
+}
+
 function effectsOf(record: { character?: Doc<'characters'>; foe?: Doc<'foes'> }) {
   if (record.character) return record.character.liveState?.effectInstances ?? [];
   if (record.foe) return record.foe.live.effectInstances ?? [];
@@ -1862,9 +1874,19 @@ const abilityUse: OperationDefinition = {
     // the active modifiers on the actor's roll and on each target's roll against, after printed
     // stacking, less the table's exclusions. Circumstance edges and banes add to them.
     const rolledAbility = ability.kind === 'rolled';
+    // QC1 train 13 R2 follow-up: a modifier whose owner is already dying ("until you are dying",
+    // rule/health/dying.md) contributes nothing; the rolled use's commit ends it.
+    const lapsed: LapsedEffect[] = [];
+    for (const record of [records, ...targets]) {
+      const holder = holderOfRecord(record);
+      if (holder && !lapsed.some(l => sameActor(l.holder, holder)))
+        lapsed.push(...(await lapsedEffects(ctx, context.campaign._id, holder, effectsOf(record))));
+    }
+    const liveEffectsOf = (record: { character?: Doc<'characters'>; foe?: Doc<'foes'> }) =>
+      effectsOf(record).filter(i => !lapsed.some(l => l.instance.id === i.id));
     const automatic = rollContributions({
-      actor: { id: actor!.id, instances: effectsOf(records) },
-      targets: targets.map(t => ({ id: t.actor.id, instances: effectsOf(t) })),
+      actor: { id: actor!.id, instances: liveEffectsOf(records) },
+      targets: targets.map(t => ({ id: t.actor.id, instances: liveEffectsOf(t) })),
       roll: { strike: ability.keywords.some(k => plainText(k).toLowerCase() === 'strike') },
       exclude,
     });
@@ -2729,6 +2751,8 @@ const abilityUse: OperationDefinition = {
         // 1. Debit the fixed cost once, before any effect.
         if (result.cost && !result.cost.waived)
           await debit(mctx, scope, records, context, result.cost.after, result.cost.resource);
+        // QC1 train 13 R2 follow-up: modifiers left out of this roll because their owner is dying.
+        await endLapsedEffects(mctx, scope, lapsed);
         // V158: "until you use this ability again" ends the owner's earlier effects of it.
         if (compiledOutcome?.kind === 'resolved')
           await endReusedEffects(mctx, scope, actor!, ability.abilityId);

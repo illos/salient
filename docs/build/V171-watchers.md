@@ -222,6 +222,25 @@ Rules question: [Q-WATCH-1](../rules-questions-for-user.md#q-watch-1-who-deals-a
       - After a re-use, a Stamina edit to 0 is caught at the turn end: both instances end unfired,
         and no surges are gained.
     - All three fail without the fix.
-  - Left open: a `modifier` instance ending on `owner-dying` isn't re-checked when a roll reads it.
-    `/adjust stamina` to 0 still doesn't end `owner-dying` effects by itself. Watchers are covered
-    by the firing re-check.
+  - Follow-ups closed the same day, on top of `e4f497f6`:
+    - **Rolls.** `lapsedEffects` and `endLapsedEffects` (`effectInstances.ts`) find active
+      instances whose owner is dying.
+      - `ability.use` and `test.roll` leave them out of `rollContributions`. The saving-throw bonus
+        (`clock.ts` `saveBonus`) leaves them out of `statModifiers`.
+      - Each of these operations ends them in its own journal, with a linked `effect.ended` entry.
+        Only the rolled path of `ability.use` ends them, because it is the only one that reads
+        contributions.
+    - **Stamina edits.** `/adjust stamina` that takes a hero from above 0 to 0 or lower runs
+      `endOwnerDyingEffects`, as the damage writer does. `/adjust temporary-stamina` can't make a
+      hero dying, because temporary Stamina doesn't change Stamina
+      (`rule/health/temporary-stamina.md`).
+    - **Tests** (`tests/app/watcher-interactions.test.ts`):
+      - A Stamina edit to 0 ends both Blessing instances at the edit, and the turn end grants no
+        surges. Undo restores the Stamina and the instances.
+      - The turn-end firing re-check is covered by a direct write standing in for any other Stamina
+        writer.
+      - A dying owner's edge adds nothing to Thorn's test or to Brutal Slam, and ends in that
+        operation. A healthy control gets the edge.
+      - Without the follow-up code, the edit test and the modifier test fail.
+    - Still read-only: speed and stability shown through `derivedValue` in queries can't end an
+      instance there. Every Stamina writer that makes a hero dying now ends them first.

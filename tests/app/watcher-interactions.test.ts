@@ -34,6 +34,9 @@ import type { EvaluationInput } from '../../shared/contracts/characterEvaluation
 import type { CompiledResult } from '../../shared/contracts/compiledResult';
 import { definitions as levelOne } from '../../shared/content/level-one-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
+import type { ModifierPayload } from '../../shared/contracts/liveState';
+import { appendEvent } from '../../convex/lib/events';
+import { applyEffectInstance } from '../../convex/lib/effectInstances';
 import conduitLedger from '../fixtures/v100-conduit-expected.json' with { type: 'json' };
 import conduitThree from '../fixtures/v134-conduit-three-expected.json' with { type: 'json' };
 import talentLedger from '../fixtures/v105-talent-expected.json' with { type: 'json' };
@@ -363,9 +366,8 @@ test('QC1 R2: a healthy Conduit’s Blessing grants surges; it ends when the Con
   await s.command('@Thorn /turn take', true);
   await s.command('@Thorn /turn end', true);
 
-  // Round 2. Healed, the Conduit uses it again (active), then a manual Stamina edit makes it dying,
-  // which reaches no damage observer. At the turn end the firing re-check ends both instances
-  // unfired: no surges.
+  // Round 2. Healed, the Conduit uses it again (active); a manual Stamina edit to 0 makes it dying
+  // and ends both instances, as the damage writer does. The turn end grants no surges.
   const encounter = await s.t.run(async ctx =>
     (await ctx.db.query('encounters').take(10)).find(e => e.status === 'committed'),
   );
@@ -383,16 +385,160 @@ test('QC1 R2: a healthy Conduit’s Blessing grants surges; it ends when the Con
   );
   for (const instance of await blessingInstances(s, second.eventId))
     expect(instance.status).toBe('active');
-  await s.command(`${votaryRef} /adjust stamina value=0`);
-  const before = await surges();
-  const end = await s.command(`${votaryRef} /turn end`, true);
-  expect(await surges()).toEqual(before);
+  const edit = await s.command(`${votaryRef} /adjust stamina value=0`);
   for (const instance of await blessingInstances(s, second.eventId))
     expect(instance).toMatchObject({
       status: 'ended',
-      endedReason: 'Votary is dying (Stamina 0)',
+      endedReason: 'Votary is dying',
+      endedEventId: edit.eventId,
     });
+  expect(
+    (await s.events()).filter(e => e.kind === 'effect.ended' && e.causeEventId === edit.eventId),
+  ).toHaveLength(2);
+  const before = await surges();
+  const end = await s.command(`${votaryRef} /turn end`, true);
+  expect(await surges()).toEqual(before);
+  const after = (await s.events()).filter(e => e.sequence > end.sequence);
+  expect(after.filter(e => e.kind === 'effect.watcher-fired')).toEqual([]);
+  // Undo of the edit restores the Stamina and the instances together.
+  await s.command('/history undo');
+  await s.command('/history undo');
+  expect((await s.heroLive(s.votary)).stamina).toBe(20);
+  for (const instance of await blessingInstances(s, second.eventId))
+    expect(instance.status).toBe('active');
+});
+
+test('QC1 R2: the turn-end firing re-checks the owner, when Stamina reached 0 outside the damage writer and /adjust', async () => {
+  const s = await setup();
+  const votaryRef = `@{character:${s.votary}}`;
+  await s.command('/combat start');
+  await s.command('/combat commit');
+  await s.command('/combat roll', true);
+  await s.command('/combat first side=heroes');
+  await s.command(`${votaryRef} /turn take`, true);
+  await s.command(`${votaryRef} /adjust heroic-resource value=5`);
+  const blessing = await s.command(
+    `${votaryRef} /ability use ability="Blessing of Insight" targets=[@Thorn]`,
+    true,
+  );
+  // A direct write stands in for any Stamina writer that doesn't end owner-dying effects itself.
+  await s.t.run(async ctx => {
+    const hero = (await ctx.db.get(s.votary))!;
+    await ctx.db.patch(s.votary, { liveState: { ...hero.liveState!, stamina: 0 } });
+  });
+  const before = {
+    votary: (await s.heroLive(s.votary)).surges,
+    thorn: (await s.heroLive(s.f.thornId)).surges,
+  };
+  const end = await s.command(`${votaryRef} /turn end`, true);
+  expect((await s.heroLive(s.votary)).surges).toBe(before.votary);
+  expect((await s.heroLive(s.f.thornId)).surges).toBe(before.thorn);
+  for (const instance of await blessingInstances(s, blessing.eventId))
+    expect(instance).toMatchObject({ status: 'ended', endedReason: 'Votary is dying (Stamina 0)' });
   const after = (await s.events()).filter(e => e.sequence > end.sequence);
   expect(after.filter(e => e.kind === 'effect.watcher-fired')).toEqual([]);
   expect(after.filter(e => e.kind === 'effect.ended')).toHaveLength(2);
+});
+
+/** A synthetic edge on Thorn's power rolls, owned by the Conduit, "until you are dying". */
+async function storeDyingEdge(s: Awaited<ReturnType<typeof setup>>, name: string) {
+  return s.t.run(async ctx => {
+    const eventId = await appendEvent(ctx, {
+      campaignId: s.f.campaignId,
+      sessionId: s.f.sessionId!,
+      encounterId: null,
+      origin: 'user',
+      actor: (await ctx.db.get(s.f.director.profile.userId))!,
+      commandId: `watcher-interactions-source-${++sequence}`,
+      kind: 'test.effect',
+      description: 'Synthetic source occurrence for an edge that ends when its owner is dying.',
+    });
+    const edge: ModifierPayload = {
+      kind: 'roll',
+      target: 'rolls-by',
+      scope: 'power-roll',
+      edges: 1,
+    };
+    const stored = await applyEffectInstance(
+      ctx,
+      { campaignId: s.f.campaignId, eventId },
+      {
+        id: `fixture-${eventId}`,
+        kind: 'modifier',
+        sourceUseEventId: eventId,
+        sourceActorId: s.votary,
+        abilityId: `fixture-${name}`,
+        abilityName: name,
+        actorLabel: 'Votary',
+        sourcePath: 'rule/dice/edge.md',
+        clause: `Fixture: until you are dying, ${name} gives an edge on power rolls.`,
+        owner: { kind: 'character', id: s.votary, name: 'Votary' },
+        subject: { kind: 'character', id: s.f.thornId, name: 'Thorn' },
+        payload: { kind: 'modifier', text: 'Fixture edge.', modifier: edge },
+        printedDuration: { kind: 'encounter' },
+        endsWhen: ['owner-dying'],
+        appliedSequence: (await ctx.db.get(eventId))!.sequence,
+      },
+    );
+    if (!stored || !('instance' in stored)) throw new Error('Expected a tracked instance.');
+    return stored.instance;
+  });
+}
+
+test('QC1 R2: a modifier whose owner is dying adds nothing to a test or an ability roll, and ends', async () => {
+  const s = await setup();
+  const goblinRef = `@{foe:${s.goblin}}`;
+  const setVotaryStamina = (stamina: number) =>
+    s.t.run(async ctx => {
+      const hero = (await ctx.db.get(s.votary))!;
+      await ctx.db.patch(s.votary, { liveState: { ...hero.liveState!, stamina } });
+    });
+  const thornEffect = async (id: string) =>
+    (await s.heroLive(s.f.thornId)).effectInstances!.find(i => i.id === id)!;
+  const testData = async (eventId: Id<'events'>) =>
+    ((await s.t.run(ctx => ctx.db.get(eventId)))!.payload as { data: Record<string, unknown> })
+      .data;
+
+  // Control: while the Conduit is healthy, Thorn's test gets the edge (rule/dice/power-roll.md: a
+  // test is a power roll).
+  const edge = await storeDyingEdge(s, 'Fixture Blessing');
+  const control = await s.command('@Thorn /test roll characteristic=M', true);
+  expect((await testData(control.eventId)).contributions).toEqual([
+    expect.objectContaining({ instanceId: edge.id, edges: 1 }),
+  ]);
+
+  // The Conduit at Stamina 0 without the damage writer or /adjust: the test gets no edge, and the
+  // edge ends in the test's journal with a linked entry.
+  await setVotaryStamina(0);
+  const tested = await s.command('@Thorn /test roll characteristic=M', true);
+  expect((await testData(tested.eventId)).contributions).toBeUndefined();
+  expect(await thornEffect(edge.id)).toMatchObject({
+    status: 'ended',
+    endedReason: 'Votary is dying (Stamina 0)',
+    endedEventId: tested.eventId,
+  });
+  expect(
+    (await s.events()).filter(e => e.kind === 'effect.ended' && e.causeEventId === tested.eventId),
+  ).toHaveLength(1);
+
+  // The same for an ability roll: Thorn's Brutal Slam records no contribution, and the edge ends.
+  await setVotaryStamina(20);
+  const second = await storeDyingEdge(s, 'Fixture Second Blessing');
+  await setVotaryStamina(0);
+  const used = await s.command(
+    `@Thorn /ability use ability="Brutal Slam" targets=[${goblinRef}]`,
+    true,
+  );
+  const result = await s.t.run(ctx =>
+    ctx.db
+      .query('abilityResults')
+      .withIndex('by_event', q => q.eq('eventId', used.eventId))
+      .unique(),
+  );
+  expect(result!.targets[0]!.contributions).toBeUndefined();
+  expect(await thornEffect(second.id)).toMatchObject({
+    status: 'ended',
+    endedReason: 'Votary is dying (Stamina 0)',
+    endedEventId: used.eventId,
+  });
 });

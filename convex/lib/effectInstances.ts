@@ -373,6 +373,61 @@ export async function ownerStateEnding(
     : undefined;
 }
 
+/** QC1 train 13 R2 follow-up: an active instance whose owner-state end condition holds. */
+export interface LapsedEffect {
+  holder: EffectHolder;
+  instance: EffectInstance;
+  reason: string;
+}
+
+/**
+ * QC1 train 13 R2 follow-up: of the instances one hero or foe holds, the active ones whose
+ * owner-state end condition already holds (ownerStateEnding). A roll or derived value that reads
+ * instances leaves these out, and the operation ends them in its journal (endLapsedEffects). Only
+ * instances that end on `owner-dying` cost a read, one per owner.
+ */
+export async function lapsedEffects(
+  ctx: ReadCtx,
+  campaignId: Id<'campaigns'>,
+  holder: EffectHolder,
+  instances: readonly EffectInstance[],
+): Promise<LapsedEffect[]> {
+  const found: LapsedEffect[] = [];
+  const seen = new Map<string, string | undefined>();
+  for (const instance of instances) {
+    if (
+      instance.status !== 'active' ||
+      !instance.endsWhen.includes('owner-dying') ||
+      instance.owner.kind !== 'character'
+    )
+      continue;
+    const key = `${instance.owner.id}|${instance.actorLabel}`;
+    if (!seen.has(key))
+      seen.set(
+        key,
+        await ownerStateEnding(ctx, instance, id => resolveHistoricalId(ctx, campaignId, id)),
+      );
+    const reason = seen.get(key);
+    if (reason) found.push({ holder, instance, reason });
+  }
+  return found;
+}
+
+/** Ends lapsed instances in the operation's journal, one linked `effect.ended` entry each. */
+export async function endLapsedEffects(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  lapsed: readonly LapsedEffect[],
+): Promise<EffectInstance[]> {
+  const ended: EffectInstance[] = [];
+  for (const { holder, instance, reason } of lapsed) {
+    const done = await endEffectInstance(ctx, scope, holder, instance.id, reason);
+    if (done) ended.push(done);
+  }
+  await logEnded(ctx, scope, ended);
+  return ended;
+}
+
 /**
  * Ends one active instance with a reason, retiring its clock work and its owner's pointer. V159:
  * `consumed` marks a consumable component used up by a roll (design section 5a).

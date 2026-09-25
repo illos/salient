@@ -50,7 +50,12 @@ import {
   rollContributions,
   withContributions,
 } from '../../shared/resolve/modifiers';
-import { consumeRollEffects } from './effectInstances';
+import {
+  consumeRollEffects,
+  endLapsedEffects,
+  endOwnerDyingEffects,
+  lapsedEffects,
+} from './effectInstances';
 import { excludeList } from './abilityOperations';
 import { requireContent } from '../content';
 import { journalPatch, type JournalScope } from './journal';
@@ -190,8 +195,20 @@ const testRoll: OperationDefinition = {
     // (rule/dice/power-roll.md), so the tester's active power-roll modifiers apply to it. A test has
     // no target, so only the tester's own `rolls-by` modifiers count; a test is never a strike.
     const exclude = excludeList(args.exclude);
+    // QC1 train 13 R2 follow-up: a modifier whose owner is already dying contributes nothing; the
+    // test ends it.
+    const held = character.liveState?.effectInstances ?? [];
+    const lapsed = await lapsedEffects(
+      ctx,
+      context.campaign._id,
+      { kind: 'character', id: character._id },
+      held,
+    );
     const contributions = rollContributions({
-      actor: { id: actor!.id, instances: character.liveState?.effectInstances ?? [] },
+      actor: {
+        id: actor!.id,
+        instances: held.filter(i => !lapsed.some(l => l.instance.id === i.id)),
+      },
       targets: [{ id: actor!.id, instances: [] }],
       roll: { strike: false, test: true },
       exclude,
@@ -273,9 +290,10 @@ const testRoll: OperationDefinition = {
       },
       // V159 (design 5a): a consumable the test qualified for is used up by it, in this operation's
       // journal, so undo of the test restores it.
-      ...(consumed.length
+      ...(consumed.length || lapsed.length
         ? {
             commit: async (mctx: MutationCtx, scope: Parameters<typeof consumeRollEffects>[1]) => {
+              await endLapsedEffects(mctx, scope, lapsed);
               await consumeRollEffects(
                 mctx,
                 scope,
@@ -671,6 +689,12 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
         commit: async (mctx, scope) => {
           const next = withHeroField(live, field.verb, value);
           await journalPatch(mctx, scope, 'characters', character._id, { liveState: next });
+          // QC1 train 13 R2 follow-up (rule/health/dying.md, "When your Stamina is 0 or lower, you
+          // are dying"): an edit that takes a hero from above 0 to 0 or lower ends its
+          // `owner-dying` effects, as the damage writer does. A temporary Stamina edit never
+          // changes Stamina, so it can't make a hero dying (rule/health/temporary-stamina.md).
+          if (live.stamina > 0 && next.stamina <= 0)
+            await endOwnerDyingEffects(mctx, scope, character._id);
           // V171 review: a manual edit isn't recorded damage; watchers of it get a table note.
           const baseline = baselineOf(character.derivedBaseline);
           if (baseline && (field.verb === 'stamina' || field.verb === 'temporary-stamina'))

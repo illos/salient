@@ -38,9 +38,11 @@ import {
   unscheduleConditionInstance,
 } from './conditionInstances';
 import {
+  endLapsedEffects,
   endUnmaintainedEffects,
   expireEffectInstance,
   findEffectInstance,
+  lapsedEffects,
   patchEffectInstance,
   recordEffectSave,
   unscheduleEffectInstance,
@@ -637,15 +639,30 @@ async function saveThreshold(
  */
 async function saveBonus(
   ctx: MutationCtx,
+  scope: JournalScope,
   creature: { kind: string; id: string },
 ): Promise<{ bonus: number; sources: StatContribution[] }> {
   const instances =
-    creature.kind === 'character'
+    (creature.kind === 'character'
       ? (await ctx.db.get(creature.id as Id<'characters'>))?.liveState?.effectInstances
       : creature.kind === 'foe'
         ? (await ctx.db.get(creature.id as Id<'foes'>))?.live.effectInstances
-        : undefined;
-  const { total, contributions } = statModifiers(instances ?? [], 'saving-throw');
+        : undefined) ?? [];
+  // QC1 train 13 R2 follow-up: a modifier whose owner is already dying adds nothing; it ends here.
+  const lapsed =
+    creature.kind === 'character' || creature.kind === 'foe'
+      ? await lapsedEffects(
+          ctx,
+          scope.campaignId,
+          creature as { kind: 'character' | 'foe'; id: string },
+          instances,
+        )
+      : [];
+  await endLapsedEffects(ctx, scope, lapsed);
+  const { total, contributions } = statModifiers(
+    instances.filter(i => !lapsed.some(l => l.instance.id === i.id)),
+    'saving-throw',
+  );
   return { bonus: total, sources: contributions };
 }
 
@@ -795,7 +812,7 @@ async function fire(
         );
         const roll = accepted.dice[0]!.value;
         const { threshold, thresholdSource } = await saveThreshold(ctx, effect.holder);
-        const { bonus, sources } = await saveBonus(ctx, effect.holder);
+        const { bonus, sources } = await saveBonus(ctx, firing.scope, effect.holder);
         const success = saveSucceeds(roll, bonus, threshold);
         await recordEffectSave(ctx, firing.scope, effect.holder, effect.instance.id, {
           roll,
@@ -865,7 +882,7 @@ async function fire(
       );
       const roll = accepted.dice[0]!.value;
       const { threshold, thresholdSource } = await saveThreshold(ctx, found.target);
-      const { bonus, sources } = await saveBonus(ctx, found.target);
+      const { bonus, sources } = await saveBonus(ctx, firing.scope, found.target);
       const success = saveSucceeds(roll, bonus, threshold);
       await recordConditionSave(ctx, firing.scope, found.target, found.instance.id, {
         roll,
