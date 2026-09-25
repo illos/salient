@@ -42,3 +42,9 @@ Pinned Compendium paths and named sections are given in the research report.
 
 - User requested a per-effect “Text only” checkbox. It synchronizes the disposition, persists
   locally and exports without a comment; unchecking resets the disposition to Unreviewed.
+
+- QC R1: removed Rat-only traversal from Crow/Distracted; reread all repeated hero summaries
+  and separated Excavation/fissure, terrain, and return clauses by their actual sources.
+- QC R2: configurable animal traits now have five independent source/section IDs and controls.
+  Stench is marked boundary/member-selection context. Filter reconciliation waits until leaving
+  the active card, preserving in-progress edits and restoring focus in another retained card.

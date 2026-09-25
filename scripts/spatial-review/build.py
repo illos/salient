@@ -60,7 +60,10 @@ for line in context.splitlines():
     match = re.match(r'- \*\*(V1|Other catalog) — (.*?)\*\*, `([^`]+)` § \*\*(.*?)\*\*:(.*)', line)
     if not match: continue
     scope, owner, source, section, detail = match.groups()
-    add(section, owner, 'V1 monsters' if scope == 'V1' else 'Other monsters', 'Core candidates', source, section, detail, 'See clause-specific timing above', 'See clause-specific remainder above', 'Group context; source evidence, not runtime proof.')
+    fields = re.search(r'\*\*Unknown fact:\*\*(.*?)\*\*Timing/input burden:\*\*(.*?)\*\*Deterministic portion:\*\*(.*)', detail)
+    details = fields.groups() if fields else (detail, 'See clause-specific timing above', 'See clause-specific remainder above')
+    category = 'Boundary cases' if section == 'Defensive Traits / Stench (2 Points)' else 'Core candidates'
+    add(section, owner, 'V1 monsters' if scope == 'V1' else 'Other monsters', category, source, section, *details, 'Group context; applies only when selected. Source evidence, not runtime proof.')
 
 # Keep distinct clauses from the same source; identical repeats get one review field.
 unique = {}
