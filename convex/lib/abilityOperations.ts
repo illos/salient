@@ -2664,6 +2664,14 @@ const abilityUse: OperationDefinition = {
     const squadCard = squadCasualtyInteraction(squadPlans, envelope);
     const grabTier = perTarget[0]?.outcome.tier ?? 1;
     const grabText = grabPlan ? grabPlan.note(grabTier) : '';
+    // V173: a melee strike (rule/combat/strike.md, rule/combat/melee.md) for Riposte's trigger:
+    // the Strike and Melee keywords, and the melee mode when the ability is also Ranged. Saved on the
+    // use, so a correction's changed damage is matched against the same fact.
+    const printedKeywords = ability.keywords.map(k => plainText(k).toLowerCase());
+    const meleeStrike =
+      printedKeywords.includes('strike') &&
+      printedKeywords.includes('melee') &&
+      (!printedKeywords.includes('ranged') || mode === 'melee');
     const describeUse = (payment: string) =>
       `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment}${automaticText ? ` Automatic effects (${automaticText}).` : ''} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${grabText}${squadText}${critText}${strainedPlan?.text ?? ''}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
     return {
@@ -2712,6 +2720,7 @@ const abilityUse: OperationDefinition = {
           usedOpportunity: tracking.opportunity?._id ?? null,
         },
         squads: squadPlanData(squadPlans),
+        meleeStrike,
         warnings,
         source,
       },
@@ -2745,13 +2754,6 @@ const abilityUse: OperationDefinition = {
                 ownedEffects: records.foe.live.ownedEffects ?? [],
               }
             : undefined;
-        // V173: a melee strike (rule/combat/strike.md, rule/combat/melee.md) for Riposte's trigger:
-        // the Strike and Melee keywords, and the melee mode when the ability is also Ranged.
-        const printed = ability.keywords.map(k => plainText(k).toLowerCase());
-        const meleeStrike =
-          printed.includes('strike') &&
-          printed.includes('melee') &&
-          (!printed.includes('ranged') || mode === 'melee');
         const dealer =
           actor!.kind === 'character' || actor!.kind === 'foe'
             ? {
@@ -3229,6 +3231,13 @@ const abilityCorrect: OperationDefinition = {
       correction.temporaryStaminaReconciliationDelta !== 0
     )
       await assertWatchersReconcilable(ctx, context.campaign._id, event);
+    // V173 (QC1 train 13 advisory): the changed damage is matched against the melee-strike fact the
+    // use saved, so a melee-strike trigger (Riposte) refuses the correction as the use's hit would
+    // have offered it. A use saved without the fact is treated as a melee strike: the correction is
+    // refused whenever such a trigger could match, rather than missing it.
+    const savedMeleeStrike = (event.payload as { data?: { meleeStrike?: unknown } })?.data
+      ?.meleeStrike;
+    const correctionMeleeStrike = typeof savedMeleeStrike === 'boolean' ? savedMeleeStrike : true;
     // Only a rolled use reaches here (effect-only uses are refused above).
     const savedCompiled = result.compiled as
       (CompiledResult & { inputs: CompiledAbilityInput }) | undefined;
@@ -3395,7 +3404,9 @@ const abilityCorrect: OperationDefinition = {
                 facts.facts.temporaryStamina + correction.temporaryStaminaReconciliationDelta,
             },
             event._id,
-            correctionDealer ? { dealer: correctionDealer } : {},
+            correctionDealer
+              ? { dealer: correctionDealer, meleeStrike: correctionMeleeStrike }
+              : {},
           );
         if (savedCompiled && correctedCompiled?.kind === 'resolved') {
           for (const occurrence of savedCompiled.effects) {

@@ -425,3 +425,23 @@ test('V173: undo of the hit withdraws its card; stale rounds, dead and dying own
   );
   expect((await s.t.run(ctx => ctx.db.get(s.seer)))!.liveState!.stamina).toBe(0);
 });
+
+test('V173 (QC1 train 13 advisory): a correction of a melee strike that set off Riposte is refused', async () => {
+  const s = await setup({ bard: true });
+  // Spear Charge (a Melee Strike) on the Talent, 5 + 5 + 2 = 12, tier 2: 4 damage. Riposte is
+  // offered (the Talent is the Troubadour's ally); Feedback Loop is not (the damaged creature is the
+  // Talent itself, not its ally).
+  await atDice(s.t, s.f.campaignId, [5, 5]);
+  const hit = await s.command(
+    `${s.goblinRef} /ability use ability="Spear Charge" targets=[${s.seerRef}]`,
+  );
+  const offers = (await s.cards()).filter(c => c.offer?.triggeringEventId === hit.eventId);
+  expect(offers.map(c => c.offer.abilityName)).toEqual(['Riposte']);
+  const seerStamina = (await s.t.run(ctx => ctx.db.get(s.seer)))!.liveState!.stamina;
+  // A bane makes 10, tier 1 (3 damage): the changed damage is still from a melee strike, so the
+  // correction can't re-derive Riposte's offer and is refused.
+  await expect(
+    s.command(`/ability correct event="${hit.eventId}" target=${s.seerRef} banes=1`),
+  ).rejects.toThrow(/Riposte is a triggered action this damage sets off/);
+  expect((await s.t.run(ctx => ctx.db.get(s.seer)))!.liveState!.stamina).toBe(seerStamina);
+});

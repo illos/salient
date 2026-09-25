@@ -164,8 +164,8 @@ Rules question: [Q-TRIG-1](../rules-questions-for-user.md#q-trig-1-the-triggerin
      - Squad strikes (`squadOperations.ts` 958 and 1092) pass no dealer and no `meleeStrike`, so they
        offer no Feedback Loop or Riposte.
      - A creature's free strike doesn't say it's melee.
-     - Corrections pass no `meleeStrike`. They are refused whenever a holder's trigger matches the
-       changed damage.
+     - Corrections passed no `meleeStrike` (fixed 2026-09-25, see below). They are refused whenever
+       a holder's trigger matches the changed damage.
      - Other preventions are the table's to check, and the card text says so briefly. These include
        unconscious and a printed "can't use triggered actions until …", as on foes such as the
        Bugbear Sneak.
@@ -193,3 +193,15 @@ Rules question: [Q-TRIG-1](../rules-questions-for-user.md#q-trig-1-the-triggerin
       supporting-actions, remaining-ancestries and complication-actions.
   - With the accept-time re-check and card closing disabled, the pass/early-close/expiry app test
     fails.
+- 2026-09-25: QC1 train 13 advisory fixed: corrections now match melee-strike triggers.
+  - `ability.use` saves `meleeStrike` in its event data. `ability.correct` passes the saved fact
+    with the dealer, so a changed damage that Riposte's "takes damage from a melee strike" matches
+    is refused ("rewind to the use").
+  - A use saved without the fact is treated as a melee strike. It is refused whenever such a trigger
+    could match, rather than being missed.
+  - A squad's use has no dealer in a correction and offers no Riposte, as before. This covers the
+    damage-dealt and damage-taken triggers the engine offers. It is not a claim about trigger kinds
+    V173 leaves manual.
+  - Test: `tests/app/triggered-actions.test.ts`. The goblin's Spear Charge (a Melee Strike) on the
+    Talent offers only Riposte, and a bane correction is refused, naming Riposte. The test fails
+    without the fix, because the correction went through.
