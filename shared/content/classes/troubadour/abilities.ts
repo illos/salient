@@ -2,6 +2,7 @@
 /** Embedded choices and source-timed uses, with explicit manual boundaries. */
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
+import { sourceBody } from '../../source-body.ts';
 export interface TroubadourAction {
   name: string;
   parent: string;
@@ -249,7 +250,7 @@ export function troubadourActionText(action: TroubadourAction): string {
     e => e.sourcePath === `vendor/steel-compendium/${action.sourcePath}`,
   );
   if (!entry) throw new Error(`Missing Troubadour source ${action.sourcePath}`);
-  return `${action.activationCondition}\n\n${entry.text}`;
+  return `${action.activationCondition}\n\n${sourceBody(entry.text)}`;
 }
 
 /** Printed clauses of chosen level-2/3 abilities the resolver does not model. */

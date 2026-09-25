@@ -176,3 +176,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V185 | [Build History page: full recorded sheet preview and restore](V185-build-history.md) | Merged (`f2160c3`); cloud dev published; accepted TESTER results reused |
 | V186 | [Level-up capture spec leaves the editor by navigation](V186-v32-spec-exit.md) | Merged (`0c5848c`); spec and docs only, no deploy needed |
 | V187 | [Level-up capture spec approves through Manage players](V187-v32-spec-approve.md) | Merged (`ccd9c67`); spec and docs only; v32 capture passes end to end |
+| V188 | [Follow-up ability records show the printed body, not frontmatter](V188-follow-up-ability-content.md) | Ready for gate |

@@ -2,6 +2,7 @@
 /** Source-prose choices, reactions and activities; unsupported timing/spatial effects stay manual. */
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
+import { sourceBody } from '../../source-body.ts';
 export interface NullAction {
   name: string;
   parent: string;
@@ -240,7 +241,7 @@ export function nullActionText(action: NullAction): string {
     e => e.sourcePath === `vendor/steel-compendium/${action.sourcePath}`,
   );
   if (!entry) throw new Error(`Missing Null source ${action.sourcePath}`);
-  return `${action.activationCondition}\n\n${entry.text}`;
+  return `${action.activationCondition}\n\n${sourceBody(entry.text)}`;
 }
 
 /** Level-2/3 ability notes: what the table resolves automatically and which clauses stay manual. */

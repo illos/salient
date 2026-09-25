@@ -2,6 +2,7 @@
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
 import { CENSOR_ACTIONS, type CensorAction } from '../censor/abilities.ts';
+import { sourceBody } from '../../source-body.ts';
 export const CONDUIT_ACTIONS: CensorAction[] = [
   // Identical domain feature activities; Conduit uses Intuition where its own source says so.
   ...CENSOR_ACTIONS.filter(a =>
@@ -310,7 +311,7 @@ export function conduitActionText(action: CensorAction): string {
     e => e.sourcePath === `vendor/steel-compendium/${action.sourcePath}`,
   );
   if (!entry) throw new Error(`Missing Conduit source ${action.sourcePath}`);
-  return entry.text;
+  return sourceBody(entry.text);
 }
 
 /** Level-2/3 ability notes: what the table resolves automatically and which clauses stay manual. */

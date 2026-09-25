@@ -3,6 +3,7 @@
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import kitSources from '../../compendium/kit.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
+import { sourceBody } from '../../source-body.ts';
 export interface FuryAction {
   name: string;
   parent: string;
@@ -210,5 +211,5 @@ export function furyActionText(action: FuryAction): string {
     e => e.sourcePath === `vendor/steel-compendium/${action.sourcePath}`,
   );
   if (!entry) throw new Error(`Missing Fury action source: ${action.sourcePath}`);
-  return entry.text;
+  return sourceBody(entry.text);
 }

@@ -2,13 +2,14 @@
 /** App labels for actions embedded in the complete pinned source; effects remain manual. */
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
+import { sourceBody } from '../../source-body.ts';
 
 function source(path: string) {
   const row = [...abilitySources, ...featureSources].find(
     entry => entry.sourcePath === `vendor/steel-compendium/${path}`,
   );
   if (!row) throw new Error(`Missing Tactician action source: ${path}`);
-  return row.text;
+  return sourceBody(row.text);
 }
 const mark = 'en/unified/md/feature/ability/tactician/level-1/mark.md';
 const studied = 'en/unified/md/feature/tactician/level-1/studied-commander.md';

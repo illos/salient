@@ -2,6 +2,7 @@
 /** Source-prose choices, reactions and activities; unsupported timing/spatial effects stay manual. */
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
+import { sourceBody } from '../../source-body.ts';
 export interface ElementalistAction {
   name: string;
   parent: string;
@@ -382,7 +383,7 @@ export function elementalistSourceText(action: ElementalistAction): string {
     e => e.sourcePath === `vendor/steel-compendium/${action.sourcePath}`,
   );
   if (!entry) throw new Error(`Missing Elementalist source ${action.sourcePath}`);
-  return entry.text;
+  return sourceBody(entry.text);
 }
 
 export function elementalistActionText(action: ElementalistAction): string {

@@ -2,6 +2,7 @@
 /** Audited manual entries for the explicitly deferred companion combat integration. */
 import abilitySources from '../../compendium/ability.json' with { type: 'json' };
 import featureSources from '../../compendium/feature.json' with { type: 'json' };
+import { sourceBody } from '../../source-body.ts';
 export interface BeastheartAction {
   name: string;
   parent: string;
@@ -1414,7 +1415,7 @@ export function beastheartSourceText(a: BeastheartAction): string {
     s => s.sourcePath === `vendor/steel-compendium/${a.sourcePath}`,
   );
   if (!source) throw new Error(`Missing Beastheart source: ${a.sourcePath}`);
-  return source.text;
+  return sourceBody(source.text);
 }
 export function beastheartActionText(a: BeastheartAction): string {
   return `${a.activationCondition}\n\n${beastheartSourceText(a)}`;

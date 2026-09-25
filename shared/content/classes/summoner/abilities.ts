@@ -4,6 +4,7 @@ import featureSources from '../../compendium/feature.json' with { type: 'json' }
 import statblockSources from '../../compendium/statblock.json' with { type: 'json' };
 import { SUMMONER_MINIONS } from './minions.ts';
 import { SUMMONER_FIXTURES } from './level-two-three.ts';
+import { sourceBody } from '../../source-body.ts';
 export interface SummonerAction {
   name: string;
   parent: string;
@@ -1353,12 +1354,12 @@ export const SUMMONER_ACTIONS: SummonerAction[] = [
 ];
 export function summonerSourceText(a: SummonerAction): string {
   const fixture = SUMMONER_FIXTURES.find(f => f.sourcePath === a.sourcePath);
-  if (fixture) return fixture.text;
+  if (fixture) return sourceBody(fixture.text);
   const source = [...abilitySources, ...featureSources, ...statblockSources].find(
     s => s.sourcePath === 'vendor/steel-compendium/' + a.sourcePath,
   );
   if (!source) throw new Error('Missing Summoner source: ' + a.sourcePath);
-  return source.text;
+  return sourceBody(source.text);
 }
 export function summonerActionText(a: SummonerAction): string {
   return a.activationCondition + '\n\n' + summonerSourceText(a);
