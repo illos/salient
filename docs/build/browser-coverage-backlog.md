@@ -178,3 +178,13 @@ that creature's sheet. Headless coverage is `tests/app/areas.test.ts`.
   at Thorn's End turn, a Shadow's "Hesitation Is Weakness" card appears and stays until the next Take
   turn. Accepting it, then Take turn for the Shadow, shows no side-order warning. Headless coverage is
   `tests/app/turn-trigger-offers.test.ts`.
+
+
+## V211 plan — selected foe engine work (V212–V228)
+
+After V66, inspect Director trait/Malice/villain action discovery, two separate solo turn entries,
+optional End Effect, per-target test cards, foe reactions, movement-fact continuations, area membership,
+revived minion rows, rage and dragonsealed. Verify conditional actions are available from the same
+shared route as CLI/API, stale cards explain expiry, source text remains accessible and player views
+hide unused monster details. Headless persisted proofs in the owning slices establish behavior;
+this entry records future table-browser scenarios, not tests already run.

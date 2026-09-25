@@ -200,3 +200,21 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V202 | [Turn-start and turn-end triggered-action offers](V202-turn-trigger-offers.md) | Merged (`d249fc9`); cloud dev published; accepted TESTER results reused |
 | V210 | [Director build-review count](V210-build-review-count.md) | Merged (`6c4c566c`); cloud dev frontend published; gate and focused browser PASS |
 | V203 | [Current documentation phase and role cleanup](V203-documentation-phase-transition.md) | Merged (`b404a8b1`); documentation only, no runtime update |
+| V211 | [V1 foe parser and engine audit and plan](V211-v1-foe-engine-plan.md) | Committed on branch |
+| V212 | [Foe source accounting and action discovery](V212-foe-source-and-actions.md) | Registered |
+| V213 | [Selected foe turns, villain actions and End Effect](V213-foe-turns-and-villain-actions.md) | Registered |
+| V214 | [Foe Malice features and payments](V214-foe-malice-features.md) | Registered |
+| V215 | [Compiled minion actions and captain parity](V215-minion-compiled-actions.md) | Registered |
+| V216 | [Foe roll clauses and optional Malice variants](V216-foe-rolls-and-spends.md) | Registered |
+| V217 | [Foe grabs and confirmed movement consequences](V217-foe-grabs-and-movement.md) | Registered |
+| V218 | [Granted foe actions and ordered sequences](V218-foe-granted-action-sequences.md) | Registered |
+| V219 | [Foe reaction holders and damage consequences](V219-foe-damage-reactions.md) | Registered |
+| V220 | [Foe pre-resolution and roll-changing reactions](V220-foe-pre-resolution-reactions.md) | Registered |
+| V221 | [Foe effects resolved by each target's test](V221-foe-target-tests.md) | Registered |
+| V222 | [Foe traits, modifiers and lasting effects](V222-foe-traits-and-lasting-effects.md) | Registered |
+| V223 | [Foe reinforcements, revival and delayed death](V223-foe-spawn-and-revival.md) | Registered |
+| V224 | [Foe areas, auras and terrain consequences](V224-foe-areas-and-terrain.md) | Registered |
+| V225 | [Werewolf Accursed Rage](V225-werewolf-rage.md) | Registered |
+| V226 | [Werewolf form, curse and Shared Ferocity](V226-werewolf-form-and-curse.md) | Registered |
+| V227 | [Thorn Dragon linked effects and domain](V227-thorn-dragon-effects.md) | Registered |
+| V228 | [Connected V1 foe proof and residual manual work](V228-foe-connected-play-proof.md) | Registered |

@@ -2040,3 +2040,104 @@ Current behaviour:
    first. Alternative: let both accept and have the table order the two turns.
 
 Recommendation: keep 1 to 9.
+
+## Q-FOE-1: timing for attack redirection and pre-resolution foe reactions
+
+Open, queued by V211 on 2026-09-25; blocks only the corresponding V220 automation.
+
+**Question:** How should the app handle Meat Shield, Clever Trick, Bloodstones and Facepalm and
+Head Slam when they change an attack before its original result should take effect?
+
+**Recommendation:** add a narrow declaration/response step for these named situations, selected
+through the shared action route, then resolve the final attack once. Ordinary attacks and existing
+damage-halving option B keep their present flow. Until that contract is accepted and built, expose
+these actions as manual with their costs and source text.
+
+Sources read at the pinned unified Markdown root:
+
+- `monster/goblin/statblock/goblin-monarch.md`, Meat Shield: replace the monarch with an ally.
+- `monster/bugbear/statblock/bugbear-sneak.md`, Clever Trick: replace the strike target with a chosen
+  enemy within the strike's distance, for 1 Malice.
+- `monster/human/statblock/human-bandit-chief.md`, Bloodstones: improve the chief's power-roll
+  outcome one tier for 5 irreducible corruption damage.
+- `monster/werewolf/statblock/werewolf.md`, Facepalm and Head Slam: qualifying approach, prone and
+  5 damage; the source literally says “before the triggered action is resolved,” so the exact
+  antecedent also needs a labelled reading (recommended: before the triggering melee ability).
+- `rule/combat/triggered-action.md`, ordering of player-controlled then Director-controlled responses.
+
+The existing 2026-09-24 option B ruling addresses damage changes after application. It does not
+settle retargeting conditions, canceled attacks, or replaying all effects of a changed tier.
+Alternatives: extend option B to revise the complete attack and every dependent consequence, or
+leave these four mechanics manually adjudicated. No global mandatory pause is proposed.
+
+## Q-FOE-2: Ravenous Horde's winded minions
+
+Open, queued by V211 on 2026-09-25; other reinforcement/revival work can proceed.
+
+**Question:** How should Ravenous Horde's newly created “winded” rotting zombies be represented?
+
+**Recommendation:** a source-specific weakened spawn with 2 Stamina per living zombie and a
+matching 2-point casualty step, in a separately created squad, while ordinary minions keep their
+normal no-winded rule. This is a proposed application ruling, not the printed formula.
+
+Sources read:
+
+- `monster/undead/1st-echelon/undead-malice-level-1-malice-features.md`, Ravenous Horde: two
+  rotting zombies per qualifying hero appear at round end; each zombie is winded.
+- `monster/undead/1st-echelon/statblock/rotting-zombie.md`, header: Stamina 5.
+- `chapter/monster-basics.md`, Shared Low Stamina: minions cannot be winded, heal or gain temporary
+  Stamina; Dropping One Minion ties casualties to the individual Stamina amount.
+- `rule/health/winded.md`: winded is remaining Stamina at or below half maximum, not one exact value.
+- `rule/general/always-round-down.md` and `chapter/the-basics.md`, Game of Exceptions.
+
+The specific wording conflicts with the ordinary minion model and supplies neither an exact value
+nor an altered pool/casualty rule. Halving an ordinary pool at creation would kill some of the very
+zombies being created. Alternatives: spawn full-strength minions and retain “winded” as a manual
+source note, or let the Director choose an explicit spawn value. Keep this effect manual until answered.
+
+## Q-FOE-3: Shared Ferocity's first-use scope
+
+Open, queued by V211 on 2026-09-25; blocks this V226 trait's automatic limit only.
+
+**Question:** Should Shared Ferocity grant Malice once per qualifying creature per encounter?
+
+**Recommendation:** yes; retain an encounter/creature record and the accepted 1d3. This is an
+interpretation awaiting confirmation, not a source-stated reset interval.
+
+`monster/group/werewolf.md`, Shared Ferocity, grants the Director 1d3 Malice “the first time a
+creature uses an ability that costs ferocity” within the werewolf's line of effect. The paragraph
+states no round, turn, encounter or lifetime reset. The stat-block Accursed Rage and general
+`rule/monster/malice.md` do not settle the first-use scope. Alternatives: one trigger total per
+werewolf encounter, or another explicitly chosen interval. Line of effect remains a supplied fact.
+
+## Q-FOE-4: Thorn Dragon's Domain rider durations
+
+Open, queued by V211 on 2026-09-25; the rest of V227 can proceed.
+
+**Question:** What duration should the Domain's speed reduction and bleeding use?
+
+**Recommendation:** apply one nonstacking −2 speed adjustment for the affected creature's current
+turn (minimum 1), and bind domain-caused bleeding to the restraint that caused it. Both are
+proposed interpretations; keep duration manual until answered.
+
+`monster/group/dragon.md`, Thorn Dragon's Domain, requires a location occupied for at least a week.
+It reduces a non-dragon creature's speed by 2 when its turn starts, and says a creature made
+restrained while on the ground is also made bleeding. It gives no duration for either rider.
+`monster/dragon/statblock/thorn-dragon.md`, Malign Thicket, adds separate domain-dependent poison
+and does not settle those durations. `condition/bleeding.md` and `condition/restrained.md` supply
+the conditions' effects, not these missing durations. Alternatives include encounter-long speed
+reduction and an independently tracked bleeding duration selected by the Director.
+
+## Q-FOE-5: Human Knave's Overwhelm duration
+
+Open, queued by V211 on 2026-09-25; other V222 traits can proceed.
+
+**Question:** Should Overwhelm prevent shifting for the triggering creature's current turn only?
+
+**Recommendation:** yes, ending at that turn's end, without stacking or extending from adjacency
+later in the turn. Record this as an interpretation if accepted.
+
+`monster/human/statblock/human-knave.md`, Overwhelm, says an enemy who starts their turn adjacent
+to the knave can't shift, without printing a duration. The turn rules and `movement/shifting.md` do
+not specify this trait's lifetime. Alternatives: while adjacent, until next turn start, or explicit
+Director-selected duration. Keep its unprinted duration manual while other trait behavior proceeds.
