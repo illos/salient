@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V179 granted defenses
+## Current release — V191 XP bank
+
+Backend/frontend source `35abd9f30ce0e85e629a693d97db42c88ac2d902` published on 2026-09-25 as
+Worker `2f249d43-1535-4890-b463-d8b22495c205`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V191](build/V191-xp-bank.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V179 granted defenses
 
 Backend/frontend source `392d236292c299497151f7a2da7301e7f00e773d` published on 2026-09-25 as
 Worker `d29fda21-1978-45c7-8541-8c0f084e2ce2`. Backend and schema validation, the hosted build and the upload succeeded.

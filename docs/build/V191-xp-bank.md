@@ -70,3 +70,9 @@ ruling applies to this case only.
 - Built on `slice/V191`, `.worktrees/xp-bank`. Author checks: both TypeScript projects, lint, the
   focused app tests (xp-per-level, respite, table), the Convex push check.
 - Independent review PASS (2026-09-25). Its low findings are fixed: withdraw wording covers XP banked at the level-10 cap, the admitted-above-level-1 difference, the server and shared split for the XP text, and a Cancel test with a non-zero bank.
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `35abd9f` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `2f249d43-1535-4890-b463-d8b22495c205`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V191-release-35abd9f`.

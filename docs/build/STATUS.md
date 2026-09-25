@@ -190,4 +190,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V190 | [Campaign XP per level](V190-xp-per-level.md) | Merged (`36a5e17`, train 19); cloud dev published; gate and headless PASS at tip |
 | V178 | [Damage immunity and weakness](V178-immunity-weakness.md) | Merged (`eeaa992`); cloud dev published; accepted TESTER results reused |
 | V179 | [Immunity and weakness granted in play](V179-granted-defenses.md) | Merged (`392d236`); cloud dev published; accepted TESTER results reused |
-| V191 | [XP bank](V191-xp-bank.md) | Committed on branch |
+| V191 | [XP bank](V191-xp-bank.md) | Merged (`35abd9f`); cloud dev published; accepted TESTER results reused |

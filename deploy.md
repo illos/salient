@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V191 | `35abd9f` | Merged; backend/frontend published; accepted gates reused | complete |
 | V179 | `392d236` | Merged; backend/frontend published; accepted gates reused | complete |
 | V178 | `eeaa992` | Merged; backend/frontend published; accepted gates reused | complete |
 | V190 | `36a5e17` | Merged in train 19; backend/frontend published; gate and headless at tip | complete |
@@ -954,3 +955,16 @@ The test and deploy thread fast-forwarded reviewed tip `392d236292c299497151f7a2
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V179-release-392d236`.
+
+### V191 XP bank publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `35abd9f30ce0e85e629a693d97db42c88ac2d902` into main.
+- Full gate at the tip (306 s, 458 engine and 945 app tests; the XP tests were rewritten for the bank model).
+- `respite`, `level-up`, `lifecycle` and `all` journeys at the tip.
+- Independent rules review passed. Replaces V190 owed levels by user ruling; adds optional `liveState.xpLifetime`.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `2f249d43-1535-4890-b463-d8b22495c205`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V191-release-35abd9f`.
