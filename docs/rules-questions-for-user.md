@@ -2033,7 +2033,7 @@ Current behaviour:
    so a correction of a hit on the target is refused only when it changes whether the target took
    any damage from it (for example 4 → 0). A correction from 4 to 6 damage stands. Alternative:
    refuse every correction that changes the amount, as V173 does for responses sized by the damage.
-9. **One creature takes the turn after the triggering hero.** When two Shadows are offered
+9. **One creature takes the turn after the triggering hero** (interpretation). When two Shadows are offered
    Hesitation Is Weakness for the same turn end, the first to accept takes the next turn; the other
    card closes with that acceptance (undo reopens it), and an accept against a held turn is refused.
    `rule/combat/triggered-action.md` has the players decide among themselves which responses resolve
