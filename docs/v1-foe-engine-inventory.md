@@ -345,7 +345,7 @@ inputs, not extra named features. V212 accounts for them; V215 proves all ten mi
 - **Thorned Armor:** V213/V219/V227; encounter-long adjacent melee-targeting retaliation of 3,
   then use Provoking Nettles, retaining its once-per-turn accounting.
 - **Malign Thicket:** V213/V217/V224/V227; two no-cost Bramble Barricades, force-move poison 1d3
-  and M < 2 weakened, plus domain-dependent turn-start poison 1d3.
+  and M < 2 weakened. Domain-dependent turn-start poison 1d3 stays manual under Q-FOE-4.
 
 ## Band and solo Malice
 
@@ -370,7 +370,7 @@ assign the payload; an unimplemented payload stays manual with the actual paymen
 | `rule/monster/malice.md`, Basic Malice / **Brutal Effectiveness** | V214/V222: 3 Malice, next ability with potency +1; an ability without potency must not consume it |
 | Same, **Malicious Strike** | V214/V222: 5+ Malice, next strike adds highest characteristic plus extras to one chosen target, capped at 3×highest characteristic; encounter-wide no-consecutive-round usage, even by another monster |
 | `monster/group/werewolf.md`, **Shared Ferocity** | V226: confirmed line of effect to a ferocity-cost ability yields one recorded 1d3 Malice grant per encounter, at the first qualifying use across creatures; accepted Q-FOE-3 |
-| `monster/group/dragon.md`, **Thorn Dragon's Domain** | V227: Director declares the one-week location predicate; other creatures (including other dragons) take turn-start speed −2, minimum 1; only the source dragon is exempt from speed loss; any creature restrained while grounded also bleeds; duration question Q-FOE-4 |
+| `monster/group/dragon.md`, **Thorn Dragon's Domain** | V227: text/manual only by user deferral Q-FOE-4; later environmental-effect review retains one-week prerequisite, Director encounter-start enable/disable, current-turn speed −2 (minimum 1) for others including monsters, source-dragon-only speed exemption, and grounded-restraint bleeding. Flight and bleeding duration unresolved; no automatic riders |
 | `rule/monster/villain-action.md`, Villain Actions | V213: at another creature's turn end; each named action once/encounter; at most one villain action per round across all such creatures; order may vary |
 | `rule/monster/end-effect.md`, End Effect, plus printed stat-block values | V213: optional unreduceable damage, chosen save-ended effect; do not auto-spend at End turn |
 | `rule/monster/creature-free-strike.md`, Creature Free Strikes / Creature Opportunity Attacks / Stat Block Self-Reference | V215/V218/V222: static damage; range/keywords/type from signature; bane prevents opportunity attack; relative allies/enemies and distances refer to the acting creature |

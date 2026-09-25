@@ -143,7 +143,7 @@ not permission to work in another slice's checkout. V211 is this audit and plan.
 | [V224](build/V224-foe-areas-and-terrain.md) | Persistent zones, auras, movement-trigger facts and terrain lifecycle | V217, V219, V221, V222 |
 | [V225](build/V225-werewolf-rage.md) | Accursed Rage and compulsory strike sequence | V213, V218, V221, V222 |
 | [V226](build/V226-werewolf-form-and-curse.md) | Full Wolf, lycanthropy, Moonfall and Shared Ferocity | V214, V225; accepted Q-FOE-3 once-per-encounter limit |
-| [V227](build/V227-thorn-dragon-effects.md) | Dragonsealed, healing aura, briars and domain | V214, V217, V218, V219, V221, V224; Q-FOE-4 for domain durations |
+| [V227](build/V227-thorn-dragon-effects.md) | Dragonsealed, healing aura and briars; Domain text/manual | V214, V217, V218, V219, V221, V224; Domain deferred under Q-FOE-4 |
 | [V228](build/V228-foe-connected-play-proof.md) | Connected roster proof, remaining manual-work report and final cross-feature fixes | Relevant completed slices V212–V227 |
 
 Recommended first wave: V212–V216. This makes the action surfaces and monster timing honest,
@@ -179,8 +179,10 @@ Queued in [the questions file](rules-questions-for-user.md):
 - **Q-FOE-3:** answered: one 1d3 Malice grant per encounter on the first qualifying expenditure,
   with required line of effect. A different creature does not grant another use. This accepted
   interpretation supersedes the original per-creature proposal.
-- **Q-FOE-4:** Thorn Dragon's Domain does not print expiry for its speed reduction or linked
-  bleeding. Keep their duration explicit/manual until the user settles it.
+- **Q-FOE-4:** user shelved Domain automation as text/manual pending review of encounter-wide
+  environmental effects. Future Director encounter-start enable/disable and current-turn speed
+  duration are recorded; other monsters are affected. Flight and bleeding lifetime remain open.
+  Domain-dependent Malign Thicket poison stays manual; independent dragon effects proceed.
 
 - **Q-FOE-5:** Human Knave Overwhelm does not state how long its no-shift restriction lasts.
   Recommend the triggering turn; keep that duration manual pending the answer.

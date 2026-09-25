@@ -2150,24 +2150,44 @@ These parallels support the revised recommendation but do not themselves conclus
 Shared Ferocity's omitted interval. The user then confirmed: “Once per encounter.” The ruling
 settles this selected-roster trait; it does not reinterpret those comparison features.
 
-## Q-FOE-4: Thorn Dragon's Domain rider durations
+## Q-FOE-4: Thorn Dragon's Domain — deferred environmental-effect review
 
-Open, queued by V211 on 2026-09-25; the rest of V227 can proceed.
+Shelved by the user on 2026-09-25; recorded by V232. The rest of V227 can proceed.
 
-**Question:** What duration should the Domain's speed reduction and bleeding use?
+**Current disposition:** retain the Domain's source text when used, with its effects explicitly
+manual. Do not automate its speed or bleeding riders or build the new encounter-wide activation
+mechanism now. Earmark it for later research into a possible environmental/lair-style effect
+classification; that classification is not yet designed or accepted as a rules category.
 
-**Recommendation:** apply one nonstacking −2 speed adjustment for the affected creature's current
-turn (minimum 1), and bind domain-caused bleeding to the restraint that caused it. Both are
-proposed interpretations; keep duration manual until answered.
+**Direction retained for that later review:**
 
-`monster/group/dragon.md`, Thorn Dragon's Domain, requires a location occupied for at least a week.
-It reduces any creature's speed other than the source dragon's by 2 when its turn starts
-(minimum 1); other dragons are affected. Any creature made restrained while on the ground is
-also made bleeding; that clause has no source-owner exclusion. It gives no duration for either rider.
-`monster/dragon/statblock/thorn-dragon.md`, Malign Thicket, adds separate domain-dependent poison
-and does not settle those durations. `condition/bleeding.md` and `condition/restrained.md` supply
-the conditions' effects, not these missing durations. Alternatives include encounter-long speed
-reduction and an independently tracked bleeding duration selected by the Director.
+- The Director must be able to enable or disable this optional encounter-wide effect at the
+  start of an encounter. This is a future product requirement, not a toggle claimed to exist now.
+- The speed reduction lasts for the affected creature's current turn. The printed amount is
+  −2, minimum 1. The user confirmed the turn duration; no accumulating per-turn penalty is intended.
+- The speed clause covers other monsters as well as heroes, exempting only the source dragon.
+- The user raised a possible exemption for flying creatures because the thorns cover surfaces.
+  Treat this as a research question, not a silently implemented exception: the speed clause
+  says starts their turn on the encounter map, while only the restraint/bleeding clause explicitly
+  requires being on the ground.
+- Bleeding duration remains unresolved. The earlier recommendation to end it with restraint
+  was not accepted. No expiry is inferred from the accepted speed duration.
+
+**Later research scope:** compare similar encounter-wide environmental effects in the pinned
+Compendium; determine whether a distinct shared classification is useful; design Director
+activation/deactivation and source prerequisites; resolve flight/ground contact and bleeding
+lifetime. Preserve the user-approved speed duration and other-monster scope. This follow-up is
+shelved, not a new gate for unrelated monster implementation.
+
+Source: `monster/group/dragon.md`, Thorn Dragon's Domain, requires a location occupied for at
+least one week, covers all surfaces in overgrowth, gives the speed rider to creatures other than
+the source dragon, and makes any creature restrained on the ground also bleeding. The bleeding
+clause has no source-owner exclusion. It prints no duration for either rider.
+`monster/dragon/statblock/thorn-dragon.md`, Malign Thicket, adds a domain-dependent turn-start
+poison rider. Keep that dependent rider manual while Domain activation/eligibility is shelved;
+its independent Brambles and poison/weakened effects remain in V227's scope. No Domain state
+should be inferred merely from using Malign Thicket. `condition/bleeding.md` and
+`condition/restrained.md` do not supply the Domain's missing bleeding duration.
 
 ## Q-FOE-5: Human Knave's Overwhelm duration
 
