@@ -348,7 +348,8 @@ const grantLevelUp: OperationDefinition = {
  * V163 `/character withdraw-level-up`: the Director's correction for a mistaken grant. Removes one
  * pending (not yet taken) level-up from each chosen hero; a level already taken is not affected.
  * V191 (user ruling 2026-09-25, XP bank): a withdrawal is final. The XP that bought the level is not
- * refunded to the bank, and no later Respite Complete grants it again.
+ * refunded to the bank; a later Respite Complete buys a level only from banked XP (including XP
+ * kept banked while level 10 was held or pending, which the withdrawal makes spendable again).
  */
 const withdrawLevelUp: OperationDefinition = {
   id: 'character.withdraw-level-up',
@@ -356,7 +357,7 @@ const withdrawLevelUp: OperationDefinition = {
   verb: 'withdraw-level-up',
   title: 'Withdraw a pending level-up',
   description:
-    'Director: remove one granted level-up that has not been taken yet from each chosen hero, to correct a mistaken grant. Levels already taken and the XP bank are unchanged. The withdrawal is final: the XP is not refunded and the level is not granted again.',
+    'Director: remove one granted level-up that has not been taken yet from each chosen hero, to correct a mistaken grant. Levels already taken and the XP bank are unchanged. The withdrawal is final: the XP is not refunded; a later Respite Complete grants a level only from XP in the bank.',
   args: { characters: v.array(characterArg) },
   argDescriptions: {
     characters: 'Heroes to withdraw a pending level-up from, as @{character:id}.',

@@ -1768,7 +1768,8 @@ the respite never waits for it, and the Director can resolve the respite and mov
   Advancement says "The amount of Experience you gain is cumulative" and reads a cumulative total
   against the Heroic Advancement and Adjusted XP Advancement tables. Salient instead keeps each hero's
   XP (`liveState.xp`) as a bank. At a fixed pace from level 1 both reach the same levels; the bank
-  differs only when the pace changes or a level-up is granted or withdrawn by hand. Alternatives
+  differs only when the pace changes, a level-up is granted or withdrawn by hand, or a hero is
+  admitted above level 1 (with an empty bank). Alternatives
   considered: V190's cumulative XP with owed levels, and cumulative table XP counted from the entry
   level (Q-XP-1, resolved by this ruling).
 - **Respite Complete.** For each participant: bank += Victories; lifetime XP += Victories; Victories
@@ -1781,13 +1782,14 @@ the respite never waits for it, and the Director can resolve the respite and mov
 - **Rate changes** apply to the bank at the next Complete. Nothing is retroactive, caught up or
   removed.
 - **Manual grant and withdraw.** `character.grant-level-up` never touches the bank. A withdrawn
-  level-up is final: its XP is not refunded to the bank and no Complete grants it again.
+  level-up is final: its XP is not refunded to the bank. A later Complete buys a level only from XP in the bank,
+  including XP kept banked while level 10 was held or pending, which a withdrawal can make spendable.
 - **`/adjust xp`** sets the XP bank (Director, recorded as a Manual adjustment); lifetime XP is not
   changed.
 - **Display.** The character sheet's Stats show "XP 5 / 16" (bank / the campaign's XP per level, 16
   outside a campaign) and "Lifetime XP 37" when recorded (`liveState.xpLifetime`, display only). At
-  level 10, held or pending, the XP row shows only the bank. Both are computed on the server
-  (`characters.sheet` `xpProgress`).
+  level 10, held or pending, the XP row shows only the bank. The values are computed on the server
+  (`characters.sheet` `xpProgress`); the shared `xpProgressRows` formats the row text.
 
 Confirmed: respite is its own dedicated table mode, with a self-contained gameplay loop that the Director
 starts and ends. It has mechanics to support rather than being only a pause or a descriptive log entry.

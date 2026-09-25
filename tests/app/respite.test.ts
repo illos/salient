@@ -95,10 +95,14 @@ test('interrupt keeps what happened and grants nothing', async () => {
 
 test('cancel returns every participant to the state before the respite', async () => {
   const f = await setup();
+  // A non-zero XP bank, so a Cancel that failed to restore it would show.
+  await f.say('@Thorn /adjust xp value=5');
   const before = (await f.hero()).liveState;
+  expect(before?.xp).toBe(5);
   await f.say('/respite start');
   await f.say('@Thorn /adjust stamina value=12');
   await f.say('@Thorn /adjust recoveries value=1');
+  await f.say('@Thorn /adjust xp value=20');
   await f.say('/respite cancel');
   expect((await f.hero()).liveState).toEqual(before);
   expect((await f.session()).respite ?? null).toBeNull();

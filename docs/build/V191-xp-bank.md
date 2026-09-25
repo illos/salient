@@ -43,7 +43,7 @@ ruling applies to this case only.
 - The V190 `earnedLevel`, `levelUpsOwed` and `entryLevelOf` are removed. `entryLevelXpOffset` stays
   as a stored record of the entry level (admission still writes it; the progression query and the
   level-up event still report it) but nothing reads it for XP.
-- `character.grant-level-up` leaves the bank alone; `character.withdraw-level-up` is final (no refund,
+- `character.grant-level-up` leaves the bank alone; `character.withdraw-level-up` is final (no refund; only banked XP buys a later level,
   no re-grant). Both descriptions say so.
 - `adjust.xp` (`/adjust xp value=N`) sets the XP bank; its description says so. Lifetime XP is not
   changed by it.
@@ -69,3 +69,4 @@ ruling applies to this case only.
 
 - Built on `slice/V191`, `.worktrees/xp-bank`. Author checks: both TypeScript projects, lint, the
   focused app tests (xp-per-level, respite, table), the Convex push check.
+- Independent review PASS (2026-09-25). Its low findings are fixed: withdraw wording covers XP banked at the level-10 cap, the admitted-above-level-1 difference, the server and shared split for the XP text, and a Cancel test with a non-zero bank.

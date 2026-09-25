@@ -567,7 +567,7 @@ shared headless operation, under existing timing, encounter locks and validation
   then spends each full XP per level on one pending level-up while level + pending < 10; the remainder
   stays banked. At a fixed pace from level 1 this reaches the same levels as the cumulative table. A
   hero admitted above level 1 starts with an empty bank. A rate change applies at the next Complete. A
-  manual grant leaves the bank alone; a withdrawn level-up is final (no refund, no re-grant).
+  manual grant leaves the bank alone; a withdrawn level-up is final (no refund; a later Complete buys a level only from banked XP).
   `/adjust xp` sets the bank. The sheet shows "XP 5 / 16" and "Lifetime XP 37" (only the bank at
   level 10). See [respite mode](table-spec.md#respite-mode).
 - **Earlier choices (confirmed 2026-09-24).** A level-up only adds that level's choices. Swapping an
