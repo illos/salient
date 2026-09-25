@@ -550,47 +550,49 @@ export function CompiledEffects({
                     : 'Damage not applied'
                   : occurrence.disposition
                     ? 'Resolved at table'
-                    : effect.kind === 'strained'
-                      ? effect.status === 'applied'
-                        ? 'Applied'
-                        : effect.status === 'not-strained'
-                          ? 'Not strained'
-                          : 'Manual'
-                      : effect.kind === 'watcher' ||
-                          effect.kind === 'mark' ||
-                          effect.kind === 'area'
+                    : effect.kind === 'rider' && effect.status === 'applied'
+                      ? 'Applied'
+                      : effect.kind === 'strained'
                         ? effect.status === 'applied'
-                          ? 'Tracked effect'
-                          : `Manual ${effect.kind}`
-                        : effect.kind === 'modifier'
+                          ? 'Applied'
+                          : effect.status === 'not-strained'
+                            ? 'Not strained'
+                            : 'Manual'
+                        : effect.kind === 'watcher' ||
+                            effect.kind === 'mark' ||
+                            effect.kind === 'area'
                           ? effect.status === 'applied'
                             ? 'Tracked effect'
-                            : effect.status === 'resisted'
-                              ? 'Resisted'
-                              : 'Manual modifier'
-                          : effect.kind === 'gain'
+                            : `Manual ${effect.kind}`
+                          : effect.kind === 'modifier'
                             ? effect.status === 'applied'
-                              ? 'Applied gain'
-                              : 'Manual gain'
-                            : effect.kind === 'condition'
+                              ? 'Tracked effect'
+                              : effect.status === 'resisted'
+                                ? 'Resisted'
+                                : 'Manual modifier'
+                            : effect.kind === 'gain'
                               ? effect.status === 'applied'
-                                ? 'Applied condition'
-                                : effect.status === 'resisted'
-                                  ? 'Resisted'
-                                  : effect.status === 'immune'
-                                    ? 'Immune'
-                                    : effect.status === 'ineligible'
-                                      ? 'Too large to grab'
-                                      : effect.status === 'fact-needed'
-                                        ? 'Facts needed'
-                                        : 'Manual condition'
-                              : effect.kind === 'push'
-                                ? 'Outstanding instruction'
-                                : effect.kind === 'triggered-damage'
-                                  ? effect.application
-                                    ? 'Applied damage'
-                                    : 'Manual damage'
-                                  : 'Unresolved'}
+                                ? 'Applied gain'
+                                : 'Manual gain'
+                              : effect.kind === 'condition'
+                                ? effect.status === 'applied'
+                                  ? 'Applied condition'
+                                  : effect.status === 'resisted'
+                                    ? 'Resisted'
+                                    : effect.status === 'immune'
+                                      ? 'Immune'
+                                      : effect.status === 'ineligible'
+                                        ? 'Too large to grab'
+                                        : effect.status === 'fact-needed'
+                                          ? 'Facts needed'
+                                          : 'Manual condition'
+                                : effect.kind === 'push'
+                                  ? 'Outstanding instruction'
+                                  : effect.kind === 'triggered-damage'
+                                    ? effect.application
+                                      ? 'Applied damage'
+                                      : 'Manual damage'
+                                    : 'Unresolved'}
               </Badge>
             </span>
             <span className="[overflow-wrap:anywhere]">
@@ -809,6 +811,7 @@ export function CompiledEffects({
               (effect.kind !== 'area' || effect.status === 'manual') &&
               (effect.kind !== 'mark' || effect.status === 'manual') &&
               (effect.kind !== 'strained' || effect.status === 'manual') &&
+              (effect.kind !== 'rider' || effect.status !== 'applied') &&
               (effect.kind !== 'triggered-damage' || effect.status === 'manual') &&
               (effect.kind !== 'condition' ||
                 effect.status === 'fact-needed' ||

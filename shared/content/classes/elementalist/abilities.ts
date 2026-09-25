@@ -104,7 +104,7 @@ export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
     sourcePath: 'en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md',
     actionType: 'Part of parent ability',
     activationCondition:
-      'With the parent, target can spend one additional Recovery per Essence. Repeat for each additional Recovery; outside combat total is limited to Victories. Resolve the stated effects manually.',
+      'With the parent, and only when its card’s Spend (spend=N) was not paid: target can spend one additional Recovery per Essence. Repeat for each additional Recovery; outside combat total is limited to Victories. Resolve the stated effects manually.',
     cost: 1,
   },
   {

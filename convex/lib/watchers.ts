@@ -57,6 +57,12 @@ const MAX_DEPTH = 3;
 export interface ObserveOptions {
   /** A correction's damage write: any watcher that would fire refuses the correction instead. */
   correction?: boolean;
+  /**
+   * V202: the damage the corrected hit dealt this creature before and after the correction (Stamina
+   * and temporary Stamina lost), so a response that answers only whether damage was taken is judged
+   * on that (convex/lib/triggeredActions.ts assertNoTriggerOnCorrection).
+   */
+  correctionTaken?: { before: number; after: number };
   /** How many watcher firings led to this observation. */
   depth?: number;
 }
@@ -567,7 +573,8 @@ export async function observeDamage(
     ...(observation.meleeStrike !== undefined ? { meleeStrike: observation.meleeStrike } : {}),
   };
   if (!observation.partOfHit) {
-    if (options.correction) await assertNoTriggerOnCorrection(ctx, scope, damage);
+    if (options.correction)
+      await assertNoTriggerOnCorrection(ctx, scope, damage, options.correctionTaken);
     else await offerForDamage(ctx, scope, damage);
   }
   // V175: the damaged creature's marks: `marked-damaged` watchers of their owners, and the Mark's

@@ -27,7 +27,12 @@ export interface EffectRider {
      * V202: the user takes their turn after the triggering hero (Hesitation Is Weakness). Accepted
      * from its turn-end card, the next turn start records it (convex/lib/initiative.ts).
      */
-    | 'turn-order';
+    | 'turn-order'
+    /**
+     * V202: the user spends a Recovery and the target regains Stamina equal to the user's recovery
+     * value (My Life for Yours). The use applies it (convex/lib/abilityOperations.ts).
+     */
+    | 'recovery-transfer';
   /**
    * V152 `after-effects`: the section reads a tier outcome other than damage (Choke's "made
    * restrained by this ability"), so it waits for that target's condition outcomes too.

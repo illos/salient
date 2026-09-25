@@ -1962,24 +1962,40 @@ Current behaviour:
    Is Weakness, because the turn names the same ability's source. A use by hand records no allowance,
    so such a turn is not recognised and the table checks the second sentence itself. Alternative:
    infer "used this ability to start their turn" from the log, including uses by hand.
-4. **"Starts their turn or takes damage" are two occurrences.** The turn start is offered from the
-   clock and the damage from the damage writer, as separate cards. Both can open together, for
-   example when an area rider damages the target at its turn start. Accepting one closes its owner's
-   other earlier cards, and the re-check refuses a second ordinary triggered action that round.
-   Alternative: one card per turn for both halves.
+4. **"Starts their turn or takes damage" are two occurrences** (interpretation). The turn start is
+   offered from the clock and the damage from the damage writer, as separate cards. Both can open
+   together, for example when an area rider damages the target at its turn start. Accepting one
+   closes its owner's other earlier cards, and the re-check refuses a second ordinary triggered
+   action that round. Alternative: one card per turn for both halves.
 5. **A response to a turn start closes when that creature acts** (application of the confirmed
    "Clarified existing precedent": the cutoff follows "the triggering event and subsequent play by
    the affected character"). When the creature whose turn started commits an ability, cards
    answering its turn start close; undo reopens them. V173's damage offers don't close on the
    damaged creature's play yet; V202 leaves them unchanged. Alternative: keep turn-start cards open
    until the next turn start regardless.
-6. **Recoveries are table work.** "You spend a Recovery and the target regains Stamina equal to your
-   recovery value." and "The target can spend a Recovery." are recorded for the table, with their
-   Spend sections (1 Wrath to end an effect or stand up; 1+ Essence for more Recoveries). Nothing is
-   spent or healed automatically, as for V157's Recovery sentences. Alternative: the engine spends
-   the Recovery and heals the target.
-7. **Prescient Grace stays manual.** Its trigger ("An enemy within 10 squares starts their turn.") is
-   observed, but "The target can then take their turn immediately before the triggering enemy."
-   needs a turn before one the clock has already started, and the app keeps one turn in progress.
+6. **My Life for Yours applies its Recovery; Breath of Dawn Remembered's stays table work**
+   (interpretation). "You spend a Recovery and the target regains Stamina equal to your recovery
+   value." is mandatory, so accepting (or using it by hand) is refused when the Censor has no
+   Recoveries. Otherwise the Censor's Recoveries drop by 1 and the target regains the Censor's
+   recovery value, up to its Stamina maximum (`rule/health/recoveries.md`), as V175's Mark Recovery
+   benefit applies it. "The target can spend a Recovery." is the target's choice, so it is recorded
+   for the table. The Spend sections (1 Wrath to end an effect or stand up; 1+ Essence for more
+   Recoveries) are paid on the card and resolved at the table. Alternative for Breath of Dawn
+   Remembered: V175's reading (Q-MARK-1 point 4), where accepting the card is the table's
+   confirmation that the target spends the Recovery, and the engine applies it.
+7. **Prescient Grace stays manual** (interpretation). Its trigger ("An enemy within 10 squares
+   starts their turn.") is observed, but "The target can then take their turn immediately before
+   the triggering enemy." needs a turn before one the clock has already started, and the app keeps
+   one turn in progress. Alternative: offer it, apply the Recovery, and record the early turn as a
+   table instruction, with the enemy's turn left in progress while the target acts.
+8. **Corrections of the damage half** (interpretation). "Or takes damage" doesn't read the amount,
+   so a correction of a hit on the target is refused only when it changes whether the target took
+   any damage from it (for example 4 → 0). A correction from 4 to 6 damage stands. Alternative:
+   refuse every correction that changes the amount, as V173 does for responses sized by the damage.
+9. **One creature takes the turn after the triggering hero.** When two Shadows are offered
+   Hesitation Is Weakness for the same turn end, the first to accept takes the next turn; the other
+   card closes with that acceptance (undo reopens it), and an accept against a held turn is refused.
+   `rule/combat/triggered-action.md` has the players decide among themselves which responses resolve
+   first. Alternative: let both accept and have the table order the two turns.
 
-Recommendation: keep 1 to 7.
+Recommendation: keep 1 to 9.

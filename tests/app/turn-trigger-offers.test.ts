@@ -31,6 +31,9 @@ import betterAuthTest from '@convex-dev/better-auth/test';
 import { api, internal } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import schema from '../../convex/schema';
+import { generate } from '../../convex/lib/dice';
+import { fromHex } from '../../convex/lib/sha256';
+import { assertNoTriggerOnCorrection } from '../../convex/lib/triggeredActions';
 import type { EvaluationInput } from '../../shared/contracts/characterEvaluation';
 import type { CompiledResult } from '../../shared/contracts/compiledResult';
 import { definitions } from '../../shared/content/level-one-decisions';
@@ -186,10 +189,22 @@ test('V202: My Life for Yours at an ally’s turn start: dazed, undo, early clos
   expect(await s.card(first!._id)).toBeNull();
   expect(await s.cards()).toEqual([]);
 
-  // Take turn again; the Director accepts for the player, spending 1 Wrath.
+  // Take turn again. "You spend a Recovery": with none left, accepting is refused and the card
+  // stays open.
   await s.command('@Thorn /turn take', 'player');
   const [second] = await s.open();
+  const thornId = second!.offer.target.id as Id<'characters'>;
+  const thorn = async () => (await s.t.run(ctx => ctx.db.get(thornId)))!.liveState!;
   await s.command(`${warden} /adjust heroic-resource value=1`);
+  await s.command(`${warden} /adjust recoveries value=0`);
+  await expect(s.respond(second!._id, 'director', { spend: 1 })).rejects.toThrow(
+    /no Recoveries left/,
+  );
+  expect(await s.card(second!._id)).toMatchObject({ status: 'awaiting-input' });
+  // The Director accepts for the player, spending 1 Wrath: the Censor spends a Recovery (2 → 1) and
+  // Thorn regains the Censor's recovery value (the ledger's 8): 5 → 13.
+  await s.command(`${warden} /adjust recoveries value=2`);
+  await s.command('@Thorn /adjust stamina value=5');
   const accepted = await s.respond(second!._id, 'director', { spend: 1 });
   const use = await s.event(accepted.eventId);
   expect(use.kind).toBe('ability.use');
@@ -197,7 +212,11 @@ test('V202: My Life for Yours at an ally’s turn start: dazed, undo, early clos
     interactionId: second!._id,
     triggeringEventId: second!.openedEventId,
   });
-  expect(use.description).toContain('For the table (Thorn)');
+  expect(use.description).toContain(
+    'Warden spends a Recovery (2 → 1) and Thorn regains 8 Stamina (5 → 13).',
+  );
+  expect((await s.hero('Warden')).liveState!.recoveries).toBe(1);
+  expect((await thorn()).stamina).toBe(5 + censorLedger.witnesses[0]!.expected.recoveryValue);
   expect((await s.hero('Warden')).liveState!.heroicResource).toEqual({
     name: 'wrath',
     current: 0,
@@ -213,10 +232,24 @@ test('V202: My Life for Yours at an ally’s turn start: dazed, undo, early clos
       .unique(),
   );
   expect((result!.compiled as CompiledResult).effects.map(o => o.effect)).toMatchObject([
-    { kind: 'rider', shape: 'recovery', status: 'manual', targetId: second!.offer.target.id },
+    {
+      kind: 'rider',
+      shape: 'recovery-transfer',
+      status: 'applied',
+      targetId: thornId,
+      recovery: { recoveriesBefore: 2, recoveriesAfter: 1, staminaBefore: 5, staminaAfter: 13 },
+    },
     { kind: 'response-spend', status: 'spent', amount: 1, resource: 'wrath' },
   ]);
   expect(await s.uses('Warden')).toMatchObject([{ actionType: 'triggered action', round: 1 }]);
+  // The card's Spend paid the 1 Wrath, so the hand-paid part warns that it pays it again.
+  await s.command(`${warden} /adjust heroic-resource value=1`);
+  const cleanse = await s.command(
+    `${warden} /ability use ability="My Life for Yours: Cleanse" targets=[@Thorn]`,
+  );
+  expect((await s.event(cleanse.eventId)).description).toContain(
+    "Rule warning: Warden's My Life for Yours this round already paid its Spend on its card",
+  );
 
   // One per round: the Censor's own turn start (Self) offers nothing more this round. Its turn
   // start still gains 2 wrath (wrath.md).
@@ -265,14 +298,6 @@ test('V202: Hesitation Is Weakness at another hero’s turn end: window, pass, p
   const shadeCard = offers.find(c => c.offer.owner.name === 'Shade')!;
   const umbraCard = offers.find(c => c.offer.owner.name === 'Umbra')!;
 
-  // Pass: Umbra's player closes the card; nothing is applied.
-  await s.f.player.client.mutation(api.interactions.close, {
-    interactionId: umbraCard._id,
-    commandId: `turn-trigger-${++sequence}`,
-  });
-  expect(await s.card(umbraCard._id)).toMatchObject({ status: 'closed' });
-  expect(await s.uses('Umbra')).toEqual([]);
-
   // The player accepts in the gap after Thorn's turn end: 1 Insight, and Shade goes next.
   await s.command(`${shade} /adjust heroic-resource value=1`);
   const accepted = await s.respond(shadeCard._id, 'player');
@@ -287,6 +312,16 @@ test('V202: Hesitation Is Weakness at another hero’s turn end: window, pass, p
     afterName: 'Thorn',
     abilityName: 'Hesitation Is Weakness',
   });
+  // Only one creature takes the next turn: Umbra's card closes with Shade's acceptance, so Umbra
+  // can't pay for a turn Shade already holds.
+  expect(await s.card(umbraCard._id)).toMatchObject({
+    status: 'closed',
+    resolvedEventId: accepted.eventId,
+  });
+  await s.command(`${umbra} /adjust heroic-resource value=1`);
+  await expect(s.respond(umbraCard._id, 'player')).rejects.toThrow(/already closed/);
+  expect(await s.uses('Umbra')).toEqual([]);
+  expect((await s.hero('Umbra')).liveState!.heroicResource.current).toBe(1);
 
   // Shade takes their turn after Thorn: no side-order warning, and the turn records what started it.
   const take = await s.command(`${shade} /turn take`, 'player');
@@ -313,7 +348,8 @@ test('V202: Hesitation Is Weakness at another hero’s turn end: window, pass, p
   await s.command(`${umbra} /turn end`, 'player');
   expect(await s.open()).toEqual([]);
 
-  // Round 2: Thorn's turn end offers both again; ending combat closes both, and neither accepts.
+  // Round 2: Thorn's turn end offers both again. Umbra passes (nothing is applied); ending combat
+  // closes Shade's, which can't be accepted after.
   await s.command(`${s.goblinRef} /turn take`);
   await s.command(`${s.goblinRef} /turn end`);
   expect((await s.encounter()).round).toBe(2);
@@ -322,9 +358,17 @@ test('V202: Hesitation Is Weakness at another hero’s turn end: window, pass, p
   const later = await s.open();
   expect(later).toHaveLength(2);
   expect(later.every(c => c.offer.round === 2)).toBe(true);
+  const umbraLater = later.find(c => c.offer.owner.name === 'Umbra')!;
+  const shadeLater = later.find(c => c.offer.owner.name === 'Shade')!;
+  await s.f.player.client.mutation(api.interactions.close, {
+    interactionId: umbraLater._id,
+    commandId: `turn-trigger-${++sequence}`,
+  });
+  expect(await s.card(umbraLater._id)).toMatchObject({ status: 'closed' });
+  expect(await s.uses('Umbra')).toEqual([]);
   await s.command('/combat end');
   expect(await s.open()).toEqual([]);
-  await expect(s.respond(later[0]!._id, 'player')).rejects.toThrow(/already closed/);
+  await expect(s.respond(shadeLater._id, 'player')).rejects.toThrow(/already closed/);
 });
 
 test('V202: an unanswered turn-end card closes when the next individual turn starts', async () => {
@@ -363,4 +407,70 @@ test('V202: "or takes damage" is the damage writer’s offer for the same target
   });
   expect(card!.offer.damage).toBeGreaterThanOrEqual(3);
   expect(card!.offer.boundary).toBeUndefined();
+});
+
+/** Positions the campaign's dice stream so the next 2d10 are `faces` (S02's own generator). */
+async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, number]) {
+  await t.run(async ctx => {
+    const state = (await ctx.db
+      .query('diceStates')
+      .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+      .unique())!;
+    const seed = fromHex(state.seed);
+    const spec = [
+      { id: 'd10a', sides: 10 },
+      { id: 'd10b', sides: 10 },
+    ];
+    for (let counter = state.counter; counter < state.counter + 100000; counter++) {
+      const out = generate(seed, counter, spec);
+      if (out.dice[0]!.value === faces[0] && out.dice[1]!.value === faces[1]) {
+        await ctx.db.patch(state._id, { counter });
+        return;
+      }
+    }
+    throw new Error('No matching dice position found.');
+  });
+}
+
+test('V202: a correction that keeps the Censor damaged passes; one that removes the damage is refused', async () => {
+  const s = await setup([{ name: 'Warden', selections: censorLedger.witnesses[0]!.selections }]);
+  const warden = s.ref('Warden');
+  await s.command(`${warden} /adjust stamina value=20`);
+  await s.command(`${s.goblinRef} /turn take`);
+  // monster/goblin/statblock/goblin-warrior.md, Spear Charge, Power Roll + 2: 5 + 5 + 2 = 12 is
+  // tier 2, 4 damage; a double edge raises it one tier (rule/dice/power-roll.md): tier 3, 5 damage.
+  await atDice(s.t, s.f.campaignId, [5, 5]);
+  const hit = await s.command(
+    `${s.goblinRef} /ability use ability="Spear Charge" targets=[${warden}]`,
+  );
+  expect((await s.hero('Warden')).liveState!.stamina).toBe(16);
+  await s.command(`/ability correct event="${hit.eventId}" target=${warden} edges=2`);
+  expect((await s.hero('Warden')).liveState!.stamina).toBe(15);
+  // No registered correction of this hit takes all its damage away, so the rule is read directly:
+  // damage taken 4 → 0 changes whether "the target takes damage" occurred and is refused; 4 → 6
+  // doesn't.
+  await s.t.run(async ctx => {
+    const scope = { campaignId: s.f.campaignId, eventId: hit.eventId as Id<'events'> };
+    const damaged = { kind: 'character' as const, id: s.ids.Warden!, name: 'Warden' };
+    await assertNoTriggerOnCorrection(
+      ctx as never,
+      scope as never,
+      { damaged, amount: 2 },
+      {
+        before: 4,
+        after: 6,
+      },
+    );
+    await expect(
+      assertNoTriggerOnCorrection(
+        ctx as never,
+        scope as never,
+        { damaged, amount: -4 },
+        {
+          before: 4,
+          after: 0,
+        },
+      ),
+    ).rejects.toThrow(/My Life for Yours/);
+  });
 });

@@ -259,12 +259,12 @@ const PATTERNS: readonly Pattern[] = [
     read: instruction('target', 'recovery'),
   },
   // V202 feature/ability/censor/level-1/my-life-for-yours.md: "You spend a Recovery and the target
-  // regains Stamina equal to your recovery value." The user's Recovery and the target's healing
-  // are table work (rule/health/recoveries.md), as the V109 `recovery` rider that has the user
-  // spend a Recovery for an ally's Stamina is (shared/resolve/effectRiders.ts).
+  // regains Stamina equal to your recovery value." Mandatory, so the use applies it: the user's
+  // Recoveries drop by 1 and the target regains the user's recovery value up to its Stamina maximum
+  // (rule/health/recoveries.md), as V175's Mark Recovery benefit does (convex/lib/markOperations.ts).
   {
     pattern: /^You spend a Recovery and the target regains Stamina equal to your recovery value\./,
-    read: instruction('target', 'recovery'),
+    read: instruction('target', 'recovery-transfer'),
     singleTarget: true,
   },
   // V202 feature/ability/shadow/level-1/hesitation-is-weakness.md: "You take your turn after the

@@ -27,6 +27,7 @@ type Saved = {
   liveState: {
     heroicResource: { current: number };
     stamina: number;
+    recoveries: number;
     conditions?: Record<string, boolean>;
     conditionInstances?: {
       status: string;
@@ -237,8 +238,12 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
               : targetIds[0]!;
             const target = { refKind: 'character', id: targetId };
             await invoke(id, 'adjust.heroic-resource', { value: cost });
-            await invoke(targetId, 'adjust.stamina', { value: name === 'Grave Speech' ? 0 : 18 });
+            // V202: My Life for Yours heals; 5 leaves room for the recovery value below the maximum.
+            await invoke(targetId, 'adjust.stamina', {
+              value: name === 'Grave Speech' ? 0 : name === 'My Life for Yours' ? 5 : 18,
+            });
             const before = await get(targetId);
+            const censorBefore = await get(id);
             // V115 (rule/combat/distance.md): these Melee-and-Ranged strikes are used in melee, the
             // mode the source ledger's damage assumes; their kits' melee and ranged bonuses differ.
             const mode = MELEE_OR_RANGED.has(name) ? { mode: 'melee' } : {};
@@ -320,12 +325,22 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
                 );
               }
             } else if (name === 'My Life for Yours') {
-              // V202: a compiled turn-start and damage response persists as ability.use. Its
-              // Recovery and healing are table work (feature/ability/censor/level-1/
-              // my-life-for-yours.md), so the target is unchanged.
+              // V202: a compiled turn-start and damage response persists as ability.use. "You spend
+              // a Recovery and the target regains Stamina equal to your recovery value."
+              // (feature/ability/censor/level-1/my-life-for-yours.md) is applied: the Censor's
+              // Recoveries drop by 1 and the target regains the ledger's recovery value.
               assert.equal(persisted?.kind, 'ability.use', name);
               assert.equal(persisted?.payload?.data?.ability?.name, name);
-              assert.deepEqual(after.liveState, before.liveState, `${name} target unchanged`);
+              assert.equal(
+                (await get(id)).liveState?.recoveries,
+                censorBefore.liveState!.recoveries - 1,
+                `${name} Recovery spent`,
+              );
+              assert.equal(
+                after.liveState?.stamina,
+                before.liveState!.stamina + w.expected.recoveryValue,
+                `${name} healing`,
+              );
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);
