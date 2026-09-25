@@ -95,6 +95,8 @@ const FURY: Witness = { ledger: furyLedger, id: 'v101-panther' };
 const TACTICIAN: Witness = { ledger: tacticianLedger, id: 'v94-tactician-3' };
 const TALENT: Witness = { ledger: talentLedger, id: 'v105-3' };
 const ELEMENTALIST: Witness = { ledger: elementalistLedger, id: 'v104-2' };
+/** v103-4: a Null with Might −1 (Stamina 21). */
+const NULL_WEAK: Witness = { ledger: nullLedger, id: 'v103-4' };
 
 let sequence = 0;
 async function setup(heroes: Record<string, Witness>) {
@@ -560,4 +562,185 @@ test('V174: a creature free strike and a hero’s ability are revised too', asyn
   expect(spike!.offer).toMatchObject({ abilityName: 'Inertial Shield', damage: 8 });
   await s.respond(spike!._id, 'director');
   expect((await s.live('Nul')).stamina).toBe(17);
+});
+
+// ---------------------------------------------------------------------------------------------
+// QC1 train 16 R1 and R2. Pinned sources (en/unified/md), quoted exactly:
+// - feature/ability/tactician/level-1/parry.md: "If the damage has any potency effect associated
+//   with it, the potency is decreased by 1."
+// - feature/ability/elementalist/level-1/skin-like-castle-walls.md, Spend 1 Essence: "If the damage
+//   has any potency effects associated with it, the potency is reduced by 1 for the target."
+// - feature/ability/null/level-1/inertial-shield.md, Spend 1 Discipline: "The potency of one effect
+//   associated with the damage is reduced by 1 for you."
+// - rule/character/potency.md: "Ability effects that have a potency are applied to a target only
+//   if the effect's potency value is higher than the target's indicated characteristic score."
+// - rule/general/always-round-down.md: "Whenever you divide an odd number in half and it results
+//   in a decimal, round the result down to the nearest whole number."
+// - monster/goblin/statblock/goblin-warrior.md, Bury the Point: "12-16: 6 damage; M < 1
+//   bleeding (save ends)"; 5 + 5 + 2 = 12 is tier 2. Might −1 is below 1, then 0, not below −1.
+// - feature/ability/tactician/level-1/mark.md: "When a creature marked by you is reduced to 0
+//   Stamina, you can use a free triggered action to mark a new target within distance." and
+//   "whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you
+//   can spend 1 focus to gain one of the following benefits as a free triggered action".
+
+const bleedingOf = async (
+  s: Awaited<ReturnType<typeof setup>>,
+  name: string,
+  hitEventId: Id<'events'>,
+) =>
+  (await s.live(name)).conditionInstances?.find(
+    i => i.sourceUseEventId === hitEventId && i.condition === 'bleeding',
+  );
+const revisionOf = async (s: Awaited<ReturnType<typeof setup>>, eventId: Id<'events'>) =>
+  (
+    ((await s.result(eventId))!.compiled as CompiledResult).effects.find(
+      o => o.effect.kind === 'damage-revision',
+    )!.effect as { potencyReductions?: Record<string, number> }
+  ).potencyReductions;
+
+test('V174 QC1 R1: two potency reductions end the condition; undo restores only the second', async () => {
+  const s = await setup({ Nul: NULL_WEAK, Vane: TACTICIAN, Terra: ELEMENTALIST });
+  await s.command('/adjust malice value=2');
+  await s.command(`${s.ref('Terra')} /adjust heroic-resource value=1`);
+  // Tier 2: 6 damage (21 → 15) and M < 1 bleeding on Might −1.
+  const hit = await s.hit('Bury the Point', 'Nul', [5, 5]);
+  expect((await s.live('Nul')).stamina).toBe(15);
+  expect(await bleedingOf(s, 'Nul', hit.eventId)).toMatchObject({ status: 'active' });
+  const byName = async (name: string) =>
+    (await s.open()).find(c => (c.offer as { abilityName: string }).abilityName === name)!;
+  // 1. Parry: 6 → 3 (21 − 3 = 18); potency 1 → 0, and −1 < 0 still bleeds.
+  const parry = await s.respond((await byName('Parry'))._id, 'player');
+  expect((await s.live('Nul')).stamina).toBe(18);
+  const bleeding = await bleedingOf(s, 'Nul', hit.eventId);
+  expect(bleeding).toMatchObject({ status: 'active' });
+  expect(await revisionOf(s, parry.eventId)).toEqual({ [bleeding!.id]: 1 });
+  // 2. Skin Like Castle Walls with Spend 1 Essence, from the current accepted potency: 3 → 1
+  // (21 − 1 = 20); potency 0 → −1, and −1 is not below −1: no longer bleeding.
+  const walls = await byName('Skin Like Castle Walls');
+  const second = await s.respond(walls._id, 'player', { spend: 1 });
+  expect((await s.live('Nul')).stamina).toBe(20);
+  expect((await s.live('Terra')).heroicResource.current).toBe(0);
+  expect(await bleedingOf(s, 'Nul', hit.eventId)).toMatchObject({ status: 'ended' });
+  expect(await revisionOf(s, second.eventId)).toEqual({ [bleeding!.id]: 2 });
+  // 3. Undo of the second restores only its reduction: bleeding again, the first still recorded.
+  await s.command('/history undo');
+  expect((await s.live('Nul')).stamina).toBe(18);
+  expect((await s.live('Terra')).heroicResource.current).toBe(1);
+  expect(await bleedingOf(s, 'Nul', hit.eventId)).toMatchObject({ status: 'active' });
+  expect(await revisionOf(s, parry.eventId)).toEqual({ [bleeding!.id]: 1 });
+  expect(await s.card(walls._id)).toMatchObject({ status: 'awaiting-input' });
+  await s.respond(walls._id, 'player', { spend: 1 });
+  expect(await bleedingOf(s, 'Nul', hit.eventId)).toMatchObject({ status: 'ended' });
+});
+
+test('V174 QC1 R1: a one-effect spend keeps its selected effect for the next reduction', async () => {
+  const s = await setup({ Nul: NULL_WEAK, Vane: TACTICIAN });
+  await s.command('/adjust malice value=2');
+  await s.command(`${s.ref('Nul')} /adjust heroic-resource value=1`);
+  const hit = await s.hit('Bury the Point', 'Nul', [5, 5]);
+  const byName = async (name: string) =>
+    (await s.open()).find(c => (c.offer as { abilityName: string }).abilityName === name)!;
+  // Inertial Shield, Spend 1 Discipline on the one effect (bleeding): 6 → 3, potency 1 → 0.
+  const shield = await s.respond((await byName('Inertial Shield'))._id, 'player', { spend: 1 });
+  const bleeding = await bleedingOf(s, 'Nul', hit.eventId);
+  expect(bleeding).toMatchObject({ status: 'active' });
+  expect(await revisionOf(s, shield.eventId)).toEqual({ [bleeding!.id]: 1 });
+  // Parry then works from potency 0: 0 → −1 ends it; 3 → 1 (21 − 1 = 20).
+  await s.respond((await byName('Parry'))._id, 'player');
+  expect((await s.live('Nul')).stamina).toBe(20);
+  expect(await bleedingOf(s, 'Nul', hit.eventId)).toMatchObject({ status: 'ended' });
+});
+
+const markCards = (s: Awaited<ReturnType<typeof setup>>) =>
+  s.t.run(async ctx =>
+    (await ctx.db.query('interactions').take(200)).filter(c => c.kind === 'mark-offer'),
+  );
+
+test('V174 QC1 R2: a revision closes the Mark retarget its hit no longer triggers; undo reopens it', async () => {
+  const s = await setup({ Nul: NULL, Vane: TACTICIAN });
+  await s.command(`${s.ref('Vane')} /ability use ability=Mark targets=[${s.ref('Nul')}]`, 'player');
+  // Spear Charge 5 takes the marked Null from 3 to −2: reduced to 0 Stamina.
+  await s.command(`${s.ref('Nul')} /adjust stamina value=3`);
+  const hit = await s.hit('Spear Charge', 'Nul');
+  expect((await s.live('Nul')).stamina).toBe(-2);
+  const retarget = (await markCards(s)).find(
+    c => c.openedEventId === hit.eventId && c.operation === 'mark.retarget',
+  )!;
+  expect(retarget).toMatchObject({ status: 'awaiting-input' });
+  // Inertial Shield: 5 → 2, Stamina 1. The Null was never reduced to 0, so the card closes.
+  const shield = (await s.open()).find(
+    c => (c.offer as { abilityName: string }).abilityName === 'Inertial Shield',
+  )!;
+  const accepted = await s.respond(shield._id, 'player');
+  expect((await s.live('Nul')).stamina).toBe(1);
+  expect(await s.card(retarget._id)).toMatchObject({
+    status: 'closed',
+    resolvedEventId: accepted.eventId,
+  });
+  await expect(
+    s.respond(retarget._id, 'player', { targets: [{ refKind: 'foe', id: s.goblin }] }),
+  ).rejects.toThrow(/already closed/);
+  // Undo reopens it.
+  await s.command('/history undo');
+  expect((await s.live('Nul')).stamina).toBe(-2);
+  expect(await s.card(retarget._id)).toMatchObject({ status: 'awaiting-input' });
+});
+
+test('V174 QC1 R2: a retarget already accepted refuses the revision that would undo its trigger', async () => {
+  const s = await setup({ Nul: NULL, Vane: TACTICIAN });
+  await s.command(`${s.ref('Vane')} /ability use ability=Mark targets=[${s.ref('Nul')}]`, 'player');
+  await s.command(`${s.ref('Nul')} /adjust stamina value=3`);
+  const hit = await s.hit('Spear Charge', 'Nul');
+  const retarget = (await markCards(s)).find(
+    c => c.openedEventId === hit.eventId && c.operation === 'mark.retarget',
+  )!;
+  await s.respond(retarget._id, 'player', { targets: [{ refKind: 'foe', id: s.goblin }] });
+  expect(await s.card(retarget._id)).toMatchObject({ status: 'resolved' });
+  const goblinMarks = async () =>
+    ((await s.t.run(ctx => ctx.db.get(s.goblin)))!.live.effectInstances ?? []).filter(
+      i => i.kind === 'mark' && i.status === 'active',
+    );
+  expect(await goblinMarks()).toHaveLength(1);
+  const shield = (await s.open()).find(
+    c => (c.offer as { abilityName: string }).abilityName === 'Inertial Shield',
+  )!;
+  await expect(s.respond(shield._id, 'player')).rejects.toThrow(/Rewind to the hit/);
+  expect(await s.card(shield._id)).toMatchObject({ status: 'awaiting-input' });
+  expect((await s.live('Nul')).stamina).toBe(-2);
+  expect(await goblinMarks()).toHaveLength(1);
+});
+
+test('V174 QC1 R2: a revision to 0 damage closes the Mark benefit of that rolled damage', async () => {
+  const s = await setup({ Nul: NULL, Vane: TACTICIAN, Seer: TALENT });
+  await s.command(`${s.ref('Vane')} /ability use ability=Mark targets=[${s.ref('Nul')}]`, 'player');
+  // Synthetic fixture: psychic immunity 3 on the Null, so a 4-damage Mind Spike deals 1
+  // (damage-immunity.md) and half of 4 is 2, which the immunity reduces to 0.
+  await s.t.run(async ctx => {
+    const hero = (await ctx.db.get(s.ids.Nul!))!;
+    await ctx.db.patch(hero._id, {
+      derivedBaseline: {
+        ...(hero.derivedBaseline as object),
+        damageImmunities: [{ damageType: 'psychic', value: { value: 3 } }],
+      },
+    });
+  });
+  // Mind Spike 1 + 1 + 2 = 4, tier 1: 2 + R = 4 psychic, 1 after immunity (21 → 20).
+  await atDice(s.t, s.f.campaignId, [1, 1]);
+  const hit = await s.command(
+    `${s.ref('Seer')} /ability use ability="Mind Spike" targets=[${s.ref('Nul')}] strained=no`,
+    'player',
+  );
+  expect((await s.live('Nul')).stamina).toBe(20);
+  const benefit = (await markCards(s)).find(
+    c => c.openedEventId === hit.eventId && c.operation === 'mark.benefit',
+  )!;
+  expect(benefit).toMatchObject({ status: 'awaiting-input' });
+  const shield = (await s.open()).find(
+    c => (c.offer as { abilityName: string }).abilityName === 'Inertial Shield',
+  )!;
+  await s.respond(shield._id, 'player');
+  expect((await s.live('Nul')).stamina).toBe(21);
+  expect(await s.card(benefit._id)).toMatchObject({ status: 'closed' });
+  await s.command('/history undo');
+  expect(await s.card(benefit._id)).toMatchObject({ status: 'awaiting-input' });
 });

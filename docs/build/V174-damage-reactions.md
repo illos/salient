@@ -181,3 +181,14 @@ Rules question: [Q-REACT-1](../rules-questions-for-user.md#q-react-1-halving-ord
      turn starts. The app test hits the Talent during her own turn with Bury the Point's bleeding
      (save ends); she ends her turn, the save rolls, and accepting the Tactician's Parry is refused
      with the card still open.
+- QC1 train 16 (the project's `review-artifacts/2026-09-25-train16-QC1.md`), fixed on `slice/V175`:
+  - R1: successive potency reductions. Each revision outcome saves the hit's accepted potency
+    reductions per condition occurrence, cumulatively (`potencyReductions`). This includes
+    reductions that leave the condition applied, and a one-effect spend's selected effect. The next
+    revision re-checks the hit's potency conditions from the current accepted potency
+    (rule/character/potency.md). Undo of a revision removes its record, so it restores only that
+    reduction. Tests: Parry, then Skin Like Castle Walls with Spend 1 Essence, on a Might −1 Null
+    hit by tier 2 Bury the Point (M < 1): potency 1 → 0 still bleeds, 0 → −1 ends it; undo of the
+    second brings the bleeding back and keeps the first reduction. Inertial Shield's one-effect
+    spend, then Parry, ends it too.
+  - R2: Mark cards on a revised hit are reconciled; see the V175 work log.

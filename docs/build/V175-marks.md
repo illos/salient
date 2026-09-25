@@ -176,7 +176,8 @@ Rules questions: [Q-MARK-1](../rules-questions-for-user.md#q-mark-1-marks-from-a
 - Known limits:
   - A correction of rolled damage to a marked creature from the owner's side is refused ("rewind to
     the use"), as V173 does for triggered actions.
-  - A V174 revision of a hit on a marked hero doesn't revise that hit's mark cards.
+  - A V174 revision of a hit on a marked hero doesn't revise that hit's mark cards (fixed after
+    QC1 train 16 R2, below).
   - The Focus gain for damaging a marked creature (`feature/tactician/level-1/focus.md`) is still a
     V120 table claim. The mark observation could automate it next.
   - Mark cards on a squad minion don't exist, because the mark is table work.
@@ -214,4 +215,13 @@ Rules questions: [Q-MARK-1](../rules-questions-for-user.md#q-mark-1-marks-from-a
     - a dying Tactician's Mark;
     - who may end a mark;
     - the extra-damage entry's figures.
-
+- QC1 train 16 R2 (the project's `review-artifacts/2026-09-25-train16-QC1.md`): a V174 revision now
+  reconciles this hit's Mark cards on the revised hero (`convex/lib/damageRevisions.ts`
+  `markCardInvalid`). mark.md: "When a creature marked by you is reduced to 0 Stamina" (for a hero,
+  the crossing to 0 or lower) and "whenever you or any ally uses an ability to deal rolled damage to
+  a creature marked by you". An open retarget whose 0 crossing the revision removes, or an open
+  benefit whose damage the revision takes to 0, closes in the revision's journal, so undo reopens
+  it. One already accepted refuses the revision (rewind to the hit), with the card left open. The
+  check compares the recorded hit and its revision, not current Stamina. Tests in
+  `tests/app/damage-reactions.test.ts`: the revision closes the retarget and undo reopens it; an
+  accepted retarget refuses the revision; a revision to 0 damage closes the benefit.

@@ -2171,7 +2171,10 @@ const abilityUse: OperationDefinition = {
       // V174: what the revision reverses or leaves standing, with the revised hit (design 5b).
       for (const effect of outcome.effects)
         if (effect.kind === 'damage-revision' && effect.status === 'calculated' && revisionPlan)
-          Object.assign(effect, { consequences: revisionPlan.notes });
+          Object.assign(effect, {
+            consequences: revisionPlan.notes,
+            potencyReductions: revisionPlan.potencyReductions,
+          });
       // V173: damage sized by the triggering damage, through the target's immunities and
       // weaknesses (rule/damage/damage-immunity.md, damage-weakness.md) and the damage writer.
       const triggeredDamage: { record: TargetRecord; application: DamageApplication }[] = [];

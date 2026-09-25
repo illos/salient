@@ -49,7 +49,8 @@ import { endConditionInstance, hasRolledConditionSave, replacedByUse } from './c
 import { committedEncounter } from './encounters';
 import { appendEvent } from './events';
 import { journalPatch, type JournalScope } from './journal';
-import { OFFER_KIND, type TriggerOffer } from './triggeredActions';
+import { MARK_OFFER_KIND, OFFER_KIND, type TriggerOffer } from './triggeredActions';
+import type { MarkOffer } from './marks';
 
 /** The events a lost hit event undoes for watchers (convex/lib/watchers.ts damageEvents). */
 const WATCHED: Record<DamageEvent, string[]> = {
@@ -81,6 +82,13 @@ export interface RevisionPlan {
   temporaryStamina: { before: number; after: number };
   gains: GainReversal[];
   ended: PotencyEffect[];
+  /**
+   * The accepted potency reductions per effect occurrence after this revision (cumulative: the
+   * earlier revisions' and this one's), saved on the revision outcome so the next one starts there.
+   */
+  potencyReductions: Record<string, number>;
+  /** The hit's events this revision no longer makes true (for the Mark cards at commit). */
+  lost: DamageEvent[];
   turnDamage?: { turnId: string; amount: number };
   /** For the log: reversals, what stands, and table work. */
   notes: string[];
@@ -150,29 +158,36 @@ async function recordedHit(
 
 /**
  * The current accepted revision of this hit for each creature it revised (design 5b "Recompute"):
- * the latest accepted response to the same trigger that revised it. The resolved cards are read
- * once for all targets.
+ * the latest accepted response to the same trigger that revised it, with the potency reductions
+ * accepted so far per effect occurrence (cumulative, so each revision works from the current
+ * accepted potency). The resolved cards are read once for all targets; the hit's resolved Mark
+ * cards come back with them.
  */
 async function revisionsOf(
   ctx: MutationCtx,
   campaignId: Id<'campaigns'>,
   hitEventId: string,
-): Promise<Map<string, DamageApplication>> {
-  const answered = (
+): Promise<{
+  latest: Map<string, { application: DamageApplication; potency: Record<string, number> }>;
+  markCards: Doc<'interactions'>[];
+}> {
+  const resolved = (
     await ctx.db
       .query('interactions')
       .withIndex('by_campaign_status', q => q.eq('campaignId', campaignId).eq('status', 'resolved'))
       .order('desc')
       .take(200)
-  )
-    .filter(
-      card =>
-        card.kind === OFFER_KIND &&
-        (card.offer as TriggerOffer | undefined)?.triggeringEventId === hitEventId &&
-        card.resolvedEventId,
-    )
+  ).filter(
+    card =>
+      (card.offer as { triggeringEventId?: string } | undefined)?.triggeringEventId === hitEventId,
+  );
+  const answered = resolved
+    .filter(card => card.kind === OFFER_KIND && card.resolvedEventId)
     .sort((a, b) => (b.resolvedAt ?? 0) - (a.resolvedAt ?? 0));
-  const latest = new Map<string, DamageApplication>();
+  const latest = new Map<
+    string,
+    { application: DamageApplication; potency: Record<string, number> }
+  >();
   for (const card of answered) {
     const result = await ctx.db
       .query('abilityResults')
@@ -185,9 +200,27 @@ async function revisionsOf(
         effect.application &&
         !latest.has(effect.targetId)
       )
-        latest.set(effect.targetId, effect.application);
+        latest.set(effect.targetId, {
+          application: effect.application,
+          potency: effect.potencyReductions ?? {},
+        });
   }
-  return latest;
+  return { latest, markCards: resolved.filter(card => card.kind === MARK_OFFER_KIND) };
+}
+
+/**
+ * V175: whether the revised hit no longer triggers a Mark card about the damaged creature: a
+ * retarget needs it reduced to 0 Stamina (for a hero, the `dying` crossing), a benefit rolled
+ * damage taken (mark.md).
+ */
+function markCardInvalid(
+  card: Doc<'interactions'>,
+  damagedId: string,
+  lost: readonly DamageEvent[],
+): boolean {
+  const offer = card.offer as MarkOffer | undefined;
+  if (!offer?.mark || offer.mark.holder.id !== damagedId) return false;
+  return offer.mark.kind === 'retarget' ? lost.includes('dying') : lost.includes('damage-taken');
 }
 
 /** V174: a correction of a hit an accepted response revised is refused (rewind instead). */
@@ -196,7 +229,7 @@ export async function assertNotRevised(
   campaignId: Id<'campaigns'>,
   hitEventId: Id<'events'>,
 ): Promise<void> {
-  if ((await revisionsOf(ctx, campaignId, hitEventId)).size)
+  if ((await revisionsOf(ctx, campaignId, hitEventId)).latest.size)
     throw new ConvexError(
       'An accepted response revised this hit; undo that response or rewind to the hit instead of correcting it.',
     );
@@ -248,8 +281,10 @@ export async function planRevision(
     return refuse('the triggering entry or the damaged hero is no longer recorded.');
   const hit = await recordedHit(ctx, hitEvent, damaged._id);
   // Design 5b: the current accepted revision, which open cards of this hit were updated to.
-  const current =
-    (await revisionsOf(ctx, campaignId, hitEvent._id)).get(damaged._id) ?? hit?.application;
+  const revisions = await revisionsOf(ctx, campaignId, hitEvent._id);
+  const accepted = revisions.latest.get(damaged._id);
+  const current = accepted?.application ?? hit?.application;
+  const priorPotency = accepted?.potency ?? {};
   if (!hit || !current || damageTaken(current) !== offer.damage)
     return refuse(
       `the triggering entry records no single hit on ${damaged.authored.name} of ${offer.damage} damage the engine can recompute.`,
@@ -277,6 +312,16 @@ export async function planRevision(
       `${name}'s temporary Stamina changed since the hit (${current.temporaryStaminaAfter} → ${live.temporaryStamina}), so the absorbed damage can't be given back exactly; rewind to the hit instead.`,
     );
   const lost = eventsNoLongerTrue(current, revised, 'hero');
+  // V175 marks (feature/ability/tactician/level-1/mark.md): a retarget answers "When a creature
+  // marked by you is reduced to 0 Stamina", a benefit "whenever you or any ally uses an ability to
+  // deal rolled damage to a creature marked by you". An already accepted one the
+  // revised hit no longer triggers can't be taken back exactly, so the revision is refused; open
+  // ones close at commit.
+  const takenMarks = revisions.markCards.filter(card => markCardInvalid(card, damaged._id, lost));
+  if (takenMarks.length)
+    refuse(
+      `${takenMarks.map(card => (card.offer as MarkOffer).owner.name + "'s Mark " + (card.offer as MarkOffer).mark.kind).join(', ')} was already taken on this hit, and the revised hit no longer triggers it. Rewind to the hit instead.`,
+    );
 
   // The hit's linked consequences: every entry the hit's command logged as caused by it.
   const logged = (
@@ -413,8 +458,20 @@ export async function planRevision(
       : undefined;
   const scope = revisionNode?.potency === 'any' ? 'any' : spendPotency;
   let ended: PotencyEffect[] = [];
+  const potencyReductions = { ...priorPotency };
   if (scope) {
-    const effects = potencyEffects(hit.compiled, damaged._id);
+    // Each revision works from the current accepted potency: the earlier reductions of this hit's
+    // effects (rule/character/potency.md: applied only while the potency exceeds the score).
+    const effects = potencyEffects(hit.compiled, damaged._id).map(e => {
+      const prior = priorPotency[e.id] ?? 0;
+      if (!prior || e.threshold === undefined || e.targetScore === undefined) return e;
+      const threshold = e.threshold - prior;
+      return {
+        ...e,
+        threshold,
+        status: e.status === 'applied' && !(e.targetScore < threshold) ? 'resisted' : e.status,
+      };
+    });
     // A potency condition the engine didn't evaluate is the table's to re-check.
     const unevaluated = effects.filter(
       e => e.threshold === undefined || e.targetScore === undefined,
@@ -446,6 +503,8 @@ export async function planRevision(
       );
     if (outcome.kind === 'revised') {
       ended = outcome.ended;
+      for (const e of [...outcome.ended, ...outcome.unchanged])
+        potencyReductions[e.id] = (potencyReductions[e.id] ?? 0) + 1;
       for (const effect of ended) {
         const target = { kind: 'character' as const, id: damaged._id };
         if (await hasRolledConditionSave(ctx, target, hitEvent._id))
@@ -487,6 +546,8 @@ export async function planRevision(
     },
     gains,
     ended,
+    potencyReductions,
+    lost,
     ...(turnDamage ? { turnDamage } : {}),
     notes,
   };
@@ -540,6 +601,21 @@ export async function commitRevision(
     )
     .take(200);
   for (const card of open) {
+    // V175: a Mark card of this hit the revised hit no longer triggers closes; undo reopens it.
+    if (card.kind === MARK_OFFER_KIND) {
+      if (
+        (card.offer as { triggeringEventId?: string } | undefined)?.triggeringEventId ===
+          plan.hitEventId &&
+        markCardInvalid(card, plan.damaged._id, plan.lost)
+      )
+        await journalPatch(ctx, scope, 'interactions', card._id, {
+          status: 'closed',
+          revision: card.revision + 1,
+          resolvedEventId: scope.eventId,
+          resolvedAt: Date.now(),
+        });
+      continue;
+    }
     const offer = card.offer as TriggerOffer | undefined;
     if (
       card.kind !== OFFER_KIND ||

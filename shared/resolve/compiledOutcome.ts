@@ -399,6 +399,11 @@ export interface CompiledDamageRevisionOutcome extends EffectIdentity {
   before?: DamageApplication;
   application?: DamageApplication;
   consequences?: string[];
+  /**
+   * The hit's accepted potency reductions per effect occurrence after this revision, cumulative
+   * (convex/lib/damageRevisions.ts): the next revision of the same hit starts from them.
+   */
+  potencyReductions?: Record<string, number>;
   requirements: string[];
 }
 /** V174: the optional Spend section of such a response, spent or not. */
