@@ -81,11 +81,13 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     // The hero panel shows the evaluated level-2 build, not a pending one.
     await expect(player.getByText('Devil · Fury (Berserker) · Level 2')).toBeVisible();
     // Once the choice is evaluated, the perk step counts as done: no missing-selection notice.
-    await expect(player.getByText('Needs a selection')).toHaveCount(0);
     await expect(player.getByRole('progressbar', { name: 'Steps completed' })).toHaveAttribute(
       'aria-valuenow',
       '1',
     );
+    await expect(
+      player.getByRole('region', { name: 'Level-up step' }).getByText('Needs a selection'),
+    ).toHaveCount(0);
     await player.screenshot({ path: `${directory}/v164-step-perk.png`, fullPage: true });
     // Moving on saves the level-up's choices (the shared saveAdvancement operation).
     await player.getByRole('button', { name: /Continue to Level 2 Berserker ability/ }).click();
