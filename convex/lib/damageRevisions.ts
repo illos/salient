@@ -90,7 +90,14 @@ async function recordedHit(
   ctx: MutationCtx,
   hitEvent: Doc<'events'>,
   damagedId: string,
-): Promise<{ application: DamageApplication; compiled?: CompiledResult } | null> {
+): Promise<{
+  application: DamageApplication;
+  compiled?: CompiledResult;
+  /** Another creature took damage from the same entry (its dealer's damage-dealt still happened). */
+  othersDamaged: boolean;
+  /** The creature whose use dealt the damage, when the effective record names it. */
+  dealerId?: string;
+} | null> {
   const result = await ctx.db
     .query('abilityResults')
     .withIndex('by_event', q => q.eq('eventId', hitEvent._id))
@@ -100,14 +107,32 @@ async function recordedHit(
     const effect = compiled?.effects.find(
       o => o.effect.kind === 'triggered-damage' && o.effect.targetId === damagedId,
     )?.effect;
+    const othersDamaged = (compiled?.effects ?? []).some(
+      o =>
+        o.effect.kind === 'triggered-damage' &&
+        o.effect.targetId !== damagedId &&
+        !!o.effect.application &&
+        damageTaken(o.effect.application) > 0,
+    );
     return effect?.kind === 'triggered-damage' && effect.application
-      ? { application: effect.application }
+      ? { application: effect.application, othersDamaged, dealerId: result.actor.id }
       : null;
   }
   if (result) {
     const entry = result.targets.find(t => t.target.id === damagedId);
     const applied = (entry?.applied as DamageApplication | null | undefined) ?? undefined;
-    return applied ? { application: applied, ...(compiled ? { compiled } : {}) } : null;
+    const othersDamaged = result.targets.some(
+      t =>
+        t.target.id !== damagedId && !!t.applied && damageTaken(t.applied as DamageApplication) > 0,
+    );
+    return applied
+      ? {
+          application: applied,
+          othersDamaged,
+          dealerId: result.actor.id,
+          ...(compiled ? { compiled } : {}),
+        }
+      : null;
   }
   // A creature free strike records its application on the entry only.
   const damage = (
@@ -116,19 +141,22 @@ async function recordedHit(
     }
   )?.data?.damage;
   const application = damage?.find(d => d.target.id === damagedId)?.application;
-  return application ? { application } : null;
+  const othersDamaged = (damage ?? []).some(
+    d => d.target.id !== damagedId && !!d.application && damageTaken(d.application) > 0,
+  );
+  return application ? { application, othersDamaged } : null;
 }
 
 /**
- * The current accepted revision of this hit for this creature (design 5b "Recompute"): the latest
- * accepted response to the same trigger that revised it, else `null`.
+ * The current accepted revision of this hit for each creature it revised (design 5b "Recompute"):
+ * the latest accepted response to the same trigger that revised it. The resolved cards are read
+ * once for all targets.
  */
-async function latestRevision(
+async function revisionsOf(
   ctx: MutationCtx,
   campaignId: Id<'campaigns'>,
   hitEventId: string,
-  damagedId: string,
-): Promise<DamageApplication | null> {
+): Promise<Map<string, DamageApplication>> {
   const answered = (
     await ctx.db
       .query('interactions')
@@ -143,20 +171,22 @@ async function latestRevision(
         card.resolvedEventId,
     )
     .sort((a, b) => (b.resolvedAt ?? 0) - (a.resolvedAt ?? 0));
+  const latest = new Map<string, DamageApplication>();
   for (const card of answered) {
     const result = await ctx.db
       .query('abilityResults')
       .withIndex('by_event', q => q.eq('eventId', card.resolvedEventId!))
       .unique();
-    const revision = (result?.compiled as CompiledResult | undefined)?.effects.find(
-      o =>
-        o.effect.kind === 'damage-revision' &&
-        o.effect.status === 'calculated' &&
-        o.effect.targetId === damagedId,
-    )?.effect;
-    if (revision?.kind === 'damage-revision' && revision.application) return revision.application;
+    for (const { effect } of (result?.compiled as CompiledResult | undefined)?.effects ?? [])
+      if (
+        effect.kind === 'damage-revision' &&
+        effect.status === 'calculated' &&
+        effect.application &&
+        !latest.has(effect.targetId)
+      )
+        latest.set(effect.targetId, effect.application);
   }
-  return null;
+  return latest;
 }
 
 /** V174: a correction of a hit an accepted response revised is refused (rewind instead). */
@@ -165,18 +195,10 @@ export async function assertNotRevised(
   campaignId: Id<'campaigns'>,
   hitEventId: Id<'events'>,
 ): Promise<void> {
-  const hit = await ctx.db.get(hitEventId);
-  const damaged = new Set(
-    (
-      (hit?.payload as { data?: { damage?: { target: { id: string } }[] } } | undefined)?.data
-        ?.damage ?? []
-    ).map(d => d.target.id),
-  );
-  for (const id of damaged)
-    if (await latestRevision(ctx, campaignId, hitEventId, id))
-      throw new ConvexError(
-        'An accepted response revised this hit; undo that response or rewind to the hit instead of correcting it.',
-      );
+  if ((await revisionsOf(ctx, campaignId, hitEventId)).size)
+    throw new ConvexError(
+      'An accepted response revised this hit; undo that response or rewind to the hit instead of correcting it.',
+    );
 }
 
 /** The hit's potency conditions on the damaged creature (V88 compiled occurrences). */
@@ -224,12 +246,24 @@ export async function planRevision(
   if (!hitEvent || !damaged?.liveState || !baseline)
     return refuse('the triggering entry or the damaged hero is no longer recorded.');
   const hit = await recordedHit(ctx, hitEvent, damaged._id);
-  if (!hit || damageTaken(hit.application) !== offer.damage)
+  // Design 5b: the current accepted revision, which open cards of this hit were updated to.
+  const current =
+    (await revisionsOf(ctx, campaignId, hitEvent._id)).get(damaged._id) ?? hit?.application;
+  if (!hit || !current || damageTaken(current) !== offer.damage)
     return refuse(
       `the triggering entry records no single hit on ${damaged.authored.name} of ${offer.damage} damage the engine can recompute.`,
     );
-  const current =
-    (await latestRevision(ctx, campaignId, hitEvent._id, damaged._id)) ?? hit.application;
+  if (options.potencyChoice !== undefined) {
+    const spendNode = ability.definition.sections.find(node => node.kind === 'response-spend');
+    if (
+      options.spend === undefined ||
+      spendNode?.effect.kind !== 'potency' ||
+      spendNode.effect.scope !== 'one'
+    )
+      refuse(
+        '"potency" names the one effect whose potency a spend reduces; this answer reduces no single effect’s potency.',
+      );
+  }
   const revised = halveApplication(current, 'hero');
   const delta = revisionDelta(current, revised);
   const live = requireHeroLive(damaged);
@@ -258,10 +292,19 @@ export async function planRevision(
       unknown
     >;
   // V171 "rewind to the use": a watcher's firing whose event the revision undoes.
+  // Only firings about the revised creature: its own watchers of what it took, and the dealer's
+  // damage-dealt when no other creature took damage from the same entry.
   const unwatched = new Set(lost.flatMap(event => WATCHED[event]));
-  const fired = logged.filter(
-    entry => entry.kind === 'effect.watcher-fired' && unwatched.has(String(data(entry).event)),
-  );
+  const dealerId = hit.dealerId;
+  const fired = logged.filter(entry => {
+    if (entry.kind !== 'effect.watcher-fired') return false;
+    const event = String(data(entry).event);
+    const holder = (data(entry).holder as { id?: string } | undefined)?.id;
+    if (!unwatched.has(event)) return false;
+    return event === 'damage-dealt'
+      ? !hit.othersDamaged && (dealerId === undefined || holder === dealerId)
+      : holder === damaged._id;
+  });
   if (fired.length)
     refuse(
       `the hit set off a watcher the revision would undo (${fired.map(entry => entry.description).join(' ')}), and the engine never re-derives a watcher's firing (V171). Rewind to the hit instead.`,
@@ -315,11 +358,14 @@ export async function planRevision(
       ? triggersFor(profile, heroBaseline).find(t => t.id === d.triggerId)
       : undefined;
     if (!hero?.liveState || !heroBaseline || !trigger) continue;
+    // Already reversed by an earlier revision of this hit: its claim was released then.
+    if (!(hero.liveState.resourceClaims ?? []).some(claim => claim.eventId === entry._id)) continue;
     const stillTrue =
       trigger.observe === 'damage-taken'
         ? !lost.includes('damage-taken')
         : trigger.observe === 'winded-or-dying'
-          ? // resourceTriggers.ts damageSatisfies (Q-RES-2), for the revised hit.
+          ? // resourceTriggers.ts damageSatisfies (Q-RES-2): this revision undoes what earned it.
+            !lost.some(event => event === 'made-winded' || event === 'dying') ||
             (revised.staminaBefore > revised.windedValue &&
               revised.staminaAfter <= revised.windedValue) ||
             (revised.staminaBefore > 0 && revised.staminaAfter <= 0)
@@ -365,6 +411,14 @@ export async function planRevision(
   let ended: PotencyEffect[] = [];
   if (scope) {
     const effects = potencyEffects(hit.compiled, damaged._id);
+    // A potency condition the engine didn't evaluate is the table's to re-check.
+    const unevaluated = effects.filter(
+      e => e.threshold === undefined || e.targetScore === undefined,
+    );
+    if (unevaluated.length)
+      notes.push(
+        `For the table: ${unevaluated.map(e => e.condition).join(', ')} was not evaluated by the engine; reduce its potency by 1 for ${name} when resolving it (rule/character/potency.md).`,
+      );
     const outcome = potencyRevision(effects, scope, options.potencyChoice);
     if (outcome.kind === 'choose')
       refuse(
@@ -372,7 +426,13 @@ export async function planRevision(
       );
     if (outcome.kind === 'unknown-choice')
       refuse(`potency names none of this hit's potency effects (${outcome.options.join(', ')}).`);
-    if (outcome.kind === 'none' && hit.compiled && spendPotency && revisionNode?.potency !== 'any')
+    if (
+      outcome.kind === 'none' &&
+      !unevaluated.length &&
+      hit.compiled &&
+      spendPotency &&
+      revisionNode?.potency !== 'any'
+    )
       refuse(
         `the damage has no potency effect on ${name}, so the ${spendNode!.cost} section has nothing to reduce; accept without spending.`,
       );

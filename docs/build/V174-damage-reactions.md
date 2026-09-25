@@ -108,7 +108,8 @@ Rules question: [Q-REACT-1](../rules-questions-for-user.md#q-react-1-halving-ord
 ## Work log
 
 - 2026-09-25: `slice/V174` in `.worktrees/reactions`, stacked on `slice/V173` `7ad54313`.
-  Implementation commit: `d4cd9676` (committed on the branch, not pushed).
+  Implementation commit: `0ecdb97f` after the rebase onto the new chain (pushed on
+  `slice/V174`).
 - Flipped to fully compiled (all without a power roll, each with its Spend section):
   - **Inertial Shield** (`feature/ability/null/level-1/inertial-shield.md`).
   - **Skin Like Castle Walls** (`feature/ability/elementalist/level-1/skin-like-castle-walls.md`).
@@ -156,3 +157,24 @@ Rules question: [Q-REACT-1](../rules-questions-for-user.md#q-react-1-halving-ord
     `party-read-limit`, `abilities`; `tests/scripts/damage-reactions`, `triggered-actions`,
     `effect-only`, `live-compiled-report`, `audit-ability-grammar`, `compiled-ability`: all
     passed.
+- Review follow-ups (changes required, 2026-09-25):
+  1. A second response on the same hit is checked against the current accepted revision (the
+     damage its open card was updated to), not the original hit, so 7 → 3 → 1 works.
+  2. A gain whose claim an earlier revision already released is skipped, and a winded-or-dying gain
+     is reversed only when this revision undoes what earned it: no double reversal.
+  3. Q-REACT-1 point 4 is labelled an interpretation, quotes inertial-shield.md exactly and names the
+     alternatives.
+  4. The work log cites `0ecdb97f`.
+  5. `potency=` is refused unless the answer spends on a "one effect" potency Spend.
+  6. The watcher-firing refusal considers only firings about the revised creature (its own
+     watchers, and the dealer's damage-dealt when no other creature took damage from the entry).
+  7. The resolved cards are read once per hit (`revisionsOf`), for the plan and for the correction
+     refusal; the correction refusal now comes first, before the history window checks.
+  8. A potency condition on a compiled hit that the engine didn't evaluate gets a table note, and
+     doesn't count as "no potency effect".
+  9. `tests/app/damage-reactions.test.ts` adds: two responses on one hit (Fury then Elementalist,
+     7 → 3 → 1, the winded gain reversed once, the first-damage gain standing); a correction refused
+     after a revision; temporary Stamina given back (10 absorbs 5, revised 8); and a Persistent
+     Magic break refusing the revision (a seeded maintained entry; the Elementalist takes 5 then 7
+     in the goblin's turn, 12 ≥ 5 × Reason 2). The rolled-save refusal isn't tested: saves roll at
+     the end of the saving creature's turn, and the card window closes when the next turn starts.

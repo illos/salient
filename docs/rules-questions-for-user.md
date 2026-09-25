@@ -1472,7 +1472,12 @@ Current behaviour:
    removed; the rest stands and the log says how much. Alternative: attribute each spend at the
    time it happened (a later gain then never shields an earlier one), which needs a per-spend
    ledger the app doesn't keep.
-4. **"One effect"** (Inertial Shield's Spend). When only one of the hit's potency effects would
-   change, that one is reduced; when several would, the answer names one (`potency=`).
+4. **"One effect"** (interpretation). `feature/ability/null/level-1/inertial-shield.md`, Spend 1
+   Discipline: "The potency of one effect associated with the damage is reduced by 1 for you." The
+   source doesn't say who picks the effect or what happens when only one would change. When only
+   one of the hit's potency effects would change, that one is reduced without asking; when several
+   would, the answer names one (`potency=`). Alternatives: always ask which effect, even when only
+   one would change; or let the user pick any potency effect, including one the reduction doesn't
+   change.
 
 Recommendation: keep all four.

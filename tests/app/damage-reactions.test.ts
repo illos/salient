@@ -25,7 +25,13 @@
  * - rule/combat/triggered-action.md: one triggered action per round.
  * Heroes: the Null is v103-1 (Stamina 21, winded 10, Might 2), the Fury v101-panther (Reaver:
  * Stamina 27, winded 13), the Tactician v94-tactician-3 (Vanguard: Parry) and the Talent v105-3
- * (Stamina 18, winded 9, Might 1, Reason 2), all owned by the player.
+ * (Stamina 18, winded 9, Might 1, Reason 2), and the Elementalist v104-2 (Earth: Skin Like Castle
+ * Walls; Reason 2), all owned by the player.
+ * - elementalist/level-1/skin-like-castle-walls.md: Self or one ally; "The target takes half the
+ *   damage." feature/elementalist/level-1/persistent-magic.md: "If you take damage equal to or
+ *   greater than 5 times your Reason score in one turn, you stop maintaining any persistent
+ *   abilities."
+ * - rule/health/temporary-stamina.md: "the temporary Stamina decreases first".
  */
 import { expect, test } from 'vitest';
 import { convexTest } from 'convex-test';
@@ -46,6 +52,7 @@ import nullLedger from '../fixtures/v103-null-expected.json' with { type: 'json'
 import furyLedger from '../fixtures/v101-fury-expected.json' with { type: 'json' };
 import tacticianLedger from '../fixtures/v94-tactician-expected.json' with { type: 'json' };
 import talentLedger from '../fixtures/v105-talent-expected.json' with { type: 'json' };
+import elementalistLedger from '../fixtures/v104-elementalist-expected.json' with { type: 'json' };
 import { admitHero, table, type Backend } from './fixtures/table';
 
 const modules = import.meta.glob('../../convex/**/*.ts');
@@ -87,6 +94,7 @@ const NULL: Witness = { ledger: nullLedger, id: 'v103-1' };
 const FURY: Witness = { ledger: furyLedger, id: 'v101-panther' };
 const TACTICIAN: Witness = { ledger: tacticianLedger, id: 'v94-tactician-3' };
 const TALENT: Witness = { ledger: talentLedger, id: 'v105-3' };
+const ELEMENTALIST: Witness = { ledger: elementalistLedger, id: 'v104-2' };
 
 let sequence = 0;
 async function setup(heroes: Record<string, Witness>) {
@@ -234,10 +242,104 @@ test('V174: Inertial Shield halves the goblin’s hit; undo restores it; the Dir
   await s.respond(offer!._id, 'director');
   expect((await s.live('Nul')).stamina).toBe(19);
 
+  // A correction of the revised hit is refused: undo the response or rewind instead.
+  await expect(
+    s.command(`/ability correct event="${hit.eventId}" target=${s.ref('Nul')} banes=1`),
+  ).rejects.toThrow(/An accepted response revised this hit/);
+
   // 4. One triggered action per round: a second hit in the round offers nothing.
   await s.hit('Spear Charge', 'Nul');
   expect((await s.live('Nul')).stamina).toBe(14);
   expect(await s.open()).toEqual([]);
+});
+
+test('V174: two responses on one hit: 7 → 3 → 1, and a reversed gain is not reversed twice', async () => {
+  const s = await setup({ Rook: FURY, Terra: ELEMENTALIST });
+  // Bury the Point 18: 7 damage (the Fury's Might 2 resists M < 2). Winded value 13: 17 − 7 = 10
+  // is winded (first damage +1 ferocity, first winded +1d3); 17 − 3 = 14 is not.
+  await s.command('/adjust malice value=2');
+  await s.command(`${s.ref('Rook')} /adjust stamina value=17`);
+  const hit = await s.hit('Bury the Point', 'Rook');
+  expect((await s.live('Rook')).stamina).toBe(10);
+  const cards = await s.open();
+  const reflexes = cards.find(
+    c => (c.offer as { abilityName: string }).abilityName === 'Unearthly Reflexes',
+  )!;
+  const walls = cards.find(
+    c => (c.offer as { abilityName: string }).abilityName === 'Skin Like Castle Walls',
+  )!;
+  expect(walls.offer).toMatchObject({ damage: 7, target: { id: s.ids.Rook } });
+  const firstGain = (await s.events()).find(
+    e =>
+      e.kind === 'resource.triggered' &&
+      e.causeEventId === hit.eventId &&
+      (e.payload as { data: { triggerId: string } }).data.triggerId !== 'fury-winded-or-dying',
+  )!;
+  expect((firstGain.payload as { data: { delta: number } }).data.delta).toBe(1);
+
+  // The Fury answers first: half of 7 is 3; the winded gain goes, nothing having been spent.
+  await s.respond(reflexes._id, 'player');
+  expect((await s.live('Rook')).stamina).toBe(14);
+  const afterFirst = (await s.live('Rook')).heroicResource.current;
+  expect(afterFirst).toBe(1);
+  // The open card now answers the revised damage.
+  expect((await s.card(walls._id)).offer).toMatchObject({ damage: 3 });
+
+  // The Elementalist answers second, from the current revision: half of 3 is 1, 17 − 1 = 16. The
+  // winded gain is already reversed and is not reversed again; damage is still taken, so the
+  // first-damage gain stands.
+  const second = await s.respond(walls._id, 'player');
+  const rook = await s.live('Rook');
+  expect(rook.stamina).toBe(16);
+  expect(rook.heroicResource.current).toBe(afterFirst);
+  expect(rook.resourceClaims?.map(c => c.eventId)).toContain(firstGain._id);
+  const record = await s.result(second.eventId);
+  expect((record!.compiled as CompiledResult).effects[0]!.effect).toMatchObject({
+    kind: 'damage-revision',
+    before: { incoming: 3, staminaAfter: 14 },
+    application: { incoming: 1, staminaAfter: 16 },
+  });
+  const revised = (await s.events()).filter(e => e.kind === 'damage.revised');
+  expect(revised.map(e => e.description.match(/\d+ → \d+ damage/)?.[0])).toEqual([
+    '7 → 3 damage',
+    '3 → 1 damage',
+  ]);
+  expect(revised[1]!.description).not.toContain('no longer applies');
+});
+
+test('V174: temporary Stamina the hit absorbed is given back', async () => {
+  const s = await setup({ Nul: NULL });
+  // temporary-stamina.md: 10 temporary Stamina absorbs all 5; half is 2, leaving 8.
+  await s.command(`${s.ref('Nul')} /adjust temporary-stamina value=10`);
+  await s.hit('Spear Charge', 'Nul');
+  expect((await s.live('Nul')).temporaryStamina).toBe(5);
+  const [offer] = await s.open();
+  await s.respond(offer!._id, 'player');
+  const nul = await s.live('Nul');
+  expect([nul.temporaryStamina, nul.stamina]).toEqual([8, 21]);
+});
+
+test('V174: a hit that broke Persistent Magic refuses the revision', async () => {
+  const s = await setup({ Terra: ELEMENTALIST });
+  // Seed one maintained persistent ability (the V148 record a maintained use leaves).
+  await s.t.run(async ctx => {
+    const encounter = (await ctx.db.query('encounters').take(10)).find(e => e.phase === 'turns')!;
+    const hero = (await ctx.db.get(s.ids.Terra!))!;
+    await ctx.db.patch(hero._id, {
+      liveState: {
+        ...hero.liveState!,
+        maintained: [{ ability: 'Fixture Persistent', value: 1, encounterId: encounter._id }],
+      },
+    });
+  });
+  // 5 then 7 damage in the goblin's turn: 12 ≥ 5 × Reason 2, so maintenance stops at the second.
+  await s.command('/adjust malice value=2');
+  await s.hit('Spear Charge', 'Terra');
+  await s.hit('Bury the Point', 'Terra');
+  expect((await s.live('Terra')).maintained ?? []).toEqual([]);
+  const second = (await s.open()).find(c => (c.offer as { damage: number }).damage === 7)!;
+  await expect(s.respond(second._id, 'player')).rejects.toThrow(/Persistent Magic/);
+  expect(await s.card(second._id)).toMatchObject({ status: 'awaiting-input' });
 });
 
 test('V174: the revision reconciles winded; a potency spend on damage without potency is refused', async () => {

@@ -2091,7 +2091,7 @@ const abilityUse: OperationDefinition = {
       if (spend !== undefined && !spendNode)
         throw new ConvexError(`${ability.name} has no Spend section the engine applies.`);
       const revisionNode = definition.sections.find(node => node.kind === 'damage-revision');
-      if (args.potency !== undefined && !answered)
+      if (args.potency !== undefined && (!answered || !revisionNode))
         throw new ConvexError(
           '"potency" answers a response card that reduces one effect’s potency.',
         );
@@ -3129,6 +3129,8 @@ const abilityCorrect: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context, args }) => {
     const { event, result } = await resultByEvent(ctx, context, String(args.event));
+    // V174: a hit an accepted response revised is recomputed from that revision; rewind instead.
+    await assertNotRevised(ctx, context.campaign._id, event._id);
     // V157: an ability without a power roll has no dice, edges or banes to correct.
     const dice = result.dice;
     const characteristicValue = result.characteristicValue;
@@ -3181,8 +3183,6 @@ const abilityCorrect: OperationDefinition = {
       }
     }
     await assertCorrectionAllowed(ctx, event._id, context.user);
-    // V174: a hit an accepted response revised is recomputed from that revision; rewind instead.
-    await assertNotRevised(ctx, context.campaign._id, event._id);
     if (result.actor.kind === 'squad')
       throw new ConvexError(
         'Corrections of a squad action are not supported in V02: rewind the use, or adjust the squad pool with /adjust stamina on the squad.',
