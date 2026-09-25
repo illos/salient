@@ -284,7 +284,16 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     ).toHaveCount(0);
     await expect(director.getByText('Private audit fixture note')).toHaveCount(0);
     await director.goto(fixture.campaignUrl);
-    await director.getByRole('button', { name: 'Approve', exact: true }).click();
+    // V68: hero reviews live in the Manage players pop-up. A session is running, so open it from the
+    // players pane (the header's Invite players shows only between sessions).
+    await director.getByRole('button', { name: 'Manage players', exact: true }).click();
+    await director
+      .getByRole('dialog')
+      .getByTestId('admission')
+      .filter({ hasText: heroName })
+      .getByRole('button', { name: 'Approve', exact: true })
+      .click();
+    await director.keyboard.press('Escape');
     await player.goto(`/characters/${characterId}`);
     await expect(player.getByText('30 / 30', { exact: true }).first()).toBeVisible();
     const restored: HeroSheet = await query('characters:sheet', { characterId });
