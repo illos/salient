@@ -676,8 +676,8 @@ test('V200: two Talents’ columns on one goblin form a manual stacking group; n
 });
 
 test('V200: the column’s user deals its rider damage: Hit ’Em Hard! gives the Talent 2 surges with no Mark benefit card, and Violence Will Not Aid Thee fires on the Talent', async () => {
-  // Q-AREA-2 point 6 (interpretation): rule/damage/rolled-damage.md speaks of "an ability or effect
-  // [that] deals damage without requiring a power roll"; the area is the Talent's ability's effect,
+  // Q-AREA-2 point 6 (interpretation): rule/damage/rolled-damage.md says "If an ability or effect deals
+  // damage without requiring a power roll, that is not rolled damage"; the area is the Talent's ability's effect,
   // so the Talent deals its damage, which is not rolled damage.
   // - feature/ability/tactician/level-3/hit-em-hard.md: "whenever you or any ally deals damage to a
   //   target marked by you, that creature gains 2 surges"; mark.md: its benefit is on rolled

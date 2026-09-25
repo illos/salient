@@ -1904,8 +1904,8 @@ Open; V200 binds labelled interpretations so the areas can compile. Pinned `en/u
    performance and ends the current one. When in the round a performance is chosen is the table's.
    Alternative: the Troubadour confirms maintenance each round.
 6. **The area's user deals its riders' damage** (revised after the V200 review). Pinned
-   `rule/damage/rolled-damage.md` speaks of "an ability or effect [that] deals damage without
-   requiring a power roll"; the area is the user's ability's effect, so the user is read as dealing
+   `rule/damage/rolled-damage.md` says "If an ability or effect deals damage without requiring a power
+   roll, that is not rolled damage"; the area is the user's ability's effect, so the user is read as dealing
    its damage. It counts for damage-dealt watchers (so Violence Will Not Aid Thee on the user fires
    on the column's damage) and for "you or any ally deals damage to a target marked by you" watchers
    (Hit 'Em Hard!, Stay Strong and Focus!). It is never rolled damage, so the Mark benefit, which
