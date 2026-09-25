@@ -315,6 +315,8 @@ export function resolveTarget(
   selectedCharacteristic: Characteristic | undefined,
   inputs: TargetRollInputs,
   damageCharacteristic?: Characteristic,
+  /** V177: the use's chosen damage type, replacing the printed untyped damage of every tier. */
+  selectedDamageType?: string,
 ): TargetRollOutcome {
   const edgeBane = resolveEdgeBane(inputs.edges, inputs.banes);
   // Section 1.3: bonuses and penalties add together, before edges and banes.
@@ -328,6 +330,9 @@ export function resolveTarget(
   const tier: Tier = natural ? 3 : shifted;
   const tierText = ability.tiers[tier - 1]!;
   const unresolvedClauses = [...tierText.unresolvedClauses];
+  if (selectedDamageType !== undefined && tierText.damageType !== undefined)
+    throw new Error('A chosen damage type replaces only untyped printed damage.');
+  const damageType = selectedDamageType ?? tierText.damageType;
   let damage: DamageBreakdown | undefined;
   if (tierText.damage) {
     damage = damageFor(
@@ -335,12 +340,14 @@ export function resolveTarget(
       actor,
       selectedCharacteristic,
       kitBonusFor(ability, actor, tier),
-      tierText.damageType,
+      damageType,
       damageCharacteristic,
     );
     if (damage) {
+      // V177: a modifier for one damage type of one ability (Acolyte of Fire's Hurl Element) reads
+      // the chosen type.
       const bonuses = (actor.abilityDamageModifiers ?? [])
-        .filter(modifier => matchesAbilityModifier(modifier, ability, tierText.damageType))
+        .filter(modifier => matchesAbilityModifier(modifier, ability, damageType))
         .map(({ label, amount }) => ({ label, amount }));
       if (bonuses.length) {
         damage.buildBonuses = bonuses;
@@ -632,6 +639,7 @@ export function resolveAbilityRoll(input: AbilityRollInput): AbilityRollResponse
       selected,
       inputs,
       input.selectedDamageCharacteristic,
+      input.selectedDamageType,
     ),
   );
   const manualResolutions: ManualResolution[] = [];
@@ -674,6 +682,7 @@ export function resolveAbilityRoll(input: AbilityRollInput): AbilityRollResponse
       ? { selectedDamageCharacteristic: input.selectedDamageCharacteristic }
       : {}),
     ...(input.selectedMode ? { selectedMode: input.selectedMode } : {}),
+    ...(input.selectedDamageType ? { selectedDamageType: input.selectedDamageType } : {}),
     characteristicValue: value,
     criticalHit,
     additionalMainActionOffered: criticalHit,
@@ -706,6 +715,7 @@ export function correctTarget(
     | 'selectedCharacteristic'
     | 'selectedDamageCharacteristic'
     | 'selectedMode'
+    | 'selectedDamageType'
   >,
   originalEventId: string,
   before: TargetRollOutcome,
@@ -734,6 +744,7 @@ export function correctTarget(
       ...(extraDamage?.length ? { extraDamage } : {}),
     },
     original.selectedDamageCharacteristic,
+    original.selectedDamageType,
   );
   const result: PostRollCorrectionResult = {
     originalEventId,

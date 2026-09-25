@@ -54,7 +54,7 @@ export function elementalistAbilities(
   for (const a of result)
     if (a.name === 'Hurl Element' && a.provenance.decisionId.startsWith('class.elementalist.'))
       a.activationCondition =
-        'Choose a typed Hurl Element action to roll and apply damage. This base entry records the choice manually.';
+        'Give the damage type when you use it (damage-type= acid, cold, corruption, fire, lightning, poison or sonic), or use a typed Hurl Element action.';
   return result.map(a =>
     a.provenance.decisionId.startsWith('class.elementalist.level-') &&
     ELEMENTALIST_ACTIVATION[a.name]

@@ -260,12 +260,22 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
             const actorBefore = await get(id);
             if (name === 'Bifurcated Incineration')
               await invoke(lowId, 'adjust.stamina', { value: 24 });
+            // V177 (feature/ability/elementalist/level-1/hurl-element.md): "When you make this strike,
+            // choose the damage type from one of the following options: acid, cold, corruption, fire,
+            // lightning, poison, or sonic." A use without the choice is refused before any roll.
+            const hurl = name === 'Hurl Element';
+            if (hurl)
+              await assert.rejects(
+                invoke(id, 'ability.use', { ability: name, targets: [target] }),
+                /needs its damage type/,
+              );
             const used = await invoke(id, 'ability.use', {
               ability: name,
               targets:
                 name === 'Bifurcated Incineration'
                   ? [target, { refKind: 'character', id: lowId }]
                   : [target],
+              ...(hurl ? { 'damage-type': 'fire' } : {}),
             });
             const persisted = await event(used.eventId);
             const after = await get(affectedId);
@@ -324,6 +334,25 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
                   24 - rolled.damageByTier[second.tier - 1]!,
                 );
               }
+            } else if (hurl) {
+              // The chosen fire deals the typed Hurl Element: Fire damage of the ledger, including
+              // Acolyte of Fire's bonus "when you use it to deal fire damage"
+              // (feature/elementalist/level-1/fire-acolyte-of-fire.md).
+              assert.equal(persisted?.kind, 'ability.use', name);
+              assert.equal(
+                (persisted?.payload?.data?.ability as { execution?: { mode?: string } })?.execution
+                  ?.mode,
+                'compiled',
+                name,
+              );
+              const result = persisted?.payload?.data?.result;
+              assert.equal(result?.selectedDamageType, 'fire', name);
+              const outcome = result.targets[0]!;
+              const fire = w.rolledActions.find(a => a.name === 'Hurl Element: Fire')!;
+              const damage = fire.damageByTier[outcome.tier - 1]!;
+              assert.equal(outcome.damage?.damageType, 'fire', name);
+              assert.equal(outcome.damage?.rolledDamage, damage, name);
+              assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
             } else if (name === 'Skin Like Castle Walls') {
               // V174: a compiled damage-changing response persists as ability.use. Used by hand there is
               // no triggering hit to revise, so its effect is left to the table and the target is unchanged.
@@ -343,7 +372,7 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
                 `${name} manual target unchanged`,
               );
             }
-            if (actorBefore && !rolled)
+            if (actorBefore && !rolled && !hurl)
               assert.deepEqual(
                 withoutResource((await get(id)).liveState),
                 withoutResource(actorBefore.liveState),

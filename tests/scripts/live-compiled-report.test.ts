@@ -211,6 +211,10 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Thunder Roar',
       'Phase Inversion Strike',
       'Machinations of Sound',
+      // V177: damage-type options executed in every tier's damage.
+      'Ray of Wrath',
+      'Hurl Element',
+      'Visceral Roar',
     ].sort(),
   );
   expect(

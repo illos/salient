@@ -173,7 +173,7 @@ export const CONDUIT_ACTIONS: CensorAction[] = [
       sourcePath: 'en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md',
       actionType: 'Part of Ray of Wrath',
       activationCondition:
-        'Choose holy damage for this Ray of Wrath use; resolve damage-type interactions manually. Resolve the stated effects manually.',
+        'Use Ray of Wrath with damage-type=holy to have it deal holy damage; the engine applies holy immunity and weakness. This entry records nothing itself.',
     },
     {
       name: 'Creation: Domain Prayer',

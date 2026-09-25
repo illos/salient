@@ -93,6 +93,7 @@ import {
   withoutImmunityTypes,
   applyDamage,
 } from '../../shared/resolve/index';
+import { chooseDamageType } from '../../shared/resolve/damageTypes';
 import type { ReadCtx } from './access';
 import { committedEncounter } from './encounters';
 import {
@@ -1678,6 +1679,7 @@ const abilityUse: OperationDefinition = {
     banes: v.optional(v.union(v.number(), v.array(v.number()))),
     characteristic: v.optional(v.string()),
     'damage-characteristic': v.optional(v.string()),
+    'damage-type': v.optional(v.string()),
     mode: v.optional(v.string()),
     exclude: v.optional(v.union(v.string(), v.array(v.string()))),
     strained: v.optional(v.string()),
@@ -1693,6 +1695,8 @@ const abilityUse: OperationDefinition = {
     characteristic: 'Roll characteristic override (M, A, R, I or P) among the permitted ones.',
     'damage-characteristic':
       'Independent choice among the printed damage characteristics; otherwise highest permitted.',
+    'damage-type':
+      'For an ability whose Effect lets you choose its damage type (V177), the type (for example fire): required when the choice is mandatory, omitted for the printed untyped damage when it is optional. A primordial damage type comes from the Stormwight kit and is not chosen.',
     mode: 'melee or ranged, required when a Melee-and-Ranged ability deals different damage in each mode.',
     exclude:
       'Effect instance ids whose automatic edge, bane or bonus does not apply to this roll (the table’s override). Edges and banes given here are circumstance, added to the automatic ones.',
@@ -1849,6 +1853,26 @@ const abilityUse: OperationDefinition = {
         );
       declaredStrained = value;
     }
+    // V177: a damage-type section the engine applies, and this use's type (shared/resolve/
+    // damageTypes.ts). Refused before any payment or roll when the choice is missing or not printed.
+    const damageTypeNode =
+      ability.compilation?.mode === 'compiled'
+        ? ability.compilation.definition.sections.find(node => node.kind === 'damage-type')
+        : undefined;
+    let chosenDamageType: { type?: string; note?: string } = {};
+    if (damageTypeNode) {
+      const chosen = chooseDamageType(
+        damageTypeNode.spec,
+        args['damage-type'] === undefined ? undefined : String(args['damage-type']),
+        records.character ? baselineOf(records.character.derivedBaseline)?.features : undefined,
+        ability.name,
+      );
+      if ('refusal' in chosen) throw new ConvexError(chosen.refusal);
+      chosenDamageType = chosen;
+    } else if (args['damage-type'] !== undefined)
+      throw new ConvexError(
+        `${ability.name} has no damage-type option the engine applies; resolve any damage type at the table.`,
+      );
 
     if (ability.compilation?.mode === 'manual') {
       return {
@@ -2660,6 +2684,7 @@ const abilityUse: OperationDefinition = {
       ...(characteristic ? { selectedCharacteristic: characteristic } : {}),
       ...(damageCharacteristic ? { selectedDamageCharacteristic: damageCharacteristic } : {}),
       ...(mode ? { selectedMode: mode } : {}),
+      ...(chosenDamageType.type ? { selectedDamageType: chosenDamageType.type } : {}),
     });
     if (probe.kind === 'blocked') {
       const blocked: AbilityRollBlocked = probe;
@@ -2716,6 +2741,7 @@ const abilityUse: OperationDefinition = {
       ...(characteristic ? { selectedCharacteristic: characteristic } : {}),
       ...(damageCharacteristic ? { selectedDamageCharacteristic: damageCharacteristic } : {}),
       ...(mode ? { selectedMode: mode } : {}),
+      ...(chosenDamageType.type ? { selectedDamageType: chosenDamageType.type } : {}),
       ...(!compiledDefinition && ability.effects ? { effectClauses: ability.effects } : {}),
       ...(compiledDefinition
         ? {
@@ -2829,8 +2855,12 @@ const abilityUse: OperationDefinition = {
       printedKeywords.includes('strike') &&
       printedKeywords.includes('melee') &&
       (!printedKeywords.includes('ranged') || mode === 'melee');
+    // V177: the damage type the use's damage-type section gave.
+    const damageTypeText = damageTypeNode
+      ? ` Damage type: ${chosenDamageType.type ? `${chosenDamageType.type} (${chosenDamageType.note ?? 'chosen'})` : 'untyped (no damage type chosen)'}.`
+      : '';
     const describeUse = (payment: string) =>
-      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment}${automaticText ? ` Automatic effects (${automaticText}).` : ''} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${grabText}${squadText}${critText}${strainedPlan?.text ?? ''}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${damageTypeText}${payment}${automaticText ? ` Automatic effects (${automaticText}).` : ''} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${grabText}${squadText}${critText}${strainedPlan?.text ?? ''}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
     return {
       kind: 'ability.use',
       description: describeUse(costText),
@@ -3360,6 +3390,10 @@ const abilityCorrect: OperationDefinition = {
           ? { selectedDamageCharacteristic: originalResult.selectedDamageCharacteristic }
           : {}),
         ...(originalResult?.selectedMode ? { selectedMode: originalResult.selectedMode } : {}),
+        // V177: the use's damage type, never re-chosen.
+        ...(originalResult?.selectedDamageType
+          ? { selectedDamageType: originalResult.selectedDamageType }
+          : {}),
         ...(result.selectedCharacteristic
           ? { selectedCharacteristic: result.selectedCharacteristic }
           : {}),

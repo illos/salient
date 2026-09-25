@@ -87,9 +87,9 @@ test.each([
   expect(definition.sections[0]!.clause).toBe(source?.kind === 'section' ? source.text : undefined);
 });
 
+// V177 compiles the damage-type options of Ray of Wrath and Hurl Element as executed damage
+// (tests/scripts/damage-types.test.ts); they are no longer rider candidates.
 test.each([
-  'Ray of Wrath',
-  'Hurl Element',
   "Summoner's Sword",
   'Method Acting',
   'I Work Better Alone',

@@ -59,6 +59,7 @@ import {
 import type { EffectRider } from './effectRiders.ts';
 import { sameTriggerSpec, triggerSection } from './triggers.ts';
 import { readMarkAbility, sameMarkSpec, type MarkSpec } from './marks.ts';
+import { damageTypeAdmitted, sameDamageTypeSpec, sectionDamageType } from './damageTypes.ts';
 import {
   effectOnlyClause,
   type EffectOnlySentence,
@@ -826,6 +827,17 @@ export function resolveCompiledAbility(
           shape.kind !== 'single'
         );
       }
+      // V177: a damage-type section re-reads to the same spec, is the only one, and every tier's
+      // damage is still untyped.
+      if (node.kind === 'damage-type') {
+        const again = sectionDamageType(node.clause);
+        return (
+          !again ||
+          !sameDamageTypeSpec(again, node.spec) ||
+          !damageTypeAdmitted(definition.tiers) ||
+          definition.sections.filter(other => other.kind === 'damage-type').length !== 1
+        );
+      }
       if (node.kind !== 'rider') return true;
       // V158: a lasting instruction re-reads to the same spec, or the definition was tampered with.
       if (node.lasting) {
@@ -940,6 +952,24 @@ export function resolveCompiledAbility(
     )
   )
     throw new Error('Accepted dice and edge/bane counts must be valid integers.');
+  // V177: the use's damage type is one the section prints, and a required choice was made. The
+  // section is executed in every tier's damage (resolveTarget), so it is not listed as table work.
+  const damageTypeNode = definition.sections.find(node => node.kind === 'damage-type');
+  if (
+    (input.selectedDamageType !== undefined &&
+      !damageTypeNode?.spec.options.includes(input.selectedDamageType)) ||
+    (damageTypeNode?.spec.choice !== undefined &&
+      damageTypeNode.spec.choice !== 'optional' &&
+      input.selectedDamageType === undefined)
+  )
+    return {
+      kind: 'manual',
+      definition,
+      reason: damageTypeNode
+        ? `The damage type must be one of ${damageTypeNode.spec.options.join(', ')}${damageTypeNode.spec.choice === 'optional' ? ', or none' : ''}.`
+        : 'This ability prints no damage-type option.',
+      effects: [],
+    };
   const tiers = definition.tiers.map(nodes => {
     const damage = nodes[0]?.kind === 'damage' ? nodes[0] : undefined;
     return {

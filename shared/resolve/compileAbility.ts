@@ -12,6 +12,7 @@ import { sectionModifier, type ModifierSpec } from './modifiers.ts';
 import { strainedSection, type StrainedSpec } from './strained.ts';
 import { sectionWatcher, type WatcherSpec } from './watchers.ts';
 import { markManualReason, readMarkAbility, type MarkSpec } from './marks.ts';
+import { damageTypeAdmitted, sectionDamageType, type DamageTypeSpec } from './damageTypes.ts';
 import {
   responseSpend,
   type DamageRevisionClause,
@@ -193,6 +194,15 @@ export interface MarkNode extends NodeSource {
   spec: MarkSpec;
 }
 export interface ResponseSpendNode extends NodeSource, ResponseSpendClause {}
+/**
+ * V177: a whole Effect section that sets the type of the ability's damage (shared/resolve/
+ * damageTypes.ts). It is executed in the damage of every tier, from the use's choice; it is not
+ * table work.
+ */
+export interface DamageTypeNode extends NodeSource {
+  kind: 'damage-type';
+  spec: DamageTypeSpec;
+}
 export type CompiledNode =
   DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
 /** Effect-section nodes: V109 riders, V157 effect-only gains and instructions, or manual work. */
@@ -207,7 +217,8 @@ export type SectionNode =
   | TriggeredDamageNode
   | DamageRevisionNode
   | ResponseSpendNode
-  | MarkNode;
+  | MarkNode
+  | DamageTypeNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -387,6 +398,23 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       return;
     }
     if (block.kind === 'section') {
+      // V177: a whole Effect section that sets the type of every tier's untyped damage.
+      const damageType =
+        block.label === 'Effect' && !block.cost && rollIndex >= 0
+          ? sectionDamageType(block.text)
+          : undefined;
+      if (
+        damageType &&
+        damageTypeAdmitted(tiers) &&
+        !sections.some(node => node.kind === 'damage-type')
+      ) {
+        sections.push({
+          ...sourceNode(envelope, locator, 0, block.text),
+          kind: 'damage-type',
+          spec: damageType,
+        });
+        return;
+      }
       // V170: a whole Strained section after the roll. "The target" work needs one target (V110),
       // and its extra damage must be the type of every tier's damage (strainedExtraDamage).
       const strained =

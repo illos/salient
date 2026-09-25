@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 176 (without a power roll: 20); unchanged reachable compatibility: 1445; structurally supported but unavailable: 0.
+Currently reachable compiled: 179 (without a power roll: 20); unchanged reachable compatibility: 1442; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -177,7 +177,7 @@ Currently reachable compiled: 176 (without a power roll: 20); unchanged reachabl
 | Holy Lash | hero-standalone | supported | compiled |  |
 | Judgment's Hammer | hero-standalone | supported | compiled |  |
 | Lightfall | hero-standalone | supported | compiled |  |
-| Ray of Wrath | hero-standalone | manual | legacy-compatibility | manual-section |
+| Ray of Wrath | hero-standalone | supported | compiled |  |
 | Sacrificial Offer | hero-standalone | supported | compiled |  |
 | Sermon of Grace | hero-standalone | supported | compiled |  |
 | Staggering Curse | hero-standalone | supported | compiled |  |
@@ -211,7 +211,7 @@ Currently reachable compiled: 176 (without a power roll: 20); unchanged reachabl
 | Conflagration | hero-standalone | manual | legacy-compatibility | manual-section |
 | Explosive Assistance | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Grasp of Beyond | hero-standalone | supported | compiled |  |
-| Hurl Element | hero-standalone | manual | legacy-compatibility | manual-section |
+| Hurl Element | hero-standalone | supported | compiled |  |
 | Instantaneous Excavation | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Invigorating Growth | hero-standalone | manual | legacy-compatibility | manual-section |
 | Meteoric Introduction | hero-standalone | supported | compiled |  |
@@ -259,7 +259,7 @@ Currently reachable compiled: 176 (without a power roll: 20); unchanged reachabl
 | Death... Death! | hero-standalone | supported | compiled |  |
 | Phalanx-Breaker | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Special Delivery | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Visceral Roar | hero-standalone | manual | legacy-compatibility | manual-section |
+| Visceral Roar | hero-standalone | supported | compiled |  |
 | Wrecking Ball | hero-standalone | manual | legacy-compatibility | source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Demon Unleashed | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Face the Storm! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |

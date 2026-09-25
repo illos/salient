@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 101,
-      "manual": 270
+      "supported": 104,
+      "manual": 267
     },
     "kit-signature": {
       "total": 25,
@@ -25648,7 +25648,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/ray-of-wrath.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -25698,22 +25698,19 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/ray-of-wrath#block:1:0:d39701b4b1c33363",
           "locator": "block:1:0",
           "clause": "You can have this ability deal holy damage.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "damage-type",
+          "spec": {
+            "choice": "optional",
+            "options": [
+              "holy"
+            ],
+            "text": "You can have this ability deal holy damage."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can have this ability deal holy damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Ray of Wrath",
@@ -30134,7 +30131,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/hurl-element.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -30184,22 +30181,25 @@
           "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/hurl-element#block:1:0:18e3b752ff14a56a",
           "locator": "block:1:0",
           "clause": "When you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), choose the [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) from one of the following options: acid, cold, corruption, fire, lightning, poison, or sonic.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "damage-type",
+          "spec": {
+            "choice": "required",
+            "options": [
+              "acid",
+              "cold",
+              "corruption",
+              "fire",
+              "lightning",
+              "poison",
+              "sonic"
+            ],
+            "text": "When you make this strike, choose the damage type from one of the following options: acid, cold, corruption, fire, lightning, poison, or sonic."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "When you make this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), choose the [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) from one of the following options: acid, cold, corruption, fire, lightning, poison, or sonic.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Hurl Element",
@@ -37079,7 +37079,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/visceral-roar.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -37192,22 +37192,22 @@
           "id": "mcdm.heroes.v1/feature.ability.fury.level-2/visceral-roar#block:1:0:38a53643603718eb",
           "locator": "block:1:0",
           "clause": "This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "damage-type",
+          "spec": {
+            "choice": "primordial",
+            "options": [
+              "cold",
+              "fire",
+              "corruption",
+              "lightning"
+            ],
+            "text": "This ability deals your primordial damage type (see Stormwight Kits)."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "This ability deals your primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Visceral Roar",
@@ -213229,9 +213229,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 176,
+    "compiled": 179,
     "compiledEffectOnly": 20,
-    "compatibility": 1445,
+    "compatibility": 1442,
     "compiledButUnavailable": 0
   }
 }

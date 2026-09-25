@@ -1307,7 +1307,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       ]),
     );
     expect(listed.find(op => op.id === 'ability.use')!.syntax).toBe(
-      '@Actor /ability use ability=… [targets=…] [edges=…] [banes=…] [characteristic=…] [damage-characteristic=…] [mode=…] [exclude=…] [strained=…] [spend=…] [potency=…] [fromDraft=…]',
+      '@Actor /ability use ability=… [targets=…] [edges=…] [banes=…] [characteristic=…] [damage-characteristic=…] [damage-type=…] [mode=…] [exclude=…] [strained=…] [spend=…] [potency=…] [fromDraft=…]',
     );
     expect(listed.find(op => op.id === 'ability.resolved')!.roles).toEqual(['director']);
   });

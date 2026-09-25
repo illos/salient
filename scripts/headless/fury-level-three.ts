@@ -328,6 +328,24 @@ export async function runFuryLevelThree({
               remainder,
               name,
             );
+          } else if (name === 'Visceral Roar') {
+            // V177 (feature/ability/fury/level-2/visceral-roar.md): "This ability deals your
+            // primordial damage type (see Stormwight Kits)." The kit's Primordial Storm feature gives
+            // it (ledger damageTypeByKit, from feature/fury/<kit>/primordial-storm-*.md).
+            assert.equal(persisted?.kind, 'ability.use', name);
+            const result = persisted?.payload?.data?.result;
+            assert.ok(result, name);
+            const outcome = result.targets[0]!;
+            const entry = ledger.abilities.find(a => a.name === name) as unknown as {
+              damageByTierMight2: number[];
+              damageTypeByKit: Record<string, string>;
+            };
+            const type = entry.damageTypeByKit[b.w.kit]!;
+            assert.equal(result.selectedDamageType, type, `${name} ${b.w.kit}`);
+            assert.equal(outcome.damage?.damageType, type, `${name} ${b.w.kit}`);
+            const damage = entry.damageByTierMight2[outcome.tier - 1]!;
+            assert.equal(outcome.damage?.rolledDamage, damage, name);
+            assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
           } else if (name === 'Steelbreaker') {
             // V157: compiled without a power roll. feature/ability/fury/level-3/steelbreaker.md:
             // "You gain 20 temporary Stamina."; the greater amount is kept

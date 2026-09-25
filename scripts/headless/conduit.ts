@@ -303,6 +303,33 @@ export async function runConduit({ actors: { director, peer }, run, runId }: Sce
                 );
                 assert.equal(conditionEvent?.payload?.status, 'resisted');
                 assert.equal(conditionEvent?.payload?.condition, condition);
+              } else if (name === 'Ray of Wrath') {
+                // V177 (feature/ability/conduit/level-1/ray-of-wrath.md): "You can have this ability
+                // deal holy damage." is compiled. Without damage-type the damage is the printed
+                // untyped damage; with damage-type=holy the same tiers deal holy damage.
+                assert.equal(
+                  (persisted?.payload?.data?.ability as { execution?: { mode?: string } })
+                    ?.execution?.mode,
+                  'compiled',
+                  name,
+                );
+                assert.equal(result.selectedDamageType, undefined, name);
+                assert.equal(outcome.damage?.damageType, undefined, name);
+                await invoke(targetId, 'adjust.stamina', { value: 24 });
+                const holy = await invoke(id, 'ability.use', {
+                  ability: name,
+                  targets: [target],
+                  'damage-type': 'holy',
+                });
+                const holyResult = (await event(holy.eventId))?.payload?.data?.result;
+                assert.equal(holyResult?.selectedDamageType, 'holy', name);
+                const holyOutcome = holyResult.targets[0]!;
+                assert.equal(holyOutcome.damage?.damageType, 'holy', name);
+                assert.equal(
+                  (await get(targetId)).liveState?.stamina,
+                  24 - rolled.damageByTier![holyOutcome.tier - 1]!,
+                  `${name} holy`,
+                );
               } else {
                 // Source clauses remain explicit where the bounded compiler cannot automate them.
                 assert.match(

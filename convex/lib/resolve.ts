@@ -313,8 +313,6 @@ export function abilityFromEntry(
     // Same Self-header movement shape: rolls target enemies moved adjacent to, never yourself.
     '/feature/ability/fury/level-2/phalanx-breaker.md',
     '/feature/ability/fury/level-2/wrecking-ball.md',
-    // Deals the Stormwight kit's primordial damage type, which the generic roll cannot carry.
-    '/feature/ability/fury/level-2/visceral-roar.md',
     // Self header: movement and swap come first, then a strike against another creature.
     '/feature/ability/tactician/level-2/try-me-instead.md',
     // Upstage selects enemies passed during movement; never apply its roll to Self.
@@ -325,8 +323,6 @@ export function abilityFromEntry(
     '/feature/ability/troubadour/level-2/tough-crowd.md',
     // Separate rolls per eligible creature above each hole; generic shared dice cannot represent this.
     '/feature/ability/elementalist/level-1/instantaneous-excavation.md',
-    // A damage type is mandatory; source-typed grants below own its actual roll.
-    '/feature/ability/elementalist/level-1/hurl-element.md',
     // Subvert the Green Within: the target uses its signature ability before your roll.
     '/feature/ability/elementalist/level-2/subvert-the-green-within.md',
     // Translated Through Flame: the roll affects enemies adjacent to the teleported self or ally.

@@ -146,6 +146,11 @@ export interface AbilityRollRequest {
   selectedDamageCharacteristic?: Characteristic;
   /** V115: required when a Melee-and-Ranged ability's outcome depends on the mode. */
   selectedMode?: AbilityMode;
+  /**
+   * V177: the damage type of every tier's damage for this use, from a compiled damage-type section
+   * (shared/resolve/damageTypes.ts). Only for an ability whose printed tier damage is untyped.
+   */
+  selectedDamageType?: string;
   targets: TargetRollInputs[];
   dice: PowerRollDice;
   inCombat: boolean;
@@ -218,6 +223,8 @@ export interface AbilityRollResult {
   selectedDamageCharacteristic?: Characteristic;
   /** V115: the chosen mode of a Melee-and-Ranged ability, reused by corrections. */
   selectedMode?: AbilityMode;
+  /** V177: the damage type this use dealt, from its damage-type section; reused by corrections. */
+  selectedDamageType?: string;
   characteristicValue: number;
   criticalHit: boolean;
   /** Offered to the acting user; never executed by the app (section 2). */

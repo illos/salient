@@ -1605,3 +1605,41 @@ on these readings; each is an interpretation with its alternatives.
    is not a melee weapon ability for this rule, so no bonus.
 
 Recommendation: keep 1 to 5 as implemented.
+
+## Q-DT-1: readings behind the V177 damage-type options
+
+Open. Compendium paths read (pinned `en/unified/md`): `rule/damage/damage-type.md`,
+`rule/damage/damage-immunity.md`, `rule/damage/damage-weakness.md`,
+`feature/fury/stormwight-kits/kit-features.md`, the four `feature/fury/<kit>/primordial-storm-*.md`,
+and the three abilities below. V177 compiles them on these readings. Items 1 to 3 are
+interpretations, each with its alternatives. Items 4 and 5 are findings outside the slice.
+
+1. **Ray of Wrath without a choice deals untyped damage.**
+   `feature/ability/conduit/level-1/ray-of-wrath.md` prints "2 + I damage" (untyped, as
+   `rule/damage/damage-type.md` describes typical damage) and "You can have this ability deal holy
+   damage." A use without `damage-type` deals the printed untyped damage; `damage-type=holy` deals
+   holy. Alternative: require an explicit answer on every use (holy or untyped), so a forgotten
+   choice against a creature with holy weakness can't pass silently.
+2. **Visceral Roar's type is not chosen.** `feature/ability/fury/level-2/visceral-roar.md`: "This
+   ability deals your primordial damage type (see Stormwight Kits)." The type is read from the
+   user's Primordial Storm feature, for example `feature/fury/boren/primordial-storm-blizzard.md`:
+   "Your primordial damage type is cold." The ability is a Stormwight choice, whose kit grants that
+   feature. A user without one is refused, and so is a `damage-type` that differs from the kit's. Alternative: let the table name one of the
+   four primordial types when no kit feature is found.
+3. **Hurl Element's choice is made with the use, before the roll, once for the use.**
+   `feature/ability/elementalist/level-1/hurl-element.md`: "When you make this strike, choose the
+   damage type from one of the following options: …". The type is given with `ability.use` and
+   applies to whichever tier the roll gives. Hurl Element has one target, so it can't differ per
+   target. Alternative: choose after seeing the tier. That would change only which immunity or
+   weakness the table aims at, since no option changes the tier damage.
+4. **Finding: foes' printed immunity and weakness cells are not read.** A foe whose stat block
+   prints either cell (for example `monster/demon/1st-echelon/statblock/ruinant.md`, "Holy 3"
+   weakness) gets `fact-needed` damage from every ability. So a chosen type changes foe damage only
+   once those cells are read. Recommendation: a separate slice that reads the cells, typed and
+   untyped, citing `rule/damage/damage-immunity.md` and `damage-weakness.md`.
+5. **Finding: hero damage weaknesses don't reach the damage facts.** The evaluator records them,
+   for example the Revenant's "you have fire weakness 5"
+   (`feature/trait/revenant/tough-but-withered.md`) and complication weaknesses, but
+   `damageTargetFacts` passes only immunities. Recommendation: the same separate slice.
+
+Recommendation: keep 1 to 3 as implemented. Schedule 4 and 5.
