@@ -114,7 +114,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V202 turn trigger offers
+## Current release — V210 Director build-review count
+
+Frontend source `6c4c566c21948420645f8d0256a60cce443bae2b` published on 2026-09-25 as
+Worker `0c91bf9c-1fe2-423b-a076-97b50722b997`. The hosted build and asset upload succeeded.
+Backend and content are unchanged from V202; no backend deploy or reseed was needed. The accepted
+TESTER gate and focused non-table browser proof were reused without a deployment smoke test. See
+[V210](build/V210-build-review-count.md) and [the ledger](../deploy.md).
+
+## Previous release — V202 turn trigger offers
 
 Backend/frontend source `d249fc95d9d62b343aec2076badf264346073901` published on 2026-09-25 as
 Worker `b3b3ba19-a333-463b-abb7-cef284b011e0`. Backend and schema validation, the hosted build and the upload succeeded.

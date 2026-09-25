@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V210 | `6c4c566c` | Merged; frontend published as Worker `0c91bf9c-1fe2-423b-a076-97b50722b997`; gate and focused browser PASS | complete |
 | V202 | `d249fc9` | Merged; backend/frontend published; accepted gates reused | complete |
 | V201 | `9d8f7bc` | Merged in train 21; backend/frontend published; gate and headless at tip | complete |
 | V200 | `9d8f7bc` | Merged in train 21; backend/frontend published; gate and headless at tip | complete |
