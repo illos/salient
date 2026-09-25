@@ -42,3 +42,7 @@ Spec: docs/character-wizard-spec.md#5-progression-history
 - 2026-09-25: worktree `.worktrees/history-view-only`, branch `slice/V189` from main `d3ab253`.
   First pass deleted the restore UI and CLI; reverted on the user's follow-up and reimplemented as
   the `BUILD_RESTORE_ENABLED` switch. Authoring checks run; see the commit report.
+
+## Publication: 2026-09-25
+
+Merged in train 19 as main `36a5e17` and published as Worker `c076ef27-2f91-4988-a279-2f9332cf3110`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train19-release-36a5e17`.

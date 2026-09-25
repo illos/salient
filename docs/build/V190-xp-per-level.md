@@ -74,3 +74,7 @@ counts at the next Complete, where V165 counted only that respite's gain.
   a non-numeric value is never submitted; the level-3 test now admits through the real flow and
   asserts `entryLevelXpOffset` 32.
 - Independent re-review PASS (2026-09-25). Its one leftover is fixed: a second commit is ignored while the first is still being submitted.
+
+## Publication: 2026-09-25
+
+Merged in train 19 as main `36a5e17` and published as Worker `c076ef27-2f91-4988-a279-2f9332cf3110`. Release logs: `/srv/presidium/projects/salient/test-artifacts/train19-release-36a5e17`.

@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V177 damage-type options
+## Current release — train 19 (V189, V190)
+
+Backend/frontend source `36a5e179b0cf4b892b42ab6b2a75c2dc27a8bc56` published on 2026-09-25 as
+Worker `c076ef27-2f91-4988-a279-2f9332cf3110`: view-only build history and campaign XP per level. Backend and schema validation, the
+hosted build and the upload succeeded. Content remains the 1881-entry snapshot, so no reseed was
+needed. See the [ledger](../deploy.md).
+
+## Previous release — V177 damage-type options
 
 Backend/frontend source `64b521edbc21c811e7a42357af02cb699d184d1e` published on 2026-09-25 as
 Worker `c56d0334-acbf-4712-b599-3200983d92c2`. Backend and schema validation, the hosted build and the upload succeeded.

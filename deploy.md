@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V190 | `36a5e17` | Merged in train 19; backend/frontend published; gate and headless at tip | complete |
+| V189 | `36a5e17` | Merged in train 19; backend/frontend published; gate and headless at tip | complete |
 | V177 | `64b521e` | Merged; backend/frontend published; accepted gates reused | complete |
 | V176 | `408dd11` | Merged; backend/frontend published; accepted gates reused | complete |
 | V175 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
@@ -907,3 +909,20 @@ The test and deploy thread fast-forwarded reviewed tip `64b521edbc21c811e7a42357
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V177-release-64b521e`.
+
+### Train 19 (V189 view-only history, Null test fix, V190 XP per level) publication: 2026-09-25
+
+WIZARD3's V189 (build history view-only; restore kept behind `BUILD_RESTORE_ENABLED=false`) and V190
+(campaign XP per level), with ENGINE2's test-only fix for the flaky Null discipline test, were
+cherry-picked onto main `16be43d` and fast-forwarded as `36a5e179b0cf4b892b42ab6b2a75c2dc27a8bc56`.
+- Full gate at the tip (349 s, 458 engine and 917 app tests); the formerly flaky
+  `heroic-resource-null` test passed 5 of 5 runs.
+- Journeys at the tip: history, lifecycle, respite, level-up, heroic-resource and all.
+- The v32 level-up browser capture passed end to end with restore hidden (seven screens).
+- Independent reviews passed.
+- Backend publication and schema validation (optional `settings.xpPerLevel`), the hosted build and
+  the frontend upload succeeded. Worker `c076ef27-2f91-4988-a279-2f9332cf3110`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/train19-release-36a5e17`.
