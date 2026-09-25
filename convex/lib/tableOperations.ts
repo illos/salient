@@ -491,6 +491,8 @@ interface AdjustableField {
   scope: 'hero' | 'creature' | 'campaign';
   /** Stamina may be negative for a hero (R03: no clamp); other counters cannot go below zero. */
   min?: number;
+  /** What the value means, appended to the operation description. */
+  meaning?: string;
 }
 
 const ADJUSTABLE: AdjustableField[] = [
@@ -501,7 +503,15 @@ const ADJUSTABLE: AdjustableField[] = [
   { verb: 'surges', label: 'Surges', scope: 'hero', min: 0 },
   { verb: 'victories', label: 'Victories', scope: 'hero', min: 0 },
   // V32: manual campaign XP bookkeeping; this does not award XP by rule or advance the build.
-  { verb: 'xp', label: 'XP', scope: 'hero', min: 0 },
+  // V191 (user ruling 2026-09-25): the value is the hero's XP bank, spent at Respite Complete.
+  {
+    verb: 'xp',
+    label: 'XP',
+    scope: 'hero',
+    min: 0,
+    meaning:
+      " The value is the hero's XP bank: the next Respite Complete adds Victories and turns each full XP-per-level into a pending level-up. Lifetime XP is not changed.",
+  },
   { verb: 'malice', label: 'Malice', scope: 'campaign', min: 0 },
 ];
 // Q-A-200 (option A, applied): the provisional `stamina-maximum` and `recoveries-maximum` verbs
@@ -584,9 +594,11 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
     family: 'adjust',
     verb: field.verb,
     title: `Adjust ${field.label}`,
-    description: `Director edit of the persistent ${field.label} value${field.scope === 'campaign' ? ' (the shared pool)' : ''}; appends a Manual adjustment entry with the previous and new value.`,
+    description: `Director edit of the persistent ${field.label} value${field.scope === 'campaign' ? ' (the shared pool)' : ''}; appends a Manual adjustment entry with the previous and new value.${field.meaning ?? ''}`,
     args: { value: v.number() },
-    argDescriptions: { value: `The new ${field.label} value.` },
+    argDescriptions: {
+      value: `The new ${field.verb === 'xp' ? 'XP bank' : field.label} value.`,
+    },
     roles: ['director'],
     session: RUNNING_SESSION,
     actor: field.scope === 'campaign' ? 'none' : 'required',
@@ -818,8 +830,9 @@ const healthDisplay: OperationDefinition = {
 /**
  * V190 XP per level (docs/table-spec.md#respite-mode, confirmed 2026-09-25): chapter/making-a-hero.md,
  * Heroic Advancement (16 per level) and Adjusted XP Advancement (double 8, half 32, "Directors can
- * also create their own customized pace"). Applies from the next Respite Complete; nothing is
- * retroactive, and raising it never removes a level or a pending level-up.
+ * also create their own customized pace"). V191 (user ruling 2026-09-25): it applies to each hero's XP
+ * bank at the next Respite Complete; nothing is retroactive or caught up, and raising it removes
+ * nothing.
  */
 const xpPerLevel: OperationDefinition = {
   id: 'campaign.xp-per-level',

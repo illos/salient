@@ -910,14 +910,14 @@ async function heroSheet(
     ),
     commonActions: await commonActions(ctx),
     live: live ? { ...live, labels: labelsOf(live, baseline) } : null,
-    // V190: progress at the attached campaign's XP per level; outside a campaign, the standard 16.
+    // V191: the XP bank against the attached campaign's XP per level (16 outside one).
     xpProgress: live
       ? xpProgress(
           live.xp,
           campaign && character.campaignId === campaign._id
             ? settingsOf(campaign).xpPerLevel
             : STANDARD_XP_PER_LEVEL,
-          character.entryLevelXpOffset,
+          live.xpLifetime,
           (effective ? revisionLevel(effective) : 1) + (character.pendingLevelUps ?? 0),
         )
       : null,

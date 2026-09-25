@@ -1645,7 +1645,11 @@ interpretations, each with its alternatives. Items 4 and 5 are findings outside 
 Recommendation: keep 1 to 3 as implemented. Schedule 4 and 5.
 ## Q-XP-1: does a hero admitted above level 1 carry table XP? (V190)
 
-Open; implementation interpretation in place. `chapter/making-a-hero.md`, Heroic Advancement: "The
+Resolved 2026-09-25 by the user's XP bank ruling ([V191](build/V191-xp-bank.md),
+[respite mode](table-spec.md#respite-mode)): XP is a bank, so an admitted hero starts with an empty
+bank at any level and the question no longer arises. The original entry follows as history.
+
+Was: open; implementation interpretation in place. `chapter/making-a-hero.md`, Heroic Advancement: "The
 amount of Experience you gain is cumulative", and the Heroic Advancement Table gives a 3rd-level
 hero 32-47 XP. Salient stores only XP earned after entry (a hero admitted at level 3 starts at 0 XP)
 and derives the entry level from `entryLevelXpOffset` ((entryLevel − 1) × 16), so earned level =

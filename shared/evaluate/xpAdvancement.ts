@@ -1,12 +1,22 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * V190 XP-based advancement at a campaign's XP-per-level pace (docs/table-spec.md#respite-mode,
- * user ruling 2026-09-25).
+ * V190 campaign XP-per-level pace and V191 XP bank (docs/table-spec.md#respite-mode, user rulings
+ * 2026-09-25).
  *
- * chapter/making-a-hero.md, Heroic Advancement: XP is cumulative and the Heroic Advancement table
- * gives 16 XP per level (level 2 at 16 … level 10 at 144). "Adjusted XP Advancement" gives double
- * speed (8 per level) and half speed (32 per level), and "Directors can also create their own
- * customized pace". A campaign stores one whole-number XP per level; absent means 16.
+ * chapter/making-a-hero.md, Heroic Advancement: "The amount of Experience you gain is cumulative"
+ * and the Heroic Advancement table gives 16 XP per level (level 2 at 16 … level 10 at 144).
+ * "Adjusted XP Advancement" gives double speed (8 per level) and half speed (32 per level), and
+ * "Directors can also create their own customized pace". A campaign stores one whole-number XP per
+ * level; absent means 16.
+ *
+ * User-ruled adaptation (V191, 2026-09-25: "Switch to a bank. The books mention using different
+ * rates of advancement, but they assume 16 almost always in their text. The app actually makes that
+ * recommendation of adjustment a reality and so a bank makes more sense."): instead of a cumulative
+ * total read against the table, each hero keeps an XP bank. Respite Complete adds Victories to the
+ * bank and spends each full XP-per-level on one pending level-up; the remainder stays banked. At a
+ * fixed pace from level 1 this reaches the same levels as the cumulative table. Alternatives
+ * considered: V190's cumulative XP with owed levels (superseded) and cumulative table XP from the
+ * entry level (Q-XP-1, resolved by this ruling).
  */
 
 /** chapter/making-a-hero.md, Heroic Advancement Table: 16 XP per level. */
@@ -29,74 +39,69 @@ export function xpPerLevelProblem(value: number): string | null {
     : `XP per level must be a whole number from ${XP_PER_LEVEL_MIN} to ${XP_PER_LEVEL_MAX}.`;
 }
 
-/**
- * The level a hero entered play at. Heroes created or admitted above level 1 store
- * `entryLevelXpOffset = (entryLevel − 1) × 16` (convex/lib/characterBuild.ts), a standard-table XP
- * figure kept without a schema change; V190 reads it only as the entry level, so the campaign pace
- * applies to XP earned after entry. Absent means level 1.
- */
-export function entryLevelOf(entryLevelXpOffset: number | undefined): number {
-  return Math.floor((entryLevelXpOffset ?? 0) / STANDARD_XP_PER_LEVEL) + 1;
-}
-
-/** min(10, entryLevel + floor(xp / xpPerLevel)), where xp is the hero's cumulative XP. */
-export function earnedLevel(xp: number, xpPerLevel: number, entryLevelXpOffset?: number): number {
-  return Math.min(
-    MAX_HERO_LEVEL,
-    entryLevelOf(entryLevelXpOffset) + Math.floor(Math.max(0, xp) / xpPerLevel),
-  );
+/** What Respite Complete does to one hero's XP (V191 bank). */
+export interface RespiteXp {
+  /** The bank after conversion and spending. */
+  bank: number;
+  /** Lifetime XP after the Victories are added (display only). */
+  lifetime: number;
+  /** Pending level-ups this Complete grants. */
+  levelUps: number;
 }
 
 /**
- * Level-ups a completed respite grants: the levels owed and not yet held or pending,
- * max(0, earnedLevel − (level + pendingLevelUps)). Lowering the pace grants catch-up levels at the
- * next Complete; raising it never removes a level or a pending level-up.
+ * rule/resource/experience.md: "you gain XP equal to your Victories, then your Victories reset to
+ * 0". V191 bank: bank += Victories and lifetime += Victories; then while bank ≥ xpPerLevel and
+ * level + pending < 10, bank −= xpPerLevel and one level-up is granted. A remainder, or everything
+ * at level 10, stays in the bank. The pace is read at this Complete, so a changed pace simply
+ * applies to the bank from now on.
  */
-export function levelUpsOwed(
-  xp: number,
+export function respiteXp(
+  bank: number,
+  lifetime: number | undefined,
+  victories: number,
   xpPerLevel: number,
-  entryLevelXpOffset: number | undefined,
   levelWithPending: number,
-): number {
-  return Math.max(0, earnedLevel(xp, xpPerLevel, entryLevelXpOffset) - levelWithPending);
+): RespiteXp {
+  let next = bank + victories;
+  let levelUps = 0;
+  while (next >= xpPerLevel && levelWithPending + levelUps < MAX_HERO_LEVEL) {
+    next -= xpPerLevel;
+    levelUps += 1;
+  }
+  return { bank: next, lifetime: (lifetime ?? 0) + victories, levelUps };
 }
 
 export interface XpProgress {
-  xp: number;
+  /** The XP bank. */
+  bank: number;
   xpPerLevel: number;
-  /** The level this XP reaches at this pace. */
-  earnedLevel: number;
-  /**
-   * The next level a Complete would grant and the XP it needs; null when level 10 is held, pending
-   * or earned. It counts from max(earnedLevel, level + pending), because Complete grants only above
-   * level + pending (after a raised pace or a manual grant the XP-earned level may already be held).
-   */
-  next: { level: number; at: number } | null;
+  /** Lifetime XP, or null when the hero has none recorded. */
+  lifetime: number | null;
+  /** Level 10 is held or pending, so the bank buys nothing more. */
+  capped: boolean;
 }
 
-/** The sheet's "XP 20 · level 3 at 32" line; outside a campaign pass 16. */
+/** The sheet's XP figures; outside a campaign pass 16. */
 export function xpProgress(
-  xp: number,
+  bank: number,
   xpPerLevel: number,
-  entryLevelXpOffset: number | undefined,
+  lifetime: number | undefined,
   levelWithPending: number,
 ): XpProgress {
-  const level = earnedLevel(xp, xpPerLevel, entryLevelXpOffset);
-  const nextLevel = Math.max(level, levelWithPending) + 1;
   return {
-    xp,
+    bank,
     xpPerLevel,
-    earnedLevel: level,
-    next:
-      nextLevel > MAX_HERO_LEVEL
-        ? null
-        : { level: nextLevel, at: (nextLevel - entryLevelOf(entryLevelXpOffset)) * xpPerLevel },
+    lifetime: lifetime ?? null,
+    capped: levelWithPending >= MAX_HERO_LEVEL,
   };
 }
 
-/** "20 · level 3 at 32"; at level 10 only the XP. */
-export function xpProgressText(progress: XpProgress): string {
-  return progress.next
-    ? `${progress.xp} · level ${progress.next.level} at ${progress.next.at}`
-    : `${progress.xp}`;
+/** Sheet rows: "XP 5 / 16" (only the bank at level 10), then "Lifetime XP 37" when recorded. */
+export function xpProgressRows(progress: XpProgress): [string, string][] {
+  const rows: [string, string][] = [
+    ['XP', progress.capped ? `${progress.bank}` : `${progress.bank} / ${progress.xpPerLevel}`],
+  ];
+  if (progress.lifetime !== null) rows.push(['Lifetime XP', `${progress.lifetime}`]);
+  return rows;
 }

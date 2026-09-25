@@ -163,9 +163,9 @@ export async function activateRevision(
       : {}),
     campaignId,
   };
-  // entryLevelXpOffset = (entryLevel − 1) × 16, the standard-table XP of the entry level. V190 reads it
-  // only as the entry level (shared/evaluate/xpAdvancement.ts entryLevelOf), whatever the campaign's
-  // XP per level; the field is kept as it is to avoid a schema change.
+  // entryLevelXpOffset = (entryLevel − 1) × 16, the standard-table XP of the entry level, kept as a
+  // record of the entry level. V191's XP bank does not read it: an admitted hero starts with an empty
+  // bank whatever its level (docs/table-spec.md#respite-mode).
   if (character.campaignId !== campaignId)
     patch.entryLevelXpOffset =
       ((revision.level ?? baseline.level.value) - 1) * STANDARD_XP_PER_LEVEL;

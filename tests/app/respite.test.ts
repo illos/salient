@@ -3,13 +3,14 @@
  * V165 respite loop through the shared command path, with persisted readback. Expected values come
  * from rule/resource/respite.md ("regain all your Recoveries and Stamina, and your Victories convert
  * to Experience"), rule/resource/experience.md (Victories reset to 0), the Heroic Advancement table
- * (16 XP per level) and the Thorn fixture's R03 maxima (Stamina 30, Recoveries 10).
+ * (16 XP per level) and the Thorn fixture's R03 maxima (Stamina 30, Recoveries 10). V191 (user
+ * ruling 2026-09-25): the XP is a bank; each full 16 becomes a pending level-up and the rest stays.
  */
 import { expect, test } from 'vitest';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { backend, table, storedEvents, admitHero } from './fixtures/table';
-import { levelUpsOwed } from '../../shared/evaluate/xpAdvancement';
+import { respiteXp } from '../../shared/evaluate/xpAdvancement';
 import tacticianLedger from '../fixtures/v94-tactician-expected.json';
 import nullOne from '../fixtures/v103-null-expected.json';
 import nullThree from '../fixtures/v133-null-three-expected.json';
@@ -63,15 +64,21 @@ test('complete restores Stamina and Recoveries, converts Victories to XP and gra
   await expect(f.say('/combat start')).rejects.toThrow('A respite is open');
   const result = await f.say('/respite complete');
   const after = await f.hero();
-  expect(after.liveState).toMatchObject({ stamina: 30, recoveries: 10, xp: 17, victories: 0 });
-  // 17 XP is 2nd level (Heroic Advancement Table 16-31): one pending level-up.
+  // 17 XP at 16 per level (Heroic Advancement Table: 2nd level at 16): one level-up, 1 banked.
+  expect(after.liveState).toMatchObject({
+    stamina: 30,
+    recoveries: 10,
+    xp: 1,
+    xpLifetime: 17,
+    victories: 0,
+  });
   expect(after.pendingLevelUps).toBe(1);
   expect((await f.session()).respite ?? null).toBeNull();
   const event = (await storedEvents(f.t, f.campaignId)).find(e => e._id === result.eventId)!;
   expect(event.kind).toBe('respite.completed');
   // Complete is final: nothing rewinds across it.
   await expect(f.say('/history rewind')).rejects.toThrow(/the respite/);
-  expect((await f.hero()).liveState).toMatchObject({ stamina: 30, xp: 17 });
+  expect((await f.hero()).liveState).toMatchObject({ stamina: 30, xp: 1 });
 });
 
 test('interrupt keeps what happened and grants nothing', async () => {
@@ -97,16 +104,16 @@ test('cancel returns every participant to the state before the respite', async (
   expect((await f.session()).respite ?? null).toBeNull();
 });
 
-test('level-ups owed at 16 per level, from the entry level, never past level 10', () => {
-  // V190 owed-levels model: max(0, earnedLevel − (level + pending)), Heroic Advancement Table.
-  expect(levelUpsOwed(16, 16, 0, 1)).toBe(1);
-  expect(levelUpsOwed(17, 16, 0, 1)).toBe(1);
-  expect(levelUpsOwed(15, 16, 0, 1)).toBe(0);
-  expect(levelUpsOwed(32, 16, 0, 1)).toBe(2);
-  // A hero admitted at level 3 carries a 32-XP offset: 16 new XP reaches level 4.
-  expect(levelUpsOwed(16, 16, 32, 3)).toBe(1);
-  expect(levelUpsOwed(144, 16, 0, 9)).toBe(1);
-  expect(levelUpsOwed(160, 16, 0, 10)).toBe(0);
+test('the XP bank spends 16 per level and keeps the rest, never past level 10', () => {
+  // Heroic Advancement Table: 16 XP from one level to the next (2nd at 16, 3rd at 32, 10th at 144).
+  expect(respiteXp(0, undefined, 16, 16, 1)).toEqual({ bank: 0, lifetime: 16, levelUps: 1 });
+  expect(respiteXp(0, undefined, 15, 16, 1)).toEqual({ bank: 15, lifetime: 15, levelUps: 0 });
+  expect(respiteXp(0, 0, 32, 16, 1)).toEqual({ bank: 0, lifetime: 32, levelUps: 2 });
+  // A banked remainder counts at the next Complete: 15 + 1 = 16.
+  expect(respiteXp(15, 15, 1, 16, 1)).toEqual({ bank: 0, lifetime: 16, levelUps: 1 });
+  // 1st to 10th is nine levels (0 to 144); the rest stays banked. At level 10 all of it stays.
+  expect(respiteXp(0, 0, 160, 16, 1)).toEqual({ bank: 16, lifetime: 160, levelUps: 9 });
+  expect(respiteXp(3, 144, 16, 16, 10)).toEqual({ bank: 19, lifetime: 160, levelUps: 0 });
 });
 
 test('cancel keeps the damage taken against a build changed during the respite', async () => {

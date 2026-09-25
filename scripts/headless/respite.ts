@@ -2,8 +2,9 @@
 /**
  * V165 respite loop through authenticated public operations with persisted readback
  * (docs/table-spec.md#respite-mode; rule/resource/respite.md; rule/resource/experience.md).
- * V190: the campaign XP per level set through `campaign.xp-per-level`, then a completed respite's
- * owed level-ups (chapter/making-a-hero.md, Heroic Advancement and Adjusted XP Advancement tables).
+ * V190/V191: the campaign XP per level set through `campaign.xp-per-level`, then a completed
+ * respite's XP bank and level-ups (chapter/making-a-hero.md, Heroic Advancement and Adjusted XP
+ * Advancement tables; the bank is a user-ruled adaptation, docs/table-spec.md#respite-mode).
  */
 import assert from 'node:assert/strict';
 import type { ScenarioContext } from './character-client.ts';
@@ -20,7 +21,13 @@ type Saved = {
     staminaMaximum: { value: number };
     recoveriesMaximum: { value: number };
   } | null;
-  liveState: { stamina: number; recoveries: number; xp: number; victories: number } | null;
+  liveState: {
+    stamina: number;
+    recoveries: number;
+    xp: number;
+    xpLifetime?: number;
+    victories: number;
+  } | null;
 };
 const cid = () => crypto.randomUUID();
 
@@ -116,38 +123,47 @@ export async function runRespite({ actors: { director }, run, runId }: ScenarioC
         assert.equal(interrupted.victories, 16);
         assert.equal(interrupted.xp, 0);
 
-        // Complete: full Stamina and Recoveries, Victories to XP, one level-up for 16 XP.
+        // Complete: full Stamina and Recoveries, Victories to the XP bank, 16 spent on a level-up.
         await invoke('respite.start');
         await invoke('respite.complete');
         const done = await get();
         assert.equal(done.liveState!.stamina, max.staminaMaximum.value);
         assert.equal(done.liveState!.recoveries, max.recoveriesMaximum.value);
-        assert.equal(done.liveState!.xp, 16);
+        assert.equal(done.liveState!.xp, 0);
+        assert.equal(done.liveState!.xpLifetime, 16);
         assert.equal(done.liveState!.victories, 0);
         assert.equal(done.pendingLevelUps, 1);
 
-        // V190: double speed (8). 17 XP is 3rd level (Adjusted XP Advancement, 16-23): one more owed.
+        // Double speed (Adjusted XP Advancement, 8 per level): 9 banked buys one level, 1 stays.
         await assert.rejects(invoke('campaign.xp-per-level', { value: 0 }), /whole number from 1/);
         await invoke('campaign.xp-per-level', { value: 8 });
         assert.equal((await get()).pendingLevelUps, 1, 'the setting alone grants nothing');
-        await adjust('victories', 1);
+        await adjust('victories', 9);
         await invoke('respite.start');
         await invoke('respite.complete');
         const faster = await get();
-        assert.equal(faster.liveState!.xp, 17);
+        assert.equal(faster.liveState!.xp, 1);
+        assert.equal(faster.liveState!.xpLifetime, 25);
         assert.equal(faster.pendingLevelUps, 2);
-        // Half speed (32) removes nothing: 17 XP is 1st level there, yet both pending level-ups stay.
+        // Half speed (32 per level) removes nothing: the bank of 1 buys nothing, both pending stay.
         await invoke('campaign.xp-per-level', { value: 32 });
         await invoke('respite.start');
         await invoke('respite.complete');
         assert.equal((await get()).pendingLevelUps, 2);
         const sheet = await director.query<{
-          xpProgress: { xpPerLevel: number; next: { level: number; at: number } | null } | null;
+          xpProgress: {
+            bank: number;
+            xpPerLevel: number;
+            lifetime: number | null;
+            capped: boolean;
+          } | null;
         }>('characters:sheet', { characterId });
-        // Level 1 + 2 pending holds level 3, so the next grant is level 4 at (4 − 1) × 32 = 96
-        // (Adjusted XP Advancement, half speed: 4th level at 96-127).
-        assert.deepEqual(sheet.xpProgress?.next, { level: 4, at: 96 });
-        assert.equal(sheet.xpProgress?.xpPerLevel, 32);
+        assert.deepEqual(sheet.xpProgress, {
+          bank: 1,
+          xpPerLevel: 32,
+          lifetime: 25,
+          capped: false,
+        });
       } finally {
         // Close cleanly without masking a failure: end any open respite first, ignore cleanup errors.
         try {

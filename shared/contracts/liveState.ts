@@ -357,8 +357,13 @@ export interface HeroLiveState {
   surges: number;
   /** Campaign value; granted by the Director at closeout (docs/table-spec.md#formal-encounter-closeout). */
   victories: number;
-  /** Campaign value; nothing in v0.01 changes it (respite and advancement are V01/V08). */
+  /**
+   * V191 (user ruling 2026-09-25): the XP bank. Respite Complete adds Victories and spends each full
+   * XP-per-level on a pending level-up; a remainder stays (docs/table-spec.md#respite-mode).
+   */
   xp: number;
+  /** V191: display-only lifetime XP, every Victory converted at Respite Complete; absent means none. */
+  xpLifetime?: number;
   conditions: ConditionToggles;
   manualConditions?: ConditionToggles;
   conditionInstances?: ConditionInstance[];

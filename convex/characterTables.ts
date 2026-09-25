@@ -282,7 +282,10 @@ export const heroLiveValidator = v.object({
   heroicResource: v.object({ name: v.string(), current: v.number() }),
   surges: v.number(),
   victories: v.number(),
+  /** V191: the XP bank (shared/contracts/liveState.ts). */
   xp: v.number(),
+  /** V191: display-only lifetime XP; optional so rows written before V191 still validate. */
+  xpLifetime: v.optional(v.number()),
   conditions: conditionsValidator,
   manualConditions: v.optional(conditionsValidator),
   conditionInstances: v.optional(v.array(conditionInstanceValidator)),

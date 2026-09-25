@@ -559,17 +559,24 @@ shared headless operation, under existing timing, encounter locks and validation
 - **Campaign XP per level (confirmed 2026-09-25, [V190](build/V190-xp-per-level.md)).** The XP
   needed per level is a Director-only campaign setting, default 16 (`chapter/making-a-hero.md`, Heroic
   Advancement), with double (8) and half (32) speed presets from the Adjusted XP Advancement table and
-  any custom whole number from 1 to 200. A hero's earned level is min(10, entry level + floor(XP ÷ XP
-  per level)); only Respite Complete grants, and it grants the levels owed, max(0, earned level −
-  (level + pending level-ups)). Lowering the setting grants catch-up level-ups at the next Complete;
-  raising it removes nothing; nothing is retroactive. Later XP absorbs a manual grant, and a withdrawn
-  level-up returns at the next Complete if XP still earns it (`/adjust xp` stops that). Entry level is
-  an implementation interpretation (Q-XP-1): stored XP counts only XP earned after entry. The sheet shows "XP 20 · level 3 at 32" at the
-  campaign's value (16 outside a campaign). See [respite mode](table-spec.md#respite-mode).
+  any custom whole number from 1 to 200.
+- **XP bank (user ruling 2026-09-25, [V191](build/V191-xp-bank.md)), superseding V190's owed-levels
+  model.** The user ruled: "Switch to a bank. The books mention using different rates of advancement, but they assume 16 almost always in their text. The app actually makes that recommendation of adjustment a reality and so a bank makes more sense." **User-ruled adaptation** of `chapter/making-a-hero.md`, Heroic
+  Advancement ("The amount of Experience you gain is cumulative"; Heroic Advancement and Adjusted XP
+  Advancement tables): XP is a bank. Respite Complete adds Victories to the bank and to lifetime XP,
+  then spends each full XP per level on one pending level-up while level + pending < 10; the remainder
+  stays banked. At a fixed pace from level 1 this reaches the same levels as the cumulative table. A
+  hero admitted above level 1 starts with an empty bank. A rate change applies at the next Complete. A
+  manual grant leaves the bank alone; a withdrawn level-up is final (no refund, no re-grant).
+  `/adjust xp` sets the bank. The sheet shows "XP 5 / 16" and "Lifetime XP 37" (only the bank at
+  level 10). See [respite mode](table-spec.md#respite-mode).
 - **Earlier choices (confirmed 2026-09-24).** A level-up only adds that level's choices. Swapping an
   earlier choice is an attribute of the specific higher-level option whose source permits it, and is
   built together with that option when its level is implemented; no generic swap exists. Levels 2–3 have
   none. Other changes use the full edit with Director approval.
+
+**Superseded for XP by V191 (2026-09-25):** the XP bank no longer reads the offset below; an
+admitted hero starts with an empty bank. The paragraph is kept as history.
 
 A transferred higher-level hero starts with zero destination-campaign XP and earns toward the next
 level from the admitted effective level. Keep an eligibility offset equal to that entry level's

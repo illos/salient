@@ -286,8 +286,9 @@ const decline: OperationDefinition = {
  * V163 `/character grant-level-up`: the Director's manual grant (docs/character-wizard-spec.md#level-up,
  * "Manual Director grant"; the rules' Director Says So advancement in chapter/making-a-hero.md,
  * Alternative Advancement). Each chosen hero, the whole attached party by default, gains one pending
- * level-up that its owner takes later through the level-up flow. Nothing waits for it. V190: Respite
- * Complete grants only the levels owed above level + pending, so later XP absorbs a manual grant.
+ * level-up that its owner takes later through the level-up flow. Nothing waits for it. V191 (user
+ * ruling 2026-09-25, XP bank): a manual grant does not touch the XP bank; later Respite Completes
+ * still turn banked XP into level-ups.
  */
 const grantLevelUp: OperationDefinition = {
   id: 'character.grant-level-up',
@@ -295,7 +296,7 @@ const grantLevelUp: OperationDefinition = {
   verb: 'grant-level-up',
   title: 'Grant a level-up',
   description:
-    'Director: grant one pending level-up to chosen heroes (default: every hero attached to this campaign). Each owner takes it later from the character sheet, one level at a time. Respite Complete grants only levels owed above level plus pending, so later XP absorbs this grant before granting more.',
+    'Director: grant one pending level-up to chosen heroes (default: every hero attached to this campaign). Each owner takes it later from the character sheet, one level at a time. The XP bank is not changed.',
   args: { characters: v.optional(v.array(characterArg)) },
   argDescriptions: {
     characters: 'Heroes to grant a level-up, as @{character:id}; omit for every attached hero.',
@@ -346,8 +347,8 @@ const grantLevelUp: OperationDefinition = {
 /**
  * V163 `/character withdraw-level-up`: the Director's correction for a mistaken grant. Removes one
  * pending (not yet taken) level-up from each chosen hero; a level already taken is not affected.
- * XP is not changed (V190): if XP still earns the level, the next Respite Complete grants it again;
- * the Director stops that with `/adjust xp`.
+ * V191 (user ruling 2026-09-25, XP bank): a withdrawal is final. The XP that bought the level is not
+ * refunded to the bank, and no later Respite Complete grants it again.
  */
 const withdrawLevelUp: OperationDefinition = {
   id: 'character.withdraw-level-up',
@@ -355,7 +356,7 @@ const withdrawLevelUp: OperationDefinition = {
   verb: 'withdraw-level-up',
   title: 'Withdraw a pending level-up',
   description:
-    "Director: remove one granted level-up that has not been taken yet from each chosen hero, to correct a mistaken grant. Levels already taken and XP are unchanged. If the hero's XP still earns that level, the next Respite Complete grants it again; to stop that, lower XP with /adjust xp.",
+    'Director: remove one granted level-up that has not been taken yet from each chosen hero, to correct a mistaken grant. Levels already taken and the XP bank are unchanged. The withdrawal is final: the XP is not refunded and the level is not granted again.',
   args: { characters: v.array(characterArg) },
   argDescriptions: {
     characters: 'Heroes to withdraw a pending level-up from, as @{character:id}.',

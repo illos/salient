@@ -1762,24 +1762,32 @@ the respite never waits for it, and the Director can resolve the respite and mov
   lives in the table settings pop-up as a slider snapping to Double 8, Standard 16 and Half 32 plus a
   number input, and is the registered operation `campaign.xp-per-level` (`/campaign xp-per-level
   value=24`), recorded as a campaign setting event like the other campaign settings.
-- **Earned level.** earnedLevel = min(10, entryLevel + floor(XP ÷ XP per level)), with XP the hero's
-  cumulative XP. A hero created or admitted above level 1 keeps that entry level (stored as the
-  standard-table offset (entryLevel − 1) × 16, read only as the entry level).
-  **Implementation interpretation (Q-XP-1), not a user ruling:** `chapter/making-a-hero.md`, Heroic
-  Advancement says "The amount of Experience you gain is cumulative" and gives a 3rd-level hero
-  32-47 XP; Salient's stored XP counts only XP earned after entry, and the entry level comes from
-  `entryLevelXpOffset`. Alternative: cumulative table XP (store and show the entry level's table XP
-  plus earned XP).
-- **Only Respite Complete grants.** Complete converts Victories to XP and grants the levels owed:
-  max(0, earnedLevel − (level + pending level-ups)). This replaces "thresholds crossed by this gain":
-  lowering the setting grants catch-up level-ups at the next Complete; raising it never removes a level
-  or a pending level-up. A change applies from the next Complete and is never retroactive. The Director's
-  manual grant and withdraw operations are unchanged, but Complete now absorbs them: a manual grant
-  counts toward level + pending, so later XP fills it before granting more; a withdrawn level-up
-  (withdraw never changes XP) returns at the next Complete if XP still earns it. To stop that re-grant,
-  the Director lowers XP with `/adjust xp`.
-- **Display.** The character sheet's XP row shows progress at the campaign's value, e.g. "XP 20 ·
-  level 3 at 32"; outside a campaign it uses 16.
+- **XP bank, confirmed 2026-09-25 (user ruling; [V191](build/V191-xp-bank.md)), superseding V190's
+  earned-level and owed-levels model.** The user ruled: "Switch to a bank. The books mention using different rates of advancement, but they assume 16 almost always in their text. The app actually makes that recommendation of adjustment a reality and so a bank makes more sense."
+  **User-ruled adaptation, not the source's presentation:** `chapter/making-a-hero.md`, Heroic
+  Advancement says "The amount of Experience you gain is cumulative" and reads a cumulative total
+  against the Heroic Advancement and Adjusted XP Advancement tables. Salient instead keeps each hero's
+  XP (`liveState.xp`) as a bank. At a fixed pace from level 1 both reach the same levels; the bank
+  differs only when the pace changes or a level-up is granted or withdrawn by hand. Alternatives
+  considered: V190's cumulative XP with owed levels, and cumulative table XP counted from the entry
+  level (Q-XP-1, resolved by this ruling).
+- **Respite Complete.** For each participant: bank += Victories; lifetime XP += Victories; Victories
+  = 0 (`rule/resource/experience.md`); then, while bank ≥ XP per level and level + pending level-ups
+  < 10, bank −= XP per level and pending level-ups += 1. A remainder, or everything at level 10, stays
+  in the bank. Only Complete grants.
+- **Entry level.** A hero admitted at any level starts with an empty bank and needs one XP per level
+  for each level from there. `entryLevelXpOffset` is kept as a record of the entry level and is not
+  read for XP.
+- **Rate changes** apply to the bank at the next Complete. Nothing is retroactive, caught up or
+  removed.
+- **Manual grant and withdraw.** `character.grant-level-up` never touches the bank. A withdrawn
+  level-up is final: its XP is not refunded to the bank and no Complete grants it again.
+- **`/adjust xp`** sets the XP bank (Director, recorded as a Manual adjustment); lifetime XP is not
+  changed.
+- **Display.** The character sheet's Stats show "XP 5 / 16" (bank / the campaign's XP per level, 16
+  outside a campaign) and "Lifetime XP 37" when recorded (`liveState.xpLifetime`, display only). At
+  level 10, held or pending, the XP row shows only the bank. Both are computed on the server
+  (`characters.sheet` `xpProgress`).
 
 Confirmed: respite is its own dedicated table mode, with a self-contained gameplay loop that the Director
 starts and ends. It has mechanics to support rather than being only a pause or a descriptive log entry.

@@ -2,6 +2,10 @@
 
 Rules review: required. Depends on: V165.
 
+**Superseded in part by [V191](V191-xp-bank.md) (user ruling 2026-09-25):** XP is now a bank. The
+owed-levels model, the entry-level reading (Q-XP-1) and the "level N at X" sheet text below are
+replaced; the XP-per-level setting, its operation and its UI stand.
+
 ## Goal
 
 The Director sets how much XP each level needs for the campaign, and a completed respite grants the

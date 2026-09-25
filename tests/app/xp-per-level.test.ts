@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * V190 campaign XP per level (docs/table-spec.md#respite-mode, user ruling 2026-09-25) through the
- * shared command path with persisted readback. Expected values come from chapter/making-a-hero.md:
- * the Heroic Advancement Table (standard: level 2 at 16, level 3 at 32, level 4 at 48) and the
- * Adjusted XP Advancement Table (double speed: level 2 at 8, level 3 at 16, level 4 at 24, level 5
- * at 32; half speed: level 2 at 32). XP is cumulative; Victories convert to XP when a respite
- * finishes (rule/resource/experience.md).
+ * V190 campaign XP per level and V191 XP bank (docs/table-spec.md#respite-mode, user rulings
+ * 2026-09-25) through the shared command path with persisted readback. Expected values come from
+ * chapter/making-a-hero.md: the Heroic Advancement Table (16 XP from each level to the next: 2nd at
+ * 16, 3rd at 32, 10th at 144) and the Adjusted XP Advancement Table (double speed 8 per level: 2nd
+ * at 8, 3rd at 16; half speed 32 per level: 2nd at 32). Victories convert to XP when a respite
+ * finishes (rule/resource/experience.md). User-ruled adaptation: the XP is a bank, each full XP per
+ * level becomes one pending level-up and the remainder stays banked.
  */
 import { expect, test } from 'vitest';
 import { api } from '../../convex/_generated/api';
 import type { HeroSheet } from '../../shared/contracts/characterSheet';
 import { backend, table } from './fixtures/table';
-import { levelUpsOwed } from '../../shared/evaluate/xpAdvancement';
+import { xpProgressRows } from '../../shared/evaluate/xpAdvancement';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import { levelThreeBuilds } from '../fixtures/level-three-builds';
 
@@ -28,11 +29,11 @@ async function setup(victories: number) {
   const hero = async () => (await t.run(ctx => ctx.db.get(f.thornId)))!;
   const campaign = async () => (await t.run(ctx => ctx.db.get(f.campaignId)))!;
   /** Stand-in for a level taken or an admission above level 1: the effective build's level. */
-  const setLevel = (level: number, patch: { entryLevelXpOffset?: number } = {}) =>
+  const setLevel = (level: number) =>
     t.run(async ctx => {
       const h = (await ctx.db.get(f.thornId))!;
       await ctx.db.patch(h.effectiveRevisionId!, { level });
-      await ctx.db.patch(f.thornId, { pendingLevelUps: 0, ...patch });
+      await ctx.db.patch(f.thornId, { pendingLevelUps: 0 });
     });
   const rest = async () => {
     await say('/respite start');
@@ -46,65 +47,66 @@ async function setup(victories: number) {
   return { t, ...f, say, hero, campaign, setLevel, rest, sheet };
 }
 
-test('the default 16 grants one level-up for 17 XP and the sheet shows level 3 at 32', async () => {
+test('at the default 16, 17 XP gives one level-up and leaves 1 in the bank', async () => {
   const f = await setup(17);
   expect((await f.campaign()).settings?.xpPerLevel).toBeUndefined();
   await f.rest();
   const after = await f.hero();
-  expect(after.liveState?.xp).toBe(17);
-  // Heroic Advancement Table: 16-31 is 2nd level.
+  // Heroic Advancement Table: 16 XP from 1st to 2nd level; 17 − 16 = 1 stays.
+  expect(after.liveState).toMatchObject({ xp: 1, xpLifetime: 17, victories: 0 });
   expect(after.pendingLevelUps).toBe(1);
-  expect((await f.sheet()).xpProgress).toEqual({
-    xp: 17,
-    xpPerLevel: 16,
-    earnedLevel: 2,
-    next: { level: 3, at: 32 },
-  });
+  const progress = (await f.sheet()).xpProgress!;
+  expect(progress).toEqual({ bank: 1, xpPerLevel: 16, lifetime: 17, capped: false });
+  expect(xpProgressRows(progress)).toEqual([
+    ['XP', '1 / 16'],
+    ['Lifetime XP', '17'],
+  ]);
 });
 
-test('at double speed (8) 17 XP grants two level-ups', async () => {
+test('at double speed (8), 17 XP gives two level-ups and leaves 1 in the bank', async () => {
   const f = await setup(17);
   await f.say('/campaign xp-per-level value=8');
   expect((await f.campaign()).settings?.xpPerLevel).toBe(8);
   await f.rest();
-  // Adjusted XP Advancement Table, double speed: 16-23 is 3rd level.
-  expect((await f.hero()).pendingLevelUps).toBe(2);
-  expect((await f.sheet()).xpProgress?.next).toEqual({ level: 4, at: 24 });
-});
-
-test('lowering 16 to 8 grants the catch-up level-up at the next Complete, not before', async () => {
-  const f = await setup(20);
-  await f.rest();
-  expect((await f.hero()).pendingLevelUps).toBe(1);
-  // The hero takes level 2: level 2, 20 XP, nothing pending.
-  await f.setLevel(2);
-  await f.say('/campaign xp-per-level value=8');
-  // Nothing is retroactive: the setting alone grants nothing.
-  expect((await f.hero()).pendingLevelUps).toBe(0);
-  await f.rest();
-  // Double speed: 16-23 is 3rd level, so one level is owed.
+  // Adjusted XP Advancement Table, double speed: 8 XP per level; 17 − 2 × 8 = 1.
   const after = await f.hero();
-  expect(after.liveState?.xp).toBe(20);
-  expect(after.pendingLevelUps).toBe(1);
+  expect(after.pendingLevelUps).toBe(2);
+  expect(after.liveState?.xp).toBe(1);
+  expect((await f.sheet()).xpProgress).toMatchObject({ bank: 1, xpPerLevel: 8 });
 });
 
-test('raising the setting removes no level and no pending level-up', async () => {
+test('lowering 16 to 8 with 12 banked: 4 more Victories give two level-ups and empty the bank', async () => {
+  const f = await setup(12);
+  await f.rest();
+  // 12 is below 16 (Heroic Advancement Table: 1st level is 0-15): banked, nothing granted.
+  expect(await f.hero()).toMatchObject({ liveState: { xp: 12 } });
+  expect((await f.hero()).pendingLevelUps ?? 0).toBe(0);
+  await f.say('/campaign xp-per-level value=8');
+  // The setting alone grants nothing; it applies at the next Complete.
+  expect((await f.hero()).pendingLevelUps ?? 0).toBe(0);
+  await f.say('@Thorn /adjust victories value=4');
+  await f.rest();
+  // Double speed: 12 + 4 = 16 is two levels of 8, nothing left.
+  const after = await f.hero();
+  expect(after.pendingLevelUps).toBe(2);
+  expect(after.liveState).toMatchObject({ xp: 0, xpLifetime: 16 });
+});
+
+test('raising the setting removes no level-up and nothing from the bank', async () => {
   const f = await setup(17);
   await f.rest();
   expect((await f.hero()).pendingLevelUps).toBe(1);
   await f.say('/campaign xp-per-level value=32');
   await f.say('@Thorn /adjust victories value=3');
   await f.rest();
-  // Half speed: 20 XP is still 1st level (0-31), but the pending level-up stays.
+  // Half speed, 32 per level: the bank of 1 + 3 = 4 buys nothing; the pending level-up stays.
   const after = await f.hero();
-  expect(after.liveState?.xp).toBe(20);
   expect(after.pendingLevelUps).toBe(1);
-  // The sheet names the next level Complete can grant: level 1 + 1 pending holds level 2, so level 3,
-  // at (3 − 1) × 32 = 64 (Adjusted XP Advancement, half speed: 3rd level at 64-95).
-  expect((await f.sheet()).xpProgress).toMatchObject({
-    xpPerLevel: 32,
-    next: { level: 3, at: 64 },
-  });
+  expect(after.liveState).toMatchObject({ xp: 4, xpLifetime: 20 });
+  expect(xpProgressRows((await f.sheet()).xpProgress!)).toEqual([
+    ['XP', '4 / 32'],
+    ['Lifetime XP', '20'],
+  ]);
 });
 
 test('only the Director can change it, and an invalid value is refused', async () => {
@@ -119,7 +121,7 @@ test('only the Director can change it, and an invalid value is refused', async (
   expect((await f.campaign()).settings?.xpPerLevel).toBe(24);
 });
 
-test('a hero admitted at level 3 stores the entry offset and earns from the entry level', async () => {
+test('a hero admitted at level 3 starts with an empty bank and levels at 16', async () => {
   const f = await setup(0);
   // The real creation and admission path at level 3 (convex/lib/characterBuild.ts).
   const build = levelThreeBuilds().find(b => b.className === 'Fury')!;
@@ -146,20 +148,18 @@ test('a hero admitted at level 3 stores the entry offset and earns from the entr
     characterId: id,
   });
   const veteran = async () => (await f.t.run(ctx => ctx.db.get(id)))!;
-  // (3 − 1) × 16, the Heroic Advancement Table's first 3rd-level XP.
-  expect((await veteran()).entryLevelXpOffset).toBe(32);
+  expect((await veteran()).liveState?.xp).toBe(0);
   await f.say('@Veteran /adjust victories value=17');
   await f.rest();
-  // 17 XP earned after entry at 16 per level: one level above the entry level.
-  expect((await veteran()).pendingLevelUps).toBe(1);
+  // Heroic Advancement Table: 16 XP from 3rd to 4th level (32 to 48); 1 stays banked.
+  expect(await veteran()).toMatchObject({ pendingLevelUps: 1, liveState: { xp: 1 } });
   const sheet = (await f.director.client.query(api.characters.sheet, {
     characterId: id,
   })) as HeroSheet;
-  // Level 3 + 1 pending holds level 4; level 5 needs (5 − 3) × 16 = 32 XP after entry.
-  expect(sheet.xpProgress).toMatchObject({ earnedLevel: 4, next: { level: 5, at: 32 } });
+  expect(sheet.xpProgress).toMatchObject({ bank: 1, xpPerLevel: 16, capped: false });
 });
 
-test('a manual grant is absorbed by later XP; a withdrawn level-up returns unless XP is adjusted', async () => {
+test('a manual grant leaves the bank alone; a withdrawn level-up is final', async () => {
   const f = await setup(17);
   let invoked = 0;
   const invoke = (operation: string, args: Record<string, unknown> = {}) =>
@@ -170,36 +170,47 @@ test('a manual grant is absorbed by later XP; a withdrawn level-up returns unles
       arguments: args,
     });
   const thorn = [{ refKind: 'character', id: f.thornId }];
-  // Grant first: 1 pending. Complete then converts 17 XP (2nd level at 16): nothing more is owed.
+  // Grant first: 1 pending, bank 0. Complete then banks 17 and spends 16 on one more level-up.
   await invoke('character.grant-level-up', { characters: thorn });
+  expect(await f.hero()).toMatchObject({ pendingLevelUps: 1, liveState: { xp: 0 } });
   await f.rest();
-  expect((await f.hero()).liveState?.xp).toBe(17);
-  expect((await f.hero()).pendingLevelUps).toBe(1);
-  // Withdraw leaves XP alone; the next Complete grants the level 17 XP still earns.
+  expect(await f.hero()).toMatchObject({ pendingLevelUps: 2, liveState: { xp: 1 } });
+  // Withdraw refunds nothing, and the next Complete does not grant the level again.
   await invoke('character.withdraw-level-up', { characters: thorn });
-  expect(await f.hero()).toMatchObject({ pendingLevelUps: 0, liveState: { xp: 17 } });
+  expect(await f.hero()).toMatchObject({ pendingLevelUps: 1, liveState: { xp: 1 } });
   await f.rest();
-  expect((await f.hero()).pendingLevelUps).toBe(1);
-  // To stop the re-grant, the Director lowers XP below the threshold (1st level is 0-15).
-  await invoke('character.withdraw-level-up', { characters: thorn });
+  expect(await f.hero()).toMatchObject({
+    pendingLevelUps: 1,
+    liveState: { xp: 1, xpLifetime: 17 },
+  });
+  // /adjust xp sets the bank; lifetime XP is unchanged.
   await f.say('@Thorn /adjust xp value=15');
+  await f.say('@Thorn /adjust victories value=1');
   await f.rest();
-  expect((await f.hero()).pendingLevelUps).toBe(0);
+  // 15 + 1 = 16 buys one level (Heroic Advancement Table), nothing left.
+  expect(await f.hero()).toMatchObject({
+    pendingLevelUps: 2,
+    liveState: { xp: 0, xpLifetime: 18 },
+  });
 });
 
-test('the sheet names no next level once level 10 is held', async () => {
-  const f = await setup(0);
+test('at level 10 the bank keeps everything and the sheet shows only the bank', async () => {
+  const f = await setup(40);
+  await f.setLevel(9);
+  await f.rest();
+  // Heroic Advancement Table: 9th to 10th is 16 XP; 10th is the last level, so 24 stays.
+  expect(await f.hero()).toMatchObject({ pendingLevelUps: 1, liveState: { xp: 24 } });
   await f.setLevel(10);
-  const sheet = await f.sheet();
-  expect(sheet.xpProgress?.next).toBeNull();
-});
-
-test('owed level-ups never pass level 10', () => {
-  // Heroic Advancement Table: 144+ is 10th level.
-  expect(levelUpsOwed(144, 16, 0, 9)).toBe(1);
-  expect(levelUpsOwed(400, 16, 0, 1)).toBe(9);
-  expect(levelUpsOwed(400, 16, 0, 10)).toBe(0);
-  // Adjusted XP Advancement Table, double speed: 72+ is 10th level.
-  expect(levelUpsOwed(72, 8, 0, 1)).toBe(9);
-  expect(levelUpsOwed(71, 8, 0, 1)).toBe(8);
+  await f.say('@Thorn /adjust victories value=5');
+  await f.rest();
+  expect(await f.hero()).toMatchObject({
+    pendingLevelUps: 0,
+    liveState: { xp: 29, xpLifetime: 45 },
+  });
+  const progress = (await f.sheet()).xpProgress!;
+  expect(progress.capped).toBe(true);
+  expect(xpProgressRows(progress)).toEqual([
+    ['XP', '29'],
+    ['Lifetime XP', '45'],
+  ]);
 });

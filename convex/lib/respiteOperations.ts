@@ -12,13 +12,15 @@
  *   (rule/resource/respite.md: "the respite ends early and you don't gain the benefits").
  * - `/respite complete`: each participant regains all Stamina and Recoveries and converts Victories
  *   to XP (rule/resource/respite.md; rule/resource/experience.md "you gain XP equal to your Victories,
- *   then your Victories reset to 0") and gains a pending level-up for each level owed at the
- *   campaign's XP per level, taken later (docs/character-wizard-spec.md#level-up). Complete is final.
+ *   then your Victories reset to 0") in the XP bank, and spends it on pending level-ups taken later
+ *   (docs/character-wizard-spec.md#level-up). Complete is final.
  *
- * V190 (user ruling 2026-09-25): the pace is the campaign's XP-per-level setting, 16 by default
- * (chapter/making-a-hero.md, Heroic Advancement and Adjusted XP Advancement). Complete grants the
- * levels owed, max(0, earnedLevel − (level + pendingLevelUps)) (shared/evaluate/xpAdvancement.ts),
- * so a lowered pace catches up at the next Complete and a raised one removes nothing.
+ * V190/V191 (user rulings 2026-09-25): the pace is the campaign's XP-per-level setting, 16 by
+ * default (chapter/making-a-hero.md, Heroic Advancement and Adjusted XP Advancement). User-ruled
+ * adaptation of the cumulative table: bank += Victories, then each full XP per level becomes one
+ * pending level-up while level + pending < 10; the remainder stays banked
+ * (shared/evaluate/xpAdvancement.ts respiteXp). A changed pace applies to the bank at the next
+ * Complete; nothing is caught up or removed.
  * Feature-specific respite effects remain manual.
  */
 import { ConvexError, v } from 'convex/values';
@@ -44,7 +46,7 @@ import { revisionLevel } from './characterProgression';
 import { sessionEncounter } from './combatOperations';
 import { reconciledCurrent } from '../../shared/evaluate/liveReconciliation';
 import { activitiesOf, respiteActivityAllowance } from '../../shared/evaluate/respiteActivities';
-import { levelUpsOwed } from '../../shared/evaluate/xpAdvancement';
+import { respiteXp } from '../../shared/evaluate/xpAdvancement';
 import { settingsOf } from './audience';
 
 const DIRECTOR_RUNNING: { roles: Role[]; session: 'running' } = {
@@ -307,7 +309,7 @@ const complete: OperationDefinition = {
   verb: 'complete',
   title: 'Complete the respite',
   description:
-    "Director: finish the respite. Each participant regains all Stamina and Recoveries, converts Victories to XP and gains a pending level-up for each level owed at the campaign's XP per level. This is final.",
+    "Director: finish the respite. Each participant regains all Stamina and Recoveries, adds Victories to their XP bank and spends each full XP per level (the campaign's setting) on a pending level-up, below level 10; the remainder stays banked. This is final.",
   args: {},
   argDescriptions: {},
   ...DIRECTOR_RUNNING,
@@ -334,8 +336,8 @@ const complete: OperationDefinition = {
           : null;
         const level = effective ? revisionLevel(effective) : 1;
         const pending = hero.pendingLevelUps ?? 0;
-        const xp = live.xp + live.victories;
-        const earned = levelUpsOwed(xp, xpPerLevel, hero.entryLevelXpOffset, level + pending);
+        const xp = respiteXp(live.xp, live.xpLifetime, live.victories, xpPerLevel, level + pending);
+        const earned = xp.levelUps;
         return {
           hero,
           before: { stamina: live.stamina, recoveries: live.recoveries, xp: live.xp },
@@ -343,7 +345,8 @@ const complete: OperationDefinition = {
             ...live,
             stamina: baseline.staminaMaximum.value,
             recoveries: baseline.recoveriesMaximum.value,
-            xp,
+            xp: xp.bank,
+            xpLifetime: xp.lifetime,
             victories: 0,
           },
           pendingLevelUps: pending + earned,
@@ -354,7 +357,7 @@ const complete: OperationDefinition = {
     const summary = results
       .map(
         r =>
-          `${r.hero.authored.name}: restored, XP ${r.before.xp} → ${r.liveState.xp}${r.earned ? `, ${r.earned} level-up${r.earned > 1 ? 's' : ''} granted` : ''}`,
+          `${r.hero.authored.name}: restored, XP bank ${r.before.xp} → ${r.liveState.xp}${r.earned ? `, ${r.earned} level-up${r.earned > 1 ? 's' : ''} granted` : ''}`,
       )
       .join('; ');
     // docs/table-spec.md (completing with unused options): unused activities lapse but are named.

@@ -124,7 +124,7 @@ export interface HeroSheet {
   features: SheetFeature[];
   commonActions: CommonAction[];
   live: (HeroLiveState & { labels: HealthLabels }) | null;
-  /** V190: XP toward the next level at the attached campaign's XP per level (16 outside one). */
+  /** V191: the XP bank against the attached campaign's XP per level (16 outside one), and lifetime XP. */
   xpProgress: XpProgress | null;
   /** The proposed build's effect on current live values; null for an effective/initial build. */
   activationPreview: BuildReconciliation | null;
