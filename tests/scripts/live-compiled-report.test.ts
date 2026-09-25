@@ -205,6 +205,12 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Mark',
       "Hit 'Em Hard!",
       'Stay Strong and Focus!',
+      // V176: forced-movement follow-ups that read only the allowance, not what moved.
+      'Sentenced',
+      'Call the Thunder Down',
+      'Thunder Roar',
+      'Phase Inversion Strike',
+      'Machinations of Sound',
     ].sort(),
   );
   expect(

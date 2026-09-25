@@ -34,7 +34,28 @@ export interface EffectRider {
    * differ and the user picks the applicable tier; such sections stay manual on multi/area envelopes.
    */
   subject: 'use' | 'target';
+  /**
+   * V176: a section that governs the tier's own forced movement rather than adding table work.
+   * Only the allowance itself is read (docs/lasting-effects-design.md#3-watchers: an allowance
+   * proves nothing moved), so none of these needs a movement fact.
+   */
+  forcedMovement?: ForcedMovementRule;
 }
+
+/**
+ * V176 forced-movement rules, each read from one whole printed section:
+ * - `stability-replaced`: the tier's forced movement ignores stability and is instead reduced by a
+ *   characteristic score of each target (shadow/level-2/machinations-of-sound.md). Executed in the
+ *   push allowance, since the allowance is a number the engine computes for this use.
+ * - `same-distance`: other creatures can be force moved the tier's distance
+ *   (conduit/level-1/call-the-thunder-down.md). Table work that reads the tier push allowance.
+ * - `teleport-first`: the tier's push can happen only after a table teleport of the target
+ *   (null/level-1/phase-inversion-strike.md), so its allowance waits on that table fact.
+ */
+export type ForcedMovementRule =
+  | { kind: 'stability-replaced'; reducedBy: 'M' | 'A' | 'R' | 'I' | 'P' }
+  | { kind: 'same-distance' }
+  | { kind: 'teleport-first' };
 
 // Source examples below are relative to the pinned Compendium en/unified/md.
 const CHARACTERISTIC = '(?:Might|Agility|Reason|Intuition|Presence)';
@@ -180,11 +201,95 @@ const independent: readonly [EffectRider['shape'], RegExp, EffectRider['dependen
   ],
 ];
 
+const CHARACTERISTIC_LETTER = {
+  Might: 'M',
+  Agility: 'A',
+  Reason: 'R',
+  Intuition: 'I',
+  Presence: 'P',
+} as const;
+
+/**
+ * V176 forced-movement follow-ups, matched whole. Each reads only the forced-movement allowance,
+ * never what actually moved (docs/decisions/2026-09-24-automation-rulings.md, ruling 2).
+ */
+const forcedMovementSections: readonly {
+  pattern: RegExp;
+  rider: (match: RegExpExecArray) => EffectRider;
+}[] = [
+  // censor/level-2/sentenced.md. Reads the tier's restrained outcome ("this way"), as Choke does.
+  // Every later forced movement of a restrained creature is already a manual push outcome (an
+  // active condition leaves movement coverage unhandled), so the exception is table work.
+  {
+    pattern:
+      /^While the target is restrained this way, your abilities that impose forced movement can still move them\.$/,
+    rider: () => ({ shape: 'forced-movement', dependency: 'after-effects', subject: 'target' }),
+  },
+  // conduit/level-1/call-the-thunder-down.md. Allies' pushes are table work; "the same distance"
+  // is read from the tier push allowances once they are known.
+  {
+    pattern: /^You can push each willing ally in the area the same distance, ignoring stability\.$/,
+    rider: () => ({
+      shape: 'forced-movement',
+      dependency: 'after-effects',
+      subject: 'use',
+      forcedMovement: { kind: 'same-distance' },
+    }),
+  },
+  // fury/level-1/thunder-roar.md. Orders the tier pushes, which movement/forced-movement.md
+  // ("Multitarget Abilities and Forced Movement") otherwise leaves to the user, and permits
+  // collisions between targets. Order, paths and collisions are table work for every push. The
+  // sentence is about all the targets, so it is a use section on the area envelope.
+  {
+    pattern:
+      /^The targets are force moved one at a time, starting with the target nearest to you, and can be pushed into other targets in the same line\.$/,
+    rider: () => ({ shape: 'forced-movement', dependency: 'independent', subject: 'use' }),
+  },
+  // null/level-1/phase-inversion-strike.md. The teleport is table work; the push waits on it.
+  {
+    pattern:
+      /^Before the push is resolved, you teleport the target to a square adjacent to you and opposite the one they started in\. If the target can't be teleported this way, you can't push them\.$/,
+    rider: () => ({
+      shape: 'teleport',
+      dependency: 'independent',
+      subject: 'target',
+      forcedMovement: { kind: 'teleport-first' },
+    }),
+  },
+  // shadow/level-2/machinations-of-sound.md. Each target's own score reduces its own allowance.
+  {
+    pattern: new RegExp(
+      `^This forced movement ignores stability\\. Instead, the forced movement is reduced by a number equal to the target's (${CHARACTERISTIC}) score\\.$`,
+    ),
+    rider: match => ({
+      shape: 'forced-movement',
+      dependency: 'independent',
+      subject: 'target',
+      forcedMovement: {
+        kind: 'stability-replaced',
+        reducedBy: CHARACTERISTIC_LETTER[match[1] as keyof typeof CHARACTERISTIC_LETTER],
+      },
+    }),
+  },
+];
+
+/** V176: two forced-movement rules read from the same printed section are the same. */
+export function sameForcedMovementRule(
+  a: ForcedMovementRule | undefined,
+  b: ForcedMovementRule | undefined,
+): boolean {
+  return JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+}
+
 /** Sections whose printed subject or measure is the (single) target or its tier outcome. */
 const targetSubject = /\bthe target\b|\btier outcome\b/i;
 
 export function effectRider(text: string): EffectRider | undefined {
   const normalized = text.replace(/\s+/g, ' ').trim();
+  for (const { pattern, rider } of forcedMovementSections) {
+    const match = pattern.exec(normalized);
+    if (match) return rider(match);
+  }
   const subject = targetSubject.test(normalized) ? 'target' : 'use';
   // beastheart/level-1/i-feed-on-your-pain.md and conduit/level-1/blessed-light.md.
   if (

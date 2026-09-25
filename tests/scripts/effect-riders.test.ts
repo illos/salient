@@ -95,7 +95,6 @@ test.each([
   'I Work Better Alone',
   'Teamwork Has Its Place',
   'Censored',
-  'Phase Inversion Strike',
   'Tide of Death',
   'Pain for Pain',
   'Patient Shot',
@@ -106,17 +105,14 @@ test.each([
   expect(definition.sections.some(n => n.kind === 'unsupported')).toBe(true);
 });
 
-// V152 exclusions. Call the Thunder Down's "the same distance" reads each target's tier push;
-// Thunder Roar orders the tier pushes on an area; Ripples in the Earth's use requirement would
-// only be shown after the roll it gates.
-test.each(['Call the Thunder Down', 'Thunder Roar', 'Ripples in the Earth'])(
-  '%s keeps its Effect section manual',
-  name => {
-    const definition = compileAbility(envelope(name));
-    expect(definition.execution).toBe('manual');
-    expect(definition.sections.some(n => n.kind === 'unsupported')).toBe(true);
-  },
-);
+// V152 exclusion: Ripples in the Earth's use requirement would only be shown after the roll it
+// gates. V176 admits V152's other two exclusions, Call the Thunder Down and Thunder Roar
+// (tests/scripts/forced-movement-followups.test.ts).
+test.each(['Ripples in the Earth'])('%s keeps its Effect section manual', name => {
+  const definition = compileAbility(envelope(name));
+  expect(definition.execution).toBe('manual');
+  expect(definition.sections.some(n => n.kind === 'unsupported')).toBe(true);
+});
 
 test('V152 dependencies follow the printed reader', () => {
   const choke = compileAbility(envelope('Choke')).sections[0]!;

@@ -660,24 +660,31 @@ export function CompiledEffects({
                   Printed {effect.vertical ? 'vertical ' : ''}
                   {effect.movement ?? 'push'} {effect.printed} + size bonus{' '}
                   {effect.sizeBonus ?? 'unknown'}
+                  {effect.reduction
+                    ? ` − target ${effect.reduction.characteristic} ${effect.reduction.score ?? 'unknown'}`
+                    : ''}
                   {effect.allowance !== undefined
-                    ? ` · Allowance ${effect.allowance} before optional stability reduction.`
+                    ? ` · Allowance ${effect.allowance}${effect.stabilityReduction === 'ignored' ? '.' : ' before optional stability reduction.'}`
                     : effect.subtotal !== undefined
                       ? ` · Subtotal ${effect.subtotal}; final allowance not established.`
                       : ' · Final allowance not established.'}
                 </span>
-                <span>
-                  Optional stability reduction: {effect.stability ?? 'unknown'}
-                  {effect.stabilityEffects?.length
-                    ? ` (includes ${effect.stabilityEffects
-                        .map(
-                          e =>
-                            `${e.amount >= 0 ? '+' : '−'}${Math.abs(e.amount)} from ${e.actorLabel}'s ${e.abilityName}`,
-                        )
-                        .join(', ')})`
-                    : ''}
-                  . Physical movement remains manual.
-                </span>
+                {effect.stabilityReduction === 'ignored' ? (
+                  <span>Ignores stability. Physical movement remains manual.</span>
+                ) : (
+                  <span>
+                    Optional stability reduction: {effect.stability ?? 'unknown'}
+                    {effect.stabilityEffects?.length
+                      ? ` (includes ${effect.stabilityEffects
+                          .map(
+                            e =>
+                              `${e.amount >= 0 ? '+' : '−'}${Math.abs(e.amount)} from ${e.actorLabel}'s ${e.abilityName}`,
+                          )
+                          .join(', ')})`
+                      : ''}
+                    . Physical movement remains manual.
+                  </span>
+                )}
                 {!!effect.requirements.length && (
                   <span>Needed: {effect.requirements.join('; ')}.</span>
                 )}
@@ -760,6 +767,9 @@ export function CompiledEffects({
               <span>
                 Resolve the printed effect at the table; this entry applies no additional state
                 changes.
+                {effect.distances?.length
+                  ? ` The same distance: ${effect.distances.join(', ')}.`
+                  : ''}
                 {effect.requirements.length > 0 && ` Needed: ${effect.requirements.join('; ')}.`}
               </span>
             )}

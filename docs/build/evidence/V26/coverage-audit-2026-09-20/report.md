@@ -14,7 +14,7 @@ Content hash: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 371 | 34 | 136 | 19 | 201 |
+| Hero standalone (`ability.json`) | 371 | 37 | 133 | 20 | 201 |
 | Kit signature (`kit.json`) | 25 | 7 | 14 | 1 | 4 |
 | Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 21 | 565 | 29 | 572 |
@@ -25,7 +25,7 @@ Wizard ability grants inspected: 2985 (2130 resolve to a standalone entry, 150 t
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 21 fully (1.81%), 565 with a typed remainder (48.79%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 194 of 468 (41.45%) compile: 42 fully (8.97%), 152 with a typed remainder (32.48%), of which 20 (4.27%) are within the bounded potency remainder. 274 (58.55%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 194 of 468 (41.45%) compile: 45 fully (9.62%), 149 with a typed remainder (31.84%), of which 21 (4.49%) are within the bounded potency remainder. 274 (58.55%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -33,8 +33,8 @@ compiled entries:
 
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | COMPILES | 23 | 2 | 9 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 99 | 3 | 27 | 5 | 2 |
+| Hero standalone (`ability.json`) | COMPILES | 24 | 2 | 11 | 0 | 0 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 98 | 3 | 25 | 5 | 2 |
 | Kit signature (`kit.json`) | COMPILES | 4 | 2 | 1 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 13 | 1 | 0 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -56,7 +56,7 @@ Expected categories are read from the V26 designs; a disagreement is a finding, 
 | Ranged Free Strike | COMPILES | COMPILES | yes | selectable | independent Might/Agility roll and damage choices |
 | Pain for Pain | COMPILES_WITH_REMAINDER | COMPILES_WITH_REMAINDER | yes | selectable | conditional Effect rider stays outside the safe subset |
 | Out of the Way! | COMPILES_WITH_REMAINDER | COMPILES_WITH_REMAINDER | yes | selectable | slide and movement rider remain manual |
-| Thunder Roar | COMPILES_WITH_REMAINDER | COMPILES_WITH_REMAINDER | yes | selectable | area, nearest-first Effect; push not an independent instruction |
+| Thunder Roar | COMPILES | COMPILES | yes | selectable | area; nearest-first Effect admitted as a table rider (V176) |
 | Lines of Force | NO_MATCH | NO_MATCH | yes | selectable | no power roll; triggered action |
 | Viscous Fire | COMPILES | COMPILES | yes | selectable | fire damage + Reason then push |
 | Meteoric Introduction (compile-only) | COMPILES | COMPILES | yes | selectable | damage + Reason then push; no live grant |
@@ -101,11 +101,11 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | The Gods Punish and Defend | COMPILES | — | single | selectable | class.censor.ability-3@1:selectable, class.censor.ability-3@2:selectable, class.censor.ability-3@3:selectable, class.censor.ability-3@4:selectable, class.censor.ability-3@5:selectable, class.censor.ability-3@6:selectable | — |
 | hero-standalone | Your Allies Cannot Save You! | COMPILES | — | single | selectable | class.censor.signature-ability@1:selectable, class.censor.signature-ability@2:selectable, class.censor.signature-ability@3:selectable, class.censor.signature-ability@4:selectable, class.censor.signature-ability@5:selectable, class.censor.signature-ability@6:selectable | — |
 | hero-standalone | It Is Justice You Fear | COMPILES_WITH_REMAINDER | — | single | selectable | class.censor.level-2.exorcist-ability@2:selectable, class.censor.level-2.exorcist-ability@3:selectable, class.censor.level-2.exorcist-ability@4:selectable, class.censor.level-2.exorcist-ability@5:selectable, class.censor.level-2.exorcist-ability@6:selectable | effect-paragraph:effect; potency:P < SYM frightened (save ends) |
-| hero-standalone | Sentenced | COMPILES_WITH_REMAINDER | — | single | selectable | class.censor.level-2.paragon-ability@2:selectable, class.censor.level-2.paragon-ability@3:selectable, class.censor.level-2.paragon-ability@4:selectable, class.censor.level-2.paragon-ability@5:selectable, class.censor.level-2.paragon-ability@6:selectable | effect-paragraph:effect; potency:P < SYM restrained (save ends) |
+| hero-standalone | Sentenced | COMPILES_WITH_REMAINDER | yes | single | selectable | class.censor.level-2.paragon-ability@2:selectable, class.censor.level-2.paragon-ability@3:selectable, class.censor.level-2.paragon-ability@4:selectable, class.censor.level-2.paragon-ability@5:selectable, class.censor.level-2.paragon-ability@6:selectable | potency:P < SYM restrained (save ends) |
 | hero-standalone | Melee Weapon Free Strike [V26: Melee Free Strike] | COMPILES | — | single | selectable | free-strikes.grant@1:selectable, free-strikes.grant@2:selectable, free-strikes.grant@3:selectable, free-strikes.grant@4:selectable, free-strikes.grant@5:selectable, free-strikes.grant@6:selectable | — |
 | hero-standalone | Ranged Weapon Free Strike [V26: Ranged Free Strike] | COMPILES | — | single | selectable | free-strikes.grant@1:selectable, free-strikes.grant@2:selectable, free-strikes.grant@3:selectable, free-strikes.grant@4:selectable, free-strikes.grant@5:selectable, free-strikes.grant@6:selectable | — |
 | hero-standalone | Blessed Light | COMPILES | — | single | selectable | class.conduit.signature-abilities@1:selectable, class.conduit.signature-abilities@2:selectable, class.conduit.signature-abilities@3:selectable, class.conduit.signature-abilities@4:selectable, class.conduit.signature-abilities@5:selectable, class.conduit.signature-abilities@6:selectable | — |
-| hero-standalone | Call the Thunder Down | COMPILES_WITH_REMAINDER | — | area | selectable | class.conduit.ability-3@1:selectable, class.conduit.ability-3@2:selectable, class.conduit.ability-3@3:selectable, class.conduit.ability-3@4:selectable, class.conduit.ability-3@5:selectable, class.conduit.ability-3@6:selectable | effect-paragraph:effect |
+| hero-standalone | Call the Thunder Down | COMPILES | — | area | selectable | class.conduit.ability-3@1:selectable, class.conduit.ability-3@2:selectable, class.conduit.ability-3@3:selectable, class.conduit.ability-3@4:selectable, class.conduit.ability-3@5:selectable, class.conduit.ability-3@6:selectable | — |
 | hero-standalone | Corruption's Curse | COMPILES_WITH_REMAINDER | — | single | selectable | class.conduit.ability-5@1:selectable, class.conduit.ability-5@2:selectable, class.conduit.ability-5@3:selectable, class.conduit.ability-5@4:selectable, class.conduit.ability-5@5:selectable, class.conduit.ability-5@6:selectable | potency:M < SYM damage weakness N (save ends) |
 | hero-standalone | Curse of Terror | COMPILES_WITH_REMAINDER | yes | single | selectable | class.conduit.ability-5@1:selectable, class.conduit.ability-5@2:selectable, class.conduit.ability-5@3:selectable, class.conduit.ability-5@4:selectable, class.conduit.ability-5@5:selectable, class.conduit.ability-5@6:selectable | potency:I < SYM frightened (save ends) |
 | hero-standalone | Drain | COMPILES | — | single | selectable | class.conduit.signature-abilities@1:selectable, class.conduit.signature-abilities@2:selectable, class.conduit.signature-abilities@3:selectable, class.conduit.signature-abilities@4:selectable, class.conduit.signature-abilities@5:selectable, class.conduit.signature-abilities@6:selectable | — |
@@ -153,7 +153,7 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Hit and Run | COMPILES_WITH_REMAINDER | yes | single | selectable | class.fury.signature-ability@1:selectable, class.fury.signature-ability@2:selectable, class.fury.signature-ability@3:selectable, class.fury.signature-ability@4:selectable, class.fury.signature-ability@5:selectable, class.fury.signature-ability@6:selectable | potency:A < SYM slowed (save ends) |
 | hero-standalone | Impaled! | COMPILES_WITH_REMAINDER | — | unknown | selectable | class.fury.signature-ability@1:selectable, class.fury.signature-ability@2:selectable, class.fury.signature-ability@3:selectable, class.fury.signature-ability@4:selectable, class.fury.signature-ability@5:selectable, class.fury.signature-ability@6:selectable | potency:M < SYM grabbed |
 | hero-standalone | Out of the Way! [V26: Out of the Way!] | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.ability-3@1:selectable, class.fury.ability-3@2:selectable, class.fury.ability-3@3:selectable, class.fury.ability-3@4:selectable, class.fury.ability-3@5:selectable, class.fury.ability-3@6:selectable | effect-paragraph:effect; slide N |
-| hero-standalone | Thunder Roar [V26: Thunder Roar] | COMPILES_WITH_REMAINDER | — | area | selectable | class.fury.ability-5@1:selectable, class.fury.ability-5@2:selectable, class.fury.ability-5@3:selectable, class.fury.ability-5@4:selectable, class.fury.ability-5@5:selectable, class.fury.ability-5@6:selectable | effect-paragraph:effect |
+| hero-standalone | Thunder Roar [V26: Thunder Roar] | COMPILES | — | area | selectable | class.fury.ability-5@1:selectable, class.fury.ability-5@2:selectable, class.fury.ability-5@3:selectable, class.fury.ability-5@4:selectable, class.fury.ability-5@5:selectable, class.fury.ability-5@6:selectable | — |
 | hero-standalone | Tide of Death | COMPILES_WITH_REMAINDER | — | self | selectable | class.fury.ability-3@1:selectable, class.fury.ability-3@2:selectable, class.fury.ability-3@3:selectable, class.fury.ability-3@4:selectable, class.fury.ability-3@5:selectable, class.fury.ability-3@6:selectable | effect-paragraph:effect |
 | hero-standalone | To the Death! | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.signature-ability@1:selectable, class.fury.signature-ability@2:selectable, class.fury.signature-ability@3:selectable, class.fury.signature-ability@4:selectable, class.fury.signature-ability@5:selectable, class.fury.signature-ability@6:selectable | effect-paragraph:effect |
 | hero-standalone | To the Uttermost End | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.ability-5@1:selectable, class.fury.ability-5@2:selectable, class.fury.ability-5@3:selectable, class.fury.ability-5@4:selectable, class.fury.ability-5@5:selectable, class.fury.ability-5@6:selectable | resource-spend:spend N+ ferocity |
@@ -171,7 +171,7 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Joint Lock | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.signature-abilities@1:selectable, class.null.signature-abilities@2:selectable, class.null.signature-abilities@3:selectable, class.null.signature-abilities@4:selectable, class.null.signature-abilities@5:selectable, class.null.signature-abilities@6:selectable | potency:A < SYM grabbed |
 | hero-standalone | Kinetic Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.signature-abilities@1:selectable, class.null.signature-abilities@2:selectable, class.null.signature-abilities@3:selectable, class.null.signature-abilities@4:selectable, class.null.signature-abilities@5:selectable, class.null.signature-abilities@6:selectable | taunted (eot); taunted (eot), slide N |
 | hero-standalone | Magnetic Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.signature-abilities@1:selectable, class.null.signature-abilities@2:selectable, class.null.signature-abilities@3:selectable, class.null.signature-abilities@4:selectable, class.null.signature-abilities@5:selectable, class.null.signature-abilities@6:selectable | vertical pull N |
-| hero-standalone | Phase Inversion Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.signature-abilities@1:selectable, class.null.signature-abilities@2:selectable, class.null.signature-abilities@3:selectable, class.null.signature-abilities@4:selectable, class.null.signature-abilities@5:selectable, class.null.signature-abilities@6:selectable | effect-paragraph:effect |
+| hero-standalone | Phase Inversion Strike | COMPILES | — | single | selectable | class.null.signature-abilities@1:selectable, class.null.signature-abilities@2:selectable, class.null.signature-abilities@3:selectable, class.null.signature-abilities@4:selectable, class.null.signature-abilities@5:selectable, class.null.signature-abilities@6:selectable | — |
 | hero-standalone | Phase Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.ability-5@1:selectable, class.null.ability-5@2:selectable, class.null.ability-5@3:selectable, class.null.ability-5@4:selectable, class.null.ability-5@5:selectable, class.null.ability-5@6:selectable | effect-paragraph:effect; potency:I < SYM the target goes out of phase (save ends) |
 | hero-standalone | Pressure Points | COMPILES_WITH_REMAINDER | yes | single | selectable | class.null.signature-abilities@1:selectable, class.null.signature-abilities@2:selectable, class.null.signature-abilities@3:selectable, class.null.signature-abilities@4:selectable, class.null.signature-abilities@5:selectable, class.null.signature-abilities@6:selectable | potency:A < SYM weakened (save ends) |
 | hero-standalone | Relentless Nemesis | COMPILES_WITH_REMAINDER | — | single | selectable | class.null.ability-3@1:selectable, class.null.ability-3@2:selectable, class.null.ability-3@3:selectable, class.null.ability-3@4:selectable, class.null.ability-3@5:selectable, class.null.ability-3@6:selectable | effect-paragraph:effect |
@@ -383,7 +383,7 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | I'm No Threat | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N insight |
 | hero-standalone | In All This Confusion | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N+ insight |
 | hero-standalone | Shadowstrike | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
-| hero-standalone | Machinations of Sound | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:slide N |
+| hero-standalone | Machinations of Sound | tier1-damage-outside-grammar | selectable | tier:slide N |
 | hero-standalone | So Gullible | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
 | hero-standalone | Too Slow | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
 | hero-standalone | Careful Observation | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
@@ -547,7 +547,7 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1245 | 1231 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1240 | 1226 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
 | 2 | no-power-roll | no-power-roll | 723 | 723 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
 | 3 | trigger | trigger | 212 | 212 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/pyre`, `mcdm.beastheart.v1/feature.ability.beastheart.level-1/shadow-in-the-mist` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
@@ -592,7 +592,7 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1335 | 13 |
+| effect-paragraph | 1330 | 13 |
 | potency-condition | 1113 | 220 |
 | no-power-roll | 723 | 1 |
 | tier-damage | 297 | 115 |

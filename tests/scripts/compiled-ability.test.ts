@@ -248,13 +248,20 @@ describe('V67 source-backed compiled nodes and manual boundaries', () => {
     });
   });
 
-  it('leaves kit conditional damage and Thunder Roar area ordering outside compiled execution', () => {
+  it('leaves kit conditional damage outside compiled execution', () => {
     const kit = compileAbility(source('kit-signature', 'Pain for Pain'));
-    const area = compileAbility(hero('Thunder Roar'));
     expect(kit.execution).toBe('manual');
-    expect(area.execution).toBe('manual');
     expect(kit.sections.length).toBeGreaterThan(0);
-    expect(area.sections.length).toBeGreaterThan(0);
+  });
+
+  // V176: Thunder Roar's Effect only orders the tier pushes and permits collisions between
+  // targets (feature/ability/fury/level-1/thunder-roar.md), which is table work for every push.
+  it('admits Thunder Roar area ordering as one use rider', () => {
+    const area = compileAbility(hero('Thunder Roar'));
+    expect(area.execution).toBe('supported');
+    expect(area.sections).toMatchObject([
+      { kind: 'rider', shape: 'forced-movement', dependency: 'independent' },
+    ]);
   });
 });
 
@@ -449,8 +456,8 @@ describe('V67 source-backed pure outcome examples', () => {
 });
 
 describe('V67 compatibility arithmetic remains separate from compiled execution', () => {
-  // TR1 checks projection arithmetic only. The full area/Effect envelope must still be refused
-  // by the new evaluator; this is not a legacy fallback or a live-support assertion.
+  // TR1 checks projection arithmetic. Since V176 the compiled evaluator also resolves it: its pushes
+  // stay allowances (tiers 3/1/2 print push 6/2/4) and its Effect is one table rider.
   it('retains Thunder Roar constant damage, per-target tiers and one payment without executing its pushes', () => {
     const definition = compileAbility(hero('Thunder Roar'));
     const facts = hToG();
@@ -465,7 +472,11 @@ describe('V67 compatibility arithmetic remains separate from compiled execution'
       targetId: target.targetId,
     }));
     facts.resourcePool = { resource: 'ferocity', current: 6, legalFloor: 0 };
-    expect(resolveCompiledAbility(definition, facts).kind).toBe('manual');
+    const compiled = resolved(definition, facts);
+    expect(
+      compiled.effects.filter(e => e.kind === 'push').map(e => e.kind === 'push' && e.printed),
+    ).toEqual([6, 2, 4]);
+    expect(compiled.effects.filter(e => e.kind === 'rider')).toHaveLength(1);
     if (!definition.metadata) throw new Error('Thunder Roar damage projection missing');
     const arithmetic = resolveAbilityRoll({ ...facts, ability: definition.metadata });
     if (arithmetic.kind !== 'resolved') throw new Error('Expected affordable arithmetic');

@@ -595,13 +595,26 @@ describe('A05 attacks, damage, costs and common actions', () => {
       [9, false, false],
       [6, true, false],
     ]);
-    expect(result.targets.map(x => x.unresolvedClauses)).toEqual([
-      ['[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6'],
-      ['[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2'],
-      ['[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4'],
+    // V176: Thunder Roar compiles. Each target's tier push is an allowance (tiers 3/1/2 print
+    // push 6/2/4 in feature/ability/fury/level-1/thunder-roar.md) and the Effect's ordering of the
+    // pushes is a source-linked table rider.
+    expect(result.targets.map(x => x.unresolvedClauses)).toEqual([[], [], []]);
+    const roarReadback = await player.client.query(api.abilities.results, {
+      campaignId,
+      eventIds: [used.eventId],
+    });
+    const roarEffects = roarReadback[0]!.compiled!.effects.map(o => o.effect);
+    expect(
+      roarEffects
+        .filter(e => e.kind === 'push')
+        .map(e => [e.targetId, e.kind === 'push' && e.printed]),
+    ).toEqual([
+      [w1, 6],
+      [w2, 2],
+      [w3, 4],
     ]);
-    expect(result.manualResolutions.map(m => m.sourceClause)).toEqual([
-      'Effect: The targets are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) one at a time, starting with the target nearest to you, and can be [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) into other targets in the same line.',
+    expect(roarEffects.filter(e => e.kind === 'rider').map(e => e.clause)).toEqual([
+      'The targets are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) one at a time, starting with the target nearest to you, and can be [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) into other targets in the same line.',
     ]);
     expect((await heroRow(t, thornId)).liveState!.heroicResource.current).toBe(1);
     expect(await Promise.all(goblins.map(async id => (await foeRow(t, id)).live.stamina))).toEqual([

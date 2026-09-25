@@ -1546,3 +1546,55 @@ player's own use, whose log text every member sees), the Mark cards and their `t
 lines, or hero sheets (a hero's sheet is shown only to its player and the Director). A "no" answer
 would also need a per-audience log description for those entries. Recommendation: yes.
 Alternative: only the Director and the marking Tactician's player see them.
+
+## Q-FM-1: a negative score in Machinations of Sound (V176)
+
+Open; kept manual. `feature/ability/shadow/level-2/machinations-of-sound.md` (pinned
+`en/unified/md`): "This forced movement ignores stability. Instead, the forced movement is reduced
+by a number equal to the target's Intuition score." Nothing printed says what a negative Intuition
+does. V176 computes the slide allowance for Intuition 0 or higher, never below 0 (forced movement is
+"up to X squares", `movement/forced-movement.md`), and leaves a target with negative Intuition as a
+manual push outcome that cites this question. Alternatives: a negative score lengthens the slide
+(Slide 5 at Intuition −1 is 6); or it reduces the slide by nothing. Recommendation: reduce by
+nothing, since the sentence only ever reduces the movement.
+
+## Q-FM-2: readings behind the V176 forced-movement follow-ups
+
+Open. Compendium paths read (pinned `en/unified/md`): `movement/forced-movement.md`,
+`rule/character/stability.md`, `rule/dice/ability-roll.md` ("Abilities With Damage and Effects"),
+`movement/teleport.md`, `condition/restrained.md`, and the four abilities below. V176 compiles them
+on these readings; each is an interpretation with its alternatives.
+
+1. **"The same distance" when targets roll different tiers.**
+   `feature/ability/conduit/level-1/call-the-thunder-down.md`: "You can push each willing ally in
+   the area the same distance, ignoring stability." With one tier for every target, the rider shows
+   that push distance. With different tiers (per-target edges or banes), the rider asks the table
+   to pick one, by analogy with `rule/dice/ability-roll.md`: "If different tiered outcomes affect
+   multiple targets, the creature using the ability picks which tier of rolled effect applies to
+   them or the Director." Alternatives: the highest tier's distance; or each ally uses the distance
+   of the target nearest to them.
+2. **Sentenced's exception is table work.**
+   `feature/ability/censor/level-2/sentenced.md`: "While the target is restrained this way, your
+   abilities that impose forced movement can still move them." The engine never automates forced
+   movement of a restrained creature (`condition/restrained.md`: it "can't be force moved"; any
+   active condition leaves a push outcome manual). So this exception is shown as table work once
+   the restrained outcome is known, and the restrained condition instance, whose source is
+   Sentenced, shows how long it lasts. Alternative: a tracked effect instance tied to that
+   condition, which the Censor's later pushes would read. That would change nothing the engine
+   computes today.
+3. **Thunder Roar's ordering and collisions are table work.**
+   `feature/ability/fury/level-1/thunder-roar.md`: "The targets are force moved one at a time,
+   starting with the target nearest to you, and can be pushed into other targets in the same line."
+   It replaces the user's choice of order (`movement/forced-movement.md`, "Multitarget Abilities
+   and Forced Movement") and permits collisions between targets. The table resolves collision
+   damage ("Slamming into Creatures") for every push. Alternative: keep the ability manual until
+   collisions are modelled.
+4. **Phase Inversion Strike's push waits on the teleport.**
+   `feature/ability/null/level-1/phase-inversion-strike.md`: "Before the push is resolved, you
+   teleport the target to a square adjacent to you and opposite the one they started in. If the
+   target can't be teleported this way, you can't push them." The teleport is table work. The push
+   outcome keeps its calculated distance but gives no allowance until the table confirms the
+   teleport. Teleporting ends grabbed and restrained on the target (`movement/teleport.md`), which
+   the table records with `condition off`. Alternative: none found in the source.
+
+Recommendation: keep 1 to 4 as implemented.

@@ -297,8 +297,29 @@ export async function runShadowLevelTwo({
             ]),
             manual,
           );
-          if (name === 'Machinations of Sound')
-            assert.match(JSON.stringify(roll.manualResolutions), /Intuition/);
+          // V176: Machinations compiles. Its Effect ("This forced movement ignores stability.
+          // Instead, the forced movement is reduced by a number equal to the target's Intuition
+          // score.", shadow/level-2/machinations-of-sound.md) is executed in the slide allowance.
+          // The target witness (v97-shadow-1-2) has Intuition -1 in the ledger, and whether a
+          // negative score lengthens the slide is open (Q-FM-1), so the slide stays manual.
+          if (name === 'Machinations of Sound') {
+            const slide = (
+              await director.query<
+                { compiled?: { effects: { effect: Record<string, unknown> }[] } }[]
+              >('abilities:results', { campaignId, eventIds: [result.eventId] })
+            )[0]?.compiled?.effects.find(o => o.effect.kind === 'push')?.effect;
+            assert.ok(slide);
+            assert.equal(slide.movement, 'slide');
+            assert.equal(slide.printed, [4, 5, 7][outcome.tier - 1]);
+            assert.equal(slide.stabilityReduction, 'ignored');
+            assert.deepEqual(slide.reduction, {
+              nodeId: (slide.reduction as { nodeId: string }).nodeId,
+              characteristic: 'I',
+              score: -1,
+            });
+            assert.equal(slide.status, 'manual');
+            assert.match(JSON.stringify(slide.manualReasons), /Q-FM-1/);
+          }
           assert.equal(
             (await director.query<Saved>('characters:get', { characterId: id })).liveState
               ?.heroicResource.current,

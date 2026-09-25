@@ -6,7 +6,7 @@ import type {
   DamageExpression,
   SourceRef,
 } from '../contracts/rollResolution.ts';
-import { tierInstruction } from './effectRiders.ts';
+import { tierInstruction, type EffectRider, type ForcedMovementRule } from './effectRiders.ts';
 import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import { sectionModifier, type ModifierSpec } from './modifiers.ts';
 import { strainedSection, type StrainedSpec } from './strained.ts';
@@ -113,6 +113,8 @@ export interface RiderNode extends NodeSource {
    * `instruction` effect instance that the engine tracks and ends (shared/resolve/lastingEffects.ts).
    */
   lasting?: LastingSpec;
+  /** V176: a section that governs the tier's own forced movement (shared/resolve/effectRiders.ts). */
+  forcedMovement?: ForcedMovementRule;
 }
 /**
  * V154 tier instruction: a whole tier clause that is table work for that target's outcome (a
@@ -432,12 +434,13 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           ? effectRider(plain(block.text))
           : undefined;
       // V110: a section written about "the target" stays manual when several targets can differ.
-      if (rider && (grammar.targetShape === 'single' || rider.subject === 'use')) {
+      if (rider && riderAdmitted(rider, tiers, grammar.targetShape)) {
         sections.push({
           ...sourceNode(envelope, locator, 0, block.text),
           kind: 'rider',
           shape: rider.shape,
           dependency: rider.dependency,
+          ...(rider.forcedMovement ? { forcedMovement: rider.forcedMovement } : {}),
         });
         return;
       }
@@ -926,6 +929,28 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
  * N damage" adds to this use's damage to one target, so it needs a one-target envelope (V110) and
  * the type of every tier's damage; any other combination stays manual.
  */
+/**
+ * V110 and V176 rider admission. A section about "the target" needs one target, except a
+ * `stability-replaced` rule, which the engine applies to each target's own allowance. A V176
+ * forced-movement rule reads the tier's forced movement, so every tier must print exactly one.
+ */
+export function riderAdmitted(
+  rider: Pick<EffectRider, 'subject' | 'forcedMovement'>,
+  tiers: readonly (readonly { kind: string }[])[],
+  targetShape: string | undefined,
+): boolean {
+  if (
+    rider.forcedMovement &&
+    (tiers.length !== 3 || tiers.some(nodes => nodes.filter(n => n.kind === 'push').length !== 1))
+  )
+    return false;
+  return (
+    targetShape === 'single' ||
+    rider.subject === 'use' ||
+    rider.forcedMovement?.kind === 'stability-replaced'
+  );
+}
+
 export function strainedAdmitted(
   spec: StrainedSpec,
   tiers: readonly CompiledNode[][],

@@ -21,16 +21,20 @@ function source(name: string): Doc<'content'> {
 const compilation = (name: string) => abilityFromEntry(source(name)).compilation!;
 
 describe('V72 selected source runtime adapters', () => {
-  it.each(['Brutal Slam', 'Viscous Fire', 'Melee Weapon Free Strike', 'Ranged Weapon Free Strike'])(
-    'hands the currently reachable standalone %s to the checked compiler',
-    name => {
-      const result = compilation(name);
-      expect(result.mode).toBe('compiled');
-      expect(result.definition.execution).toBe('supported');
-      expect(result.definition.metadata).toBeDefined();
-      expect(result.diagnostics).toEqual([]);
-    },
-  );
+  // V176: Thunder Roar's Effect orders its tier pushes, which is table work; it now compiles.
+  it.each([
+    'Brutal Slam',
+    'Viscous Fire',
+    'Melee Weapon Free Strike',
+    'Ranged Weapon Free Strike',
+    'Thunder Roar',
+  ])('hands the currently reachable standalone %s to the checked compiler', name => {
+    const result = compilation(name);
+    expect(result.mode).toBe('compiled');
+    expect(result.definition.execution).toBe('supported');
+    expect(result.definition.metadata).toBeDefined();
+    expect(result.diagnostics).toEqual([]);
+  });
 
   it('compiles both Goblin abilities without leaking sibling abilities or parent facts', () => {
     const definitions = abilitiesFromStatBlock(source('Goblin Warrior'));
@@ -53,14 +57,11 @@ describe('V72 selected source runtime adapters', () => {
     ).toBe(true);
   });
 
-  it.each(['Out of the Way!', 'Thunder Roar'])(
-    'preserves only the labeled established A05 path for %s',
-    name => {
-      const result = compilation(name);
-      expect(result.mode).toBe('legacy-compatibility');
-      expect(result.definition.execution).toBe('manual');
-    },
-  );
+  it.each(['Out of the Way!'])('preserves only the labeled established A05 path for %s', name => {
+    const result = compilation(name);
+    expect(result.mode).toBe('legacy-compatibility');
+    expect(result.definition.execution).toBe('manual');
+  });
 
   it('keeps Pain for Pain on the unchanged kit adapter', () => {
     const entry = source('Mountain');

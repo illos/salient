@@ -5,11 +5,11 @@
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
-      "COMPILES": 34,
-      "COMPILES_WITH_REMAINDER": 136,
+      "COMPILES": 37,
+      "COMPILES_WITH_REMAINDER": 133,
       "NO_MATCH": 201,
       "total": 371,
-      "withinV26Bounded": 19
+      "withinV26Bounded": 20
     },
     "kit-signature": {
       "COMPILES": 7,
@@ -6140,12 +6140,6 @@
         ],
         "diagnostics": [
           {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "While the target is restrained this way, your abilities that impose forced movement can still move them.",
-            "locator": "section:1"
-          },
-          {
             "type": "potency-condition",
             "shape": "potency:P < SYM restrained (save ends)",
             "text": "P < WEAK, restrained (save ends)",
@@ -6167,7 +6161,7 @@
             "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "single"
       },
       "grants": [
@@ -8412,7 +8406,7 @@
       "target": "Each enemy in the area",
       "cost": "3 Piety",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "I"
@@ -8444,14 +8438,7 @@
             "push": 3
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "You can push each willing ally in the area the same distance, ignoring stability.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -17172,7 +17159,7 @@
       "target": "Each enemy in the area",
       "cost": "5 Ferocity",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "M"
@@ -17201,14 +17188,7 @@
             "push": 6
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "The targets are force moved one at a time, starting with the target nearest to you, and can be pushed into other targets in the same line.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "area"
       },
@@ -17271,7 +17251,7 @@
       "availability": "selectable",
       "v26": {
         "label": "Thunder Roar",
-        "expected": "COMPILES_WITH_REMAINDER",
+        "expected": "COMPILES",
         "agrees": true
       }
     },
@@ -20107,7 +20087,7 @@
       "usage": "Main action",
       "target": "One creature or object",
       "classification": {
-        "category": "COMPILES_WITH_REMAINDER",
+        "category": "COMPILES",
         "roll": {
           "permitted": [
             "A"
@@ -20139,14 +20119,7 @@
             "push": 6
           }
         ],
-        "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "Before the push is resolved, you teleport the target to a square adjacent to you and opposite the one they started in. If the target can't be teleported this way, you can't push them.",
-            "locator": "section:1"
-          }
-        ],
+        "diagnostics": [],
         "withinV26Bounded": false,
         "targetShape": "single"
       },
@@ -24427,12 +24400,6 @@
           ]
         },
         "diagnostics": [
-          {
-            "type": "effect-paragraph",
-            "shape": "effect-paragraph:effect",
-            "text": "This forced movement ignores stability. Instead, the forced movement is reduced by a number equal to the target's Intuition score.",
-            "locator": "section:1"
-          },
           {
             "type": "tier-damage",
             "shape": "tier:slide N",
@@ -107258,8 +107225,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1245,
-      "abilities": 1231,
+      "count": 1240,
+      "abilities": 1226,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -112025,12 +111992,12 @@
     },
     {
       "label": "Thunder Roar",
-      "expected": "COMPILES_WITH_REMAINDER",
-      "actual": "COMPILES_WITH_REMAINDER",
+      "expected": "COMPILES",
+      "actual": "COMPILES",
       "agrees": true,
       "id": "mcdm.heroes.v1/feature.ability.fury.level-1/thunder-roar",
       "availability": "selectable",
-      "note": "area, nearest-first Effect; push not an independent instruction"
+      "note": "area; nearest-first Effect admitted as a table rider (V176)"
     },
     {
       "label": "Lines of Force",
@@ -112087,9 +112054,9 @@
     },
     "hero": {
       "total": 468,
-      "compiles": 42,
-      "withRemainder": 152,
-      "withinV26Bounded": 20,
+      "compiles": 45,
+      "withRemainder": 149,
+      "withinV26Bounded": 21,
       "noMatch": 274
     }
   }

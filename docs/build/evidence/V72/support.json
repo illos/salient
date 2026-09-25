@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 96,
-      "manual": 275
+      "supported": 101,
+      "manual": 270
     },
     "kit-signature": {
       "total": 25,
@@ -22127,7 +22127,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/sentenced.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -22219,22 +22219,14 @@
           "id": "mcdm.heroes.v1/feature.ability.censor.level-2/sentenced#block:1:0:2c04b233251f96f8",
           "locator": "block:1:0",
           "clause": "While the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way, your abilities that impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) can still move them.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "forced-movement",
+          "dependency": "after-effects"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "While the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way, your abilities that impose [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) can still move them.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Sentenced",
@@ -23634,7 +23626,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/call-the-thunder-down.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -23708,22 +23700,17 @@
           "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/call-the-thunder-down#block:1:0:1a7c21a6902ba9ce",
           "locator": "block:1:0",
           "clause": "You can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) each willing ally in the area the same [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "forced-movement",
+          "dependency": "after-effects",
+          "forcedMovement": {
+            "kind": "same-distance"
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) each willing ally in the area the same [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance), ignoring [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Call the Thunder Down",
@@ -35593,7 +35580,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -35664,22 +35651,14 @@
           "id": "mcdm.heroes.v1/feature.ability.fury.level-1/thunder-roar#block:1:0:9428aada81a7abea",
           "locator": "block:1:0",
           "clause": "The targets are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) one at a time, starting with the target nearest to you, and can be [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) into other targets in the same line.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "forced-movement",
+          "dependency": "independent"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The targets are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) one at a time, starting with the target nearest to you, and can be [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) into other targets in the same line.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Thunder Roar",
@@ -39689,7 +39668,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/phase-inversion-strike.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -39763,22 +39742,17 @@
           "id": "mcdm.heroes.v1/feature.ability.null.level-1/phase-inversion-strike#block:1:0:937361f5ae2f1334",
           "locator": "block:1:0",
           "clause": "Before the [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) is resolved, you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target to a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and opposite the one they started in. If the target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed this way, you can't [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "teleport",
+          "dependency": "independent",
+          "forcedMovement": {
+            "kind": "teleport-first"
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "Before the [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) is resolved, you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) the target to a square [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and opposite the one they started in. If the target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed this way, you can't [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Phase Inversion Strike",
@@ -45317,7 +45291,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-2/machinations-of-sound.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -45358,22 +45332,18 @@
           "id": "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound#block:1:0:d842f208021f97d9",
           "locator": "block:1:0",
           "clause": "This [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). Instead, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced by a number equal to the target's [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "rider",
+          "shape": "forced-movement",
+          "dependency": "independent",
+          "forcedMovement": {
+            "kind": "stability-replaced",
+            "reducedBy": "I"
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "This [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). Instead, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced by a number equal to the target's [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Machinations of Sound",
@@ -213259,9 +213229,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 171,
+    "compiled": 176,
     "compiledEffectOnly": 20,
-    "compatibility": 1450,
+    "compatibility": 1445,
     "compiledButUnavailable": 0
   }
 }

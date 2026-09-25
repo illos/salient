@@ -18,7 +18,7 @@ import {
   type Characteristic,
 } from './abilityGrammar.ts';
 import type { RiderNode } from './compileAbility.ts';
-import { tierInstruction } from './effectRiders.ts';
+import { sameForcedMovementRule, tierInstruction } from './effectRiders.ts';
 import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import {
   bindModifier,
@@ -46,6 +46,7 @@ import {
 import {
   actionTypeOfUsage,
   revisionFits,
+  riderAdmitted,
   spendSubjectFits,
   strainedAdmitted,
 } from './compileAbility.ts';
@@ -148,12 +149,27 @@ export interface CompiledPushOutcome extends EffectIdentity {
   printed: number;
   sizeBonus?: number;
   subtotal?: number;
-  /** Allowance before optional stability reduction; never an executed distance. */
+  /**
+   * Allowance before optional stability reduction; never an executed distance. V176: with a
+   * `stability-replaced` rule it is the allowance after the printed reduction, and stability is
+   * ignored.
+   */
   allowance?: number;
   stability?: number;
   /** V159: the effects included in `stability`, with their sources. */
   stabilityEffects?: StatContribution[];
-  stabilityReduction: 'optional';
+  /** V176 `ignored`: the ability's own section says this forced movement ignores stability. */
+  stabilityReduction: 'optional' | 'ignored';
+  /**
+   * V176 `stability-replaced` (shadow/level-2/machinations-of-sound.md): the printed reduction by
+   * the target's characteristic score, from the section `nodeId`.
+   */
+  reduction?: { nodeId: string; characteristic: Characteristic; score?: number };
+  /**
+   * V176 `teleport-first` (null/level-1/phase-inversion-strike.md): the section whose table work
+   * must happen first. Without it the allowance is 0 ("you can't push them").
+   */
+  precondition?: { nodeId: string; clause: string };
   requirements: string[];
   manualReasons: string[];
   instruction: string;
@@ -278,6 +294,11 @@ export interface CompiledRiderOutcome extends EffectIdentity {
   tier?: true;
   /** V158: the lasting instruction a use stores as an effect instance on commit. */
   lasting?: LastingSpec;
+  /**
+   * V176 `same-distance` (conduit/level-1/call-the-thunder-down.md): the distinct tier push
+   * allowances of this use's targets, from their push outcomes. Absent until each is known.
+   */
+  distances?: number[];
 }
 
 /** V158: two lasting specs read from the same printed section are the same, field by field. */
@@ -638,11 +659,54 @@ function pushOutcome(
         manualReasons.push(`${label}.${category}: ${coverage.labels.join(', ') || 'unevaluated'}`);
     }
   }
-  const stability = target?.stability;
-  if (stability === undefined || !Number.isSafeInteger(stability) || stability < 0)
+  // V176: a section of this ability that governs its own forced movement.
+  const ruleNode = definition.sections.find(
+    (section): section is RiderNode => section.kind === 'rider' && !!section.forcedMovement,
+  );
+  const rule = ruleNode?.forcedMovement;
+  const replaced = rule?.kind === 'stability-replaced' ? rule : undefined;
+  let reduction: CompiledPushOutcome['reduction'];
+  if (replaced) {
+    // shadow/level-2/machinations-of-sound.md: "This forced movement ignores stability. Instead,
+    // the forced movement is reduced by a number equal to the target's Intuition score."
+    const score = input.conditionFacts?.targets.find(fact => fact.targetId === targetId)
+      ?.characteristics?.[replaced.reducedBy];
+    reduction = {
+      nodeId: ruleNode!.id,
+      characteristic: replaced.reducedBy,
+      ...(score !== undefined ? { score } : {}),
+    };
+    if (score === undefined || !Number.isSafeInteger(score))
+      requirements.push(`target:${targetId}.characteristics.${replaced.reducedBy}`);
+    // Q-FM-1 (docs/rules-questions-for-user.md): the source does not say whether a negative
+    // score lengthens the movement or reduces it by nothing, so that target stays manual.
+    else if (score < 0)
+      manualReasons.push(
+        `target:${targetId}.characteristics.${replaced.reducedBy}: a negative score's reduction is unresolved (Q-FM-1)`,
+      );
+  }
+  const stability = replaced ? undefined : target?.stability;
+  if (!replaced && (stability === undefined || !Number.isSafeInteger(stability) || stability < 0))
     requirements.push(`target:${targetId}.stability`);
   if (!damageComplete) requirements.push(`damage:${node.after}.completion`);
-  const subtotal = sizeBonus === undefined ? undefined : node.distance + sizeBonus;
+  // null/level-1/phase-inversion-strike.md: "If the target can't be teleported this way, you can't
+  // push them." The teleport is table work, so the allowance waits on it.
+  const precondition =
+    rule?.kind === 'teleport-first'
+      ? { nodeId: ruleNode!.id, clause: ruleNode!.clause }
+      : undefined;
+  if (precondition)
+    requirements.push(
+      "The table's teleport of the target before the push; if it can't be teleported this way, the push allowance is 0",
+    );
+  const printedSubtotal = sizeBonus === undefined ? undefined : node.distance + sizeBonus;
+  // A reduction never makes an allowance negative: "up to" X squares (movement/forced-movement.md).
+  const subtotal =
+    printedSubtotal !== undefined && reduction
+      ? reduction.score !== undefined && reduction.score >= 0
+        ? Math.max(0, printedSubtotal - reduction.score)
+        : undefined
+      : printedSubtotal;
   const status = manualReasons.length
     ? 'manual'
     : requirements.length
@@ -663,8 +727,12 @@ function pushOutcome(
     ...(stability !== undefined && Number.isSafeInteger(stability) && stability >= 0
       ? { stability }
       : {}),
-    ...(target?.stabilityEffects?.length ? { stabilityEffects: target.stabilityEffects } : {}),
-    stabilityReduction: 'optional',
+    ...(!replaced && target?.stabilityEffects?.length
+      ? { stabilityEffects: target.stabilityEffects }
+      : {}),
+    stabilityReduction: replaced ? 'ignored' : 'optional',
+    ...(reduction ? { reduction } : {}),
+    ...(precondition ? { precondition } : {}),
     requirements,
     manualReasons,
     ...(node.movement ? { movement: node.movement } : {}),
@@ -775,7 +843,10 @@ export function resolveCompiledAbility(
         !parsed ||
         parsed.shape !== node.shape ||
         parsed.dependency !== node.dependency ||
-        (shape.kind !== 'single' && parsed.subject !== 'use')
+        !sameForcedMovementRule(parsed.forcedMovement, node.forcedMovement) ||
+        !riderAdmitted(parsed, definition.tiers, shape.kind) ||
+        definition.sections.filter(other => other.kind === 'rider' && other.forcedMovement).length >
+          1
       );
     }) ||
     definition.tiers.some(
@@ -1022,11 +1093,20 @@ export function resolveCompiledAbility(
       continue;
     }
     if (node.kind !== 'rider') continue;
+    // V176: a stability replacement is executed in each push allowance; it is not table work.
+    if (node.forcedMovement?.kind === 'stability-replaced') continue;
+    // V176 `same-distance` reads the tier push allowances instead of condition outcomes.
+    const tierPushes =
+      node.forcedMovement?.kind === 'same-distance'
+        ? remainder.filter((effect): effect is CompiledPushOutcome => effect.kind === 'push')
+        : [];
     const after =
       node.dependency === 'after-damage'
         ? effects.map(effect => effect.nodeId)
         : node.dependency === 'after-effects'
-          ? [...effects, ...tierConditions].map(effect => effect.nodeId)
+          ? [...effects, ...(tierPushes.length ? tierPushes : tierConditions)].map(
+              effect => effect.nodeId,
+            )
           : [];
     const damageRequirements = effects
       .filter(effect => effect.kind === 'damage' && !effect.application)
@@ -1038,14 +1118,33 @@ export function resolveCompiledAbility(
           ]
         : node.dependency === 'after-damage'
           ? damageRequirements
-          : node.dependency === 'after-effects'
+          : node.dependency === 'after-effects' && tierPushes.length
             ? [
                 ...damageRequirements,
-                ...tierConditions
-                  .filter(effect => effect.status === 'fact-needed')
-                  .map(effect => `condition:${effect.nodeId}.outcome`),
+                ...tierPushes
+                  .filter(effect => effect.subtotal === undefined)
+                  .map(effect => `push:${effect.nodeId}.allowance`),
               ]
-            : [];
+            : node.dependency === 'after-effects'
+              ? [
+                  ...damageRequirements,
+                  ...tierConditions
+                    .filter(effect => effect.status === 'fact-needed')
+                    .map(effect => `condition:${effect.nodeId}.outcome`),
+                ]
+              : [];
+    // "The same distance" with several targets on different tiers names no one distance. By
+    // analogy with rule/dice/ability-roll.md ("the creature using the ability picks which tier of
+    // rolled effect applies"), the table picks; this is an interpretation (Q-FM-2).
+    const distances = [
+      ...new Set(
+        tierPushes.flatMap(effect => (effect.subtotal !== undefined ? [effect.subtotal] : [])),
+      ),
+    ].sort((a, b) => a - b);
+    if (tierPushes.length && distances.length > 1)
+      requirements.push(
+        `The user picks which tier's push distance (${distances.join(' or ')}) the allies' push uses (Q-FM-2)`,
+      );
     remainder.push({
       kind: 'rider',
       nodeId: node.id,
@@ -1058,6 +1157,7 @@ export function resolveCompiledAbility(
       requirements,
       status: requirements.length ? 'fact-needed' : 'manual',
       ...(node.lasting ? { lasting: node.lasting } : {}),
+      ...(tierPushes.length && !requirements.length ? { distances } : {}),
     });
   }
   // V119, chapter/monster-basics.md, Creatures Who Grab ("only one creature … grabbed at a time

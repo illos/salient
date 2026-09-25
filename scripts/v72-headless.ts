@@ -619,11 +619,14 @@ try {
   await play('PP3', 'Pain for Pain', H, [G[1]], [15], { faces: [8, 7], compiled: false });
   await play('OW2', 'Out of the Way!', H, [G[0]], [7], { ferocity: 3, compiled: false });
   await block('OW-insufficient', 'Out of the Way!', H, [G[0]], 2, 0);
+  // V176: Thunder Roar compiles (its Effect orders the pushes: table work). The first target's
+  // tier 3 "push 6" (fury/level-1/thunder-roar.md) gains 1 for H's larger size with a melee
+  // weapon ability (movement/forced-movement.md, Big Versus Little), as Brutal Slam's does above.
   await play('TR1', 'Thunder Roar', H, G, [17, 6, 9], {
     faces: [7, 6],
     ferocity: 6,
     extra: 'edges=[1,0,0] banes=[0,2,0]',
-    compiled: false,
+    push: 7,
   });
   await block('TR-insufficient', 'Thunder Roar', H, G, 4, 0);
   await play('LF1', 'Lines of Force', H, [H], [], { ferocity: 1, compiled: false });

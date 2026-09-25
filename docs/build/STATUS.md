@@ -184,3 +184,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V173 | [Triggered actions: offers on observable triggers](V173-triggered-actions.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
 | V174 | [Damage-changing reactions (option B revision)](V174-damage-reactions.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
 | V175 | [Marks (Tactician Mark lifecycle and benefits)](V175-marks.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
+| V176 | [Forced-movement follow-ups](V176-forced-movement-followups.md) | Committed on branch (`slice/V176`); awaiting TESTER and review |

@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 171 (without a power roll: 20); unchanged reachable compatibility: 1450; structurally supported but unavailable: 0.
+Currently reachable compiled: 176 (without a power roll: 20); unchanged reachable compatibility: 1445; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -150,7 +150,7 @@ Currently reachable compiled: 171 (without a power roll: 20); unchanged reachabl
 | It Is Justice You Fear | hero-standalone | manual | legacy-compatibility | manual-section |
 | Prescient Grace | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Revelator | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
-| Sentenced | hero-standalone | manual | legacy-compatibility | manual-section |
+| Sentenced | hero-standalone | supported | compiled |  |
 | With My Blessing | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Edict of Disruptive Isolation | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Edict of Perfect Order | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
@@ -164,7 +164,7 @@ Currently reachable compiled: 171 (without a power roll: 20); unchanged reachabl
 | Melee Weapon Free Strike | hero-standalone | supported | compiled |  |
 | Ranged Weapon Free Strike | hero-standalone | supported | compiled |  |
 | Blessed Light | hero-standalone | supported | compiled |  |
-| Call the Thunder Down | hero-standalone | manual | legacy-compatibility | manual-section |
+| Call the Thunder Down | hero-standalone | supported | compiled |  |
 | Corruption's Curse | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Curse of Terror | hero-standalone | supported | compiled |  |
 | Drain | hero-standalone | supported | compiled |  |
@@ -249,7 +249,7 @@ Currently reachable compiled: 171 (without a power roll: 20); unchanged reachabl
 | Lines of Force | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Make Peace With Your God! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Out of the Way! | hero-standalone | manual | legacy-compatibility | manual-section |
-| Thunder Roar | hero-standalone | manual | legacy-compatibility | manual-section |
+| Thunder Roar | hero-standalone | supported | compiled |  |
 | Tide of Death | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | To the Death! | hero-standalone | manual | legacy-compatibility | manual-section |
 | To the Uttermost End | hero-standalone | manual | legacy-compatibility | manual-section |
@@ -278,7 +278,7 @@ Currently reachable compiled: 171 (without a power roll: 20); unchanged reachabl
 | Kinetic Strike | hero-standalone | supported | compiled |  |
 | Magnetic Strike | hero-standalone | supported | compiled |  |
 | Null Field | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Phase Inversion Strike | hero-standalone | manual | legacy-compatibility | manual-section |
+| Phase Inversion Strike | hero-standalone | supported | compiled |  |
 | Phase Strike | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Pressure Points | hero-standalone | supported | compiled |  |
 | Psychic Pulse | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
@@ -316,7 +316,7 @@ Currently reachable compiled: 171 (without a power roll: 20); unchanged reachabl
 | Two Throats at Once | hero-standalone | supported | compiled |  |
 | You Were Watching the Wrong One | hero-standalone | manual | legacy-compatibility | manual-section |
 | In a Puff of Ash | hero-standalone | supported | compiled |  |
-| Machinations of Sound | hero-standalone | manual | legacy-compatibility | manual-section |
+| Machinations of Sound | hero-standalone | supported | compiled |  |
 | So Gullible | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Sticky Bomb | hero-standalone | manual | legacy-compatibility | manual-section |
 | Stink Bomb | hero-standalone | manual | legacy-compatibility | manual-section |

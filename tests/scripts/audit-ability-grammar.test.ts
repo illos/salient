@@ -53,19 +53,18 @@ describe('V26 bounded grammar classifier on real entries', () => {
 
   // Source: feature/ability/fury/level-1/thunder-roar.md — Area/Melee/Weapon, "Each enemy in the
   // area", tiers "6 damage; push 2" / "9 damage; push 4" / "13 damage; push 6" and a nearest-first
-  // Effect paragraph. Catches a classifier that ignores the Effect section and reports COMPILES.
-  it('Thunder Roar compiles its tiers but keeps the Effect paragraph as a remainder', () => {
+  // Effect paragraph, admitted whole as a table rider since V176 (it orders the tier pushes).
+  it('Thunder Roar compiles its tiers and admits its whole Effect paragraph', () => {
     const result = classify(envelope('hero-standalone', 'Thunder Roar'));
-    expect(result.category).toBe('COMPILES_WITH_REMAINDER');
+    expect(result.category).toBe('COMPILES');
     expect(result.tiers?.map(t => t.push)).toEqual([2, 4, 6]);
     expect(result.tiers?.map(t => t.damage)).toEqual([
       { kind: 'flat', constant: 6 },
       { kind: 'flat', constant: 9 },
       { kind: 'flat', constant: 13 },
     ]);
-    expect(result.diagnostics.map(d => d.type)).toEqual(['effect-paragraph']);
+    expect(result.diagnostics).toEqual([]);
     expect(result.targetShape).toBe('area');
-    expect(result.withinV26Bounded).toBe(false);
   });
 
   // Source: monster/goblin/statblock/goblin-warrior.md, Bury the Point (2 Malice) — "5 damage;

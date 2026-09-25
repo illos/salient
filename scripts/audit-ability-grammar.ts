@@ -322,8 +322,8 @@ export const V26_INVENTORY: {
   {
     label: 'Thunder Roar',
     match: e => e.id === 'mcdm.heroes.v1/feature.ability.fury.level-1/thunder-roar',
-    expected: 'COMPILES_WITH_REMAINDER',
-    note: 'area, nearest-first Effect; push not an independent instruction',
+    expected: 'COMPILES',
+    note: 'area; nearest-first Effect admitted as a table rider (V176)',
   },
   {
     label: 'Lines of Force',
