@@ -256,3 +256,143 @@ test('QC1 R1: Strained self-damage is taken after the watcher damage its target 
     },
   });
 });
+
+/** Blessing of Insight's instances from one use, on the Conduit and Thorn. */
+async function blessingInstances(s: Awaited<ReturnType<typeof setup>>, eventId: Id<'events'>) {
+  return [
+    ...((await s.heroLive(s.votary)).effectInstances ?? []),
+    ...((await s.heroLive(s.f.thornId)).effectInstances ?? []),
+  ].filter(i => i.sourceUseEventId === eventId);
+}
+
+test('QC1 R2: Blessing of Insight used by a dying Conduit ends as it is applied and grants no surges', async () => {
+  const s = await setup();
+  const votaryRef = `@{character:${s.votary}}`;
+  await s.command('/combat start');
+  await s.command('/combat commit');
+  await s.command('/combat roll', true);
+  await s.command('/combat first side=heroes');
+  await s.command(`${votaryRef} /turn take`, true);
+  // Dying, not dead: Stamina 0 (rule/health/dying.md); a dying hero can still act.
+  await s.command(`${votaryRef} /adjust stamina value=0`);
+  await s.command(`${votaryRef} /adjust heroic-resource value=5`);
+  const surges = {
+    votary: (await s.heroLive(s.votary)).surges,
+    thorn: (await s.heroLive(s.f.thornId)).surges,
+  };
+  const blessing = await s.command(
+    `${votaryRef} /ability use ability="Blessing of Insight" targets=[@Thorn]`,
+    true,
+  );
+  expect((await s.t.run(ctx => ctx.db.get(blessing.eventId)))!.kind).toBe('ability.use');
+  const blessed = await blessingInstances(s, blessing.eventId);
+  expect(blessed.map(i => i.subject.id).sort()).toEqual([s.votary, s.f.thornId].sort());
+  for (const instance of blessed)
+    expect(instance).toMatchObject({
+      kind: 'watcher',
+      status: 'ended',
+      endedReason: 'Votary is dying (Stamina 0), so it ends as it is applied',
+      endedEventId: blessing.eventId,
+      registrationIds: [],
+    });
+  // No owner pointer and no clock work for them.
+  expect((await s.heroLive(s.votary)).ownedEffects ?? []).toEqual([]);
+  const registrations = await s.t.run(ctx => ctx.db.query('clockRegistrations').take(500));
+  expect(
+    registrations.filter(
+      r =>
+        r.status === 'active' &&
+        r.work.kind === 'watcher' &&
+        blessed.some(i => i.id === (r.work as { effectInstanceId: string }).effectInstanceId),
+    ),
+  ).toEqual([]);
+  const applied = (await s.events()).filter(
+    e => e.kind === 'effect.applied' && e.causeEventId === blessing.eventId,
+  );
+  expect(applied).toHaveLength(2);
+  for (const entry of applied) expect(entry.description).toContain('It ends as it is applied');
+
+  // The Conduit's turn ends: no surges for either target, and no firing.
+  await s.command(`${votaryRef} /turn end`, true);
+  expect((await s.heroLive(s.votary)).surges).toBe(surges.votary);
+  expect((await s.heroLive(s.f.thornId)).surges).toBe(surges.thorn);
+  expect((await s.events()).filter(e => e.kind === 'effect.watcher-fired')).toEqual([]);
+});
+
+test('QC1 R2: a healthy Conduit’s Blessing grants surges; it ends when the Conduit becomes dying, by damage or by a Stamina edit', async () => {
+  const s = await setup();
+  const votaryRef = `@{character:${s.votary}}`;
+  const goblinRef = `@{foe:${s.goblin}}`;
+  const surges = async () => ({
+    votary: (await s.heroLive(s.votary)).surges,
+    thorn: (await s.heroLive(s.f.thornId)).surges,
+  });
+  await s.command('/combat start');
+  await s.command('/combat commit');
+  await s.command('/combat roll', true);
+  await s.command('/combat first side=heroes');
+
+  // Round 1. Control: a healthy Conduit's Blessing grants each target 1 surge at its turn end.
+  await s.command(`${votaryRef} /turn take`, true);
+  await s.command(`${votaryRef} /adjust heroic-resource value=5`);
+  const first = await s.command(
+    `${votaryRef} /ability use ability="Blessing of Insight" targets=[@Thorn]`,
+    true,
+  );
+  for (const instance of await blessingInstances(s, first.eventId))
+    expect(instance.status).toBe('active');
+  const start = await surges();
+  await s.command(`${votaryRef} /turn end`, true);
+  expect(await surges()).toEqual({ votary: start.votary + 1, thorn: start.thorn + 1 });
+
+  // Transition by damage: at Stamina 1, the goblin's Free Strike (1 damage) makes the Conduit
+  // dying (1 → 0), and both instances end.
+  await s.command(`${goblinRef} /turn take`);
+  await s.command(`${votaryRef} /adjust stamina value=1`);
+  const strike = await s.command(
+    `${goblinRef} /ability use ability="Free Strike" targets=[${votaryRef}]`,
+  );
+  expect((await s.heroLive(s.votary)).stamina).toBe(0);
+  for (const instance of await blessingInstances(s, first.eventId))
+    expect(instance).toMatchObject({
+      status: 'ended',
+      endedReason: 'Votary is dying',
+      endedEventId: strike.eventId,
+    });
+  await s.command(`${goblinRef} /turn end`);
+  await s.command('@Thorn /turn take', true);
+  await s.command('@Thorn /turn end', true);
+
+  // Round 2. Healed, the Conduit uses it again (active), then a manual Stamina edit makes it dying,
+  // which reaches no damage observer. At the turn end the firing re-check ends both instances
+  // unfired: no surges.
+  const encounter = await s.t.run(async ctx =>
+    (await ctx.db.query('encounters').take(10)).find(e => e.status === 'committed'),
+  );
+  expect(encounter!.round).toBe(2);
+  if (encounter!.activeSide === 'director') {
+    await s.command(`${goblinRef} /turn take`);
+    await s.command(`${goblinRef} /turn end`);
+  }
+  await s.command(`${votaryRef} /turn take`, true);
+  await s.command(`${votaryRef} /adjust stamina value=20`);
+  await s.command(`${votaryRef} /adjust heroic-resource value=5`);
+  const second = await s.command(
+    `${votaryRef} /ability use ability="Blessing of Insight" targets=[@Thorn]`,
+    true,
+  );
+  for (const instance of await blessingInstances(s, second.eventId))
+    expect(instance.status).toBe('active');
+  await s.command(`${votaryRef} /adjust stamina value=0`);
+  const before = await surges();
+  const end = await s.command(`${votaryRef} /turn end`, true);
+  expect(await surges()).toEqual(before);
+  for (const instance of await blessingInstances(s, second.eventId))
+    expect(instance).toMatchObject({
+      status: 'ended',
+      endedReason: 'Votary is dying (Stamina 0)',
+    });
+  const after = (await s.events()).filter(e => e.sequence > end.sequence);
+  expect(after.filter(e => e.kind === 'effect.watcher-fired')).toEqual([]);
+  expect(after.filter(e => e.kind === 'effect.ended')).toHaveLength(2);
+});

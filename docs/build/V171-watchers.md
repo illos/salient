@@ -191,3 +191,37 @@ Rules question: [Q-WATCH-1](../rules-questions-for-user.md#q-watch-1-who-deals-a
   - a nested third-creature firing is named in the refusal;
   - Aid Attack and a manual Stamina edit leave notes;
   - raising Stamina leaves no note.
+- 2026-09-25: QC1 train 13 **R2** (High) fixed: a dying owner's Blessing of Insight granted surges.
+  - `feature/ability/conduit/level-2/blessing-of-insight.md` lasts "until the end of the encounter
+    or until you are dying". `rule/health/dying.md`: "When your Stamina is 0 or lower, you are
+    dying", and "you can still act". `owner-dying` was only acted on when the damage writer crossed
+    from positive to 0 or lower.
+  - At application, `applyEffectInstance` (`convex/lib/effectInstances.ts`) now checks
+    `ownerStateEnding`. `owner-dying` is the only end condition that is a state; `reused` and
+    `willingly-ended` are acts. When it holds, the instance is stored **ended**, with the reason
+    "<owner> is dying (Stamina N), so it ends as it is applied". It has no clock work, no owner
+    pointer and no part in stacking.
+  - The caller's `effect.applied` entry (watchers, modifiers and lasting instructions) says "It ends
+    as it is applied (…)", and its payload carries `endedAtApplication`.
+  - Why ended and not "not applied": V158 keeps every instance with its end reason and the event that
+    ended it. The use did create the effect, and its printed end condition held at once. Storing it
+    ended keeps that trail on the sheet and in history, and undo removes it with the use.
+    - Alternative considered: storing nothing and logging it as untracked. That would lose the
+      provenance, and "untracked" means the table must resolve the effect, which is wrong here.
+  - Defensive re-check at firing: `observeWatchers` and `fireClockWatcher` end a watcher unfired,
+    with a linked `effect.ended` entry, when its owner is dying. This covers a manual `/adjust
+    stamina` to 0, which reaches no damage observer.
+  - Tests: `tests/app/watcher-interactions.test.ts` covers three cases, all through registered
+    operations, with persisted surge readback at the Conduit's turn end.
+    - A real Conduit at Stamina 0 (dying, not dead) uses Blessing on Thorn. Both instances are
+      stored ended with no registrations, and neither gains a surge at the turn end.
+    - The healthy control grants 1 surge each.
+    - Transitions:
+      - The goblin's Free Strike takes the Conduit from 1 to 0 and ends both instances ("Votary is
+        dying").
+      - After a re-use, a Stamina edit to 0 is caught at the turn end: both instances end unfired,
+        and no surges are gained.
+    - All three fail without the fix.
+  - Left open: a `modifier` instance ending on `owner-dying` isn't re-checked when a roll reads it.
+    `/adjust stamina` to 0 still doesn't end `owner-dying` effects by itself. Watchers are covered
+    by the firing re-check.

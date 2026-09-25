@@ -146,6 +146,11 @@ export async function applyEffectInstance(
       superseded?: EffectInstance;
       /** QC1 R1b: joined an unresolved same-ability group the table resolves. */
       manualGroup?: true;
+      /**
+       * QC1 train 13 R2: an end condition already held, so the instance was stored ended with
+       * this reason: nothing is scheduled and it never fires or applies.
+       */
+      endedAtApplication?: string;
     }
   | { untracked: EffectInstance; holder: EffectHolder }
   | undefined
@@ -165,6 +170,25 @@ export async function applyEffectInstance(
   // use of the same ability on it can't be seen here: such effects are not tracked automatically.
   if (!holds(input.subject) && input.subject.id !== input.owner.id)
     return { untracked: { ...(input as EffectInstance) }, holder };
+  // QC1 train 13 R2: an end condition on the owner's state that already holds ends the effect as it
+  // is applied (feature/ability/conduit/level-2/blessing-of-insight.md, "until you are dying", used
+  // by a hero already at 0 Stamina, rule/health/dying.md). V158 keeps every instance with its end
+  // reason, so it is stored ended, with no clock work, owner pointer or stacking effect.
+  const ending = await ownerStateEnding(ctx, input);
+  if (ending) {
+    if (current.effectInstances.some(instance => instance.id === input.id))
+      throw new ConvexError('Effect instance already exists.');
+    const instance: EffectInstance = {
+      ...input,
+      duration: bindDuration(input.printedDuration, input.owner.id, input.subject.id),
+      status: 'ended',
+      registrationIds: [],
+      endedReason: `${ending}, so it ends as it is applied`,
+      endedEventId: scope.eventId,
+    };
+    await write(ctx, scope, holder, { effectInstances: [...current.effectInstances, instance] });
+    return { instance, holder, endedAtApplication: instance.endedReason! };
+  }
   const group = current.effectInstances.filter(
     other =>
       other.status === 'active' &&
@@ -328,6 +352,28 @@ export async function applyEffectInstance(
 }
 
 /**
+ * QC1 train 13 R2: why an instance's owner-state end condition already holds, or undefined. Only
+ * `owner-dying` is a state: rule/health/dying.md, "When your Stamina is 0 or lower, you are dying"
+ * (a hero; foes don't die this way). `reused` and `willingly-ended` are acts, not states. `resolve`
+ * maps an owner id recorded before an undo or redo to the current one.
+ */
+export async function ownerStateEnding(
+  ctx: Reader,
+  instance: Pick<EffectInstance, 'owner' | 'endsWhen' | 'actorLabel'>,
+  resolve?: (id: string) => Promise<string>,
+): Promise<string | undefined> {
+  if (!instance.endsWhen.includes('owner-dying') || instance.owner.kind !== 'character')
+    return undefined;
+  const id = resolve ? await resolve(instance.owner.id) : instance.owner.id;
+  const heroId = ctx.db.normalizeId('characters', id);
+  const hero = heroId ? await ctx.db.get(heroId) : null;
+  const stamina = hero?.liveState?.stamina;
+  return stamina !== undefined && stamina <= 0
+    ? `${instance.actorLabel} is dying (Stamina ${stamina})`
+    : undefined;
+}
+
+/**
  * Ends one active instance with a reason, retiring its clock work and its owner's pointer. V159:
  * `consumed` marks a consumable component used up by a roll (design section 5a).
  */
@@ -442,7 +488,7 @@ export async function ownedActiveEffects(
 }
 
 /** One linked log entry per instance an engine rule ended inside the causing operation. */
-async function logEnded(ctx: MutationCtx, scope: JournalScope, ended: EffectInstance[]) {
+export async function logEnded(ctx: MutationCtx, scope: JournalScope, ended: EffectInstance[]) {
   if (!ended.length) return;
   const cause = (await ctx.db.get(scope.eventId))!;
   for (const instance of ended)

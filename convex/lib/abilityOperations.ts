@@ -1124,13 +1124,15 @@ async function commitLasting(
     const lasts = describeDuration(lasting.duration, lasting.endsWhen);
     const tracked = stored && 'instance' in stored ? stored : undefined;
     const untracked = stored && 'untracked' in stored ? stored : undefined;
-    const description = tracked?.manualGroup
-      ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" ${subject.name} is already under this ability's effect in a way the engine can't resolve. This use and the earlier ones are kept as a manual stacking group: no clock ends them. Apply the stacking rule at the table (the most impactful effect applies, and the most recent use sets the duration), then end them with /effect end.`
-      : tracked
-        ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" Tracked as an effect${tracked.instance.registrationIds.length ? '; its end is scheduled' : lasting.duration.kind === 'none' || lasting.duration.kind === 'maintained' ? '' : '; its end is unscheduled outside a committed encounter, so end it with /effect end'}.${tracked.superseded ? ` It replaces ${tracked.superseded.actorLabel}'s earlier use, because the most recent use of the same ability sets the duration (Stacking Unique Effects).` : ''} The table resolves the instruction itself.`
-        : untracked
-          ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" This effect can't be tracked on a squad or object, because another use of the same ability on it couldn't be seen. Resolve it at the table.`
-          : `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" No hero or foe can hold this effect; resolve it at the table.`;
+    const description = tracked?.endedAtApplication
+      ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" It ends as it is applied (${tracked.endedAtApplication}), so nothing is scheduled.`
+      : tracked?.manualGroup
+        ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" ${subject.name} is already under this ability's effect in a way the engine can't resolve. This use and the earlier ones are kept as a manual stacking group: no clock ends them. Apply the stacking rule at the table (the most impactful effect applies, and the most recent use sets the duration), then end them with /effect end.`
+        : tracked
+          ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" Tracked as an effect${tracked.instance.registrationIds.length ? '; its end is scheduled' : lasting.duration.kind === 'none' || lasting.duration.kind === 'maintained' ? '' : '; its end is unscheduled outside a committed encounter, so end it with /effect end'}.${tracked.superseded ? ` It replaces ${tracked.superseded.actorLabel}'s earlier use, because the most recent use of the same ability sets the duration (Stacking Unique Effects).` : ''} The table resolves the instruction itself.`
+          : untracked
+            ? `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" This effect can't be tracked on a squad or object, because another use of the same ability on it couldn't be seen. Resolve it at the table.`
+            : `${source.actor.name}'s ${source.abilityName} on ${subject.name}, ${lasts}: "${lasting.text}" No hero or foe can hold this effect; resolve it at the table.`;
     await appendEvent(ctx, {
       campaignId: scope.campaignId,
       sessionId: cause.sessionId,
@@ -1146,6 +1148,7 @@ async function commitLasting(
         effectInstanceId: tracked?.instance.id ?? null,
         holder: stored?.holder ?? null,
         duration: tracked?.instance.duration ?? null,
+        ...(tracked?.endedAtApplication ? { endedAtApplication: tracked.endedAtApplication } : {}),
         ...(tracked?.superseded ? { superseded: tracked.superseded.id } : {}),
         sourcePath: source.sourcePath,
       },
@@ -1253,19 +1256,22 @@ async function commitModifiers(
       commandId: cause.commandId,
       causeEventId: scope.eventId,
       kind: untracked ? 'effect.untracked' : 'effect.applied',
-      description: stored
-        ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}${consumable}. The engine applies it automatically; exclude it on a roll it doesn't fit${stored.instance.registrationIds.length ? '' : effect.spec.duration.kind === 'none' || effect.spec.duration.kind === 'maintained' ? '' : '. Its end is unscheduled outside a committed encounter, so end it with /effect end'}.`
-        : manualGroup
-          ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. ${subject!.name} is already under ${source.abilityName} in a way the engine can't resolve, so this use and the earlier ones form a manual stacking group. The engine applies none of them: apply the most impactful effect with the most recent use's duration at the table (Stacking Unique Effects), then end them with /effect end.`
-          : untracked
-            ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. This effect can't be tracked on a squad or object; apply it at the table.`
-            : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); apply it at the table.`,
+      description: stored?.endedAtApplication
+        ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}. It ends as it is applied (${stored.endedAtApplication}): the engine never applies it.`
+        : stored
+          ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}${consumable}. The engine applies it automatically; exclude it on a roll it doesn't fit${stored.instance.registrationIds.length ? '' : effect.spec.duration.kind === 'none' || effect.spec.duration.kind === 'maintained' ? '' : '. Its end is unscheduled outside a committed encounter, so end it with /effect end'}.`
+          : manualGroup
+            ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. ${subject!.name} is already under ${source.abilityName} in a way the engine can't resolve, so this use and the earlier ones form a manual stacking group. The engine applies none of them: apply the most impactful effect with the most recent use's duration at the table (Stacking Unique Effects), then end them with /effect end.`
+            : untracked
+              ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. This effect can't be tracked on a squad or object; apply it at the table.`
+              : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); apply it at the table.`,
       payload: {
         sourceUseEventId: source.eventId,
         occurrence: occurrence.id,
         effectInstanceId: stored?.instance.id ?? null,
         holder: result?.holder ?? null,
         duration: stored?.instance.duration ?? null,
+        ...(stored?.endedAtApplication ? { endedAtApplication: stored.endedAtApplication } : {}),
         modifier: effect.payload ?? null,
         sourcePath: source.sourcePath,
       },
@@ -1349,19 +1355,22 @@ async function commitWatchers(
       commandId: cause.commandId,
       causeEventId: scope.eventId,
       kind: untracked ? 'effect.untracked' : 'effect.applied',
-      description: stored
-        ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}, ${lasts}: ${describeWatcher(effect.payload!)}. The engine fires it when that happens${scheduled}.${stored.superseded ? ` It replaces ${stored.superseded.actorLabel}'s earlier use, because the most recent use of the same ability sets the duration (Stacking Unique Effects).` : ''}`
-        : manualGroup
-          ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}, ${lasts}: "${effect.spec.text}" ${subject!.name} is already under ${source.abilityName} in a way the engine can't resolve, so this use and the earlier ones form a manual stacking group. The engine fires none of them: apply the stacking rule at the table (Stacking Unique Effects), then end them with /effect end.`
-          : untracked
-            ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}, ${lasts}: "${effect.spec.text}" This effect can't be tracked on a squad or object; resolve it at the table.`
-            : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); resolve it at the table.`,
+      description: stored?.endedAtApplication
+        ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}, ${lasts}: ${describeWatcher(effect.payload!)}. It ends as it is applied (${stored.endedAtApplication}): nothing is scheduled and the engine never fires it.`
+        : stored
+          ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}, ${lasts}: ${describeWatcher(effect.payload!)}. The engine fires it when that happens${scheduled}.${stored.superseded ? ` It replaces ${stored.superseded.actorLabel}'s earlier use, because the most recent use of the same ability sets the duration (Stacking Unique Effects).` : ''}`
+          : manualGroup
+            ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}, ${lasts}: "${effect.spec.text}" ${subject!.name} is already under ${source.abilityName} in a way the engine can't resolve, so this use and the earlier ones form a manual stacking group. The engine fires none of them: apply the stacking rule at the table (Stacking Unique Effects), then end them with /effect end.`
+            : untracked
+              ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}, ${lasts}: "${effect.spec.text}" This effect can't be tracked on a squad or object; resolve it at the table.`
+              : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); resolve it at the table.`,
       payload: {
         sourceUseEventId: source.eventId,
         occurrence: occurrence.id,
         effectInstanceId: stored?.instance.id ?? null,
         holder: result?.holder ?? null,
         duration: stored?.instance.duration ?? null,
+        ...(stored?.endedAtApplication ? { endedAtApplication: stored.endedAtApplication } : {}),
         watcher: effect.payload ?? null,
         sourcePath: source.sourcePath,
       },

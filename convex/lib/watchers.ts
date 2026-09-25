@@ -35,7 +35,14 @@ import { rollDice } from './dice';
 import { appendEvent } from './events';
 import { resolveHistoricalId } from './history';
 import { journalPatch, type JournalScope } from './journal';
-import { patchEffectInstance, readHolder, type EffectHolder } from './effectInstances';
+import {
+  endEffectInstance,
+  logEnded,
+  ownerStateEnding,
+  patchEffectInstance,
+  readHolder,
+  type EffectHolder,
+} from './effectInstances';
 import { damageTargetFacts, writeDamage, type TargetRecord } from './resolve';
 import { assertNoTriggerOnCorrection, offerForDamage } from './triggeredActions';
 
@@ -350,6 +357,27 @@ async function log(
 }
 
 /**
+ * QC1 train 13 R2: ends a watcher whose owner-state end condition holds when it would fire
+ * (effectInstances.ts ownerStateEnding), logged as a linked `effect.ended` entry unless the caller
+ * logs it. Returns the ended instance, or undefined when it may fire.
+ */
+async function endIfOwnerEnded(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  holder: EffectHolder,
+  instance: EffectInstance,
+  logged = true,
+): Promise<EffectInstance | undefined> {
+  const ending = await ownerStateEnding(ctx, instance, id =>
+    resolveHistoricalId(ctx, scope.campaignId, id),
+  );
+  if (!ending) return undefined;
+  const ended = await endEffectInstance(ctx, scope, holder, instance.id, ending);
+  if (ended && logged) await logEnded(ctx, scope, [ended]);
+  return ended ?? { ...instance, endedReason: ending };
+}
+
+/**
  * Fires every watcher due for these occurrences of one creature, each within its limit, as
  * linked consequences of the causing operation. Watchers set off by a firing's own damage fire
  * after it is logged, up to MAX_DEPTH.
@@ -384,6 +412,8 @@ export async function observeWatchers(
         `${label} watches this damage, and a correction can't recompute a watcher's firing. Rewind to the use and record it again instead.`,
       );
     }
+    // QC1 train 13 R2 (defensive): an owner-state end condition that holds ends it unfired.
+    if (await endIfOwnerEnded(ctx, scope, holder, instance)) continue;
     const due = watcherDue(instance, at);
     if (due.status === 'limited') continue;
     const data = { effectInstanceId: instance.id, sourceUseEventId: instance.sourceUseEventId };
@@ -506,6 +536,21 @@ export async function fireClockWatcher(
   dice?: DieResult[];
   unsupported?: string;
 }> {
+  // QC1 train 13 R2 (defensive): the owner's state already ended it (Blessing of Insight's
+  // "until you are dying" when the owner reached 0 Stamina without the damage writer, such as a
+  // manual Stamina edit): it ends here and doesn't fire.
+  const ended = await endIfOwnerEnded(ctx, scope, holder, instance, false);
+  if (ended)
+    return {
+      kind: 'effect.ended',
+      description: `${label}: ends unfired — ${ended.endedReason}.`,
+      payload: {
+        effectInstanceId: ended.id,
+        sourceUseEventId: ended.sourceUseEventId,
+        reason: ended.endedReason,
+        sourcePath: ended.sourcePath,
+      },
+    };
   const due = watcherDue(instance, at);
   if (due.status === 'limited')
     return {
