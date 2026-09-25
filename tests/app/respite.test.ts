@@ -9,7 +9,7 @@ import { expect, test } from 'vitest';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { backend, table, storedEvents, admitHero } from './fixtures/table';
-import { levelUpsEarned } from '../../convex/lib/respiteOperations';
+import { levelUpsOwed } from '../../shared/evaluate/xpAdvancement';
 import tacticianLedger from '../fixtures/v94-tactician-expected.json';
 import nullOne from '../fixtures/v103-null-expected.json';
 import nullThree from '../fixtures/v133-null-three-expected.json';
@@ -64,7 +64,7 @@ test('complete restores Stamina and Recoveries, converts Victories to XP and gra
   const result = await f.say('/respite complete');
   const after = await f.hero();
   expect(after.liveState).toMatchObject({ stamina: 30, recoveries: 10, xp: 17, victories: 0 });
-  // 0 → 17 XP crosses the 16-XP threshold once: one pending level-up.
+  // 17 XP is 2nd level (Heroic Advancement Table 16-31): one pending level-up.
   expect(after.pendingLevelUps).toBe(1);
   expect((await f.session()).respite ?? null).toBeNull();
   const event = (await storedEvents(f.t, f.campaignId)).find(e => e._id === result.eventId)!;
@@ -97,15 +97,16 @@ test('cancel returns every participant to the state before the respite', async (
   expect((await f.session()).respite ?? null).toBeNull();
 });
 
-test('level-ups earned count thresholds crossed, from the entry offset, never past level 10', () => {
-  expect(levelUpsEarned(0, 16, 0, 1)).toBe(1);
-  expect(levelUpsEarned(15, 17, 0, 1)).toBe(1);
-  expect(levelUpsEarned(0, 15, 0, 1)).toBe(0);
-  expect(levelUpsEarned(0, 32, 0, 1)).toBe(2);
+test('level-ups owed at 16 per level, from the entry level, never past level 10', () => {
+  // V190 owed-levels model: max(0, earnedLevel − (level + pending)), Heroic Advancement Table.
+  expect(levelUpsOwed(16, 16, 0, 1)).toBe(1);
+  expect(levelUpsOwed(17, 16, 0, 1)).toBe(1);
+  expect(levelUpsOwed(15, 16, 0, 1)).toBe(0);
+  expect(levelUpsOwed(32, 16, 0, 1)).toBe(2);
   // A hero admitted at level 3 carries a 32-XP offset: 16 new XP reaches level 4.
-  expect(levelUpsEarned(0, 16, 32, 3)).toBe(1);
-  expect(levelUpsEarned(0, 48, 0, 9)).toBe(1);
-  expect(levelUpsEarned(0, 48, 0, 10)).toBe(0);
+  expect(levelUpsOwed(16, 16, 32, 3)).toBe(1);
+  expect(levelUpsOwed(144, 16, 0, 9)).toBe(1);
+  expect(levelUpsOwed(160, 16, 0, 10)).toBe(0);
 });
 
 test('cancel keeps the damage taken against a build changed during the respite', async () => {

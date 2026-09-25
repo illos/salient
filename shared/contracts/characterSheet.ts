@@ -15,6 +15,7 @@ import type {
 } from './characterEvaluation.ts';
 import type { StartingRewards } from './startingRewards.ts';
 import type { BuildReconciliation, HealthLabels, HeroLiveState } from './liveState.ts';
+import type { XpProgress } from '../evaluate/xpAdvancement.ts';
 
 /** A content snapshot entry carrying verbatim source text (shared/contracts/content.ts). */
 export interface SheetContent {
@@ -123,6 +124,8 @@ export interface HeroSheet {
   features: SheetFeature[];
   commonActions: CommonAction[];
   live: (HeroLiveState & { labels: HealthLabels }) | null;
+  /** V190: XP toward the next level at the attached campaign's XP per level (16 outside one). */
+  xpProgress: XpProgress | null;
   /** The proposed build's effect on current live values; null for an effective/initial build. */
   activationPreview: BuildReconciliation | null;
   details: SheetDetails;

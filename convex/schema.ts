@@ -46,6 +46,8 @@ export default defineSchema({
         healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),
         /** A06 "Enable user undo" (docs/table-spec.md#undo-permissions-and-proposed-campaign-control); absent means on. */
         enableUserUndo: v.optional(v.boolean()),
+        /** V190 XP per level (docs/table-spec.md#respite-mode, 2026-09-25); absent means 16. */
+        xpPerLevel: v.optional(v.number()),
       }),
     ),
     /** The shared Malice pool; absent means no pool has been recorded yet (read as 0). */

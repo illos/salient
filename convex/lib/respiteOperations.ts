@@ -12,11 +12,13 @@
  *   (rule/resource/respite.md: "the respite ends early and you don't gain the benefits").
  * - `/respite complete`: each participant regains all Stamina and Recoveries and converts Victories
  *   to XP (rule/resource/respite.md; rule/resource/experience.md "you gain XP equal to your Victories,
- *   then your Victories reset to 0"); each XP threshold crossed grants one pending level-up, taken later
- *   (docs/character-wizard-spec.md#level-up). Complete is final.
+ *   then your Victories reset to 0") and gains a pending level-up for each level owed at the
+ *   campaign's XP per level, taken later (docs/character-wizard-spec.md#level-up). Complete is final.
  *
- * Standard advancement thresholds are 16 XP per level (chapter/making-a-hero.md, Heroic Advancement
- * table: 0, 16, 32 … 144 for levels 1–10). The campaign XP-per-level setting is later work.
+ * V190 (user ruling 2026-09-25): the pace is the campaign's XP-per-level setting, 16 by default
+ * (chapter/making-a-hero.md, Heroic Advancement and Adjusted XP Advancement). Complete grants the
+ * levels owed, max(0, earnedLevel − (level + pendingLevelUps)) (shared/evaluate/xpAdvancement.ts),
+ * so a lowered pace catches up at the next Complete and a raised one removes nothing.
  * Feature-specific respite effects remain manual.
  */
 import { ConvexError, v } from 'convex/values';
@@ -42,9 +44,9 @@ import { revisionLevel } from './characterProgression';
 import { sessionEncounter } from './combatOperations';
 import { reconciledCurrent } from '../../shared/evaluate/liveReconciliation';
 import { activitiesOf, respiteActivityAllowance } from '../../shared/evaluate/respiteActivities';
+import { levelUpsOwed } from '../../shared/evaluate/xpAdvancement';
+import { settingsOf } from './audience';
 
-const XP_PER_LEVEL = 16;
-const MAX_LEVEL = 10;
 const DIRECTOR_RUNNING: { roles: Role[]; session: 'running' } = {
   roles: ['director'],
   session: 'running',
@@ -75,19 +77,6 @@ async function participants(ctx: MutationCtx, respite: OpenRespite, campaignId: 
 }
 const leftNote = (left: string[]) =>
   left.length ? ` No longer in the campaign, unchanged: ${left.join(', ')}.` : '';
-
-/** Level-ups granted by an XP gain: thresholds crossed, capped at level 10 (V165). */
-export function levelUpsEarned(
-  xpBefore: number,
-  xpAfter: number,
-  entryOffset: number,
-  levelAfterPending: number,
-): number {
-  const crossed =
-    Math.floor((xpAfter + entryOffset) / XP_PER_LEVEL) -
-    Math.floor((xpBefore + entryOffset) / XP_PER_LEVEL);
-  return Math.max(0, Math.min(crossed, MAX_LEVEL - levelAfterPending));
-}
 
 const start: OperationDefinition = {
   id: 'respite.start',
@@ -318,7 +307,7 @@ const complete: OperationDefinition = {
   verb: 'complete',
   title: 'Complete the respite',
   description:
-    'Director: finish the respite. Each participant regains all Stamina and Recoveries, converts Victories to XP and gains a pending level-up for each XP threshold crossed. This is final.',
+    "Director: finish the respite. Each participant regains all Stamina and Recoveries, converts Victories to XP and gains a pending level-up for each level owed at the campaign's XP per level. This is final.",
   args: {},
   argDescriptions: {},
   ...DIRECTOR_RUNNING,
@@ -326,6 +315,7 @@ const complete: OperationDefinition = {
   execute: async (ctx, { context }) => {
     const respite = openRespite(context);
     const { present, left } = await participants(ctx, respite, context.campaign._id);
+    const { xpPerLevel } = settingsOf(context.campaign);
     // rule/health/dying.md: a dead hero (Stamina at or below the negative of their winded value)
     // "can't be brought back to life" by resting; leave them unchanged for the table.
     const dead = present.filter(({ hero }) => {
@@ -345,7 +335,7 @@ const complete: OperationDefinition = {
         const level = effective ? revisionLevel(effective) : 1;
         const pending = hero.pendingLevelUps ?? 0;
         const xp = live.xp + live.victories;
-        const earned = levelUpsEarned(live.xp, xp, hero.entryLevelXpOffset ?? 0, level + pending);
+        const earned = levelUpsOwed(xp, xpPerLevel, hero.entryLevelXpOffset, level + pending);
         return {
           hero,
           before: { stamina: live.stamina, recoveries: live.recoveries, xp: live.xp },

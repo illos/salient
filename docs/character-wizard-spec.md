@@ -556,8 +556,14 @@ shared headless operation, under existing timing, encounter locks and validation
   (Stamina and Recoveries under Q-CHAR-2, new features and abilities), save-and-resume, and a confirm
   that takes the level-up without Director approval, then offers the next pending level-up. If the
   builder mode does not work well in review, a dedicated level-up wizard is designed instead.
-- **Campaign XP per level (requirement, design later).** The XP needed per level is a campaign setting
-  the Director can change long-term; the rules' 16 per level is the default.
+- **Campaign XP per level (confirmed 2026-09-25, [V190](build/V190-xp-per-level.md)).** The XP
+  needed per level is a Director-only campaign setting, default 16 (`chapter/making-a-hero.md`, Heroic
+  Advancement), with double (8) and half (32) speed presets from the Adjusted XP Advancement table and
+  any custom whole number from 1 to 200. A hero's earned level is min(10, entry level + floor(XP ÷ XP
+  per level)); only Respite Complete grants, and it grants the levels owed, max(0, earned level −
+  (level + pending level-ups)). Lowering the setting grants catch-up level-ups at the next Complete;
+  raising it removes nothing; nothing is retroactive. The sheet shows "XP 20 · level 3 at 32" at the
+  campaign's value (16 outside a campaign). See [respite mode](table-spec.md#respite-mode).
 - **Earlier choices (confirmed 2026-09-24).** A level-up only adds that level's choices. Swapping an
   earlier choice is an attribute of the specific higher-level option whose source permits it, and is
   built together with that option when its level is implemented; no generic swap exists. Levels 2–3 have

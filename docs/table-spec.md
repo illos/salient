@@ -1754,6 +1754,25 @@ XP, and each threshold a hero's XP crosses grants that hero one pending level-up
 owner's separate character-sheet action (see the [level-up policy](character-wizard-spec.md#level-up));
 the respite never waits for it, and the Director can resolve the respite and move on.
 
+**Campaign XP per level, confirmed 2026-09-25 (user; [V190](build/V190-xp-per-level.md)):**
+- **The setting.** Each campaign has one Director-only setting, **XP per level**, default **16**
+  (`chapter/making-a-hero.md`, Heroic Advancement table). The Adjusted XP Advancement table's double
+  speed (**8**) and half speed (**32**) are the presets, and "Directors can also create their own
+  customized pace": any whole number from **1 to 200** (the range is a product bound, not a rule). It
+  lives in the table settings pop-up as a slider snapping to Double 8, Standard 16 and Half 32 plus a
+  number input, and is the registered operation `campaign.xp-per-level` (`/campaign xp-per-level
+  value=24`), recorded as a campaign setting event like the other campaign settings.
+- **Earned level.** earnedLevel = min(10, entryLevel + floor(XP ÷ XP per level)), with XP the hero's
+  cumulative XP. A hero created or admitted above level 1 keeps that entry level (stored as the
+  standard-table offset (entryLevel − 1) × 16, read only as the entry level).
+- **Only Respite Complete grants.** Complete converts Victories to XP and grants the levels owed:
+  max(0, earnedLevel − (level + pending level-ups)). This replaces "thresholds crossed by this gain":
+  lowering the setting grants catch-up level-ups at the next Complete; raising it never removes a level
+  or a pending level-up. A change applies from the next Complete and is never retroactive. The Director's
+  manual grant and withdraw are unchanged.
+- **Display.** The character sheet's XP row shows progress at the campaign's value, e.g. "XP 20 ·
+  level 3 at 32"; outside a campaign it uses 16.
+
 Confirmed: respite is its own dedicated table mode, with a self-contained gameplay loop that the Director
 starts and ends. It has mechanics to support rather than being only a pause or a descriptive log entry.
 

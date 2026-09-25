@@ -223,6 +223,7 @@ export const roster = query({
         showTestDifficulty: v.boolean(),
         healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),
         enableUserUndo: v.boolean(),
+        xpPerLevel: v.number(),
       }),
     ),
     healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),

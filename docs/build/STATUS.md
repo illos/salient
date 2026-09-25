@@ -187,3 +187,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V176 | [Forced-movement follow-ups](V176-forced-movement-followups.md) | Merged (`408dd11`); cloud dev published; accepted TESTER results reused |
 | V177 | [Damage-type options](V177-damage-type-options.md) | Merged (`64b521e`); cloud dev published; accepted TESTER results reused |
 | V189 | [History is view-only; restore deferred](V189-history-view-only.md) | Ready for gate |
+| V190 | [Campaign XP per level](V190-xp-per-level.md) | Ready for gate |

@@ -718,6 +718,11 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
 
 export { DEFAULT_SETTINGS } from './audience';
 import { settingsOf } from './audience';
+import {
+  XP_PER_LEVEL_MAX,
+  XP_PER_LEVEL_MIN,
+  xpPerLevelProblem,
+} from '../../shared/evaluate/xpAdvancement';
 
 const maliceVisible: OperationDefinition = {
   id: 'campaign.malice-visible',
@@ -810,6 +815,42 @@ const healthDisplay: OperationDefinition = {
   },
 };
 
+/**
+ * V190 XP per level (docs/table-spec.md#respite-mode, confirmed 2026-09-25): chapter/making-a-hero.md,
+ * Heroic Advancement (16 per level) and Adjusted XP Advancement (double 8, half 32, "Directors can
+ * also create their own customized pace"). Applies from the next Respite Complete; nothing is
+ * retroactive, and raising it never removes a level or a pending level-up.
+ */
+const xpPerLevel: OperationDefinition = {
+  id: 'campaign.xp-per-level',
+  family: 'campaign',
+  verb: 'xp-per-level',
+  title: 'XP per level',
+  description: `Set how much XP each level needs: 16 standard, 8 double speed, 32 half speed, or any whole number from ${XP_PER_LEVEL_MIN} to ${XP_PER_LEVEL_MAX}. Applies from the next completed respite.`,
+  args: { value: v.number() },
+  argDescriptions: {
+    value: `XP per level, a whole number from ${XP_PER_LEVEL_MIN} to ${XP_PER_LEVEL_MAX} (16 standard).`,
+  },
+  roles: ['director'],
+  session: 'none',
+  actor: 'none',
+  execute: async (_ctx, { context, args }) => {
+    const value = Number(args.value);
+    const problem = xpPerLevelProblem(value);
+    if (problem) throw new ConvexError(problem);
+    const before = settingsOf(context.campaign);
+    const settings = { ...before, xpPerLevel: value };
+    return {
+      kind: 'campaign.setting',
+      description: `XP per level set to ${value}${before.xpPerLevel === value ? ' (unchanged)' : ` (was ${before.xpPerLevel})`}; it applies from the next completed respite.`,
+      data: { setting: 'xpPerLevel', before: before.xpPerLevel, after: value },
+      commit: async (mctx, scope) => {
+        await journalPatch(mctx, scope, 'campaigns', context.campaign._id, { settings });
+      },
+    };
+  },
+};
+
 export const tableOperations: OperationDefinition[] = [
   testRoll,
   heroRecover,
@@ -819,4 +860,5 @@ export const tableOperations: OperationDefinition[] = [
   maliceVisible,
   testDifficultyVisible,
   healthDisplay,
+  xpPerLevel,
 ];

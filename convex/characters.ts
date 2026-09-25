@@ -78,6 +78,8 @@ import {
 } from '../shared/evaluate/abilityModifiers';
 import { draftSelectionsFrom } from '../shared/evaluate/draft';
 import { previewBuildReconciliation } from '../shared/evaluate/liveReconciliation';
+import { STANDARD_XP_PER_LEVEL, xpProgress } from '../shared/evaluate/xpAdvancement';
+import { settingsOf } from './lib/audience';
 import { selectionsFrom } from '../shared/evaluate/character';
 import { indexDecisions, poolOf } from '../shared/evaluate/structure';
 import { type DraftSelection } from '../shared/characterDraft';
@@ -906,6 +908,16 @@ async function heroSheet(
     ),
     commonActions: await commonActions(ctx),
     live: live ? { ...live, labels: labelsOf(live, baseline) } : null,
+    // V190: progress at the attached campaign's XP per level; outside a campaign, the standard 16.
+    xpProgress: live
+      ? xpProgress(
+          live.xp,
+          campaign && character.campaignId === campaign._id
+            ? settingsOf(campaign).xpPerLevel
+            : STANDARD_XP_PER_LEVEL,
+          character.entryLevelXpOffset,
+        )
+      : null,
     activationPreview:
       label !== 'effective' && live && shown
         ? previewBuildReconciliation(live, baseline, shown)

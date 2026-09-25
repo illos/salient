@@ -55,6 +55,7 @@ import type { ReadCtx } from './access';
 import { combatActive, requireCharacterEditable } from './encounters';
 import type { BuildReconciliation, ConditionToggles } from '../../shared/contracts/liveState';
 import { previewBuildReconciliation } from '../../shared/evaluate/liveReconciliation';
+import { STANDARD_XP_PER_LEVEL } from '../../shared/evaluate/xpAdvancement';
 
 export type HeroLive = NonNullable<Doc<'characters'>['liveState']>;
 
@@ -162,14 +163,19 @@ export async function activateRevision(
       : {}),
     campaignId,
   };
+  // entryLevelXpOffset = (entryLevel − 1) × 16, the standard-table XP of the entry level. V190 reads it
+  // only as the entry level (shared/evaluate/xpAdvancement.ts entryLevelOf), whatever the campaign's
+  // XP per level; the field is kept as it is to avoid a schema change.
   if (character.campaignId !== campaignId)
-    patch.entryLevelXpOffset = ((revision.level ?? baseline.level.value) - 1) * 16;
+    patch.entryLevelXpOffset =
+      ((revision.level ?? baseline.level.value) - 1) * STANDARD_XP_PER_LEVEL;
   const firstAdmission = character.liveState === null;
   if (firstAdmission) {
     patch.liveState = initialHeroLive(baseline, revision._id, evaluation.evaluatedAgainst, now);
     if (!character.startingRewards)
       patch.startingRewards = makeStartingRewards(baseline, revision._id, now);
-    patch.entryLevelXpOffset = ((revision.level ?? baseline.level.value) - 1) * 16;
+    patch.entryLevelXpOffset =
+      ((revision.level ?? baseline.level.value) - 1) * STANDARD_XP_PER_LEVEL;
   } else if (character.liveState) {
     const live = character.liveState;
     reconciliation = previewBuildReconciliation(live, previous, baseline);

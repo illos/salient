@@ -19,6 +19,7 @@ import { SecretInheritance } from './secret-inheritance';
 import type { Id } from '../../convex/_generated/dataModel';
 import type { EffectInstance } from '../../shared/contracts/liveState';
 import { derivedValue, statModifiers } from '../../shared/resolve/modifiers';
+import { xpProgressText, type XpProgress } from '../../shared/evaluate/xpAdvancement';
 
 /** A value the baseline has not derived yet is shown as pending, never as a zero. */
 export function pending(value: number | string | undefined | null): string {
@@ -140,7 +141,8 @@ export function StatsList({
   effects,
 }: {
   partial: PartialBaseline | null;
-  xp: number | null;
+  /** V190: server-computed XP progress at the campaign's XP per level. */
+  xp: XpProgress | null;
   compact?: boolean;
   /** V159: the hero whose active effects add to its derived values. */
   holderId?: string;
@@ -176,7 +178,7 @@ export function StatsList({
     ['Renown', pending(partial?.renown?.value)],
     ['Wealth', pending(partial?.wealth?.value)],
   ];
-  if (xp !== null) rows.push(['XP', xp]);
+  if (xp !== null) rows.push(['XP', xpProgressText(xp)]);
   return (
     <ul
       className={cn(

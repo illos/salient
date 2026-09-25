@@ -4,6 +4,7 @@
  * docs/table-spec.md: Malice visibility, monster visibility and health display, public tests. */
 import type { Doc } from '../_generated/dataModel';
 import { v } from 'convex/values';
+import { STANDARD_XP_PER_LEVEL } from '../../shared/evaluate/xpAdvancement';
 
 export const DEFAULT_SETTINGS = {
   showMalice: false,
@@ -11,6 +12,8 @@ export const DEFAULT_SETTINGS = {
   healthDisplay: 'bar' as const,
   /** A06: player undo is on for new campaigns (confirmed 2026-09-11); off keeps Director rewind/redo. */
   enableUserUndo: true,
+  /** V190: chapter/making-a-hero.md, Heroic Advancement table (16 XP per level). */
+  xpPerLevel: STANDARD_XP_PER_LEVEL,
 };
 export const settingsOf = (campaign: Doc<'campaigns'>) => ({
   ...DEFAULT_SETTINGS,

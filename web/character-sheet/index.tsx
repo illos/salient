@@ -505,7 +505,7 @@ export function HeroSheetView({
           <SheetSection title="Stats" compact id="sheet-stats">
             <StatsList
               partial={partial}
-              xp={live?.xp ?? null}
+              xp={live ? sheet.xpProgress : null}
               compact
               holderId={sheet.id}
               effects={live?.effectInstances}
@@ -569,7 +569,7 @@ export function HeroSheetView({
           <SheetSection title="Stats" id="sheet-stats">
             <StatsList
               partial={partial}
-              xp={live?.xp ?? null}
+              xp={live ? sheet.xpProgress : null}
               holderId={sheet.id}
               effects={live?.effectInstances}
             />
