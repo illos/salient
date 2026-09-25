@@ -142,11 +142,11 @@ Spec references:
   immunity 5. If he takes holy damage, he loses this immunity until the end of the round.") sits
   outside his cell, so V178 dealt him 5 too much on every non-holy hit.
   - **Fix:** `FOE_MODIFIER_TRAITS` in `shared/resolve/damageModifiers.ts` lists every stat block
-    whose own features change its immunity or weakness outside the cells (56, each with the quoted
+    whose own features change its immunity or weakness outside the cells (57 after round 2, each with the quoted
     feature). `damageTargetFacts` returns them as manual and names the feature.
   - **Heroes:** `HERO_MODIFIER_TRAITS` does the same for the Corrupted Mentor complication, whose
     holy weakness grows.
-  - **Reviewed mentions:** `FOE_MODIFIER_MENTIONS_REVIEWED` gives a reason for each of the 29 other
+  - **Reviewed mentions:** `FOE_MODIFIER_MENTIONS_REVIEWED` gives a reason for each of the 28 other
     mentions (a target, an object, the dealer's damage, another creature, a feature name).
   - **Scan test:** `tests/scripts/immunity-weakness.test.ts` covers every read stat block's feature
     text with `/damage (immunity|weakness)|immunit|immune|weakness/i`, and fails on any
@@ -156,3 +156,8 @@ Spec references:
     unchanged.
   - **Q-IW-1:** point 3 now covers the Mark extra after a halving, point 4 the trait list, and the
     new point 5 the readings and what isn't covered.
+- 2026-09-25, review round 2 (one blocking item): the Olothec's Psychic Pulse gives the olothec
+  damage immunity 4, so it moved from the reviewed list to `FOE_MODIFIER_TRAITS`. The other
+  reviewed mentions were re-read line by line, and none gives the creature itself an immunity or
+  weakness. Q-IW-1 now records the Olothec (point 4), the Bandit Chief's Form Up! reading, and the
+  limit of classifying a whole stat block (point 5).

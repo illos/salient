@@ -1719,6 +1719,8 @@ interpretation with its alternatives.
        - the Crux of Fire and the Essences of Storms and Tides (Convocation, "Self or one
          elemental");
        - the Lich's Necrotic Form, Lord Syuul's and the Evolutionist's Adaptability;
+       - the Olothec's Psychic Pulse (`monster/olothec/statblock/olothec.md`: "Additionally, until
+         the start of their next turn, the olothec has damage immunity 4.");
        - the Minotaurs' Bays, the Bonecage's Ribcage Chomp, and the Bandit Chief's Form Up!;
        - the Kobold Centurion's Testudo! and Are You Not Entertained?!;
        - the war dogs: Doomthief, Tetrarch, Iron Priest (Iron Banner), Castellan Hoplon, Soulbinder
@@ -1735,6 +1737,16 @@ interpretation with its alternatives.
    - "Self or one elemental" (the Convocations) and Iron Banner's "Each war dog in the area" (a 4
      aura) are read as able to reach the user, so those stat blocks are manual. Alternative: treat
      them as affecting others only and read their cells.
+   - The Human Bandit Chief's Form Up! (`monster/human/statblock/human-bandit-chief.md`: "until
+     the end of the encounter, while the bandit chief or any ally is adjacent to a target, they
+     have damage immunity 2") is read with "they" as the bandit chief or ally, so the chief is
+     manual. Alternative: "they" is the target, so the chief's own cells are read and the targets
+     gain the immunity.
+   - The scan classifies a whole stat block. Once a stat block is on the reviewed list, a later
+     harmful mention in the same block (a second feature, or a second clause in the same
+     feature) is not flagged. The Olothec's Psychic Pulse was missed this way until review: its
+     targets' weakened and slimed hid "the olothec has damage immunity 4". The reviewed list was
+     then re-read line by line. A change to a stat block's text still needs that re-read.
    - Not covered: features that give another creature an immunity. Examples are the Giant
      Shambler Zombie's Meat Shield ("Each ally adjacent to the shambler has damage immunity 3"),
      Castellan Hoplon's Hold the Line, the War Dog Neuronite's The Voice and the Wodenelg's rider.

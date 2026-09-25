@@ -342,6 +342,13 @@ export const FOE_MODIFIER_TRAITS: Readonly<Record<string, readonly ModifierTrait
       text: 'The tantrum has damage immunity 3 and speed 8 while their squad has two or fewer minions in it.',
     },
   ],
+  // Psychic Pulse's other clauses (weakened, slimed) are the targets'; this one is the olothec's.
+  'mcdm.monsters.v1/monster.olothec.statblock/olothec': [
+    {
+      feature: 'Psychic Pulse',
+      text: 'Additionally, until the start of their next turn, the olothec has damage immunity 4.',
+    },
+  ],
   'mcdm.monsters.v1/monster.retainer.statblock/devil-defector': [
     {
       feature: 'True Name',
@@ -475,7 +482,6 @@ export const FOE_MODIFIER_MENTIONS_REVIEWED: Readonly<Record<string, string>> = 
   'mcdm.monsters.v1/monster.hobgoblin.statblock/slaughter-demon': TARGET,
   'mcdm.monsters.v1/monster.kingfissure-worm.statblock/kingfissure-worm': OBJECT,
   'mcdm.monsters.v1/monster.kobold.statblock/kobold-adeptus': DEALT,
-  'mcdm.monsters.v1/monster.olothec.statblock/olothec': TARGET,
   'mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger': TARGET,
   'mcdm.monsters.v1/monster.rival.1st-echelon.statblock/rival-elementalist': TARGET,
   'mcdm.monsters.v1/monster.rival.2nd-echelon.statblock/rival-elementalist': TARGET,
