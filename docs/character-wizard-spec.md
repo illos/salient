@@ -194,8 +194,8 @@ See [the deferred queue](rules-questions-for-user.md#deferred-questions).
 In scope: creation, advancement, full editing, history, authored details, inventory integration, derived
 sheets, attachment/detachment/duplication, Director review, and Forge Steel import (not V1 per the [2026-09-25 ruling](#required-import)). Compatible Forge
 Steel export is not required for v1. The data model must preserve the information and interchange-adapter
-boundary needed to add it without rewriting the system. Import remains a v1 requirement; export implementation
-and demonstrated compatibility are later delivery work.
+boundary needed to add it without rewriting the system. Import and export are later delivery work: import
+waits until the wizard is level-complete for all classes (user ruling 2026-09-25).
 
 The app is mobile-optimized and online-first. Shared character operations must also work through the headless
 development client. Full combat automation, a digital battle map, a general-purpose version-control product,
@@ -857,7 +857,7 @@ unmapped data where compatible. Do not resurrect cleared campaign values from th
 
 Success means the character retains expected semantic choices and state after Forge Steel loads and updates
 it. Valid JSON alone is insufficient: Forge Steel refreshes known definitions and can discard unavailable
-nested selections. For v1, verify import with real files and missing-sourcebook/unsupported-data cases,
+nested selections. When import resumes, verify it with real files and missing-sourcebook/unsupported-data cases,
 documenting limitations without enabling excluded content. Verify export round trips when that later adapter
 is implemented; they are not a v1 release gate. See [interchange research](forge-steel-interchange.md). No
 live round trip has been demonstrated yet.
@@ -949,7 +949,7 @@ state through shared operations. Exercise phone dimensions when mobile delivery 
 | Detachment/reset | Detach a character with nonzero XP/Victories. Both clear while current level/build/history/inventory remain. A campaign duplicate starts cleared without changing the original's values. |
 | Live-state preservation | Gain an item or take damage through gameplay while a full edit awaits review. Encounter changes reach the main sheet immediately. Approval must wait until the encounter lock ends, preserve those changes, and apply the established maximum-reconciliation policy. |
 | Authorization | Character owner and campaign Director/owner can inspect as specified; player grants permit sheet viewing/combat control under the access spec. Neither friendship nor guessed IDs grant access. Director/controller status does not permit selecting another user's build choices; character notes are owner-private; any additional private-field exclusions remain open. |
-| V1 import / future export compatibility | Import a real core character, nested-domain character, and customized/homebrew example. Preserve supported selections and unknown data with diagnostics. For export, test both an imported and a locally built hero by reopening in Forge Steel. |
+| Import / export compatibility (not V1, ruling 2026-09-25) | Import a real core character, nested-domain character, and customized/homebrew example. Preserve supported selections and unknown data with diagnostics. For export, test both an imported and a locally built hero by reopening in Forge Steel. |
 
 Rules support, conversion fidelity, and workflow behavior are separate acceptance dimensions. Approval by a
 Director does not certify parser correctness or turn unsupported automation into supported behavior.
