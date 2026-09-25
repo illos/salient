@@ -13,8 +13,11 @@ import { describeDuration } from '../../shared/resolve/lastingEffects';
 import { describeModifier } from '../../shared/resolve/modifiers';
 import { describeWatcher } from '../../shared/resolve/watchers';
 import { describeMark, effectVisibleTo } from '../../shared/resolve/marks';
+import { describeArea } from '../../shared/resolve/areas';
 import { bindActor } from './actors';
 import { campaignEffects, endEffectInstance, findCampaignEffect } from './effectInstances';
+import { addAreaMember, findMember, removeAreaMember } from './areas';
+import { committedEncounter } from './encounters';
 import { resolveHistoricalId } from './history';
 import type { OperationDefinition, Outcome } from './registry';
 
@@ -36,6 +39,17 @@ function summary(instance: EffectInstance, holder: { kind: string; id: string; n
     endsWhen: instance.endsWhen,
     scheduled: instance.registrationIds.length > 0,
     ...(instance.manualStacking ? { manualStacking: true } : {}),
+    // V200: an area's members, and the area a member's rider belongs to.
+    ...(instance.members
+      ? {
+          members: instance.members.map(member => ({
+            party: member.party,
+            effects: member.effects,
+            ...(member.manual ? { manual: member.manual } : {}),
+          })),
+        }
+      : {}),
+    ...(instance.area ? { area: instance.area } : {}),
     sourceUseEventId: instance.sourceUseEventId,
   };
 }
@@ -83,7 +97,7 @@ const effectList: OperationDefinition = {
     );
     const lines = listed.map(
       ({ instance }, index) =>
-        `${index + 1}. ${instance.actorLabel}'s ${instance.abilityName} on ${instance.subject.name}, ${describeDuration(instance.printedDuration, instance.endsWhen)}${instance.registrationIds.length ? '' : ' (unscheduled)'}: "${instance.payload.text}"${instance.payload.kind === 'modifier' ? ` (${describeModifier(instance.payload.modifier)}${instance.consumeOn ? ', used up by the next roll' : ''})` : ''}${instance.payload.kind === 'watcher' ? ` (${describeWatcher(instance.payload.watcher)}${instance.manualStacking ? '; manual stacking, the engine does not fire it' : ''})` : ''}${instance.payload.kind === 'mark' ? ` (${describeMark(instance.owner.name, instance.subject.name)})` : ''}`,
+        `${index + 1}. ${instance.actorLabel}'s ${instance.abilityName} on ${instance.subject.name}, ${describeDuration(instance.printedDuration, instance.endsWhen)}${instance.registrationIds.length ? '' : ' (unscheduled)'}: "${instance.payload.text}"${instance.payload.kind === 'modifier' ? ` (${describeModifier(instance.payload.modifier)}${instance.consumeOn ? ', used up by the next roll' : ''})` : ''}${instance.payload.kind === 'watcher' ? ` (${describeWatcher(instance.payload.watcher)}${instance.manualStacking ? '; manual stacking, the engine does not fire it' : ''})` : ''}${instance.payload.kind === 'mark' ? ` (${describeMark(instance.owner.name, instance.subject.name)})` : ''}${instance.payload.kind === 'area' ? ` (${describeArea(instance.payload.area)}; members: ${(instance.members ?? []).map(member => `${member.party.name}${member.manual ? ' (manual)' : ''}`).join(', ') || 'none'})` : ''}`,
     );
     return {
       kind: 'effect.list',
@@ -161,4 +175,140 @@ const effectEnd: OperationDefinition = {
   },
 };
 
-export const effectOperations: OperationDefinition[] = [effectList, effectEnd];
+/** Whether the caller's player controls one of these heroes (the Director always may act). */
+async function controlsAny(
+  ctx: Parameters<OperationDefinition['execute']>[0],
+  context: Parameters<OperationDefinition['execute']>[1]['context'],
+  parties: readonly { kind: string; id: string }[],
+): Promise<boolean> {
+  if (context.role === 'director') return true;
+  for (const party of parties) {
+    if (party.kind !== 'character') continue;
+    const heroId = ctx.db.normalizeId(
+      'characters',
+      await resolveHistoricalId(ctx, context.campaign._id, party.id),
+    );
+    const hero = heroId ? await ctx.db.get(heroId as Id<'characters'>) : null;
+    if (hero?.campaignId === context.campaign._id && hero.ownerId === context.user._id) return true;
+  }
+  return false;
+}
+
+/**
+ * V200 `effect.members` (docs/lasting-effects-design.md#6-areas-and-auras). There is no map, so the
+ * table keeps who is in an area or aura (user ruling, 2026-09-25). Adding a member is an explicit
+ * "enters the area": its riders are stored and its enter riders fire within their printed limit.
+ * Removing one is leaving: its riders end. Both are journaled with the actor, so undo of an add
+ * reverses the membership and everything the enter rider did.
+ */
+const effectMembers: OperationDefinition = {
+  id: 'effect.members',
+  family: 'effect',
+  verb: 'members',
+  title: 'Change who is in an area',
+  description:
+    'Add a creature to an area or aura (it enters the area: enter riders fire within their limit) or remove one (it leaves; its riders end). The table keeps the members: there is no map. The Director changes any area; a player changes areas their hero owns or moves their own hero.',
+  args: {
+    instance: v.string(),
+    add: v.optional(
+      v.union(v.object({ name: v.string() }), v.object({ refKind: v.string(), id: v.string() })),
+    ),
+    remove: v.optional(
+      v.union(v.object({ name: v.string() }), v.object({ refKind: v.string(), id: v.string() })),
+    ),
+    note: v.optional(v.string()),
+  },
+  argDescriptions: {
+    instance: 'The area effect instance id, as effect.list gives it.',
+    add: 'The hero or foe entering the area, as @Name or @{foe:id}.',
+    remove: 'The hero or foe leaving the area, as @Name or @{foe:id}.',
+    note: 'Why, up to 500 characters.',
+  },
+  roles: ['director', 'player'],
+  session: 'running',
+  actor: 'none',
+  execute: async (ctx, { context, args }): Promise<Outcome> => {
+    const id = String(args.instance);
+    const note = args.note === undefined ? undefined : String(args.note).trim();
+    if (note !== undefined && note.length > 500)
+      throw new ConvexError('A note is at most 500 characters.');
+    if ((args.add === undefined) === (args.remove === undefined))
+      throw new ConvexError('Give exactly one of add=@Creature or remove=@Creature.');
+    const found = await findCampaignEffect(ctx, context.campaign._id, id);
+    if (!found || found.instance.payload.kind !== 'area')
+      throw new ConvexError('No area with that id is at this table.');
+    const { holder, instance } = found;
+    if (instance.status !== 'active')
+      throw new ConvexError(
+        `${instance.actorLabel}'s ${instance.abilityName} area has already ended (${instance.endedReason ?? instance.status}).`,
+      );
+    const reference = (args.add ?? args.remove) as Reference;
+    const current =
+      'id' in reference
+        ? { ...reference, id: await resolveHistoricalId(ctx, context.campaign._id, reference.id) }
+        : reference;
+    const bound = await bindActor(ctx, { ...context, role: 'director' }, current);
+    if (bound.kind === 'squad')
+      throw new ConvexError(
+        `${bound.name} is a squad: add or remove its minions one by one (the table resolves the area's riders for them).`,
+      );
+    const party = { kind: bound.kind, id: bound.id, name: bound.name };
+    if (!(await controlsAny(ctx, context, [instance.owner, party])))
+      throw new ConvexError(
+        `You do not control ${instance.owner.name} or ${party.name}; the Director changes this area.`,
+      );
+    const member = await findMember(ctx, context.campaign._id, instance, party.id);
+    const area = `${instance.actorLabel}'s ${instance.abilityName}`;
+    const who = context.user.displayName;
+    if (args.add !== undefined) {
+      if (member) throw new ConvexError(`${party.name} is already in ${area}.`);
+      const encounter = await committedEncounter(ctx, context.campaign);
+      return {
+        kind: 'effect.members',
+        description: `${who}: ${party.name} enters ${area}${note ? ` (${note})` : ''}.`,
+        data: {
+          effectInstanceId: instance.id,
+          change: 'add',
+          member: party,
+          ...(note ? { note } : {}),
+        },
+        commit: async (mctx, scope) => {
+          await addAreaMember(mctx, scope, holder, instance.id, party, encounter?._id);
+        },
+      };
+    }
+    if (!member) throw new ConvexError(`${party.name} is not in ${area}.`);
+    // An area that names its user ("Self and each ally in the area") is an aura: it "always
+    // originates from you and moves with you" (rule/combat/aura.md), so its user never leaves it.
+    if (
+      party.id === instance.owner.id &&
+      instance.payload.kind === 'area' &&
+      instance.payload.area.riders.some(rider => rider.who.self)
+    )
+      throw new ConvexError(
+        `${area} originates from ${instance.owner.name} and moves with them (rule/combat/aura.md), so ${instance.owner.name} can't leave it; end the effect with /effect end instead.`,
+      );
+    return {
+      kind: 'effect.members',
+      description: `${who}: ${party.name} leaves ${area}${note ? ` (${note})` : ''}.`,
+      data: {
+        effectInstanceId: instance.id,
+        change: 'remove',
+        member: party,
+        ...(note ? { note } : {}),
+      },
+      commit: async (mctx, scope) => {
+        await removeAreaMember(
+          mctx,
+          scope,
+          holder,
+          instance.id,
+          party.id,
+          `${party.name} left ${area} (removed by ${who}${note ? `: ${note}` : ''})`,
+        );
+      },
+    };
+  },
+};
+
+export const effectOperations: OperationDefinition[] = [effectList, effectEnd, effectMembers];

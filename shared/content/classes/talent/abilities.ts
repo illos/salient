@@ -151,7 +151,7 @@ export const TALENT_ACTIONS: TalentAction[] = [
     sourcePath: 'en/unified/md/feature/ability/talent/level-1/incinerate.md',
     actionType: 'Source-timed effect',
     activationCondition:
-      'Until start of your next turn, first enemy entry each round or starting there takes 2 fire damage. Strained fire ends at end of your current turn. Fixed damage has no Force bonus. Resolve the stated effects manually.',
+      'The engine applies this with Incinerate: the column is an area whose members are the targets, then who the table adds or removes (/effect members; adding one is it entering). Until the start of your next turn, an enemy takes 2 fire damage the first time it enters each round and whenever it starts its turn there; strained, the fire ends at the end of your turn. Fixed damage has no Force bonus. Record it here only for a use the engine did not resolve, and then resolve the stated effects manually.',
   },
   {
     name: 'Entropic Bolt: Repeated Target',

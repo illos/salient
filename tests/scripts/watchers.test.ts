@@ -9,7 +9,8 @@
  *   the encounter or until you are dying, each target gains 1 surge at the end of each of your
  *   turns."
  * - feature/ability/censor/level-2/blessing-of-the-faithful.md: the same sentence on a 3 aura,
- *   whose membership changes (rule/combat/aura.md: it "moves with you for the duration").
+ *   whose membership changes (rule/combat/aura.md: it "moves with you for the duration"); V200
+ *   compiles it as an area, not a watcher.
  * - rule/health/winded.md: winded at or below half the Stamina maximum; rule/health/dying.md: a
  *   hero is dying at 0 Stamina or lower.
  */
@@ -104,10 +105,12 @@ test('pattern admission: Violence Will Not Aid Thee and Blessing of Insight comp
     targetShape: { kind: 'each', self: true },
   });
   expect(insight.sections.map(node => node.kind)).toEqual(['watcher']);
-  // The aura's membership changes over the watcher's life (design section 6); allies counted
-  // within 10 squares (Our Hearts Your Strength) and kills (Reap) are not observed.
-  for (const name of ['Blessing of the Faithful', 'Our Hearts Your Strength', 'Reap'])
+  // Allies counted within 10 squares (Our Hearts Your Strength) and kills (Reap) are not observed.
+  for (const name of ['Our Hearts Your Strength', 'Reap'])
     expect(compiled(name).execution, name).toBe('manual');
+  // V200: the same sentence on a 3 aura is an area whose members the table keeps, never a watcher
+  // of the use-time targets (design section 6; tests/scripts/areas.test.ts).
+  expect(compiled('Blessing of the Faithful').sections.map(node => node.kind)).toEqual(['area']);
 });
 
 const rolled: CompiledAbilityInput = {

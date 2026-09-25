@@ -276,7 +276,7 @@ export const TROUBADOUR_ACTIVATION: Record<string, string> = {
   'We Meet at Last':
     'Until the end of the encounter you and the target can target each other beyond distance, using this ability’s distance; the target cannot be force moved by such a use. Use We Meet at Last: Message each turn. Resolve manually.',
   '"Fire Up the Night"':
-    'At the start of a combat round choose this as your one performance only while not dazed, dead or surprised (Routines). While active, each target who starts its turn in the aura takes no bane on strikes against creatures with concealment and once during its turn can search for hidden creatures as a free maneuver. Lifecycle and effects are manual.',
+    'At the start of a combat round choose this as your one performance only while not dazed, dead or surprised (Routines). While active, each target who starts its turn in the aura takes no bane on strikes against creatures with concealment and once during its turn can search for hidden creatures as a free maneuver. The engine keeps the performance and its aura (members via /effect members), ends it when you choose another performance or are dazed or dead at a round start, and reminds each member at its turn start; the bane and the search are resolved by hand.',
   '"Never-Ending Hero"':
     'At the start of a combat round choose this as your one performance only while not dazed, dead or surprised (Routines). While active, each target who starts its turn dying in the aura gains an edge on power rolls and ignores bleeding until the end of its turn. Lifecycle and effects are manual.',
 };

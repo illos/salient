@@ -119,6 +119,11 @@ export type ScheduledWorkKind =
    * fires its responses at each of the watched creature's turn starts or ends.
    */
   | { kind: 'watcher'; effectInstanceId: string }
+  /**
+   * V200: a Troubadour performance's maintenance at the start of each combat round
+   * (feature/troubadour/level-1/routines.md): it ends when its owner is dazed or dead then.
+   */
+  | { kind: 'performance'; effectInstanceId: string }
   /** Any other source-backed operation registered by A04/A05; must name its registered operation. */
   | { kind: 'operation'; operationId: OperationId };
 

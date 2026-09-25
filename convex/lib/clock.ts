@@ -58,6 +58,7 @@ import { applyDamage, saveSucceeds } from '../../shared/resolve/index';
 import { statModifiers, type StatContribution } from '../../shared/resolve/modifiers';
 import { damageTargetFacts, writeDamage } from './resolve';
 import { fireClockWatcher } from './watchers';
+import { maintainPerformance } from './areas';
 
 export type Registration = Doc<'clockRegistrations'>;
 
@@ -783,6 +784,32 @@ async function fire(
           round: firing.event.round,
           ...(firing.event.turn ? { turnId: firing.event.turn.turnId } : {}),
         },
+        firing.registration.source.label,
+      );
+    }
+    case 'performance': {
+      // V200 (feature/troubadour/level-1/routines.md): the performance's maintenance at the start
+      // of a combat round.
+      const creatureId = firing.registration.affectedIds?.[0];
+      const effect = creatureId
+        ? await findEffectInstance(ctx, creatureId, work.effectInstanceId)
+        : null;
+      if (
+        !effect ||
+        effect.campaignId !== firing.encounter.campaignId ||
+        effect.instance.status !== 'active' ||
+        !effect.instance.registrationIds.includes(firing.registration._id)
+      )
+        return {
+          kind: 'clock.unsupported',
+          description: `${firing.registration.source.label}: no active performance; resolve manually.`,
+          unsupported: 'no active performance',
+        };
+      return maintainPerformance(
+        ctx,
+        firing.scope,
+        effect.holder,
+        effect.instance,
         firing.registration.source.label,
       );
     }

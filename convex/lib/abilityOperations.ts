@@ -114,6 +114,8 @@ import { commitStrained, planStrained, withStrainedPlan, type StrainedPlan } fro
 import { assertWatchersReconcilable, noteManualWatchers, observeWatchers } from './watchers';
 import { applyMark } from './marks';
 import { describeWatcher } from '../../shared/resolve/watchers';
+import { describeArea } from '../../shared/resolve/areas';
+import { applyArea, endChosenPerformance } from './areas';
 import {
   acceptanceOrder,
   closeOffersOnPlay,
@@ -1410,6 +1412,103 @@ async function commitWatchers(
 }
 
 /**
+ * V200: each applied area of a compiled use becomes an `area` effect instance on its user
+ * (docs/lasting-effects-design.md#6-areas-and-auras), with the use's targets as its first members
+ * and each rider stored on the members it applies to (convex/lib/areas.ts). The table then keeps the
+ * members with `effect.members`. A member whose rider joined a manual stacking group is named in
+ * the linked entry.
+ */
+async function commitAreas(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  occurrences: import('../../shared/contracts/compiledResult').EffectOccurrence[],
+  recipients: { actor: Actor }[],
+  source: {
+    eventId: Id<'events'>;
+    abilityId: string;
+    abilityName: string;
+    actor: Actor;
+    sourcePath: string;
+  },
+  encounterId: Id<'encounters'> | null,
+): Promise<void> {
+  const cause = (await ctx.db.get(scope.eventId))!;
+  const use = (await ctx.db.get(source.eventId))!;
+  for (const occurrence of occurrences) {
+    const effect = occurrence.effect;
+    if (effect.kind !== 'area') continue;
+    const owner = { kind: source.actor.kind, id: source.actor.id, name: source.actor.name };
+    const lasts = describeDuration(effect.duration, effect.spec.endsWhen);
+    const members = effect.members.flatMap(id => {
+      const actor = recipients.find(r => r.actor.id === id)?.actor;
+      return actor ? [{ kind: actor.kind, id: actor.id, name: actor.name }] : [];
+    });
+    const applied =
+      effect.status === 'applied' && effect.payload
+        ? await applyArea(
+            ctx,
+            scope,
+            {
+              id: occurrence.id,
+              kind: 'area',
+              sourceUseEventId: source.eventId,
+              sourceActorId: source.actor.id,
+              abilityId: source.abilityId,
+              abilityName: source.abilityName,
+              actorLabel: source.actor.name,
+              sourcePath: source.sourcePath,
+              clause: plainText(effect.clause),
+              owner,
+              subject: owner,
+              payload: { kind: 'area', text: effect.spec.text, area: effect.payload },
+              printedDuration: effect.duration,
+              endsWhen: effect.spec.endsWhen,
+              appliedSequence: use.sequence,
+            },
+            members,
+            encounterId ?? undefined,
+          )
+        : undefined;
+    const memberText = (applied?.joined ?? [])
+      .map(({ member, manualGroup }) =>
+        member.manual
+          ? `${member.party.name} (manual: ${member.manual})`
+          : manualGroup.length
+            ? `${member.party.name} (manual stacking: already under ${source.abilityName} in a way the engine can't resolve; apply the stacking rule at the table)`
+            : member.effects.length
+              ? member.party.name
+              : `${member.party.name} (no rider applies)`,
+      )
+      .join(', ');
+    await appendEvent(ctx, {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      encounterId: cause.encounterId,
+      origin: 'engine',
+      commandId: cause.commandId,
+      causeEventId: scope.eventId,
+      kind: applied ? 'effect.applied' : 'effect.untracked',
+      description: applied?.endedAtApplication
+        ? `${source.actor.name}'s ${source.abilityName} area, ${lasts}: ${describeArea(effect.payload!)}. It ends as it is applied (${applied.endedAtApplication}): nothing is scheduled and no rider is stored.`
+        : applied
+          ? `${source.actor.name}'s ${source.abilityName} area, ${lasts}: ${describeArea(effect.payload!)}. Members: ${memberText || 'none'}. The table keeps who is in the area with /effect members (adding a creature is it entering the area)${applied.instance.registrationIds.length || ['none', 'maintained'].includes(effect.duration.kind) ? '' : '. Outside a committed encounter nothing is scheduled: end it with /effect end'}.`
+          : `${source.actor.name}'s ${source.abilityName} area, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'only a hero or a foe can hold an area'}); resolve it at the table.`,
+      payload: {
+        sourceUseEventId: source.eventId,
+        occurrence: occurrence.id,
+        effectInstanceId: applied?.instance.id ?? null,
+        holder: applied?.holder ?? null,
+        duration: applied?.instance.duration ?? null,
+        ...(applied?.endedAtApplication ? { endedAtApplication: applied.endedAtApplication } : {}),
+        members: applied?.instance.members ?? [],
+        area: effect.payload ?? null,
+        sourcePath: source.sourcePath,
+      },
+    });
+  }
+}
+
+/**
  * V171: the user's `ability-used` and, for a strike, `strike-made` watchers
  * (rule/combat/strike.md: a strike is an ability with the Strike keyword).
  */
@@ -1910,6 +2009,8 @@ const abilityUse: OperationDefinition = {
         },
         commit: async (mctx, scope) => {
           await noteRecordedUse(mctx, scope, actor!, ability.keywords, targets);
+          // V200: choosing a performance ends the user's current one (Routines).
+          await endChosenPerformance(mctx, scope, actor!, ability.keywords, ability.name);
           // V173: a triggered action used by hand still counts against the round's allowance.
           if (triggeredUse)
             await recordUse(
@@ -2282,6 +2383,11 @@ const abilityUse: OperationDefinition = {
           return effect.status === 'applied'
             ? `${nameOf(effect.targetId)} is marked by ${actor!.name} until the end of the encounter, until ${actor!.name} is dying, or until ${actor!.name} uses ${ability.name} again (tracked; the linked effect entry records it).`
             : `For the table (${nameOf(effect.targetId)}): the mark is not tracked (${effect.requirements.join('; ')}).`;
+        // V200: an area whose members the table keeps.
+        if (effect.kind === 'area')
+          return effect.status === 'applied' && effect.payload
+            ? `Area, ${describeDuration(effect.duration, effect.spec.endsWhen)}: ${describeArea(effect.payload)}; members ${effect.members.map(nameOf).join(', ')} (tracked; the linked effect entry records it).`
+            : `For the table: "${effect.clause}" (${effect.requirements.join('; ')})`;
         if (effect.kind === 'watcher')
           return effect.status === 'applied' && effect.payload
             ? `${nameOf(effect.targetId)}: ${describeWatcher(effect.payload)}, ${describeDuration(effect.spec.duration, effect.spec.endsWhen)} (tracked; the linked effect entry records whether the engine fires it).`
@@ -2363,6 +2469,8 @@ const abilityUse: OperationDefinition = {
             await debit(mctx, scope, records, context, outcome.cost.after, outcome.cost.resource);
           // V158: "until you use this ability again" ends the owner's earlier effects of it.
           await endReusedEffects(mctx, scope, actor!, ability.abilityId);
+          // V200: choosing a performance ends the user's current one (Routines).
+          await endChosenPerformance(mctx, scope, actor!, ability.keywords, ability.name);
           // V171: the user's watchers of their own ability use.
           await observeUse(mctx, scope, actor!, ability.keywords);
           // 2. Gains on each hero's live state (temporary Stamina keeps the greater; surges add).
@@ -2426,6 +2534,21 @@ const abilityUse: OperationDefinition = {
           await logReappliedDamage(mctx, scope, `${actor!.name}'s ${ability.name}`, reapplied);
           // V171: watchers become watcher effect instances on each subject.
           const watcherIds = await commitWatchers(
+            mctx,
+            scope,
+            effects(scope.eventId),
+            [records, ...targets],
+            {
+              eventId: scope.eventId,
+              abilityId: ability.abilityId,
+              abilityName: ability.name,
+              actor: actor!,
+              sourcePath: ability.source.path,
+            },
+            allowance.encounterId,
+          );
+          // V200: an area is stored on the user with the targets as its first members.
+          await commitAreas(
             mctx,
             scope,
             effects(scope.eventId),
@@ -2551,6 +2674,8 @@ const abilityUse: OperationDefinition = {
           if (cost && !cost.waived)
             await debit(mctx, scope, records, context, cost.after, cost.resource);
           await noteRecordedUse(mctx, scope, actor!, ability.keywords, targets);
+          // V200: choosing a performance ends the user's current one (Routines).
+          await endChosenPerformance(mctx, scope, actor!, ability.keywords, ability.name);
           if (ability.actionType)
             await recordUse(mctx, scope, allowance, actor!, type, ability.name, tracking);
           await clear(mctx);
@@ -2944,6 +3069,8 @@ const abilityUse: OperationDefinition = {
         // V158: "until you use this ability again" ends the owner's earlier effects of it.
         if (compiledOutcome?.kind === 'resolved')
           await endReusedEffects(mctx, scope, actor!, ability.abilityId);
+        // V200: choosing a performance ends the user's current one (Routines).
+        await endChosenPerformance(mctx, scope, actor!, ability.keywords, ability.name);
         // V159: the consumables this roll qualified for are used up by it (design 5a).
         await consumeRollEffects(
           mctx,
@@ -3051,6 +3178,22 @@ const abilityUse: OperationDefinition = {
                 allowance.encounterId,
               )
             : new Set<string>();
+        // V200: an area is stored on the user with the targets as its first members.
+        if (compiledOutcome?.kind === 'resolved')
+          await commitAreas(
+            mctx,
+            scope,
+            effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+            targets,
+            {
+              eventId: scope.eventId,
+              abilityId: ability.abilityId,
+              abilityName: ability.name,
+              actor: actor!,
+              sourcePath: ability.source.path,
+            },
+            allowance.encounterId,
+          );
         // V158: lasting instructions become tracked effect instances after the conditions.
         if (compiledOutcome?.kind === 'resolved')
           await commitLasting(
@@ -3528,6 +3671,8 @@ const abilityCorrect: OperationDefinition = {
               effect.kind === 'modifier' ||
               // V171: a watcher section is once per use too; it keeps its occurrence and instance.
               effect.kind === 'watcher' ||
+              // V200: so is an area; its members are the table's since the use.
+              effect.kind === 'area' ||
               // V170: the Strained outcome is once per use and records the user's damage as applied.
               effect.kind === 'strained'
             ) {
@@ -3777,6 +3922,11 @@ const abilityResolved: OperationDefinition = {
       if (occurrence.effect.kind === 'watcher' && occurrence.effect.status === 'applied')
         throw new ConvexError(
           'An applied watcher is tracked by the engine, which fires it; end it with /effect end.',
+        );
+      // V200: an applied area is tracked by the engine; the table keeps its members.
+      if (occurrence.effect.kind === 'area' && occurrence.effect.status === 'applied')
+        throw new ConvexError(
+          'An applied area is tracked by the engine; change its members with /effect members or end it with /effect end.',
         );
       // V175: an applied mark is tracked by the engine.
       if (occurrence.effect.kind === 'mark' && occurrence.effect.status === 'applied')

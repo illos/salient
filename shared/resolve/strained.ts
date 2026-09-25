@@ -40,10 +40,20 @@ export interface StrainedSpec {
    * than reduces (rule/damage/damage-weakness.md), still applies.
    */
   selfDamage?: { amount: number; damageType?: string; unreducible: true };
+  /**
+   * V200, feature/ability/talent/level-1/incinerate.md: "The size of the cube increases by 2, but
+   * the fire disappears at the end of your turn." The size is the table's: there is no map, and the
+   * table keeps who is in the area (user ruling, 2026-09-25). The fire, the area this use's Effect
+   * section creates, lasts until the end of the user's turn instead of the start of their next one.
+   * Admitted only with that area section (compileAbility `strainedAdmitted`).
+   */
+  area?: { sizeIncrease: number; endsAtTurnEnd: true };
 }
 
 const TYPES = 'acid|cold|corruption|fire|holy|lightning|poison|psychic|sonic';
 const TARGET_EXTRA = new RegExp(`^The target takes an extra (\\d+) (?:(${TYPES}) )?damage\\.$`);
+const AREA_ENDS =
+  /^The size of the cube increases by (\d+), but the fire disappears at the end of your turn\.$/;
 const SELF_UNREDUCIBLE = new RegExp(
   `^You (?:also )?take (\\d+) (?:(${TYPES}) )?damage that can['’]t be reduced in any way\\.$`,
 );
@@ -63,6 +73,13 @@ export function strainedSection(text: string): StrainedSpec | undefined {
       spec.targetExtraDamage = { amount, ...(target[2] ? { damageType: target[2] } : {}) };
       continue;
     }
+    const area = AREA_ENDS.exec(sentence);
+    if (area && !spec.area && !spec.targetExtraDamage && !spec.selfDamage) {
+      const sizeIncrease = Number(area[1]);
+      if (!Number.isSafeInteger(sizeIncrease)) return undefined;
+      spec.area = { sizeIncrease, endsAtTurnEnd: true };
+      continue;
+    }
     const self = SELF_UNREDUCIBLE.exec(sentence);
     if (self && !spec.selfDamage) {
       const amount = Number(self[1]);
@@ -76,7 +93,7 @@ export function strainedSection(text: string): StrainedSpec | undefined {
     }
     return undefined;
   }
-  return spec.targetExtraDamage || spec.selfDamage ? spec : undefined;
+  return spec.targetExtraDamage || spec.selfDamage || spec.area ? spec : undefined;
 }
 
 export function sameStrainedSpec(a: StrainedSpec, b: StrainedSpec): boolean {
@@ -90,6 +107,7 @@ function canonical(spec: StrainedSpec) {
     spec.selfDamage
       ? [spec.selfDamage.amount, spec.selfDamage.damageType ?? null, spec.selfDamage.unreducible]
       : null,
+    spec.area ? [spec.area.sizeIncrease, spec.area.endsAtTurnEnd] : null,
   ];
 }
 

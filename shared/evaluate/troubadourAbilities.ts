@@ -21,6 +21,9 @@ export function troubadourAbilitySource(
       }
     : undefined;
 }
+/** V200: performances the engine keeps as areas (shared/resolve/areas.ts). */
+const AREA_PERFORMANCES = ['Revitalizing Limerick', '"Ballad of the Beast"'];
+
 export function troubadourAbilities(
   features: GrantedFeature[],
   existing: GrantedAbility[],
@@ -68,8 +71,9 @@ export function troubadourAbilities(
       ...(cost ? { cost: { resource: 'drama' as const, amount: cost } } : {}),
       ...(performance
         ? {
-            activationCondition:
-              'At start of a combat round choose this as your one performance only while not dazed, dead or surprised. Lifecycle, area and timed effects remain manual. Thunder Mother attacks only at end of round, ignores cover and cannot repeat a target; its level-based damage roll is manual.',
+            activationCondition: AREA_PERFORMANCES.includes(a.name)
+              ? 'At start of a combat round choose this as your one performance only while not dazed, dead or surprised. The engine keeps it and its aura (members via /effect members): it ends when you choose another performance, when you are dazed or dead at a round start, or at the end of the encounter, and each member’s rider fires at its turn (Ballad of the Beast: 1 surge at a member’s turn start; Revitalizing Limerick: a reminder at the end of your turn to choose targets who can spend a Recovery).'
+              : 'At start of a combat round choose this as your one performance only while not dazed, dead or surprised. Lifecycle, area and timed effects remain manual. Thunder Mother attacks only at end of round, ignores cover and cannot repeat a target; its level-based damage roll is manual.',
           }
         : {}),
       ...(a.name === 'Upstage'

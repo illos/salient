@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 182 (without a power roll: 20); unchanged reachable compatibility: 1439; structurally supported but unavailable: 0.
+Currently reachable compiled: 188 (without a power roll: 25); unchanged reachable compatibility: 1433; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -146,7 +146,7 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Repent! | hero-standalone | supported | compiled |  |
 | The Gods Punish and Defend | hero-standalone | supported | compiled |  |
 | Your Allies Cannot Save You! | hero-standalone | supported | compiled |  |
-| Blessing of the Faithful | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Blessing of the Faithful | hero-standalone | supported | compiled |  |
 | It Is Justice You Fear | hero-standalone | manual | legacy-compatibility | manual-section |
 | Prescient Grace | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Revelator | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
@@ -170,7 +170,7 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Drain | hero-standalone | supported | compiled |  |
 | Faith Is Our Armor | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Faithful Friend | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Font of Wrath | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Font of Wrath | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
 | Grave Speech | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Hands of the Maker | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Healing Grace | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
@@ -195,9 +195,9 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Reap | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Sacred Bond | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Saint's Tempest | hero-standalone | supported | compiled |  |
-| Statue of Power | hero-standalone | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
+| Statue of Power | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, defense-manual, target-boundary |
 | The Gods Command You Obey | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
-| Wellspring of Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Wellspring of Grace | hero-standalone | supported | compiled |  |
 | Fear of the Gods | hero-standalone | manual | legacy-compatibility | manual-section |
 | Saint's Raiment | hero-standalone | supported | compiled |  |
 | Soul Siphon | hero-standalone | supported | compiled |  |
@@ -229,7 +229,7 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | The Green Within, the Green Without | hero-standalone | supported | compiled |  |
 | Unquiet Ground | hero-standalone | supported | compiled |  |
 | Viscous Fire | hero-standalone | supported | compiled |  |
-| O Flower Aid, O Earth Defend | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| O Flower Aid, O Earth Defend | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, area-manual, manual-section, target-boundary |
 | Subvert the Green Within | hero-standalone | manual | legacy-compatibility | manual-section |
 | There Is No Space Between | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Translated Through Flame | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
@@ -239,7 +239,7 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Maw of Earth | hero-standalone | manual | legacy-compatibility | manual-section |
 | Remember Growth and Sun and Rain | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Swarm of Spirits | hero-standalone | manual | legacy-compatibility | manual-section |
-| Wall of Fire | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Wall of Fire | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
 | Back! | hero-standalone | supported | compiled |  |
 | Blood for Blood! | hero-standalone | manual | legacy-compatibility | manual-section |
 | Brutal Slam | hero-standalone | supported | compiled |  |
@@ -277,23 +277,23 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Joint Lock | hero-standalone | supported | compiled |  |
 | Kinetic Strike | hero-standalone | supported | compiled |  |
 | Magnetic Strike | hero-standalone | supported | compiled |  |
-| Null Field | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Null Field | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, area-manual, manual-section |
 | Phase Inversion Strike | hero-standalone | supported | compiled |  |
 | Phase Strike | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Pressure Points | hero-standalone | supported | compiled |  |
-| Psychic Pulse | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Psychic Pulse | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section |
 | Relentless Nemesis | hero-standalone | supported | compiled |  |
 | Stunning Blow | hero-standalone | supported | compiled |  |
 | Blur | hero-standalone | supported | compiled |  |
 | Entropic Field | hero-standalone | supported | compiled |  |
 | Force Redirected | hero-standalone | supported | compiled |  |
 | Gravitic Strike | hero-standalone | supported | compiled |  |
-| Heat Sink | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Heat Sink | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
 | Kinetic Shield | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
-| Absorption Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Molecular Rearrangement Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Stabilizing Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Synapse Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Absorption Field | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
+| Molecular Rearrangement Field | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
+| Stabilizing Field | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
+| Synapse Field | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
 | Shadowmeld | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Detonate Sigil | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Black Ash Teleport | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
@@ -368,7 +368,7 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Feedback Loop | hero-standalone | supported | compiled |  |
 | Flashback | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Hoarfrost | hero-standalone | manual | legacy-compatibility | manual-section |
-| Incinerate | hero-standalone | manual | legacy-compatibility | manual-section |
+| Incinerate | hero-standalone | supported | compiled |  |
 | Inertia Soak | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Iron | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Kinetic Grip | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
@@ -396,11 +396,11 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Concussive Slam | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, empty-clause |
 | Minor Acceleration | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Psionic Bolt | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder |
-| Acrobatics | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Acrobatics | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
 | Artful Flourish | hero-standalone | manual | legacy-compatibility | manual-section |
-| "Ballad of the Beast" | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Blocking | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
-| Choreography | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| "Ballad of the Beast" | hero-standalone | supported | compiled |  |
+| Blocking | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Choreography | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
 | Cutting Sarcasm | hero-standalone | supported | compiled |  |
 | Dramatic Monologue | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Dramatic Reversal | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
@@ -413,10 +413,10 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Method Acting | hero-standalone | manual | legacy-compatibility | manual-section |
 | Power Chord | hero-standalone | supported | compiled |  |
 | Quick Rewrite | hero-standalone | supported | compiled |  |
-| Revitalizing Limerick | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Revitalizing Limerick | hero-standalone | supported | compiled |  |
 | Riposte | hero-standalone | supported | compiled |  |
 | Star Power | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| "Thunder Mother" | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, action-type |
+| "Thunder Mother" | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Turnabout Is Fair Play | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
 | Upstage | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Witty Banter | hero-standalone | manual | legacy-compatibility | manual-section |
@@ -427,9 +427,9 @@ Currently reachable compiled: 182 (without a power roll: 20); unchanged reachabl
 | Tough Crowd | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Twist at the End | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Extensive Rewrites | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| "Fire Up the Night" | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| "Fire Up the Night" | hero-standalone | supported | compiled |  |
 | Infernal Gavotte | hero-standalone | supported | compiled |  |
-| "Never-Ending Hero" | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| "Never-Ending Hero" | hero-standalone | manual | legacy-compatibility | grammar, area-manual, manual-section, target-boundary |
 | Star Solo | hero-standalone | manual | legacy-compatibility | manual-section |
 | We Meet at Last | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
 | The Wode Defends | hero-standalone | supported | compiled |  |

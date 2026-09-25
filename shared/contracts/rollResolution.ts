@@ -14,7 +14,13 @@ export type ActionType =
   | 'move action'
   | 'triggered action'
   | 'free triggered action'
-  | 'free maneuver';
+  | 'free maneuver'
+  /**
+   * V200: printed "No action" (rule/combat/turn.md), such as the Troubadour's performances, which
+   * are chosen at the start of a combat round (feature/troubadour/level-1/routines.md: "no action
+   * required").
+   */
+  | 'no action';
 export type TestDifficulty = 'easy' | 'medium' | 'hard';
 export type TestOutcome =
   | 'Failure with a consequence'

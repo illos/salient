@@ -53,3 +53,24 @@ manually. This is backed by `condition/prone.md`, `feature/common/maneuvers/stan
 blocks that print prone and "can't stand" separately (for example
 `monster/giant/statblock/hill-giant-clobberer.md`). The ruling applies to "prone and can't stand"
 effects and their split printings only.
+
+## 6. Areas and auras: the table keeps the members (2026-09-25)
+
+The user made these rulings in the ENGINE2 thread on 2026-09-25, for
+[the lasting effects design, section 6](../lasting-effects-design.md#6-areas-and-auras) and slice
+V200. They answer that design's "Questions for the user", item 2 (yes).
+
+1. **Membership is table-picked.** There is no map. The table picks who is in an area or aura at use
+   time, with the existing target selection, and edits the list later as creatures move.
+2. **Adding a member means they entered.** The user said: "just make adding a new member to the
+   effect an explicit enter, and have the riders trigger. If the players screwed up and forgot to
+   enter someone, the director can manually remove the effects they didn't want."
+   - `effect.members add` is an "enters the area" event, and enter riders fire, subject to the
+     printed limit (such as "for the first time in a combat round").
+   - There is no "list fix" flag and no separate movement confirmation.
+   - Removing a member is leaving.
+   - Undo of an add reverses it and what it triggered, through the journal as usual.
+
+This replaces the design's earlier proposal that membership changes are not events and that enter
+triggers wait for a confirmed movement fact. The ruling applies to area and aura membership only;
+other movement triggers (section 2) stay table work.

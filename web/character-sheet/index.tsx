@@ -25,6 +25,7 @@ import type { PartialBaseline } from '../../shared/contracts/characterEvaluation
 import type { StartingRewards } from '../../shared/contracts/startingRewards';
 import { describeWatcher } from '../../shared/resolve/watchers';
 import { describeMark } from '../../shared/resolve/marks';
+import { describeArea } from '../../shared/resolve/areas';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Disc } from '../components/disc';
@@ -366,6 +367,21 @@ function Conditions({
                   : {}),
                 ...(instance.payload.kind === 'mark'
                   ? { mark: describeMark(instance.owner.name, instance.subject.name) }
+                  : {}),
+                // V200: an area's riders and members, and the area a member's rider belongs to.
+                ...(instance.payload.kind === 'area'
+                  ? {
+                      area: describeArea(instance.payload.area),
+                      members: (instance.members ?? []).map(member => ({
+                        kind: member.party.kind,
+                        id: member.party.id,
+                        name: member.party.name,
+                        ...(member.manual ? { manual: member.manual } : {}),
+                      })),
+                    }
+                  : {}),
+                ...(instance.area
+                  ? { inArea: `${instance.actorLabel}'s ${instance.abilityName}` }
                   : {}),
               }))}
           />

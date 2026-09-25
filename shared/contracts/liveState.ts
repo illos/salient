@@ -112,7 +112,17 @@ export type BoundDuration =
  * V158 extra printed end conditions: `owner-dying` ("until you are dying", rule/health/dying.md),
  * `reused` ("until you use this ability again") and `willingly-ended` (no action required).
  */
-export type EffectEndTrigger = 'owner-dying' | 'reused' | 'willingly-ended';
+export type EffectEndTrigger =
+  | 'owner-dying'
+  | 'reused'
+  | 'willingly-ended'
+  /**
+   * V200: a Troubadour performance (feature/troubadour/level-1/routines.md): it ends when the owner
+   * chooses another performance, or when the owner can't maintain it at the start of a combat
+   * round ("as long as you are not dazed, dead, or surprised"); "Your performance lasts until you
+   * are unable to maintain it or until the end of the encounter".
+   */
+  | 'performance';
 
 /**
  * V159 roll modifier (docs/lasting-effects-design.md#2-modifier-pipeline): edges, banes and a bonus
@@ -161,7 +171,47 @@ export type EffectPayload =
   | { kind: 'instruction'; text: string }
   | { kind: 'modifier'; text: string; modifier: ModifierPayload }
   | { kind: 'watcher'; text: string; watcher: Watcher }
-  | { kind: 'mark'; text: string; mark: MarkPayload };
+  | { kind: 'mark'; text: string; mark: MarkPayload }
+  | { kind: 'area'; text: string; area: AreaPayload };
+
+/**
+ * V200 area or aura (docs/lasting-effects-design.md#6-areas-and-auras). There is no map, so the
+ * table keeps who is in the area: the use's targets at first, then `effect.members` (user rulings,
+ * 2026-09-25). Each rider applies to the members its relation names; the engine stores it as a
+ * child instance on each such member (`EffectInstance.area`), so the watcher machinery fires it.
+ */
+export interface AreaPayload {
+  riders: AreaRider[];
+}
+
+/**
+ * Who among the members a rider is about, relative to the area's owner (rule/combat/side.md: the
+ * heroes and their allies are one side). `self`: the owner; `others`: members on the owner's side
+ * (`ally`), on the other side (`enemy`), or none.
+ */
+export interface AreaRelation {
+  self: boolean;
+  others: 'ally' | 'enemy' | 'none';
+}
+
+/** V200: one printed rider of an area, with its amounts bound at use. */
+export interface AreaRider {
+  who: AreaRelation;
+  watcher: Watcher;
+}
+
+/**
+ * V200: one creature the table has in an area. `effects` are the child instances this membership
+ * stored on the member (one per rider that applies to it); `manual` says why the riders are the
+ * table's for this member (a squad minion or a creature without a live record).
+ */
+export interface AreaMember {
+  party: EffectParty;
+  effects: string[];
+  manual?: string;
+  /** The operation that put the member in the area (the use, or `effect.members add`). */
+  addedEventId: string;
+}
 
 /**
  * V175 mark (feature/ability/tactician/level-1/mark.md; docs/lasting-effects-design.md#5-marks-and-similar-statuses):
@@ -196,7 +246,13 @@ export type WatcherEvent =
    * (tactician/level-3/hit-em-hard.md, stay-strong-and-focus.md). Observed at the damage writer from
    * the damaged creature's active marks.
    */
-  | 'marked-damaged';
+  | 'marked-damaged'
+  /**
+   * V200: the watched creature enters an area (docs/lasting-effects-design.md#6-areas-and-auras).
+   * The user ruled on 2026-09-25 that adding a member to an area with `effect.members` is an
+   * explicit enter; the rider fires then, within its printed limit.
+   */
+  | 'area-entered';
 
 /** Who a watcher's response applies to: the instance's subject or its owner. */
 export type WatcherParty = 'subject' | 'owner';
@@ -264,7 +320,7 @@ export interface EffectParty {
 export interface EffectInstance {
   /** The occurrence id of the compiled use that created it. */
   id: string;
-  kind: 'instruction' | 'modifier' | 'aura' | 'mark' | 'watcher' | 'maintained';
+  kind: 'instruction' | 'modifier' | 'aura' | 'area' | 'mark' | 'watcher' | 'maintained';
   sourceUseEventId: string;
   sourceActorId: string;
   /** Ability identity for stacking and `reused` (the content id). */
@@ -313,6 +369,13 @@ export interface EffectInstance {
    * and the accepting operation.
    */
   markBenefits?: { triggeringEventId: string; benefit: MarkBenefitKind; eventId: string }[];
+  /** V200: an area's members as the table keeps them (`payload.kind === 'area'`). */
+  members?: AreaMember[];
+  /**
+   * V200: a rider of an area stored on one member: the area instance, its holder (the owner) and
+   * the rider's index. It ends when the member leaves or the area ends.
+   */
+  area?: { id: string; holder: { kind: 'character' | 'foe'; id: string }; rider: number };
 }
 
 /**

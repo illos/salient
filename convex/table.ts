@@ -16,6 +16,7 @@ import { query } from './_generated/server';
 import type { DerivedBaseline } from '../shared/contracts/characterEvaluation';
 import { describeWatcher } from '../shared/resolve/watchers';
 import { describeMark, effectVisibleTo } from '../shared/resolve/marks';
+import { describeArea } from '../shared/resolve/areas';
 import type { Doc } from './_generated/dataModel';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
@@ -87,6 +88,19 @@ function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerica
         ...(instance.payload.kind === 'mark'
           ? { mark: describeMark(instance.owner.name, instance.subject.name) }
           : {}),
+        // V200: an area's riders and members, and the area a member's rider belongs to.
+        ...(instance.payload.kind === 'area'
+          ? {
+              area: describeArea(instance.payload.area),
+              members: (instance.members ?? []).map(member => ({
+                kind: member.party.kind,
+                id: member.party.id,
+                name: member.party.name,
+                ...(member.manual ? { manual: member.manual } : {}),
+              })),
+            }
+          : {}),
+        ...(instance.area ? { inArea: `${instance.actorLabel}'s ${instance.abilityName}` } : {}),
       })),
     health,
     summary: director ? foeSummary(foe.sourceSnapshot) : null,
@@ -259,6 +273,23 @@ export const roster = query({
             manualStacking: v.optional(v.boolean()),
             watching: v.optional(v.string()),
             mark: v.optional(v.string()),
+            area: v.optional(v.string()),
+            members: v.optional(
+              v.array(
+                v.object({
+                  kind: v.union(
+                    v.literal('character'),
+                    v.literal('foe'),
+                    v.literal('squad'),
+                    v.literal('object'),
+                  ),
+                  id: v.string(),
+                  name: v.string(),
+                  manual: v.optional(v.string()),
+                }),
+              ),
+            ),
+            inArea: v.optional(v.string()),
           }),
         ),
         health: foeHealthValidator,

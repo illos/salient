@@ -324,7 +324,7 @@ export const CONDUIT_ACTIVATION: Record<string, string> = {
   'The Gods Command You Obey':
     'At every tier, a target whose Presence is below the potency acts before taking the damage (a free strike, an ability of your choice, or a shift and an ability), so the power roll, target actions and damage are resolved manually.',
   'Wellspring of Grace':
-    'Until the end of the encounter or until you are dying, each ally who starts their turn in the aura can spend a Recovery. Resolve manually.',
+    'Until the end of the encounter or until you are dying, each ally who starts their turn in the aura can spend a Recovery. The engine keeps the aura (its members are the targets, then who the table adds or removes with /effect members) and reminds each member at its turn start; the Recovery is spent by hand.',
   'Our Hearts Your Strength':
     'Until the end of the encounter or until the target is dying, at the start of each of its turns it gains a speed and rolled-damage bonus equal to the allies within 10 squares, until the start of its next turn. Apply manually.',
   'Nature Judges Thee':

@@ -43,7 +43,7 @@ import {
   readHolder,
   type EffectHolder,
 } from './effectInstances';
-import { damageTargetFacts, writeDamage, type TargetRecord } from './resolve';
+import { damageTargetFacts, writePlannedDamage, type TargetRecord } from './resolve';
 import { assertNoTriggerOnCorrection, offerForDamage } from './triggeredActions';
 import { observeMarks } from './marks';
 
@@ -313,13 +313,14 @@ async function execute(
       applied.push({ kind: 'damage', status: 'manual', amount, reason: facts.missing });
       continue;
     }
-    const application = applyDamage(facts.facts, {
+    const planned = applyDamage(facts.facts, {
       targetId: facts.facts.targetId,
       amount,
       ...(response.damageType ? { damageType: response.damageType } : {}),
       causeLabel: `${instance.actorLabel}'s ${instance.abilityName}`,
     });
-    await writeDamage(ctx, scope, record, application, undefined, { defer: deferred });
+    // The planned amount stands; the pools are the creature's as the damage is written.
+    const application = await writePlannedDamage(ctx, scope, record, planned, { defer: deferred });
     texts.push(
       `${who} takes ${rolled}${amount}${type} damage${application.afterImmunity !== amount ? ` (${application.afterImmunity} after immunity and weakness)` : ''}; Stamina ${application.staminaBefore} → ${application.staminaAfter}${application.absorbedByTemporaryStamina ? ` (${application.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}`,
     );
