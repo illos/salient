@@ -66,7 +66,11 @@ export interface XpProgress {
   xpPerLevel: number;
   /** The level this XP reaches at this pace. */
   earnedLevel: number;
-  /** The next level and the cumulative XP it needs; null once level 10 is earned. */
+  /**
+   * The next level a Complete would grant and the XP it needs; null when level 10 is held, pending
+   * or earned. It counts from max(earnedLevel, level + pending), because Complete grants only above
+   * level + pending (after a raised pace or a manual grant the XP-earned level may already be held).
+   */
   next: { level: number; at: number } | null;
 }
 
@@ -74,21 +78,25 @@ export interface XpProgress {
 export function xpProgress(
   xp: number,
   xpPerLevel: number,
-  entryLevelXpOffset?: number,
+  entryLevelXpOffset: number | undefined,
+  levelWithPending: number,
 ): XpProgress {
   const level = earnedLevel(xp, xpPerLevel, entryLevelXpOffset);
-  const entry = entryLevelOf(entryLevelXpOffset);
+  const nextLevel = Math.max(level, levelWithPending) + 1;
   return {
     xp,
     xpPerLevel,
     earnedLevel: level,
     next:
-      level >= MAX_HERO_LEVEL ? null : { level: level + 1, at: (level + 1 - entry) * xpPerLevel },
+      nextLevel > MAX_HERO_LEVEL
+        ? null
+        : { level: nextLevel, at: (nextLevel - entryLevelOf(entryLevelXpOffset)) * xpPerLevel },
   };
 }
 
+/** "20 · level 3 at 32"; at level 10 only the XP. */
 export function xpProgressText(progress: XpProgress): string {
   return progress.next
     ? `${progress.xp} · level ${progress.next.level} at ${progress.next.at}`
-    : `${progress.xp} · level ${MAX_HERO_LEVEL}`;
+    : `${progress.xp}`;
 }

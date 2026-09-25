@@ -1765,11 +1765,19 @@ the respite never waits for it, and the Director can resolve the respite and mov
 - **Earned level.** earnedLevel = min(10, entryLevel + floor(XP ÷ XP per level)), with XP the hero's
   cumulative XP. A hero created or admitted above level 1 keeps that entry level (stored as the
   standard-table offset (entryLevel − 1) × 16, read only as the entry level).
+  **Implementation interpretation (Q-XP-1), not a user ruling:** `chapter/making-a-hero.md`, Heroic
+  Advancement says "The amount of Experience you gain is cumulative" and gives a 3rd-level hero
+  32-47 XP; Salient's stored XP counts only XP earned after entry, and the entry level comes from
+  `entryLevelXpOffset`. Alternative: cumulative table XP (store and show the entry level's table XP
+  plus earned XP).
 - **Only Respite Complete grants.** Complete converts Victories to XP and grants the levels owed:
   max(0, earnedLevel − (level + pending level-ups)). This replaces "thresholds crossed by this gain":
   lowering the setting grants catch-up level-ups at the next Complete; raising it never removes a level
   or a pending level-up. A change applies from the next Complete and is never retroactive. The Director's
-  manual grant and withdraw are unchanged.
+  manual grant and withdraw operations are unchanged, but Complete now absorbs them: a manual grant
+  counts toward level + pending, so later XP fills it before granting more; a withdrawn level-up
+  (withdraw never changes XP) returns at the next Complete if XP still earns it. To stop that re-grant,
+  the Director lowers XP with `/adjust xp`.
 - **Display.** The character sheet's XP row shows progress at the campaign's value, e.g. "XP 20 ·
   level 3 at 32"; outside a campaign it uses 16.
 

@@ -562,7 +562,9 @@ shared headless operation, under existing timing, encounter locks and validation
   any custom whole number from 1 to 200. A hero's earned level is min(10, entry level + floor(XP ÷ XP
   per level)); only Respite Complete grants, and it grants the levels owed, max(0, earned level −
   (level + pending level-ups)). Lowering the setting grants catch-up level-ups at the next Complete;
-  raising it removes nothing; nothing is retroactive. The sheet shows "XP 20 · level 3 at 32" at the
+  raising it removes nothing; nothing is retroactive. Later XP absorbs a manual grant, and a withdrawn
+  level-up returns at the next Complete if XP still earns it (`/adjust xp` stops that). Entry level is
+  an implementation interpretation (Q-XP-1): stored XP counts only XP earned after entry. The sheet shows "XP 20 · level 3 at 32" at the
   campaign's value (16 outside a campaign). See [respite mode](table-spec.md#respite-mode).
 - **Earlier choices (confirmed 2026-09-24).** A level-up only adds that level's choices. Swapping an
   earlier choice is an attribute of the specific higher-level option whose source permits it, and is

@@ -161,7 +161,7 @@ const SLIDER_MAX = 48;
 const snap = (value: number) =>
   XP_PER_LEVEL_PRESETS.find(p => Math.abs(p.value - value) <= 2)?.value ?? value;
 
-/** XP per level: submits `/campaign xp-per-level value=<n>` when the slider is released or the input is committed. */
+/** XP per level: submits `/campaign xp-per-level value=<n>` when the slider is released (pointer up, or blur/Enter from the keyboard), a preset is chosen, or the input is committed. */
 function XpPerLevelControl({
   campaignId,
   current,
@@ -180,7 +180,9 @@ function XpPerLevelControl({
   }
   const commit = (raw: string) => {
     const value = Number(raw);
-    if (!raw.trim() || value === current) return setDraft(String(current));
+    // Never submit an empty or non-numeric value; the server refuses out-of-range numbers.
+    if (!raw.trim() || !Number.isFinite(value) || value === current)
+      return setDraft(String(current));
     const text = `/campaign xp-per-level value=${value}`;
     void command
       .run(
@@ -208,7 +210,10 @@ function XpPerLevelControl({
           disabled={command.pending}
           onChange={e => setDraft(String(snap(Number(e.target.value))))}
           onPointerUp={() => commit(draft)}
-          onKeyUp={() => commit(draft)}
+          onBlur={() => commit(draft)}
+          onKeyDown={e => {
+            if (e.key === 'Enter') commit(draft);
+          }}
           className="h-6 min-w-0 flex-1 cursor-pointer accent-primary disabled:opacity-40"
         />
         <datalist id="xp-per-level-presets">
@@ -234,7 +239,11 @@ function XpPerLevelControl({
           className="w-20 shrink-0 text-right tabular-nums"
         />
       </span>
-      <span role="group" aria-label="XP per level presets" className="flex gap-2">
+      <span
+        role="group"
+        aria-label="XP per level presets"
+        className="inline-flex h-9 w-fit items-center rounded-full bg-muted p-1"
+      >
         {XP_PER_LEVEL_PRESETS.map(p => (
           <button
             key={p.value}

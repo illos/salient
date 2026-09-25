@@ -861,6 +861,8 @@ async function heroSheet(
   const selections = revision?.selections ?? [];
   const live = character.liveState;
   const readOnly = label === 'history';
+  const effective =
+    live && character.effectiveRevisionId ? await ctx.db.get(character.effectiveRevisionId) : null;
   return {
     audience: owner ? 'owner' : 'director',
     id: character._id,
@@ -916,6 +918,7 @@ async function heroSheet(
             ? settingsOf(campaign).xpPerLevel
             : STANDARD_XP_PER_LEVEL,
           character.entryLevelXpOffset,
+          (effective ? revisionLevel(effective) : 1) + (character.pendingLevelUps ?? 0),
         )
       : null,
     activationPreview:

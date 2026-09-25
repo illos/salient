@@ -1643,3 +1643,14 @@ interpretations, each with its alternatives. Items 4 and 5 are findings outside 
    `damageTargetFacts` passes only immunities. Recommendation: the same separate slice.
 
 Recommendation: keep 1 to 3 as implemented. Schedule 4 and 5.
+## Q-XP-1: does a hero admitted above level 1 carry table XP? (V190)
+
+Open; implementation interpretation in place. `chapter/making-a-hero.md`, Heroic Advancement: "The
+amount of Experience you gain is cumulative", and the Heroic Advancement Table gives a 3rd-level
+hero 32-47 XP. Salient stores only XP earned after entry (a hero admitted at level 3 starts at 0 XP)
+and derives the entry level from `entryLevelXpOffset` ((entryLevel − 1) × 16), so earned level =
+min(10, entry level + floor(XP ÷ XP per level)) at any campaign pace, and the sheet's "level 5 at 32"
+counts XP after entry. Alternative: cumulative table XP, storing and showing the entry level's table
+XP plus earned XP (the level-3 hero starts at 32 and sees "level 5 at 64"); that ties the entry XP to
+one pace, so a campaign at 8 or 32 per level would need the entry XP recomputed. Recommendation: keep
+the current reading; it works at every pace and changes no stored data.

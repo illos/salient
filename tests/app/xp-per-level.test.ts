@@ -12,6 +12,8 @@ import { api } from '../../convex/_generated/api';
 import type { HeroSheet } from '../../shared/contracts/characterSheet';
 import { backend, table } from './fixtures/table';
 import { levelUpsOwed } from '../../shared/evaluate/xpAdvancement';
+import { draftSelectionsFrom } from '../../shared/evaluate/draft';
+import { levelThreeBuilds } from '../fixtures/level-three-builds';
 
 async function setup(victories: number) {
   const t = backend();
@@ -97,9 +99,11 @@ test('raising the setting removes no level and no pending level-up', async () =>
   const after = await f.hero();
   expect(after.liveState?.xp).toBe(20);
   expect(after.pendingLevelUps).toBe(1);
+  // The sheet names the next level Complete can grant: level 1 + 1 pending holds level 2, so level 3,
+  // at (3 − 1) × 32 = 64 (Adjusted XP Advancement, half speed: 3rd level at 64-95).
   expect((await f.sheet()).xpProgress).toMatchObject({
     xpPerLevel: 32,
-    next: { level: 2, at: 32 },
+    next: { level: 3, at: 64 },
   });
 });
 
@@ -115,17 +119,79 @@ test('only the Director can change it, and an invalid value is refused', async (
   expect((await f.campaign()).settings?.xpPerLevel).toBe(24);
 });
 
-test('a hero admitted at level 3 earns from the entry level', async () => {
-  const f = await setup(17);
-  // Admission at level 3 stores entryLevelXpOffset (3 − 1) × 16 = 32 (convex/lib/characterBuild.ts).
-  await f.setLevel(3, { entryLevelXpOffset: 32 });
+test('a hero admitted at level 3 stores the entry offset and earns from the entry level', async () => {
+  const f = await setup(0);
+  // The real creation and admission path at level 3 (convex/lib/characterBuild.ts).
+  const build = levelThreeBuilds().find(b => b.className === 'Fury')!;
+  const { definitions } = await f.player.client.query(api.characterWizard.discover, {
+    targetLevel: 3,
+  });
+  const authored = { name: 'Veteran', appearance: '', biography: '', notes: '' };
+  const id = await f.player.client.mutation(api.characters.create, {
+    commandId: 'xp-veteran-create',
+    targetLevel: 3,
+    authored,
+    selections: draftSelectionsFrom(
+      { ...build.selections, 'details.name': 'Veteran' },
+      definitions,
+    ),
+  });
+  await f.player.client.mutation(api.characters.submit, {
+    commandId: 'xp-veteran-submit',
+    characterId: id,
+    campaignId: f.campaignId,
+  });
+  await f.director.client.mutation(api.characters.approve, {
+    commandId: 'xp-veteran-approve',
+    characterId: id,
+  });
+  const veteran = async () => (await f.t.run(ctx => ctx.db.get(id)))!;
+  // (3 − 1) × 16, the Heroic Advancement Table's first 3rd-level XP.
+  expect((await veteran()).entryLevelXpOffset).toBe(32);
+  await f.say('@Veteran /adjust victories value=17');
   await f.rest();
   // 17 XP earned after entry at 16 per level: one level above the entry level.
+  expect((await veteran()).pendingLevelUps).toBe(1);
+  const sheet = (await f.director.client.query(api.characters.sheet, {
+    characterId: id,
+  })) as HeroSheet;
+  // Level 3 + 1 pending holds level 4; level 5 needs (5 − 3) × 16 = 32 XP after entry.
+  expect(sheet.xpProgress).toMatchObject({ earnedLevel: 4, next: { level: 5, at: 32 } });
+});
+
+test('a manual grant is absorbed by later XP; a withdrawn level-up returns unless XP is adjusted', async () => {
+  const f = await setup(17);
+  let invoked = 0;
+  const invoke = (operation: string, args: Record<string, unknown> = {}) =>
+    f.director.client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId: `xp-invoke-${++invoked}`,
+      operation,
+      arguments: args,
+    });
+  const thorn = [{ refKind: 'character', id: f.thornId }];
+  // Grant first: 1 pending. Complete then converts 17 XP (2nd level at 16): nothing more is owed.
+  await invoke('character.grant-level-up', { characters: thorn });
+  await f.rest();
+  expect((await f.hero()).liveState?.xp).toBe(17);
   expect((await f.hero()).pendingLevelUps).toBe(1);
-  expect((await f.sheet()).xpProgress).toMatchObject({
-    earnedLevel: 4,
-    next: { level: 5, at: 32 },
-  });
+  // Withdraw leaves XP alone; the next Complete grants the level 17 XP still earns.
+  await invoke('character.withdraw-level-up', { characters: thorn });
+  expect(await f.hero()).toMatchObject({ pendingLevelUps: 0, liveState: { xp: 17 } });
+  await f.rest();
+  expect((await f.hero()).pendingLevelUps).toBe(1);
+  // To stop the re-grant, the Director lowers XP below the threshold (1st level is 0-15).
+  await invoke('character.withdraw-level-up', { characters: thorn });
+  await f.say('@Thorn /adjust xp value=15');
+  await f.rest();
+  expect((await f.hero()).pendingLevelUps).toBe(0);
+});
+
+test('the sheet names no next level once level 10 is held', async () => {
+  const f = await setup(0);
+  await f.setLevel(10);
+  const sheet = await f.sheet();
+  expect(sheet.xpProgress?.next).toBeNull();
 });
 
 test('owed level-ups never pass level 10', () => {

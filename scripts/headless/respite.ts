@@ -144,7 +144,9 @@ export async function runRespite({ actors: { director }, run, runId }: ScenarioC
         const sheet = await director.query<{
           xpProgress: { xpPerLevel: number; next: { level: number; at: number } | null } | null;
         }>('characters:sheet', { characterId });
-        assert.deepEqual(sheet.xpProgress?.next, { level: 2, at: 32 });
+        // Level 1 + 2 pending holds level 3, so the next grant is level 4 at (4 − 1) × 32 = 96
+        // (Adjusted XP Advancement, half speed: 4th level at 96-127).
+        assert.deepEqual(sheet.xpProgress?.next, { level: 4, at: 96 });
         assert.equal(sheet.xpProgress?.xpPerLevel, 32);
       } finally {
         // Close cleanly without masking a failure: end any open respite first, ignore cleanup errors.
