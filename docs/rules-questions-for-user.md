@@ -2121,8 +2121,9 @@ turn (minimum 1), and bind domain-caused bleeding to the restraint that caused i
 proposed interpretations; keep duration manual until answered.
 
 `monster/group/dragon.md`, Thorn Dragon's Domain, requires a location occupied for at least a week.
-It reduces a non-dragon creature's speed by 2 when its turn starts, and says a creature made
-restrained while on the ground is also made bleeding. It gives no duration for either rider.
+It reduces any creature's speed other than the source dragon's by 2 when its turn starts
+(minimum 1); other dragons are affected. Any creature made restrained while on the ground is
+also made bleeding; that clause has no source-owner exclusion. It gives no duration for either rider.
 `monster/dragon/statblock/thorn-dragon.md`, Malign Thicket, adds separate domain-dependent poison
 and does not settle those durations. `condition/bleeding.md` and `condition/restrained.md` supply
 the conditions' effects, not these missing durations. Alternatives include encounter-long speed

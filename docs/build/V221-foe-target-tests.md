@@ -30,7 +30,8 @@ Likely paths: compiler roll contract, shared test resolution, dice operations an
 2. Howl's low test outcome gives forced retreat instruction and frightened save ends; middle
    frightened EoT; high no test effect. Separate encounter-wide rage clause is not suppressed by high tier.
 3. Geyser low/middle deals 4 plus vertical push 5/3; high asks safe-space shift. Swamp Stink low
-   deals 5 poison plus weakness, middle only weakness, high neither, with mist-linked duration.
+   deals 5 poison damage once plus weakened, middle only weakened, high neither. Weakened lasts
+   until the mist disappears; assert that no damage-weakness modifier is created.
 4. The Grasping, the Hungry deals 5 in all three tiers; restrained save ends/EoT/none differs.
    Afflictive Overgrowth deals 12/9/5 poison with its printed restrained/bleeding durations.
 5. Actor/player/Director authority, partial target completion, duplicate input, already-removed

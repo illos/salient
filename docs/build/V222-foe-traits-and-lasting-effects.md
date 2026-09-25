@@ -30,9 +30,10 @@ Likely paths: shared modifier predicates, effect instances, source feature profi
 1. `foe-traits`: prone hero's melee strike against Arixx replaces the prone bane with double edge;
    ranged strike does not. Supernatural Insight ignores supernatural concealment only; ordinary
    cover/concealment inputs remain distinguishable. Crafty does not make all free strikes impossible.
-2. You! grants an edge on allies' abilities against its target until the blackguard's next turn,
-   without Tactician resource/Recovery rewards. Next-strike edge/bane consumes on the next
-   qualifying strike even if cancelled, with expiration and source identity preserved.
+2. You! grants an edge on the blackguard's own and each ally's abilities against its target
+   until the start of the blackguard's next turn, without Tactician resource/Recovery rewards.
+   Assert both beneficiaries, no edge against an unmarked target, and expiry at that turn start.
+   Next-strike edge/bane consumes on the next qualifying strike even if cancelled, with expiration and source identity preserved.
 3. Twist Shape's higher-tier failed potency gives slowed and fire weakness 10 under one save;
    saving ends both, without retroactively increasing the initiating damage. Tier 1 gives only slowed.
 4. Arixx Bite deals 3 acid at qualifying size-1 grabbed turn start; larger grabbed subject does

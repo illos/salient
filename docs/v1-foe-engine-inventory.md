@@ -236,8 +236,8 @@ inputs, not extra named features. V212 accounts for them; V215 proves all ten mi
 
 - **Zweihander Swing:** V216/V218; area damage/slowed, chosen ally free strike or 1 Malice to
   replace it with signature ability.
-- **You!:** V222; source-owned mark grants allies edge on abilities against target until owner's
-  next turn; not the Tactician's Mark and does not grant its benefits.
+- **You!:** V222; source-owned mark grants the blackguard and each ally an edge on abilities against target
+  until the start of the owner's next turn; not the Tactician's Mark and does not grant its benefits.
 - **End Effect:** V213. **Supernatural Insight:** V222.
 - **Parry!:** V219; self/adjacent ally, strike-targeting event, halve damage without borrowing the
   hero Parry's potency reduction.
@@ -321,8 +321,8 @@ inputs, not extra named features. V212 accounts for them; V215 proves all ten mi
   prone and 5 damage. Printed sequencing wording needs Q-FOE-1, not damage-only revision.
 - **Howl:** V213/V221/V225; each target's Intuition test; encounter enemies with existing rage gain
   4 separately, even outside the burst when the printed predicate applies.
-- **Full Wolf:** V213/V226; size 3, speed 10, stability 2, strike damage +2, rage +1, Bite potency +1;
-  lasts to death/encounter end with supplied relocation/push facts.
+- **Full Wolf:** V213/V226; size 3, speed 10, stability 2, strikes deal +2 damage and give an
+  additional 1 rage, Bite potency +1; lasts to death/encounter end with supplied relocation/push facts.
 - **Rampage:** V213/V216/V225; area damage/bleeding/rage 2/4/8, shifts before and after.
 
 **Thorn Dragon** — `monster/dragon/statblock/thorn-dragon.md`.
@@ -355,7 +355,7 @@ assign the payload; an unimplemented payload stays manual with the actual paymen
 
 | Source file under `monster/` | Named feature and payload slices |
 | --- | --- |
-| `goblin/goblin-malice.md` | **Goblin Mode** — V214/V222: Goblin keyword, speed +2 through round end (includes bugbears). **Tiny Stabs** — V217: 1 damage per adjacent goblin, per enemy. **Swamp Stink** — V221/V224: all non-goblins' Might tests, terrain, poison/weakness tied to mist expiry; wind cannot disperse it. |
+| `goblin/goblin-malice.md` | **Goblin Mode** — V214/V222: Goblin keyword, speed +2 through round end (includes bugbears). **Tiny Stabs** — V217: 1 damage per adjacent goblin, per enemy. **Swamp Stink** — V221/V224: all non-goblins' Might tests, terrain, low-tier 5 poison damage once; low/middle-tier weakened until mist disappears; wind cannot disperse it. |
 | `bugbear/bugbear-malice.md` | **Goblin Malice Features** — V214: alias access, pay selected actual feature cost once. **Grab Iron Ball** — V214/V217/V218: 3 per acting non-minion recipient; grant maneuver, confirmed distance, damage 8−distance, M < 1 slowed. **Grab Javelin** — V214/V217/V218/V222: 5 per recipient, 12−distance damage, M < 1 bleeding; linked free maneuver pull for allies within 2. **Show Them the Great Fear** — V222/V224: doubled speed/climbing and qualifying-strike frightened plus forced retreat instruction through encounter end. |
 | `undead/1st-echelon/undead-malice-level-1-malice-features.md` | **Ravenous Horde** — V223: delayed round-end adjacency check, two winded rotting zombies per qualifying hero, no consecutive rounds. **Paranormal Fling** — V217: up to three selected unattended objects, nearest-enemy movement instructions. **The Grasping, the Hungry** — V221/V224: chosen nine-square surface; adjacent turn-end Agility test; 5 damage in every tier, restraint duration differs, restrained turn-start 1d6. **Dread March** — V218/V223: four undead +1 per extra Malice, move/free strike; defer their death to sequence completion. |
 | `human/human-malice.md` | **Alchemical Device** — V214/V216: granted non-minion maneuver, one Malice payment, area corruption and Agility-gated slow/restrain. **Exploit Opening** — V214/V222: acting humans' edge, double edge against a conditioned enemy through their turn end. **Staying Power** — V214/V217: non-minion human heals 5×level, cap at max, route through healing modifiers. |
@@ -370,7 +370,7 @@ assign the payload; an unimplemented payload stays manual with the actual paymen
 | `rule/monster/malice.md`, Basic Malice / **Brutal Effectiveness** | V214/V222: 3 Malice, next ability with potency +1; an ability without potency must not consume it |
 | Same, **Malicious Strike** | V214/V222: 5+ Malice, next strike adds highest characteristic plus extras to one chosen target, capped at 3×highest characteristic; encounter-wide no-consecutive-round usage, even by another monster |
 | `monster/group/werewolf.md`, **Shared Ferocity** | V226: confirmed line of effect to a ferocity-cost ability yields recorded 1d3 Malice at the chosen first-use scope; Q-FOE-3 |
-| `monster/group/dragon.md`, **Thorn Dragon's Domain** | V227: Director declares the one-week location predicate; non-dragon turn-start speed −2, minimum 1; restrained while grounded also bleeds; duration question Q-FOE-4 |
+| `monster/group/dragon.md`, **Thorn Dragon's Domain** | V227: Director declares the one-week location predicate; other creatures (including other dragons) take turn-start speed −2, minimum 1; only the source dragon is exempt from speed loss; any creature restrained while grounded also bleeds; duration question Q-FOE-4 |
 | `rule/monster/villain-action.md`, Villain Actions | V213: at another creature's turn end; each named action once/encounter; at most one villain action per round across all such creatures; order may vary |
 | `rule/monster/end-effect.md`, End Effect, plus printed stat-block values | V213: optional unreduceable damage, chosen save-ended effect; do not auto-spend at End turn |
 | `rule/monster/creature-free-strike.md`, Creature Free Strikes / Creature Opportunity Attacks / Stat Block Self-Reference | V215/V218/V222: static damage; range/keywords/type from signature; bane prevents opportunity attack; relative allies/enemies and distances refer to the acting creature |

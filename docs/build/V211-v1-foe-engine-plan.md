@@ -42,3 +42,8 @@ Source files and sections are enumerated in the inventory; no online rules sourc
 - Foes peer supplied independent read-only findings on V02, missing band-Malice routes and V03's
   unimplemented boss turns (Chords 2487–2489), consistent with this audit. No test was run by that peer.
 - Implementation, runtime tests and deployment of V212–V228 have not occurred in this slice.
+- QC review of `2b50ca25` (Chords 2491; review artifact `2026-09-25-V211-QC.md`) requested
+  corrections before Test. Corrected Swamp Stink to weakened, Domain to exclude only its source
+  dragon from speed loss, You! to include the blackguard, and Full Wolf to grant extra rage only
+  on strikes. Added explicit negative acceptance cases and corrected the same weakened wording
+  for Malign Thicket. Review remains pending on the revised candidate; no gameplay test run.

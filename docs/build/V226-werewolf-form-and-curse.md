@@ -9,7 +9,7 @@ story cure decisions while automating their defined combat consequences.
 
 ## Scope
 
-- Full Wolf overrides size/speed/stability and adds strike damage/rage/Bite potency until death
+- Full Wolf overrides size/speed/stability and adds damage and rage to strikes, plus Bite potency until death
   or encounter end; enter combat hybrid, external shape change remains a reported rules conflict.
 - Accursed Bite's optional cost, per-target increasing potency after failed application,
   lycanthropy turn-end rage and respite retention. Cure is explicit table resolution linked to
@@ -26,8 +26,10 @@ Likely paths: effect-derived actor facts, potency history, damage observations, 
 
 ## Acceptance checks
 
-1. `foe-werewolf`: Full Wolf sets size 3, speed 10, stability 2, strike damage +2, added rage +1,
-   Bite potency +1. Repeated effect does not compound; death/encounter end restores underlying values.
+1. `foe-werewolf`: Full Wolf sets size 3, speed 10, stability 2, strike damage +2 and
+   an additional 1 rage from strikes, plus Bite potency +1. Rampage and Berserker Slash area
+   abilities gain neither strike bonus. Repeated effect does not compound; death/encounter end
+   restores underlying values.
 2. On one target, paid Bite potency begins P < 0, failed effect increases the next attempt's
    potency to 1; another target starts independently. Full Wolf adds its own +1 without rewriting history.
 3. Lycanthropy adds 2 rage at affected combat turn end and retains rage after respite. An explicit

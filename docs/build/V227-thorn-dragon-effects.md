@@ -42,8 +42,11 @@ Likely paths: source effects, typed damage dice, healing pipeline, area/terrain 
    strike, then M < 2 bleeding with correct subject next-turn expiry.
 5. Each Bramble square has 5 Stamina and fire weakness 5; two no-cost uses by Malign Thicket
    remain independently tracked. Supplied forced path of three affected squares gives 3 damage,
-   with distinct Malign Thicket poison/weakness rider. Do not guess collision/location damage.
-6. Domain declaration needs ≥1 week occupancy fact; its unanswered duration cases remain manual.
+   with distinct Malign Thicket poison/weakened rider. Do not guess collision/location damage.
+6. Domain declaration needs ≥1 week occupancy fact. Its turn-start speed reduction excludes
+   the source dragon only: another creature, including another dragon, is affected; the source
+   dragon is not. The grounded-restraint bleeding predicate has no source-owner exclusion.
+   Unanswered duration cases remain manual.
    Test gate plus `foe-thorn-dragon`; read dice, members, terrain health, costs, effects and undo/redo.
 
 ## Work log
