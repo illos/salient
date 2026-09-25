@@ -161,12 +161,17 @@ function LevelUp({
   const newSelections = draftSelectionsFrom(merged, definitions).filter(s =>
     newIds.has(s.decisionId),
   );
-  const evaluation = useQuery(api.characters.evaluate, {
+  const fresh = useQuery(api.characters.evaluate, {
     characterId,
     context: 'progression',
     selections: [...base.selections, ...newSelections],
     targetLevel,
   }) as EvaluationResult | undefined;
+  // Each choice changes the query's arguments, and a new query reads as loading. Keep showing the
+  // last result meanwhile so the hero panel doesn't flash back to "Pending".
+  const [latest, setLatest] = useState(fresh);
+  if (fresh && fresh !== latest) setLatest(fresh);
+  const evaluation = fresh ?? latest;
   const before = useQuery(api.characters.evaluate, {
     characterId,
     context: 'progression',

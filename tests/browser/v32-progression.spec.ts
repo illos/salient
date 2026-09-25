@@ -77,6 +77,8 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await target.selectOption('Blacksmithing');
     await player.getByLabel('Danger Sense', { exact: true }).check({ force: true });
     await expect(target).toHaveCount(0);
+    // The hero panel shows the evaluated level-2 build, not a pending one.
+    await expect(player.getByText('Devil · Fury (Berserker) · Level 2')).toBeVisible();
     await player.screenshot({ path: `${directory}/v164-step-perk.png`, fullPage: true });
     // Moving on saves the level-up's choices (the shared saveAdvancement operation).
     await player.getByRole('button', { name: /Continue to Level 2 Berserker ability/ }).click();
@@ -173,7 +175,16 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
       expect(baseline[field].map(grant => grant.name).sort(), field).toEqual(
         [...reference.expected[field]].sort(),
       );
-    for (const [key, value] of Object.entries(before.live!))
+    // Q-CHAR-2 revised: damage taken and Recoveries spent carry over to the new maxima
+    // (Stamina 20/30 → 29/39); every other live value is unchanged.
+    const recoveriesSpent =
+      before.build!.baseline!.recoveriesMaximum.value - before.live!.recoveries;
+    const carried: Record<string, unknown> = {
+      ...before.live!,
+      stamina: 29,
+      recoveries: baseline.recoveriesMaximum.value - recoveriesSpent,
+    };
+    for (const [key, value] of Object.entries(carried))
       if (key !== 'labels')
         expect(Object.fromEntries(Object.entries(advanced.live!))[key], key).toEqual(value);
     const sourceReadback = [];

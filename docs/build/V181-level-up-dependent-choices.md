@@ -25,3 +25,4 @@ choices now appears on its parent's step, directly under it, as the wizard shows
 - Built on `slice/V181`, `.worktrees/level-up-steps`, from `slice/V164`. Author checks: TypeScript,
   ESLint, Prettier.
 - Independent review PASS (2026-09-24): no independent level 2–3 choices merge (the only same-level link, Conduit domain abilities, is automatic).
+- Test-Deploy capture (train 12): all five screens, but the perk screenshot caught the hero panel "Pending" while the new evaluation loaded; the level-up screen now keeps the last result meanwhile, and the spec waits for the evaluated panel. The spec's live-state check still expected Stamina 20; it now carries damage and Recoveries spent (Q-CHAR-2 revised: 29/39).
