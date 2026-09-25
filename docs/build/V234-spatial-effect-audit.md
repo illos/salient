@@ -52,3 +52,8 @@ Pinned Compendium paths and named sections are given in the research report.
 - QC residual R1: removed Cult Victim thickness/eligibility language from Breeze and Mind
   Projection. Rechecked every repeated hero fact field (not just identical whole summaries)
   against its source; added Motivate Earth’s separate opening-creation alternative.
+
+- Test accepted generator/reconciliation (515 unique entries, 423 source paths), links (592
+  Markdown files) and focused non-table browser behavior, including checkbox-only exports,
+  reload persistence, imports and filters. Evidence: `../test-artifacts/V234-43be0e8c/`.
+  Removed the extra EOF blank reported by diff check; only that check requires revalidation.

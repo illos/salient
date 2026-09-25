@@ -164,5 +164,3 @@ user wants to revisit that interaction burden; do not silently downgrade them.
 The appendices preserve borderline findings so they can be reviewed without inflating the strict
 core list. A simple zone or pairwise relation may be representable using an existing control;
 that possibility is not a claim the individual feature has already been implemented.
-
-
