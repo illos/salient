@@ -1214,6 +1214,29 @@ async function commitModifiers(
     if (effect.kind !== 'modifier') continue;
     const owner = { kind: source.actor.kind, id: source.actor.id, name: source.actor.name };
     const recipient = recipients.find(r => r.actor.id === effect.targetId)?.actor;
+    // V179: a tier weakness the target's score resisted (rule/character/potency.md) stores nothing.
+    // As for conditions, the target's score is never published.
+    if (effect.status === 'resisted') {
+      await appendEvent(ctx, {
+        campaignId: scope.campaignId,
+        sessionId: cause.sessionId,
+        encounterId: cause.encounterId,
+        origin: 'engine',
+        commandId: cause.commandId,
+        causeEventId: scope.eventId,
+        kind: 'effect.resisted',
+        description: `${source.actor.name}'s ${source.abilityName}: ${recipient?.name ?? 'the target'} resists ${effect.payload ? describeModifier(effect.payload) : 'the effect'} ("${plainText(effect.clause)}"); nothing is stored.`,
+        payload: {
+          sourceUseEventId: source.eventId,
+          occurrence: occurrence.id,
+          modifier: effect.payload ?? null,
+          status: effect.status,
+          target: recipient ?? null,
+          sourcePath: source.sourcePath,
+        },
+      });
+      continue;
+    }
     const subject = recipient
       ? { kind: recipient.kind, id: recipient.id, name: recipient.name }
       : undefined;
@@ -1266,9 +1289,9 @@ async function commitModifiers(
       description: stored?.endedAtApplication
         ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}. It ends as it is applied (${stored.endedAtApplication}): the engine never applies it.`
         : stored
-          ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}${consumable}. The engine applies it automatically; exclude it on a roll it doesn't fit${stored.instance.registrationIds.length ? '' : effect.spec.duration.kind === 'none' || effect.spec.duration.kind === 'maintained' ? '' : '. Its end is unscheduled outside a committed encounter, so end it with /effect end'}.`
+          ? `${source.actor.name}'s ${source.abilityName} on ${stored.instance.subject.name}: ${describeModifier(effect.payload!)}, ${lasts}${consumable}. ${effect.payload!.kind === 'damage-modifier' ? `The engine applies it to damage ${stored.instance.subject.name} takes, where only the highest ${effect.payload!.defense} applies (rule/damage/damage-${effect.payload!.defense}.md)` : "The engine applies it automatically; exclude it on a roll it doesn't fit"}${stored.instance.registrationIds.length ? '' : effect.spec.duration.kind === 'none' || effect.spec.duration.kind === 'maintained' ? '' : '. Its end is unscheduled outside a committed encounter, so end it with /effect end'}.`
           : manualGroup
-            ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. ${subject!.name} is already under ${source.abilityName} in a way the engine can't resolve, so this use and the earlier ones form a manual stacking group. The engine applies none of them: apply the most impactful effect with the most recent use's duration at the table (Stacking Unique Effects), then end them with /effect end.`
+            ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. ${subject!.name} is already under ${source.abilityName} in a way the engine can't resolve, so this use and the earlier ones form a manual stacking group. The engine applies none of them: apply the most impactful effect with the most recent use's duration at the table (Stacking Unique Effects), then end them with /effect end.${effect.payload?.kind === 'damage-modifier' ? ` Until then, damage to ${subject!.name} is left for manual application.` : ''}`
             : untracked
               ? `${source.actor.name}'s ${source.abilityName} on ${subject!.name}: ${describeModifier(effect.payload!)}, ${lasts}. This effect can't be tracked on a squad or object; apply it at the table.`
               : `${source.actor.name}'s ${source.abilityName}${subject ? ` on ${subject.name}` : ''}, ${lasts}: "${plainText(effect.clause)}" Not tracked (${effect.requirements.join('; ') || 'no hero or foe can hold it'}); apply it at the table.`,
@@ -3470,6 +3493,26 @@ const abilityCorrect: OperationDefinition = {
       const outcome = correctedCompiled.roll.targets.find(t => t.targetId === entry.target.id);
       if (outcome) correction.after = outcome;
     }
+    // V179: a tier weakness this use gave the target is an effect instance later damage may already
+    // have read, so a correction never re-derives it. One that would change it (another tier's
+    // clause, or a different potency result) is refused; the table rewinds the use instead.
+    if (savedCompiled && correctedCompiled?.kind === 'resolved') {
+      const tierDefenses = (effects: readonly CompiledEffectOutcome[]) =>
+        effects
+          .filter(e => e.kind === 'modifier' && e.tier && e.targetId === entry.target.id)
+          .map(e =>
+            JSON.stringify([
+              e.nodeId,
+              e.status,
+              e.kind === 'modifier' ? (e.payload ?? null) : null,
+            ]),
+          );
+      const saved = tierDefenses(savedCompiled.effects.map(o => o.effect));
+      if (JSON.stringify(saved) !== JSON.stringify(tierDefenses(correctedCompiled.effects)))
+        throw new ConvexError(
+          `This correction would change the damage weakness ${result.abilityName} gave ${targetRecord.actor.name}, which later damage may already have used; rewind the use instead of correcting it.`,
+        );
+    }
     // V110: only the corrected target's occurrences and once-per-use sections get the correction
     // revision. Other targets keep their recorded occurrence identities, dispositions and instances.
     const correctedOccurrences = (revision: string) =>
@@ -3727,6 +3770,9 @@ const abilityResolved: OperationDefinition = {
         throw new ConvexError(
           'An applied modifier is tracked by the engine; exclude it on a roll or end it with /effect end.',
         );
+      // V179: a resisted tier weakness left nothing to resolve (rule/character/potency.md).
+      if (occurrence.effect.kind === 'modifier' && occurrence.effect.status === 'resisted')
+        throw new ConvexError('A resisted modifier occurrence cannot be resolved manually.');
       // V171: an applied watcher is tracked by the engine, which fires it.
       if (occurrence.effect.kind === 'watcher' && occurrence.effect.status === 'applied')
         throw new ConvexError(

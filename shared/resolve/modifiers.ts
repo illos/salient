@@ -11,6 +11,7 @@
  */
 import type { TargetRollInputs } from '../contracts/rollResolution.ts';
 import type {
+  DamageModifier,
   EffectDuration,
   EffectEndTrigger,
   EffectInstance,
@@ -26,7 +27,8 @@ import { markEdgeConditions, ownerOrAlly, type MarkParty } from './marks.ts';
 export type PrintedStatModifier = Omit<StatModifier, 'amount'> & {
   amount: number | { characteristic: Characteristic };
 };
-export type PrintedModifier = RollModifier | PrintedStatModifier;
+/** V179: a granted immunity or weakness prints its value (shared/resolve/damageModifiers.ts). */
+export type PrintedModifier = RollModifier | PrintedStatModifier | DamageModifier;
 
 /**
  * One modifier read from a whole printed sentence: what it changes, whose it is (`target`: the
@@ -154,7 +156,8 @@ export function bindModifier(
   printed: PrintedModifier,
   characteristics: Partial<Record<Characteristic, number>> | undefined,
 ): { payload: ModifierPayload } | { requirement: string } {
-  if (printed.kind === 'roll') return { payload: { ...printed } };
+  if (printed.kind === 'roll' || printed.kind === 'damage-modifier')
+    return { payload: { ...printed } };
   if (typeof printed.amount === 'number')
     return { payload: { ...printed, amount: printed.amount } };
   const letter = printed.amount.characteristic;
@@ -170,6 +173,9 @@ export function bindModifier(
 
 /** Plain text of a bound modifier, for the log and sheets. */
 export function describeModifier(payload: ModifierPayload): string {
+  // V179: "damage weakness 5" for the untyped entry, "fire weakness 3" for a typed one.
+  if (payload.kind === 'damage-modifier')
+    return `${payload.damageType === 'all-damage' ? 'damage' : payload.damageType} ${payload.defense} ${payload.value}`;
   if (payload.kind === 'stat') {
     const name = { speed: 'speed', stability: 'stability', 'saving-throw': 'saving throws' }[
       payload.stat

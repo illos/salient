@@ -37,6 +37,7 @@ type Saved = {
       sourceUseEventId: string;
       registrationId?: string;
     }[];
+    effectInstances?: { sourceUseEventId: string; status: string }[];
   } | null;
 };
 type Log = {
@@ -329,6 +330,32 @@ export async function runConduit({ actors: { director, peer }, run, runId }: Sce
                   (await get(targetId)).liveState?.stamina,
                   24 - rolled.damageByTier![holyOutcome.tier - 1]!,
                   `${name} holy`,
+                );
+              } else if (name === "Corruption's Curse") {
+                // V179 (feature/ability/conduit/level-1/corruptions-curse.md): "M < WEAK, damage
+                // weakness 5 (save ends)" (AVERAGE, STRONG) is compiled. The conduit's potency is
+                // weak 0, average 1, strong 2 (rule/character/potency.md, its conduit example), and
+                // the Censor target has Might 2 (class/censor.md: "You start with a Might of 2"),
+                // which no tier's potency exceeds: the weakness is resisted and nothing is stored.
+                assert.equal(
+                  (persisted?.payload?.data?.ability as { execution?: { mode?: string } })
+                    ?.execution?.mode,
+                  'compiled',
+                  name,
+                );
+                const weakness = (await compiledEffects(used.eventId)).find(
+                  o => o.effect.kind === 'modifier',
+                )?.effect as
+                  | { status?: string; potency?: { threshold?: number; targetScore?: number } }
+                  | undefined;
+                assert.equal(weakness?.status, 'resisted', name);
+                assert.equal(weakness?.potency?.threshold, [0, 1, 2][outcome.tier - 1], name);
+                assert.equal(weakness?.potency?.targetScore, 2, name);
+                assert.ok(
+                  !(after.liveState?.effectInstances ?? []).some(
+                    i => i.sourceUseEventId === used.eventId,
+                  ),
+                  name,
                 );
               } else {
                 // Source clauses remain explicit where the bounded compiler cannot automate them.

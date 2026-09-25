@@ -9,6 +9,7 @@ import type {
 import { tierInstruction, type EffectRider, type ForcedMovementRule } from './effectRiders.ts';
 import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import { sectionModifier, type ModifierSpec } from './modifiers.ts';
+import { defenseManualReason, tierDamageModifier } from './damageModifiers.ts';
 import { strainedSection, type StrainedSpec } from './strained.ts';
 import { sectionWatcher, type WatcherSpec } from './watchers.ts';
 import { markManualReason, readMarkAbility, type MarkSpec } from './marks.ts';
@@ -203,8 +204,28 @@ export interface DamageTypeNode extends NodeSource {
   kind: 'damage-type';
   spec: DamageTypeSpec;
 }
+/**
+ * V179: a tier clause that gives the target a damage weakness (shared/resolve/damageModifiers.ts
+ * `tierDamageModifier`), after the tier's damage and with its potency. A use stores it as a
+ * `modifier` effect instance on the target when the potency applies; the damage arithmetic then
+ * reads it (convex/lib/resolve.ts damageTargetFacts).
+ */
+export interface DamageModifierNode extends NodeSource {
+  kind: 'damage-modifier';
+  /** Absent only for an unconditional clause (`threshold.kind === 'always'`). */
+  characteristic?: Characteristic;
+  threshold: ConditionThreshold | { kind: 'always' };
+  spec: ModifierSpec;
+  after: string;
+}
 export type CompiledNode =
-  DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
+  | DamageNode
+  | PushNode
+  | ConditionNode
+  | UnsupportedNode
+  | RiderNode
+  | InstructionNode
+  | DamageModifierNode;
 /** Effect-section nodes: V109 riders, V157 effect-only gains and instructions, or manual work. */
 export type SectionNode =
   | UnsupportedNode
@@ -669,6 +690,19 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           });
           return;
         }
+        // V179: a damage weakness the tier gives the target, after the tier's damage.
+        const defense = tierDamageModifier(clause);
+        if (supportedRun && defense) {
+          nodes.push({
+            ...sourceNode(envelope, tierLocator, ordinal, clause),
+            kind: 'damage-modifier',
+            ...(defense.characteristic ? { characteristic: defense.characteristic } : {}),
+            threshold: defense.threshold,
+            spec: defense.spec,
+            after,
+          });
+          return;
+        }
         // V154: tier table work, after the tier's damage when it has any.
         const instruction = tierInstruction(plain(clause));
         if (
@@ -851,6 +885,13 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         section.clause,
         'Section preserved as manual work; its effect on automation is not assumed independent.',
       );
+  // V179: a manual clause that grants or changes an immunity or weakness says why. Only clauses
+  // already diagnosed are named, so this never changes whether an ability compiles.
+  for (const diagnostic of [...diagnostics])
+    if (diagnostic.code === 'manual-section' || diagnostic.code === 'unsafe-tier-remainder') {
+      const why = defenseManualReason(diagnostic.clause);
+      if (why) diagnose('defense-manual', diagnostic.locator, diagnostic.clause, why);
+    }
   // V110: counted (`multi`) and area targets share one roll with per-target edges/banes and tiers;
   // area placement and target eligibility remain the user's table selection.
   // V157: an effect-only envelope's target was read by the effect-only target reader instead.

@@ -4,19 +4,19 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 179 (without a power roll: 20); unchanged reachable compatibility: 1442; structurally supported but unavailable: 0.
+Currently reachable compiled: 182 (without a power roll: 20); unchanged reachable compatibility: 1439; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
 | Advanced Studies: Study Notebook | granted | manual | legacy-compatibility | grammar, extra-roll-or-tiers, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Animal Form | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
-| Bereaved: Ask the Spirit | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Bereaved: Ask the Spirit | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, defense-manual, target-boundary, compatibility-boundary, action-type |
 | Consuming Interest: Study Lore | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Corrupt Spirit | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
 | Crash Landed: Activate Power Pack | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Crash Landed: Deactivate Power Pack | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
-| Cult Victim: Pass Through Matter | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
-| Curse of Stone: Stone Appearance | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Cult Victim: Pass Through Matter | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, defense-manual, target-boundary, compatibility-boundary, action-type |
+| Curse of Stone: Stone Appearance | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, defense-manual, target-boundary, compatibility-boundary, action-type |
 | Draconian Guard | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Draconian Pride | granted | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
 | Dragon Breath | granted | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
@@ -32,7 +32,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Hawk Rider: Dismiss Hawk | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Hawk Rider: Restore Hawk | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Hawk Rider: Summon Hawk | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
-| Host Body: Transfer Host | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Host Body: Transfer Host | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, defense-manual, target-boundary, compatibility-boundary, action-type |
 | Hunted: Lay Low | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Loner: Choose Respite Skill | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Share Head | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
@@ -44,12 +44,12 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Psychic Blast | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-title, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Psychic Blast: Forced Eruption | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Telekinetic Grasp | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
-| Telekinetic Grasp: Ranged Free Strike | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Telekinetic Grasp: Ranged Free Strike | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, defense-manual, compatibility-boundary |
 | Secret Identity: Resume Secret Identity | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Secret Identity: Resume True Identity | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Self-Taught: Forgo Heroic Resource | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Shared Spirit: Determine Controller | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
-| Silent Sentinel: Telepathy | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Silent Sentinel: Telepathy | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, defense-manual, target-boundary, compatibility-boundary, action-type |
 | Stolen Face: Change Face | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Issue Order | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Waking Dreams: Receive Vision | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
@@ -142,7 +142,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Hands of the Maker | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Judgment | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
 | My Life for Yours | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| Purifying Fire | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Purifying Fire | hero-standalone | manual | legacy-compatibility | manual-section, defense-manual |
 | Repent! | hero-standalone | supported | compiled |  |
 | The Gods Punish and Defend | hero-standalone | supported | compiled |  |
 | Your Allies Cannot Save You! | hero-standalone | supported | compiled |  |
@@ -165,7 +165,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Ranged Weapon Free Strike | hero-standalone | supported | compiled |  |
 | Blessed Light | hero-standalone | supported | compiled |  |
 | Call the Thunder Down | hero-standalone | supported | compiled |  |
-| Corruption's Curse | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Corruption's Curse | hero-standalone | supported | compiled |  |
 | Curse of Terror | hero-standalone | supported | compiled |  |
 | Drain | hero-standalone | supported | compiled |  |
 | Faith Is Our Armor | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
@@ -195,7 +195,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Reap | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Sacred Bond | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Saint's Tempest | hero-standalone | supported | compiled |  |
-| Statue of Power | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Statue of Power | hero-standalone | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | The Gods Command You Obey | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Wellspring of Grace | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Fear of the Gods | hero-standalone | manual | legacy-compatibility | manual-section |
@@ -310,7 +310,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | I'm No Threat | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | In All This Confusion | hero-standalone | supported | compiled |  |
 | One Hundred Throats | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
-| Setup | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Setup | hero-standalone | supported | compiled |  |
 | Shadowstrike | hero-standalone | supported | compiled |  |
 | Teamwork Has Its Place | hero-standalone | manual | legacy-compatibility | manual-section |
 | Two Throats at Once | hero-standalone | supported | compiled |  |
@@ -334,7 +334,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Black Ash Eruption | hero-standalone | manual | legacy-compatibility | manual-section |
 | Cinderstorm | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Look! | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
-| One Vial Makes You Better | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
+| One Vial Makes You Better | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, defense-manual |
 | One Vial Makes You Faster | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section |
 | Puppet Strings | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Advanced Tactics | hero-standalone | manual | legacy-compatibility | grammar, trigger-manual, manual-section |
@@ -381,7 +381,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Precognition | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Remote Assistance | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | Repel | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| Smolder | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Smolder | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, defense-manual |
 | Spirit Sword | hero-standalone | supported | compiled |  |
 | Applied Chronometrics | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Gravitic Burst | hero-standalone | manual | legacy-compatibility | manual-section |
@@ -390,7 +390,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Slow | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Synaptic Override | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Fling Through Time | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| Force Orbs | hero-standalone | manual | legacy-compatibility | source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Force Orbs | hero-standalone | manual | legacy-compatibility | source-block-mismatch, unaccounted-paragraph, manual-section, defense-manual, target-boundary |
 | Reflector Field | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Soul Burn | hero-standalone | manual | legacy-compatibility | manual-section |
 | Concussive Slam | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, empty-clause |
@@ -456,7 +456,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Fancy Footwork | kit-signature | supported | compiled |  |
 | Shield Bash | kit-signature | supported | compiled |  |
 | Unbalancing Attack | kit-signature | supported | compiled |  |
-| Weakening Brand | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section |
+| Weakening Brand | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, defense-manual |
 | Extension of My Arm | kit-signature | supported | compiled |  |
 | Arcane Trick | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Area of Expertise: Inspect Object | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
@@ -509,7 +509,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Heartstopper | foe-ability | manual | legacy-compatibility | manual-section |
 | Snapjaw | foe-ability | manual | legacy-compatibility | target-boundary |
 | Covetous Bolts | foe-ability | manual | legacy-compatibility | manual-section |
-| The Silver Wolf's Final Stratagem | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
+| The Silver Wolf's Final Stratagem | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, action-type, cost |
 | Manifold Blade | foe-ability | manual | legacy-compatibility | manual-section |
 | Executioner's Swing | foe-ability | manual | legacy-compatibility | manual-section |
 | Fairness Is a Human Concept | foe-ability | manual | legacy-compatibility | grammar, manual-section |
@@ -562,15 +562,15 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Gatling Bolt Gun | foe-ability | supported | compiled |  |
 | Firetail Pilum | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | Tongue Slap | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
-| Twist Shape | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| Scaleshatter Burst | malice | manual | not-reachable | manual-section, compatibility-boundary |
+| Twist Shape | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, defense-manual |
+| Scaleshatter Burst | malice | manual | not-reachable | manual-section, defense-manual, compatibility-boundary |
 | Enveloping Umbrage | foe-ability | manual | legacy-compatibility | action-type, cost |
 | My Power Alone | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
 | You Come With Me | foe-ability | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary |
 | Flail and Blade | foe-ability | manual | legacy-compatibility | manual-section |
 | Hrraaaaaagh! | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Instill Regret | foe-ability | manual | legacy-compatibility | manual-section |
-| Rejuvenation | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, source-block-count, source-block-mismatch, source-header, unaccounted-paragraph, manual-section, target-boundary, action-type |
+| Rejuvenation | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, source-block-count, source-block-mismatch, source-header, unaccounted-paragraph, manual-section, defense-manual, target-boundary, action-type |
 | Natural Weapon | foe-ability | supported | compiled |  |
 | Resonate Rune | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
 | Gift From an Accursed Tome | malice | manual | not-reachable | unsafe-tier-remainder, manual-section, compatibility-boundary |
@@ -582,7 +582,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Blazing Leap | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Burning Kick | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
 | Back! | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
-| Convocation of Waves | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Convocation of Waves | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | Agonizing Harmony | foe-ability | manual | legacy-compatibility | manual-section |
 | Feast | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Malign Thicket | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type, cost |
@@ -593,7 +593,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | The Writhing Green | foe-ability | supported | compiled |  |
 | Crack the Earth | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Stoneshift | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Break Armor | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Break Armor | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Command the Awakened | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Shadow Veil | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Ready Rodent | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
@@ -609,7 +609,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Rise, My Minions | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, cost |
 | Retaliatory Strike | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Detonation | foe-ability | manual | legacy-compatibility | grammar, manual-section |
-| The Voice | foe-ability | manual | legacy-compatibility | grammar, manual-section |
+| The Voice | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual |
 | Prickly Situation | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Glare of the Old Judgments | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Mug and Tear | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
@@ -635,7 +635,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Noxious Bubble | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, target-boundary |
 | Phantom Pain | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Stinging Ovipositor | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| The Depths Hunger | foe-ability | manual | legacy-compatibility | manual-section |
+| The Depths Hunger | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
 | Voracious Mastication | foe-ability | manual | legacy-compatibility | manual-section |
 | Swat the Fly | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Blade Rake | foe-ability | supported | compiled |  |
@@ -653,7 +653,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Agonizing Stinger | foe-ability | manual | legacy-compatibility | manual-section |
 | Despair Bolt | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Flame Jet | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| The Earth Devours | foe-ability | manual | legacy-compatibility | manual-section |
+| The Earth Devours | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
 | Adjudicator's Interdiction | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section |
 | Houndcannon | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Gladius | foe-ability | manual | legacy-compatibility | grammar |
@@ -696,7 +696,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Ready Rodent | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
 | Eye Flash | foe-ability | supported | compiled |  |
 | Maw | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| Wilting Visions | foe-ability | manual | legacy-compatibility | manual-section |
+| Wilting Visions | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
 | Ruinous Temptation | foe-ability | manual | legacy-compatibility | manual-section |
 | Cower! | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Pneumatic Punch | foe-ability | supported | compiled |  |
@@ -721,9 +721,9 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Bonesplitter's Cackletongue | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Lightning Beam | foe-ability | manual | legacy-compatibility | manual-section |
 | Corpse Bomb | foe-ability | manual | legacy-compatibility | manual-section |
-| Subdermal Shielding | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Subdermal Shielding | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, defense-manual, target-boundary, action-type, cost |
 | Wode Sickness | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
-| Expanding Doom | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Expanding Doom | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | A Hero Faces the Void | foe-ability | manual | legacy-compatibility | trigger-unobserved, manual-section, target-boundary |
 | Soulstorm | foe-ability | manual | legacy-compatibility | manual-section |
 | Snackies for Sweeties | foe-ability | manual | legacy-compatibility | extra-roll-or-tiers, manual-section, action-type, cost |
@@ -756,7 +756,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Three-Tail Flail | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Noxious Bite | foe-ability | manual | legacy-compatibility | manual-section |
 | Rapier and Dagger | foe-ability | manual | legacy-compatibility | manual-section |
-| Flower of Frost | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Flower of Frost | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, defense-manual, target-boundary |
 | Leaping Fury | foe-ability | manual | legacy-compatibility | manual-section |
 | Where I End the Woods Begin | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Tooth! Tusk! Claw! | foe-ability | manual | legacy-compatibility | manual-section |
@@ -789,7 +789,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Elemental Charge | foe-ability | supported | compiled |  |
 | Ripper Shrikegun | foe-ability | manual | legacy-compatibility | manual-section |
 | Incapacitate | foe-ability | supported | compiled |  |
-| The World Consumes | foe-ability | manual | legacy-compatibility | grammar, manual-section |
+| The World Consumes | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual |
 | Soul Prism | foe-ability | manual | legacy-compatibility | target-boundary |
 | Bloodshot | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
 | Vicious Pursuit | foe-ability | manual | legacy-compatibility | manual-section |
@@ -848,7 +848,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Mass Petrify | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Posthumous Promotion | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Blood For Blood | foe-ability | manual | legacy-compatibility | trigger-unobserved, manual-section |
-| Convocation of Squalls | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Convocation of Squalls | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | Gloom Dagger | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Jaws of the Void | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Burning Legion | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
@@ -875,11 +875,11 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Spit | foe-ability | manual | legacy-compatibility | target-boundary |
 | Muddle the Mind | foe-ability | supported | compiled |  |
 | Vault | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
-| Optical Flare | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
+| Optical Flare | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, defense-manual, target-boundary |
 | Longarm Shrikegun | foe-ability | manual | legacy-compatibility | manual-section |
 | Mind Requital | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | I Am Fire! I Am Death! | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, action-type, cost |
-| Twin Flamebelchers | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Twin Flamebelchers | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, defense-manual |
 | Forward! | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Sweeping Blade | foe-ability | manual | legacy-compatibility | manual-section |
 | Stinging Departure | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
@@ -888,7 +888,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Flamelash | foe-ability | supported | compiled |  |
 | Stick and Poke | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Vermilion Fangs | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| Necrotic Form | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Necrotic Form | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | Carpe Quadratum | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Barbed Tail Swing | foe-ability | manual | legacy-compatibility | manual-section |
 | Psionic Retribution | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
@@ -902,7 +902,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Knife in the Dark | foe-ability | manual | legacy-compatibility | manual-section |
 | Duskfall | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, cost |
 | Crushing Despair | foe-ability | manual | legacy-compatibility | manual-section |
-| The Chasm Engulfs | foe-ability | manual | legacy-compatibility | manual-section |
+| The Chasm Engulfs | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
 | Lay the Foundation | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, target-boundary |
 | Biokinetic Ballista | foe-ability | manual | legacy-compatibility | manual-section |
 | The Forest's Embrace | foe-ability | manual | legacy-compatibility | manual-section |
@@ -912,7 +912,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Nip | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | Posthumous Promotion | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Demonic Egress | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Form Up! | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
+| Form Up! | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, action-type, cost |
 | Grabby Hand | foe-ability | manual | legacy-compatibility | manual-section |
 | Shatterstone | foe-ability | manual | legacy-compatibility | trigger-unobserved, unsafe-tier-remainder, manual-section |
 | Vanish | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
@@ -927,7 +927,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Envious Imitation | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Polarize Aura | foe-ability | manual | legacy-compatibility | trigger-unobserved, unsafe-tier-remainder, manual-section |
 | Needle-Knife | foe-ability | manual | legacy-compatibility | manual-section |
-| Mindshatter | foe-ability | manual | legacy-compatibility | manual-section, action-type, cost |
+| Mindshatter | foe-ability | manual | legacy-compatibility | manual-section, defense-manual, action-type, cost |
 | Berserker Slash | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Mobile Mine Field | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Turned Upside Down | foe-ability | manual | legacy-compatibility | trigger-unobserved, unsafe-tier-remainder, manual-section |
@@ -955,10 +955,10 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Stunning Surge | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Ready Rodent | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
 | Hampering Roots | foe-ability | manual | legacy-compatibility | manual-section |
-| Searing Grasp | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
+| Searing Grasp | foe-ability | manual | legacy-compatibility | target-boundary |
 | Sanguineous Flourish | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Writ of Execution | foe-ability | manual | legacy-compatibility | manual-section |
-| Spirit Form | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Spirit Form | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Snack Attack | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Meat Shield | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
 | Concealed Dagger | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
@@ -967,7 +967,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Quickshot | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Vengeance for the Slain | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
 | Guardian From Afar | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
-| Sanguine Mist | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, action-type, cost |
+| Sanguine Mist | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, defense-manual, action-type, cost |
 | Spinning Bone Blade | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Fight Me, Coward! | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Polish Stone Shape | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
@@ -1002,7 +1002,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Grasping Tonguetacles | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
 | Wasn't Aiming For You | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Earth Breach | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
-| Tail Stinger | foe-ability | manual | legacy-compatibility | manual-section |
+| Tail Stinger | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
 | Charging Chomp | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Snap, Crackle, Pop | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
 | Ice Dance | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
@@ -1012,13 +1012,13 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Summoner's Cackletongue | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Cadenza | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Lay Waste | foe-ability | manual | legacy-compatibility | manual-section, action-type, cost |
-| Iron Banner | foe-ability | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary, cost |
+| Iron Banner | foe-ability | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, defense-manual, target-boundary, cost |
 | Chain Shotput | foe-ability | manual | legacy-compatibility | target-boundary |
 | Mace Lariat | foe-ability | manual | legacy-compatibility | target-boundary |
 | Call to Victory | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Throw Fit | foe-ability | manual | legacy-compatibility | unaccounted-paragraph, manual-section, target-boundary |
 | Overwatch | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| Unhallowed Ground | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Unhallowed Ground | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | You Would Flounder Your Assault? | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Kick | malice | manual | not-reachable | compatibility-boundary |
 | Bomber Wasp Warfare | foe-ability | manual | legacy-compatibility | action-type, cost |
@@ -1034,7 +1034,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Burning Aurora | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | Houndaxe | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Salt Wounds | foe-ability | manual | legacy-compatibility | manual-section |
-| Breath Weapon | malice | manual | not-reachable | manual-section, compatibility-boundary |
+| Breath Weapon | malice | manual | not-reachable | manual-section, defense-manual, compatibility-boundary |
 | Lava Pillar | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
 | Javelin and Bellow | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | Flashing Fangs | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
@@ -1062,7 +1062,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | An Army From Blood | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Flail | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | Blazing Trail | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Primal Bay | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Primal Bay | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | Hellfire | foe-ability | manual | legacy-compatibility | manual-section |
 | Wink | foe-ability | manual | legacy-compatibility | manual-section |
 | Brainstorm | foe-ability | manual | legacy-compatibility | manual-section, action-type, cost |
@@ -1104,7 +1104,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Marauder's Cackletongue | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Dismissal with Prejudice | foe-ability | manual | legacy-compatibility | manual-section |
 | Nimble Step | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
-| Convocation of Flames | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Convocation of Flames | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | Scramble | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Bola Knock | foe-ability | supported | compiled |  |
 | Bloodstones | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
@@ -1131,7 +1131,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Eye of Surlach | foe-ability | supported | compiled |  |
 | Handaxes | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Sword Stab | foe-ability | manual | legacy-compatibility | manual-section |
-| You Would Dare?! | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| You Would Dare?! | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, defense-manual, target-boundary, action-type, cost |
 | Carving Dagger | foe-ability | manual | legacy-compatibility | manual-section |
 | Heart of the Forge | foe-ability | manual | legacy-compatibility | action-type, cost |
 | King's Fissure | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, action-type, cost |
@@ -1153,7 +1153,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Sword Lunge | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | Psionic Intrusion | foe-ability | supported | compiled |  |
 | Acquired Taste | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| Psychic Pulse | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
+| Psychic Pulse | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, action-type, cost |
 | Shield Bash | foe-ability | supported | compiled |  |
 | Ensnaring Chains | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Shed Some Skin | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type, cost |
@@ -1185,7 +1185,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Guardian Block | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Spinous Tail Swing | foe-ability | manual | legacy-compatibility | manual-section |
 | Impale | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| Ribcage Chomp | foe-ability | manual | legacy-compatibility | manual-section |
+| Ribcage Chomp | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
 | Tentacle | foe-ability | supported | compiled |  |
 | Cobblestone Shape | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Ready Rodent | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
@@ -1195,7 +1195,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Demonwarp Tears | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Heavy Crossbolt | foe-ability | supported | compiled |  |
 | Zephyr Feint | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| Liquify | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Liquify | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Dusk Cleave | foe-ability | manual | legacy-compatibility | manual-section |
 | Blowgun | foe-ability | manual | legacy-compatibility | manual-section |
 | Shrapnel Whip | foe-ability | manual | legacy-compatibility | manual-section |
@@ -1216,7 +1216,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Kinetic Lane | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Snaring Javelin | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Inertial Flow | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
-| Who's Hesitating? | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Who's Hesitating? | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Corrupted Ash Teleport | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Catcher | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Shield Warden | foe-ability | manual | legacy-compatibility | manual-section |
@@ -1254,10 +1254,10 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Focus Fire | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
 | Forward Assault | foe-ability | manual | legacy-compatibility | manual-section |
 | Bat Form | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, cost |
-| Armor of the Ancients | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Armor of the Ancients | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Composite Bow | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Inspiring Swordplay | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| Thunderstruck | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Thunderstruck | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Blistering Element | foe-ability | manual | legacy-compatibility | manual-section |
 | Preserve and Protect | foe-ability | manual | legacy-compatibility | manual-section |
 | Steam-Powered Snare | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section |
@@ -1292,7 +1292,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Ripper Spear | foe-ability | manual | legacy-compatibility | manual-section |
 | Courtesy Call | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
 | Striking Afterimage | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| Break Armor | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Break Armor | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Shapeshifter | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Psionic Boom | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Blaster Volley | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
@@ -1337,7 +1337,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Numb | foe-ability | supported | compiled |  |
 | Longshot | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Tentacle Grab | foe-ability | manual | legacy-compatibility | manual-section |
-| Forked Knife | foe-ability | manual | legacy-compatibility | manual-section |
+| Forked Knife | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
 | Devolving Tentacles | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Forge Hammer Tail Slam | foe-ability | manual | legacy-compatibility | manual-section |
 | Bite | foe-ability | manual | legacy-compatibility | manual-section |
@@ -1392,7 +1392,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Vine Lash | foe-ability | manual | legacy-compatibility | manual-section |
 | Hill Quake | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section |
 | Juke | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| Are You Not Entertained?! | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
+| Are You Not Entertained?! | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, action-type, cost |
 | Damning Gaze | foe-ability | manual | legacy-compatibility | manual-section |
 | Night Knife | foe-ability | manual | legacy-compatibility | manual-section |
 | Corroding Breath | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section |
@@ -1440,7 +1440,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Archer's Cackletongue | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Overture of Destruction | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
 | Experimental Treasure | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
-| Testudo! | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
+| Testudo! | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual |
 | Highest Posthumous Promotion | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Piercing Trill | foe-ability | manual | legacy-compatibility | manual-section |
 | Refulgent Beams | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
@@ -1456,11 +1456,11 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Eager Claws | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | Pilium | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Spiked Maul | foe-ability | manual | legacy-compatibility | manual-section |
-| Breath of Brume | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section |
+| Breath of Brume | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, defense-manual |
 | Mudslide | foe-ability | manual | legacy-compatibility | manual-section |
 | Impede | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Pounce | foe-ability | manual | legacy-compatibility | manual-section |
-| Expunging Exhalation | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
+| Expunging Exhalation | foe-ability | supported | compiled |  |
 | Hook and Chain | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Rapier Flunge | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | It Is Day | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type, cost |
@@ -1468,7 +1468,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | A Hush of Ash | foe-ability | manual | legacy-compatibility | manual-section |
 | Gnash | foe-ability | manual | legacy-compatibility | grammar, source-title, manual-section |
 | Brawny Buffe | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
-| Power Burst | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Power Burst | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, defense-manual |
 | Tearing Recoil | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Violent Thrashing | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
 | Corrosive Claws | foe-ability | supported | compiled |  |
@@ -1477,7 +1477,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Claws | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Dagger Feint | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Marble From a Great Sling | foe-ability | manual | legacy-compatibility | manual-section |
-| Summon the Onyx Tower | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Summon the Onyx Tower | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | Illusory Feint | foe-ability | manual | legacy-compatibility | manual-section |
 | Infernal Pike | foe-ability | manual | legacy-compatibility | manual-section |
 | Devilish Charm | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, extra-roll-or-tiers, manual-section, target-boundary |
@@ -1487,8 +1487,8 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Shadow Drag | foe-ability | manual | legacy-compatibility | manual-section |
 | Construction Arm | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
 | But We Will Change Her Mind | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
-| Fearsome Bay | foe-ability | manual | legacy-compatibility | manual-section |
-| Adaptability | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Fearsome Bay | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
+| Adaptability | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Tail Sweep | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Lion's Toss | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
 | You Didn't Pay Attention! | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
@@ -1509,7 +1509,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Visions in the Dark | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Sparkling Tail Whip | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Imbue with Power | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Arcane Telum | foe-ability | manual | legacy-compatibility | manual-section |
+| Arcane Telum | foe-ability | manual | legacy-compatibility | manual-section, defense-manual |
 | Blood of the Abyss | foe-ability | manual | legacy-compatibility | manual-section, action-type, cost |
 | Skewer | foe-ability | manual | legacy-compatibility | manual-section |
 | Exposed Crux | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
@@ -1518,7 +1518,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Assail and Serrate | foe-ability | manual | legacy-compatibility | manual-section |
 | Spiteful Retort | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Tonguelash | foe-ability | manual | legacy-compatibility | manual-section |
-| Adaptability | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
+| Adaptability | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, defense-manual, target-boundary |
 | Wild Swing | foe-ability | supported | compiled |  |
 | Cerebral Suplex | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Black Flame | foe-ability | manual | legacy-compatibility | grammar, unsafe-tier-remainder |
@@ -1547,7 +1547,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | I Thrive on Pain | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Precog Reflexes | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Thresher Thrasher | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
-| Blood Haze | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Blood Haze | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual, target-boundary |
 | Is It Now or Is It Then? | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Chroma Cloak | foe-ability | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary |
 | Running Cacophony | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
@@ -1574,7 +1574,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Vengeful Tusker | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Wide Axe | foe-ability | manual | legacy-compatibility | manual-section |
 | Infernal Injunction | foe-ability | manual | legacy-compatibility | manual-section |
-| Heat and Pressure | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, extra-roll-or-tiers, manual-section, target-boundary |
+| Heat and Pressure | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, extra-roll-or-tiers, manual-section, defense-manual, target-boundary |
 | Gladius | foe-ability | manual | legacy-compatibility | manual-section |
 | All to Cinders | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
 | Gloom Bolt | foe-ability | manual | legacy-compatibility | target-boundary |
@@ -1585,7 +1585,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Bloody Whirlwind | foe-ability | manual | legacy-compatibility | manual-section |
 | See Only Me | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, manual-section, action-type, cost |
 | Breathsnipe | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
-| Fuel for the Fire | foe-ability | manual | legacy-compatibility | grammar, manual-section |
+| Fuel for the Fire | foe-ability | manual | legacy-compatibility | grammar, manual-section, defense-manual |
 | Rush | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Frightening Tones | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
 | Big Bite | foe-ability | manual | legacy-compatibility | grammar, manual-section |
@@ -1624,7 +1624,7 @@ Currently reachable compiled: 179 (without a power roll: 20); unchanged reachabl
 | Stunning Blast | foe-ability | supported | compiled |  |
 | Devilish Suggestion | foe-ability | manual | legacy-compatibility | grammar, trigger-unobserved, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
 | Talons | foe-ability | manual | legacy-compatibility | manual-section |
-| Dweomer Plume | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
+| Dweomer Plume | foe-ability | manual | legacy-compatibility | target-boundary |
 | Wall of Flesh | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Flurry of Bites | foe-ability | supported | compiled |  |
 | Land's Guardian | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, source-header, manual-section, target-boundary, action-type, cost |

@@ -17,7 +17,10 @@
  *   block refers to an R". A foe row has no summoner, so an "R" value stays manual.
  */
 import type { DamageApplication, DamageModifierEntry } from '../contracts/rollResolution.ts';
+import type { DamageModifier, EffectInstance } from '../contracts/liveState.ts';
 import { DAMAGE_TYPES } from './damageTypes.ts';
+import { plain, type Characteristic, type ConditionThreshold } from './abilityGrammar.ts';
+import type { ModifierSpec } from './modifiers.ts';
 
 /** A printed cell read: its entries, or why it is left to the table (entries are then empty). */
 export interface ModifierCell {
@@ -565,4 +568,211 @@ export function extraDamageAfterModifiers(
   if (hit.immunityApplied === 'all') return 0;
   const total = Math.max(0, hit.incoming + extra + hit.weaknessApplied - hit.immunityApplied);
   return total - hit.afterImmunity;
+}
+
+// ---------------------------------------------------------------------------------------------
+// V179 immunity and weakness granted in play (docs/build/V179-granted-defenses.md).
+
+/**
+ * One tier clause that gives the target a damage weakness, read whole, with its potency. The
+ * printed forms (pinned `en/unified/md`):
+ * - feature/ability/shadow/level-1/setup.md: "R < WEAK, the target has damage weakness 5 (save
+ *   ends)";
+ * - feature/ability/conduit/level-1/corruptions-curse.md: "M < WEAK, damage weakness 5 (save
+ *   ends)" (a potency clause names no subject; rule/character/potency.md: an effect with a potency
+ *   "is applied to a target");
+ * - feature/ability/censor/level-1/purifying-fire.md: "M < WEAK, the target has fire weakness 3
+ *   (save ends)";
+ * - monster/draconian/statblock/myxovidan-the-sintaker.md: "M < 1 the target has corruption
+ *   weakness 3 (save ends)"; monster/elf-high/statblock/elemental-mote.md: "R < 1 damage weakness 3
+ *   (save ends)"; monster/hobgoblin/statblock/hobgoblin-brandbearer.md: "M < 2 fire weakness 5
+ *   (save ends)";
+ * - monster/shambling-mound/statblock/shambling-mound.md: "the target has poison weakness 3 until
+ *   the end of the encounter".
+ * "damage weakness" with no type is the untyped entry (rule/damage/damage-weakness.md: "with no
+ * specific type or keyword indicated ... when they take damage of any type"); a type is one of
+ * rule/damage/damage-type.md. A weakness with neither ("the target has weakness 5",
+ * feature/ability/talent/level-1/smolder.md, whose type is a choice) is not read. The duration is
+ * "(save ends)" (rule/general/saving-throw.md), "(EoT)" (rule/combat/end-of-turn.md) or "until the
+ * end of the encounter", each a V158 duration of the target.
+ */
+export interface TierDamageModifier {
+  characteristic?: Characteristic;
+  threshold: ConditionThreshold | { kind: 'always' };
+  spec: ModifierSpec;
+}
+
+const TIER_WEAKNESS = new RegExp(
+  `^(?:([MARIP]) < (-?\\d+|WEAK|AVERAGE|STRONG),? )?(?:the target has )?(?:(${DAMAGE_TYPES.join('|')})|damage) weakness (\\d+)(?: \\((save ends|EoT)\\)| (until the end of the encounter))$`,
+);
+
+export function tierDamageModifier(clause: string): TierDamageModifier | undefined {
+  const text = plain(clause).replace(/\s+/g, ' ').trim();
+  const match = TIER_WEAKNESS.exec(text);
+  if (!match) return undefined;
+  const value = Number(match[4]);
+  if (!Number.isSafeInteger(value) || value <= 0) return undefined;
+  let threshold: TierDamageModifier['threshold'] = { kind: 'always' };
+  if (match[2] !== undefined) {
+    if (/^-?\d+$/.test(match[2])) {
+      const printed = Number(match[2]);
+      if (!Number.isSafeInteger(printed)) return undefined;
+      threshold = { kind: 'printed', value: printed };
+    } else
+      threshold = {
+        kind: 'potency',
+        tier: match[2].toLowerCase() as 'weak' | 'average' | 'strong',
+      };
+  }
+  const modifier: DamageModifier = {
+    kind: 'damage-modifier',
+    defense: 'weakness',
+    damageType: match[3] ?? 'all-damage',
+    value,
+  };
+  return {
+    ...(match[1] ? { characteristic: match[1] as Characteristic } : {}),
+    threshold,
+    spec: {
+      effect: 'modifier',
+      subject: 'target',
+      modifier,
+      duration:
+        match[6] !== undefined
+          ? { kind: 'encounter' }
+          : match[5] === 'EoT'
+            ? { kind: 'eot' }
+            : { kind: 'save-ends' },
+      endsWhen: [],
+      text,
+    },
+  };
+}
+
+/** A granted immunity or weakness a creature holds, as it reaches the damage arithmetic. */
+export interface GrantedDefense {
+  instanceId: string;
+  abilityName: string;
+  actorLabel: string;
+  sourcePath: string;
+  defense: DamageModifier['defense'];
+  entry: DamageModifierEntry;
+}
+
+/**
+ * The active granted immunities and weaknesses one hero or foe holds (V159 `modifier` instances
+ * with a `damage-modifier` payload), or why its damage is left to the table.
+ *
+ * Every active instance is an entry next to the printed cells or evaluated values. Only the highest
+ * of those that apply to a damage is used (rule/damage/damage-immunity.md: "If multiple damage
+ * immunities apply to a source of damage, only the immunity with the highest value applies.";
+ * rule/damage/damage-weakness.md: "If multiple damage weaknesses apply to a source of damage, only
+ * the weakness with the highest value applies."), which is also what "Stacking Unique Effects"
+ * gives for several uses of one ability (en/books/heroes/clean/Draw Steel Heroes.md: the most
+ * impactful effect applies).
+ *
+ * An instance in a V158 manual stacking group is the table's to resolve, so the engine can't know
+ * which of them applies: the creature's damage is then manual rather than silently missing it.
+ */
+export function grantedDefenses(
+  instances: readonly EffectInstance[] | undefined,
+): { granted: GrantedDefense[] } | { manual: string } {
+  const granted: GrantedDefense[] = [];
+  for (const instance of instances ?? []) {
+    if (instance.status !== 'active' || instance.kind !== 'modifier') continue;
+    if (instance.payload.kind !== 'modifier') continue;
+    const modifier = instance.payload.modifier;
+    if (modifier.kind !== 'damage-modifier') continue;
+    // An object's or squad's effect held by its owner is not about the owner (V159 aboutHolder).
+    if (instance.subject.kind !== 'character' && instance.subject.kind !== 'foe') continue;
+    if (instance.manualStacking)
+      return {
+        manual: `${instance.actorLabel}'s ${instance.abilityName} (${describeDefense(modifier)}) is in a manual stacking group the table resolves, so which granted ${modifier.defense} applies is not known`,
+      };
+    granted.push({
+      instanceId: instance.id,
+      abilityName: instance.abilityName,
+      actorLabel: instance.actorLabel,
+      sourcePath: instance.sourcePath,
+      defense: modifier.defense,
+      entry: { type: modifier.damageType, value: modifier.value },
+    });
+  }
+  return { granted };
+}
+
+const describeDefense = (modifier: DamageModifier) =>
+  `${modifier.damageType === 'all-damage' ? 'damage' : modifier.damageType} ${modifier.defense} ${modifier.value}`;
+
+/** Printed or evaluated entries with the granted ones added (the highest applies in applyDamage). */
+export function withGrantedDefenses<
+  T extends { immunities?: DamageModifierEntry[]; weaknesses?: DamageModifierEntry[] },
+>(facts: T, granted: readonly GrantedDefense[]): T {
+  if (!granted.length) return facts;
+  const of = (defense: GrantedDefense['defense']) =>
+    granted.filter(g => g.defense === defense).map(g => g.entry);
+  const immunities = [...(facts.immunities ?? []), ...of('immunity')];
+  const weaknesses = [...(facts.weaknesses ?? []), ...of('weakness')];
+  return {
+    ...facts,
+    ...(immunities.length ? { immunities } : {}),
+    ...(weaknesses.length ? { weaknesses } : {}),
+  };
+}
+
+/**
+ * V179: why a printed clause that grants or changes an immunity or weakness stays manual. Each hero
+ * ability at levels 1 to 3 whose text grants one has its own reason (pinned `en/unified/md`); any
+ * other such clause gets the general one. Used only for clauses the compiler already left manual.
+ */
+const DEFENSE_MANUAL: readonly { pattern: RegExp; reason: string }[] = [
+  {
+    // feature/ability/censor/level-1/purifying-fire.md
+    pattern:
+      /^While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage\.$/,
+    reason:
+      'Purifying Fire: while the weakness lasts, later abilities may deal fire instead of holy damage to the target; a later use has no such damage-type choice, so the ability stays manual (its tier weakness is read)',
+  },
+  {
+    // feature/ability/talent/level-1/smolder.md
+    pattern:
+      /^Choose the damage type and the weakness for this ability from one of the following: acid, corruption, or fire\. The target takes damage before this ability imposes any weakness\.$/,
+    reason:
+      'Smolder: the damage and weakness type is a choice printed before the power roll, which V177 damage-type choices do not read, and the tier weakness prints no type',
+  },
+  {
+    // feature/ability/talent/level-1/smolder.md tiers: "the target has weakness 5 (save ends)"
+    pattern: /the target has weakness (\d+|equal to 5 \+ your Reason score) \(save ends\)$/,
+    reason:
+      'the weakness prints no damage type: its type is the ability’s choice (Smolder), which the tier clause can’t bind',
+  },
+  {
+    // feature/ability/talent/level-3/force-orbs.md
+    pattern:
+      /^You create three size 1T orbs that orbit your body\. Each orb gives you a cumulative damage immunity 1\. Each time you take damage, you lose 1 orb\.$/,
+    reason:
+      'Force Orbs: the immunity counts orbs, lost one per damage taken and per orb fired; the engine does not track the count',
+  },
+  {
+    // feature/ability/warrior-priest/weakening-brand.md
+    pattern:
+      /^Until the end of the target's next turn, they have damage weakness equal to the characteristic score used for this ability's power roll\.$/,
+    reason:
+      'Weakening Brand: the weakness equals the characteristic the power roll used, and the roll’s choice of Might, Reason, Intuition or Presence is not compiled',
+  },
+  {
+    // feature/ability/conduit/level-2/statue-of-power.md
+    pattern: /It has immunity all to poison and psychic damage\.$/,
+    reason:
+      'Statue of Power: the statue, an object without a live record, has the immunity; objects are not tracked',
+  },
+];
+
+export function defenseManualReason(text: string): string | undefined {
+  const clause = plain(text).replace(/\s+/g, ' ').trim();
+  const found = DEFENSE_MANUAL.find(entry => entry.pattern.test(clause));
+  if (found) return found.reason;
+  return /immunit|immune|weakness/i.test(clause)
+    ? 'the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it'
+    : undefined;
 }

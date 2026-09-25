@@ -91,7 +91,8 @@ export const current = query({
               occurrence.effect.kind === 'damage' ||
               occurrence.disposition ||
               (occurrence.effect.kind === 'gain' && occurrence.effect.status === 'applied') ||
-              (occurrence.effect.kind === 'modifier' && occurrence.effect.status === 'applied') ||
+              // V179: a resisted tier weakness left nothing for the table.
+              (occurrence.effect.kind === 'modifier' && occurrence.effect.status !== 'manual') ||
               // V171: an applied watcher is tracked and fired by the engine.
               (occurrence.effect.kind === 'watcher' && occurrence.effect.status === 'applied') ||
               // V175: an applied mark is tracked by the engine.

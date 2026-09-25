@@ -12,13 +12,13 @@
     },
     "foe-ability": {
       "total": 1158,
-      "supported": 62,
-      "manual": 1096
+      "supported": 63,
+      "manual": 1095
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 104,
-      "manual": 267
+      "supported": 106,
+      "manual": 265
     },
     "kit-signature": {
       "total": 25,
@@ -501,6 +501,12 @@
           "locator": "markdown:item:2:0",
           "clause": "Drawback: You have corruption weakness 5.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:item:2:0",
+          "clause": "Drawback: You have corruption weakness 5.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -1470,6 +1476,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "markdown:item:2:0",
+          "clause": "Drawback: You have corruption weakness 5.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "",
@@ -1644,6 +1656,12 @@
           "locator": "markdown:item:2:0",
           "clause": "Drawback: You have sonic weakness 5. Additionally, while you are winded, you are dazed.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:item:2:0",
+          "clause": "Drawback: You have sonic weakness 5. Additionally, while you are winded, you are dazed.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -4361,6 +4379,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "markdown:item:2:0",
+          "clause": "Drawback: You have fire weakness 5. Additionally, you take a bane on any test made to read a humanoid creature's emotions or body language.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "",
@@ -6647,6 +6671,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "markdown:item:10:0",
+          "clause": "Drawback: You have psychic weakness 5.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "compatibility-boundary",
           "locator": "envelope",
           "clause": "granted",
@@ -7471,6 +7501,12 @@
           "locator": "markdown:item:2:0",
           "clause": "Drawback: You have sonic weakness 5. Additionally, whenever you take sonic damage, you are dazed until the end of your next turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:item:2:0",
+          "clause": "Drawback: You have sonic weakness 5. Additionally, whenever you take sonic damage, you are dazed until the end of your next turn.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -21050,10 +21086,28 @@
             "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier1:1:acca4174cc87fdc2",
             "locator": "block:0:tier1:1",
             "clause": "M < WEAK, the target has fire weakness 3 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "fire",
+                "value": 3
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < WEAK, the target has fire weakness 3 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier1:0:34a47434afce1c29"
           }
         ],
         [
@@ -21074,10 +21128,28 @@
             "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier2:1:bbde7338685d7a47",
             "locator": "block:0:tier2:1",
             "clause": "M < AVERAGE, the target has fire weakness 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "fire",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < AVERAGE, the target has fire weakness 5 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier2:0:afc871927433a505"
           }
         ],
         [
@@ -21098,10 +21170,28 @@
             "id": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier3:1:8a0419a3b14f2bd5",
             "locator": "block:0:tier3:1",
             "clause": "M < STRONG, the target has fire weakness 7 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM the target has fire weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "fire",
+                "value": 7
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < STRONG, the target has fire weakness 7 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.censor.level-1/purifying-fire#block:0:tier3:0:bae9458eba2f07af"
           }
         ]
       ],
@@ -21118,28 +21208,16 @@
       ],
       "diagnostics": [
         {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < WEAK, the target has fire weakness 3 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < AVERAGE, the target has fire weakness 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < STRONG, the target has fire weakness 7 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
           "code": "manual-section",
           "locator": "block:1:0",
           "clause": "While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "While the target has fire weakness from this ability, you can choose to have your abilities deal fire damage to the target instead of holy damage.",
+          "message": "Purifying Fire: while the weakness lasts, later abilities may deal fire instead of holy damage to the target; a later use has no such damage-type choice, so the ability stays manual (its tier weakness is read)"
         }
       ],
       "live": "legacy-compatibility",
@@ -23781,7 +23859,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-1/corruptions-curse.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -23801,10 +23879,28 @@
             "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier1:1:d891b5bc1c2b2786",
             "locator": "block:0:tier1:1",
             "clause": "M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM damage weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "all-damage",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < WEAK, damage weakness 5 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier1:0:36f59bdde83ca50a"
           }
         ],
         [
@@ -23825,10 +23921,28 @@
             "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier2:1:5c8fabf48a139285",
             "locator": "block:0:tier2:1",
             "clause": "M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM damage weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "all-damage",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < AVERAGE, damage weakness 5 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier2:0:ca473fb1364cdfa1"
           }
         ],
         [
@@ -23849,36 +23963,35 @@
             "id": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier3:1:1177b6671e05769d",
             "locator": "block:0:tier3:1",
             "clause": "M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < SYM damage weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "all-damage",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < STRONG, damage weakness 5 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.conduit.level-1/corruptions-curse#block:0:tier3:0:406df3a99cfc1c2c"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < WEAK, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < AVERAGE, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < STRONG, [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Corruption's Curse",
@@ -27990,6 +28103,12 @@
           "locator": "block:0:0",
           "clause": "A [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 statue rises out of the ground in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) and lasts until the end of the encounter. While within 3 squares of the statue, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally within 3 squares of the statue gains this same benefit. The statue is destroyed if it takes 20 or more damage. It has immunity all to poison and psychic damage.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "A [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 statue rises out of the ground in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) and lasts until the end of the encounter. While within 3 squares of the statue, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally within 3 squares of the statue gains this same benefit. The statue is destroyed if it takes 20 or more damage. It has immunity all to poison and psychic damage.",
+          "message": "Statue of Power: the statue, an object without a live record, has the immunity; objects are not tracked"
         },
         {
           "code": "target-boundary",
@@ -44513,7 +44632,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/setup.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -44532,10 +44651,28 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier1:1:39a08d2ddf8d927f",
             "locator": "block:0:tier1:1",
             "clause": "R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < SYM the target has damage weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "all-damage",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "R < WEAK, the target has damage weakness 5 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier1:0:c242b54eeae60b04"
           }
         ],
         [
@@ -44555,10 +44692,28 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier2:1:3573db6c137704b8",
             "locator": "block:0:tier2:1",
             "clause": "R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < SYM the target has damage weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "all-damage",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "R < AVERAGE, the target has damage weakness 5 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier2:0:59d6701840f609eb"
           }
         ],
         [
@@ -44578,36 +44733,35 @@
             "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier3:1:c19f93f76423a49a",
             "locator": "block:0:tier3:1",
             "clause": "R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < SYM the target has damage weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "all-damage",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "R < STRONG, the target has damage weakness 5 (save ends)"
+            },
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier3:0:e667b4ddb44f1970"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Setup",
@@ -47329,6 +47483,18 @@
           "locator": "markdown:item:4:0",
           "clause": "A creature who drinks the potion can spend up to 2 Recoveries, and has acid immunity, fire immunity, or poison immunity (their choice) equal to your level until the end of the encounter.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You ready, hand, or lob a potion to each target, who can immediately quaff the potion (no action required). If they don't drink the potion right away, they must use the Use Consumable maneuver to consume it later. The potion loses its potency at the end of the encounter.\nA creature who drinks the potion can spend up to 2 Recoveries, and has acid immunity, fire immunity, or poison immunity (their choice) equal to your level until the end of the encounter.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:item:4:0",
+          "clause": "A creature who drinks the potion can spend up to 2 Recoveries, and has acid immunity, fire immunity, or poison immunity (their choice) equal to your level until the end of the encounter.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -53798,6 +53964,30 @@
           "locator": "block:0:0",
           "clause": "Choose the [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) and the weakness for this ability from one of the following: acid, corruption, or fire. The target takes damage before this ability imposes any weakness.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:tier1:1",
+          "clause": "R < WEAK, the target has weakness 5 (save ends)",
+          "message": "the weakness prints no damage type: its type is the ability’s choice (Smolder), which the tier clause can’t bind"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:tier2:1",
+          "clause": "R < AVERAGE, the target has weakness 5 (save ends)",
+          "message": "the weakness prints no damage type: its type is the ability’s choice (Smolder), which the tier clause can’t bind"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:tier3:1",
+          "clause": "R < STRONG, the target has weakness equal to 5 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score (save ends)",
+          "message": "the weakness prints no damage type: its type is the ability’s choice (Smolder), which the tier clause can’t bind"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Choose the [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) and the weakness for this ability from one of the following: acid, corruption, or fire. The target takes damage before this ability imposes any weakness.",
+          "message": "Smolder: the damage and weakness type is a choice printed before the power roll, which V177 damage-type choices do not read, and the tier weakness prints no type"
         }
       ],
       "live": "legacy-compatibility",
@@ -55277,6 +55467,18 @@
           "locator": "markdown:item:4:0",
           "clause": "Once on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "You create three [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1T orbs that orbit your body. Each orb gives you a cumulative [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 1. Each time you take damage, you lose 1 orb.",
+          "message": "Force Orbs: the immunity counts orbs, lost one per damage taken and per orb fired; the engine does not track the count"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You create three size 1T orbs that orbit your body. Each orb gives you a cumulative damage immunity 1. Each time you take damage, you lose 1 orb.\nOnce on each of your turns, you can use a free maneuver to fire an orb at a creature or object within 5 squares as a ranged strike, losing the orb after the strike.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -64782,6 +64984,12 @@
           "locator": "block:1:0",
           "clause": "Until the end of the target's next turn, they have damage weakness equal to the characteristic score used for this ability's power roll.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "Until the end of the target's next turn, they have damage weakness equal to the characteristic score used for this ability's power roll.",
+          "message": "Weakening Brand: the weakness equals the characteristic the power roll used, and the roll’s choice of Might, Reason, Intuition or Presence is not compiled"
         }
       ],
       "live": "legacy-compatibility",
@@ -74651,6 +74859,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Until the start of the next round, each target enemy who has I < 4 is [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), each target enemy who has M < 4 is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), and each target enemy who has A < 4 can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action). Additionally, until the end of the encounter, Alkestis and each target ally have damage immunity 3 and deal an extra 5 damage with strikes.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "action-type",
           "locator": "header:usage",
           "clause": "-",
@@ -80998,6 +81212,12 @@
           "locator": "block:1:0",
           "clause": "A shapechanged creature is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and has fire weakness 10 as their limbs stretch and their skin becomes paper thin.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "A shapechanged creature is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and has fire weakness 10 as their limbs stretch and their skin becomes paper thin.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -81088,6 +81308,12 @@
           "locator": "block:1:0",
           "clause": "The draconian's scales shatter from battle damage. The draconian has damage weakness 5 but can take two turns per round until the end of the encounter.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The draconian's scales shatter from battle damage. The draconian has damage weakness 5 but can take two turns per round until the end of the encounter.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "compatibility-boundary",
@@ -82013,6 +82239,18 @@
           "locator": "markdown:item:2:0",
           "clause": "A creature who touches an inhabited soulstone makes a Might test that takes a bane.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The lich has a soulstone, which has 50 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and damage immunity all except to sonic damage and holy damage. If the lich is destroyed while their soulstone is intact, their soul retreats into the soulstone. Any creature who has P < 5 and who moves within 5 squares of an inhabited soulstone for the first time in a round or starts their turn there is compelled (save ends). A compelled creature must do everything in their power to move toward and touch the soulstone.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:item:1:0",
+          "clause": "The lich has a soulstone, which has 50 Stamina and damage immunity all except to sonic damage and holy damage. If the lich is destroyed while their soulstone is intact, their soul retreats into the soulstone. Any creature who has P < 5 and who moves within 5 squares of an inhabited soulstone for the first time in a round or starts their turn there is compelled (save ends). A compelled creature must do everything in their power to move toward and touch the soulstone.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -83523,6 +83761,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Until the start of the essence's next turn, the target has cold immunity 5.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Self or one elemental",
@@ -84779,6 +85023,12 @@
           "locator": "block:1:0",
           "clause": "The marble stone giant halves the damage, and has damage weakness 3 and a +3 bonus to speed until the end of the encounter. The damage weakness increases by 3 each time the marble stone giant uses this ability in the same encounter.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The marble stone giant halves the damage, and has damage weakness 3 and a +3 bonus to speed until the end of the encounter. The damage weakness increases by 3 each time the marble stone giant uses this ability in the same encounter.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -86410,6 +86660,12 @@
           "locator": "block:0:0",
           "clause": "The neuronite chooses one ally within 10 squares. Each target is either taunted by the ally, or the ally has damage immunity 3 whenever any target makes a strike against them (the neuronite's choice). Either effect lasts until the start of the neuronite's next turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The neuronite chooses one ally within 10 squares. Each target is either taunted by the ally, or the ally has damage immunity 3 whenever any target makes a strike against them (the neuronite's choice). Either effect lasts until the start of the neuronite's next turn.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -89519,6 +89775,12 @@
           "locator": "block:1:0",
           "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. Any enemy in the area has acid [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 3.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. Any enemy in the area has acid [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 3.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -91709,6 +91971,12 @@
           "locator": "block:1:0",
           "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. Any enemy in the area has acid [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 2.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. Any enemy in the area has acid [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 2.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -96623,6 +96891,18 @@
           "locator": "block:2:0",
           "clause": "If the target has I < 2, they have corruption [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The target has corruption [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (EoT).",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:2:0",
+          "clause": "If the target has I < 2, they have corruption [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends).",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -99430,6 +99710,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Shields embedded under the dragon's scales emerge, and the dragon gains damage immunity 6 at the start of each round until the end of the encounter. If the dragon takes any damage, they lose this immunity until the end of the current round.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Self",
@@ -99622,6 +99908,12 @@
           "locator": "block:0:0",
           "clause": "The doomthief has damage immunity 4 and the size of the aura from their Doom Magnet trait increases by 3, both until the start of their next turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The doomthief has damage immunity 4 and the size of the aura from their Doom Magnet trait increases by 3, both until the start of their next turn.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -103648,6 +103940,12 @@
           "locator": "block:1:0",
           "clause": "14 cold damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4; [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n11 cold damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n7 cold damage",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The storm hurler throws three size 1L ice javelins into unoccupied squares within distance. Each javelin has 30 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and fire weakness 5. At the start of the storm hurler's next turn, all javelins not destroyed explode in a shower of icicles. Each enemy and object within 3 squares of an exploding javelin makes an **Agility test**.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -107782,6 +108080,12 @@
           "locator": "block:0:0",
           "clause": "The area becomes overgrown with caustic vines until the end of the encounter. While in the area, any enemy has acid [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 and is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed). Any enemy who ends their turn in the area and has M < 4 is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The area becomes overgrown with caustic vines until the end of the encounter. While in the area, any enemy has acid [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 and is [slowed](scc.v1:mcdm.heroes.v1/condition/slowed). Any enemy who ends their turn in the area and has M < 4 is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends).",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -115269,6 +115573,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Until the start of the essence's next turn, the target has lightning immunity 5.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Self or one elemental",
@@ -118584,6 +118894,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:0:tier3:1",
+          "clause": "this damage ignores immunity",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "One creature or object per minion",
@@ -119161,6 +119477,12 @@
           "locator": "block:1:0",
           "clause": "A seared creature takes a bane on strikes and has damage weakness 5. If this ability obtains a tier 3 outcome against one or more creatures who are already seared, the firestarter can use Enflame as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "A seared creature takes a bane on strikes and has damage weakness 5. If this ability obtains a tier 3 outcome against one or more creatures who are already seared, the firestarter can use Enflame as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -120171,6 +120493,12 @@
           "locator": "block:0:0",
           "clause": "The lich becomes spectral, moves up to their speed, and becomes corporeal again. While spectral, the lich automatically ends the [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) or [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) conditions, has damage immunity 5, can move through solid matter, and ignores [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain). If the lich ends this movement inside solid matter, they are shunted out into the space from which they entered it.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The lich becomes spectral, moves up to their speed, and becomes corporeal again. While spectral, the lich automatically ends the [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) or [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) conditions, has damage immunity 5, can move through solid matter, and ignores [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain). If the lich ends this movement inside solid matter, they are shunted out into the space from which they entered it.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -121880,6 +122208,12 @@
           "locator": "block:1:0",
           "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. Any enemy in the area has acid [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies until the end of the encounter. Any enemy in the area has acid [weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -123059,6 +123393,12 @@
           "locator": "block:0:0",
           "clause": "Each target [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to their speed. Additionally, until the end of the encounter, while the bandit chief or any ally is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to a target, they have damage immunity 2.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Each target [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to their speed. Additionally, until the end of the encounter, while the bandit chief or any ally is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to a target, they have damage immunity 2.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "action-type",
@@ -125012,6 +125352,12 @@
           "locator": "block:1:0",
           "clause": "Until the end of the encounter, each target has damage weakness 3.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "Until the end of the encounter, each target has damage weakness 3.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "action-type",
@@ -128477,10 +128823,28 @@
             "id": "salient:foe-feature:633e0bae-21ff-45e4-87e9-53b3fdb94b76#block:0:tier2:1:e83180949ead735a",
             "locator": "block:0:tier2:1",
             "clause": "M < 2 fire weakness 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N fire weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "fire",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < 2 fire weakness 5 (save ends)"
+            },
+            "after": "salient:foe-feature:633e0bae-21ff-45e4-87e9-53b3fdb94b76#block:0:tier2:0:e331033aa5c3dff6"
           }
         ],
         [
@@ -128500,27 +128864,33 @@
             "id": "salient:foe-feature:633e0bae-21ff-45e4-87e9-53b3fdb94b76#block:0:tier3:1:f50f4d249f1cdf7d",
             "locator": "block:0:tier3:1",
             "clause": "M < 3 fire weakness 5 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N fire weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "fire",
+                "value": 5
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < 3 fire weakness 5 (save ends)"
+            },
+            "after": "salient:foe-feature:633e0bae-21ff-45e4-87e9-53b3fdb94b76#block:0:tier3:0:f68c934b3334e560"
           }
         ]
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 2 fire weakness 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 3 fire weakness 5 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
@@ -129019,6 +129389,12 @@
           "locator": "block:1:0",
           "clause": "Psyche moves up to 5 squares, and has damage immunity 5 and ignores [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) during this movement. The first time she moves through any creature during this movement, that creature takes 5 corruption damage.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "Psyche moves up to 5 squares, and has damage immunity 5 and ignores [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) during this movement. The first time she moves through any creature during this movement, that creature takes 5 corruption damage.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -130026,6 +130402,12 @@
           "locator": "block:2:0",
           "clause": "Rhodar [teleports](scc.v1:mcdm.heroes.v1/movement/teleport) to an unoccupied space in the area. If he has lost the damage immunity from his Grave Ward trait, he regains it.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:2:0",
+          "clause": "Rhodar [teleports](scc.v1:mcdm.heroes.v1/movement/teleport) to an unoccupied space in the area. If he has lost the damage immunity from his Grave Ward trait, he regains it.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "action-type",
@@ -134105,6 +134487,12 @@
           "locator": "block:1:0",
           "clause": "A target [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way also has damage weakness 3.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "A target [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way also has damage weakness 3.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -135228,6 +135616,24 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "- The target has damage immunity 2. - The target's strikes deal an extra 3 holy damage. - The target has a +3 bonus to speed.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: For every 2 Malice spent, each target gains one of the following effects until the start of the iron priest's next turn.\n- The target has damage immunity 2.\n- The target's strikes deal an extra 3 holy damage.\n- The target has a +3 bonus to speed.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:item:4:0",
+          "clause": "- The target has damage immunity 2.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Each war dog in the area",
@@ -136007,6 +136413,12 @@
           "locator": "block:0:0",
           "clause": "The war mage consecrates the area and causes it to smolder until the end of the encounter. The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and an enemy in the area has fire weakness 10.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The war mage consecrates the area and causes it to smolder until the end of the encounter. The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and an enemy in the area has fire weakness 10.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -137989,6 +138401,12 @@
           "locator": "block:0:0",
           "clause": "The damage dealt by this ability matches a damage type the draconian has immunity to.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The damage dealt by this ability matches a damage type the draconian has immunity to.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "compatibility-boundary",
@@ -141538,6 +141956,12 @@
           "locator": "block:0:0",
           "clause": "Until the end of their next turn, the minotaur has damage immunity 2 and deals an extra 5 damage with strikes. On their next turn, the minotaur can use one additional maneuver.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of their next turn, the minotaur has damage immunity 2 and deals an extra 5 damage with strikes. On their next turn, the minotaur can use one additional maneuver.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -146855,6 +147279,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Until the start of the crux's next turn, the target has fire immunity 5.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Self or one elemental",
@@ -147394,10 +147824,26 @@
             "id": "salient:foe-feature:89e05872-cd00-47ba-b091-1a3e5e02e7bf#block:0:tier2:2:8e3279c634fb4570",
             "locator": "block:0:tier2:2",
             "clause": "the target has poison weakness 3 until the end of the encounter",
-            "kind": "unsupported",
-            "shape": "the target has poison weakness N until the end of the encounter",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "threshold": {
+              "kind": "always"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "poison",
+                "value": 3
+              },
+              "duration": {
+                "kind": "encounter"
+              },
+              "endsWhen": [],
+              "text": "the target has poison weakness 3 until the end of the encounter"
+            },
+            "after": "salient:foe-feature:89e05872-cd00-47ba-b091-1a3e5e02e7bf#block:0:tier2:0:cfa92550e9d3470b"
           }
         ],
         [
@@ -147425,10 +147871,26 @@
             "id": "salient:foe-feature:89e05872-cd00-47ba-b091-1a3e5e02e7bf#block:0:tier3:2:94cf2c371541045a",
             "locator": "block:0:tier3:2",
             "clause": "the target has poison weakness 5 until the end of the encounter",
-            "kind": "unsupported",
-            "shape": "the target has poison weakness N until the end of the encounter",
-            "reason": "unknown",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "threshold": {
+              "kind": "always"
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "poison",
+                "value": 5
+              },
+              "duration": {
+                "kind": "encounter"
+              },
+              "endsWhen": [],
+              "text": "the target has poison weakness 5 until the end of the encounter"
+            },
+            "after": "salient:foe-feature:89e05872-cd00-47ba-b091-1a3e5e02e7bf#block:0:tier3:0:4fb09bdd7b896edc"
           }
         ]
       ],
@@ -147438,18 +147900,6 @@
           "code": "unsafe-tier-remainder",
           "locator": "block:0:tier1:0",
           "clause": "7 damage, [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:2",
-          "clause": "the target has poison weakness 3 until the end of the encounter",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:2",
-          "clause": "the target has poison weakness 5 until the end of the encounter",
           "message": "The effect on damage, payment, targeting or order is not established."
         },
         {
@@ -150009,6 +150459,12 @@
           "locator": "block:0:0",
           "clause": "Until the end of the encounter, the tetrarch has damage immunity 2, and their Houndblade ability targets three creatures or objects.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter, the tetrarch has damage immunity 2, and their Houndblade ability targets three creatures or objects.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -152626,6 +153082,12 @@
           "locator": "block:0:0",
           "clause": "The olothec [slides](scc.v1:mcdm.heroes.v1/movement/forced-movement) each target up to 5 squares. Each target takes 12 psychic damage, and if they have M < 3 they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) and slimed (save ends). A slimed target takes 4 psychic damage whenever they make a power roll. Additionally, until the start of their next turn, the olothec has damage immunity 4.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "The olothec [slides](scc.v1:mcdm.heroes.v1/movement/forced-movement) each target up to 5 squares. Each target takes 12 psychic damage, and if they have M < 3 they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) and slimed (save ends). A slimed target takes 4 psychic damage whenever they make a power roll. Additionally, until the start of their next turn, the olothec has damage immunity 4.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "action-type",
@@ -156643,6 +157105,12 @@
           "locator": "block:2:0",
           "clause": "While [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) this way, a target can't [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) or be [teleported](scc.v1:mcdm.heroes.v1/movement/teleport).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The bonecage can have up to four [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 targets [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) at once. Any creature [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by the bonecage takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on the [Escape Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/escape-grab) maneuver, and the bonecage has [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) 5 against that creature's abilities. When the bonecage is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), any creature or object they have [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) moves with them.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -157806,6 +158274,12 @@
           "locator": "block:1:0",
           "clause": "The target takes 8 psychic damage and has psychic weakness 3 until the end of the olothec's next turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The target takes 8 psychic damage and has psychic weakness 3 until the end of the olothec's next turn.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -160426,6 +160900,12 @@
           "locator": "block:1:0",
           "clause": "Ajax [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to his speed and can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). If the target has R < 4, this free strike also makes them [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) until the end of their next turn.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "A creature uses the Hesitation is Weakness ability.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -165284,6 +165764,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "Phrrygalax takes no damage and instead regains the same amount of [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina). He then swaps his current damage immunity with the triggering damage type.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Self",
@@ -165623,6 +166109,12 @@
           "locator": "block:1:0",
           "clause": "After the ability is resolved, the target is [teleported](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares and is thunderstruck (save ends). A thunderstruck creature has lightning weakness 5, and the taxiarch gains an edge on power rolls against them.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "After the ability is resolved, the target is [teleported](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares and is thunderstruck (save ends). A thunderstruck creature has lightning weakness 5, and the taxiarch gains an edge on power rolls against them.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -169761,6 +170253,12 @@
           "locator": "block:1:0",
           "clause": "The force halves the damage, and has damage weakness 3 and a +3 bonus to speed until the end of the encounter. This damage weakness increases by 3 each time the force uses this ability in the same encounter.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The force halves the damage, and has damage weakness 3 and a +3 bonus to speed until the end of the encounter. This damage weakness increases by 3 each time the force uses this ability in the same encounter.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -175180,6 +175678,12 @@
           "locator": "block:1:0",
           "clause": "The knife lands in the target's square, and has 30 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and damage immunity 5. Whenever the knife takes damage, it deals 4 sonic damage to each enemy within 3 squares. The knife lasts until the end of the encounter, and can't be picked up or manipulated.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The knife lands in the target's square, and has 30 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and damage immunity 5. Whenever the knife takes damage, it deals 4 sonic damage to each enemy within 3 squares. The knife lasts until the end of the encounter, and can't be picked up or manipulated.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -181960,6 +182464,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "A target who has P < 2 is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) (save ends). Each ally within distance can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). Additionally, until the end of the encounter, the centurion has damage immunity 2.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "action-type",
           "locator": "header:usage",
           "clause": "-",
@@ -187869,6 +188379,12 @@
           "locator": "block:1:0",
           "clause": "Each target [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares before the damage is resolved. Each kobold with the Shield? Shield! trait gains damage immunity 2 against the triggering ability.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "Each target [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares before the damage is resolved. Each kobold with the Shield? Shield! trait gains damage immunity 2 against the triggering ability.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -189845,6 +190361,18 @@
           "locator": "markdown:item:7:0",
           "clause": "A dragonsealed creature has psychic weakness 3 and cold weakness 3. Additionally, the area is filled with magical darkness. The dragon ignores concealment created by this darkness.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:2:0",
+          "clause": "A dragonsealed creature has psychic weakness 3 and cold weakness 3. Additionally, the area is filled with magical darkness. The dragon ignores concealment created by this darkness.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
+          "code": "defense-manual",
+          "locator": "markdown:item:7:0",
+          "clause": "A dragonsealed creature has psychic weakness 3 and cold weakness 3. Additionally, the area is filled with magical darkness. The dragon ignores concealment created by this darkness.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -190263,7 +190791,7 @@
         "path": "en/books/monsters/md/monster/draconian/statblock/myxovidan-the-sintaker.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -190282,10 +190810,28 @@
             "id": "salient:foe-feature:d6ed54f4-b64d-4fbd-bd14-20b374d5cf26#block:0:tier1:1:ac90216abc7c3bfc",
             "locator": "block:0:tier1:1",
             "clause": "M < 1 the target has corruption weakness 3 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N the target has corruption weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "corruption",
+                "value": 3
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < 1 the target has corruption weakness 3 (save ends)"
+            },
+            "after": "salient:foe-feature:d6ed54f4-b64d-4fbd-bd14-20b374d5cf26#block:0:tier1:0:d459d87385254e48"
           }
         ],
         [
@@ -190305,10 +190851,28 @@
             "id": "salient:foe-feature:d6ed54f4-b64d-4fbd-bd14-20b374d5cf26#block:0:tier2:1:f5c7398d14094897",
             "locator": "block:0:tier2:1",
             "clause": "M < 2 the target has corruption weakness 3 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N the target has corruption weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "corruption",
+                "value": 3
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < 2 the target has corruption weakness 3 (save ends)"
+            },
+            "after": "salient:foe-feature:d6ed54f4-b64d-4fbd-bd14-20b374d5cf26#block:0:tier2:0:f2d4131265e775f4"
           }
         ],
         [
@@ -190328,36 +190892,35 @@
             "id": "salient:foe-feature:d6ed54f4-b64d-4fbd-bd14-20b374d5cf26#block:0:tier3:1:db580dfd918986fa",
             "locator": "block:0:tier3:1",
             "clause": "M < 3 the target has corruption weakness 3 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:M < N the target has corruption weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "printed",
+              "value": 3
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "corruption",
+                "value": 3
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "M < 3 the target has corruption weakness 3 (save ends)"
+            },
+            "after": "salient:foe-feature:d6ed54f4-b64d-4fbd-bd14-20b374d5cf26#block:0:tier3:0:fbe8130a67c299c1"
           }
         ]
       ],
       "sections": [],
-      "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier1:1",
-          "clause": "M < 1 the target has corruption weakness 3 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "M < 2 the target has corruption weakness 3 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "M < 3 the target has corruption weakness 3 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -191469,6 +192032,12 @@
           "locator": "block:1:0",
           "clause": "This ability deals cold, fire, or lightning damage, and any enemy targeted by the ability has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 3 to the same damage type (save ends).",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "This ability deals cold, fire, or lightning damage, and any enemy targeted by the ability has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 3 to the same damage type (save ends).",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -192601,6 +193170,12 @@
           "locator": "block:0:0",
           "clause": "A 10-square-tall tower made of black stone shimmers into being in an unoccupied space that is 5 squares on a side. The tower has three floors, an entrance in the middle of each side on the ground floor, and a crenelated rooftop. Any war dog inside or [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the tower has damage immunity 2 and regains 5 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the start of each of their turns, and war dogs inside the tower can observe through and have line of effect through its walls. This ability can be used only once per encounter.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "A 10-square-tall tower made of black stone shimmers into being in an unoccupied space that is 5 squares on a side. The tower has three floors, an entrance in the middle of each side on the ground floor, and a crenelated rooftop. Any war dog inside or [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the tower has damage immunity 2 and regains 5 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) at the start of each of their turns, and war dogs inside the tower can observe through and have line of effect through its walls. This ability can be used only once per encounter.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -193826,6 +194401,12 @@
           "locator": "block:1:0",
           "clause": "Until the end of their next turn, the minotaur has damage immunity 2 and deals an extra 5 damage with strikes.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "Until the end of their next turn, the minotaur has damage immunity 2 and deals an extra 5 damage with strikes.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -193927,6 +194508,12 @@
           "locator": "block:1:0",
           "clause": "Until the start of their next turn, the evolutionist has damage immunity 5 to the triggering damage type.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "Until the start of their next turn, the evolutionist has damage immunity 5 to the triggering damage type.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -196405,6 +196992,12 @@
           "locator": "block:1:0",
           "clause": "This ability ignores banes, double banes, and damage immunity.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "This ability ignores banes, double banes, and damage immunity.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -197600,6 +198193,12 @@
           "locator": "block:1:0",
           "clause": "Until the start of his next turn, Lord Syuul gains immunity 5 to the triggering damage type.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "Until the start of his next turn, Lord Syuul gains immunity 5 to the triggering damage type.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         },
         {
           "code": "target-boundary",
@@ -200913,6 +201512,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the next round, a cloud of blood vapor fills the area. The cloud blocks line of effect for enemies, and any enemy has damage weakness 3 while in the area. The bloodletter can then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to their speed, and can attempt to hide if they end that shift with concealment.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "Special",
@@ -204212,6 +204817,12 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         },
         {
+          "code": "defense-manual",
+          "locator": "block:1:0",
+          "clause": "The target makes a **Might test**. A target with fire immunity automatically obtains a tier 3 outcome.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
+        },
+        {
           "code": "target-boundary",
           "locator": "header:target",
           "clause": "The triggering creature",
@@ -205690,6 +206301,12 @@
           "locator": "block:0:0",
           "clause": "Until the end of the flameslinger's next turn, the target has fire weakness equal to the flameslinger's level. If the target is the flameslinger's mentor, they instead have fire immunity equal to the flameslinger's level.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "defense-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the flameslinger's next turn, the target has fire weakness equal to the flameslinger's level. If the target is the flameslinger's mentor, they instead have fire immunity equal to the flameslinger's level.",
+          "message": "the clause grants or changes a damage immunity or weakness in a form V179 does not read (a tier clause giving the target a typed or untyped damage weakness N with a potency and a printed duration); the table applies it"
         }
       ],
       "live": "legacy-compatibility",
@@ -210214,10 +210831,28 @@
             "id": "salient:foe-feature:ffca721d-4709-4acd-b74f-9506a6bc3845#block:0:tier2:1:cbfcf966cb668ef7",
             "locator": "block:0:tier2:1",
             "clause": "R < 1 damage weakness 3 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N damage weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 1
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "all-damage",
+                "value": 3
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "R < 1 damage weakness 3 (save ends)"
+            },
+            "after": "salient:foe-feature:ffca721d-4709-4acd-b74f-9506a6bc3845#block:0:tier2:0:1adb725bfe833afe"
           }
         ],
         [
@@ -210236,27 +210871,33 @@
             "id": "salient:foe-feature:ffca721d-4709-4acd-b74f-9506a6bc3845#block:0:tier3:1:da418b8e28a1c706",
             "locator": "block:0:tier3:1",
             "clause": "R < 2 damage weakness 3 (save ends)",
-            "kind": "unsupported",
-            "shape": "potency:R < N damage weakness N (save ends)",
-            "reason": "potency-condition",
-            "dependency": "unknown"
+            "kind": "damage-modifier",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "printed",
+              "value": 2
+            },
+            "spec": {
+              "effect": "modifier",
+              "subject": "target",
+              "modifier": {
+                "kind": "damage-modifier",
+                "defense": "weakness",
+                "damageType": "all-damage",
+                "value": 3
+              },
+              "duration": {
+                "kind": "save-ends"
+              },
+              "endsWhen": [],
+              "text": "R < 2 damage weakness 3 (save ends)"
+            },
+            "after": "salient:foe-feature:ffca721d-4709-4acd-b74f-9506a6bc3845#block:0:tier3:0:c31afe8fa82fb263"
           }
         ]
       ],
       "sections": [],
       "diagnostics": [
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier2:1",
-          "clause": "R < 1 damage weakness 3 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
-        {
-          "code": "unsafe-tier-remainder",
-          "locator": "block:0:tier3:1",
-          "clause": "R < 2 damage weakness 3 (save ends)",
-          "message": "The effect on damage, payment, targeting or order is not established."
-        },
         {
           "code": "target-boundary",
           "locator": "header:target",
@@ -213229,9 +213870,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 179,
+    "compiled": 182,
     "compiledEffectOnly": 20,
-    "compatibility": 1442,
+    "compatibility": 1439,
     "compiledButUnavailable": 0
   }
 }

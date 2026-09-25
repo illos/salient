@@ -401,6 +401,16 @@ and "—" print none. A cell with any other item (a summoner's "R", a type with 
 types) leaves that foe's damage manual, naming the cell. A hero's evaluated immunities and
 weaknesses both apply. No damage takes no weakness (Q-RES-4, as the V174 halving already reads it).
 
+V179 (`docs/build/V179-granted-defenses.md`): an immunity or weakness granted in play is a V159
+`modifier` effect instance on the creature, with a `damage-modifier` payload (defense, type or
+`all-damage`, value) and its printed duration. Every damage path builds its target facts in
+`damageTargetFacts`, which adds the creature's active instances to the printed cells or evaluated
+values, so only the highest applicable entry of each kind applies, as quoted above. Corrections
+and V174 revisions keep the values their hit saved. An instance in a V158 manual stacking group
+leaves the creature's damage manual. The compiled source is a tier clause giving the target a typed
+or untyped damage weakness N, with its potency and a printed duration ("(save ends)", "(EoT)" or
+"until the end of the encounter").
+
 ### 6.3 Winded
 
 > "Your winded value equals half your Stamina maximum. When your Stamina is equal to or less than

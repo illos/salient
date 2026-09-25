@@ -129,6 +129,13 @@ export const modifierPayloadValidator = v.union(
     stat: v.union(v.literal('speed'), v.literal('stability'), v.literal('saving-throw')),
     amount: v.number(),
   }),
+  // V179: a granted damage immunity or weakness (shared/contracts/liveState.ts DamageModifier).
+  v.object({
+    kind: v.literal('damage-modifier'),
+    defense: v.union(v.literal('immunity'), v.literal('weakness')),
+    damageType: v.string(),
+    value: v.number(),
+  }),
 );
 const watcherPartyValidator = v.union(v.literal('subject'), v.literal('owner'));
 export const watcherEventValidator = v.union(

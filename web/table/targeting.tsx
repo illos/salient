@@ -560,7 +560,9 @@ export function CompiledEffects({
                         : effect.kind === 'modifier'
                           ? effect.status === 'applied'
                             ? 'Tracked effect'
-                            : 'Manual modifier'
+                            : effect.status === 'resisted'
+                              ? 'Resisted'
+                              : 'Manual modifier'
                           : effect.kind === 'gain'
                             ? effect.status === 'applied'
                               ? 'Applied gain'
@@ -734,8 +736,12 @@ export function CompiledEffects({
                 {describeDuration(effect.spec.duration, effect.spec.endsWhen)}
                 {effect.spec.consumeOn ? ' · used up by their next roll' : ''}.{' '}
                 {effect.status === 'applied'
-                  ? 'Applied automatically to later rolls and derived values; exclude it on a roll it doesn’t fit.'
-                  : `Apply it at the table: ${effect.requirements.join('; ')}.`}
+                  ? effect.payload?.kind === 'damage-modifier'
+                    ? 'Applied automatically to damage this creature takes; the highest of each kind applies.'
+                    : 'Applied automatically to later rolls and derived values; exclude it on a roll it doesn’t fit.'
+                  : effect.status === 'resisted'
+                    ? 'Resisted: the target’s score beats the potency, so nothing was stored.'
+                    : `Apply it at the table: ${effect.requirements.join('; ')}.`}
               </span>
             )}
             {effect.kind === 'watcher' && (

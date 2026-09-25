@@ -215,6 +215,10 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Ray of Wrath',
       'Hurl Element',
       'Visceral Roar',
+      // V179: a tier's damage weakness stored as an effect instance on the target.
+      'Setup',
+      "Corruption's Curse",
+      'Expunging Exhalation',
     ].sort(),
   );
   expect(

@@ -1761,4 +1761,79 @@ interpretation with its alternatives.
      Each of these is table work today. Recommendation: an effect-instance slice that tracks
      granted immunity and weakness.
 
+     V179 (`docs/build/V179-granted-defenses.md`) now tracks the weakness a compiled tier clause
+     gives its target; its readings are Q-IW-2. The items above stay table work: the dealers'
+     abilities and Wilting Visions (its 2 Malice section) are not compiled.
+
 Recommendation: keep 1 to 3 and 5 as implemented, and answer the trolls' value in 4.
+
+## Q-IW-2: readings behind V179's immunity and weakness granted in play
+
+Open. Compendium paths read (pinned `en/unified/md`): `rule/damage/damage-immunity.md`,
+`rule/damage/damage-weakness.md`, `rule/character/potency.md`, `rule/general/saving-throw.md`,
+`feature/ability/shadow/level-1/setup.md`, `feature/ability/conduit/level-1/corruptions-curse.md`,
+`feature/ability/censor/level-1/purifying-fire.md`, `feature/ability/talent/level-1/smolder.md`,
+`feature/ability/talent/level-3/force-orbs.md`, `feature/ability/warrior-priest/weakening-brand.md`,
+`feature/ability/conduit/level-2/statue-of-power.md`, `feature/talent/level-1/steel-ward.md`,
+`feature/ability/tactician/level-1/parry.md`, and every stat block on `FOE_MODIFIER_TRAITS`
+(`shared/resolve/damageModifiers.ts`). The stacking itself is printed: "If multiple damage
+weaknesses apply to a source of damage, only the weakness with the highest value applies."
+(`damage-weakness.md`), and the same for immunities (`damage-immunity.md`). These are the
+readings:
+
+1. **A potency clause without a subject gives the weakness to the target.** Corruption's Curse
+   prints "M < WEAK, damage weakness 5 (save ends)" with no "the target has".
+   `rule/character/potency.md` says an effect with a potency "is applied to a target only if the
+   effect's potency value is higher than the target's indicated characteristic score", so it is
+   read as the target's. Alternative: none found in the source.
+2. **A weakness that follows damage the engine didn't apply stays manual.** If the tier's damage
+   was left to the table (for example on a foe whose own features keep its damage manual), its
+   weakness is left to the table too. This is the same rule tier conditions use. Alternative:
+   store it anyway.
+3. **A correction never re-derives a stored weakness.** Later damage may already have used it. So
+   a correction that would change the weakness a use gave (another tier's clause, or a different
+   potency result) is refused, and the table rewinds the use. A correction that keeps it keeps the
+   instance. Corrections and V174 revisions of other hits keep the weakness and immunity those
+   hits saved. Alternative: end the old instance, store the new one, and flag later damage for
+   the table.
+4. **A potency decrease ends a stored weakness.** Parry's "the potency is decreased by 1"
+   (`parry.md`) and the potency Spend sections re-check a stored weakness the way they re-check a
+   tier condition. A weakness no longer applied ends. A saving throw already rolled for it refuses
+   the revision, as for conditions.
+5. **An unresolved stacking group makes damage manual.** Two users' Setup on one creature is left
+   to the table as a V158 manual stacking group. While the group stands, the engine doesn't know
+   which weakness applies, so all damage to that creature is manual. Alternative: apply the
+   highest of the group, which the printed rule would give for weakness alone. It isn't used,
+   because the group's durations are also the table's.
+6. **Squad minions and objects hold no granted weakness.** A squad minion's weakness stays table
+   work, as squad potency conditions do. An object is immune to an ability's other effects
+   (`rule/combat/target.md`).
+
+What stays manual, and why:
+
+- **Purifying Fire.** Its Effect lets later abilities deal fire instead of holy damage to the target
+  while the weakness lasts. No later use has that choice.
+- **Smolder.** The weakness type is chosen in an Effect printed before the roll, and the tier clause
+  prints no type ("the target has weakness 5").
+- **Weakening Brand.** The weakness equals the characteristic the roll used, a choice that isn't
+  compiled.
+- **Force Orbs.** Its immunity is counted in orbs.
+- **Statue of Power.** The statue, an object, has the immunity.
+- **Steel Ward.** It is a trait watcher, "you gain damage immunity equal to your Reason score until
+  the end of your next turn". It is outside this slice's hero abilities and is still used by hand
+  (Steel Ward: React).
+- **Foe self-grants.** No stat block moves off `FOE_MODIFIER_TRAITS`. Each granting ability is
+  manual for other reasons, so no instance can be stored:
+  - Psychic Pulse's slimed;
+  - the Minotaurs' "deals an extra 5 damage with strikes";
+  - the Lich's spectral movement;
+  - Adaptability's triggering damage type;
+  - the others' grammar or cost.
+- **Standing traits.** Grave Ward is regained by Sanguine Mist, which is manual. Psionic Barrier is
+  lost on "When they use a main action", which includes actions taken by hand. Neither can be
+  modelled exactly.
+- **Conditional traits.** "While winded, the goon has damage immunity 2" (the ogres' Defiant Anger)
+  depends only on Stamina. It is a candidate for a later slice. It isn't a stored instance, so it
+  is left alone here.
+
+Recommendation: keep 1 to 6 as implemented.

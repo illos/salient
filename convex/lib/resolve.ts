@@ -64,6 +64,8 @@ import {
   heroModifierEntries,
   heroModifierTraitReason,
   statBlockModifiers,
+  grantedDefenses,
+  withGrantedDefenses,
 } from '../../shared/resolve/damageModifiers';
 import { findContent, requireContent } from '../content';
 import { endOwnerDyingEffects, type EffectHolder } from './effectInstances';
@@ -982,30 +984,43 @@ export function damageTargetFacts(
       return {
         missing: `${record.foe.name}'s printed ${[immunity.unparsed, weakness.unparsed].filter(Boolean).join(' and ')} is not read by the app; damage is left for manual application.`,
       };
+    // V179 (docs/build/V179-granted-defenses.md): immunities and weaknesses granted in play, stored
+    // as effect instances on the creature, join the printed cells; the highest applies.
+    const foeGranted = grantedDefenses(record.foe.live.effectInstances);
+    if ('manual' in foeGranted)
+      return {
+        missing: `${record.foe.name}: ${foeGranted.manual}; damage is left for manual application.`,
+      };
     // V02: a squad member's health is its squad pool; minions cannot hold temporary Stamina
     // (chapter/monster-basics.md, Shared Low Stamina). Casualties come from the ladder, not here.
     if (record.squad)
       return {
-        facts: {
+        facts: withGrantedDefenses(
+          {
+            targetId: record.foe._id,
+            kind: 'foe',
+            stamina: record.squad.pool,
+            maxStamina: record.squad.poolMax,
+            temporaryStamina: 0,
+            immunities: immunity.entries,
+            weaknesses: weakness.entries,
+          },
+          foeGranted.granted,
+        ),
+      };
+    return {
+      facts: withGrantedDefenses(
+        {
           targetId: record.foe._id,
           kind: 'foe',
-          stamina: record.squad.pool,
-          maxStamina: record.squad.poolMax,
-          temporaryStamina: 0,
+          stamina: record.foe.live.stamina,
+          maxStamina: record.foe.maxStamina,
+          temporaryStamina: record.foe.live.temporaryStamina,
           immunities: immunity.entries,
           weaknesses: weakness.entries,
         },
-      };
-    return {
-      facts: {
-        targetId: record.foe._id,
-        kind: 'foe',
-        stamina: record.foe.live.stamina,
-        maxStamina: record.foe.maxStamina,
-        temporaryStamina: record.foe.live.temporaryStamina,
-        immunities: immunity.entries,
-        weaknesses: weakness.entries,
-      },
+        foeGranted.granted,
+      ),
     };
   }
   const live = record.character?.liveState;
@@ -1020,21 +1035,30 @@ export function damageTargetFacts(
     return {
       missing: `${record.actor.name}'s ${heroTrait}, which the app doesn't track; damage is left for manual application.`,
     };
+  // V179: immunities and weaknesses granted in play join the evaluated ones; the highest applies.
+  const heroGranted = grantedDefenses(live.effectInstances);
+  if ('manual' in heroGranted)
+    return {
+      missing: `${record.actor.name}: ${heroGranted.manual}; damage is left for manual application.`,
+    };
   return {
-    facts: {
-      targetId: record.character._id,
-      kind: 'hero',
-      stamina: live.stamina,
-      maxStamina: baseline.staminaMaximum.value,
-      temporaryStamina: live.temporaryStamina,
-      ...(baseline.damageImmunities?.length
-        ? { immunities: heroModifierEntries(baseline.damageImmunities) }
-        : {}),
-      // V178: the evaluated weaknesses apply next to the immunities (rule/damage/damage-weakness.md).
-      ...(baseline.damageWeaknesses?.length
-        ? { weaknesses: heroModifierEntries(baseline.damageWeaknesses) }
-        : {}),
-    },
+    facts: withGrantedDefenses<DamageTargetFacts>(
+      {
+        targetId: record.character._id,
+        kind: 'hero',
+        stamina: live.stamina,
+        maxStamina: baseline.staminaMaximum.value,
+        temporaryStamina: live.temporaryStamina,
+        ...(baseline.damageImmunities?.length
+          ? { immunities: heroModifierEntries(baseline.damageImmunities) }
+          : {}),
+        // V178: the evaluated weaknesses apply next to the immunities (rule/damage/damage-weakness.md).
+        ...(baseline.damageWeaknesses?.length
+          ? { weaknesses: heroModifierEntries(baseline.damageWeaknesses) }
+          : {}),
+      },
+      heroGranted.granted,
+    ),
   };
 }
 

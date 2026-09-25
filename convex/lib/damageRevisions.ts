@@ -31,6 +31,8 @@ import type { MutationCtx } from '../_generated/server';
 import type { DamageApplication } from '../../shared/contracts/rollResolution';
 import type { CompiledResult } from '../../shared/contracts/compiledResult';
 import type { CompiledConditionOutcome } from '../../shared/resolve/compiledOutcome';
+import { describeModifier } from '../../shared/resolve/modifiers';
+import { endEffectInstance, findEffectInstance } from './effectInstances';
 import type { CompiledAbility } from '../../shared/resolve/compileAbility';
 import {
   damageTaken,
@@ -264,8 +266,32 @@ export async function assertNotRevised(
 
 /** The hit's potency conditions on the damaged creature (V88 compiled occurrences). */
 function potencyEffects(compiled: CompiledResult | undefined, damagedId: string): PotencyEffect[] {
-  return (compiled?.effects ?? []).flatMap(occurrence => {
+  return (compiled?.effects ?? []).flatMap((occurrence): PotencyEffect[] => {
     const effect = occurrence.effect;
+    // V179: a tier damage weakness with a potency is re-checked the same way
+    // (rule/character/potency.md); an applied one is the effect instance with the occurrence's id.
+    if (
+      effect.kind === 'modifier' &&
+      effect.tier &&
+      effect.targetId === damagedId &&
+      effect.potency &&
+      effect.payload
+    )
+      return [
+        {
+          id: occurrence.id,
+          store: 'effect' as const,
+          effect: effect.nodeId,
+          condition: describeModifier(effect.payload),
+          status: effect.status,
+          ...(effect.potency.threshold !== undefined
+            ? { threshold: effect.potency.threshold }
+            : {}),
+          ...(effect.potency.targetScore !== undefined
+            ? { targetScore: effect.potency.targetScore }
+            : {}),
+        },
+      ];
     if (effect.kind !== 'condition' || effect.targetId !== damagedId || !effect.characteristic)
       return [];
     const condition = effect as CompiledConditionOutcome;
@@ -533,6 +559,15 @@ export async function planRevision(
       ended = outcome.ended;
       for (const effect of ended) {
         const target = { kind: 'character' as const, id: damaged._id };
+        // V179: a stored weakness keeps its own saving throws (rule/general/saving-throw.md).
+        if (effect.store === 'effect') {
+          const found = await findEffectInstance(ctx, damaged._id, effect.id);
+          if (found?.instance.lastSave)
+            refuse(
+              `a saving throw was already rolled for the hit's ${effect.condition} on ${name}; recorded saves are never replayed. Rewind the save first.`,
+            );
+          continue;
+        }
         if (await hasRolledConditionSave(ctx, target, hitEvent._id))
           refuse(
             `a saving throw was already rolled for the hit's conditions on ${name}; recorded saves are never replayed. Rewind the save first.`,
@@ -611,13 +646,23 @@ export async function commitRevision(
     });
   }
   for (const effect of plan.ended)
-    await endConditionInstance(
-      ctx,
-      scope,
-      { kind: 'character', id: plan.damaged._id },
-      effect.id,
-      `potency reduced by 1 (${label})`,
-    );
+    if (effect.store === 'effect')
+      // V179: the weakness this hit gave ends with its potency (rule/character/potency.md).
+      await endEffectInstance(
+        ctx,
+        scope,
+        { kind: 'character', id: plan.damaged._id },
+        effect.id,
+        `potency reduced by 1 (${label})`,
+      );
+    else
+      await endConditionInstance(
+        ctx,
+        scope,
+        { kind: 'character', id: plan.damaged._id },
+        effect.id,
+        `potency reduced by 1 (${label})`,
+      );
   // Open offers of this hit for the same creature answer the revised damage from now on.
   const taken = damageTaken(plan.revised);
   const open = await ctx.db

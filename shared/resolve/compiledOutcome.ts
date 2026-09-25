@@ -9,7 +9,14 @@ import type {
   ResourcePoolFacts,
   TierDamageText,
 } from '../contracts/rollResolution.ts';
-import type { CompiledAbility, CompiledNode, PushNode, ConditionNode } from './compileAbility.ts';
+import type {
+  CompiledAbility,
+  CompiledNode,
+  DamageModifierNode,
+  PushNode,
+  ConditionNode,
+} from './compileAbility.ts';
+import { tierDamageModifier } from './damageModifiers.ts';
 import {
   eachAreaTarget,
   effectRider,
@@ -345,12 +352,27 @@ export interface CompiledGainOutcome extends EffectIdentity {
  */
 export interface CompiledModifierOutcome extends EffectIdentity {
   kind: 'modifier';
-  status: 'applied' | 'manual';
+  /** V179 `resisted`: a tier modifier whose potency the target's score beats (no instance). */
+  status: 'applied' | 'manual' | 'resisted';
   subject: 'actor' | 'target';
   spec: ModifierSpec;
   /** The modifier with its printed amount bound at use; absent when the amount is unknown. */
   payload?: ModifierPayload;
   requirements: string[];
+  /**
+   * V179: a tier clause for this target's own outcome (a damage weakness), not a once-per-use
+   * section. `after` is the tier's damage node, and `potency` the check that decided it
+   * (rule/character/potency.md), absent for an unconditional clause.
+   */
+  tier?: true;
+  after?: string;
+  potency?: {
+    characteristic: Characteristic;
+    thresholdSource: ConditionNode['threshold'];
+    threshold?: number;
+    potencyCharacteristic?: Characteristic;
+    targetScore?: number;
+  };
 }
 
 /**
@@ -496,6 +518,71 @@ function modifierOutcome(
     spec,
     ...('payload' in bound ? { payload: bound.payload } : {}),
     requirements,
+  };
+}
+
+/**
+ * V179: one target's damage weakness from its tier (shared/resolve/damageModifiers.ts). The
+ * potency is checked as for tier conditions (rule/character/potency.md: "applied to a target only
+ * if the effect's potency value is higher than the target's indicated characteristic score"). Only
+ * a hero or a foe outside a squad holds the instance, as for V159 modifiers: an object is immune to
+ * an ability's other effects (rule/combat/target.md), and squad potency effects stay manual as
+ * squad conditions do. The weakness follows the tier's damage, so it waits for that damage.
+ */
+function damageModifierOutcome(
+  node: DamageModifierNode,
+  targetId: string,
+  input: CompiledAbilityInput,
+  damageComplete: boolean,
+): CompiledModifierOutcome {
+  const requirements: string[] = [];
+  const target = input.conditionFacts?.targets.find(fact => fact.targetId === targetId);
+  const holder = target?.kind;
+  if (holder !== 'hero' && holder !== 'foe')
+    requirements.push(
+      `target:${targetId}.${holder ?? 'unknown'} holds no modifier the engine reads`,
+    );
+  if (!damageComplete) requirements.push(`damage:${node.after}.completion`);
+  const identity = {
+    nodeId: node.id,
+    targetId,
+    locator: node.locator,
+    clause: node.clause,
+    kind: 'modifier' as const,
+    subject: 'target' as const,
+    spec: node.spec,
+    payload: node.spec.modifier as ModifierPayload,
+    tier: true as const,
+    after: node.after,
+  };
+  const threshold = node.threshold;
+  if (threshold.kind === 'always' || !node.characteristic)
+    return { ...identity, requirements, status: requirements.length ? 'manual' : 'applied' };
+  const potency = input.conditionFacts?.potency;
+  const raw = threshold.kind === 'printed' ? threshold.value : potency?.[threshold.tier];
+  const value = Number.isSafeInteger(raw) ? raw : undefined;
+  if (value === undefined)
+    requirements.push(`actor.potency.${threshold.kind === 'potency' ? threshold.tier : 'printed'}`);
+  const rawScore =
+    holder === 'hero' || holder === 'foe'
+      ? target!.characteristics?.[node.characteristic]
+      : undefined;
+  const targetScore = Number.isSafeInteger(rawScore) ? rawScore : undefined;
+  if (targetScore === undefined)
+    requirements.push(`target:${targetId}.characteristics.${node.characteristic}`);
+  return {
+    ...identity,
+    potency: {
+      characteristic: node.characteristic,
+      thresholdSource: threshold,
+      ...(value !== undefined ? { threshold: value } : {}),
+      ...(threshold.kind === 'potency' && potency
+        ? { potencyCharacteristic: potency.characteristic }
+        : {}),
+      ...(targetScore !== undefined ? { targetScore } : {}),
+    },
+    requirements,
+    status: requirements.length ? 'manual' : targetScore! < value! ? 'applied' : 'resisted',
   };
 }
 
@@ -870,9 +957,33 @@ export function resolveCompiledAbility(
         nodes.some((node, index) => node.kind === 'damage' && index !== 0) ||
         nodes.some(
           node =>
-            (node.kind === 'push' || node.kind === 'condition' || node.kind === 'instruction') &&
+            (node.kind === 'push' ||
+              node.kind === 'condition' ||
+              node.kind === 'instruction' ||
+              node.kind === 'damage-modifier') &&
             node.after !== (nodes[0]?.kind === 'damage' ? nodes[0].id : ''),
         ) ||
+        // V179: a damage weakness re-reads to the same clause, in the supported run after damage.
+        nodes.some((node, index) => {
+          if (node.kind !== 'damage-modifier') return false;
+          const again = tierDamageModifier(node.clause);
+          return (
+            !again ||
+            !sameModifierSpec(again.spec, node.spec) ||
+            again.characteristic !== node.characteristic ||
+            JSON.stringify(again.threshold) !== JSON.stringify(node.threshold) ||
+            index < (nodes[0]?.kind === 'damage' ? 1 : 0) ||
+            nodes
+              .slice(nodes[0]?.kind === 'damage' ? 1 : 0, index)
+              .some(
+                prior =>
+                  prior.kind !== 'push' &&
+                  prior.kind !== 'condition' &&
+                  prior.kind !== 'instruction' &&
+                  prior.kind !== 'damage-modifier',
+              )
+          );
+        }) ||
         nodes.some(node => {
           if (node.kind !== 'instruction') return false;
           const parsed = tierInstruction(plain(node.clause));
@@ -892,7 +1003,8 @@ export function resolveCompiledAbility(
                   prior =>
                     prior.kind !== 'push' &&
                     prior.kind !== 'condition' &&
-                    prior.kind !== 'instruction',
+                    prior.kind !== 'instruction' &&
+                    prior.kind !== 'damage-modifier',
                 ) ||
               !['save-ends', 'eot', 'none'].includes(node.duration) ||
               (node.duration === 'none' &&
@@ -1024,6 +1136,8 @@ export function resolveCompiledAbility(
         });
       } else if (node.kind === 'condition') {
         remainder.push(conditionOutcome(node, target.targetId, input, damageComplete));
+      } else if (node.kind === 'damage-modifier') {
+        remainder.push(damageModifierOutcome(node, target.targetId, input, damageComplete));
       } else if (node.kind === 'push') {
         remainder.push(pushOutcome(node, target.targetId, definition, input, damageComplete));
       } else if (node.kind === 'instruction') {

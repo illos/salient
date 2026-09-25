@@ -313,6 +313,11 @@ export function unspentGain(input: {
 export interface PotencyEffect {
   /** The condition occurrence (its instance id). */
   id: string;
+  /**
+   * V179: `effect` for a tier damage weakness, stored as an effect instance with the occurrence's
+   * id; absent for a condition instance.
+   */
+  store?: 'effect';
   /** Conditions of one printed clause share it (V153 group, else the clause node). */
   effect: string;
   condition: string;

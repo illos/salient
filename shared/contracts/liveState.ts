@@ -136,7 +136,22 @@ export interface StatModifier {
   amount: number;
 }
 
-export type ModifierPayload = RollModifier | StatModifier;
+/**
+ * V179 granted damage immunity or weakness (docs/build/V179-granted-defenses.md): the subject has
+ * `defense` of `value` against damage of `damageType`, a type from rule/damage/damage-type.md or
+ * `all-damage` for the untyped "damage weakness X" (rule/damage/damage-weakness.md: "with no
+ * specific type or keyword indicated ... when they take damage of any type"). The damage writer
+ * reads it next to the printed or evaluated entries, and only the highest applies
+ * (rule/damage/damage-immunity.md, damage-weakness.md).
+ */
+export interface DamageModifier {
+  kind: 'damage-modifier';
+  defense: 'immunity' | 'weakness';
+  damageType: string;
+  value: number;
+}
+
+export type ModifierPayload = RollModifier | StatModifier | DamageModifier;
 
 /**
  * What an instance does: V158 table work the engine tracks and ends, or a V159 modifier the engine
