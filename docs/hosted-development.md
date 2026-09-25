@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V185 build history page
+## Current release — V188 follow-up ability text
+
+Backend/frontend source `75885cb35d4300f872dc8f8818fb273e0c0e4180` published on 2026-09-25 as
+Worker `dbb5720a-6982-489d-8d59-56d2e465769a`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V188](build/V188-follow-up-ability-content.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V185 build history page
 
 Backend/frontend source `f2160c355efa143e100fa7de857e76a165d80033` published on 2026-09-25 as
 Worker `00525f22-e999-4002-b0b0-89ed1a0e7465`. Backend and schema validation, the hosted build and the upload succeeded.

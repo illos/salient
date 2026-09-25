@@ -47,3 +47,9 @@ applied. Provenance quotes built from the same functions carried the frontmatter
 - 2026-09-25 WIZARD3: cause traced to the class follow-up text builders; `sourceBody()` added and
   applied; focused test added (fails before, passes after). Ready for gate.
 - Independent review PASS (2026-09-25). sourceBody matched an independent strip on all 1,881 Compendium entries. There are no engine, report or snapshot dependents, so no regeneration is needed.
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `75885cb` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `dbb5720a-6982-489d-8d59-56d2e465769a`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V188-release-75885cb`.

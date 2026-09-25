@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V188 | `75885cb` | Merged; backend/frontend published; accepted gates reused | complete |
 | V185 | `f2160c3` | Merged; backend/frontend published; accepted gates reused | complete |
 | V184 | `887f448` | Merged; backend/frontend published; accepted gates reused | complete |
 | V181 | `bd4f0cc` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -839,3 +840,16 @@ The test and deploy thread fast-forwarded reviewed tip `f2160c355efa143e100fa7de
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V185-release-f2160c3`.
+
+### V188 follow-up ability text publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `75885cb35d4300f872dc8f8818fb273e0c0e4180` into main.
+- Full gate at the tip (270 s, 458 engine and 792 app tests).
+- `fury-level-three` and `follow-up-actions` journeys at the tip.
+- Independent rules review passed. 641 follow-up ability texts in 10 classes no longer show raw YAML frontmatter.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `dbb5720a-6982-489d-8d59-56d2e465769a`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V188-release-75885cb`.
