@@ -39,3 +39,6 @@ Pinned Compendium paths and named sections are given in the research report.
   Per-clause stable IDs, browser-local autosave, JSON/Markdown exports and JSON restore allow
   user triage without changing any game behavior. Serve only the generated artifact directory.
 - Deploy reserved `https://presidium-iv.tail41404c.ts.net:9570/` for the review artifact.
+
+- User requested a per-effect “Text only” checkbox. It synchronizes the disposition, persists
+  locally and exports without a comment; unchecking resets the disposition to Unreviewed.
