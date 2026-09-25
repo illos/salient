@@ -231,3 +231,9 @@ abilities, used by hand.
      with the damaged-or-not test removed, the correction test fails. Journeys were not run
      (TESTER): `multi-target.ts`, `effect-riders.ts`, `kit-bonus.ts` (corrections on Censor or
      Elementalist targets) and `censor.ts` are the ones to run.
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `d249fc9` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `b3b3ba19-a333-463b-abb7-cef284b011e0`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V202-release-d249fc9`.

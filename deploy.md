@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V202 | `d249fc9` | Merged; backend/frontend published; accepted gates reused | complete |
 | V201 | `9d8f7bc` | Merged in train 21; backend/frontend published; gate and headless at tip | complete |
 | V200 | `9d8f7bc` | Merged in train 21; backend/frontend published; gate and headless at tip | complete |
 | V191 | `35abd9f` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -987,3 +988,16 @@ fast-forwarded as `9d8f7bc53f193c193b766197ce0b6d6acf0cbfb0`.
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/train21-release-9d8f7bc`.
+
+### V202 turn trigger offers publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `d249fc95d9d62b343aec2076badf264346073901` into main.
+- Full gate at the stacked tip 249eda2 (458 engine and 979 app tests); the candidate d249fc9 differs only in docs.
+- `multi-target`, `effect-riders`, `kit-bonus`, `shadow-level-two`, `shadow-level-three`, `censor-level-three`, `elementalist-level-three`, `all`, `censor` and `elementalist` journeys at 249eda2.
+- QC1 scoped rules review passed (review-artifacts/2026-09-25-V202-QC1.md). 191 abilities fully compiled.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `b3b3ba19-a333-463b-abb7-cef284b011e0`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V202-release-d249fc9`.

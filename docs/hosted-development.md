@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — train 21 (V200, V201)
+## Current release — V202 turn trigger offers
+
+Backend/frontend source `d249fc95d9d62b343aec2076badf264346073901` published on 2026-09-25 as
+Worker `b3b3ba19-a333-463b-abb7-cef284b011e0`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V202](build/V202-turn-trigger-offers.md) and
+the [ledger](../deploy.md).
+
+## Previous release — train 21 (V200, V201)
 
 Backend/frontend source `9d8f7bc53f193c193b766197ce0b6d6acf0cbfb0` published on 2026-09-25 as
 Worker `758b9359-5be8-4113-a393-6d7c117c2fa4`: areas and auras, and the V201 damage fixes. Backend and schema validation, the hosted
