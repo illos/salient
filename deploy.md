@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V185 | `f2160c3` | Merged; backend/frontend published; accepted gates reused | complete |
 | V184 | `887f448` | Merged; backend/frontend published; accepted gates reused | complete |
 | V181 | `bd4f0cc` | Merged; backend/frontend published; accepted gates reused | complete |
 | V09 | `1118489` | Merged in train 12; backend/frontend published; gate and headless at tip | complete |
@@ -825,3 +826,16 @@ The test and deploy thread fast-forwarded reviewed tip `887f44892a06be30c759d5e2
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V184-release-887f448`.
+
+### V185 build history page publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `f2160c355efa143e100fa7de857e76a165d80033` into main.
+- Full gate at the tip (318 s, 456 engine and 792 app tests).
+- `history`, `lifecycle`, `level-up` and `starting-rewards` journeys at the tip.
+- Independent rules review passed. The level-up browser capture reaches the full editor with the level-two choices kept (test-artifacts/V185-f2160c3/capture).
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `00525f22-e999-4002-b0b0-89ed1a0e7465`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V185-release-f2160c3`.

@@ -70,3 +70,9 @@ Spec: docs/character-wizard-spec.md#5-progression-history
   (a Director before admission), and the panel says inventory becomes visible once the character
   is admitted. App test covers the pending-admission Director, the attached Director and the owner.
 - Independent review PASS (2026-09-25), after three rounds: inventory shown read-only, then gated by canReadStartingRewards (the same access as characterRewards.get).
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `f2160c3` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `00525f22-e999-4002-b0b0-89ed1a0e7465`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V185-release-f2160c3`.

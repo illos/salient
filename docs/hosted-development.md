@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V184 level-up diagnostics
+## Current release — V185 build history page
+
+Backend/frontend source `f2160c355efa143e100fa7de857e76a165d80033` published on 2026-09-25 as
+Worker `00525f22-e999-4002-b0b0-89ed1a0e7465`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V185](build/V185-build-history.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V184 level-up diagnostics
 
 Backend/frontend source `887f44892a06be30c759d5e2f610595a2ac7a013` published on 2026-09-25 as
 Worker `5a9f67c6-9c3e-4270-8f6d-e739420dc105`. Backend and schema validation, the hosted build and the upload succeeded.
