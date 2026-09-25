@@ -32,6 +32,7 @@ import {
   eventsNoLongerTrue,
   halveApplication,
   potencyRevision,
+  reducePotency,
   responseSpend,
   revisionDelta,
   unspentGain,
@@ -234,6 +235,44 @@ test('potency reduced by 1 re-checks the hit’s potency effects', () => {
   });
   expect(potencyRevision(both, 'one', 'slowed')).toMatchObject({ ended: [{ id: 's' }] });
   expect(potencyRevision([], 'any')).toEqual({ kind: 'none' });
+  // "one effect" with several effects and none that would change (Agility 0 against potency 2 → 1
+  // still applies both): the reduction is lasting, so the user names the effect.
+  const low = [
+    { ...prone, targetScore: 0 },
+    { ...slowed, targetScore: 0 },
+  ];
+  expect(potencyRevision(low, 'one')).toEqual({ kind: 'choose', options: ['prone', 'slowed'] });
+  // A single effect needs no choice.
+  expect(potencyRevision([low[0]!], 'one')).toMatchObject({
+    kind: 'revised',
+    unchanged: [{ id: 'p' }],
+  });
+});
+
+test('a one-effect reduction keeps its chosen effect when there are several (QC1 train 16 R1)', () => {
+  // potency.md: applied only if potency > score. Both at potency 2 against 0.
+  const prone = {
+    id: 'p',
+    effect: 'n1',
+    condition: 'prone',
+    status: 'applied',
+    threshold: 2,
+    targetScore: 0,
+  };
+  const slowed = { ...prone, id: 's', effect: 'n2', condition: 'slowed' };
+  // Inertial Shield's spend names slowed: 2 → 1, still applied (0 < 1); only slowed carries it.
+  const first = reducePotency([prone, slowed], {}, 'one', 'slowed');
+  expect(first.outcome).toMatchObject({ kind: 'revised', ended: [], unchanged: [{ id: 's' }] });
+  expect(first.reductions).toEqual({ s: 1 });
+  // Parry then reduces any effect from the current accepted potency: prone 2 → 1 (0 < 1, still
+  // prone); slowed 1 → 0 (0 is not below 0: no longer slowed).
+  const second = reducePotency([prone, slowed], first.reductions, 'any');
+  expect(second.outcome).toMatchObject({
+    kind: 'revised',
+    ended: [{ id: 's' }],
+    unchanged: [{ id: 'p' }],
+  });
+  expect(second.reductions).toEqual({ p: 1, s: 2 });
 });
 
 function input(extra: Partial<EffectOnlyInput> = {}): EffectOnlyInput {

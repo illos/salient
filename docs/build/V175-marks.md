@@ -225,3 +225,7 @@ Rules questions: [Q-MARK-1](../rules-questions-for-user.md#q-mark-1-marks-from-a
   check compares the recorded hit and its revision, not current Stamina. Tests in
   `tests/app/damage-reactions.test.ts`: the revision closes the retarget and undo reopens it; an
   accepted retarget refuses the revision; a revision to 0 damage closes the benefit.
+- Review of `661594c4`: tests for an accepted benefit, whose revision to 0 damage is refused. An
+  accepted extra-damage benefit (mark.md: "The ability deals extra damage equal to twice your Reason
+  score") also refuses any later revision of that hit, since the extra damage was sized on the hit
+  as it was.

@@ -36,7 +36,7 @@ import {
   damageTaken,
   eventsNoLongerTrue,
   halveApplication,
-  potencyRevision,
+  reducePotency,
   revisionDelta,
   unspentGain,
   type DamageEvent,
@@ -223,6 +223,16 @@ function markCardInvalid(
   return offer.mark.kind === 'retarget' ? lost.includes('dying') : lost.includes('damage-taken');
 }
 
+/** An accepted Mark benefit on the damaged creature that took the extra damage. */
+function extraDamageTaken(card: Doc<'interactions'>, damagedId: string): boolean {
+  const offer = card.offer as MarkOffer | undefined;
+  return (
+    offer?.mark?.kind === 'benefit' &&
+    offer.mark.holder.id === damagedId &&
+    (card.answer as { benefit?: string } | null)?.benefit === 'extra-damage'
+  );
+}
+
 /** V174: a correction of a hit an accepted response revised is refused (rewind instead). */
 export async function assertNotRevised(
   ctx: MutationCtx,
@@ -317,10 +327,14 @@ export async function planRevision(
   // deal rolled damage to a creature marked by you". An already accepted one the
   // revised hit no longer triggers can't be taken back exactly, so the revision is refused; open
   // ones close at commit.
-  const takenMarks = revisions.markCards.filter(card => markCardInvalid(card, damaged._id, lost));
+  // A benefit's extra damage ("The ability deals extra damage equal to twice your Reason score")
+  // was sized on the hit as it was; a revision can't re-derive it either.
+  const takenMarks = revisions.markCards.filter(
+    card => markCardInvalid(card, damaged._id, lost) || extraDamageTaken(card, damaged._id),
+  );
   if (takenMarks.length)
     refuse(
-      `${takenMarks.map(card => (card.offer as MarkOffer).owner.name + "'s Mark " + (card.offer as MarkOffer).mark.kind).join(', ')} was already taken on this hit, and the revised hit no longer triggers it. Rewind to the hit instead.`,
+      `${takenMarks.map(card => (card.offer as MarkOffer).owner.name + "'s Mark " + (card.offer as MarkOffer).mark.kind).join(', ')} was already taken on this hit, and the revised hit no longer triggers it or would change its extra damage. Rewind to the hit instead.`,
     );
 
   // The hit's linked consequences: every entry the hit's command logged as caused by it.
@@ -458,20 +472,17 @@ export async function planRevision(
       : undefined;
   const scope = revisionNode?.potency === 'any' ? 'any' : spendPotency;
   let ended: PotencyEffect[] = [];
-  const potencyReductions = { ...priorPotency };
+  let potencyReductions = { ...priorPotency };
   if (scope) {
-    // Each revision works from the current accepted potency: the earlier reductions of this hit's
-    // effects (rule/character/potency.md: applied only while the potency exceeds the score).
-    const effects = potencyEffects(hit.compiled, damaged._id).map(e => {
-      const prior = priorPotency[e.id] ?? 0;
-      if (!prior || e.threshold === undefined || e.targetScore === undefined) return e;
-      const threshold = e.threshold - prior;
-      return {
-        ...e,
-        threshold,
-        status: e.status === 'applied' && !(e.targetScore < threshold) ? 'resisted' : e.status,
-      };
-    });
+    // Each revision works from the current accepted potency (QC1 train 16 R1).
+    const reduced = reducePotency(
+      potencyEffects(hit.compiled, damaged._id),
+      priorPotency,
+      scope,
+      options.potencyChoice,
+    );
+    const effects = reduced.effects;
+    potencyReductions = reduced.reductions;
     // A potency condition the engine didn't evaluate is the table's to re-check.
     const unevaluated = effects.filter(
       e => e.threshold === undefined || e.targetScore === undefined,
@@ -480,10 +491,10 @@ export async function planRevision(
       notes.push(
         `For the table: ${unevaluated.map(e => e.condition).join(', ')} was not evaluated by the engine; reduce its potency by 1 for ${name} when resolving it (rule/character/potency.md).`,
       );
-    const outcome = potencyRevision(effects, scope, options.potencyChoice);
+    const outcome = reduced.outcome;
     if (outcome.kind === 'choose')
       refuse(
-        `the potency of one effect is reduced, and more than one would change: answer with potency set to one of ${outcome.options.join(', ')}.`,
+        `the potency of one effect is reduced, and the hit has several: answer with potency set to one of ${outcome.options.join(', ')}.`,
       );
     if (outcome.kind === 'unknown-choice')
       refuse(`potency names none of this hit's potency effects (${outcome.options.join(', ')}).`);
@@ -503,8 +514,6 @@ export async function planRevision(
       );
     if (outcome.kind === 'revised') {
       ended = outcome.ended;
-      for (const e of [...outcome.ended, ...outcome.unchanged])
-        potencyReductions[e.id] = (potencyReductions[e.id] ?? 0) + 1;
       for (const effect of ended) {
         const target = { kind: 'character' as const, id: damaged._id };
         if (await hasRolledConditionSave(ctx, target, hitEvent._id))

@@ -163,8 +163,6 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V165 | [Respite loop](V165-respite-loop.md) | Merged (`1811a3f`); cloud dev published; gate and headless PASS at tip |
 | V166 | [Respite activities](V166-respite-activities.md) | Merged (`1811a3f`); cloud dev published; gate and headless PASS at tip |
 | V168 | [Field Arsenal choices stay locked mid-respite](V168-field-arsenal-lock.md) | Merged (`79fc25f`); cloud dev published; accepted TESTER results reused |
-| V157 | [Abilities without a power roll, and executed gains](V157-effect-only-abilities.md) | Merged (`6632e95`); cloud dev published; gate and headless PASS at tip |
-| V158 | [Effect instances and durations](V158-effect-instances.md) | Merged (`6632e95`); cloud dev published; gate and headless PASS at tip |
 | V167 | [Respite on the table](V167-respite-table.md) | Merged (`59b890c`); cloud dev published; gate and headless PASS at tip |
 | V169 | [Rapid Processing's extra respite activity](V169-respite-extra-activity.md) | Merged (`59b890c`); cloud dev published; gate and headless PASS at tip |
 | V164 | [Level-up screen, first design pass](V164-level-up-screen.md) | Merged (`6686fbe`); cloud dev published; accepted TESTER results reused |

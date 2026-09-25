@@ -744,3 +744,64 @@ test('V174 QC1 R2: a revision to 0 damage closes the Mark benefit of that rolled
   await s.command('/history undo');
   expect(await s.card(benefit._id)).toMatchObject({ status: 'awaiting-input' });
 });
+
+test('V174 QC1 R2: an accepted Mark benefit refuses a revision to 0 damage; an accepted extra damage refuses any revision', async () => {
+  const s = await setup({ Nul: NULL, Vane: TACTICIAN, Seer: TALENT });
+  await s.command(`${s.ref('Vane')} /ability use ability=Mark targets=[${s.ref('Nul')}]`, 'player');
+  await s.command(`${s.ref('Vane')} /adjust heroic-resource value=2`);
+  // The same synthetic psychic immunity 3 as above: a 4-damage Mind Spike deals 1; half is 0.
+  await s.t.run(async ctx => {
+    const hero = (await ctx.db.get(s.ids.Nul!))!;
+    await ctx.db.patch(hero._id, {
+      derivedBaseline: {
+        ...(hero.derivedBaseline as object),
+        damageImmunities: [{ damageType: 'psychic', value: { value: 3 } }],
+      },
+    });
+  });
+  const spike = async () => {
+    await atDice(s.t, s.f.campaignId, [1, 1]);
+    return s.command(
+      `${s.ref('Seer')} /ability use ability="Mind Spike" targets=[${s.ref('Nul')}] strained=no`,
+      'player',
+    );
+  };
+  const cardsOf = async (eventId: Id<'events'>) => ({
+    benefit: (await markCards(s)).find(
+      c => c.openedEventId === eventId && c.operation === 'mark.benefit',
+    )!,
+    shield: (await s.open()).find(
+      c =>
+        c.openedEventId === eventId &&
+        (c.offer as { abilityName: string }).abilityName === 'Inertial Shield',
+    )!,
+  });
+  // 1. The benefit (a shift for the dealer) is taken first; the revision to 0 damage would leave
+  // "rolled damage to a creature marked by you" untrue, so it is refused.
+  const first = await spike();
+  const one = await cardsOf(first.eventId);
+  await s.respond(one.benefit._id, 'player', { benefit: 'shift' });
+  expect(await s.card(one.benefit._id)).toMatchObject({ status: 'resolved' });
+  await expect(s.respond(one.shield._id, 'player')).rejects.toThrow(
+    /Mark benefit was already taken on this hit/,
+  );
+  expect(await s.card(one.shield._id)).toMatchObject({ status: 'awaiting-input' });
+  expect((await s.live('Nul')).stamina).toBe(20);
+
+  // 2. Without the immunity, Mind Spike deals 4 (20 → 16); the extra damage benefit is taken, and a
+  // revision (4 → 2) would change the hit that benefit was sized on, so it is refused too.
+  await s.t.run(async ctx => {
+    const hero = (await ctx.db.get(s.ids.Nul!))!;
+    await ctx.db.patch(hero._id, {
+      derivedBaseline: { ...(hero.derivedBaseline as object), damageImmunities: [] },
+    });
+  });
+  const second = await spike();
+  expect((await s.live('Nul')).stamina).toBe(16);
+  const two = await cardsOf(second.eventId);
+  await s.respond(two.benefit._id, 'player', { benefit: 'extra-damage' });
+  expect(await s.card(two.benefit._id)).toMatchObject({ status: 'resolved' });
+  const stamina = (await s.live('Nul')).stamina;
+  await expect(s.respond(two.shield._id, 'player')).rejects.toThrow(/extra damage/);
+  expect((await s.live('Nul')).stamina).toBe(stamina);
+});

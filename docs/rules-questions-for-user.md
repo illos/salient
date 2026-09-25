@@ -1476,7 +1476,10 @@ Current behaviour:
    Discipline: "The potency of one effect associated with the damage is reduced by 1 for you." The
    source doesn't say who picks the effect or what happens when only one would change. When only
    one of the hit's potency effects would change, that one is reduced without asking; when several
-   would, the answer names one (`potency=`). Alternatives: always ask which effect, even when only
+   would, the answer names one (`potency=`). When the hit has several potency effects and none
+   would change now, the answer must still name one. The reduction lasts, and a later reduction
+   builds on it (QC1 train 16), so the engine never credits it to one silently. A single potency
+   effect needs no answer. Alternatives: always ask which effect, even when only
    one would change; or let the user pick any potency effect, including one the reduction doesn't
    change.
 

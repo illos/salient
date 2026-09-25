@@ -358,7 +358,11 @@ export function potencyRevision(
       if (picked.length !== 1) return { kind: 'unknown-choice', options: groups.map(label) };
       chosen = picked;
     } else if (changing.length > 1) return { kind: 'choose', options: changing.map(label) };
-    else chosen = changing.length ? changing : groups.slice(0, 1);
+    else if (changing.length === 1) chosen = changing;
+    // Several effects and none would change: the lasting reduction still belongs to one of them,
+    // which the user names (a later reduction builds on it), so nothing is picked silently.
+    else if (groups.length > 1) return { kind: 'choose', options: groups.map(label) };
+    else chosen = groups;
   }
   const inScope = potency.filter(e => chosen.includes(e.effect));
   return {
@@ -366,4 +370,39 @@ export function potencyRevision(
     ended: inScope.filter(changes),
     unchanged: inScope.filter(e => !changes(e)),
   };
+}
+
+/**
+ * QC1 train 16 R1: one revision's potency re-check from the hit's current accepted potency. `prior`
+ * holds the accepted reductions per condition occurrence (cumulative across the hit's revisions);
+ * each effect is re-checked at its printed potency less those, then this revision's reduction of 1
+ * is added to every effect in its scope, including one that stays applied, so the next revision
+ * starts there.
+ */
+export function reducePotency(
+  effects: readonly PotencyEffect[],
+  prior: Readonly<Record<string, number>>,
+  scope: 'one' | 'any',
+  choice?: string,
+): {
+  outcome: ReturnType<typeof potencyRevision>;
+  effects: PotencyEffect[];
+  reductions: Record<string, number>;
+} {
+  const current = effects.map(e => {
+    const reduced = prior[e.id] ?? 0;
+    if (!reduced || e.threshold === undefined || e.targetScore === undefined) return e;
+    const threshold = e.threshold - reduced;
+    return {
+      ...e,
+      threshold,
+      status: e.status === 'applied' && !(e.targetScore < threshold) ? 'resisted' : e.status,
+    };
+  });
+  const outcome = potencyRevision(current, scope, choice);
+  const reductions = { ...prior };
+  if (outcome.kind === 'revised')
+    for (const e of [...outcome.ended, ...outcome.unchanged])
+      reductions[e.id] = (reductions[e.id] ?? 0) + 1;
+  return { outcome, effects: current, reductions };
 }

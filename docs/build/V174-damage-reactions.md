@@ -192,3 +192,10 @@ Rules question: [Q-REACT-1](../rules-questions-for-user.md#q-react-1-halving-ord
     second brings the bleeding back and keeps the first reduction. Inertial Shield's one-effect
     spend, then Parry, ends it too.
   - R2: Mark cards on a revised hit are reconciled; see the V175 work log.
+  - Review of `661594c4`: with several potency effects and none that would change, a one-effect
+    reduction used to credit the first effect silently. It now asks for `potency=` (Q-REACT-1 point
+    4). The re-check from the current accepted potency is the pure `reducePotency`
+    (`shared/resolve/damageRevision.ts`), tested with two effects: a one-effect spend on slowed,
+    then an any-effect reduction that ends slowed and leaves prone. An accepted Mark benefit refuses
+    a revision to 0 damage. An accepted extra-damage benefit refuses any revision of the hit it was
+    sized on (rewind to the hit).
