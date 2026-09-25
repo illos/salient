@@ -136,3 +136,4 @@ lists the level-two abilities, and Forge's Summoner "Summoner's Cradle" has no C
   (4 files) 51/51, Convex push of `git archive 6199c40b` in a removed mkdtemp copy: "Convex
   functions ready!". A one-step `import` runner run into a removed temp output reproduced the
   table above and left no `salient-forge-*` directory.
+- Independent re-review PASS (2026-09-25). Deploy note: liveSeed is required, so characterImports rows written by the merged V09a (e.g. forge-import journey rows on cloud dev) must be cleared before the schema push.
