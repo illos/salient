@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — train 17 (V159 fix, V170–V175)
+## Current release — V176 forced-movement follow-ups
+
+Backend/frontend source `408dd11b6c6b6430b7ac09224ef1c70c7c640f6c` published on 2026-09-25 as
+Worker `713636cf-0683-4b09-981d-cfe7997ec946`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V176](build/V176-forced-movement-followups.md) and
+the [ledger](../deploy.md).
+
+## Previous release — train 17 (V159 fix, V170–V175)
 
 Backend/frontend source `04013505e72e990a9a75fe3e3fb703b2f8bc22f0` published on 2026-09-25 as
 Worker `7db282ef-874d-4898-83e7-fad8a9c28cfd`: Talent Strained, watchers, next-turn durations, triggered actions, damage reactions

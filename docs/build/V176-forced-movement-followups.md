@@ -134,3 +134,9 @@ Spec references:
     effect-riders and compiled-effects.
 - Journeys were not run (TESTER). Open questions: Q-FM-1 and Q-FM-2 in
   `docs/rules-questions-for-user.md`.
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `408dd11` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `713636cf-0683-4b09-981d-cfe7997ec946`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V176-release-408dd11`.

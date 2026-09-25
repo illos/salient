@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V176 | `408dd11` | Merged; backend/frontend published; accepted gates reused | complete |
 | V175 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
 | V174 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
 | V173 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
@@ -879,3 +880,16 @@ the newly automated abilities.
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/train17-release-0401350`.
+
+### V176 forced-movement follow-ups publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `408dd11b6c6b6430b7ac09224ef1c70c7c640f6c` into main.
+- Full gate at the tip (293 s, 458 engine and 898 app tests), including the V72 live compiled report.
+- Journeys at the tip: shadow-level-two, fury, fury-level-three, censor, censor-level-three, conduit, null and all.
+- Independent review and QC1 clearance passed; Q-FM-1 and Q-FM-2 remain open questions.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `713636cf-0683-4b09-981d-cfe7997ec946`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V176-release-408dd11`.
