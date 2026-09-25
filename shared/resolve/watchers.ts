@@ -142,6 +142,57 @@ export const EFFECT_ONLY_WATCHERS: readonly {
       };
     },
   },
+  // V175, feature/ability/tactician/level-3/hit-em-hard.md: "Until the end of the encounter or until
+  // you are dying, whenever you or any ally deals damage to a target marked by you, that creature
+  // gains 2 surges, which they can use immediately." The damage and the damaged creature's marks are
+  // observed at the damage writer (V175 marks, feature/ability/tactician/level-1/mark.md); "that
+  // creature" is the one who dealt the damage; surges are rule/resource/surge.md, and gained surges
+  // are usable at once, as the sentence says. "You or any ally": the owner's side (rule/combat/side.md).
+  {
+    pattern:
+      /^Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, that creature gains (\d+) surges?, which they can use immediately\./,
+    read: match => {
+      const surges = count(match[1]);
+      if (!surges) return undefined;
+      return {
+        effect: 'watcher',
+        subject: 'owner',
+        watcher: {
+          event: 'marked-damaged',
+          whose: 'owner',
+          limit: 'each',
+          responses: [{ kind: 'gain', recipient: 'dealer', surges }],
+        },
+        duration: { kind: 'encounter' },
+        endsWhen: ['owner-dying'],
+        text: match[0],
+      };
+    },
+  },
+  // V175, feature/ability/tactician/level-3/stay-strong-and-focus.md: "Until the end of the encounter
+  // or until you are dying, whenever you or any ally deals damage to a target marked by you, the
+  // creature who dealt the damage can spend a Recovery." Spending a Recovery is that creature's
+  // choice (rule/health/recoveries.md), so the response is table work, as V157's "can spend a
+  // Recovery" sentences are.
+  {
+    pattern:
+      /^Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a Recovery\./,
+    read: match => ({
+      effect: 'watcher',
+      subject: 'owner',
+      watcher: {
+        event: 'marked-damaged',
+        whose: 'owner',
+        limit: 'each',
+        responses: [
+          { kind: 'instruction', text: 'the creature who dealt the damage can spend a Recovery.' },
+        ],
+      },
+      duration: { kind: 'encounter' },
+      endsWhen: ['owner-dying'],
+      text: match[0],
+    }),
+  },
 ];
 
 /** Reads one stored effect-only sentence as exactly one admitted watcher, or `undefined`. */
@@ -203,7 +254,12 @@ export function bindWatcher(
   return { payload: { ...printed, responses } };
 }
 
-const party = (who: WatcherParty) => (who === 'owner' ? 'its owner' : 'its subject');
+const party = (who: WatcherParty | 'dealer') =>
+  who === 'owner'
+    ? 'its owner'
+    : who === 'dealer'
+      ? 'the creature who dealt the damage'
+      : 'its subject';
 
 /** Plain text of a bound watcher, for the log and sheets. */
 export function describeWatcher(watcher: Watcher): string {
@@ -216,6 +272,7 @@ export function describeWatcher(watcher: Watcher): string {
     'turn-end': 'ends a turn',
     'ability-used': 'uses an ability',
     'strike-made': 'makes a strike',
+    'marked-damaged': 'or an ally deals damage to a creature it marked',
   }[watcher.event];
   const limit = { turn: 'the first time on a turn', round: 'once per round', each: 'each time' }[
     watcher.limit
@@ -252,7 +309,7 @@ export interface WatchedOccurrence {
   event: WatcherEvent;
   /** The creature the event is about: the damaged creature, the dealer, the turn's creature, the user. */
   creatureId: string;
-  /** `damage-dealt`: the creature that took the damage. */
+  /** `damage-dealt`: the creature that took the damage. V175 `marked-damaged`: the dealer. */
   otherId?: string;
 }
 

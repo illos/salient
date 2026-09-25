@@ -347,6 +347,21 @@ export async function runTacticianLevelThree({
                 before.liveState?.stamina,
                 `${name} no damage`,
               );
+            } else if (name === "Hit 'Em Hard!" || name === 'Stay Strong and Focus!') {
+              // V175 (feature/ability/tactician/level-3/hit-em-hard.md, stay-strong-and-focus.md):
+              // compiled without a power roll; the Tactician holds a watcher of damage to creatures
+              // they marked, until the end of the encounter or until they are dying.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              const watcher = after.liveState?.effectInstances?.find(
+                i => i.sourceUseEventId === use.eventId,
+              )?.payload as { kind?: string; watcher?: { event?: string } } | undefined;
+              assert.equal(watcher?.kind, 'watcher', name);
+              assert.equal(watcher?.watcher?.event, 'marked-damaged', name);
+              assert.equal(
+                after.liveState?.stamina,
+                before.liveState?.stamina,
+                `${name} no damage`,
+              );
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);

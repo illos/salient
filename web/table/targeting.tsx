@@ -523,20 +523,22 @@ export function CompiledEffects({
                     ? 'Strained effect'
                     : effect.kind === 'watcher'
                       ? 'Watcher'
-                      : effect.kind === 'modifier'
-                        ? 'Modifier'
-                        : effect.kind === 'gain'
-                          ? 'Gain'
-                          : effect.kind === 'push'
-                            ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
-                                /^./,
-                                letter => letter.toUpperCase(),
-                              )
-                            : effect.kind === 'condition'
-                              ? 'Condition'
-                              : effect.kind === 'triggered-damage'
-                                ? 'Triggered damage'
-                                : 'Damage'}
+                      : effect.kind === 'mark'
+                        ? 'Mark'
+                        : effect.kind === 'modifier'
+                          ? 'Modifier'
+                          : effect.kind === 'gain'
+                            ? 'Gain'
+                            : effect.kind === 'push'
+                              ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
+                                  /^./,
+                                  letter => letter.toUpperCase(),
+                                )
+                              : effect.kind === 'condition'
+                                ? 'Condition'
+                                : effect.kind === 'triggered-damage'
+                                  ? 'Triggered damage'
+                                  : 'Damage'}
               </strong>
               <Badge variant="outline">
                 {effect.kind === 'damage'
@@ -551,10 +553,10 @@ export function CompiledEffects({
                         : effect.status === 'not-strained'
                           ? 'Not strained'
                           : 'Manual'
-                      : effect.kind === 'watcher'
+                      : effect.kind === 'watcher' || effect.kind === 'mark'
                         ? effect.status === 'applied'
                           ? 'Tracked effect'
-                          : 'Manual watcher'
+                          : `Manual ${effect.kind}`
                         : effect.kind === 'modifier'
                           ? effect.status === 'applied'
                             ? 'Tracked effect'
@@ -738,6 +740,13 @@ export function CompiledEffects({
                   : `Resolve it at the table: ${effect.requirements.join('; ')}.`}
               </span>
             )}
+            {effect.kind === 'mark' && (
+              <span>
+                {effect.status === 'applied'
+                  ? 'Marked: the engine applies the edge and offers the Mark benefit and retarget; end it with /effect end.'
+                  : `Track it at the table: ${effect.requirements.join('; ')}.`}
+              </span>
+            )}
             {effect.kind === 'strained' && (
               <span>
                 {effect.status === 'not-strained'
@@ -767,6 +776,7 @@ export function CompiledEffects({
               (effect.kind !== 'gain' || effect.status === 'manual') &&
               (effect.kind !== 'modifier' || effect.status === 'manual') &&
               (effect.kind !== 'watcher' || effect.status === 'manual') &&
+              (effect.kind !== 'mark' || effect.status === 'manual') &&
               (effect.kind !== 'strained' || effect.status === 'manual') &&
               (effect.kind !== 'triggered-damage' || effect.status === 'manual') &&
               (effect.kind !== 'condition' ||

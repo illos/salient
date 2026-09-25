@@ -1065,6 +1065,13 @@ export async function writeDamage(
       stamina: number;
       temporaryStamina: number;
     }) => Pick<DamageApplication, 'staminaAfter' | 'temporaryStaminaAfter'>;
+    /**
+     * V175 (convex/lib/marks.ts): rolled damage (rule/damage/rolled-damage.md), a melee ability's
+     * damage, or part of a hit already observed (the Mark's extra damage).
+     */
+    rolled?: boolean;
+    meleeAbility?: boolean;
+    partOfHit?: boolean;
   } = {},
 ): Promise<void> {
   // V02: squad members take damage through their squad's pool (convex/lib/squads.ts commits it).
@@ -1120,6 +1127,9 @@ export async function writeDamage(
         : {}),
       targetName: current.name,
       ...(options.meleeStrike !== undefined ? { meleeStrike: options.meleeStrike } : {}),
+      ...(options.rolled ? { rolled: true } : {}),
+      ...(options.meleeAbility ? { meleeAbility: true } : {}),
+      ...(options.partOfHit ? { partOfHit: true } : {}),
       preloaded: {
         effectInstances: current.live.effectInstances ?? [],
         ownedEffects: current.live.ownedEffects ?? [],
@@ -1176,6 +1186,9 @@ export async function writeDamage(
         : {}),
       targetName: character.authored.name,
       ...(options.meleeStrike !== undefined ? { meleeStrike: options.meleeStrike } : {}),
+      ...(options.rolled ? { rolled: true } : {}),
+      ...(options.meleeAbility ? { meleeAbility: true } : {}),
+      ...(options.partOfHit ? { partOfHit: true } : {}),
       preloaded: {
         effectInstances: live.effectInstances ?? [],
         ownedEffects: live.ownedEffects ?? [],

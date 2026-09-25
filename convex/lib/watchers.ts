@@ -45,6 +45,7 @@ import {
 } from './effectInstances';
 import { damageTargetFacts, writeDamage, type TargetRecord } from './resolve';
 import { assertNoTriggerOnCorrection, offerForDamage } from './triggeredActions';
+import { observeMarks } from './marks';
 
 /**
  * Watchers set off by a watcher's own responses fire too, to this depth; deeper chains are left
@@ -133,6 +134,23 @@ async function recordOf(
   return { actor: { kind: 'foe', id: foe._id, name: foe.name }, foe };
 }
 
+/** V175: a hero or foe named by id (the dealer of a `marked-damaged` occurrence). */
+async function partyOf(
+  ctx: MutationCtx,
+  campaignId: Id<'campaigns'>,
+  id: string,
+): Promise<(EffectHolder & { name: string }) | undefined> {
+  const current = await resolveHistoricalId(ctx, campaignId, id);
+  const heroId = ctx.db.normalizeId('characters', current);
+  if (heroId) {
+    const hero = await ctx.db.get(heroId);
+    return hero ? { kind: 'character', id: hero._id, name: hero.authored.name } : undefined;
+  }
+  const foeId = ctx.db.normalizeId('foes', current);
+  const foe = foeId ? await ctx.db.get(foeId) : null;
+  return foe ? { kind: 'foe', id: foe._id, name: foe.name } : undefined;
+}
+
 /** A die key the dice service accepts (8–128 letters, digits, underscores, hyphens). */
 function diceKey(scope: JournalScope, instanceId: string, index: string): string {
   let hash = 0x811c9dc5;
@@ -162,6 +180,8 @@ async function execute(
   instance: EffectInstance,
   window: Omit<WatcherFiring, 'causeEventId'>,
   deferred: DamageObservation[],
+  /** V175: the observed occurrence, whose `otherId` is the dealer of `marked-damaged`. */
+  occurrence?: WatchedOccurrence,
 ): Promise<Firing> {
   if (instance.payload.kind !== 'watcher') throw new ConvexError('Not a watcher.');
   const watcher = instance.payload.watcher;
@@ -180,17 +200,21 @@ async function execute(
       continue;
     }
     const party =
-      response.recipient === 'owner'
-        ? instance.owner.kind === 'character' || instance.owner.kind === 'foe'
-          ? {
-              kind: instance.owner.kind,
-              id: await resolveHistoricalId(ctx, scope.campaignId, instance.owner.id),
-              name: instance.owner.name,
-            }
+      response.recipient === 'dealer'
+        ? occurrence?.event === 'marked-damaged' && occurrence.otherId
+          ? await partyOf(ctx, scope.campaignId, occurrence.otherId)
           : undefined
-        : subjectHolds
-          ? { ...holder, name: instance.subject.name }
-          : undefined;
+        : response.recipient === 'owner'
+          ? instance.owner.kind === 'character' || instance.owner.kind === 'foe'
+            ? {
+                kind: instance.owner.kind,
+                id: await resolveHistoricalId(ctx, scope.campaignId, instance.owner.id),
+                name: instance.owner.name,
+              }
+            : undefined
+          : subjectHolds
+            ? { ...holder, name: instance.subject.name }
+            : undefined;
     const record = party
       ? await recordOf(ctx, party)
       : `${instance.subject.name} has no live record`;
@@ -330,6 +354,14 @@ export interface DamageObservation {
   targetName?: string;
   dealerName?: string;
   meleeStrike?: boolean;
+  /**
+   * V175 marks (convex/lib/marks.ts): the damage is rolled damage (rule/damage/rolled-damage.md:
+   * determined by an ability roll), dealt by a melee ability, or part of a hit already observed
+   * (the Mark's extra damage), which changes Stamina without being a second damage event.
+   */
+  rolled?: boolean;
+  meleeAbility?: boolean;
+  partOfHit?: boolean;
 }
 
 /** Logs a firing, or a watcher left to the table, as a consequence of the causing operation. */
@@ -395,7 +427,7 @@ export async function observeWatchers(
   if (!found.length) return;
   const at = await windowOf(ctx, scope.campaignId);
   const depth = options.depth ?? 0;
-  for (const { holder, instance: seen } of found) {
+  for (const { holder, instance: seen, occurrence } of found) {
     // An earlier firing in this loop may have ended or used it.
     const instance = (await readHolder(ctx, holder))?.effectInstances.find(
       item => item.id === seen.id && item.status === 'active',
@@ -428,7 +460,7 @@ export async function observeWatchers(
       continue;
     }
     const deferred: DamageObservation[] = [];
-    const fired = await execute(ctx, scope, holder, instance, due.window, deferred);
+    const fired = await execute(ctx, scope, holder, instance, due.window, deferred, occurrence);
     await log(ctx, scope, 'effect.watcher-fired', fired.description, fired.data, fired.dice);
     for (const observation of deferred)
       await observeDamage(ctx, scope, observation, { depth: depth + 1 });
@@ -450,7 +482,7 @@ export async function observeDamage(
     observation.winded,
     observation.before,
     observation.after,
-  );
+  ).filter(event => !observation.partOfHit || event !== 'damage-taken');
   // A correction changes damage in either direction: less damage can undo what a watcher
   // watched (taken, winded, dying) just as more damage can newly satisfy it.
   if (options.correction)
@@ -473,7 +505,7 @@ export async function observeDamage(
     options,
     observation.preloaded,
   );
-  if (observation.dealer && events.includes('damage-taken'))
+  if (observation.dealer && events.includes('damage-taken') && !observation.partOfHit)
     await observeWatchers(
       ctx,
       scope,
@@ -513,8 +545,21 @@ export async function observeDamage(
     amount: lost,
     ...(observation.meleeStrike !== undefined ? { meleeStrike: observation.meleeStrike } : {}),
   };
-  if (options.correction) await assertNoTriggerOnCorrection(ctx, scope, damage);
-  else await offerForDamage(ctx, scope, damage);
+  if (!observation.partOfHit) {
+    if (options.correction) await assertNoTriggerOnCorrection(ctx, scope, damage);
+    else await offerForDamage(ctx, scope, damage);
+  }
+  // V175: the damaged creature's marks: `marked-damaged` watchers of their owners, and the Mark's
+  // benefit and retarget cards.
+  await observeMarks(ctx, scope, observation, lost, options, (owner, dealerId) =>
+    observeWatchers(
+      ctx,
+      scope,
+      owner,
+      [{ event: 'marked-damaged', creatureId: owner.id, otherId: dealerId }],
+      options,
+    ),
+  );
 }
 
 /**

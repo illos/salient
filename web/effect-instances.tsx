@@ -26,6 +26,8 @@ export interface ActiveEffect {
   manualStacking?: boolean;
   /** V171: what a watcher watches and does, as the shared describer words it. */
   watching?: string;
+  /** V175: a mark, as the shared describer words it. */
+  mark?: string;
 }
 
 export function ActiveEffects({
@@ -60,6 +62,7 @@ export function ActiveEffects({
               {effect.watching && (
                 <span className="text-muted-foreground">Watcher: {effect.watching}.</span>
               )}
+              {effect.mark && <span className="text-muted-foreground">Mark: {effect.mark}.</span>}
             </span>
             {campaignId && (
               <Button

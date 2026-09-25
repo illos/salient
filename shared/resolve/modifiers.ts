@@ -20,6 +20,7 @@ import type {
 } from '../contracts/liveState.ts';
 import type { Characteristic } from './abilityGrammar.ts';
 import { effectiveAggregate } from './lastingEffects.ts';
+import { markEdgeConditions, ownerOrAlly, type MarkParty } from './marks.ts';
 
 /** A printed stat amount is a number, or "equal to your <characteristic> score" bound at use. */
 export type PrintedStatModifier = Omit<StatModifier, 'amount'> & {
@@ -306,9 +307,11 @@ function aggregate(
  */
 export function rollContributions(input: {
   actor: { id: string; instances: readonly EffectInstance[] };
-  targets: readonly { id: string; instances: readonly EffectInstance[] }[];
+  targets: readonly { id: string; name?: string; instances: readonly EffectInstance[] }[];
   roll: RollFacts;
   exclude?: readonly string[];
+  /** V175: the roller's side, for the Mark edge ("you and allies"); absent, no Mark edge applies. */
+  roller?: MarkParty;
 }): { targetId: string; contributions: RollContribution[] }[] {
   const exclude = new Set(input.exclude ?? []);
   const side = (
@@ -335,8 +338,62 @@ export function rollContributions(input: {
   const actor = side(input.actor.id, input.actor.instances, 'actor');
   return input.targets.map(target => ({
     targetId: target.id,
-    contributions: [...actor, ...side(target.id, target.instances, 'target')],
+    contributions: [
+      ...actor,
+      ...side(target.id, target.instances, 'target'),
+      ...markEdge(target, input.roll, input.roller, exclude),
+    ],
   }));
+}
+
+/**
+ * V175, feature/ability/tactician/level-1/mark.md: "While a creature marked by you is within your
+ * line of effect, you and allies within your line of effect gain an edge on power rolls made against
+ * that creature." One edge for a roll against a marked creature by its marker or the marker's ally
+ * (rule/combat/side.md), whichever ability marked it: the mark is one status, so it counts once
+ * ("Stacking Unique Effects": the same effect doesn't stack), and another Tactician's mark on the
+ * creature has already ended (convex/lib/marks.ts). Tests are power rolls without a target
+ * (rule/dice/power-roll.md), so they never get it. Line of effect has no map: both printed
+ * conditions label the contribution, and the table's `exclude` rejects it when either fails.
+ */
+function markEdge(
+  target: { id: string; name?: string; instances: readonly EffectInstance[] },
+  roll: RollFacts,
+  roller: MarkParty | undefined,
+  exclude: ReadonlySet<string>,
+): RollContribution[] {
+  if (!roller || roll.test) return [];
+  const mark = [...target.instances]
+    .filter(
+      instance =>
+        instance.kind === 'mark' &&
+        instance.status === 'active' &&
+        !instance.manualStacking &&
+        instance.payload.kind === 'mark' &&
+        instance.owner.kind === 'character' &&
+        ownerOrAlly({ id: instance.owner.id, side: 'heroes' }, roller),
+    )
+    .sort((a, b) => b.appliedSequence - a.appliedSequence)[0];
+  if (!mark) return [];
+  const subject = target.name ?? mark.subject.name;
+  return [
+    {
+      instanceId: mark.id,
+      sources: [mark.id],
+      consumes: [],
+      abilityId: mark.abilityId,
+      abilityName: mark.abilityName,
+      actorLabel: mark.actorLabel,
+      sourcePath: mark.sourcePath,
+      text: `an edge on power rolls against ${subject}, marked by ${mark.actorLabel}: ${markEdgeConditions(mark.actorLabel, subject)}`,
+      side: 'target',
+      subjectId: target.id,
+      edges: 1,
+      banes: 0,
+      bonus: 0,
+      ...(exclude.has(mark.id) ? { excluded: true as const } : {}),
+    },
+  ];
 }
 
 /** Every instance id a set of contributions names, applied or excluded. */

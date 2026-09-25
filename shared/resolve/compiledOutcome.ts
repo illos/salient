@@ -57,6 +57,7 @@ import {
 } from './damageRevision.ts';
 import type { EffectRider } from './effectRiders.ts';
 import { sameTriggerSpec, triggerSection } from './triggers.ts';
+import { readMarkAbility, sameMarkSpec, type MarkSpec } from './marks.ts';
 import {
   effectOnlyClause,
   type EffectOnlySentence,
@@ -412,7 +413,21 @@ export interface CompiledResponseSpendOutcome extends EffectIdentity {
   requirements: string[];
 }
 
+/**
+ * V175: the Mark on one target (feature/ability/tactician/level-1/mark.md). `applied`: the use stores
+ * a `mark` effect instance on a hero or foe outside a squad. `manual`: the target can't hold one (a
+ * squad minion, whose squad's rolls and pool the engine doesn't read per creature, or an object:
+ * the Mark targets "One creature"); the table tracks it.
+ */
+export interface CompiledMarkOutcome extends EffectIdentity {
+  kind: 'mark';
+  status: 'applied' | 'manual';
+  spec: MarkSpec;
+  requirements: string[];
+}
+
 export type CompiledEffectOutcome =
+  | CompiledMarkOutcome
   | CompiledDamageRevisionOutcome
   | CompiledResponseSpendOutcome
   | CompiledTriggeredDamageOutcome
@@ -1157,26 +1172,36 @@ export function resolveEffectOnly(
   )
     return manual('Compiled structure is outside the supported envelope.');
   // Every Effect section, read whole again, must give exactly the saved nodes in order.
+  // V175: the Mark is read whole from its printed text, not sentence by sentence.
+  const markAgain = definition.sections.some(node => node.kind === 'mark')
+    ? readMarkAbility(definition.envelope)
+    : undefined;
   const reread: {
     index: number;
     sentence: EffectOnlySentence | undefined;
     spend?: ResponseSpendClause | undefined;
+    mark?: MarkSpec;
   }[] = definition.envelope.blocks.flatMap((block, index) =>
     block.kind === 'section' && block.label === 'Trigger' && triggered
       ? []
-      : block.kind === 'section' && block.label === 'Effect' && !block.cost
-        ? (readEffectOnlySection(block.text) ?? [undefined]).map(sentence => ({ index, sentence }))
-        : [
-            {
+      : markAgain
+        ? [{ index, sentence: undefined, mark: markAgain.spec }]
+        : block.kind === 'section' && block.label === 'Effect' && !block.cost
+          ? (readEffectOnlySection(block.text) ?? [undefined]).map(sentence => ({
               index,
-              sentence: undefined,
-              // V174: a response's Spend section.
-              spend:
-                block.kind === 'section' && block.cost && triggered
-                  ? responseSpend(block.cost, block.text)
-                  : undefined,
-            },
-          ],
+              sentence,
+            }))
+          : [
+              {
+                index,
+                sentence: undefined,
+                // V174: a response's Spend section.
+                spend:
+                  block.kind === 'section' && block.cost && triggered
+                    ? responseSpend(block.cost, block.text)
+                    : undefined,
+              },
+            ],
   );
   if (
     definition.format !== 'salient.compiled-ability' ||
@@ -1206,6 +1231,15 @@ export function resolveEffectOnly(
           !definition.sections.some(other => other.kind === 'damage-revision')
         );
       }
+      if (node.kind === 'mark')
+        return (
+          !again.mark ||
+          node.locator !== `block:${again.index}:0` ||
+          !sameMarkSpec(again.mark, node.spec) ||
+          definition.sections.length !== 1 ||
+          shape.kind !== 'one' ||
+          shape.self
+        );
       if (!again.sentence || !node.locator.startsWith(`block:${again.index}:`)) return true;
       if (
         node.kind !== 'gain' &&
@@ -1344,6 +1378,27 @@ export function resolveEffectOnly(
     id === input.actor.id ? input.actor : input.targets.find(target => target.id === id)!;
   const effects: CompiledEffectOutcome[] = [];
   for (const node of definition.sections) {
+    // V175: each target is marked by the user; only a hero or a foe outside a squad holds it.
+    if (node.kind === 'mark') {
+      for (const target of input.targets)
+        effects.push({
+          nodeId: node.id,
+          targetId: target.id,
+          locator: node.locator,
+          clause: node.clause,
+          kind: 'mark',
+          spec: node.spec,
+          ...(target.kind === 'hero' || target.kind === 'foe'
+            ? { status: 'applied' as const, requirements: [] }
+            : {
+                status: 'manual' as const,
+                requirements: [
+                  `target:${target.id}.${target.kind} holds no mark the engine tracks (${target.kind === 'object' ? 'the Mark targets one creature' : 'a squad acts and takes damage as one'}); track it at the table`,
+                ],
+              }),
+        });
+      continue;
+    }
     // V174: the revised hit, computed from its current accepted revision (design 5b).
     if (node.kind === 'damage-revision') {
       for (const target of input.targets) {

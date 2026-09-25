@@ -94,6 +94,8 @@ export const current = query({
               (occurrence.effect.kind === 'modifier' && occurrence.effect.status === 'applied') ||
               // V171: an applied watcher is tracked and fired by the engine.
               (occurrence.effect.kind === 'watcher' && occurrence.effect.status === 'applied') ||
+              // V175: an applied mark is tracked by the engine.
+              (occurrence.effect.kind === 'mark' && occurrence.effect.status === 'applied') ||
               // V170: an applied or inapplicable Strained section leaves nothing for the table.
               (occurrence.effect.kind === 'strained' && occurrence.effect.status !== 'manual') ||
               (occurrence.effect.kind === 'condition' &&

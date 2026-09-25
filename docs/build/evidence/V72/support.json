@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 93,
-      "manual": 278
+      "supported": 96,
+      "manual": 275
     },
     "kit-signature": {
       "total": 25,
@@ -48394,7 +48394,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/mark.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -48405,196 +48406,50 @@
           "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#block:0:0:3e5396a2d086ec08",
           "locator": "block:0:0",
           "clause": "The target is marked by you until the end of the encounter, until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another [tactician](scc.v1:mcdm.heroes.v1/class/tactician) marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to mark a new target within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:block:0:0:c7a40774d32861c7",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The target is marked by you until the end of the encounter, until you are dying, or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another tactician marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 Stamina, you can use a free triggered action to mark a new target within distance.\nYou can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.\nWhile a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:\n- The ability deals extra damage equal to twice your Reason score.\n- The creature dealing the damage can spend a Recovery.\n- The creature dealing the damage can shift up to a number of squares equal to your Reason score.\n- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can't gain more than one benefit from the same trigger.",
-          "kind": "unsupported",
-          "shape": "source-block-mismatch",
-          "reason": "Printed mechanics differ from the structured projection.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:4:0:983aeeea026bd55f",
-          "locator": "markdown:item:4:0",
-          "clause": "You can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:5:0:08d4e0326b882760",
-          "locator": "markdown:item:5:0",
-          "clause": "While a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:6:0:52146f0b4e7e52e9",
-          "locator": "markdown:item:6:0",
-          "clause": "- The ability deals extra damage equal to twice your Reason score.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:7:0:a20e7fdc1edaa068",
-          "locator": "markdown:item:7:0",
-          "clause": "- The creature dealing the damage can spend a Recovery.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:8:0:7489602b9c80957f",
-          "locator": "markdown:item:8:0",
-          "clause": "- The creature dealing the damage can shift up to a number of squares equal to your Reason score.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:9:0:f291ab587f60f948",
-          "locator": "markdown:item:9:0",
-          "clause": "- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:10:0:f1bcd37d45189cee",
-          "locator": "markdown:item:10:0",
-          "clause": "You can't gain more than one benefit from the same trigger.",
-          "kind": "unsupported",
-          "shape": "unaccounted-paragraph",
-          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
-          "dependency": "unknown"
+          "kind": "mark",
+          "spec": {
+            "effect": "mark",
+            "subject": "target",
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "owner-dying",
+              "reused",
+              "willingly-ended"
+            ],
+            "exclusive": "one-tactician",
+            "retarget": {
+              "actionType": "free triggered action",
+              "distance": "Ranged 10"
+            },
+            "edge": {
+              "edges": 1,
+              "scope": "power-roll",
+              "rollers": "owner-and-allies"
+            },
+            "benefit": {
+              "actionType": "free triggered action",
+              "cost": {
+                "resource": "focus",
+                "amount": 1
+              },
+              "trigger": "rolled-damage",
+              "options": [
+                "extra-damage",
+                "recovery",
+                "shift",
+                "taunt"
+              ],
+              "perTrigger": 1
+            },
+            "text": "The target is marked by you until the end of the encounter, until you are dying, or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another tactician marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 Stamina, you can use a free triggered action to mark a new target within distance. You can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level. While a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action: - The ability deals extra damage equal to twice your Reason score. - The creature dealing the damage can spend a Recovery. - The creature dealing the damage can shift up to a number of squares equal to your Reason score. - If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn. You can't gain more than one benefit from the same trigger."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "source-block-mismatch",
-          "locator": "markdown:block:0",
-          "clause": "Effect: The target is marked by you until the end of the encounter, until you are dying, or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another tactician marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 Stamina, you can use a free triggered action to mark a new target within distance.\nYou can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.\nWhile a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:\n- The ability deals extra damage equal to twice your Reason score.\n- The creature dealing the damage can spend a Recovery.\n- The creature dealing the damage can shift up to a number of squares equal to your Reason score.\n- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can't gain more than one benefit from the same trigger.",
-          "message": "Roll, tier, section content or order differs between the envelope and full source."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:4",
-          "clause": "You can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:5",
-          "clause": "While a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:6",
-          "clause": "- The ability deals extra damage equal to twice your Reason score.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:7",
-          "clause": "- The creature dealing the damage can spend a Recovery.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:8",
-          "clause": "- The creature dealing the damage can shift up to a number of squares equal to your Reason score.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:9",
-          "clause": "- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "unaccounted-paragraph",
-          "locator": "markdown:item:10",
-          "clause": "You can't gain more than one benefit from the same trigger.",
-          "message": "Printed mechanics cannot be ignored."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "The target is marked by you until the end of the encounter, until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another [tactician](scc.v1:mcdm.heroes.v1/class/tactician) marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to mark a new target within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:block:0:0",
-          "clause": "Effect: The target is marked by you until the end of the encounter, until you are dying, or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another tactician marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 Stamina, you can use a free triggered action to mark a new target within distance.\nYou can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.\nWhile a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:\n- The ability deals extra damage equal to twice your Reason score.\n- The creature dealing the damage can spend a Recovery.\n- The creature dealing the damage can shift up to a number of squares equal to your Reason score.\n- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can't gain more than one benefit from the same trigger.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:4:0",
-          "clause": "You can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:5:0",
-          "clause": "While a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:6:0",
-          "clause": "- The ability deals extra damage equal to twice your Reason score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:7:0",
-          "clause": "- The creature dealing the damage can spend a Recovery.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:8:0",
-          "clause": "- The creature dealing the damage can shift up to a number of squares equal to your Reason score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:9:0",
-          "clause": "- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "markdown:item:10:0",
-          "clause": "You can't gain more than one benefit from the same trigger.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Mark",
@@ -48773,6 +48628,18 @@
         }
       ],
       "diagnostics": [
+        {
+          "code": "mark-manual",
+          "locator": "block:0:0",
+          "clause": "You mark the target.",
+          "message": "a mark made by an ability other than Mark: its duration, and whether using Mark again ends it, are not printed (Q-MARK-1), so the engine does not store it"
+        },
+        {
+          "code": "mark-manual",
+          "locator": "block:2:0",
+          "clause": "Before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the first time any ally deals damage to any target marked by you, that ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "it watches Mind Game’s own mark (Q-MARK-1), and \"the first time … before the start of your next turn\" is a once-only limit the V171 watcher limits (turn, round, each) do not have"
+        },
         {
           "code": "manual-section",
           "locator": "block:0:0",
@@ -49586,6 +49453,24 @@
           "message": "Printed mechanics cannot be ignored."
         },
         {
+          "code": "mark-manual",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
+          "message": "a mark made by an ability other than Mark: its duration, and whether using Mark again ends it, are not printed (Q-MARK-1), so the engine does not store it"
+        },
+        {
+          "code": "mark-manual",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and must immediately make a free strike against a creature of your choice within 5 squares of them.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "a mark made by an ability other than Mark: its duration, and whether using Mark again ends it, are not printed (Q-MARK-1), so the engine does not store it"
+        },
+        {
+          "code": "mark-manual",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to force that target to make a free strike against a creature of your choice within 5 squares of them.",
+          "message": "a paid response to a strike against a marked creature, before its outcome: adding a target changes a strike the engine already resolved, and the forced free strike is the marked creature’s own use; the marks themselves are Q-MARK-1"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Each target is marked by you, and must immediately make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against a creature of your choice within 5 squares of them.",
@@ -50165,6 +50050,24 @@
           "message": "Printed mechanics cannot be ignored."
         },
         {
+          "code": "mark-manual",
+          "locator": "block:0:0",
+          "clause": "Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "a mark made by an ability other than Mark: its duration, and whether using Mark again ends it, are not printed (Q-MARK-1), so the engine does not store it"
+        },
+        {
+          "code": "mark-manual",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target is marked by you, and you gain two surges.\nMark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "a mark made by an ability other than Mark: its duration, and whether using Mark again ends it, are not printed (Q-MARK-1), so the engine does not store it"
+        },
+        {
+          "code": "mark-manual",
+          "locator": "markdown:item:4:0",
+          "clause": "Mark Benefit: Until the end of the encounter, whenever you or any ally makes a strike against a creature marked by you, you can spend 2 focus to add one additional target to the strike.",
+          "message": "a paid response to a strike against a marked creature, before its outcome: adding a target changes a strike the engine already resolved, and the forced free strike is the marked creature’s own use; the marks themselves are Q-MARK-1"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Each target is marked by you, and you gain two [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
@@ -50452,6 +50355,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "mark-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "message": "the push and shift are movement (no map), and the Charge substitution is a permission at a later use tied to the first sentence’s duration, which the effect-only reader can’t bind to a sentence of its own"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), the first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you or any ally deals damage to a target marked by you, the creature who dealt the damage can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares and then [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares. Additionally, any ally using the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action to target a creature marked by you can use a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
@@ -50518,7 +50427,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/hit-em-hard.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -50526,37 +50436,38 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard#block:0:0:42e4971bb885f22c",
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/hit-em-hard#block:0:0:de04ce9d70c30877",
           "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, that creature gains 2 surges, which they can use immediately.",
+          "kind": "watcher",
+          "spec": {
+            "effect": "watcher",
+            "subject": "owner",
+            "watcher": {
+              "event": "marked-damaged",
+              "whose": "owner",
+              "limit": "each",
+              "responses": [
+                {
+                  "kind": "gain",
+                  "recipient": "dealer",
+                  "surges": 2
+                }
+              ]
+            },
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "owner-dying"
+            ],
+            "text": "Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, that creature gains 2 surges, which they can use immediately."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, that creature gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use immediately.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Hit 'Em Hard!",
@@ -50634,6 +50545,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "mark-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).",
+          "message": "frightened of the creature who dealt the damage, gated by the owner’s Reason potency: a watcher condition response with a potency check and a source other than the owner is not built"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you who has R < AVERAGE, the target is [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of the creature who dealt the damage (save ends).",
@@ -50700,7 +50617,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/stay-strong-and-focus.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -50708,37 +50626,37 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus#block:0:0:f3427a5e3adc17c0",
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-3/stay-strong-and-focus#block:0:0:5dd6c71df16abf6a",
           "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a Recovery.",
+          "kind": "watcher",
+          "spec": {
+            "effect": "watcher",
+            "subject": "owner",
+            "watcher": {
+              "event": "marked-damaged",
+              "whose": "owner",
+              "limit": "each",
+              "responses": [
+                {
+                  "kind": "instruction",
+                  "text": "the creature who dealt the damage can spend a Recovery."
+                }
+              ]
+            },
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "owner-dying"
+            ],
+            "text": "Until the end of the encounter or until you are dying, whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a Recovery."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever you or any ally deals damage to a target marked by you, the creature who dealt the damage can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Stay Strong and Focus!",
@@ -213341,9 +213259,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 168,
-    "compiledEffectOnly": 17,
-    "compatibility": 1453,
+    "compiled": 171,
+    "compiledEffectOnly": 20,
+    "compatibility": 1450,
     "compiledButUnavailable": 0
   }
 }

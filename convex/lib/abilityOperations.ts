@@ -111,6 +111,7 @@ import { assertNotRevised, commitRevision, planRevision } from './damageRevision
 import { damageTaken } from '../../shared/resolve/damageRevision';
 import { commitStrained, planStrained, withStrainedPlan, type StrainedPlan } from './strainedUse';
 import { assertWatchersReconcilable, noteManualWatchers, observeWatchers } from './watchers';
+import { applyMark } from './marks';
 import { describeWatcher } from '../../shared/resolve/watchers';
 import {
   acceptanceOrder,
@@ -1894,9 +1895,15 @@ const abilityUse: OperationDefinition = {
       effectsOf(record).filter(i => !lapsed.some(l => l.instance.id === i.id));
     const automatic = rollContributions({
       actor: { id: actor!.id, instances: liveEffectsOf(records) },
-      targets: targets.map(t => ({ id: t.actor.id, instances: liveEffectsOf(t) })),
+      targets: targets.map(t => ({
+        id: t.actor.id,
+        name: t.actor.name,
+        instances: liveEffectsOf(t),
+      })),
       roll: { strike: ability.keywords.some(k => plainText(k).toLowerCase() === 'strike') },
       exclude,
+      // V175: the Mark edge is for the marker and their allies (rule/combat/side.md).
+      roller: { id: actor!.id, side: actor!.kind === 'character' ? 'heroes' : 'director' },
     });
     if (exclude.length) {
       if (!rolledAbility)
@@ -2220,6 +2227,11 @@ const abilityUse: OperationDefinition = {
           return effect.status === 'calculated' && effect.application
             ? `${nameOf(effect.targetId)} takes ${effect.amount} ${effect.damageType} damage (half the triggering ${effect.triggeringDamage}, rounded down)${effect.application.afterImmunity !== effect.amount ? `, ${effect.application.afterImmunity} after immunity and weakness` : ''}; Stamina ${effect.application.staminaBefore} → ${effect.application.staminaAfter}.`
             : `For the table (${nameOf(effect.targetId)}): "${effect.clause}"${effect.requirements.length ? ` (${effect.requirements.join('; ')})` : ''}`;
+        // V175: the Mark (feature/ability/tactician/level-1/mark.md).
+        if (effect.kind === 'mark')
+          return effect.status === 'applied'
+            ? `${nameOf(effect.targetId)} is marked by ${actor!.name} until the end of the encounter, until ${actor!.name} is dying, or until ${actor!.name} uses ${ability.name} again (tracked; the linked effect entry records it).`
+            : `For the table (${nameOf(effect.targetId)}): the mark is not tracked (${effect.requirements.join('; ')}).`;
         if (effect.kind === 'watcher')
           return effect.status === 'applied' && effect.payload
             ? `${nameOf(effect.targetId)}: ${describeWatcher(effect.payload)}, ${describeDuration(effect.spec.duration, effect.spec.endsWhen)} (tracked; the linked effect entry records whether the engine fires it).`
@@ -2377,6 +2389,35 @@ const abilityUse: OperationDefinition = {
             },
             allowance.encounterId,
           );
+          // V175: each marked target stores a mark (convex/lib/marks.ts), ending another
+          // Tactician's mark on it first (feature/ability/tactician/level-1/mark.md).
+          const useEvent = (await mctx.db.get(scope.eventId))!;
+          for (const occurrence of effects(scope.eventId)) {
+            const effect = occurrence.effect;
+            if (effect.kind !== 'mark' || effect.status !== 'applied') continue;
+            const record = targets.find(t => t.actor.id === effect.targetId)!;
+            await applyMark(
+              mctx,
+              scope,
+              {
+                id: occurrence.id,
+                owner: actor!,
+                subject: {
+                  kind: record.actor.kind as 'character' | 'foe',
+                  id: record.actor.id,
+                  name: record.actor.name,
+                },
+                sourceUseEventId: scope.eventId,
+                abilityId: ability.abilityId,
+                abilityName: ability.name,
+                sourcePath: ability.source.path,
+                clause: plainText(effect.clause),
+                spec: effect.spec,
+                appliedSequence: useEvent.sequence,
+              },
+              allowance.encounterId ?? undefined,
+            );
+          }
           // 3. The effective record: occurrences and their dispositions; no dice or outcome.
           await journalInsert(mctx, scope, 'abilityResults', {
             campaignId: scope.campaignId,
@@ -2875,6 +2916,13 @@ const abilityUse: OperationDefinition = {
                 dealer: { kind: actor!.kind, id: actor!.id, name: actor!.name },
                 ...(actorEffects ? { dealerEffects: actorEffects } : {}),
                 meleeStrike,
+                // V175 (feature/ability/tactician/level-1/mark.md): this damage was determined by
+                // the ability roll (rule/damage/rolled-damage.md), and whether the ability was a
+                // melee ability (the Melee keyword, in melee mode when it is also Ranged).
+                rolled: true,
+                meleeAbility:
+                  printedKeywords.includes('melee') &&
+                  (!printedKeywords.includes('ranged') || mode === 'melee'),
               }
             : {};
         // QC1 train 13 R1: each target's planned damage is taken from its pools as they are when
@@ -3521,9 +3569,10 @@ const abilityCorrect: OperationDefinition = {
                 facts.facts.temporaryStamina + correction.temporaryStaminaReconciliationDelta,
             },
             event._id,
+            // V175: a corrected roll's damage is still rolled damage (rule/damage/rolled-damage.md).
             correctionDealer
-              ? { dealer: correctionDealer, meleeStrike: correctionMeleeStrike }
-              : {},
+              ? { dealer: correctionDealer, meleeStrike: correctionMeleeStrike, rolled: true }
+              : { rolled: true },
           );
         if (savedCompiled && correctedCompiled?.kind === 'resolved') {
           for (const occurrence of savedCompiled.effects) {
@@ -3646,6 +3695,9 @@ const abilityResolved: OperationDefinition = {
         throw new ConvexError(
           'An applied watcher is tracked by the engine, which fires it; end it with /effect end.',
         );
+      // V175: an applied mark is tracked by the engine.
+      if (occurrence.effect.kind === 'mark' && occurrence.effect.status === 'applied')
+        throw new ConvexError('An applied mark is tracked by the engine; end it with /effect end.');
       // V170: an applied Strained section already dealt its damage; an inapplicable one did nothing.
       // V173: damage sized by the triggering damage was applied by the engine.
       if (occurrence.effect.kind === 'triggered-damage' && occurrence.effect.status !== 'manual')

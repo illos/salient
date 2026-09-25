@@ -11,6 +11,7 @@ import { lastingInstruction, type LastingSpec } from './lastingEffects.ts';
 import { sectionModifier, type ModifierSpec } from './modifiers.ts';
 import { strainedSection, type StrainedSpec } from './strained.ts';
 import { sectionWatcher, type WatcherSpec } from './watchers.ts';
+import { markManualReason, readMarkAbility, type MarkSpec } from './marks.ts';
 import {
   responseSpend,
   type DamageRevisionClause,
@@ -180,6 +181,15 @@ export interface TriggeredDamageNode extends NodeSource {
  * (shared/resolve/damageRevision.ts), and the optional Spend section of such a response.
  */
 export interface DamageRevisionNode extends NodeSource, DamageRevisionClause {}
+/**
+ * V175: the Tactician's Mark, read whole from its printed text (shared/resolve/marks.ts). A use
+ * stores a `mark` effect instance on the target; the engine applies its edge and offers its benefit
+ * and retarget as free triggered actions.
+ */
+export interface MarkNode extends NodeSource {
+  kind: 'mark';
+  spec: MarkSpec;
+}
 export interface ResponseSpendNode extends NodeSource, ResponseSpendClause {}
 export type CompiledNode =
   DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
@@ -194,7 +204,8 @@ export type SectionNode =
   | WatcherNode
   | TriggeredDamageNode
   | DamageRevisionNode
-  | ResponseSpendNode;
+  | ResponseSpendNode
+  | MarkNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -324,13 +335,15 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       'Content identity, source path and revision are required.',
     );
   const effectOnly = readEffectOnly(envelope);
+  // V175: the Mark, read whole from its printed paragraphs; its one Effect section is a mark node.
+  const markRead = effectOnly ? undefined : readMarkAbility(envelope);
   // V154: a tier that opens without damage is judged clause by clause in the tier loop below,
   // which diagnoses every clause it can't support; other grammar failures stay fatal here.
   // V157: "no-power-roll" is not a failure for an ability read whole as effect-only.
   if (
     grammar.category === 'NO_MATCH' &&
     !/^tier[123]-damage-outside-grammar$/.test(grammar.reason ?? '') &&
-    !(effectOnly && grammar.reason === 'no-power-roll')
+    !((effectOnly || markRead) && grammar.reason === 'no-power-roll')
   )
     diagnose('grammar', 'envelope', '', grammar.reason ?? 'No bounded power roll.');
 
@@ -339,6 +352,14 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
     const locator = `block:${index}`;
     // V173: the observed Trigger section is the definition's `trigger`, not work of the use.
     if (block.kind === 'section' && effectOnly && block.label === 'Trigger') return;
+    if (block.kind === 'section' && markRead) {
+      sections.push({
+        ...sourceNode(envelope, locator, 0, block.text),
+        kind: 'mark',
+        spec: markRead.spec,
+      });
+      return;
+    }
     if (block.kind === 'section' && effectOnly) {
       effectOnly.sections[index]!.forEach(({ text, clause }, ordinal) => {
         const node = sourceNode(envelope, locator, ordinal, text);
@@ -677,6 +698,9 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
   for (let index = 0; index < Math.max(structuredBlocks.length, markdown.blocks.length); index++) {
     const structured = structuredBlocks[index];
     const printed = markdown.blocks[index];
+    // V175: the Mark's printed Effect block is its structured first paragraph followed by the rest
+    // of its printed rules, which readMarkAbility matched whole.
+    if (markRead && index === 0 && structuredBlocks.length === 1) continue;
     if (!structured || !printed || comparable(structured) !== comparable(printed)) {
       const clause = printed ? blockText(printed) : structured ? blockText(structured) : '';
       diagnose(
@@ -756,6 +780,13 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         return;
       }
     } else if (item.kind !== 'paragraph' && item.kind !== 'heading') return;
+    // V175: the Mark's printed rule paragraphs are its mark node.
+    if (
+      markRead &&
+      item.kind === 'paragraph' &&
+      markRead.paragraphs.includes(item.text.replace(/\s+/g, ' ').trim())
+    )
+      return;
     const locator = `markdown:item:${index}`;
     sections.push(
       unsupported(
@@ -775,6 +806,12 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       declared.join('\n'),
       'Declared flavor is absent from the source body.',
     );
+  // V175: a mark clause outside the Mark says precisely what the engine lacks.
+  for (const section of sections)
+    if (section.kind === 'unsupported') {
+      const why = markManualReason(section.clause);
+      if (why) diagnose('mark-manual', section.locator, section.clause, why);
+    }
   for (const section of sections)
     if (section.kind === 'unsupported')
       diagnose(
@@ -789,6 +826,7 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
   const area = envelope.keywords.some(k => plain(k).toLowerCase() === 'area');
   if (
     !effectOnly &&
+    !markRead &&
     !(
       (grammar.targetShape === 'area' && eachAreaTarget(envelope.target)) ||
       ((grammar.targetShape === 'single' || grammar.targetShape === 'multi') && !area)
@@ -852,16 +890,17 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
     source,
     envelope,
     ...(metadata ? { metadata } : {}),
-    ...(effectOnly && action
+    ...((effectOnly || markRead) && action
       ? {
-          ...(effectOnly.trigger ? { trigger: effectOnly.trigger } : {}),
+          ...(effectOnly?.trigger ? { trigger: effectOnly.trigger } : {}),
           effectOnly: true as const,
           activation: {
             actionType: action,
             ...(cost && Number.isSafeInteger(Number(cost[1]))
               ? { fixedCost: { resource: cost[2]!.toLowerCase(), amount: Number(cost[1]) } }
               : {}),
-            targetShape: effectOnly.target,
+            // V175: the Mark's "One creature" (rule/combat/target.md: not the user).
+            targetShape: effectOnly ? effectOnly.target : { kind: 'one' as const, self: false },
           },
         }
       : {}),
@@ -869,7 +908,9 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
     sections,
     diagnostics,
     execution:
-      diagnostics.length === 0 && (metadata || (effectOnly && action)) ? 'supported' : 'manual',
+      diagnostics.length === 0 && (metadata || ((effectOnly || markRead) && action))
+        ? 'supported'
+        : 'manual',
     context: {
       corpus: envelope.corpus,
       ...(envelope.parent ? { parent: envelope.parent } : {}),

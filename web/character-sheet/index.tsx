@@ -24,6 +24,7 @@ import type {
 import type { PartialBaseline } from '../../shared/contracts/characterEvaluation';
 import type { StartingRewards } from '../../shared/contracts/startingRewards';
 import { describeWatcher } from '../../shared/resolve/watchers';
+import { describeMark } from '../../shared/resolve/marks';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Disc } from '../components/disc';
@@ -362,6 +363,9 @@ function Conditions({
                 ...(instance.manualStacking ? { manualStacking: true } : {}),
                 ...(instance.payload.kind === 'watcher'
                   ? { watching: describeWatcher(instance.payload.watcher) }
+                  : {}),
+                ...(instance.payload.kind === 'mark'
+                  ? { mark: describeMark(instance.owner.name, instance.subject.name) }
                   : {}),
               }))}
           />

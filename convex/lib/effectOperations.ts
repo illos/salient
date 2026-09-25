@@ -12,6 +12,7 @@ import type { EffectInstance } from '../../shared/contracts/liveState';
 import { describeDuration } from '../../shared/resolve/lastingEffects';
 import { describeModifier } from '../../shared/resolve/modifiers';
 import { describeWatcher } from '../../shared/resolve/watchers';
+import { describeMark, effectVisibleTo } from '../../shared/resolve/marks';
 import { bindActor } from './actors';
 import { campaignEffects, endEffectInstance, findCampaignEffect } from './effectInstances';
 import { resolveHistoricalId } from './history';
@@ -73,14 +74,16 @@ const effectList: OperationDefinition = {
     }
     const listed = (await campaignEffects(ctx, context.campaign._id)).filter(
       ({ holder, instance }) =>
-        !creature ||
-        holder.id === creature.id ||
-        instance.owner.id === creature.id ||
-        instance.subject.id === creature.id,
+        // V175: whether players see marks is decided in one place (shared/resolve/marks.ts).
+        effectVisibleTo(instance.kind, context.role) &&
+        (!creature ||
+          holder.id === creature.id ||
+          instance.owner.id === creature.id ||
+          instance.subject.id === creature.id),
     );
     const lines = listed.map(
       ({ instance }, index) =>
-        `${index + 1}. ${instance.actorLabel}'s ${instance.abilityName} on ${instance.subject.name}, ${describeDuration(instance.printedDuration, instance.endsWhen)}${instance.registrationIds.length ? '' : ' (unscheduled)'}: "${instance.payload.text}"${instance.payload.kind === 'modifier' ? ` (${describeModifier(instance.payload.modifier)}${instance.consumeOn ? ', used up by the next roll' : ''})` : ''}${instance.payload.kind === 'watcher' ? ` (${describeWatcher(instance.payload.watcher)}${instance.manualStacking ? '; manual stacking, the engine does not fire it' : ''})` : ''}`,
+        `${index + 1}. ${instance.actorLabel}'s ${instance.abilityName} on ${instance.subject.name}, ${describeDuration(instance.printedDuration, instance.endsWhen)}${instance.registrationIds.length ? '' : ' (unscheduled)'}: "${instance.payload.text}"${instance.payload.kind === 'modifier' ? ` (${describeModifier(instance.payload.modifier)}${instance.consumeOn ? ', used up by the next roll' : ''})` : ''}${instance.payload.kind === 'watcher' ? ` (${describeWatcher(instance.payload.watcher)}${instance.manualStacking ? '; manual stacking, the engine does not fire it' : ''})` : ''}${instance.payload.kind === 'mark' ? ` (${describeMark(instance.owner.name, instance.subject.name)})` : ''}`,
     );
     return {
       kind: 'effect.list',

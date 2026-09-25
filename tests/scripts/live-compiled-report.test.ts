@@ -201,6 +201,10 @@ test('V72 availability follows current grants and loading, not catalog presence'
       'Defensive Roll',
       'In All This Confusion',
       'Unearthly Reflexes',
+      // V175: the Tactician's Mark, and two level-3 abilities that watch damage to marked creatures.
+      'Mark',
+      "Hit 'Em Hard!",
+      'Stay Strong and Focus!',
     ].sort(),
   );
   expect(
@@ -212,12 +216,12 @@ test('V72 availability follows current grants and loading, not catalog presence'
 });
 
 // V157: the seven effect-only abilities, V159's Squad! On Me!, V171's Blessing of Insight and V173's
-// Feedback Loop and Riposte, and V174's six damage-changing responses are counted; no foe ability
-// is effect-only.
+// Feedback Loop and Riposte, V174's six damage-changing responses, and V175's Mark, Hit 'Em Hard!
+// and Stay Strong and Focus! are counted; no foe ability is effect-only.
 test('V157 effect-only abilities are counted in the live report', () => {
   const report = liveCompiledSupportReport();
   const effectOnly = report.entries.filter(e => e.live === 'compiled' && e.effectOnly);
-  expect(report.liveCounts.compiledEffectOnly).toBe(17);
+  expect(report.liveCounts.compiledEffectOnly).toBe(20);
   expect(effectOnly.every(e => e.context.corpus === 'hero-standalone')).toBe(true);
 });
 

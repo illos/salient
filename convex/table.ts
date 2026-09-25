@@ -15,6 +15,7 @@ import { v } from 'convex/values';
 import { query } from './_generated/server';
 import type { DerivedBaseline } from '../shared/contracts/characterEvaluation';
 import { describeWatcher } from '../shared/resolve/watchers';
+import { describeMark, effectVisibleTo } from '../shared/resolve/marks';
 import type { Doc } from './_generated/dataModel';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
@@ -63,7 +64,12 @@ function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerica
         }),
       ),
     effectInstances: (foe.live.effectInstances ?? [])
-      .filter(instance => instance.status === 'active')
+      // V175: whether players see marks is decided in one place (shared/resolve/marks.ts).
+      .filter(
+        instance =>
+          instance.status === 'active' &&
+          effectVisibleTo(instance.kind, director ? 'director' : 'player'),
+      )
       .map(instance => ({
         id: instance.id,
         abilityName: instance.abilityName,
@@ -77,6 +83,9 @@ function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerica
         ...(instance.manualStacking ? { manualStacking: true } : {}),
         ...(instance.payload.kind === 'watcher'
           ? { watching: describeWatcher(instance.payload.watcher) }
+          : {}),
+        ...(instance.payload.kind === 'mark'
+          ? { mark: describeMark(instance.owner.name, instance.subject.name) }
           : {}),
       })),
     health,
@@ -248,6 +257,7 @@ export const roster = query({
             scheduled: v.boolean(),
             manualStacking: v.optional(v.boolean()),
             watching: v.optional(v.string()),
+            mark: v.optional(v.string()),
           }),
         ),
         health: foeHealthValidator,

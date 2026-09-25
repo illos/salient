@@ -148,7 +148,7 @@ export async function registerTriggerHolders(
 }
 
 /** The encounter whose round a triggered action counts against, when turns are being taken. */
-async function roundOf(ctx: MutationCtx, campaignId: Id<'campaigns'>) {
+export async function roundOf(ctx: MutationCtx, campaignId: Id<'campaigns'>) {
   const campaign = await ctx.db.get(campaignId);
   const encounter = campaign ? await committedEncounter(ctx, campaign) : null;
   if (!encounter || encounter.phase !== 'turns' || (encounter.round ?? 0) < 1) return null;
@@ -350,6 +350,9 @@ export async function assertNoTriggerOnCorrection(
   }
 }
 
+/** V175: Mark cards (convex/lib/marks.ts) share the offer windows. */
+export const MARK_OFFER_KIND = 'mark-offer';
+
 /** The open offer cards of this encounter (a bounded read of pending cards). */
 async function openOffers(ctx: MutationCtx, campaignId: Id<'campaigns'>) {
   const cards = await ctx.db
@@ -358,7 +361,7 @@ async function openOffers(ctx: MutationCtx, campaignId: Id<'campaigns'>) {
       q.eq('campaignId', campaignId).eq('status', 'awaiting-input'),
     )
     .take(200);
-  return cards.filter(card => card.kind === OFFER_KIND);
+  return cards.filter(card => card.kind === OFFER_KIND || card.kind === MARK_OFFER_KIND);
 }
 
 async function closeOffer(
@@ -402,6 +405,9 @@ export async function closeOffersOnPlay(
   for (const card of await openOffers(ctx, scope.campaignId)) {
     const offer = card.offer as TriggerOffer | undefined;
     if (offer?.owner.id !== actor.id || offer.triggeringEventId === keepTriggeringEventId) continue;
+    // V175: a card this very use opened (the Tactician's own hit on a creature they marked) is not
+    // an earlier offer.
+    if (offer.triggeringEventId === scope.eventId) continue;
     await closeOffer(ctx, scope, card);
   }
 }

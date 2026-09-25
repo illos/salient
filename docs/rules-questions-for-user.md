@@ -1481,3 +1481,49 @@ Current behaviour:
    change.
 
 Recommendation: keep all four.
+
+## Q-MARK-1: marks from abilities other than Mark, the retarget, and "reduced to 0 Stamina" (V175)
+
+Open; V175 compiles the Tactician's Mark and keeps the other mark sources manual. Pinned
+`en/unified/md`:
+- `feature/ability/tactician/level-1/mark.md`: "The target is marked by you until the end of the
+  encounter, until you are dying, or until you use this ability again." "When a creature marked by
+  you is reduced to 0 Stamina, you can use a free triggered action to mark a new target within
+  distance." "You can initially mark only one creature using this ability, though other tactician
+  abilities allow you to mark additional creatures at the same time."
+- `feature/ability/tactician/level-1/mind-game.md`: "You mark the target."
+  `feature/ability/tactician/level-2/fog-of-war.md` and `targets-of-opportunity.md`: "Each target is
+  marked by you, and …" None of the three prints how long its mark lasts.
+- `rule/health/stamina.md`: "In most circumstances, Director-controlled creatures die or are
+  destroyed when their Stamina drops to 0."
+
+Questions and current behaviour:
+1. **How long does a mark from Mind Game, Fog of War or Targets of Opportunity last, and does using
+   Mark again end it?** Not printed. These abilities stay manual (`mark-manual` diagnostics) until
+   answered. Recommendation: such a mark follows the Mark's printed lifecycle (end of the encounter,
+   or until you are dying), but only marks made with Mark end when you use Mark again, since "at the
+   same time" says the extra marks coexist with the Mark's. Alternatives: every mark ends when you
+   use Mark again; or each lasts until the end of the encounter only.
+2. **The retarget** (interpretation). The free triggered action "to mark a new target" is treated as
+   a use of Mark: the new mark has Mark's lifecycle, and the owner's earlier Mark marks (including
+   the one on the creature at 0 Stamina) end, as "until you use this ability again" says.
+   Alternatives: the new mark is additional and the old one stays until the encounter ends; or the
+   new mark has no printed duration.
+3. **"Reduced to 0 Stamina"** (interpretation). Stamina going from above 0 to 0 or lower in one
+   damage write offers the retarget, since the app records a foe's arithmetic Stamina below 0 and
+   `stamina.md` says such creatures die when Stamina "drops to 0". Alternative: only an exact 0.
+4. **The Recovery benefit** (interpretation). "The creature dealing the damage can spend a
+   Recovery": the Tactician picks the benefit, and accepting it is the table's confirmation that the
+   dealer spends one (`rule/health/recoveries.md`: they regain their recovery value). Alternative:
+   a second card for the dealer to accept or decline.
+
+Recommendation: 1 as above; keep 2, 3 and 4.
+
+## Q-MARK-2: can players see marks on foes? (V175, product)
+
+Open (`docs/lasting-effects-design.md`, "Questions for the user", 1). V175 implements the
+recommendation: marks are table knowledge, so players and observers see a foe's marks on the
+roster and in `effect.list`. The decision is one constant, `MARKS_VISIBLE_TO_PLAYERS` in
+`shared/resolve/marks.ts`; flipping it hides marks from players in both places (the Director always
+sees them). Recommendation: yes. Alternative: only the Director and the marking Tactician's player
+see them.

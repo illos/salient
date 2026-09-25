@@ -145,7 +145,22 @@ export type ModifierPayload = RollModifier | StatModifier;
 export type EffectPayload =
   | { kind: 'instruction'; text: string }
   | { kind: 'modifier'; text: string; modifier: ModifierPayload }
-  | { kind: 'watcher'; text: string; watcher: Watcher };
+  | { kind: 'watcher'; text: string; watcher: Watcher }
+  | { kind: 'mark'; text: string; mark: MarkPayload };
+
+/**
+ * V175 mark (feature/ability/tactician/level-1/mark.md; docs/lasting-effects-design.md#5-marks-and-similar-statuses):
+ * the subject is marked by the owner. The printed benefits live in the owning ability's rules
+ * (shared/resolve/marks.ts), so the payload records only where the mark came from: `retarget` is
+ * the printed distance within which the owner may mark a new target when the subject is reduced to
+ * 0 Stamina.
+ */
+export interface MarkPayload {
+  retargetDistance: string;
+}
+
+/** V175: the four printed Mark benefits (mark.md), one per trigger. */
+export type MarkBenefitKind = 'extra-damage' | 'recovery' | 'shift' | 'taunt';
 
 /**
  * V171 watcher events (docs/lasting-effects-design.md#3-watchers), each observed where the engine
@@ -160,17 +175,25 @@ export type WatcherEvent =
   | 'turn-start'
   | 'turn-end'
   | 'ability-used'
-  | 'strike-made';
+  | 'strike-made'
+  /**
+   * V175: the owner or an ally of the owner deals damage to a creature marked by the owner
+   * (tactician/level-3/hit-em-hard.md, stay-strong-and-focus.md). Observed at the damage writer from
+   * the damaged creature's active marks.
+   */
+  | 'marked-damaged';
 
 /** Who a watcher's response applies to: the instance's subject or its owner. */
 export type WatcherParty = 'subject' | 'owner';
+/** V175: a response may also go to the creature who dealt the watched damage (`marked-damaged`). */
+export type WatcherRecipient = WatcherParty | 'dealer';
 
 /**
  * V171 response of a watcher, with every amount bound at use: a gain (surges, temporary Stamina), a
  * fixed or rolled amount of damage through the damage writer, a condition, or table work.
  */
 export type WatcherResponse =
-  | { kind: 'gain'; recipient: WatcherParty; surges?: number; temporaryStamina?: number }
+  | { kind: 'gain'; recipient: WatcherRecipient; surges?: number; temporaryStamina?: number }
   | {
       kind: 'damage';
       recipient: WatcherParty;
@@ -269,6 +292,12 @@ export interface EffectInstance {
   lastSave?: ConditionInstance['lastSave'];
   /** V171: a watcher's firings, newest last; they are its per-turn and per-round limit records. */
   firings?: WatcherFiring[];
+  /**
+   * V175: the Mark benefits gained from this mark, one per trigger ("You can't gain more than one
+   * benefit from the same trigger", mark.md): the log entry whose damage set it off, the benefit
+   * and the accepting operation.
+   */
+  markBenefits?: { triggeringEventId: string; benefit: MarkBenefitKind; eventId: string }[];
 }
 
 /**

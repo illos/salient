@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 168 (without a power roll: 17); unchanged reachable compatibility: 1453; structurally supported but unavailable: 0.
+Currently reachable compiled: 171 (without a power roll: 20); unchanged reachable compatibility: 1450; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -342,24 +342,24 @@ Currently reachable compiled: 168 (without a power roll: 17); unchanged reachabl
 | Concussive Strike | hero-standalone | supported | compiled |  |
 | Hammer and Anvil | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Inspiring Strike | hero-standalone | supported | compiled |  |
-| Mark | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Mind Game | hero-standalone | manual | legacy-compatibility | manual-section |
+| Mark | hero-standalone | supported | compiled |  |
+| Mind Game | hero-standalone | manual | legacy-compatibility | mark-manual, manual-section |
 | Now! | hero-standalone | supported | compiled |  |
 | Overwatch | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
 | Parry | hero-standalone | supported | compiled |  |
 | Squad! Forward! | hero-standalone | supported | compiled |  |
 | "Strike Now!" | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | This Is What We Planned For | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
-| Fog of War | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Fog of War | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, mark-manual, manual-section |
 | I've Got Your Back | hero-standalone | supported | compiled |  |
 | No Dying on My Watch | hero-standalone | manual | legacy-compatibility | trigger-manual, unsafe-tier-remainder, manual-section |
 | Squad! On Me! | hero-standalone | supported | compiled |  |
-| Targets of Opportunity | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Targets of Opportunity | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, mark-manual, manual-section |
 | Try Me Instead | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
-| Frontal Assault | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Hit 'Em Hard! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Rout | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Stay Strong and Focus! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Frontal Assault | hero-standalone | manual | legacy-compatibility | grammar, mark-manual, manual-section, target-boundary |
+| Hit 'Em Hard! | hero-standalone | supported | compiled |  |
+| Rout | hero-standalone | manual | legacy-compatibility | grammar, mark-manual, manual-section, target-boundary |
+| Stay Strong and Focus! | hero-standalone | supported | compiled |  |
 | Accelerate | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Again | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Awe | hero-standalone | manual | legacy-compatibility | manual-section |

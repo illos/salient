@@ -25,7 +25,7 @@ export const TACTICIAN_ACTIONS = [
     cost: '1 Focus',
     trigger: 'You or an ally uses an ability to deal rolled damage to a creature marked by you.',
     activationCondition:
-      'The source trigger must occur. Choose exactly one printed benefit per trigger; resolve the chosen benefit manually. This records use and pays Focus, not mark state or the benefit.',
+      'The source trigger must occur. Choose exactly one printed benefit per trigger; resolve the chosen benefit manually. This records use and pays Focus, not mark state or the benefit. When the app tracks the mark (V175), accept the Mark benefit card instead.',
     text: source(mark),
   },
   {
@@ -35,7 +35,7 @@ export const TACTICIAN_ACTIONS = [
     actionType: 'Free triggered action',
     trigger: 'A creature marked by you is reduced to 0 Stamina.',
     activationCondition:
-      'The source trigger must occur; mark a new target within 10 squares manually. This records use, not mark state.',
+      'The source trigger must occur; mark a new target within 10 squares manually. This records use, not mark state. When the app tracks the mark (V175), accept the Mark retarget card instead.',
     text: source(mark),
   },
   {
@@ -137,8 +137,8 @@ export const TACTICIAN_ACTIVATION: Record<string, string> = {
   'Frontal Assault':
     'Until the end of the encounter or until you are dying: the first time each turn you or an ally damages a target marked by you, that creature can push it 2 and shift 2; allies charging a marked target can use a melee strike signature or heroic ability. Resolve manually.',
   "Hit 'Em Hard!":
-    'Until the end of the encounter or until you are dying, whenever you or an ally damages a target marked by you, that creature gains 2 surges it can use immediately. Adjust surges manually.',
+    'Until the end of the encounter or until you are dying, whenever you or an ally damages a target marked by you, that creature gains 2 surges it can use immediately. The app applies the surges for marks it tracks (V175); adjust them by hand only for a mark the table tracks.',
   Rout: 'Until the end of the encounter or until you are dying, whenever you or an ally damages a target marked by you with Reason below your average potency, it is frightened of that creature (save ends). Apply manually.',
   'Stay Strong and Focus!':
-    'Until the end of the encounter or until you are dying, whenever you or an ally damages a target marked by you, that creature can spend a Recovery. Resolve manually.',
+    'Until the end of the encounter or until you are dying, whenever you or an ally damages a target marked by you, that creature can spend a Recovery. The app notes each such hit on a mark it tracks (V175); the Recovery is spent at the table.',
 };

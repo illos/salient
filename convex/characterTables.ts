@@ -142,6 +142,7 @@ export const watcherEventValidator = v.union(
       'turn-end',
       'ability-used',
       'strike-made',
+      'marked-damaged',
     ] as const
   ).map(value => v.literal(value)),
 );
@@ -155,7 +156,8 @@ export const watcherValidator = v.object({
     v.union(
       v.object({
         kind: v.literal('gain'),
-        recipient: watcherPartyValidator,
+        // V175: `dealer`, the creature who dealt the watched damage (`marked-damaged`).
+        recipient: v.union(watcherPartyValidator, v.literal('dealer')),
         surges: v.optional(v.number()),
         temporaryStamina: v.optional(v.number()),
       }),
@@ -182,6 +184,19 @@ const effectPayloadValidator = v.union(
   v.object({ kind: v.literal('instruction'), text: v.string() }),
   v.object({ kind: v.literal('modifier'), text: v.string(), modifier: modifierPayloadValidator }),
   v.object({ kind: v.literal('watcher'), text: v.string(), watcher: watcherValidator }),
+  // V175: a mark (feature/ability/tactician/level-1/mark.md).
+  v.object({
+    kind: v.literal('mark'),
+    text: v.string(),
+    mark: v.object({ retargetDistance: v.string() }),
+  }),
+);
+/** V175: the four printed Mark benefits (shared/contracts/liveState.ts MarkBenefitKind). */
+export const markBenefitValidator = v.union(
+  v.literal('extra-damage'),
+  v.literal('recovery'),
+  v.literal('shift'),
+  v.literal('taunt'),
 );
 /** V158 effect instance (shared/contracts/liveState.ts EffectInstance). */
 export const effectInstanceValidator = v.object({
@@ -225,6 +240,15 @@ export const effectInstanceValidator = v.object({
         encounterId: v.optional(v.string()),
         round: v.optional(v.number()),
         turnId: v.optional(v.string()),
+      }),
+    ),
+  ),
+  markBenefits: v.optional(
+    v.array(
+      v.object({
+        triggeringEventId: v.string(),
+        benefit: markBenefitValidator,
+        eventId: v.string(),
       }),
     ),
   ),

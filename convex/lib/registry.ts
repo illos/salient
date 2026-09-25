@@ -43,6 +43,7 @@ import { abilityOperations } from './abilityOperations';
 import { characterOperations } from './characterOperations';
 import { squadOperations } from './squadOperations';
 import { effectOperations } from './effectOperations';
+import { markOperations } from './markOperations';
 import { closeInteraction, respondToInteraction } from './interactions';
 
 export type Role = 'director' | 'player' | 'observer';
@@ -436,6 +437,7 @@ export function registeredOperations(): OperationDefinition[] {
     ...resourceOperations,
     ...respiteOperations,
     ...effectOperations,
+    ...markOperations,
     runeOperation,
   ]);
 }

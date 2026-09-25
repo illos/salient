@@ -6,6 +6,8 @@
  * may answer (the owning player or the Director) and re-checks eligibility on Accept; nothing here
  * decides a rule. V174: a damage-changing response with a Spend section also offers "Accept and
  * spend", answering with the printed amount (`spend`); larger amounts go through the command line.
+ * V175: Mark cards (`mark-offer`) answer with one of the offered benefits (`benefit`) or a new
+ * target among the encounter's creatures (`targets`); the server re-checks both.
  * Owning specifications: docs/lasting-effects-design.md#4-triggered-actions-and-reactions,
  * docs/table-spec.md#inline-interaction-cards-in-the-game-log.
  */
@@ -20,7 +22,9 @@ export function TriggerOffers({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const respond = useMutation(api.interactions.respond);
   const close = useMutation(api.interactions.close);
   const command = useCommand();
-  const offers = (cards ?? []).filter(card => card.kind === 'triggered-offer');
+  const offers = (cards ?? []).filter(
+    card => card.kind === 'triggered-offer' || card.kind === 'mark-offer',
+  );
   if (!offers.length) return null;
   return (
     <ul className="m-0 flex list-none flex-col gap-2 p-0" aria-label="Triggered action offers">
@@ -28,7 +32,16 @@ export function TriggerOffers({ campaignId }: { campaignId: Id<'campaigns'> }) {
         const spend = (
           card.offer as { revision?: { spend?: { cost: string; amount: number } } } | null
         )?.revision?.spend;
-        const accept = (answer: Record<string, number>, key: string) =>
+        const mark = (
+          card.offer as {
+            mark?: {
+              kind: 'benefit' | 'retarget';
+              options?: { kind: string; text: string }[];
+              candidates?: { kind: string; id: string; name: string }[];
+            };
+          } | null
+        )?.mark;
+        const accept = (answer: Record<string, unknown>, key: string) =>
           void command.run(
             commandId =>
               respond({
@@ -45,15 +58,49 @@ export function TriggerOffers({ campaignId }: { campaignId: Id<'campaigns'> }) {
               {(card.offer as { text?: string } | null)?.text ?? card.actorLabel}
             </span>
             {card.mayAnswer && (
-              <span className="flex gap-2">
-                <Button
-                  type="button"
-                  size="sm"
-                  disabled={command.pending}
-                  onClick={() => accept({}, 'trigger.accept')}
-                >
-                  Accept
-                </Button>
+              <span className="flex flex-wrap gap-2">
+                {!mark && (
+                  <Button
+                    type="button"
+                    size="sm"
+                    disabled={command.pending}
+                    onClick={() => accept({}, 'trigger.accept')}
+                  >
+                    Accept
+                  </Button>
+                )}
+                {mark?.kind === 'benefit' &&
+                  (mark.options ?? []).map(option => (
+                    <Button
+                      key={option.kind}
+                      type="button"
+                      size="sm"
+                      title={option.text}
+                      disabled={command.pending}
+                      onClick={() =>
+                        accept({ benefit: option.kind }, `mark.benefit.${option.kind}`)
+                      }
+                    >
+                      {option.kind.replace('-', ' ')}
+                    </Button>
+                  ))}
+                {mark?.kind === 'retarget' &&
+                  (mark.candidates ?? []).map(candidate => (
+                    <Button
+                      key={candidate.id}
+                      type="button"
+                      size="sm"
+                      disabled={command.pending}
+                      onClick={() =>
+                        accept(
+                          { targets: [{ refKind: candidate.kind, id: candidate.id }] },
+                          `mark.retarget.${candidate.id}`,
+                        )
+                      }
+                    >
+                      Mark {candidate.name}
+                    </Button>
+                  ))}
                 {spend && (
                   <Button
                     type="button"

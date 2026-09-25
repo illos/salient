@@ -53,7 +53,8 @@ import { OFFER_KIND, type TriggerOffer } from './triggeredActions';
 
 /** The events a lost hit event undoes for watchers (convex/lib/watchers.ts damageEvents). */
 const WATCHED: Record<DamageEvent, string[]> = {
-  'damage-taken': ['damage-taken', 'damage-dealt'],
+  // V175: a mark owner's `marked-damaged` watchers fired from the same damage.
+  'damage-taken': ['damage-taken', 'damage-dealt', 'marked-damaged'],
   'made-winded': ['made-winded'],
   dying: ['dying'],
   dead: [],
@@ -301,6 +302,9 @@ export async function planRevision(
     const event = String(data(entry).event);
     const holder = (data(entry).holder as { id?: string } | undefined)?.id;
     if (!unwatched.has(event)) return false;
+    // V175: a `marked-damaged` firing is held by the mark's owner; when this hit damaged no other
+    // creature, it was this creature's damage.
+    if (event === 'marked-damaged') return !hit.othersDamaged;
     return event === 'damage-dealt'
       ? !hit.othersDamaged && (dealerId === undefined || holder === dealerId)
       : holder === damaged._id;

@@ -185,3 +185,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V172 | [Owner-anchored end of your next turn](V172-next-turn-duration.md) | Committed on branch |
 | V173 | [Triggered actions: offers on observable triggers](V173-triggered-actions.md) | Committed on branch |
 | V174 | [Damage-changing reactions (option B revision)](V174-damage-reactions.md) | Committed on branch |
+| V175 | [Marks (Tactician Mark lifecycle and benefits)](V175-marks.md) | Committed on branch |
