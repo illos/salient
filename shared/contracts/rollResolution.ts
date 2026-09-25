@@ -283,6 +283,18 @@ export interface DamageTargetFacts {
   temporaryStamina: number;
   immunities?: DamageModifierEntry[];
   weaknesses?: DamageModifierEntry[];
+  /**
+   * V201: immunities a feature gives only while the creature is winded (the ogres' Defiant Anger,
+   * "While winded, the goon has damage immunity 2."). They join `immunities` when the damage is
+   * applied to a creature whose Stamina is at or below its winded value (section 6.3).
+   */
+  whileWinded?: WindedDefenses;
+}
+
+/** V201: a feature's immunities that apply while the creature is winded. */
+export interface WindedDefenses {
+  feature: string;
+  immunities: DamageModifierEntry[];
 }
 
 export interface DamageModifierEntry {
@@ -317,6 +329,12 @@ export interface DamageApplication {
   windedValue: number;
   windedBefore: boolean;
   windedAfter: boolean;
+  /**
+   * V201: the target had immunities that apply only while winded. The immunity the damage meets in
+   * each state, so damage written against pools that changed after planning (reapplyDamage) meets
+   * the one its write-time Stamina gives. `immunityApplied` is the one used.
+   */
+  whileWinded?: { feature: string; winded: number | 'all'; notWinded: number | 'all' };
   /** Ordinary foe at 0 or lower (section 6.4). */
   slain?: boolean;
   /** Hero labels only; no dying automation in v0.01 (section 6.4). */

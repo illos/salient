@@ -92,6 +92,8 @@ import {
   ignoredImmunityTypes,
   withoutImmunityTypes,
   applyDamage,
+  atWindedState,
+  windedValueOf,
 } from '../../shared/resolve/index';
 import { chooseDamageType } from '../../shared/resolve/damageTypes';
 import type { ReadCtx } from './access';
@@ -962,7 +964,7 @@ export function describeTarget(
   const tier = `total ${outcome.total} → tier ${outcome.tier}${outcome.uncertainty ? ` (${outcome.uncertainty})` : ''}`;
   const damage = outcome.damage
     ? applied
-      ? `${applied.afterImmunity} damage to ${name}${applied.absorbedByTemporaryStamina ? ` (${applied.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}${applied.slain ? '; Slain' : applied.windedAfter && !applied.windedBefore ? '; now winded' : applied.windedAfter ? '; winded' : ''}${applied.dying ? '; at 0 Stamina or lower (dying not automated)' : ''}`
+      ? `${applied.afterImmunity} damage to ${name}${applied.whileWinded && applied.windedBefore ? ` (${applied.whileWinded.feature}: winded, damage immunity ${applied.whileWinded.winded})` : ''}${applied.absorbedByTemporaryStamina ? ` (${applied.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}${applied.slain ? '; Slain' : applied.windedAfter && !applied.windedBefore ? '; now winded' : applied.windedAfter ? '; winded' : ''}${applied.dying ? '; at 0 Stamina or lower (dying not automated)' : ''}`
       : `${outcome.damage.rolledDamage} damage to ${name} not applied`
     : `no supported damage for ${name}`;
   const unresolved = outcome.unresolvedClauses.length
@@ -1170,6 +1172,10 @@ async function commitLasting(
  * (docs/lasting-effects-design.md#2-modifier-pipeline), with its duration bound and registered on
  * the clock. The engine then applies it to later rolls and derived values automatically.
  */
+/** The requirement markManual adds to an occurrence that joined a manual stacking group. */
+const MANUAL_STACKING_REQUIREMENT =
+  'manual stacking: an unresolved use of the same ability is already active; apply the stacking rule at the table';
+
 /** V159: occurrences that joined a manual stacking group are recorded as manual on the result. */
 function markManual<T extends import('../../shared/contracts/compiledResult').EffectOccurrence>(
   occurrences: T[],
@@ -1183,10 +1189,7 @@ function markManual<T extends import('../../shared/contracts/compiledResult').Ef
           effect: {
             ...occurrence.effect,
             status: 'manual' as const,
-            requirements: [
-              ...occurrence.effect.requirements,
-              'manual stacking: an unresolved use of the same ability is already active; apply the stacking rule at the table',
-            ],
+            requirements: [...occurrence.effect.requirements, MANUAL_STACKING_REQUIREMENT],
           },
         }
       : occurrence,
@@ -3531,19 +3534,37 @@ const abilityCorrect: OperationDefinition = {
       );
     const savedStrained = result.compiled as
       (CompiledResult & { inputs: CompiledAbilityInput }) | undefined;
-    const currentFacts = damageTargetFacts(targetRecord);
     const originalFacts = inputs.targetFacts.find(f => f.targetId === entry.target.id);
+    const applied = (entry.applied as DamageApplication | null) ?? undefined;
+    // The correction reuses the facts the hit saved (its weakness and immunity) and takes only the
+    // pools from the creature as it is now. V201: the pools are read from the creature itself, so a
+    // creature whose new damage is manual now (for example a V179 manual stacking group formed after
+    // the hit) still has the hit reconciled on the values it met, rather than losing the hit's record.
+    const livePools = targetRecord.foe
+      ? targetRecord.foe.live
+      : targetRecord.character?.liveState
+        ? {
+            stamina: targetRecord.character.liveState.stamina,
+            temporaryStamina: targetRecord.character.liveState.temporaryStamina,
+          }
+        : undefined;
     const facts: { facts: DamageTargetFacts } | { missing: string } =
-      'facts' in currentFacts && originalFacts
+      originalFacts && livePools
         ? {
             facts: {
-              ...originalFacts,
-              stamina: currentFacts.facts.stamina,
-              temporaryStamina: currentFacts.facts.temporaryStamina,
+              // V201: a while-winded immunity is fixed to the winded state the hit met (saved on
+              // its application, else the saved facts' Stamina), never the creature's now.
+              ...atWindedState(
+                originalFacts,
+                applied
+                  ? applied.windedBefore
+                  : originalFacts.stamina <= windedValueOf(originalFacts.maxStamina),
+              ),
+              stamina: livePools.stamina,
+              temporaryStamina: livePools.temporaryStamina,
             },
           }
         : { missing: 'The original use had no supported target facts; damage remains manual.' };
-    const applied = (entry.applied as DamageApplication | null) ?? undefined;
     const originalResult = (event.payload as { data?: { result?: AbilityRollResult } })?.data
       ?.result;
     const correction = correctTarget(
@@ -3639,22 +3660,36 @@ const abilityCorrect: OperationDefinition = {
     // V179: a tier weakness this use gave the target is an effect instance later damage may already
     // have read, so a correction never re-derives it. One that would change it (another tier's
     // clause, or a different potency result) is refused; the table rewinds the use instead.
+    // V201: like is compared with like. A saved clause that joined a V158 manual stacking group was
+    // recorded as manual after the roll resolved (markManual); the corrected roll is resolved alone,
+    // so the saved clause is compared as the roll resolved it. The kept occurrence stays manual.
     if (savedCompiled && correctedCompiled?.kind === 'resolved') {
+      const tierDefense = (e: CompiledEffectOutcome) =>
+        e.kind === 'modifier' && !!e.tier && e.targetId === entry.target.id;
+      const stackedManual = (e: CompiledEffectOutcome) =>
+        e.kind === 'modifier' &&
+        e.status === 'manual' &&
+        e.requirements.includes(MANUAL_STACKING_REQUIREMENT);
       const tierDefenses = (effects: readonly CompiledEffectOutcome[]) =>
         effects
-          .filter(e => e.kind === 'modifier' && e.tier && e.targetId === entry.target.id)
+          .filter(tierDefense)
           .map(e =>
             JSON.stringify([
               e.nodeId,
-              e.status,
+              stackedManual(e) ? 'applied' : e.status,
               e.kind === 'modifier' ? (e.payload ?? null) : null,
             ]),
           );
-      const saved = tierDefenses(savedCompiled.effects.map(o => o.effect));
-      if (JSON.stringify(saved) !== JSON.stringify(tierDefenses(correctedCompiled.effects)))
+      const savedEffects = savedCompiled.effects.map(o => o.effect);
+      const saved = tierDefenses(savedEffects);
+      if (JSON.stringify(saved) !== JSON.stringify(tierDefenses(correctedCompiled.effects))) {
+        const stacked = savedEffects.some(e => tierDefense(e) && stackedManual(e));
         throw new ConvexError(
-          `This correction would change the damage weakness ${result.abilityName} gave ${targetRecord.actor.name}, which later damage may already have used; rewind the use instead of correcting it.`,
+          stacked
+            ? `This correction would change the damage weakness ${result.abilityName} gave ${targetRecord.actor.name}, which is in a manual stacking group the table resolves; rewind the use instead of correcting it.`
+            : `This correction would change the damage weakness ${result.abilityName} gave ${targetRecord.actor.name}, which later damage may already have used; rewind the use instead of correcting it.`,
         );
+      }
     }
     // V110: only the corrected target's occurrences and once-per-use sections get the correction
     // revision. Other targets keep their recorded occurrence identities, dispositions and instances.

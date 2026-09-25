@@ -12,7 +12,7 @@ import type { BoundActor, Reference } from '../../shared/commands/envelope';
 import type { MarkBenefitKind } from '../../shared/contracts/liveState';
 import { benefitTaken, planMarkBenefit, type MarkSpec } from '../../shared/resolve/marks';
 import { heroicResourceFloor } from '../../shared/resolve/resourceFloor';
-import { applyDamage } from '../../shared/resolve/index';
+import { applyDamage, atWindedState } from '../../shared/resolve/index';
 import { extraDamageAfterModifiers } from '../../shared/resolve/damageModifiers';
 import { triggerEligibility } from '../../shared/resolve/triggers';
 import { baselineOf, requireHeroLive } from './characterBuild';
@@ -206,7 +206,10 @@ const markBenefit: OperationDefinition = {
     const modified =
       !!facts &&
       'facts' in facts &&
-      ((facts.facts.immunities?.length ?? 0) > 0 || (facts.facts.weaknesses?.length ?? 0) > 0);
+      ((facts.facts.immunities?.length ?? 0) > 0 ||
+        (facts.facts.weaknesses?.length ?? 0) > 0 ||
+        // V201: a while-winded immunity is the hit's too: the extra meets what the hit met.
+        !!facts.facts.whileWinded);
     // V178: the extra damage joins the hit, so the weakness and immunity the hit met (as its
     // current accepted revision saved them) apply once to the total; only the difference is added.
     const hit =
@@ -233,7 +236,7 @@ const markBenefit: OperationDefinition = {
       const application =
         hit && extraTaken !== undefined
           ? applyDamage(
-              { ...facts.facts, immunities: [], weaknesses: [] },
+              { ...atWindedState(facts.facts, false), immunities: [], weaknesses: [] },
               {
                 targetId: facts.facts.targetId,
                 amount: extraTaken,

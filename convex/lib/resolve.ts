@@ -61,6 +61,7 @@ import { parseTierText, plainText, reapplyDamage, windedValueOf } from '../../sh
 import { triggeredActionType } from '../../shared/resolve/triggers';
 import {
   foeModifierTraitReason,
+  foeWindedDefenses,
   heroModifierEntries,
   heroModifierTraitReason,
   statBlockModifiers,
@@ -991,8 +992,17 @@ export function damageTargetFacts(
       return {
         missing: `${record.foe.name}: ${foeGranted.manual}; damage is left for manual application.`,
       };
+    // V201: an immunity the stat block gives while winded (the ogres' Defiant Anger) joins the
+    // cells when the damage finds the foe winded (shared/resolve/index.ts applyDamage).
+    const whileWinded = foeWindedDefenses(snapshot.id);
     // V02: a squad member's health is its squad pool; minions cannot hold temporary Stamina
     // (chapter/monster-basics.md, Shared Low Stamina). Casualties come from the ladder, not here.
+    // V201: a pool has no member's winded state, so a while-winded trait on a member stays manual
+    // (no ingested minion has one; the ogres who do are elites).
+    if (record.squad && whileWinded)
+      return {
+        missing: `${record.foe.name}'s ${whileWinded.feature} depends on being winded, which a squad member's shared Stamina pool doesn't give; damage is left for manual application.`,
+      };
     if (record.squad)
       return {
         facts: withGrantedDefenses(
@@ -1018,6 +1028,7 @@ export function damageTargetFacts(
           temporaryStamina: record.foe.live.temporaryStamina,
           immunities: immunity.entries,
           weaknesses: weakness.entries,
+          ...(whileWinded ? { whileWinded } : {}),
         },
         foeGranted.granted,
       ),

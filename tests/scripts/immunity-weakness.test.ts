@@ -23,13 +23,15 @@ import {
   extraDamageAfterModifiers,
   FOE_MODIFIER_MENTIONS_REVIEWED,
   FOE_MODIFIER_TRAITS,
+  FOE_WINDED_TRAITS,
   foeModifierTraitReason,
+  foeWindedDefenses,
   heroModifierEntries,
   heroModifierTraitReason,
   parseModifierCell,
   statBlockModifiers,
 } from '../../shared/resolve/damageModifiers.ts';
-import { applyDamage } from '../../shared/resolve/index.ts';
+import { applyDamage, atWindedState, reapplyDamage } from '../../shared/resolve/index.ts';
 import { halveApplication } from '../../shared/resolve/damageRevision.ts';
 import type {
   DamageModifierEntry,
@@ -318,14 +320,33 @@ describe('features that change immunity or weakness outside the cells (V178 revi
     const unclassified = read
       .filter(e => MENTION.test(featureText(e.text)))
       .map(e => e.id)
-      .filter(id => !FOE_MODIFIER_TRAITS[id] && !FOE_MODIFIER_MENTIONS_REVIEWED[id]);
-    // A new stat block that mentions either must be listed as manual or reviewed with a reason.
+      .filter(
+        id =>
+          !FOE_MODIFIER_TRAITS[id] && !FOE_MODIFIER_MENTIONS_REVIEWED[id] && !FOE_WINDED_TRAITS[id],
+      );
+    // A new stat block that mentions either must be listed as manual, as applied while winded
+    // (V201), or reviewed with a reason.
     expect(unclassified).toEqual([]);
   });
 
   test('the lists are disjoint, current, and quote the stat blocks exactly', () => {
     for (const id of Object.keys(FOE_MODIFIER_TRAITS))
       expect(FOE_MODIFIER_MENTIONS_REVIEWED[id], id).toBeUndefined();
+    for (const [id, trait] of Object.entries(FOE_WINDED_TRAITS)) {
+      expect(FOE_MODIFIER_TRAITS[id], id).toBeUndefined();
+      expect(FOE_MODIFIER_MENTIONS_REVIEWED[id], id).toBeUndefined();
+      const entry = read.find(e => e.id === id);
+      expect(entry, id).toBeDefined();
+      const text = plain(entry!.text);
+      expect(text, id).toContain(trait.text);
+      expect(text, id).toContain(trait.feature);
+      // The trait is the stat block's only mention of immunity or weakness in its features, so
+      // nothing else on it would need the manual list.
+      const mentions = featureText(plain(entry!.text))
+        .split('\n')
+        .filter(line => MENTION.test(line));
+      expect(mentions, id).toEqual([trait.text]);
+    }
     for (const [id, reason] of Object.entries(FOE_MODIFIER_MENTIONS_REVIEWED)) {
       const entry = read.find(e => e.id === id);
       expect(entry && MENTION.test(featureText(entry.text)), id).toBe(true);
@@ -363,6 +384,32 @@ describe('features that change immunity or weakness outside the cells (V178 revi
     expect(foeModifierTraitReason(id('/devil-legate'))).toMatch(/Hellish Bailiff and True Name/);
     // A stat block with no such feature is read from its cells.
     expect(foeModifierTraitReason(id('/mummy'))).toBeUndefined();
+    // The squad-dependent ogres stay manual: monster/ogre/statblock/ogre-tantrum.md, Excessive
+    // Anger, "while their squad has two or fewer minions in it".
+    expect(foeModifierTraitReason(id('/ogre-tantrum'))).toMatch(/^Excessive Anger/);
+    expect(foeModifierTraitReason(id('/ogre-blue-blood'))).toMatch(/^Royal Anger/);
+  });
+
+  test('every stat block whose immunity or weakness depends on being winded is applied, not manual', () => {
+    // A search of the stat blocks for "winded" in the same feature line as an immunity or weakness.
+    const winded = read
+      .filter(e =>
+        featureText(plain(e.text))
+          .split('\n')
+          .some(line => /winded/i.test(line) && MENTION.test(line)),
+      )
+      .map(e => e.id)
+      .sort();
+    expect(winded).toEqual(Object.keys(FOE_WINDED_TRAITS).sort());
+    expect(winded.map(i => i.split('/').pop())).toEqual(['ogre-goon', 'ogre-juggernaut']);
+    for (const id of winded) {
+      expect(foeModifierTraitReason(id), id).toBeUndefined();
+      // "damage immunity 2": immunity to all damage (rule/damage/damage-immunity.md).
+      expect(foeWindedDefenses(id), id).toEqual({
+        feature: 'Defiant Anger',
+        immunities: [{ type: 'all-damage', value: 2 }],
+      });
+    }
   });
 
   test('a Corrupted Mentor hero’s growing holy weakness is manual', () => {
@@ -383,5 +430,114 @@ describe('features that change immunity or weakness outside the cells (V178 revi
         [{ damageType: 'fire', value: { value: 5, provenance: [{ selection: 'Revenant' }] } }],
       ]),
     ).toBeUndefined();
+  });
+});
+
+/**
+ * V201 Defiant Anger, applied exactly. Sources (pinned `en/unified/md`):
+ * - monster/ogre/statblock/ogre-goon.md: Stamina 100; "While winded, the goon has damage immunity 2."
+ * - monster/ogre/statblock/ogre-juggernaut.md: Stamina 80; "While winded, the juggernaut has damage
+ *   immunity 2."
+ * - rule/health/winded.md: "Your winded value equals half your Stamina maximum. When your Stamina is
+ *   equal to or less than your winded value, you are winded." Goon 100 / 2 = 50; juggernaut 80 / 2
+ *   = 40.
+ * - rule/health/temporary-stamina.md: "Temporary Stamina shouldn't be included in a creature's
+ *   Stamina total when figuring out a creature's recovery value or winded value. If you have
+ *   temporary Stamina while winded, dying, or dead, the temporary Stamina doesn't change those
+ *   states." and "the temporary Stamina decreases first".
+ * - rule/damage/damage-immunity.md: "damage immunity 5" is "immunity to all damage"; reduce "to a
+ *   minimum of 0 damage".
+ */
+describe('while winded: the ogres’ Defiant Anger (V201)', () => {
+  const blocks = statblocks as { id: string; text: string }[];
+  const ogre = (slug: string, stamina: number, temporaryStamina = 0): DamageTargetFacts => {
+    const entry = blocks.find(e => e.id.endsWith(`/${slug}`))!;
+    const max = Number(/^stamina: "(\d+)"$/m.exec(entry.text)![1]);
+    return {
+      targetId: slug,
+      kind: 'foe',
+      stamina,
+      maxStamina: max,
+      temporaryStamina,
+      immunities: statBlockModifiers(entry.text, 'Immunity').entries,
+      weaknesses: statBlockModifiers(entry.text, 'Weakness').entries,
+      whileWinded: foeWindedDefenses(entry.id)!,
+    };
+  };
+  const hit = (facts: DamageTargetFacts, amount: number, damageType?: string) =>
+    applyDamage(facts, {
+      targetId: facts.targetId,
+      amount,
+      ...(damageType ? { damageType } : {}),
+      causeLabel: 'test',
+    });
+
+  test('above the winded value: full damage; the hit that makes it winded is not reduced', () => {
+    // Goon at 51 of 100 (winded value 50): not winded, 10 damage takes 10 and leaves 41, winded.
+    expect(hit(ogre('ogre-goon', 51), 10)).toMatchObject({
+      immunityApplied: 0,
+      afterImmunity: 10,
+      staminaAfter: 41,
+      windedBefore: false,
+      windedAfter: true,
+    });
+    // Juggernaut at 80 of 80: 13 fire is 13.
+    expect(hit(ogre('ogre-juggernaut', 80), 13, 'fire').afterImmunity).toBe(13);
+  });
+
+  test('at or below the winded value: every damage type is reduced by 2', () => {
+    // Goon at exactly 50 ("equal to or less than"): 10 − 2 = 8, leaving 42.
+    expect(hit(ogre('ogre-goon', 50), 10)).toMatchObject({
+      immunityApplied: 2,
+      afterImmunity: 8,
+      staminaAfter: 42,
+    });
+    // Juggernaut at 40 of 80: 7 fire − 2 = 5; 7 psychic − 2 = 5; 2 untyped − 2 = 0.
+    expect(hit(ogre('ogre-juggernaut', 40), 7, 'fire').afterImmunity).toBe(5);
+    expect(hit(ogre('ogre-juggernaut', 40), 7, 'psychic').afterImmunity).toBe(5);
+    expect(hit(ogre('ogre-juggernaut', 12), 2).afterImmunity).toBe(0);
+    // Juggernaut at 41: not winded, 7 is 7.
+    expect(hit(ogre('ogre-juggernaut', 41), 7, 'fire').afterImmunity).toBe(7);
+  });
+
+  test('temporary Stamina neither makes nor unmakes winded; it absorbs after the immunity', () => {
+    // Goon at 50 with 5 temporary: winded, 10 − 2 = 8; 5 absorbed, then 3 from Stamina.
+    expect(hit(ogre('ogre-goon', 50, 5), 10)).toMatchObject({
+      immunityApplied: 2,
+      afterImmunity: 8,
+      absorbedByTemporaryStamina: 5,
+      staminaAfter: 47,
+    });
+    // Goon at 51 with 20 temporary: not winded, 10 is 10, all absorbed.
+    expect(hit(ogre('ogre-goon', 51, 20), 10)).toMatchObject({
+      immunityApplied: 0,
+      afterImmunity: 10,
+      staminaAfter: 51,
+    });
+  });
+
+  test('damage written after the pools changed meets the immunity of the Stamina it is written to', () => {
+    // Planned at 60 (not winded): 10. Written after other damage left the goon at 50: 8.
+    const planned = hit(ogre('ogre-goon', 60), 10);
+    expect(planned.afterImmunity).toBe(10);
+    expect(reapplyDamage(planned, { stamina: 50, temporaryStamina: 0 })).toMatchObject({
+      immunityApplied: 2,
+      afterImmunity: 8,
+      staminaAfter: 42,
+    });
+    // And back: planned winded at 50 (8), written at 70 after healing: 10.
+    const winded = hit(ogre('ogre-goon', 50), 10);
+    expect(reapplyDamage(winded, { stamina: 70, temporaryStamina: 0 })).toMatchObject({
+      immunityApplied: 0,
+      afterImmunity: 10,
+      staminaAfter: 60,
+    });
+  });
+
+  test('a saved hit’s winded state is fixed for arithmetic that reuses its facts', () => {
+    // A correction re-applies the hit from Stamina restored to 100 but keeps the hit's winded state.
+    const facts = { ...ogre('ogre-goon', 50), stamina: 100 };
+    expect(hit(atWindedState(facts, true), 8).afterImmunity).toBe(6);
+    expect(hit(atWindedState(facts, false), 8).afterImmunity).toBe(8);
   });
 });

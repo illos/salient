@@ -333,12 +333,6 @@ export const FOE_MODIFIER_TRAITS: Readonly<Record<string, readonly ModifierTrait
       text: 'The blue blood has damage immunity 2 while their squad has three or fewer minions in it.',
     },
   ],
-  'mcdm.monsters.v1/monster.ogre.statblock/ogre-goon': [
-    { feature: 'Defiant Anger', text: 'While winded, the goon has damage immunity 2.' },
-  ],
-  'mcdm.monsters.v1/monster.ogre.statblock/ogre-juggernaut': [
-    { feature: 'Defiant Anger', text: 'While winded, the juggernaut has damage immunity 2.' },
-  ],
   'mcdm.monsters.v1/monster.ogre.statblock/ogre-tantrum': [
     {
       feature: 'Excessive Anger',
@@ -450,6 +444,47 @@ export const FOE_MODIFIER_TRAITS: Readonly<Record<string, readonly ModifierTrait
     },
   ],
 };
+
+// ---------------------------------------------------------------------------------------------
+// V201: immunities a stat block gives only while the creature is winded. Winded depends only on
+// Stamina (rule/health/winded.md: "Your winded value equals half your Stamina maximum. When your
+// Stamina is equal to or less than your winded value, you are winded."), which the app tracks, so
+// these are applied exactly rather than left manual: the immunity joins the printed cells when the
+// damage is applied to a winded creature (shared/resolve/index.ts applyDamage).
+
+/** One trait that gives the creature an immunity while it is winded, quoted, and its entries. */
+export interface WindedModifierTrait extends ModifierTrait {
+  immunities: DamageModifierEntry[];
+}
+
+/**
+ * Keyed by content id. Every ingested stat block whose feature text makes an immunity or weakness
+ * depend on being winded (a search of the stat blocks for "winded" next to "immunity" or "weakness"
+ * finds only these two). "Damage immunity 2" names no type: rule/damage/damage-immunity.md,
+ * "damage immunity 5" is "representing immunity to all damage" (`all-damage`, Q-IW-1 point 1).
+ */
+export const FOE_WINDED_TRAITS: Readonly<Record<string, WindedModifierTrait>> = {
+  // monster/ogre/statblock/ogre-goon.md (Elite Brute, Stamina 100).
+  'mcdm.monsters.v1/monster.ogre.statblock/ogre-goon': {
+    feature: 'Defiant Anger',
+    text: 'While winded, the goon has damage immunity 2.',
+    immunities: [{ type: 'all-damage', value: 2 }],
+  },
+  // monster/ogre/statblock/ogre-juggernaut.md (Elite Harrier, Stamina 80).
+  'mcdm.monsters.v1/monster.ogre.statblock/ogre-juggernaut': {
+    feature: 'Defiant Anger',
+    text: 'While winded, the juggernaut has damage immunity 2.',
+    immunities: [{ type: 'all-damage', value: 2 }],
+  },
+};
+
+/** The while-winded immunities a foe's stat block gives, if any. */
+export function foeWindedDefenses(
+  contentId: string,
+): { feature: string; immunities: DamageModifierEntry[] } | undefined {
+  const trait = FOE_WINDED_TRAITS[contentId];
+  return trait ? { feature: trait.feature, immunities: trait.immunities } : undefined;
+}
 
 const TARGET =
   'the immunity or weakness is given to the targets, enemies or creatures the ability affects, not to this creature';

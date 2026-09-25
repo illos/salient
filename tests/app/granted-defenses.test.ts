@@ -51,6 +51,7 @@ import { admitHero, table, type Backend } from './fixtures/table';
 const modules = import.meta.glob('../../convex/**/*.ts');
 const GOBLIN = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
 const MYXOVIDAN = 'mcdm.monsters.v1/monster.draconian.statblock/myxovidan-the-sintaker';
+const GOON = 'mcdm.monsters.v1/monster.ogre.statblock/ogre-goon';
 
 async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, number]) {
   await t.run(async ctx => {
@@ -309,6 +310,101 @@ test('V179: two users’ Setups on one goblin are a manual stacking group: damag
   const strike = await s.freeStrike(other, `@{foe:${goblin}}`);
   expect(await s.description(strike.eventId)).toContain('manual stacking group');
   expect((await s.foe(goblin)).stamina).toBe(15);
+});
+
+// V201: the second user's Setup joined a V158 manual stacking group, so its saved clause is manual
+// while the corrected roll resolves it alone as applied. One edge on 5 + 5 + A 2 = 12 makes 14, still
+// tier 2 (rule/dice/power-roll.md): the same clause, the same 9 + 2 = 11 damage. The hit met Shade's
+// damage weakness 5 (15 − 16 = −1). A double edge raises the tier to 3, another clause: refused.
+test('V201: correcting a Setup in a manual stacking group compares like with like', async () => {
+  const s = await setup({ Shade: SHADOW, Twin: SHADOW });
+  const goblin = await s.addFoe(GOBLIN);
+  await s.setup('Shade', goblin, [5, 5]);
+  await s.command(`@{foe:${goblin}} /adjust stamina value=15`);
+  const twin = await s.setup('Twin', goblin, [5, 5]);
+  const hit = { incoming: 11, weaknessApplied: 5, afterImmunity: 16 };
+  expect(await s.applied(twin.eventId)).toMatchObject(hit);
+  expect((await s.foe(goblin)).stamina).toBe(-1);
+  const modifierOf = async () =>
+    ((await s.result(twin.eventId))!.compiled as CompiledResult).effects.find(
+      o => o.effect.kind === 'modifier',
+    )!;
+  expect((await modifierOf()).effect.status).toBe('manual');
+
+  const corrected = await s.command(
+    `/ability correct event="${twin.eventId}" target=@{foe:${goblin}} edges=1 banes=0`,
+  );
+  const description = await s.description(corrected.eventId);
+  expect(description).toContain('edges 0 → 1');
+  expect(description).toContain('tier 2 → 2, damage 11 → 11, reconciliation +0 Stamina');
+  // Persisted: the edge, the hit's application reconciled on its saved weakness (not dropped because
+  // new damage to the goblin is manual now), the Stamina, and the group, still manual.
+  const saved = (await s.result(twin.eventId))!.targets[0]!;
+  expect(saved.edges).toBe(1);
+  expect(saved.applied).toMatchObject(hit);
+  expect((await s.foe(goblin)).stamina).toBe(-1);
+  expect((await modifierOf()).effect.status).toBe('manual');
+  const group = (await s.foe(goblin)).effectInstances!.filter(i => i.status === 'active');
+  expect(group).toHaveLength(2);
+  expect(group.every(i => i.manualStacking)).toBe(true);
+
+  await expect(
+    s.command(`/ability correct event="${twin.eventId}" target=@{foe:${goblin}} edges=2 banes=0`),
+  ).rejects.toThrow(
+    /change the damage weakness Setup gave .*, which is in a manual stacking group the table resolves; rewind the use instead/,
+  );
+});
+
+// V201, the ogres' Defiant Anger. monster/ogre/statblock/ogre-goon.md: Stamina 100, Free Strike 5,
+// "While winded, the goon has damage immunity 2." rule/health/winded.md: winded at Stamina "equal to
+// or less than" half the maximum, 50. "Damage immunity 2" is all damage (damage-immunity.md), so
+// Hurl Element's fire too (v104-1: fire 6 / 8 / 10; 5 + 4 + Reason 2 = 11, tier 1; one edge 13, tier 2).
+test('V201: an ogre goon takes full damage above winded and 2 less when winded; a correction keeps the hit’s state', async () => {
+  const s = await setup({ Mage: [elementalistLedger, 'v104-1'] });
+  const goon = await s.addFoe(GOON);
+  const other = await s.addFoe(GOON);
+  const at = `@{foe:${goon}}`;
+
+  // At 51, not winded: the free strike's 5 is 5, leaving 46 (winded now).
+  await s.command(`${at} /adjust stamina value=51`);
+  const first = await s.freeStrike(other, at);
+  expect(await s.applied(first.eventId)).toMatchObject({
+    incoming: 5,
+    immunityApplied: 0,
+    afterImmunity: 5,
+    windedBefore: false,
+    windedAfter: true,
+  });
+  expect((await s.foe(goon)).stamina).toBe(46);
+  // Winded: 5 − 2 = 3, leaving 43.
+  const second = await s.freeStrike(other, at);
+  expect(await s.applied(second.eventId)).toMatchObject({ immunityApplied: 2, afterImmunity: 3 });
+  expect((await s.foe(goon)).stamina).toBe(43);
+
+  // At exactly 50: Hurl Element fire at tier 1, 6 − 2.
+  await s.command(`${at} /adjust stamina value=50`);
+  await atDice(s.t, s.f.campaignId, [5, 4]);
+  const fire = await s.command(
+    `@Mage /ability use ability="Hurl Element" targets=[${at}] damage-type=fire`,
+    'player',
+  );
+  expect(await s.applied(fire.eventId)).toMatchObject({
+    incoming: hurlFire[0],
+    immunityApplied: 2,
+    afterImmunity: hurlFire[0]! - 2,
+  });
+  expect(await s.description(fire.eventId)).toContain('Defiant Anger: winded, damage immunity 2');
+  expect((await s.foe(goon)).stamina).toBe(50 - (hurlFire[0]! - 2));
+  // One edge: tier 2, 8 fire. The hit was taken winded, so the correction keeps immunity 2:
+  // 50 − (8 − 2). (A correction is refused once later gameplay has committed, so the goon's
+  // Stamina can't have moved since; tests/scripts/immunity-weakness.test.ts fixes the state.)
+  await s.command(`/ability correct event="${fire.eventId}" target=${at} edges=1 banes=0`);
+  expect((await s.result(fire.eventId))!.targets[0]!.applied).toMatchObject({
+    incoming: hurlFire[1],
+    immunityApplied: 2,
+    afterImmunity: hurlFire[1]! - 2,
+  });
+  expect((await s.foe(goon)).stamina).toBe(50 - (hurlFire[1]! - 2));
 });
 
 test('V179: a foe’s tier weakness on a hero; Parry’s potency decrease ends it; undo restores it', async () => {

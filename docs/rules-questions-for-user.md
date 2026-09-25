@@ -1711,8 +1711,10 @@ interpretation with its alternatives.
      names the feature. They fall into these groups:
      - **Standing or conditional traits:** Count Rhodar's Grave Ward ("Rhodar has damage immunity
        5. If he takes holy damage, he loses this immunity until the end of the round."), the Devil
-       Legate's Hellish Bailiff, the 13 shadow elves' Of the Umbra, the ogres' Anger traits, and
-       Xorannox's six eyes' Psionic Barrier.
+       Legate's Hellish Bailiff, the 13 shadow elves' Of the Umbra, the Ogre Blue Blood's Royal
+       Anger and the Ogre Tantrum's Excessive Anger (both counted in squad minions), and Xorannox's
+       six eyes' Psionic Barrier. The Ogre Goon's and Ogre Juggernaut's Defiant Anger left this
+       list in V201 (point 6).
      - **True Name**, which removes immunities: the devil Adjudicator, Clerk, High Judge, Jurist,
        Legate, Magistrate, Notary and Scrivener, and the Devil Defector retainer. No "Detective" stat
        block is among the ingested ones.
@@ -1769,7 +1771,34 @@ interpretation with its alternatives.
      gives its target; its readings are Q-IW-2. The items above stay table work: the dealers'
      abilities and Wilting Visions (its 2 Malice section) are not compiled.
 
-Recommendation: keep 1 to 3 and 5 as implemented, and answer the trolls' value in 4.
+6. **While winded (V201, `docs/build/V201-small-damage-fixes.md`).** Defiant Anger on
+   `monster/ogre/statblock/ogre-goon.md` ("While winded, the goon has damage immunity 2.") and
+   `monster/ogre/statblock/ogre-juggernaut.md` ("While winded, the juggernaut has damage immunity
+   2.") depends only on Stamina, so it is applied: `FOE_WINDED_TRAITS` in
+   `shared/resolve/damageModifiers.ts`. A search of every stat block for "winded" in a line that
+   mentions immunity or weakness finds only these two; the scan test pins that.
+   `rule/health/winded.md`: "Your winded value equals half your Stamina maximum. When your Stamina
+   is equal to or less than your winded value, you are winded." "Damage immunity 2" is all damage
+   (point 1). Readings:
+   - **The damage that makes it winded doesn't meet the immunity.** The immunity is read when the
+     damage is applied, from the Stamina before it: a goon at 51 of 100 takes a full 10 and is then
+     winded at 41. Alternative: split the damage at the threshold, so the part below the winded
+     value is reduced. Nothing in `damage-immunity.md` splits one damage, so it isn't used.
+   - **Temporary Stamina doesn't count.** `rule/health/temporary-stamina.md`: temporary Stamina
+     "shouldn't be included in a creature's Stamina total when figuring out a creature's recovery
+     value or winded value" and "doesn't change those states". The immunity reduces the damage
+     first; the temporary Stamina then absorbs what is left. This is stated, not read.
+   - **Damage written after the pools changed** (a watcher's damage earlier in the same commit) meets
+     the immunity of the Stamina it is written against, not the one planned.
+   - **Corrections and V174 revisions keep the hit's winded state.** A correction reuses the hit's
+     saved facts and its saved `windedBefore`; a revision reuses the saved `immunityApplied`. The
+     Mark's extra damage joins the hit, so it meets the hit's saved immunity (point 3).
+   - **Squads.** No minion has a while-winded trait. A squad member's damage goes to the shared
+     pool, which gives no member a winded state, so such a member would be manual. The ogres are
+     elites; as a captain an ogre keeps its own Stamina and the trait applies.
+   Alternative for the whole point: keep Defiant Anger manual. Not needed, since winded is exact.
+
+Recommendation: keep 1 to 3, 5 and 6 as implemented, and answer the trolls' value in 4.
 
 ## Q-IW-2: readings behind V179's immunity and weakness granted in play
 
@@ -1800,6 +1829,14 @@ readings:
    instance. Corrections and V174 revisions of other hits keep the weakness and immunity those
    hits saved. Alternative: end the old instance, store the new one, and flag later damage for
    the table.
+   V201: a use whose weakness joined a manual stacking group (point 5) saves that clause as manual
+   after the roll resolved, while the corrected roll resolves it alone. The check compares the
+   saved clause as the roll resolved it, so a correction that keeps the same clause stands (for
+   example one edge that keeps tier 2), and the saved occurrence stays manual. One that would
+   change it is refused with a message naming the manual stacking group. The correction takes only
+   the pools from the creature now and the hit's saved weakness and immunity, so it still reconciles
+   a hit on a creature whose new damage is manual because of the group; before V201 the hit's saved
+   application was dropped in that case.
 4. **A potency decrease ends a stored weakness.** Parry's "the potency is decreased by 1"
    (`parry.md`) and the potency Spend sections re-check a stored weakness the way they re-check a
    tier condition. A weakness no longer applied ends. A saving throw already rolled for it refuses
@@ -1853,8 +1890,8 @@ What stays manual, and why:
   lost on "When they use a main action", which includes actions taken by hand. Neither can be
   modelled exactly.
 - **Conditional traits.** "While winded, the goon has damage immunity 2" (the ogres' Defiant Anger)
-  depends only on Stamina. It is a candidate for a later slice. It isn't a stored instance, so it
-  is left alone here.
+  depends only on Stamina. It isn't a stored instance, so it was left alone here; V201 applies it
+  (Q-IW-1 point 6).
 
 Recommendation: keep 1 to 7 as implemented.
 

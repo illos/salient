@@ -401,9 +401,33 @@ export function ignoredImmunityTypes(features: readonly { name: string }[] | und
 
 /** Target facts with the actor's ignored immunity types removed; other entries are kept. */
 export function withoutImmunityTypes(facts: DamageTargetFacts, types: readonly string[]) {
-  return types.length && facts.immunities
-    ? { ...facts, immunities: facts.immunities.filter(i => !types.includes(i.type)) }
-    : facts;
+  if (!types.length) return facts;
+  return {
+    ...facts,
+    ...(facts.immunities
+      ? { immunities: facts.immunities.filter(i => !types.includes(i.type)) }
+      : {}),
+    ...(facts.whileWinded
+      ? {
+          whileWinded: {
+            ...facts.whileWinded,
+            immunities: facts.whileWinded.immunities.filter(i => !types.includes(i.type)),
+          },
+        }
+      : {}),
+  };
+}
+
+/**
+ * V201: target facts with the while-winded immunities fixed to one state, for arithmetic that must
+ * use what a saved hit met (a correction reuses the hit's saved facts, so its winded state is the
+ * hit's, not the creature's now).
+ */
+export function atWindedState(facts: DamageTargetFacts, winded: boolean): DamageTargetFacts {
+  if (!facts.whileWinded) return facts;
+  const { whileWinded, ...rest } = facts;
+  if (!winded) return rest;
+  return { ...rest, immunities: [...(facts.immunities ?? []), ...whileWinded.immunities] };
 }
 
 /** Section 6.3: floor(maxStamina / 2). */
@@ -418,7 +442,16 @@ export function applyDamage(
 ): DamageApplication {
   const incoming = instance.manualDamageOverride ?? instance.amount;
   const weakness = highest(target.weaknesses, instance.damageType);
-  const immunity = highest(target.immunities, instance.damageType);
+  const windedValue = windedValueOf(target.maxStamina);
+  // V201: an immunity that applies "while winded" (the ogres' Defiant Anger) joins the others when
+  // the creature is winded as the damage is applied: Stamina, not temporary Stamina, at or below
+  // the winded value (section 6.3; rule/health/temporary-stamina.md). The damage that makes it
+  // winded was taken before it was winded, so it doesn't meet it (Q-IW-1 point 6).
+  const notWinded = highest(target.immunities, instance.damageType);
+  const whenWinded = target.whileWinded
+    ? highest([...(target.immunities ?? []), ...target.whileWinded.immunities], instance.damageType)
+    : notWinded;
+  const immunity = target.stamina <= windedValue ? whenWinded : notWinded;
   // Section 6.2: only the highest weakness and immunity apply; weakness first, then immunity.
   // V178: no damage is not damage taken (Q-RES-4), so weakness adds nothing to it, as the halved
   // revision already reads it (shared/resolve/damageRevision.ts, Q-REACT-1).
@@ -431,7 +464,6 @@ export function applyDamage(
   // Step 5: the leftover reduces Stamina with no floor (6.4 interpretation).
   const staminaDelta = afterImmunity - absorbed;
   const staminaAfter = target.stamina - staminaDelta;
-  const windedValue = windedValueOf(target.maxStamina);
   const application: DamageApplication = {
     targetId: target.targetId,
     incoming,
@@ -447,6 +479,9 @@ export function applyDamage(
     windedValue,
     windedBefore: target.stamina <= windedValue,
     windedAfter: staminaAfter <= windedValue,
+    ...(target.whileWinded
+      ? { whileWinded: { feature: target.whileWinded.feature, winded: whenWinded, notWinded } }
+      : {}),
   };
   if (target.kind === 'foe') application.slain = staminaAfter <= 0;
   else {
@@ -458,20 +493,34 @@ export function applyDamage(
 
 /**
  * The same damage taken from the pools as they are now. The amount after weakness and immunity is
- * kept, since the pools don't change it. Only the pools are recomputed: temporary Stamina decreases
- * first, then Stamina (rule/health/temporary-stamina.md). Used when damage planned before an
- * operation's commit is written after something else in that commit changed the pools, such as a
- * watcher's damage.
+ * kept, since the pools don't change it, except for an immunity that applies only while winded
+ * (V201): that one is chosen by the Stamina the damage is written against. Then the pools are
+ * recomputed: temporary Stamina decreases first, then Stamina (rule/health/temporary-stamina.md).
+ * Used when damage planned before an operation's commit is written after something else in that
+ * commit changed the pools, such as a watcher's damage.
  */
 export function reapplyDamage(
   planned: DamageApplication,
   pools: { stamina: number; temporaryStamina: number },
 ): DamageApplication {
-  const absorbed = Math.min(pools.temporaryStamina, planned.afterImmunity);
-  const staminaDelta = planned.afterImmunity - absorbed;
+  let { immunityApplied, afterImmunity } = planned;
+  if (planned.whileWinded) {
+    immunityApplied =
+      pools.stamina <= planned.windedValue
+        ? planned.whileWinded.winded
+        : planned.whileWinded.notWinded;
+    afterImmunity =
+      immunityApplied === 'all'
+        ? 0
+        : Math.max(0, planned.incoming + planned.weaknessApplied - immunityApplied);
+  }
+  const absorbed = Math.min(pools.temporaryStamina, afterImmunity);
+  const staminaDelta = afterImmunity - absorbed;
   const staminaAfter = pools.stamina - staminaDelta;
   const application: DamageApplication = {
     ...planned,
+    immunityApplied,
+    afterImmunity,
     absorbedByTemporaryStamina: absorbed,
     temporaryStaminaBefore: pools.temporaryStamina,
     temporaryStaminaAfter: pools.temporaryStamina - absorbed,

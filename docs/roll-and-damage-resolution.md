@@ -411,6 +411,13 @@ leaves the creature's damage manual. The compiled source is a tier clause giving
 or untyped damage weakness N, with its potency and a printed duration ("(save ends)", "(EoT)" or
 "until the end of the encounter").
 
+V201 (`docs/build/V201-small-damage-fixes.md`): an immunity a stat block gives only "While winded"
+(the Ogre Goon's and Ogre Juggernaut's Defiant Anger, "damage immunity 2") joins the others when
+the damage is applied to a creature that is winded (section 6.3) at that moment, on its Stamina
+before the damage and without temporary Stamina. The damage that makes it winded doesn't meet it.
+Damage written against pools that changed after planning meets the immunity of the Stamina it is
+written against. Corrections and V174 revisions keep the hit's saved winded state (Q-IW-1 point 6).
+
 ### 6.3 Winded
 
 > "Your winded value equals half your Stamina maximum. When your Stamina is equal to or less than
