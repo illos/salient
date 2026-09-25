@@ -332,7 +332,7 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
           )}
           {sheet.audience !== 'peer' && (
             <Link
-              to="/characters/$characterId/progression"
+              to="/characters/$characterId/history"
               params={{ characterId }}
               className={buttonVariants({
                 variant: 'outline',
@@ -340,7 +340,7 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
                 className: 'hover:no-underline',
               })}
             >
-              Progression
+              History
             </Link>
           )}
           {owner && <SubmitControls characterId={characterId} />}

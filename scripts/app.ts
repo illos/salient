@@ -3,6 +3,13 @@ import { ConvexHttpClient } from 'convex/browser';
 import { makeFunctionReference } from 'convex/server';
 import { createAuthClient } from 'better-auth/client';
 import { convexClient, crossDomainClient } from '@convex-dev/better-auth/client/plugins';
+import {
+  historySheet,
+  listHistory,
+  restoreRevision,
+  sheetSummary,
+  type HistoryCaller,
+} from './lib/build-history.ts';
 
 try {
   process.loadEnvFile('.env.local');
@@ -13,6 +20,9 @@ const usage =
   'Usage: pnpm app <query|mutation|action> <module:function> [JSON arguments]\n' +
   '       pnpm app command "<slash text>" [--campaign <id>] [--command-id <id>]\n' +
   "       pnpm app respond <interactionId> '<JSON answer>' [--command-id <id>]\n" +
+  '       pnpm app history <characterId> [--cursor <cursor>]\n' +
+  '       pnpm app history-sheet <characterId> <revisionId> [--full]\n' +
+  '       pnpm app restore <characterId> <revisionId> [--command-id <id>]\n' +
   'Authenticate with SALIENT_EMAIL and SALIENT_PASSWORD, or SALIENT_AUTH_TOKEN. The campaign comes\n' +
   'from --campaign or SALIENT_CAMPAIGN_ID. Every call uses the same commandId and authorization\n' +
   'contract as the browser; pass --command-id to retry an earlier command exactly.';
@@ -25,11 +35,26 @@ function option(name: string): string | undefined {
 }
 const campaignOption = option('--campaign') ?? process.env.SALIENT_CAMPAIGN_ID;
 const commandIdOption = option('--command-id') ?? process.env.SALIENT_COMMAND_ID;
-let kind: 'query' | 'mutation' | 'action';
-let functionName: string;
+const cursorOption = option('--cursor') ?? null;
+const fullIndex = argv.indexOf('--full');
+const full = fullIndex !== -1;
+if (full) argv.splice(fullIndex, 1);
+let kind: 'query' | 'mutation' | 'action' = 'query';
+let functionName = '';
 let args: unknown;
+/** V185 build-history verbs: several calls through the same authenticated client. */
+let historyVerb: ((caller: HistoryCaller) => Promise<unknown>) | undefined;
 const [verb, first, second] = argv;
-if (verb === 'command') {
+if (verb === 'history' && first) {
+  historyVerb = caller => listHistory(caller, first, cursorOption);
+} else if (verb === 'history-sheet' && first && second) {
+  historyVerb = async caller => {
+    const history = await historySheet(caller, first, second);
+    return full ? history : sheetSummary(history);
+  };
+} else if (verb === 'restore' && first && second) {
+  historyVerb = caller => restoreRevision(caller, first, second, commandIdOption);
+} else if (verb === 'command') {
   // The slash text is one shell argument; the host shell's quoting is independent of the grammar.
   if (!first || !campaignOption) {
     console.error(usage);
@@ -116,13 +141,20 @@ try {
     token = jwt.data.token;
   }
   client.setAuth(token);
-  const ref = makeFunctionReference<typeof kind>(functionName);
-  const result =
-    kind === 'query'
-      ? await client.query(ref as ReturnType<typeof makeFunctionReference<'query'>>, args)
-      : kind === 'mutation'
-        ? await client.mutation(ref as ReturnType<typeof makeFunctionReference<'mutation'>>, args)
-        : await client.action(ref as ReturnType<typeof makeFunctionReference<'action'>>, args);
+  const call = (callKind: typeof kind, name: string, callArgs: unknown) => {
+    const ref = makeFunctionReference<typeof callKind>(name);
+    return callKind === 'query'
+      ? client.query(ref as ReturnType<typeof makeFunctionReference<'query'>>, callArgs)
+      : callKind === 'mutation'
+        ? client.mutation(ref as ReturnType<typeof makeFunctionReference<'mutation'>>, callArgs)
+        : client.action(ref as ReturnType<typeof makeFunctionReference<'action'>>, callArgs);
+  };
+  const result = historyVerb
+    ? await historyVerb({
+        query: (name, callArgs) => call('query', name, callArgs),
+        mutation: (name, callArgs) => call('mutation', name, callArgs),
+      } as HistoryCaller)
+    : await call(kind, functionName, args);
   console.log(JSON.stringify(result, null, 2));
 } catch (error) {
   console.error(error instanceof Error ? error.message : 'Application command failed.');

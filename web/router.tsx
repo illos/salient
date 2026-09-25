@@ -34,8 +34,8 @@ const CharactersPage = lazy(() =>
   import('./characters').then(module => ({ default: module.CharactersPage })),
 );
 const WizardPage = lazy(() => import('./wizard').then(module => ({ default: module.WizardPage })));
-const ProgressionPage = lazy(() =>
-  import('./progression').then(module => ({ default: module.ProgressionPage })),
+const HistoryPage = lazy(() =>
+  import('./progression').then(module => ({ default: module.HistoryPage })),
 );
 const LevelUpPage = lazy(() =>
   import('./progression/level-up').then(module => ({ default: module.LevelUpPage })),
@@ -451,11 +451,23 @@ const wizardRoute = createRoute({
     );
   },
 });
+/** V185: the build History page; the former Progression page redirects here. */
+const historyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/characters/$characterId/history',
+  component: () => (
+    <HistoryPage characterId={historyRoute.useParams().characterId as Id<'characters'>} />
+  ),
+});
 const progressionRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/characters/$characterId/progression',
   component: () => (
-    <ProgressionPage characterId={progressionRoute.useParams().characterId as Id<'characters'>} />
+    <Navigate
+      to="/characters/$characterId/history"
+      params={{ characterId: progressionRoute.useParams().characterId }}
+      replace
+    />
   ),
 });
 const levelUpRoute = createRoute({
@@ -531,6 +543,7 @@ export const router = createRouter({
     charactersRoute,
     characterRoute,
     wizardRoute,
+    historyRoute,
     progressionRoute,
     levelUpRoute,
     accountRoute,

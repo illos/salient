@@ -387,6 +387,7 @@ export function DetailsRows({
       {(sheet.audience === 'director' || sheet.viewer.role === 'director') &&
         sheet.build &&
         sheet.build.label !== 'draft' &&
+        sheet.build.label !== 'history' &&
         partial?.features?.some(
           feature => feature.kind === 'complication' && feature.name === 'Strange Inheritance',
         ) && (

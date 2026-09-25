@@ -603,6 +603,19 @@ later history and independent authored/live/inventory state. Complete attached r
 full-edit review; incomplete snapshots restore as private drafts. Complete unattached restorations
 activate without initializing campaign resources. Original snapshots remain immutable.
 
+**Implementation note — 2026-09-25 (V185):** The build History page (`/characters/<id>/history`;
+the old Progression address redirects there and keeps the level-up notice) lists every revision
+newest first, labelled by kind (created, edited, level-up, kit changed at a respite, restored from
+revision N), level and date. Selecting one shows the full character sheet from that revision's
+recorded evaluation and baseline, read-only, with present live values, inventory and authored text,
+and a server-computed comparison with the active build: level, Stamina and Recoveries maxima, and
+features, abilities and perks added or removed by name. `characters.historySheet` serves it to the
+history readers only, without the owner's notes for the Director. The owner's "Restore this build"
+uses `characters.restore` and states the outcome first. Headless: `pnpm app history`,
+`pnpm app history-sheet` and `pnpm app restore`; the `history` cohort proves the journey. See the
+[V185 slice](build/V185-build-history.md). The user's pending confirmation of the snapshot scope
+(build only, per the table below) does not change this slice.
+
 Confirmed example: restore a level-7 wood elf Shadow to the build they had at level 3. Restore its choices,
 including ones later replaced, automatic grants, and build-derived stats/abilities. Retain present inventory.
 Lowering a numeric level field alone does not meet this requirement.

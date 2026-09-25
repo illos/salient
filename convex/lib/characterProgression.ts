@@ -104,7 +104,15 @@ export async function requireHistoryReader(
     throw new ConvexError('Character history unavailable.');
   return character;
 }
-export function historyEntry(character: Doc<'characters'>, revision: Doc<'characterRevisions'>) {
+/** One build-history row (V32; V185 adds the restore source's revision number for its label). */
+export async function historyEntry(
+  ctx: ReadCtx,
+  character: Doc<'characters'>,
+  revision: Doc<'characterRevisions'>,
+) {
+  const source = revision.restoredFromRevisionId
+    ? await ctx.db.get(revision.restoredFromRevisionId)
+    : null;
   return {
     id: revision._id,
     revision: revision.revision,
@@ -114,6 +122,7 @@ export function historyEntry(character: Doc<'characters'>, revision: Doc<'charac
     createdAt: revision._creationTime,
     parentRevisionId: revision.parentRevisionId,
     restoredFromRevisionId: revision.restoredFromRevisionId ?? null,
+    restoredFromRevision: source?.revision ?? null,
     isEffective: character.effectiveRevisionId === revision._id,
     isDraft: character.draftRevisionId === revision._id,
   };

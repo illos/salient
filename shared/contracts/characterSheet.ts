@@ -68,8 +68,11 @@ export interface CommonAction {
 }
 
 export interface SheetBuild {
-  /** `effective`: the campaign's build. `draft`: the owner's saved draft. `proposed`: a pending submission. */
-  label: 'effective' | 'draft' | 'proposed';
+  /**
+   * `effective`: the campaign's build. `draft`: the owner's saved draft. `proposed`: a pending
+   * submission. `history`: a recorded revision shown read-only from its recorded evaluation (V185).
+   */
+  label: 'effective' | 'draft' | 'proposed' | 'history';
   revision: number;
   status: EvaluationStatus | 'awaiting-rules-evaluation';
   baseline: DerivedBaseline | null;
@@ -136,3 +139,50 @@ export interface PeerSheet {
 }
 
 export type CharacterSheet = HeroSheet | PeerSheet;
+
+/** V185 build history (docs/character-wizard-spec.md#5-progression-history). */
+export type BuildHistoryKind = 'creation' | 'full-edit' | 'level-up' | 'restore' | 'respite-kit';
+export interface BuildHistoryEntry {
+  id: string;
+  revision: number;
+  level: number;
+  kind: BuildHistoryKind;
+  status: EvaluationStatus | 'awaiting-rules-evaluation';
+  createdAt: number;
+  parentRevisionId: string | null;
+  restoredFromRevisionId: string | null;
+  /** The revision number a restore copied, for the "from revision N" label. */
+  restoredFromRevision: number | null;
+  isEffective: boolean;
+  isDraft: boolean;
+}
+export interface ValueChange {
+  current: number | null;
+  snapshot: number | null;
+}
+export interface NameChange {
+  added: string[];
+  removed: string[];
+}
+/**
+ * A recorded build against the current effective build. `added` are grants the recorded build has
+ * that the current one lacks (what restoring would add); `removed` the reverse.
+ */
+export interface BuildDifference {
+  /** False when there is no current effective build to compare against. */
+  hasCurrent: boolean;
+  level: ValueChange;
+  staminaMaximum: ValueChange;
+  recoveriesMaximum: ValueChange;
+  features: NameChange;
+  abilities: NameChange;
+  perks: NameChange;
+  /** True when every compared field matches. */
+  same: boolean;
+}
+/** `characters.historySheet`: the full sheet of one recorded revision with today's live state. */
+export interface HistorySheet {
+  entry: BuildHistoryEntry;
+  sheet: HeroSheet;
+  difference: BuildDifference;
+}

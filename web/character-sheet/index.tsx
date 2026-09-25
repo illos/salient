@@ -261,7 +261,8 @@ function Abilities({ sheet, compact }: { sheet: HeroSheet; compact?: boolean }) 
       id="sheet-abilities"
     >
       {sheet.features.some(feature => feature.name === 'Runic Carving') &&
-        (sheet.build?.label === 'effective' || (sheet.audience === 'owner' && !sheet.campaign)) && (
+        (sheet.build?.label === 'effective' ||
+          (sheet.audience === 'owner' && !sheet.campaign && sheet.build?.label !== 'history')) && (
           <RunicCarving characterId={sheet.id as Id<'characters'>} />
         )}
       {sheet.build?.status === 'incomplete' && (
@@ -371,7 +372,9 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
   const [rollFor, setRollFor] = useState<CharacteristicKey | null>(null);
   const baseline = sheet.build?.baseline ?? null;
   const partial: PartialBaseline | null = baseline ?? sheet.build?.partial ?? null;
-  const campaignId = sheet.campaign ? (sheet.campaign.id as Id<'campaigns'>) : null;
+  // A recorded build (V185 History) is read-only: no table controls, rolls or inventory actions.
+  const readOnly = sheet.build?.label === 'history';
+  const campaignId = sheet.campaign && !readOnly ? (sheet.campaign.id as Id<'campaigns'>) : null;
   const live = sheet.live;
   const director = sheet.viewer.role === 'director';
   const running = sheet.viewer.sessionRunning;
@@ -383,7 +386,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
     sheet.activationPreview &&
     (sheet.activationPreview.changes.length > 0 || sheet.activationPreview.incompatibleResource) ? (
       <Notice role="status">
-        On activation:{' '}
+        {readOnly ? 'If restored and activated:' : 'On activation:'}{' '}
         {sheet.activationPreview.changes
           .map(
             change =>
@@ -396,6 +399,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
     ) : null;
   const rollTest =
     rollFor &&
+    !readOnly &&
     (campaignId ? (
       <RollTest
         campaignId={campaignId}
@@ -430,8 +434,10 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
       campaignId={campaignId}
       canAct={canAct}
       canEdit={canEdit}
-      turnState={<TurnState campaignId={campaignId} characterId={sheet.id} />}
-      extraControls={rollEntry}
+      turnState={
+        readOnly ? undefined : <TurnState campaignId={campaignId} characterId={sheet.id} />
+      }
+      extraControls={readOnly ? undefined : rollEntry}
     />
   );
   if (compact) {
@@ -489,7 +495,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
                 <LanguageChips partial={partial} />
               </div>
               <DetailsRows sheet={sheet} partial={partial} />
-              {(sheet.audience === 'owner' || sheet.campaign) && (
+              {!readOnly && (sheet.audience === 'owner' || sheet.campaign) && (
                 <StartingRewardsPanel
                   characterId={sheet.id}
                   combatLocked={sheet.combatLocked}
@@ -548,7 +554,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
           <SheetSection title="Languages" id="sheet-languages">
             <LanguageChips partial={partial} />
           </SheetSection>
-          {(sheet.audience === 'owner' || sheet.campaign) && (
+          {!readOnly && (sheet.audience === 'owner' || sheet.campaign) && (
             <StartingRewardsPanel characterId={sheet.id} combatLocked={sheet.combatLocked} />
           )}
           <SheetSection title="Details" id="sheet-details">

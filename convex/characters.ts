@@ -97,9 +97,12 @@ import type {
   GrantedFeature,
   Provenance,
 } from '../shared/contracts/characterEvaluation';
+import { buildDifference } from '../shared/evaluate/buildDifference';
 import type {
   ActionGroup,
+  BuildHistoryEntry,
   CharacterSheet,
+  HistorySheet,
   CommonAction,
   HeroSheet,
   SheetAbility,
@@ -803,6 +806,135 @@ function labelsOf(
   };
 }
 
+/** Who is reading a character's sheet, resolved once for the live and historical sheet reads. */
+async function sheetAudience(ctx: ReadCtx, character: Doc<'characters'>, userId: Id<'users'>) {
+  const owner = character.ownerId === userId;
+  const pending = await pendingReview(ctx, character._id);
+  const campaignId = character.campaignId ?? pending?.campaignId ?? null;
+  const campaign = campaignId ? await ctx.db.get(campaignId) : null;
+  const membership =
+    campaign &&
+    (await ctx.db
+      .query('memberships')
+      .withIndex('by_campaign_user', q => q.eq('campaignId', campaign._id).eq('userId', userId))
+      .unique());
+  const director = !!campaign && campaign.ownerId === userId;
+  return { owner, director, pending, campaign, member: !!(campaign && membership) };
+}
+
+/**
+ * The owner's or Director's full sheet of one build (docs/character-sheet-spec.md). Live state,
+ * inventory and authored details are always today's; only the build comes from `revision`. A
+ * `history` revision shows its recorded baseline, never a re-evaluation with today's rules (V185).
+ */
+async function heroSheet(
+  ctx: ReadCtx,
+  userId: Id<'users'>,
+  character: Doc<'characters'>,
+  audience: Awaited<ReturnType<typeof sheetAudience>>,
+  revision: Doc<'characterRevisions'> | null,
+  label: 'effective' | 'draft' | 'proposed' | 'history',
+): Promise<HeroSheet> {
+  const { owner, director, pending, campaign } = audience;
+  const ownerName = (await ctx.db.get(character.ownerId))?.displayName ?? 'Former player';
+  const baseline = baselineOf(character.derivedBaseline);
+  const evaluation = (revision?.evaluation ?? null) as EvaluationResult | null;
+  const shown =
+    label === 'effective'
+      ? baseline
+      : label === 'history'
+        ? (baselineOf(revision?.derivedBaseline) ?? evaluation?.baseline ?? null)
+        : (evaluation?.baseline ?? null);
+  const partial = evaluation?.partial ?? null;
+  const granted = shown ?? partial;
+  const session = campaign?.activeSessionId ? await ctx.db.get(campaign.activeSessionId) : null;
+  const role = !campaign
+    ? null
+    : director
+      ? ('director' as const)
+      : session?.selectedPlayerIds.includes(userId)
+        ? ('player' as const)
+        : ('observer' as const);
+  const selections = revision?.selections ?? [];
+  const live = character.liveState;
+  const readOnly = label === 'history';
+  return {
+    audience: owner ? 'owner' : 'director',
+    id: character._id,
+    name: character.authored.name,
+    ownerId: character.ownerId,
+    ownerName,
+    campaign: campaign && character.campaignId ? { id: campaign._id, name: campaign.name } : null,
+    viewer: {
+      role,
+      // A recorded build never acts at the table.
+      controls: !readOnly && (director || (role === 'player' && owner)),
+      sessionRunning: session?.status === 'running',
+    },
+    combatLocked: character.combatLocked,
+    build: revision
+      ? {
+          label,
+          revision: revision.revision,
+          status: revision.status,
+          baseline: shown,
+          partial,
+          diagnostics: evaluation?.diagnostics ?? {},
+        }
+      : null,
+    abilities: await Promise.all(
+      [
+        ...startingItemAbilities(character.startingRewards, manifest.compendium.revision),
+        ...complicationAbilities(
+          granted?.features ?? [],
+          perkAbilities(
+            granted?.perks ?? [],
+            ancestryAbilities(
+              granted?.traits ?? [],
+              tacticianAbilities(granted?.features ?? [], granted?.abilities ?? []),
+              character.activeRune?.kind ?? null,
+            ),
+          ),
+        ),
+      ].map(a => abilityView(ctx, a, granted?.abilityModifiers)),
+    ),
+    features: await Promise.all(
+      [...(granted?.traits ?? []), ...(granted?.features ?? []), ...(granted?.perks ?? [])].map(f =>
+        featureView(ctx, f),
+      ),
+    ),
+    commonActions: await commonActions(ctx),
+    live: live ? { ...live, labels: labelsOf(live, baseline) } : null,
+    activationPreview:
+      label !== 'effective' && live && shown
+        ? previewBuildReconciliation(live, baseline, shown)
+        : null,
+    details: {
+      cultureName: selectionText(selections, 'culture.name'),
+      cultureLanguage: selectionText(selections, 'culture.language'),
+      environment: selectionText(selections, 'culture.environment'),
+      organization: selectionText(selections, 'culture.organization'),
+      upbringing: selectionText(selections, 'culture.upbringing'),
+      incitingIncident:
+        selections
+          .filter(selection => selection.decisionId.endsWith('.inciting-incident'))
+          .map(selection => selectionText(selections, selection.decisionId))
+          .find(value => value !== null) ?? null,
+      whatWasTaken: selectionText(selections, 'career.what-was-taken'),
+      connections: selectionText(selections, 'connections.notes'),
+    },
+    // Owner-private notes never leave the owner audience (accounts spec section 7).
+    authored: owner
+      ? {
+          appearance: character.authored.appearance,
+          biography: character.authored.biography,
+          notes: character.authored.notes,
+        }
+      : { appearance: character.authored.appearance, biography: character.authored.biography },
+    review: pending ? await reviewView(ctx, pending) : null,
+  };
+}
+
 export const sheet = query({
   args: {
     characterId: v.id('characters'),
@@ -814,28 +946,18 @@ export const sheet = query({
     const user = await requireUser(ctx);
     const character = await ctx.db.get(args.characterId);
     if (!character) throw new ConvexError('Character unavailable.');
-    const owner = character.ownerId === user._id;
-    const pending = await pendingReview(ctx, character._id);
-    const campaignId = character.campaignId ?? pending?.campaignId ?? null;
-    const campaign = campaignId ? await ctx.db.get(campaignId) : null;
-    const membership =
-      campaign &&
-      (await ctx.db
-        .query('memberships')
-        .withIndex('by_campaign_user', q => q.eq('campaignId', campaign._id).eq('userId', user._id))
-        .unique());
-    const director = !!campaign && campaign.ownerId === user._id;
-    if (!owner && !director && !(campaign && membership && character.campaignId))
+    const audience = await sheetAudience(ctx, character, user._id);
+    const { owner, director, pending } = audience;
+    if (!owner && !director && !(audience.member && character.campaignId))
       throw new ConvexError('Character unavailable.');
-    const ownerName = (await ctx.db.get(character.ownerId))?.displayName ?? 'Former player';
-    const baseline = baselineOf(character.derivedBaseline);
     if (!owner && !director) {
       // Peer: Stamina and Recoveries only (docs/table-spec.md#party-sheets-and-resource-visibility).
+      const baseline = baselineOf(character.derivedBaseline);
       return {
         audience: 'peer',
         id: character._id,
         name: character.authored.name,
-        ownerName,
+        ownerName: (await ctx.db.get(character.ownerId))?.displayName ?? 'Former player',
         live: character.liveState
           ? { stamina: character.liveState.stamina, recoveries: character.liveState.recoveries }
           : null,
@@ -871,95 +993,7 @@ export const sheet = query({
           : null;
       label = pending ? 'proposed' : 'draft';
     }
-    const evaluation = (revision?.evaluation ?? null) as EvaluationResult | null;
-    const shown = label === 'effective' ? baseline : (evaluation?.baseline ?? null);
-    const partial = evaluation?.partial ?? null;
-    const granted = shown ?? partial;
-    const session = campaign?.activeSessionId ? await ctx.db.get(campaign.activeSessionId) : null;
-    const role = !campaign
-      ? null
-      : director
-        ? ('director' as const)
-        : session?.selectedPlayerIds.includes(user._id)
-          ? ('player' as const)
-          : ('observer' as const);
-    const selections = revision?.selections ?? [];
-    const live = character.liveState;
-    const payload: HeroSheet = {
-      audience: owner ? 'owner' : 'director',
-      id: character._id,
-      name: character.authored.name,
-      ownerId: character.ownerId,
-      ownerName,
-      campaign: campaign && character.campaignId ? { id: campaign._id, name: campaign.name } : null,
-      viewer: {
-        role,
-        controls: director || (role === 'player' && owner),
-        sessionRunning: session?.status === 'running',
-      },
-      combatLocked: character.combatLocked,
-      build: revision
-        ? {
-            label,
-            revision: revision.revision,
-            status: revision.status,
-            baseline: shown,
-            partial,
-            diagnostics: evaluation?.diagnostics ?? {},
-          }
-        : null,
-      abilities: await Promise.all(
-        [
-          ...startingItemAbilities(character.startingRewards, manifest.compendium.revision),
-          ...complicationAbilities(
-            granted?.features ?? [],
-            perkAbilities(
-              granted?.perks ?? [],
-              ancestryAbilities(
-                granted?.traits ?? [],
-                tacticianAbilities(granted?.features ?? [], granted?.abilities ?? []),
-                character.activeRune?.kind ?? null,
-              ),
-            ),
-          ),
-        ].map(a => abilityView(ctx, a, granted?.abilityModifiers)),
-      ),
-      features: await Promise.all(
-        [...(granted?.traits ?? []), ...(granted?.features ?? []), ...(granted?.perks ?? [])].map(
-          f => featureView(ctx, f),
-        ),
-      ),
-      commonActions: await commonActions(ctx),
-      live: live ? { ...live, labels: labelsOf(live, baseline) } : null,
-      activationPreview:
-        label !== 'effective' && live && shown
-          ? previewBuildReconciliation(live, baseline, shown)
-          : null,
-      details: {
-        cultureName: selectionText(selections, 'culture.name'),
-        cultureLanguage: selectionText(selections, 'culture.language'),
-        environment: selectionText(selections, 'culture.environment'),
-        organization: selectionText(selections, 'culture.organization'),
-        upbringing: selectionText(selections, 'culture.upbringing'),
-        incitingIncident:
-          selections
-            .filter(selection => selection.decisionId.endsWith('.inciting-incident'))
-            .map(selection => selectionText(selections, selection.decisionId))
-            .find(value => value !== null) ?? null,
-        whatWasTaken: selectionText(selections, 'career.what-was-taken'),
-        connections: selectionText(selections, 'connections.notes'),
-      },
-      // Owner-private notes never leave the owner audience (accounts spec section 7).
-      authored: owner
-        ? {
-            appearance: character.authored.appearance,
-            biography: character.authored.biography,
-            notes: character.authored.notes,
-          }
-        : { appearance: character.authored.appearance, biography: character.authored.biography },
-      review: pending ? await reviewView(ctx, pending) : null,
-    };
-    return payload;
+    return await heroSheet(ctx, user._id, character, audience, revision, label);
   },
 });
 
@@ -1151,7 +1185,10 @@ export const history = query({
       .withIndex('by_character_and_revision', q => q.eq('characterId', character._id))
       .order('desc')
       .paginate({ ...args.paginationOpts, numItems: Math.min(50, args.paginationOpts.numItems) });
-    return { ...result, page: result.page.map(row => historyEntry(character, row)) };
+    return {
+      ...result,
+      page: await Promise.all(result.page.map(row => historyEntry(ctx, character, row))),
+    };
   },
 });
 export const historySnapshot = query({
@@ -1165,7 +1202,7 @@ export const historySnapshot = query({
       throw new ConvexError('Historical build unavailable.');
     const baseline = baselineOf(revision.derivedBaseline);
     return {
-      entry: historyEntry(character, revision),
+      entry: await historyEntry(ctx, character, revision),
       selections: revision.selections,
       evaluation: revision.evaluation ?? null,
       derivedBaseline: baseline,
@@ -1177,6 +1214,34 @@ export const historySnapshot = query({
               baseline,
             )
           : null,
+    };
+  },
+});
+/**
+ * V185: the full character sheet of one recorded revision, for its history readers only (owner or
+ * the Director; requireHistoryReader). The build is the revision's recorded evaluation and
+ * baseline, never re-evaluated; live state, inventory and authored details stay today's and
+ * owner-private notes stay with the owner. `difference` compares it with the current effective
+ * build (docs/character-wizard-spec.md#5-progression-history).
+ */
+export const historySheet = query({
+  args: { characterId: v.id('characters'), revisionId: v.id('characterRevisions') },
+  returns: v.any(),
+  handler: async (ctx, args): Promise<HistorySheet> => {
+    const user = await requireUser(ctx);
+    const character = await requireHistoryReader(ctx, args.characterId, user._id);
+    const revision = await ctx.db.get(args.revisionId);
+    if (!revision || revision.characterId !== character._id)
+      throw new ConvexError('Historical build unavailable.');
+    const audience = await sheetAudience(ctx, character, user._id);
+    const sheet = await heroSheet(ctx, user._id, character, audience, revision, 'history');
+    return {
+      entry: (await historyEntry(ctx, character, revision)) as BuildHistoryEntry,
+      sheet,
+      difference: buildDifference(
+        baselineOf(character.derivedBaseline),
+        sheet.build?.baseline ?? sheet.build?.partial ?? null,
+      ),
     };
   },
 });

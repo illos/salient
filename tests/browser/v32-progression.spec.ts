@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** V32: real authenticated level-up, persisted sheet/source readback, additive restoration. */
+/**
+ * V32: real authenticated level-up, persisted sheet/source readback, additive restoration. V185
+ * moved the history preview and restore to the History page (full recorded sheet and comparison).
+ */
 import { expect, test } from '@playwright/test';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -46,7 +49,8 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     });
   try {
     await player.goto(`/characters/${characterId}`);
-    await player.getByRole('link', { name: 'Progression', exact: true }).click();
+    await player.getByRole('link', { name: 'History', exact: true }).click();
+    await expect(player).toHaveURL(new RegExp(`/characters/${characterId}/history$`));
     // V163: no panel until the Director grants a level-up. Setup uses public commands only.
     await expect(player.getByRole('heading', { name: 'Level up to level 2' })).toHaveCount(0);
     await app(dm, 'mutation', 'commands:submit', {
@@ -226,24 +230,48 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await player.screenshot({ path: `${directory}/level-two-sheet.png`, fullPage: true });
     // The full editor must round-trip the new choices rather than silently reverting to level one.
     await player.getByRole('link', { name: 'Edit', exact: true }).click();
-    await player.getByRole('button', { name: /^5\. Class/ }).click();
+    // The builder rail labels each step `${step.name}: ${step.chosen}`, e.g. "Class: Fury".
+    await player.getByRole('button', { name: /^Class/ }).click();
     await expect(player.getByLabel('Wrecking Ball', { exact: true })).toBeChecked();
     await expect(player.getByLabel('Danger Sense', { exact: true })).toBeChecked();
     await player.getByRole('button', { name: 'Exit', exact: true }).click();
-    // Preview is read-only. Restoring lower maximum caps only on exact revision approval.
+    // V185: the History page previews the full recorded sheet, read-only, with a comparison.
+    // Restoring the lower maximum applies only on exact revision approval.
     await adjust('stamina', 39);
-    await player.getByRole('link', { name: 'Progression', exact: true }).click();
+    await player.getByRole('link', { name: 'History', exact: true }).click();
     await player
-      .getByRole('button', { name: new RegExp(`^Revision ${original.revision} · level 1`) })
+      .getByRole('button', { name: new RegExp(`^Revision ${original.revision} · Level 1 · `) })
       .click();
+    const recorded = player.getByRole('region', { name: 'Recorded build' });
+    await expect(
+      recorded.getByRole('article', { name: `${heroName} character sheet` }),
+    ).toBeVisible();
+    await expect(
+      recorded.getByText(`Recorded revision ${original.revision} (read-only)`),
+    ).toBeVisible();
+    const comparison = recorded.getByRole('region', { name: 'Compared with the active build' });
+    await expect(comparison).toContainText('Wrecking Ball');
+    await expect(comparison).toContainText('Danger Sense');
+    // The recorded sheet has no table controls.
+    await expect(recorded.getByRole('button', { name: 'Roll test', exact: true })).toHaveCount(0);
     expect((await query('characters:sheet', { characterId })).build.baseline.level.value).toBe(2);
     await player.screenshot({ path: `${directory}/history-preview.png`, fullPage: true });
-    await player.getByRole('button', { name: 'Restore this build', exact: true }).click();
+    const restorePanel = recorded.getByRole('region', { name: 'Restore this build' });
+    await expect(restorePanel).toContainText('submits it for Director review');
+    await restorePanel.getByRole('button', { name: 'Restore this build', exact: true }).click();
     await expect
       .poll(async () => (await query('characters:get', { characterId })).review?.status)
       .toBe('pending');
     expect((await query('characters:sheet', { characterId })).live.stamina).toBe(39);
+    // The old Progression address redirects to History; the Director inspects but cannot restore.
     await director.goto(`/characters/${characterId}/progression`);
+    await expect(director).toHaveURL(new RegExp(`/characters/${characterId}/history$`));
+    await director
+      .getByRole('button', { name: new RegExp(`^Revision ${original.revision} · Level 1 · `) })
+      .click();
+    await expect(
+      director.getByRole('article', { name: `${heroName} character sheet` }),
+    ).toBeVisible();
     await expect(
       director.getByRole('button', { name: 'Restore this build', exact: true }),
     ).toHaveCount(0);

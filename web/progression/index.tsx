@@ -1,386 +1,372 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Scoped advancement and immutable build history. Every write uses the shared character API. */
+/**
+ * The build History page (V185; V32 before it): every recorded revision newest first, the full
+ * read-only character sheet of a selected revision from its recorded evaluation, a comparison with
+ * the active build, and the owner's "Restore this build". Reads `characters.history` and
+ * `characters.historySheet`; restores through `characters.restore`, the same operations the CLI
+ * uses (docs/character-wizard-spec.md#5-progression-history). Nothing here computes a game value.
+ */
 import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { useMutation, usePaginatedQuery, useQuery } from 'convex/react';
-import type { FunctionReturnType } from 'convex/server';
+import { cn } from 'cn';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import type { DraftSelection } from '../../shared/characterDraft';
 import type {
-  CharacterChoiceOrigins,
-  EvaluationResult,
-} from '../../shared/contracts/characterEvaluation';
-import type { CharacterSheet, HeroSheet } from '../../shared/contracts/characterSheet';
-import type { BuildReconciliation } from '../../shared/contracts/liveState';
-import { HeroSoFar } from '../wizard/hero-so-far';
-import { decisionLabel } from '../wizard/presentation';
+  BuildDifference,
+  BuildHistoryEntry,
+  CharacterSheet,
+  HeroSheet,
+  HistorySheet,
+  NameChange,
+  ValueChange,
+} from '../../shared/contracts/characterSheet';
+import {
+  historyEntryTitle,
+  historyKindLabel,
+  restoreOutcome,
+} from '../../shared/presentation/buildHistory';
+import { HeroSheetView } from '../character-sheet';
+import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { RuleLink } from '../rules/link';
-import { readableRuleText } from '../rules/reference';
-import { Loading, Notice, useCommand } from '../ui';
+import { Eyebrow, Loading, Notice, SectionHeading, useCommand } from '../ui';
 
-type OwnedCharacter = FunctionReturnType<typeof api.characters.get>;
-interface Advancement {
-  revision: number;
-  baseRevisionId: Id<'characterRevisions'> | null;
-  baseLevel: number;
-  targetLevel: number;
-  fromLevel: number;
-  eligible: boolean;
-  reason: string | null;
-  xp: number;
-  entryLevelXpOffset: number;
-  pendingLevelUps: number;
-  baseSelections: DraftSelection[];
-  choiceOrigins: CharacterChoiceOrigins;
-  draft: {
-    version: number;
-    selections: DraftSelection[];
-    baseRevisionId: Id<'characterRevisions'>;
-  } | null;
-  draftIsStale: boolean;
-}
-interface HistoryEntry {
-  id: Id<'characterRevisions'>;
-  revision: number;
-  level: number;
-  kind: string;
-  status: string;
-  createdAt: number;
-  parentRevisionId: Id<'characterRevisions'> | null;
-  restoredFromRevisionId: Id<'characterRevisions'> | null;
-  isEffective: boolean;
-  isDraft: boolean;
-}
-interface HistorySnapshot {
-  entry: HistoryEntry;
-  evaluation: EvaluationResult | null;
-  selections: DraftSelection[];
-  activationPreview: BuildReconciliation | null;
-}
-
-/** The Quiet panel each progression section sits in; its previews are `sub` insets. */
+/** The Quiet panel each section sits in. */
 const PANEL = 'rounded-lg bg-card p-6';
 
-/** A preview displays recorded or proposed maxima, never current gameplay resources. */
-function BuildPreview({ evaluation, name }: { evaluation?: EvaluationResult; name: string }) {
-  const baseline = evaluation?.baseline ?? evaluation?.partial;
-  // Use this evaluation's recorded provenance, including its quotation. A historical
-  // Elementalist (or incomplete ancestry-only build) must not inherit Fury attribution.
-  const identity = baseline?.class ?? baseline?.ancestry;
-  const source = identity?.provenance.find(item => item.source.quote)?.source;
-  if (!evaluation) return <Loading>Evaluating build…</Loading>;
-  if (!source)
-    return (
-      <Notice>
-        No sourced build summary was recorded. Inspect the recorded choices for this revision.
-      </Notice>
-    );
-  const sourceReference = {
-    sourcePath: source.path,
-    label: `${identity!.value} ${baseline?.class ? 'class' : 'ancestry'} selection`,
-  };
-  const grants = [
-    ...(baseline?.traits ?? []),
-    ...(baseline?.features ?? []),
-    ...(baseline?.perks ?? []),
-    ...(baseline?.abilities ?? []),
-  ];
+/** A waiting level-up is taken on the level-up screen (V164); History keeps the notice. */
+function LevelUpNotice({ characterId }: { characterId: Id<'characters'> }) {
+  const progression = useQuery(api.characters.progression, { characterId }) as
+    { pendingLevelUps: number; targetLevel: number; draft: unknown } | undefined;
+  if (!progression || (progression.pendingLevelUps < 1 && !progression.draft)) return null;
   return (
-    <div className="rounded-md bg-muted p-4">
-      <HeroSoFar
-        evaluation={evaluation}
-        heroName={name}
-        sourceReference={sourceReference}
-        sourceExcerpt={readableRuleText(source.quote)}
-      />
-      {grants.length > 0 && (
-        <div className="mt-4 border-t border-border pt-4">
-          <h3 className="text-base">Grant sources</h3>
-          <ul className="mt-2 flex list-none flex-wrap gap-3 p-0">
-            {grants.map((grant, i) => (
-              <li key={`${grant.name}-${i}`} className="flex items-center gap-2 text-base">
-                <span>{grant.name}</span>
-                <RuleLink sourcePath={grant.sourcePath} label={grant.name} />
-              </li>
-            ))}
-          </ul>
-        </div>
+    <section
+      aria-label="Level advancement"
+      className={`${PANEL} flex flex-wrap items-center justify-between gap-3`}
+    >
+      <p className="m-0 text-base">
+        {progression.pendingLevelUps > 1
+          ? `${progression.pendingLevelUps} level-ups are waiting; take them one level at a time.`
+          : `A level-up to level ${progression.targetLevel} is waiting.`}
+      </p>
+      <Link to="/characters/$characterId/level-up" params={{ characterId }} className="text-base">
+        Open the level-up
+      </Link>
+    </section>
+  );
+}
+
+function valueRow(label: string, change: ValueChange) {
+  const same = change.current === change.snapshot;
+  return (
+    <div key={label} className="flex items-baseline justify-between gap-3 py-1.5">
+      <dt className="text-muted-foreground">{label}</dt>
+      <dd className={cn('m-0 tabular-nums', !same && 'font-medium')}>
+        {same
+          ? (change.snapshot ?? '—')
+          : `${change.current ?? '—'} now → ${change.snapshot ?? '—'} in this build`}
+      </dd>
+    </div>
+  );
+}
+
+function nameRows(label: string, change: NameChange) {
+  if (!change.added.length && !change.removed.length) return null;
+  return (
+    <div key={label} className="flex flex-col gap-1 py-1.5">
+      <dt className="text-muted-foreground">{label}</dt>
+      {change.added.length > 0 && (
+        <dd className="m-0">Only in this build: {change.added.join(', ')}</dd>
+      )}
+      {change.removed.length > 0 && (
+        <dd className="m-0">Only in the active build: {change.removed.join(', ')}</dd>
       )}
     </div>
   );
 }
 
-function OwnerAdvancement({ characterId }: { characterId: Id<'characters'> }) {
-  const progression = useQuery(api.characters.progression, { characterId }) as
-    Advancement | undefined;
-  if (!progression) return <Loading>Loading advancement…</Loading>;
-  // A pending level-up is taken in the level-up screen (V164); this page keeps the history.
-  if (progression.pendingLevelUps < 1 && !progression.draft) return null;
+/** The server's comparison of the recorded build with the active one; displayed, not computed. */
+function DifferenceSummary({ difference }: { difference: BuildDifference }) {
   return (
-    <section aria-label="Level advancement" className={`${PANEL} flex flex-col gap-3`}>
-      <h2 className="m-0">Level up to level {progression.targetLevel}</h2>
-      <p className="m-0 text-base">
-        {progression.pendingLevelUps > 1
-          ? `${progression.pendingLevelUps} level-ups are waiting; take them one level at a time.`
-          : 'A level-up is waiting.'}
+    <section aria-label="Compared with the active build" className={`${PANEL} flex flex-col gap-3`}>
+      <h3 className="m-0">Compared with the active build</h3>
+      {!difference.hasCurrent ? (
+        <p className="m-0 text-base text-muted-foreground">
+          There is no active build yet to compare with.
+        </p>
+      ) : difference.same ? (
+        <p className="m-0 text-base text-muted-foreground">
+          Level, maxima and granted features, abilities and perks match the active build.
+        </p>
+      ) : null}
+      <dl className="m-0 flex flex-col divide-y divide-border text-base">
+        {valueRow('Level', difference.level)}
+        {valueRow('Stamina maximum', difference.staminaMaximum)}
+        {valueRow('Recoveries maximum', difference.recoveriesMaximum)}
+        {difference.hasCurrent && nameRows('Features', difference.features)}
+        {difference.hasCurrent && nameRows('Abilities', difference.abilities)}
+        {difference.hasCurrent && nameRows('Perks', difference.perks)}
+      </dl>
+    </section>
+  );
+}
+
+interface Expected {
+  revision: number;
+  effectiveRevisionId: Id<'characterRevisions'> | null;
+}
+
+/** The owner's restore action; it states the outcome and uses the shared `characters.restore`. */
+function RestorePanel({
+  characterId,
+  history,
+  expected,
+}: {
+  characterId: Id<'characters'>;
+  history: HistorySheet;
+  expected: Expected;
+}) {
+  const character = useQuery(api.characters.get, { characterId });
+  const restore = useMutation(api.characters.restore);
+  const command = useCommand();
+  const [message, setMessage] = useState('');
+  if (!character) return <Loading>Loading character…</Loading>;
+  const complete = history.entry.status === 'complete';
+  const changed =
+    expected.revision !== character.revision ||
+    expected.effectiveRevisionId !== character.effectiveRevisionId;
+  const active = history.entry.isEffective;
+  return (
+    <section aria-label="Restore this build" className={`${PANEL} flex flex-col gap-3`}>
+      <h3 className="m-0">Restore this build</h3>
+      <p className="m-0 text-base">{restoreOutcome(complete, !!character.campaignId)}</p>
+      <p className="m-0 text-base text-muted-foreground">
+        Later revisions stay in history. Inventory, name, appearance and notes are not part of a
+        build and stay as they are. Damage taken and Recoveries spent stay the same against the
+        restored maxima; restoring does not heal or refill anything.
       </p>
+      {active && <Notice>This is the active build.</Notice>}
+      {changed && (
+        <Notice>
+          The character changed since you opened this build. Select it again to restore it.
+        </Notice>
+      )}
+      {character.combatLocked && <Notice>Restoration is locked during combat.</Notice>}
+      {message && <Notice role="status">{message}</Notice>}
       <div>
-        <Link to="/characters/$characterId/level-up" params={{ characterId }} className="text-base">
-          Open the level-up
-        </Link>
+        <Button
+          disabled={command.pending || changed || active || character.combatLocked || !!message}
+          onClick={async () => {
+            const args = {
+              characterId,
+              expectedRevision: expected.revision,
+              sourceRevisionId: history.entry.id as Id<'characterRevisions'>,
+              expectedEffectiveRevisionId: expected.effectiveRevisionId,
+            };
+            const ok = await command.run(
+              commandId => restore({ ...args, commandId }),
+              JSON.stringify(['restore', args]),
+            );
+            if (ok)
+              setMessage(
+                !complete
+                  ? 'Restored as a new private draft. Open Edit to continue its choices.'
+                  : character.campaignId
+                    ? 'Restored as a new revision and submitted. The character sheet shows its review status.'
+                    : 'Restored as a new revision; it is now the active build.',
+              );
+          }}
+        >
+          Restore this build
+        </Button>
       </div>
     </section>
   );
 }
 
-function BuildHistory({
+function RecordedBuild({
   characterId,
-  sheet,
-  character,
+  revisionId,
+  owner,
+  expected,
 }: {
   characterId: Id<'characters'>;
-  sheet: HeroSheet;
-  character?: OwnedCharacter;
+  revisionId: Id<'characterRevisions'>;
+  owner: boolean;
+  expected: Expected | null;
+}) {
+  const history = useQuery(api.characters.historySheet, { characterId, revisionId }) as
+    HistorySheet | undefined;
+  if (!history) return <Loading>Loading the recorded build…</Loading>;
+  return (
+    <section aria-label="Recorded build" className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1">
+        <h2 className="m-0">{historyEntryTitle(history.entry)}</h2>
+        <p className="m-0 text-base text-muted-foreground">
+          Recorded {new Date(history.entry.createdAt).toLocaleString()}. This sheet shows the build
+          as recorded, read-only, with the hero’s current Stamina, Recoveries and other live values.
+        </p>
+      </div>
+      <div className="grid items-start gap-4 lg:grid-cols-2">
+        <DifferenceSummary difference={history.difference} />
+        {!owner ? (
+          <Notice>Only the character’s owner can restore a recorded build.</Notice>
+        ) : expected ? (
+          <RestorePanel characterId={characterId} history={history} expected={expected} />
+        ) : (
+          <Notice>
+            The character was still loading. Select this revision again to restore it.
+          </Notice>
+        )}
+      </div>
+      <HeroSheetView sheet={history.sheet} />
+    </section>
+  );
+}
+
+function HistoryList({
+  characterId,
+  selected,
+  onSelect,
+}: {
+  characterId: Id<'characters'>;
+  selected: Id<'characterRevisions'> | null;
+  onSelect: (id: Id<'characterRevisions'>) => void;
 }) {
   const history = usePaginatedQuery(
     api.characters.history,
     { characterId },
     { initialNumItems: 12 },
   );
-  const entries = history.results as HistoryEntry[];
-  const [selected, setSelected] = useState<{
-    id: Id<'characterRevisions'>;
-    expectedRevision: number | null;
-    expectedEffectiveRevisionId: Id<'characterRevisions'> | null;
-  } | null>(null);
-  const snapshot = useQuery(
-    api.characters.historySnapshot,
-    selected ? { characterId, revisionId: selected.id } : 'skip',
-  ) as HistorySnapshot | undefined;
-  const restore = useMutation(api.characters.restore);
-  const command = useCommand();
-  const [message, setMessage] = useState('');
-  const changed =
-    !!selected &&
-    !!character &&
-    (selected.expectedRevision !== character.revision ||
-      selected.expectedEffectiveRevisionId !== character.effectiveRevisionId);
+  const entries = history.results as BuildHistoryEntry[];
   return (
-    <section aria-label="Build history" className={`${PANEL} mt-4 flex flex-col gap-4`}>
-      <h2>Build history</h2>
-      <p className="m-0 text-base">
-        Browse recorded builds without changing the active sheet or current resources. Later history
-        is retained when you restore.
-      </p>
+    <section aria-label="Build history" className={PANEL}>
+      <SectionHeading as="h2" aside={`${entries.length} shown`}>
+        Revisions
+      </SectionHeading>
       {history.status === 'LoadingFirstPage' ? (
         <Loading>Loading history…</Loading>
       ) : (
-        <ol className="m-0 list-none space-y-2 p-0">
+        <ol className="m-0 flex list-none flex-col gap-1 p-0">
           {entries.map(entry => (
             <li key={entry.id}>
-              <Button
-                variant={selected?.id === entry.id ? 'default' : 'outline'}
-                onClick={() => {
-                  setSelected({
-                    id: entry.id,
-                    expectedRevision: character?.revision ?? null,
-                    expectedEffectiveRevisionId: character?.effectiveRevisionId ?? null,
-                  });
-                  setMessage('');
-                }}
+              <button
+                type="button"
+                aria-pressed={selected === entry.id}
+                aria-label={historyEntryTitle(entry)}
+                onClick={() => onSelect(entry.id as Id<'characterRevisions'>)}
+                className={cn(
+                  'flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-md px-3 py-2 text-left text-base transition-colors hover:bg-muted',
+                  selected === entry.id && 'bg-muted',
+                )}
               >
-                Revision {entry.revision} · level {entry.level} · {entry.kind.replaceAll('-', ' ')}{' '}
-                · {entry.status}
-                {entry.isEffective ? ' · Active' : ''}
-                {entry.isDraft ? ' · Draft' : ''}
-              </Button>
-              <span className="ml-3 text-sm text-muted-foreground">
-                {new Date(entry.createdAt).toLocaleString()}
-              </span>
+                <span className="flex flex-wrap items-center gap-x-2">
+                  <span className="font-medium">Revision {entry.revision}</span>
+                  <span className="text-muted-foreground">Level {entry.level}</span>
+                  <span>{historyKindLabel(entry)}</span>
+                </span>
+                <span className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                  {entry.isEffective && <Badge>Active</Badge>}
+                  {entry.isDraft && !entry.isEffective && <Badge variant="outline">Draft</Badge>}
+                  {entry.status !== 'complete' && <Badge variant="outline">{entry.status}</Badge>}
+                  <span>{new Date(entry.createdAt).toLocaleString()}</span>
+                </span>
+              </button>
             </li>
           ))}
         </ol>
       )}
       {history.status !== 'Exhausted' && history.status !== 'LoadingFirstPage' && (
         <Button
+          className="mt-3"
           variant="outline"
           disabled={history.status === 'LoadingMore'}
           onClick={() => history.loadMore(12)}
         >
-          {history.status === 'LoadingMore' ? 'Loading…' : 'Load older builds'}
+          {history.status === 'LoadingMore' ? 'Loading…' : 'Load older revisions'}
         </Button>
-      )}
-      {message && <Notice role="status">{message}</Notice>}
-      {selected && !snapshot && <Loading>Loading recorded build…</Loading>}
-      {snapshot && (
-        <div className="grid items-start gap-6 border-t border-border pt-6 lg:grid-cols-2">
-          <div className="flex flex-col gap-4">
-            <h3>
-              Recorded revision {snapshot.entry.revision} · Level {snapshot.entry.level}
-            </h3>
-            <Notice>
-              This is a read-only recorded build. Present inventory, authored details and current
-              resources are unchanged.
-            </Notice>
-            {character && (
-              <>
-                <p className="m-0 text-base">
-                  {snapshot.entry.status !== 'complete'
-                    ? 'Restoring this unfinished build creates a new private draft. It does not submit for review or replace the active build. Continue its choices in Edit.'
-                    : character.campaignId
-                      ? 'Restoring creates a new build and submits it for Director review. Your active build changes only after approval. A Director restoring their own character is approved automatically.'
-                      : 'Restoring creates and activates a new recorded build. Later history, present inventory and authored details are retained.'}
-                </p>
-                <p className="m-0 text-base">
-                  Damage taken and Recoveries spent stay the same against the restored maxima; this
-                  does not heal or refill resources.
-                </p>
-                {snapshot.activationPreview && (
-                  <ul className="m-0 list-none p-0 text-base" aria-label="Restore resource preview">
-                    {snapshot.activationPreview.changes.map(change => (
-                      <li key={change.field}>
-                        {change.field}: {change.currentBefore}/{change.maximumBefore ?? '—'} →{' '}
-                        {change.currentAfter}/{change.maximumAfter}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {snapshot.activationPreview?.incompatibleResource && (
-                  <Notice>
-                    The heroic resource changes; activation requires explicit resource
-                    reconciliation.
-                  </Notice>
-                )}
-                {changed && (
-                  <Notice>
-                    The character changed since you opened this build. Select its revision again to
-                    reload the restore preview.
-                  </Notice>
-                )}
-                {sheet.combatLocked && <Notice>Restoration is locked during combat.</Notice>}
-                <Button
-                  disabled={
-                    command.pending ||
-                    changed ||
-                    sheet.combatLocked ||
-                    selected?.expectedRevision === null
-                  }
-                  onClick={async () => {
-                    if (!selected || selected.expectedRevision === null) return;
-                    const args = {
-                      characterId,
-                      expectedRevision: selected.expectedRevision,
-                      sourceRevisionId: selected.id,
-                      expectedEffectiveRevisionId: selected.expectedEffectiveRevisionId,
-                    };
-                    const ok = await command.run(
-                      commandId => restore({ ...args, commandId }),
-                      JSON.stringify(['restore', args]),
-                    );
-                    if (ok)
-                      setMessage(
-                        snapshot.entry.status !== 'complete'
-                          ? 'Recorded choices restored as a new private draft. Open Edit to continue.'
-                          : character.campaignId
-                            ? 'Restored build submitted. Check the character sheet for its review status.'
-                            : 'Recorded build restored as a new active revision.',
-                      );
-                  }}
-                >
-                  Restore this build
-                </Button>
-              </>
-            )}
-            <details>
-              <summary className="cursor-pointer text-base">Recorded choices</summary>
-              <dl className="mt-3 space-y-3 text-base">
-                {snapshot.selections.map(selection => (
-                  <div key={selection.decisionId}>
-                    <dt className="font-medium">{decisionLabel(selection.decisionId)}</dt>
-                    <dd className="m-0 break-words">
-                      {typeof selection.value === 'string'
-                        ? selection.value
-                        : JSON.stringify(selection.value)}
-                    </dd>
-                    {selection.sources.map((source, index) => (
-                      <RuleLink
-                        key={index}
-                        sourcePath={source.path}
-                        label={decisionLabel(selection.decisionId)}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </dl>
-            </details>
-            {!snapshot.evaluation && (
-              <Notice>
-                This revision has no recorded evaluation. Restore its saved choices as a draft and
-                continue in Edit.
-              </Notice>
-            )}
-          </div>
-          {snapshot.evaluation && (
-            <BuildPreview evaluation={snapshot.evaluation} name={sheet.name} />
-          )}
-        </div>
       )}
     </section>
   );
 }
 
-function AuthorizedProgression({
+function AuthorizedHistory({
   characterId,
   sheet,
 }: {
   characterId: Id<'characters'>;
   sheet: HeroSheet;
 }) {
-  // Directors may read history, but the draft/advancement endpoint belongs exclusively to owners.
-  const character = useQuery(
-    api.characters.get,
-    sheet.audience === 'owner' ? { characterId } : 'skip',
-  );
+  const owner = sheet.audience === 'owner';
+  // Restore's optimistic-concurrency values come from the owner-only read, captured on selection.
+  const character = useQuery(api.characters.get, owner ? { characterId } : 'skip');
+  const [selected, setSelected] = useState<{
+    id: Id<'characterRevisions'>;
+    expected: Expected | null;
+  } | null>(null);
   return (
-    <>
-      {sheet.audience === 'owner' &&
-        (character ? (
-          <OwnerAdvancement characterId={characterId} />
-        ) : (
-          <Loading>Loading character…</Loading>
-        ))}
-      {sheet.audience === 'director' && (
+    <div className="flex flex-col gap-6">
+      {owner && <LevelUpNotice characterId={characterId} />}
+      {!owner && (
         <Notice>
-          The character owner makes progression choices. You can inspect recorded builds here.
+          The character’s owner makes progression choices and restores builds. You can inspect every
+          recorded build here.
         </Notice>
       )}
-      <BuildHistory characterId={characterId} sheet={sheet} character={character} />
-    </>
+      <HistoryList
+        characterId={characterId}
+        selected={selected?.id ?? null}
+        onSelect={id =>
+          setSelected({
+            id,
+            expected: character
+              ? { revision: character.revision, effectiveRevisionId: character.effectiveRevisionId }
+              : null,
+          })
+        }
+      />
+      {selected ? (
+        <RecordedBuild
+          key={selected.id}
+          characterId={characterId}
+          revisionId={selected.id}
+          owner={owner}
+          expected={selected.expected}
+        />
+      ) : (
+        <p className="m-0 text-base text-muted-foreground">
+          Select a revision to see its full recorded character sheet.
+        </p>
+      )}
+    </div>
   );
 }
 
-export function ProgressionPage({ characterId }: { characterId: Id<'characters'> }) {
+export function HistoryPage({ characterId }: { characterId: Id<'characters'> }) {
   const sheet = useQuery(api.characters.sheet, { characterId }) as CharacterSheet | undefined;
-  if (!sheet) return <Loading>Opening progression…</Loading>;
+  if (!sheet) return <Loading>Opening history…</Loading>;
   return (
-    <div className="space-y-6">
-      <header className="flex items-center justify-between gap-4">
-        <h1>{sheet.name} · Progression</h1>
-        <Link
-          to="/characters/$characterId"
-          params={{ characterId }}
-          className="text-sm text-muted-foreground hover:text-foreground"
-        >
-          Back to character sheet
-        </Link>
-      </header>
+    <>
+      <Link
+        to="/characters/$characterId"
+        params={{ characterId }}
+        className="mb-4 inline-block text-sm text-muted-foreground hover:text-foreground"
+      >
+        ← Back to the character sheet
+      </Link>
+      <div className="mb-6">
+        <Eyebrow>Build history</Eyebrow>
+        <h1>{sheet.name} · History</h1>
+        <p className="m-0 text-base text-muted-foreground">
+          Every creation, edit, level-up, respite kit change and restore records the whole build.
+          Live values, inventory and written details are not part of a build and stay current.
+        </p>
+      </div>
       {sheet.audience === 'peer' ? (
         <Notice>Build history is available to the character owner and Director.</Notice>
       ) : (
-        <AuthorizedProgression key={characterId} characterId={characterId} sheet={sheet} />
+        <AuthorizedHistory key={characterId} characterId={characterId} sheet={sheet} />
       )}
-    </div>
+    </>
   );
 }

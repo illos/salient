@@ -32,7 +32,9 @@ export function buildLabel(sheet: HeroSheet): string {
       ? 'Proposed build (awaiting review)'
       : sheet.build?.label === 'draft'
         ? 'Draft preview (not in play)'
-        : 'No build yet';
+        : sheet.build?.label === 'history'
+          ? `Recorded revision ${sheet.build.revision} (read-only)`
+          : 'No build yet';
 }
 
 export function SheetHeader({

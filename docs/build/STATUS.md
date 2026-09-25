@@ -173,3 +173,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V182 | Forge import levels 2–3 and UI (doc on `slice/V182`) | Paused (user ruling 2026-09-25: not V1); reviewed PASS, parked on `slice/V182` |
 | V183 | [Pause Forge Steel import](V183-forge-import-pause.md) | Merged (docs only; no gate needed) |
 | V184 | [Level-up diagnostics follow the current choices](V184-level-up-stale-diagnostics.md) | Merged (`887f448`); cloud dev published; accepted TESTER results reused |
+| V185 | [Build History page: full recorded sheet preview and restore](V185-build-history.md) | In progress |
