@@ -23,10 +23,16 @@ export function legacyFuryExpectationView<T>(value: T): T {
         assert.equal(a.kind, 'class');
         assert.equal(a.sourcePath, source);
         assert.equal(a.provenance.source.path, source);
-        assert.equal(
-          a.provenance.source.quote,
-          readPinnedSource(process.cwd(), `vendor/steel-compendium/${source}`),
+        // V188: the quote is the file's body after its YAML frontmatter, stripped here independently
+        // of the code under test (the lines after the second `---` line, without leading blank lines).
+        const lines = readPinnedSource(process.cwd(), `vendor/steel-compendium/${source}`).split(
+          '\n',
         );
+        const close = lines.indexOf('---', 1);
+        assert.equal(lines[0], '---');
+        let first = close + 1;
+        while (lines[first] === '') first += 1;
+        assert.equal(a.provenance.source.quote, lines.slice(first).join('\n'));
         assert.deepEqual(a.cost, e.cost ? { resource: 'ferocity', amount: e.cost } : undefined);
         assert.ok(a.activationCondition?.includes('manual'));
       }
