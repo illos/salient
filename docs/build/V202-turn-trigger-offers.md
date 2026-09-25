@@ -114,6 +114,7 @@ abilities, used by hand.
 ## Work log
 
 - 2026-09-25: `slice/V202` in `.worktrees/turn-triggers`, stacked on `slice/V200` `473bee03`.
+  Implementation commit: `a7d9a7f5` (committed on the branch, not pushed).
 - Flipped to fully compiled (effect-only), and the only three:
   - **My Life for Yours** (`feature/ability/censor/level-1/my-life-for-yours.md`): offered at the
     turn start of the Censor or an ally, and when either takes damage. The Recovery and healing, and
