@@ -1263,7 +1263,7 @@ with this anchor compiles.
 
 ### Q-V-3: Does imported Forge Steel damage and Recoveries used survive admission? (V09)
 
-- **Status:** open
+- **Status:** deferred (Forge import paused, user ruling 2026-09-25)
 - **Raised by:** V09 part a, 2026-09-24
 - **Where:** `docs/character-wizard-spec.md#required-import` ("stores Stamina damage and Recoveries
   used ... Reconcile those representations explicitly"); Q-R-201 above (destination admission starts
@@ -1284,7 +1284,7 @@ with this anchor compiles.
 
 ### Q-V-4: Which Forge Steel versions and file shapes does import support? (V09)
 
-- **Status:** open
+- **Status:** deferred (Forge import paused, user ruling 2026-09-25)
 - **Raised by:** V09 part a, 2026-09-24
 - **Where:** `docs/character-wizard-spec.md#required-import` ("within an explicitly tested support
   range") and `#12-open-decisions` (historical Forge shapes); `docs/forge-steel-interchange.md`
@@ -1302,7 +1302,7 @@ with this anchor compiles.
 
 ### Q-V-5: Is preserved unmapped Forge data shown to the owner? (V09)
 
-- **Status:** open
+- **Status:** deferred (Forge import paused, user ruling 2026-09-25)
 - **Raised by:** V09 part a, 2026-09-24
 - **Where:** `docs/character-wizard-spec.md#required-import` ("Unmapped mechanics remain visible and
   preserved"); V09 open question on preserved compatibility data.
@@ -1318,7 +1318,7 @@ with this anchor compiles.
 
 ### Q-V-6: What happens to a Forge file above the supported level? (V09)
 
-- **Status:** open
+- **Status:** deferred (Forge import paused, user ruling 2026-09-25)
 - **Raised by:** V09 part a, 2026-09-24
 - **Where:** `docs/character-wizard-spec.md#required-import` ("If an earlier level is requested,
   reconstruct only what the available data establishes"); `shared/content/character-support.ts`

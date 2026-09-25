@@ -192,7 +192,7 @@ borrowed trait, removes the career benefit, nor awards optional treasure. None i
 See [the deferred queue](rules-questions-for-user.md#deferred-questions).
 
 In scope: creation, advancement, full editing, history, authored details, inventory integration, derived
-sheets, attachment/detachment/duplication, Director review, and required Forge Steel import. Compatible Forge
+sheets, attachment/detachment/duplication, Director review, and Forge Steel import (not V1 per the [2026-09-25 ruling](#required-import)). Compatible Forge
 Steel export is not required for v1. The data model must preserve the information and interchange-adapter
 boundary needed to add it without rewriting the system. Import remains a v1 requirement; export implementation
 and demonstrated compatibility are later delivery work.
@@ -819,6 +819,8 @@ customizations, and unmapped homebrew distinguishable. Source updates are delibe
 startup/build, and must not silently rewrite recorded history.
 
 ### Required import
+
+**User ruling, 2026-09-25:** Forge Steel import is not part of V1. It is paused until the character wizard is level-complete for all classes. Part a (V09, command-line import of drafts) stays on main as built; parts b and c (V182 levels 2–3 and the import UI; preserving customised and non-core content) are parked. The ruling supersedes the "Import remains a v1 requirement" wording in this document and the V1 roadmap.
 
 Required for the fuller product; implementation is explicitly deferred beyond v0.01. The architecture above
 must accommodate it from the first character model.

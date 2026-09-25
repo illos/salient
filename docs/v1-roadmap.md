@@ -184,7 +184,7 @@ before starting the five development tracks.
 4. **Remaining combat support and release criteria:** finish unresolved resolution, response, clock,
    special-turn and history contracts; define and verify core content and automation coverage. Specify
    what must work reliably for stable V1, including the connected campaign-to-next-session journey,
-   Forge Steel import, multiplayer access/retries/reconnect, mobile/tablet usability and sustained table
+   Forge Steel import (removed from V1 on 2026-09-25; paused until the wizard is level-complete), multiplayer access/retries/reconnect, mobile/tablet usability and sustained table
    performance. Owning references: [table](table-spec.md), [character wizard](character-wizard-spec.md),
    [reference libraries](reference-library-spec.md), [tech stack](v1-tech-stack-spec.md) and
    [V1 integration acceptance](v1-spec-checkpoint.md#remaining-work-before-complete-v1-play).

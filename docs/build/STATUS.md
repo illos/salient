@@ -170,3 +170,5 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V164 | [Level-up screen, first design pass](V164-level-up-screen.md) | Merged (`6686fbe`); cloud dev published; accepted TESTER results reused |
 | V180 | [Split the headless `all` cohort again](V180-headless-all-split.md) | Merged (`1118489`, train 12); cloud dev published; gate and headless PASS at tip |
 | V181 | [Dependent choices stay with their parent on the level-up screen](V181-level-up-dependent-choices.md) | Merged (`bd4f0cc`); cloud dev published; accepted TESTER results reused |
+| V182 | [Forge import levels 2–3 and UI](V182-forge-import-levels-ui.md) | Paused (user ruling 2026-09-25: not V1); reviewed PASS, parked on `slice/V182` |
+| V183 | [Pause Forge Steel import](V183-forge-import-pause.md) | Ready for gate |
