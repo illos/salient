@@ -105,3 +105,11 @@ lists the level-two abilities, and Forge's Summoner "Summoner's Cradle" has no C
   11/17 and 12/18 (Conduit), 12/12 and 13/13 (Elementalist, Talent), 12/13 and 13/14 (Beastheart),
   12/12 and 14/14 (Summoner). Some pinned Forge entries carry random ids generated at load, so a
   rerun changes those files' digests; the manifest records the committed ones.
+- 2026-09-25: committed on `slice/V182` (`c1b74b31` docs, `9293f7ca` mappings/tooling/fixtures,
+  `2bc98bc3` API and CLI, `04410e6c` UI). Authoring checks at `04410e6c`: `npx tsc --noEmit` exit 0,
+  `npx tsc -p tsconfig.web.json --noEmit` exit 0, `pnpm -s lint` exit 0 ("All matched files use
+  Prettier code style!"), `vitest run tests/forge-import-levels.test.ts tests/forge-import.test.ts
+  tests/app/forge-import-levels.test.ts tests/app/forge-import.test.ts` 49/49. Convex push of
+  `git archive 04410e6c` to an anonymous local deployment: "Convex functions ready"; the codegen
+  differs from the committed `_generated/api.d.ts` only by five `lib/*` entries also missing on
+  main, none from this slice. The browser spec is authored only; TESTER has run nothing.
