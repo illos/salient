@@ -29,3 +29,6 @@ user-approved resolution are recorded in Q-FOE-2; the 2-point formula is an appl
 - 2026-09-25: created `slice/V230` in `.worktrees/ravenous-horde-ruling` from `171a8702`.
   User accepted the previously presented separate-squad/casualty example and explicitly confirmed
   summoned zombies have 2 Stamina. Recorded the answer and updated planned acceptance cases.
+- Test accepted `3f45f32b`: diff check passed and 584 Markdown files had no broken relative links
+  or anchors. QC gave final PASS on that exact tip. Fast-forward merged into main; no runtime
+  component changed.
