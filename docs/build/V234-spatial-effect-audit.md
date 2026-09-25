@@ -57,3 +57,6 @@ Pinned Compendium paths and named sections are given in the research report.
   Markdown files) and focused non-table browser behavior, including checkbox-only exports,
   reload persistence, imports and filters. Evidence: `../test-artifacts/V234-43be0e8c/`.
   Removed the extra EOF blank reported by diff check; only that check requires revalidation.
+- 2026-09-25: Test's final diff recheck passed at `b411de86`; QC gave final PASS. Fast-forward
+  merged into `main` and published the generated review at
+  `https://presidium-iv.tail41404c.ts.net:9570/`. No game-runtime deployment.
