@@ -115,7 +115,7 @@ import { assertWatchersReconcilable, noteManualWatchers, observeWatchers } from 
 import { applyMark } from './marks';
 import { describeWatcher } from '../../shared/resolve/watchers';
 import { describeArea } from '../../shared/resolve/areas';
-import { applyArea, endChosenPerformance } from './areas';
+import { applyArea, endChosenPerformance, performanceActivationWarnings } from './areas';
 import {
   acceptanceOrder,
   closeOffersOnPlay,
@@ -1919,6 +1919,17 @@ const abilityUse: OperationDefinition = {
       warnings.push(
         `Rule warning: ${actor!.name} is bleeding${bleedingLive.stamina <= 0 ? ' (dying)' : ''}: after this triggered action resolves they lose 1d6 + ${baselineOf(records.character!.derivedBaseline)?.level.value ?? 'their level'} Stamina, which can't be prevented (condition/bleeding.md). The table applies it.`,
       );
+    // V200 (QC1 train 21 R1): choosing a performance while dazed, dead or surprised is a rule
+    // warning on every path, compiled or by hand (feature/troubadour/level-1/routines.md).
+    warnings.push(
+      ...(await performanceActivationWarnings(
+        ctx,
+        actor!,
+        records,
+        ability.keywords,
+        allowance.inCombat ? allowance.encounterId : null,
+      )),
+    );
     // V173: a response to a triggered-action card (convex/lib/triggeredActions.ts).
     const answered = respondsTo ? await offerOf(ctx, respondsTo.interactionId) : null;
     if (answered)

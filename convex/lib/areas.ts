@@ -14,7 +14,7 @@
  * rider did.
  */
 import { ConvexError } from 'convex/values';
-import type { Id } from '../_generated/dataModel';
+import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { AreaMember, EffectInstance, EffectParty } from '../../shared/contracts/liveState';
 import { riderApplies, sameAreaPayload, type AreaSide } from '../../shared/resolve/areas';
@@ -382,4 +382,49 @@ export async function maintainPerformance(
       sourcePath: instance.sourcePath,
     },
   };
+}
+
+/** feature/troubadour/level-1/routines.md, quoted word for word. */
+export const ROUTINES_ACTIVATION =
+  'At the start of each combat round, as long as you are not dazed, dead, or surprised, you can either choose a new performance or maintain your current performance (no action required).';
+
+/**
+ * V200 (QC1 train 21 R1): the rule warnings for choosing a performance while its user is dazed
+ * (condition/dazed.md), dead (rule/health/dying.md: "if it reaches the negative of your winded
+ * value, you die") or surprised (the encounter's recorded surprise, which lasts "until the end of
+ * the first combat round", rule/combat/surprised.md). By the warning-through override policy
+ * (docs/rules-adaptation-principles.md) the use is never refused: the warning is persisted on the
+ * use's result and log entry, and the table decides. Empty for any other ability.
+ */
+export async function performanceActivationWarnings(
+  ctx: ReadCtx,
+  actor: { kind: string; id: string; name: string },
+  records: { character?: Doc<'characters'>; foe?: Doc<'foes'> },
+  keywords: readonly string[],
+  encounterId: Id<'encounters'> | null,
+): Promise<string[]> {
+  if (!keywords.some(keyword => plain(keyword).trim().toLowerCase() === 'performance')) return [];
+  const states: string[] = [];
+  const live = records.character?.liveState;
+  const conditions = live?.conditions ?? records.foe?.live.conditions;
+  if (conditions?.dazed) states.push('dazed');
+  const baseline = records.character ? baselineOf(records.character.derivedBaseline) : undefined;
+  if (live && baseline && live.stamina < 0 && live.stamina <= -baseline.windedValue.value)
+    states.push('dead');
+  if (encounterId) {
+    const entries = await ctx.db
+      .query('turnEntries')
+      .withIndex('by_encounter', q => q.eq('encounterId', encounterId))
+      .take(500);
+    if (
+      entries.some(
+        entry => entry.surprised && entry.actor.kind === actor.kind && entry.actor.id === actor.id,
+      )
+    )
+      states.push('surprised');
+  }
+  if (!states.length) return [];
+  return [
+    `Rule warning: ${actor.name} is ${states.join(' and ')}, so can't choose or maintain a performance (feature/troubadour/level-1/routines.md: "${ROUTINES_ACTIVATION}"). The use is recorded as the table chose it.`,
+  ];
 }

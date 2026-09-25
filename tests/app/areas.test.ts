@@ -115,6 +115,20 @@ async function setup() {
   return { t, f, command, members, addGoblin, hero, foe, events };
 }
 
+/** feature/troubadour/level-1/routines.md, word for word. */
+const ROUTINES =
+  'At the start of each combat round, as long as you are not dazed, dead, or surprised, you can either choose a new performance or maintain your current performance (no action required).';
+
+/** The rule warnings a use persisted on its log entry, and the entry's description. */
+async function persistedWarnings(s: Awaited<ReturnType<typeof setup>>, eventId: Id<'events'>) {
+  const event = (await s.t.run(ctx => ctx.db.get(eventId)))!;
+  const data = (event.payload as { data?: { warnings?: string[] } }).data;
+  return {
+    description: event.description,
+    warnings: (data?.warnings ?? []).filter(w => w.includes('routines.md')),
+  };
+}
+
 const riders = (instances: readonly EffectInstance[] | undefined, areaId: string) =>
   (instances ?? []).filter(instance => instance.area?.id === areaId);
 
@@ -625,6 +639,79 @@ test('V200: a Troubadour performance keeps its aura until another performance is
   const dazed = ((await s.hero(bard)).effectInstances ?? []).find(i => i.id === next.id)!;
   expect(dazed.status).toBe('ended');
   expect(dazed.endedReason).toMatch(/dazed at the start of the round/);
+
+  // 6. QC1 train 21 R1: still dazed after round 3 began, the Bard chooses Ballad again. Routines
+  // forbids it, but the warning-through override policy (docs/rules-adaptation-principles.md)
+  // records the use with a persisted rule warning instead of refusing it.
+  const balladName = JSON.stringify('"Ballad of the Beast"');
+  const again = await s.command(
+    `${bardRef} /ability use ability=${balladName} targets=[${bardRef}, @Thorn]`,
+    true,
+  );
+  const dazedRead = await persistedWarnings(s, again.eventId);
+  expect(dazedRead.warnings).toEqual([expect.stringMatching(/Bard is dazed, so/)]);
+  expect(dazedRead.warnings[0]).toMatch(ROUTINES);
+  expect(dazedRead.description).toContain(dazedRead.warnings[0]!);
+  expect(
+    ((await s.hero(bard)).effectInstances ?? []).find(
+      i => i.sourceUseEventId === again.eventId && i.kind === 'area',
+    )!.status,
+  ).toBe('active');
+
+  // 7. The eligible control: no longer dazed, no warning.
+  await s.command(`${bardRef} /condition off name=dazed`);
+  const eligible = await s.command(
+    `${bardRef} /ability use ability=${balladName} targets=[${bardRef}, @Thorn]`,
+    true,
+  );
+  expect((await persistedWarnings(s, eligible.eventId)).warnings).toEqual([]);
+
+  // 8. Dead (Stamina at the negative of the winded value, 9 for the v102-3 Bard's 18): the compiled
+  // Ballad and Choreography, a performance used by hand, both carry the warning.
+  await s.command(`${bardRef} /adjust stamina value=-9`);
+  for (const name of [balladName, 'Choreography']) {
+    const use = await s.command(
+      `${bardRef} /ability use ability=${name} targets=[${bardRef}, @Thorn]`,
+      true,
+    );
+    const read = await persistedWarnings(s, use.eventId);
+    expect(read.warnings, String(name)).toEqual([expect.stringMatching(/Bard is dead, so/)]);
+    expect(read.warnings[0]).toMatch(ROUTINES);
+  }
+});
+
+test('V200 (QC1 train 21 R1): a Troubadour surprised in round 1 who chooses a performance gets the Routines warning', async () => {
+  const s = await setup();
+  const bard = await admitHero(
+    s.t,
+    s.f.player,
+    s.f.director,
+    s.f.campaignId,
+    'Bard',
+    draftSelectionsFrom(
+      {
+        ...(troubadourLedger.witnesses.find(w => w.id === 'v102-3')!
+          .selections as unknown as EvaluationInput['selections']),
+        'details.name': 'Bard',
+      },
+      definitions,
+    ),
+  );
+  await s.addGoblin();
+  const bardRef = `@{character:${bard}}`;
+  // rule/combat/surprised.md: "surprised until the end of the first combat round".
+  await s.command('/combat start');
+  await s.command(`/combat setup creature=${bardRef} surprised=true`);
+  await s.command('/combat commit');
+  await s.command('/combat roll', true);
+  await s.command('/combat first side=heroes');
+  const use = await s.command(
+    `${bardRef} /ability use ability=${JSON.stringify('"Ballad of the Beast"')} targets=[${bardRef}]`,
+    true,
+  );
+  const read = await persistedWarnings(s, use.eventId);
+  expect(read.warnings).toEqual([expect.stringMatching(/Bard is surprised, so/)]);
+  expect(read.warnings[0]).toMatch(ROUTINES);
 });
 
 test('V200: two Talents’ columns on one goblin form a manual stacking group; neither fires at its turn start', async () => {
