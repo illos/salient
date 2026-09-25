@@ -176,3 +176,9 @@ Spec references:
       forced-movement-followups and damage-reactions;
     - the character files v100, v104, v114, v134, v135, v45 and v25.
 - Journeys were not run (TESTER). Open question: Q-DT-1 in `docs/rules-questions-for-user.md`.
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `64b521e` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `c56d0334-acbf-4712-b599-3200983d92c2`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V177-release-64b521e`.

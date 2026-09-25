@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V177 | `64b521e` | Merged; backend/frontend published; accepted gates reused | complete |
 | V176 | `408dd11` | Merged; backend/frontend published; accepted gates reused | complete |
 | V175 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
 | V174 | `0401350` | Merged in train 17; backend/frontend published; gate and headless at tip | complete |
@@ -893,3 +894,16 @@ The test and deploy thread fast-forwarded reviewed tip `408dd11b6c6b6430b7ac0922
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V176-release-408dd11`.
+
+### V177 damage-type options publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `64b521edbc21c811e7a42357af02cb699d184d1e` into main.
+- Cherry-picked onto main `d3ab253` as train 18; full gate at the tip (337 s, 458 engine and 908 app tests).
+- Journeys at the tip: conduit, elementalist, elementalist-level-three, fury, fury-level-three and all.
+- Independent review and QC1 scoped clearance passed; Q-DT-1 (hero weaknesses) stays open for V178.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `c56d0334-acbf-4712-b599-3200983d92c2`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V177-release-64b521e`.

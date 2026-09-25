@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V176 forced-movement follow-ups
+## Current release — V177 damage-type options
+
+Backend/frontend source `64b521edbc21c811e7a42357af02cb699d184d1e` published on 2026-09-25 as
+Worker `c56d0334-acbf-4712-b599-3200983d92c2`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V177](build/V177-damage-type-options.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V176 forced-movement follow-ups
 
 Backend/frontend source `408dd11b6c6b6430b7ac09224ef1c70c7c640f6c` published on 2026-09-25 as
 Worker `713636cf-0683-4b09-981d-cfe7997ec946`. Backend and schema validation, the hosted build and the upload succeeded.
