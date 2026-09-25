@@ -1189,6 +1189,16 @@ that close their own chain. Other characters' responses to unrelated triggering 
 own windows. This correction does not add a universal wait barrier, selective rollback, or a special
 resource-dependency repair mechanism. Existing sequential undo and prompt restoration remain in force.
 
+**Confirmed shared triggered-card refinement, 2026-09-25:** in the Meat Shield discussion the user
+confirmed that the next committed action closes an unused triggered-action response card, even
+within the same turn, and explicitly requires the same behavior for these cards across all hero
+and monster triggered actions. This supersedes the narrower affected-character-only early-close
+scope above. Next individual turn start remains the outer cutoff. Preparation/refused actions and
+the offered response's own ordered chain retain their existing treatment. Apply the original
+action immediately and offer its dynamic response card afterward; using that card revises the
+linked result. This records the shared interaction rule, not proof that every ability's revision
+consequences are implemented. Source-specific effects, validity and ordering still govern.
+
 This convention governs the current prompt's response window, not deletion of its historical entry or
 the lifetime of an ongoing effect. Persistent-area cards retain their established effect lifetime and
 can offer new firing prompts. Required unresolved work still prevents dependent progression; expiry

@@ -2043,7 +2043,8 @@ Recommendation: keep 1 to 9.
 
 ## Q-FOE-1: timing for attack redirection and pre-resolution foe reactions
 
-Partially answered by the user on 2026-09-25; V229 records the correction to V211's proposal.
+Interaction and window answered by the user on 2026-09-25; source-specific readings remain open.
+V229 records the correction to V211's proposal.
 
 **Confirmed interaction direction:** minimize interruptions, following character reactions. Resolve
 and apply the player's action as if the Director declined the optional response. Offer a dynamic
@@ -2051,13 +2052,13 @@ card informing the Director that Meat Shield is available; accepting it revises 
 The proposed blocking declaration/response step is rejected. This confirms the interaction direction;
 it does not settle every source-specific consequence for all four abilities below.
 
-**Window:** the user gives the start of the next monster's or hero's turn as the deadline and also
-says “when the next action is taken.” The existing character precedent in
-`docs/table-spec.md#inline-interaction-cards-in-the-game-log` has next individual turn start as its
-outer cutoff and earlier closure when the affected character commits subsequent play or spends the
-hit's granted resources. One clarification is queued: does “next action” mean any creature's next
-committed action, or the existing character-reaction early-close rule? Recommendation: reuse the
-existing rule. The resolve-first interaction direction is confirmed independently of that detail.
+**Confirmed window:** the next committed action closes the unused response card, even within the
+same turn. The user explicitly chose “Next action” and requires the same behavior for these cards
+across all triggered actions, including heroes and monsters. Apply the shared card convention;
+do not create a monster-specific window. Next individual turn start remains the outer cutoff.
+The offered response itself and ordered work in its response chain retain the existing handling;
+preparing or refusing an action is not committing one. This supersedes the narrower suggestion
+that only the affected creature's subsequent play closes this opportunity.
 
 **Source consequences still to preserve:** Meat Shield replaces the target of the strike. The
 user's damage-redirection example settles presentation/timing; it does not authorize ignoring

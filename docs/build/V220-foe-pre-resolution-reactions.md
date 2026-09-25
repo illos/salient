@@ -14,9 +14,9 @@ revises its result if used within the accepted window, preserving the complete c
   reinterpret target replacement as damage transfer, or reuse a previous target's defenses/potency.
 - Q-FOE-1 confirms resolve-first interaction following character reactions: no blocking response
   step. Meat Shield appears on a dynamic Director card after the player's action applies.
-- Reuse the existing response-window contract; clarification of the user's “next action” wording
-  remains queued. Next individual turn start is the confirmed outer deadline. Unresolved
-  source-specific consequences and Facepalm's timing antecedent stay explicit/manual.
+- Use the shared hero/monster triggered-card window: the next committed action closes the
+  unused card, even in the same turn. Next individual turn start remains the outer deadline.
+  Unresolved source-specific consequences and Facepalm's timing antecedent stay explicit/manual.
 
 Spec: `docs/engine-architecture.md#proposed-resolution-lifecycle`;
 `docs/table-spec.md#director-edits-to-inline-results`;
@@ -38,7 +38,7 @@ Likely paths: ability operation, contextual offers, response-window validity, li
 4. Ordered competing hero/foe reactions, stale target changes, retry, cancellation and undo/redo
    cannot commit two original attacks, spend twice or leave effects on a displaced target.
 5. Prove no mandatory pause, Director authority, stale-card refusal at next individual turn start,
-   and the clarified early-close boundary once answered. End turn alone is not the outer cutoff.
+   and closure on the next committed action by either side, including within the same turn. End turn alone is not the outer cutoff.
 6. Test gate plus `foe-interruptions`; compare original/final targets, roll and saved state through
    the public readback. QC must review the explicit answer and affected character pathways first.
 
@@ -46,4 +46,5 @@ Likely paths: ability operation, contextual offers, response-window validity, li
 
 - 2026-09-25: registered by V211, decision-dependent. No implementation or test results.
 - 2026-09-25: V229 records the user's resolve-first/card-revision direction. The prior blocking
-  response proposal is withdrawn; window wording and unconfirmed source readings remain open.
+  response proposal is withdrawn. The user confirmed next-action closure across hero and monster
+  triggered cards; unconfirmed source readings remain open.
