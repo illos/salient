@@ -5,6 +5,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createTable } from './v21-fixtures';
+import { vendorPath } from '../../scripts/lib/vendor';
 import type { Credentials } from './local-fixtures';
 import type { HeroSheet } from '../../shared/contracts/characterSheet';
 import reference from '../fixtures/v32-fury-level-two.json' with { type: 'json' };
@@ -79,6 +80,12 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await expect(target).toHaveCount(0);
     // The hero panel shows the evaluated level-2 build, not a pending one.
     await expect(player.getByText('Devil · Fury (Berserker) · Level 2')).toBeVisible();
+    // Once the choice is evaluated, the perk step counts as done: no missing-selection notice.
+    await expect(player.getByText('Needs a selection')).toHaveCount(0);
+    await expect(player.getByRole('progressbar', { name: 'Steps completed' })).toHaveAttribute(
+      'aria-valuenow',
+      '1',
+    );
     await player.screenshot({ path: `${directory}/v164-step-perk.png`, fullPage: true });
     // Moving on saves the level-up's choices (the shared saveAdvancement operation).
     await player.getByRole('button', { name: /Continue to Level 2 Berserker ability/ }).click();
@@ -192,7 +199,7 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
       expect(grant.content, `${grant.name} content`).not.toBeNull();
       const content = grant.content!;
       expect(content.revision).toBe(reference.compendiumRevision);
-      expect(content.text).toBe(await readFile(content.sourcePath, 'utf8'));
+      expect(content.text).toBe(await readFile(vendorPath(content.sourcePath), 'utf8'));
       sourceReadback.push({
         name: grant.name,
         path: content.sourcePath,

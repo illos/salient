@@ -172,3 +172,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V181 | [Dependent choices stay with their parent on the level-up screen](V181-level-up-dependent-choices.md) | Merged (`bd4f0cc`); cloud dev published; accepted TESTER results reused |
 | V182 | [Forge import levels 2–3 and UI](V182-forge-import-levels-ui.md) | Paused (user ruling 2026-09-25: not V1); reviewed PASS, parked on `slice/V182` |
 | V183 | [Pause Forge Steel import](V183-forge-import-pause.md) | Ready for gate |
+| V184 | [Level-up diagnostics follow the current choices](V184-level-up-stale-diagnostics.md) | Ready for gate |
