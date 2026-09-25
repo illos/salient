@@ -161,3 +161,9 @@ Spec references:
   reviewed mentions were re-read line by line, and none gives the creature itself an immunity or
   weakness. Q-IW-1 now records the Olothec (point 4), the Bandit Chief's Form Up! reading, and the
   limit of classifying a whole stat block (point 5).
+
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `eeaa992` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `a1debfdf-a8fb-4bcc-9347-3ed4bb026ef3`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V178-release-eeaa992`.

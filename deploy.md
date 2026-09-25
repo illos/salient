@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V178 | `eeaa992` | Merged; backend/frontend published; accepted gates reused | complete |
 | V190 | `36a5e17` | Merged in train 19; backend/frontend published; gate and headless at tip | complete |
 | V189 | `36a5e17` | Merged in train 19; backend/frontend published; gate and headless at tip | complete |
 | V177 | `64b521e` | Merged; backend/frontend published; accepted gates reused | complete |
@@ -926,3 +927,16 @@ cherry-picked onto main `16be43d` and fast-forwarded as `36a5e179b0cf4b892b42ab6
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/train19-release-36a5e17`.
+
+### V178 immunity and weakness publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `eeaa9920a6338b6b60f4343b420450e1f1ac26c4` into main.
+- Its own three commits plus the Eye Flash test fix, cherry-picked onto main `cc4e99f` as train 20; full gate at the tip (291 s, 458 engine and 935 app tests).
+- Journeys at the tip: ancestries, all, tier-effects, cant-stand, and conduit, talent and null with their level-three journeys.
+- Independent review and QC1 clearance passed; Q-DT-1 (hero weaknesses) is closed. Conditional and granted defenses stay manual.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `a1debfdf-a8fb-4bcc-9347-3ed4bb026ef3`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V178-release-eeaa992`.

@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — train 19 (V189, V190)
+## Current release — V178 immunity and weakness
+
+Backend/frontend source `eeaa9920a6338b6b60f4343b420450e1f1ac26c4` published on 2026-09-25 as
+Worker `a1debfdf-a8fb-4bcc-9347-3ed4bb026ef3`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V178](build/V178-immunity-weakness.md) and
+the [ledger](../deploy.md).
+
+## Previous release — train 19 (V189, V190)
 
 Backend/frontend source `36a5e179b0cf4b892b42ab6b2a75c2dc27a8bc56` published on 2026-09-25 as
 Worker `c076ef27-2f91-4988-a279-2f9332cf3110`: view-only build history and campaign XP per level. Backend and schema validation, the
