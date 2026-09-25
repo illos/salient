@@ -43,7 +43,7 @@ export interface DamageTypeSpec {
 
 /**
  * The primordial damage type of each Stormwight kit's Primordial Storm feature (the feature names
- * are shared/content/classes/fury/stormwight.ts). feature/fury/stormwight-kits/kit-features.md:
+ * are shared/content/classes/fury/stormwight.ts). feature/fury/stormwight-kits/primordial-storm.md:
  * "Each stormwight kit is associated with a primordial storm, which channels a specific damage type
  * used by some of your abilities."
  */
@@ -180,7 +180,7 @@ export function chooseDamageType(
     const storm = primordialDamageType(features);
     if (!storm)
       return {
-        refusal: `${abilityName} deals your primordial damage type, which comes from your Stormwight kit's Primordial Storm (feature/fury/stormwight-kits/kit-features.md); this creature has none, so resolve it at the table.`,
+        refusal: `${abilityName} deals your primordial damage type, which comes from your Stormwight kit's Primordial Storm (feature/fury/stormwight-kits/primordial-storm.md); this creature has none, so resolve it at the table.`,
       };
     if (value !== undefined && value !== storm.type)
       return {

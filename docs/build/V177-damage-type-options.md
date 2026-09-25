@@ -40,7 +40,7 @@ so all four stay manual (see the work log).
 
 Compendium (pinned `en/unified/md`): `rule/damage/damage-type.md`,
 `rule/damage/damage-immunity.md`, `rule/damage/damage-weakness.md`,
-`feature/fury/stormwight-kits/kit-features.md`, the four `feature/fury/<kit>/primordial-storm-*.md`,
+`feature/fury/stormwight-kits/primordial-storm.md`, the four `feature/fury/<kit>/primordial-storm-*.md`,
 `feature/elementalist/level-1/fire-acolyte-of-fire.md`, and the abilities below.
 
 | Ability | Source | Effect section | Choice |

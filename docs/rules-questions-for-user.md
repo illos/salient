@@ -1610,7 +1610,7 @@ Recommendation: keep 1 to 5 as implemented.
 
 Open. Compendium paths read (pinned `en/unified/md`): `rule/damage/damage-type.md`,
 `rule/damage/damage-immunity.md`, `rule/damage/damage-weakness.md`,
-`feature/fury/stormwight-kits/kit-features.md`, the four `feature/fury/<kit>/primordial-storm-*.md`,
+`feature/fury/stormwight-kits/primordial-storm.md`, the four `feature/fury/<kit>/primordial-storm-*.md`,
 and the three abilities below. V177 compiles them on these readings. Items 1 to 3 are
 interpretations, each with its alternatives. Items 4 and 5 are findings outside the slice.
 
