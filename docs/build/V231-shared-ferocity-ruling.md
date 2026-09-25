@@ -27,3 +27,6 @@ wording and the limits of that evidence are recorded in Q-FOE-3; this ruling is 
 - 2026-09-25: created `slice/V231` in `.worktrees/shared-ferocity-ruling` from `0d96ce08`.
   After the pinned-rule comparison, the user agreed with the revised once-per-encounter reading.
   Recorded the answer and source comparisons; runtime implementation remains V226.
+- Test accepted `160d2808`: diff check passed and 585 Markdown files had no broken relative links
+  or anchors. QC gave final PASS on that exact tip. Fast-forward merged into main; no runtime
+  component changed.
