@@ -37,6 +37,7 @@ import { appendEvent } from './events';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
 import type { TableContext } from './registry';
 import { abilitiesFor } from './resolve';
+import type { CompiledAbility } from '../../shared/resolve/compileAbility';
 
 export const OFFER_KIND = 'triggered-offer';
 
@@ -54,9 +55,54 @@ export interface TriggerOffer {
   triggeringEventId: Id<'events'>;
   /** The triggering damage: Stamina and temporary Stamina lost, after immunity and weakness. */
   damage: number;
+  /** V174: the creature that took the triggering damage (the target of a damage-taken response). */
+  damaged?: BoundActor;
+  /**
+   * V174: accepting revises the hit (convex/lib/damageRevisions.ts). `spend` is the optional Spend
+   * section, answered with `spend` (and `potency` for "one effect").
+   */
+  revision?: OfferRevision;
   distance: string;
   /** The card's text, for the log and headless readers. */
   text: string;
+}
+
+/** V174: what a card needs to say about a damage-changing response. */
+export interface OfferRevision {
+  confirm?: 'self-or-adjacent';
+  spend?: {
+    cost: string;
+    resource: string;
+    amount: number;
+    variable: boolean;
+    effect: 'potency-one' | 'potency-any' | 'instruction';
+  };
+}
+
+/** V174: the card facts of a compiled response that revises the triggering damage, if it is one. */
+function offerRevision(definition: CompiledAbility): OfferRevision | undefined {
+  const revision = definition.sections.find(node => node.kind === 'damage-revision');
+  if (!revision) return undefined;
+  const spend = definition.sections.find(node => node.kind === 'response-spend');
+  return {
+    ...(revision.confirm ? { confirm: revision.confirm } : {}),
+    ...(spend
+      ? {
+          spend: {
+            cost: spend.cost,
+            resource: spend.resource,
+            amount: spend.amount,
+            variable: spend.variable,
+            effect:
+              spend.effect.kind === 'potency'
+                ? spend.effect.scope === 'one'
+                  ? 'potency-one'
+                  : 'potency-any'
+                : 'instruction',
+          },
+        }
+      : {}),
+  };
 }
 
 const side = (kind: string): TriggerCreature['side'] =>
@@ -95,6 +141,7 @@ export async function registerTriggerHolders(
         target: definition.envelope.target,
         distance: definition.envelope.distance,
         sourcePath: ability.source.path,
+        ...(offerRevision(definition) ? { revision: offerRevision(definition) } : {}),
       });
     }
   }
@@ -197,7 +244,12 @@ export async function offerForDamage(
     const targetActor =
       targetId === damage.damaged.id ? damage.damaged : (damage.dealer ?? damage.damaged);
     const distance = distanceNote(holder.distance);
-    const text = `${owner.name} may use ${holder.abilityName} (${holder.actionType}) on ${targetActor.name}: "${spec.text}" Distance ${distance}. Other preventions (unconscious, an effect that forbids triggered actions) are the table's check. Accept or pass.`;
+    const revision = holder.revision as OfferRevision | undefined;
+    // V174: accepting a damage-changing response revises the hit (ruling 3, option B).
+    const revises = revision
+      ? ` Accepting revises the hit: ${targetActor.name} takes half the damage.${revision.confirm && targetActor.id !== owner.id ? ` Accept only if ${owner.name} ends the shift adjacent to ${targetActor.name}: the table confirms.` : ''}${revision.spend ? ` Optional: ${revision.spend.cost} (answer spend=${revision.spend.amount}${revision.spend.variable ? ' or more' : ''}).` : ''}`
+      : '';
+    const text = `${owner.name} may use ${holder.abilityName} (${holder.actionType}) on ${targetActor.name}: "${spec.text}" Distance ${distance}.${revises} Other preventions (unconscious, an effect that forbids triggered actions) are the table's check. Accept or pass.`;
     const offer: TriggerOffer = {
       encounterId: encounter._id,
       round: encounter.round ?? 0,
@@ -209,6 +261,8 @@ export async function offerForDamage(
       target: targetActor,
       triggeringEventId: scope.eventId,
       damage: damage.amount,
+      damaged: damage.damaged,
+      ...(revision ? { revision } : {}),
       distance,
       text,
     };

@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:2a0e586d57738631adc9d2cce0d83e80da9efe5a86288df2fc690a5c5e40e952`.
 
-Currently reachable compiled: 162 (without a power roll: 11); unchanged reachable compatibility: 1459; structurally supported but unavailable: 0.
+Currently reachable compiled: 168 (without a power roll: 17); unchanged reachable compatibility: 1453; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -222,7 +222,7 @@ Currently reachable compiled: 162 (without a power roll: 11); unchanged reachabl
 | Return to Formlessness | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Ripples in the Earth | hero-standalone | manual | legacy-compatibility | manual-section |
 | Shared Void Sense | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Skin Like Castle Walls | hero-standalone | manual | legacy-compatibility | grammar, trigger-manual, manual-section, target-boundary |
+| Skin Like Castle Walls | hero-standalone | supported | compiled |  |
 | Subtle Relocation | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Test of Rain | hero-standalone | supported | compiled |  |
 | The Flesh, a Crucible | hero-standalone | manual | legacy-compatibility | manual-section |
@@ -253,7 +253,7 @@ Currently reachable compiled: 162 (without a power roll: 11); unchanged reachabl
 | Tide of Death | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | To the Death! | hero-standalone | manual | legacy-compatibility | manual-section |
 | To the Uttermost End | hero-standalone | manual | legacy-compatibility | manual-section |
-| Unearthly Reflexes | hero-standalone | manual | legacy-compatibility | grammar, trigger-manual, manual-section, target-boundary |
+| Unearthly Reflexes | hero-standalone | supported | compiled |  |
 | Your Entrails Are Your Extrails! | hero-standalone | manual | legacy-compatibility | manual-section |
 | Apex Predator | hero-standalone | manual | legacy-compatibility | manual-section |
 | Death... Death! | hero-standalone | supported | compiled |  |
@@ -272,7 +272,7 @@ Currently reachable compiled: 162 (without a power roll: 11); unchanged reachabl
 | Dance of Blows | hero-standalone | supported | compiled |  |
 | Faster Than the Eye | hero-standalone | manual | legacy-compatibility | manual-section |
 | Impart Force | hero-standalone | manual | legacy-compatibility | manual-section |
-| Inertial Shield | hero-standalone | manual | legacy-compatibility | grammar, trigger-manual, manual-section, target-boundary |
+| Inertial Shield | hero-standalone | supported | compiled |  |
 | Inertial Step | hero-standalone | supported | compiled |  |
 | Joint Lock | hero-standalone | supported | compiled |  |
 | Kinetic Strike | hero-standalone | supported | compiled |  |
@@ -300,7 +300,7 @@ Currently reachable compiled: 162 (without a power roll: 11); unchanged reachabl
 | Clever Trick | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | Coat the Blade | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Coup de Grace | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
-| Defensive Roll | hero-standalone | manual | legacy-compatibility | grammar, trigger-manual, manual-section, target-boundary |
+| Defensive Roll | hero-standalone | supported | compiled |  |
 | Disorienting Strike | hero-standalone | supported | compiled |  |
 | Eviscerate | hero-standalone | supported | compiled |  |
 | Gasping in Pain | hero-standalone | supported | compiled |  |
@@ -308,7 +308,7 @@ Currently reachable compiled: 162 (without a power roll: 11); unchanged reachabl
 | Hesitation Is Weakness | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section, target-boundary |
 | I Work Better Alone | hero-standalone | manual | legacy-compatibility | manual-section |
 | I'm No Threat | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| In All This Confusion | hero-standalone | manual | legacy-compatibility | grammar, trigger-manual, manual-section, target-boundary |
+| In All This Confusion | hero-standalone | supported | compiled |  |
 | One Hundred Throats | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Setup | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Shadowstrike | hero-standalone | supported | compiled |  |
@@ -346,7 +346,7 @@ Currently reachable compiled: 162 (without a power roll: 11); unchanged reachabl
 | Mind Game | hero-standalone | manual | legacy-compatibility | manual-section |
 | Now! | hero-standalone | supported | compiled |  |
 | Overwatch | hero-standalone | manual | legacy-compatibility | grammar, trigger-unobserved, manual-section |
-| Parry | hero-standalone | manual | legacy-compatibility | grammar, trigger-manual, manual-section, target-boundary |
+| Parry | hero-standalone | supported | compiled |  |
 | Squad! Forward! | hero-standalone | supported | compiled |  |
 | "Strike Now!" | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | This Is What We Planned For | hero-standalone | manual | legacy-compatibility | grammar, manual-section |

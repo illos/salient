@@ -1436,3 +1436,43 @@ Current behaviour:
    offer outside combat too, with no limit and no window.
 
 Recommendation: keep all three.
+
+## Q-REACT-1: halving order, Parry's adjacency, and spent-gain accounting (V174)
+
+Open; V174 binds labelled interpretations so six damage-changing responses can revise the hit.
+Pinned `en/unified/md`:
+- `rule/damage/damage-immunity.md`: "Damage immunity should be the last thing applied when
+  calculating damage. For instance, if your hero has fire immunity 5 and takes 8 fire damage, they
+  take 3 damage. But if an ally first halved the damage with a triggered action, your hero would
+  take 4 damage before immunity is applied, with immunity then reducing the damage to 0."
+- `rule/damage/damage-weakness.md`: "If a creature has both damage immunity and damage weakness for
+  a source of damage, apply the weakness first, then the immunity." Neither file places a halving
+  relative to weakness.
+- `feature/ability/tactician/level-1/parry.md`: "You can shift 1 square. If the target is you, or if
+  you end this shift adjacent to the target, the target takes half the damage. If the damage has
+  any potency effect associated with it, the potency is decreased by 1."
+- `docs/lasting-effects-design.md` section 5b names the spent-gain attribution an open accounting
+  choice.
+
+Current behaviour:
+1. **Halving order** (interpretation). The damage as dealt is halved (rounded down,
+   `rule/general/always-round-down.md`), then weakness, then immunity: 10 fire against fire
+   weakness 5 becomes 5 + 5 = 10. Halved damage of 0 takes no weakness (Q-RES-4: 0 damage is not
+   damage taken). Alternative: apply weakness first and halve the result (15 → 7), immunity still
+   last.
+2. **Parry's adjacency** (interpretation). There is no map, so accepting the card for an ally is
+   the table's confirmation that the Tactician ends the shift adjacent to them; the potency
+   decrease applies with the halving. Parry used on yourself needs no confirmation. Alternatives:
+   a separate "adjacent" answer on the card; or applying the potency decrease even when the
+   Tactician does not end adjacent (the sentence does not repeat the condition), which the table
+   can do by using Parry by hand.
+3. **Spent gains** (accounting choice, not a rules claim). When a revision reverses a heroic
+   resource gain, spending since the gain is charged to gains made after it first, so the part of
+   the gain still in the pool is the pool's rise above its level just before the gain. That part is
+   removed; the rest stands and the log says how much. Alternative: attribute each spend at the
+   time it happened (a later gain then never shields an earlier one), which needs a per-spend
+   ledger the app doesn't keep.
+4. **"One effect"** (Inertial Shield's Spend). When only one of the hit's potency effects would
+   change, that one is reduced; when several would, the answer names one (`potency=`).
+
+Recommendation: keep all four.

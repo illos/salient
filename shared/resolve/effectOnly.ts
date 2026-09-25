@@ -13,6 +13,11 @@ import type { EffectRider } from './effectRiders.ts';
 import { plain } from './abilityGrammar.ts';
 import { EFFECT_ONLY_MODIFIERS, type ModifierSpec } from './modifiers.ts';
 import { EFFECT_ONLY_WATCHERS, type WatcherSpec } from './watchers.ts';
+import {
+  EFFECT_ONLY_REVISIONS,
+  type DamageRevisionClause,
+  type ResponseSpendClause,
+} from './damageRevision.ts';
 
 /**
  * The effect-only target reader. rule/combat/target.md: the entry is the most that can be
@@ -107,7 +112,11 @@ export type EffectOnlyClause =
       subject: 'target';
       damageType: string;
       share: 'half';
-    };
+    }
+  /** V174: a response that revises the triggering damage (shared/resolve/damageRevision.ts). */
+  | DamageRevisionClause
+  /** V174: the optional Spend section of such a response. */
+  | ResponseSpendClause;
 
 interface Pattern {
   pattern: RegExp;
@@ -120,8 +129,10 @@ interface Pattern {
   /**
    * V173: the sentence speaks of "the triggering damage" or "the triggering strike", so it is
    * admitted only in a triggered ability whose Trigger section names that event.
+   * V174 `damage-taken`: the sentence changes the damage the creature it names took, so the
+   * trigger must be that creature's `damage-taken` (shared/resolve/damageRevision.ts).
    */
-  trigger?: 'damage' | 'melee-strike';
+  trigger?: 'damage' | 'melee-strike' | 'damage-taken';
 }
 
 const amount = (text: string | undefined) => {
@@ -218,6 +229,14 @@ const PATTERNS: readonly Pattern[] = [
     singleTarget: true,
     trigger: 'melee-strike',
   },
+  // ---- V174 responses that revise the triggering damage, each citing its source in
+  // shared/resolve/damageRevision.ts.
+  ...EFFECT_ONLY_REVISIONS.map(({ pattern, read, singleTarget }) => ({
+    pattern,
+    read: (): EffectOnlyClause => read(),
+    ...(singleTarget ? { singleTarget } : {}),
+    trigger: 'damage-taken' as const,
+  })),
   // ---- Table work, recorded as ordered manual occurrences (V109, V152).
   // feature/ability/conduit/level-1/sermon-of-grace.md, the whole section. Each target spends
   // through their own Recovery; the free triggered action ends an effect (rule/general/saving-throw.md,
@@ -261,7 +280,7 @@ export interface EffectOnlySentence {
   clause: EffectOnlyClause;
   singleTarget: boolean;
   /** V173: the Trigger section the sentence needs (Pattern.trigger). */
-  trigger?: 'damage' | 'melee-strike';
+  trigger?: 'damage' | 'melee-strike' | 'damage-taken';
 }
 
 /** Reads one Effect section whole, or `undefined` when any part is outside the patterns. */

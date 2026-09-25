@@ -4,7 +4,9 @@
  * Accept and Pass. Accept answers the card (`card.respond` through interactions.respond), whose
  * continuation is the offered `ability.use`; Pass closes it (`card.close`). The server decides who
  * may answer (the owning player or the Director) and re-checks eligibility on Accept; nothing here
- * decides a rule. Owning specifications: docs/lasting-effects-design.md#4-triggered-actions-and-reactions,
+ * decides a rule. V174: a damage-changing response with a Spend section also offers "Accept and
+ * spend", answering with the printed amount (`spend`); larger amounts go through the command line.
+ * Owning specifications: docs/lasting-effects-design.md#4-triggered-actions-and-reactions,
  * docs/table-spec.md#inline-interaction-cards-in-the-game-log.
  */
 import { useMutation, useQuery } from 'convex/react';
@@ -22,51 +24,71 @@ export function TriggerOffers({ campaignId }: { campaignId: Id<'campaigns'> }) {
   if (!offers.length) return null;
   return (
     <ul className="m-0 flex list-none flex-col gap-2 p-0" aria-label="Triggered action offers">
-      {offers.map(card => (
-        <li key={card.id} className="inset-controls flex flex-col gap-2 rounded-md bg-muted p-3">
-          <span className="[overflow-wrap:anywhere]">
-            {(card.offer as { text?: string } | null)?.text ?? card.actorLabel}
-          </span>
-          {card.mayAnswer && (
-            <span className="flex gap-2">
-              <Button
-                type="button"
-                size="sm"
-                disabled={command.pending}
-                onClick={() =>
-                  void command.run(
-                    commandId =>
-                      respond({
-                        interactionId: card.id,
-                        answer: {},
-                        commandId,
-                        expectedRevision: card.revision,
-                      }),
-                    JSON.stringify(['trigger.accept', campaignId, card.id]),
-                  )
-                }
-              >
-                Accept
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                variant="outline"
-                disabled={command.pending}
-                onClick={() =>
-                  void command.run(
-                    commandId =>
-                      close({ interactionId: card.id, commandId, expectedRevision: card.revision }),
-                    JSON.stringify(['trigger.pass', campaignId, card.id]),
-                  )
-                }
-              >
-                Pass
-              </Button>
+      {offers.map(card => {
+        const spend = (
+          card.offer as { revision?: { spend?: { cost: string; amount: number } } } | null
+        )?.revision?.spend;
+        const accept = (answer: Record<string, number>, key: string) =>
+          void command.run(
+            commandId =>
+              respond({
+                interactionId: card.id,
+                answer,
+                commandId,
+                expectedRevision: card.revision,
+              }),
+            JSON.stringify([key, campaignId, card.id]),
+          );
+        return (
+          <li key={card.id} className="inset-controls flex flex-col gap-2 rounded-md bg-muted p-3">
+            <span className="[overflow-wrap:anywhere]">
+              {(card.offer as { text?: string } | null)?.text ?? card.actorLabel}
             </span>
-          )}
-        </li>
-      ))}
+            {card.mayAnswer && (
+              <span className="flex gap-2">
+                <Button
+                  type="button"
+                  size="sm"
+                  disabled={command.pending}
+                  onClick={() => accept({}, 'trigger.accept')}
+                >
+                  Accept
+                </Button>
+                {spend && (
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="secondary"
+                    disabled={command.pending}
+                    onClick={() => accept({ spend: spend.amount }, 'trigger.accept-spend')}
+                  >
+                    Accept and {spend.cost.toLowerCase()}
+                  </Button>
+                )}
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  disabled={command.pending}
+                  onClick={() =>
+                    void command.run(
+                      commandId =>
+                        close({
+                          interactionId: card.id,
+                          commandId,
+                          expectedRevision: card.revision,
+                        }),
+                      JSON.stringify(['trigger.pass', campaignId, card.id]),
+                    )
+                  }
+                >
+                  Pass
+                </Button>
+              </span>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }

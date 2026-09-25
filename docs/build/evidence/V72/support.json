@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 87,
-      "manual": 284
+      "supported": 93,
+      "manual": 278
     },
     "kit-signature": {
       "total": 25,
@@ -26776,7 +26776,7 @@
           "clause": "The target would take damage from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
           "kind": "unsupported",
           "shape": "trigger",
-          "reason": "The engine does not observe this trigger: it answers damage or movement before it happens, and a response that changes the hit is V174 (option B revision). Use the ability by hand as a triggered action.",
+          "reason": "The engine does not observe this trigger: it answers damage or movement before it happens; V174 revises only a hit already written (option B). Use the ability by hand as a triggered action.",
           "dependency": "unknown"
         },
         {
@@ -26809,7 +26809,7 @@
           "code": "trigger-unobserved",
           "locator": "block:0",
           "clause": "The target would take damage from an ability that uses a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
-          "message": "The engine does not observe this trigger: it answers damage or movement before it happens, and a response that changes the hit is V174 (option B revision). Use the ability by hand as a triggered action."
+          "message": "The engine does not observe this trigger: it answers damage or movement before it happens; V174 revises only a hit already written (option B). Use the ability by hand as a triggered action."
         },
         {
           "code": "manual-section",
@@ -31818,7 +31818,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -31826,73 +31827,33 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls#block:0:0:6f2af0804c86ff50",
-          "locator": "block:0:0",
-          "clause": "The target takes damage.",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
           "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls#block:1:0:93d77050cd9190d8",
           "locator": "block:1:0",
           "clause": "The target takes half the damage.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "damage-revision",
+          "subject": "target",
+          "share": "half",
+          "instructions": []
         },
         {
-          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls#block:2:0:9c913dfb7c4e74f9",
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls#block:2:0:cfbf49fb0307eaa9",
           "locator": "block:2:0",
-          "clause": "If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effects associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is reduced by 1 for the target.",
-          "kind": "unsupported",
-          "shape": "resource-spend:spend N essence",
-          "reason": "resource-spend",
-          "dependency": "unknown"
+          "clause": "If the damage has any potency effects associated with it, the potency is reduced by 1 for the target.",
+          "kind": "response-spend",
+          "subject": "target",
+          "resource": "essence",
+          "amount": 1,
+          "variable": false,
+          "effect": {
+            "kind": "potency",
+            "scope": "any"
+          },
+          "cost": "Spend 1 Essence"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-manual",
-          "locator": "block:0",
-          "clause": "The target takes damage.",
-          "message": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "The target takes damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The target takes half the damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effects associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is reduced by 1 for the target.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self or one ally",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Skin Like Castle Walls",
@@ -35228,7 +35189,7 @@
           "clause": "The target would be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).",
           "kind": "unsupported",
           "shape": "trigger",
-          "reason": "The engine does not observe this trigger: it answers damage or movement before it happens, and a response that changes the hit is V174 (option B revision). Use the ability by hand as a triggered action.",
+          "reason": "The engine does not observe this trigger: it answers damage or movement before it happens; V174 revises only a hit already written (option B). Use the ability by hand as a triggered action.",
           "dependency": "unknown"
         },
         {
@@ -35261,7 +35222,7 @@
           "code": "trigger-unobserved",
           "locator": "block:0",
           "clause": "The target would be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).",
-          "message": "The engine does not observe this trigger: it answers damage or movement before it happens, and a response that changes the hit is V174 (option B revision). Use the ability by hand as a triggered action."
+          "message": "The engine does not observe this trigger: it answers damage or movement before it happens; V174 revises only a hit already written (option B). Use the ability by hand as a triggered action."
         },
         {
           "code": "manual-section",
@@ -36215,7 +36176,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/unearthly-reflexes.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -36223,73 +36185,35 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes#block:0:0:be3818a860174e7a",
-          "locator": "block:0:0",
-          "clause": "You take damage.",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes#block:1:0:8ad74f06b02111ac",
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes#block:1:0:39358da4752f511b",
           "locator": "block:1:0",
-          "clause": "You take half the damage from the triggering effect and can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You take half the damage from the triggering effect and can shift up to a number of squares equal to your Agility score.",
+          "kind": "damage-revision",
+          "subject": "actor",
+          "share": "half",
+          "instructions": [
+            "shift"
+          ]
         },
         {
-          "id": "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes#block:2:0:0761d021410e0546",
+          "id": "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes#block:2:0:3d48ec1d654a40d6",
           "locator": "block:2:0",
-          "clause": "If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effects associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is reduced by 1 for you.",
-          "kind": "unsupported",
-          "shape": "resource-spend:spend N ferocity",
-          "reason": "resource-spend",
-          "dependency": "unknown"
+          "clause": "If the damage has any potency effects associated with it, the potency is reduced by 1 for you.",
+          "kind": "response-spend",
+          "subject": "actor",
+          "resource": "ferocity",
+          "amount": 1,
+          "variable": false,
+          "effect": {
+            "kind": "potency",
+            "scope": "any"
+          },
+          "cost": "Spend 1 Ferocity"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-manual",
-          "locator": "block:0",
-          "clause": "You take damage.",
-          "message": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "You take damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You take half the damage from the triggering effect and can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effects associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is reduced by 1 for you.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Unearthly Reflexes",
@@ -38816,7 +38740,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/null/level-1/inertial-shield.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -38824,73 +38749,33 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield#block:0:0:be3818a860174e7a",
-          "locator": "block:0:0",
-          "clause": "You take damage.",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
           "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield#block:1:0:697516afa9dcb352",
           "locator": "block:1:0",
           "clause": "You take half the damage.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "damage-revision",
+          "subject": "actor",
+          "share": "half",
+          "instructions": []
         },
         {
-          "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield#block:2:0:6e4d46d2de610ff6",
+          "id": "mcdm.heroes.v1/feature.ability.null.level-1/inertial-shield#block:2:0:cc0f6067431d26ee",
           "locator": "block:2:0",
-          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of one effect associated with the damage is reduced by 1 for you.",
-          "kind": "unsupported",
-          "shape": "resource-spend:spend N discipline",
-          "reason": "resource-spend",
-          "dependency": "unknown"
+          "clause": "The potency of one effect associated with the damage is reduced by 1 for you.",
+          "kind": "response-spend",
+          "subject": "actor",
+          "resource": "discipline",
+          "amount": 1,
+          "variable": false,
+          "effect": {
+            "kind": "potency",
+            "scope": "one"
+          },
+          "cost": "Spend 1 Discipline"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-manual",
-          "locator": "block:0",
-          "clause": "You take damage.",
-          "message": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "You take damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You take half the damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of one effect associated with the damage is reduced by 1 for you.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Inertial Shield",
@@ -43280,7 +43165,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -43288,73 +43174,36 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll#block:0:0:79192850615f3422",
-          "locator": "block:0:0",
-          "clause": "Another creature damages you.",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll#block:1:0:facb3c5a50d2f7ba",
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll#block:1:0:b6b2342dfa04d046",
           "locator": "block:1:0",
-          "clause": "You take half the triggering damage, then can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves. If you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover), you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You take half the triggering damage, then can shift up to 2 squares after the triggering effect resolves. If you end this shift with concealment or cover, you can use the Hide maneuver even if you are observed.",
+          "kind": "damage-revision",
+          "subject": "actor",
+          "share": "half",
+          "instructions": [
+            "shift",
+            "ability-use"
+          ]
         },
         {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll#block:2:0:daa777f60a1b0bcd",
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll#block:2:0:9062bb1438111735",
           "locator": "block:2:0",
-          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects associated with the damage are reduced by 1 for you.",
-          "kind": "unsupported",
-          "shape": "resource-spend:spend N insight",
-          "reason": "resource-spend",
-          "dependency": "unknown"
+          "clause": "The potency of any effects associated with the damage are reduced by 1 for you.",
+          "kind": "response-spend",
+          "subject": "actor",
+          "resource": "insight",
+          "amount": 1,
+          "variable": false,
+          "effect": {
+            "kind": "potency",
+            "scope": "any"
+          },
+          "cost": "Spend 1 Insight"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-manual",
-          "locator": "block:0",
-          "clause": "Another creature damages you.",
-          "message": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Another creature damages you.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You take half the triggering damage, then can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves. If you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover), you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects associated with the damage are reduced by 1 for you.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Defensive Roll",
@@ -44443,7 +44292,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -44451,73 +44301,35 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion#block:0:0:be3818a860174e7a",
-          "locator": "block:0:0",
-          "clause": "You take damage.",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion#block:1:0:24bf193b25b17a4a",
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion#block:1:0:a0114961fa8c4dbb",
           "locator": "block:1:0",
-          "clause": "You take half the damage, then can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 4 squares after the triggering effect resolves.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You take half the damage, then can teleport up to 4 squares after the triggering effect resolves.",
+          "kind": "damage-revision",
+          "subject": "actor",
+          "share": "half",
+          "instructions": [
+            "teleport"
+          ]
         },
         {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion#block:2:0:3a5a01b88bbcd1a9",
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion#block:2:0:02381a9db3d57032",
           "locator": "block:2:0",
-          "clause": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.",
-          "kind": "unsupported",
-          "shape": "resource-spend:spend N+ insight",
-          "reason": "resource-spend",
-          "dependency": "unknown"
+          "clause": "You teleport 1 additional square for each insight spent.",
+          "kind": "response-spend",
+          "subject": "actor",
+          "resource": "insight",
+          "amount": 1,
+          "variable": true,
+          "effect": {
+            "kind": "instruction",
+            "shape": "teleport"
+          },
+          "cost": "Spend 1+ Insight"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-manual",
-          "locator": "block:0",
-          "clause": "You take damage.",
-          "message": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "You take damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You take half the damage, then can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 4 squares after the triggering effect resolves.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "In All This Confusion",
@@ -49276,7 +49088,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/parry.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -49284,73 +49097,37 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry#block:0:0:3bf58aa4ba06b196",
-          "locator": "block:0:0",
-          "clause": "A creature deals damage to the target.",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry#block:1:0:77ca0de7968bb983",
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry#block:1:0:13aaba8b4ea44376",
           "locator": "block:1:0",
-          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square. If the target is you, or if you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, the target takes half the damage. If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effect associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is decreased by 1.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You can shift 1 square. If the target is you, or if you end this shift adjacent to the target, the target takes half the damage. If the damage has any potency effect associated with it, the potency is decreased by 1.",
+          "kind": "damage-revision",
+          "subject": "target",
+          "share": "half",
+          "instructions": [
+            "shift"
+          ],
+          "confirm": "self-or-adjacent",
+          "potency": "any"
         },
         {
-          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry#block:2:0:9e65227889872bae",
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry#block:2:0:cc8d97d3a8a4e84b",
           "locator": "block:2:0",
-          "clause": "This ability's [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) becomes [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score, and you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score instead of 1 square.",
-          "kind": "unsupported",
-          "shape": "resource-spend:spend N focus",
-          "reason": "resource-spend",
-          "dependency": "unknown"
+          "clause": "This ability's distance becomes Melee 1 + your Reason score, and you can shift up to a number of squares equal to your Reason score instead of 1 square.",
+          "kind": "response-spend",
+          "subject": "actor",
+          "resource": "focus",
+          "amount": 1,
+          "variable": false,
+          "effect": {
+            "kind": "instruction",
+            "shape": "shift"
+          },
+          "cost": "Spend 1 Focus"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-manual",
-          "locator": "block:0",
-          "clause": "A creature deals damage to the target.",
-          "message": "The engine observes this trigger, but the rest of the ability is manual; use it by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "A creature deals damage to the target.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square. If the target is you, or if you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, the target takes half the damage. If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effect associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is decreased by 1.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "This ability's [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) becomes [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score, and you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score instead of 1 square.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self or one ally",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Parry",
@@ -71993,7 +71770,7 @@
           "clause": "The target receives enough damage to die or be destroyed.",
           "kind": "unsupported",
           "shape": "trigger",
-          "reason": "The engine does not observe this trigger: it answers damage or movement before it happens, and a response that changes the hit is V174 (option B revision). Use the ability by hand as a triggered action.",
+          "reason": "The engine does not observe this trigger: it answers damage or movement before it happens; V174 revises only a hit already written (option B). Use the ability by hand as a triggered action.",
           "dependency": "unknown"
         },
         {
@@ -72026,7 +71803,7 @@
           "code": "trigger-unobserved",
           "locator": "block:0",
           "clause": "The target receives enough damage to die or be destroyed.",
-          "message": "The engine does not observe this trigger: it answers damage or movement before it happens, and a response that changes the hit is V174 (option B revision). Use the ability by hand as a triggered action."
+          "message": "The engine does not observe this trigger: it answers damage or movement before it happens; V174 revises only a hit already written (option B). Use the ability by hand as a triggered action."
         },
         {
           "code": "source-header",
@@ -213564,9 +213341,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 162,
-    "compiledEffectOnly": 11,
-    "compatibility": 1459,
+    "compiled": 168,
+    "compiledEffectOnly": 17,
+    "compatibility": 1453,
     "compiledButUnavailable": 0
   }
 }

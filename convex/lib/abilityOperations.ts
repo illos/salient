@@ -107,6 +107,8 @@ import {
   reconcileObservedGains,
 } from './resourceTriggers';
 import { rollDice } from './dice';
+import { assertNotRevised, commitRevision, planRevision } from './damageRevisions';
+import { damageTaken } from '../../shared/resolve/damageRevision';
 import { commitStrained, planStrained, withStrainedPlan, type StrainedPlan } from './strainedUse';
 import { assertWatchersReconcilable, noteManualWatchers, observeWatchers } from './watchers';
 import { describeWatcher } from '../../shared/resolve/watchers';
@@ -1678,6 +1680,8 @@ const abilityUse: OperationDefinition = {
     mode: v.optional(v.string()),
     exclude: v.optional(v.union(v.string(), v.array(v.string()))),
     strained: v.optional(v.string()),
+    spend: v.optional(v.number()),
+    potency: v.optional(v.string()),
     fromDraft: v.optional(v.boolean()),
   },
   argDescriptions: {
@@ -1693,6 +1697,10 @@ const abilityUse: OperationDefinition = {
       'Effect instance ids whose automatic edge, bane or bonus does not apply to this roll (the table’s override). Edges and banes given here are circumstance, added to the automatic ones.',
     strained:
       'yes or no, for an ability with a Strained effect the engine applies. By default the engine decides from Clarity (below 0 before the use, or taken below 0 by its cost). Outside combat, yes incurs the effect for 1d6 damage (the one-minute or voluntary rule); in combat a value against the automatic one is the table’s override.',
+    spend:
+      'For a triggered response with a Spend section the engine applies (V174), the heroic resource to spend on it: its printed amount, or that much or more for "Spend 1+". Omit to spend nothing.',
+    potency:
+      'For a response that reduces the potency of one effect of the triggering damage, the condition whose potency is reduced, when more than one would change.',
     fromDraft: 'Set by the selection controls when they fire the invoking user’s draft.',
   },
   roles: PLAYERS,
@@ -2077,6 +2085,37 @@ const abilityUse: OperationDefinition = {
         }
         return { id, kind: record.foe ? 'foe' : 'object' };
       };
+      // V174: a response that revises the triggering damage, and its optional Spend section.
+      const spendNode = definition.sections.find(node => node.kind === 'response-spend');
+      const spend = args.spend === undefined ? undefined : integer(args.spend, 'spend', 1);
+      if (spend !== undefined && !spendNode)
+        throw new ConvexError(`${ability.name} has no Spend section the engine applies.`);
+      const revisionNode = definition.sections.find(node => node.kind === 'damage-revision');
+      if (args.potency !== undefined && !answered)
+        throw new ConvexError(
+          '"potency" answers a response card that reduces one effect’s potency.',
+        );
+      const revisionPlan =
+        answered && revisionNode
+          ? await planRevision(
+              ctx,
+              context.campaign._id,
+              answered.offer,
+              { name: ability.name, definition },
+              {
+                ...(spend !== undefined ? { spend } : {}),
+                ...(args.potency !== undefined ? { potencyChoice: String(args.potency) } : {}),
+              },
+            )
+          : undefined;
+      // The response's own spend can't use a gain its revision takes back: the pool it is paid from
+      // is the pool after that reversal (the revision is written first, below).
+      const reclaimed =
+        revisionPlan?.gains
+          .filter(gain => gain.characterId === actor!.id)
+          .reduce((sum, gain) => sum + gain.before - gain.after, 0) ?? 0;
+      const heldPool = spendNode ? poolFor(records, context, spendNode.resource) : undefined;
+      const spendPool = heldPool && { ...heldPool, current: heldPool.current - reclaimed };
       const effectInput: EffectOnlyInput = {
         actor: recipient(records),
         ...(records.character || records.foe
@@ -2084,8 +2123,29 @@ const abilityUse: OperationDefinition = {
           : {}),
         targets: targets.map(recipient),
         inCombat: allowance.inCombat,
-        ...(costPool ? { resourcePool: costPool } : {}),
-        ...(answered ? { trigger: { damage: answered.offer.damage } } : {}),
+        ...(spend !== undefined && spendPool
+          ? { resourcePool: spendPool }
+          : costPool
+            ? { resourcePool: costPool }
+            : {}),
+        ...(answered
+          ? {
+              trigger: {
+                damage: answered.offer.damage,
+                ...(revisionPlan
+                  ? {
+                      revision: {
+                        hitEventId: revisionPlan.hitEventId,
+                        targetId: revisionPlan.damaged._id,
+                        kind: 'hero' as const,
+                        current: revisionPlan.current,
+                      },
+                    }
+                  : {}),
+              },
+            }
+          : {}),
+        ...(spend !== undefined ? { spend } : {}),
       };
       const outcome = resolveEffectOnly(definition, effectInput);
       // V173: an accepted card re-checks cost; an unaffordable one stays open, unchanged.
@@ -2101,6 +2161,10 @@ const abilityUse: OperationDefinition = {
         };
       if (outcome.kind !== 'resolved') throw new ConvexError(`${ability.name}: ${outcome.reason}`);
       warnings.push(...outcome.warnings);
+      // V174: what the revision reverses or leaves standing, with the revised hit (design 5b).
+      for (const effect of outcome.effects)
+        if (effect.kind === 'damage-revision' && effect.status === 'calculated' && revisionPlan)
+          Object.assign(effect, { consequences: revisionPlan.notes });
       // V173: damage sized by the triggering damage, through the target's immunities and
       // weaknesses (rule/damage/damage-immunity.md, damage-weakness.md) and the damage writer.
       const triggeredDamage: { record: TargetRecord; application: DamageApplication }[] = [];
@@ -2129,6 +2193,29 @@ const abilityUse: OperationDefinition = {
       const nameOf = (id: string) =>
         id === actor!.id ? actor!.name : (targets.find(t => t.actor.id === id)?.actor.name ?? id);
       const describeEffect = (effect: CompiledEffectOutcome) => {
+        if (effect.kind === 'damage-revision') {
+          const table = effect.instructions.length
+            ? ` For the table (no map): the movement${effect.instructions.includes('ability-use') ? ' and the Hide maneuver' : ''} in "${effect.clause}"`
+            : '';
+          if (
+            effect.status !== 'calculated' ||
+            !effect.before ||
+            !effect.application ||
+            !revisionPlan
+          )
+            return `For the table (${nameOf(effect.targetId)}): "${effect.clause}" (used by hand: halve the triggering damage and resolve the rest at the table)`;
+          const before = effect.before;
+          const after = effect.application;
+          const stamina = revisionPlan.stamina;
+          const temporary = revisionPlan.temporaryStamina;
+          return `${nameOf(effect.targetId)} takes half the damage (rule/general/always-round-down.md: ${before.incoming} → ${after.incoming})${after.weaknessApplied || after.immunityApplied ? `, then weakness ${after.weaknessApplied} and immunity ${after.immunityApplied}` : ''}: the hit is revised from ${damageTaken(before)} to ${damageTaken(after)} damage; Stamina ${stamina.before} → ${stamina.after}${temporary.after !== temporary.before ? `, temporary Stamina ${temporary.before} → ${temporary.after}` : ''}${after.windedAfter ? '' : before.windedAfter ? '; no longer winded' : ''}${after.dying || !before.dying ? '' : '; no longer dying'}.${effect.consequences?.length ? ` ${effect.consequences.join(' ')}` : ''}${effect.confirm && effect.targetId !== actor!.id ? ` Accepting confirmed ${actor!.name} ended the shift adjacent to ${nameOf(effect.targetId)}.` : ''}${table}`;
+        }
+        if (effect.kind === 'response-spend')
+          return effect.status !== 'spent'
+            ? ''
+            : effect.effect.kind === 'instruction'
+              ? `For the table (${effect.amount} ${effect.resource} spent): "${effect.clause}"`
+              : `${effect.amount} ${effect.resource} spent: "${effect.clause}"`;
         if (effect.kind === 'triggered-damage')
           return effect.status === 'calculated' && effect.application
             ? `${nameOf(effect.targetId)} takes ${effect.amount} ${effect.damageType} damage (half the triggering ${effect.triggeringDamage}, rounded down)${effect.application.afterImmunity !== effect.amount ? `, ${effect.application.afterImmunity} after immunity and weakness` : ''}; Stamina ${effect.application.staminaBefore} → ${effect.application.staminaAfter}.`
@@ -2155,7 +2242,7 @@ const abilityUse: OperationDefinition = {
         }
         return `For the table (${nameOf(effect.targetId)}): "${effect.clause}"`;
       };
-      const effectsText = outcome.effects.map(describeEffect).join(' ');
+      const effectsText = outcome.effects.map(describeEffect).filter(Boolean).join(' ');
       const payment = outcome.cost
         ? outcome.cost.waived
           ? ` Cost ${outcome.cost.amount} ${outcome.cost.resource} waived outside combat.`
@@ -2205,6 +2292,10 @@ const abilityUse: OperationDefinition = {
         commit: async (mctx, scope) => {
           // V173: the answered card resolves in this use's journal, so undo reopens it.
           if (answered) await resolveOffer(mctx, scope, answered.card, respondsTo!.answer);
+          // V174: the accepted response revises the hit, in this use's journal scope, before its
+          // own spend is paid from what the revision leaves.
+          if (revisionPlan)
+            await commitRevision(mctx, scope, revisionPlan, `${actor!.name}'s ${ability.name}`);
           // 1. The fixed cost once, before any effect.
           if (outcome.cost && !outcome.cost.waived)
             await debit(mctx, scope, records, context, outcome.cost.after, outcome.cost.resource);
@@ -3090,6 +3181,8 @@ const abilityCorrect: OperationDefinition = {
       }
     }
     await assertCorrectionAllowed(ctx, event._id, context.user);
+    // V174: a hit an accepted response revised is recomputed from that revision; rewind instead.
+    await assertNotRevised(ctx, context.campaign._id, event._id);
     if (result.actor.kind === 'squad')
       throw new ConvexError(
         'Corrections of a squad action are not supported in V02: rewind the use, or adjust the squad pool with /adjust stamina on the squad.',

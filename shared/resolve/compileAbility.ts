@@ -12,6 +12,11 @@ import { sectionModifier, type ModifierSpec } from './modifiers.ts';
 import { strainedSection, type StrainedSpec } from './strained.ts';
 import { sectionWatcher, type WatcherSpec } from './watchers.ts';
 import {
+  responseSpend,
+  type DamageRevisionClause,
+  type ResponseSpendClause,
+} from './damageRevision.ts';
+import {
   triggeredActionType,
   triggerSection,
   triggerTarget,
@@ -170,6 +175,12 @@ export interface TriggeredDamageNode extends NodeSource {
   damageType: string;
   share: 'half';
 }
+/**
+ * V174: a response that revises the triggering damage to the damaged creature
+ * (shared/resolve/damageRevision.ts), and the optional Spend section of such a response.
+ */
+export interface DamageRevisionNode extends NodeSource, DamageRevisionClause {}
+export interface ResponseSpendNode extends NodeSource, ResponseSpendClause {}
 export type CompiledNode =
   DamageNode | PushNode | ConditionNode | UnsupportedNode | RiderNode | InstructionNode;
 /** Effect-section nodes: V109 riders, V157 effect-only gains and instructions, or manual work. */
@@ -181,7 +192,9 @@ export type SectionNode =
   | ModifierNode
   | StrainedNode
   | WatcherNode
-  | TriggeredDamageNode;
+  | TriggeredDamageNode
+  | DamageRevisionNode
+  | ResponseSpendNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -330,7 +343,10 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       effectOnly.sections[index]!.forEach(({ text, clause }, ordinal) => {
         const node = sourceNode(envelope, locator, ordinal, text);
         sections.push(
-          clause.kind === 'gain' || clause.kind === 'triggered-damage'
+          clause.kind === 'gain' ||
+            clause.kind === 'triggered-damage' ||
+            clause.kind === 'damage-revision' ||
+            clause.kind === 'response-spend'
             ? { ...node, ...clause }
             : clause.kind === 'modifier'
               ? { ...node, kind: 'modifier', spec: clause.spec }
@@ -883,6 +899,23 @@ export function strainedAdmitted(
   );
 }
 
+/**
+ * V174: a sentence that revises the triggering damage names the damaged creature: "You take …"
+ * needs the owner's own damage-taken trigger ("You take damage."), "the target takes …" the
+ * target's ("The target takes damage.", "A creature deals damage to the target.").
+ */
+export function revisionFits(
+  clause: EffectOnlySentence['clause'],
+  trigger: TriggerSpec | undefined,
+): boolean {
+  if (clause.kind !== 'damage-revision' || trigger?.event !== 'damage-taken') return false;
+  return trigger.whose === (clause.subject === 'actor' ? 'owner' : 'target');
+}
+/** V174: "for you" reduces the user's potency: a Self response; "for the target" its target's. */
+export function spendSubjectFits(spend: ResponseSpendClause, target: EffectOnlyTarget): boolean {
+  return spend.subject === 'target' || target.kind === 'self';
+}
+
 /** V157 actions a use without a power roll may take. V173 adds triggered actions with a trigger. */
 const EFFECT_ONLY_ACTIONS: ActionType[] = ['main action', 'maneuver', 'free maneuver'];
 
@@ -921,8 +954,21 @@ function readEffectOnly(envelope: Envelope):
     trigger = read;
   }
   const sections: Record<number, EffectOnlySentence[]> = {};
+  // V174: the one optional Spend section of a response that revises the triggering damage.
+  const spendBlocks = envelope.blocks.filter(b => b.kind === 'section' && b.cost);
+  if (spendBlocks.length > (trigger ? 1 : 0) || (spendBlocks.length && envelope.cost))
+    return undefined;
   for (const [index, block] of envelope.blocks.entries()) {
     if (block.kind === 'section' && block.label === 'Trigger' && trigger) continue;
+    if (block.kind === 'section' && block.cost && trigger) {
+      const spend = responseSpend(block.cost, block.text);
+      if (!spend || (spend.effect.kind === 'potency' && !spendSubjectFits(spend, target)))
+        return undefined;
+      sections[index] = [
+        { text: plain(block.text).replace(/\s+/g, ' ').trim(), clause: spend, singleTarget: false },
+      ];
+      continue;
+    }
     if (block.kind !== 'section' || block.label !== 'Effect' || block.cost) return undefined;
     const read = readEffectOnlySection(block.text);
     if (
@@ -938,11 +984,21 @@ function readEffectOnly(envelope: Envelope):
           // V173: "the triggering damage" needs a damage trigger, "the triggering strike" a
           // melee-strike one.
           (sentence.trigger === 'damage' && !trigger) ||
-          (sentence.trigger === 'melee-strike' && trigger?.from !== 'melee-strike'),
+          (sentence.trigger === 'melee-strike' && trigger?.from !== 'melee-strike') ||
+          (sentence.trigger === 'damage-taken' && !revisionFits(sentence.clause, trigger)),
       )
     )
       return undefined;
     sections[index] = read;
   }
+  // V174: a Spend section speaks of "the damage" the response revises, so it needs one.
+  const clauses = Object.values(sections)
+    .flat()
+    .map(sentence => sentence.clause);
+  if (
+    clauses.some(clause => clause.kind === 'response-spend') &&
+    clauses.filter(clause => clause.kind === 'damage-revision').length !== 1
+  )
+    return undefined;
   return { target, sections, ...(trigger ? { trigger } : {}) };
 }

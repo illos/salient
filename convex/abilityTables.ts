@@ -123,6 +123,11 @@ export const abilityTables = {
     target: v.string(),
     distance: v.string(),
     sourcePath: v.string(),
+    /**
+     * V174: a response that revises the triggering damage (convex/lib/damageRevisions.ts): its
+     * adjacency confirmation and optional Spend section, for the card (TriggerOffer.revision).
+     */
+    revision: v.optional(v.any()),
   }).index('by_encounter', ['encounterId']),
   /** A critical hit's additional main action: offered to the acting user, never executed by the app. */
   actionOpportunities: defineTable({

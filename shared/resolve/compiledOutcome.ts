@@ -43,10 +43,23 @@ import {
   type StrainedSpec,
   type StrainedState,
 } from './strained.ts';
-import { actionTypeOfUsage, strainedAdmitted } from './compileAbility.ts';
+import {
+  actionTypeOfUsage,
+  revisionFits,
+  spendSubjectFits,
+  strainedAdmitted,
+} from './compileAbility.ts';
+import {
+  halveApplication,
+  responseSpend,
+  sameResponseSpend,
+  type ResponseSpendClause,
+} from './damageRevision.ts';
+import type { EffectRider } from './effectRiders.ts';
 import { sameTriggerSpec, triggerSection } from './triggers.ts';
 import {
   effectOnlyClause,
+  type EffectOnlySentence,
   effectOnlyTarget,
   effectOnlyTargetLimit,
   readEffectOnlySection,
@@ -368,7 +381,40 @@ export interface CompiledTriggeredDamageOutcome extends EffectIdentity {
   requirements: string[];
 }
 
+/**
+ * V174: a response that revises the triggering damage (shared/resolve/damageRevision.ts). Only an
+ * offer accepted from that damage knows the hit; a use by hand leaves the halving to the table.
+ * `before` is the hit's current accepted revision and `application` the revised hit. The use adds
+ * `consequences`: what the revision reversed or left standing (design 5b), for the log.
+ */
+export interface CompiledDamageRevisionOutcome extends EffectIdentity {
+  kind: 'damage-revision';
+  status: 'calculated' | 'manual';
+  share: 'half';
+  instructions: EffectRider['shape'][];
+  confirm?: 'self-or-adjacent';
+  potency?: 'any';
+  hitEventId?: string;
+  before?: DamageApplication;
+  application?: DamageApplication;
+  consequences?: string[];
+  requirements: string[];
+}
+/** V174: the optional Spend section of such a response, spent or not. */
+export interface CompiledResponseSpendOutcome extends EffectIdentity {
+  kind: 'response-spend';
+  status: 'spent' | 'not-spent';
+  resource: string;
+  amount?: number;
+  effect:
+    | { kind: 'potency'; scope: 'one' | 'any' }
+    | { kind: 'instruction'; shape: EffectRider['shape'] };
+  requirements: string[];
+}
+
 export type CompiledEffectOutcome =
+  | CompiledDamageRevisionOutcome
+  | CompiledResponseSpendOutcome
   | CompiledTriggeredDamageOutcome
   | CompiledWatcherOutcome
   | CompiledStrainedOutcome
@@ -1028,7 +1074,21 @@ export interface EffectOnlyInput {
    * V173: the event an accepted offer answers. `damage` is the triggering damage (Stamina and
    * temporary Stamina the damaged creature lost, after immunity and weakness).
    */
-  trigger?: { damage: number };
+  trigger?: {
+    damage: number;
+    /**
+     * V174: the hit a damage-changing response revises: its current accepted revision for the
+     * damaged creature (design 5b), loaded by the use from the triggering entry.
+     */
+    revision?: {
+      hitEventId: string;
+      targetId: string;
+      kind: 'hero' | 'foe';
+      current: DamageApplication;
+    };
+  };
+  /** V174: the amount the user spends on the response's optional Spend section, if any. */
+  spend?: number;
 }
 export type EffectOnlyOutcome =
   | { kind: 'manual'; definition: CompiledAbility; reason: string; effects: [] }
@@ -1097,12 +1157,26 @@ export function resolveEffectOnly(
   )
     return manual('Compiled structure is outside the supported envelope.');
   // Every Effect section, read whole again, must give exactly the saved nodes in order.
-  const reread = definition.envelope.blocks.flatMap((block, index) =>
+  const reread: {
+    index: number;
+    sentence: EffectOnlySentence | undefined;
+    spend?: ResponseSpendClause | undefined;
+  }[] = definition.envelope.blocks.flatMap((block, index) =>
     block.kind === 'section' && block.label === 'Trigger' && triggered
       ? []
       : block.kind === 'section' && block.label === 'Effect' && !block.cost
         ? (readEffectOnlySection(block.text) ?? [undefined]).map(sentence => ({ index, sentence }))
-        : [{ index, sentence: undefined }],
+        : [
+            {
+              index,
+              sentence: undefined,
+              // V174: a response's Spend section.
+              spend:
+                block.kind === 'section' && block.cost && triggered
+                  ? responseSpend(block.cost, block.text)
+                  : undefined,
+            },
+          ],
   );
   if (
     definition.format !== 'salient.compiled-ability' ||
@@ -1118,13 +1192,28 @@ export function resolveEffectOnly(
     reread.length !== definition.sections.length ||
     definition.sections.some((node, index) => {
       const again = reread[index]!;
+      // V174: the Spend section of a damage-changing response re-reads to the same spend.
+      if (node.kind === 'response-spend') {
+        const spend = again.spend;
+        const { id: _id, locator, clause: _clause, ...saved } = node;
+        void _id;
+        void _clause;
+        return (
+          !spend ||
+          !locator.startsWith(`block:${again.index}:`) ||
+          !sameResponseSpend(spend, saved) ||
+          (spend.effect.kind === 'potency' && !spendSubjectFits(spend, shape)) ||
+          !definition.sections.some(other => other.kind === 'damage-revision')
+        );
+      }
       if (!again.sentence || !node.locator.startsWith(`block:${again.index}:`)) return true;
       if (
         node.kind !== 'gain' &&
         node.kind !== 'instruction' &&
         node.kind !== 'modifier' &&
         node.kind !== 'watcher' &&
-        node.kind !== 'triggered-damage'
+        node.kind !== 'triggered-damage' &&
+        node.kind !== 'damage-revision'
       )
         return true;
       const parsed = effectOnlyClause(node.clause);
@@ -1134,9 +1223,17 @@ export function resolveEffectOnly(
         (parsed.singleTarget && shape.kind !== 'one' && shape.kind !== 'self') ||
         (clause.subject === 'actor' && shape.kind !== 'self') ||
         (parsed.trigger === 'damage' && !definition.trigger) ||
-        (parsed.trigger === 'melee-strike' && definition.trigger?.from !== 'melee-strike')
+        (parsed.trigger === 'melee-strike' && definition.trigger?.from !== 'melee-strike') ||
+        (parsed.trigger === 'damage-taken' && !revisionFits(clause, definition.trigger))
       )
         return true;
+      if (node.kind === 'damage-revision') {
+        const { id: _id, locator: _locator, clause: _text, ...saved } = node;
+        void _id;
+        void _locator;
+        void _text;
+        return JSON.stringify(saved) !== JSON.stringify(clause);
+      }
       if (node.kind === 'triggered-damage')
         return (
           clause.kind !== 'triggered-damage' ||
@@ -1202,8 +1299,24 @@ export function resolveEffectOnly(
           ? `Include yourself: the target is Self and each ally${shape.kind === 'area' ? ' in the area' : ''}.`
           : `Give ${limit === 1 ? 'one target' : limit === undefined ? 'one or more distinct targets' : `one to ${limit} distinct targets`}${selfAllowed ? '' : ', not the user'}.`,
     );
+  // V174: the optional Spend section is the use's only cost (the compiler admits no fixed cost
+  // beside it). The printed amount, or at least it for "Spend 1+".
+  const spendNode = definition.sections.find(node => node.kind === 'response-spend');
+  if (input.spend !== undefined) {
+    if (!spendNode) return manual(`${definition.name} has no Spend section the engine applies.`);
+    if (
+      !Number.isSafeInteger(input.spend) ||
+      input.spend < spendNode.amount ||
+      (!spendNode.variable && input.spend !== spendNode.amount)
+    )
+      return manual(
+        `${spendNode.cost}: spend ${spendNode.variable ? `${spendNode.amount} or more` : spendNode.amount} ${spendNode.resource}.`,
+      );
+  }
   const affordability = checkAffordability(
-    activation.fixedCost,
+    spendNode && input.spend !== undefined
+      ? { resource: spendNode.resource, amount: input.spend }
+      : activation.fixedCost,
     input.resourcePool,
     input.inCombat,
   );
@@ -1231,6 +1344,57 @@ export function resolveEffectOnly(
     id === input.actor.id ? input.actor : input.targets.find(target => target.id === id)!;
   const effects: CompiledEffectOutcome[] = [];
   for (const node of definition.sections) {
+    // V174: the revised hit, computed from its current accepted revision (design 5b).
+    if (node.kind === 'damage-revision') {
+      for (const target of input.targets) {
+        const identity = {
+          nodeId: node.id,
+          targetId: target.id,
+          locator: node.locator,
+          clause: node.clause,
+          kind: 'damage-revision' as const,
+          share: node.share,
+          instructions: node.instructions,
+          ...(node.confirm ? { confirm: node.confirm } : {}),
+          ...(node.potency ? { potency: node.potency } : {}),
+        };
+        const hit = input.trigger?.revision;
+        effects.push(
+          hit && hit.targetId === target.id
+            ? {
+                ...identity,
+                status: 'calculated',
+                hitEventId: hit.hitEventId,
+                before: hit.current,
+                application: halveApplication(hit.current, hit.kind),
+                requirements: [],
+              }
+            : {
+                ...identity,
+                status: 'manual',
+                requirements: [
+                  'trigger.hit (used by hand: the table halves the damage and resolves the rest)',
+                ],
+              },
+        );
+      }
+      continue;
+    }
+    if (node.kind === 'response-spend') {
+      effects.push({
+        nodeId: node.id,
+        targetId: input.targets[0]!.id,
+        locator: node.locator,
+        clause: node.clause,
+        kind: 'response-spend',
+        status: input.spend !== undefined ? 'spent' : 'not-spent',
+        resource: node.resource,
+        ...(input.spend !== undefined ? { amount: input.spend } : {}),
+        effect: node.effect,
+        requirements: [],
+      });
+      continue;
+    }
     if (node.kind === 'triggered-damage') {
       for (const target of input.targets) {
         const identity = {

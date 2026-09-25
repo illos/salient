@@ -18,7 +18,7 @@
  *   those abilities also have "self" as a target (see below), or unless the ability indicates
  *   otherwise." ("An ally" excluding yourself is Q-TRIG-1's labelled interpretation.)
  * - Manual examples: censor/level-1/my-life-for-yours.md (turn start or damage, and a Spend section),
- *   elementalist/level-1/skin-like-castle-walls.md ("take half the damage": V174),
+ *   tactician/level-1/advanced-tactics.md (surges on the triggering damage, and a Spend section),
  *   conduit/level-1/word-of-judgment.md ("would take damage"), shadow/level-1/hesitation-is-weakness.md
  *   (another hero ends their turn), tactician/level-2/no-dying-on-my-watch.md (a power roll).
  */
@@ -87,9 +87,11 @@ test('unobserved triggers and manual effects keep the ability manual with a prec
     expect(compiled(name).execution, name).toBe('manual');
     expect(codes(name), name).toContain('trigger-unobserved');
   }
-  // An observed trigger with a manual effect ("take half the damage" is V174).
-  expect(compiled('Skin Like Castle Walls').execution).toBe('manual');
-  expect(codes('Skin Like Castle Walls')).toContain('trigger-manual');
+  // An observed trigger with a manual effect (surges "on the triggering damage", and a Spend
+  // section: tactician/level-1/advanced-tactics.md). Skin Like Castle Walls compiles since V174
+  // (tests/scripts/damage-reactions.test.ts).
+  expect(compiled('Advanced Tactics').execution).toBe('manual');
+  expect(codes('Advanced Tactics')).toContain('trigger-manual');
   // A power roll: offered only without one in V173.
   expect(compiled('No Dying on My Watch').execution).toBe('manual');
   expect(

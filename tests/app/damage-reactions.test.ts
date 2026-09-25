@@ -1,0 +1,436 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/**
+ * V174 damage-changing responses through the registered operations, with persisted readback.
+ * Accepting the card revises the hit (docs/decisions/2026-09-24-automation-rulings.md, ruling 3;
+ * docs/lasting-effects-design.md#5b-response-revision-accounting-ruling-3-option-b). Expected
+ * values come from the pinned Compendium (en/unified/md), never from a run of the code under test:
+ * - feature/ability/null/level-1/inertial-shield.md: Triggered, Self; Trigger "You take damage.";
+ *   Effect "You take half the damage."; Spend 1 Discipline: "The potency of one effect associated
+ *   with the damage is reduced by 1 for you."
+ * - feature/ability/fury/level-1/unearthly-reflexes.md: Triggered, Self; "You take half the damage
+ *   from the triggering effect …".
+ * - feature/ability/tactician/level-1/parry.md: Triggered, Self or one ally; Trigger "A creature
+ *   deals damage to the target."; "… the target takes half the damage. If the damage has any
+ *   potency effect associated with it, the potency is decreased by 1."
+ * - rule/general/always-round-down.md: 7 halved is 3; 5 halved is 2; 1 halved is 0.
+ * - monster/goblin/statblock/goblin-warrior.md: Stamina 15, Free Strike 1; Spear Charge, Power Roll
+ *   + 2, 17+ 5 damage; Bury the Point (2 Malice), Power Roll + 2, 17+ "7 damage; M < 2 bleeding
+ *   (save ends)". rule/dice/power-roll.md: 8 + 8 + 2 = 18 is tier 3.
+ * - feature/ability/talent/level-1/mind-spike.md: Power Roll + Reason, 17+ "6 + R psychic damage".
+ * - rule/character/potency.md: an effect applies only if its potency is higher than the score.
+ * - rule/health/winded.md: winded at or below the winded value (the fixtures' expected values).
+ * - feature/fury/level-1/ferocity.md: "the first time each combat round that you take damage, you
+ *   gain 1 ferocity"; "The first time you become winded or are dying in an encounter, you gain 1d3
+ *   ferocity."
+ * - rule/combat/triggered-action.md: one triggered action per round.
+ * Heroes: the Null is v103-1 (Stamina 21, winded 10, Might 2), the Fury v101-panther (Reaver:
+ * Stamina 27, winded 13), the Tactician v94-tactician-3 (Vanguard: Parry) and the Talent v105-3
+ * (Stamina 18, winded 9, Might 1, Reason 2), all owned by the player.
+ */
+import { expect, test } from 'vitest';
+import { convexTest } from 'convex-test';
+import betterAuthTest from '@convex-dev/better-auth/test';
+import { api, internal } from '../../convex/_generated/api';
+import type { Id } from '../../convex/_generated/dataModel';
+import schema from '../../convex/schema';
+import { generate } from '../../convex/lib/dice';
+import { fromHex } from '../../convex/lib/sha256';
+import { appendEvent } from '../../convex/lib/events';
+import { applyEffectInstance } from '../../convex/lib/effectInstances';
+import type { EvaluationInput } from '../../shared/contracts/characterEvaluation';
+import type { CompiledResult } from '../../shared/contracts/compiledResult';
+import type { Watcher } from '../../shared/contracts/liveState';
+import { definitions } from '../../shared/content/level-one-decisions';
+import { draftSelectionsFrom } from '../../shared/evaluate/draft';
+import nullLedger from '../fixtures/v103-null-expected.json' with { type: 'json' };
+import furyLedger from '../fixtures/v101-fury-expected.json' with { type: 'json' };
+import tacticianLedger from '../fixtures/v94-tactician-expected.json' with { type: 'json' };
+import talentLedger from '../fixtures/v105-talent-expected.json' with { type: 'json' };
+import { admitHero, table, type Backend } from './fixtures/table';
+
+const modules = import.meta.glob('../../convex/**/*.ts');
+const GOBLIN = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
+
+async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, number]) {
+  await t.run(async ctx => {
+    let state = await ctx.db
+      .query('diceStates')
+      .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+      .unique();
+    if (!state) {
+      const seed = crypto.getRandomValues(new Uint8Array(32));
+      const id = await ctx.db.insert('diceStates', {
+        campaignId,
+        seed: [...seed].map(b => b.toString(16).padStart(2, '0')).join(''),
+        counter: 0,
+      });
+      state = (await ctx.db.get(id))!;
+    }
+    const seed = fromHex(state.seed);
+    const spec = [
+      { id: 'd10a', sides: 10 },
+      { id: 'd10b', sides: 10 },
+    ];
+    for (let counter = state.counter; counter < state.counter + 100000; counter++) {
+      const out = generate(seed, counter, spec);
+      if (out.dice[0]!.value === faces[0] && out.dice[1]!.value === faces[1]) {
+        await ctx.db.patch(state._id, { counter });
+        return;
+      }
+    }
+    throw new Error('No matching dice position found.');
+  });
+}
+
+type Witness = { ledger: { witnesses: { id: string; selections: unknown }[] }; id: string };
+const NULL: Witness = { ledger: nullLedger, id: 'v103-1' };
+const FURY: Witness = { ledger: furyLedger, id: 'v101-panther' };
+const TACTICIAN: Witness = { ledger: tacticianLedger, id: 'v94-tactician-3' };
+const TALENT: Witness = { ledger: talentLedger, id: 'v105-3' };
+
+let sequence = 0;
+async function setup(heroes: Record<string, Witness>) {
+  // The damage writer is a hot path (tests/app/party-read-limit.test.ts): enforce Convex's limits.
+  const t = convexTest({ schema, modules, transactionLimits: true }) as unknown as Backend;
+  betterAuthTest.register(t);
+  const f = await table(t);
+  await t.action(internal.content.reseed, {});
+  const ids: Record<string, Id<'characters'>> = {};
+  for (const [name, witness] of Object.entries(heroes))
+    ids[name] = await admitHero(
+      t,
+      f.player,
+      f.director,
+      f.campaignId,
+      name,
+      draftSelectionsFrom(
+        {
+          ...(witness.ledger.witnesses.find(w => w.id === witness.id)!
+            .selections as EvaluationInput['selections']),
+          'details.name': name,
+        },
+        definitions,
+      ),
+    );
+  const command = (text: string, who: 'director' | 'player' = 'director') =>
+    f[who].client.mutation(api.commands.submit, {
+      campaignId: f.campaignId,
+      commandId: `reactions-${++sequence}`,
+      text,
+    });
+  const goblin = await f.director.client.mutation(api.foes.add, {
+    campaignId: f.campaignId,
+    definitionId: GOBLIN,
+    commandId: `reactions-${++sequence}`,
+  });
+  const goblinRef = `@{foe:${goblin}}`;
+  const ref = (name: string) => `@{character:${ids[name]}}`;
+  const live = async (name: string) => (await t.run(ctx => ctx.db.get(ids[name]!)))!.liveState!;
+  const cards = async () =>
+    (await t.run(ctx => ctx.db.query('interactions').take(100))).filter(
+      c => c.kind === 'triggered-offer',
+    );
+  const open = async () => (await cards()).filter(c => c.status === 'awaiting-input');
+  const card = async (id: Id<'interactions'>) => (await t.run(ctx => ctx.db.get(id)))!;
+  const events = () => t.run(ctx => ctx.db.query('events').take(4000));
+  const hit = async (ability: string, target: string, faces: [number, number] = [8, 8]) => {
+    await atDice(t, f.campaignId, faces);
+    return command(`${goblinRef} /ability use ability="${ability}" targets=[${ref(target)}]`);
+  };
+  const respond = (
+    id: Id<'interactions'>,
+    who: 'director' | 'player',
+    answer: Record<string, unknown> = {},
+  ) =>
+    f[who].client.mutation(api.interactions.respond, {
+      interactionId: id,
+      answer,
+      commandId: `reactions-${++sequence}`,
+    });
+  const result = (eventId: Id<'events'>) =>
+    t.run(ctx =>
+      ctx.db
+        .query('abilityResults')
+        .withIndex('by_event', q => q.eq('eventId', eventId))
+        .unique(),
+    );
+  // Combat with the goblin's side first, and the goblin's turn in progress.
+  await command('/combat start');
+  await command('/combat commit');
+  await command('/combat roll', 'player');
+  await command('/combat first side=foes');
+  await command(`${goblinRef} /turn take`);
+  return {
+    t,
+    f,
+    ids,
+    ref,
+    goblin,
+    goblinRef,
+    command,
+    live,
+    cards,
+    open,
+    card,
+    events,
+    hit,
+    respond,
+    result,
+  };
+}
+
+test('V174: Inertial Shield halves the goblin’s hit; undo restores it; the Director accepts; one per round', async () => {
+  const s = await setup({ Nul: NULL });
+  // Spear Charge 8 + 8 + 2 = 18, tier 3: 5 damage, 21 → 16.
+  const hit = await s.hit('Spear Charge', 'Nul');
+  expect((await s.live('Nul')).stamina).toBe(16);
+  const [offer] = await s.open();
+  expect(offer).toMatchObject({
+    boundActor: { kind: 'character', id: s.ids.Nul },
+    offer: {
+      abilityName: 'Inertial Shield',
+      triggeringEventId: hit.eventId,
+      damage: 5,
+      damaged: { kind: 'character', id: s.ids.Nul },
+      target: { kind: 'character', id: s.ids.Nul },
+      revision: { spend: { cost: 'Spend 1 Discipline', resource: 'discipline', amount: 1 } },
+    },
+  });
+  expect((offer!.offer as { text: string }).text).toContain('Accepting revises the hit');
+
+  // 1. The player accepts: half of 5 is 2, so Stamina is 21 − 2 = 19.
+  const accepted = await s.respond(offer!._id, 'player');
+  expect((await s.live('Nul')).stamina).toBe(19);
+  const record = await s.result(accepted.eventId);
+  expect((record!.compiled as CompiledResult).effects.map(o => o.effect)).toMatchObject([
+    {
+      kind: 'damage-revision',
+      status: 'calculated',
+      hitEventId: hit.eventId,
+      before: { incoming: 5, staminaBefore: 21, staminaAfter: 16 },
+      application: { incoming: 2, staminaBefore: 21, staminaAfter: 19, windedAfter: false },
+    },
+    { kind: 'response-spend', status: 'not-spent' },
+  ]);
+  const revised = (await s.events()).filter(e => e.kind === 'damage.revised');
+  expect(revised).toHaveLength(1);
+  expect(revised[0]).toMatchObject({
+    causeEventId: accepted.eventId,
+    payload: { data: { hitEventId: hit.eventId, responseEventId: accepted.eventId } },
+  });
+  expect((await s.t.run(ctx => ctx.db.get(accepted.eventId)))!.causeEventId).toBe(hit.eventId);
+  expect(revised[0]!.description).toContain('5 → 2 damage; Stamina 16 → 19');
+  expect(await s.card(offer!._id)).toMatchObject({ status: 'resolved' });
+
+  // 2. Undo of the acceptance restores the original hit and reopens the card.
+  await s.command('/history undo');
+  expect((await s.live('Nul')).stamina).toBe(16);
+  expect(await s.card(offer!._id)).toMatchObject({ status: 'awaiting-input' });
+  expect(
+    (await s.events()).filter(e => e.kind === 'damage.revised' && e.disposition !== 'undone'),
+  ).toHaveLength(0);
+
+  // 3. The Director accepts for the player's hero (ruling 4).
+  await s.respond(offer!._id, 'director');
+  expect((await s.live('Nul')).stamina).toBe(19);
+
+  // 4. One triggered action per round: a second hit in the round offers nothing.
+  await s.hit('Spear Charge', 'Nul');
+  expect((await s.live('Nul')).stamina).toBe(14);
+  expect(await s.open()).toEqual([]);
+});
+
+test('V174: the revision reconciles winded; a potency spend on damage without potency is refused', async () => {
+  const s = await setup({ Nul: NULL });
+  // Winded value 10: 13 − 5 = 8 is winded; 13 − 2 = 11 is not.
+  await s.command(`${s.ref('Nul')} /adjust stamina value=13`);
+  await s.command(`${s.ref('Nul')} /adjust heroic-resource value=1`);
+  await s.hit('Spear Charge', 'Nul');
+  expect((await s.live('Nul')).stamina).toBe(8);
+  const [offer] = await s.open();
+  // Spear Charge has no potency effect, so Spend 1 Discipline has nothing to reduce.
+  await expect(s.respond(offer!._id, 'player', { spend: 1 })).rejects.toThrow(/no potency effect/);
+  expect(await s.card(offer!._id)).toMatchObject({ status: 'awaiting-input' });
+  expect((await s.live('Nul')).heroicResource.current).toBe(1);
+  const accepted = await s.respond(offer!._id, 'player');
+  expect((await s.live('Nul')).stamina).toBe(11);
+  const use = (await s.t.run(ctx => ctx.db.get(accepted.eventId)))!;
+  expect(use.description).toContain('no longer winded');
+  const [effect] = (await s.result(accepted.eventId))!.compiled!
+    .effects as CompiledResult['effects'];
+  expect(effect!.effect).toMatchObject({
+    before: { windedAfter: true },
+    application: { windedAfter: false, staminaAfter: 11 },
+  });
+});
+
+test('V174: a gain the revision no longer earns is reversed; its spent part stands and is logged', async () => {
+  const s = await setup({ Rook: FURY });
+  // Winded value 13: 16 − 5 = 11 is winded (the first time: 1d3 ferocity); 16 − 2 = 14 is not.
+  await s.command(`${s.ref('Rook')} /adjust stamina value=16`);
+  const hit = await s.hit('Spear Charge', 'Rook');
+  const gains = (await s.events()).filter(
+    e => e.kind === 'resource.triggered' && e.causeEventId === hit.eventId,
+  );
+  const data = (e: (typeof gains)[number]) =>
+    (e.payload as { data: { triggerId: string; delta: number; after: number } }).data;
+  const damaged = gains.find(e => data(e).triggerId !== 'fury-winded-or-dying')!;
+  const winded = gains.find(e => data(e).triggerId === 'fury-winded-or-dying')!;
+  expect(data(damaged).delta).toBe(1);
+  const d3 = data(winded).delta;
+  expect(d3).toBeGreaterThanOrEqual(1);
+  expect(d3).toBeLessThanOrEqual(3);
+  const pool = (await s.live('Rook')).heroicResource.current;
+  expect(pool).toBe(data(winded).after);
+  // The Fury spends 1 ferocity before the response (a Director adjustment stands in for a spend).
+  await s.command(`${s.ref('Rook')} /adjust heroic-resource value=${pool - 1}`);
+  const [offer] = await s.open();
+  expect(offer!.offer).toMatchObject({ abilityName: 'Unearthly Reflexes', damage: 5 });
+  await s.respond(offer!._id, 'player');
+  const rook = await s.live('Rook');
+  expect(rook.stamina).toBe(14);
+  // The first-damage gain stands (damage is still taken); the winded gain is reversed except the
+  // 1 already spent, which counts the most recent gain first (design 5b).
+  expect(rook.heroicResource.current).toBe(pool - 1 - (d3 - 1));
+  expect(rook.resourceClaims?.map(c => c.eventId)).toContain(damaged._id);
+  expect(rook.resourceClaims?.map(c => c.eventId)).not.toContain(winded._id);
+  const [revised] = (await s.events()).filter(e => e.kind === 'damage.revised');
+  expect(revised!.description).toContain('You became winded or are dying no longer applies');
+  expect(revised!.description).toContain('1 of it was already spent and stands');
+});
+
+test('V174: a watched hit — a firing the revision undoes refuses; one still true stands', async () => {
+  const s = await setup({ Nul: NULL });
+  const store = (event: Watcher['event']) =>
+    s.t.run(async ctx => {
+      const session = (await ctx.db.get(s.f.sessionId!))!;
+      const eventId = await appendEvent(ctx, {
+        campaignId: s.f.campaignId,
+        sessionId: s.f.sessionId!,
+        encounterId: session.encounterId ?? null,
+        origin: 'user',
+        actor: (await ctx.db.get(s.f.director.profile.userId))!,
+        commandId: `reactions-source-${++sequence}`,
+        kind: 'test.effect',
+        description: 'Synthetic source occurrence for a watcher.',
+      });
+      const nul = { kind: 'character' as const, id: s.ids.Nul!, name: 'Nul' };
+      await applyEffectInstance(
+        ctx,
+        { campaignId: s.f.campaignId, eventId },
+        {
+          id: `fixture-${eventId}`,
+          kind: 'watcher',
+          sourceUseEventId: eventId,
+          sourceActorId: s.ids.Nul!,
+          abilityId: `fixture-${event}`,
+          abilityName: `Fixture ${event}`,
+          actorLabel: 'Nul',
+          sourcePath: 'rule/resource/surge.md',
+          clause: `Fixture: on ${event}, gain 1 surge.`,
+          owner: nul,
+          subject: nul,
+          payload: {
+            kind: 'watcher',
+            text: 'Fixture watcher.',
+            watcher: {
+              event,
+              whose: 'subject',
+              limit: 'each',
+              responses: [{ kind: 'gain', recipient: 'subject', surges: 1 }],
+            },
+          },
+          printedDuration: { kind: 'encounter' },
+          endsWhen: [],
+          appliedSequence: (await ctx.db.get(eventId))!.sequence,
+        },
+        session.encounterId ?? undefined,
+      );
+    });
+  await store('made-winded');
+  await store('damage-taken');
+  const surges = (await s.live('Nul')).surges;
+  // 13 − 5 = 8 makes the Null winded: both watchers fire. Half the damage (13 − 2 = 11) would not
+  // make it winded, so that firing can't stand and the engine can't re-derive it (V171).
+  await s.command(`${s.ref('Nul')} /adjust stamina value=13`);
+  await s.hit('Spear Charge', 'Nul');
+  expect((await s.live('Nul')).surges).toBe(surges + 2);
+  const [offer] = await s.open();
+  await expect(s.respond(offer!._id, 'player')).rejects.toThrow(/Rewind to the hit/);
+  expect(await s.card(offer!._id)).toMatchObject({ status: 'awaiting-input' });
+  expect((await s.live('Nul')).stamina).toBe(8);
+
+  // Rewind to the hit, and hit from full Stamina: only the damage-taken watcher fires, and half the
+  // damage is still damage taken, so its firing stands (ruling 3: still-true consequences stand).
+  await s.command('/history undo');
+  expect(await s.open()).toEqual([]);
+  await s.command(`${s.ref('Nul')} /adjust stamina value=21`);
+  await s.hit('Spear Charge', 'Nul');
+  expect((await s.live('Nul')).surges).toBe(surges + 1);
+  const [again] = await s.open();
+  await s.respond(again!._id, 'player');
+  expect((await s.live('Nul')).stamina).toBe(19);
+  expect((await s.live('Nul')).surges).toBe(surges + 1);
+});
+
+test('V174: Parry protects an ally from Bury the Point: 7 → 3 damage and the bleeding potency drops', async () => {
+  const s = await setup({ Vane: TACTICIAN, Seer: TALENT });
+  await s.command('/adjust malice value=2');
+  // 8 + 8 + 2 = 18: 7 damage and M < 2 bleeding (save ends); the Talent's Might 1 is below 2.
+  const hit = await s.hit('Bury the Point', 'Seer');
+  expect((await s.live('Seer')).stamina).toBe(11);
+  expect((await s.live('Seer')).conditions.bleeding).toBe(true);
+  const [offer] = await s.open();
+  expect(offer).toMatchObject({
+    boundActor: { kind: 'character', id: s.ids.Vane },
+    offer: {
+      abilityName: 'Parry',
+      target: { kind: 'character', id: s.ids.Seer },
+      revision: { confirm: 'self-or-adjacent' },
+      damage: 7,
+    },
+  });
+  expect((offer!.offer as { text: string }).text).toContain('adjacent to Seer');
+  const accepted = await s.respond(offer!._id, 'player');
+  const seer = await s.live('Seer');
+  // always-round-down.md: 7 halved is 3; 18 − 3 = 15. Potency 2 → 1 against Might 1: no bleeding.
+  expect(seer.stamina).toBe(15);
+  expect(seer.conditions.bleeding).toBe(false);
+  expect(seer.conditionInstances?.find(i => i.sourceUseEventId === hit.eventId)).toMatchObject({
+    condition: 'bleeding',
+    status: 'ended',
+  });
+  const use = (await s.t.run(ctx => ctx.db.get(accepted.eventId)))!;
+  expect(use.description).toContain('no longer bleeding');
+  expect(use.description).toContain('ended the shift adjacent to Seer');
+  // Undo restores the hit, bleeding included.
+  await s.command('/history undo');
+  expect((await s.live('Seer')).stamina).toBe(11);
+  expect((await s.live('Seer')).conditions.bleeding).toBe(true);
+});
+
+test('V174: a creature free strike and a hero’s ability are revised too', async () => {
+  const s = await setup({ Nul: NULL, Seer: TALENT });
+  // The goblin's free strike deals 1; half of 1 is 0, so the Null takes nothing.
+  await s.command(`${s.goblinRef} /ability use ability="Free Strike" targets=[${s.ref('Nul')}]`);
+  expect((await s.live('Nul')).stamina).toBe(20);
+  const [strike] = await s.open();
+  expect(strike!.offer).toMatchObject({ abilityName: 'Inertial Shield', damage: 1 });
+  await s.respond(strike!._id, 'player');
+  expect((await s.live('Nul')).stamina).toBe(21);
+  // The Null has used its triggered action this round, so rewind the response and the free strike
+  // before the hero's ability: Mind Spike 8 + 8 + 2 = 18, tier 3: 6 + 2 = 8 psychic, 21 → 13; half
+  // of 8 is 4, 21 → 17.
+  await s.command('/history undo');
+  await s.command('/history undo');
+  expect((await s.live('Nul')).stamina).toBe(21);
+  await atDice(s.t, s.f.campaignId, [8, 8]);
+  await s.command(
+    `${s.ref('Seer')} /ability use ability="Mind Spike" targets=[${s.ref('Nul')}] strained=no`,
+  );
+  expect((await s.live('Nul')).stamina).toBe(13);
+  const [spike] = await s.open();
+  expect(spike!.offer).toMatchObject({ abilityName: 'Inertial Shield', damage: 8 });
+  await s.respond(spike!._id, 'director');
+  expect((await s.live('Nul')).stamina).toBe(17);
+});

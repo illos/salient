@@ -194,6 +194,13 @@ test('V72 availability follows current grants and loading, not catalog presence'
       // V173: triggered actions offered on observed damage (effect-only).
       'Feedback Loop',
       'Riposte',
+      // V174: responses that revise the triggering damage (effect-only, with a Spend section).
+      'Inertial Shield',
+      'Skin Like Castle Walls',
+      'Parry',
+      'Defensive Roll',
+      'In All This Confusion',
+      'Unearthly Reflexes',
     ].sort(),
   );
   expect(
@@ -205,11 +212,12 @@ test('V72 availability follows current grants and loading, not catalog presence'
 });
 
 // V157: the seven effect-only abilities, V159's Squad! On Me!, V171's Blessing of Insight and V173's
-// Feedback Loop and Riposte are counted; no foe ability is effect-only.
+// Feedback Loop and Riposte, and V174's six damage-changing responses are counted; no foe ability
+// is effect-only.
 test('V157 effect-only abilities are counted in the live report', () => {
   const report = liveCompiledSupportReport();
   const effectOnly = report.entries.filter(e => e.live === 'compiled' && e.effectOnly);
-  expect(report.liveCounts.compiledEffectOnly).toBe(11);
+  expect(report.liveCounts.compiledEffectOnly).toBe(17);
   expect(effectOnly.every(e => e.context.corpus === 'hero-standalone')).toBe(true);
 });
 

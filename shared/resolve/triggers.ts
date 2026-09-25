@@ -97,7 +97,7 @@ const UNOBSERVED: readonly { pattern: RegExp; reason: string }[] = [
   {
     pattern: /\bwould (take damage|be force moved)\b|\breceives enough damage\b/,
     reason:
-      'it answers damage or movement before it happens, and a response that changes the hit is V174 (option B revision)',
+      'it answers damage or movement before it happens; V174 revises only a hit already written (option B)',
   },
   {
     pattern: /\b(moves|force moved|force moves|enters a space)\b/,
