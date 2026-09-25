@@ -395,6 +395,12 @@ equals the instance's damage type; untyped damage is matched only by untyped ent
 `immunity` are the highest applicable values (0 when none); an immunity value of `"all"` sets
 `afterImmunity = 0`. The v0.01 Goblin Warrior has neither ("-" in both stat block cells).
 
+V178 (`shared/resolve/damageModifiers.ts`): a foe's printed Immunity and Weakness cells are read as
+a comma-separated list of "<type> <value>" items, where "Damage" is the untyped `all-damage`; "-"
+and "—" print none. A cell with any other item (a summoner's "R", a type with no value, a choice of
+types) leaves that foe's damage manual, naming the cell. A hero's evaluated immunities and
+weaknesses both apply. No damage takes no weakness (Q-RES-4, as the V174 halving already reads it).
+
 ### 6.3 Winded
 
 > "Your winded value equals half your Stamina maximum. When your Stamina is equal to or less than

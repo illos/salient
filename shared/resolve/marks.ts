@@ -195,7 +195,9 @@ export type MarkBenefitPlan =
  * - Extra damage "equal to twice your Reason score" is applied only when adding it separately gives
  *   the same result as adding it to the ability's damage: the marked creature has no damage
  *   immunity or weakness (rule/damage/damage-immunity.md and damage-weakness.md apply per damage, so
- *   a separate application would count them twice), it is a creature the engine writes damage to,
+ *   a separate application would count them twice) or, since V178, the caller sized the extra
+ *   against the hit's saved weakness and immunity (`immunityOrWeakness` false; shared/resolve/
+ *   damageModifiers.ts `extraDamageAfterModifiers`), it is a creature the engine writes damage to,
  *   and Reason is at least 1 (twice a lower score is not damage the source establishes; labelled,
  *   as V171's bindWatcher). Otherwise the table adds it.
  * - The Recovery is spent by "the creature dealing the damage" (rule/health/recoveries.md), so it

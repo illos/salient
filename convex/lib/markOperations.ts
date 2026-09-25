@@ -13,6 +13,7 @@ import type { MarkBenefitKind } from '../../shared/contracts/liveState';
 import { benefitTaken, planMarkBenefit, type MarkSpec } from '../../shared/resolve/marks';
 import { heroicResourceFloor } from '../../shared/resolve/resourceFloor';
 import { applyDamage } from '../../shared/resolve/index';
+import { extraDamageAfterModifiers } from '../../shared/resolve/damageModifiers';
 import { triggerEligibility } from '../../shared/resolve/triggers';
 import { baselineOf, requireHeroLive } from './characterBuild';
 import {
@@ -26,6 +27,7 @@ import { journalPatch, type JournalScope } from './journal';
 import type { OperationDefinition, Outcome, TableContext } from './registry';
 import { abilitiesFor, damageTargetFacts, writePlannedDamage, type TargetRecord } from './resolve';
 import { appendEvent } from './events';
+import { currentHitApplication } from './damageRevisions';
 import { allowanceFor, bindTarget, planTracking, recordUse } from './abilityOperations';
 import { MARK_OFFER_KIND, eligibilityFacts, roundOf } from './triggeredActions';
 import { applyMark, type MarkOffer } from './marks';
@@ -200,14 +202,23 @@ const markBenefit: OperationDefinition = {
           )
         : null;
     const dealerBaseline = dealer ? baselineOf(dealer.derivedBaseline) : null;
+    const reason = ownerBaseline.characteristics.R.value;
+    const modified =
+      !!facts &&
+      'facts' in facts &&
+      ((facts.facts.immunities?.length ?? 0) > 0 || (facts.facts.weaknesses?.length ?? 0) > 0);
+    // V178: the extra damage joins the hit, so the weakness and immunity the hit met (as its
+    // current accepted revision saved them) apply once to the total; only the difference is added.
+    const hit =
+      modified && chosen === 'extra-damage'
+        ? await currentHitApplication(ctx, context.campaign._id, offer.triggeringEventId, holder.id)
+        : null;
+    const extraTaken = hit ? extraDamageAfterModifiers(hit, reason * 2) : undefined;
     const plan = planMarkBenefit(chosen, {
-      reason: ownerBaseline.characteristics.R.value,
+      reason,
       target: {
         damageable: !!facts && 'facts' in facts,
-        immunityOrWeakness:
-          !!facts &&
-          'facts' in facts &&
-          ((facts.facts.immunities?.length ?? 0) > 0 || (facts.facts.weaknesses?.length ?? 0) > 0),
+        immunityOrWeakness: modified && extraTaken === undefined,
         name: offer.mark.subject.name,
       },
       dealer: { hero: !!dealer?.liveState && !!dealerBaseline, name: dealerRef.name },
@@ -219,16 +230,26 @@ const markBenefit: OperationDefinition = {
       | { character: Doc<'characters'>; stamina: number; recoveries: number; healed: number }
       | undefined;
     if (plan.status === 'apply' && plan.kind === 'extra-damage' && facts && 'facts' in facts) {
-      const application = applyDamage(facts.facts, {
-        targetId: facts.facts.targetId,
-        amount: plan.amount,
-        causeLabel: `${offer.owner.name}'s Mark`,
-      });
+      const application =
+        hit && extraTaken !== undefined
+          ? applyDamage(
+              { ...facts.facts, immunities: [], weaknesses: [] },
+              {
+                targetId: facts.facts.targetId,
+                amount: extraTaken,
+                causeLabel: `${offer.owner.name}'s Mark, after the hit's weakness and immunity`,
+              },
+            )
+          : applyDamage(facts.facts, {
+              targetId: facts.facts.targetId,
+              amount: plan.amount,
+              causeLabel: `${offer.owner.name}'s Mark`,
+            });
       damage = { record: subjectRecord!, application };
       // Interpretation (Q-MARK-1 point 7): only the marked creature whose damage set off the
       // trigger takes it; the alternative is every creature the ability damaged. The Stamina
       // figures are logged from the write itself (the linked entry below).
-      applied = `${offer.mark.subject.name} takes ${plan.amount} extra damage (twice ${offer.owner.name}'s Reason ${ownerBaseline.characteristics.R.value}); the linked entry records the Stamina change.`;
+      applied = `${offer.mark.subject.name} takes ${plan.amount} extra damage (twice ${offer.owner.name}'s Reason ${reason})${hit && extraTaken !== undefined ? `, added to the hit's ${hit.incoming} damage: with weakness ${hit.weaknessApplied} and immunity ${hit.immunityApplied} applied once to the total, ${extraTaken} more is taken` : ''}; the linked entry records the Stamina change.`;
     }
     if (
       plan.status === 'apply' &&

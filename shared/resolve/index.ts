@@ -420,7 +420,9 @@ export function applyDamage(
   const weakness = highest(target.weaknesses, instance.damageType);
   const immunity = highest(target.immunities, instance.damageType);
   // Section 6.2: only the highest weakness and immunity apply; weakness first, then immunity.
-  const weaknessApplied = weakness === 'all' ? 0 : weakness;
+  // V178: no damage is not damage taken (Q-RES-4), so weakness adds nothing to it, as the halved
+  // revision already reads it (shared/resolve/damageRevision.ts, Q-REACT-1).
+  const weaknessApplied = weakness === 'all' || incoming <= 0 ? 0 : weakness;
   const afterWeakness = incoming + weaknessApplied;
   const afterImmunity = immunity === 'all' ? 0 : Math.max(0, afterWeakness - immunity);
   // Section 6.1 step 4: temporary Stamina decreases first.

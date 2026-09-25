@@ -209,6 +209,23 @@ async function revisionsOf(
 }
 
 /**
+ * V178: the damage this hit's current accepted revision dealt `damagedId` (the latest accepted
+ * response that revised it, else the hit as recorded), for damage added to the hit later (the
+ * Mark's extra damage), or null when the entry recorded no application for it.
+ */
+export async function currentHitApplication(
+  ctx: MutationCtx,
+  campaignId: Id<'campaigns'>,
+  hitEventId: Id<'events'>,
+  damagedId: string,
+): Promise<DamageApplication | null> {
+  const revised = (await revisionsOf(ctx, campaignId, hitEventId)).latest.get(damagedId);
+  if (revised) return revised.application;
+  const hitEvent = await ctx.db.get(hitEventId);
+  return hitEvent ? ((await recordedHit(ctx, hitEvent, damagedId))?.application ?? null) : null;
+}
+
+/**
  * V175: whether the revised hit no longer triggers a Mark card about the damaged creature: a
  * retarget needs it reduced to 0 Stamina (for a hero, the `dying` crossing), a benefit rolled
  * damage taken (mark.md).

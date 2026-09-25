@@ -52,7 +52,6 @@ import type {
   ActorRollFacts,
   Characteristic,
   DamageApplication,
-  DamageModifierEntry,
   DamageTargetFacts,
   ResourceCost,
   SourceRef,
@@ -60,6 +59,7 @@ import type {
 import { manifest } from '../../shared/content/compendium/index';
 import { parseTierText, plainText, reapplyDamage, windedValueOf } from '../../shared/resolve/index';
 import { triggeredActionType } from '../../shared/resolve/triggers';
+import { heroModifierEntries, statBlockModifiers } from '../../shared/resolve/damageModifiers';
 import { findContent, requireContent } from '../content';
 import { endOwnerDyingEffects, type EffectHolder } from './effectInstances';
 import { observeDamage, type DamageObservation, type Preloaded } from './watchers';
@@ -429,18 +429,6 @@ export function abilitiesFromStatBlock(entry: ContentSource): AbilityDefinition[
     );
   }
   return out;
-}
-
-/** Printed stat-block cells: "**-**<br>Immunity" means none; anything else is an unparsed fact. */
-function modifierCells(
-  text: string,
-  label: 'Immunity' | 'Weakness',
-): { entries: DamageModifierEntry[]; unparsed?: string } {
-  const match = new RegExp(`\\*\\*([^*]+)\\*\\*<br>${label}`).exec(text);
-  if (!match) return { entries: [], unparsed: `${label} cell not found in the stat block` };
-  const cell = plainText(match[1]!);
-  if (cell === '-') return { entries: [] };
-  return { entries: [], unparsed: `${label} ${cell}` };
 }
 
 export interface FoeSnapshot {
@@ -975,8 +963,10 @@ export function damageTargetFacts(
 ): { facts: DamageTargetFacts } | { missing: string } {
   if (record.foe) {
     const snapshot = foeSnapshot(record.foe);
-    const immunity = modifierCells(snapshot.text ?? '', 'Immunity');
-    const weakness = modifierCells(snapshot.text ?? '', 'Weakness');
+    // V178 (shared/resolve/damageModifiers.ts): the printed cells as typed entries; a cell the app
+    // can't read exactly leaves the damage to the table.
+    const immunity = statBlockModifiers(snapshot.text ?? '', 'Immunity');
+    const weakness = statBlockModifiers(snapshot.text ?? '', 'Weakness');
     if (immunity.unparsed || weakness.unparsed)
       return {
         missing: `${record.foe.name}'s printed ${[immunity.unparsed, weakness.unparsed].filter(Boolean).join(' and ')} is not read by the app; damage is left for manual application.`,
@@ -1022,12 +1012,11 @@ export function damageTargetFacts(
       maxStamina: baseline.staminaMaximum.value,
       temporaryStamina: live.temporaryStamina,
       ...(baseline.damageImmunities?.length
-        ? {
-            immunities: baseline.damageImmunities.map(immunity => ({
-              type: immunity.damageType,
-              value: immunity.value.value,
-            })),
-          }
+        ? { immunities: heroModifierEntries(baseline.damageImmunities) }
+        : {}),
+      // V178: the evaluated weaknesses apply next to the immunities (rule/damage/damage-weakness.md).
+      ...(baseline.damageWeaknesses?.length
+        ? { weaknesses: heroModifierEntries(baseline.damageWeaknesses) }
         : {}),
     },
   };

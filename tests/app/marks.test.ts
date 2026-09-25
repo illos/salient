@@ -618,3 +618,30 @@ test('V175 review: only the owner’s player or the Director ends a mark', async
     (await s.hero(s.f.thornId)).liveState!.effectInstances!.find(i => i.id === mark.id),
   ).toMatchObject({ status: 'ended' });
 });
+
+test('V178: the extra damage joins the hit, so a printed immunity reduces the total once', async () => {
+  // monster/giant/statblock/hill-giant-clobberer.md: Stamina 200, "Damage 3" Immunity (all damage,
+  // rule/damage/damage-immunity.md). Thorn's Brutal Slam with the Mark edge: 3 + 6 + 2 + 2 = 13,
+  // tier 2, 8 damage, 8 − 3 = 5. The extra twice Reason 2 = 4 joins it: 12 − 3 = 9, so 4 more (a
+  // separate application of immunity 3 to the 4 would take only 1).
+  const s = await setup();
+  const giant = await s.f.director.client.mutation(api.foes.add, {
+    campaignId: s.f.campaignId,
+    definitionId: 'mcdm.monsters.v1/monster.giant.statblock/hill-giant-clobberer',
+    commandId: `marks-cmd-${++sequence}`,
+  });
+  const giantRef = `@{foe:${giant}}`;
+  await s.command(`${s.plannerRef} /ability use ability=Mark targets=[${giantRef}]`, 'player');
+  await atDice(s.t, s.f.campaignId, [3, 6]);
+  const hit = await s.command(
+    `@Thorn /ability use ability="Brutal Slam" targets=[${giantRef}]`,
+    'player',
+  );
+  expect((await s.foe(giant)).live.stamina).toBe(200 - 5);
+  const card = (await s.markCards()).find(c => c.openedEventId === hit.eventId)!;
+  const benefit = await s.respond(card._id, { benefit: 'extra-damage' }, 'player');
+  expect((await s.foe(giant)).live.stamina).toBe(200 - 9);
+  const event = (await s.t.run(ctx => ctx.db.get(benefit.eventId)))!;
+  expect(event.description).toMatch(/weakness 0 and immunity 3 applied once to the total, 4 more/);
+  expect(event.description).not.toMatch(/For the table/);
+});

@@ -1496,7 +1496,12 @@ describe('A05 audit regressions with persisted state', () => {
     await t.run(async ctx => {
       const foe = (await ctx.db.get(goblin))!;
       const snapshot = JSON.parse(foe.sourceSnapshot);
-      snapshot.text = snapshot.text.replace('**-**<br>Immunity', '**fire 5**<br>Immunity');
+      // V178: a cell the app can't read exactly (monster/orc/statblock/orc-eye-of-grole.md prints
+      // a choice of types with no value) keeps damage manual.
+      snapshot.text = snapshot.text.replace(
+        '**-**<br>Immunity',
+        '**Cold, fire, or lightning**<br>Immunity',
+      );
       await ctx.db.patch(goblin, { sourceSnapshot: JSON.stringify(snapshot) });
       const catalog = (await ctx.db
         .query('content')
@@ -1512,7 +1517,7 @@ describe('A05 audit regressions with persisted state', () => {
       cid('unknown-immunity'),
     );
     expect((await eventById(t, campaignId, manual.eventId)).description).toContain(
-      'damage is left for manual application',
+      'printed Immunity "Cold, fire, or lightning" ("Cold" prints no value) is not read by the app; damage is left for manual application',
     );
     expect((await foeRow(t, goblin)).live.stamina).toBe(15);
     await atDice(t, campaignId, [4, 5]);

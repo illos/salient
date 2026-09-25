@@ -1654,3 +1654,47 @@ counts XP after entry. Alternative: cumulative table XP, storing and showing the
 XP plus earned XP (the level-3 hero starts at 32 and sees "level 5 at 64"); that ties the entry XP to
 one pace, so a campaign at 8 or 32 per level would need the entry XP recomputed. Recommendation: keep
 the current reading; it works at every pace and changes no stored data.
+
+4 and 5 are addressed by V178 (`docs/build/V178-immunity-weakness.md`); its readings are Q-IW-1.
+
+## Q-IW-1: readings behind V178's damage immunity and weakness
+
+Open. Compendium paths read (pinned `en/unified/md`): `rule/damage/damage-immunity.md`,
+`rule/damage/damage-weakness.md`, `rule/damage/damage-type.md`,
+`feature/summoner/level-1/minions.md`, `feature/ability/tactician/level-1/mark.md`, and every
+ingested stat block's Immunity and Weakness cell (enumerated in
+`tests/scripts/immunity-weakness.test.ts`). V178 applies them on these readings; each is an
+interpretation with its alternatives.
+
+1. **"Damage N" and untyped damage.** A "Damage 3" cell (for example
+   `monster/giant/statblock/hill-giant-clobberer.md`) is read as the untyped damage immunity:
+   `damage-immunity.md` says a stat block noting "damage immunity 5" is "representing immunity to
+   all damage". It applies to typed and untyped damage alike, as R04 section 6.2 already did for
+   hero entries. For weakness, `damage-weakness.md` says "A creature who has "damage weakness X"
+   with no specific type or keyword indicated has weakness of the indicated amount when they take
+   damage of any type." That is read the same way, including untyped damage (the Cursed Weapon
+   complication's "You have damage weakness 2."). Alternative: "of any type" means any of the nine
+   types in `damage-type.md`, so untyped damage takes no untyped weakness.
+2. **No damage takes no weakness.** A damage instance of 0 adds no weakness, as Q-RES-4 ("0 damage
+   is not taking damage") and the V174 halving (Q-REACT-1) already read it. Alternative: weakness
+   adds even to 0 damage.
+3. **The Mark's extra damage joins the hit.** `mark.md`: "The ability deals extra damage equal to
+   twice your Reason score." The extra is added to the hit's damage before immunity, using the
+   weakness and immunity the hit met as its current accepted revision saved them, so each counts
+   once. Only the difference is written: for example Hill Giant Clobberer, 8 − 3 = 5, then
+   8 + 4 − 3 = 9, so 4 more. Alternatives: a separate damage instance, where immunity reduces the
+   extra again (1 more in that example); or leave it to the table, as V175 did.
+4. **Cells left manual.** These keep the damage manual, with the cell named:
+   - Summoner minions' "R" values, for example "Corruption R, Poison R"
+     (`monster/minion/summoner/undead/statblock/skeleton.md`). `minions.md`: "You use your own
+     characteristics where a minion's stat block refers to an R". These aren't addable as foes
+     today.
+   - The trolls' "Acid 5, fire" and "Acid 8, fire" weaknesses, for example
+     `monster/troll/statblock/troll-whelp.md`. The fire item prints no value in the cell or the
+     frontmatter, whose `weaknesses` list is "Acid 5" and "fire". **Question:** what is the trolls' fire weakness
+     value? Recommendation: leave it manual until the source prints one.
+   - The Orc Eye of Grole's "Cold, fire, or lightning" immunity
+     (`monster/orc/statblock/orc-eye-of-grole.md`, Elemental Affinity: "The chosen type determines
+     the eye's damage immunity"). No value is printed.
+
+Recommendation: keep 1 to 3 as implemented.
