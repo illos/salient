@@ -33,7 +33,7 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V06 | [Monster catalog, saved encounters and party strength](V06-catalog-and-saved-encounters.md) | Registered |
 | V07 | [Inventory, loot and Director stash](V07-inventory-and-loot.md) | Registered |
 | V08 | [Eleven-class editor, advancement and progression history](V08-classes-and-advancement.md) | Registered |
-| V09 | [Forge Steel import](V09-forge-steel-import.md) | In progress (part a) |
+| V09 | [Forge Steel import](V09-forge-steel-import.md) | Merged (`1118489`, train 12); cloud dev published; gate and headless PASS at tip |
 | V10 | [Accounts: settings, password reset, friends, blocking, share codes, deletion](V10-accounts-social.md) | Registered |
 | V11 | [Character grants and delegated play](V11-character-grants.md) | Registered |
 | V12 | [Campaign chat](V12-campaign-chat.md) | Registered |
@@ -168,4 +168,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V167 | [Respite on the table](V167-respite-table.md) | Merged (`59b890c`); cloud dev published; gate and headless PASS at tip |
 | V169 | [Rapid Processing's extra respite activity](V169-respite-extra-activity.md) | Merged (`59b890c`); cloud dev published; gate and headless PASS at tip |
 | V164 | [Level-up screen, first design pass](V164-level-up-screen.md) | Merged (`6686fbe`); cloud dev published; accepted TESTER results reused |
-| V180 | [Split the headless `all` cohort again](V180-headless-all-split.md) | Ready for gate |
+| V180 | [Split the headless `all` cohort again](V180-headless-all-split.md) | Merged (`1118489`, train 12); cloud dev published; gate and headless PASS at tip |

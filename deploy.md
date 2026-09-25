@@ -42,6 +42,8 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V09 | `1118489` | Merged in train 12; backend/frontend published; gate and headless at tip | complete |
+| V180 | `1118489` | Merged in train 12; backend/frontend published; gate and headless at tip | complete |
 | V164 | `6686fbe` | Merged; backend/frontend published; accepted gates reused | complete |
 | V169 | `59b890c` | Merged with V167 and V169 stacked; backend/frontend published; gate and headless at tip | complete |
 | V167 | `59b890c` | Merged with V167 and V169 stacked; backend/frontend published; gate and headless at tip | complete |
@@ -778,3 +780,20 @@ The test and deploy thread fast-forwarded reviewed tip `6686fbee51df636ba5905460
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V164-release-6686fbe`.
+
+### Train 12 (V180 headless split, V09 part a Forge import) publication: 2026-09-25
+
+WIZARD3's V180 (the `all` journey split into `ancestries`, `culture`, the complication and the
+starting-reward and starting-item journeys) and V09 part a (Forge character import) were
+cherry-picked onto main `b77d3ad` and fast-forwarded as `111848900476d623577b8d3552c7ef8d4d2f3d17`. V181 was tested in the same train
+but held back: its level-up preview shows the hero as pending.
+- Full gate at the tip (307 s, 456 engine and 788 app tests).
+- Journeys, with V181's UI-only change on top: forge-import, ancestries, culture, complication-choices,
+  complication-table, starting-rewards, starting-items, level-up, lifecycle and all (23/23, 89 s).
+- Independent rules reviews passed.
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `74d47264-33a5-44ce-a544-73c36de159c4`.
+- Content is unchanged at 1881 entries, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/train12-release-1118489`.

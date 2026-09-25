@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V164 level-up screen
+## Current release — train 12 (V180, V09 part a)
+
+Backend/frontend source `111848900476d623577b8d3552c7ef8d4d2f3d17` published on 2026-09-25 as
+Worker `74d47264-33a5-44ce-a544-73c36de159c4`: the headless journey split and the Forge character import. Backend and schema
+validation, the hosted build and the upload succeeded. Content remains the 1881-entry snapshot, so no
+reseed was needed. See the [ledger](../deploy.md).
+
+## Previous release — V164 level-up screen
 
 Backend/frontend source `6686fbee51df636ba590546088e457288678fe4f` published on 2026-09-24 as
 Worker `0b1c92f9-495a-4ad9-bcfc-9d43a57191f8`. Backend and schema validation, the hosted build and the upload succeeded.

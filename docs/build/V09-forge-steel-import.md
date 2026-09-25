@@ -160,3 +160,8 @@ damage and Recoveries used are reconciled per Q-V-3 with the rule cited.
     tests/app/forge-import.test.ts` 19/19, and the Convex push of `13969f2` reported "Convex
     functions ready" with the two `characterImports` indexes added.
 - Independent re-review PASS (2026-09-24). Its remaining nit is fixed: a culture name over 100 characters is shortened with a diagnostic, rather than failing the whole file on the selection size cap.
+
+## Publication: 2026-09-25
+
+Merged in train 12 (V180, V09 part a) as main `1118489` and published as Worker `74d47264-33a5-44ce-a544-73c36de159c4`. Release
+logs: `/srv/presidium/projects/salient/test-artifacts/train12-release-1118489`.

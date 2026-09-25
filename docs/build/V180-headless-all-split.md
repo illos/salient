@@ -24,3 +24,8 @@ of `all` into cohorts, so every scenario still runs but no single cohort nears t
 ## Work log
 
 - Built on `slice/V180`, `.worktrees/headless-split`. Author checks: TypeScript, ESLint, Prettier.
+
+## Publication: 2026-09-25
+
+Merged in train 12 (V180, V09 part a) as main `1118489` and published as Worker `74d47264-33a5-44ce-a544-73c36de159c4`. Release
+logs: `/srv/presidium/projects/salient/test-artifacts/train12-release-1118489`.
