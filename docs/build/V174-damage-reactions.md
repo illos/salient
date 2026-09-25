@@ -176,5 +176,8 @@ Rules question: [Q-REACT-1](../rules-questions-for-user.md#q-react-1-halving-ord
      7 → 3 → 1, the winded gain reversed once, the first-damage gain standing); a correction refused
      after a revision; temporary Stamina given back (10 absorbs 5, revised 8); and a Persistent
      Magic break refusing the revision (a seeded maintained entry; the Elementalist takes 5 then 7
-     in the goblin's turn, 12 ≥ 5 × Reason 2). The rolled-save refusal isn't tested: saves roll at
-     the end of the saving creature's turn, and the card window closes when the next turn starts.
+     in the goblin's turn, 12 ≥ 5 × Reason 2). Re-review: the rolled-save refusal is reachable, because
+     `/turn end` rolls saves at the turn-end boundary while offer cards close only when the next
+     turn starts. The app test hits the Talent during her own turn with Bury the Point's bleeding
+     (save ends); she ends her turn, the save rolls, and accepting the Tactician's Parry is refused
+     with the card still open.

@@ -511,6 +511,31 @@ test('V174: Parry protects an ally from Bury the Point: 7 → 3 damage and the b
   expect((await s.live('Seer')).conditions.bleeding).toBe(true);
 });
 
+test('V174: a saving throw rolled at the turn end, before the card closes, refuses the potency revision', async () => {
+  const s = await setup({ Vane: TACTICIAN, Seer: TALENT });
+  // The Talent's own turn: the goblin's turn ends and hers starts; the goblin then uses Bury the
+  // Point on her (7 damage, M < 2 bleeding (save ends); her Might 1 is below 2).
+  await s.command(`${s.goblinRef} /turn end`);
+  await s.command(`${s.ref('Seer')} /turn take`, 'player');
+  await s.command('/adjust malice value=2');
+  const hit = await s.hit('Bury the Point', 'Seer');
+  expect((await s.live('Seer')).conditions.bleeding).toBe(true);
+  const [offer] = await s.open();
+  expect(offer!.offer).toMatchObject({ abilityName: 'Parry', damage: 7 });
+  // Her turn ends: the bleeding save rolls at the turn-end boundary; the card stays open until the
+  // next turn starts.
+  await s.command(`${s.ref('Seer')} /turn end`, 'player');
+  expect(
+    (await s.live('Seer')).conditionInstances?.find(i => i.sourceUseEventId === hit.eventId)
+      ?.lastSave,
+  ).toBeDefined();
+  expect(await s.card(offer!._id)).toMatchObject({ status: 'awaiting-input' });
+  // Parry's potency decrease would end the bleeding, but a recorded save is never replayed.
+  await expect(s.respond(offer!._id, 'player')).rejects.toThrow(/saving throw was already rolled/);
+  expect(await s.card(offer!._id)).toMatchObject({ status: 'awaiting-input' });
+  expect((await s.live('Seer')).stamina).toBe(11);
+});
+
 test('V174: a creature free strike and a hero’s ability are revised too', async () => {
   const s = await setup({ Nul: NULL, Seer: TALENT });
   // The goblin's free strike deals 1; half of 1 is 0, so the Null takes nothing.
