@@ -213,6 +213,7 @@ const effectPayloadValidator = v.union(
           watcher: watcherValidator,
         }),
       ),
+      aura: v.optional(v.literal(true)),
     }),
   }),
 );

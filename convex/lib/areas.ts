@@ -17,7 +17,7 @@ import { ConvexError } from 'convex/values';
 import type { Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { AreaMember, EffectInstance, EffectParty } from '../../shared/contracts/liveState';
-import { riderApplies, type AreaSide } from '../../shared/resolve/areas';
+import { riderApplies, sameAreaPayload, type AreaSide } from '../../shared/resolve/areas';
 import { plain } from '../../shared/resolve/abilityGrammar';
 import { baselineOf } from './characterBuild';
 import {
@@ -157,6 +157,34 @@ export async function applyArea(
 ): Promise<AppliedArea | undefined> {
   if (input.payload.kind !== 'area' || input.kind !== 'area') throw new ConvexError('Not an area.');
   if (input.owner.kind !== 'character' && input.owner.kind !== 'foe') return undefined;
+  // "Stacking Unique Effects" (Heroes book): the same ability used again doesn't stack, and the
+  // most recent use sets the duration. The same user's identical aura "originates from you and
+  // moves with you" (rule/combat/aura.md), so both cover the same creatures: the newer use
+  // supersedes the older, whose riders end with it, as V158 supersedes an identical repeat. Areas
+  // placed elsewhere (Incinerate's column) are not the same squares, so they stay separate and a
+  // creature in both holds a manual stacking group.
+  const superseded: EffectInstance[] = [];
+  if (input.payload.area.aura) {
+    const owner = { kind: input.owner.kind, id: input.owner.id };
+    for (const { holder, instance } of await ownedActiveEffects(ctx, scope.campaignId, owner))
+      if (
+        instance.kind === 'area' &&
+        instance.abilityId === input.abilityId &&
+        instance.payload.kind === 'area' &&
+        sameAreaPayload(instance.payload.area, input.payload.area) &&
+        JSON.stringify(instance.endsWhen) === JSON.stringify(input.endsWhen)
+      ) {
+        const done = await endEffectInstance(
+          ctx,
+          scope,
+          holder,
+          instance.id,
+          'superseded by a newer use of the same ability (the most recent use sets the duration)',
+        );
+        if (done) superseded.push(done);
+      }
+    await logEnded(ctx, scope, superseded);
+  }
   const result = await applyEffectInstance(ctx, scope, input, encounterId);
   if (!result || 'untracked' in result) return undefined;
   if (result.endedAtApplication)

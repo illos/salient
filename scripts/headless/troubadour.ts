@@ -211,6 +211,8 @@ export async function runTroubadour({ actors: { director, peer }, run, runId }: 
           )
         )[0]?.compiled?.effects ?? [];
       const usedNames = new Set<string>();
+      /** V200: the Ballad of the Beast area whose rider the ally holds, ended by the next choice. */
+      let ballad: { owner: string; area: string } | undefined;
       try {
         // Paid optional trigger outside combat uses the shared waiver, retaining a zero pool.
         await invoke(ids[0]!, 'adjust.heroic-resource', { value: 0 });
@@ -338,6 +340,47 @@ export async function runTroubadour({ actors: { director, peer }, run, runId }: 
                 (before.liveState as unknown as { stamina: number }).stamina,
                 `${name} nothing at the use`,
               );
+              if (name === '"Ballad of the Beast"') ballad = { owner: id, area: area!.id };
+            } else if (name === '"Thunder Mother"' && ballad?.owner === id) {
+              // V200 (feature/troubadour/level-1/routines.md): choosing Thunder Mother, a manual
+              // performance, ends the current one. The Ballad area and the ally's rider end with
+              // the reason "Routines"; nothing else on the ally changes.
+              assert.equal(persisted?.kind, 'ability.recorded', name);
+              assert.equal(persisted?.payload?.data?.manual, true, name);
+              type Held = {
+                effectInstances?: {
+                  id: string;
+                  status: string;
+                  endedReason?: string;
+                  area?: { id: string };
+                }[];
+              };
+              const area = ((await get(id)).liveState as unknown as Held).effectInstances?.find(
+                e => e.id === ballad!.area,
+              );
+              assert.equal(area?.status, 'ended', `${name} ends the Ballad`);
+              assert.match(area?.endedReason ?? '', /Routines/, name);
+              const was = (before.liveState as unknown as Held).effectInstances ?? [];
+              const now = (after.liveState as unknown as Held).effectInstances ?? [];
+              const rider = now.find(e => e.area?.id === ballad!.area);
+              assert.equal(rider?.status, 'ended', `${name} ends the ally's rider`);
+              assert.match(rider?.endedReason ?? '', /Routines/, name);
+              const rest = (state: Saved['liveState'], instances: unknown[]) => ({
+                ...withoutResource(state),
+                effectInstances: instances,
+              });
+              assert.deepEqual(
+                rest(
+                  after.liveState,
+                  now.filter(e => e.id !== rider!.id),
+                ),
+                rest(
+                  before.liveState,
+                  was.filter(e => e.id !== rider!.id),
+                ),
+                `${name} nothing else on the target changes`,
+              );
+              ballad = undefined;
             } else if (name === 'Riposte') {
               // V173: a compiled triggered action persists as ability.use. Used by hand there is no
               // observed trigger, so its effect is left to the table and the target is unchanged.

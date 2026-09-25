@@ -320,7 +320,22 @@ async function execute(
       causeLabel: `${instance.actorLabel}'s ${instance.abilityName}`,
     });
     // The planned amount stands; the pools are the creature's as the damage is written.
-    const application = await writePlannedDamage(ctx, scope, record, planned, { defer: deferred });
+    // V200 (Q-AREA-2 point 6): an area's rider damage is dealt by the area's user, for
+    // damage-dealt watchers and marked-damaged observation only; it is never rolled damage
+    // (rule/damage/rolled-damage.md) and offers no dealer-keyed triggered action. Other watchers'
+    // damage has no dealer (Q-WATCH-1 point 1).
+    const dealer =
+      instance.area && (instance.owner.kind === 'character' || instance.owner.kind === 'foe')
+        ? {
+            kind: instance.owner.kind,
+            id: await resolveHistoricalId(ctx, scope.campaignId, instance.owner.id),
+            name: instance.owner.name,
+          }
+        : undefined;
+    const application = await writePlannedDamage(ctx, scope, record, planned, {
+      defer: deferred,
+      ...(dealer ? { dealer, dealerForWatchersOnly: true as const } : {}),
+    });
     texts.push(
       `${who} takes ${rolled}${amount}${type} damage${application.afterImmunity !== amount ? ` (${application.afterImmunity} after immunity and weakness)` : ''}; Stamina ${application.staminaBefore} → ${application.staminaAfter}${application.absorbedByTemporaryStamina ? ` (${application.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}`,
     );
@@ -355,6 +370,11 @@ export interface DamageObservation {
   targetName?: string;
   dealerName?: string;
   meleeStrike?: boolean;
+  /**
+   * V200: the dealer is an area's user, attributed for damage-dealt watchers and marked-damaged
+   * observation only: triggered-action offers see no dealer (Q-AREA-2 point 6).
+   */
+  dealerForWatchersOnly?: true;
   /**
    * V175 marks (convex/lib/marks.ts): the damage is rolled damage (rule/damage/rolled-damage.md:
    * determined by an ability roll), dealt by a melee ability, or part of a hit already observed
@@ -534,7 +554,7 @@ export async function observeDamage(
       id: observation.target.id,
       name: observation.targetName ?? 'the damaged creature',
     },
-    ...(observation.dealer
+    ...(observation.dealer && !observation.dealerForWatchersOnly
       ? {
           dealer: {
             kind: observation.dealer.kind,

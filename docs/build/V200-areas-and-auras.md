@@ -204,10 +204,11 @@ Compendium read (`en/unified/md`):
   - **V174 revisions:** rider damage reaches only members on the other side from the user, so a
     hero's area never damages a hero or an ally. A revision needs a recorded hit, and an
     `effect.members` entry has none. No compiled foe owns an area.
-  - **V173 offers:** rider damage has no dealer (Q-WATCH-1 point 1), so only damage-taken triggers
-    could answer it. No offer arose in the probe.
-  - **V175 marks:** the Mark benefit needs rolled damage, and "you or any ally deals damage"
-    watchers need a dealer, so rider damage sets neither off. A retarget on 0 Stamina is unaffected.
+  - **V173 offers:** offers see no dealer for rider damage, so only damage-taken triggers could
+    answer it. No offer arose in the probe.
+  - **V175 marks** (revised in review round 1): the area's user deals rider damage, so "you or any
+    ally deals damage to a target marked by you" watchers fire; it is not rolled damage, so the Mark
+    benefit is not offered. A retarget on 0 Stamina is unaffected.
   - **V178/V179:** rider damage goes through `damageTargetFacts`, so printed and granted immunity
     and weakness apply (tested with the crucibite).
   - **Corrections:** an area is once per use and keeps its occurrence. A correction after a later
@@ -240,3 +241,26 @@ Compendium read (`en/unified/md`):
       party-read-limit, compiled-effects, condition-instances, effect-riders, multi-target,
       supporting-actions, elementalist-character.
 - Committed on `slice/V200` as `43cea7d5` (not pushed). Handoff to TESTER and review is the lead's.
+
+### Review round 1 (2026-09-25)
+
+The coordinator's review of `0b4a2ec8` required changes; fixed on top:
+
+1. **Troubadour journey.** In `scripts/headless/troubadour.ts`, witness v102-3 uses Ballad of the
+   Beast, then Thunder Mother, a manual performance, whose recorded use ends the Ballad
+   (`endChosenPerformance`). The journey now asserts that the Ballad area and the ally's rider end
+   ("Routines") and that nothing else on the ally changes.
+2. **Rider damage has a dealer.** An area rider's damage is dealt by the area's user
+   (Q-AREA-2 point 6, rewritten; `convex/lib/watchers.ts`). It counts for damage-dealt watchers and
+   marked-damaged observation only (`dealerForWatchersOnly`): V173 offers see no dealer, and it is
+   never rolled damage, so no Mark benefit card opens. New app test:
+   - the marked goblin entering the column gives the Talent Hit 'Em Hard!'s 2 surges;
+   - no mark or triggered card opens;
+   - Violence Will Not Aid Thee on the Talent fires on that damage (1d10 lightning to the Talent).
+3. **Same-owner re-use of an aura** now supersedes the older aura and its riders (Q-AREA-2 point 7;
+   `applyArea`). Auras are flagged from the printed "X aura" distance (`isAura`, `AreaPayload.aura`).
+   The aura's user can't leave it, checked by that flag. The Blessing of the Faithful app test re-uses
+   it and reads the old aura and rider ended and the new rider tracked, not manual.
+4. The "Routines: Maintain Performance" note says what the engine tracks. The `areas` cohort now
+   performs the refused second add its header describes. The Medley conflict is noted in Q-AREA-2
+   point 8.
