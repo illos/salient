@@ -170,3 +170,8 @@ Spec references:
     - The immediate-Parry control is kept.
     - Without the fix, the new case fails (the response resolves).
 
+## Publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed `392d236` into main and published the backend/frontend
+using the DEPLOY2 hosted procedure. Worker: `d29fda21-1978-45c7-8541-8c0f084e2ce2`. Content is unchanged, so no reseed was needed. Temporary credentials were
+removed and the private hosted helpers stopped. Release logs: `/srv/presidium/projects/salient/test-artifacts/V179-release-392d236`.

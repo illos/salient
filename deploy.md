@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V179 | `392d236` | Merged; backend/frontend published; accepted gates reused | complete |
 | V178 | `eeaa992` | Merged; backend/frontend published; accepted gates reused | complete |
 | V190 | `36a5e17` | Merged in train 19; backend/frontend published; gate and headless at tip | complete |
 | V189 | `36a5e17` | Merged in train 19; backend/frontend published; gate and headless at tip | complete |
@@ -940,3 +941,16 @@ The test and deploy thread fast-forwarded reviewed tip `eeaa9920a6338b6b60f4343b
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V178-release-eeaa992`.
+
+### V179 granted defenses publication: 2026-09-25
+
+The test and deploy thread fast-forwarded reviewed tip `392d236292c299497151f7a2da7301e7f00e773d` into main.
+- Full gate at the tip (297 s, 458 engine and 946 app tests).
+- Journeys at the tip: tactician, tactician-level-three, all and conduit; the Shadow level journeys and conduit-level-three passed at 29a0f49, before the one-commit R1 fix.
+- Independent review and QC1 clearance passed after QC1 R1 (a reaction may not end a granted weakness that later damage used).
+- Backend publication and schema validation, the hosted build and the frontend upload succeeded.
+  Worker `d29fda21-1978-45c7-8541-8c0f084e2ce2`.
+- Content is unchanged, so no reseed was needed.
+- No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
+
+Logs: `/srv/presidium/projects/salient/test-artifacts/V179-release-392d236`.

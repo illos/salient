@@ -114,7 +114,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V178 immunity and weakness
+## Current release — V179 granted defenses
+
+Backend/frontend source `392d236292c299497151f7a2da7301e7f00e773d` published on 2026-09-25 as
+Worker `d29fda21-1978-45c7-8541-8c0f084e2ce2`. Backend and schema validation, the hosted build and the upload succeeded.
+Content is unchanged, so no reseed was needed. Accepted TESTER results were reused, with no smoke test. See [V179](build/V179-granted-defenses.md) and
+the [ledger](../deploy.md).
+
+## Previous release — V178 immunity and weakness
 
 Backend/frontend source `eeaa9920a6338b6b60f4343b420450e1f1ac26c4` published on 2026-09-25 as
 Worker `a1debfdf-a8fb-4bcc-9347-3ed4bb026ef3`. Backend and schema validation, the hosted build and the upload succeeded.
