@@ -218,4 +218,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V226 | [Werewolf form, curse and Shared Ferocity](V226-werewolf-form-and-curse.md) | Registered |
 | V227 | [Thorn Dragon linked effects and domain](V227-thorn-dragon-effects.md) | Registered |
 | V228 | [Connected V1 foe proof and residual manual work](V228-foe-connected-play-proof.md) | Registered |
-| V229 | [Director reaction interaction ruling](V229-foe-reaction-ruling.md) | Committed on branch; QC pending |
+| V229 | [Director reaction interaction ruling](V229-foe-reaction-ruling.md) | Merged (`a57bb42e`); documentation only, Test and QC PASS |

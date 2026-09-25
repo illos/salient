@@ -29,3 +29,6 @@ Spec: `docs/table-spec.md#inline-interaction-cards-in-the-game-log`;
   Read the existing option B, Lines of Force and response-window precedents. Recorded the user's
   confirmed direction. The user then confirmed next-action closure across all these triggered
   cards, resolving the window clarification. No runtime implementation or tests.
+- Test accepted `a57bb42e`: diff check passed and 583 Markdown files had no broken relative links
+  or anchors. QC gave final PASS on that exact tip. Fast-forward merged into main; no runtime
+  component changed.
