@@ -58,24 +58,30 @@ export function sheetSummary(history: HistorySheet) {
 }
 
 /**
- * Restores a recorded revision as the owner, with the concurrency values read just before; the
- * server then submits it for review, activates it or keeps it as a private draft.
+ * Restores a recorded revision as the owner; the server then submits it for review, activates it
+ * or keeps it as a private draft. `expected` is the optimistic-concurrency check the History page
+ * captures when the revision is selected: the character revision and effective revision the
+ * caller last saw. Without it, this reads them immediately before the mutation, which skips the
+ * check against changes made since the caller inspected the build.
  */
 export async function restoreRevision(
   caller: HistoryCaller,
   characterId: string,
   sourceRevisionId: string,
   commandId: string = crypto.randomUUID(),
+  expected?: { revision: number; effectiveRevisionId: string | null },
 ) {
-  const character = await caller.query<{
-    revision: number;
-    effectiveRevisionId: string | null;
-  }>('characters:get', { characterId });
+  const seen =
+    expected ??
+    (await caller.query<{ revision: number; effectiveRevisionId: string | null }>(
+      'characters:get',
+      { characterId },
+    ));
   return caller.mutation<string>('characters:restore', {
     commandId,
     characterId,
     sourceRevisionId,
-    expectedRevision: character.revision,
-    expectedEffectiveRevisionId: character.effectiveRevisionId,
+    expectedRevision: seen.revision,
+    expectedEffectiveRevisionId: seen.effectiveRevisionId,
   });
 }

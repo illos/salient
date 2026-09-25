@@ -13,6 +13,7 @@ import type {
   GrantedFeature,
   PartialBaseline,
 } from './characterEvaluation.ts';
+import type { StartingRewards } from './startingRewards.ts';
 import type { BuildReconciliation, HealthLabels, HeroLiveState } from './liveState.ts';
 
 /** A content snapshot entry carrying verbatim source text (shared/contracts/content.ts). */
@@ -185,4 +186,6 @@ export interface HistorySheet {
   entry: BuildHistoryEntry;
   sheet: HeroSheet;
   difference: BuildDifference;
+  /** Today's recorded inventory (starting rewards); inventory is never part of a snapshot. */
+  inventory: StartingRewards | null;
 }

@@ -55,6 +55,20 @@ test('the historical sheet shows the recorded build with present live state, and
       derivedBaseline: { ...baseline, staminaMaximum: { ...baseline.staminaMaximum, value: 31 } },
     });
   });
+  // Inventory is present state: change it after both revisions were recorded.
+  await f.t.run(async ctx => {
+    await ctx.db.patch(f.thornId, {
+      startingRewards: {
+        originRevisionId: f.originalId,
+        initializedAt: 1,
+        wealth: 7,
+        renown: 2,
+        projectPoints: 0,
+        sources: { wealth: [], renown: [], projectPoints: [] },
+        items: [],
+      },
+    });
+  });
   const character = (await f.t.run(ctx => ctx.db.get(f.thornId)))!;
   const history = (await f.player.client.query(api.characters.historySheet, {
     characterId: f.thornId,
@@ -69,6 +83,8 @@ test('the historical sheet shows the recorded build with present live state, and
   expect(history.sheet.live).toMatchObject({ stamina: character.liveState!.stamina });
   expect(history.sheet.authored.notes).toBe(character.authored.notes);
   expect(history.sheet.viewer.controls).toBe(false);
+  expect(history.inventory).toEqual(character.startingRewards);
+  expect(history.inventory).toMatchObject({ wealth: 7, renown: 2 });
   expect(history.entry).toMatchObject({ id: f.originalId, level: 1, isEffective: false });
   expect(history.difference).toMatchObject({
     hasCurrent: true,

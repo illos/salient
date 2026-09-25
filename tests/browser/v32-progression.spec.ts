@@ -51,13 +51,19 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await player.goto(`/characters/${characterId}`);
     await player.getByRole('link', { name: 'History', exact: true }).click();
     await expect(player).toHaveURL(new RegExp(`/characters/${characterId}/history$`));
-    // V163: no panel until the Director grants a level-up. Setup uses public commands only.
-    await expect(player.getByRole('heading', { name: 'Level up to level 2' })).toHaveCount(0);
+    // V163: no level-up notice until the Director grants one; History keeps the notice (V185).
+    // The revision list loading first means the notice's absence is not a loading artefact.
+    await expect(
+      player.getByRole('button', { name: /^Revision \d+ · Level 1 · / }).first(),
+    ).toBeVisible();
+    const notice = player.getByRole('region', { name: 'Level advancement' });
+    await expect(notice).toHaveCount(0);
     await app(dm, 'mutation', 'commands:submit', {
       campaignId,
       commandId: crypto.randomUUID(),
       text: `/character grant-level-up`,
     });
+    await expect(notice).toContainText('A level-up to level 2 is waiting.');
     for (const [field, value] of [
       ['xp', 16],
       ['stamina', 20],

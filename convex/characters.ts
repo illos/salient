@@ -1242,6 +1242,7 @@ export const historySheet = query({
         baselineOf(character.derivedBaseline),
         sheet.build?.baseline ?? sheet.build?.partial ?? null,
       ),
+      inventory: character.startingRewards ?? null,
     };
   },
 });

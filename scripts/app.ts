@@ -22,7 +22,10 @@ const usage =
   "       pnpm app respond <interactionId> '<JSON answer>' [--command-id <id>]\n" +
   '       pnpm app history <characterId> [--cursor <cursor>]\n' +
   '       pnpm app history-sheet <characterId> <revisionId> [--full]\n' +
-  '       pnpm app restore <characterId> <revisionId> [--command-id <id>]\n' +
+  '       pnpm app restore <characterId> <revisionId> [--expected-revision <n>\n' +
+  '                --expected-effective <revisionId|null>] [--command-id <id>]\n' +
+  '  restore checks the character revision and effective revision you last saw; without both\n' +
+  '  --expected-* options it reads them just before restoring and skips that check.\n' +
   'Authenticate with SALIENT_EMAIL and SALIENT_PASSWORD, or SALIENT_AUTH_TOKEN. The campaign comes\n' +
   'from --campaign or SALIENT_CAMPAIGN_ID. Every call uses the same commandId and authorization\n' +
   'contract as the browser; pass --command-id to retry an earlier command exactly.';
@@ -36,6 +39,8 @@ function option(name: string): string | undefined {
 const campaignOption = option('--campaign') ?? process.env.SALIENT_CAMPAIGN_ID;
 const commandIdOption = option('--command-id') ?? process.env.SALIENT_COMMAND_ID;
 const cursorOption = option('--cursor') ?? null;
+const expectedRevisionOption = option('--expected-revision');
+const expectedEffectiveOption = option('--expected-effective');
 const fullIndex = argv.indexOf('--full');
 const full = fullIndex !== -1;
 if (full) argv.splice(fullIndex, 1);
@@ -53,7 +58,18 @@ if (verb === 'history' && first) {
     return full ? history : sheetSummary(history);
   };
 } else if (verb === 'restore' && first && second) {
-  historyVerb = caller => restoreRevision(caller, first, second, commandIdOption);
+  if ((expectedRevisionOption === undefined) !== (expectedEffectiveOption === undefined)) {
+    console.error(usage);
+    process.exit(1);
+  }
+  const expected =
+    expectedRevisionOption !== undefined && expectedEffectiveOption !== undefined
+      ? {
+          revision: Number(expectedRevisionOption),
+          effectiveRevisionId: expectedEffectiveOption === 'null' ? null : expectedEffectiveOption,
+        }
+      : undefined;
+  historyVerb = caller => restoreRevision(caller, first, second, commandIdOption, expected);
 } else if (verb === 'command') {
   // The slash text is one shell argument; the host shell's quoting is independent of the grammar.
   if (!first || !campaignOption) {

@@ -129,13 +129,26 @@ function RestorePanel({
   const character = useQuery(api.characters.get, { characterId });
   const restore = useMutation(api.characters.restore);
   const command = useCommand();
-  const [message, setMessage] = useState('');
+  // The revision this panel created: its outcome is read back from the character, not assumed.
+  const [restoredId, setRestoredId] = useState<Id<'characterRevisions'> | null>(null);
   if (!character) return <Loading>Loading character…</Loading>;
   const complete = history.entry.status === 'complete';
   const changed =
-    expected.revision !== character.revision ||
-    expected.effectiveRevisionId !== character.effectiveRevisionId;
+    !restoredId &&
+    (expected.revision !== character.revision ||
+      expected.effectiveRevisionId !== character.effectiveRevisionId);
   const active = history.entry.isEffective;
+  const outcome = !restoredId
+    ? null
+    : character.effectiveRevisionId === restoredId
+      ? 'Restored as a new revision; it is now the active build.'
+      : character.review?.status === 'pending' && character.review.revision === character.revision
+        ? 'Restored as a new revision and submitted for Director review. The character sheet shows its review status.'
+        : complete && character.campaignId
+          ? `Restored as a new revision, saved but not submitted. ${
+              character.pendingDirectorSetup ?? 'Private Director setup is still required.'
+            } Submit it from the character sheet afterwards.`
+          : 'Restored as a new private draft. Open Edit to continue its choices.';
   return (
     <section aria-label="Restore this build" className={`${PANEL} flex flex-col gap-3`}>
       <h3 className="m-0">Restore this build</h3>
@@ -145,36 +158,28 @@ function RestorePanel({
         build and stay as they are. Damage taken and Recoveries spent stay the same against the
         restored maxima; restoring does not heal or refill anything.
       </p>
-      {active && <Notice>This is the active build.</Notice>}
+      {active && !restoredId && <Notice>This is the active build.</Notice>}
       {changed && (
         <Notice>
           The character changed since you opened this build. Select it again to restore it.
         </Notice>
       )}
       {character.combatLocked && <Notice>Restoration is locked during combat.</Notice>}
-      {message && <Notice role="status">{message}</Notice>}
+      {outcome && <Notice role="status">{outcome}</Notice>}
       <div>
         <Button
-          disabled={command.pending || changed || active || character.combatLocked || !!message}
-          onClick={async () => {
+          disabled={command.pending || changed || active || character.combatLocked || !!restoredId}
+          onClick={() => {
             const args = {
               characterId,
               expectedRevision: expected.revision,
               sourceRevisionId: history.entry.id as Id<'characterRevisions'>,
               expectedEffectiveRevisionId: expected.effectiveRevisionId,
             };
-            const ok = await command.run(
-              commandId => restore({ ...args, commandId }),
+            void command.run(
+              async commandId => setRestoredId(await restore({ ...args, commandId })),
               JSON.stringify(['restore', args]),
             );
-            if (ok)
-              setMessage(
-                !complete
-                  ? 'Restored as a new private draft. Open Edit to continue its choices.'
-                  : character.campaignId
-                    ? 'Restored as a new revision and submitted. The character sheet shows its review status.'
-                    : 'Restored as a new revision; it is now the active build.',
-              );
           }}
         >
           Restore this build
@@ -219,7 +224,7 @@ function RecordedBuild({
           </Notice>
         )}
       </div>
-      <HeroSheetView sheet={history.sheet} />
+      <HeroSheetView sheet={history.sheet} inventory={history.inventory} />
     </section>
   );
 }

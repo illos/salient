@@ -22,6 +22,7 @@ import type {
   SheetAbility,
 } from '../../shared/contracts/characterSheet';
 import type { PartialBaseline } from '../../shared/contracts/characterEvaluation';
+import type { StartingRewards } from '../../shared/contracts/startingRewards';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Disc } from '../components/disc';
@@ -368,7 +369,16 @@ function Conditions({
   );
 }
 
-export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: boolean }) {
+export function HeroSheetView({
+  sheet,
+  compact,
+  inventory,
+}: {
+  sheet: HeroSheet;
+  compact?: boolean;
+  /** Read-only (history) sheets: today's inventory, supplied with the recorded build. */
+  inventory?: StartingRewards | null;
+}) {
   const [rollFor, setRollFor] = useState<CharacteristicKey | null>(null);
   const baseline = sheet.build?.baseline ?? null;
   const partial: PartialBaseline | null = baseline ?? sheet.build?.partial ?? null;
@@ -454,7 +464,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
             partial={partial}
             compact
             rollFor={rollFor}
-            onRollFor={setRollFor}
+            onRollFor={readOnly ? undefined : setRollFor}
           >
             {live && (
               <ActiveConditionBadges
@@ -495,11 +505,12 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
                 <LanguageChips partial={partial} />
               </div>
               <DetailsRows sheet={sheet} partial={partial} />
-              {!readOnly && (sheet.audience === 'owner' || sheet.campaign) && (
+              {(readOnly || sheet.audience === 'owner' || sheet.campaign) && (
                 <StartingRewardsPanel
                   characterId={sheet.id}
                   combatLocked={sheet.combatLocked}
                   compact
+                  readOnly={readOnly ? { rewards: inventory ?? null } : undefined}
                 />
               )}
               {sheet.audience === 'owner' && <NotesBox notes={sheet.authored.notes} compact />}
@@ -512,7 +523,12 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
   return (
     <article className="flex flex-col gap-6" aria-label={`${sheet.name} character sheet`}>
       <div className="flex flex-col gap-4">
-        <SheetHeader sheet={sheet} partial={partial} rollFor={rollFor} onRollFor={setRollFor}>
+        <SheetHeader
+          sheet={sheet}
+          partial={partial}
+          rollFor={rollFor}
+          onRollFor={readOnly ? undefined : setRollFor}
+        >
           {live && (
             <ActiveConditionBadges
               conditions={live.conditions}
@@ -554,8 +570,12 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
           <SheetSection title="Languages" id="sheet-languages">
             <LanguageChips partial={partial} />
           </SheetSection>
-          {!readOnly && (sheet.audience === 'owner' || sheet.campaign) && (
-            <StartingRewardsPanel characterId={sheet.id} combatLocked={sheet.combatLocked} />
+          {(readOnly || sheet.audience === 'owner' || sheet.campaign) && (
+            <StartingRewardsPanel
+              characterId={sheet.id}
+              combatLocked={sheet.combatLocked}
+              readOnly={readOnly ? { rewards: inventory ?? null } : undefined}
+            />
           )}
           <SheetSection title="Details" id="sheet-details">
             <DetailsRows sheet={sheet} partial={partial} />

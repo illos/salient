@@ -38,6 +38,6 @@ export function restoreOutcome(complete: boolean, attached: boolean): string {
   if (!complete)
     return 'This build is unfinished. Restoring it creates a new private draft; it is not submitted or activated. Continue its choices in Edit.';
   if (attached)
-    return 'Restoring creates a new revision and submits it for Director review. Your active build changes only after approval. A Director restoring their own character is approved automatically.';
+    return 'Restoring creates a new revision and submits it for Director review. Your active build changes only after approval. A Director restoring their own character is approved on submission, unless private Director setup (such as a Strange Inheritance trinket) is still needed: then the restored build is saved unsubmitted until that setup is done.';
   return 'Restoring creates a new revision and makes it your active build.';
 }

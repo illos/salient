@@ -50,7 +50,8 @@ export function SheetHeader({
   compact?: boolean;
   /** The characteristic whose Roll test entry is open, if any. */
   rollFor: CharacteristicKey | null;
-  onRollFor: (key: CharacteristicKey | null) => void;
+  /** Absent on a read-only (history) sheet: the characteristics are plain boxes, not Roll entries. */
+  onRollFor?: (key: CharacteristicKey | null) => void;
   /** Rendered under the identity line (active condition badges in the compact header). */
   children?: React.ReactNode;
 }) {
@@ -137,6 +138,32 @@ export function SheetHeader({
         {CHARACTERISTICS.map(([key, name]) => {
           const value = pending(partial?.characteristics?.[key]?.value);
           const open = rollFor === key;
+          const box = (
+            <StatBox
+              value={value}
+              label={
+                <Glyph
+                  token={{
+                    kind: compact ? 'characteristic' : 'characteristicName',
+                    characteristic: key,
+                  }}
+                />
+              }
+              compact={compact}
+              emphasis={open}
+              inset={compact}
+              className={cn(
+                onRollFor && 'transition-colors',
+                onRollFor && (compact ? 'group-hover/stat:bg-accent' : 'group-hover/stat:bg-muted'),
+              )}
+            />
+          );
+          if (!onRollFor)
+            return (
+              <div key={key} role="group" aria-label={`${name} ${value}`}>
+                {box}
+              </div>
+            );
           return (
             <button
               key={key}
@@ -147,24 +174,7 @@ export function SheetHeader({
               title={`Open the Roll test flow with ${name} selected`}
               onClick={() => onRollFor(open ? null : key)}
             >
-              <StatBox
-                value={value}
-                label={
-                  <Glyph
-                    token={{
-                      kind: compact ? 'characteristic' : 'characteristicName',
-                      characteristic: key,
-                    }}
-                  />
-                }
-                compact={compact}
-                emphasis={open}
-                inset={compact}
-                className={cn(
-                  'transition-colors',
-                  compact ? 'group-hover/stat:bg-accent' : 'group-hover/stat:bg-muted',
-                )}
-              />
+              {box}
             </button>
           );
         })}

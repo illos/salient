@@ -2,6 +2,7 @@
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
+import type { StartingRewards } from '../../shared/contracts/startingRewards';
 import { Button } from '../components/ui/button';
 import { useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
@@ -11,15 +12,33 @@ export function StartingRewardsPanel({
   characterId,
   combatLocked,
   compact,
+  readOnly,
 }: {
   characterId: string;
   combatLocked: boolean;
   /** Inside another panel (the compact sheet): no panel surface of its own. */
   compact?: boolean;
+  /**
+   * V185 History: today's inventory supplied by `characters.historySheet`, shown without the
+   * initialize action (inventory is never part of a build snapshot).
+   */
+  readOnly?: { rewards: StartingRewards | null };
 }) {
-  const data = useQuery(api.characterRewards.get, { characterId: characterId as Id<'characters'> });
+  const live = useQuery(
+    api.characterRewards.get,
+    readOnly ? 'skip' : { characterId: characterId as Id<'characters'> },
+  );
   const initialize = useMutation(api.characterRewards.initialize);
   const command = useCommand();
+  const data = readOnly
+    ? {
+        rewards: readOnly.rewards,
+        canInitialize: false,
+        originRevisionId: null,
+        characterRevision: 0,
+        initializationBlocked: null,
+      }
+    : live;
   if (!data) return null;
   const rewards = data.rewards;
   return (

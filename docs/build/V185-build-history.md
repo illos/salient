@@ -55,3 +55,12 @@ Spec: docs/character-wizard-spec.md#5-progression-history
   character-progression 16/16 pass; the Convex push check from `git archive HEAD` reported
   "Convex functions ready". Remaining: TESTER runs the `history` cohort, the v32 browser spec and
   the gate; review.
+- 2026-09-25 WIZARD3, review fixes: the history sheet shows today's inventory read-only
+  (`historySheet.inventory`, starting-rewards panel without its initialize action; app test asserts
+  it equals the character's present rewards); read-only characteristics are plain boxes; the
+  restore panel reads the outcome back from the character (active, submitted, or saved unsubmitted
+  pending Director setup, or private draft) and no longer shows the "changed" notice after its own
+  restore; the pre-restore text covers the owning-Director setup case; `pnpm app restore` accepts
+  `--expected-revision` and `--expected-effective` and documents that omitting them skips the
+  concurrency check; the v32 spec's level-up notice check now waits for the list and asserts the
+  notice appears after the grant.
