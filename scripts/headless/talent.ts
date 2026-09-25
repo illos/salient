@@ -261,6 +261,15 @@ export async function runTalent({ actors: { director, peer }, run, runId }: Scen
                 new RegExp(rolled.manualRemainder, 'i'),
                 name,
               );
+            } else if (name === 'Feedback Loop') {
+              // V173: a compiled triggered action persists as ability.use. Used by hand there is no
+              // observed trigger, so its effect is left to the table and the target is unchanged.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              assert.deepEqual(
+                withoutResource(after.liveState),
+                withoutResource(before.liveState),
+                `${name} target unchanged without a trigger`,
+              );
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);
