@@ -26,7 +26,8 @@ work log), and it has other blockers.
   - `same-distance` (Call the Thunder Down): a table rider that reads the tier push allowances. With
     one distance it shows it; with several it asks the user to pick (Q-FM-2 item 1).
   - `teleport-first` (Phase Inversion Strike): a table teleport rider. The push outcome keeps its
-    calculated distance but gives no allowance until the table confirms the teleport.
+    calculated distance but gives no allowance; no operation confirms the teleport yet, so the push
+    stays table work (Q-FM-2 item 4).
 - `shared/resolve/compileAbility.ts`: `riderAdmitted`. A V176 rule needs exactly one forced movement
   in each tier. A `stability-replaced` rule is per target, so it is admitted on area envelopes.
 - `shared/resolve/compiledOutcome.ts`: push outcome fields `stabilityReduction: 'ignored'`,

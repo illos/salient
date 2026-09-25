@@ -1571,8 +1571,9 @@ on these readings; each is an interpretation with its alternatives.
    that push distance. With different tiers (per-target edges or banes), the rider asks the table
    to pick one, by analogy with `rule/dice/ability-roll.md`: "If different tiered outcomes affect
    multiple targets, the creature using the ability picks which tier of rolled effect applies to
-   them or the Director." Alternatives: the highest tier's distance; or each ally uses the distance
-   of the target nearest to them.
+   them or the Director." Alternatives: the highest tier's distance; each ally uses the distance
+   of the target nearest to them; or the distance the enemies were actually pushed, which depends on
+   the movement outcome and would stay table work.
 2. **Sentenced's exception is table work.**
    `feature/ability/censor/level-2/sentenced.md`: "While the target is restrained this way, your
    abilities that impose forced movement can still move them." The engine never automates forced
@@ -1593,8 +1594,14 @@ on these readings; each is an interpretation with its alternatives.
    `feature/ability/null/level-1/phase-inversion-strike.md`: "Before the push is resolved, you
    teleport the target to a square adjacent to you and opposite the one they started in. If the
    target can't be teleported this way, you can't push them." The teleport is table work. The push
-   outcome keeps its calculated distance but gives no allowance until the table confirms the
-   teleport. Teleporting ends grabbed and restrained on the target (`movement/teleport.md`), which
-   the table records with `condition off`. Alternative: none found in the source.
+   outcome keeps its calculated distance but gives no allowance: no operation confirms the teleport
+   yet, so the push stays table work after it. Teleporting ends grabbed and restrained on the target
+   (`movement/teleport.md`), which the table records with `condition off`. Alternatives: show the
+   push allowance now, with the teleport precondition as a warning; or keep the ability manual.
+5. **Thunder Roar's size bonus.** `movement/forced-movement.md`, Big Versus Little: "When a larger
+   creature force moves a smaller target with a melee weapon ability, the distance of the forced
+   movement is increased by 1." Thunder Roar is an area ability with the Melee and Weapon keywords, and the engine
+   already reads Melee plus Weapon keywords as a melee weapon ability. Alternative: an area ability
+   is not a melee weapon ability for this rule, so no bonus.
 
-Recommendation: keep 1 to 4 as implemented.
+Recommendation: keep 1 to 5 as implemented.
