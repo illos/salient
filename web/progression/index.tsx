@@ -5,6 +5,8 @@
  * the active build, and the owner's "Restore this build". Reads `characters.history` and
  * `characters.historySheet`; restores through `characters.restore`, the same operations the CLI
  * uses (docs/character-wizard-spec.md#5-progression-history). Nothing here computes a game value.
+ * V189: restore is deferred (user ruling 2026-09-25); the page is view-only while
+ * `BUILD_RESTORE_ENABLED` is off, and the restore panel and its wording are not rendered.
  */
 import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
@@ -22,6 +24,7 @@ import type {
   ValueChange,
 } from '../../shared/contracts/characterSheet';
 import {
+  BUILD_RESTORE_ENABLED,
   historyEntryTitle,
   historyKindLabel,
   restoreOutcome,
@@ -212,18 +215,22 @@ function RecordedBuild({
           as recorded, read-only, with the hero’s current Stamina, Recoveries and other live values.
         </p>
       </div>
-      <div className="grid items-start gap-4 lg:grid-cols-2">
+      {BUILD_RESTORE_ENABLED ? (
+        <div className="grid items-start gap-4 lg:grid-cols-2">
+          <DifferenceSummary difference={history.difference} />
+          {!owner ? (
+            <Notice>Only the character’s owner can restore a recorded build.</Notice>
+          ) : expected ? (
+            <RestorePanel characterId={characterId} history={history} expected={expected} />
+          ) : (
+            <Notice>
+              The character was still loading. Select this revision again to restore it.
+            </Notice>
+          )}
+        </div>
+      ) : (
         <DifferenceSummary difference={history.difference} />
-        {!owner ? (
-          <Notice>Only the character’s owner can restore a recorded build.</Notice>
-        ) : expected ? (
-          <RestorePanel characterId={characterId} history={history} expected={expected} />
-        ) : (
-          <Notice>
-            The character was still loading. Select this revision again to restore it.
-          </Notice>
-        )}
-      </div>
+      )}
       <HeroSheetView
         sheet={history.sheet}
         inventory={history.inventory}
@@ -308,7 +315,10 @@ function AuthorizedHistory({
 }) {
   const owner = sheet.audience === 'owner';
   // Restore's optimistic-concurrency values come from the owner-only read, captured on selection.
-  const character = useQuery(api.characters.get, owner ? { characterId } : 'skip');
+  const character = useQuery(
+    api.characters.get,
+    owner && BUILD_RESTORE_ENABLED ? { characterId } : 'skip',
+  );
   const [selected, setSelected] = useState<{
     id: Id<'characterRevisions'>;
     expected: Expected | null;
@@ -318,8 +328,9 @@ function AuthorizedHistory({
       {owner && <LevelUpNotice characterId={characterId} />}
       {!owner && (
         <Notice>
-          The character’s owner makes progression choices and restores builds. You can inspect every
-          recorded build here.
+          {BUILD_RESTORE_ENABLED
+            ? 'The character’s owner makes progression choices and restores builds. You can inspect every recorded build here.'
+            : 'The character’s owner makes progression choices. You can inspect every recorded build here.'}
         </Notice>
       )}
       <HistoryList
@@ -367,7 +378,9 @@ export function HistoryPage({ characterId }: { characterId: Id<'characters'> }) 
         <Eyebrow>Build history</Eyebrow>
         <h1>{sheet.name} · History</h1>
         <p className="m-0 text-base text-muted-foreground">
-          Every creation, edit, level-up, respite kit change and restore records the whole build.
+          {BUILD_RESTORE_ENABLED
+            ? 'Every creation, edit, level-up, respite kit change and restore records the whole build.'
+            : 'Every creation, edit, level-up and respite kit change records the whole build. Recorded builds are view-only.'}{' '}
           Live values, inventory and written details are not part of a build and stay current.
         </p>
       </div>

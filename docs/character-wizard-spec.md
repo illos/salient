@@ -610,11 +610,20 @@ revision N), level and date. Selecting one shows the full character sheet from t
 recorded evaluation and baseline, read-only, with present live values, inventory and authored text,
 and a server-computed comparison with the active build: level, Stamina and Recoveries maxima, and
 features, abilities and perks added or removed by name. `characters.historySheet` serves it to the
-history readers only, without the owner's notes for the Director. The owner's "Restore this build"
-uses `characters.restore` and states the outcome first. Headless: `pnpm app history`,
-`pnpm app history-sheet` and `pnpm app restore`; the `history` cohort proves the journey. See the
+history readers only, without the owner's notes for the Director. V185 also added the owner's
+"Restore this build" (through `characters.restore`, stating the outcome first) and
+`pnpm app restore`; since V189 both are hidden (see the ruling below). Headless: `pnpm app history`
+and `pnpm app history-sheet`; the `history` cohort proves the journey. See the
 [V185 slice](build/V185-build-history.md). The user's pending confirmation of the snapshot scope
 (build only, per the table below) does not change this slice.
+
+**User ruling 2026-09-25 (V189):** "Let's defer restoring for now. Just make the historical copies
+viewable." Restore is deferred; History is view-only. The restore operation remains server-side but
+has no UI or CLI route until the user reopens it. The History page's restore panel and wording and
+`pnpm app restore` are hidden behind `BUILD_RESTORE_ENABLED` (shared/presentation/buildHistory.ts),
+not removed, so re-enabling is a one-line change; while it is off, `pnpm app restore` exits
+non-zero without calling the mutation. Existing "Restored from revision N" labels still show. See
+the [V189 slice](build/V189-history-view-only.md).
 
 Confirmed example: restore a level-7 wood elf Shadow to the build they had at level 3. Restore its choices,
 including ones later replaced, automatic grants, and build-derived stats/abilities. Retain present inventory.

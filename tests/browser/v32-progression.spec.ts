@@ -11,6 +11,7 @@ import { createTable } from './v21-fixtures';
 import { vendorPath } from '../../scripts/lib/vendor';
 import type { Credentials } from './local-fixtures';
 import type { HeroSheet } from '../../shared/contracts/characterSheet';
+import { BUILD_RESTORE_ENABLED } from '../../shared/presentation/buildHistory';
 import reference from '../fixtures/v32-fury-level-two.json' with { type: 'json' };
 
 async function app(
@@ -263,13 +264,21 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
     await expect(recorded.getByRole('button', { name: 'Roll test', exact: true })).toHaveCount(0);
     expect((await query('characters:sheet', { characterId })).build.baseline.level.value).toBe(2);
     await player.screenshot({ path: `${directory}/history-preview.png`, fullPage: true });
-    const restorePanel = recorded.getByRole('region', { name: 'Restore this build' });
-    await expect(restorePanel).toContainText('submits it for Director review');
-    await restorePanel.getByRole('button', { name: 'Restore this build', exact: true }).click();
-    await expect
-      .poll(async () => (await query('characters:get', { characterId })).review?.status)
-      .toBe('pending');
-    expect((await query('characters:sheet', { characterId })).live.stamina).toBe(39);
+    // V189: restore is deferred (user ruling 2026-09-25); History is view-only while it is off.
+    if (BUILD_RESTORE_ENABLED) {
+      const restorePanel = recorded.getByRole('region', { name: 'Restore this build' });
+      await expect(restorePanel).toContainText('submits it for Director review');
+      await restorePanel.getByRole('button', { name: 'Restore this build', exact: true }).click();
+      await expect
+        .poll(async () => (await query('characters:get', { characterId })).review?.status)
+        .toBe('pending');
+      expect((await query('characters:sheet', { characterId })).live.stamina).toBe(39);
+    } else {
+      await expect(recorded.getByRole('region', { name: 'Restore this build' })).toHaveCount(0);
+      await expect(
+        player.getByRole('button', { name: 'Restore this build', exact: true }),
+      ).toHaveCount(0);
+    }
     // The old Progression address redirects to History; the Director inspects but cannot restore.
     await director.goto(`/characters/${characterId}/progression`);
     await expect(director).toHaveURL(new RegExp(`/characters/${characterId}/history$`));
@@ -283,28 +292,32 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
       director.getByRole('button', { name: 'Restore this build', exact: true }),
     ).toHaveCount(0);
     await expect(director.getByText('Private audit fixture note')).toHaveCount(0);
-    await director.goto(fixture.campaignUrl);
-    // V68: hero reviews live in the Manage players pop-up. A session is running, so open it from the
-    // players pane (the header's Invite players shows only between sessions).
-    await director.getByRole('button', { name: 'Manage players', exact: true }).click();
-    await director
-      .getByRole('dialog')
-      .getByTestId('admission')
-      .filter({ hasText: heroName })
-      .getByRole('button', { name: 'Approve', exact: true })
-      .click();
-    await director.keyboard.press('Escape');
-    await player.goto(`/characters/${characterId}`);
-    await expect(player.getByText('30 / 30', { exact: true }).first()).toBeVisible();
-    const restored: HeroSheet = await query('characters:sheet', { characterId });
-    expect(restored.build!.baseline).toEqual(before.build!.baseline);
-    expect(restored.authored).toEqual(before.authored);
-    expect(restored.live).toMatchObject({
-      stamina: 30,
-      recoveries: 4,
-      heroicResource: { current: 3 },
-      xp: 16,
-    });
+    let restored: HeroSheet | undefined;
+    if (BUILD_RESTORE_ENABLED) {
+      await director.goto(fixture.campaignUrl);
+      // V68: hero reviews live in the Manage players pop-up. A session is running, so open it from
+      // the players pane (the header's Invite players shows only between sessions).
+      await director.getByRole('button', { name: 'Manage players', exact: true }).click();
+      await director
+        .getByRole('dialog')
+        .getByTestId('admission')
+        .filter({ hasText: heroName })
+        .getByRole('button', { name: 'Approve', exact: true })
+        .click();
+      await director.keyboard.press('Escape');
+      await player.goto(`/characters/${characterId}`);
+      await expect(player.getByText('30 / 30', { exact: true }).first()).toBeVisible();
+      const sheet: HeroSheet = await query('characters:sheet', { characterId });
+      restored = sheet;
+      expect(sheet.build!.baseline).toEqual(before.build!.baseline);
+      expect(sheet.authored).toEqual(before.authored);
+      expect(sheet.live).toMatchObject({
+        stamina: 30,
+        recoveries: 4,
+        heroicResource: { current: 3 },
+        xp: 16,
+      });
+    }
     const history = await query('characters:history', {
       characterId,
       paginationOpts: { cursor: null, numItems: 20 },
@@ -314,12 +327,14 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
         (row: { kind: string; level: number }) => row.kind === 'level-up' && row.level === 2,
       ),
     ).toBe(true);
-    expect(history.page[0]).toMatchObject({
-      kind: 'restore',
-      restoredFromRevisionId: original.effectiveRevisionId,
-      isEffective: true,
-    });
-    await player.screenshot({ path: `${directory}/restored-sheet.png`, fullPage: true });
+    if (BUILD_RESTORE_ENABLED) {
+      expect(history.page[0]).toMatchObject({
+        kind: 'restore',
+        restoredFromRevisionId: original.effectiveRevisionId,
+        isEffective: true,
+      });
+      await player.screenshot({ path: `${directory}/restored-sheet.png`, fullPage: true });
+    }
     await writeFile(
       `${directory}/readback.json`,
       JSON.stringify(

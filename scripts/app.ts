@@ -3,6 +3,7 @@ import { ConvexHttpClient } from 'convex/browser';
 import { makeFunctionReference } from 'convex/server';
 import { createAuthClient } from 'better-auth/client';
 import { convexClient, crossDomainClient } from '@convex-dev/better-auth/client/plugins';
+import { BUILD_RESTORE_ENABLED } from '../shared/presentation/buildHistory.ts';
 import {
   historySheet,
   listHistory,
@@ -25,7 +26,8 @@ const usage =
   '       pnpm app restore <characterId> <revisionId> [--expected-revision <n>\n' +
   '                --expected-effective <revisionId|null>] [--command-id <id>]\n' +
   '  restore checks the character revision and effective revision you last saw; without both\n' +
-  '  --expected-* options it reads them just before restoring and skips that check.\n' +
+  '  --expected-* options it reads them just before restoring and skips that check. Restore is\n' +
+  '  deferred (V189): while BUILD_RESTORE_ENABLED is off it exits without restoring.\n' +
   'Authenticate with SALIENT_EMAIL and SALIENT_PASSWORD, or SALIENT_AUTH_TOKEN. The campaign comes\n' +
   'from --campaign or SALIENT_CAMPAIGN_ID. Every call uses the same commandId and authorization\n' +
   'contract as the browser; pass --command-id to retry an earlier command exactly.';
@@ -57,6 +59,10 @@ if (verb === 'history' && first) {
     const history = await historySheet(caller, first, second);
     return full ? history : sheetSummary(history);
   };
+} else if (verb === 'restore' && !BUILD_RESTORE_ENABLED) {
+  // V189: restore is deferred (user ruling 2026-09-25); the mutation is not called.
+  console.error('Restore is deferred: build history is view-only (BUILD_RESTORE_ENABLED is off).');
+  process.exit(1);
 } else if (verb === 'restore' && first && second) {
   if ((expectedRevisionOption === undefined) !== (expectedEffectiveOption === undefined)) {
     console.error(usage);

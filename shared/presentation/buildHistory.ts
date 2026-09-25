@@ -5,6 +5,14 @@
  */
 import type { BuildHistoryEntry } from '../contracts/characterSheet.ts';
 
+/**
+ * User ruling 2026-09-25 (V189): "Let's defer restoring for now. Just make the historical copies
+ * viewable." Restore is deferred and History is view-only. The History page's restore panel and
+ * `pnpm app restore` stay in the code behind this switch; the server's `characters.restore`
+ * mutation is unchanged. Re-enabling restore is this one line.
+ */
+export const BUILD_RESTORE_ENABLED = false;
+
 /** What produced a revision: creation, an edit, a level-up, a respite kit change or a restore. */
 export function historyKindLabel(
   entry: Pick<BuildHistoryEntry, 'kind' | 'restoredFromRevision'>,
