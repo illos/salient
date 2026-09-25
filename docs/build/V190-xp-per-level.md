@@ -73,3 +73,4 @@ counts at the next Complete, where V165 counted only that respite's gain.
   presets sit on the `bg-muted` track, the slider submits on pointer up or a committing key only, and
   a non-numeric value is never submitted; the level-3 test now admits through the real flow and
   asserts `entryLevelXpOffset` 32.
+- Independent re-review PASS (2026-09-25). Its one leftover is fixed: a second commit is ignored while the first is still being submitted.

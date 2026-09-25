@@ -179,6 +179,8 @@ function XpPerLevelControl({
     setDraft(String(current));
   }
   const commit = (raw: string) => {
+    // Pointer up then blur fires twice for one change; ignore the second while the first is in flight.
+    if (command.pending) return;
     const value = Number(raw);
     // Never submit an empty or non-numeric value; the server refuses out-of-range numbers.
     if (!raw.trim() || !Number.isFinite(value) || value === current)
