@@ -168,7 +168,8 @@ function LevelUp({
     targetLevel,
   }) as EvaluationResult | undefined;
   // Each choice changes the query's arguments, and a new query reads as loading. Keep showing the
-  // last result meanwhile so the hero panel doesn't flash back to "Pending".
+  // last result meanwhile so the hero panel doesn't flash back to "Pending"; diagnostics, rail
+  // progress and readiness use only `fresh`, so a stale result never marks a made choice missing.
   const [latest, setLatest] = useState(fresh);
   if (fresh && fresh !== latest) setLatest(fresh);
   const evaluation = fresh ?? latest;
@@ -218,7 +219,7 @@ function LevelUp({
     ids.reduce(
       (sum, id) =>
         sum +
-        (evaluation?.diagnostics[id] ?? []).filter(diagnostic => diagnostic.severity !== 'warning')
+        (fresh?.diagnostics[id] ?? []).filter(diagnostic => diagnostic.severity !== 'warning')
           .length,
       0,
     );
@@ -328,7 +329,8 @@ function LevelUp({
           };
         })
       : [];
-  const ready = evaluation?.status === 'complete';
+  // Readiness and problems come only from the current choices' evaluation, never the kept one.
+  const ready = fresh?.status === 'complete';
   const previous = stepIndex > 0 ? rail[stepIndex - 1] : undefined;
   const next = stepIndex < rail.length - 1 ? rail[stepIndex + 1] : undefined;
 
@@ -391,7 +393,7 @@ function LevelUp({
                     selections={merged}
                     authored={{ name: heroName, appearance: '', biography: '', notes: '' }}
                     onAuthored={() => undefined}
-                    diagnostics={evaluation?.diagnostics[decision.id]}
+                    diagnostics={fresh?.diagnostics[decision.id]}
                     onSelect={(id, value) => {
                       if (blocked || !newIds.has(id)) return;
                       setChoices(previousChoices => {
