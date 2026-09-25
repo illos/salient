@@ -46,3 +46,4 @@ applied. Provenance quotes built from the same functions carried the frontmatter
 
 - 2026-09-25 WIZARD3: cause traced to the class follow-up text builders; `sourceBody()` added and
   applied; focused test added (fails before, passes after). Ready for gate.
+- Independent review PASS (2026-09-25). sourceBody matched an independent strip on all 1,881 Compendium entries. There are no engine, report or snapshot dependents, so no regeneration is needed.
