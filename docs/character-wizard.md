@@ -1,5 +1,8 @@
 # Character wizard foundation
 
+Historical foundation notes. Use the [current wizard specification](character-wizard-spec.md) and
+[current direction](v1-roadmap.md#version-one) for new work.
+
 The consolidated [character wizard specification](character-wizard-spec.md) is now the primary implementation
 entry point. This document retains the supporting discussion and source examples. Future requirement changes
 should update the specification first and keep these notes consistent where applicable.

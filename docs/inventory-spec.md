@@ -236,7 +236,7 @@ provide another use case.
 foundation as Compendium rules and other supported objects, including chat sharing and bookmarks.
 Follow the [shared reference direction](data-architecture-spec.md#35-unified-object-references-and-sharing)
 while retaining the distinction between reusable item definitions and particular owned instances.
-This does not assign these future sharing workflows to the current inventory milestone.
+This does not assign these future sharing workflows to the current inventory scope.
 
 The interface, supported object types for v1, and disclosure behavior remain open. Showing an object in a
 message is distinct from moving an inventory item, granting character control, or granting editing access. Do

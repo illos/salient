@@ -32,7 +32,7 @@ application target. A local test pass does not prove a different deployed build.
 playable app and existing data in place; do not restart abandoned pilot stacks or repurpose
 protected rollback copies. The user clarified on 2026-09-22 that the
 [existing moratorium](build/README.md#browser-testing-moratorium--2026-09-20) prohibits table
-browser testing; focused non-table browser investigations may proceed through TESTER.
+browser testing; focused non-table browser investigations may proceed through the test coordinator.
 
 ## Workflow
 

@@ -1,10 +1,9 @@
 # Deployment
 
-DEPLOY2 (Chords `80f94764-5a63-430c-9548-6d8583052803`, succeeding DEPLOY
-`bc6847ae-0334-4282-ae3c-6ec7291a509c` on 2026-09-20) owns integration of finished branches into `main`,
+The user-assigned deployment coordinator owns integration of finished branches into `main`,
 final release commits, the verified push of `main` to GitHub, and promotion of the integrated
-revision to the live stable cloud environment.
-TESTER owns feature acceptance test execution under
+revision to the cloud development environment. The user-assigned test coordinator owns feature
+acceptance test execution under
 [testing-process.md](testing-process.md).
 
 ## Stable target
@@ -12,7 +11,7 @@ TESTER owns feature acceptance test execution under
 - Frontend: `https://salient-dev.rdxx.workers.dev` (`salient-dev` Cloudflare Worker)
 - Backend: Convex `dev:different-bat-943`
 - Procedure and credential handling: [docs/hosted-development.md](docs/hosted-development.md)
-- Reuse accepted TESTER evidence; deployment does not run smoke tests or other test gates.
+- Reuse accepted test-coordinator evidence; deployment does not run smoke tests or other test gates.
 - Reseed the committed content when required; development data is disposable under `AGENTS.md`.
 
 The cloud target is stable only when its backend, content and frontend are recorded against one
@@ -21,10 +20,10 @@ partially updated target is not stable.
 
 ## Promotion gate
 
-1. The owner hands off the reviewed tip after TESTER's full check and applicable headless proof pass.
-2. DEPLOY2 fast-forwards `main` and publishes affected backend, content and frontend components.
+1. The owner hands off the reviewed tip after the test coordinator's full check and applicable headless proof pass.
+2. The deployment coordinator fast-forwards `main` and publishes affected backend, content and frontend components.
    Reuse passing checks for unchanged inputs; do not add a pre-promotion or exact-revision test gate.
-3. DEPLOY2 records the runtime source and Worker version, commits the release closeout, pushes
+3. The deployment coordinator records the runtime source and Worker version, commits the release closeout, pushes
    `main`, verifies the remote SHA and sends the completion handoff.
 
 Do not rerun suites, headless journeys, smoke tests or live checks as part of promotion. Reuse the

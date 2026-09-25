@@ -1,5 +1,9 @@
 # v0.01 character sheet specification
 
+Historical first-pass presentation guidance. The [current direction](v1-roadmap.md#version-one),
+[wizard specification](character-wizard-spec.md), and [table specification](table-spec.md) govern
+current behavior and design work.
+
 Status: initial implementation guidance, 2026-09-14. The user authorized a reasonable first-pass
 spec guided by the supplied paper character sheet, with refinement through use rather than exhaustive
 upfront design. This document specifies presentation and integration; it does not claim implementation.
@@ -19,7 +23,7 @@ its edition was not independently established. It is a design reference, not an 
 or a new rules authority. Its artwork and game content retain their original rights; this copy is
 not covered by the project's application-code license.
 
-The [pre-alpha checkpoint](pre-alpha-design-gaps.md) controls milestone scope. The
+The [pre-alpha checkpoint](pre-alpha-design-gaps.md) records the original prototype scope. The
 [wizard spec](character-wizard-spec.md) owns builds, drafts, review and derived/live-state boundaries;
 the [table spec](table-spec.md) owns gameplay, timing and history; the
 [access spec](accounts-and-access-spec.md) owns permissions. Those contracts take precedence over

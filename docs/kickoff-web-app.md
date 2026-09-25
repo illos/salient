@@ -1,7 +1,7 @@
 # Kickoff prompt: web application implementation
 
-Historical v0.01 kickoff. For new work, use [the post-v0.01 track kickoff](kickoff-development-track.md)
-and [five-track roadmap](v1-roadmap.md). The original assignment below is retained as history; it does
+Historical v0.01 kickoff. For new work, use the [current direction](v1-roadmap.md#version-one)
+and [build process](build/README.md). The original assignment below is retained as history; it does
 not restart accepted foundation work or replace the current isolation/feedback policy.
 
 You are the lead for implementing and reviewing the ordinary web-application portion of this Draw Steel

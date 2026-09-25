@@ -76,7 +76,7 @@ Confirmed v1 reference breadth includes eligible official retainers, companions,
 standard monsters. Summoner and Beastheart are official supplemental content, not core, and their
 classes/associated mechanics are excluded from v1. See the
 [reference-library scope](reference-library-spec.md). The earlier proposed 409 standard Monsters-book foes may
-remain an initial import milestone, but that count alone no longer defines complete v1 reference coverage.
+remain an initial import stage, but that count alone no longer defines complete v1 reference coverage.
 Audit the included core/source-qualified categories separately from the broad corpus and its supplemental
 entries. Public reference availability need not wait for full automation.
 
@@ -350,8 +350,8 @@ were introduced. See the [slice verification](build/V30-second-echelon-undead.md
 V35 extends the source package to all 438 core stat blocks and all 63 core Malice parents, with
 2,006 independently addressable features. It adds a compact browser projection, explicit group and
 sourcebook facets, source-checked contextual Rules links, and exact original source retention.
-The user assigned the library browse/sort UI to a parallel thread; live roster loading and ability
-execution remain separate. See [V35](build/V35-full-core-ingestion.md) for actual verification/branch
+The library browse/sort UI, live roster loading, and ability execution were separate work at this
+checkpoint. See [V35](build/V35-full-core-ingestion.md) for actual verification/branch
 status and [the consumer contract](../shared/foes/README.md) for the generated interface.
 
 Two guarded source repairs address malformed Gnoll extraction and omitted/mislabeled Hag material.
@@ -549,15 +549,15 @@ These are proposed checks, not completed tests. The source audit supplies the ob
 | Edition update/reimport | Existing selections resolve their retained edition; retrying the same import is idempotent; incomplete imports never become the active library edition. |
 | Manual action and history | Unsupported source text remains visible; manual changes are recorded and reversible; restoring before/after state makes no parser or engine call. |
 
-For the extraction milestone, test the importer and package round trip against the relevant rows. Squad
+For the extraction work, test the importer and package round trip against the relevant rows. Squad
 combat, permissions, live state, and history cases become required when implementing encounter loading; a
-catalog-only milestone must not claim those behaviors are complete.
+catalog-only work must not claim those behaviors are complete.
 
 ## Remaining decisions
 
 - Audit the in-scope official retainer, companion, and summon reference coverage in addition to standard
   monsters. Exclude all official supplemental content, including Summoner/Beastheart dependencies, from v1;
-  the 409-standard-monster milestone is not complete v1 coverage. Decide adapter sequencing independently of
+  the 409-standard-monster import is not complete v1 coverage. Decide adapter sequencing independently of
   readable reference delivery.
 - Saved-encounter sharing is deferred beyond v1; v1 templates are private to their creator. Any
   monster-control delegation beyond the confirmed Director authority needs later design. Public library access

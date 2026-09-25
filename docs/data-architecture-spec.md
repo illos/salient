@@ -11,11 +11,10 @@ development path; migration compatibility is not a v0.01 completion gate. This q
 retention during development, while normal saved-state, reconnect and history behavior within a running
 version still apply. See [development policy](development-process.md#confirmed-pre-alpha-development-policy).
 
-**Milestone scope:** apply the [v0.01 feature checkpoint](pre-alpha-design-gaps.md) before implementing the
-broader data model below. Saved character-build revisions and visible gameplay history are included;
-inventory, chat, character grants, Director delegation and interchange implementation are deferred. Preserve
-their conceptual boundaries without requiring unused records or full future workflows now. Detailed
-combat-history and resource-reconciliation contracts remain open.
+**Historical prototype scope:** the [v0.01 feature checkpoint](pre-alpha-design-gaps.md) bounded the
+original data model. Its deferrals are not current milestones. Use the
+[current direction](v1-roadmap.md#version-one) and owning specifications for current scope; preserve
+the conceptual boundaries below where a capability remains unfinished.
 
 This is the primary checkpoint for the app's data model and storage lifecycle. It brings together the
 [character wizard](character-wizard-spec.md), [monster catalog](monster-catalog-spec.md), and
@@ -430,7 +429,7 @@ Rules will account for most shared content, but inventory items and other suppor
 the same foundation. Users should be able to put these objects into chat and bookmark them.
 The embedded Compendium is an initial consumer of this model. This establishes an architectural
 direction and future capabilities; it does not assign chat, inventory sharing or bookmarks to the
-current implementation milestone. Earlier bookmark exclusions describe release timing, not a
+original implementation scope. Earlier bookmark exclusions describe release timing, not a
 requirement to prevent bookmarking in the architecture.
 
 **Proposed implementation boundary:** a common object reference identifies the object and its kind;
@@ -513,7 +512,8 @@ bookmarks, private direct messages, or admin-dashboard
 functionality. Campaign chat is the only v1 messaging surface. Statistics are deferred at the presentation
 layer: retain relevant structured gameplay data so later analysis does not require reconstructing missing
 facts. Forge Steel export is not required for v1, but the character data model must preserve the information
-and adapter boundaries needed to add it without rewriting the system; import remains required.
+and adapter boundaries needed to add it without rewriting the system. Forge Steel import is deferred
+beyond V1 by the [2026-09-25 ruling](character-wizard-spec.md#required-import).
 
 V1 user discovery for friendship uses a personal share code and URL, analogous to campaign share codes/URLs;
 username search is not included. Friend requests, campaign join requests, and character review requests

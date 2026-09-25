@@ -1,5 +1,9 @@
 # Kickoff prompt: post-v0.01 development track
 
+Historical prompt from 2026-09-16. Use [current project instructions](../AGENTS.md), the
+[build process](build/README.md), and [testing process](../testing-process.md) for new work.
+The text below records the earlier track handoff and is not an active workflow.
+
 Use this prompt for one active track. Supply the track and bounded assignment when starting the thread;
 the [roadmap's starting assignments](v1-roadmap.md#starting-implementation) provide recommendations.
 To resume the planning/coordination session, use the

@@ -1,5 +1,9 @@
 # Build status
 
+Version one is nearing feature completion. Current work is entering UI design and testing; the
+rows below are implementation records, not additional product milestones. See the
+[current direction](../v1-roadmap.md#version-one).
+
 One row per slice. Status is one of `Registered`, `In progress`, `Committed on branch`, `Merged`,
 `Blocked (Q-id)` or `Historical`. Details live in the slice document's work log and in Chords; do not
 add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
@@ -149,7 +153,7 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V149 | [Troubadour drama generation](V149-troubadour-drama-generation.md) | Merged (`71a3fa5`, resource train 4); cloud dev published; gate and headless PASS at tip |
 | V148 | [Elementalist essence generation with Persistent Magic](V148-elementalist-essence-generation.md) | Merged (`71a3fa5`, resource train 4); cloud dev published; gate and headless PASS at tip |
 | V151 | [Level 2–3 follow-up actions](V151-follow-up-actions.md) | Merged (`b0f7c53`); cloud dev published with content reseed; gate and headless PASS at tip |
-| V150 | [Self-Taught forgo for automatic heroic resources](V150-self-taught-forgo.md) | Ready for integration; TESTER PASS at 50f066d5, independent review and QC1 PASS |
+| V150 | [Self-Taught forgo for automatic heroic resources](V150-self-taught-forgo.md) | Merged (`fad564f`); cloud dev published; accepted gate reused |
 | V138 | [Summoner levels two and three](V138-summoner-level-three.md) | Merged (`b0f7c53`); cloud dev published with content reseed; gate and headless PASS at tip |
 | V152 | [Effect rider grammar II](V152-effect-rider-grammar.md) | Merged (`4b87799`, train 7); cloud dev published; gate and headless PASS |
 | V153 | [Compound tier conditions](V153-compound-conditions.md) | Merged (`4b87799`, train 7); cloud dev published; gate and headless PASS |
@@ -175,8 +179,8 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V186 | [Level-up capture spec leaves the editor by navigation](V186-v32-spec-exit.md) | Merged (`0c5848c`); spec and docs only, no deploy needed |
 | V187 | [Level-up capture spec approves through Manage players](V187-v32-spec-approve.md) | Merged (`ccd9c67`); spec and docs only; v32 capture passes end to end |
 | V188 | [Follow-up ability records show the printed body, not frontmatter](V188-follow-up-ability-content.md) | Merged (`75885cb`); cloud dev published; accepted TESTER results reused |
-| V157 | [Abilities without a power roll, and executed gains](V157-effect-only-abilities.md) | In progress (ENGINE2) |
-| V158 | [Effect instances and durations](V158-effect-instances.md) | In progress (ENGINE2) |
+| V157 | [Abilities without a power roll, and executed gains](V157-effect-only-abilities.md) | Merged (`6632e95`); cloud dev published; gate and headless PASS at tip |
+| V158 | [Effect instances and durations](V158-effect-instances.md) | Merged (`6632e95`); cloud dev published; gate and headless PASS at tip |
 | V159 | [Modifiers from lasting effects](V159-modifiers.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
 | V170 | [Talent Strained sections](V170-talent-strained.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
 | V171 | [Watchers and limits](V171-watchers.md) | Merged (`0401350`, train 17); cloud dev published; gate and headless PASS at tip |
@@ -195,3 +199,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V201 | [Small damage fixes](V201-small-damage-fixes.md) | Merged (`9d8f7bc`, train 21); cloud dev published; gate and headless PASS at tip |
 | V202 | [Turn-start and turn-end triggered-action offers](V202-turn-trigger-offers.md) | Merged (`d249fc9`); cloud dev published; accepted TESTER results reused |
 | V210 | [Director build-review count](V210-build-review-count.md) | Merged (`6c4c566c`); cloud dev frontend published; gate and focused browser PASS |
+| V203 | [Current documentation phase and role cleanup](V203-documentation-phase-transition.md) | Committed on branch |

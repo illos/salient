@@ -1,10 +1,13 @@
 # App features: first pass
 
+Historical first-pass inventory from 2026-09-11. The [current direction](v1-roadmap.md#version-one)
+and owning specifications supersede its milestone language and earlier scope assumptions.
+
 Status: consolidated feature inventory, 2026-09-11. The [v1 checkpoint](v1-spec-checkpoint.md) records the
 agreed release scope and remaining work. Screen layouts and implementation contracts remain proposed where
 labeled.
 
-**Immediate milestone:** the [v0.01 scope checkpoint](pre-alpha-design-gaps.md) controls prototype delivery.
+**Historical prototype milestone:** the [v0.01 scope checkpoint](pre-alpha-design-gaps.md) controlled prototype delivery.
 It targets desktop with temporary UI and explicitly defers several features listed below, including chat,
 inventory, rules search, leveling and interchange implementation. This inventory describes the fuller V1
 product; its feature lists are not prototype gates.
@@ -25,7 +28,8 @@ character/campaign statistics dashboards, reference bookmarks, private direct me
 functionality. Campaign chat is the only v1 messaging surface. Statistics are deferred at the presentation
 layer: retain relevant structured gameplay data so later analysis does not require reconstructing missing
 facts. Forge Steel export is not required for v1, but the character data model must preserve the information
-and adapter boundaries needed to add it without rewriting the system; import remains required.
+and adapter boundaries needed to add it without rewriting the system. Forge Steel import is deferred
+beyond V1 by the [2026-09-25 ruling](character-wizard-spec.md#required-import).
 
 ## The table: the heart of the app
 

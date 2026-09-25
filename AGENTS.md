@@ -4,13 +4,12 @@ Salient is a Draw Steel companion web app: Convex backend, React frontend, TypeS
 This file is the whole standing instruction set. Product decisions live in the specs under `docs/`,
 the build process in `docs/build/README.md`, test execution in `testing-process.md`.
 
-## Current V1 target
+## Current phase
 
-Build toward the [confirmed 2026-09-22 release target](docs/v1-roadmap.md#current-v1-release-target--confirmed-2026-09-22):
-all eleven classes playable and close to fully engine automated through level two or three, a useful
-low-level foe roster (complete bands are unnecessary), and most app features working and tested.
-The exact level ceiling, foe roster and release checklist remain open. Broader levels 1–10 designs
-are not all V1 release gates. Prioritize and report work against this target.
+Version one is nearing feature completion. The project is entering a phase of testing connected
+play and designing and refining the UI. The [current direction](docs/v1-roadmap.md#version-one)
+is the only current milestone. Owning specs define behavior; the build tracker records work and
+historical slices without creating additional release gates.
 
 ## Rules and mechanics
 
@@ -43,9 +42,9 @@ are not all V1 release gates. Prioritize and report work against this target.
 - Rules resolution stays out of UI components. Every table control is a registered shared operation
   usable from the UI, the command palette, slash commands and headless calls. Every UI capability has
   a supported programmatic CLI/API route.
-- DEPLOY2's promotion of merged main to the cloud dev deployment and GitHub is standing
-  authorization; any other deployment, push or external publication needs an explicit user
-  instruction in the current thread. The Presidium shell carries an ambient
+- Promotion of merged main to the cloud dev deployment and GitHub by the user-assigned deployment
+  coordinator is standing authorization; any other deployment, push or external publication needs
+  an explicit user instruction in the current conversation. The Presidium shell carries an ambient
   `CONVEX_DEPLOY_KEY`; run Convex CLI commands with `env -u CONVEX_DEPLOY_KEY` or on CT114.
 - Development data is disposable. Reset and reseed instead of migrating. Do not fingerprint, snapshot
   or preservation-check records for a dev build. Do not reset another thread's environment or the
@@ -64,11 +63,11 @@ are not all V1 release gates. Prioritize and report work against this target.
   Headless CLI/API journeys with persisted readback prove features. Table browser tests are under
   moratorium until V66 lands; log would-be table scenarios in `docs/build/browser-coverage-backlog.md`.
   The user clarified on 2026-09-22 that the pause is specifically for table testing; focused
-  non-table browser tests and investigations may proceed through TESTER.
-- All test runs go through the TESTER thread under `testing-process.md`. Implementers run only
-  authoring checks locally: lint, typecheck, the focused test file. DEPLOY2 integrates finished
-  slices into main and promotes to the cloud dev deployment.
-- Deployment reuses accepted TESTER results. Do not rerun suites, headless journeys, smoke tests,
+  non-table browser tests and investigations may proceed through the test coordinator.
+- All test runs go through the user-assigned test coordinator under `testing-process.md`.
+  Implementers run only authoring checks locally: lint, typecheck, the focused test file. The
+  user-assigned deployment coordinator integrates finished slices into main and promotes to cloud dev.
+- Deployment reuses accepted test-coordinator results. Do not rerun suites, headless journeys, smoke tests,
   or live checks before or after promotion just because the commit, environment or release changed.
   Deployment consists of required build/publication steps and recording their success. New tests
   require an explicit user request or a concrete code change/failure needing targeted verification.

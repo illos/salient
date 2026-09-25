@@ -1,5 +1,8 @@
 # v0.01 pre-alpha: scope checkpoint and design gaps
 
+Historical prototype checkpoint. The [current direction](v1-roadmap.md#version-one) supersedes its
+milestone and remaining-work statements; the owning specifications govern current behavior.
+
 Checkpointed **2026-09-14** after the game-basics-first scope revision. Specification only; this is
 not an implementation milestone or approval of proposed technical interfaces.
 

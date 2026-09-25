@@ -1,13 +1,15 @@
 # V1 technology stack and deployment specification
 
-Version 0.1 — 2026-09-11. Specification and recommendations. Written before the pre-alpha app was scaffolded;
-section 2 records the current checkout state, and no deployment beyond the local development backend exists.
+Version 0.1 — 2026-09-11. Historical specification and recommendations, written before the pre-alpha
+app was scaffolded. Checkout and deployment status below describe that date, not the current app.
+For current direction and deployment use the [roadmap](v1-roadmap.md#version-one) and
+[deployment runbook](../deploy.md).
 
 This document consolidates the technology discussion, including the later clarifications about long table
 sessions, multiplayer responsiveness, Cloudflare hosting, and a possible home-server/LAN edition. It records
 the reasoning behind the recommended stack without treating every suggested library as a confirmed choice.
 
-The [v1 checkpoint](v1-spec-checkpoint.md) controls release scope. The [table](table-spec.md),
+The [v1 checkpoint](v1-spec-checkpoint.md) records the earlier release scope. The [table](table-spec.md),
 [accounts and access](accounts-and-access-spec.md), [characters](character-wizard-spec.md),
 [data architecture](data-architecture-spec.md), [engine](engine-architecture.md), and
 [dice](dice-roller-spec.md) specifications retain authority over their respective behavior.
@@ -64,7 +66,7 @@ not itself authorize deployment.
 | Frontend | React + TypeScript + Vite | **Recommended baseline.** Fits complex interactive sheets, reusable controls, and the researched 3D ecosystem. Vite can produce a locally servable static app. |
 | Routing | TanStack Router | **Recommended.** Typed routes/search parameters, nested layouts, and code splitting fit campaigns, characters, reference filters, and a persistent table shell. |
 | Styling | Tailwind CSS | **User preference; recommended.** Direct control over responsive layouts and a project-specific visual design, with a documented Vite integration. |
-| UI controls | shadcn/ui using Base UI | **Recommended for a new UI.** Customizable source components supply menus, dialogs, selectors, tabs, and sheets. Existing UI choices in the other thread must be inspected before proposing migration. |
+| UI controls | shadcn/ui using Base UI | **Historical recommendation for a new UI.** Customizable source components supply menus, dialogs, selectors, tabs, and sheets. Inspect the current UI before proposing migration. |
 | Animation | Motion for React plus native CSS | **Recommended.** Motion supplies springs, presence, and layout transitions; CSS handles simple state transitions. Use one coherent motion system. |
 | Browser data access | Native Convex React hooks | **Recommended baseline.** Direct subscriptions and mutations without an additional mandatory cache framework. |
 | Forms | React Hook Form + Zod | **Recommended.** Manage fields, input shapes, and feedback. Shared character evaluation remains separate from form state. |

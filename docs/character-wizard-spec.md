@@ -14,8 +14,8 @@ This document is the primary entry point for implementing the wizard. [Foundatio
 retain the source investigation and examples; [interchange research](forge-steel-interchange.md) supplies
 file-format evidence.
 
-**V1 wizard specification work, 2026-09-14:** the user assigned this thread the fuller V1 wizard,
-alongside separate v0.01 build and broader V1 specification threads. The
+**V1 wizard specification work, 2026-09-14:** the fuller V1 wizard was specified alongside
+separate v0.01 build and broader V1 specification work. The
 [core-content and decision contracts](v1-character-wizard-contracts.md) now detail all ancestry budgets,
 culture pools, career grants, core class baselines and progression patterns, nested choices, kit
 composition, and representative acceptance cases. The reproducible
@@ -859,9 +859,9 @@ startup/build, and must not silently rewrite recorded history.
 
 ### Required import
 
-**User ruling, 2026-09-25:** Forge Steel import is not part of V1. It is paused until the character wizard is level-complete for all classes. Part a (V09, command-line import of drafts) stays on main as built; parts b and c (V182 levels 2–3 and the import UI; preserving customised and non-core content) are parked. The ruling supersedes the "Import remains a v1 requirement" wording in this document and the V1 roadmap.
+**User ruling, 2026-09-25:** Forge Steel import is not part of V1. It is paused until the character wizard is level-complete for all classes. Part a (V09, command-line import of drafts) stays on main as built; parts b and c (V182 levels 2–3 and the import UI; preserving customised and non-core content) are parked. This ruling supersedes earlier import milestones.
 
-Required for the fuller product; implementation is explicitly deferred beyond v0.01. The architecture above
+Required for the fuller product; implementation is explicitly deferred beyond V1. The architecture above
 must accommodate it from the first character model.
 
 Accept the researched `.ds-hero` and `.drawsteel-hero` JSON formats within an explicitly tested support range.

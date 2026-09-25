@@ -11,14 +11,11 @@ Related specifications: [access](accounts-and-access-spec.md), [characters](char
 [data/history](data-architecture-spec.md), [monster catalog](monster-catalog-spec.md),
 [dice](dice-roller-spec.md), [engine](engine-architecture.md), and [v1 tech stack](v1-tech-stack-spec.md).
 
-**Immediate milestone:** the [v0.01 checkpoint](pre-alpha-design-gaps.md) controls feature delivery. Use a
-temporary desktop UI with a visible game log, a minimal hero and direct catalog-to-foes-roster loading.
-Campaign chat, saved encounter templates and inventory/loot are deferred. Foe hiding is also deferred:
-all loaded foes are visible, with no hide/reveal or Add visibility controls; see [visibility](#monster-visibility-and-health-display). The creator serves as Director;
-player-to-player character-control sharing and Director delegation are deferred. Relevant table text remains
-readable under existing visibility rules. Broader surfaces and acceptance examples below describe V1, not
-automatic prototype gates. FreePlay/combat specification is active; unresolved behavior is not authorized
-for implementation. Playable retainers and friendly monsters are deferred beyond V1.
+**Historical prototype scope:** the [v0.01 checkpoint](pre-alpha-design-gaps.md) records the
+temporary desktop UI and feature deferrals accepted for the original prototype. Those deferrals are
+not current delivery milestones. The [current direction](v1-roadmap.md#version-one) and the
+confirmed contracts below govern ongoing work. Unresolved behavior still requires a product
+decision or explicit manual handling; playable retainers and friendly monsters remain beyond V1.
 
 **Combat scope confirmed, 2026-09-13:** [the G4 acceptance checklist](pre-alpha-design-gaps.md#v001-combat-acceptance-checklist)
 is complete. Require the full opening and ordinary hero/foe turn flow; settled roster targeting;
@@ -394,7 +391,7 @@ initiative or turn tracking; see the FreePlay section below.
 **User decision, 2026-09-15 (desktop presentation):** the V1 mockups' desktop layouts are binding
 for this pane structure; see the [mockup README](design-mockups/v1/README.md) and the
 [design fidelity audit](build/audits/2026-09-15-v1-design-audit.md). Three further decisions from the
-same thread:
+same discussion:
 
 - **Director rosters are compact cards on both sides.** In the Director's view, foes and heroes use
   the same compact card style showing the resources this section already lists: Stamina (current,
@@ -834,7 +831,7 @@ combat participants and their initiative groups/turns have no hidden-foe present
 hide/reveal controls and the Add visibility setting from v0.01. Full monster stat blocks remain
 Director-only; health display and Malice visibility retain their separate policies. This defers
 roster visibility controls, not the source rules for stealth or concealment. Fuller V1 hide/reveal
-design remains future work. Audit F2 is closed for this milestone by scope deferral.
+design remains future work. Audit F2 was closed for the original prototype scope by deferral.
 
 The hide/reveal behavior elsewhere in this specification describes the fuller V1 design.
 
@@ -2060,8 +2057,8 @@ or turn spending. Preserve casualty history and surviving identities.
 Non-exhausting damage thresholds after a stat adjustment were decided on 2026-09-20 (below);
 source-driven membership changes remain a separate follow-up.
 
-**User decisions, 2026-09-20 (V02 build thread).** These settle the arithmetic the 2026-09-13 rulings
-left open. The user answered them directly in the foes build thread; this section is the owning record.
+**User decisions, 2026-09-20 (V02).** These settle the arithmetic the 2026-09-13 rulings
+left open; this section is the owning record.
 
 - *Casualty ladder.* Casualties come from the squad pool crossing step values, exactly as the pinned
   Shared Low Stamina and Dropping One Minion rules describe (a squad "loses a minion when they take a

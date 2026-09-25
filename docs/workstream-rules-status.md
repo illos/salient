@@ -1,5 +1,8 @@
 # Rules/combat workstream status
 
+Historical 2026-09-14 status record. The [current direction](v1-roadmap.md#version-one) and owning
+specifications supersede its handoffs and milestone language.
+
 Checkpoint: **2026-09-14 — v0.01 scope review complete; build follow-up as needed**. The user
 is satisfied with the shared-basics scope. No further open-ended feature questionnaire is queued.
 The building agent can ask concrete material questions during implementation; routine source

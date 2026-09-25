@@ -1,6 +1,6 @@
 # Lasting effects, watchers and reactions: engine design
 
-Status: proposal by ENGINE2, 2026-09-24, revised after QC1's review
+Status: proposal dated 2026-09-24, revised after independent review
 (`../review-artifacts/2026-09-24-lasting-effects-design-QC1.md`, R1–R5 and the missing decisions). It builds pieces 4–6 of the automation
 plan on the product rulings in
 [the automation rulings](decisions/2026-09-24-automation-rulings.md):
@@ -338,7 +338,8 @@ members, and each printed rider stored as a watcher on each member it applies to
 
 ## 8. Delivery plan
 
-Each slice below gets its own review, TESTER gate and QC1, as usual.
+Each slice below gets its own independent review and test-coordinator gate under the current build
+and testing processes.
 
 1. **Effect instances and durations:**
    - generalize condition instances;

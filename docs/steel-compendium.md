@@ -33,7 +33,7 @@ Initial revision: `fb83a789da8f0327a389c277a0c790b1648d5810`, upstream tag `v4.2
 
 ## Generated content snapshot
 
-Implementation note (S01, 2026-09-14): the application does not read the submodule at runtime. `pnpm content:build` (`scripts/build-content.ts`) copies the v0.01 selection into `shared/content/compendium/` with a manifest whose `compendium.revision` is read from the submodule checkout and must equal the superproject's pin; the generator refuses a different or dirty checkout. `pnpm content:check`, part of `pnpm check`, regenerates in memory and fails on any difference, so a hand edit of a generated file or an unreviewed pin change is caught. The layout and field meanings are in [shared/content/README.md](../shared/content/README.md). After adopting a reviewed update (below), run `pnpm content:build`, review the diff of `shared/content/compendium/`, and reseed development deployments with `pnpm content:seed`.
+Implementation note (S01, 2026-09-14): the application does not read the submodule at runtime. `pnpm content:build` (`scripts/build-content.ts`) copies the v0.01 selection into `shared/content/compendium/` with a manifest whose `compendium.revision` is read from the submodule checkout and must equal the superproject's pin; the generator refuses a different or dirty checkout. `pnpm content:check`, part of `pnpm check`, regenerates in memory and fails on any difference, so a hand edit of a generated file or an unreviewed pin change is caught. The layout and field meanings are in [shared/content/README.md](../shared/content/README.md). The pin remains fixed under the project instructions.
 
 Historical note: when the dependency was added the project had no Git repository, so one was initialized locally with no remote or commits. `.gitmodules` and the dependency pointer have since been committed.
 
@@ -51,46 +51,16 @@ superproject pin (including the clean Heroes book and book chapters). They do no
 files to be materialized and never fetch or expand sparse checkout. Generated-content builds still
 use the clean checked-out `en/unified/md/` and `en/unified/json/` directories listed above.
 
-Sparse checkout is a local setting and is not propagated by the parent repository. If disk space permits, `git -C vendor/steel-compendium sparse-checkout disable` restores every format. The current working files occupy approximately 34 MB, plus approximately 22 MB of Git data.
+The canonical checkout's sparse set must remain unchanged. Read other tracked files from its Git
+objects at the pinned revision. The current working files occupy approximately 34 MB, plus approximately
+22 MB of Git data.
 
 Keep upstream files unmodified. Store project notes, transformations, and explicit local corrections outside the dependency. The upstream site labels its data as a work in progress; repository inclusion alone does not establish accuracy or permissions for every item.
 
-## Review updates without changing installed data
+## Canonical reference on Presidium
 
-Run these commands from the project root:
-
-```bash
-git -C vendor/steel-compendium fetch origin
-git -C vendor/steel-compendium log --oneline HEAD..origin/main
-git -C vendor/steel-compendium diff --stat HEAD origin/main
-git -C vendor/steel-compendium diff HEAD origin/main -- en/unified/json
-```
-
-Fetching downloads updates without adopting them. Check whether changes are useful and whether identifiers, formats, or rules text changed. Once an importer or engine exists, run the relevant checks before retaining an update. No automatic updating job is configured.
-
-## Adopt a reviewed update
-
-First run `git -C vendor/steel-compendium status --short`. If there are local edits, preserve and investigate them before switching revisions. Otherwise, replace `REVIEWED_COMMIT_SHA` below with the exact chosen commit:
-
-```bash
-git -C vendor/steel-compendium checkout --detach REVIEWED_COMMIT_SHA
-git diff --submodule=log -- vendor/steel-compendium
-git add vendor/steel-compendium
-git diff --cached --submodule=log -- vendor/steel-compendium
-```
-
-Commit the pointer change with a short explanation of its benefit and any checks performed. To roll back, check out the previous dependency commit and stage that pointer instead. Avoid unattended pulls in startup or build scripts.
-
-## Restore elsewhere
-
-Once the parent project is committed and shared, `git clone --recurse-submodules PROJECT_URL` restores the pinned dependency. After an ordinary project clone, use `git submodule update --init --recursive`. Both normally check out every format on a fresh machine.
-
-For a machine with limited disk space, clone the parent without submodules, then run:
-
-```bash
-git clone --no-checkout https://github.com/SteelCompendium/data-unified.git vendor/steel-compendium
-git -C vendor/steel-compendium sparse-checkout set en/unified/md en/unified/json
-git submodule update --init -- vendor/steel-compendium
-```
-
-The final command checks out the parent project's pinned commit using the selected sparse paths.
+Use the pinned Compendium checkout at
+`/srv/presidium/projects/salient/code/vendor/steel-compendium` as a read-only reference. Worktrees
+leave `vendor/*` empty. Do not clone, initialize, copy, symlink, change the sparse set, or advance
+the submodule pin. The [project instructions](../AGENTS.md#non-negotiables) and
+[build worktree procedure](build/README.md#branch-and-merge-policy) govern source access.

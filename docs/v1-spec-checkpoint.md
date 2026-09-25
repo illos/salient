@@ -1,40 +1,34 @@
 # V1 specification checkpoint
 
 Consolidated through 2026-09-13 after the product, technology and gameplay design discussions. This is a
-documentation checkpoint, not an implementation milestone or approval of proposed technical defaults.
+historical documentation checkpoint, not current milestone guidance or approval of proposed technical defaults.
+The [current direction](v1-roadmap.md#version-one) supersedes its planning and release-target sections;
+the owning specifications remain the source for detailed behavior.
 
-The [V1 roadmap](v1-roadmap.md#confirmed-development-tracks--2026-09-15) records the confirmed
-five post-v0.01 tracks: parser/rules engine, foe coverage, characters (wizard, sheets and progression),
-UI/polish, and app/social features.
-Character and foe coverage can advance with explicit manual mechanics while automation develops.
-It also retains the earlier specification sequence and the respite discussion checkpoint.
+The earlier five-track plan is preserved in the
+[2026-09-16 planning checkpoint](checkpoint-2026-09-16-development-tracks.md). The
+[accepted prototype record](build/evidence/v001-acceptance.md) closes the prototype scope
+described below. For new work, use the [current direction](v1-roadmap.md#version-one) and
+[build process](build/README.md).
 
-Post-v0.01 implementation uses [the track kickoff](kickoff-development-track.md) and
-[build process](build/README.md), including separate worktrees, short-lived slice branches and runtime
-isolation. The [accepted prototype record](build/evidence/v001-acceptance.md) closes the scope described
-below; historical statements about its remaining work are not instructions to restart it. Fuller V1
-behavior still requires its own implementation and verification.
+## Historical release scope
 
-## Current release scope
+The [2026-09-22 target](build/V111-v1-release-target.md) formerly governed V1 release breadth.
+The [current direction](v1-roadmap.md#version-one) replaces that planning milestone. The fuller
+scope below remains a historical source of feature contracts and future expansion; the owning specs
+define current behavior.
 
-The [user-confirmed 2026-09-22 target](v1-roadmap.md#current-v1-release-target--confirmed-2026-09-22)
-now governs V1 release breadth: all classes close to fully automated through level two or three,
-useful low-level foes rather than complete bands, and most app features working and tested.
-The fuller scope below remains a source of feature contracts and future expansion, not a requirement
-to complete every listed feature or all levels 1–10 before V1. See the target for unsettled boundaries.
+## Historical prototype milestone: v0.01
 
-## Immediate milestone: v0.01
-
-Scope review concluded 2026-09-14: the user is satisfied with the shared-basics prototype scope.
-Continue through the [build handoff](web-app-build-handoff.md#v001-scope-review-complete--build-handoff),
-asking concrete questions only as build work exposes them. This does not declare all fuller V1
-specification work complete or certify the prototype implementation.
+Scope review concluded 2026-09-14: the user was satisfied with the shared-basics prototype scope.
+The [historical build handoff](web-app-build-handoff.md#v001-scope-review-complete--build-handoff)
+records what remained at that time. It does not certify implementation or direct current work.
 
 Engine language confirmed 2026-09-14: use TypeScript for v0.01 and beyond unless a concrete reason
 to change emerges. No routine later language comparison is required; packaging, runtime placement
 and integration are still outstanding. See [the engine decision](engine-architecture.md#standalone-engine-and-portability).
 
-The current target is a desktop pre-alpha with temporary UI and a durable architectural foundation. The
+The target at this checkpoint was a desktop pre-alpha with temporary UI and a durable architectural foundation. The
 [pre-alpha scope checkpoint](pre-alpha-design-gaps.md) consolidates the accepted journey, per-feature
 inclusions/deferrals, component boundaries and remaining gaps. Read it before applying the fuller V1 scope
 below; those complete feature lists are not automatic prototype gates.

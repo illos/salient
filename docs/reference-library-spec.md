@@ -43,7 +43,7 @@ Core rulebooks remain the general reference/encounter scope. **Confirmed charact
 2026-09-15 (Q-CHAR-14): the wizard includes all eleven classes through levels 1–10 from the outset,
 including Beastheart and Summoner and the sourced dependencies required for their editor choices,
 grants, derived builds and readable references.** This supersedes their earlier wizard exclusion.
-Their table UI and engine support have separate milestones. Other official supplements and homebrew
+Their table UI and engine support have separate acceptance work. Other official supplements and homebrew
 remain excluded. See [character scope](character-wizard-spec.md#fuller-product-scope).
 
 ## Official content is not necessarily core content
@@ -62,7 +62,7 @@ support. Homebrew authoring and selection remain deferred.
   [unified object-reference and sharing model](data-architecture-spec.md#35-unified-object-references-and-sharing).
   Rules, inventory items and other supported objects should use the same foundation for readable links,
   chat sharing and bookmarks. Build Compendium navigation so later consumers can reference the same
-  content; exact contracts and delivery milestones remain open.
+  content; exact contracts and delivery timing remain open.
 - Retain source-qualified identities and publication provenance. Classify core versus supplemental content
   using identified source material, not a generic class/monster category or the fact that data lives in a
   unified directory.
@@ -100,7 +100,7 @@ an initial search implementation, with performance and relevance targets still t
 - Beastheart/Summoner editor dependencies are deliberately inventoried and enabled under Q-CHAR-14;
   their official supplemental provenance and actual automation coverage remain correctly identified.
 
-Reference bookmarks remain excluded from the currently recorded v1 milestone, but are an explicitly desired
+Reference bookmarks remain outside the current V1 scope, but are an explicitly desired
 future use of the shared object model (2026-09-15); their implementation timing has not been reassigned.
 The implemented layout, filters, navigation and core coverage are recorded below; future consumers can
 reuse its IDs without depending on presentation routes.

@@ -1,5 +1,8 @@
 # Undead ingestion: kickoff and build handoff
 
+Historical V30 handoff. The [current direction](v1-roadmap.md#version-one) and
+[build status](build/STATUS.md) supersede the slice state below.
+
 ## Current slice — V30 second-echelon undead
 
 The user selected and authorized the next slice: all nine second-echelon undead and their level-four

@@ -1,12 +1,12 @@
 # Engine architecture
 
-**Milestone scope, revised 2026-09-14:** the [v0.01 checkpoint](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope)
-prioritizes shared game basics as the playable/testable foundation for later parser and engine development.
-Class/stat-block-specific resource logic, traits, triggers and ability effects are manually resolved;
-automatic turn-start Ferocity is deferred despite its earlier inclusion. Keep known-input common
-operations, source visibility, explicit manual/unsupported results and persistent state/history correct.
-No whole-ability parsing or unique-feature execution is a v0.01 gate. Preserve existing experimental
-code and portable engine boundaries; this is not a request to delete or rewrite them.
+**Historical prototype scope, revised 2026-09-14:** the
+[v0.01 checkpoint](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope) prioritized
+shared game basics before later parser and engine development. Its manual-resolution and deferral
+statements describe that prototype, not the current automation state. Use the
+[current direction](v1-roadmap.md#version-one), owning rules contracts, and verified implementation
+evidence for current work. Preserve portable engine boundaries and explicit manual outcomes where
+mechanics remain unsupported.
 
 The reusable engine intent below remains the architectural destination. Selected timing, cost and history
 policies remain; shared mechanic formulas and manual-operation integration still need source-backed

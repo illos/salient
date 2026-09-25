@@ -1,5 +1,8 @@
 # App workstream status
 
+Historical 2026-09-15 status record. Runtime addresses, ownership, and next actions below are not
+current instructions; use the [current direction](v1-roadmap.md#version-one) and [build status](build/STATUS.md).
+
 ## Current audit — 2026-09-15
 
 A02–A07 implementation and repairs have passed independent code/source review. The audit incorporates

@@ -19,5 +19,5 @@ how to read it back.
 
 ## Work log
 
-Append-only: worktree and branch, decisions, TESTER results with artifact paths, review verdict,
+Append-only: worktree and branch, decisions, test-coordinator results with artifact paths, review verdict,
 commit hashes, what remains.

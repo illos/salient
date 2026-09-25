@@ -20,7 +20,7 @@ Useful source locations:
 - `src/models/class.ts`, `subclass.ts`, `feature.ts`: progression shape and typed choices.
 - `src/logic/factory-feature-logic.ts`: defaults, selection counts, ability-pool filters, and choice timing.
 - `src/data/class-data.ts`: only the nine core classes. Beastheart and Summoner are registered through supplemental sourcebooks; do not use this file alone as the complete class registry.
-- `src/data/domains`, `kits`, `ancestries`, `careers`, `perks`: additional inputs for a complete wizard; expand sparse checkout when working on them.
+- `src/data/domains`, `kits`, `ancestries`, `careers`, `perks`: additional inputs for a complete wizard; inspect pinned Git blobs when a path is outside the canonical sparse checkout.
 
 Generate a source inventory with:
 
@@ -30,21 +30,10 @@ pnpm run --silent character:sources > /tmp/character-sources.json
 
 This reads TypeScript syntax without executing Forge Steel. It reports both installed revisions, class-to-Compendium SCC references, subclass files, and feature factory call counts by level, including nested branches. It is an inspection tool, not a rules importer: it does not resolve factory defaults, determine active branches, map individual options, or count required wizard prompts. Unsupported source shapes fail visibly. A successful inventory does not prove rules correctness.
 
-## Restore and update
+## Canonical reference on Presidium
 
-After cloning this project, `git submodule update --init --recursive` restores the recorded dependencies. Sparse checkout is a local setting. For a small initial Forge Steel checkout, before initializing that submodule:
-
-```sh
-git clone --filter=blob:none --sparse https://github.com/andyaiken/forgesteel.git vendor/forge-steel
-git -C vendor/forge-steel sparse-checkout set src/data/classes src/models src/enums src/logic
-git submodule update --init -- vendor/forge-steel
-```
-
-To inspect updates without adopting them:
-
-```sh
-git -C vendor/forge-steel fetch origin
-git -C vendor/forge-steel diff HEAD origin/main -- src/data/classes src/models/feature.ts src/logic/factory-feature-logic.ts
-```
-
-Before adopting an exact reviewed commit, check `git -C vendor/forge-steel status --short`, then use `git -C vendor/forge-steel checkout --detach REVIEWED_COMMIT_SHA`. Regenerate the inventory and run relevant wizard checks before staging the pointer with `git add vendor/forge-steel`. Review referenced domains/kits and sourcebook changes as needed. Do not update either dependency during startup or build. The submodule registration was committed in `5efb7c7`, consistent with the existing Compendium setup.
+Use the pinned Forge Steel checkout at
+`/srv/presidium/projects/salient/code/vendor/forge-steel` as a read-only reference. Worktrees leave
+`vendor/*` empty. Do not clone, initialize, copy, symlink, change the sparse set, or advance the
+submodule pin. The [project instructions](../AGENTS.md#non-negotiables) and
+[build worktree procedure](build/README.md#branch-and-merge-policy) govern source access.

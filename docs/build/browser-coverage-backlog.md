@@ -1,10 +1,11 @@
 # Browser coverage backlog
 
-Status: active during the [browser testing moratorium](README.md#browser-testing-moratorium--2026-09-20)
-that began 2026-09-20. Every thread appends here instead of running browser tests.
+Status: active for **table browser testing** during the
+[moratorium](README.md#browser-testing-moratorium--2026-09-20) that began 2026-09-20. Focused
+non-table browser tests may run through the test coordinator.
 
-Purpose: while verification is headless-only, record the UI behavior each slice would have checked
-in a browser, so the coverage is not lost and can be run in a later pass once
+Purpose: while table verification remains headless, record the UI behavior each slice would have
+checked in a browser, so the coverage is not lost and can be run in a later pass once
 [V66](V66-browser-test-harness-repair.md) has repaired the harness. Log only what a browser can
 see: layout, focus, dialogs, drag, theme, error boundaries, route transitions, screenshots for the
 user. Do not log persisted-value checks; those belong to the headless proof in the slice work log.

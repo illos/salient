@@ -12,12 +12,14 @@ direction; the previous procedures are archived in
 2. **Build** on `slice/<id>` in your own worktree cut from current `main` (recipe below). Read the
    spec sections you cite; the spec wins over the slice document.
 3. **Verify.** Run authoring checks locally (lint, typecheck, the focused test file). Submit one job to
-   TESTER for `pnpm check` and any headless journey, per [the testing process](../../testing-process.md).
+   the user-assigned test coordinator for `pnpm check` and any headless journey, per
+   [the testing process](../../testing-process.md).
 4. **Review.** One fresh-context reviewer reads the diff against the cited spec sections and Compendium
    passages and replies in Chords with `pass` or the blocking findings. Rules slices also get a short
    written review under `audits/`.
-5. **Hand off** the commit to DEPLOY2. It fast-forwards `main`, updates the shared dev target and
-   records successful publication, reusing accepted tests without a smoke test. Update your `STATUS.md` row to `Merged` when it tells you.
+5. **Hand off** the commit to the user-assigned deployment coordinator, who fast-forwards `main`,
+   updates the shared dev target and records successful publication, reusing accepted tests without
+   a smoke test. Update the `STATUS.md` row to `Merged` after integration.
 
 ## Slice document template
 
@@ -56,17 +58,18 @@ The user clarified on 2026-09-22 that this pause applies specifically to **table
 No table browser or Playwright test runs until [V66](V66-browser-test-harness-repair.md) is
 implemented. Verify table behavior headlessly and log would-be table scenarios in the
 [browser coverage backlog](browser-coverage-backlog.md). Focused non-table browser tests and
-investigations, including live sign-in timing, may proceed through TESTER. Browser checks do not
+investigations, including live sign-in timing, may proceed through the test coordinator. Browser checks do not
 replace persisted CLI/API proof; the [failure audit](audits/2026-09-20-browser-testing-failures.md)
 records the original harness failures.
 
 ## Verification baseline
 
 `pnpm check` runs lint, engine typecheck and tests, the rules ingest, app typecheck and tests, link,
-vendor, content, supporting, foes and compiled-report checks, and the web build. TESTER's run of it
-must pass before hand-off. The commit checker runs in the local commit hook and DEPLOY2’s merge gate, not in
-`pnpm check`. The manually dispatched GitHub check also checks branch commits (the tip on main);
-promotion pushes reuse TESTER’s gate without starting Actions. `pnpm format` applies Prettier (print width 100).
+vendor, content, supporting, foes and compiled-report checks, and the web build. The test coordinator's
+run must pass before hand-off. The commit checker runs in the local commit hook and the deployment
+coordinator's merge gate, not in `pnpm check`. The manually dispatched GitHub check also checks branch
+commits (the tip on main); promotion pushes reuse the accepted gate without starting Actions.
+`pnpm format` applies Prettier (print width 100).
 
 ## Commit format
 
@@ -91,7 +94,7 @@ Co-Authored-By: <agent> <email>
 - A commit never modifies `vendor/`, and never adds a rule, formula, threshold or grant that its
   `Spec:` sections and the Compendium do not state.
 
-`scripts/check-commit.ts` enforces this in the `commit-msg` hook and in CI; the lead runs
+`scripts/check-commit.ts` enforces this in the `commit-msg` hook and in CI; the integration owner runs
 `node scripts/check-commit.ts --merge --range main..slice/<id>` before merging.
 
 ## Review standard
@@ -105,17 +108,19 @@ values must trace to the source. The implementer never self-attests.
 
 `main` is the one integrated, tested playable version. Each active slice has its own worktree and a
 short-lived `slice/<id>` branch cut from current `main`; never switch the branch in another thread's
-directory. Worktree recipe on Presidium (GitHub is unreachable there):
+directory. Worktree recipe:
 
 ```
-git worktree add .worktrees/<name> -b slice/<id> main
+git fetch origin
+git worktree add .worktrees/<name> -b slice/<id> origin/main
 cd .worktrees/<name>
 CI=true pnpm install --offline --frozen-lockfile
-git -c protocol.file.allow=always \
-  -c submodule.vendor/steel-compendium.url=<main checkout>/.git/modules/vendor/steel-compendium \
-  submodule update --init vendor/steel-compendium
-cp -a <main checkout>/vendor/forge-steel/. vendor/forge-steel/
 ```
+
+Keep `vendor/*` empty in worktrees. Read the canonical pinned sources in the main checkout through
+`scripts/lib/vendor.ts` or pinned Git blobs. Never initialize, copy, or alter the submodules in a
+worktree. For a disposable copy without Git metadata, set
+`SALIENT_VENDOR_ROOT=/srv/presidium/projects/salient/code/vendor`.
 
 Give each worktree its own `node_modules` (the offline install hard-links from the local store in
 about a second). Do not symlink it to the main checkout's: pnpm run in the worktree relinks the
@@ -130,11 +135,11 @@ app. Development data is disposable; do not reset another track's environment.
 A merge is: fast-forward `main`, update the shared dev target's affected backend, content and
 frontend, record successful publication, and send one Chords message with the commit.
 Do not rerun accepted tests or add a smoke/live gate during promotion; see [the testing process](../../testing-process.md).
-Documentation-only changes need no runtime update. Cloud or external publication still needs an
-explicit user instruction.
+Documentation-only changes need no runtime update. The user-assigned deployment coordinator's
+promotion of merged main to cloud dev and GitHub has standing authorization; other external
+publication needs an explicit user instruction in the current conversation.
 
 ## Questions for the user
 
-The user is not in build threads. Append rules or product questions to
-`docs/rules-questions-for-user.md` with the Compendium paths read, the alternatives and a
+Append rules or product questions to `docs/rules-questions-for-user.md` with the Compendium paths read, the alternatives and a
 recommendation; set the slice to `Blocked (Q-id)` only if nothing else can proceed.

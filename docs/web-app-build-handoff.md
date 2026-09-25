@@ -1,13 +1,14 @@
 # Web app build thread handoff
 
-## Current handoff — 2026-09-15
+Historical foundation handoff. Follow the [current direction](v1-roadmap.md#version-one),
+[build process](build/README.md), and [testing process](../testing-process.md) for new work.
 
-For new post-v0.01 work, use the [five-track roadmap](v1-roadmap.md),
-[track kickoff](kickoff-development-track.md), and [build process](build/README.md).
-The [integrated acceptance](build/evidence/v001-acceptance.md) closes the recorded prototype scope.
-The two-thread division and remaining-build instructions below describe the earlier foundation phase;
-they do not override the five tracks or require rebuilding accepted behavior. Existing detailed
-contracts still apply within their scope, and later implementations need their own evidence.
+## Handoff recorded 2026-09-15
+
+At this handoff, the [integrated acceptance](build/evidence/v001-acceptance.md) closed the recorded
+prototype scope. The division of work and remaining-build instructions below describe that earlier
+foundation phase. Existing detailed contracts still apply within their scope; new work follows the
+current direction and build process linked above.
 
 ## Earlier foundation handoff
 
