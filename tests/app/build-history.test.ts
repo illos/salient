@@ -10,7 +10,8 @@ import { api } from '../../convex/_generated/api';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import type { HistorySheet } from '../../shared/contracts/characterSheet';
-import { account, backend, table } from './fixtures/table';
+import type { Id } from '../../convex/_generated/dataModel';
+import { account, backend, heroFixtureSelections, table } from './fixtures/table';
 
 async function advanced() {
   const t = backend();
@@ -156,4 +157,62 @@ test('a restored entry names the revision it copied', async () => {
     restoredFromRevisionId: f.originalId,
     restoredFromRevision: original.revision,
   });
+});
+
+test('inventory follows its own readers: withheld from a Director before admission', async () => {
+  const t = backend();
+  const f = await table(t, { session: false });
+  const rewards = (originRevisionId: Id<'characterRevisions'>) => ({
+    originRevisionId,
+    initializedAt: 1,
+    wealth: 5,
+    renown: 1,
+    projectPoints: 0,
+    sources: { wealth: [], renown: [], projectPoints: [] },
+    items: [],
+  });
+  // Attached hero: the owner and the attached campaign's Director both see today's inventory.
+  const thorn = (await t.run(ctx => ctx.db.get(f.thornId)))!;
+  await t.run(ctx =>
+    ctx.db.patch(f.thornId, { startingRewards: rewards(thorn.effectiveRevisionId!) }),
+  );
+  for (const reader of [f.player, f.director]) {
+    const view = (await reader.client.query(api.characters.historySheet, {
+      characterId: f.thornId,
+      revisionId: thorn.effectiveRevisionId!,
+    })) as HistorySheet;
+    expect(view).toMatchObject({ inventory: { wealth: 5 }, inventoryWithheld: false });
+  }
+  // A hero only pending admission: the Director reads its history but not its inventory.
+  const authored = { name: 'Pending', appearance: '', biography: '', notes: 'Pending note' };
+  const pendingId = await f.player.client.mutation(api.characters.create, {
+    commandId: 'history-create-pending',
+    authored,
+  });
+  await f.player.client.mutation(api.characters.save, {
+    commandId: 'history-save-pending',
+    characterId: pendingId,
+    expectedRevision: 1,
+    authored,
+    selections: heroFixtureSelections({ 'details.name': 'Pending' }),
+  });
+  await f.player.client.mutation(api.characters.submit, {
+    commandId: 'history-submit-pending',
+    characterId: pendingId,
+    campaignId: f.campaignId,
+  });
+  const pending = (await t.run(ctx => ctx.db.get(pendingId)))!;
+  expect(pending.campaignId ?? null).toBeNull();
+  await t.run(ctx =>
+    ctx.db.patch(pendingId, { startingRewards: rewards(pending.draftRevisionId!) }),
+  );
+  const args = { characterId: pendingId, revisionId: pending.draftRevisionId! };
+  const director = (await f.director.client.query(
+    api.characters.historySheet,
+    args,
+  )) as HistorySheet;
+  expect(director.sheet.audience).toBe('director');
+  expect(director).toMatchObject({ inventory: null, inventoryWithheld: true });
+  const owner = (await f.player.client.query(api.characters.historySheet, args)) as HistorySheet;
+  expect(owner).toMatchObject({ inventory: { wealth: 5 }, inventoryWithheld: false });
 });

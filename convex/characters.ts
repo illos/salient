@@ -47,6 +47,7 @@ import {
   revisionLevel,
 } from './lib/characterProgression';
 import { pendingDirectorSetup } from './lib/characterDirectorSetup';
+import { canReadStartingRewards } from './lib/startingRewards';
 import { canonicalChoiceOrigins } from './lib/characterChoiceOrigins';
 import { authored, insertCharacterDraft, validatedSelections } from './lib/characterDrafts';
 import { COMPLICATION_ABILITIES } from '../shared/content/supporting-complication-abilities';
@@ -1235,6 +1236,7 @@ export const historySheet = query({
       throw new ConvexError('Historical build unavailable.');
     const audience = await sheetAudience(ctx, character, user._id);
     const sheet = await heroSheet(ctx, user._id, character, audience, revision, 'history');
+    const inventoryReadable = await canReadStartingRewards(ctx, character, user._id);
     return {
       entry: (await historyEntry(ctx, character, revision)) as BuildHistoryEntry,
       sheet,
@@ -1242,7 +1244,10 @@ export const historySheet = query({
         baselineOf(character.derivedBaseline),
         sheet.build?.baseline ?? sheet.build?.partial ?? null,
       ),
-      inventory: character.startingRewards ?? null,
+      // Inventory follows its own readers, not history's (docs/inventory-spec.md).
+      ...(inventoryReadable
+        ? { inventory: character.startingRewards ?? null, inventoryWithheld: false }
+        : { inventory: null, inventoryWithheld: true }),
     };
   },
 });

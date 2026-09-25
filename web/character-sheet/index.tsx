@@ -373,11 +373,14 @@ export function HeroSheetView({
   sheet,
   compact,
   inventory,
+  inventoryWithheld,
 }: {
   sheet: HeroSheet;
   compact?: boolean;
   /** Read-only (history) sheets: today's inventory, supplied with the recorded build. */
   inventory?: StartingRewards | null;
+  /** The reader may not see inventory; the panel says so instead of an empty state. */
+  inventoryWithheld?: boolean;
 }) {
   const [rollFor, setRollFor] = useState<CharacteristicKey | null>(null);
   const baseline = sheet.build?.baseline ?? null;
@@ -510,7 +513,11 @@ export function HeroSheetView({
                   characterId={sheet.id}
                   combatLocked={sheet.combatLocked}
                   compact
-                  readOnly={readOnly ? { rewards: inventory ?? null } : undefined}
+                  readOnly={
+                    readOnly
+                      ? { rewards: inventory ?? null, withheld: inventoryWithheld }
+                      : undefined
+                  }
                 />
               )}
               {sheet.audience === 'owner' && <NotesBox notes={sheet.authored.notes} compact />}
@@ -574,7 +581,9 @@ export function HeroSheetView({
             <StartingRewardsPanel
               characterId={sheet.id}
               combatLocked={sheet.combatLocked}
-              readOnly={readOnly ? { rewards: inventory ?? null } : undefined}
+              readOnly={
+                readOnly ? { rewards: inventory ?? null, withheld: inventoryWithheld } : undefined
+              }
             />
           )}
           <SheetSection title="Details" id="sheet-details">

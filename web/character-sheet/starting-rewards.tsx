@@ -22,7 +22,7 @@ export function StartingRewardsPanel({
    * V185 History: today's inventory supplied by `characters.historySheet`, shown without the
    * initialize action (inventory is never part of a build snapshot).
    */
-  readOnly?: { rewards: StartingRewards | null };
+  readOnly?: { rewards: StartingRewards | null; withheld?: boolean };
 }) {
   const live = useQuery(
     api.characterRewards.get,
@@ -105,6 +105,10 @@ export function StartingRewardsPanel({
             Record starting rewards
           </Button>
         </>
+      ) : readOnly?.withheld ? (
+        <p className="text-muted-foreground">
+          Inventory becomes visible to the Director once the character is admitted.
+        </p>
       ) : (
         <p className="text-muted-foreground">
           {data.initializationBlocked ??

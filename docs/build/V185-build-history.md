@@ -64,3 +64,8 @@ Spec: docs/character-wizard-spec.md#5-progression-history
   `--expected-revision` and `--expected-effective` and documents that omitting them skips the
   concurrency check; the v32 spec's level-up notice check now waits for the list and asserts the
   notice appears after the grant.
+- 2026-09-25 WIZARD3, re-review fix: inventory follows its own readers. `canReadStartingRewards`
+  (convex/lib/startingRewards.ts) is the non-throwing check `requireStartingRewardsAccess` now
+  uses; `historySheet` returns `inventory: null, inventoryWithheld: true` for a reader who fails it
+  (a Director before admission), and the panel says inventory becomes visible once the character
+  is admitted. App test covers the pending-admission Director, the attached Director and the owner.

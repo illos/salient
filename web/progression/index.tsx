@@ -224,7 +224,11 @@ function RecordedBuild({
           </Notice>
         )}
       </div>
-      <HeroSheetView sheet={history.sheet} inventory={history.inventory} />
+      <HeroSheetView
+        sheet={history.sheet}
+        inventory={history.inventory}
+        inventoryWithheld={history.inventoryWithheld}
+      />
     </section>
   );
 }

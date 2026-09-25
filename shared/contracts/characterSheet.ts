@@ -188,4 +188,6 @@ export interface HistorySheet {
   difference: BuildDifference;
   /** Today's recorded inventory (starting rewards); inventory is never part of a snapshot. */
   inventory: StartingRewards | null;
+  /** True when this reader may see history but not inventory (e.g. a Director before admission). */
+  inventoryWithheld: boolean;
 }

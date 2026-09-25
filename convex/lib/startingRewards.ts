@@ -2,11 +2,31 @@
 import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { ReadCtx } from './access';
-import { requireMember } from './access';
 import type { DerivedBaseline, EvaluationResult } from '../../shared/contracts/characterEvaluation';
 import { makeStartingRewards, type StartingRewards } from '../../shared/contracts/startingRewards';
 
-/** The owner or the character's currently attached campaign Director; never ordinary peers. */
+/**
+ * The owner or the character's currently attached campaign Director; never ordinary peers, and
+ * never the Director of a campaign the character is only pending admission to
+ * (docs/inventory-spec.md, docs/accounts-and-access-spec.md). Does not throw.
+ */
+export async function canReadStartingRewards(
+  ctx: ReadCtx,
+  character: Doc<'characters'>,
+  userId: Id<'users'>,
+): Promise<boolean> {
+  if (character.ownerId === userId) return true;
+  if (!character.campaignId) return false;
+  const campaign = await ctx.db.get(character.campaignId);
+  if (!campaign || campaign.ownerId !== userId) return false;
+  const membership = await ctx.db
+    .query('memberships')
+    .withIndex('by_campaign_user', q => q.eq('campaignId', campaign._id).eq('userId', userId))
+    .unique();
+  return membership !== null;
+}
+
+/** canReadStartingRewards, throwing for everyone else. */
 export async function requireStartingRewardsAccess(
   ctx: ReadCtx,
   characterId: Id<'characters'>,
@@ -14,11 +34,7 @@ export async function requireStartingRewardsAccess(
 ): Promise<Doc<'characters'>> {
   const character = await ctx.db.get(characterId);
   if (!character) throw new ConvexError('Character unavailable.');
-  if (character.ownerId === userId) return character;
-  if (character.campaignId) {
-    const campaign = await requireMember(ctx, character.campaignId, userId);
-    if (campaign.ownerId === userId) return character;
-  }
+  if (await canReadStartingRewards(ctx, character, userId)) return character;
   throw new ConvexError(
     'Only the character owner or its campaign Director can access starting rewards.',
   );
