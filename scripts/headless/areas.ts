@@ -2,8 +2,9 @@
 /**
  * V200 areas and auras through the shared public operations. A Talent's compiled Incinerate stores
  * its column of fire as an area on the Talent with the targeted goblin as its member;
- * `effect.members add` puts a second goblin in (it enters: 2 fire damage), a second add in the same
- * round is refused and a remove-and-add deals nothing more; undo of the add restores its Stamina.
+ * `effect.members add` puts a second goblin in (it enters: 2 fire damage); adding it again while it
+ * is in is refused, and a remove-and-add in the same round deals nothing more; undo of the add
+ * restores its Stamina.
  * Every check reads persisted state back through public queries. Expected values come from the
  * pinned Compendium and the reviewed ledger, never the engine:
  * - feature/ability/talent/level-1/incinerate.md: "Each enemy who enters the area for the first time
@@ -145,6 +146,11 @@ export async function runAreas({ actors: { director }, run, runId }: ScenarioCon
           e => e.kind === 'effect.watcher-fired' && e.causeEventId === enter.eventId,
         ),
         'the enter rider fired from the add',
+      );
+      await assert.rejects(
+        invoke('effect.members', { instance: area.id, add: secondRef }),
+        /already in/,
+        'a creature already in the area is not added twice',
       );
       await invoke('effect.members', { instance: area.id, remove: secondRef });
       await invoke('effect.members', { instance: area.id, add: secondRef });

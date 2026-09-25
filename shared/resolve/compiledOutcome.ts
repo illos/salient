@@ -41,7 +41,14 @@ import type {
   ModifierPayload,
   Watcher,
 } from '../contracts/liveState.ts';
-import { bindArea, effectOnlyArea, sameAreaSpec, sectionArea, type AreaSpec } from './areas.ts';
+import {
+  bindArea,
+  effectOnlyArea,
+  isAura,
+  sameAreaSpec,
+  sectionArea,
+  type AreaSpec,
+} from './areas.ts';
 import {
   bindWatcher,
   effectOnlyWatcher,
@@ -516,6 +523,8 @@ function areaOutcome(
   characteristics: Partial<Record<Characteristic, number>> | undefined,
   duration: EffectDuration,
   extra: string[] = [],
+  /** rule/combat/aura.md: the printed distance is "X aura". */
+  aura = false,
 ): CompiledAreaOutcome {
   const requirements = [...extra];
   const bound = bindArea(spec, characteristics);
@@ -527,7 +536,9 @@ function areaOutcome(
     spec,
     duration,
     members,
-    ...('payload' in bound ? { payload: bound.payload } : {}),
+    ...('payload' in bound
+      ? { payload: { ...bound.payload, ...(aura ? { aura: true as const } : {}) } }
+      : {}),
     requirements,
   };
 }
@@ -1298,6 +1309,7 @@ export function resolveCompiledAbility(
           input.actor.characteristics,
           endsEarly && state?.applies ? { kind: 'eot' } : node.spec.duration,
           endsEarly && !state ? ['actor.strained'] : [],
+          isAura(definition.envelope.distance),
         ),
       );
       continue;
@@ -1762,6 +1774,7 @@ export function resolveEffectOnly(
           input.actor.kind === 'hero' || input.actor.kind === 'foe'
             ? []
             : [`actor.${input.actor.kind} holds no area the engine keeps`],
+          isAura(definition.envelope.distance),
         ),
       );
       continue;

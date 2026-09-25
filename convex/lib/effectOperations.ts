@@ -278,12 +278,12 @@ const effectMembers: OperationDefinition = {
       };
     }
     if (!member) throw new ConvexError(`${party.name} is not in ${area}.`);
-    // An area that names its user ("Self and each ally in the area") is an aura: it "always
-    // originates from you and moves with you" (rule/combat/aura.md), so its user never leaves it.
+    // An aura "always originates from you and moves with you" (rule/combat/aura.md), so its user
+    // never leaves it.
     if (
       party.id === instance.owner.id &&
       instance.payload.kind === 'area' &&
-      instance.payload.area.riders.some(rider => rider.who.self)
+      instance.payload.area.aura
     )
       throw new ConvexError(
         `${area} originates from ${instance.owner.name} and moves with them (rule/combat/aura.md), so ${instance.owner.name} can't leave it; end the effect with /effect end instead.`,

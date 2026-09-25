@@ -1899,9 +1899,26 @@ Open; V200 binds labelled interpretations so the areas can compile. Pinned `en/u
    later round start finds the Troubadour surprised. Using any Performance ability chooses a new
    performance and ends the current one. When in the round a performance is chosen is the table's.
    Alternative: the Troubadour confirms maintenance each round.
-6. **An enter rider's damage has no dealer**, as Q-WATCH-1 point 1 reads a watcher's damage: it sets
-   off the member's damage-taken watchers and damage-taken triggered offers, but no damage-dealt
-   watcher, "you or any ally deals damage" mark watcher, or Mark benefit (which needs rolled damage,
-   `feature/ability/tactician/level-1/mark.md`). Alternative: the area's user deals it.
+6. **The area's user deals its riders' damage** (revised after the V200 review). Pinned
+   `rule/damage/rolled-damage.md` speaks of "an ability or effect [that] deals damage without
+   requiring a power roll"; the area is the user's ability's effect, so the user is read as dealing
+   its damage. It counts for damage-dealt watchers (so Violence Will Not Aid Thee on the user fires
+   on the column's damage) and for "you or any ally deals damage to a target marked by you" watchers
+   (Hit 'Em Hard!, Stay Strong and Focus!). It is never rolled damage, so the Mark benefit, which
+   needs rolled damage (`feature/ability/tactician/level-1/mark.md`), is not offered, and V173
+   triggered offers see no dealer. Other watchers' damage keeps Q-WATCH-1 point 1 (no dealer).
+   Alternative: no one deals it, as Q-WATCH-1 reads other watchers' damage, which leaves those
+   compiled mark watchers silent on area damage.
+7. **The same user's identical aura used again supersedes the older one.** "Stacking Unique Effects"
+   (Heroes book): the same ability used again doesn't stack and the most recent use sets the
+   duration. An aura "always originates from you and moves with you" (`rule/combat/aura.md`), so two
+   uses cover the same creatures: the older aura and its riders end as superseded, as V158 does for
+   an identical repeat. An area placed elsewhere (Incinerate's column) is not the same squares, so
+   two of the same user's columns stay separate and a creature in both holds a manual stacking
+   group. Alternative: every repeat forms a manual group.
+8. **Medley** (`feature/troubadour/level-5/medley.md`: "You can maintain two performances at a time
+   using your Routines feature") is outside the V1 level ceiling. V200 ends the current performance
+   whenever the user uses any Performance ability, so a level-5 Troubadour with Medley would lose the
+   first of two performances; `endChosenPerformance` must keep one when Medley is built.
 
-Recommendation: keep 1 to 6 as implemented.
+Recommendation: keep 1 to 7 as implemented; 8 is a note for level 5.

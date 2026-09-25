@@ -182,6 +182,11 @@ export type EffectPayload =
  */
 export interface AreaPayload {
   riders: AreaRider[];
+  /**
+   * The area is an aura ("X aura"): it "always originates from you and moves with you for the
+   * duration of the ability that created it" (rule/combat/aura.md).
+   */
+  aura?: true;
 }
 
 /**

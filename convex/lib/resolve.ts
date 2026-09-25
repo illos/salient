@@ -1082,6 +1082,8 @@ export async function writeDamage(
     defer?: DamageObservation[];
     /** V173: the damage came from a melee strike (Riposte's trigger), when the use says. */
     meleeStrike?: boolean;
+    /** V200: the dealer counts for watchers and marks only (convex/lib/watchers.ts). */
+    dealerForWatchersOnly?: true;
     /**
      * QC1 train 13 R1: the pools to write are computed from the creature's current pools, not the
      * caller's absolute values (writePlannedDamage).
@@ -1152,6 +1154,7 @@ export async function writeDamage(
         : {}),
       targetName: current.name,
       ...(options.meleeStrike !== undefined ? { meleeStrike: options.meleeStrike } : {}),
+      ...(options.dealerForWatchersOnly && dealer ? { dealerForWatchersOnly: true as const } : {}),
       ...(options.rolled ? { rolled: true } : {}),
       ...(options.meleeAbility ? { meleeAbility: true } : {}),
       ...(options.partOfHit ? { partOfHit: true } : {}),
@@ -1211,6 +1214,7 @@ export async function writeDamage(
         : {}),
       targetName: character.authored.name,
       ...(options.meleeStrike !== undefined ? { meleeStrike: options.meleeStrike } : {}),
+      ...(options.dealerForWatchersOnly && dealer ? { dealerForWatchersOnly: true as const } : {}),
       ...(options.rolled ? { rolled: true } : {}),
       ...(options.meleeAbility ? { meleeAbility: true } : {}),
       ...(options.partOfHit ? { partOfHit: true } : {}),

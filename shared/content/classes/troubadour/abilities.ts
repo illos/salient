@@ -135,7 +135,7 @@ export const TROUBADOUR_ACTIONS: TroubadourAction[] = [
     sourcePath: f('routines'),
     actionType: 'No action',
     activationCondition:
-      'At start of a combat round, while not dazed, dead or surprised, maintain your one current performance or use a granted performance to choose a new one. Track current performance, eligibility, area and ending at inability to maintain or encounter end manually.',
+      'At start of a combat round, while not dazed, dead or surprised, maintain your one current performance or use a granted performance to choose a new one. The engine tracks Ballad of the Beast, Revitalizing Limerick and Fire Up the Night: using any performance ends the current one, it ends at the end of the encounter, and a round start ends it when you are dazed or dead; their auras keep members via /effect members. Record this only to note maintaining by hand; track the other performances manually.',
   },
   {
     name: 'Drama: Return to Life',

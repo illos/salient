@@ -45,6 +45,10 @@ import talentLedger from '../fixtures/v105-talent-expected.json' with { type: 'j
 import censorLedger from '../fixtures/v99-censor-expected.json' with { type: 'json' };
 import censorThree from '../fixtures/v117-censor-three-expected.json' with { type: 'json' };
 import troubadourLedger from '../fixtures/v102-troubadour-expected.json' with { type: 'json' };
+import tacticianOne from '../fixtures/v94-tactician-expected.json' with { type: 'json' };
+import tacticianThree from '../fixtures/v116-tactician-three-expected.json' with { type: 'json' };
+import conduitOne from '../fixtures/v100-conduit-expected.json' with { type: 'json' };
+import conduitThree from '../fixtures/v134-conduit-three-expected.json' with { type: 'json' };
 import { admitHero, table, type Backend } from './fixtures/table';
 
 const modules = import.meta.glob('../../convex/**/*.ts');
@@ -369,12 +373,30 @@ test('V200: Blessing of the Faithful gives its current members a surge at the Ce
   expect((await s.hero(warden)).surges).toBe(start.warden + 2);
   expect((await s.hero(s.f.thornId)).surges).toBe(start.thorn + 1);
 
-  // 4. "Until you are dying": the Censor at 0 Stamina ends the aura and every member's rider.
-  await s.command(`${wardenRef} /adjust stamina value=0`);
-  expect(((await s.hero(warden)).effectInstances ?? []).find(i => i.id === area.id)!.status).toBe(
-    'ended',
+  // 4. "Stacking Unique Effects": the same Censor's identical re-use supersedes the aura (the most
+  // recent use sets the duration); the old riders end and the new ones are tracked, not manual.
+  await s.command(`${wardenRef} /adjust heroic-resource value=5`);
+  const again = await s.command(
+    `${wardenRef} /ability use ability="Blessing of the Faithful" targets=[${wardenRef}, @Thorn]`,
+    true,
   );
-  for (const rider of riders((await s.hero(s.f.thornId)).effectInstances, area.id))
+  const old = ((await s.hero(warden)).effectInstances ?? []).find(i => i.id === area.id)!;
+  expect(old.status).toBe('ended');
+  expect(old.endedReason).toMatch(/superseded/);
+  const renewed = ((await s.hero(warden)).effectInstances ?? []).find(
+    i => i.sourceUseEventId === again.eventId && i.kind === 'area',
+  )!;
+  expect(renewed.status).toBe('active');
+  expect(riders((await s.hero(s.f.thornId)).effectInstances, area.id)[0]!.status).toBe('ended');
+  const fresh = riders((await s.hero(s.f.thornId)).effectInstances, renewed.id);
+  expect(fresh.map(r => [r.status, r.manualStacking ?? false])).toEqual([['active', false]]);
+
+  // 5. "Until you are dying": the Censor at 0 Stamina ends the aura and every member's rider.
+  await s.command(`${wardenRef} /adjust stamina value=0`);
+  expect(
+    ((await s.hero(warden)).effectInstances ?? []).find(i => i.id === renewed.id)!.status,
+  ).toBe('ended');
+  for (const rider of riders((await s.hero(s.f.thornId)).effectInstances, renewed.id))
     expect(rider.status).toBe('ended');
 
   // effect.list describes the area and its members.
@@ -651,4 +673,127 @@ test('V200: two Talents’ columns on one goblin form a manual stacking group; n
   await s.command(`@{character:${seer}} /turn end`, true);
   await s.command(`${goblinRef} /turn take`);
   expect((await s.foe(goblin)).stamina).toBe(15 - 2 - 2);
+});
+
+test('V200: the column’s user deals its rider damage: Hit ’Em Hard! gives the Talent 2 surges with no Mark benefit card, and Violence Will Not Aid Thee fires on the Talent', async () => {
+  // Q-AREA-2 point 6 (interpretation): rule/damage/rolled-damage.md speaks of "an ability or effect
+  // [that] deals damage without requiring a power roll"; the area is the Talent's ability's effect,
+  // so the Talent deals its damage, which is not rolled damage.
+  // - feature/ability/tactician/level-3/hit-em-hard.md: "whenever you or any ally deals damage to a
+  //   target marked by you, that creature gains 2 surges"; mark.md: its benefit is on rolled
+  //   damage only. tests/fixtures/v116-tactician-three-expected.json v94-tactician-2 has both.
+  // - feature/ability/conduit/level-1/violence-will-not-aid-thee.md: "The first time on a turn that
+  //   the target deals damage to another creature, the target of this ability takes 1d10 lightning
+  //   damage (save ends)."
+  const s = await setup();
+  const create = async (
+    name: string,
+    level: number,
+    selections: Record<string, unknown>,
+  ): Promise<Id<'characters'>> => {
+    const { definitions: levelDefinitions } = await s.f.player.client.query(
+      api.characterWizard.discover,
+      { targetLevel: level },
+    );
+    const id = await s.f.player.client.mutation(api.characters.create, {
+      commandId: `areas-v200-${++sequence}`,
+      targetLevel: level,
+      authored: { name, appearance: '', biography: '', notes: '' },
+      selections: draftSelectionsFrom(
+        { ...(selections as EvaluationInput['selections']), 'details.name': name },
+        levelDefinitions,
+      ),
+    });
+    await s.f.player.client.mutation(api.characters.submit, {
+      commandId: `areas-v200-${++sequence}`,
+      characterId: id,
+      campaignId: s.f.campaignId,
+    });
+    await s.f.director.client.mutation(api.characters.approve, {
+      commandId: `areas-v200-${++sequence}`,
+      characterId: id,
+    });
+    return id;
+  };
+  const tactic = tacticianThree.witnesses['v94-tactician-2'];
+  const planner = await create('Planner', 3, {
+    ...tacticianOne.witnesses.find(w => w.id === tactic.base)!.selections,
+    'class.tactician.level-2.perk': tactic.levelTwo.addedSelections.perk,
+    'class.tactician.level-2.mastermind-ability': tactic.levelTwo.addedSelections.doctrineAbility,
+    'class.tactician.level-3.ability-7': tactic.levelThree.addedSelections.ability7,
+  });
+  const war = conduitThree.witnesses['v100-war'];
+  const votary = await create('Votary', 2, {
+    ...conduitOne.witnesses.find(w => w.id === war.base)!.selections,
+    'class.conduit.level-2.perk': war.levelTwo.addedSelections.perk,
+    'class.conduit.level-2.domain-ability': war.levelTwo.addedSelections.domainAbilityDomain,
+    'class.conduit.level-2.domain-skill.life': war.levelTwo.addedSelections.secondDomainSkill,
+  });
+  const seer = await admitHero(
+    s.t,
+    s.f.player,
+    s.f.director,
+    s.f.campaignId,
+    'Seer',
+    draftSelectionsFrom(
+      {
+        ...(talentLedger.witnesses.find(w => w.id === 'v105-2')!
+          .selections as unknown as EvaluationInput['selections']),
+        'details.name': 'Seer',
+      },
+      definitions,
+    ),
+  );
+  const first = await s.addGoblin();
+  const marked = await s.addGoblin();
+  const seerRef = `@{character:${seer}}`;
+  const plannerRef = `@{character:${planner}}`;
+  const votaryRef = `@{character:${votary}}`;
+  await s.command('/combat start');
+  await s.command('/combat commit');
+  await s.command('/combat roll', true);
+  await s.command('/combat first side=heroes');
+  await s.command(`${seerRef} /turn take`, true);
+  await s.command(`${plannerRef} /adjust heroic-resource value=7`);
+  await s.command(`${plannerRef} /ability use ability="Hit 'Em Hard!"`, true);
+  await s.command(`${plannerRef} /ability use ability=Mark targets=[@{foe:${marked}}]`, true);
+
+  // The column on the first goblin; then Violence Will Not Aid Thee on the Talent, so the use's
+  // own damage is not what sets it off.
+  await s.command(`${seerRef} /adjust heroic-resource value=2`);
+  await atDice(s.t, s.f.campaignId, [1, 1]);
+  const use = await s.command(
+    `${seerRef} /ability use ability="Incinerate" targets=[@{foe:${first}}]`,
+  );
+  const area = ((await s.hero(seer)).effectInstances ?? []).find(
+    i => i.sourceUseEventId === use.eventId,
+  )!;
+  await s.command(`${votaryRef} /adjust heroic-resource value=3`);
+  await atDice(s.t, s.f.campaignId, [5, 5]);
+  await s.command(
+    `${votaryRef} /ability use ability="Violence Will Not Aid Thee" targets=[${seerRef}]`,
+  );
+  const before = await s.hero(seer);
+  const cards = async () =>
+    (await s.t.run(ctx => ctx.db.query('interactions').take(500))).filter(
+      c => c.kind === 'mark-offer' || c.kind === 'triggered-offer',
+    ).length;
+  const cardsBefore = await cards();
+
+  // The marked goblin enters: 2 fire (15 -> 13), dealt by the Talent.
+  const enter = await s.members(area.id, 'add', `@{foe:${marked}}`);
+  expect((await s.foe(marked)).stamina).toBe(15 - 2);
+  const after = await s.hero(seer);
+  expect(after.surges).toBe(before.surges + 2);
+  expect(await cards()).toBe(cardsBefore);
+  const violence = (await s.events()).find(
+    e =>
+      e.kind === 'effect.watcher-fired' &&
+      e.causeEventId === enter.eventId &&
+      e.description.includes('Violence Will Not Aid Thee'),
+  )!;
+  const lightning = violence.dice![0]!.value;
+  expect(after.stamina + after.temporaryStamina).toBe(
+    before.stamina + before.temporaryStamina - lightning,
+  );
 });

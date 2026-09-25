@@ -312,6 +312,16 @@ export function sameAreaSpec(a: AreaSpec, b: AreaSpec): boolean {
   return canonical(a) === canonical(b);
 }
 
+/** rule/combat/aura.md: an aura's distance is printed "X aura". */
+export function isAura(distance: string): boolean {
+  return /^\d+ aura$/.test(normalize(distance).toLowerCase());
+}
+
+/** Two bound area payloads are the same, field by field, whatever their key order. */
+export function sameAreaPayload(a: AreaPayload, b: AreaPayload): boolean {
+  return canonical(a) === canonical(b);
+}
+
 /** Binds every rider's printed amounts at use (shared/resolve/watchers.ts bindWatcher). */
 export function bindArea(
   spec: AreaSpec,
