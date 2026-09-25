@@ -50,3 +50,8 @@ Spec: docs/character-wizard-spec.md#5-progression-history
 - 2026-09-25 WIZARD3: worktree `.worktrees/build-history`, branch `slice/V185` from main `f423f56`.
   Authoring checks only (typecheck, lint, focused vitest, Convex push check); browser and headless
   runs belong to TESTER.
+- 2026-09-25 WIZARD3: committed `8c38b06` on `slice/V185`. Authoring checks: both `tsc --noEmit`
+  runs clean; `pnpm -s lint` clean; `vitest --project app` on build-history and
+  character-progression 16/16 pass; the Convex push check from `git archive HEAD` reported
+  "Convex functions ready". Remaining: TESTER runs the `history` cohort, the v32 browser spec and
+  the gate; review.
