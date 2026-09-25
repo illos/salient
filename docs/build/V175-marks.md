@@ -133,6 +133,7 @@ Rules questions: [Q-MARK-1](../rules-questions-for-user.md#q-mark-1-marks-from-a
 ## Work log
 
 - 2026-09-25: `slice/V175` in `.worktrees/marks`, stacked on `slice/V174` `52246cfe`.
+  Implementation commit: `8836ace3` (committed on the branch, not pushed).
 - Flipped to fully compiled (all without a power roll):
   - **Mark** (`feature/ability/tactician/level-1/mark.md`).
   - **Hit 'Em Hard!** (`feature/ability/tactician/level-3/hit-em-hard.md`).
