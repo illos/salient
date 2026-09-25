@@ -1,6 +1,6 @@
 # V222: Foe traits, modifiers and lasting effects
 
-Rules review: required. Depends on: V216, V217, V219. Q-FOE-5 affects Overwhelm duration only.
+Rules review: required. Depends on: V216, V217, V219. Accepted Q-FOE-5 sets Overwhelm to the current turn.
 
 ## Goal
 
@@ -14,7 +14,7 @@ later shared operations, with exact subject, scope and expiration.
 - Twist Shape bundles slowed/fire weakness; Carving Dagger hide prevention ends with its bleeding;
   Sucker Punch trigger prevention ends next round; Phantom Flow immunity uses V224 membership.
 - Periodic grab damage, cumulative Zombie hunger consequence and explicit manual cure; Commander
-  condition removal choice; source-specific no-shift restriction (resolve missing duration explicitly).
+  condition removal choice; Overwhelm current-turn no-shift restriction using supplied turn-start adjacency facts.
 - Encounter buffs from Get Reckless!, Form Up!, Show Them the Great Fear and consumed Malice
   modifiers. Do not copy Tactician Mark benefits onto Blackguard's You!.
 
@@ -41,11 +41,18 @@ Likely paths: shared modifier predicates, effect instances, source feature profi
    cross the printed cumulative-5 threshold. Reduced damage counts actual damage, not nominal 2.
 5. Commander offers a chosen condition removal at ally start with confirmed line of effect.
    Sucker Punch denies ordinary/free reactions until next round; removing its grab does not
-   implicitly erase that independent prohibition. Unspecified Overwhelm duration remains manual
-   under queued Q-FOE-5.
+   implicitly erase that independent prohibition. Overwhelm uses confirmed start-of-turn adjacency
+   to an enemy knave, blocks shifting through that turn, survives moving away and expires at End
+   turn. Starting nonadjacent then moving adjacent does not trigger it; the next turn needs its
+   own facts. Missing facts stay unresolved, never silently treated as nonadjacent.
+   Prove the spatial answer and persisted restriction through the shared API, with wrong-user
+   refusal, duplicate submission, correction and undo/redo checks. Multiple sources must not
+   cause duplicate prompts/effects; exact card layout remains a proposal under Q-FOE-5.
 6. Test gate plus `foe-traits` and focused modifier/clock regression. Read restrictions, saved
    effect groups, expiry, resource effects, chosen removals and full undo/redo state.
 
 ## Work log
 
 - 2026-09-25: registered by V211; no implementation or test results.
+- 2026-09-25: V233 records accepted Overwhelm duration and a proposed minimum-input spatial
+  flow. The duration is settled; no UI design or runtime implementation is claimed as approved/built.

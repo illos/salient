@@ -2191,14 +2191,33 @@ should be inferred merely from using Malign Thicket. `condition/bleeding.md` and
 
 ## Q-FOE-5: Human Knave's Overwhelm duration
 
-Open, queued by V211 on 2026-09-25; other V222 traits can proceed.
+Answered by the user on 2026-09-25; recorded by V233. Runtime implementation remains V222.
 
-**Question:** Should Overwhelm prevent shifting for the triggering creature's current turn only?
+**Accepted interpretation:** an enemy who starts their turn adjacent to the knave cannot shift
+for that current turn. End the restriction at that turn's end. Moving away later does not remove
+it, and moving adjacent later does not establish this turn-start trigger. Check the new turn's
+facts independently. This duration is a user-approved interpretation of the omitted lifetime.
 
-**Recommendation:** yes, ending at that turn's end, without stacking or extending from adjacency
-later in the turn. Record this as an interpretation if accepted.
+Source: `monster/human/statblock/human-knave.md`, Overwhelm, says an enemy who starts their turn
+adjacent to the knave cannot shift. The turn rules and `movement/shifting.md` do not specify this
+trait's lifetime. The earlier alternatives (while adjacent, until next turn start, or a
+Director-selected duration) were not selected.
 
-`monster/human/statblock/human-knave.md`, Overwhelm, says an enemy who starts their turn adjacent
-to the knave can't shift, without printing a duration. The turn rules and `movement/shifting.md` do
-not specify this trait's lifetime. Alternatives: while adjacent, until next turn start, or explicit
-Director-selected duration. Keep its unprinted duration manual while other trait behavior proceeds.
+**Proposed implementation, not an approved UI design or existing capability:** use the established
+mapless spatial-input and clock contracts. At the active creature's turn start, collect only the
+missing fact: whether it started adjacent to an eligible enemy knave, identifying the source(s).
+Combine multiple candidate knaves in one inline card with an explicit none choice. The controlling
+player or Director would supply the fact via the shared operation; final authority follows the
+owning interaction contract. Reuse a supplied fact only when it is valid for this exact boundary;
+never infer continued adjacency from an old turn, targeting history or roster order.
+
+A confirmed match creates a source-linked cannot-shift restriction anchored to the subject's
+current turn. Enforce it in shared shift resolution and expire it through the clock at End turn.
+Physical movement remains table-controlled. Unknown adjacency is explicitly unresolved, not a
+negative answer: dependent shifting needs that fact before automated resolution, while independent
+work follows the existing minimum-input contract. No modal approval for every creature or full
+movement report is proposed. Corrected inputs and undo/redo must preserve coherent fact/effect history.
+
+Example: a hero starts adjacent, confirms the knave, and gains cannot-shift until their turn ends.
+Walking away does not end it. On a later turn, confirming no adjacent knave gives no new restriction.
+Moving next to a knave halfway through a turn that began elsewhere does not create Overwhelm.
