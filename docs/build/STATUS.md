@@ -199,4 +199,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V201 | [Small damage fixes](V201-small-damage-fixes.md) | Merged (`9d8f7bc`, train 21); cloud dev published; gate and headless PASS at tip |
 | V202 | [Turn-start and turn-end triggered-action offers](V202-turn-trigger-offers.md) | Merged (`d249fc9`); cloud dev published; accepted TESTER results reused |
 | V210 | [Director build-review count](V210-build-review-count.md) | Merged (`6c4c566c`); cloud dev frontend published; gate and focused browser PASS |
-| V203 | [Current documentation phase and role cleanup](V203-documentation-phase-transition.md) | Committed on branch |
+| V203 | [Current documentation phase and role cleanup](V203-documentation-phase-transition.md) | Merged (`b404a8b1`); documentation only, no runtime update |

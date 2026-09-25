@@ -35,3 +35,6 @@ without changing historical slice and release attribution.
   relative links or anchors`); `git diff --check` exited 0. No application tests or deployments ran.
 - Fresh-context documentation review passed after the stale checkpoint, handoff, tech-stack and
   Compendium references were corrected. Historical release and slice attribution remains intact.
+- Rebasing over V210 closeout main `0ac7c258` produced reviewed tip `b404a8b1`. The final link check
+  passed for 561 Markdown files, and the diff and commit merge gates passed. Fast-forward merged
+  into main; no runtime component changed.
