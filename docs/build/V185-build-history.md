@@ -69,3 +69,4 @@ Spec: docs/character-wizard-spec.md#5-progression-history
   uses; `historySheet` returns `inventory: null, inventoryWithheld: true` for a reader who fails it
   (a Director before admission), and the panel says inventory becomes visible once the character
   is admitted. App test covers the pending-admission Director, the attached Director and the owner.
+- Independent review PASS (2026-09-25), after three rounds: inventory shown read-only, then gated by canReadStartingRewards (the same access as characterRewards.get).
