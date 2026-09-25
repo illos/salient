@@ -169,8 +169,9 @@ unimplemented mechanic remains a gap even when the Director can adjust values ma
 Queued in [the questions file](rules-questions-for-user.md):
 
 - **Q-FOE-1:** timing of target redirection, before-resolution responses and roll-tier revision.
-  Existing damage-only option B does not settle retargeting an entire attack. Keep that specific
-  behavior manual pending a decision; ordinary damage reactions can proceed.
+  User confirmed resolve-first Director cards following character reactions; the proposed pause
+  is withdrawn. Exact “next action” early closure and unconfirmed source-specific consequences
+  remain queued under Q-FOE-1; ordinary damage reactions can proceed.
 - **Q-FOE-2:** Ravenous Horde says newly created minions are winded without giving exact Stamina.
   The general minion rule also forbids winded minions. Q-FOE-2 proposes a specific exception;
   do not silently halve an ordinary pool and kill half the new minions.

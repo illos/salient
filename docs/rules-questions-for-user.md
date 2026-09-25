@@ -2043,15 +2043,27 @@ Recommendation: keep 1 to 9.
 
 ## Q-FOE-1: timing for attack redirection and pre-resolution foe reactions
 
-Open, queued by V211 on 2026-09-25; blocks only the corresponding V220 automation.
+Partially answered by the user on 2026-09-25; V229 records the correction to V211's proposal.
 
-**Question:** How should the app handle Meat Shield, Clever Trick, Bloodstones and Facepalm and
-Head Slam when they change an attack before its original result should take effect?
+**Confirmed interaction direction:** minimize interruptions, following character reactions. Resolve
+and apply the player's action as if the Director declined the optional response. Offer a dynamic
+card informing the Director that Meat Shield is available; accepting it revises the recorded result.
+The proposed blocking declaration/response step is rejected. This confirms the interaction direction;
+it does not settle every source-specific consequence for all four abilities below.
 
-**Recommendation:** add a narrow declaration/response step for these named situations, selected
-through the shared action route, then resolve the final attack once. Ordinary attacks and existing
-damage-halving option B keep their present flow. Until that contract is accepted and built, expose
-these actions as manual with their costs and source text.
+**Window:** the user gives the start of the next monster's or hero's turn as the deadline and also
+says “when the next action is taken.” The existing character precedent in
+`docs/table-spec.md#inline-interaction-cards-in-the-game-log` has next individual turn start as its
+outer cutoff and earlier closure when the affected character commits subsequent play or spends the
+hit's granted resources. One clarification is queued: does “next action” mean any creature's next
+committed action, or the existing character-reaction early-close rule? Recommendation: reuse the
+existing rule. The resolve-first interaction direction is confirmed independently of that detail.
+
+**Source consequences still to preserve:** Meat Shield replaces the target of the strike. The
+user's damage-redirection example settles presentation/timing; it does not authorize ignoring
+other attack effects or using the original target's defenses for the replacement. Keep source-specific
+consequence handling explicit until implemented and proven. Facepalm's ambiguous timing antecedent
+below also remains open; this answer does not approve the earlier recommended reading.
 
 Sources read at the pinned unified Markdown root:
 
@@ -2065,10 +2077,11 @@ Sources read at the pinned unified Markdown root:
   antecedent also needs a labelled reading (recommended: before the triggering melee ability).
 - `rule/combat/triggered-action.md`, ordering of player-controlled then Director-controlled responses.
 
-The existing 2026-09-24 option B ruling addresses damage changes after application. It does not
-settle retargeting conditions, canceled attacks, or replaying all effects of a changed tier.
-Alternatives: extend option B to revise the complete attack and every dependent consequence, or
-leave these four mechanics manually adjudicated. No global mandatory pause is proposed.
+The 2026-09-24 option B ruling and the table spec's Lines of Force precedent already apply the
+triggering outcome first and revise it through a linked response. V220 must extend that pattern for
+the named foe mechanics, preserving original dice, source attribution, choices and applicable costs.
+The earlier proposal to pause for a response is superseded by the user's answer above. Unresolved
+source-specific semantics stay explicit/manual; no mandatory use/pass barrier is introduced.
 
 ## Q-FOE-2: Ravenous Horde's winded minions
 
