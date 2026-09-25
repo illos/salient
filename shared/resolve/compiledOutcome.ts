@@ -35,7 +35,13 @@ import {
   type ModifierSpec,
   type StatContribution,
 } from './modifiers.ts';
-import type { ModifierPayload, Watcher } from '../contracts/liveState.ts';
+import type {
+  AreaPayload,
+  EffectDuration,
+  ModifierPayload,
+  Watcher,
+} from '../contracts/liveState.ts';
+import { bindArea, effectOnlyArea, sameAreaSpec, sectionArea, type AreaSpec } from './areas.ts';
 import {
   bindWatcher,
   effectOnlyWatcher,
@@ -52,6 +58,7 @@ import {
 } from './strained.ts';
 import {
   actionTypeOfUsage,
+  isPerformance,
   revisionFits,
   riderAdmitted,
   spendSubjectFits,
@@ -475,7 +482,58 @@ export interface CompiledMarkOutcome extends EffectIdentity {
   requirements: string[];
 }
 
+/**
+ * V200 area or aura of one use (docs/lasting-effects-design.md#6-areas-and-auras), addressed
+ * through the first target like other once-per-use sections. `applied`: the use stores an `area`
+ * effect instance on its user, with the use's targets as its first members; each rider is stored on
+ * the members it applies to. `manual`: a printed amount or the strained decision is unknown, or the
+ * user can't hold it; the table resolves the area.
+ */
+export interface CompiledAreaOutcome extends EffectIdentity {
+  kind: 'area';
+  status: 'applied' | 'manual';
+  spec: AreaSpec;
+  /**
+   * How long the area lasts for this use: the printed duration, or the end of the user's turn for a
+   * strained use whose Strained section says so (feature/ability/talent/level-1/incinerate.md).
+   */
+  duration: EffectDuration;
+  /** The use's targets in target order: the area's first members. */
+  members: string[];
+  /** The riders with their printed amounts bound at use; absent when an amount is unknown. */
+  payload?: AreaPayload;
+  requirements: string[];
+}
+
+/**
+ * V200: one use's area outcome. The user holds the area; the commit checks that the user is a hero
+ * or a foe with its own record (convex/lib/areas.ts).
+ */
+function areaOutcome(
+  identity: EffectIdentity,
+  spec: AreaSpec,
+  members: string[],
+  characteristics: Partial<Record<Characteristic, number>> | undefined,
+  duration: EffectDuration,
+  extra: string[] = [],
+): CompiledAreaOutcome {
+  const requirements = [...extra];
+  const bound = bindArea(spec, characteristics);
+  if ('requirement' in bound) requirements.push(bound.requirement);
+  return {
+    ...identity,
+    kind: 'area',
+    status: requirements.length ? 'manual' : 'applied',
+    spec,
+    duration,
+    members,
+    ...('payload' in bound ? { payload: bound.payload } : {}),
+    requirements,
+  };
+}
+
 export type CompiledEffectOutcome =
+  | CompiledAreaOutcome
   | CompiledMarkOutcome
   | CompiledDamageRevisionOutcome
   | CompiledResponseSpendOutcome
@@ -890,8 +948,23 @@ export function resolveCompiledAbility(
         return (
           !again ||
           !sameStrainedSpec(again, node.spec) ||
-          !strainedAdmitted(again, definition.tiers, shape.kind) ||
+          !strainedAdmitted(
+            again,
+            definition.tiers,
+            shape.kind,
+            definition.sections.some(other => other.kind === 'area'),
+          ) ||
           definition.sections.filter(other => other.kind === 'strained').length !== 1
+        );
+      }
+      // V200: an area re-reads to the same spec for this target line, and is the only one.
+      if (node.kind === 'area') {
+        const again = sectionArea(plain(node.clause), definition.envelope.target);
+        return (
+          !again ||
+          !sameAreaSpec(again, node.spec) ||
+          shape.kind !== 'area' ||
+          definition.sections.filter(other => other.kind === 'area').length !== 1
         );
       }
       // V171: a watcher re-reads to the same spec, or the definition was tampered with.
@@ -1206,6 +1279,29 @@ export function resolveCompiledAbility(
       });
       continue;
     }
+    // V200: the area is once per use; its first members are the use's targets. A Strained section
+    // that ends the area at the end of the user's turn needs the use's strained decision.
+    if (node.kind === 'area') {
+      const strainedNode = definition.sections.find(other => other.kind === 'strained');
+      const endsEarly = strainedNode?.kind === 'strained' && strainedNode.spec.area;
+      const state = input.strained;
+      remainder.push(
+        areaOutcome(
+          {
+            nodeId: node.id,
+            targetId: roll.targets[0]!.targetId,
+            locator: node.locator,
+            clause: node.clause,
+          },
+          node.spec,
+          roll.targets.map(target => target.targetId),
+          input.actor.characteristics,
+          endsEarly && state?.applies ? { kind: 'eot' } : node.spec.duration,
+          endsEarly && !state ? ['actor.strained'] : [],
+        ),
+      );
+      continue;
+    }
     // V171: a watcher section is once per use and independent of the roll; "the target" is the
     // single target (V110), which holds its instance.
     if (node.kind === 'watcher') {
@@ -1425,32 +1521,40 @@ export function resolveEffectOnly(
   const markAgain = definition.sections.some(node => node.kind === 'mark')
     ? readMarkAbility(definition.envelope)
     : undefined;
+  // V200: an area target's whole Effect section read as one area (shared/resolve/areas.ts).
+  const areaAgain = (block: (typeof definition.envelope.blocks)[number]) =>
+    shape?.kind === 'area' && !triggered && block.kind === 'section' && !block.cost
+      ? effectOnlyArea(block.text, definition.envelope.target)
+      : undefined;
   const reread: {
     index: number;
     sentence: EffectOnlySentence | undefined;
     spend?: ResponseSpendClause | undefined;
     mark?: MarkSpec;
+    area?: AreaSpec;
   }[] = definition.envelope.blocks.flatMap((block, index) =>
     block.kind === 'section' && block.label === 'Trigger' && triggered
       ? []
       : markAgain
         ? [{ index, sentence: undefined, mark: markAgain.spec }]
-        : block.kind === 'section' && block.label === 'Effect' && !block.cost
-          ? (readEffectOnlySection(block.text) ?? [undefined]).map(sentence => ({
-              index,
-              sentence,
-            }))
-          : [
-              {
+        : block.kind === 'section' && block.label === 'Effect' && areaAgain(block)
+          ? [{ index, sentence: undefined, area: areaAgain(block)! }]
+          : block.kind === 'section' && block.label === 'Effect' && !block.cost
+            ? (readEffectOnlySection(block.text) ?? [undefined]).map(sentence => ({
                 index,
-                sentence: undefined,
-                // V174: a response's Spend section.
-                spend:
-                  block.kind === 'section' && block.cost && triggered
-                    ? responseSpend(block.cost, block.text)
-                    : undefined,
-              },
-            ],
+                sentence,
+              }))
+            : [
+                {
+                  index,
+                  sentence: undefined,
+                  // V174: a response's Spend section.
+                  spend:
+                    block.kind === 'section' && block.cost && triggered
+                      ? responseSpend(block.cost, block.text)
+                      : undefined,
+                },
+              ],
   );
   if (
     definition.format !== 'salient.compiled-ability' ||
@@ -1458,6 +1562,7 @@ export function resolveEffectOnly(
     !shape ||
     JSON.stringify(shape) !== JSON.stringify(activation.targetShape) ||
     usage !== activation.actionType ||
+    (usage === 'no action' && !isPerformance(definition.envelope.keywords)) ||
     JSON.stringify(expectedCost) !== JSON.stringify(activation.fixedCost) ||
     (expectedCost && !Number.isSafeInteger(expectedCost.amount)) ||
     definition.tiers.length !== 3 ||
@@ -1488,6 +1593,19 @@ export function resolveEffectOnly(
           definition.sections.length !== 1 ||
           shape.kind !== 'one' ||
           shape.self
+        );
+      // V200: an area re-reads to the same spec for this target line, and is the only one. A
+      // performance's area needs the Performance keyword, as does a use with no action.
+      if (node.kind === 'area' || again.area)
+        return (
+          node.kind !== 'area' ||
+          !again.area ||
+          again.area.endsWhen.includes('performance') !==
+            isPerformance(definition.envelope.keywords) ||
+          node.locator !== `block:${again.index}:0` ||
+          !sameAreaSpec(again.area, node.spec) ||
+          shape.kind !== 'area' ||
+          definition.sections.filter(other => other.kind === 'area').length !== 1
         );
       if (!again.sentence || !node.locator.startsWith(`block:${again.index}:`)) return true;
       if (
@@ -1627,6 +1745,27 @@ export function resolveEffectOnly(
     id === input.actor.id ? input.actor : input.targets.find(target => target.id === id)!;
   const effects: CompiledEffectOutcome[] = [];
   for (const node of definition.sections) {
+    // V200: the area, once per use; its first members are the use's targets.
+    if (node.kind === 'area') {
+      effects.push(
+        areaOutcome(
+          {
+            nodeId: node.id,
+            targetId: input.targets[0]!.id,
+            locator: node.locator,
+            clause: node.clause,
+          },
+          node.spec,
+          input.targets.map(target => target.id),
+          input.actorCharacteristics,
+          node.spec.duration,
+          input.actor.kind === 'hero' || input.actor.kind === 'foe'
+            ? []
+            : [`actor.${input.actor.kind} holds no area the engine keeps`],
+        ),
+      );
+      continue;
+    }
     // V175: each target is marked by the user; only a hero or a foe outside a squad holds it.
     if (node.kind === 'mark') {
       for (const target of input.targets)

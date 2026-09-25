@@ -274,6 +274,7 @@ export function describeWatcher(watcher: Watcher): string {
     'ability-used': 'uses an ability',
     'strike-made': 'makes a strike',
     'marked-damaged': 'or an ally deals damage to a creature it marked',
+    'area-entered': 'enters the area',
   }[watcher.event];
   const limit = { turn: 'the first time on a turn', round: 'once per round', each: 'each time' }[
     watcher.limit
@@ -312,6 +313,8 @@ export interface WatchedOccurrence {
   creatureId: string;
   /** `damage-dealt`: the creature that took the damage. V175 `marked-damaged`: the dealer. */
   otherId?: string;
+  /** V200 `area-entered`: the area instance the creature entered. */
+  areaId?: string;
 }
 
 /**
@@ -333,6 +336,8 @@ export function watches(
     watcher.whose === 'owner' ? instance.owner.id : subjectHolds ? holderId : undefined;
   if (watched !== occurrence.creatureId) return false;
   if (watcher.otherCreature && occurrence.otherId === occurrence.creatureId) return false;
+  // V200: an enter rider watches its own area only.
+  if (watcher.event === 'area-entered' && instance.area?.id !== occurrence.areaId) return false;
   return true;
 }
 

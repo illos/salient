@@ -1857,3 +1857,55 @@ What stays manual, and why:
   is left alone here.
 
 Recommendation: keep 1 to 7 as implemented.
+
+## Q-AREA-1: can the table keep who is in an area, and is adding a member an enter? (V200, product)
+
+Answered 2026-09-25 (`docs/lasting-effects-design.md`, "Questions for the user", 2, and section 6;
+`docs/decisions/2026-09-24-automation-rulings.md`, section 6). Yes: there is no map, so the table
+picks who is in an area or aura at use time with the target selection and edits the list as
+creatures move. Adding a member with `effect.members add` is an explicit "enters the area": enter
+riders fire, within their printed limit, and the Director removes what shouldn't have happened.
+Removing a member is leaving; undo of an add reverses it and what it set off.
+
+## Q-AREA-2: readings behind V200's areas and auras
+
+Open; V200 binds labelled interpretations so the areas can compile. Pinned `en/unified/md` read:
+`rule/combat/aura.md`, `area-of-effect.md`, `cube.md`, `side.md`, `enemy.md`, `ally.md`,
+`target.md`, `combat-round.md`, `surprised.md`; `rule/health/dying.md`;
+`feature/troubadour/level-1/routines.md`; the abilities named below.
+
+1. **Who is an ally or an enemy.** `rule/combat/enemy.md` and `ally.md` leave it to the players,
+   with the Director's final say. A rider for "each enemy" applies to members on the other side from
+   the area's user, and "each ally" to members on the user's side (`rule/combat/side.md`: the heroes
+   and their allies are one side), as V173 offers and V175 marks already read sides. A foe the
+   Director treats as an ally, or the reverse, is the table's to handle by ending the rider.
+   Alternative: the table tags each member's relation when adding it.
+2. **"Each target" in an aura** (`feature/ability/censor/level-2/blessing-of-the-faithful.md`:
+   "each target gains 1 surge at the end of each of your turns"). Read as the aura's current
+   members that the target line admits, since the aura "moves with you for the duration"
+   (`rule/combat/aura.md`). Alternative: only the creatures targeted at use, wherever they are; the
+   table gets that reading by not editing the list.
+3. **Entering and starting a turn there** (`feature/ability/talent/level-1/incinerate.md`: "Each
+   enemy who enters the area for the first time in a combat round or starts their turn there takes
+   2 fire damage"). "For the first time in a combat round" is read as limiting entering only: an
+   enemy that entered this round still takes the damage when it starts its turn there, and a
+   creature that leaves and enters again in the same round takes nothing the second time.
+   Alternative: one shared once-per-round limit for both.
+4. **The use's targets don't enter.** The creatures targeted at use are the area's first members,
+   placed there by the use; no enter rider fires for them (Incinerate's targets take the tier
+   damage only). Alternative: every target at use counts as entering.
+5. **Maintaining a performance** (`feature/troubadour/level-1/routines.md`: "At the start of each
+   combat round, as long as you are not dazed, dead, or surprised, you can either choose a new
+   performance or maintain your current performance (no action required)"). Maintaining needs no
+   act, so the engine keeps the performance at each round start unless the Troubadour is dazed or
+   dead then (dead: Stamina at or below the negative of the winded value, `rule/health/dying.md`).
+   Surprise lasts "until the end of the first combat round" (`rule/combat/surprised.md`), so no
+   later round start finds the Troubadour surprised. Using any Performance ability chooses a new
+   performance and ends the current one. When in the round a performance is chosen is the table's.
+   Alternative: the Troubadour confirms maintenance each round.
+6. **An enter rider's damage has no dealer**, as Q-WATCH-1 point 1 reads a watcher's damage: it sets
+   off the member's damage-taken watchers and damage-taken triggered offers, but no damage-dealt
+   watcher, "you or any ally deals damage" mark watcher, or Mark benefit (which needs rolled damage,
+   `feature/ability/tactician/level-1/mark.md`). Alternative: the area's user deals it.
+
+Recommendation: keep 1 to 6 as implemented.

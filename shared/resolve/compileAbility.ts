@@ -12,6 +12,7 @@ import { sectionModifier, type ModifierSpec } from './modifiers.ts';
 import { defenseManualReason, tierDamageModifier } from './damageModifiers.ts';
 import { strainedSection, type StrainedSpec } from './strained.ts';
 import { sectionWatcher, type WatcherSpec } from './watchers.ts';
+import { areaManualReason, effectOnlyArea, sectionArea, type AreaSpec } from './areas.ts';
 import { markManualReason, readMarkAbility, type MarkSpec } from './marks.ts';
 import { damageTypeAdmitted, sectionDamageType, type DamageTypeSpec } from './damageTypes.ts';
 import {
@@ -196,6 +197,15 @@ export interface MarkNode extends NodeSource {
 }
 export interface ResponseSpendNode extends NodeSource, ResponseSpendClause {}
 /**
+ * V200: a whole Effect section read as one area or aura (shared/resolve/areas.ts). A use stores an
+ * `area` effect instance on its user with the targets as its first members; the table keeps the
+ * members with `effect.members`, and each rider is stored on the members it applies to.
+ */
+export interface AreaNode extends NodeSource {
+  kind: 'area';
+  spec: AreaSpec;
+}
+/**
  * V177: a whole Effect section that sets the type of the ability's damage (shared/resolve/
  * damageTypes.ts). It is executed in the damage of every tier, from the use's choice; it is not
  * table work.
@@ -239,7 +249,8 @@ export type SectionNode =
   | DamageRevisionNode
   | ResponseSpendNode
   | MarkNode
-  | DamageTypeNode;
+  | DamageTypeNode
+  | AreaNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -288,6 +299,8 @@ const ACTIONS: ActionType[] = [
   'triggered action',
   'free triggered action',
   'free maneuver',
+  // V200: printed "No action" (feature/troubadour/level-1/routines.md, performances).
+  'no action',
 ];
 const normalized = (text: string) => plain(text).replace(/\.$/, '').replace(/\s+/g, ' ').trim();
 /**
@@ -407,13 +420,15 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
               ? { ...node, kind: 'modifier', spec: clause.spec }
               : clause.kind === 'watcher'
                 ? { ...node, kind: 'watcher', spec: clause.spec }
-                : {
-                    ...node,
-                    kind: 'instruction',
-                    shape: clause.shape,
-                    after: '',
-                    subject: clause.subject,
-                  },
+                : clause.kind === 'area'
+                  ? { ...node, kind: 'area', spec: clause.spec }
+                  : {
+                      ...node,
+                      kind: 'instruction',
+                      shape: clause.shape,
+                      after: '',
+                      subject: clause.subject,
+                    },
         );
       });
       return;
@@ -442,11 +457,37 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
         block.label === 'Strained' && !block.cost && rollIndex >= 0
           ? strainedSection(plain(block.text))
           : undefined;
-      if (strained && strainedAdmitted(strained, tiers, grammar.targetShape)) {
+      if (
+        strained &&
+        strainedAdmitted(
+          strained,
+          tiers,
+          grammar.targetShape,
+          sections.some(node => node.kind === 'area'),
+        )
+      ) {
         sections.push({
           ...sourceNode(envelope, locator, 0, block.text),
           kind: 'strained',
           spec: strained,
+        });
+        return;
+      }
+      // V200: a whole Effect section that is one area the table keeps the members of. Only an
+      // area target line ("Each enemy in the area") admits it; one per ability.
+      const area =
+        block.label === 'Effect' &&
+        !block.cost &&
+        rollIndex >= 0 &&
+        grammar.targetShape === 'area' &&
+        !sections.some(node => node.kind === 'area')
+          ? sectionArea(plain(block.text), envelope.target)
+          : undefined;
+      if (area) {
+        sections.push({
+          ...sourceNode(envelope, locator, 0, block.text),
+          kind: 'area',
+          spec: area,
         });
         return;
       }
@@ -877,6 +918,12 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
       const why = markManualReason(section.clause);
       if (why) diagnose('mark-manual', section.locator, section.clause, why);
     }
+  // V200: a manual clause of an area ability says why it is not an area the engine keeps.
+  for (const section of sections)
+    if (section.kind === 'unsupported') {
+      const why = areaManualReason(section.clause);
+      if (why) diagnose('area-manual', section.locator, section.clause, why);
+    }
   for (const section of sections)
     if (section.kind === 'unsupported')
       diagnose(
@@ -1024,7 +1071,10 @@ export function strainedAdmitted(
   spec: StrainedSpec,
   tiers: readonly CompiledNode[][],
   targetShape: string,
+  /** V200: the ability has an area section, whose area a strained use ends at the turn's end. */
+  hasArea = false,
 ): boolean {
+  if (spec.area && !hasArea) return false;
   if (!spec.targetExtraDamage) return true;
   const type = spec.targetExtraDamage.damageType;
   return (
@@ -1049,6 +1099,11 @@ export function revisionFits(
 /** V174: "for you" reduces the user's potency: a Self response; "for the target" its target's. */
 export function spendSubjectFits(spend: ResponseSpendClause, target: EffectOnlyTarget): boolean {
   return spend.subject === 'target' || target.kind === 'self';
+}
+
+/** V200: the ability has the Performance keyword (feature/troubadour/level-1/routines.md). */
+export function isPerformance(keywords: readonly string[]): boolean {
+  return keywords.some(keyword => plain(keyword).trim().toLowerCase() === 'performance');
 }
 
 /** V157 actions a use without a power roll may take. V173 adds triggered actions with a trigger. */
@@ -1076,7 +1131,14 @@ function readEffectOnly(envelope: Envelope):
   if (!envelope.blocks.length) return undefined;
   const usage = actionTypeOfUsage(envelope.usage);
   const triggered = usage === 'triggered action' || usage === 'free triggered action';
-  const action = triggered ? usage : EFFECT_ONLY_ACTIONS.find(value => value === usage);
+  // V200: a Troubadour performance is used with no action (feature/troubadour/level-1/routines.md);
+  // "No action" is admitted only with the Performance keyword.
+  const performance = isPerformance(envelope.keywords);
+  const action = triggered
+    ? usage
+    : usage === 'no action' && performance
+      ? usage
+      : EFFECT_ONLY_ACTIONS.find(value => value === usage);
   const target = effectOnlyTarget(envelope.target, envelope.keywords);
   if (!action || !target) return undefined;
   const triggers = envelope.blocks.filter(b => b.kind === 'section' && b.label === 'Trigger');
@@ -1105,6 +1167,25 @@ function readEffectOnly(envelope: Envelope):
       continue;
     }
     if (block.kind !== 'section' || block.label !== 'Effect' || block.cost) return undefined;
+    // V200: an area target's whole Effect section read as one area whose members the table keeps
+    // (shared/resolve/areas.ts). One area per ability.
+    const area =
+      target.kind === 'area' && !trigger ? effectOnlyArea(block.text, envelope.target) : undefined;
+    if (area) {
+      if (Object.values(sections).some(read => read.some(s => s.clause.kind === 'area')))
+        return undefined;
+      // "While this performance is active" needs a performance, and a performance's area has that
+      // lifecycle.
+      if (area.endsWhen.includes('performance') !== performance) return undefined;
+      sections[index] = [
+        {
+          text: plain(block.text).replace(/\s+/g, ' ').trim(),
+          clause: { kind: 'area', subject: 'target', spec: area },
+          singleTarget: false,
+        },
+      ];
+      continue;
+    }
     const read = readEffectOnlySection(block.text);
     if (
       !read ||

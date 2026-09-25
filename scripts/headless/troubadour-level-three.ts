@@ -353,6 +353,41 @@ export async function runTroubadourLevelThree({
                 remainder,
                 name,
               );
+            } else if (name === '"Fire Up the Night"') {
+              // V200: a performance compiled as an aura the table keeps the members of
+              // (feature/ability/troubadour/level-3/fire-up-the-night.md). Used on the Troubadour
+              // alone, the Troubadour holds the area and its turn-start rider (table work: no bane
+              // on strikes against concealed creatures, and a search as a free maneuver).
+              assert.equal(persisted?.kind, 'ability.use', name);
+              type Held = {
+                effectInstances?: {
+                  id: string;
+                  kind: string;
+                  status: string;
+                  sourceUseEventId: string;
+                  members?: { party: { id: string } }[];
+                  area?: { id: string };
+                }[];
+              };
+              const now = after.liveState as unknown as Held;
+              const area = now.effectInstances?.find(
+                e => e.sourceUseEventId === use.eventId && e.kind === 'area',
+              );
+              assert.equal(area?.status, 'active', name);
+              assert.deepEqual(
+                area?.members?.map(m => m.party.id),
+                [id],
+                `${name} members`,
+              );
+              assert.ok(
+                now.effectInstances?.some(e => e.area?.id === area?.id && e.status === 'active'),
+                `${name} rider`,
+              );
+              assert.equal(
+                after.liveState?.stamina,
+                before.liveState?.stamina,
+                `${name} no damage`,
+              );
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);

@@ -282,7 +282,9 @@ export function describeDuration(
     .map(trigger =>
       trigger === 'owner-dying'
         ? 'or until the owner is dying'
-        : 'or until the ability is used again',
+        : trigger === 'performance'
+          ? 'or until the owner chooses another performance or can’t maintain it at the start of a round'
+          : 'or until the ability is used again',
     );
   return [base, ...extra].join(' ');
 }

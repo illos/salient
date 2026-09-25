@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 106,
-      "manual": 265
+      "supported": 112,
+      "manual": 259
     },
     "kit-signature": {
       "total": 25,
@@ -21718,7 +21718,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-2/blessing-of-the-faithful.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -21726,37 +21727,45 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/blessing-of-the-faithful#block:0:0:682a231d40c9f8c0",
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-2/blessing-of-the-faithful#block:0:0:a3bc7930814c8b01",
           "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "Until the end of the encounter or until you are dying, each target gains 1 surge at the end of each of your turns.",
+          "kind": "area",
+          "spec": {
+            "effect": "area",
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "owner-dying"
+            ],
+            "riders": [
+              {
+                "who": {
+                  "self": true,
+                  "others": "ally"
+                },
+                "watcher": {
+                  "event": "turn-end",
+                  "whose": "owner",
+                  "limit": "each",
+                  "responses": [
+                    {
+                      "kind": "gain",
+                      "recipient": "subject",
+                      "surges": 1
+                    }
+                  ]
+                }
+              }
+            ],
+            "text": "Until the end of the encounter or until you are dying, each target gains 1 surge at the end of each of your turns."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self and each ally in the area",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Blessing of the Faithful",
@@ -24679,6 +24688,12 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
+        },
+        {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "You summon a spirit of [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 who can't be harmed, and who appears in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance). The spirit lasts until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). You and your allies can move through the spirit's space, but enemies can't. Any enemy who moves within 2 squares of the spirit for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes holy damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "the summoned spirit is not tracked, and its area is the squares within 2 of the spirit, not an area of the ability the table keeps"
         },
         {
           "code": "manual-section",
@@ -28099,6 +28114,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "A [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 statue rises out of the ground in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) and lasts until the end of the encounter. While within 3 squares of the statue, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally within 3 squares of the statue gains this same benefit. The statue is destroyed if it takes 20 or more damage. It has immunity all to poison and psychic damage.",
+          "message": "the statue is an object with its own Stamina and immunities that the engine doesn’t track, and its area is the squares within 3 of it"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "A [size](scc.v1:mcdm.heroes.v1/rule.character/size) 2 statue rises out of the ground in an unoccupied space within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) and lasts until the end of the encounter. While within 3 squares of the statue, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally within 3 squares of the statue gains this same benefit. The statue is destroyed if it takes 20 or more damage. It has immunity all to poison and psychic damage.",
@@ -28339,7 +28360,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/conduit/level-2/wellspring-of-grace.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -28347,31 +28369,44 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/wellspring-of-grace#block:0:0:aa732e364b3eedbe",
+          "id": "mcdm.heroes.v1/feature.ability.conduit.level-2/wellspring-of-grace#block:0:0:ba58ee20f4dfcaba",
           "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area, they can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "Until the end of the encounter or until you are dying, whenever a target starts their turn in the area, they can spend a Recovery.",
+          "kind": "area",
+          "spec": {
+            "effect": "area",
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "owner-dying"
+            ],
+            "riders": [
+              {
+                "who": {
+                  "self": false,
+                  "others": "ally"
+                },
+                "watcher": {
+                  "event": "turn-start",
+                  "whose": "subject",
+                  "limit": "each",
+                  "responses": [
+                    {
+                      "kind": "instruction",
+                      "text": "they can spend a Recovery."
+                    }
+                  ]
+                }
+              }
+            ],
+            "text": "Until the end of the encounter or until you are dying, whenever a target starts their turn in the area, they can spend a Recovery."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Until the end of the encounter or until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), whenever a target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area, they can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Wellspring of Grace",
@@ -32980,6 +33015,24 @@
           "message": "Printed mechanics cannot be ignored."
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the area gains the following effects:",
+          "message": "its listed area effects and its Persistent section (moving the area, the line-of-effect end, V148 maintenance) are not built for areas yet"
+        },
+        {
+          "code": "area-manual",
+          "locator": "block:1:0",
+          "clause": "The area remains until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). As a maneuver, you can move the area up to 5 squares. This ability ends if the area is ever not within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect).",
+          "message": "its listed area effects and its Persistent section (moving the area, the line-of-effect end, V148 maintenance) are not built for areas yet"
+        },
+        {
+          "code": "area-manual",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Until the start of your next turn, the area gains the following effects:\n- Once as a free maneuver at the start of your turn, you allow yourself and each ally in the area to spend any number of Recoveries.\n- The area is difficult terrain for enemies.\n- Each enemy who enters the area for the first time in a combat round or starts their turn there takes damage equal to your Reason score.",
+          "message": "its listed area effects and its Persistent section (moving the area, the line-of-effect end, V148 maintenance) are not built for areas yet"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the area gains the following effects:",
@@ -34252,6 +34305,12 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
+        },
+        {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "The wall lasts until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), and can be placed in occupied squares. Creatures can enter and pass through the wall. Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes fire damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score for each square of the area they start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in or enter.",
+          "message": "the damage counts the squares of the wall a creature starts in or enters, a map fact the table doesn’t record"
         },
         {
           "code": "manual-section",
@@ -39673,6 +39732,24 @@
           "message": "Printed mechanics cannot be ignored."
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "Each target reduces their [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
+        },
+        {
+          "code": "area-manual",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Each target reduces their potencies by 1.\nOnce as a free maneuver on each of your turns, you can spend 1 discipline and give your Null Field one of the following additional effects until the start of your next turn:\n- Gravitic Disruption: The first time on a turn that a target takes damage, you can slide them up to 2 squares.\n- Inertial Anchor: Any target who starts their turn in the area can't shift.\n- Synaptic Break: Whenever you or any ally uses an ability against a target that has a potency effect, the potency is increased by 1.\nThis ability remains active even after an encounter ends. It ends only if you are dying or if you willingly end it (no action required).",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
+        },
+        {
+          "code": "area-manual",
+          "locator": "markdown:item:4:0",
+          "clause": "Once as a free maneuver on each of your turns, you can spend 1 discipline and give your Null Field one of the following additional effects until the start of your next turn:",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Each target reduces their [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency) by 1.",
@@ -40310,6 +40387,12 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
+        },
+        {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "Each target takes psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score. Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. At the end of your current [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability takes psychic damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
         },
         {
           "code": "manual-section",
@@ -41277,6 +41360,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1, and you and any ally benefit from [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) while in the area. At the end of this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area takes cold damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1, and you and any ally benefit from [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) while in the area. At the end of this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), each enemy in the area takes cold damage equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
@@ -41519,6 +41608,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy in the area takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy in the area takes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).",
@@ -41608,6 +41703,12 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
+        },
+        {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, each enemy who has I < AVERAGE and enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there is [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends). Each ally who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there gains [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
         },
         {
           "code": "manual-section",
@@ -41701,6 +41802,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and reduce the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of enemy effects targeting you by 1 for you. You can also use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) at the start of each of your turns to end one effect on you that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally in the area also gains these benefits.",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and reduce the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of enemy effects targeting you by 1 for you. You can also use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) at the start of each of your turns to end one effect on you that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each ally in the area also gains these benefits.",
@@ -41790,6 +41897,12 @@
           "locator": "envelope",
           "clause": "",
           "message": "no-power-roll"
+        },
+        {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "Until the end of the encounter, the size of your [Null Field](scc.v1:mcdm.heroes.v1/feature.null.level-1/null-field) ability increases by 1. While the area of that ability is enlarged this way, whenever an enemy in the area takes [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage), they take extra psychic damage equal to twice your [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition) score.",
+          "message": "Null Field is not an area the engine keeps yet: its potency reduction on the creatures in the aura is not a modifier the engine applies to their abilities, and its discipline options and its life after the encounter are manual, so the abilities that enlarge it or read its area wait for it"
         },
         {
           "code": "manual-section",
@@ -52042,7 +52155,7 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/incinerate.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
       "tiers": [
         [
           {
@@ -52092,37 +52205,73 @@
           "id": "mcdm.heroes.v1/feature.ability.talent.level-1/incinerate#block:1:0:86f875356ab56879",
           "locator": "block:1:0",
           "clause": "A column of fire remains in the area until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes 2 fire damage.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "area",
+          "spec": {
+            "effect": "area",
+            "duration": {
+              "kind": "start-of-next-turn",
+              "anchor": "owner"
+            },
+            "endsWhen": [],
+            "riders": [
+              {
+                "who": {
+                  "self": false,
+                  "others": "enemy"
+                },
+                "watcher": {
+                  "event": "area-entered",
+                  "whose": "subject",
+                  "limit": "round",
+                  "responses": [
+                    {
+                      "kind": "damage",
+                      "recipient": "subject",
+                      "amount": 2,
+                      "damageType": "fire"
+                    }
+                  ]
+                }
+              },
+              {
+                "who": {
+                  "self": false,
+                  "others": "enemy"
+                },
+                "watcher": {
+                  "event": "turn-start",
+                  "whose": "subject",
+                  "limit": "each",
+                  "responses": [
+                    {
+                      "kind": "damage",
+                      "recipient": "subject",
+                      "amount": 2,
+                      "damageType": "fire"
+                    }
+                  ]
+                }
+              }
+            ],
+            "text": "A column of fire remains in the area until the start of your next turn. Each enemy who enters the area for the first time in a combat round or starts their turn there takes 2 fire damage."
+          }
         },
         {
           "id": "mcdm.heroes.v1/feature.ability.talent.level-1/incinerate#block:2:0:24f21a23239bf54e",
           "locator": "block:2:0",
           "clause": "The size of the [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) increases by 2, but the fire disappears at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:strained",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "kind": "strained",
+          "spec": {
+            "area": {
+              "sizeIncrease": 2,
+              "endsAtTurnEnd": true
+            }
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "A column of fire remains in the area until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes 2 fire damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "The size of the [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) increases by 2, but the fire disappears at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [
         {
           "name": "Incinerate",
@@ -56484,6 +56633,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area can automatically obtain a tier 3 outcome on one [test](scc.v1:mcdm.heroes.v1/rule.test/test) made to jump, tumble, or climb as part of their movement before the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "an automatic tier 3 outcome on one later test to jump, tumble or climb is the member’s choice at that test, which the test operation doesn’t take as an input"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area can automatically obtain a tier 3 outcome on one [test](scc.v1:mcdm.heroes.v1/rule.test/test) made to jump, tumble, or climb as part of their movement before the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
@@ -56494,12 +56649,6 @@
           "locator": "header:target",
           "clause": "Self and each ally in the area",
           "message": "Only one, counted or area target envelopes are eligible."
-        },
-        {
-          "code": "action-type",
-          "locator": "header:usage",
-          "clause": "No action",
-          "message": "Unrecognized action type."
         }
       ],
       "live": "legacy-compatibility",
@@ -56715,7 +56864,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -56723,43 +56873,45 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/ballad-of-the-beast#block:0:0:376d0940a6db7c9f",
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/ballad-of-the-beast#block:0:0:945bbd950b0009be",
           "locator": "block:0:0",
-          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "While this performance is active, each target who starts their turn in the area gains 1 surge.",
+          "kind": "area",
+          "spec": {
+            "effect": "area",
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "performance"
+            ],
+            "riders": [
+              {
+                "who": {
+                  "self": true,
+                  "others": "ally"
+                },
+                "watcher": {
+                  "event": "turn-start",
+                  "whose": "subject",
+                  "limit": "each",
+                  "responses": [
+                    {
+                      "kind": "gain",
+                      "recipient": "subject",
+                      "surges": 1
+                    }
+                  ]
+                }
+              }
+            ],
+            "text": "While this performance is active, each target who starts their turn in the area gains 1 surge."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self and each ally in the area",
-          "message": "Only one, counted or area target envelopes are eligible."
-        },
-        {
-          "code": "action-type",
-          "locator": "header:usage",
-          "clause": "No action",
-          "message": "Unrecognized action type."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "\"Ballad of the Beast\"",
@@ -56859,12 +57011,6 @@
           "locator": "block:0:0",
           "clause": "At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) while this performance is active, you can choose up to a number of targets equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score and [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) those targets to unoccupied spaces in the area. A target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "action-type",
-          "locator": "header:usage",
-          "clause": "No action",
-          "message": "Unrecognized action type."
         }
       ],
       "live": "legacy-compatibility",
@@ -56964,6 +57110,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area gains a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "a speed bonus until the end of the member’s turn is a modifier the rider would store at its turn start, and area riders don’t store modifiers yet"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area gains a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
@@ -56974,12 +57126,6 @@
           "locator": "header:target",
           "clause": "Self and each ally in the area",
           "message": "Only one, counted or area target envelopes are eligible."
-        },
-        {
-          "code": "action-type",
-          "locator": "header:usage",
-          "clause": "No action",
-          "message": "Unrecognized action type."
         }
       ],
       "live": "legacy-compatibility",
@@ -58806,7 +58952,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -58814,43 +58961,44 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/revitalizing-limerick#block:0:0:617228f643714450",
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/revitalizing-limerick#block:0:0:868e02d014d328cd",
           "locator": "block:0:0",
-          "clause": "At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) while this performance is active, you can choose up to a number of targets equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Each chosen target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "At the end of each of your turns while this performance is active, you can choose up to a number of targets equal to your Presence score. Each chosen target can spend a Recovery.",
+          "kind": "area",
+          "spec": {
+            "effect": "area",
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "performance"
+            ],
+            "riders": [
+              {
+                "who": {
+                  "self": true,
+                  "others": "none"
+                },
+                "watcher": {
+                  "event": "turn-end",
+                  "whose": "owner",
+                  "limit": "each",
+                  "responses": [
+                    {
+                      "kind": "instruction",
+                      "text": "you can choose up to a number of targets equal to your Presence score. Each chosen target can spend a Recovery."
+                    }
+                  ]
+                }
+              }
+            ],
+            "text": "At the end of each of your turns while this performance is active, you can choose up to a number of targets equal to your Presence score. Each chosen target can spend a Recovery."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) while this performance is active, you can choose up to a number of targets equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Each chosen target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self and each ally in the area",
-          "message": "Only one, counted or area target envelopes are eligible."
-        },
-        {
-          "code": "action-type",
-          "locator": "header:usage",
-          "clause": "No action",
-          "message": "Unrecognized action type."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Revitalizing Limerick",
@@ -59207,12 +59355,6 @@
           "locator": "block:0:0",
           "clause": "At the end of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while this performance is active, you can make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target that ignores [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover). You can't target the same creature twice with this effect.",
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "action-type",
-          "locator": "header:usage",
-          "clause": "No action",
-          "message": "Unrecognized action type."
         }
       ],
       "live": "legacy-compatibility",
@@ -60630,7 +60772,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/fire-up-the-night.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -60638,43 +60781,44 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/fire-up-the-night#block:0:0:aaad6a4d29a80c57",
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-3/fire-up-the-night#block:0:0:e9eca91a862433bc",
           "locator": "block:0:0",
-          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area doesn't take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) against creatures with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment). Once during their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they can search for hidden creatures as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) (see Hide and Sneak in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "While this performance is active, each target who starts their turn in the area doesn't take a bane on strikes against creatures with concealment. Once during their turn, they can search for hidden creatures as a free maneuver (see Hide and Sneak in Chapter 9: Tests).",
+          "kind": "area",
+          "spec": {
+            "effect": "area",
+            "duration": {
+              "kind": "encounter"
+            },
+            "endsWhen": [
+              "performance"
+            ],
+            "riders": [
+              {
+                "who": {
+                  "self": true,
+                  "others": "ally"
+                },
+                "watcher": {
+                  "event": "turn-start",
+                  "whose": "subject",
+                  "limit": "each",
+                  "responses": [
+                    {
+                      "kind": "instruction",
+                      "text": "doesn't take a bane on strikes against creatures with concealment. Once during their turn, they can search for hidden creatures as a free maneuver (see Hide and Sneak in Chapter 9: Tests)."
+                    }
+                  ]
+                }
+              }
+            ],
+            "text": "While this performance is active, each target who starts their turn in the area doesn't take a bane on strikes against creatures with concealment. Once during their turn, they can search for hidden creatures as a free maneuver (see Hide and Sneak in Chapter 9: Tests)."
+          }
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area doesn't take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) against creatures with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment). Once during their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), they can search for hidden creatures as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) (see Hide and Sneak in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self and each ally in the area",
-          "message": "Only one, counted or area target envelopes are eligible."
-        },
-        {
-          "code": "action-type",
-          "locator": "header:usage",
-          "clause": "No action",
-          "message": "Unrecognized action type."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "\"Fire Up the Night\"",
@@ -60904,6 +61048,12 @@
           "message": "no-power-roll"
         },
         {
+          "code": "area-manual",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) while in the area gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and ignores the effects of [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "the rider needs the member to be dying at its turn start, and its edge and ignoring bleeding until the end of the turn are not rider responses yet"
+        },
+        {
           "code": "manual-section",
           "locator": "block:0:0",
           "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) while in the area gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [power rolls](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and ignores the effects of [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
@@ -60914,12 +61064,6 @@
           "locator": "header:target",
           "clause": "Self and each ally in the area",
           "message": "Only one, counted or area target envelopes are eligible."
-        },
-        {
-          "code": "action-type",
-          "locator": "header:usage",
-          "clause": "No action",
-          "message": "Unrecognized action type."
         }
       ],
       "live": "legacy-compatibility",
@@ -213870,9 +214014,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 182,
-    "compiledEffectOnly": 20,
-    "compatibility": 1439,
+    "compiled": 188,
+    "compiledEffectOnly": 25,
+    "compatibility": 1433,
     "compiledButUnavailable": 0
   }
 }

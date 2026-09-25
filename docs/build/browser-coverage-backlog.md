@@ -161,4 +161,13 @@ and firing records `selectedMode: ranged` and ranged damage. Firing with no choi
 server's "give mode=melee or mode=ranged" refusal. The selector must appear for Compendium keywords
 stored as links. Headless coverage is the `kit-bonus` cohort.
 
+## V200 — Area members in the active-effects list
+
+On a hero sheet whose hero holds an area (Incinerate's column, Blessing of the Faithful, a
+Troubadour performance), the active-effects entry shows "Area: …" and "In the area:" with each
+member and a Remove button, then an "Add a creature…" picker and Add. Add and Remove call
+`effect.members`; adding a goblin to Incinerate's column shows its 2 fire damage in the log, and
+Remove on the aura's own user is refused. A member's rider shows "While in <user>'s <ability>" on
+that creature's sheet. Headless coverage is `tests/app/areas.test.ts`.
+
 - **Stale wizard Exit (found in V186, 2026-09-25):** eight wizard browser specs click or expect the Exit button that V96 removed. See `V186-v32-spec-exit.md`. Refresh them to use site navigation; `v40-unsaved-wizard` needs its unsaved-changes scenario redesigned.

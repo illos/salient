@@ -5,6 +5,7 @@ import { runCantStand } from './headless/cant-stand.ts';
 import { runTierInstructions } from './headless/tier-instructions.ts';
 import { runEffectOnly } from './headless/effect-only.ts';
 import { runEffectInstances } from './headless/effect-instances.ts';
+import { runAreas } from './headless/areas.ts';
 import { runModifiers } from './headless/modifiers.ts';
 import { runMultiTarget } from './headless/multi-target.ts';
 import { runTierEffects } from './headless/tier-effects.ts';
@@ -73,6 +74,7 @@ const cohorts = {
   'tier-instructions': runTierInstructions,
   'effect-only': runEffectOnly,
   'effect-instances': runEffectInstances,
+  areas: runAreas,
   modifiers: runModifiers,
   'multi-target': runMultiTarget,
   'tier-effects': runTierEffects,

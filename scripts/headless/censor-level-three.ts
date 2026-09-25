@@ -328,6 +328,43 @@ export async function runCensorLevelThree({
                 remainder,
                 name,
               );
+            } else if (name === 'Blessing of the Faithful') {
+              // V200: compiled without a power roll as an aura the table keeps the members of.
+              // feature/ability/censor/level-2/blessing-of-the-faithful.md ("Self and each ally in
+              // the area"): "each target gains 1 surge at the end of each of your turns". Used on
+              // the Censor alone, the Censor holds the area and its turn-end rider; nothing is
+              // gained at the use.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              type Held = {
+                surges: number;
+                effectInstances?: {
+                  id: string;
+                  kind: string;
+                  status: string;
+                  sourceUseEventId: string;
+                  members?: { party: { id: string } }[];
+                  area?: { id: string };
+                }[];
+              };
+              const now = after.liveState as unknown as Held;
+              const area = now.effectInstances?.find(
+                e => e.sourceUseEventId === use.eventId && e.kind === 'area',
+              );
+              assert.equal(area?.status, 'active', name);
+              assert.deepEqual(
+                area?.members?.map(m => m.party.id),
+                [id],
+                `${name} members`,
+              );
+              assert.ok(
+                now.effectInstances?.some(e => e.area?.id === area?.id && e.status === 'active'),
+                `${name} rider`,
+              );
+              assert.equal(
+                now.surges,
+                (before.liveState as unknown as Held).surges,
+                `${name} no surge at the use`,
+              );
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);

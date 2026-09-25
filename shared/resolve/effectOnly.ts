@@ -13,6 +13,7 @@ import type { EffectRider } from './effectRiders.ts';
 import { plain } from './abilityGrammar.ts';
 import { EFFECT_ONLY_MODIFIERS, type ModifierSpec } from './modifiers.ts';
 import { EFFECT_ONLY_WATCHERS, type WatcherSpec } from './watchers.ts';
+import type { AreaSpec } from './areas.ts';
 import {
   EFFECT_ONLY_REVISIONS,
   type DamageRevisionClause,
@@ -112,6 +113,15 @@ export type EffectOnlyClause =
       subject: 'target';
       damageType: string;
       share: 'half';
+    }
+  | {
+      /**
+       * V200: a whole Effect section read as one area or aura whose members the table keeps
+       * (shared/resolve/areas.ts). Only an area target line admits it.
+       */
+      kind: 'area';
+      subject: 'target';
+      spec: AreaSpec;
     }
   /** V174: a response that revises the triggering damage (shared/resolve/damageRevision.ts). */
   | DamageRevisionClause

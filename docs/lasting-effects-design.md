@@ -306,12 +306,27 @@ instance with a membership list:
 - `effect.members add/remove` edits it later;
 - effects "for each creature in the area" apply to the members.
 
-Membership changes are **not** events by themselves:
-- Adding a member doesn't invent an "enters the area" trigger. Enter and leave triggers fire only
-  from a confirmed movement fact (section 3) that names the area.
-- First-per-round triggers use the V120 limit records.
-- Every change is journaled with who made it and why, so corrections and undo keep the history.
-- Geometry and line of effect remain table facts.
+User rulings, 2026-09-25 (`decisions/2026-09-24-automation-rulings.md`, section 6):
+- **Membership is table-picked.** There is no map. The table picks who is in an area or aura at use
+  time with the existing target selection, and edits the list later as creatures move.
+- **Adding a member means they entered.** In the user's words: "just make adding a new member to the
+  effect an explicit enter, and have the riders trigger. If the players screwed up and forgot to
+  enter someone, the director can manually remove the effects they didn't want."
+  - `effect.members add` is an "enters the area" event. Enter riders fire then, within their
+    printed limit ("for the first time in a combat round": a V120 per-round limit record per
+    creature).
+  - There is no "list fix" flag and no separate movement confirmation.
+  - `effect.members remove` is leaving: the member's riders end.
+  - Undo of an add reverses it and whatever it set off, through the journal as usual.
+
+So:
+- Every change is journaled with who made it, so corrections and undo keep the history.
+- Geometry, distance, line of effect, the size of the area and moving it remain table facts. An
+  ability that moves or enlarges an area changes nothing the engine computes; the table edits the
+  members.
+
+V200 (`build/V200-areas-and-auras.md`) builds this: an `area` instance held by the user, with its
+members, and each printed rider stored as a watcher on each member it applies to.
 
 ## 7. History and corrections
 
@@ -345,6 +360,7 @@ The per-class sweeps afterwards reuse these mechanisms ability by ability.
 1. **Mark visibility:** can players see marks on foes? Recommended: yes, marks are table knowledge.
    The Mark lifecycle itself is printed, so it isn't a question.
 2. **Area membership:** is it acceptable that the table picks who is in an area and updates the
-   list as creatures move, since the app has no map? Recommended: yes.
+   list as creatures move, since the app has no map? Recommended: yes. **Answered yes, 2026-09-25**,
+   with adding a member counting as entering the area (section 6).
 3. **Active-effects display:** is a simple list per creature (source, duration, end button) enough
    for V1, with polish later? Recommended: yes.

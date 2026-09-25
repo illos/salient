@@ -27,6 +27,7 @@ import { Button } from '../components/ui/button';
 import { useCommand } from '../ui';
 import { describeContribution, describeModifier } from '../../shared/resolve/modifiers';
 import { describeWatcher } from '../../shared/resolve/watchers';
+import { describeArea } from '../../shared/resolve/areas';
 import { describeDuration } from '../../shared/resolve/lastingEffects';
 
 type Actor = { kind: 'character' | 'foe' | 'squad'; id: string; name: string };
@@ -523,22 +524,24 @@ export function CompiledEffects({
                     ? 'Strained effect'
                     : effect.kind === 'watcher'
                       ? 'Watcher'
-                      : effect.kind === 'mark'
-                        ? 'Mark'
-                        : effect.kind === 'modifier'
-                          ? 'Modifier'
-                          : effect.kind === 'gain'
-                            ? 'Gain'
-                            : effect.kind === 'push'
-                              ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
-                                  /^./,
-                                  letter => letter.toUpperCase(),
-                                )
-                              : effect.kind === 'condition'
-                                ? 'Condition'
-                                : effect.kind === 'triggered-damage'
-                                  ? 'Triggered damage'
-                                  : 'Damage'}
+                      : effect.kind === 'area'
+                        ? 'Area'
+                        : effect.kind === 'mark'
+                          ? 'Mark'
+                          : effect.kind === 'modifier'
+                            ? 'Modifier'
+                            : effect.kind === 'gain'
+                              ? 'Gain'
+                              : effect.kind === 'push'
+                                ? `${effect.vertical ? 'Vertical ' : ''}${effect.movement === 'pull' ? 'pull' : effect.movement === 'slide' ? 'slide' : 'push'}`.replace(
+                                    /^./,
+                                    letter => letter.toUpperCase(),
+                                  )
+                                : effect.kind === 'condition'
+                                  ? 'Condition'
+                                  : effect.kind === 'triggered-damage'
+                                    ? 'Triggered damage'
+                                    : 'Damage'}
               </strong>
               <Badge variant="outline">
                 {effect.kind === 'damage'
@@ -553,7 +556,9 @@ export function CompiledEffects({
                         : effect.status === 'not-strained'
                           ? 'Not strained'
                           : 'Manual'
-                      : effect.kind === 'watcher' || effect.kind === 'mark'
+                      : effect.kind === 'watcher' ||
+                          effect.kind === 'mark' ||
+                          effect.kind === 'area'
                         ? effect.status === 'applied'
                           ? 'Tracked effect'
                           : `Manual ${effect.kind}`
@@ -753,6 +758,15 @@ export function CompiledEffects({
                   : `Resolve it at the table: ${effect.requirements.join('; ')}.`}
               </span>
             )}
+            {effect.kind === 'area' && (
+              <span>
+                {effect.payload ? describeArea(effect.payload) : 'Amount unknown'} ·{' '}
+                {describeDuration(effect.duration, effect.spec.endsWhen)}.{' '}
+                {effect.status === 'applied'
+                  ? 'The table keeps who is in the area in the active effects list (/effect members); adding a creature is it entering the area.'
+                  : `Resolve it at the table: ${effect.requirements.join('; ')}.`}
+              </span>
+            )}
             {effect.kind === 'mark' && (
               <span>
                 {effect.status === 'applied'
@@ -792,6 +806,7 @@ export function CompiledEffects({
               (effect.kind !== 'gain' || effect.status === 'manual') &&
               (effect.kind !== 'modifier' || effect.status === 'manual') &&
               (effect.kind !== 'watcher' || effect.status === 'manual') &&
+              (effect.kind !== 'area' || effect.status === 'manual') &&
               (effect.kind !== 'mark' || effect.status === 'manual') &&
               (effect.kind !== 'strained' || effect.status === 'manual') &&
               (effect.kind !== 'triggered-damage' || effect.status === 'manual') &&

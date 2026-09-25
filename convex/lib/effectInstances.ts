@@ -189,12 +189,20 @@ export async function applyEffectInstance(
     await write(ctx, scope, holder, { effectInstances: [...current.effectInstances, instance] });
     return { instance, holder, endedAtApplication: instance.endedReason! };
   }
-  const group = current.effectInstances.filter(
-    other =>
-      other.status === 'active' &&
-      other.abilityId === input.abilityId &&
-      other.subject.id === input.subject.id,
-  );
+  // V200: an area instance is the area itself, held by its user; stacking is judged on the
+  // riders its members hold. A rider is one printed effect of the ability, so riders are grouped by
+  // their index as well: two riders of one area on a member are different effects, while the same
+  // rider from two uses (or two users) is the same ability used again.
+  const group =
+    input.kind === 'area'
+      ? []
+      : current.effectInstances.filter(
+          other =>
+            other.status === 'active' &&
+            other.abilityId === input.abilityId &&
+            other.subject.id === input.subject.id &&
+            other.area?.rider === input.area?.rider,
+        );
   const overlap = group[group.length - 1];
   let superseded: EffectInstance | undefined;
   let manualGroup = false;
@@ -202,7 +210,10 @@ export async function applyEffectInstance(
     // Only the same owner's repeat is settled by the printed rule here. Whether two users' uses
     // (for example two Nulls' Relentless Nemesis, each benefiting its own user) stack is not, so a
     // different owner's overlap is left to the table.
+    // V200: the same rider from another area of the same ability (two uses whose areas overlap on
+    // this member) is not settled here either; the table applies the stacking rule.
     const equal =
+      overlap.area?.id === input.area?.id &&
       overlap.owner.id === input.owner.id &&
       JSON.stringify(overlap.payload) === JSON.stringify(input.payload) &&
       !overlap.endsWhen.length &&
@@ -303,6 +314,22 @@ export async function applyEffectInstance(
         }),
       );
   }
+  // V200: a performance is checked at the start of each combat round, when its owner must be able
+  // to maintain it (feature/troubadour/level-1/routines.md).
+  if (committed && !manualGroup && input.endsWhen.includes('performance') && holds(input.owner))
+    instance.registrationIds.push(
+      await registerWork(ctx, scope, committed._id, {
+        timing: { scope: 'round', boundary: 'round-start' },
+        work: { kind: 'performance', effectInstanceId: input.id },
+        source: {
+          logEntryId: input.sourceUseEventId,
+          originId: input.owner.id,
+          sourcePath: input.sourcePath,
+          label: `${input.actorLabel}: ${input.abilityName} (performance maintained at the start of each round)`,
+        },
+        affectedIds: [holder.id],
+      }),
+    );
   if (encounterId && schedulable) {
     if (committed)
       instance.registrationIds.push(
@@ -458,6 +485,23 @@ export async function endEffectInstance(
   };
   instances[index] = ended;
   await write(ctx, scope, holder, { effectInstances: instances });
+  // V200: an area's riders end with it, on each member that holds one.
+  if (instance.payload.kind === 'area')
+    for (const member of instance.members ?? []) {
+      if (!holds(member.party)) continue;
+      const memberHolder: EffectHolder = {
+        kind: member.party.kind,
+        id: await resolveHistoricalId(ctx, scope.campaignId, member.party.id),
+      };
+      for (const childId of member.effects)
+        await endEffectInstance(
+          ctx,
+          scope,
+          memberHolder,
+          childId,
+          `${instance.actorLabel}'s ${instance.abilityName} area ended (${reason})`,
+        );
+    }
   if (holds(instance.owner) && !sameHolder(holder, instance.owner)) {
     const ownerId = await resolveHistoricalId(ctx, scope.campaignId, instance.owner.id);
     const owner = { kind: instance.owner.kind, id: ownerId };

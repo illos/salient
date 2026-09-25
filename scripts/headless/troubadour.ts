@@ -50,6 +50,8 @@ const withoutResource = (state: Saved['liveState']) => {
   return rest;
 };
 const cid = () => crypto.randomUUID();
+/** V200: performances compiled as areas (feature/ability/troubadour/level-1/*.md). */
+const areaPerformances = new Set(['Revitalizing Limerick', '"Ballad of the Beast"']);
 export async function runTroubadour({ actors: { director, peer }, run, runId }: ScenarioContext) {
   await run(
     'Troubadour: four class-act builds, pruning and forty-four actions persist',
@@ -243,6 +245,8 @@ export async function runTroubadour({ actors: { director, peer }, run, runId }: 
             );
             const affectedId = ledger.selfTargets.includes(name) ? id : targetId;
             const target = { refKind: 'character', id: affectedId };
+            // V200: a compiled performance names its user ("Self and each ally in the area").
+            const performance = areaPerformances.has(name);
             await invoke(id, 'adjust.heroic-resource', { value: cost });
             await invoke(affectedId, 'adjust.stamina', {
               value: name === 'Drama: Return to Life' ? -w.expected.staminaMaximum : 24,
@@ -256,7 +260,9 @@ export async function runTroubadour({ actors: { director, peer }, run, runId }: 
               targets:
                 name === 'Artful Flourish'
                   ? [target, { refKind: 'character', id: lowId }]
-                  : [target],
+                  : performance
+                    ? [{ refKind: 'character', id }, target]
+                    : [target],
             });
             const persisted = await event(used.eventId);
             const after = await get(affectedId);
@@ -302,6 +308,36 @@ export async function runTroubadour({ actors: { director, peer }, run, runId }: 
                   24 - rolled.damageByTier[second.tier - 1]!,
                 );
               }
+            } else if (performance) {
+              // V200: a performance compiled as an aura the table keeps the members of
+              // (feature/troubadour/level-1/routines.md). The Troubadour holds the area with itself
+              // and the ally as members; each member's riders fire later (Ballad of the Beast at a
+              // member's turn start, Revitalizing Limerick at the Troubadour's turn end), so nothing
+              // changes on the ally at the use.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              type Held = {
+                effectInstances?: {
+                  id: string;
+                  kind: string;
+                  status: string;
+                  sourceUseEventId: string;
+                  members?: { party: { id: string } }[];
+                }[];
+              };
+              const area = ((await get(id)).liveState as unknown as Held).effectInstances?.find(
+                e => e.sourceUseEventId === used.eventId && e.kind === 'area',
+              );
+              assert.equal(area?.status, 'active', name);
+              assert.deepEqual(
+                area?.members?.map(m => m.party.id),
+                [id, targetId],
+                `${name} members`,
+              );
+              assert.deepEqual(
+                (after.liveState as unknown as { stamina: number; surges?: number }).stamina,
+                (before.liveState as unknown as { stamina: number }).stamina,
+                `${name} nothing at the use`,
+              );
             } else if (name === 'Riposte') {
               // V173: a compiled triggered action persists as ability.use. Used by hand there is no
               // observed trigger, so its effect is left to the table and the target is unchanged.

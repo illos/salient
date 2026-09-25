@@ -302,7 +302,7 @@ export const CENSOR_ACTIVATION: Record<string, string> = {
   'With My Blessing':
     'The target can use With My Blessing: Target Strike. Resolve the granted strike manually.',
   'Blessing of the Faithful':
-    'Until the end of the encounter or until you are dying, you and each ally in the aura gain 1 surge at the end of each of your turns. Adjust surges manually.',
+    'Until the end of the encounter or until you are dying, you and each ally in the aura gain 1 surge at the end of each of your turns. The engine keeps the aura: its members are the targets, then who the table adds or removes (/effect members), and each member gains the surge at your turn end.',
   Sentenced:
     'Restrained is manual; while the target is restrained this way, your abilities that impose forced movement can still move it.',
   'Edict of Disruptive Isolation':

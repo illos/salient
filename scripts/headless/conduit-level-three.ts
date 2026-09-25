@@ -430,6 +430,41 @@ export async function runConduitLevelThree({
               assert.equal(watcher?.kind, 'watcher', name);
               assert.equal(watcher?.status, 'active', name);
               assert.equal(now.surges, was.surges, `${name} no surge at the use`);
+            } else if (name === 'Wellspring of Grace') {
+              // V200: compiled without a power roll as an aura the table keeps the members of.
+              // feature/ability/conduit/level-2/wellspring-of-grace.md ("Each ally in the area"):
+              // "whenever a target starts their turn in the area, they can spend a Recovery". The
+              // Conduit holds the area with the target as its member; the target holds the
+              // turn-start rider; nothing changes at the use.
+              assert.equal(persisted?.kind, 'ability.use', name);
+              type Held = {
+                effectInstances?: {
+                  id: string;
+                  kind: string;
+                  status: string;
+                  sourceUseEventId: string;
+                  members?: { party: { id: string } }[];
+                  area?: { id: string };
+                }[];
+              };
+              const area = ((await get(id)).liveState as unknown as Held).effectInstances?.find(
+                e => e.sourceUseEventId === use.eventId && e.kind === 'area',
+              );
+              assert.equal(area?.status, 'active', name);
+              assert.deepEqual(
+                area?.members?.map(m => m.party.id),
+                [affectedId],
+                `${name} members`,
+              );
+              const rider = (after.liveState as unknown as Held).effectInstances?.find(
+                e => e.area?.id === area?.id,
+              );
+              assert.equal(rider?.status, 'active', `${name} rider on the member`);
+              assert.equal(
+                after.liveState?.stamina,
+                before.liveState?.stamina,
+                `${name} no damage`,
+              );
             } else {
               assert.equal(persisted?.kind, 'ability.recorded', name);
               assert.equal(persisted?.payload?.data?.manual, true, name);

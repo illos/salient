@@ -113,6 +113,7 @@ export const effectEndTriggerValidator = v.union(
   v.literal('owner-dying'),
   v.literal('reused'),
   v.literal('willingly-ended'),
+  v.literal('performance'),
 );
 /** V159 modifier payload (shared/contracts/liveState.ts ModifierPayload). */
 export const modifierPayloadValidator = v.union(
@@ -150,6 +151,7 @@ export const watcherEventValidator = v.union(
       'ability-used',
       'strike-made',
       'marked-damaged',
+      'area-entered',
     ] as const
   ).map(value => v.literal(value)),
 );
@@ -197,6 +199,22 @@ const effectPayloadValidator = v.union(
     text: v.string(),
     mark: v.object({ retargetDistance: v.string() }),
   }),
+  // V200: an area or aura and its riders (shared/contracts/liveState.ts AreaPayload).
+  v.object({
+    kind: v.literal('area'),
+    text: v.string(),
+    area: v.object({
+      riders: v.array(
+        v.object({
+          who: v.object({
+            self: v.boolean(),
+            others: v.union(v.literal('ally'), v.literal('enemy'), v.literal('none')),
+          }),
+          watcher: watcherValidator,
+        }),
+      ),
+    }),
+  }),
 );
 /** V175: the four printed Mark benefits (shared/contracts/liveState.ts MarkBenefitKind). */
 export const markBenefitValidator = v.union(
@@ -212,6 +230,7 @@ export const effectInstanceValidator = v.object({
     v.literal('instruction'),
     v.literal('modifier'),
     v.literal('aura'),
+    v.literal('area'),
     v.literal('mark'),
     v.literal('watcher'),
     v.literal('maintained'),
@@ -258,6 +277,28 @@ export const effectInstanceValidator = v.object({
         eventId: v.string(),
       }),
     ),
+  ),
+  /** V200: an area's members (shared/contracts/liveState.ts AreaMember). */
+  members: v.optional(
+    v.array(
+      v.object({
+        party: partyValidator,
+        effects: v.array(v.string()),
+        manual: v.optional(v.string()),
+        addedEventId: v.string(),
+      }),
+    ),
+  ),
+  /** V200: a rider of an area stored on one member. */
+  area: v.optional(
+    v.object({
+      id: v.string(),
+      holder: v.object({
+        kind: v.union(v.literal('character'), v.literal('foe')),
+        id: v.string(),
+      }),
+      rider: v.number(),
+    }),
   ),
 });
 /** V158: an owner's pointer to an active instance another creature holds. */
