@@ -48,3 +48,7 @@ Pinned Compendium paths and named sections are given in the research report.
 - QC R2: configurable animal traits now have five independent source/section IDs and controls.
   Stench is marked boundary/member-selection context. Filter reconciliation waits until leaving
   the active card, preserving in-progress edits and restoring focus in another retained card.
+
+- QC residual R1: removed Cult Victim thickness/eligibility language from Breeze and Mind
+  Projection. Rechecked every repeated hero fact field (not just identical whole summaries)
+  against its source; added Motivate Earth’s separate opening-creation alternative.
