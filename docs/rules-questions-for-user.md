@@ -2121,18 +2121,34 @@ zombies' 5 Stamina or establish a general winded-minion rule.
 
 ## Q-FOE-3: Shared Ferocity's first-use scope
 
-Open, queued by V211 on 2026-09-25; blocks this V226 trait's automatic limit only.
+Answered by the user on 2026-09-25; recorded by V231. Runtime implementation remains V226.
 
-**Question:** Should Shared Ferocity grant Malice once per qualifying creature per encounter?
+**Accepted ruling:** Shared Ferocity grants the Director one recorded 1d3 Malice gain per
+encounter, on the first qualifying use of an ability that costs ferocity within the werewolf's
+line of effect. Further uses by the same or another creature give no additional grant that
+encounter. A new encounter resets the limit. Line of effect remains a supplied fact.
 
-**Recommendation:** yes; retain an encounter/creature record and the accepted 1d3. This is an
-interpretation awaiting confirmation, not a source-stated reset interval.
+**Example:** the first fury spends ferocity with the required line of effect: grant 1d3 Malice.
+That fury spends again, or a second fury spends: neither produces another Shared Ferocity grant.
+A use without the required line of effect does not consume the opportunity.
 
-`monster/group/werewolf.md`, Shared Ferocity, grants the Director 1d3 Malice “the first time a
-creature uses an ability that costs ferocity” within the werewolf's line of effect. The paragraph
-states no round, turn, encounter or lifetime reset. The stat-block Accursed Rage and general
-`rule/monster/malice.md` do not settle the first-use scope. Alternatives: one trigger total per
-werewolf encounter, or another explicitly chosen interval. Line of effect remains a supplied fact.
+**Source and interpretation:** `monster/group/werewolf.md`, Shared Ferocity, says “the first
+time a creature uses an ability that costs ferocity” but gives no explicit reset interval.
+The once-per-encounter scope is the user-approved interpretation for this trait, not a general
+rule for all occurrences of “first time.” The earlier per-creature recommendation is superseded.
+
+At the user's request, searched the pinned unified Markdown for “first time” and compared:
+
+- `feature/conduit/level-1/domain-piety-and-effects.md`, Creation Domain Piety: the first time in
+  an encounter that a creature uses an area ability. This supports a first qualifying event reading.
+- `feature/troubadour/level-4/melodrama.md`: first-time events involving a hero, framed as events
+  during battle; `feature/troubadour/level-1/drama.md`, Drama in Combat, supplies encounter context.
+- `feature/null/level-1/discipline.md`, Discipline in Combat: explicitly says each combat round
+  for recurring first-use resource gains.
+
+These parallels support the revised recommendation but do not themselves conclusively supply
+Shared Ferocity's omitted interval. The user then confirmed: “Once per encounter.” The ruling
+settles this selected-roster trait; it does not reinterpret those comparison features.
 
 ## Q-FOE-4: Thorn Dragon's Domain rider durations
 

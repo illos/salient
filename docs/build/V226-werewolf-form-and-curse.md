@@ -1,6 +1,6 @@
 # V226: Werewolf form, curse and Shared Ferocity
 
-Rules review: required. Depends on: V214, V225. Q-FOE-3 affects Shared Ferocity's limit.
+Rules review: required. Depends on: V214, V225. Accepted Q-FOE-3 sets Shared Ferocity's limit.
 
 ## Goal
 
@@ -15,7 +15,7 @@ story cure decisions while automating their defined combat consequences.
   lycanthropy turn-end rage and respite retention. Cure is explicit table resolution linked to
   the printed Find a Cure project; no fabricated downtime implementation.
 - Blood In Their Eyes holy-damage interval, temporary Stamina and speed; Moonfall line-of-effect
-  facts, action choice and rage gain; Shared Ferocity recorded 1d3 with Q-FOE-3 limit.
+  facts, action choice and rage gain; Shared Ferocity grants one recorded 1d3 per encounter under accepted Q-FOE-3.
 
 Spec: `docs/lasting-effects-design.md`;
 `docs/table-spec.md#respite-mode`;
@@ -37,11 +37,16 @@ Likely paths: effect-derived actor facts, potency history, damage observations, 
 4. Blood In Their Eyes grants max(current temp, 10), speed +3 until turn end; prior holy damage
    since last turn end triggers the printed restriction. Ordinary unrelated damage does not.
 5. Moonfall grants one extra move or maneuver only with line of effect to moon; existing-rage
-   eligible creature gets +2 at its end. Shared Ferocity, after Q-FOE-3, rolls 1d3 exactly once per
-   accepted scope and requires an ability that costs ferocity plus line of effect.
+   eligible creature gets +2 at its end. Shared Ferocity grants 1d3 only for the first qualifying
+   ferocity-cost ability in the encounter with supplied line of effect. Use accepted die result 2:
+   first qualifying use adds 2 Malice; subsequent uses by that creature or a different creature
+   add 0. An earlier use without line of effect does not consume the limit; a new encounter
+   makes it available again. Retry and redo retain the accepted roll and never grant twice.
 6. Test gate plus `foe-werewolf`: read actor facts, counters, cost, history, turn allowance, curse
    and cleanup through public queries. Undo/redo preserves rolls and all modifier dependencies.
 
 ## Work log
 
 - 2026-09-25: registered by V211; no implementation or test results.
+- 2026-09-25: V231 records accepted once-per-encounter Q-FOE-3 after comparison with other
+  pinned first-time resource features. The per-creature proposal is superseded; no runtime work.

@@ -220,3 +220,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V228 | [Connected V1 foe proof and residual manual work](V228-foe-connected-play-proof.md) | Registered |
 | V229 | [Director reaction interaction ruling](V229-foe-reaction-ruling.md) | Merged (`a57bb42e`); documentation only, Test and QC PASS |
 | V230 | [Ravenous Horde spawn ruling](V230-ravenous-horde-ruling.md) | Merged (`3f45f32b`); documentation only, Test and QC PASS |
+| V231 | [Shared Ferocity first-use ruling](V231-shared-ferocity-ruling.md) | Committed on branch; QC pending |

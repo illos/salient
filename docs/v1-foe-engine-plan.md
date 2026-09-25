@@ -142,7 +142,7 @@ not permission to work in another slice's checkout. V211 is this audit and plan.
 | [V223](build/V223-foe-spawn-and-revival.md) | Reinforcements, revival and delayed death | V214, V215, V218; accepted Q-FOE-2 spawn exception |
 | [V224](build/V224-foe-areas-and-terrain.md) | Persistent zones, auras, movement-trigger facts and terrain lifecycle | V217, V219, V221, V222 |
 | [V225](build/V225-werewolf-rage.md) | Accursed Rage and compulsory strike sequence | V213, V218, V221, V222 |
-| [V226](build/V226-werewolf-form-and-curse.md) | Full Wolf, lycanthropy, Moonfall and Shared Ferocity | V214, V225; Q-FOE-3 for Shared Ferocity |
+| [V226](build/V226-werewolf-form-and-curse.md) | Full Wolf, lycanthropy, Moonfall and Shared Ferocity | V214, V225; accepted Q-FOE-3 once-per-encounter limit |
 | [V227](build/V227-thorn-dragon-effects.md) | Dragonsealed, healing aura, briars and domain | V214, V217, V218, V219, V221, V224; Q-FOE-4 for domain durations |
 | [V228](build/V228-foe-connected-play-proof.md) | Connected roster proof, remaining manual-work report and final cross-feature fixes | Relevant completed slices V212–V227 |
 
@@ -176,8 +176,9 @@ Queued in [the questions file](rules-questions-for-user.md):
 - **Q-FOE-2:** Ravenous Horde says newly created minions are winded without giving exact Stamina.
   Answered: 2 Stamina per zombie, separate squads and a 2-point casualty step. This is a
   user-approved Ravenous Horde exception; ordinary minions retain their existing rules.
-- **Q-FOE-3:** Shared Ferocity's "first time a creature" omits a reset interval. Recommend once
-  per qualifying creature per encounter, labelled as an interpretation until answered.
+- **Q-FOE-3:** answered: one 1d3 Malice grant per encounter on the first qualifying expenditure,
+  with required line of effect. A different creature does not grant another use. This accepted
+  interpretation supersedes the original per-creature proposal.
 - **Q-FOE-4:** Thorn Dragon's Domain does not print expiry for its speed reduction or linked
   bleeding. Keep their duration explicit/manual until the user settles it.
 

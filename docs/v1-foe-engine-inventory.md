@@ -369,7 +369,7 @@ assign the payload; an unimplemented payload stays manual with the actual paymen
 | --- | --- |
 | `rule/monster/malice.md`, Basic Malice / **Brutal Effectiveness** | V214/V222: 3 Malice, next ability with potency +1; an ability without potency must not consume it |
 | Same, **Malicious Strike** | V214/V222: 5+ Malice, next strike adds highest characteristic plus extras to one chosen target, capped at 3×highest characteristic; encounter-wide no-consecutive-round usage, even by another monster |
-| `monster/group/werewolf.md`, **Shared Ferocity** | V226: confirmed line of effect to a ferocity-cost ability yields recorded 1d3 Malice at the chosen first-use scope; Q-FOE-3 |
+| `monster/group/werewolf.md`, **Shared Ferocity** | V226: confirmed line of effect to a ferocity-cost ability yields one recorded 1d3 Malice grant per encounter, at the first qualifying use across creatures; accepted Q-FOE-3 |
 | `monster/group/dragon.md`, **Thorn Dragon's Domain** | V227: Director declares the one-week location predicate; other creatures (including other dragons) take turn-start speed −2, minimum 1; only the source dragon is exempt from speed loss; any creature restrained while grounded also bleeds; duration question Q-FOE-4 |
 | `rule/monster/villain-action.md`, Villain Actions | V213: at another creature's turn end; each named action once/encounter; at most one villain action per round across all such creatures; order may vary |
 | `rule/monster/end-effect.md`, End Effect, plus printed stat-block values | V213: optional unreduceable damage, chosen save-ended effect; do not auto-spend at End turn |
