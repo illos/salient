@@ -47,3 +47,7 @@ Source files and sections are enumerated in the inventory; no online rules sourc
   dragon from speed loss, You! to include the blackguard, and Full Wolf to grant extra rage only
   on strikes. Added explicit negative acceptance cases and corrected the same weakened wording
   for Malign Thicket. Review remains pending on the revised candidate; no gameplay test run.
+- Test accepted `89e25645`: diff check and 582-document link check passed, and the roster/inventory
+  reconciliation found no mismatch (36 stat blocks; 110 abilities, 50 traits, 25 band Malice
+  records, two basic Malice options and two group traits). QC then gave final PASS on that tip.
+  Fast-forward merged into main. This documentation release needs no runtime update.
