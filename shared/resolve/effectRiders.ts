@@ -22,7 +22,12 @@ export interface EffectRider {
     /** V157: a creature's own movement ("Each target can move up to their speed"). */
     | 'move'
     /** V157: the user's later ability use, made by the table through the ability operation. */
-    | 'ability-use';
+    | 'ability-use'
+    /**
+     * V202: the user takes their turn after the triggering hero (Hesitation Is Weakness). Accepted
+     * from its turn-end card, the next turn start records it (convex/lib/initiative.ts).
+     */
+    | 'turn-order';
   /**
    * V152 `after-effects`: the section reads a tier outcome other than damage (Choke's "made
    * restrained by this ability"), so it waits for that target's condition outcomes too.

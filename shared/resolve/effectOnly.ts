@@ -141,8 +141,10 @@ interface Pattern {
    * admitted only in a triggered ability whose Trigger section names that event.
    * V174 `damage-taken`: the sentence changes the damage the creature it names took, so the
    * trigger must be that creature's `damage-taken` (shared/resolve/damageRevision.ts).
+   * V202 `hero-turn-end`: the sentence speaks of "the triggering hero", so the trigger must be
+   * another hero's turn end.
    */
-  trigger?: 'damage' | 'melee-strike' | 'damage-taken';
+  trigger?: 'damage' | 'melee-strike' | 'damage-taken' | 'hero-turn-end';
 }
 
 const amount = (text: string | undefined) => {
@@ -256,6 +258,24 @@ const PATTERNS: readonly Pattern[] = [
       /^Each target can spend a Recovery\. Additionally, each target can use a free triggered action to end one effect on them that is ended by a saving throw or that ends at the end of their turn, or to stand up if prone\./,
     read: instruction('target', 'recovery'),
   },
+  // V202 feature/ability/censor/level-1/my-life-for-yours.md: "You spend a Recovery and the target
+  // regains Stamina equal to your recovery value." The user's Recovery and the target's healing
+  // are table work (rule/health/recoveries.md), as the V109 `recovery` rider that has the user
+  // spend a Recovery for an ally's Stamina is (shared/resolve/effectRiders.ts).
+  {
+    pattern: /^You spend a Recovery and the target regains Stamina equal to your recovery value\./,
+    read: instruction('target', 'recovery'),
+    singleTarget: true,
+  },
+  // V202 feature/ability/shadow/level-1/hesitation-is-weakness.md: "You take your turn after the
+  // triggering hero." rule/combat/triggered-action.md: "a shadow hero can use their Hesitation Is
+  // Weakness ability to take their turn in response to the trigger of another hero ending their
+  // turn." Accepted from its card, the user's next Take turn records it (convex/lib/initiative.ts).
+  {
+    pattern: /^You take your turn after the triggering hero\./,
+    read: instruction('actor', 'turn-order'),
+    trigger: 'hero-turn-end',
+  },
   // feature/ability/conduit/level-1/drain.md ("The target can spend a Recovery"); sermon-of-grace.md.
   {
     pattern: /^The target can spend a Recovery\./,
@@ -290,7 +310,7 @@ export interface EffectOnlySentence {
   clause: EffectOnlyClause;
   singleTarget: boolean;
   /** V173: the Trigger section the sentence needs (Pattern.trigger). */
-  trigger?: 'damage' | 'melee-strike' | 'damage-taken';
+  trigger?: 'damage' | 'melee-strike' | 'damage-taken' | 'hero-turn-end';
 }
 
 /** Reads one Effect section whole, or `undefined` when any part is outside the patterns. */

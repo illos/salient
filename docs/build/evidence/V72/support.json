@@ -17,8 +17,8 @@
     },
     "hero-standalone": {
       "total": 371,
-      "supported": 112,
-      "manual": 259
+      "supported": 115,
+      "manual": 256
     },
     "kit-signature": {
       "total": 25,
@@ -20921,7 +20921,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -20929,73 +20930,33 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours#block:0:0:40d9f6a8d629aced",
-          "locator": "block:0:0",
-          "clause": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours#block:1:0:b3f1e67ab9d22753",
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours#block:1:0:3c595dde2a421c5f",
           "locator": "block:1:0",
-          "clause": "You spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and the target regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You spend a Recovery and the target regains Stamina equal to your recovery value.",
+          "kind": "instruction",
+          "shape": "recovery",
+          "after": "",
+          "subject": "target"
         },
         {
-          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours#block:2:0:46cc1384be5aac0b",
+          "id": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours#block:2:0:8fa4495415ffa36f",
           "locator": "block:2:0",
-          "clause": "You can end one effect on the target that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or a [prone](scc.v1:mcdm.heroes.v1/condition/prone) target can stand up.",
-          "kind": "unsupported",
-          "shape": "resource-spend:spend N wrath",
-          "reason": "resource-spend",
-          "dependency": "unknown"
+          "clause": "You can end one effect on the target that is ended by a saving throw or that ends at the end of their turn, or a prone target can stand up.",
+          "kind": "response-spend",
+          "subject": "target",
+          "resource": "wrath",
+          "amount": 1,
+          "variable": false,
+          "effect": {
+            "kind": "instruction",
+            "shape": "end-effect"
+          },
+          "cost": "Spend 1 Wrath"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-unobserved",
-          "locator": "block:0",
-          "clause": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.",
-          "message": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and the target regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "You can end one effect on the target that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or a [prone](scc.v1:mcdm.heroes.v1/condition/prone) target can stand up.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self or one ally",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "My Life for Yours",
@@ -22012,7 +21973,7 @@
           "clause": "An enemy within 10 squares starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
           "kind": "unsupported",
           "shape": "trigger",
-          "reason": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action.",
+          "reason": "The engine observes this turn boundary, but the trigger is another creature's turn and the target is \"Self or one ally\", which the card can't name for the user; and its effect has a creature take their turn before the triggering enemy, whose turn the clock has already started (the app keeps one turn in progress, convex/lib/initiative.ts). Use the ability by hand as a triggered action.",
           "dependency": "unknown"
         },
         {
@@ -22033,10 +21994,10 @@
           "message": "no-power-roll"
         },
         {
-          "code": "trigger-unobserved",
+          "code": "trigger-manual",
           "locator": "block:0",
           "clause": "An enemy within 10 squares starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action."
+          "message": "The engine observes this turn boundary, but the trigger is another creature's turn and the target is \"Self or one ally\", which the card can't name for the user; and its effect has a creature take their turn before the triggering enemy, whose turn the clock has already started (the app keeps one turn in progress, convex/lib/initiative.ts). Use the ability by hand as a triggered action."
         },
         {
           "code": "manual-section",
@@ -29683,7 +29644,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -29691,73 +29653,33 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered#block:0:0:40d9f6a8d629aced",
-          "locator": "block:0:0",
-          "clause": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered#block:1:0:e141dd44bb812383",
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered#block:1:0:cb9e1f78a89a6117",
           "locator": "block:1:0",
-          "clause": "The target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "The target can spend a Recovery.",
+          "kind": "instruction",
+          "shape": "recovery",
+          "after": "",
+          "subject": "target"
         },
         {
-          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered#block:2:0:81ada2def6f8597a",
+          "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered#block:2:0:67e7391eb3dde8ce",
           "locator": "block:2:0",
-          "clause": "The target can spend an additional [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) for each essence spent.",
-          "kind": "unsupported",
-          "shape": "resource-spend:spend N+ essence",
-          "reason": "resource-spend",
-          "dependency": "unknown"
+          "clause": "The target can spend an additional Recovery for each essence spent.",
+          "kind": "response-spend",
+          "subject": "target",
+          "resource": "essence",
+          "amount": 1,
+          "variable": true,
+          "effect": {
+            "kind": "instruction",
+            "shape": "recovery"
+          },
+          "cost": "Spend 1+ Essence"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-unobserved",
-          "locator": "block:0",
-          "clause": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.",
-          "message": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "The target starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) or takes damage.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "The target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:2:0",
-          "clause": "The target can spend an additional [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) for each essence spent.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self or one ally",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Breath of Dawn Remembered",
@@ -44066,7 +43988,8 @@
         "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
         "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
       },
-      "execution": "manual",
+      "execution": "supported",
+      "effectOnly": true,
       "tiers": [
         [],
         [],
@@ -44074,58 +43997,18 @@
       ],
       "sections": [
         {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness#block:0:0:ba47b57635b23728",
-          "locator": "block:0:0",
-          "clause": "Another hero ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). That hero can't have used this ability to start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "kind": "unsupported",
-          "shape": "trigger",
-          "reason": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action.",
-          "dependency": "unknown"
-        },
-        {
-          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness#block:1:0:04843726d5caf8a0",
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness#block:1:0:2a01955c690d76aa",
           "locator": "block:1:0",
-          "clause": "You take your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) after the triggering hero.",
-          "kind": "unsupported",
-          "shape": "effect-paragraph:effect",
-          "reason": "effect-paragraph",
-          "dependency": "unknown"
+          "clause": "You take your turn after the triggering hero.",
+          "kind": "instruction",
+          "shape": "turn-order",
+          "after": "",
+          "subject": "actor"
         }
       ],
-      "diagnostics": [
-        {
-          "code": "grammar",
-          "locator": "envelope",
-          "clause": "",
-          "message": "no-power-roll"
-        },
-        {
-          "code": "trigger-unobserved",
-          "locator": "block:0",
-          "clause": "Another hero ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). That hero can't have used this ability to start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:0:0",
-          "clause": "Another hero ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). That hero can't have used this ability to start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "manual-section",
-          "locator": "block:1:0",
-          "clause": "You take your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) after the triggering hero.",
-          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
-        },
-        {
-          "code": "target-boundary",
-          "locator": "header:target",
-          "clause": "Self",
-          "message": "Only one, counted or area target envelopes are eligible."
-        }
-      ],
-      "live": "legacy-compatibility",
-      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled gains and ordered manual instructions without a power roll through registered ability operations.",
       "grants": [
         {
           "name": "Hesitation Is Weakness",
@@ -99938,7 +99821,7 @@
           "clause": "An ally ends their turn.",
           "kind": "unsupported",
           "shape": "trigger",
-          "reason": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action.",
+          "reason": "The engine does not observe this trigger: the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them. Use the ability by hand as a triggered action.",
           "dependency": "unknown"
         },
         {
@@ -99962,7 +99845,7 @@
           "code": "trigger-unobserved",
           "locator": "block:0",
           "clause": "An ally ends their turn.",
-          "message": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action."
+          "message": "The engine does not observe this trigger: the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them. Use the ability by hand as a triggered action."
         },
         {
           "code": "manual-section",
@@ -121169,7 +121052,7 @@
           "clause": "An ally ends their turn while the guerrilla hasn't acted this round.",
           "kind": "unsupported",
           "shape": "trigger",
-          "reason": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action.",
+          "reason": "The engine does not observe this trigger: the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them. Use the ability by hand as a triggered action.",
           "dependency": "unknown"
         },
         {
@@ -121220,7 +121103,7 @@
           "code": "trigger-unobserved",
           "locator": "block:0",
           "clause": "An ally ends their turn while the guerrilla hasn't acted this round.",
-          "message": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action."
+          "message": "The engine does not observe this trigger: the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them. Use the ability by hand as a triggered action."
         },
         {
           "code": "source-block-mismatch",
@@ -212177,7 +212060,7 @@
           "clause": "The mummy comes within distance of a [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) creature or starts their turn within distance of one.",
           "kind": "unsupported",
           "shape": "trigger",
-          "reason": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action.",
+          "reason": "The engine does not observe this trigger: the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them. Use the ability by hand as a triggered action.",
           "dependency": "unknown"
         },
         {
@@ -212201,7 +212084,7 @@
           "code": "trigger-unobserved",
           "locator": "block:0",
           "clause": "The mummy comes within distance of a [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) creature or starts their turn within distance of one.",
-          "message": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action."
+          "message": "The engine does not observe this trigger: the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them. Use the ability by hand as a triggered action."
         },
         {
           "code": "manual-section",
@@ -213544,7 +213427,7 @@
           "clause": "The giant zombie [grabs](scc.v1:mcdm.heroes.v1/condition/grabbed) two creatures or objects, or starts their turn with two creatures or objects [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).",
           "kind": "unsupported",
           "shape": "trigger",
-          "reason": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action.",
+          "reason": "The engine does not observe this trigger: the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them. Use the ability by hand as a triggered action.",
           "dependency": "unknown"
         },
         {
@@ -213568,7 +213451,7 @@
           "code": "trigger-unobserved",
           "locator": "block:0",
           "clause": "The giant zombie [grabs](scc.v1:mcdm.heroes.v1/condition/grabbed) two creatures or objects, or starts their turn with two creatures or objects [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).",
-          "message": "The engine does not observe this trigger: turn-boundary triggers are not offered yet (V173 observes damage only). Use the ability by hand as a triggered action."
+          "message": "The engine does not observe this trigger: the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them. Use the ability by hand as a triggered action."
         },
         {
           "code": "manual-section",
@@ -214014,9 +213897,9 @@
     }
   ],
   "liveCounts": {
-    "compiled": 188,
-    "compiledEffectOnly": 25,
-    "compatibility": 1433,
+    "compiled": 191,
+    "compiledEffectOnly": 28,
+    "compatibility": 1430,
     "compiledButUnavailable": 0
   }
 }

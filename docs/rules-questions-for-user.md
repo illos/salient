@@ -1922,3 +1922,64 @@ Open; V200 binds labelled interpretations so the areas can compile. Pinned `en/u
    first of two performances; `endChosenPerformance` must keep one when Medley is built.
 
 Recommendation: keep 1 to 7 as implemented; 8 is a note for level 5.
+
+## Q-TURNTRIG-1: readings behind V202's turn-boundary offers
+
+Open; V202 binds labelled readings so My Life for Yours, Breath of Dawn Remembered and Hesitation Is
+Weakness are offered at the clock's turn start and turn end. Pinned `en/unified/md`:
+- `feature/ability/shadow/level-1/hesitation-is-weakness.md`: Trigger "Another hero ends their turn.
+  That hero can't have used this ability to start their turn."; Effect "You take your turn after the
+  triggering hero."
+- `rule/combat/triggered-action.md`: "You can use one triggered action per round, either on your
+  turn or another creature's turn, but only when the action's trigger occurs." and "a shadow hero can
+  use their Hesitation Is Weakness ability to take their turn in response to the trigger of another
+  hero ending their turn."
+- `feature/ability/censor/level-1/my-life-for-yours.md` and
+  `feature/ability/elementalist/level-1/breath-of-dawn-remembered.md`: Trigger "The target starts
+  their turn or takes damage."
+- `docs/table-spec.md`, "Standing action-card/prompt window" (confirmed 2026-09-13): "all
+  outstanding response opportunities that remain valid stay available through the gap after the
+  current individual turn ends, with next individual turn start as the outer turn-based cutoff",
+  which "includes Lines of Force, failed-save hero-token prompts and opportunities first created by a
+  turn ending, such as Hesitation Is Weakness".
+
+Current behaviour:
+1. **The turn-end window** (application of the confirmed convention). In the app, End turn and the
+   next Take turn are separate operations, so a card opened at a turn end stays open through that
+   gap and closes at the next individual turn start, like every other offer. It does not close at a
+   round end. The card belongs to the round of the turn that ended, and accepting is refused once the
+   round has changed. Hesitation Is Weakness can't reach that case: it is offered only while the
+   Shadow still has a turn this round (point 2), which keeps the round open. Alternatives: (a) keep a
+   turn-end card open through the next turn start and close it at the end of that turn; (b) accept a
+   turn-end card after the round changes and count it against the round of the triggering turn.
+2. **"Your turn" is the Shadow's turn this round** (interpretation). Hesitation Is Weakness is
+   offered only while its user has an unspent turn this round. Alternatives: offer it anyway and let
+   the table decide; or let it take the user's first turn of the next round.
+3. **"Take your turn after the triggering hero" and "used this ability to start their turn"**
+   (interpretation). Accepting the card lets the Shadow take the next turn: that Take turn gives no
+   side-order or group warning, and the turn records the use that started it. Any other turn start
+   ends the allowance. A later turn end by that Shadow is not offered to another Shadow's Hesitation
+   Is Weakness, because the turn names the same ability's source. A use by hand records no allowance,
+   so such a turn is not recognised and the table checks the second sentence itself. Alternative:
+   infer "used this ability to start their turn" from the log, including uses by hand.
+4. **"Starts their turn or takes damage" are two occurrences.** The turn start is offered from the
+   clock and the damage from the damage writer, as separate cards. Both can open together, for
+   example when an area rider damages the target at its turn start. Accepting one closes its owner's
+   other earlier cards, and the re-check refuses a second ordinary triggered action that round.
+   Alternative: one card per turn for both halves.
+5. **A response to a turn start closes when that creature acts** (application of the confirmed
+   "Clarified existing precedent": the cutoff follows "the triggering event and subsequent play by
+   the affected character"). When the creature whose turn started commits an ability, cards
+   answering its turn start close; undo reopens them. V173's damage offers don't close on the
+   damaged creature's play yet; V202 leaves them unchanged. Alternative: keep turn-start cards open
+   until the next turn start regardless.
+6. **Recoveries are table work.** "You spend a Recovery and the target regains Stamina equal to your
+   recovery value." and "The target can spend a Recovery." are recorded for the table, with their
+   Spend sections (1 Wrath to end an effect or stand up; 1+ Essence for more Recoveries). Nothing is
+   spent or healed automatically, as for V157's Recovery sentences. Alternative: the engine spends
+   the Recovery and heals the target.
+7. **Prescient Grace stays manual.** Its trigger ("An enemy within 10 squares starts their turn.") is
+   observed, but "The target can then take their turn immediately before the triggering enemy."
+   needs a turn before one the clock has already started, and the app keeps one turn in progress.
+
+Recommendation: keep 1 to 7.

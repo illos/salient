@@ -2471,6 +2471,21 @@ const abilityUse: OperationDefinition = {
         commit: async (mctx, scope) => {
           // V173: the answered card resolves in this use's journal, so undo reopens it.
           if (answered) await resolveOffer(mctx, scope, answered.card, respondsTo!.answer);
+          // V202: "You take your turn after the triggering hero", accepted from a turn-end card: the
+          // next individual turn start consumes the allowance (convex/lib/initiative.ts startTurn).
+          const boundary = answered?.offer.boundary;
+          if (boundary?.kind === 'turn-end' && answered!.offer.takesTurn)
+            await journalPatch(mctx, scope, 'encounters', answered!.offer.encounterId, {
+              turnAfter: {
+                actorId: actor!.id,
+                actorName: actor!.name,
+                afterTurnId: boundary.turnId,
+                afterName: boundary.creature.name,
+                useEventId: scope.eventId,
+                sourcePath: ability.source.path,
+                abilityName: ability.name,
+              },
+            });
           // V174: the accepted response revises the hit, in this use's journal scope, before its
           // own spend is paid from what the revision leaves.
           if (revisionPlan)

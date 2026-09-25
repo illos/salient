@@ -188,12 +188,19 @@ export async function validateTurnStart(
     warnings.push(
       `Rule warning: ${entry.actor.name}'s initiative group already finished this round; its completion remains recorded.`,
     );
-  if (encounter.activeGroupId && encounter.activeGroupId !== group._id)
+  // V202: an accepted response let this creature take their turn after the triggering hero
+  // (feature/ability/shadow/level-1/hesitation-is-weakness.md), so the order warnings don't apply.
+  const allowed = encounter.turnAfter?.actorId === entry.actor.id ? encounter.turnAfter : null;
+  if (allowed)
+    warnings.push(
+      `${entry.actor.name} takes their turn after ${allowed.afterName} (${allowed.abilityName}).`,
+    );
+  if (!allowed && encounter.activeGroupId && encounter.activeGroupId !== group._id)
     warnings.push(
       'Rule warning: another initiative group is active; its remaining members resume after this turn.',
     );
   const side = sideOf(entry.actor);
-  if (!encounter.activeGroupId && encounter.activeSide && encounter.activeSide !== side)
+  if (!allowed && !encounter.activeGroupId && encounter.activeSide && encounter.activeSide !== side)
     warnings.push(
       `Rule warning: the ${encounter.activeSide === 'heroes' ? "heroes'" : "Director's"} side is expected to act next (Combat Round: sides alternate; an exhausted side lets the other finish).`,
     );
@@ -216,6 +223,9 @@ export async function startTurn(
   const { encounter, entry, group, warnings } = await validateTurnStart(ctx, encounterId, entryId);
   const round = encounter.round ?? 0;
   const side = sideOf(entry.actor);
+  // V202: the turn the accepted response allowed records the use that started it ("That hero can't
+  // have used this ability to start their turn"); any turn start consumes the allowance.
+  const allowed = encounter.turnAfter?.actorId === entry.actor.id ? encounter.turnAfter : null;
   const turnId = await journalInsert(ctx, scope, 'turns', {
     campaignId: encounter.campaignId,
     encounterId,
@@ -227,9 +237,19 @@ export async function startTurn(
     status: 'active',
     startedEventId: scope.eventId,
     endedEventId: null,
+    ...(allowed
+      ? {
+          startedBy: {
+            useEventId: allowed.useEventId,
+            sourcePath: allowed.sourcePath,
+            abilityName: allowed.abilityName,
+          },
+        }
+      : {}),
   });
   await journalPatch(ctx, scope, 'turnEntries', entry._id, { spentRound: round });
   await journalPatch(ctx, scope, 'encounters', encounterId, {
+    ...(encounter.turnAfter ? { turnAfter: null } : {}),
     activeTurnId: turnId,
     // A deliberate departure does not abandon an unfinished group's remaining members.
     activeGroupId: encounter.activeGroupId ?? group._id,

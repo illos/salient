@@ -66,10 +66,11 @@ import {
 import {
   actionTypeOfUsage,
   isPerformance,
-  revisionFits,
   riderAdmitted,
+  sentenceTriggerFits,
   spendSubjectFits,
   strainedAdmitted,
+  triggerNamesTarget,
 } from './compileAbility.ts';
 import {
   halveApplication,
@@ -1525,7 +1526,8 @@ export function resolveEffectOnly(
     (definition.trigger &&
       (!triggerAgain ||
         'unobserved' in triggerAgain ||
-        !sameTriggerSpec(triggerAgain, definition.trigger)))
+        !sameTriggerSpec(triggerAgain, definition.trigger) ||
+        !triggerNamesTarget(definition.trigger, definition.envelope.target)))
   )
     return manual('Compiled structure is outside the supported envelope.');
   // Every Effect section, read whole again, must give exactly the saved nodes in order.
@@ -1594,7 +1596,9 @@ export function resolveEffectOnly(
           !locator.startsWith(`block:${again.index}:`) ||
           !sameResponseSpend(spend, saved) ||
           (spend.effect.kind === 'potency' && !spendSubjectFits(spend, shape)) ||
-          !definition.sections.some(other => other.kind === 'damage-revision')
+          // V202: only a potency spend needs the revision; table work needs the trigger.
+          (spend.effect.kind === 'potency' &&
+            !definition.sections.some(other => other.kind === 'damage-revision'))
         );
       }
       if (node.kind === 'mark')
@@ -1635,9 +1639,7 @@ export function resolveEffectOnly(
       if (
         (parsed.singleTarget && shape.kind !== 'one' && shape.kind !== 'self') ||
         (clause.subject === 'actor' && shape.kind !== 'self') ||
-        (parsed.trigger === 'damage' && !definition.trigger) ||
-        (parsed.trigger === 'melee-strike' && definition.trigger?.from !== 'melee-strike') ||
-        (parsed.trigger === 'damage-taken' && !revisionFits(clause, definition.trigger))
+        !sentenceTriggerFits(parsed, definition.trigger)
       )
         return true;
       if (node.kind === 'damage-revision') {

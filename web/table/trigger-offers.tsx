@@ -6,6 +6,7 @@
  * may answer (the owning player or the Director) and re-checks eligibility on Accept; nothing here
  * decides a rule. V174: a damage-changing response with a Spend section also offers "Accept and
  * spend", answering with the printed amount (`spend`); larger amounts go through the command line.
+ * V202: so does a turn-boundary response with a Spend section of table work (`offer.spend`).
  * V175: Mark cards (`mark-offer`) answer with one of the offered benefits (`benefit`) or a new
  * target among the encounter's creatures (`targets`); the server re-checks both.
  * Owning specifications: docs/lasting-effects-design.md#4-triggered-actions-and-reactions,
@@ -29,9 +30,12 @@ export function TriggerOffers({ campaignId }: { campaignId: Id<'campaigns'> }) {
   return (
     <ul className="m-0 flex list-none flex-col gap-2 p-0" aria-label="Triggered action offers">
       {offers.map(card => {
-        const spend = (
-          card.offer as { revision?: { spend?: { cost: string; amount: number } } } | null
-        )?.revision?.spend;
+        // V202: a turn-boundary response's own Spend section (no revision) sits on `offer.spend`.
+        const offered = card.offer as {
+          revision?: { spend?: { cost: string; amount: number } };
+          spend?: { cost: string; amount: number };
+        } | null;
+        const spend = offered?.revision?.spend ?? offered?.spend;
         const mark = (
           card.offer as {
             mark?: {

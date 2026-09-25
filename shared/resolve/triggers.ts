@@ -20,25 +20,40 @@
 import type { ActionType } from '../contracts/rollResolution.ts';
 import { plain } from './abilityGrammar.ts';
 
-/** The events V173 observes for triggers: the damage writer's (convex/lib/watchers.ts). */
-export type TriggerEvent = 'damage-taken' | 'damage-dealt';
+/**
+ * The events observed for triggers: the damage writer's (V173, convex/lib/watchers.ts) and V202's
+ * clock turn boundaries (convex/lib/clock.ts dispatchBoundary).
+ */
+export type TriggerEvent = 'damage-taken' | 'damage-dealt' | 'turn-start' | 'turn-end';
 
 /**
  * One Trigger section the engine observes.
  * - `whose`: the creature the event is about. `target`: the creature this ability would target
- *   (the damaged creature for `damage-taken`, the dealer for `damage-dealt`); `owner`: the user.
+ *   (the damaged creature for `damage-taken`, the dealer for `damage-dealt`, the creature whose turn
+ *   it is for a turn boundary); `owner`: the user. V202 turn boundaries only: `enemy`, an enemy of
+ *   the owner; `other-hero`, a hero other than the owner.
  * - `damaged` (`damage-dealt` only): who the dealer damaged, relative to the owner.
  * - `dealer` (`damage-taken` only): `known` needs a creature that dealt the damage; `other` needs
  *   one other than the damaged creature.
  * - `from` (`damage-taken` only): the damage came from a melee strike.
+ * - V202 `orDamageTaken` (turn boundaries only): the sentence also names the target taking damage
+ *   ("The target starts their turn or takes damage."), which the damage writer observes as a
+ *   `damage-taken` of the target.
+ * - V202 `within` (turn boundaries only): the printed distance of the creature whose turn it is,
+ *   which the table confirms (there is no map).
+ * - V202 `notStartedByThis` (turn boundaries only): the creature whose turn ended must not have
+ *   used this same ability to start that turn.
  */
 export interface TriggerSpec {
   effect: 'trigger';
   event: TriggerEvent;
-  whose: 'target' | 'owner';
+  whose: 'target' | 'owner' | 'enemy' | 'other-hero';
   damaged?: 'ally' | 'another' | 'any';
   dealer?: 'known' | 'other';
   from?: 'melee-strike';
+  orDamageTaken?: true;
+  within?: number;
+  notStartedByThis?: true;
   /** The printed sentence, display markup removed. */
   text: string;
 }
@@ -87,6 +102,27 @@ const TRIGGERS: readonly { text: string; spec: Omit<TriggerSpec, 'effect' | 'tex
     text: 'Another creature damages you.',
     spec: { event: 'damage-taken', whose: 'owner', dealer: 'other' },
   },
+  // ---- V202 turn boundaries, from the clock's turn-start and turn-end (convex/lib/clock.ts).
+  // feature/ability/censor/level-1/my-life-for-yours.md;
+  // elementalist/level-1/breath-of-dawn-remembered.md. "Or takes damage" is the damage writer's
+  // `damage-taken` of the same target.
+  {
+    text: 'The target starts their turn or takes damage.',
+    spec: { event: 'turn-start', whose: 'target', orDamageTaken: true },
+  },
+  // feature/ability/censor/level-2/prescient-grace.md. Observed, but its effect ("The target can
+  // then take their turn immediately before the triggering enemy") is not one the engine compiles:
+  // the enemy's turn has already started when the clock observes it (shared/resolve/effectOnly.ts).
+  {
+    text: 'An enemy within 10 squares starts their turn.',
+    spec: { event: 'turn-start', whose: 'enemy', within: 10 },
+  },
+  // feature/ability/shadow/level-1/hesitation-is-weakness.md, both sentences read whole. The
+  // second is the turn's record of the ability that started it (convex/lib/initiative.ts).
+  {
+    text: "Another hero ends their turn. That hero can't have used this ability to start their turn.",
+    spec: { event: 'turn-end', whose: 'other-hero', notStartedByThis: true },
+  },
 ];
 
 /**
@@ -114,7 +150,8 @@ const UNOBSERVED: readonly { pattern: RegExp; reason: string }[] = [
   },
   {
     pattern: /\bstarts their turn\b|\bends their turn\b/,
-    reason: 'turn-boundary triggers are not offered yet (V173 observes damage only)',
+    reason:
+      'the clock offers only the turn-boundary sentences V202 reads whole (shared/resolve/triggers.ts), and this is not one of them',
   },
   {
     pattern: /\buses an ability\b|\buse your\b|\buse a triggered action\b/,
@@ -229,6 +266,12 @@ export function triggerTargetFor(
 ): string | undefined {
   if (damage.amount <= 0) return undefined;
   const spec = holder.spec;
+  // V202: a turn-boundary sentence answers damage only when it also says "or takes damage" of
+  // the target; that half is read as the target's `damage-taken`.
+  if (spec.event === 'turn-start' || spec.event === 'turn-end') {
+    if (!spec.orDamageTaken || spec.whose !== 'target') return undefined;
+    return targetable(holder, damage.damaged) ? damage.damaged.id : undefined;
+  }
   if (spec.event === 'damage-dealt') {
     const dealer = damage.dealer;
     if (!dealer || dealer.id === damage.damaged.id) return undefined;
@@ -246,6 +289,52 @@ export function triggerTargetFor(
   return targetable(holder, damage.damaged) ? damage.damaged.id : undefined;
 }
 
+/** V202: one turn boundary the clock dispatched (convex/lib/clock.ts dispatchBoundary). */
+export interface TurnOccurrence {
+  boundary: 'turn-start' | 'turn-end';
+  /** The creature whose turn it is (a squad's turn is its own creature on the Director's side). */
+  creature: TriggerCreature;
+  /** The creature is a hero (a character in the app). */
+  hero: boolean;
+  /**
+   * The turn was started by using the holder's own ability (the turn's `startedBy` record names
+   * the same source), for "That hero can't have used this ability to start their turn."
+   */
+  startedByThis: boolean;
+}
+
+/**
+ * V202: the creature a holder's response would target at this turn boundary, or `undefined` when
+ * the trigger doesn't occur. A response whose trigger is about another creature (an enemy, another
+ * hero) targets only its user, so its offer names the user; any other target shape is refused at
+ * compile time (shared/resolve/compileAbility.ts).
+ */
+export function triggerTargetForTurn(
+  holder: TriggerHolder,
+  turn: TurnOccurrence,
+): string | undefined {
+  const spec = holder.spec;
+  if (spec.event !== turn.boundary) return undefined;
+  const related = relation(holder.owner, turn.creature);
+  switch (spec.whose) {
+    case 'target':
+      // "The target starts their turn": the creature whose turn it is must be one the ability may
+      // target (rule/combat/target.md), such as "Self or one ally".
+      return targetable(holder, turn.creature) ? turn.creature.id : undefined;
+    case 'owner':
+      return related === 'self' && holder.target.self ? holder.owner.id : undefined;
+    case 'enemy':
+      return related === 'enemy' && holder.target.self && holder.target.others === 'none'
+        ? holder.owner.id
+        : undefined;
+    case 'other-hero':
+      // "Another hero ends their turn. That hero can't have used this ability to start their turn."
+      if (related === 'self' || !turn.hero) return undefined;
+      if (spec.notStartedByThis && turn.startedByThis) return undefined;
+      return holder.target.self && holder.target.others === 'none' ? holder.owner.id : undefined;
+  }
+}
+
 /** What stands between an owner and a response when it is offered, and again when accepted. */
 export interface TriggerEligibilityInput {
   actionType: 'triggered action' | 'free triggered action';
@@ -256,6 +345,12 @@ export interface TriggerEligibilityInput {
    * preventions (unconscious, a printed "can't use triggered actions until …") are the table's check.
    */
   preventions: readonly ('dazed' | 'surprised' | 'dead')[];
+  /**
+   * V202, given only for a response whose effect is "You take your turn after the triggering hero":
+   * whether the owner still has a turn to take this round (an unspent turn entry). Interpretation
+   * (Q-TURNTRIG-1, point 2): "your turn" is the owner's turn of this round.
+   */
+  turnLeft?: boolean;
 }
 
 const PREVENTION: Record<TriggerEligibilityInput['preventions'][number], string> = {
@@ -279,6 +374,12 @@ export function triggerEligibility(
 ): { eligible: true } | { eligible: false; reason: string } {
   const prevented = input.preventions[0];
   if (prevented) return { eligible: false, reason: PREVENTION[prevented] };
+  if (input.turnLeft === false)
+    return {
+      eligible: false,
+      reason:
+        'has already taken their turn this round, so has no turn to take after the triggering hero (interpretation, Q-TURNTRIG-1)',
+    };
   if (input.actionType === 'triggered action' && input.ordinaryUsedThisRound)
     return {
       eligible: false,

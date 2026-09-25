@@ -67,6 +67,13 @@ export const initiativeTables = {
     status: v.union(v.literal('active'), v.literal('ended')),
     startedEventId: v.id('events'),
     endedEventId: v.union(v.id('events'), v.null()),
+    /**
+     * V202: the accepted ability use that let this creature take this turn (Hesitation Is
+     * Weakness's "You take your turn after the triggering hero"), from `encounters.turnAfter`.
+     */
+    startedBy: v.optional(
+      v.object({ useEventId: v.id('events'), sourcePath: v.string(), abilityName: v.string() }),
+    ),
   }).index('by_encounter', ['encounterId']),
   /** ScheduledWorkRegistration rows. `timing` and `work` carry the contract's discriminated unions. */
   clockRegistrations: defineTable({

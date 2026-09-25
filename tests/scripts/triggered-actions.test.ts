@@ -17,10 +17,10 @@
  * - rule/combat/target.md: "You aren't an eligible creature target for your own abilities unless
  *   those abilities also have "self" as a target (see below), or unless the ability indicates
  *   otherwise." ("An ally" excluding yourself is Q-TRIG-1's labelled interpretation.)
- * - Manual examples: censor/level-1/my-life-for-yours.md (turn start or damage, and a Spend section),
- *   tactician/level-1/advanced-tactics.md (surges on the triggering damage, and a Spend section),
- *   conduit/level-1/word-of-judgment.md ("would take damage"), shadow/level-1/hesitation-is-weakness.md
- *   (another hero ends their turn), tactician/level-2/no-dying-on-my-watch.md (a power roll).
+ * - Manual examples: tactician/level-1/advanced-tactics.md (surges on the triggering damage, and a
+ *   Spend section), conduit/level-1/word-of-judgment.md ("would take damage"),
+ *   elementalist/level-1/subtle-relocation.md ("The target starts their turn, moves, or is force
+ *   moved."), tactician/level-2/no-dying-on-my-watch.md (a power roll).
  */
 import { expect, test } from 'vitest';
 import { buildCorpus, readInputs } from '../../scripts/audit-ability-grammar.ts';
@@ -83,7 +83,9 @@ test('Feedback Loop and Riposte compile as triggered actions with observed trigg
 
 test('unobserved triggers and manual effects keep the ability manual with a precise diagnostic', () => {
   const codes = (name: string) => compiled(name).diagnostics.map(d => d.code);
-  for (const name of ['My Life for Yours', 'Word of Judgment', 'Hesitation Is Weakness']) {
+  // V202 compiles My Life for Yours and Hesitation Is Weakness (tests/scripts/turn-triggers.test.ts);
+  // Subtle Relocation's "starts their turn, moves, or is force moved" still needs movement.
+  for (const name of ['Word of Judgment', 'Subtle Relocation']) {
     expect(compiled(name).execution, name).toBe('manual');
     expect(codes(name), name).toContain('trigger-unobserved');
   }

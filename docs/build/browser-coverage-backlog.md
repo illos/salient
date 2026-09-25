@@ -171,3 +171,9 @@ Remove on the aura's own user is refused. A member's rider shows "While in <user
 that creature's sheet. Headless coverage is `tests/app/areas.test.ts`.
 
 - **Stale wizard Exit (found in V186, 2026-09-25):** eight wizard browser specs click or expect the Exit button that V96 removed. See `V186-v32-spec-exit.md`. Refresh them to use site navigation; `v40-unsaved-wizard` needs its unsaved-changes scenario redesigned.
+
+- **Turn-boundary offer cards (V202, 2026-09-25):** at Thorn's Take turn, a Censor's "My Life for
+  Yours" card appears in the triggered-action list with Accept, "Accept and spend 1 wrath" and Pass;
+  at Thorn's End turn, a Shadow's "Hesitation Is Weakness" card appears and stays until the next Take
+  turn. Accepting it, then Take turn for the Shadow, shows no side-order warning. Headless coverage is
+  `tests/app/turn-trigger-offers.test.ts`.
