@@ -78,3 +78,11 @@ Likely paths: `convex/lib/resolve.ts`, `compiledSource.ts`, shared foe/source co
   Prettier failures on main in the earlier spatial-review renderer/template; applied only
   mechanical Prettier formatting to those two files to unblock the shared gate. Runtime
   feature behavior is unchanged. Return revised tip to QC and Test for the gate/cohort rerun.
+
+- Test accepted the shared gate at `92391c01` (458 engine, 981 app/script checks) and discovery
+  report. The HTTP cohort loaded all 36 foes but stopped at command actor validation. Corrected
+  its shared Director/player command input to `{refKind: 'foe', id}`; sheet queries retain
+  `{kind, id, name}`. Negative checks now require the authorization, paused-session and
+  absent-session refusal messages, so malformed inputs cannot pass them. Reviewed all remaining
+  cohort calls against current public validators and registered operation arguments. App runtime
+  is unchanged; QC requested reuse of the gate/report and a focused foe-discovery rerun only.

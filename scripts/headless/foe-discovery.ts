@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { selectedFoes, foeDiscoveryReport } from '../foe-discovery-report.ts';
 import type { ScenarioContext } from './character-client.ts';
+import type { Reference } from '../../shared/commands/envelope.ts';
 type Ability = {
   id: string;
   name: string;
@@ -107,10 +108,13 @@ export async function runFoeDiscovery({
       campaignId,
       commandId: cid(),
       operation: 'ability.use',
-      actor,
+      actor: { refKind: 'foe', id: dragon } satisfies Reference,
       arguments: { ability: nettles.id },
     };
-    await assert.rejects(player.mutation('commands:invoke', { ...args, commandId: cid() }));
+    await assert.rejects(
+      player.mutation('commands:invoke', { ...args, commandId: cid() }),
+      /You do not control/,
+    );
     const before = await director.query('foes:list', { campaignId });
     const used = await director.mutation<{ eventId: string }>('commands:invoke', args);
     assert.equal(
@@ -169,7 +173,10 @@ export async function runFoeDiscovery({
       expectedRevision: 0,
       action: 'pause',
     });
-    await assert.rejects(director.mutation('commands:invoke', { ...args, commandId: cid() }));
+    await assert.rejects(
+      director.mutation('commands:invoke', { ...args, commandId: cid() }),
+      /session is paused/,
+    );
     await director.mutation('sessions:transition', {
       sessionId,
       commandId: cid(),
@@ -182,6 +189,9 @@ export async function runFoeDiscovery({
       expectedRevision: 2,
       action: 'close',
     });
-    await assert.rejects(director.mutation('commands:invoke', { ...args, commandId: cid() }));
+    await assert.rejects(
+      director.mutation('commands:invoke', { ...args, commandId: cid() }),
+      /needs an active session/,
+    );
   });
 }
