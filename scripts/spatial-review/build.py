@@ -3,6 +3,7 @@ import hashlib
 import json
 import re
 import sys
+import subprocess
 from pathlib import Path
 sys.dont_write_bytecode = True
 from source_text import excerpt
@@ -75,6 +76,12 @@ for row in rows:
 rows = list(unique.values())
 for row in rows:
     row['sourceText'] = excerpt(row['source'], row['section'])
+rendered = json.loads(subprocess.run(
+    ['node', str(Path(__file__).with_name('render-source.mjs'))],
+    input=json.dumps([row['sourceText'] for row in rows]), text=True,
+    capture_output=True, check=True).stdout)
+for row, source_html in zip(rows, rendered, strict=True):
+    row['sourceHtml'] = source_html
 data = json.dumps({'version':'V234', 'entries':rows}, ensure_ascii=False).replace('<','\\u003c')
 out = Path(sys.argv[1]); out.mkdir(parents=True, exist_ok=True)
 (out / 'index.html').write_text((Path(__file__).with_name('template.html')).read_text().replace('__AUDIT_DATA__', data))
