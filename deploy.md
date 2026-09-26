@@ -41,6 +41,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V212 | `33f53337` | Merged; cloud dev backend/frontend published as Worker `1d524a6d-238f-443a-ba39-876cbf0945b4`; accepted gate and foe-discovery reused | complete |
 | V210 | `6c4c566c` | Merged; frontend published as Worker `0c91bf9c-1fe2-423b-a076-97b50722b997`; gate and focused browser PASS | complete |
 | V202 | `d249fc9` | Merged; backend/frontend published; accepted gates reused | complete |
 | V201 | `9d8f7bc` | Merged in train 21; backend/frontend published; gate and headless at tip | complete |
@@ -1001,3 +1002,16 @@ The test and deploy thread fast-forwarded reviewed tip `d249fc95d9d62b343aec2076
 - No smoke tests. Temporary credentials were removed and the private hosted helpers stopped.
 
 Logs: `/srv/presidium/projects/salient/test-artifacts/V202-release-d249fc9`.
+
+### V212 foe source/action discovery publication: 2026-09-26
+
+Fast-forwarded reviewed runtime source `33f53337870e9f145e61f8e779bb5e2e7eedaf87` into main.
+The tree matches Test-accepted `8e5a067d`; QC final PASS is recorded in
+`../review-artifacts/2026-09-26-V212-QC.md`. Reused the shared gate at `92391c01` (458 engine,
+981 app/script checks), the 189-record discovery report at `595f80e9`, and the exact-tip
+foe-discovery journey at `8e5a067d` (36 foes, persisted manual history and denials).
+
+Published backend functions to Convex dev `different-bat-943`; schema validation succeeded.
+The hosted build and `salient-dev` frontend publication succeeded as Worker version
+`1d524a6d-238f-443a-ba39-876cbf0945b4`. Content files were unchanged; no reseed was needed.
+The shipped scope is source-linked/manual recording, with automated foe mechanics still pending.

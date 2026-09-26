@@ -86,3 +86,9 @@ Likely paths: `convex/lib/resolve.ts`, `compiledSource.ts`, shared foe/source co
   absent-session refusal messages, so malformed inputs cannot pass them. Reviewed all remaining
   cohort calls against current public validators and registered operation arguments. App runtime
   is unchanged; QC requested reuse of the gate/report and a focused foe-discovery rerun only.
+
+- 2026-09-26: Test accepted the exact-tip foe-discovery journey at `8e5a067d` (36 foes,
+  persisted manual history and reason-specific denials); QC gave final PASS. The reviewed
+  metadata-only tip `33f53337` has the same tree. Fast-forward merged into `main` and published
+  Convex dev `different-bat-943` plus Worker `salient-dev` version
+  `1d524a6d-238f-443a-ba39-876cbf0945b4`. Content was unchanged, so no reseed was needed.
