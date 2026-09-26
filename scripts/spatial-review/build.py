@@ -4,6 +4,7 @@ import json
 import re
 import sys
 from pathlib import Path
+sys.dont_write_bytecode = True
 from source_text import excerpt
 
 ROOT = Path(__file__).resolve().parents[2]
