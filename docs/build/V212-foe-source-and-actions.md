@@ -42,3 +42,32 @@ Likely paths: `convex/lib/resolve.ts`, `compiledSource.ts`, shared foe/source co
 ## Work log
 
 - 2026-09-25: registered by V211. Proposed cohort and checks; no implementation or test results yet.
+
+- 2026-09-26: resumed on `slice/V212`, `.worktrees/foe-source-actions`, base `d9f8ac24`.
+  Added reusable source descriptors for printed traits, named End Effect children, band/basic
+  Malice and the two group features. `ability.use` records these as text-only entries and
+  `ability.resolved` records their manual completion. No payment, action allowance, trigger,
+  movement, damage or lasting effect is inferred from a source-only entry. The UI says **Record
+  text** and labels timing/effects manual; this is reference/manual reachability, not an automated
+  availability window or an engine action grant. Executable timing and payloads remain with the
+  existing dependent slices. Domain and Overwhelm retain their accepted manual dispositions.
+- Report command: `node scripts/foe-discovery-report.ts > /tmp/v212-source-report.json`.
+  Reconciles 36 headers and 189 named records (110 abilities, 50 traits, 27 Malice including basic,
+  two group traits), plus three End Effect children. Fresh compiler recognition retains six
+  compiled and 104 compatibility abilities. The report includes source/revision, clauses,
+  dependency and operation; it explicitly does not claim persisted execution proof. Generated
+  reports remain outside Git. The inventory remains the per-feature delivery checklist.
+- Focused authoring: web/backend TypeScript and touched-file ESLint passed; the source discovery,
+  compiled-source and foe-source-text files passed 16 checks. Source drift remains covered by
+  the existing compiled-source checks. New manual recording checks cover permitted source only,
+  denied player operation, no foe-state changes, retries and attributed manual completion.
+- Test job after QC: `CI=true pnpm check`, then `SALIENT_HEADLESS_COHORT=foe-discovery pnpm
+  test:headless:character` in the coordinator's standard seeded private anonymous environment
+  with exact candidate SHA in `SALIENT_HEADLESS_SOURCE`, `SALIENT_HEADLESS_RUNNER_SOURCE`;
+  `SALIENT_HEADLESS_ENVIRONMENT=character-headless`, `SALIENT_HEADLESS_TARGET` equal to
+  `VITE_CONVEX_URL`, and matching local site/auth origins. See `testing-process.md`. The cohort
+  adds all 36 sources via `foe.add`/`squad.add`, reads their action lists, checks player privacy,
+  records and completes Provoking Nettles without mechanical changes, replays its command,
+  exercises disposition undo/redo, and checks paused/closed refusal. Failure means missing
+  discovery, privacy/authority breach, fabricated mechanics or broken persisted manual history.
+  Runtime push and authenticated cohort are coordinator work, not claimed as locally verified.

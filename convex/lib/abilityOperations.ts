@@ -1022,7 +1022,9 @@ function sourceFor(ability: AbilityDefinition) {
   return {
     id: ability.contentId,
     name: ability.name,
-    text: ability.text,
+    text: ability.manualFeature?.context
+      ? `${ability.manualFeature.context}\n\n${ability.text}`
+      : ability.text,
     sourcePath: ability.source.path,
     revision: ability.source.revision,
   };
@@ -1941,7 +1943,7 @@ const abilityUse: OperationDefinition = {
       warnings.push(
         `Rule warning: ${ability.name} targets up to ${ability.targetShape.max} creatures; ${targets.length} were given.`,
       );
-    if (ability.targetShape.kind !== 'self' && !targets.length)
+    if (!ability.manualFeature && ability.targetShape.kind !== 'self' && !targets.length)
       throw new ConvexError(`${ability.name} needs at least one target.`);
     const allowance = await allowanceFor(ctx, context, actor!);
     const tracking = planTracking(allowance, actor!, ability.actionType);
@@ -2059,6 +2061,40 @@ const abilityUse: OperationDefinition = {
       throw new ConvexError(
         `${ability.name} has no damage-type option the engine applies; resolve any damage type at the table.`,
       );
+
+    // V212 source-only entries publish just the chosen feature. No automated use is implied.
+    if (ability.manualFeature) {
+      return {
+        kind: 'ability.recorded',
+        description: `${actor!.name}: ${ability.name} — text only. Confirm eligibility, timing, costs and consequences at the table; no mechanics applied.`,
+        data: {
+          ability: abilityData,
+          source,
+          manual: true,
+          feature: ability.manualFeature,
+          result: {
+            manualResolutions: ability.manualFeature.clauses.map(c => ({ sourceClause: c.text })),
+          },
+          targets: targets.map(t => t.actor),
+        },
+        commit: async (mctx, scope) => {
+          await journalInsert(mctx, scope, 'abilityResults', {
+            campaignId: scope.campaignId,
+            eventId: scope.eventId,
+            encounterId: allowance.encounterId,
+            actor: actor!,
+            abilityId: ability.abilityId,
+            abilityName: ability.name,
+            effectOnly: true,
+            selectedCharacteristic: null,
+            targets: [],
+            manualDispositions: [],
+            correctionEventIds: [],
+          });
+          await clear(mctx);
+        },
+      };
+    }
 
     if (ability.compilation?.mode === 'manual') {
       return {

@@ -192,6 +192,9 @@ function AbilityRow({
               {ability.fixedCost.amount} {ability.fixedCost.resource}
             </Badge>
           )}
+          {ability.manualFeature && (
+            <Badge variant="outline">Text only · timing and effects manual</Badge>
+          )}
           {ability.unknownCost && (
             <Badge variant="outline" className="ml-2">
               cost not read: manual
@@ -201,8 +204,8 @@ function AbilityRow({
         <span className="flex gap-1">
           <Command
             campaignId={campaignId}
-            text={`${ref(actor)} /ability select ability="${ability.id}"`}
-            label={pending ? 'Cancel' : 'Use'}
+            text={`${ref(actor)} /ability ${ability.manualFeature ? 'use' : 'select'} ability="${ability.id}"`}
+            label={ability.manualFeature ? 'Record text' : pending ? 'Cancel' : 'Use'}
             variant={pending ? 'default' : 'outline'}
           />
           <RuleLink id={ability.id} sourcePath={ability.sourcePath} label={ability.name} />

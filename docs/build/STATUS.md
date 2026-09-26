@@ -201,7 +201,7 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V210 | [Director build-review count](V210-build-review-count.md) | Merged (`6c4c566c`); cloud dev frontend published; gate and focused browser PASS |
 | V203 | [Current documentation phase and role cleanup](V203-documentation-phase-transition.md) | Merged (`b404a8b1`); documentation only, no runtime update |
 | V211 | [V1 foe parser and engine audit and plan](V211-v1-foe-engine-plan.md) | Merged (`89e25645`); documentation only, Test and QC PASS |
-| V212 | [Foe source accounting and action discovery](V212-foe-source-and-actions.md) | Registered |
+| V212 | [Foe source accounting and action discovery](V212-foe-source-and-actions.md) | In progress: source discovery/manual routes; QC candidate |
 | V213 | [Selected foe turns, villain actions and End Effect](V213-foe-turns-and-villain-actions.md) | Registered |
 | V214 | [Foe Malice features and payments](V214-foe-malice-features.md) | Registered |
 | V215 | [Compiled minion actions and captain parity](V215-minion-compiled-actions.md) | Registered |

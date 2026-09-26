@@ -43,6 +43,7 @@ const targetShape = v.union(
 );
 
 const abilityView = v.object({
+  manualFeature: v.boolean(),
   id: v.string(),
   name: v.string(),
   kind: v.union(
@@ -74,6 +75,7 @@ const abilityView = v.object({
 
 function projectAbility(ability: AbilityDefinition, director: boolean, foe: boolean) {
   return {
+    manualFeature: !!ability.manualFeature,
     id: ability.abilityId,
     name: ability.name,
     kind: ability.kind,

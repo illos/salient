@@ -1,3 +1,4 @@
+import { runFoeDiscovery } from './headless/foe-discovery.ts';
 import { runEffectRiders } from './headless/effect-riders.ts';
 import { runRiderGrammar } from './headless/rider-grammar.ts';
 import { runCompoundConditions } from './headless/compound-conditions.ts';
@@ -67,6 +68,7 @@ import { runForgeImport } from './headless/forge-import.ts';
 
 // Each selected cohort invokes the original scenario, including all assertions and setup.
 const cohorts = {
+  'foe-discovery': runFoeDiscovery,
   'effect-riders': runEffectRiders,
   'rider-grammar': runRiderGrammar,
   'compound-conditions': runCompoundConditions,

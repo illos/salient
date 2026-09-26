@@ -188,3 +188,11 @@ revived minion rows, rage and dragonsealed. Verify conditional actions are avail
 shared route as CLI/API, stale cards explain expiry, source text remains accessible and player views
 hide unused monster details. Headless persisted proofs in the owning slices establish behavior;
 this entry records future table-browser scenarios, not tests already run.
+
+## V212 — foe source-only entries
+
+After the table-browser moratorium: Director sees Provoking Nettles, End Effect, passive traits
+and applicable Malice/group references with **Text only · timing and effects manual** and
+**Record text**. The used log entry exposes only that source section and offers Resolved at table;
+other players cannot browse unused foe features. Recording does not create an action prompt,
+deduct Malice or fabricate movement/damage. Existing ordinary ability controls retain Use/Cancel.

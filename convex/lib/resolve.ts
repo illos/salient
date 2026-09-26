@@ -1,3 +1,9 @@
+import {
+  manualFoeFeatures,
+  namedFoeFeatures,
+  foeSupportingIds,
+  type ManualFoeFeature,
+} from '../../shared/resolve/foeFeatures';
 import { summonerAbilitySource } from '../../shared/evaluate/summonerAbilities';
 import { beastheartAbilitySource } from '../../shared/evaluate/beastheartAbilities';
 import { elementalistAbilitySource } from '../../shared/evaluate/elementalistAbilities';
@@ -110,6 +116,8 @@ export type TargetShape =
 
 /** One ability as the operations see it: verbatim source plus the printed metadata. */
 export interface AbilityDefinition {
+  /** Source-only entry: no inferred payment, action tracking, triggers or effects. */
+  manualFeature?: ManualFoeFeature;
   abilityId: string;
   name: string;
   /**
@@ -437,6 +445,25 @@ export function abilitiesFromStatBlock(entry: ContentSource): AbilityDefinition[
     );
   }
   return out;
+}
+
+function manualFeatureAbility(feature: ManualFoeFeature): AbilityDefinition {
+  return {
+    abilityId: feature.id,
+    name: feature.name,
+    contentId: feature.source.id,
+    source: feature.source,
+    text: feature.text,
+    usage: 'Manual feature — confirm timing at table',
+    actionType: null,
+    kind: 'recorded',
+    distance: '',
+    target: '',
+    keywords: [],
+    targetShape: { kind: 'unknown', text: 'Resolve at table' },
+    manualFeature: feature,
+    effects: feature.clauses.map(c => ({ label: c.name, text: c.text })),
+  };
 }
 
 export interface FoeSnapshot {
@@ -821,7 +848,7 @@ export async function abilitiesFor(
     }
   } else if (records.foe) {
     const snapshot = foeSnapshot(records.foe);
-    if (snapshot.sourcePath && snapshot.revision)
+    if (snapshot.sourcePath && snapshot.revision) {
       granted.push(
         ...abilitiesFromStatBlock({
           contentId: snapshot.id,
@@ -833,6 +860,23 @@ export async function abilitiesFor(
           revision: snapshot.revision,
         }),
       );
+      granted.push(
+        ...manualFoeFeatures({
+          ...snapshot,
+          contentId: snapshot.id,
+          sourcePath: snapshot.sourcePath,
+          revision: snapshot.revision,
+          structured: snapshot.structured ?? {},
+        }).map(manualFeatureAbility),
+      );
+      for (const id of foeSupportingIds(snapshot.id)) {
+        const entry = await findContent(ctx, id);
+        if (entry)
+          granted.push(
+            ...[...manualFoeFeatures(entry), ...namedFoeFeatures(entry)].map(manualFeatureAbility),
+          );
+      }
+    }
   }
   let common = await commonActions(ctx, actor, records.foe);
   // Summoner Strike replaces both ordinary hero free strikes (Summoner level-one feature).
