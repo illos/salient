@@ -25,7 +25,7 @@ def excerpt(source, section):
     headings = []
     for index, line in enumerate(lines):
         heading = re.match(r'^(#{1,6})\s+(.+?)\s*$', line)
-        callout = re.match(r'^>\s*[^\w*\s][^\w*]*\*\*(.+?)\*\*\s*$', line)
+        callout = re.match(r'^>\s*[^\w*]*\*\*([^:]+?)\*\*\s*$', line)
         if heading:
             headings.append((index, len(heading[1]), heading[2], 'heading'))
         elif callout:
