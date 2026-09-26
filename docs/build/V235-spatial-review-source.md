@@ -18,11 +18,14 @@ Retain all 515 IDs, V234 storage key and export/import schema so existing review
   excerpts stop at their section boundary and preserve complete tiers/effect paragraphs.
 - Expand/collapse with keyboard and pointer; literal text cannot become HTML. Wrapped source is
   usable on narrow screens. Existing saved notes and checkbox-only exports survive regeneration.
-- QC review, then Test focused generator and non-table browser checks, then QC final/Deploy
-  publication to the existing MagicDNS URL. No game-runtime behavior changes.
+- Publish directly to the existing MagicDNS URL. User clarified that collaborative discussion
+  documents do not need the app QC/Test pipeline. No game-runtime behavior changes.
 
 ## Work log
 
 - 2026-09-26: created slice/V235 from main 1fc59678. Added canonical-source section extraction,
   one native details dropdown per card, and excluded source bodies from comment exports.
   Source audit interpretation text and all IDs remain unchanged. Generator authoring run: 515 cards.
+
+- User stopped the unnecessary review pipeline. Published the 515-card document directly to
+  the existing tailnet artifact directory; future discussion-document edits use direct publication.
