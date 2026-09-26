@@ -4,6 +4,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from source_text import excerpt
 
 ROOT = Path(__file__).resolve().parents[2]
 rows = []
@@ -71,6 +72,8 @@ for row in rows:
     if row['id'] in unique and unique[row['id']] != row: raise ValueError('Conflicting duplicate: '+row['name'])
     unique[row['id']] = row
 rows = list(unique.values())
+for row in rows:
+    row['sourceText'] = excerpt(row['source'], row['section'])
 data = json.dumps({'version':'V234', 'entries':rows}, ensure_ascii=False).replace('<','\\u003c')
 out = Path(sys.argv[1]); out.mkdir(parents=True, exist_ok=True)
 (out / 'index.html').write_text((Path(__file__).with_name('template.html')).read_text().replace('__AUDIT_DATA__', data))
