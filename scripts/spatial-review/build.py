@@ -73,7 +73,12 @@ unique = {}
 for row in rows:
     if row['id'] in unique and unique[row['id']] != row: raise ValueError('Conflicting duplicate: '+row['name'])
     unique[row['id']] = row
-rows = list(unique.values())
+all_ids = list(unique)
+# Current owning character spec includes all eleven classes through levels 1–10.
+# Catalog-only foes and supporting rows with unproved inclusion are outside this review.
+rows = [row for row in unique.values()
+        if row['scope'] in ('V1 monsters', 'Summoner minions')
+        or (row['scope'] == 'Heroes' and row['category'] != 'Source exposure unproved')]
 for row in rows:
     row['sourceText'] = excerpt(row['source'], row['section'])
 rendered = json.loads(subprocess.run(
@@ -82,7 +87,7 @@ rendered = json.loads(subprocess.run(
     capture_output=True, check=True).stdout)
 for row, source_html in zip(rows, rendered, strict=True):
     row['sourceHtml'] = source_html
-data = json.dumps({'version':'V234', 'entries':rows}, ensure_ascii=False).replace('<','\\u003c')
+data = json.dumps({'version':'V234', 'allIds':all_ids, 'entries':rows}, ensure_ascii=False).replace('<','\\u003c')
 out = Path(sys.argv[1]); out.mkdir(parents=True, exist_ok=True)
 (out / 'index.html').write_text((Path(__file__).with_name('template.html')).read_text().replace('__AUDIT_DATA__', data))
 for name in ['spatial-effect-triage.md','spatial-effect-triage-heroes.md','spatial-effect-triage-monsters.md']:
