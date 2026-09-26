@@ -19,9 +19,14 @@ function readableLinks() {
     walk(tree);
   };
 }
-const processor = unified().use(remarkParse).use(remarkGfm)
-  .use(remarkRehype, { allowDangerousHtml: true }).use(rehypeRaw)
-  .use(rehypeSanitize).use(readableLinks).use(rehypeStringify);
+const processor = unified()
+  .use(remarkParse)
+  .use(remarkGfm)
+  .use(remarkRehype, { allowDangerousHtml: true })
+  .use(rehypeRaw)
+  .use(rehypeSanitize)
+  .use(readableLinks)
+  .use(rehypeStringify);
 let input = '';
 for await (const chunk of process.stdin) input += chunk;
 const texts = JSON.parse(input);

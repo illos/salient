@@ -36,10 +36,12 @@ export async function runFoeDiscovery({
       commandId: cid(),
       requestId: pending.pendingRequests[0]!.id,
     });
+    const playerProfile = await player.query<{ userId: string }>('auth:viewer', {});
     const sessionId = await director.mutation<string>('sessions:start', {
       commandId: cid(),
       campaignId,
-      name: `Foe discovery ${runId}`,
+      selectedPlayerIds: [playerProfile.userId],
+      title: `Foe discovery ${runId}`,
     });
     let dragon = '';
     for (const source of selectedFoes) {

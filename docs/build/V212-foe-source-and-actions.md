@@ -71,3 +71,10 @@ Likely paths: `convex/lib/resolve.ts`, `compiledSource.ts`, shared foe/source co
   exercises disposition undo/redo, and checks paused/closed refusal. Failure means missing
   discovery, privacy/authority breach, fabricated mechanics or broken persisted manual history.
   Runtime push and authenticated cohort are coordinator work, not claimed as locally verified.
+
+- QC passed `595f80e9` for manual/source reachability. Test found a cohort setup error before
+  roster loading: session start needs `selectedPlayerIds` and `title`, not `name`. Corrected
+  the fixture to select the admitted player's authenticated profile. Test also reproduced
+  Prettier failures on main in the earlier spatial-review renderer/template; applied only
+  mechanical Prettier formatting to those two files to unblock the shared gate. Runtime
+  feature behavior is unchanged. Return revised tip to QC and Test for the gate/cohort rerun.
