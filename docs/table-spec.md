@@ -512,6 +512,11 @@ controls while preserving the original entries and the [historical edit boundary
 
 ### Game log and chat scope
 
+The [game log message and manifest spec](game-log-spec.md) defines routing, per-audience
+presentation, attention/interaction classification, event markers and action-card lifetimes.
+It records the 2026-09-26 design discussion and the initial levels 1–3/selected-foe validation
+scope; it does not claim runtime implementation or replace the history and authority rules below.
+
 Implementation note (2026-09-15): the user's [app-wide rule card presentation](reference-library-spec.md#app-wide-rule-cards)
 supersedes inline source expansions. Readable labels and the shared rulebook icon open a centered,
 scrollable reference card with a blurred backdrop. Source paths and IDs remain metadata; operational
