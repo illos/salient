@@ -29,3 +29,5 @@ Retain all 515 IDs, V234 storage key and export/import schema so existing review
 
 - User stopped the unnecessary review pipeline. Published the 515-card document directly to
   the existing tailnet artifact directory; future discussion-document edits use direct publication.
+- 2026-09-26: fast-forward merged `942e6a8c` into `main` and pushed the documentation and
+  generator. The already published tailnet review was retained without regeneration.

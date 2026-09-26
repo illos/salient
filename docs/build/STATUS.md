@@ -224,4 +224,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V232 | [Thorn Dragon Domain deferral](V232-thorn-domain-deferral.md) | Merged (`4fd2c92d`); documentation only, Test and QC PASS |
 | V233 | [Overwhelm duration and spatial deferral](V233-overwhelm-ruling.md) | Merged (`df9a9ecc`); documentation only, Test and QC PASS |
 | V234 | [Spatial-dependent hero and monster audit](V234-spatial-effect-audit.md) | Merged (`b411de86`); review published on tailnet, Test and QC PASS |
-| V235 | [Spatial review verbatim source](V235-spatial-review-source.md) | In progress |
+| V235 | [Spatial review verbatim source](V235-spatial-review-source.md) | Merged (`942e6a8c`); discussion review published on tailnet |
