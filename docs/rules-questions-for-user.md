@@ -2218,3 +2218,25 @@ not disable existing fact-assisted abilities outside Overwhelm.
 Example for manual play: a hero starts adjacent and cannot shift through that turn, even after
 walking away. Starting a later turn away from the knave gives no new restriction. Moving next
 to a knave halfway through a turn that began elsewhere does not create Overwhelm.
+
+## Q-ARCH-12: unspent Grab Iron Ball and Grab Javelin opportunities
+
+- **Status:** open; queued for one-at-a-time triage, not required to finish the research.
+- **Raised by:** V1 action-card lifecycle audit, 2026-09-26.
+- **Where:** `vendor/steel-compendium/en/unified/md/monster/bugbear/bugbear-malice.md`, Grab Iron Ball and Grab Javelin; `rule/monster/malice.md`; [research](research/action-card-lifecycle-audit.md).
+- **Conflict or gap:** The feature is purchased at turn start and supplies a weapon that an eligible bugbear acting that turn can throw using a maneuver. It does not explicitly say when an unthrown weapon's granted use expires. “Acting this turn” clearly qualifies the recipient but does not unambiguously retire the unused grant at turn end.
+- **Options:** A: the throw must occur that turn. B: the unthrown grant remains available until used or otherwise lost.
+- **Recommendation:** Keep the unspent grant's termination explicit/manual until a reading is chosen; do not silently introduce an end-of-turn expiry or an indefinitely stored inventory item. The lifecycle representation should be able to express either reading.
+- **Blocked until answered:** Automatic expiration of these two unspent grants only. Research and other lifecycle cases can proceed.
+- **Answer:** pending.
+
+## Q-ARCH-13: Alchemical Device's turn-start feature and maneuver timing
+
+- **Status:** open; queued for one-at-a-time triage, not required to finish the research.
+- **Raised by:** V1 action-card lifecycle audit, 2026-09-26.
+- **Where:** `vendor/steel-compendium/en/unified/md/monster/human/human-malice.md`, Alchemical Device and featureblock introduction; `rule/monster/malice.md`; [research](research/action-card-lifecycle-audit.md).
+- **Conflict or gap:** Human Malice says to activate a feature at the start of a human's turn; Alchemical Device is itself headed Maneuver. No prose grants a retained object or says to defer that maneuver to later in the turn. The generic feature window and printed action allowance need a source-specific reading.
+- **Options:** A: activate and resolve at turn start, spending the maneuver. B: pay at turn start and grant a maneuver use later that turn.
+- **Recommendation:** A is the narrower reading of “activate” and the printed maneuver, subject to the user's ruling. Until chosen, preserve the two constraints as manual; do not fabricate an inventory object or an indefinite future activation.
+- **Blocked until answered:** Automatic activation timing and allowance handling for this feature only; no blocker to lifecycle research.
+- **Answer:** pending.

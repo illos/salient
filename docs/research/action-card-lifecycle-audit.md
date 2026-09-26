@@ -12,13 +12,35 @@ The user explicitly separates this from tracking an effect and its duration. Thi
 
 The owning character specification includes all eleven classes through levels 1–10, including the Beastheart and Summoner dependencies. The selected encounter roster contains 36 monsters. Earlier low-level implementation milestones do not exclude higher-level character source material from this research.
 
-The audit includes all files under `feature/`: class abilities and features, ancestry traits, complications, perks, kits, careers, cultures, common actions, companion features and fixtures. It also reads the chosen monster statblocks, their Malice sheets and shared rules; granted Summoner minion/fixture sources; core item mechanics; and the condition, resource and movement rules that create or restrict actions. Class and ancestry parent records are checked for embedded grants. Titles are recorded separately as supporting reference coverage: finding an action in a title does not establish that the application grants it in V1.
+The audit includes all files under `feature/`: class abilities and features, ancestry traits, complications, perks, kits, careers, cultures, common actions, companion features and fixtures. It also reads the chosen monster statblocks, their Malice sheets and shared rules; granted Summoner minion/fixture sources; all 100 core item sources and their category/enhancement mechanics; and the condition, resource and movement rules that create or restrict actions. Class and ancestry parent records are checked for embedded grants. The 27 supplemental treasure files were reviewed for completeness of the directory but are excluded by the V1 inventory specification; their findings are an appendix, not V1 grants. Titles are also recorded separately as supporting reference coverage: finding an action in a title does not establish that the application grants it in V1.
 
 Only the pinned Steel Compendium is rules evidence: revision `fb83a789da8f0327a389c277a0c790b1648d5810`, canonical `vendor/steel-compendium/en/unified/md`. Every ledger row names its source. Supplements outside the authorized character dependencies, unrelated monster rosters, and dynamic terrain statblocks are outside this selected playable content audit. Automatic effects are included in the review but explicitly distinguished from player choices. Lack of automation is not a reason to omit an otherwise in-scope ability.
 
 Four delegated audits read the hero/supporting sources, and the parent audit reads the selected monsters, starting item actions and common lifecycle rules. Whole-file reading is followed by clause extraction and a source inventory reconciliation. An enumerated filename or keyword hit alone does not count as semantic review. Duplicate parent references do not count as additional abilities.
 
-Coverage totals and final reconciliation will be inserted when every assigned review is complete. The searchable evidence document retains all source dispositions, individual clauses, exceptions and unresolved facts.
+The [searchable evidence document](https://presidium-iv.tail41404c.ts.net:9570/card-lifecycle/) retains source dispositions, individual clauses, readable evidence excerpts and unresolved facts. Its default view excludes supplemental items and the title appendix. Comments can be exported as JSON for discussion.
+
+### Coverage reconciliation
+
+The audit reviews **2,219 unique source paths**, including the explicitly separated reference/exclusion appendix. Final counts are reconciled against the canonical source paths, with repeated context references counted once. Source counts are not ability counts: a file may contain several abilities, an advancement table, or only a passive benefit.
+
+| Content boundary | Reviewed coverage |
+|---|---:|
+| Every file under `feature/`, including all eleven classes and supporting grants | 1,592 / 1,592 |
+| Careers, complications, cultures, kits and perks | 211 / 211 |
+| Selected V1 foe statblocks | 36 / 36 |
+| Selected foe Malice sheets | 7 / 7, plus basic Malice rules |
+| Summoner minion sources | 49 / 49 |
+| Fixture presentations | 8 / 8 |
+| Companion statblocks and advancement presentations | 28 / 28 |
+| Champion statblocks and advancement presentations | 8 / 8 |
+| Named Source of Earth summon statblock | 1 / 1 |
+| Class and ancestry parent records | 23 / 23 |
+| Core treasure sources | 100 / 100, plus category/enhancement dependencies |
+| Supplemental treasure appendix, excluded from V1 inventory | 27 / 27 |
+| Title reference appendix, live grant scope unestablished | 66 / 66 |
+
+The common rule review additionally covers condition, action, movement, resource, save, respite and test dependencies. A source-path census and literal-excerpt check find no missing assigned source, duplicate row within a group, or evidence excerpt attributed to the wrong file. These authoring checks verify accounting and citation fidelity; they do not certify every interpretation. The detailed review records deliberately retain source uncertainty.
 
 ## Distinctions that the sources require
 
@@ -98,15 +120,57 @@ The Scoundrel accepts Dagger Storm and pays its cost. That creates a sequence wi
 
 ### Yellow Color Cloak: timing begins after later consumption
 
-A qualifying lightning event opens the cloak response. Accepting arms the printed bonus for a later damaging ability. That later bonus consumption starts weakness through the end of the next round. The cloak cannot use its response during the weakness interval. The initial response is already resolved; the effect system owns armed bonus and weakness, and the capability observes them.
+A qualifying lightning event opens the cloak response. Accepting arms the printed bonus for a later damaging ability. That later bonus consumption starts weakness through the end of the next round. After accepting, the cloak cannot use this response again until that subsequent weakness ends, including the time spent waiting for the bonus to be used. The initial response is already resolved; the effect system owns armed bonus and weakness, and the capability observes them.
 
-**Unresolved source detail:** repeated acceptance while a bonus is armed but weakness has not begun must not be silently invented. Source: `treasure/1st-echelon/trinket/color-cloak-yellow.md`.
+**Lifecycle consequence:** the lock begins on acceptance, while the timed weakness begins on later bonus consumption. A single cooldown starting at acceptance would be wrong. Source: `treasure/1st-echelon/trinket/color-cloak-yellow.md`.
 
 ### Grabbed: a persistent control without recurring prompts
 
 While one creature holds another, “release” is available without an action and “reposition” can be used as a maneuver. Ending that particular grab retires those relationship-specific controls. The actor's ordinary Grab action remains available for future legal attempts. No start-of-turn prompt is needed just to remind someone they are still holding a creature.
 
 Source: `condition/grabbed.md`. This is the distinction between availability and repeatedly demanding attention.
+
+## Additional hero cases from the complete class review
+
+| Source | Why it matters to the lifecycle |
+|---|---|
+| Summoner, Shields of Essence (`feature/ability/summoner/level-1/shields-of-essence.md`) | Each recipient gets protection through the encounter until they accept a qualifying damage response. Passing one hit preserves future opportunities; accepting consumes only that recipient's grant. |
+| Troubadour, Take Two! (`feature/ability/troubadour/level-5/take-two.md`) | Eligible recipients can reroll the first tier-2 roll of the turn. Passing that first roll does not make the second roll eligible. Counting accepted uses alone is insufficient. |
+| Talent, Force Orbs (`feature/ability/talent/level-3/force-orbs.md`) | Firing is once on each own turn and consumes an orb; taking damage also consumes an orb. The external stock can eliminate future opportunities without a card being used. |
+| Beastheart, Elements Unleashed (`feature/ability/beastheart/level-6/elements-unleashed.md`) | Each own-turn start offers a three-ferocity extension and a possible damage-type change. This is a fresh upkeep choice, separate from casting and automatic transformation damage. |
+| Tactician, I'll Open and You'll Close | A granted choice can require affordability while waiving actual payment. A zero-cost action is not necessarily unconditionally affordable. The detailed ledger retains the exact source and predicates. |
+| Beastheart, Companion Rules (`feature/beastheart/level-1/companion-rules.md`) | Hero and companion share particular action/resource allowances while remaining distinct actors. One card per actor cannot imply one independent budget per card. |
+| Summoner, Rise (`feature/summoner/level-1/rise.md`) | A newly created actor cannot yet act until the specified later turn. Existence is separate from current availability. |
+| Troubadour, Masterwork (`feature/troubadour/level-8/masterwork.md`) | A named signature can survive kit removal; last-use history can grant a later story action. Ending the current kit or encounter is not a universal retirement rule. |
+
+### Two different meanings of declining
+
+**Shields of Essence:** the target takes damage, declines the response, then takes damage again. The second event can create another opportunity because the protection was never consumed. If the target accepts, future offers from that protection stop; other protected recipients keep their own grants.
+
+**Take Two!:** an eligible recipient rolls the turn's first tier 2 and declines the reroll. A later tier 2 that turn is not the first, so it creates no new opportunity. The next qualifying turn can offer a fresh first-roll opportunity while the performance and recipient eligibility permit it.
+
+Both can use the same occurrence lifecycle. They need different source-defined facts for future eligibility: remaining protection versus first-event history. Neither requires the card to own an effect duration.
+
+## Source-derived paper walkthroughs
+
+These are research checks of the proposed distinctions, **not executed application tests**.
+
+| Case | Expected progression | What the simpler model gets wrong |
+|---|---|---|
+| Unused Meat Shield | Trigger → show offer → refused/prepared action leaves it → next unrelated committed action closes it | Closes on mere preparation or waits for only the owner to act |
+| Same-trigger responses | One response accepted → its ordered consequences and other legal responses retain their source handling | Treats the accepted response itself as an unrelated action and discards its chain |
+| Dagger Storm | Accept parent → first attack and its movement choice → remaining attacks still available → stop or exhaust | Retires all children when first attack commits |
+| Shields of Essence | Decline occurrence → retain protection → offer on later damage → accept → consume that recipient only | Decline consumes the whole grant, or one recipient consumes everyone's grant |
+| Take Two! | Observe first qualifying roll → decline → second qualifying roll produces no offer → reset for next eligible turn | Counts only accepted uses and offers repeatedly until accepted |
+| Force Orbs | Start with three → fire one → two remain, turn allowance spent → take damage → one remains → next own turn can fire → no orbs retires this grant | Tracks only accepted uses, ignoring external destruction or the per-turn cap |
+| Villain action | Another creature's turn ends → one villain acts → all villains blocked for the round → next round other unused named actions eligible | Gives each villain its own separate round allowance |
+| Elements Unleashed | Initial maneuver completes → later turn-start extension choice → pay to extend or allow authoritative expiry → no more upkeep after effect ends | Leaves the casting card open or expires the grant before processing its valid extension choice |
+| Grab release | Grab relationship established → release/reposition available → release ends relation → controls retire → general Grab still available | Deletes the learned action, or retains stale controls for a vanished relation |
+| Required target test | Accepted ability needs test result → result supplied → continue parent resolution | Lets unrelated next-action dismissal silently waive the required result |
+| Temporary dazed | Capability unavailable through ordinary gate → condition ends → capability eligible again if its window still exists | Treats temporary inability as irreversible retirement, or revives an already expired occurrence |
+| Shared companion allowance | Hero uses shared ordinary triggered allowance → companion cannot spend it again → round reset re-enables applicable opportunities | Gives each visible card an independent reaction counter |
+
+The paper cases expose requirements; an implementation still needs negative, concurrent and persisted-state checks. The source ledger records cases that cannot yet be assigned exact semantics without a ruling or external fact.
 
 ## Cross-cutting cases that defeat broad shortcuts
 
@@ -143,3 +207,25 @@ The research output should make it possible to challenge the model with a partic
 4. The same trace through UI and shared operations, including stale or duplicate answers, undo/replay and simultaneous responders, once implementation is authorized.
 
 An exhaustive source inventory can establish coverage of this pinned, bounded corpus. It cannot prove that every possible future rule or arbitrary combination of rules is correct. Missing source semantics must remain visible even when a generic mechanism can mechanically represent either interpretation.
+
+## Conclusion and unresolved work
+
+**A shared action-card lifecycle manifest is viable as a small orchestration layer. A self-contained duration/availability record is not sufficient.** The reviewed sources repeatedly fit three core jobs: expose an eligible action, manage a particular opportunity, and preserve/advance accepted follow-up work. Scoped budgets, external facts and the origin of each grant must remain explicit.
+
+The audit found no structural reason to build bespoke lifecycle state machines for each named ability. It also does not prove a finished minimal schema: no schema has been approved or implemented, and source-silent rules cannot be made correct by adding fields. The qualified conclusion is that the same lifecycle operations can express the observed families while the existing rules operations supply their facts. A design that hides each ability's whole lifecycle in a custom callback would fail this conclusion's simplicity requirement.
+
+Important unresolved source cases are retained in the evidence rather than normalized into invented defaults:
+
+- Unspent Grab Iron Ball/Javelin termination and Alchemical Device's turn-start/maneuver relationship are queued as **Q-ARCH-12** and **Q-ARCH-13** in `docs/rules-questions-for-user.md`, for one-at-a-time triage.
+- Facepalm's timing antecedent remains under existing **Q-FOE-1**. The user's response presentation and next-action cutoff are already settled and are not reopened.
+- Some grants omit a lifetime, action cost, reset or replacement rule: Force Orbs, Mindlink, Nature Watch, Panacea, Faithful Friend and Earth Harness have specific evidence and limits in their group ledgers. The manifest can reference authoritative state for them, but cannot invent that state transition.
+- Some effects create potentially repeated action chains or interactions between benefits. Iron Reaver, Mindlink and other recorded cases require source-specific consequence and recursion treatment; a universal guessed once-per-turn cap would change the rule.
+- Spatial facts, narrative consent and Director-adjudicated choices remain manual where the existing systems cannot establish them. Domain and Overwhelm keep their accepted text/manual treatment.
+
+These do not block the research finding. They do block claiming that every detailed rule is ready for deterministic automation. The next design discussion can use this corpus and its counterexamples to choose the smallest representation; formalization should preserve the unresolved entries explicitly.
+
+## Publication and verification record
+
+This is a collaborative research document. It bypasses app QC/Test under the user's explicit instruction for discussion documents. Source-census reconciliation, evidence substring checks, document generation and JavaScript syntax checking are authoring checks only. The generated HTML and complete research ledgers are served as research artifacts; generated output and game-source copies are not committed to application assets.
+
+No parser, engine, backend, effects, card component, clock or runtime behavior was changed. The identified next-action cutoff gap remains recorded implementation work.
